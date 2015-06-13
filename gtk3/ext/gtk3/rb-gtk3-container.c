@@ -145,7 +145,7 @@ rg_s_type_register(int argc, VALUE *argv, VALUE klass)
 }
 
 void
-rb_gtk3_container_init(void)
+rbgtk3_container_init(void)
 {
     VALUE mGtk;
     VALUE RG_TARGET_NAMESPACE;

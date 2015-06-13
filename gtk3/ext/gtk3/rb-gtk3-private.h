@@ -23,6 +23,6 @@
 
 #include "rb-gtk3.h"
 
-G_GNUC_INTERNAL void rb_gtk3_container_init(void);
+G_GNUC_INTERNAL void rbgtk3_container_init(void);
 
 #endif
