@@ -9,10 +9,10 @@
 require "gtk3"
 
 dialog = Gtk::RecentChooserDialog.new(:title => "Recent Chooser Dialog Sample",
-                                      :buttons => [["_Cancel", Gtk::ResponseType::CANCEL], 
-                                        ["_Accept", Gtk::ResponseType::ACCEPT]])
+                                      :buttons => [["_Cancel", Gtk::ResponseType::CANCEL],
+                                                   ["_Accept", Gtk::ResponseType::ACCEPT]])
 
-dialog.signal_connect("response") do |widget, response|
+dialog.signal_connect("response") do |_widget, response|
   case response
   when Gtk::ResponseType::ACCEPT
     info = dialog.current_item
