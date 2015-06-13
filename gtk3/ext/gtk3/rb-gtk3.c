@@ -314,4 +314,6 @@ Init_gtk3(void)
 #endif
 
     rb_gtk3_container_init();
+
+    rbgobj_boxed_not_copy_obj(GTK_TYPE_SELECTION_DATA);
 }
