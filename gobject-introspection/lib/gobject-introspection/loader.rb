@@ -470,6 +470,8 @@ module GObjectIntrospection
           end
         when /\A(?:has|use|can|.*_is)_/
           "#{name}?"
+        when "exists"
+          "#{name}?"
         else
           name
         end
