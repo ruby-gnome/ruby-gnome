@@ -1,11 +1,9 @@
 =begin
   dnd.rb - Drag and Drop sample script.
 
-  Copyright (C) 2002-2006 Masao Mutoh
+  Copyright (C) 2002-2015 Masao Mutoh
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Date: 2006/06/17 13:18:12 $
-  $Id: dnd.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require "gtk3"
@@ -16,16 +14,17 @@ class SrcWindow < Gtk::Window
     @label = Gtk::Label.new("Drag here!")
     add(@label)
     set_default_size(100, 100)
-    drag_source_set(Gdk::Window::ModifierType::BUTTON1_MASK |
-                    Gdk::Window::ModifierType::BUTTON2_MASK,
-                    [["test", Gtk::Drag::TargetFlags::SAME_APP, 12345]],
-                    Gdk::DragContext::Action::COPY |
-                    Gdk::DragContext::Action::MOVE)
-    signal_connect("drag-data-get") do |widget, context, selection_data, info, time|
-#      selection_data.set("text/uri-list", 8, "hoge.txt")
-      selection_data.set(Gdk::Selection::TYPE_STRING, "hoge.txt")
+    drag_source_set(Gdk::ModifierType::BUTTON1_MASK |
+                    Gdk::ModifierType::BUTTON2_MASK,
+                    [["test", Gtk::TargetFlags::SAME_APP, 12_345]],
+                    Gdk::DragAction::COPY |
+                    Gdk::DragAction::MOVE)
+    signal_connect("drag-data-get") do |_widget, _context, selection_data, _info, _time|
+      selection_data.set(Gdk::Selection::TYPE_STRING, "this is a test")
+      puts "drag-data-get signal:"
+      puts selection_data.text
     end
- end
+  end
 end
 
 class DestWindow < Gtk::Window
@@ -35,21 +34,26 @@ class DestWindow < Gtk::Window
     @label = Gtk::Label.new("Drop here!")
     add(@label)
     set_default_size(100, 100)
-    drag_dest_set(Gtk::Drag::DestDefaults::MOTION |
-                  Gtk::Drag::DestDefaults::HIGHLIGHT,
-                  [["test", :same_app, 12345]],
-                  Gdk::DragContext::Action::COPY |
-                  Gdk::DragContext::Action::MOVE)
+    drag_dest_set(Gtk::DestDefaults::MOTION |
+                  Gtk::DestDefaults::HIGHLIGHT,
+                  [["test", :same_app, 12_345]],
+                  Gdk::DragAction::COPY |
+                  Gdk::DragAction::MOVE)
 
-    signal_connect("drag-data-received") do |widget, context, x, y, selection_data, info, time|
+    signal_connect("drag-data-received") do |_widget, context, _x, _y, selection_data, _info, _time|
       context.targets.each do |target|
         if target.name == "test" ||
            selection_data.type == Gdk::Selection::TYPE_STRING
-          puts selection_data.data
+          data_len = selection_data.data[1]
+          puts "drag-data-received signal:"
+          puts selection_data.data[0].pack("C#{data_len}")
+          puts selection_data.text
+        else
+          next
         end
       end
     end
-    signal_connect("drag-drop") do |widget, context, x, y, time|
+    signal_connect("drag-drop") do |widget, context, _x, _y, time|
       widget.drag_get_data(context, context.targets[0], time)
     end
   end
@@ -58,7 +62,7 @@ end
 win1 = SrcWindow.new
 win2 = DestWindow.new
 
-win1.show_all.signal_connect("destroy") {Gtk.main_quit}
-win2.show_all.signal_connect("destroy") {Gtk.main_quit}
+win1.show_all.signal_connect("destroy") { Gtk.main_quit }
+win2.show_all.signal_connect("destroy") { Gtk.main_quit }
 
 Gtk.main
