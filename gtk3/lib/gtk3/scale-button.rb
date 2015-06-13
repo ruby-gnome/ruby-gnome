@@ -30,7 +30,6 @@ module Gtk
       end
 
       initialize_raw(icon_size, min, max, step, icons)
-
     end
   end
 end
