@@ -22,7 +22,7 @@ module Gtk
       min       = options[:min]       || 0
       max       = options[:max]       || 100
       step      = options[:step]      || 2
-      icons     = options[:icons]     ||nil
+      icons     = options[:icons]     || nil
 
       case icon_size
       when Symbol, String
