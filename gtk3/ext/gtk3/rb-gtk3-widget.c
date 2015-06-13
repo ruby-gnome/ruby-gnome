@@ -59,7 +59,7 @@ rg_s_type_register(int argc, VALUE *argv, VALUE klass)
 }
 
 void
-rb_gtk3_widget_init(void)
+rbgtk3_widget_init(void)
 {
     VALUE mGtk;
     VALUE RG_TARGET_NAMESPACE;
