@@ -18,14 +18,15 @@
 
 require "rake/clean"
 
-gresource = "simple_window.gresource"
-gresource_xml = "#{gresource}.xml"
+gresources = ["simple_window.gresource", "template.gresource"]
 
-dependencies = [gresource_xml]
-
-CLEAN << gresource
-file gresource => dependencies do
-  sh("glib-compile-resources", gresource_xml)
+gresources.each do |gresource|
+  gresource_xml = "#{gresource}.xml"
+  dependencies = [gresource_xml]
+  CLEAN << gresource
+  file gresource => dependencies do
+    sh("glib-compile-resources", gresource_xml)
+  end
 end
 
-task :default => gresource
+task :default => gresources
