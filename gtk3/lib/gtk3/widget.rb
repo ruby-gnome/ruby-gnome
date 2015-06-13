@@ -27,7 +27,6 @@ module Gtk
 
       if method_defined?(:set_template)
         alias_method :set_template_raw, :set_template
-      end
       def set_template(template)
         resource = template[:resource]
         data = template[:data]
@@ -46,6 +45,7 @@ module Gtk
         define_method(name) do
           get_template_child(self.class.gtype, name)
         end
+      end
       end
     end
 
