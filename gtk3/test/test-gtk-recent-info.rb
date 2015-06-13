@@ -28,9 +28,9 @@ class TestGtkRecentInfo < Test::Unit::TestCase
       @info = manager.lookup_item(uri)
     end
 
-    test "#exists?" do
+    test "#exist?" do
       assert do
-        @info.exists?
+        @info.exist?
       end
     end
   end
