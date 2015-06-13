@@ -37,7 +37,7 @@ dialog.signal_connect("response") do |_widget, response|
       puts info.uri_display
       puts info.age
       puts info.local?
-      info.exists
+      puts info.exist?
     end
   else
     p "Close"
