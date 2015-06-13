@@ -27,25 +27,25 @@ module Gtk
 
       if method_defined?(:set_template)
         alias_method :set_template_raw, :set_template
-      def set_template(template)
-        resource = template[:resource]
-        data = template[:data]
-        if resource
-          set_template_from_resource(resource)
-        else
-          set_template_raw(data)
+        def set_template(template)
+          resource = template[:resource]
+          data = template[:data]
+          if resource
+            set_template_from_resource(resource)
+          else
+            set_template_raw(data)
+          end
+          @have_template = true
         end
-        @have_template = true
-      end
 
-      def bind_template_child(name, options={})
-        internal_child = options[:internal_child]
-        internal_child = false if internal_child.nil?
-        bind_template_child_full(name, internal_child, 0)
-        define_method(name) do
-          get_template_child(self.class.gtype, name)
+        def bind_template_child(name, options={})
+          internal_child = options[:internal_child]
+          internal_child = false if internal_child.nil?
+          bind_template_child_full(name, internal_child, 0)
+          define_method(name) do
+            get_template_child(self.class.gtype, name)
+          end
         end
-      end
       end
     end
 
