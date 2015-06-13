@@ -83,24 +83,50 @@ class TestGtkContainer < Test::Unit::TestCase
   class TestTemplate < self
     def test_resource
       only_gtk_version(3, 10, 0)
-      resource = Gio::Resource.load(fixture_path("template.gresource"))
-      Gio::Resources.register(resource)
-      begin
-        self.class.class_eval <<EOS
-        class MyWindow < Gtk::Window
-          type_register
-          class << self
-            def init
-              set_template(:resource => "/template/template.ui")
-              bind_template_child("label")
+
+      Dir.mktmpdir do |dir|
+        Dir.chdir(dir) do
+          class_name = "MyWindowResource"
+          label_value = "My Label"
+
+          gresource_path = "template.gresource"
+          gresource_xml_path = "#{gresource_path}.xml"
+          template_ui_path = "template.ui"
+          File.open(gresource_xml_path, "w") do |gresource_xml|
+            gresource_xml.puts(<<-XML)
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/template">
+    <file>#{template_ui_path}</file>
+  </gresource>
+</gresources>
+            XML
+          end
+          File.open(template_ui_path, "w") do |template_ui|
+            template_ui.puts(ui_definition(class_name, label_value))
+          end
+
+          assert do
+            system("glib-compile-resources", gresource_xml_path)
+          end
+
+          resource = Gio::Resource.load(gresource_path)
+          Gio::Resources.register(resource)
+          begin
+            custom_class = Class.new(Gtk::Window) do
+              type_register(class_name)
+
+              singleton_class.__send__(:define_method, :init) do
+                set_template(:resource => "/template/#{template_ui_path}")
+                bind_template_child("label")
+              end
             end
+            window = custom_class.new
+            assert_equal(label_value, window.label.label)
+          ensure
+            Gio::Resources.unregister(resource)
           end
         end
-EOS
-        window = MyWindow.new
-        assert_kind_of(Gtk::Label, window.label)
-      ensure
-        Gio::Resources.unregister(resource)
       end
     end
 
@@ -127,7 +153,7 @@ EOS
     def test_data
       only_gtk_version(3, 10, 0)
 
-      class_name = "MyWindow"
+      class_name = "MyWindowData"
       label_value = "My Label"
       template_data = ui_definition(class_name, label_value)
       custom_class = Class.new(Gtk::Window) do
