@@ -105,7 +105,7 @@ EOS
     end
 
     def ui_definition
-      <<-EOS
+      <<-DEFINITION
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.12"/>
@@ -121,7 +121,7 @@ EOS
     </child>
   </template>
 </interface>
-EOS
+      DEFINITION
     end
 
     def test_data
