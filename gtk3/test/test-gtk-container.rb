@@ -104,18 +104,18 @@ EOS
       end
     end
 
-    def ui_definition
+    def ui_definition(class_name, label)
       <<-DEFINITION
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.12"/>
-  <template class="TestGtkContainerTestTemplateMyDataWindow" parent="GtkWindow">
+  <template class="#{class_name}" parent="GtkWindow">
     <property name="can_focus">False</property>
     <child>
       <object class="GtkLabel" id="label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">label</property>
+        <property name="label" translatable="yes">#{label}</property>
         <property name="ellipsize">end</property>
       </object>
     </child>
@@ -126,19 +126,20 @@ EOS
 
     def test_data
       only_gtk_version(3, 10, 0)
-      self.class.class_eval <<EOS
-        class MyDataWindow < Gtk::Window
-          type_register
-          class << self
-            def init
-              set_template(:data => '#{ui_definition}')
-              bind_template_child("label")
-            end
-          end
+
+      class_name = "MyWindow"
+      label_value = "My Label"
+      template_data = ui_definition(class_name, label_value)
+      custom_class = Class.new(Gtk::Window) do
+        type_register(class_name)
+
+        singleton_class.__send__(:define_method, :init) do
+          set_template(:data => template_data)
+          bind_template_child("label")
         end
-EOS
-      window = MyDataWindow.new
-      assert_kind_of(Gtk::Label, window.label)
+      end
+      window = custom_class.new
+      assert_equal(label_value, window.label.label)
     end
   end
 end
