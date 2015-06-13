@@ -28,7 +28,7 @@ class TestGtkScaleButton < Test::Unit::TestCase
     end
 
     test ":icon_size" do
-      scale_button = Gtk::ScaleButton.new(:icon_size => Gtk::IconSize::MENU)
+      scale_button = Gtk::ScaleButton.new(:icon_size => :menu)
       assert_equal(Gtk::IconSize::MENU, scale_button.size)
     end
 
