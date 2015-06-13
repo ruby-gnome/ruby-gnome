@@ -1756,6 +1756,14 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
                 rbgobj_initialize_gvalue(gvalue, rb_argument);
             }
             argument->v_pointer = gvalue;
+        } else if (gtype == G_TYPE_BYTES) {
+            VALUE rb_string;
+            GBytes *gbytes;
+
+            rb_string = StringValue(rb_argument);
+            gbytes = g_bytes_new(RSTRING_PTR(rb_string),
+                                 RSTRING_LEN(rb_string));
+            argument->v_pointer = gbytes;
         } else if (gtype == G_TYPE_CLOSURE) {
             GClosure *rclosure = NULL;
 
@@ -2999,11 +3007,14 @@ rb_gi_value_argument_free_interface(VALUE rb_argument,
         GType gtype;
         gtype = g_registered_type_info_get_g_type(interface_info);
 
-        if (gtype == G_TYPE_VALUE &&
-            !RVAL2CBOOL(rb_obj_is_kind_of(rb_argument, rb_cGLibValue))) {
-            GValue *gvalue = argument->v_pointer;
-            g_value_unset(gvalue);
-            xfree(argument->v_pointer);
+        if (gtype == G_TYPE_VALUE) {
+            if (!RVAL2CBOOL(rb_obj_is_kind_of(rb_argument, rb_cGLibValue))) {
+                GValue *gvalue = argument->v_pointer;
+                g_value_unset(gvalue);
+                xfree(argument->v_pointer);
+            }
+        } else if (gtype == G_TYPE_BYTES) {
+            g_bytes_unref(argument->v_pointer);
         }
     }
 
