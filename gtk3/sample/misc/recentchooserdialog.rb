@@ -1,22 +1,20 @@
 #!/usr/bin/env ruby
 =begin
-  recentchooserdialog.rb - Ruby/GTK2 sample script.
+  recentchooserdialog.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2006-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: recentchooserdialog.rb,v 1.2 2006/11/15 23:46:13 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 dialog = Gtk::RecentChooserDialog.new(:title => "Recent Chooser Dialog Sample",
-                                      :buttons => [[Gtk::Stock::CANCEL, Gtk::Dialog::ResponseType::CANCEL], 
-                                        [Gtk::Stock::OPEN, Gtk::Dialog::ResponseType::ACCEPT]])
+                                      :buttons => [["_Cancel", Gtk::ResponseType::CANCEL],
+                                                   ["_Accept", Gtk::ResponseType::ACCEPT]])
 
-dialog.signal_connect("response") do |widget, response|
+dialog.signal_connect("response") do |_widget, response|
   case response
-  when Gtk::Dialog::ResponseType::ACCEPT
+  when Gtk::ResponseType::ACCEPT
     info = dialog.current_item
     if info
       puts "----"
@@ -28,7 +26,7 @@ dialog.signal_connect("response") do |widget, response|
       puts info.modified
       puts info.visited
       puts info.private_hint?
-      p    info.application_info("gedit")
+      p    info.get_application_info("gedit")
       p    info.applications
       puts info.last_application
       p    info.groups
