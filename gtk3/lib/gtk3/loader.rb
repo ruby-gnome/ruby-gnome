@@ -155,7 +155,7 @@ module Gtk
     def rubyish_method_name(function_info, options={})
       name = function_info.name
       case name
-      when /\Alist_(child_properties)\z/
+      when /\Alist_(child_properties|style_properties)\z/
         $1
       else
         super
