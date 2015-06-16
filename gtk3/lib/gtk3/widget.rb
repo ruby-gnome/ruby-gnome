@@ -47,6 +47,11 @@ module Gtk
           end
         end
       end
+
+      alias_method :style_properties_raw, :style_properties
+      def style_properties
+        style_properties_raw[0]
+      end
     end
 
     alias_method :events_raw, :events

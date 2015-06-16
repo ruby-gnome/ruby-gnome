@@ -21,6 +21,31 @@ class TestGtkWidget < Test::Unit::TestCase
     @widget = Gtk::Invisible.new
   end
 
+  sub_test_case "class methods" do
+    test ".style_properties" do
+      assert_equal([
+                     "cursor-aspect-ratio",
+                     "cursor-color",
+                     "focus-line-pattern",
+                     "focus-line-width",
+                     "focus-padding",
+                     "interior-focus",
+                     "link-color",
+                     "scroll-arrow-hlength",
+                     "scroll-arrow-vlength",
+                     "secondary-cursor-color",
+                     "separator-height",
+                     "separator-width",
+                     "text-handle-height",
+                     "text-handle-width",
+                     "visited-link-color",
+                     "wide-separators",
+                     "window-dragging",
+                   ],
+                   Gtk::Label.style_properties.collect(&:name).sort)
+    end
+  end
+
   def test_set_window
     attrs = Gdk::WindowAttr.new(100, 100, :input_only, :temp)
     window = Gdk::Window.new(nil, attrs, 0)
