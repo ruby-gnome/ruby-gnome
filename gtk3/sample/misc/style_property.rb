@@ -17,27 +17,25 @@ class MyButton < Gtk::Button
     super("label" => label)
   end
 
-  install_style_property(GLib::Param::Int.new(
-                  "foo", # name
-                  "Foo", # nick
-                  "FOO", # blurb
-                  0,     # min
-                  100,   # max
-                  5,     # default
-                  GLib::Param::READABLE |
-                  GLib::Param::WRITABLE)) do |pspec, str|
+  install_style_property(GLib::Param::Int.new("foo", # name
+                                              "Foo", # nick
+                                              "FOO", # blurb
+                                              0,     # min
+                                              100,   # max
+                                              5,     # default
+                                              GLib::Param::READABLE |
+                                              GLib::Param::WRITABLE)) do |pspec, str|
     p pspec, str
     str.to_i + 10  # return the converted value.
   end
 
-  install_style_property(GLib::Param::Enum.new(
-                  "bar", # name
-                  "Bar", # nick
-                  "BAR", # blurb
-                  GLib::Type["GdkCursorType"], # Enum type
-                  Gdk::CursorType::ARROW, # default
-                  GLib::Param::READABLE |
-                  GLib::Param::WRITABLE)) do |pspec, str|
+  install_style_property(GLib::Param::Enum.new("bar", # name
+                                               "Bar", # nick
+                                               "BAR", # blurb
+                                               GLib::Type["GdkCursorType"], # Enum type
+                                               Gdk::CursorType::ARROW, # default
+                                               GLib::Param::READABLE |
+                                               GLib::Param::WRITABLE)) do |pspec, str|
     p pspec, str
     if str.strip! == "boat"
       Gdk::Cursor::BOAT
