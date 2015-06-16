@@ -1,14 +1,12 @@
 #!/usr/bin/env ruby
 =begin
-  style_property.rb - Ruby/GTK2 sample script.
+  style_property.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2004,2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2004-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: style_property.rb,v 1.4 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 class MyButton < Gtk::Button
   type_register
@@ -20,24 +18,24 @@ class MyButton < Gtk::Button
   end
 
   install_style_property(GLib::Param::Int.new("foo", # name
-					      "Foo", # nick
-					      "FOO", # blurb
-					      0,     #min 
-					      100,   #max
-					      5,     #default
-					      GLib::Param::READABLE |
-					      GLib::Param::WRITABLE)) do |pspec, str|
+                                              "Foo", # nick
+                                              "FOO", # blurb
+                                              0,     # min
+                                              100,   # max
+                                              5,     # default
+                                              GLib::Param::READABLE |
+                                              GLib::Param::WRITABLE)) do |pspec, str|
     p pspec, str
-    str.to_i + 10  #return the converted value.
+    str.to_i + 10  # return the converted value.
   end
 
   install_style_property(GLib::Param::Enum.new("bar", # name
-					       "Bar", # nick
-					       "BAR", # blurb
-					       GLib::Type["GdkCursorType"], #Enum type
-					       Gdk::Cursor::ARROW, #default
-					       GLib::Param::READABLE |
-					       GLib::Param::WRITABLE)) do |pspec, str|
+                                               "Bar", # nick
+                                               "BAR", # blurb
+                                               GLib::Type["GdkCursorType"], # Enum type
+                                               Gdk::CursorType::ARROW, # default
+                                               GLib::Param::READABLE |
+                                               GLib::Param::WRITABLE)) do |pspec, str|
     p pspec, str
     if str.strip! == "boat"
       Gdk::Cursor::BOAT
@@ -47,21 +45,33 @@ class MyButton < Gtk::Button
   end
 end
 
-Gtk::RC.parse("./style_property.rc")
+provider = Gtk::CssProvider.new
+provider.load(:data => DATA.read)
 
-win = Gtk::Window.new("Gtk::RC sample")
+display = Gdk::Display.default
+screen = display.default_screen
+Gtk::StyleContext.add_provider_for_screen(screen, provider, Gtk::StyleProvider::PRIORITY_USER)
+
+win = Gtk::Window.new("Custom style properties")
 b = MyButton.new("Hello")
-b.signal_connect("clicked"){ Gtk.main_quit }
+b.signal_connect("clicked") { Gtk.main_quit }
 
 p MyButton.style_properties
 
 win.set_default_size(100, 100)
-win.add(b).show_all
-win.signal_connect("destroy"){ Gtk.main_quit }
+win.add(b)
+win.show_all
+win.signal_connect("destroy") { Gtk.main_quit }
 
 # You need to call them after "Gtk::Widget#show"
 # (Or in expose event).
 p b.style_get_property("foo")
-p cursor = b.style_get_property("bar")
+p b.style_get_property("bar")
 
 Gtk.main
+
+__END__
+* {
+  -MyButton-foo: 30;
+  -MyButton-bar: boat;
+}
