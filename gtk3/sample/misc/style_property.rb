@@ -46,7 +46,12 @@ class MyButton < Gtk::Button
 end
 
 provider = Gtk::CssProvider.new
-provider.load(:data => DATA.read)
+provider.load(:data => <<-CSS)
+* {
+  -MyButton-foo: 30;
+  -MyButton-bar: boat;
+}
+CSS
 
 display = Gdk::Display.default
 screen = display.default_screen
@@ -69,9 +74,3 @@ p b.style_get_property("foo")
 p b.style_get_property("bar")
 
 Gtk.main
-
-__END__
-* {
-  -MyButton-foo: 30;
-  -MyButton-bar: boat;
-}
