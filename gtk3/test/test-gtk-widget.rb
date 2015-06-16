@@ -147,4 +147,9 @@ class TestGtkWidget < Test::Unit::TestCase
                    @widget.events)
     end
   end
+
+  test "#style_get_property" do
+    entry = Gtk::Entry.new
+    assert_equal(2, entry.style_get_property("focus-padding"))
+  end
 end

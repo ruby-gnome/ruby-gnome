@@ -90,6 +90,14 @@ module Gtk
       drag_dest_set_raw(flags, targets, actions)
     end
 
+    alias_method :style_get_property_raw, :style_get_property
+    def style_get_property(name)
+      property = self.class.find_style_property(name)
+      value = GLib::Value.new(property.value_type)
+      style_get_property_raw(name, value)
+      value.value
+    end
+
     private
     def initialize_post
       return unless self.class.have_template?
