@@ -50,8 +50,22 @@ window = Gtk::Window.new
 window.name = "pager_window"
 
 css_provider = Gtk::CssProvider.new
-css_provider.load(:data => DATA.read)
-
+css_provider.load(:data => <<CSS) 
+@binding-set MoveCursor {
+  bind "<Control>j" { "move-cursor" (display-lines, 1, 0) };
+  bind "<Control>k" { "move-cursor" (display-lines, -1, 0) };
+  bind "<Control>l" { "move-cursor" (buffer-ends, 1, 0) };
+  bind "<Control>m" { "move-cursor" (buffer-ends, -1, 0) };
+}
+GtkTextView {
+  -GtkWidget-cursor-color: green;
+  -GtkWidget-aspect-ratio: 1.0;
+  font: 20 Sans;
+  color: #aaa;
+  background-color: #333 ;
+  gtk-key-bindings: MoveCursor;
+}
+CSS
 hbox = Gtk::Box.new(:horizontal)
 
 hbox.add(button1 = Gtk::Button.new(:label => "Ctrl + l"))
@@ -95,19 +109,3 @@ end
 pager.grab_focus
 
 Gtk.main
-
-__END__
-@binding-set MoveCursor {
-  bind "<Control>j" { "move-cursor" (display-lines, 1, 0) };
-  bind "<Control>k" { "move-cursor" (display-lines, -1, 0) };
-  bind "<Control>l" { "move-cursor" (buffer-ends, 1, 0) };
-  bind "<Control>m" { "move-cursor" (buffer-ends, -1, 0) };
-}
-GtkTextView {
-  -GtkWidget-cursor-color: green;
-  -GtkWidget-aspect-ratio: 1.0;
-  font: 20 Sans;
-  color: #aaa;
-  background-color: #333 ;
-  gtk-key-bindings: MoveCursor;
-}

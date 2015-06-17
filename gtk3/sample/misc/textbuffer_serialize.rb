@@ -19,7 +19,15 @@ file_name = "serialized.dat"
 textview = Gtk::TextView.new
 textview.set_size_request(600, 400)
 buffer = textview.buffer
-buffer.text = DATA.read
+buffer.text = <<TEXT
+This is a sample script for rich text serialization/deserialization.
+
+1. Edit this text using font/color buttons.
+2. Click save button and save this text (= serialize this as rich text to a file)
+3. Click clear button and clear this text buffer.
+4. Click load button and load the file which you save (= deserialize this).
+TEXT
+
 deserialize_format = buffer.register_deserialize_tagset(nil)
 format = buffer.serialize_formats[0]
 
@@ -123,11 +131,3 @@ window.set_default_size 400,600
 window.signal_connect("destroy") { Gtk.main_quit }
 
 Gtk.main
-
-__END__
-This is a sample script for rich text serialization/deserialization.
-
-1. Edit this text using font/color buttons.
-2. Click save button and save this text (= serialize this as rich text to a file)
-3. Click clear button and clear this text buffer.
-4. Click load button and load the file which you save (= deserialize this).
