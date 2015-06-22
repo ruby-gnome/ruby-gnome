@@ -2,26 +2,25 @@
   stock.rb - Gtk::Stock sample script.
 
   Copyright (C) 2001-2006 Masao Mutoh
+  Copyright (c) 2001-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: stock.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("Gtk::Stock sample")
-window.signal_connect("destroy"){Gtk.main_quit}
+window.signal_connect("destroy") { Gtk.main_quit }
 
 stocks = Gtk::Stock.constants.sort
 
-image = Gtk::Image.new
-label = Gtk::Label.new
-button = Gtk::Button.new("Click!")
+image = Gtk::Image.new :stock => Gtk::Stock::OK, :size => :dialog
+label = Gtk::Label.new("Gtk::Stock::OK")
+button = Gtk::Button.new(:label => "Click!")
 cnt = 0
 button.signal_connect("clicked") do
   stock_name = "Gtk::Stock::#{stocks[cnt]}"
   label.set_text(stock_name)
-  image.set(eval(stock_name), Gtk::IconSize::DIALOG)
+  image.set_stock(eval(stock_name))
   if cnt < stocks.size - 1
     cnt += 1
   else
@@ -29,8 +28,12 @@ button.signal_connect("clicked") do
   end
 end
 
-box = Gtk::VBox.new.add(image).add(label).add(button)
-window.add(box).set_default_size(200,200).show_all
+box = Gtk::Box.new(:vertical, 0)
+box.add(image)
+box.add(label)
+box.add(button)
+window.add(box)
+window.set_default_size(200, 200)
+window.show_all
 
 Gtk.main
-
