@@ -102,7 +102,7 @@ module Gtk
       elsif animation
         initialize_new_from_animation(animation)
       elsif resource
-        initialize_new_from_resource resource
+        initialize_new_from_resource(resource)
       elsif surface
         initialize_new_from_surface(surface)
       else
