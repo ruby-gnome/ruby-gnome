@@ -62,7 +62,7 @@ win = Gtk::Window.new << box
 win.show_all.signal_connect("delete_event") do
   p "Exiting..."
   Gtk.main_quit
-  Thread.list.each { |t| t.kill }
+  Thread.list.each { |t| t.kill if t != Thread.main }
 end
 
 Gtk.main
