@@ -39,10 +39,10 @@ class TestGtkImage < Test::Unit::TestCase
       Gio::Resources.register(resource)
       begin
         resource_path = "/org/ruby/gnome/gnome-logo-icon.png"
-        image = Gtk::Image.new( :resource => resource_path,
-                                :size => :dialog)
-        assert_equal( resource_path,
-                      image.resource)
+        image = Gtk::Image.new(:resource => resource_path,
+                               :size => :dialog)
+        assert_equal(resource_path,
+                     image.resource)
       ensure
         Gio::Resources.unregister(resource)
       end
