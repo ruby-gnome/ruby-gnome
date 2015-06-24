@@ -40,5 +40,16 @@ module Gtk
         end
       end
     end
+
+    alias_method :active_iter_raw, :active_iter
+    def active_iter
+      found, iter = active_iter_raw
+      if found
+        iter.model = model
+        iter
+      else
+        nil
+      end
+    end
   end
 end

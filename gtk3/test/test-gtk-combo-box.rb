@@ -73,4 +73,25 @@ class TestGtkComboBox < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case("#active_iter") do
+    def setup
+      @model = Gtk::ListStore.new(TrueClass, String)
+
+      iter = @model.append
+      iter[0] = false
+      iter[1] = "item1"
+
+      @combo_box = Gtk::ComboBox.new(:model => @model)
+    end
+
+    test "found" do
+      @combo_box.active_iter = @model.iter_first
+      assert_equal(@model.iter_first, @combo_box.active_iter)
+    end
+
+    test "not found" do
+      assert_nil(@combo_box.active_iter)
+    end
+  end
 end
