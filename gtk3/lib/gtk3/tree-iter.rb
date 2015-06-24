@@ -37,5 +37,11 @@ module Gtk
     def path
       @model.get_path(self)
     end
+
+    def ==(other)
+      other.is_a?(self.class) and
+        @model == other.model and
+        path == other.path
+    end
   end
 end
