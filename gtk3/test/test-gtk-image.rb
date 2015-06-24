@@ -33,6 +33,7 @@ class TestGtkImage < Test::Unit::TestCase
                    ],
                    image.icon)
     end
+
     test "resource" do
       resource = Gio::Resource.load(fixture_path("image.gresource"))
       Gio::Resources.register(resource)
