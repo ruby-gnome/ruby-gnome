@@ -18,7 +18,7 @@
 
 require "rake/clean"
 
-gresources = ["simple_window.gresource"]
+gresources = ["simple_window.gresource","image.gresource"]
 
 gresources.each do |gresource|
   gresource_xml = "#{gresource}.xml"

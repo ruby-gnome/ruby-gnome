@@ -56,6 +56,12 @@ module Gtk
     #   pixAnim = Gdk::PixbufAnimation.new 'anim.gif'
     #   image = Gtk::Image.new :animation => pixAnim
     #
+    # @example Create an image from a file in a resource file
+    #   resource = Gio::Resource.load(a_resource_file)
+    #   Gio::Resources.register(resource)
+    #   resource_path = "/path/to/image.png"
+    #   image = Gtk::Image.new :resource => resource_path
+    #
     # @example Create an image from a Cairo::Surface that is a
     #          Cairo::ImageSurface.
     #   surface = Cairo::ImageSurface.new :RGB24, 60, 60
@@ -72,7 +78,7 @@ module Gtk
       file      = options[:file] || nil
       pixbuf    = options[:pixbuf] || nil
       animation = options[:animation] || nil
-      # resource  = options[:resource] ||nil
+      resource  = options[:resource] ||nil
       surface   = options[:surface] || nil
       size      = options[:size] || nil
 
@@ -95,9 +101,8 @@ module Gtk
         initialize_new_from_pixbuf(pixbuf)
       elsif animation
         initialize_new_from_animation(animation)
-#      elsif resource
-#        # ToDo: resource usage is not verified and therefore not enabled
-#        initialize_new_from_resource resource
+      elsif resource
+        initialize_new_from_resource resource
       elsif surface
         initialize_new_from_surface(surface)
       else
