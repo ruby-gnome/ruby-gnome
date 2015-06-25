@@ -191,17 +191,13 @@ rbgobj_initialize_gvalue(GValue *result, VALUE value)
 	    if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cEnum))) {
 		type = G_TYPE_ENUM;
 	    }
-	    else if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cFlags))) {
-		type = G_TYPE_FLAGS;
-	    }
-	    else if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cBoxed))) {
-		type = G_TYPE_BOXED;
+	    else if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cFlags)) ||
+                     RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cBoxed)) ||
+                     RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cObject))) {
+		type = RVAL2GTYPE(value);
 	    }
 	    else if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cParam))) {
 		type = G_TYPE_PARAM;
-	    }
-	    else if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cObject))) {
-		type = G_TYPE_OBJECT;
 	    }
 	    else if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_mInterface))) {
 		/* should use rbgobj_mMetaInterface? */
