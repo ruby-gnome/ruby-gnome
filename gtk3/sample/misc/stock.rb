@@ -13,7 +13,7 @@ window.signal_connect("destroy") { Gtk.main_quit }
 
 stocks = Gtk::Stock.constants.sort
 
-image = Gtk::Image.new :stock => Gtk::Stock::OK, :size => :dialog
+image = Gtk::Image.new(:stock => Gtk::Stock::OK, :size => :dialog)
 label = Gtk::Label.new("Gtk::Stock::OK")
 button = Gtk::Button.new(:label => "Click!")
 cnt = 0
