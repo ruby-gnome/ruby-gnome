@@ -37,6 +37,7 @@ module Gtk
     def set_values(values)
       @model.set_values(self, values)
     end
+    alias_method :values=, :set_values
 
     def path
       @model.get_path(self)

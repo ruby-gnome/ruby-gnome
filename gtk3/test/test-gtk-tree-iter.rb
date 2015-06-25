@@ -38,4 +38,16 @@ class TestGtkTreeIter < Test::Unit::TestCase
       assert_equal("string", @iter[0])
     end
   end
+
+  sub_test_case("#values=") do
+    test "Array" do
+      @iter.values = ["string"]
+      assert_equal("string", @iter[0])
+    end
+
+    test "Hash" do
+      @iter.values = {0 => "string"}
+      assert_equal("string", @iter[0])
+    end
+  end
 end
