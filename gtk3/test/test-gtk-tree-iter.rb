@@ -26,4 +26,16 @@ class TestGtkTreeIter < Test::Unit::TestCase
   def test_path
     assert_equal("0", @iter.path.to_s)
   end
+
+  sub_test_case("#set_values") do
+    test "Array" do
+      @iter.set_values(["string"])
+      assert_equal("string", @iter[0])
+    end
+
+    test "Hash" do
+      @iter.set_values(0 => "string")
+      assert_equal("string", @iter[0])
+    end
+  end
 end
