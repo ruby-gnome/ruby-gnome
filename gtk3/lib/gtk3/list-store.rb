@@ -49,5 +49,12 @@ module Gtk
       setup_iter(iter)
       iter
     end
+  
+    alias_method :prepend_raw, :prepend
+    def prepend
+      iter = prepend_raw
+      setup_iter(iter)
+      iter
+    end
   end
 end
