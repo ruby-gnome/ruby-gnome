@@ -37,18 +37,5 @@ module Gtk
       targets = ensure_drag_targets(targets)
       enable_model_drag_dest_raw(targets, actions)
     end
-    private
-    def ensure_drag_targets(targets)
-      return targets unless targets.is_a?(Array)
-
-      targets.collect do |target|
-        case target
-        when Array
-          TargetEntry.new(*target)
-        else
-          target
-        end
-      end
-    end
   end
 end
