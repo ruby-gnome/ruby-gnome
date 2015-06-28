@@ -25,5 +25,30 @@ module Gtk
         nil
       end
     end
+
+    alias_method :enable_model_drag_source_raw, :enable_model_drag_source
+    def enable_model_drag_source(flags, targets, actions)
+      targets = ensure_drag_targets(targets)
+      enable_model_drag_source_raw(flags, targets, actions)
+    end
+
+    alias_method :enable_model_drag_dest_raw, :enable_model_drag_dest
+    def enable_model_drag_dest(targets, actions)
+      targets = ensure_drag_targets(targets)
+      enable_model_drag_dest_raw(targets, actions)
+    end
+    private
+    def ensure_drag_targets(targets)
+      return targets unless targets.is_a?(Array)
+
+      targets.collect do |target|
+        case target
+        when Array
+          TargetEntry.new(*target)
+        else
+          target
+        end
+      end
+    end
   end
 end
