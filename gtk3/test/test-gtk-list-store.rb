@@ -41,7 +41,8 @@ class TestGtkListStore < Test::Unit::TestCase
     end
   end
 
-  def test_set_values
+  sub_test_case("#set_values") do
+  test "Array" do
     iter = @store.append
     assert_nothing_raised do
       @store.set_values(iter, [0, '1'])
@@ -60,7 +61,7 @@ class TestGtkListStore < Test::Unit::TestCase
     assert_equal([2, '3'], [iter[0], iter[1]])
   end
 
-  def test_set_values_with_hash
+  test "Hash" do
     iter = @store.append
     assert_nothing_raised do
       @store.set_values(iter, {ID => 0, NAME => 'me'})
@@ -82,6 +83,7 @@ class TestGtkListStore < Test::Unit::TestCase
       @store.set_values(iter, {})
     end
     assert_equal([2, 'she'], [iter[ID], iter[NAME]])
+  end
   end
 
   test "#each" do
