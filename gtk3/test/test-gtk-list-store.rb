@@ -42,48 +42,48 @@ class TestGtkListStore < Test::Unit::TestCase
   end
 
   sub_test_case("#set_values") do
-  test "Array" do
-    iter = @store.append
-    assert_nothing_raised do
-      @store.set_values(iter, [0, '1'])
-    end
-    assert_equal([0, '1'], [iter[0], iter[1]])
+    test "Array" do
+      iter = @store.append
+      assert_nothing_raised do
+        @store.set_values(iter, [0, '1'])
+      end
+      assert_equal([0, '1'], [iter[0], iter[1]])
 
-    iter = @store.append
-    assert_nothing_raised do
-      @store.set_values(iter, [2, '3'])
-    end
-    assert_equal([2, '3'], [iter[0], iter[1]])
+      iter = @store.append
+      assert_nothing_raised do
+        @store.set_values(iter, [2, '3'])
+      end
+      assert_equal([2, '3'], [iter[0], iter[1]])
 
-    assert_nothing_raised do
-      @store.set_values(iter, [])
+      assert_nothing_raised do
+        @store.set_values(iter, [])
+      end
+      assert_equal([2, '3'], [iter[0], iter[1]])
     end
-    assert_equal([2, '3'], [iter[0], iter[1]])
-  end
 
-  test "Hash" do
-    iter = @store.append
-    assert_nothing_raised do
-      @store.set_values(iter, {ID => 0, NAME => 'me'})
-    end
-    assert_equal([0, 'me'], [iter[ID], iter[NAME]])
+    test "Hash" do
+      iter = @store.append
+      assert_nothing_raised do
+        @store.set_values(iter, {ID => 0, NAME => 'me'})
+      end
+      assert_equal([0, 'me'], [iter[ID], iter[NAME]])
 
-    iter = @store.append
-    assert_nothing_raised do
-      @store.set_values(iter, {NAME => 'you', ID => 2})
-    end
-    assert_equal([2, 'you'], [iter[ID], iter[NAME]])
+      iter = @store.append
+      assert_nothing_raised do
+        @store.set_values(iter, {NAME => 'you', ID => 2})
+      end
+      assert_equal([2, 'you'], [iter[ID], iter[NAME]])
 
-    assert_nothing_raised do
-      @store.set_values(iter, {NAME => "she"})
-    end
-    assert_equal([2, 'she'], [iter[ID], iter[NAME]])
+      assert_nothing_raised do
+        @store.set_values(iter, {NAME => "she"})
+      end
+      assert_equal([2, 'she'], [iter[ID], iter[NAME]])
 
-    assert_nothing_raised do
-      @store.set_values(iter, {})
+      assert_nothing_raised do
+        @store.set_values(iter, {})
+      end
+      assert_equal([2, 'she'], [iter[ID], iter[NAME]])
     end
-    assert_equal([2, 'she'], [iter[ID], iter[NAME]])
-  end
   end
 
   test "#each" do
