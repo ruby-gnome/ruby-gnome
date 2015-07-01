@@ -2,31 +2,53 @@
 =begin
   menu.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: menu.rb,v 1.8 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 def create_menu(depth)
   return nil if depth < 1
-  
+
   menu = Gtk::Menu.new
   group = nil
-  submenu = nil
 
-  for i in 0..4
-    buf = sprintf("item %2d - %d", depth, i + 1)
+  (0..4).each do |i|
+    buf = format("item %2d - %d", depth, i + 1)
     menuitem = Gtk::RadioMenuItem.new(group, buf)
     group = menuitem.group
     menu.append(menuitem)
-    if depth > 1
-      menuitem.set_submenu create_menu(depth - 1)
-    end
+
+    menuitem.set_submenu create_menu(depth - 1) if depth > 1
   end
   menu
+end
+
+def create_option_menu
+  lstore = Gtk::ListStore.new(TrueClass, String)
+  (1..5).each do |i|
+    lstore.append.set_values([false, "item #{i}"])
+  end
+
+  combobox = Gtk::ComboBox.new(:model => lstore, :entry => true)
+
+  toggle = Gtk::CellRendererToggle.new
+
+  combobox.pack_start(toggle, true)
+  combobox.add_attribute(toggle, "active", 0)
+  combobox.set_entry_text_column(1)
+
+  combobox.signal_connect("changed") do |widget|
+    list = widget.model
+    list.each do |model, _path, iter|
+      model.set_value(iter, 0, false)
+    end
+    iter = widget.active_iter
+    list.set_value(iter, 0, true)
+  end
+
+  combobox
 end
 
 window = Gtk::Window.new("menus")
@@ -35,11 +57,11 @@ window.signal_connect("destroy") do
 end
 window.border_width = 0
 
-box1 = Gtk::VBox.new(false, 0)
+box1 = Gtk::Box.new(:vertical, 0)
 window.add(box1)
 
 menubar = Gtk::MenuBar.new
-box1.pack_start(menubar, false, true, 0)
+box1.pack_start(menubar, :expand => false, :fill => true, :padding => 0)
 
 menu = create_menu(2)
 menuitem = Gtk::MenuItem.new("test\nline2")
@@ -54,27 +76,25 @@ menuitem = Gtk::MenuItem.new("bar")
 menuitem.set_submenu(create_menu(4))
 menubar.append(menuitem)
 
-box2 = Gtk::VBox.new(false, 10)
+box2 = Gtk::Box.new(:vertical, 10)
 box2.border_width = 10
-box1.pack_start(box2, true, true, 0)
+box1.pack_start(box2, :expand => true, :fill => true, :padding => 0)
 
-optionmenu = Gtk::OptionMenu.new
-optionmenu.set_menu(create_menu(1))
-optionmenu.set_history(4)
-box2.pack_start(optionmenu, true, true, 0)
+optionmenu = create_option_menu
+box2.pack_start(optionmenu, :expand => true, :fill => true, :padding => 0)
 
-separator = Gtk::HSeparator.new
-box1.pack_start(separator, false, true, 0)
+separator = Gtk::Separator.new(:horizontal)
+box1.pack_start(separator, :expand => false, :fill => true, :padding => 0)
 
-box2 = Gtk::HBox.new(false, 10)
+box2 = Gtk::Box.new(:horizontal, 10)
 box2.border_width = 10
-box1.pack_start(box2, false, true, 0)
+box1.pack_start(box2, :expand => false, :fill => true, :padding => 0)
 
-button = Gtk::Button.new("close")
+button = Gtk::Button.new(:label => "close")
 button.signal_connect("clicked") do
   window.destroy
 end
-box2.pack_start(button, true, true, 0)
+box2.pack_start(button, :expand => true, :fill => true, :padding => 0)
 
 window.show_all
 
