@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 =begin
   Sample script using Gtk::Socket and Gtk::Plug.
 
@@ -7,13 +6,11 @@
 
   Written by Alex Boussinet <mailto:dbug@wanadoo.fr> for testing purpose only.
 
-  Copyright (c) 2003-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2003-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: t-gtkplug.rb,v 1.5 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 class MyGtkPlug
   def initialize(xid, plug)
@@ -24,23 +21,23 @@ class MyGtkPlug
     else
       @window = Gtk::Plug.new(xid.to_i)
     end
-    @window.window_position = Gtk::Window::Position::CENTER
-    @window.signal_connect("delete_event"){Gtk.main_quit}
+    @window.window_position = Gtk::WindowPosition::CENTER
+    @window.signal_connect("delete_event") { Gtk.main_quit }
     @vbox = Gtk::Box.new(:vertical, 5)
     @window.add(@vbox)
     @button1 = Gtk::Button.new(:label => plug)
-    @button1.signal_connect("clicked"){ $stderr.puts plug}
+    @button1.signal_connect("clicked") { $stderr.puts plug }
     @button2 = Gtk::Button.new(:label => "Exit")
-    @button2.signal_connect("clicked"){Gtk.main_quit}
+    @button2.signal_connect("clicked") { Gtk.main_quit }
     # Exit button to test an unexpected end of child process by Gtk::Socket
-    @vbox.pack_start(@button1, true, true)
-    @vbox.pack_start(@button2, true, true)
+    @vbox.pack_start(@button1, :expand => true, :fill => true)
+    @vbox.pack_start(@button2, :expand => true, :fill => true)
     @window.show_all
   end
 end
 
 xid = nil
-ARGV.each_index { |i|
+ARGV.each_index do |i|
   arg = ARGV.at(i)
   if arg == "-x"
     if arg.length > 2
@@ -51,8 +48,8 @@ ARGV.each_index { |i|
     end
     xid = nil if xid.to_i <= 0
     ARGV.delete_at(i)
-  end 
-}
+  end
+end
 
 MyGtkPlug.new(xid, ARGV.shift)
 Gtk.main
