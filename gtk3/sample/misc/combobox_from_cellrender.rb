@@ -32,14 +32,14 @@ window.add combobox
 
 combobox.signal_connect("changed") do |widget|
   list = widget.model
-  list.each do |model, _path, iter|
-    model.set_value(iter, 0, false)
+  list.each do |_model, _path, iter|
+    iter[0] = false
   end
   iter = widget.active_iter
   puts iter.inspect
-  puts "#{list.get_value(iter, 0)} #{list.get_value(iter, 1)}"
+  puts "#{iter[0]} #{iter[1]}"
 
-  list.set_value(iter, 0, true)
+  iter[0] = true
 end
 
 window.signal_connect("destroy") { Gtk.main_quit }
