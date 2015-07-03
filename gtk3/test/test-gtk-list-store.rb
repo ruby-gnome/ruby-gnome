@@ -76,80 +76,80 @@ class TestGtkListStore < Test::Unit::TestCase
     test "#append" do
       iter = @store.append
       @store.set_values(iter, [0, '1'])
-      assert_equal iter.path.to_s, "0"
+      assert_equal(iter.path.to_s, "0")
 
       iter = @store.append
       @store.set_values(iter, [2, '3'])
 
-      assert_equal iter.path.to_s, "1"
-      assert_equal @store.iter_first[0], 0
-      assert_equal @store.get_iter("1")[0], 2
+      assert_equal(iter.path.to_s, "1")
+      assert_equal(@store.iter_first[0], 0)
+      assert_equal(@store.get_iter("1")[0], 2)
     end
 
     test "#prepend" do
       iter = @store.append
       @store.set_values(iter, [0, '1'])
-      assert_equal iter.path.to_s, "0"
+      assert_equal(iter.path.to_s, "0")
 
       iter = @store.prepend
       @store.set_values(iter, [2, '3'])
 
-      assert_equal iter.path.to_s, "0"
-      assert_equal @store.iter_first[0], 2
-      assert_equal @store.get_iter("1")[0], 0
+      assert_equal(iter.path.to_s, "0")
+      assert_equal(@store.iter_first[0], 2)
+      assert_equal(@store.get_iter("1")[0], 0)
     end
 
     test "#insert" do
       iter = @store.append
       @store.set_values(iter, [0, '1'])
-      assert_equal iter.path.to_s, "0"
+      assert_equal(iter.path.to_s, "0")
 
       iter = @store.append
       @store.set_values(iter, [2, '3'])
-      assert_equal iter.path.to_s, "1"
+      assert_equal(iter.path.to_s, "1")
 
       iter = @store.insert(1)
       @store.set_values(iter, [4, '5'])
 
-      assert_equal @store.get_iter("0")[0], 0
-      assert_equal @store.get_iter("1")[0], 4
-      assert_equal @store.get_iter("2")[0], 2
+      assert_equal(@store.get_iter("0")[0], 0)
+      assert_equal(@store.get_iter("1")[0], 4)
+      assert_equal(@store.get_iter("2")[0], 2)
     end
 
     test "#insert_before" do
       iter = @store.append
       @store.set_values(iter, [0, '1'])
-      assert_equal iter.path.to_s, "0"
+      assert_equal(iter.path.to_s, "0")
 
       iter = @store.append
       @store.set_values(iter, [2, '3'])
-      assert_equal iter.path.to_s, "1"
+      assert_equal(iter.path.to_s, "1")
 
       sibling = @store.get_iter("1")
       iter = @store.insert_before(sibling)
       @store.set_values(iter, [4, '5'])
 
-      assert_equal @store.get_iter("0")[0], 0
-      assert_equal @store.get_iter("1")[0], 4
-      assert_equal @store.get_iter("2")[0], 2
+      assert_equal(@store.get_iter("0")[0], 0)
+      assert_equal(@store.get_iter("1")[0], 4)
+      assert_equal(@store.get_iter("2")[0], 2)
     end
 
     test "#insert_after" do
       iter = @store.append
       @store.set_values(iter, [0, '1'])
-      assert_equal iter.path.to_s, "0"
+      assert_equal(iter.path.to_s, "0")
 
       iter = @store.append
       @store.set_values(iter, [2, '3'])
-      assert_equal iter.path.to_s, "1"
+      assert_equal(iter.path.to_s, "1")
 
       sibling = @store.get_iter("0")
       iter = @store.insert_after(sibling)
       @store.set_values(iter, [4, '5'])
 
-      assert_equal @store.get_iter("0")[0], 0
-      assert_equal @store.get_iter("1")[0], 4
-      assert_equal @store.get_iter("2")[0], 2
+      assert_equal(@store.get_iter("0")[0], 0)
+      assert_equal(@store.get_iter("1")[0], 4)
+      assert_equal(@store.get_iter("2")[0], 2)
     end
   end
 
