@@ -115,6 +115,7 @@ class TestGtkListStore < Test::Unit::TestCase
       assert_equal @store.get_iter("1")[0], 4
       assert_equal @store.get_iter("2")[0], 2
     end
+
     test "#insert_before" do
       iter = @store.append
       @store.set_values(iter, [0, '1'])
