@@ -22,8 +22,8 @@ end
 def load_list
   model = Gtk::ListStore.new(TrueClass, String)
 
-  (1..4).each do |i|
-    model.append.set_values([false, "index#{i - 1}"])
+  4.times do |i|
+    model.append.set_values([false, "index#{i}"])
   end
   model
 end
