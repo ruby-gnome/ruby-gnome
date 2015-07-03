@@ -44,45 +44,111 @@ class TestGtkListStore < Test::Unit::TestCase
   sub_test_case("#set_values") do
     test "Array" do
       iter = @store.append
-      assert_nothing_raised do
-        @store.set_values(iter, [0, '1'])
-      end
+      @store.set_values(iter, [0, '1'])
       assert_equal([0, '1'], [iter[0], iter[1]])
 
       iter = @store.append
-      assert_nothing_raised do
-        @store.set_values(iter, [2, '3'])
-      end
+      @store.set_values(iter, [2, '3'])
       assert_equal([2, '3'], [iter[0], iter[1]])
 
-      assert_nothing_raised do
-        @store.set_values(iter, [])
-      end
+      @store.set_values(iter, [])
       assert_equal([2, '3'], [iter[0], iter[1]])
     end
 
     test "Hash" do
       iter = @store.append
-      assert_nothing_raised do
-        @store.set_values(iter, {ID => 0, NAME => 'me'})
-      end
+      @store.set_values(iter, {ID => 0, NAME => 'me'})
       assert_equal([0, 'me'], [iter[ID], iter[NAME]])
 
       iter = @store.append
-      assert_nothing_raised do
-        @store.set_values(iter, {NAME => 'you', ID => 2})
-      end
+      @store.set_values(iter, {NAME => 'you', ID => 2})
       assert_equal([2, 'you'], [iter[ID], iter[NAME]])
 
-      assert_nothing_raised do
-        @store.set_values(iter, {NAME => "she"})
-      end
+      @store.set_values(iter, {NAME => "she"})
       assert_equal([2, 'she'], [iter[ID], iter[NAME]])
 
-      assert_nothing_raised do
-        @store.set_values(iter, {})
-      end
+      @store.set_values(iter, {})
       assert_equal([2, 'she'], [iter[ID], iter[NAME]])
+    end
+  end
+
+  sub_test_case("Add data") do
+    test "#append" do
+      iter = @store.append
+      @store.set_values(iter, [0, '1'])
+      assert_equal iter.path.to_s, "0"
+
+      iter = @store.append
+      @store.set_values(iter, [2, '3'])
+
+      assert_equal iter.path.to_s, "1"
+      assert_equal @store.iter_first[0], 0
+      assert_equal @store.get_iter("1")[0], 2
+    end
+
+    test "#prepend" do
+      iter = @store.append
+      @store.set_values(iter, [0, '1'])
+      assert_equal iter.path.to_s, "0"
+
+      iter = @store.prepend
+      @store.set_values(iter, [2, '3'])
+
+      assert_equal iter.path.to_s, "0"
+      assert_equal @store.iter_first[0], 2
+      assert_equal @store.get_iter("1")[0], 0
+    end
+
+    test "#insert" do
+      iter = @store.append
+      @store.set_values(iter, [0, '1'])
+      assert_equal iter.path.to_s, "0"
+
+      iter = @store.append
+      @store.set_values(iter, [2, '3'])
+      assert_equal iter.path.to_s, "1"
+
+      iter = @store.insert(1)
+      @store.set_values(iter, [4, '5'])
+
+      assert_equal @store.get_iter("0")[0], 0
+      assert_equal @store.get_iter("1")[0], 4
+      assert_equal @store.get_iter("2")[0], 2
+    end
+    test "#insert_before" do
+      iter = @store.append
+      @store.set_values(iter, [0, '1'])
+      assert_equal iter.path.to_s, "0"
+
+      iter = @store.append
+      @store.set_values(iter, [2, '3'])
+      assert_equal iter.path.to_s, "1"
+
+      sibling = @store.get_iter("1")
+      iter = @store.insert_before(sibling)
+      @store.set_values(iter, [4, '5'])
+
+      assert_equal @store.get_iter("0")[0], 0
+      assert_equal @store.get_iter("1")[0], 4
+      assert_equal @store.get_iter("2")[0], 2
+    end
+
+    test "#insert_after" do
+      iter = @store.append
+      @store.set_values(iter, [0, '1'])
+      assert_equal iter.path.to_s, "0"
+
+      iter = @store.append
+      @store.set_values(iter, [2, '3'])
+      assert_equal iter.path.to_s, "1"
+
+      sibling = @store.get_iter("0")
+      iter = @store.insert_after(sibling)
+      @store.set_values(iter, [4, '5'])
+
+      assert_equal @store.get_iter("0")[0], 0
+      assert_equal @store.get_iter("1")[0], 4
+      assert_equal @store.get_iter("2")[0], 2
     end
   end
 

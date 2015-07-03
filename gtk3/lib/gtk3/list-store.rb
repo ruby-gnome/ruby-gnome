@@ -49,17 +49,31 @@ module Gtk
       setup_iter(iter)
       iter
     end
-  
+
     alias_method :prepend_raw, :prepend
     def prepend
       iter = prepend_raw
       setup_iter(iter)
       iter
     end
-    
+
     alias_method :insert_raw, :insert
     def insert(index)
       iter = insert_raw(index)
+      setup_iter(iter)
+      iter
+    end
+
+    alias_method :insert_before_raw, :insert_before
+    def insert_before(index)
+      iter = insert_before_raw(index)
+      setup_iter(iter)
+      iter
+    end
+
+    alias_method :insert_after_raw, :insert_after
+    def insert_after(index)
+      iter = insert_after_raw(index)
       setup_iter(iter)
       iter
     end
