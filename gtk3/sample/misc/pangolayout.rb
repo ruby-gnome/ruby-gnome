@@ -43,11 +43,11 @@ class PaintableWindow < Gtk::Window
 
   def screen_changed(widget)
     visual = widget.screen.rgba_visual
-    if visual && screen.composited?
+    if visual && widget.screen.composited?
       set_visual(visual)
       @supports_alpha = true
     else
-      set_visual(screen.system_visual)
+      set_visual(widget.screen.system_visual)
       @supports_alpha = false
     end
   end
