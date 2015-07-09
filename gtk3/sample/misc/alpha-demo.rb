@@ -16,8 +16,7 @@ require "gtk3"
 require "cairo"
 
 class AlphaDemo < Gtk::Window
-
-  def initialize()
+  def initialize
     super()
 
     set_app_paintable(true)
@@ -69,4 +68,4 @@ end
 alpha = AlphaDemo.new
 alpha.show
 
-Gtk.main()
+Gtk.main
