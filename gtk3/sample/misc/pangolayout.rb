@@ -77,7 +77,7 @@ pangolayout.signal_connect "draw" do |widget, cr|
   pango_layout.text = "Ruby-GNOME2"
   pango_layout.font_description = Pango::FontDescription.new("Sans Bold 14")
 
-  (0...N_WORDS).each do |i|
+  N_WORDS.times do |i|
     angle = 360 * i / N_WORDS.to_f
     cr.set_source_rgb((65_535 * rand) / 65_355,
                       (65_535 * rand) / 65_355,
