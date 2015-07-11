@@ -14,7 +14,7 @@ HEIGHT = 400
 WIDTH = 400
 
 class PaintableWindow < Gtk::Window
-  attr_reader :supports_alpha, :x, :y, :width, :height
+  attr_reader :x, :y, :width, :height
 
   def initialize(name)
     super(name)
@@ -39,6 +39,10 @@ class PaintableWindow < Gtk::Window
     screen_changed(self)
   end
 
+  def supports_alpha?
+    @supports_alpha
+  end
+
   private
 
   def screen_changed(widget)
@@ -60,7 +64,7 @@ pangolayout.signal_connect "draw" do |widget, cr|
   # http://cairographics.org/manual/cairo-cairo-t.html#cairo-operator-t
   cr.set_operator(Cairo::OPERATOR_SOURCE)
 
-  if widget.supports_alpha
+  if widget.supports_alpha?
     cr.set_source_rgba(0, 0, 0, 0.3)
   else
     cr.set_source_rgb(1, 1, 1)
