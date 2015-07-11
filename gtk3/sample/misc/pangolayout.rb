@@ -60,7 +60,7 @@ pangolayout.signal_connect "draw" do |widget, cr|
   # http://cairographics.org/manual/cairo-cairo-t.html#cairo-operator-t
   cr.set_operator(Cairo::OPERATOR_SOURCE)
 
-  if  widget.supports_alpha
+  if widget.supports_alpha
     cr.set_source_rgba(0, 0, 0, 0.3)
   else
     cr.set_source_rgb(1, 1, 1)
