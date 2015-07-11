@@ -16,8 +16,7 @@ require "gtk3"
 require "cairo"
 
 class AlphaDemo < Gtk::Window
-
-  def initialize()
+  def initialize
     super()
 
     set_app_paintable(true)
@@ -29,7 +28,7 @@ class AlphaDemo < Gtk::Window
     end
     set_double_buffered(false)
 
-    signal_connect("draw") do |widget, event|
+    signal_connect("draw") do |widget, _event|
       cr = widget.window.create_cairo_context
 
       rgba = [1.0, 1.0, 1.0]
@@ -47,20 +46,20 @@ class AlphaDemo < Gtk::Window
       cr.fill_preserve
       cr.stroke
     end
-    signal_connect("screen-changed") do |widget, old_screen|
-      screen_changed(widget, old_screen)
+    signal_connect("screen-changed") do |widget, _old_screen|
+      screen_changed(widget)
     end
 
     screen_changed(self)
   end
 
-  def screen_changed(widget,old_screen=nil)
-    visual = screen.rgba_visual
-    if visual && screen.composited?
+  def screen_changed(widget)
+    visual = widget.screen.rgba_visual
+    if visual && widget.screen.composited?
       set_visual(visual)
       @supports_alpha = true
     else
-      set_visual(screen.system_visual)
+      set_visual(widget.screen.system_visual)
       @supports_alpha = false
     end
   end
@@ -69,4 +68,4 @@ end
 alpha = AlphaDemo.new
 alpha.show
 
-Gtk.main()
+Gtk.main
