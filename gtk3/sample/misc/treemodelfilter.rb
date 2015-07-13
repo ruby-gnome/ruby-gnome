@@ -2,26 +2,28 @@
 =begin
   treemodelfilter.rb - Gtk::TreeModelFilter sample
 
-  Copyright (c) 2004,2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2004-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: treemodelfilter.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
-require 'gtk3'
+
+require "gtk3"
 
 ls = Gtk::ListStore.new(String, Integer)
 
 column1 = Gtk::TreeViewColumn.new("data1",
-				 Gtk::CellRendererText.new, {:text => 0})
+                                  Gtk::CellRendererText.new,
+                                  :text => 0)
 column2 = Gtk::TreeViewColumn.new("data2",
-				 Gtk::CellRendererText.new, {:text => 1})
+                                  Gtk::CellRendererText.new,
+                                  :text => 1)
 
-mf = Gtk::TreeModelFilter.new(ls)
-mf.set_visible_func do |model, iter|
+mf = Gtk::TreeModelFilter.new(:child_model => ls)
+
+mf.set_visible_func do |_model, iter|
   /a/ =~ iter[0]
 end
 
-mf.set_modify_func(String, String) do |model, iter, column|
+mf.set_modify_func([String, String]) do |model, iter, column|
   child_iter = model.convert_iter_to_child_iter(iter)
   if column == 0
     child_iter[0]
@@ -44,6 +46,7 @@ treeview.append_column(column2)
 end
 
 win = Gtk::Window.new("Gtk::TreeModelFilter sample")
-win.signal_connect("destroy"){Gtk.main_quit}
-win.add(treeview).show_all.signal_connect("destroy"){Gtk.main_quit}
+win.signal_connect("destroy") { Gtk.main_quit }
+win.add(treeview)
+win.show_all
 Gtk.main
