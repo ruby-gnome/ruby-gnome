@@ -23,7 +23,7 @@ mf.set_visible_func do |_model, iter|
   /a/ =~ iter[0]
 end
 
-mf.set_modify_func([String, String]) do |model, iter, column|
+mf.set_modify_func(String, String) do |model, iter, column|
   child_iter = model.convert_iter_to_child_iter(iter)
   if column == 0
     child_iter[0]

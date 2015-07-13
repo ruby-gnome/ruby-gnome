@@ -14,19 +14,19 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Gtk
-  class TreeModelFilter
-    alias_method :set_modify_func_raw, :set_modify_func
-    def set_modify_func(*types, &block)
-      raise ArgumentError, "one or more types are required" if types.empty?
-      set_modify_func_raw(types, &block)
-    end
+class TestGtkTreeModelFilter < Test::Unit::TestCase
+  include GtkTestUtils
 
-    alias_method :convert_iter_to_child_iter_raw, :convert_iter_to_child_iter
-    def convert_iter_to_child_iter(iter)
-      child_iter = convert_iter_to_child_iter_raw(iter)
-      child_iter.model = child_model
-      child_iter
+  def setup
+    @filter = Gtk::TreeModelFilter.new
+  end
+
+  sub_test_case "#set_modify_func" do
+    test "no argument" do
+      assert_raise(ArgumentError.new("one or more types are required")) do
+        @filter.set_modify_func do
+        end
+      end
     end
   end
 end
