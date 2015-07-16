@@ -21,7 +21,7 @@ window.add(drawing_area)
 drawing_area.set_size_request(pixbuf.width + 40,
                               pixbuf.height + 40)
 drawing_area.signal_connect("draw") do |_widget, cr|
-  cr.set_source_rgb(1,1,1)
+  cr.set_source_rgb(1, 1, 1)
   cr.paint
   cr.set_source_pixbuf(pixbuf, 20, 20)
   cr.paint
