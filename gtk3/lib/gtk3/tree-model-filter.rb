@@ -16,6 +16,10 @@
 
 module Gtk
   class TreeModelFilter
+    def initialize(child_model, root=nil)
+      super(:child_model => child_model, :virtual_root => root)
+    end
+
     alias_method :set_modify_func_raw, :set_modify_func
     def set_modify_func(*types, &block)
       raise ArgumentError, "one or more types are required" if types.empty?
