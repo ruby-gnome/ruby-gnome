@@ -18,7 +18,10 @@ class TestGtkTreeModelFilter < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    @filter = Gtk::TreeModelFilter.new
+    @model = Gtk::TreeStore.new(String)
+    @root = @model.append(nil)
+    @filter_root = @model.append(@root)
+    @filter = Gtk::TreeModelFilter.new(@model, @filter_root.path)
   end
 
   sub_test_case "#set_modify_func" do
@@ -27,6 +30,26 @@ class TestGtkTreeModelFilter < Test::Unit::TestCase
         @filter.set_modify_func do
         end
       end
+    end
+  end
+
+  sub_test_case "#convert_iter_to_child_iter" do
+    test "converted" do
+      iter = @model.append(@filter_root)
+      assert_equal(iter,
+                   @filter.convert_iter_to_child_iter(@filter.iter_first))
+    end
+  end
+
+  sub_test_case "#convert_child_iter_to_iter" do
+    test "converted" do
+      iter = @model.append(@filter_root)
+      assert_equal(@filter.iter_first,
+                   @filter.convert_child_iter_to_iter(iter))
+    end
+
+    test "not converted" do
+      assert_nil(@filter.convert_child_iter_to_iter(@root))
     end
   end
 end

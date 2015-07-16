@@ -32,5 +32,14 @@ module Gtk
       child_iter.model = model
       child_iter
     end
+
+    alias_method :convert_child_iter_to_iter_raw, :convert_child_iter_to_iter
+    def convert_child_iter_to_iter(child_iter)
+      converted, iter = convert_child_iter_to_iter_raw(child_iter)
+      return nil unless converted
+
+      iter.model = self
+      iter
+    end
   end
 end
