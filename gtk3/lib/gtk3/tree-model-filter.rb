@@ -29,7 +29,7 @@ module Gtk
     alias_method :convert_iter_to_child_iter_raw, :convert_iter_to_child_iter
     def convert_iter_to_child_iter(iter)
       child_iter = convert_iter_to_child_iter_raw(iter)
-      child_iter.model = child_model
+      child_iter.model = model
       child_iter
     end
   end
