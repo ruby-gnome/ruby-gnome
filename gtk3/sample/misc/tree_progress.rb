@@ -1,13 +1,11 @@
 =begin
-  tree_progress.rb - Gtk::TreeView and Gtk::CellRendererProgress 
+  tree_progress.rb - Gtk::TreeView and Gtk::CellRendererProgress
   sample script.
 
-  Copyright (C) 2004-2006 Darren Willis, Masao Mutoh
+  Copyright (C) 2004-2015 Darren Willis, Masao Mutoh
+  Copyright (c) 2004-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: tree_progress.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
-
 
 require "gtk3"
 
@@ -44,16 +42,15 @@ win.add(view)
 win.show_all
 
 dir = 1
-thr = Thread.new do
+Thread.new do
   loop do
     value = prog2[1] + dir
-    if value > 100
-      dir = - dir
-    end
-    if value < 0
-      dir = - dir
-    end
+
+    dir = - dir if value > 100
+    dir = - dir if value < 0
+
     prog2[1] += dir
+
     sleep 0.1
   end
 end
