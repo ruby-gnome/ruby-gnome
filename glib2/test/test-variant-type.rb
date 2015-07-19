@@ -48,4 +48,9 @@ class TestGLibVariantType < Test::Unit::TestCase
       end
     end
   end
+
+  test "#to_s" do
+    variant_type = GLib::VariantType.new("s")
+    assert_equal("s", variant_type.to_s)
+  end
 end

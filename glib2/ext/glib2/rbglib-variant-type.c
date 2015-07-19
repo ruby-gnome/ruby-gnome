@@ -23,6 +23,8 @@
 
 #define RG_TARGET_NAMESPACE mVariantType
 
+#define _SELF(s) ((GVariantType *)RVAL2BOXED(s, G_TYPE_VARIANT_TYPE))
+
 static VALUE
 rg_s_valid_p(G_GNUC_UNUSED VALUE klass, VALUE rb_string)
 {
@@ -68,6 +70,20 @@ rg_initialize(VALUE self, VALUE rb_string)
     return Qnil;
 }
 
+static VALUE
+rg_to_s(VALUE self)
+{
+    GVariantType *variant_type;
+    const gchar *string;
+    gsize string_length;
+
+    variant_type = _SELF(self);
+    string = g_variant_type_peek_string(variant_type);
+    string_length = g_variant_type_get_string_length(variant_type);
+
+    return CSTR2RVAL_LEN(string, string_length);
+}
+
 void
 Init_glib_variant_type(void)
 {
@@ -78,4 +94,5 @@ Init_glib_variant_type(void)
     RG_DEF_SMETHOD(scan, 1);
 
     RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(to_s, 0);
 }
