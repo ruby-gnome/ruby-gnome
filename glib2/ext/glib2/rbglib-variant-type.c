@@ -24,11 +24,11 @@
 #define RG_TARGET_NAMESPACE mVariantType
 
 static VALUE
-rg_s_valid_p(G_GNUC_UNUSED VALUE klass, VALUE string)
+rg_s_valid_p(G_GNUC_UNUSED VALUE klass, VALUE rb_string)
 {
     gboolean is_valid;
 
-    is_valid = g_variant_type_string_is_valid(StringValueCStr(string));
+    is_valid = g_variant_type_string_is_valid(StringValueCStr(rb_string));
 
     return CBOOL2RVAL(is_valid);
 }
