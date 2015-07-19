@@ -42,17 +42,15 @@ win.add(view)
 win.show_all
 
 dir = 1
-Thread.new do
-  loop do
-    value = prog2[1] + dir
+GLib::Timeout.add(100) do
+  value = prog2[1] + dir
 
-    dir = - dir if value > 100
-    dir = - dir if value < 0
+  dir = - dir if value > 100
+  dir = - dir if value < 0
 
-    prog2[1] += dir
+  prog2[1] += dir
 
-    sleep 0.1
-  end
+  GLib::Source::CONTINUE
 end
 
 Gtk.main
