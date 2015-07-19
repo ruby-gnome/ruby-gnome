@@ -40,4 +40,12 @@ class TestGLibVariantType < Test::Unit::TestCase
       assert_nil(GLib::VariantType.scan("X"))
     end
   end
+
+  sub_test_case "#initialize" do
+    test "invalid" do
+      assert_raise(ArgumentError.new("invalid type string: \"X\"")) do
+        GLib::VariantType.new("X")
+      end
+    end
+  end
 end

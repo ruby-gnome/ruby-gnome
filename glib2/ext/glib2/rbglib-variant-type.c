@@ -50,6 +50,24 @@ rg_s_scan(G_GNUC_UNUSED VALUE klass, VALUE rb_string)
     return CSTR2RVAL(end);
 }
 
+static VALUE
+rg_initialize(VALUE self, VALUE rb_string)
+{
+    GVariantType *variant_type;
+    const gchar *string;
+
+    string = StringValueCStr(rb_string);
+    if (!g_variant_type_string_is_valid(string)) {
+        rb_raise(rb_eArgError,
+                 "invalid type string: %s", rbg_inspect(rb_string));
+    }
+
+    variant_type = g_variant_type_new(string);
+    G_INITIALIZE(self, variant_type);
+
+    return Qnil;
+}
+
 void
 Init_glib_variant_type(void)
 {
@@ -58,4 +76,6 @@ Init_glib_variant_type(void)
 
     RG_DEF_SMETHOD_P(valid, 1);
     RG_DEF_SMETHOD(scan, 1);
+
+    RG_DEF_METHOD(initialize, 1);
 }
