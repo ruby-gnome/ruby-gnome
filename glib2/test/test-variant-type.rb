@@ -30,4 +30,14 @@ class TestGLibVariantType < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case ".scan" do
+    test "found" do
+      assert_equal("X", GLib::VariantType.scan("sX"))
+    end
+
+    test "not found" do
+      assert_nil(GLib::VariantType.scan("X"))
+    end
+  end
 end

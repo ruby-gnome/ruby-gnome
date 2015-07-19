@@ -33,6 +33,23 @@ rg_s_valid_p(G_GNUC_UNUSED VALUE klass, VALUE string)
     return CBOOL2RVAL(is_valid);
 }
 
+static VALUE
+rg_s_scan(G_GNUC_UNUSED VALUE klass, VALUE rb_string)
+{
+    gboolean found;
+    const gchar *string;
+    const gchar *end;
+
+    string = StringValueCStr(rb_string);
+    found = g_variant_type_string_scan(string, NULL, &end);
+
+    if (!found) {
+        return Qnil;
+    }
+
+    return CSTR2RVAL(end);
+}
+
 void
 Init_glib_variant_type(void)
 {
@@ -40,4 +57,5 @@ Init_glib_variant_type(void)
         G_DEF_CLASS(G_TYPE_VARIANT_TYPE, "VariantType", mGLib);
 
     RG_DEF_SMETHOD_P(valid, 1);
+    RG_DEF_SMETHOD(scan, 1);
 }
