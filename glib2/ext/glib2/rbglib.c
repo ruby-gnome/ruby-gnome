@@ -1168,4 +1168,5 @@ union       GDoubleIEEE754;
     Init_glib_unichar();
     Init_glib_keyfile();
     Init_glib_bookmark_file();
+    Init_glib_variant_type();
 }

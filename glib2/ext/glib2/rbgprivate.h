@@ -150,6 +150,7 @@ G_GNUC_INTERNAL void Init_glib_ucs4(void);
 G_GNUC_INTERNAL void Init_glib_unichar(void);
 G_GNUC_INTERNAL void Init_glib_keyfile(void);
 G_GNUC_INTERNAL void Init_glib_bookmark_file(void);
+G_GNUC_INTERNAL void Init_glib_variant_type(void);
 
 G_GNUC_INTERNAL void Init_gobject_convert(void);
 G_GNUC_INTERNAL void Init_gobject_gtype(void);
