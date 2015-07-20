@@ -133,4 +133,20 @@ class TestGLibVariantType < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "#tuple?" do
+    test "tuple" do
+      variant_type = GLib::VariantType.new("(s)")
+      assert do
+        variant_type.tuple?
+      end
+    end
+
+    test "not tuple" do
+      variant_type = GLib::VariantType.new("s")
+      assert do
+        !variant_type.tuple?
+      end
+    end
+  end
 end
