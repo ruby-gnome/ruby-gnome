@@ -181,4 +181,22 @@ class TestGLibVariantType < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "#==" do
+    test "same" do
+      variant_type = GLib::VariantType.new("s")
+      assert_equal(variant_type,
+                   variant_type)
+    end
+
+    test "equivalence" do
+      assert_equal(GLib::VariantType.new("s"),
+                   GLib::VariantType.new("s"))
+    end
+
+    test "not VariantType" do
+      assert_not_equal(GLib::VariantType.new("s"),
+                       "s")
+    end
+  end
 end

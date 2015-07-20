@@ -21,9 +21,11 @@
 #include "rbgprivate.h"
 #include "rbglib.h"
 
-#define RG_TARGET_NAMESPACE mVariantType
+#define RG_TARGET_NAMESPACE cVariantType
 
 #define _SELF(s) ((GVariantType *)RVAL2BOXED(s, G_TYPE_VARIANT_TYPE))
+
+static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 rg_s_valid_p(G_GNUC_UNUSED VALUE klass, VALUE rb_string)
@@ -156,17 +158,31 @@ rg_variant_p(VALUE self)
     return CBOOL2RVAL(g_variant_type_is_variant(variant_type));
 }
 
+static VALUE
+rg_operator_eq(VALUE self, VALUE other)
+{
+    GVariantType *variant_type1;
+    GVariantType *variant_type2;
+
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
+        return Qfalse;
+
+    variant_type1 = _SELF(self);
+    variant_type2 = _SELF(other);
+    return CBOOL2RVAL(g_variant_type_equal(variant_type1, variant_type2));
+}
+
 void
 Init_glib_variant_type(void)
 {
-    VALUE RG_TARGET_NAMESPACE =
-        G_DEF_CLASS(G_TYPE_VARIANT_TYPE, "VariantType", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VARIANT_TYPE, "VariantType", mGLib);
 
     RG_DEF_SMETHOD_P(valid, 1);
     RG_DEF_SMETHOD(scan, 1);
 
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(to_s, 0);
+
     RG_DEF_METHOD_P(definite, 0);
     RG_DEF_METHOD_P(container, 0);
     RG_DEF_METHOD_P(basic, 0);
@@ -175,4 +191,6 @@ Init_glib_variant_type(void)
     RG_DEF_METHOD_P(tuple, 0);
     RG_DEF_METHOD_P(dict_entry, 0);
     RG_DEF_METHOD_P(variant, 0);
+
+    RG_DEF_METHOD_OPERATOR("==", eq, 1);
 }
