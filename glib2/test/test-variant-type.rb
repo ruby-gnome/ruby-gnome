@@ -69,4 +69,20 @@ class TestGLibVariantType < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "#container?" do
+    test "container" do
+      variant_type = GLib::VariantType.new("a*")
+      assert do
+        variant_type.container?
+      end
+    end
+
+    test "not container" do
+      variant_type = GLib::VariantType.new("s")
+      assert do
+        !variant_type.container?
+      end
+    end
+  end
 end

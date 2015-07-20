@@ -93,6 +93,15 @@ rg_definite_p(VALUE self)
     return CBOOL2RVAL(g_variant_type_is_definite(variant_type));
 }
 
+static VALUE
+rg_container_p(VALUE self)
+{
+    GVariantType *variant_type;
+
+    variant_type = _SELF(self);
+    return CBOOL2RVAL(g_variant_type_is_container(variant_type));
+}
+
 void
 Init_glib_variant_type(void)
 {
@@ -105,4 +114,5 @@ Init_glib_variant_type(void)
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(to_s, 0);
     RG_DEF_METHOD_P(definite, 0);
+    RG_DEF_METHOD_P(container, 0);
 }
