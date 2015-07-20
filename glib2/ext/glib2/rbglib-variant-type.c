@@ -172,6 +172,15 @@ rg_operator_eq(VALUE self, VALUE other)
     return CBOOL2RVAL(g_variant_type_equal(variant_type1, variant_type2));
 }
 
+static VALUE
+rg_hash(VALUE self)
+{
+    GVariantType *variant_type;
+
+    variant_type = _SELF(self);
+    return UINT2NUM(g_variant_type_hash(variant_type));
+}
+
 void
 Init_glib_variant_type(void)
 {
@@ -193,4 +202,7 @@ Init_glib_variant_type(void)
     RG_DEF_METHOD_P(variant, 0);
 
     RG_DEF_METHOD_OPERATOR("==", eq, 1);
+
+    RG_DEF_METHOD(hash, 0);
+    RG_DEF_ALIAS("eql?", "==");
 }

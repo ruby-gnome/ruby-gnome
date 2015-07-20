@@ -199,4 +199,13 @@ class TestGLibVariantType < Test::Unit::TestCase
                        "s")
     end
   end
+
+  sub_test_case "#hash and #eql?" do
+    test "Hash key" do
+      hash = {
+        GLib::VariantType.new("s") => :s,
+      }
+      assert_equal(:s, hash[GLib::VariantType.new("s")])
+    end
+  end
 end
