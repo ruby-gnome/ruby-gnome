@@ -117,4 +117,20 @@ class TestGLibVariantType < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "#array?" do
+    test "array" do
+      variant_type = GLib::VariantType.new("as")
+      assert do
+        variant_type.array?
+      end
+    end
+
+    test "not array" do
+      variant_type = GLib::VariantType.new("s")
+      assert do
+        !variant_type.array?
+      end
+    end
+  end
 end
