@@ -181,6 +181,21 @@ rg_hash(VALUE self)
     return UINT2NUM(g_variant_type_hash(variant_type));
 }
 
+static VALUE
+rg_is_subtype_of_p(VALUE self, VALUE rb_subtype)
+{
+    GVariantType *variant_type;
+    GVariantType *sub_variant_type;
+
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(rb_subtype, RG_TARGET_NAMESPACE)))
+        return Qfalse;
+
+    variant_type = _SELF(self);
+    sub_variant_type = _SELF(rb_subtype);
+    return CBOOL2RVAL(g_variant_type_is_subtype_of(variant_type,
+                                                   sub_variant_type));
+}
+
 void
 Init_glib_variant_type(void)
 {
@@ -205,4 +220,6 @@ Init_glib_variant_type(void)
 
     RG_DEF_METHOD(hash, 0);
     RG_DEF_ALIAS("eql?", "==");
+
+    RG_DEF_METHOD_P(is_subtype_of, 1);
 }

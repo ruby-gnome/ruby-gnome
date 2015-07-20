@@ -208,4 +208,22 @@ class TestGLibVariantType < Test::Unit::TestCase
       assert_equal(:s, hash[GLib::VariantType.new("s")])
     end
   end
+
+  sub_test_case "#is_subtype_of?" do
+    test "subtype" do
+      string = GLib::VariantType.new("s")
+      basic = GLib::VariantType.new("?")
+      assert do
+        string.is_subtype_of?(basic)
+      end
+    end
+
+    test "not subtype" do
+      string = GLib::VariantType.new("s")
+      int32 = GLib::VariantType.new("i")
+      assert do
+        !string.is_subtype_of?(int32)
+      end
+    end
+  end
 end
