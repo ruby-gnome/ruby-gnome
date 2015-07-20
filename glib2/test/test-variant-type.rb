@@ -101,4 +101,20 @@ class TestGLibVariantType < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "#maybe?" do
+    test "maybe" do
+      variant_type = GLib::VariantType.new("ms")
+      assert do
+        variant_type.maybe?
+      end
+    end
+
+    test "not maybe" do
+      variant_type = GLib::VariantType.new("s")
+      assert do
+        !variant_type.maybe?
+      end
+    end
+  end
 end

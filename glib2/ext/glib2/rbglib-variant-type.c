@@ -111,6 +111,15 @@ rg_basic_p(VALUE self)
     return CBOOL2RVAL(g_variant_type_is_basic(variant_type));
 }
 
+static VALUE
+rg_maybe_p(VALUE self)
+{
+    GVariantType *variant_type;
+
+    variant_type = _SELF(self);
+    return CBOOL2RVAL(g_variant_type_is_maybe(variant_type));
+}
+
 void
 Init_glib_variant_type(void)
 {
@@ -125,4 +134,5 @@ Init_glib_variant_type(void)
     RG_DEF_METHOD_P(definite, 0);
     RG_DEF_METHOD_P(container, 0);
     RG_DEF_METHOD_P(basic, 0);
+    RG_DEF_METHOD_P(maybe, 0);
 }
