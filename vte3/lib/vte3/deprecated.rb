@@ -31,5 +31,13 @@ module Vte
     define_deprecated_method :padding, :warn => "Use 'inner-border' style property." do |_self|
       [0, 0]
     end
+
+    unless method_defined?(:pty_object)
+      define_deprecated_method :pty_object, :pty
+    end
+
+    unless method_defined?(:fork_command)
+      define_deprecated_method :fork_command, :spawn
+    end
   end
 end

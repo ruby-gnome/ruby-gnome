@@ -16,23 +16,52 @@
 
 module Vte
   class Terminal
-    def fork_command(options={})
-      pty_flags = options[:pty_flags] || PtyFlags::DEFAULT
-      working_directory = options[:working_directory]
-      argv = options[:argv] || [ENV["SHELL"] || "/bin/sh"]
-      envv = options[:envv]
-      default_spawn_flags =
-        GLib::Spawn::CHILD_INHERITS_STDIN | GLib::Spawn::SEARCH_PATH
-      spawn_flags = options[:spawn_flags] || default_spawn_flags
-      succeeded, pid = fork_command_full(pty_flags,
-                                         working_directory,
-                                         argv,
-                                         envv,
-                                         spawn_flags)
-      if succeeded
-        pid
-      else
-        nil
+    if method_defined?(:fork_command_full)
+      def fork_command(options={})
+        pty_flags = options[:pty_flags] || PtyFlags::DEFAULT
+        working_directory = options[:working_directory]
+        argv = options[:argv] || [ENV["SHELL"] || "/bin/sh"]
+        envv = options[:envv]
+        default_spawn_flags =
+          GLib::Spawn::CHILD_INHERITS_STDIN | GLib::Spawn::SEARCH_PATH
+        spawn_flags = options[:spawn_flags] || default_spawn_flags
+        succeeded, pid = fork_command_full(pty_flags,
+                                           working_directory,
+                                           argv,
+                                           envv,
+                                           spawn_flags)
+        if succeeded
+          pid
+        else
+          nil
+        end
+      end
+
+      alias_method :spawn, :fork_command
+
+      alias_method :pty_raw, :pty
+      def pty
+        pty_object
+      end
+    else
+      def spawn(options)
+        pty_flags = options[:pty_flags] || PtyFlags::DEFAULT
+        working_directory = options[:working_directory]
+        argv = options[:argv] || [ENV["SHELL"] || "/bin/sh"]
+        envv = options[:envv]
+        default_spawn_flags =
+          GLib::Spawn::CHILD_INHERITS_STDIN | GLib::Spawn::SEARCH_PATH
+        spawn_flags = options[:spawn_flags] || default_spawn_flags
+        succeeded, pid = spawn_sync(pty_flags,
+                                    working_directory,
+                                    argv,
+                                    envv,
+                                    spawn_flags)
+        if succeeded
+          pid
+        else
+          nil
+        end
       end
     end
   end
