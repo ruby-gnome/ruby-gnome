@@ -85,4 +85,20 @@ class TestGLibVariantType < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "#basic?" do
+    test "basic" do
+      variant_type = GLib::VariantType.new("s")
+      assert do
+        variant_type.basic?
+      end
+    end
+
+    test "not basic" do
+      variant_type = GLib::VariantType.new("as")
+      assert do
+        !variant_type.basic?
+      end
+    end
+  end
 end
