@@ -149,4 +149,20 @@ class TestGLibVariantType < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "#dict_entry?" do
+    test "dictionary entry" do
+      variant_type = GLib::VariantType.new("{ss}")
+      assert do
+        variant_type.dict_entry?
+      end
+    end
+
+    test "not dictionary entry" do
+      variant_type = GLib::VariantType.new("s")
+      assert do
+        !variant_type.dict_entry?
+      end
+    end
+  end
 end

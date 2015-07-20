@@ -138,6 +138,15 @@ rg_tuple_p(VALUE self)
     return CBOOL2RVAL(g_variant_type_is_tuple(variant_type));
 }
 
+static VALUE
+rg_dict_entry_p(VALUE self)
+{
+    GVariantType *variant_type;
+
+    variant_type = _SELF(self);
+    return CBOOL2RVAL(g_variant_type_is_dict_entry(variant_type));
+}
+
 void
 Init_glib_variant_type(void)
 {
@@ -155,4 +164,5 @@ Init_glib_variant_type(void)
     RG_DEF_METHOD_P(maybe, 0);
     RG_DEF_METHOD_P(array, 0);
     RG_DEF_METHOD_P(tuple, 0);
+    RG_DEF_METHOD_P(dict_entry, 0);
 }
