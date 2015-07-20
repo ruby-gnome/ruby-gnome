@@ -53,4 +53,20 @@ class TestGLibVariantType < Test::Unit::TestCase
     variant_type = GLib::VariantType.new("s")
     assert_equal("s", variant_type.to_s)
   end
+
+  sub_test_case "#definite?" do
+    test "definite" do
+      variant_type = GLib::VariantType.new("s")
+      assert do
+        variant_type.definite?
+      end
+    end
+
+    test "not definite" do
+      variant_type = GLib::VariantType.new("?")
+      assert do
+        !variant_type.definite?
+      end
+    end
+  end
 end
