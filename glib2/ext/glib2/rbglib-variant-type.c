@@ -19,11 +19,10 @@
  */
 
 #include "rbgprivate.h"
-#include "rbglib.h"
 
 #define RG_TARGET_NAMESPACE cVariantType
 
-#define _SELF(s) ((GVariantType *)RVAL2BOXED(s, G_TYPE_VARIANT_TYPE))
+#define _SELF(s) (RVAL2GVARIANTTYPE(s))
 
 static VALUE RG_TARGET_NAMESPACE;
 
@@ -196,6 +195,25 @@ rg_is_subtype_of_p(VALUE self, VALUE rb_subtype)
                                                    sub_variant_type));
 }
 
+static VALUE
+rg_element(VALUE self)
+{
+    GVariantType *variant_type;
+    const GVariantType *element;
+
+    variant_type = _SELF(self);
+    if (!(g_variant_type_is_array(variant_type) ||
+          g_variant_type_is_maybe(variant_type))) {
+        rb_raise(rb_eArgError,
+                 "must be array or maybe type: <%.*s>",
+                 (int)g_variant_type_get_string_length(variant_type),
+                 g_variant_type_peek_string(variant_type));
+    }
+
+    element = g_variant_type_element(variant_type);
+    return GVARIANTTYPE2RVAL((GVariantType *)element);
+}
+
 void
 Init_glib_variant_type(void)
 {
@@ -222,4 +240,6 @@ Init_glib_variant_type(void)
     RG_DEF_ALIAS("eql?", "==");
 
     RG_DEF_METHOD_P(is_subtype_of, 1);
+
+    RG_DEF_METHOD(element, 0);
 }

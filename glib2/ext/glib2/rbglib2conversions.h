@@ -41,6 +41,8 @@
 #define GTIMER2RVAL(o)                     (BOXED2RVAL(o, G_TYPE_TIMER))
 #define RVAL2GVALUE(o)                     ((GValue*)RVAL2BOXED(o, G_TYPE_VALUE))
 #define GVALUE2RVAL(o)                     (BOXED2RVAL(o, G_TYPE_VALUE))
+#define RVAL2GVARIANTTYPE(o)               ((GVariantType *)RVAL2BOXED(o, G_TYPE_VARIANT_TYPE))
+#define GVARIANTTYPE2RVAL(o)               (BOXED2RVAL(o, G_TYPE_VARIANT_TYPE))
 
 #define RVAL2GIOCONDITION(o)               (RVAL2GFLAGS(o, G_TYPE_IO_CONDITION))
 #define GIOCONDITION2RVAL(o)               (GFLAGS2RVAL(o, G_TYPE_IO_CONDITION))

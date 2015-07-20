@@ -226,4 +226,22 @@ class TestGLibVariantType < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "#element" do
+    test "array" do
+      assert_equal(GLib::VariantType.new("s"),
+                   GLib::VariantType.new("as").element)
+    end
+
+    test "maybe" do
+      assert_equal(GLib::VariantType.new("s"),
+                   GLib::VariantType.new("ms").element)
+    end
+
+    test "unexpected" do
+      assert_raise(ArgumentError.new("must be array or maybe type: <s>")) do
+        GLib::VariantType.new("s").element
+      end
+    end
+  end
 end
