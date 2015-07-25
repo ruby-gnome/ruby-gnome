@@ -321,7 +321,7 @@ array_array_interface_to_ruby(GIArgument *array,
                 element = elements->data + (element_size * i);
                 rb_ary_push(rb_array,
                             interface_struct_to_ruby(element,
-                                                     FALSE,
+                                                     TRUE,
                                                      element_type_info,
                                                      interface_info));
             }
