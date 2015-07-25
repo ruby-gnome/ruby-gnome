@@ -280,6 +280,159 @@ array_c_to_ruby(GIArgument *array, GITypeInfo *type_info, gint64 n_elements,
     }
 }
 
+static void
+array_array_interface_to_ruby(GIArgument *array,
+                              G_GNUC_UNUSED GITypeInfo *array_type_info,
+                              GITypeInfo *element_type_info,
+                              VALUE rb_array)
+{
+    GArray *elements;
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    GType gtype;
+    const char *interface_name;
+
+    elements = array->v_pointer;
+
+    interface_info = g_type_info_get_interface(element_type_info);
+    interface_type = g_base_info_get_type(interface_info);
+    gtype = g_registered_type_info_get_g_type(interface_info);
+
+    switch (interface_type) {
+    case GI_INFO_TYPE_INVALID:
+    case GI_INFO_TYPE_FUNCTION:
+    case GI_INFO_TYPE_CALLBACK:
+        interface_name = g_info_type_to_string(interface_type);
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[array][interface(%s)](%s) -> Ruby",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    case GI_INFO_TYPE_STRUCT:
+        if (gtype == G_TYPE_NONE) {
+            guint i;
+            guint element_size;
+
+            element_size = g_array_get_element_size(elements);
+            for (i = 0; i < elements->len; i++) {
+                gpointer element;
+                element = elements->data + (element_size * i);
+                rb_ary_push(rb_array,
+                            interface_struct_to_ruby(element,
+                                                     FALSE,
+                                                     element_type_info,
+                                                     interface_info));
+            }
+        } else {
+            interface_name = g_info_type_to_string(interface_type);
+            g_base_info_unref(interface_info);
+            g_base_info_unref(element_type_info);
+            rb_raise(rb_eNotImpError,
+                     "TODO: GIArgument(array)[array][interface(%s)](%s) -> Ruby",
+                     interface_name,
+                     g_type_name(gtype));
+        }
+        break;
+    case GI_INFO_TYPE_BOXED:
+    case GI_INFO_TYPE_ENUM:
+    case GI_INFO_TYPE_FLAGS:
+    case GI_INFO_TYPE_OBJECT:
+    case GI_INFO_TYPE_INTERFACE:
+    case GI_INFO_TYPE_CONSTANT:
+    case GI_INFO_TYPE_INVALID_0:
+    case GI_INFO_TYPE_UNION:
+    case GI_INFO_TYPE_VALUE:
+    case GI_INFO_TYPE_SIGNAL:
+    case GI_INFO_TYPE_VFUNC:
+    case GI_INFO_TYPE_PROPERTY:
+    case GI_INFO_TYPE_FIELD:
+    case GI_INFO_TYPE_ARG:
+    case GI_INFO_TYPE_TYPE:
+    case GI_INFO_TYPE_UNRESOLVED:
+        interface_name = g_info_type_to_string(interface_type);
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[array][interface(%s)](%s) -> Ruby",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    default:
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        g_assert_not_reached();
+        break;
+    }
+
+    g_base_info_unref(interface_info);
+}
+
+static void
+array_array_to_ruby(GIArgument *array,
+                    GITypeInfo *array_type_info,
+                    VALUE rb_array)
+{
+    GITypeInfo *element_type_info;
+    GITypeTag element_type_tag;
+    GArray *elements;
+
+    elements = array->v_pointer;
+    if (!elements) {
+        return;
+    }
+
+    element_type_info = g_type_info_get_param_type(array_type_info, 0);
+    element_type_tag = g_type_info_get_tag(element_type_info);
+
+    switch (element_type_tag) {
+    case GI_TYPE_TAG_VOID:
+    case GI_TYPE_TAG_BOOLEAN:
+    case GI_TYPE_TAG_INT8:
+    case GI_TYPE_TAG_UINT8:
+    case GI_TYPE_TAG_INT16:
+    case GI_TYPE_TAG_UINT16:
+    case GI_TYPE_TAG_INT32:
+    case GI_TYPE_TAG_UINT32:
+    case GI_TYPE_TAG_INT64:
+    case GI_TYPE_TAG_UINT64:
+    case GI_TYPE_TAG_FLOAT:
+    case GI_TYPE_TAG_DOUBLE:
+    case GI_TYPE_TAG_GTYPE:
+    case GI_TYPE_TAG_UTF8:
+    case GI_TYPE_TAG_FILENAME:
+    case GI_TYPE_TAG_ARRAY:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[array][%s] -> Ruby",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+    case GI_TYPE_TAG_INTERFACE:
+        array_array_interface_to_ruby(array,
+                                      array_type_info,
+                                      element_type_info,
+                                      rb_array);
+        break;
+    case GI_TYPE_TAG_GLIST:
+    case GI_TYPE_TAG_GSLIST:
+    case GI_TYPE_TAG_GHASH:
+    case GI_TYPE_TAG_ERROR:
+    case GI_TYPE_TAG_UNICHAR:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[array][%s] -> Ruby",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+    default:
+        g_base_info_unref(element_type_info);
+        g_assert_not_reached();
+        break;
+    }
+
+    g_base_info_unref(element_type_info);
+}
+
 static gint64
 get_array_length(GIArgument *argument, GITypeInfo *type_info)
 {
@@ -368,7 +521,7 @@ rb_gi_array_argument_to_ruby(GIArgument *array_argument,
         array_c_to_ruby(array_argument, array_type_info, n_elements, rb_array);
         break;
     case GI_ARRAY_TYPE_ARRAY:
-        rb_raise(rb_eNotImpError, "TODO: GIArgument(array)[array] -> Ruby");
+        array_array_to_ruby(array_argument, array_type_info, rb_array);
         break;
     case GI_ARRAY_TYPE_PTR_ARRAY:
         rb_raise(rb_eNotImpError, "TODO: GIArgument(array)[ptr-array] -> Ruby");
@@ -931,6 +1084,178 @@ rb_gi_argument_to_ruby(GIArgument *argument,
 }
 
 static void
+rb_gi_out_argument_init_array_array_interface(GIArgument *argument,
+                                              G_GNUC_UNUSED GIArgInfo *arg_info,
+                                              GITypeInfo *array_type_info,
+                                              GITypeInfo *element_type_info)
+{
+    gboolean zero_terminated_p;
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    GType gtype;
+    const char *interface_name;
+
+    zero_terminated_p = g_type_info_is_zero_terminated(array_type_info);
+    interface_info = g_type_info_get_interface(element_type_info);
+    interface_type = g_base_info_get_type(interface_info);
+    gtype = g_registered_type_info_get_g_type(interface_info);
+
+    switch (interface_type) {
+    case GI_INFO_TYPE_INVALID:
+    case GI_INFO_TYPE_FUNCTION:
+    case GI_INFO_TYPE_CALLBACK:
+        interface_name = g_info_type_to_string(interface_type);
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[array][interface(%s)](%s) -> Ruby",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    case GI_INFO_TYPE_STRUCT:
+    {
+        gsize struct_size;
+
+        struct_size = g_struct_info_get_size(interface_info);
+        argument->v_pointer = g_array_new(zero_terminated_p,
+                                          TRUE,
+                                          struct_size);
+        break;
+    }
+    case GI_INFO_TYPE_BOXED:
+    case GI_INFO_TYPE_ENUM:
+    case GI_INFO_TYPE_FLAGS:
+    case GI_INFO_TYPE_OBJECT:
+    case GI_INFO_TYPE_INTERFACE:
+    case GI_INFO_TYPE_CONSTANT:
+    case GI_INFO_TYPE_INVALID_0:
+    case GI_INFO_TYPE_UNION:
+    case GI_INFO_TYPE_VALUE:
+    case GI_INFO_TYPE_SIGNAL:
+    case GI_INFO_TYPE_VFUNC:
+    case GI_INFO_TYPE_PROPERTY:
+    case GI_INFO_TYPE_FIELD:
+    case GI_INFO_TYPE_ARG:
+    case GI_INFO_TYPE_TYPE:
+    case GI_INFO_TYPE_UNRESOLVED:
+        interface_name = g_info_type_to_string(interface_type);
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[array][interface(%s)](%s) -> Ruby",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    default:
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        g_assert_not_reached();
+        break;
+    }
+
+    g_base_info_unref(interface_info);
+}
+
+static void
+rb_gi_out_argument_init_array_array(GIArgument *argument,
+                                    GIArgInfo *arg_info,
+                                    GITypeInfo *array_type_info,
+                                    GITypeInfo *element_type_info)
+{
+    GITypeTag element_type_tag;
+
+    element_type_tag = g_type_info_get_tag(element_type_info);
+
+    switch (element_type_tag) {
+    case GI_TYPE_TAG_VOID:
+    case GI_TYPE_TAG_BOOLEAN:
+    case GI_TYPE_TAG_INT8:
+    case GI_TYPE_TAG_UINT8:
+    case GI_TYPE_TAG_INT16:
+    case GI_TYPE_TAG_UINT16:
+    case GI_TYPE_TAG_INT32:
+    case GI_TYPE_TAG_UINT32:
+    case GI_TYPE_TAG_INT64:
+    case GI_TYPE_TAG_UINT64:
+    case GI_TYPE_TAG_FLOAT:
+    case GI_TYPE_TAG_DOUBLE:
+    case GI_TYPE_TAG_GTYPE:
+    case GI_TYPE_TAG_UTF8:
+    case GI_TYPE_TAG_FILENAME:
+    case GI_TYPE_TAG_ARRAY:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: allocates GIArgument(array)[array][%s] for output",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+    case GI_TYPE_TAG_INTERFACE:
+        rb_gi_out_argument_init_array_array_interface(argument,
+                                                      arg_info,
+                                                      array_type_info,
+                                                      element_type_info);
+        break;
+    case GI_TYPE_TAG_GLIST:
+    case GI_TYPE_TAG_GSLIST:
+    case GI_TYPE_TAG_GHASH:
+    case GI_TYPE_TAG_ERROR:
+    case GI_TYPE_TAG_UNICHAR:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: allocates GIArgument(array)[array][%s] for output",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+    default:
+        g_base_info_unref(element_type_info);
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
+rb_gi_out_argument_init_array(GIArgument *argument, GIArgInfo *arg_info,
+                              GITypeInfo *array_type_info)
+{
+    GIArrayType array_type;
+    GITypeInfo *element_type_info;
+
+    array_type = g_type_info_get_array_type(array_type_info);
+    element_type_info = g_type_info_get_param_type(array_type_info, 0);
+
+    switch (array_type) {
+    case GI_ARRAY_TYPE_C:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: allocates GIArgument(array)[c][%s] for output",
+                 g_type_tag_to_string(g_type_info_get_tag(element_type_info)));
+        break;
+    case GI_ARRAY_TYPE_ARRAY:
+        rb_gi_out_argument_init_array_array(argument,
+                                            arg_info,
+                                            array_type_info,
+                                            element_type_info);
+        break;
+    case GI_ARRAY_TYPE_PTR_ARRAY:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: allocates GIArgument(array)[ptr-array][%s] for output",
+                 g_type_tag_to_string(g_type_info_get_tag(element_type_info)));
+        break;
+    case GI_ARRAY_TYPE_BYTE_ARRAY:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: allocates GIArgument(array)[byte-array][%s] for output",
+                 g_type_tag_to_string(g_type_info_get_tag(element_type_info)));
+        break;
+    default:
+        g_base_info_unref(element_type_info);
+        g_assert_not_reached();
+        break;
+    }
+
+    g_base_info_unref(element_type_info);
+}
+
+static void
 rb_gi_out_argument_init_interface(GIArgument *argument, GIArgInfo *arg_info,
                                   GITypeInfo *type_info)
 {
@@ -1044,7 +1369,7 @@ rb_gi_out_argument_init(GIArgument *argument, GIArgInfo *arg_info)
         argument->v_pointer = ALLOC(gchar *);
         break;
     case GI_TYPE_TAG_ARRAY:
-        argument->v_pointer = ALLOC(gpointer);
+        rb_gi_out_argument_init_array(argument, arg_info, &type_info);
         break;
     case GI_TYPE_TAG_INTERFACE:
         rb_gi_out_argument_init_interface(argument, arg_info, &type_info);
@@ -1156,17 +1481,87 @@ rb_gi_out_argument_to_ruby(GIArgument *argument,
                                   args_metadata);
 }
 
+static void
+rb_gi_out_argument_fin_array(GIArgument *argument,
+                             G_GNUC_UNUSED GIArgInfo *arg_info,
+                             GITypeInfo *array_type_info)
+{
+    GIArrayType array_type;
+
+    array_type = g_type_info_get_array_type(array_type_info);
+
+    switch (array_type) {
+    case GI_ARRAY_TYPE_C:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free out GIArgument(array)[c]");
+        break;
+    case GI_ARRAY_TYPE_ARRAY:
+        g_array_free(argument->v_pointer, TRUE);
+        break;
+    case GI_ARRAY_TYPE_PTR_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free out GIArgument(array)[ptr-array]");
+        break;
+    case GI_ARRAY_TYPE_BYTE_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free out GIArgument(array)[byte-array]");
+        break;
+    default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
 void
 rb_gi_out_argument_fin(GIArgument *argument, GIArgInfo *arg_info)
 {
     GITypeInfo type_info;
+    GITypeTag type_tag;
 
     if (g_arg_info_get_direction(arg_info) != GI_DIRECTION_OUT) {
         return;
     }
 
     g_arg_info_load_type(arg_info, &type_info);
-    xfree(argument->v_pointer);
+    type_tag = g_type_info_get_tag(&type_info);
+
+    switch (type_tag) {
+    case GI_TYPE_TAG_VOID:
+    case GI_TYPE_TAG_BOOLEAN:
+    case GI_TYPE_TAG_INT8:
+    case GI_TYPE_TAG_UINT8:
+    case GI_TYPE_TAG_INT16:
+    case GI_TYPE_TAG_UINT16:
+    case GI_TYPE_TAG_INT32:
+    case GI_TYPE_TAG_UINT32:
+    case GI_TYPE_TAG_INT64:
+    case GI_TYPE_TAG_UINT64:
+    case GI_TYPE_TAG_FLOAT:
+    case GI_TYPE_TAG_DOUBLE:
+    case GI_TYPE_TAG_GTYPE:
+    case GI_TYPE_TAG_UTF8:
+        xfree(argument->v_pointer);
+        break;
+    case GI_TYPE_TAG_FILENAME:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free out GIArgument(%s)",
+                 g_type_tag_to_string(type_tag));
+        break;
+    case GI_TYPE_TAG_ARRAY:
+        rb_gi_out_argument_fin_array(argument, arg_info, &type_info);
+        break;
+    case GI_TYPE_TAG_INTERFACE:
+    case GI_TYPE_TAG_GLIST:
+    case GI_TYPE_TAG_GSLIST:
+    case GI_TYPE_TAG_GHASH:
+    case GI_TYPE_TAG_ERROR:
+    case GI_TYPE_TAG_UNICHAR:
+        xfree(argument->v_pointer);
+        break;
+    default:
+        g_assert_not_reached();
+        break;
+    }
 }
 
 static void
