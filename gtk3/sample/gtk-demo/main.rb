@@ -52,10 +52,10 @@ module Demo
       hbox.pack_start(notebook, :expand => true, :fill => true, :padding => 0)
 
       notebook.append_page(create_text(@info_buffer, false),
-                           Gtk::Label.new('_Info', true))
+                           Gtk::Label.new('_Info', :use_underline => true))
 
       notebook.append_page(create_text(@source_buffer, true),
-                           Gtk::Label.new('_Source', true))
+                           Gtk::Label.new('_Source', :use_underline => true))
 
       @info_buffer.create_tag('title',
                              {'font' => 'Sans 18'})
