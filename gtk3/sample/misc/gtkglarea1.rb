@@ -24,6 +24,27 @@ unless Gtk::Version.or_later?(3, 16, 0)
   exit
 end
 
+def getlibdir
+  # http://www.pilotlogic.com/sitejoom/index.php/wiki?id=398<F37>
+  # 32              64
+  # /usr/lib        /usr/lib64       redhat, mandriva
+  # /usr/lib32      /usr/lib64       arch, gento
+  # /usr/lib        /usr/lib64       slackware
+  # /usr/lib/i386.. /usr/libx86_64/  debian
+  libs = Dir.glob("/usr/lib*/libGL.so") # libs in /usr/lib or /usr/lib64 for most distribs
+  libs = Dir.glob("/usr/lib*/*/libGL.so") if libs.size == 0 # debian like
+  if libs.size == 0
+    puts "no libGL.so"
+    exit 1
+  end
+  # Get the same architecture that the runnning ruby
+  if 1.size == 8 # 64 bits
+    File.dirname(libs.grep(/64/)[0])
+  else # 32 bits
+    File.dirname(libs[0])
+  end
+end
+
 case OpenGL.get_platform
 when :OPENGL_PLATFORM_WINDOWS
   OpenGL.load_lib("opengl32.dll", "C:/Windows/System32")
