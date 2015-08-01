@@ -51,7 +51,7 @@ when :OPENGL_PLATFORM_WINDOWS
 when :OPENGL_PLATFORM_MACOSX
   OpenGL.load_lib("libGL.dylib", "/System/Library/Frameworks/OpenGL.framework/Libraries")
 when :OPENGL_PLATFORM_LINUX
-  OpenGL.load_lib("libGL.so", "/usr/lib")
+  OpenGL.load_lib("libGL.so", getlibdir)
 else
   fail "Unsupported platform."
 end
