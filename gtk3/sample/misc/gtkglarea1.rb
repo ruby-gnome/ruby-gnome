@@ -30,18 +30,18 @@ def getlibdir
   # /usr/lib        /usr/lib64       redhat, mandriva
   # /usr/lib32      /usr/lib64       arch, gento
   # /usr/lib        /usr/lib64       slackware
-  # /usr/lib/i386.. /usr/libx86_64/  debian
+  # /usr/lib/i386.. /usr/lib/x86_64..debian
   libs = Dir.glob("/usr/lib*/libGL.so") # libs in /usr/lib or /usr/lib64 for most distribs
-  libs = Dir.glob("/usr/lib*/*/libGL.so") if libs.size == 0 # debian like
-  if libs.size == 0
+  libs = Dir.glob("/usr/lib*/*/libGL.so") if libs.empty? == 0 # debian like
+  if libs.empty? == 0
     puts "no libGL.so"
     exit 1
   end
   # Get the same architecture that the runnning ruby
   if 1.size == 8 # 64 bits
-    File.dirname(libs.grep(/64/)[0])
+    File.dirname(libs.grep(/64/).first)
   else # 32 bits
-    File.dirname(libs[0])
+    File.dirname(libs.first)
   end
 end
 
