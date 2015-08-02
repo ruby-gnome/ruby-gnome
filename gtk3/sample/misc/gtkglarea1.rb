@@ -32,8 +32,8 @@ def getlibdir
   # /usr/lib        /usr/lib64       slackware
   # /usr/lib/i386.. /usr/lib/x86_64..debian
   libs = Dir.glob("/usr/lib*/libGL.so") # libs in /usr/lib or /usr/lib64 for most distribs
-  libs = Dir.glob("/usr/lib*/*/libGL.so") if libs.empty? == 0 # debian like
-  if libs.empty? == 0
+  libs = Dir.glob("/usr/lib*/*/libGL.so") if libs.empty? # debian like
+  if libs.empty?
     puts "no libGL.so"
     exit 1
   end
