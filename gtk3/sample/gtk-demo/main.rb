@@ -168,8 +168,8 @@ module Demo
         iter = changed_selection.selected
         load_file(iter.get_value(FILENAME_COLUMN)) if iter
       end
-      tree_view.signal_connect("row_activated") do |treeview, path, _column|
-        row_activated_cb(treeview.model, path)
+      tree_view.signal_connect("row_activated") do |_tree_view, path, _column|
+        row_activated_cb(_tree_view.model, path)
       end
 
       tree_view.expand_all
