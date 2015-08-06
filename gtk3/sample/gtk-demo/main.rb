@@ -8,12 +8,11 @@
   $Id: main.rb,v 1.20 2007/07/09 13:21:54 ggc Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
-$:.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
 
 module Demo
-
   class Main < Gtk::Window
     TITLE_COLUMN, FILENAME_COLUMN, CLASS_COLUMN, ITALIC_COLUMN = 0, 1, 2, 3
 
@@ -25,13 +24,11 @@ module Demo
       @info_buffer = Gtk::TextBuffer.new
       @source_buffer = Gtk::TextBuffer.new
 
-      set_title('Ruby/GTK+ Code Demos')
-      signal_connect('destroy') do
-        Gtk.main_quit
-      end
+      set_title("Ruby/GTK+ Code Demos")
+      signal_connect("destroy") { Gtk.main_quit }
 
-      signal_connect("key_press_event") do |widget, event|
-        if event.state.control_mask? and event.keyval == Gdk::Keyval::KEY_q
+      signal_connect("key_press_event") do |_widget, event|
+        if event.state.control_mask? && event.keyval == Gdk::Keyval::KEY_q
           destroy
           true
         else
@@ -52,25 +49,24 @@ module Demo
       hbox.pack_start(notebook, :expand => true, :fill => true, :padding => 0)
 
       notebook.append_page(create_text(@info_buffer, false),
-                           Gtk::Label.new('_Info', true))
+                           Gtk::Label.new("_Info", :use_underline => true))
 
       notebook.append_page(create_text(@source_buffer, true),
-                           Gtk::Label.new('_Source', true))
+                           Gtk::Label.new("_Source", :use_underline => true))
 
-      @info_buffer.create_tag('title',
-                             {'font' => 'Sans 18'})
+      @info_buffer.create_tag("title",
+                              "font" => "Sans 18")
 
-      @source_buffer.create_tag('comment',
-                               {'foreground' => 'red'})
-      @source_buffer.create_tag('const',
-                               {'foreground' => 'ForestGreen'})
-      @source_buffer.create_tag('string',
-                               {
-                                  'foreground' => 'RosyBrown',
-                                  'weight' => Pango::FontDescription::WEIGHT_BOLD
-                                })
-      @source_buffer.create_tag('reserved',
-                               {'foreground' => 'purple'})
+      @source_buffer.create_tag("comment",
+                                "foreground" => "red")
+      @source_buffer.create_tag("const",
+                                "foreground" => "ForestGreen")
+      @source_buffer.create_tag("string",
+                                "foreground" => "RosyBrown",
+                                "weight" => Pango::FontDescription::WEIGHT_BOLD
+                                )
+      @source_buffer.create_tag("reserved",
+                                "foreground" => "purple")
     end
 
     def script_info(path)
@@ -80,31 +76,27 @@ module Demo
 
       file = File.open(path)
       file.each do |ln|
-        if not title and ln =~ /^=\s+(.*)$/
-          title = $1
+        if !title && ln =~ /^=\s+(.*)$/
+          title = Regexp.last_match(1)
           if title =~ /^(.*)\((.+?)\)$/
-            title = $1
-            depend = $2
+            title = Regexp.last_match(1)
+            depend = Regexp.last_match(2)
           end
-        elsif not klass and ln =~ /\s*class\s+([A-Z][A-Za-z0-9_]*)/
-          klass = $1
+        elsif !klass && ln =~ /\s*class\s+([A-Z][A-Za-z0-9_]*)/
+          klass = Regexp.last_match(1)
         end
 
-        if title and klass
-          break
-        end
+        break if title && klass
       end
 
-      if not klass
-        raise "File not found: #{path}."
-      end
+      raise "File not found: #{path}." unless klass
 
       return title, klass.intern, depend
     end
 
     def generate_index
       # Target scripts
-      scripts = Dir.glob(File.join(File.dirname(__FILE__), '*.rb'))
+      scripts = Dir.glob(File.join(File.dirname(__FILE__), "*.rb"))
 
       # Generate index tree
       children = {}
@@ -114,13 +106,11 @@ module Demo
         next if ["common.rb", "main.rb"].include?(File.basename(script))
         title, klass, depend = script_info(script)
 
-        if depend and not Gtk.const_defined?(depend)
-          next
-        end
+        next if depend && !Gtk.const_defined?(depend)
 
         if title =~ %r{^(.+?)/(.+)$}
-          parent = $1
-          child = $2
+          parent = Regexp.last_match(1)
+          child = Regexp.last_match(2)
 
           unless children[parent]
             children[parent] = []
@@ -142,10 +132,7 @@ module Demo
 
       # Expand children
       index.collect! do |row|
-        if row[3]
-          row[3] = children[row[0]]
-        end
-
+        row[3] = children[row[0]] if row[3]
         row
       end
 
@@ -171,23 +158,22 @@ module Demo
       cell = Gtk::CellRendererText.new
       cell.style = Pango::FontDescription::STYLE_ITALIC
       column = Gtk::TreeViewColumn.new("Widget (double click for demo)", cell,
-                                       {
-                                         'text' => TITLE_COLUMN,
-                                         'style_set' => ITALIC_COLUMN,
-                                       })
+                                       "text" => TITLE_COLUMN,
+                                       "style_set" => ITALIC_COLUMN
+                                       )
 
       tree_view.append_column(column)
 
-      selection.signal_connect('changed') do |selection|
-        iter = selection.selected
+      selection.signal_connect("changed") do |changed_selection|
+        iter = changed_selection.selected
         load_file(iter.get_value(FILENAME_COLUMN)) if iter
       end
-      tree_view.signal_connect('row_activated') do |tree_view, path, column|
-        row_activated_cb(tree_view.model, path)
+      tree_view.signal_connect("row_activated") do |treeview, path, _column|
+        row_activated_cb(treeview.model, path)
       end
 
       tree_view.expand_all
-      return tree_view
+      tree_view
     end
 
     def append_children(model, source, parent = nil)
@@ -195,15 +181,11 @@ module Demo
         iter = model.append(parent)
 
         [title, filename, klass].each_with_index do |value, i|
-          if value
-            iter.set_value(i, value)
-          end
+          iter.set_value(i, value) if value
         end
         iter.set_value(ITALIC_COLUMN, false)
 
-        if children
-          append_children(model, children, iter)
-        end
+        append_children(model, children, iter) if children
       end
     end
 
@@ -217,7 +199,7 @@ module Demo
 
         klass = Demo.const_get(iter.get_value(CLASS_COLUMN))
         window = klass.new
-        window.signal_connect('destroy') do
+        window.signal_connect("destroy") do
           iter.set_value(ITALIC_COLUMN, false)
         end
         window.show_all
@@ -240,7 +222,7 @@ module Demo
       scrolled_window.add(text_view)
 
       if is_source
-        font_desc = Pango::FontDescription.new('Monospace 12')
+        font_desc = Pango::FontDescription.new("Monospace 12")
         text_view.override_font(font_desc)
 
         text_view.set_wrap_mode(:none)
@@ -250,7 +232,7 @@ module Demo
         text_view.set_pixels_below_lines(2)
       end
 
-      return scrolled_window
+      scrolled_window
     end
 
     def fontify(start_iter = @source_buffer.start_iter,
@@ -265,11 +247,8 @@ module Demo
       end
     end
 
-
     def load_file(filename)
-      if filename == @current_file
-        return
-      end
+      return if filename == @current_file
 
       @info_buffer.delete(*@info_buffer.bounds)
 
@@ -278,7 +257,7 @@ module Demo
       file = begin
                File.open(filename)
              rescue
-               $stderr.puts "Cannot open: #{$!}" if $DEBUG
+               $stderr.puts "Cannot open: #{$ERROR_INFO}" if $DEBUG
                return
              end
       start = @info_buffer.get_iter_at(:offset => 0)
@@ -287,16 +266,14 @@ module Demo
       file.each do |line|
         case state
         when :before_header
-          if line =~ /^=begin$/
-            state = :in_header
-          end
+          state = :in_header if line =~ /^=begin$/
         when :in_header
           if line =~ /^=end$/
             state = :body
             start = @source_buffer.get_iter_at(:offset => 0)
           elsif line =~ /^=\s+(.*)$/
-            title = $1
-            title.gsub!(/\s*\(.*\)$/, '') # Delete depend field
+            title = Regexp.last_match(1)
+            title.gsub!(/\s*\(.*\)$/, "") # Delete depend field
 
             last = start
 
@@ -304,7 +281,7 @@ module Demo
             start = last.clone
 
             start.backward_chars(title.length)
-            @info_buffer.apply_tag('title', start, last)
+            @info_buffer.apply_tag("title", start, last)
 
             start = last
           else
@@ -323,14 +300,14 @@ module Demo
 
   class RubyTokonizer
     RESERVED_WORDS = %w(begin end module class def if then else while unless do case when require yield)
-    RESERVED_WORDS_PATTERN = Regexp.compile(/(^|\s+)(#{RESERVED_WORDS.collect do |pat| Regexp.quote(pat) end.join('|')})(\s+|$)/)
+    RESERVED_WORDS_PATTERN = Regexp.compile(/(^|\s+)(#{RESERVED_WORDS.collect { |pat| Regexp.quote(pat) }.join("|")})(\s+|$)/)
 
     def tokenize(str, index = 0)
       until str.empty?
         tag = nil
 
         case str
-        when /".+?"/, /'.+?'/
+        when /".+?"/, /".+?"/
           tag = :string
         when /#.*$/
           tag = :comment
@@ -341,26 +318,25 @@ module Demo
         end
 
         if tag
-          tokenize($~.pre_match, index) do |*args|
+          tokenize($LAST_MATCH_INFO.pre_match, index) do |*args|
             yield(*args)
           end
-          yield(tag, index + $~.begin(0), index + $~.end(0))
-          index += (str.length - $~.post_match.length)
-          str = $~.post_match
+          yield(tag, index + $LAST_MATCH_INFO.begin(0), index + $LAST_MATCH_INFO.end(0))
+          index += (str.length - $LAST_MATCH_INFO.post_match.length)
+          str = $LAST_MATCH_INFO.post_match
         else
           index += str.length
-          str = ''
+          str = ""
         end
       end
     end
   end
 end
 
-
 target = ARGV.shift
 if target
-  Demo::INDEX.each do |title, filename, klass_symbol, children|
-    if target == filename or target == klass_symbol.id2name
+  Demo::INDEX.each do |_title, filename, klass_symbol, _children|
+    if target == filename || target == klass_symbol.id2name
       require filename
 
       window = Demo.const_get(klass_symbol).new
