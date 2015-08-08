@@ -825,9 +825,9 @@ rb_gi_argument_to_ruby_glist_interface(GIArgument *argument,
                  g_type_name(gtype));
         break;
     case GI_INFO_TYPE_OBJECT:
+    case GI_INFO_TYPE_INTERFACE:
         rb_argument = GOBJGLIST2RVAL(argument->v_pointer);
         break;
-    case GI_INFO_TYPE_INTERFACE:
     case GI_INFO_TYPE_CONSTANT:
     case GI_INFO_TYPE_INVALID_0:
     case GI_INFO_TYPE_UNION:
@@ -1877,10 +1877,10 @@ rb_gi_return_argument_free_everything_glist_interface(GIArgument *argument,
                  g_type_name(gtype));
         break;
     case GI_INFO_TYPE_OBJECT:
+    case GI_INFO_TYPE_INTERFACE:
         g_list_foreach(argument->v_pointer, (GFunc)g_object_unref, NULL);
         g_list_free(argument->v_pointer);
         break;
-    case GI_INFO_TYPE_INTERFACE:
     case GI_INFO_TYPE_CONSTANT:
     case GI_INFO_TYPE_INVALID_0:
     case GI_INFO_TYPE_UNION:
