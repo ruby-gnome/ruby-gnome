@@ -24,34 +24,13 @@ unless Gtk::Version.or_later?(3, 16, 0)
   exit
 end
 
-def getlibdir
-  # http://www.pilotlogic.com/sitejoom/index.php/wiki?id=398<F37>
-  # 32              64
-  # /usr/lib        /usr/lib64       redhat, mandriva
-  # /usr/lib32      /usr/lib64       arch, gento
-  # /usr/lib        /usr/lib64       slackware
-  # /usr/lib/i386.. /usr/lib/x86_64..debian
-  libs = Dir.glob("/usr/lib*/libGL.so") # libs in /usr/lib or /usr/lib64 for most distribs
-  libs = Dir.glob("/usr/lib*/*/libGL.so") if libs.empty? # debian like
-  if libs.empty?
-    puts "no libGL.so"
-    exit 1
-  end
-  # Get the same architecture that the runnning ruby
-  if 1.size == 8 # 64 bits
-    File.dirname(libs.grep(/64/).first)
-  else # 32 bits
-    File.dirname(libs.first)
-  end
-end
-
 case OpenGL.get_platform
 when :OPENGL_PLATFORM_WINDOWS
   OpenGL.load_lib("opengl32.dll", "C:/Windows/System32")
 when :OPENGL_PLATFORM_MACOSX
   OpenGL.load_lib("libGL.dylib", "/System/Library/Frameworks/OpenGL.framework/Libraries")
 when :OPENGL_PLATFORM_LINUX
-  OpenGL.load_lib("libGL.so", getlibdir)
+  OpenGL.load_lib
 else
   fail "Unsupported platform."
 end
@@ -68,7 +47,19 @@ window.add(glarea)
 gl_vao = nil
 
 glarea.signal_connect("realize") do |widget|
+
   widget.make_current
+
+  # Check can only be done when we have an OpenGL context
+  # https://www.opengl.org/wiki/FAQ#What_is_an_OpenGL_context_and_why_do_you_need_a_window_to_do_GL_rendering.3F
+  # https://www.opengl.org/wiki/FAQ#How_do_I_tell_what_version_of_OpenGL_I.27m_using.3F
+
+  version = glGetString(GL_VERSION).to_s.split(" ").first.split(".").collect(&:to_i)
+  unless version[0] >= 3 && version[1] >= 2
+    puts "Gtk::GLArea widget require an OpenGL version >= 3.2, your version is #{version[0]}.#{version[1]}"
+    exit 1
+  end
+
   puts "realize"
   # Define a triangle in a vertex buffer ( Vertex Buffer Object)
 
