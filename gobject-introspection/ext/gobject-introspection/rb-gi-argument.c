@@ -538,6 +538,27 @@ rb_gi_array_argument_to_ruby(GIArgument *array_argument,
 }
 
 static VALUE
+interface_variant_to_ruby(GVariant *variant)
+{
+    VALUE rb_value = Qnil;
+    const GVariantType *type;
+
+    type = g_variant_get_type(variant);
+    if (g_variant_type_equal(type, G_VARIANT_TYPE_STRING)) {
+        const char *value;
+        g_variant_get(variant, "s", &value);
+        rb_value = CSTR2RVAL(value);
+    } else {
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[GVariant][%.*s] -> Ruby",
+                 (int)g_variant_type_get_string_length(type),
+                 g_variant_type_peek_string(type));
+    }
+
+    return rb_value;
+}
+
+static VALUE
 interface_to_ruby(GIArgument *argument,
                   gboolean duplicate,
                   GITypeInfo *type_info)
@@ -576,6 +597,9 @@ interface_to_ruby(GIArgument *argument,
             gsize size;
             data = g_bytes_get_data(bytes, &size);
             rb_interface = rb_enc_str_new(data, size, rb_ascii8bit_encoding());
+        } else if (gtype == G_TYPE_VARIANT) {
+            GVariant *variant = argument->v_pointer;
+            rb_interface = interface_variant_to_ruby(variant);
         } else {
             rb_interface = BOXED2RVAL(argument->v_pointer, gtype);
         }
