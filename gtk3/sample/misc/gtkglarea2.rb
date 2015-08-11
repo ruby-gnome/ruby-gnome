@@ -23,16 +23,7 @@ unless Gtk::Version.or_later?(3, 16, 0)
   exit
 end
 
-case OpenGL.get_platform
-when :OPENGL_PLATFORM_WINDOWS
-  OpenGL.load_lib("opengl32.dll", "C:/Windows/System32")
-when :OPENGL_PLATFORM_MACOSX
-  OpenGL.load_lib("libGL.dylib", "/System/Library/Frameworks/OpenGL.framework/Libraries")
-when :OPENGL_PLATFORM_LINUX
-  OpenGL.load_lib
-else
-  fail "Unsupported platform."
-end
+OpenGL.load_lib
 
 include OpenGL
 
