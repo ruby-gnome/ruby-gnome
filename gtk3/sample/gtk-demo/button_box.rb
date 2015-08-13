@@ -72,8 +72,8 @@ module Demo
       bbox.layout_style = layout
       bbox.set_spacing(spacing)
 
-      [Gtk::Stock::OK, Gtk::Stock::CANCEL, Gtk::Stock::HELP].each do |stock|
-        button = Gtk::Button.new(:stock_id => stock)
+      %w(Ok Cancel Help).each do |name|
+        button = Gtk::Button.new(:label => name)
         bbox.add(button)
       end
 
