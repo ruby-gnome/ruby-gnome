@@ -1,4 +1,4 @@
-#!/usr/bin/evn ruby
+#!/usr/bin/env ruby
 #
 # This sample code is a port of gstreamer/tools/gst-inspect.c. It is
 # licensed under the terms of the GNU Library General Public License,
