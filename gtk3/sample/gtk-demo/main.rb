@@ -2,10 +2,8 @@
 =begin
   main.rb - Main class of gtk-demo.
 
-  Copyright (c) 2003-2013 Ruby-GNOME2 Project Team
+  Copyright (c) 2003-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: main.rb,v 1.20 2007/07/09 13:21:54 ggc Exp $
 =end
 
 require "gtk3"
