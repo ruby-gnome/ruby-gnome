@@ -71,8 +71,8 @@ module Demo
       bbox.layout_style = layout
       bbox.set_spacing(spacing)
 
-      %w(Ok Cancel Help).each do |name|
-        button = Gtk::Button.new(:label => name)
+      %w(OK(_O) Cancel(_C) Help(_H)).each do |name|
+        button = Gtk::Button.new(:label => name, :use_underline => true)
         bbox.add(button)
       end
 
