@@ -16,7 +16,7 @@ class ExampleApp < Gtk::Application
       window.present
     end
     signal_connect "open" do |application, files, hin|
-      windows = application.get_windows
+      windows = application.windows
       win = nil
       unless windows.empty?
         win = windows.first
