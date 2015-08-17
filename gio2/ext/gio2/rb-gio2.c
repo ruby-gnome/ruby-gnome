@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2014  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -71,6 +71,8 @@ Init_gio2 (void)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = rb_define_module("Gio");
+
+    rb_gio2_init_application(RG_TARGET_NAMESPACE);
     rb_gio2_init_pollable_source(RG_TARGET_NAMESPACE);
 
     rb_gi_callback_register_finder(rb_gio2_async_ready_callback_finder);
