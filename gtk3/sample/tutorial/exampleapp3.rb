@@ -68,7 +68,6 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     scrolled.add(view)
     stack.add_titled(scrolled, basename, basename)
     stream = file.read
-    puts basename
     view.buffer.text = stream.read
   end
 end
@@ -101,4 +100,8 @@ end
 
 app = ExampleApp.new
 
-puts app.run(ARGV)
+# Gtk::Application#run need C style argv ([prog, arg1, arg2, ...,argn]).
+# The ARGV ruby variable only contains the arguments ([arg1, arg2, ...,argb])
+# and not the program name. We have to add it explicitly.
+
+puts app.run([$0] + ARGV)
