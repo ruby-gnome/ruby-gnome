@@ -59,6 +59,10 @@ app.signal_connect "activate" do |application|
   window.show_all
 end
 
-status = app.run(ARGV)
+# Gtk::Application#run need C style argv ([prog, arg1, arg2, ...,argn]).
+# The ARGV ruby variable only contains the arguments ([arg1, arg2, ...,argb])
+# and not the program name. We have to add it explicitly.
+
+status = app.run([$0] + ARGV)
 
 puts status
