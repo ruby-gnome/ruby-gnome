@@ -90,7 +90,7 @@ rg_initialize(VALUE self, VALUE rb_value)
         break;
     }
     g_variant_ref_sink(variant);
-    G_INITIALIZE(self, variant);
+    DATA_PTR(self) = variant;
 
     return Qnil;
 }
