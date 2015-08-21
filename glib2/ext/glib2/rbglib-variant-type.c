@@ -242,4 +242,55 @@ Init_glib_variant_type(void)
     RG_DEF_METHOD_P(is_subtype_of, 1);
 
     RG_DEF_METHOD(element, 0);
+
+    {
+        ID id_new;
+
+        CONST_ID(id_new, "new");
+
+#define DEF_TYPE(name) do {                                             \
+            const GVariantType *type = G_VARIANT_TYPE_ ## name;         \
+            const gchar *type_string;                                   \
+            gsize type_string_length;                                   \
+            VALUE rb_type_string;                                       \
+                                                                        \
+            type_string = g_variant_type_peek_string(type);             \
+            type_string_length = g_variant_type_get_string_length(type); \
+            rb_type_string = rb_str_new(type_string,                    \
+                                        type_string_length);            \
+            rb_define_const(RG_TARGET_NAMESPACE, G_STRINGIFY(name),     \
+                            rb_funcall(RG_TARGET_NAMESPACE, id_new, 1,  \
+                                       rb_type_string));                \
+        } while (0)
+
+        DEF_TYPE(BOOLEAN);
+        DEF_TYPE(BYTE);
+        DEF_TYPE(INT16);
+        DEF_TYPE(UINT16);
+        DEF_TYPE(INT32);
+        DEF_TYPE(UINT32);
+        DEF_TYPE(INT64);
+        DEF_TYPE(UINT64);
+        DEF_TYPE(HANDLE);
+        DEF_TYPE(DOUBLE);
+        DEF_TYPE(STRING);
+        DEF_TYPE(OBJECT_PATH);
+        DEF_TYPE(SIGNATURE);
+        DEF_TYPE(VARIANT);
+        DEF_TYPE(ANY);
+        DEF_TYPE(BASIC);
+        DEF_TYPE(MAYBE);
+        DEF_TYPE(ARRAY);
+        DEF_TYPE(TUPLE);
+        DEF_TYPE(UNIT);
+        DEF_TYPE(DICT_ENTRY);
+        DEF_TYPE(DICTIONARY);
+        DEF_TYPE(STRING_ARRAY);
+        DEF_TYPE(OBJECT_PATH_ARRAY);
+        DEF_TYPE(BYTESTRING);
+        DEF_TYPE(BYTESTRING_ARRAY);
+        DEF_TYPE(VARDICT);
+
+#undef DEF_TYPE
+    }
 }

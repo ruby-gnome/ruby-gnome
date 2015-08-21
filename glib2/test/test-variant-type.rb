@@ -17,6 +17,116 @@
 class TestGLibVariantType < Test::Unit::TestCase
   include GLibTestUtils
 
+  sub_test_case "constants" do
+    test "BOOLEAN" do
+      assert_equal("b", GLib::VariantType::BOOLEAN.to_s)
+    end
+
+    test "BYTE" do
+      assert_equal("y", GLib::VariantType::BYTE.to_s)
+    end
+
+    test "INT16" do
+      assert_equal("n", GLib::VariantType::INT16.to_s)
+    end
+
+    test "UINT16" do
+      assert_equal("q", GLib::VariantType::UINT16.to_s)
+    end
+
+    test "INT32" do
+      assert_equal("i", GLib::VariantType::INT32.to_s)
+    end
+
+    test "UINT32" do
+      assert_equal("u", GLib::VariantType::UINT32.to_s)
+    end
+
+    test "INT64" do
+      assert_equal("x", GLib::VariantType::INT64.to_s)
+    end
+
+    test "UINT64" do
+      assert_equal("t", GLib::VariantType::UINT64.to_s)
+    end
+
+    test "HANDLE" do
+      assert_equal("h", GLib::VariantType::HANDLE.to_s)
+    end
+
+    test "DOUBLE" do
+      assert_equal("d", GLib::VariantType::DOUBLE.to_s)
+    end
+
+    test "STRING" do
+      assert_equal("s", GLib::VariantType::STRING.to_s)
+    end
+
+    test "OBJECT_PATH" do
+      assert_equal("o", GLib::VariantType::OBJECT_PATH.to_s)
+    end
+
+    test "SIGNATURE" do
+      assert_equal("g", GLib::VariantType::SIGNATURE.to_s)
+    end
+
+    test "VARIANT" do
+      assert_equal("v", GLib::VariantType::VARIANT.to_s)
+    end
+
+    test "ANY" do
+      assert_equal("*", GLib::VariantType::ANY.to_s)
+    end
+
+    test "BASIC" do
+      assert_equal("?", GLib::VariantType::BASIC.to_s)
+    end
+
+    test "MAYBE" do
+      assert_equal("m*", GLib::VariantType::MAYBE.to_s)
+    end
+
+    test "ARRAY" do
+      assert_equal("a*", GLib::VariantType::ARRAY.to_s)
+    end
+
+    test "TUPLE" do
+      assert_equal("r", GLib::VariantType::TUPLE.to_s)
+    end
+
+    test "UNIT" do
+      assert_equal("()", GLib::VariantType::UNIT.to_s)
+    end
+
+    test "DICT_ENTRY" do
+      assert_equal("{?*}", GLib::VariantType::DICT_ENTRY.to_s)
+    end
+
+    test "DICTIONARY" do
+      assert_equal("a{?*}", GLib::VariantType::DICTIONARY.to_s)
+    end
+
+    test "STRING_ARRAY" do
+      assert_equal("as", GLib::VariantType::STRING_ARRAY.to_s)
+    end
+
+    test "OBJECT_PATH_ARRAY" do
+      assert_equal("ao", GLib::VariantType::OBJECT_PATH_ARRAY.to_s)
+    end
+
+    test "BYTESTRING" do
+      assert_equal("ay", GLib::VariantType::BYTESTRING.to_s)
+    end
+
+    test "BYTESTRING_ARRAY" do
+      assert_equal("aay", GLib::VariantType::BYTESTRING_ARRAY.to_s)
+    end
+
+    test "VARDICT" do
+      assert_equal("a{sv}", GLib::VariantType::VARDICT.to_s)
+    end
+  end
+
   sub_test_case ".valid?" do
     test "valid" do
       assert do
