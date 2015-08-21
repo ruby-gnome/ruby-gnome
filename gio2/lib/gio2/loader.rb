@@ -50,6 +50,8 @@ module Gio
     end
 
     def require_libraries
+      require "gio2/action"
+      require "gio2/action-map"
       require "gio2/inet-address"
       require "gio2/input-stream"
       require "gio2/pollable-input-stream"
