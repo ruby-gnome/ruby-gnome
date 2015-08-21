@@ -39,6 +39,11 @@ rbg_variant_to_ruby(GVariant *variant)
 
     if (g_variant_type_equal(type, G_VARIANT_TYPE_BOOLEAN)) {
         return CBOOL2RVAL(g_variant_get_boolean(variant));
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_STRING)) {
+        const gchar *string;
+        gsize string_length;
+        string = g_variant_get_string(variant, &string_length);
+        return CSTR2RVAL_LEN(string, string_length);
     } else {
         rb_raise(rb_eNotImpError,
                  "TODO: GVariant(%.*s) -> Ruby",
