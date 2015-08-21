@@ -2189,6 +2189,8 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
             rclosure = g_rclosure_new(rb_argument, Qnil, NULL);
             g_rclosure_attach(rclosure, self);
             argument->v_pointer = rclosure;
+        } else if (gtype == G_TYPE_VARIANT) {
+            argument->v_pointer = rbg_variant_from_ruby(rb_argument);
         } else {
             argument->v_pointer = RVAL2BOXED(rb_argument, gtype);
         }
