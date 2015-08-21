@@ -122,6 +122,13 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
                 return func(value);
             }
         }
+      case G_TYPE_VARIANT:
+        {
+            GVariant *variant = g_value_peek_pointer(value);
+            rb_raise(rb_eNotImpError,
+                     "TODO: GValue(GVariant) -> Ruby");
+            return Qnil;
+        }
       default:
         if (!rbgobj_convert_gvalue2rvalue(fundamental_type, value, &rvalue)) {
             GValueToRValueFunc func;
