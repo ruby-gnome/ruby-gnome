@@ -201,6 +201,10 @@ extern VALUE rbglib_uint64_to_num(guint64 val);
 extern gint64 rbglib_num_to_int64(VALUE val);
 extern guint64 rbglib_num_to_uint64(VALUE val);
 
+
+extern VALUE rbg_variant_to_ruby(GVariant *variant);
+
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
