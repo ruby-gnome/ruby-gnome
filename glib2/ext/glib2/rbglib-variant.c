@@ -105,6 +105,16 @@ rg_value(VALUE self)
     return rbg_variant_to_ruby(variant);
 }
 
+static VALUE
+rg_type(VALUE self)
+{
+    GVariant *variant;
+
+    variant = _SELF(self);
+
+    return GVARIANTTYPE2RVAL((GVariantType *)g_variant_get_type(variant));
+}
+
 void
 Init_glib_variant(void)
 {
@@ -114,4 +124,5 @@ Init_glib_variant(void)
 
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(value, 0);
+    RG_DEF_METHOD(type, 0);
 }
