@@ -85,8 +85,7 @@ rg_initialize(VALUE self, VALUE rb_value)
 
     switch (rb_type(rb_value)) {
       case RUBY_T_STRING:
-        variant = g_variant_new_take_string(g_strndup(RSTRING_PTR(rb_value),
-                                                      RSTRING_LEN(rb_value)));
+        variant = g_variant_new_string(RVAL2CSTR(rb_value));
         break;
       default:
         rb_raise(rb_eNotImpError,
