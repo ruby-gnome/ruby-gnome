@@ -2152,7 +2152,6 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
     interface_info = g_type_info_get_interface(type_info);
     interface_type = g_base_info_get_type(interface_info);
 
-    gtype = g_registered_type_info_get_g_type(interface_info);
     switch (interface_type) {
     case GI_INFO_TYPE_INVALID:
     case GI_INFO_TYPE_FUNCTION:
@@ -2163,6 +2162,7 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
                  g_base_info_get_name(interface_info));
         break;
     case GI_INFO_TYPE_STRUCT:
+        gtype = g_registered_type_info_get_g_type(interface_info);
         if (gtype == G_TYPE_NONE) {
             argument->v_pointer = DATA_PTR(rb_argument);
         } else if (gtype == G_TYPE_VALUE) {
@@ -2200,6 +2200,7 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
                  g_base_info_get_name(interface_info));
         break;
     case GI_INFO_TYPE_ENUM:
+        gtype = g_registered_type_info_get_g_type(interface_info);
         if (gtype == G_TYPE_NONE) {
             argument->v_int32 = NUM2INT(rb_argument);
         } else {
@@ -2207,6 +2208,7 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
         }
         break;
     case GI_INFO_TYPE_FLAGS:
+        gtype = g_registered_type_info_get_g_type(interface_info);
         if (gtype == G_TYPE_NONE) {
             argument->v_int32 = NUM2INT(rb_argument);
         } else {
@@ -2227,6 +2229,7 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
         g_assert_not_reached();
         break;
     case GI_INFO_TYPE_UNION:
+        gtype = g_registered_type_info_get_g_type(interface_info);
         if (gtype == G_TYPE_NONE) {
             rb_raise(rb_eNotImpError,
                      "TODO: Ruby -> GIArgument(interface)[%s]: <%s>"
