@@ -55,6 +55,7 @@ module Gio
       require "gio2/pollable-input-stream"
       require "gio2/pollable-output-stream"
       require "gio2/resources"
+      require "gio2/simple-action"
 
       require "gio2/deprecated"
     end
