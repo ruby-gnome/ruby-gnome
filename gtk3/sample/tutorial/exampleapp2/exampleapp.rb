@@ -27,11 +27,10 @@ current_path = File.expand_path(File.dirname(__FILE__))
 gresource_bin = "#{current_path}/exampleapp.gresource"
 gresource_xml = "#{current_path}/exampleapp.gresource.xml"
 
-Dir.chdir(File.dirname(gresource_xml)) do
-  system("glib-compile-resources",
-         "--target", gresource_bin,
-         File.basename(gresource_xml))
-end
+system("glib-compile-resources",
+       "--target", gresource_bin,
+       "--sourcedir", current_path,
+       gresource_xml)
 
 at_exit do
   FileUtils.rm_f(gresource_bin)
