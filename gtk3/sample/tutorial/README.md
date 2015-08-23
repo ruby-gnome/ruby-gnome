@@ -23,14 +23,19 @@ https://developer.gnome.org/gtk3/stable/ch01s03.html
 ### A trivial application
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.5
 
-*    exampleapp1.rb
+*    exampleapp1/exampleapp.rb
 
 ### Populating the window
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.6
 
-*    exampleapp2.rb
+*    exampleapp2/exampleapp.rb
 
 ### Opening files
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.7
 
-*    exampleapp3.rb
+*    exampleapp3/exampleapp.rb
+
+### An application menu
+https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.8
+
+*    exampleapp4/exampleapp.rb
