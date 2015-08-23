@@ -15,8 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #
 # Original:
-#   * URL: https://git.gnome.org/browse/gtk+/tree/examples/application2/exampleapp.c
-#   * URL: https://git.gnome.org/browse/gtk+/tree/examples/application2/exampleappwin.c
+#   * URL: https://git.gnome.org/browse/gtk+/tree/examples/application3/exampleapp.c
+#   * URL: https://git.gnome.org/browse/gtk+/tree/examples/application3/exampleappwin.c
 #   * License: LGPL 2
 
 require "gtk3"
@@ -27,11 +27,10 @@ current_path = File.expand_path(File.dirname(__FILE__))
 gresource_bin = "#{current_path}/exampleapp.gresource"
 gresource_xml = "#{current_path}/exampleapp.gresource.xml"
 
-Dir.chdir(File.dirname(gresource_xml)) do
-  system("glib-compile-resources",
-         "--target", gresource_bin,
-         File.basename(gresource_xml))
-end
+system("glib-compile-resources",
+       "--target", gresource_bin,
+       "--sourcedir", current_path,
+       gresource_xml)
 
 at_exit do
   FileUtils.rm_f(gresource_bin)
@@ -41,10 +40,13 @@ resource = Gio::Resource.load(gresource_bin)
 Gio::Resources.register(resource)
 
 class ExampleAppWindow < Gtk::ApplicationWindow
+  # https://github.com/ruby-gnome2/ruby-gnome2/pull/445
+  # https://github.com/ruby-gnome2/ruby-gnome2/issues/503
   type_register
   class << self
     def init
       set_template(:resource => "/org/gtk/exampleapp/window.ui")
+      bind_template_child("stack")
     end
   end
 
@@ -53,7 +55,19 @@ class ExampleAppWindow < Gtk::ApplicationWindow
   end
 
   def open(file)
-    
+    basename = file.basename
+    scrolled = Gtk::ScrolledWindow.new
+    scrolled.show
+    scrolled.set_hexpand(true)
+    scrolled.set_vexpand(true)
+    view = Gtk::TextView.new
+    view.set_editable(false)
+    view.set_cursor_visible(false)
+    view.show
+    scrolled.add(view)
+    stack.add_titled(scrolled, basename, basename)
+    stream = file.read
+    view.buffer.text = stream.read
   end
 end
 
@@ -66,7 +80,7 @@ class ExampleApp < Gtk::Application
       window.present
     end
 
-    signal_connect "open" do |application, files, hin|
+    signal_connect "open" do |application, files, hint|
       windows = application.windows
       win = nil
       unless windows.empty?
@@ -85,4 +99,8 @@ end
 
 app = ExampleApp.new
 
-puts app.run
+# Gtk::Application#run need C style argv ([prog, arg1, arg2, ...,argn]).
+# The ARGV ruby variable only contains the arguments ([arg1, arg2, ...,argb])
+# and not the program name. We have to add it explicitly.
+
+puts app.run([$0] + ARGV)
