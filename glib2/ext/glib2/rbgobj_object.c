@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2003  Masahiro Sakai
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -655,7 +655,6 @@ gobj_ref_count(VALUE self)
 
 /**********************************************************************/
 
-static VALUE proc_mod_eval;
 static GQuark q_ruby_setter;
 static GQuark q_ruby_getter;
 
@@ -863,7 +862,4 @@ Init_gobject_gobject(void)
 
     /* subclass */
     RG_DEF_SMETHOD(type_register, -1);
-
-    rb_global_variable(&proc_mod_eval);
-    proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
 }
