@@ -620,6 +620,35 @@ rg_type_name(VALUE self)
     return CSTR2RVAL(G_OBJECT_TYPE_NAME(RVAL2GOBJ(self)));
 }
 
+#if GLIB_CHECK_VERSION(2, 26, 0)
+static VALUE
+rg_bind_property(VALUE self,
+                 VALUE rb_source_property,
+                 VALUE rb_target,
+                 VALUE rb_target_property,
+                 VALUE rb_flags)
+{
+    gpointer source;
+    const gchar *source_property;
+    gpointer target;
+    const gchar *target_property;
+    GBindingFlags flags;
+    GBinding *binding;
+
+    source = RVAL2GOBJ(self);
+    source_property = RVAL2CSTR(rb_source_property);
+    target = RVAL2GOBJ(rb_target);
+    target_property = RVAL2CSTR(rb_target_property);
+    flags = RVAL2GBINDINGFLAGS(rb_flags);
+
+    binding = g_object_bind_property(source, source_property,
+                                     target, target_property,
+                                     flags);
+
+    return GOBJ2RVAL(binding);
+}
+#endif
+
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -817,7 +846,7 @@ rg_s_type_register(int argc, VALUE *argv, VALUE self)
 
 /**********************************************************************/
 
-void 
+void
 Init_gobject_gobject(void)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_OBJECT, "Object", mGLib,
@@ -851,6 +880,11 @@ Init_gobject_gobject(void)
     RG_DEF_METHOD(unref, 0);
     RG_DEF_METHOD(inspect, 0);
     RG_DEF_METHOD(type_name, 0);
+
+#if GLIB_CHECK_VERSION(2, 26, 0)
+    RG_DEF_METHOD(bind_property, 4);
+    G_DEF_CLASS(G_TYPE_BINDING_FLAGS, "BindingFlags", mGLib);
+#endif
 
     eNoPropertyError = rb_define_class_under(mGLib, "NoPropertyError",
                                              rb_eNameError);

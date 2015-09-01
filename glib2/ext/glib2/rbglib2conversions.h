@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -56,4 +56,7 @@
 
 #define RVAL2GFORMATSIZEFLAGS(o)           (RVAL2GFLAGS(o, G_TYPE_FORMAT_SIZE_FLAGS))
 #define GFORMATSIZEFLAGS2RVAL(o)           (GFLAGS2RVAL(o, G_TYPE_FORMAT_SIZE_FLAGS))
+
+#define RVAL2GBINDINGFLAGS(o)              (RVAL2GFLAGS(o, G_TYPE_BINDING_FLAGS))
+#define GBINDINGFLAGS2RVAL(o)              (GFLAGS2RVAL(o, G_TYPE_BINDING_FLAGS))
 #endif /* __GLIB2CONVERSIONS_H__ */

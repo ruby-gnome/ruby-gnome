@@ -172,6 +172,7 @@ G_GNUC_INTERNAL void Init_gobject_gobject(void);
 G_GNUC_INTERNAL void Init_gobject_gsignal(void);
 G_GNUC_INTERNAL void Init_gobject_gtypeplugin(void);
 G_GNUC_INTERNAL void Init_gobject_gtypemodule(void);
+G_GNUC_INTERNAL void Init_gobject_gbinding(void);
 
 G_END_DECLS
 

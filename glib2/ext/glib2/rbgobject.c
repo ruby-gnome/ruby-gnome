@@ -384,4 +384,6 @@ Init_gobject(void)
 
     Init_gobject_gtypeplugin();
     Init_gobject_gtypemodule();
+
+    Init_gobject_gbinding();
 }
