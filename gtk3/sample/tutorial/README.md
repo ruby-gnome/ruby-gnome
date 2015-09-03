@@ -265,6 +265,62 @@ The XML definition of the interface can be loaded from a file, a string or a pat
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.5
 
 *    exampleapp1/exampleapp.rb
+```ruby
+require "gtk3"
+
+class ExampleAppWindow < Gtk::ApplicationWindow
+
+  def open(file)
+    
+  end
+end
+
+class ExampleApp < Gtk::Application
+  def initialize
+    super("org.gtk.exampleapp", :handles_open)
+
+    signal_connect "activate" do |application|
+      window = ExampleAppWindow.new(application)
+      window.present
+    end
+    signal_connect "open" do |application, files, hin|
+      windows = application.windows
+      win = nil
+      unless windows.empty?
+        win = windows.first
+      else
+        win = ExampleAppWindow.new(application)
+      end
+
+      files.each { |file| win.open(file) }
+        
+      win.present
+    end
+  end
+end
+
+app = ExampleApp.new
+
+puts app.run([$0]+ARGV)
+```
+
+In this example we create a subclass of `Gtk::Application` called ExampleApp. In the `ExampleApp#initialize` method, we add instructions for two signals *activate* and *open*. Every `Gtk::Application` object or its subclass object can react to 4 signals:
+
+*    startup : sets up the application when it first start
+*    shutdown : preforms shutdown tasks
+*    activate : shows the default first window of the application
+*    open : opens files and shows them in a new window
+
+For more informations, see [here](https://wiki.gnome.org/HowDoI/GtkApplication).
+In this case, the signal "*activate*" will be triggered if no arguments are given to the `ExampleApp#run` method. And a default window will be created and will be presented to the user ( [see](https://developer.gnome.org/gtk3/stable/GtkWindow.html#gtk-window-present).
+
+If file names are given to the `ExampleApp#run` method, then it is the "*open*" signal that is called.
+Trought this event, you can manage the files that are stored in an array of `Gio::File` objects.
+
+In this example, each files are used by an `ExampleAppWindow#open` method. The `ExampleAppWindow` class is derived from the `Gtk::ApplicationWindow`.
+
+This does not look very impressive yet, but our application is already presenting itself on the session bus, and it accepts files as commandline arguments.
+
 
 ### Populating the window
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.6
