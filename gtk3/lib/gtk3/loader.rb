@@ -133,6 +133,7 @@ module Gtk
       require "gtk3/target-list"
       require "gtk3/target-entry"
       require "gtk3/text-buffer"
+      require "gtk3/text-iter"
       require "gtk3/text-tag-table"
       require "gtk3/toggle-action"
       require "gtk3/toggle-button"
