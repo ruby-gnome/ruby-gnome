@@ -141,7 +141,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     tag = buffer.create_tag()
     @settings.bind("font", tag, "font", Gio::SettingsBindFlags::DEFAULT)
     buffer.apply_tag(tag, buffer.start_iter, buffer.end_iter)
-    search.set_sensitive(true)
+    search.sensitive = true
   end
 end
 
