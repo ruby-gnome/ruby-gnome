@@ -136,4 +136,13 @@ class TestGtkWidget < Test::Unit::TestCase
       entry.style_get_property("focus-padding").is_a?(Integer)
     end
   end
+
+  sub_test_case "predicates" do
+    test "#in_destruction?" do
+      entry = Gtk::Entry.new
+      assert do
+        not entry.in_destruction?
+      end
+    end
+  end
 end

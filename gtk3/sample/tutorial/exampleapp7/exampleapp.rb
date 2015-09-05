@@ -104,7 +104,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     
       def visible_child_changed(*args)
         stack = args[0]
-        return if stack.in_destruction
+        return if stack.in_destruction?
         win = stack.toplevel
         win.searchbar.set_search_mode(false)
       end
