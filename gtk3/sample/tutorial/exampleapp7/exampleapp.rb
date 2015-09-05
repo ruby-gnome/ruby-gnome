@@ -45,7 +45,7 @@ end
 resource = Gio::Resource.load(gresource_bin)
 Gio::Resources.register(resource)
 
-ENV["GSETTINGS_SCHEMA_DIR"] = current_path 
+ENV["GSETTINGS_SCHEMA_DIR"] = current_path
 
 class ExampleAppPrefs < Gtk::Dialog
   type_register
@@ -100,13 +100,12 @@ class ExampleAppWindow < Gtk::ApplicationWindow
         buffer.select_range(range[0], range[1])
         view.scroll_to_iter(range[0], 0.0, false, 0.0, 0.0)
       end
-    
+
       def visible_child_changed(stack, params)
         return if stack.in_destruction?
         win = stack.toplevel
         win.searchbar.set_search_mode(false)
       end
-      
     end
   end
 
@@ -139,7 +138,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     stream = file.read
     buffer = view.buffer
     buffer.text = stream.read
-    tag = buffer.create_tag() 
+    tag = buffer.create_tag()
     @settings.bind("font", tag, "font", Gio::SettingsBindFlags::DEFAULT)
     buffer.apply_tag(tag, buffer.start_iter, buffer.end_iter)
     search.set_sensitive(true)
