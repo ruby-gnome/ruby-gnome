@@ -87,8 +87,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
       end
       private
 
-      def search_text_changed(*args)
-        search_entry = args[0]
+      def search_text_changed(search_entry)
         text = search_entry.text
         return if text.empty?
 
@@ -102,8 +101,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
         view.scroll_to_iter(range[0], 0.0, false, 0.0, 0.0)
       end
     
-      def visible_child_changed(*args)
-        stack = args[0]
+      def visible_child_changed(stack, params)
         return if stack.in_destruction?
         win = stack.toplevel
         win.searchbar.set_search_mode(false)
