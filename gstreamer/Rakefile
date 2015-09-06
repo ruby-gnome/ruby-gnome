@@ -147,13 +147,13 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :version => "1.5.2",
       :compression_method => "xz",
       :windows => {
+        :cc_args => "-std=gnu99",
         :configure_args => [
           "--enable-check",
           "--enable-introspection",
         ],
         :build_concurrently => false,
         :built_file => "bin/libgstreamer-1.0-0.dll",
-        :cc_args => "-std=gnu99",
       },
     },
     {
