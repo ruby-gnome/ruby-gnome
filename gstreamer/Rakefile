@@ -131,13 +131,13 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
-      :name => "speex",
-      :download_base_url => "#{xiph_download_url_base}/speex",
-      :label => "Speex",
-      :version => "1.2rc2",
+      :name => "opus",
+      :download_base_url => "#{xiph_download_url_base}/opus",
+      :label => "Opus",
+      :version => "1.1",
       :windows => {
         :configure_args => [],
-        :built_file => "bin/libspeex-1.dll",
+        :built_file => "bin/libopus-1.dll",
       },
     },
     {
