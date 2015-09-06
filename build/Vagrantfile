@@ -12,8 +12,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   targets.each do |target|
     config.vm.define(target) do |node|
-      node.vm.box = "ubuntu-14.10-x86_64"
-      node.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.10_chef-provisionerless.box"
+      node.vm.box = "ubuntu-15.04-x86_64"
+      node.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-15.04_chef-provisionerless.box"
 
       node.vm.synced_folder("../", "/ruby-gnome2")
       node.vm.synced_folder("../../pkg-config", "/pkg-config")
