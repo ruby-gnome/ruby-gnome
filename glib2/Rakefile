@@ -170,6 +170,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :label => "Boehm-Demers-Weiser garbage collector",
       :version => "7.4.2",
       :windows => {
+        :built_file => "bin/libgc-1.dll",
       },
     },
     {
