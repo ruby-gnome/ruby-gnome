@@ -119,6 +119,14 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
+      :name => "autogen",
+      :download_base_url => "http://ftp.gnu.org/gnu/autogen/rel5.18.5",
+      :label => "AutoGen",
+      :version => "5.18.5",
+      :windows => {
+      },
+    },
+    {
       :name => "gnutls",
       :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4",
       :label => "GnuTLS",
