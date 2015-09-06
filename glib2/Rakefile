@@ -92,6 +92,15 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
+      :name => "libtasn1",
+      :download_site => :gnu,
+      :label => "Libtasn1",
+      :version => "4.6",
+      :windows => {
+        :built_file => "bin/libtasn1.dll",
+      },
+    },
+    {
       :name => "gnutls",
       :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4",
       :label => "GnuTLS",
