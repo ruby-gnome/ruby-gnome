@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2010-2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2010-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -47,9 +47,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
     {
       :name => "sqlite-autoconf",
-      :download_base_url => "http://www.sqlite.org/2014",
+      :download_base_url => "http://www.sqlite.org/2015",
       :label => "SQLite",
-      :version => "3080600",
+      :version => "3081101",
       :compression_method => "gz",
       :windows => {
         :configure_args => [],
@@ -60,7 +60,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "poppler",
       :download_base_url => "http://poppler.freedesktop.org",
       :label => "Poppler",
-      :version => "0.29.0",
+      :version => "0.35.0",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
