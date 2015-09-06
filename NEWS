@@ -2,6 +2,190 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.0.0: 2015-09-XX
+
+It is a GTK+ 3.16 support release.
+
+To GTK+ 3.16 support, many people helped us. Especially, cedlemo did
+great works. Very thanks all!!!
+
+=== Changes
+
+==== All
+
+  * Improvements
+    * Added install instruction for GitHub master branch.
+      [GitHub#425][Patch by Hiroyuki Sato]
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Added new APIs:
+      * (({RVAL2GOBJGLIST}))
+      * (({RVAL2GOBJGSLIST}))
+      * (({rbg_rval2glist}))
+      * (({rbg_rval2gslist}))
+      * (({RVAL2CSTR_PTR}))
+      * (({rbg_name_to_nick}))
+      * (({rbgobj_class_init_func}))
+      * (({rbgobj_register_type}))
+    * Changed (({RVAL2CSTR})) to return (({NULL})) terminated string.
+      If you want to get raw string that may not be terminated by (({NULL})),
+      use (({RVAL2CSTR_PTR})).
+    * Supported (({Symbol})) as flag value.
+    * Added (({windows_platform?}))
+    * Supported (({GLib::Value.new})) without value.
+    * Supported array of flag value as (({GLib::Flags.new})) input.
+    * Supported name, nick and (({GLib::Enum})) as
+      (({GLib::Enum.new})) input.
+    * Migrated to Markdown for README markup.
+      [GitHub#484][Patch by prpr_man]
+    * Supported (({GVariantType})).
+    * Supported (({GVariant})).
+    * Supported (({GBinding})).
+      [GitHub#524][Reported by cedlemo]
+
+  * Fixes
+    * Fixed a bug that (({GLib.format_size})) doesn't work 32bit over
+      integer value.
+      [GitHub#413][Reported by eumario]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported non GObject struct as return value.
+      [GitHub#286][Reported by Christopher L. Ramsey]
+    * Supported (({list_XXX})) method name.
+    * Supported freeing (({GList<GObjet *>})).
+    * Supported array of struct as input argument.
+    * Supported auto native package install on CentOS 7.
+    * Supported (({can_XXX?})) predicate.
+    * Supported the number of array as input argument.
+      [Suggested by John Cupitt]
+    * Supported array of (({GValue})) as input argument.
+    * Supported array as return value.
+    * Supported (({GClosure})) as input argument.
+    * Supported (({GSList<GObject *>})) as input argument.
+    * Supported (({GSList<GObject *>})) as output argument.
+      [GitHub#324][Reported by cedlemo]
+    * Supported union as input argument.
+    * Supported array of (({guint8})) as input argument.
+    * Supported array of (({gint32})) as input argument.
+    * Supported class methods defined in (({XXXClass})).
+    * Supported (({GList<GBoxed *>})) as output argument.
+      [GitHub#389][Reported by eumario]
+    * Supported (({GList<GInterface *>})) as return value.
+      [GitHub#501][Reported by Christopher L. Ramsey]
+    * Supported (({GVariant})) as return value.
+      [GitHub#502][Reported by kitone]
+
+  * Fixes
+    * Fixed a bug that (({GList<GObjet *>})) return type method always
+      returns nil.
+    * Fixed a bug that not predicate is treated as predicate.
+    * Fixed a bug that (({self})) is different.
+
+==== Ruby/GIO2
+
+  * Improvements
+    * Supported (({GAsyncReadyCallback})).
+      [GitHub#302][Reported by Christopher L. Ramsey]
+    * Added (({ActionMap#add_actions})).
+
+==== Ruby/Pango
+
+  * Improvements
+    * Added (({Pango::Language#sample_string})).
+
+==== Ruby/GDK3
+
+  * Improvements
+    * Added backward compatibility APIs.
+      [GitHub#284][Reported by Christopher L. Ramsey]
+    * Added constants in (({Gdk::Selection})).
+      [GitHub#254][Patch by Masafumi Yokoyama]
+    * Added missing deprecations.
+      [GitHub#291][Reported by Michel Boaventura]
+    * Added (({RGBA.parse})).
+      [GitHub#295][Reported by carlosjhr64]
+    * Supported (({Gdk::Rectangle})).
+      [GitHub#319][Reported by cedlemo]
+    * Supported (({Gdk::Screen#get_setting})).
+      [GitHub#376][Reported by cedlemo]
+    * Added (({Gdk::Screen#get_monitor})).
+
+  * Fixes
+    * Fixed a bug that (({GDK_KEY_XXX})) raises an error.
+      [ruby-gnome2-devel-en][Reported by Detlef Reichl]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Migrated to GObject Introspection based bindings from hand
+      writing bindings. Now, all the latest API in GTK+ are supported.
+      [Hiroshi Hatake][Detlef Reichl][cedlemo][John Cupitt]
+      [Masafumi Yokoyama][eumario][PeterWAWood][Daiki Ueno]
+    * Updated samples. [Patch by cedlemo]
+
+==== Ruby/GtkSourceView3
+
+  * Improvements
+    * Migrated to GObject Introspection based bindings from hand
+      writing bindings. Now, all the latest API in GtkSourceView are
+      supported.
+
+==== Ruby/VTE3
+
+  * Improvements
+    * Migrated to GObject Introspection based bindings from hand
+      writing bindings. Now, all the latest API in VTE are supported.
+      [cedlemo]
+
+==== Ruby/GStreamer
+
+  * Fixes
+    * Fixed native package name on CentOS and Fedora.
+    * Fixed shebang.
+      [GitHub#507][Patch by Dmitry Marakasov]
+
+==== Ruby/RSVG2
+
+  * Improvements
+    * Added (({:file_name})), (({:data})) and (({:flags})) option to
+      (({RSVG::Handle.new})).
+    * Updated a sample.
+      [GitHub#518][Patch by Robert A. Heiler].
+
+  * Fixes
+    * Fixed a memory leak of (({RSVG::Handle.new_from_data})) and
+      (({RSVG::Handle.new_from_file})).
+      [GitHub#318][Reported by Kagetsuki]
+
+==== Ruby/Clutter
+
+  * Improvements
+    * Added (({Clutter::Version.or_later?})).
+
+==== Ruby/WebKit2GTK
+
+  * Improvements
+    * Added.
+
+=== Thanks
+
+  * Hiroshi Hatake
+  * Christopher L. Ramsey
+  * Masafumi Yokoyama
+  * cedlemo
+  * Detlef Reichl
+  * Kagetsuki
+  * eumario
+  * PeterWAWood
+  * Hiroyuki Sato
+  * Daiki Ueno
+  * prpr_mann
+  * Dmitry Marakasov
+
 == Ruby-GNOME2 2.2.5: 2015-04-24
 
 It is a GLib 2.44 support release.
