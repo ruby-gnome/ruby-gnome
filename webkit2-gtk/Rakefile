@@ -28,6 +28,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.windows.dependencies = []
   package.windows.build_dependencies = [
     "glib2",
+    "gio2",
     "gobject-introspection",
     "atk",
     "pango",
@@ -36,106 +37,78 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "gstreamer",
   ]
   package.windows.gobject_introspection_dependencies = [
+    "gio2",
     "atk",
     "gdk_pixbuf2",
     "pango",
     "gdk3",
     "gstreamer",
   ]
+
+  gstreamer_relative_binary_dir =
+    package.package.project_root_dir +
+    "gstreamer" +
+    package.windows.relative_binary_dir
+  gstreamer_absolute_binary_dir = gstreamer_relative_binary_dir.expand_path
+
+  rcairo_relative_binary_dir =
+    package.package.project_root_dir.parent +
+    "rcairo.#{package.windows.build_architecture_suffix}" +
+    package.windows.relative_binary_dir
+  rcairo_absolute_binary_dir = rcairo_relative_binary_dir.expand_path
+
   package.external_packages = [
-    # {
-    #   :name => "libjpeg",
-    #   :base_name => "jpeg-9a",
-    #   :archive_base_name => "jpegsrc.v9a.tar.gz",
-    #   :download_base_url => "http://www.ijg.org/files",
-    #   :label => "libjpeg",
-    #   :windows => {
-    #     :configure_args => [],
-    #     :built_file => "bin/libjpeg-9.dll",
-    #   },
-    # },
-    # {
-    #   :name => "libwebp",
-    #   :download_base_url => "https://webp.googlecode.com/files",
-    #   :label => "WebP",
-    #   :version => "0.4.0",
-    #   :windows => {
-    #     :built_file => "bin/libwebp-5.dll",
-    #   },
-    # },
-    # {
-    #   :name => "sqlite-autoconf",
-    #   :download_base_url => "http://www.sqlite.org/2014",
-    #   :label => "SQLite",
-    #   :version => "3080600",
-    #   :compression_method => "gz",
-    #   :windows => {
-    #     :configure_args => [],
-    #     :built_file => "bin/libsqlite3-0.dll",
-    #   },
-    # },
-    # {
-    #   :name => "libsoup",
-    #   :download_site => :gnome,
-    #   :label => "libsoup",
-    #   :version => "2.48.0",
-    #   :compression_method => "xz",
-    #   :windows => {
-    #     :configure_args => [
-    #       "--enable-introspection",
-    #       "--without-apache-httpd",
-    #     ],
-    #     :build_concurrently => false,
-    #     :patches => [
-    #       "libsoup-2.48.0-remove-nonexistent-symbol.diff",
-    #     ],
-    #     :built_file => "bin/libsoup-2.4-1.dll",
-    #   },
-    # },
-    # {
-    #   :name => "libiconv",
-    #   :label => "iconv",
-    #   :version => "1.14",
-    #   :download_base_url => "http://ftp.gnu.org/pub/gnu/libiconv",
-    #   :compression_method => "gz",
-    #   :windows => {
-    #     :built_file => "bin/libiconv-2.dll",
-    #   },
-    # },
-    # {
-    #   :name => "libxslt",
-    #   :version => "1.1.28",
-    #   :download_base_url => "ftp://xmlsoft.org/libxslt",
-    #   :compression_method => "gz",
-    #   :windows => {
-    #     :built_file => "bin/libxslt-1.dll",
-    #     :configure_args => [
-    #       "--without-python",
-    #     ],
-    #     :patches => [
-    #       "libxslt-1.1.28-add-mkdir-fallback.diff",
-    #     ],
-    #   },
-    # },
-    # {
-    #   :name => "webkitgtk",
-    #   :download_base_url => "http://webkitgtk.org/releases",
-    #   :label => "WebKitGTK+",
-    #   :version => "2.6.0",
-    #   :compression_method => "xz",
-    #   :windows => {
-    #     :cmake_args => [
-    #       "-DPORT=GTK",
-    #       "-DJPEG_INCLUDE_DIR=#{package.windows.absolute_binary_dir}/include",
-    #       "-DJPEG_LIBRARY=#{package.windows.absolute_binary_dir}/lib",
-    #       "-DENABLE_PLUGIN_PROCESS_GTK2=OFF",
-    #       "-DENABLE_X11_TARGET=OFF",
-    #     ],
-    #     :patches => [
-    #       "webkitgtk-2.6.0-buildable.diff",
-    #     ],
-    #   },
-    # },
+    {
+      :name => "libwebp",
+      :download_base_url => "http://downloads.webmproject.org/releases/webp",
+      :label => "WebP",
+      :version => "0.4.3",
+      :windows => {
+        :built_file => "bin/libwebp-5.dll",
+      },
+    },
+    {
+      :name => "libxslt",
+      :version => "1.1.28",
+      :download_base_url => "ftp://xmlsoft.org/libxslt",
+      :compression_method => "gz",
+      :windows => {
+        :built_file => "bin/libxslt-1.dll",
+        :configure_args => [
+          "--without-python",
+          "--with-libxml-prefix=#{rcairo_absolute_binary_dir}",
+        ],
+        :patches => [
+          "libxslt-1.1.28-add-mkdir-fallback.diff",
+        ],
+      },
+    },
+    {
+      :name => "webkitgtk",
+      :download_base_url => "http://webkitgtk.org/releases",
+      :label => "WebKitGTK+",
+      :version => "2.8.5",
+      :compression_method => "xz",
+      :windows => {
+        :cmake_args => [
+          "-DPORT=GTK",
+          "-DZLIB_INCLUDE_DIR=#{rcairo_absolute_binary_dir}/include",
+          "-DZLIB_LIBRARY=#{rcairo_absolute_binary_dir}/lib",
+          "-DPNG_PNG_INCLUDE_DIR=#{rcairo_absolute_binary_dir}/include",
+          "-DPNG_LIBRARY=#{rcairo_absolute_binary_dir}/lib",
+          "-DJPEG_INCLUDE_DIR=#{gstreamer_absolute_binary_dir}/include",
+          "-DJPEG_LIBRARY=#{gstreamer_absolute_binary_dir}/lib",
+          "-DFONTCONFIG_INCLUDE_DIR=#{rcairo_absolute_binary_dir}/include",
+          "-DFONTCONFIG_LIBRARIES=#{rcairo_absolute_binary_dir}/lib",
+          "-DSQLITE_INCLUDE_DIR=#{gstreamer_absolute_binary_dir}/include",
+          "-DSQLITE_LIBRARIES=#{gstreamer_absolute_binary_dir}/lib",
+          "-DENABLE_PLUGIN_PROCESS_GTK2=OFF",
+          "-DENABLE_X11_TARGET=OFF",
+        ],
+        :patches => [
+        ],
+      },
+    },
   ]
 end
 package_task.define

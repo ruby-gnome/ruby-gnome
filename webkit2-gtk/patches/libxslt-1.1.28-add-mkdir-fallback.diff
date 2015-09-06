@@ -1,0 +1,11 @@
+diff -ru libxslt-1.1.28.orig/libxslt/security.c libxslt-1.1.28/libxslt/security.c
+--- libxslt-1.1.28.orig/libxslt/security.c	2012-09-12 14:58:14.000000000 +0900
++++ libxslt-1.1.28/libxslt/security.c	2013-12-28 19:25:13.615751850 +0900
+@@ -39,6 +39,7 @@
+ #ifndef INVALID_FILE_ATTRIBUTES
+ #define INVALID_FILE_ATTRIBUTES ((DWORD)-1)
+ #endif
++#define mkdir(path, mode) mkdir(path)
+ #endif
+ 
+ #ifndef HAVE_STAT
