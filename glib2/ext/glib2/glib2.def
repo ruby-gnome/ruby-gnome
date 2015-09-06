@@ -104,6 +104,8 @@ EXPORTS
         rbg_gslist2rval
         rbg_glist2rval_with_type
         rbg_gslist2rval_with_type
+	rbg_rval2glist
+	rbg_rval2gslist
 	rbg_define_method
 	rbg_define_singleton_method
 	rbg_to_array
