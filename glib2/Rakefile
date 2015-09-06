@@ -106,6 +106,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :label => "Libidn",
       :version => "1.32",
       :windows => {
+        :built_file => "bin/libidn-11.dll",
       },
     },
     {
@@ -114,6 +115,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :label => "p11-kit",
       :version => "0.23.1",
       :windows => {
+        :built_file => "bin/libp11-kit-0.dll",
       },
     },
     {
