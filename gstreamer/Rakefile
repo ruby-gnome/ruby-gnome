@@ -197,6 +197,10 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :cc_args => [
           "-std=c99",
         ],
+        :need_autoreconf => true,
+        :patches => [
+          "gst-plugins-bad-1.5.2-use-only-I.diff",
+        ],
         :built_file => "lib/gstreamer-1.0/libgstmxf.dll",
       },
     },

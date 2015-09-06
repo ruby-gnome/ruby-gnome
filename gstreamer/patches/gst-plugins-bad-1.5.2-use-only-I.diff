@@ -1,0 +1,12 @@
+diff -ru gst-plugins-bad-1.5.2.orig/gst-libs/gst/gl/Makefile.am gst-plugins-bad-1.5.2/gst-libs/gst/gl/Makefile.am
+--- gst-plugins-bad-1.5.2.orig/gst-libs/gst/gl/Makefile.am	2015-06-22 17:19:18.000000000 +0900
++++ gst-plugins-bad-1.5.2/gst-libs/gst/gl/Makefile.am	2015-09-06 18:43:44.930668366 +0900
+@@ -139,7 +139,7 @@
+ 		--c-include "gst/gl/gl.h" \
+ 		-I$(top_srcdir)/gst-libs \
+ 		-I$(top_builddir)/gst-libs \
+-		$(GST_PLUGINS_BASE_CFLAGS) \
++		`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --cflags-only-I gstreamer-base-@GST_API_VERSION@` \
+ 		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
+ 		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
+ 		--library=libgstgl-@GST_API_VERSION@.la \
