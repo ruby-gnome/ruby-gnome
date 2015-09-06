@@ -103,7 +103,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "--enable-introspection",
         ],
         :patches => [
-          "json-glib-1.0.2-add-missing-config-h.diff",
+          # "json-glib-1.0.2-add-missing-config-h.diff",
         ],
         :need_autoreconf => true,
         :built_file => "bin/libjson-glib-1.0-0.dll",
