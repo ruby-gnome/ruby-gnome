@@ -1,4 +1,20 @@
 # -*- ruby -*-
+#
+# Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
 require 'gnome2/rake/package-task'
@@ -10,35 +26,37 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = [
-    "glib2", "atk", "pango", "gdk_pixbuf2", "gdk3",
+    "glib2",
+    "gio2",
+    "atk",
+    "pango",
+    "gdk_pixbuf2",
+    "gdk3",
+    "gobject-introspection",
   ]
-  package.windows.build_packages = [
-    # {
-    #   :name => "ncurses",
-    #   :download_base_url => "http://ftp.gnu.org/pub/gnu/ncurses",
-    #   :label => "ncurses",
-    #   :version => "5.9",
-    #   :configure_args => [
-    #     "--enable-sp-funcs",
-    #     "--enable-term-driver",
-    #     "--with-shared",
-    #     "--without-normal",
-    #     "--without-progs",
-    #     "--without-tests",
-    #   ],
-    #   :patches => [
-    #     "ncurses-5.9-support-mingw32.diff",
-    #     "ncurses-5.9-add-missing-exe.diff",
-    #   ],
-    # },
+  package.windows.gobject_introspection_dependencies = [
+    "gio2",
+    "atk",
+    "pango",
+    "gdk_pixbuf2",
+    "gdk3",
+  ]
+  package.external_packages = [
     # {
     #   :name => "vte",
     #   :download_site => :gnome,
     #   :label => "vte",
-    #   :version => "0.34.2",
-    #   :configure_args => [],
+    #   :version => "0.41.90",
     #   :compression_method => "xz",
-    # }
+    #   :windows => {
+    #     :configure_args => [
+    #       "--disable-vala",
+    #     ],
+    #     :patches => [
+    #     ],
+    #     :need_autoreconf => true,
+    #   },
+    # },
   ]
   package.post_install_message = "This library is experimental."
 end
