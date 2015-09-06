@@ -42,21 +42,21 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "gdk3",
   ]
   package.external_packages = [
-    # {
-    #   :name => "vte",
-    #   :download_site => :gnome,
-    #   :label => "vte",
-    #   :version => "0.41.90",
-    #   :compression_method => "xz",
-    #   :windows => {
-    #     :configure_args => [
-    #       "--disable-vala",
-    #     ],
-    #     :patches => [
-    #     ],
-    #     :need_autoreconf => true,
-    #   },
-    # },
+    {
+      :name => "vte",
+      :download_site => :gnome,
+      :label => "vte",
+      :version => "0.41.90",
+      :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--disable-vala",
+        ],
+        :patches => [
+        ],
+        :need_autoreconf => true,
+      },
+    },
   ]
   package.post_install_message = "This library is experimental."
 end
