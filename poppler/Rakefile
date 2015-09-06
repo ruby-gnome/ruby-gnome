@@ -63,7 +63,10 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :download_base_url => "https://github.com/uclouvain/openjpeg/archive",
       :label => "OpenJPEG",
       :windows => {
-        # :built_file => "bin/libjpeg-9.dll",
+        :cmake_args => [
+          "-DBUILD_PKGCONFIG_FILES=on",
+        ],
+        :built_file => "bin/libopenjp2.dll",
       },
     },
     {
