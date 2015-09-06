@@ -57,6 +57,16 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
+      :name => "openjpeg",
+      :base_name => "openjpeg-version.2.1",
+      :archive_base_name => "version.2.1.tar.gz",
+      :download_base_url => "https://github.com/uclouvain/openjpeg/archive",
+      :label => "OpenJPEG",
+      :windows => {
+        # :built_file => "bin/libjpeg-9.dll",
+      },
+    },
+    {
       :name => "poppler",
       :download_base_url => "http://poppler.freedesktop.org",
       :label => "Poppler",
