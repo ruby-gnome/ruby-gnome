@@ -158,7 +158,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :label => "libatomic_ops",
       :version => "7.4.0",
       :windows => {
-        :built_file => "lib/libatomic_ops.a",
+        :built_file => "bin/libatomic_ops-1.dll",
         :configure_args => [
           "--enable-shared",
         ],
@@ -198,8 +198,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :windows => {
         :configure_args => [
           "--disable-cxx",
-          "--disable-srp-authentication",
-          "--disable-psk-authentication",
         ],
         :use_cc_environment_variable => false,
         :patches => [
