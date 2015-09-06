@@ -179,6 +179,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :label => "Guile",
       :version => "2.0.11",
       :windows => {
+        :configure_args => [
+          "--without-threads",
+        ],
       },
     },
     {
