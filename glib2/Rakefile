@@ -119,6 +119,38 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
+      :name => "libtool",
+      :download_site => :gnu,
+      :label => "Libtool",
+      :version => "2.4.6",
+      :windows => {
+      },
+    },
+    {
+      :name => "libunistring",
+      :download_site => :gnu,
+      :label => "libunistring",
+      :version => "0.9.6",
+      :windows => {
+      },
+    },
+    {
+      :name => "libatomic_ops",
+      :download_base_url => "http://www.hboehm.info/gc/gc_source",
+      :label => "libatomic_ops",
+      :version => "7.4.0",
+      :windows => {
+      },
+    },
+    {
+      :name => "libgc",
+      :download_base_url => "http://www.hboehm.info/gc/gc_source",
+      :label => "Boehm-Demers-Weiser garbage collector",
+      :version => "7.4.2",
+      :windows => {
+      },
+    },
+    {
       :name => "guile",
       :download_site => :gnu,
       :label => "Guile",
