@@ -137,7 +137,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :version => "1.1",
       :windows => {
         :configure_args => [],
-        :built_file => "bin/libopus-1.dll",
+        :built_file => "bin/libopus-0.dll",
       },
     },
     {
