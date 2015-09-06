@@ -52,6 +52,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :download_base_url => "http://icon-theme.freedesktop.org/releases",
       :label => "gtk-hi-color-icon-theme",
       :version => "0.15",
+      :compression_method => "xz",
       :windows => {
         :configure_args => [],
         :build_concurrently => false,
