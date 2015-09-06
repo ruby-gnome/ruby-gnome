@@ -127,6 +127,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :windows => {
         :configure_args => [
           "--disable-cxx",
+          "--disable-srp",
         ],
         :use_cc_environment_variable => false,
         :patches => [
