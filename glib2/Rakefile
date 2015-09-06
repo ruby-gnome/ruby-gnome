@@ -135,68 +135,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
-      :name => "libtool",
-      :download_site => :gnu,
-      :label => "Libtool",
-      :version => "2.4.6",
-      :windows => {
-        :built_file => "bin/libltdl-7.dll",
-      },
-    },
-    {
-      :name => "libunistring",
-      :download_site => :gnu,
-      :label => "libunistring",
-      :version => "0.9.6",
-      :windows => {
-        :built_file => "bin/libunistring-2.dll",
-      },
-    },
-    {
-      :name => "libatomic_ops",
-      :download_base_url => "http://www.hboehm.info/gc/gc_source",
-      :label => "libatomic_ops",
-      :version => "7.4.0",
-      :windows => {
-        :built_file => "bin/libatomic_ops-1.dll",
-        :configure_args => [
-          "--enable-shared",
-        ],
-      },
-    },
-    {
-      :name => "gc",
-      :download_base_url => "http://www.hboehm.info/gc/gc_source",
-      :label => "Boehm-Demers-Weiser garbage collector",
-      :version => "7.4.2",
-      :windows => {
-        :built_file => "bin/libgc-1.dll",
-      },
-    },
-    {
-      :name => "guile",
-      :download_site => :gnu,
-      :label => "Guile",
-      :version => "2.0.11",
-      :windows => {
-        :configure_args => [
-          "--without-threads",
-        ],
-        :need_autoreconf => true,
-        :patches => [
-          "guile-2.0.11-remove-needless-mkstemp-check.diff",
-        ],
-      },
-    },
-    {
-      :name => "autogen",
-      :download_base_url => "http://ftp.gnu.org/gnu/autogen/rel5.18.5",
-      :label => "AutoGen",
-      :version => "5.18.5",
-      :windows => {
-      },
-    },
-    {
       :name => "gnutls",
       :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4",
       :label => "GnuTLS",
@@ -205,11 +143,13 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :windows => {
         :configure_args => [
           "--disable-cxx",
+          "--disable-tools",
+          "--disable-doc",
         ],
         :use_cc_environment_variable => false,
         :patches => [
         ],
-        :built_file => "bin/libgnutls-28.dll",
+        :built_file => "bin/libgnutls-30.dll",
       },
     },
     {
