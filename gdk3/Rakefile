@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -47,7 +47,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "gtk+",
       :download_site => :gnome,
       :label => "GTK+",
-      :version => "3.14.6",
+      :version => "3.16.6",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -63,7 +63,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "adwaita-icon-theme",
       :download_site => :gnome,
       :label => "adwaita-icon-theme",
-      :version => "3.14.1",
+      :version => "3.16.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => [],
