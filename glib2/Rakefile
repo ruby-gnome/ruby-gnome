@@ -182,6 +182,10 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
           "--without-threads",
         ],
+        :need_autoreconf => true,
+        :patches => [
+          "guile-2.0.11-remove-needless-mkstemp-check.diff",
+        ],
       },
     },
     {
