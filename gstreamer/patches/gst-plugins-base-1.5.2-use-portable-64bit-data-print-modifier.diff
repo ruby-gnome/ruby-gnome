@@ -1,0 +1,12 @@
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/video/video-dither.c gst-plugins-base-1.5.2/gst-libs/gst/video/video-dither.c
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/video/video-dither.c	2015-06-22 17:15:57.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/video/video-dither.c	2015-09-06 18:10:34.794869331 +0900
+@@ -413,7 +413,7 @@
+   }
+   dither->orc_mask64 = GUINT64_FROM_BE (dither->orc_mask64);
+   dither->orc_mask32 = GUINT32_FROM_BE (dither->orc_mask32);
+-  GST_DEBUG ("mask64 %08llx", (unsigned long long int) dither->orc_mask64);
++  GST_DEBUG ("mask64 %08" G_GINT64_MODIFIER "x", (unsigned long long int) dither->orc_mask64);
+   GST_DEBUG ("mask32 %08x", dither->orc_mask32);
+ 
+   switch (method) {

@@ -167,6 +167,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "--enable-introspection",
         ],
         :build_concurrently => false,
+        :patches => [
+          "gst-plugins-base-1.5.2-use-portable-64bit-data-print-modifier.diff",
+        ],
         :built_file => "lib/gstreamer-1.0/libgstgio.dll",
       },
     },
