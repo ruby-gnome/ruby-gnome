@@ -1,4 +1,20 @@
 # -*- ruby -*-
+#
+# Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
 require "gnome2/rake/package-task"
@@ -13,10 +29,10 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.external_packages = [
     {
       :name => "icu",
-      :download_base_url => "http://download.icu-project.org/files/icu4c/54.1",
+      :download_base_url => "http://download.icu-project.org/files/icu4c/55.1",
       :label => "gobject-introspection",
       :base_name => "icu",
-      :archive_base_name => "icu4c-54_1-src.tgz",
+      :archive_base_name => "icu4c-55_1-src.tgz",
       :compression_method => "gz",
       :base_dir_in_package => "source",
       :windows => {
@@ -34,7 +50,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "harfbuzz",
       :download_base_url => "http://www.freedesktop.org/software/harfbuzz/release",
       :label => "HarfBuzz",
-      :version => "0.9.35",
+      :version => "1.0.3",
       :compression_method => "bz2",
       :windows => {
         :configure_args => [
