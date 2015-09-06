@@ -163,23 +163,13 @@ class GNOME2WindowsBinaryBuildTask
   end
 
   def cmake(package)
-    toolchain_cmake_path = "toolchain.cmake"
-    File.open(toolchain_cmake_path, "w") do |toolchain|
-      toolchain.puts(<<-CMAKE)
-SET(CMAKE_SYSTEM_NAME Windows)
-SET(MSVC_CXX_ARCHITECTURE_ID #{@package.windows.build_architecture})
-SET(CMAKE_SYSTEM_PROCESSOR #{@package.windows.build_architecture})
-
-SET(CMAKE_C_COMPILER #{@package.windows.build_host}-gcc)
-SET(CMAKE_CXX_COMPILER #{@package.windows.build_host}-g++)
-SET(CMAKE_RC_COMPILER #{@package.windows.build_host}-windres)
-
-SET(CMAKE_FIND_ROOT_PATH #{cmake_root_paths.join(" ")})
-      CMAKE
-    end
     sh("cmake",
        ".",
-       "-DCMAKE_TOOLCHAIN_FILE=#{toolchain_cmake_path}",
+       "-DCMAKE_INSTALL_PREFIX=#{dist_dir}",
+       "-DCMAKE_SYSTEM_NAME=Windows",
+       "-DCMAKE_SYSTEM_PROCESSOR=#{@package.windows.build_architecture}",
+       "-DCMAKE_C_COMPILER=#{cc(package)}",
+       "-DCMAKE_CXX_COMPILER=#{cxx(package)}",
        *package.windows.cmake_args) or exit(false)
   end
 
@@ -242,6 +232,13 @@ SET(CMAKE_FIND_ROOT_PATH #{cmake_root_paths.join(" ")})
       *package.windows.cc_args,
     ]
     cc_command_line.compact.join(" ")
+  end
+
+  def cxx(package)
+    cxx_command_line = [
+      "#{@package.windows.build_host}-g++",
+    ]
+    cxx_command_line.compact.join(" ")
   end
 
   def cppflags(package)
