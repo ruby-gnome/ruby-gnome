@@ -434,6 +434,7 @@ namespace :gem do
     task :clean do
       windows_gnome2_packages.each do |package|
         rm_rf(File.join(package, "tmp"))
+        rm_rf(File.join(package, "vendor"))
       end
     end
 
