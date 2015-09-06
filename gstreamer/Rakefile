@@ -153,7 +153,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         ],
         :build_concurrently => false,
         :built_file => "bin/libgstreamer-1.0-0.dll",
-        :use_cc_environment_variable => false,
+        :cc_args => "-std=gnu99",
       },
     },
     {
