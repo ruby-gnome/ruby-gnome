@@ -119,6 +119,14 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
+      :name => "guile",
+      :download_site => :gnu,
+      :label => "Guile",
+      :version => "2.0.11",
+      :windows => {
+      },
+    },
+    {
       :name => "autogen",
       :download_base_url => "http://ftp.gnu.org/gnu/autogen/rel5.18.5",
       :label => "AutoGen",
@@ -136,6 +144,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
           "--disable-cxx",
           "--disable-srp-authentication",
+          "--disable-psk-authentication",
         ],
         :use_cc_environment_variable => false,
         :patches => [
