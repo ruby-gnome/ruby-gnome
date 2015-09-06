@@ -101,6 +101,14 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
+      :name => "libidn",
+      :download_site => :gnu,
+      :label => "Libidn",
+      :version => "1.32",
+      :windows => {
+      },
+    },
+    {
       :name => "gnutls",
       :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4",
       :label => "GnuTLS",
