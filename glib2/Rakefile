@@ -109,6 +109,14 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
+      :name => "p11-kit",
+      :download_base_url => "http://p11-glue.freedesktop.org/releases",
+      :label => "p11-kit",
+      :version => "0.23.1",
+      :windows => {
+      },
+    },
+    {
       :name => "gnutls",
       :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4",
       :label => "GnuTLS",
