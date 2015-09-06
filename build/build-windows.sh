@@ -47,9 +47,12 @@ run \
   libgtk2.0-bin \
   flex \
   bison \
+  gperf \
+  libxml2-utils \
   python-dev \
   wine1.6 \
-  mingw-w64
+  mingw-w64 \
+  cmake
 
 run git clone file:///pkg-config/.git
 run git clone file:///rcairo/.git rcairo.${DIRECTORY_SUFFIX}
