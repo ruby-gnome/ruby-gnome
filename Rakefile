@@ -106,13 +106,25 @@ task :build => ["Makefile"] do
 end
 
 namespace :windows do
-  desc "build all packages for Windows"
-  task :build do
-    cd("build") do
-      sh("vagrant", "destroy", "--force")
-      sh("vagrant", "up")
+  architectures = ["32", "64"]
+  build_tasks = []
+
+  namespace :build do
+    architectures.each do |architecture|
+      desc "build all packages for Windows #{architecture}"
+      task_name = "win#{architecture}"
+      build_tasks << task_name
+      task task_name do
+        cd("build") do
+          sh("vagrant", "destroy", "--force", task_name)
+          sh("vagrant", "up", task_name)
+        end
+      end
     end
   end
+
+  desc "build all packages for Windows"
+  task :build => build_tasks
 end
 
 desc "clean all packages"
