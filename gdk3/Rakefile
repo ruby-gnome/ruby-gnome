@@ -66,6 +66,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "--enable-introspection",
           "--with-included-immodules",
         ],
+        :patches => [
+          "gtk+-3.16.2-add-missing-exeext.diff",
+        ],
         :need_autoreconf => true,
         :build_concurrently => false,
         :built_file => "bin/libgdk-3-0.dll",
