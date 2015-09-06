@@ -124,6 +124,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :label => "Libtool",
       :version => "2.4.6",
       :windows => {
+        :built_file => "bin/libltdn-7.dll",
       },
     },
     {
@@ -132,6 +133,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :label => "libunistring",
       :version => "0.9.6",
       :windows => {
+        :built_file => "bin/libunistring-2.dll",
       },
     },
     {
@@ -140,6 +142,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :label => "libatomic_ops",
       :version => "7.4.0",
       :windows => {
+        :built_file => "lib/libatomic_ops.a",
       },
     },
     {
