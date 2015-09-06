@@ -146,7 +146,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
-      :name => "libgc",
+      :name => "gc",
       :download_base_url => "http://www.hboehm.info/gc/gc_source",
       :label => "Boehm-Demers-Weiser garbage collector",
       :version => "7.4.2",
