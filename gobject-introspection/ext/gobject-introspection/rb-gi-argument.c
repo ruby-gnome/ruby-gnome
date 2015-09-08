@@ -1003,6 +1003,24 @@ rb_gi_argument_to_ruby_gslist(GIArgument *argument, GITypeInfo *type_info)
     return rb_argument;
 }
 
+static VALUE
+rb_gi_argument_to_ruby_unichar(GIArgument *argument)
+{
+    VALUE rb_argument;
+    gunichar ucs4_character;
+    gchar *utf8_string;
+    GError *error = NULL;
+
+    ucs4_character = argument->v_uint32;
+    utf8_string = g_ucs4_to_utf8(&ucs4_character, 1, NULL, NULL, &error);
+    if (error) {
+        RG_RAISE_ERROR(error);
+    }
+    rb_argument = CSTR2RVAL_FREE(utf8_string);
+
+    return rb_argument;
+}
+
 VALUE
 rb_gi_argument_to_ruby(GIArgument *argument,
                        gboolean duplicate,
@@ -1095,9 +1113,7 @@ rb_gi_argument_to_ruby(GIArgument *argument,
         rb_argument = GERROR2RVAL(argument->v_pointer);
         break;
     case GI_TYPE_TAG_UNICHAR:
-        rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(%s) -> Ruby",
-                 g_type_tag_to_string(type_tag));
+        rb_argument = rb_gi_argument_to_ruby_unichar(argument);
         break;
     default:
         g_assert_not_reached();
