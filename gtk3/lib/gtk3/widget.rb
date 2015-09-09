@@ -41,10 +41,9 @@ module Gtk
           internal_child = options[:internal_child]
           internal_child = false if internal_child.nil?
           bind_template_child_full(name, internal_child, 0)
-          define_method(name) do
-            @template_children[name] ||=
-              get_template_child(self.class.gtype, name)
-          end
+          @template_children ||= []
+          @template_children << name
+          attr_reader(name)
         end
       end
 
@@ -100,10 +99,16 @@ module Gtk
 
     private
     def initialize_post
-      return unless self.class.have_template?
+      klass = self.class
+      return unless klass.have_template?
       return unless respond_to?(:init_template)
+
       init_template
-      @template_children = {}
+      gtype = klass.gtype
+      child_names = klass.instance_variable_get(:@template_children)
+      child_names.each do |name|
+        instance_variable_set("@#{name}", get_template_child(gtype, name))
+      end
     end
 
     def ensure_drag_targets(targets)
