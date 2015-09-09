@@ -20,9 +20,8 @@ module Gtk
       def init
       end
 
-      @have_template = false
       def have_template?
-        @have_template
+        @have_template ||= false
       end
 
       if method_defined?(:set_template)
