@@ -166,7 +166,7 @@ extern void rbgobj_gobject_initialize(VALUE obj, gpointer cobj);
 extern void rbgobj_add_abstract_but_create_instance_class(GType gtype);
 
 /* rbgobj_typeinstance.c */
-extern void rbgobj_gc_mark_instance(gpointer instance);
+extern gboolean rbgobj_gc_mark_instance(gpointer instance);
 
 
 /* rbgobj_type.c */

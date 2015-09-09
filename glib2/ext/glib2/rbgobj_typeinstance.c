@@ -106,11 +106,17 @@ rbgobj_instance_call_cinfo_free(gpointer instance)
     each_cinfo(instance, call_cinfo_free, NULL);
 }
 
-void
+gboolean
 rbgobj_gc_mark_instance(gpointer instance)
 {
     VALUE obj = rbgobj_ruby_object_from_instance2(instance, FALSE);
+
+    if (NIL_P(obj)) {
+        return FALSE;
+    }
+
     rb_gc_mark(obj);
+    return TRUE;
 }
 
 /**********************************************************************/
