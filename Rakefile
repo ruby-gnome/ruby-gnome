@@ -387,6 +387,7 @@ namespace :gem do
       "vte3",
       "webkit-gtk",
       "webkit-gtk2",
+      "webkit2-gtk",
     ]
     windows_gnome2_packages = gnome2_packages - windows_unsupported_packages
 
