@@ -43,7 +43,8 @@ module Gtk
           internal_child = false if internal_child.nil?
           bind_template_child_full(name, internal_child, 0)
           define_method(name) do
-            get_template_child(self.class.gtype, name)
+            @template_children[name] ||=
+              get_template_child(self.class.gtype, name)
           end
         end
       end
@@ -103,6 +104,7 @@ module Gtk
       return unless self.class.have_template?
       return unless respond_to?(:init_template)
       init_template
+      @template_children = {}
     end
 
     def ensure_drag_targets(targets)
