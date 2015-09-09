@@ -202,6 +202,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :need_autoreconf => true,
         :patches => [
           "gst-plugins-bad-1.5.2-use-only-I.diff",
+          "gst-plugins-bad-1.5.2-use-portable-cast.diff",
         ],
         :built_file => "lib/gstreamer-1.0/libgstmxf.dll",
       },
