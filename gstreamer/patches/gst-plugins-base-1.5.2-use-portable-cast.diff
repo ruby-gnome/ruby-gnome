@@ -1,0 +1,21 @@
+diff -ru gst-plugins-base-1.5.2.orig/gst/playback/gstplaybin2.c gst-plugins-base-1.5.2/gst/playback/gstplaybin2.c
+--- gst-plugins-base-1.5.2.orig/gst/playback/gstplaybin2.c	2015-06-23 22:28:58.000000000 +0900
++++ gst-plugins-base-1.5.2/gst/playback/gstplaybin2.c	2015-09-09 13:17:22.244128964 +0900
+@@ -3438,7 +3438,7 @@
+             G_CALLBACK (notify_tags_cb), ntdata, (GClosureNotify) g_free,
+             (GConnectFlags) 0);
+         g_object_set_data (G_OBJECT (sinkpad), "playbin.notify_tags_handler",
+-            (gpointer) (guintptr) notify_tags_handler);
++            GUINT_TO_POINTER (notify_tags_handler));
+       }
+ 
+       /* store the pad in the array */
+@@ -3473,7 +3473,7 @@
+       gst_pad_add_probe (pad, GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM,
+       _uridecodebin_event_probe, group, NULL);
+   g_object_set_data (G_OBJECT (pad), "playbin.event_probe_id",
+-      (gpointer) group_id_probe_handler);
++      GUINT_TO_POINTER (group_id_probe_handler));
+ 
+   if (changed) {
+     int signal;
