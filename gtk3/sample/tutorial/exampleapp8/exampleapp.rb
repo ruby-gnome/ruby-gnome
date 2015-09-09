@@ -33,10 +33,8 @@ system("glib-compile-resources",
        gresource_xml)
 
 gschema_bin = "#{current_path}/gschemas.compiled"
-gschema_xml = "#{current_path}/org.gtk.exampleapp.gschema.xml"
 
 system("glib-compile-schemas", current_path)
-
 
 at_exit do
   FileUtils.rm_f([gresource_bin, gschema_bin])
@@ -55,9 +53,9 @@ def update_words(win)
   iter = buffer.start_iter
   strings = []
   done = false
-  while (!iter.end?)
-    while(!iter.starts_word)
-      if !iter.forward_char
+  until iter.end?
+    until iter.starts_word
+      unless iter.forward_char
         done = true
         break
       end
@@ -72,9 +70,7 @@ def update_words(win)
   children.each { |c| win.words.remove(c) } unless children.empty?
   strings.each do |s|
     row = Gtk::Button.new(:label => s)
-    row.signal_connect "clicked" do |widget|
-      win.searchentry.text = s
-    end
+    row.signal_connect("clicked") { |_widget| win.searchentry.text = s }
     row.show
     win.words.add(row)
   end
@@ -93,7 +89,6 @@ class ExampleAppPrefs < Gtk::Dialog
 
   def initialize(args)
     parent = args[:transient_for]
-    bar = args[:use_header_bar]
     super(:transient_for => parent, :use_header_bar => 1)
     settings = Gio::Settings.new("org.gtk.exampleapp")
     settings.bind("font",
@@ -123,30 +118,30 @@ class ExampleAppWindow < Gtk::ApplicationWindow
       set_connect_func do |name|
         method(name)
       end
+    end
 
-      private
+    private
 
-      def search_text_changed(search_entry)
-        text = search_entry.text
-        return if text.empty?
+    def search_text_changed(search_entry)
+      text = search_entry.text
+      return if text.empty?
 
-        win = search_entry.toplevel
-        tab = win.stack.visible_child
-        view = tab.child
-        buffer = view.buffer
-        range = buffer.start_iter.forward_search(text, Gtk::TextSearchFlags::CASE_INSENSITIVE)
-        return unless range
-        buffer.select_range(range[0], range[1])
-        view.scroll_to_iter(range[0], 0.0, false, 0.0, 0.0)
-      end
+      win = search_entry.toplevel
+      tab = win.stack.visible_child
+      view = tab.child
+      buffer = view.buffer
+      range = buffer.start_iter.forward_search(text,
+                                               Gtk::TextSearchFlags::CASE_INSENSITIVE)
+      return unless range
+      buffer.select_range(range[0], range[1])
+      view.scroll_to_iter(range[0], 0.0, false, 0.0, 0.0)
+    end
 
-      def visible_child_changed(stack, params)
-        return if stack.in_destruction?
-        win = stack.toplevel
-        win.searchbar.set_search_mode(false)
-        update_words(win)
-      end
-
+    def visible_child_changed(stack, params)
+      return if stack.in_destruction?
+      win = stack.toplevel
+      win.searchbar.set_search_mode(false)
+      update_words(win)
     end
   end
 
@@ -154,20 +149,16 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     super(:application => application)
     @settings = Gio::Settings.new("org.gtk.exampleapp")
     @settings.bind("transition",
-                  stack,
-                  "transition-type",
-                  Gio::SettingsBindFlags::DEFAULT)
+                   stack,
+                   "transition-type",
+                   Gio::SettingsBindFlags::DEFAULT)
     search.bind_property("active", searchbar, "search-mode-enabled", :bidirectional)
     @settings.bind("show-words",
                    sidebar,
                    "reveal-child",
                    Gio::SettingsBindFlags::DEFAULT)
-    sidebar.signal_connect "notify::reveal-child" do |sidebar, gparamspec, application|
-     puts "word_changed"
-     puts "sidebar class #{sidebar.class}"
-     puts "gparamspec #{gparamspec.class}"
-     puts "application #{application.class}"
-      update_words(application)
+    sidebar.signal_connect "notify::reveal-child" do |_sidebar, _gparamspec, an_application|
+      update_words(an_application)
     end
     builder = Gtk::Builder.new(:resource => "/org/gtk/exampleapp/gears-menu.ui")
     menu = builder.get_object("menu")
@@ -195,7 +186,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     stream = file.read
     buffer = view.buffer
     buffer.text = stream.read
-    tag = buffer.create_tag()
+    tag = buffer.create_tag
     @settings.bind("font", tag, "font", Gio::SettingsBindFlags::DEFAULT)
     buffer.apply_tag(tag, buffer.start_iter, buffer.end_iter)
     search.sensitive = true
@@ -235,23 +226,22 @@ class ExampleApp < Gtk::Application
       window.present
     end
 
-    signal_connect "open" do |application, files, hint|
+    signal_connect "open" do |application, files, _hint|
       windows = application.windows
       win = nil
-      unless windows.empty?
-        win = windows.first
-      else
+      if windows.empty?
         win = ExampleAppWindow.new(application)
+      else
+        win = windows.first
       end
 
       files.each { |file| win.open(file) }
 
       win.present
     end
-
   end
 end
 
 app = ExampleApp.new
 
-puts app.run([$0] + ARGV)
+puts app.run([$PROGRAM_NAME] + ARGV)
