@@ -65,6 +65,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
           "--enable-introspection",
           "--without-apache-httpd",
+          "--disable-tls-check",
         ],
         :build_concurrently => false,
         :patches => [
