@@ -26,11 +26,17 @@
 static GQuark q_ruby_setter;
 static GQuark q_ruby_getter;
 
+static void rb_gtk3_container_mark(gpointer object);
+
 static void
 rb_gtk3_container_mark_callback(GtkWidget *widget,
                                 G_GNUC_UNUSED gpointer data)
 {
-    rbgobj_gc_mark_instance(widget);
+    if (rbgobj_gc_mark_instance(widget))
+        return;
+
+    if (GTK_IS_CONTAINER(widget))
+        rb_gtk3_container_mark(widget);
 }
 
 static void
