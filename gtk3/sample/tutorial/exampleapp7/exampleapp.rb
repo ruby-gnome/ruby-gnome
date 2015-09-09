@@ -85,27 +85,28 @@ class ExampleAppWindow < Gtk::ApplicationWindow
       set_connect_func do |name|
         method(name)
       end
-      private
+    end
 
-      def search_text_changed(search_entry)
-        text = search_entry.text
-        return if text.empty?
+    private
 
-        win = search_entry.toplevel
-        tab = win.stack.visible_child
-        view = tab.child
-        buffer = view.buffer
-        range = buffer.start_iter.forward_search(text, Gtk::TextSearchFlags::CASE_INSENSITIVE)
-        return unless range
-        buffer.select_range(range[0], range[1])
-        view.scroll_to_iter(range[0], 0.0, false, 0.0, 0.0)
-      end
+    def search_text_changed(search_entry)
+      text = search_entry.text
+      return if text.empty?
 
-      def visible_child_changed(stack, params)
-        return if stack.in_destruction?
-        win = stack.toplevel
-        win.searchbar.set_search_mode(false)
-      end
+      win = search_entry.toplevel
+      tab = win.stack.visible_child
+      view = tab.child
+      buffer = view.buffer
+      range = buffer.start_iter.forward_search(text, Gtk::TextSearchFlags::CASE_INSENSITIVE)
+      return unless range
+      buffer.select_range(range[0], range[1])
+      view.scroll_to_iter(range[0], 0.0, false, 0.0, 0.0)
+    end
+
+    def visible_child_changed(stack, params)
+      return if stack.in_destruction?
+      win = stack.toplevel
+      win.searchbar.set_search_mode(false)
     end
   end
 
