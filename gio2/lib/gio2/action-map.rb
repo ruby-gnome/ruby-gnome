@@ -20,6 +20,13 @@ module Gio
     def add_action(action)
       action = convert_to_action(action) unless action.is_a?(Action)
       add_action_raw(action)
+      actions[action.name] = action
+    end
+
+    alias_method :remove_action_raw, :remove_action
+    def remove_action(name)
+      remove_action_raw(name)
+      actions.delete(name)
     end
 
     def add_actions(actions)
@@ -29,6 +36,10 @@ module Gio
     end
 
     private
+    def actions
+      @acitions ||= {}
+    end
+
     def convert_to_action(definition)
       name = definition[:name]
       parameter_type = definition[:parameter_type]
