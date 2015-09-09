@@ -132,4 +132,4 @@ end
 
 app = ExampleApp.new
 
-puts app.run([$0] + ARGV)
+puts app.run([$PROGRAM_NAME] + ARGV)
