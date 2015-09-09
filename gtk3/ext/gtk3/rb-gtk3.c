@@ -84,11 +84,14 @@ rb_gtk3_builder_connect_func_callback(GtkBuilder *builder,
 {
     RBGICallbackData *callback_data = user_data;
     ID id___connect_signals__;
+    VALUE rb_object;
 
     CONST_ID(id___connect_signals__, "__connect_signals__");
+    rb_object = GOBJ2RVAL(object);
+    G_RELATIVE(rb_object, callback_data->rb_callback);
     rb_funcall(GOBJ2RVAL(builder), id___connect_signals__, 6,
                callback_data->rb_callback,
-               GOBJ2RVAL(object),
+               rb_object,
                CSTR2RVAL(signal_name),
                CSTR2RVAL(handler_name),
                GOBJ2RVAL(connect_object),
