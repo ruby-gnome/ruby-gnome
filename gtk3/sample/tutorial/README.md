@@ -312,7 +312,7 @@ In this example we create a subclass of `Gtk::Application` called ExampleApp. In
 *    open : opens files and shows them in a new window
 
 For more informations, see [here](https://wiki.gnome.org/HowDoI/GtkApplication).
-In this case, the signal "*activate*" will be triggered if no arguments are given to the `ExampleApp#run` method. And a default window will be created and will be presented to the user ( [see](https://developer.gnome.org/gtk3/stable/GtkWindow.html#gtk-window-present).
+In this case, the signal "*activate*" will be triggered if no arguments are given to the `ExampleApp#run` method. And a default window will be created and will be presented to the user ( [`Gtk::Widget#present`](https://developer.gnome.org/gtk3/stable/GtkWindow.html#gtk-window-present)).
 
 If file names are given to the `ExampleApp#run` method, then it is the "*open*" signal that is called.
 Trought this event, you can manage the files that are stored in an array of `Gio::File` objects.
@@ -326,6 +326,109 @@ This does not look very impressive yet, but our application is already presentin
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.6
 
 *    exampleapp2/exampleapp.rb
+
+In this step, we use a [`Gtk::Builder`](https://developer.gnome.org/gtk3/stable/GtkBuilder.html) template to associate a [`Gtk::Builder`](https://developer.gnome.org/gtk3/stable/GtkBuilder.html) ui file with our application window class.
+Our simple ui file puts a [`Gtk::HeaderBar`](https://developer.gnome.org/gtk3/stable/GtkHeaderBar.html) on top of a [`Gtk::Stack`](https://developer.gnome.org/gtk3/stable/GtkStack.html) widget. The header bar contains a [`Gtk::StackSwitcher`](https://developer.gnome.org/gtk3/stable/GtkStackSwitcher.html), which is a standalone widget to show a row of 'tabs' for the pages of a [`Gtk::Stack`](https://developer.gnome.org/gtk3/stable/GtkStack.html) .
+
+Here is the "window.ui" file that contains the template of the window:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.8 -->
+  <template class="ExampleAppWindow" parent="GtkApplicationWindow">
+    <property name="title" translatable="yes">Example Application</property>
+    <property name="default-width">600</property>
+    <property name="default-height">400</property>
+    <child>
+      <object class="GtkBox" id="content_box">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkHeaderBar" id="header">
+            <property name="visible">True</property>
+            <child type="title">
+              <object class="GtkStackSwitcher" id="tabs">
+                <property name="visible">True</property>
+                <property name="margin">6</property>
+                <property name="stack">stack</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkStack" id="stack">
+            <property name="visible">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
+```
+Unlike regular interface descriptions, in template XML descriptions, a`<template>` tag is expected as a direct child of the toplevel `<interface>` tag. Yhe `<template>` tag must specify the "*class*" attribute which must be the class name of the widget. Optionally, the "*parent*" attribute may be specified to indicate the direct parent class (superclass).
+
+More informations can be found in the part [building composite widgets from template XML](https://developer.gnome.org/gtk3/stable/GtkWidget.html#GtkWidget.description) of the `Gtk::Widget` documentation. 
+
+#### Link a template to a custom class widget.
+
+```ruby
+class ExampleAppWindow < Gtk::ApplicationWindow
+  type_register
+  class << self
+    def init
+      set_template(:resource => "/org/gtk/exampleapp/window.ui")
+    end
+  end
+
+  def initialize(application)
+    super(:application => application)
+  end
+
+  def open(file)
+    
+  end
+end
+```
+
+We create a subclass of Gtk::ApplicationWindow. Then we call the method `type_register` inherited from `GLib::Object` in order to register this class as a new [GType](https://developer.gnome.org/gobject/stable/chapter-gtype.html). See the file *ruby-gnome2/glib2/ext/glib2/rbgobj_object.c* for the C implementation. More informations on the gobject manipulation can be found [here](https://blogs.gnome.org/desrt/2012/02/26/a-gentle-introduction-to-gobject-construction/)
+
+The template of the interface is bound to the class using the `init` singleton method. We just open the *eigenclass*  with `class << self` and define the method `init` in which we call the `Gtk::Widget#set_template` method.
+
+After that, the `ExampleAppWindow#initialize` method must be overwritten. When `type_register` is used, *super* is equivalent to `GLib::Object#initialize` so you need to use properties style constructor (hash argument, see [here](https://github.com/ruby-gnome2/ruby-gnome2/issues/503))
+
+#### Load a resource file.
+
+You may have noticed that we used the `:resource => ` key as the argument of the method that sets a template. Now we need to use GLib's resource functionality to include the ui file in the binary. This is commonly done by listing all resources in a .gresource.xml file, such as this:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/gtk/exampleapp">
+    <file preprocess="xml-stripblanks">window.ui</file>
+  </gresource>
+</gresources>
+```
+In our script, we built the resource binary file with
+```ruby
+system("glib-compile-resources",
+       "--target", gresource_bin,
+       "--sourcedir", File.dirname(gresource_xml),
+       gresource_xml)
+```
+Then we make sure that this file is deleted when the script is done :
+
+```ruby
+at_exit do
+  FileUtils.rm_f(gresource_bin)
+end
+```
+The resource binary file is loaded so that each resources in it can be accessed via theirs respective paths.
+
+```ruby
+resource = Gio::Resource.load(gresource_bin)
+Gio::Resources.register(resource)
+```
 
 ### Opening files
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.7
