@@ -73,10 +73,11 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "poppler",
       :download_base_url => "http://poppler.freedesktop.org",
       :label => "Poppler",
-      :version => "0.35.0",
+      :version => "0.36.0",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
+          "--enable-zlib",
           "--enable-introspection",
         ],
         :built_file => "bin/libpoppler-glib-8.dll",
