@@ -157,7 +157,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
                    sidebar,
                    "reveal-child",
                    Gio::SettingsBindFlags::DEFAULT)
-    sidebar.signal_connect "notify::reveal-child" do |_sidebar, _gparamspec, _application|
+    sidebar.signal_connect "notify::reveal-child" do |_sidebar, _gparamspec|
       update_words(self)
     end
     builder = Gtk::Builder.new(:resource => "/org/gtk/exampleapp/gears-menu.ui")
