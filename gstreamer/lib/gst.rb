@@ -70,6 +70,7 @@ module Gst
       require "gst/plugin-feature"
       require "gst/registry"
       require "gst/structure"
+      require "gst/type-find-factory"
       init_base
       init_controller
     end
