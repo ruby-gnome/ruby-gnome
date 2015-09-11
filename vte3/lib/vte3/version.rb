@@ -19,7 +19,7 @@ module Vte
     STRING = [MAJOR, MINOR, MICRO].join(".")
 
     class << self
-      def or_later?(major, minor, micro = nil)
+      def or_later?(major, minor, micro=nil)
         micro ||= 0
         error_message = Vte.check_version(major, minor, micro)
         error_message.nil?
