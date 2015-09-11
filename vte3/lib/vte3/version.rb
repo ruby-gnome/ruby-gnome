@@ -21,8 +21,12 @@ module Vte
     class << self
       def or_later?(major, minor, micro=nil)
         micro ||= 0
-        error_message = Vte.check_version(major, minor, micro)
-        error_message.nil?
+        version = [
+          MAJOR,
+          MINOR,
+          MICRO,
+        ]
+        (version <=> [major, minor, micro]) >= 0
       end
     end
   end
