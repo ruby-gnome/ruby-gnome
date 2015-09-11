@@ -17,6 +17,12 @@
 class TestVteVersion < Test::Unit::TestCase
   include VteTestUtils
 
+  setup do
+    unless Vte::Version.const_defined?(:STRING)
+      omit("VTE doesn't provide version information")
+    end
+  end
+
   test "STRING" do
     major = Vte::Version::MAJOR
     minor = Vte::Version::MINOR
