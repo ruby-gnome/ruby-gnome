@@ -16,17 +16,19 @@
 
 module Vte
   module Version
-    STRING = [MAJOR, MINOR, MICRO].join(".")
+    if const_defined?(:MAJOR)
+      STRING = [MAJOR, MINOR, MICRO].join(".")
 
-    class << self
-      def or_later?(major, minor, micro=nil)
-        micro ||= 0
-        version = [
-          MAJOR,
-          MINOR,
-          MICRO,
-        ]
-        (version <=> [major, minor, micro]) >= 0
+      class << self
+        def or_later?(major, minor, micro=nil)
+          micro ||= 0
+          version = [
+            MAJOR,
+            MINOR,
+            MICRO,
+          ]
+          (version <=> [major, minor, micro]) >= 0
+        end
       end
     end
   end
