@@ -56,6 +56,7 @@ module Vte
         super
       end
     end
+
     def initialize_post(object)
       super
       return unless object.is_a?(GLib::Object)
