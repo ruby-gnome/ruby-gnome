@@ -27,6 +27,15 @@ module Vte
       end
     end
 
+    def pre_load(repository, namespace)
+      define_version_module
+    end
+
+    def define_version_module
+      @version_module = Module.new
+      @base_module.const_set("Version", @version_module)
+    end
+
     def post_load(repository, namespace)
       require_libraries
     end
@@ -34,10 +43,18 @@ module Vte
     def require_libraries
       require "vte3/pty"
       require "vte3/terminal"
-
+      require "vte3/version"
       require "vte3/deprecated"
     end
 
+    def load_constant_info(info)
+      case info.name
+      when /_VERSION\z/
+        @version_module.const_set($PREMATCH, info.value)
+      else
+        super
+      end
+    end
     def initialize_post(object)
       super
       return unless object.is_a?(GLib::Object)
