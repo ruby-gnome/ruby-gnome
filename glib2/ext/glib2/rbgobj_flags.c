@@ -225,6 +225,7 @@ resolve_flags_value(VALUE klass, GFlagsClass *gclass, VALUE flag_or_flags)
         value = 0;
         break;
     case RUBY_T_FIXNUM:
+    case RUBY_T_BIGNUM:
         value = NUM2UINT(flag_or_flags);
         break;
     case RUBY_T_STRING:
