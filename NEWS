@@ -2,6 +2,35 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.0.1: 2015-09-11
+
+It is a bug fix release of 3.0.0.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Fixes
+    * Windows: Fixed a bug that large number flag value isn't usable.
+      [GitHub#538] [Reported by Abby Archer]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Updated tutorials.
+      [GitHub#534][GitHub#537] [Patch by cedlemo]
+
+==== Ruby/VTE3
+
+  * Improvements
+    * Added (({Vte::Version.or_later?})).
+      [GitHub#535] [Patch by cedlemo]
+
+=== Thanks
+
+  * cedlemo
+  * Abby Archer
+
 == Ruby-GNOME2 3.0.0: 2015-09-10
 
 It is a GTK+ 3.16 support release.
