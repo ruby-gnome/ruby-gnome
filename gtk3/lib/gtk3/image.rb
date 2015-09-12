@@ -24,6 +24,9 @@ module Gtk
     #                       Gdk::Pixbuf, Gdk::PixbufAnimation, Cairo::Surface,
     #                       Fixnum}
     #
+    # @example Create an empty image.
+    #   image = Gtk::Image.new
+    #
     # @example Create an image from a file.
     #   image = Gtk::Image.new :file => 'path/to/the/image.png'
     #
@@ -106,7 +109,7 @@ module Gtk
       elsif surface
         initialize_new_from_surface(surface)
       else
-        raise ArgumentError, "Invalid arguments."
+        initialize_raw
       end
     end
   end

@@ -2,6 +2,11 @@ class TestGtkImage < Test::Unit::TestCase
   include GtkTestUtils
 
   sub_test_case ".new" do
+    test "empty" do
+      image = Gtk::Image.new
+      assert_equal(nil, image.pixbuf)
+    end
+
     test "stock" do
       image = Gtk::Image.new(:stock => Gtk::Stock::GO_FORWARD,
                              :size => :dialog)
