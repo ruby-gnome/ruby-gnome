@@ -996,6 +996,7 @@ module Gtk
     define_deprecated_method :set_flags, :warn => "Use the proper method."
     alias :flags= :set_flags
     define_deprecated_method :unset_flags, :warn => "Use the proper method."
+    define_deprecated_method :get_size_request, :size_request
     define_deprecated_method :no_window?, :warn => "Use '#{self}#has_window?'." do |_self|
       !_self.has_window?
     end
