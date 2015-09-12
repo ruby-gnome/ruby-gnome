@@ -114,6 +114,11 @@ module Gtk
     end
   end
 
+  class Alignment
+    extend GLib::Deprecatable
+    define_deprecated_const :Align, "Gtk::Align"
+  end
+
   class Arrow
     extend GLib::Deprecatable
     define_deprecated_enums :Type
@@ -972,6 +977,7 @@ module Gtk
 
   class Widget
     extend GLib::Deprecatable
+    define_deprecated_const :Align, "Gtk::Align"
     define_deprecated_const :HelpType, "Gtk::WidgetHelpType"
     define_deprecated_enums :WidgetHelpType, 'HELP'
     define_deprecated_const :TextDirection, "Gtk::TextDIrection"
