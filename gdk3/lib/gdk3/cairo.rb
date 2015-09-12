@@ -44,7 +44,7 @@ module Cairo
           set_source_rgba_raw(rgba)
         else
           r = rgba
-          set_source_rgba_raw([r, g, b, a])
+          set_source_rgba_raw([r, g, b, a || 1.0])
         end
       end
     else
