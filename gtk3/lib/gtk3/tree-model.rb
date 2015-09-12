@@ -43,6 +43,11 @@ module Gtk
       end
     end
 
+    alias_method :get_value_raw, :get_value
+    def get_value(iter, column)
+      get_value_raw(iter, column).value
+    end
+
     private
     def setup_iter(iter)
       iter.model = self

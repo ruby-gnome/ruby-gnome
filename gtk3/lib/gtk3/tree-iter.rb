@@ -25,7 +25,7 @@ module Gtk
     end
 
     def get_value(column)
-      @model.get_value(self, column).value
+      @model.get_value(self, column)
     end
     alias_method :[], :get_value
 
