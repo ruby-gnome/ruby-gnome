@@ -20,5 +20,13 @@ module Gtk
     def initialize(n_rows, n_columns, homogeneous=false)
       initialize_raw(n_rows, n_columns, homogeneous)
     end
+
+    alias_method :default_column_spacing, :default_col_spacing
+
+    def column_spacings(column)
+      get_col_spacings(column)
+    end
+    alias_method :set_column_spacings, :set_col_spacings
+    alias_method :column_spacings=,    :col_spacings=
   end
 end
