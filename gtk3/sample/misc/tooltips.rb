@@ -18,14 +18,14 @@ end
 def treeview_query_tooltip(treeview, keyboard_tip, x, y, tooltip)
   if keyboard_tip
     # Keyboard mode
-    path, = treeview.cursor
+    path, _ = treeview.cursor
     if not path
       return false
     end
   else
     bin_x, bin_y = treeview.convert_widget_to_bin_window_coords(x, y)
     # Mouse mode
-    path, = treeview.get_path_at_pos(bin_x, bin_y)
+    path, _ = treeview.get_path_at_pos(bin_x, bin_y)
     if not path
       return false
     end
