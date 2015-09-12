@@ -1366,67 +1366,67 @@ rb_gi_out_argument_init(GIArgument *argument, GIArgInfo *arg_info)
     g_arg_info_load_type(arg_info, &type_info);
     type_tag = g_type_info_get_tag(&type_info);
     switch (type_tag) {
-    case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_VOID:
         break;
-    case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_BOOLEAN:
         argument->v_pointer = ALLOC(gboolean);
         break;
-    case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_INT8:
         argument->v_pointer = ALLOC(gint8);
         break;
-    case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_UINT8:
         argument->v_pointer = ALLOC(guint8);
         break;
-    case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_INT16:
         argument->v_pointer = ALLOC(gint16);
         break;
-    case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_UINT16:
         argument->v_pointer = ALLOC(guint16);
         break;
-    case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_INT32:
         argument->v_pointer = ALLOC(gint32);
         break;
-    case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_UINT32:
         argument->v_pointer = ALLOC(guint32);
         break;
-    case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_INT64:
         argument->v_pointer = ALLOC(gint64);
         break;
-    case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_UINT64:
         argument->v_pointer = ALLOC(guint64);
         break;
-    case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_FLOAT:
         argument->v_pointer = ALLOC(gfloat);
         break;
-    case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_DOUBLE:
         argument->v_pointer = ALLOC(gdouble);
         break;
-    case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_GTYPE:
         argument->v_pointer = ALLOC(GType);
         break;
-    case GI_TYPE_TAG_UTF8:
-    case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
         argument->v_pointer = ALLOC(gchar *);
         break;
-    case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_ARRAY:
         rb_gi_out_argument_init_array(argument, arg_info, &type_info);
         break;
-    case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_INTERFACE:
         rb_gi_out_argument_init_interface(argument, arg_info, &type_info);
         break;
-    case GI_TYPE_TAG_GLIST:
-    case GI_TYPE_TAG_GSLIST:
-    case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
         argument->v_pointer = ALLOC(gpointer);
         break;
-    case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_ERROR:
         argument->v_pointer = ALLOC(GError *);
         memset(argument->v_pointer, 0, sizeof(GError *));
         break;
-    case GI_TYPE_TAG_UNICHAR:
+      case GI_TYPE_TAG_UNICHAR:
         argument->v_pointer = ALLOC(gunichar);
         break;
-    default:
+      default:
         g_assert_not_reached();
         break;
     }
