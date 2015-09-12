@@ -17,12 +17,12 @@
 module Cairo
   class Context
     if method_defined?(:set_source_color)
-      alias_method :set_source_not_gdk_color, :set_source_color
+      alias_method :set_source_color_raw, :set_source_color
       def set_source_color(color)
         if color.is_a?(Gdk::Color)
           set_source_gdk_color(color)
         else
-          set_source_not_gdk_color(color)
+          set_source_color_raw(color)
         end
       end
     else
@@ -35,16 +35,16 @@ module Cairo
     end
 
     if method_defined?(:set_source_rgba)
-      alias_method :set_source_not_gdk_rgba, :set_source_rgba
+      alias_method :set_source_rgba_raw, :set_source_rgba
       def set_source_rgba(rgba, g=nil, b=nil, a=nil)
         case rgba
         when Gdk::RGBA
           set_source_gdk_rgba(rgba)
         when Array
-          set_source_not_gdk_rgba(rgba)
+          set_source_rgba_raw(rgba)
         else
           r = rgba
-          set_source_not_gdk_rgba([r, g, b, a])
+          set_source_rgba_raw([r, g, b, a])
         end
       end
     else
