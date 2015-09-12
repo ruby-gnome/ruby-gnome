@@ -860,6 +860,16 @@ module Gtk
     end
   end
 
+  class ToggleButton
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'label=nil, use_underline=nil',
+        ':label => label, :use_underline => use_underline', 0 do
+        |_self, label, use_underline|
+      [{:label => label, :use_underline => use_underline}]
+    end
+  end
+
   class Toolbar
     extend GLib::Deprecatable
     define_deprecated_method :append, :warn => "Don't use this method."
