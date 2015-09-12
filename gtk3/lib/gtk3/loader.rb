@@ -131,6 +131,7 @@ module Gtk
       require "gtk3/stock"
       require "gtk3/style-context"
       require "gtk3/style-properties"
+      require "gtk3/table"
       require "gtk3/target-list"
       require "gtk3/target-entry"
       require "gtk3/text-buffer"
