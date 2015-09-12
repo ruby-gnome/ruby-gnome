@@ -43,6 +43,10 @@ module Gtk
       @model.get_path(self)
     end
 
+    def next!
+      @model.iter_next(self)
+    end
+
     def ==(other)
       other.is_a?(self.class) and
         @model == other.model and

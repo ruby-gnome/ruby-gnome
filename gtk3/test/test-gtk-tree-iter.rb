@@ -50,4 +50,13 @@ class TestGtkTreeIter < Test::Unit::TestCase
       assert_equal("string", @iter[0])
     end
   end
+
+  test "#next!" do
+    next_iter = @model.append
+    @iter.values = ["first"]
+    next_iter.values = ["second"]
+    assert_equal("first", @iter[0])
+    @iter.next!
+    assert_equal("second", @iter[0])
+  end
 end
