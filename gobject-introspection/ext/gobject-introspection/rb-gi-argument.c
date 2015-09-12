@@ -1448,53 +1448,53 @@ rb_gi_out_argument_to_ruby(GIArgument *argument,
     g_arg_info_load_type(arg_info, &type_info);
     type_tag = g_type_info_get_tag(&type_info);
     switch (type_tag) {
-    case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_VOID:
         break;
-    case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_BOOLEAN:
         normalized_argument.v_boolean = *((gboolean *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_INT8:
         normalized_argument.v_int8 = *((gint8 *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_UINT8:
         normalized_argument.v_uint8 = *((guint8 *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_INT16:
         normalized_argument.v_int16 = *((gint16 *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_UINT16:
         normalized_argument.v_uint16 = *((guint16 *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_INT32:
         normalized_argument.v_int32 = *((gint32 *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_UINT32:
         normalized_argument.v_uint32 = *((guint32 *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_INT64:
         normalized_argument.v_int64 = *((gint64 *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_UINT64:
         normalized_argument.v_uint64 = *((guint64 *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_FLOAT:
         normalized_argument.v_float = *((gfloat *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_DOUBLE:
         normalized_argument.v_double = *((gdouble *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_GTYPE:
         normalized_argument.v_size = *((GType *)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_UTF8:
-    case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
         normalized_argument.v_string = *((gchar **)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_ARRAY:
-    case GI_TYPE_TAG_INTERFACE:
-    case GI_TYPE_TAG_GLIST:
-    case GI_TYPE_TAG_GSLIST:
-    case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
         if (g_arg_info_is_caller_allocates(arg_info)) {
             duplicate = TRUE;
             normalized_argument.v_pointer = argument->v_pointer;
@@ -1502,13 +1502,13 @@ rb_gi_out_argument_to_ruby(GIArgument *argument,
             normalized_argument.v_pointer = *((gpointer *)(argument->v_pointer));
         }
         break;
-    case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_ERROR:
         normalized_argument.v_pointer = *((GError **)(argument->v_pointer));
         break;
-    case GI_TYPE_TAG_UNICHAR:
+      case GI_TYPE_TAG_UNICHAR:
         normalized_argument.v_uint32 = *((guint32 *)(argument->v_pointer));
         break;
-    default:
+      default:
         g_assert_not_reached();
         break;
     }
