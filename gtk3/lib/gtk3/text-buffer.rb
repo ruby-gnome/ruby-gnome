@@ -66,7 +66,29 @@ module Gtk
     alias_method :insert_raw,              :insert
     alias_method :insert_pixbuf_raw,       :insert_pixbuf
     alias_method :insert_child_anchor_raw, :insert_child_anchor
-    def insert(iter, target, options={})
+    def insert(iter, target, *args)
+      options = nil
+      tags = nil
+      case args.size
+      when 0
+        options = {}
+      when 1
+        case args.first
+        when Hash
+          options = args.first
+        else
+          tags = args
+        end
+      else
+        tags = args
+      end
+      if options.nil?
+        signature_prefix = "#{self.class}\##{__method__}(iter, target"
+        warn("#{signature_prefix}, *tags) style has been deprecated. " +
+             "Use #{signature_prefix}, options={:tags => tags}) style instead.")
+        options = {:tags => tags}
+      end
+
       interactive = options[:interactive]
       default_editable = options[:default_editable]
       tags = options[:tags]
