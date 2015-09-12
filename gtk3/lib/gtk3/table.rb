@@ -28,5 +28,14 @@ module Gtk
     end
     alias_method :set_column_spacings, :set_col_spacings
     alias_method :column_spacings=,    :col_spacings=
+
+    alias_method :attach_raw, :attach
+    def attach(child, left, right, top, bottom,
+               x_options=nil, y_options=nil,
+               x_space=nil, y_space=nil)
+      attach_raw(child, left, right, top, bottom,
+                 x_options, y_options,
+                 x_space || 0, y_space || 0)
+    end
   end
 end
