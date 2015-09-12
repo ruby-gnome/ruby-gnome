@@ -10,6 +10,7 @@ module Gtk
   define_deprecated_const :FontSelectionDialog,    :raise => "Use 'Gtk::FontChooserDialog' instead."
   remove_const(:ColorSelection)
   define_deprecated_const :ColorSelection,         :raise => "Use 'Gtk::ColorChooserWidget' instead."
+  remove_const(:ColorSelectionDialog)
   define_deprecated_const :ColorSelectionDialog,   :raise => "Use 'Gtk::ColorChooserDialog' instead."
   define_deprecated_const :GammaCurve,             :raise => "Don't use this widget anymore."
   define_deprecated_const :HRuler,                 :raise => "Don't use this widget anymore."
@@ -221,15 +222,6 @@ module Gtk
       _self.cells
     end
     define_deprecated_method :get_size_of_row, :raise => "Use Gtk::Widget#get_preferred_size."
-  end
-
-  class ColorSelectionDialog
-    extend GLib::Deprecatable
-    define_deprecated_method :colorsel, :color_selection
-    define_deprecated_method_by_hash_args :initialize,
-        'title', ':title => nil' do |_self, title|
-      [{:title => title}]
-    end
   end
 
   class ComboBox
