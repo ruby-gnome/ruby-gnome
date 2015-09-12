@@ -834,7 +834,8 @@ module Gtk
 
   class TextTag
     extend GLib::Deprecatable
-    define_deprecated_enums :WrapMode, 'WRAP'
+    define_deprecated_const :WrapMode, "Gtk::WrapMode"
+    define_deprecated_enums "Gtk::WrapMode", "WRAP"
   end
 
   class TextView
