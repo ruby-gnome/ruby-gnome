@@ -54,6 +54,15 @@ module Gtk
       end
     end
 
+    alias_method :add_button_raw, :add_button
+    def add_button(text, response_id)
+      case response_id
+      when Symbol
+        response_id = ResponseType.new(response_id)
+      end
+      add_button_raw(text, response_id)
+    end
+
     if method_defined?(:use_header_bar)
       alias_method :use_header_bar_raw, :use_header_bar
       undef_method :use_header_bar
