@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,5 +17,10 @@
 module Gdk
   class Window
     alias_method :invalidate, :invalidate_rect
+
+    alias_method :user_data_raw, :user_data
+    def user_data
+      Loader.instantiate_gobject_pointer(user_data_raw)
+    end
   end
 end
