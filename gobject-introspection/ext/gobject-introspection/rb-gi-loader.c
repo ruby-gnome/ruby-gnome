@@ -236,6 +236,17 @@ rg_s_reference_gobject(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
     return Qnil;
 }
 
+static VALUE
+rg_s_instantiate_gobject_pointer(G_GNUC_UNUSED VALUE klass,
+                                 VALUE rb_gobject_pointer)
+{
+    GObject *gobject;
+
+    gobject = GUINT_TO_POINTER(NUM2ULONG(rb_gobject_pointer));
+
+    return GOBJ2RVAL(gobject);
+}
+
 void
 rb_gi_loader_init(VALUE rb_mGI)
 {
@@ -253,4 +264,5 @@ rb_gi_loader_init(VALUE rb_mGI)
     RG_DEF_SMETHOD(register_constant_rename_map, 2);
     RG_DEF_SMETHOD(start_callback_dispatch_thread, 0);
     RG_DEF_SMETHOD(reference_gobject, -1);
+    RG_DEF_SMETHOD(instantiate_gobject_pointer, 1);
 }
