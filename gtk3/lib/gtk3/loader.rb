@@ -112,6 +112,7 @@ module Gtk
       require "gtk3/icon-theme"
       require "gtk3/icon-view"
       require "gtk3/image"
+      require "gtk3/image-menu-item"
       require "gtk3/label"
       require "gtk3/level-bar"
       require "gtk3/list-store"
