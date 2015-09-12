@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,29 +14,21 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Gtk
-  class Window
-    alias_method :initialize_raw, :initialize
-    def initialize(type=:toplevel)
-      if type.is_a?(String)
-        initialize_raw(:toplevel)
-        self.title = type
-      else
-        initialize_raw(type)
-      end
+class TestGtkWindow < Test::Unit::TestCase
+  include GtkTestUtils
+
+  def setup
+    @window = Gtk::Window.new
+  end
+
+  sub_test_case "#icon=" do
+    test "String" do
+      @window.icon = fixture_path("gnome-logo-icon.png")
     end
 
-    alias_method :set_icon_raw, :set_icon
-    def set_icon(icon_or_file_name)
-      case icon_or_file_name
-      when String
-        set_icon_from_file(icon_or_file_name)
-      else
-        set_icon_raw(icon_or_file_name)
-      end
+    test "Gdk::Pixbuf" do
+      icon = Gdk::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+      @window.icon = icon
     end
-
-    remove_method :icon=
-    alias_method :icon=, :set_icon
   end
 end
