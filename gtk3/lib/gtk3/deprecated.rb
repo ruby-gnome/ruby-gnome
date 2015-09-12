@@ -576,7 +576,8 @@ module Gtk
 
   class MessageDialog
     extend GLib::Deprecatable
-    define_deprecated_enums :ButtonsType, 'BUTTONS'
+    define_deprecated_const :ButtonsType, "Gtk::ButtonsType"
+    define_deprecated_enums "Gtk::ButtonsType", "BUTTONS"
     define_deprecated_const :Type, 'Gtk::MessageType'
     define_deprecated_enums 'Gtk::MessageType'
     define_deprecated_method_by_hash_args :initialize,
