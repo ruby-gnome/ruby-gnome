@@ -1367,6 +1367,9 @@ rb_gi_out_argument_init(GIArgument *argument, GIArgInfo *arg_info)
     type_tag = g_type_info_get_tag(&type_info);
     switch (type_tag) {
       case GI_TYPE_TAG_VOID:
+        if (g_type_info_is_pointer(&type_info)) {
+            argument->v_pointer = ALLOC(gpointer);
+        }
         break;
       case GI_TYPE_TAG_BOOLEAN:
         argument->v_pointer = ALLOC(gboolean);
@@ -1449,6 +1452,9 @@ rb_gi_out_argument_to_ruby(GIArgument *argument,
     type_tag = g_type_info_get_tag(&type_info);
     switch (type_tag) {
       case GI_TYPE_TAG_VOID:
+        if (g_type_info_is_pointer(&type_info)) {
+            normalized_argument.v_pointer = *((gpointer *)(argument->v_pointer));
+        }
         break;
       case GI_TYPE_TAG_BOOLEAN:
         normalized_argument.v_boolean = *((gboolean *)(argument->v_pointer));
