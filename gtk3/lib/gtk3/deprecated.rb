@@ -188,7 +188,8 @@ module Gtk
 
   class ButtonBox
     extend GLib::Deprecatable
-    define_deprecated_enums :Style
+    define_deprecated_const :Style, "Gtk::ButtonBoxStyle"
+    define_deprecated_enums "Gtk::ButtonBoxStyle", "STYLE"
   end
 
   class Calendar
