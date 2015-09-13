@@ -462,8 +462,8 @@ namespace :gem do
 
     desc "clean all Windows related build"
     task :clean => [
-      "gem:windows:build:tmp",
-      "gem:windows:build:vendor",
+      "gem:windows:clean:gem",
+      "gem:windows:clean:vendor",
     ]
 
     desc "download DLL for Windows all gems"
