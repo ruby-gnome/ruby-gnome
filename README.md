@@ -115,7 +115,7 @@ current dependencies are:
 
 ### Install from GitHub master branch
 
-You can also install this gem from GitHub master branch.
+You can also install these gems from GitHub master branch.
 
     % git clone https://github.com/ruby-gnome2/ruby-gnome2.git
     % cd ruby-gnome2
