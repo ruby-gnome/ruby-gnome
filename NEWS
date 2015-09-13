@@ -2,6 +2,91 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.0.2: 2015-09-13
+
+It is a compatibility improvement release of 3.0.1.
+
+=== Changes
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported void pointer.
+      [GitHub#540] [Reported by Abby Archer]
+    * Added (({GObjectIntrospection::Loader.instantiate_gobject_pointer})).
+
+==== Ruby/GDK3
+
+  * Improvements
+    * Supported (({Gdk::Window#user_data})).
+      [GitHub#540] [Reported by Abby Archer]
+    * compatibility: (({Cairo::Context#set_source_rgba})) accepts
+      (({nil})) as alpha value.
+      [GitHub#540] [Reported by Abby Archer]
+    * compatibility: Added fallback feature for deprecated
+      (({Gdk::EventScroll::Direction})).
+    * Windows: Added hicolor-icon-theme as fallback theme.
+
+==== Ruby/GTK3
+
+  * Improvements
+    * compatibility: (({Gtk::Window#icon=})) accepts icon file name.
+      [GitHub#540] [Reported by Abby Archer]
+    * compatibility: (({Gtk::Dialog#add_button})) accepts (({Symbol}))
+      as response ID.
+      [GitHub#540] [Reported by Abby Archer]
+    * Deprecated (({Gtk::ColorSelectionDialog})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::TextTag::WrapMode})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::TextBuffer#insert(iter, target, *tags)})) usage.
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::ButtonBox::Style})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::MessageDialog::ButtonsType})).
+    * compatibility: Supported creating an empty image by
+      (({Gtk::Image.new})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::ImageMenuItem.new})) usage.
+    * Supported (({Gtk::TreeIter#next!})).
+    * Supported (({Gtk::TreeModel#get_value})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::Alignment::Align})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::Widget#get_size_request})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::Table.new})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::Table#column_spaces})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::Table#column_spaces=})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::Table#attach})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::ToggleButton.new})).
+    * Windows: Added missing Ruby/RSVG2 dependency.
+  * Fixes
+    * Fixed samples.
+      [GitHub#536][GitHub#541] [Patch by cedlemo]
+      [GitHub#540] [Reported by Abby Archer]
+
+==== Ruby/RSVG2
+
+  * Improvements
+    * Windows: Added missing Ruby/Pango dependency.
+    * Windows: Updated loaders.cache for gdk-pixbuf automatically. 
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * compatibility: (({Gst::TypeFindFactory#extensions})) always
+      returns (({Array})).
+
+=== Thanks
+
+  * cedlemo
+  * Abby Archer
+
 == Ruby-GNOME2 3.0.1: 2015-09-11
 
 It is a bug fix release of 3.0.0.
