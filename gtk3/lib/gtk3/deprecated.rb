@@ -230,6 +230,15 @@ module Gtk
     define_deprecated_method :get_size_of_row, :raise => "Use Gtk::Widget#get_preferred_size."
   end
 
+  class CheckMenuItem
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        "label, use_underline=false",
+        ":label => label, :use_underline => use_underline" do |_self, label, use_underline|
+      [{:label => label, :use_underline => use_underline}]
+    end
+  end
+
   class ComboBox
     extend GLib::Deprecatable
     define_deprecated_method :append_text, :raise => "Use 'Gtk::ComboBoxText#append_text'."
