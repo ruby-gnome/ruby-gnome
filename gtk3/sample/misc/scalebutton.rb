@@ -22,7 +22,7 @@ box.hexpand = true
 window.add(box)
 # see here for an explication  on icons order
 # https://developer.gnome.org/gtk3/stable/GtkScaleButton.html#GtkScaleButton--icons
-scale.set_icons(%w(gtk-goto-bottom gtk-goto-top gtk-execute))
+scale.set_icons(%w(go-bottom go-top system-run))
 scale.signal_connect("value-changed") { |_widget, value| puts "value changed: #{value}" }
 
 window.show_all
