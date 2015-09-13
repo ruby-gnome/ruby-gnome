@@ -7,7 +7,11 @@
 =end
 
 require "gtk3"
-myapp = Gtk::Application.new("org.gtk.example", :flags_none)
+myapp = Gtk::Application.new("org.gtk.example", :handles_command_line)
+myapp.signal_connect "command-line" do |app, command_line|
+  app.activate
+  0
+end
 
 myapp.signal_connect "activate" do |app|
   win = Gtk::ApplicationWindow.new(app)
