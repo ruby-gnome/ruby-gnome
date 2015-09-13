@@ -2402,6 +2402,34 @@ rb_gi_value_argument_from_ruby_void(GIArgument *argument, GITypeInfo *type_info,
     }
 }
 
+static GType
+rb_gi_value_argument_from_ruby_gtype(VALUE rb_argument)
+{
+    ID id_gtype;
+    VALUE rb_gtype;
+
+    if (RB_TYPE_P(rb_argument, RUBY_T_STRING)) {
+        GType gtype;
+        gtype = g_type_from_name(RVAL2CSTR(rb_argument));
+        if (gtype == 0) {
+            rb_raise(rb_eArgError,
+                     "unknown GType name: <%s>",
+                     RVAL2CSTR(rb_argument));
+        }
+        return gtype;
+    }
+
+    CONST_ID(id_gtype, "gtype");
+
+    if (rb_respond_to(rb_argument, id_gtype)) {
+        rb_gtype = rb_funcall(rb_argument, id_gtype, 0);
+    } else {
+        rb_gtype = rb_argument;
+    }
+
+    return NUM2ULONG(rb_gtype);
+}
+
 GIArgument *
 rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
                                VALUE rb_argument, VALUE self)
@@ -2449,8 +2477,7 @@ rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
         argument->v_double = NUM2DBL(rb_argument);
         break;
     case GI_TYPE_TAG_GTYPE:
-        /* TODO: support GLib::Type and String as GType name. */
-        argument->v_size = NUM2ULONG(rb_argument);
+        argument->v_size = rb_gi_value_argument_from_ruby_gtype(rb_argument);
         break;
     case GI_TYPE_TAG_UTF8:
         /* TODO: support UTF-8 convert like rb_argument.encode("UTF-8"). */
