@@ -452,7 +452,7 @@ namespace :gem do
       end
 
       desc "clean all built dependency software for Windows gems"
-      task :tmp do
+      task :vendor do
         windows_gnome2_packages.each do |package|
           rm_rf(File.join(package, "vendor"))
         end
