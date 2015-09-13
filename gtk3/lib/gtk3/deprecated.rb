@@ -873,6 +873,7 @@ module Gtk
 
   class Toolbar
     extend GLib::Deprecatable
+    define_deprecated_const :Style, "Gtk::ToolbarStyle"
     define_deprecated_method :append, :warn => "Don't use this method."
     define_deprecated_method :prepend, :warn => "Don't use this method."
     define_deprecated_method :item_index, :get_item_index
