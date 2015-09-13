@@ -449,6 +449,7 @@ namespace :gem do
         windows_gnome2_packages.each do |package|
           rm_rf(File.join(package, "tmp", "x86-mingw32"))
           rm_rf(File.join(package, "tmp", "x64-mingw32"))
+          rm_rf(File.join(package, "pkg"))
         end
       end
 
