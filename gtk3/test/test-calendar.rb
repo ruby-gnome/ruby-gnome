@@ -14,17 +14,17 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Gtk
-  class Calendar
-    alias_method :select_month_raw, :select_month
-    def select_month(month, year)
-      select_month_raw(month - 1, year)
-    end
+class TestGtkCalendar < Test::Unit::TestCase
+  include GtkTestUtils
 
-    alias_method :date_raw, :date
-    def date
-      year, month, day = date_raw
-      [year, month + 1, day]
-    end
+  def setup
+    @calendar = Gtk::Calendar.new
+  end
+
+  test "accessor" do
+    @calendar.select_month(12, 2015)
+    @calendar.select_day(31)
+    assert_equal([2015, 12, 31],
+                 @calendar.date)
   end
 end
