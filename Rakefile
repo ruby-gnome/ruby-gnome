@@ -443,13 +443,27 @@ namespace :gem do
       "gem:windows:build:ext",
     ]
 
-    desc "clean all Windows gems build"
-    task :clean do
-      windows_gnome2_packages.each do |package|
-        rm_rf(File.join(package, "tmp"))
-        rm_rf(File.join(package, "vendor"))
+    namespace :clean do
+      desc "clean all Windows gems build"
+      task :tmp do
+        windows_gnome2_packages.each do |package|
+          rm_rf(File.join(package, "tmp"))
+        end
+      end
+
+      desc "clean all built dependency software for Windows gems"
+      task :tmp do
+        windows_gnome2_packages.each do |package|
+          rm_rf(File.join(package, "vendor"))
+        end
       end
     end
+
+    desc "clean all Windows related build"
+    task :clean => [
+      "gem:windows:build:tmp",
+      "gem:windows:build:vendor",
+    ]
 
     desc "download DLL for Windows all gems"
     task :download do
