@@ -26,15 +26,5 @@ module Gst
         get_feature_list_by_plugin(name)
       end
     end
-
-    alias_method :find_feature_raw, :find_feature
-    def find_feature(name, type_or_class)
-      if type_or_class.is_a?(GLib::Type)
-        type = type_or_class
-      else
-        type = type_or_class.gtype
-      end
-      find_feature_raw(name, type)
-    end
   end
 end
