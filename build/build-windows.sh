@@ -151,7 +151,7 @@ fi
 
 run cd ~/ruby-gnome2.${DIRECTORY_SUFFIX}
 run git pull --rebase
-run rake gem:windows:clean:tmp gem:windows:build
+run rake gem:windows:clean:gem gem:windows:build
 
 run mkdir -p /vagrant/pkg
 run cp */pkg/*.gem /vagrant/pkg/
