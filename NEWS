@@ -65,10 +65,20 @@ It is a compatibility improvement release of 3.0.1.
     * compatibility: Added fallback feature for deprecated
       (({Gtk::ToggleButton.new})).
     * Windows: Added missing Ruby/RSVG2 dependency.
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::Container#each_forall})).
+    * Supported (({nil})) as (({size})) for (({Gtk::Image.new})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::Image.new(pixbuf)})).
+    * compatibility: Added fallback feature for deprecated
+      (({Gtk::Toolbar::Style})).
+    * Supported Rubyish (({Gtk::CheckMenuItem.new})).
   * Fixes
     * Fixed samples.
       [GitHub#536][GitHub#541] [Patch by cedlemo]
       [GitHub#540] [Reported by Abby Archer]
+    * Fixed a bug that (({Gtk::Calendar#date})) returns (({0-11}))
+      range month value.
 
 ==== Ruby/RSVG2
 
