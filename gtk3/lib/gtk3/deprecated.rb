@@ -523,12 +523,17 @@ module Gtk
         end
       when Symbol
         [{:stock => image, :size => size}]
+      when Gdk::Pixbuf
+        [{:pixbuf => image}]
       when Gtk::IconSet
         [{:icon_set => image, :size => size}]
       when Gio::Icon
         [{:icon => image, :size => size}]
       else
-        [image]
+        message =
+          "Image must be String, Symbol, Gdk::Pixbuf, Gtk::IconSet or " +
+          "Gio::Icon: #{image.inspect}"
+        raise ArgumentError, message
       end
     end
   end
