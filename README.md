@@ -120,6 +120,7 @@ You can also install this gem from GitHub master branch.
     % git clone https://github.com/ruby-gnome2/ruby-gnome2.git
     % cd ruby-gnome2
     % gem install rake rake-compiler mechanize pkg-config cairo
+    % rake gem:build
     % rake gem:install
 
 ### Experimental
