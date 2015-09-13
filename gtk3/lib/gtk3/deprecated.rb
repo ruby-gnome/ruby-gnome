@@ -251,6 +251,7 @@ module Gtk
   class Container
     extend GLib::Deprecatable
     define_deprecated_singleton_method :child_property, :find_child_property
+    define_deprecated_method :each_forall, :each_all
   end
 
   class Dialog
