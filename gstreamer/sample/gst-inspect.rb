@@ -84,7 +84,19 @@ class Inspector
 
   def print_element(name)
     factory = Gst::ElementFactory.find(name)
-    print_element_factory(factory, false)
+    if factory
+      print_element_factory(factory, false)
+    else
+      registry = Gst::Registry.get
+      type_find_factory = registry.find_feature(name, Gst::TypeFindFactory)
+      if type_find_factory
+        # TODO
+      else
+        plugin = registry.find_plugin(name)
+        print_plugin_info(plugin)
+        # TODO: print_plugin_features(plugin)
+      end
+    end
   end
 
   private
@@ -123,10 +135,7 @@ class Inspector
          "")
   end
 
-  def print_plugin_info(name)
-    return if name.nil?
-    registry = Gst::Registry.get
-    plugin = registry.find_plugin(name)
+  def print_plugin_info(plugin)
     return if plugin.nil?
 
     puts("Plugin Details:",
@@ -430,7 +439,7 @@ class Inspector
 
     prefix(print_names ? "#{factory.name}: " : "") do
       print_factory_details_info(factory)
-      print_plugin_info(factory.plugin.name)
+      print_plugin_info(factory.plugin)
 
       print_hierarchy(element)
       print_interfaces(element)
