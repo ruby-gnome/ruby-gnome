@@ -1,4 +1,4 @@
-# Copyright (C) 2006-2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2006-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -25,6 +25,10 @@ vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_dll_path(vendor_bin_dir)
 vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
+
+if vendor_dir.exist?
+  require "rsvg2"
+end
 
 require "gtk3/loader"
 

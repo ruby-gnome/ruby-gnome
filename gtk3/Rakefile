@@ -17,5 +17,10 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   ]
   package.windows.packages = []
   package.windows.dependencies = []
+  package.cross_compiling do |spec|
+    if /mingw|mswin/ =~ spec.platform.to_s
+      spec.add_runtime_dependency("rsvg2", ">= #{package.version}")
+    end
+  end
 end
 package_task.define
