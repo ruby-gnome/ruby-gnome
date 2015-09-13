@@ -89,6 +89,8 @@ module Gtk
       when String, Symbol
         size_name = size.to_s.gsub(/_/, "-")
         size = Gtk.icon_size_from_name("gtk-#{size_name}")
+      else
+        size ||= Gtk::IconSize::BUTTON
       end
 
       if stock
