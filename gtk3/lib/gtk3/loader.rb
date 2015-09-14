@@ -224,13 +224,13 @@ module Gtk
     def define_enum(info)
       case info.name
       when /\AArrow/
-        self.class.define_class(info.gtype, $POSTMATCH, Gtk::Arrow)
+        self.class.define_class(info.gtype, $POSTMATCH, Arrow)
       when /\ALevelBar/
-        self.class.define_class(info.gtype, $POSTMATCH, Gtk::LevelBar)
+        self.class.define_class(info.gtype, $POSTMATCH, LevelBar)
       when /\ARevealer/
-        self.class.define_class(info.gtype, $POSTMATCH, Gtk::Revealer)
+        self.class.define_class(info.gtype, $POSTMATCH, Revealer)
       when /\AStack/
-        self.class.define_class(info.gtype, $POSTMATCH, Gtk::Stack)
+        self.class.define_class(info.gtype, $POSTMATCH, Stack)
       else
         super
       end

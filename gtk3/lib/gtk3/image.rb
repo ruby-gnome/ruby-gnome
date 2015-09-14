@@ -87,9 +87,9 @@ module Gtk
 
       case size
       when String, Symbol
-        size = Gtk::IconSize.new(size)
+        size = IconSize.new(size)
       else
-        size ||= Gtk::IconSize::BUTTON
+        size ||= IconSize::BUTTON
       end
 
       if stock

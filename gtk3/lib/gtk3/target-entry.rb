@@ -18,8 +18,8 @@ module Gtk
   class TargetEntry
     alias_method :initialize_raw, :initialize
     def initialize(target, flags, info)
-      unless flags.is_a?(Gtk::TargetFlags)
-        flags = Gtk::TargetFlags.new(flags)
+      unless flags.is_a?(TargetFlags)
+        flags = TargetFlags.new(flags)
       end
       initialize_raw(target, flags.to_i, info)
     end
