@@ -24,5 +24,15 @@ module Gtk
       end
       choose_icon_raw(icon_names, size, flags)
     end
+
+    alias_method :lookup_icon_raw, :lookup_icon
+    def lookup_icon(icon, size, flags)
+      case icon
+      when String, Symbol
+        lookup_icon_raw(icon.to_s, size, flags)
+      else
+        lookup_by_gicon(icon, size, flags)
+      end
+    end
   end
 end
