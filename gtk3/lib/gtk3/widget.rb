@@ -97,6 +97,12 @@ module Gtk
       value.value
     end
 
+    alias_method :render_icon_pixbuf_raw, :render_icon_pixbuf
+    def render_icon_pixbuf(stock_id, size)
+      size = IconSize.new(size) unless size.is_a?(IconSize)
+      render_icon_pixbuf_raw(stock_id, size)
+    end
+
     private
     def initialize_post
       klass = self.class

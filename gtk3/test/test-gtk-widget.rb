@@ -145,4 +145,11 @@ class TestGtkWidget < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "#render_icon_pixbuf" do
+    test "size: symbol" do
+      window = Gtk::Window.new
+      window.render_icon_pixbuf(:directory, :menu)
+    end
+  end
 end
