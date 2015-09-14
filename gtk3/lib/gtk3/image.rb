@@ -87,8 +87,7 @@ module Gtk
 
       case size
       when String, Symbol
-        size_name = size.to_s.gsub(/_/, "-")
-        size = Gtk.icon_size_from_name("gtk-#{size_name}")
+        size = Gtk::IconSize.new(size)
       else
         size ||= Gtk::IconSize::BUTTON
       end
