@@ -110,6 +110,7 @@ module Gtk
       require "gtk3/file-chooser-dialog"
       require "gtk3/font-chooser-dialog"
       require "gtk3/gesture-multi-press"
+      require "gtk3/icon-size"
       require "gtk3/icon-theme"
       require "gtk3/icon-view"
       require "gtk3/image"
@@ -186,6 +187,10 @@ module Gtk
         define_method(info, Gdk::DragContext, method_name)
       when /\Abinding_/
         # Ignore because singleton methods are defined.
+      when /\Aicon_size_/
+        icon_size_class = @base_module.const_get(:IconSize)
+        method_name = rubyish_method_name(info, :prefix => "icon_size_")
+        define_singleton_method(icon_size_class, method_name, info)
       else
         super
       end
