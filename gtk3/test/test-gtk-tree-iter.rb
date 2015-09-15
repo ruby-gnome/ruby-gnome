@@ -59,4 +59,8 @@ class TestGtkTreeIter < Test::Unit::TestCase
     @iter.next!
     assert_equal("second", @iter[0])
   end
+
+  test "#parent" do
+    # TODO
+  end
 end

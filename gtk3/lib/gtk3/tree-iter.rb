@@ -47,6 +47,10 @@ module Gtk
       @model.iter_next(self)
     end
 
+    def parent
+      @model.iter_parent(self)
+    end
+
     def ==(other)
       other.is_a?(self.class) and
         @model == other.model and
