@@ -19,7 +19,14 @@ require "glib2"
 module GObjectIntrospection
   class << self
     def prepend_typelib_path(path)
-      GLib.prepend_path_to_environment_variable(path, "GI_TYPELIB_PATH")
+      path = Pathname(path) unless path.is_a?(Pathname)
+      return unless path.exist?
+
+      dir = path.to_s
+      dir = dir.gsub("/", File::ALT_SEPARATOR) if File::ALT_SEPARATOR
+      return if Repository.search_path.include?(dir)
+
+      Repository.prepend_search_path(dir)
     end
   end
 end
