@@ -32,17 +32,17 @@ class TestGtkIconTheme < Test::Unit::TestCase
   sub_test_case "#lookup_icon" do
     sub_test_case "icon" do
       test "String" do
-        assert_not_nil(@theme.lookup_icon("document-open",
+        assert_not_nil(@theme.lookup_icon("search",
                                           16, :generic_fallback))
       end
 
       test "Symbol" do
-        assert_not_nil(@theme.lookup_icon("document-open",
+        assert_not_nil(@theme.lookup_icon("search",
                                           16, :generic_fallback))
       end
 
       test "Gio::Icon" do
-        icon = Gio::ThemedIcon.new("document-open")
+        icon = Gio::ThemedIcon.new("search")
         assert_not_nil(@theme.lookup_icon(icon, 16, :generic_fallback))
       end
     end
