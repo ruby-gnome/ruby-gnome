@@ -23,6 +23,13 @@ class TestRepository < Test::Unit::TestCase
     @repository.require("Gio")
   end
 
+  def test_search_path
+    path = GObjectIntrospection::Repository.search_path
+    GObjectIntrospection::Repository.prepend_search_path(__dir__)
+    assert_equal([__dir__] + path,
+                 GObjectIntrospection::Repository.search_path)
+  end
+
   def test_get_n_infos
     assert_kind_of(Integer, @repository.get_n_infos("GObject"))
   end

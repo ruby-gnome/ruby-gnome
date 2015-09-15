@@ -46,6 +46,19 @@ rg_s_default(G_GNUC_UNUSED VALUE klass)
     return GOBJ2RVAL(g_irepository_get_default());
 }
 
+static VALUE
+rg_s_prepend_search_path(VALUE klass, VALUE rb_path)
+{
+    g_irepository_prepend_search_path(RVAL2CSTR(rb_path));
+    return klass;
+}
+
+static VALUE
+rg_s_search_path(G_GNUC_UNUSED VALUE klass)
+{
+    return FILENAMEGSLIST2RVAL(g_irepository_get_search_path());
+}
+
 
 /* Force the namespace to be loaded if it isn't already. If namespace is not
  * loaded, this function will search for a ".typelib" file using the repository
@@ -238,6 +251,8 @@ rb_gi_repository_init(VALUE rb_mGI)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IREPOSITORY, "Repository", rb_mGI);
 
     RG_DEF_SMETHOD(default, 0);
+    RG_DEF_SMETHOD(prepend_search_path, 1);
+    RG_DEF_SMETHOD(search_path, 0);
     RG_DEF_METHOD(require, -1);
     RG_DEF_METHOD(get_dependencies, 1);
     RG_DEF_METHOD(loaded_namespaces, 0);
