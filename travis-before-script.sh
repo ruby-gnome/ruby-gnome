@@ -34,4 +34,3 @@ sudo apt-get install -qq -y \
     gir1.2-webkit-3.0 \
     gnome-icon-theme \
     dbus-x11
-find /usr/share/icons
