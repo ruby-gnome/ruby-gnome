@@ -29,7 +29,7 @@ class TestGtkImage < Test::Unit::TestCase
     end
 
     test "icon" do
-      icon = Gio::ThemedIcon.new("gtk-open")
+      icon = Gio::ThemedIcon.new("document-open")
       image = Gtk::Image.new(:icon => icon,
                              :size => :dialog)
       assert_equal([
