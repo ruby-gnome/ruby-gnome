@@ -43,6 +43,17 @@ module Gtk
       end
     end
 
+    alias_method :iter_parent_raw, :iter_parent
+    def iter_parent(iter)
+      got, iter = iter_parent_raw(iter)
+      if got
+        setup_iter(iter)
+        iter
+      else
+        nil
+      end
+    end
+
     alias_method :get_value_raw, :get_value
     def get_value(iter, column)
       get_value_raw(iter, column).value
