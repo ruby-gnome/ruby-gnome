@@ -101,6 +101,10 @@ rg_get_dependencies(VALUE self, VALUE rb_namespace)
     repository = SELF(self);
     namespace_ = RVAL2CSTR(rb_namespace);
     dependencies = g_irepository_get_dependencies(repository, namespace_);
+    if (!dependencies) {
+        return Qnil;
+    }
+
     rb_dependencies = rb_ary_new();
     for (i = 0; dependencies[i]; i++) {
         rb_ary_push(rb_dependencies, CSTR2RVAL(dependencies[i]));
