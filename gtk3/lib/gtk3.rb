@@ -19,7 +19,7 @@ require "atk"
 require "gdk3"
 require "gio2"
 
-if vendor_dir.exist?
+if /cygwin|mingw|mswin/ === RUBY_PLATFORM
   require "rsvg2"
 end
 
