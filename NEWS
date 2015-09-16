@@ -84,7 +84,7 @@ It is a compatibility improvement release of 3.0.1.
 
   * Improvements
     * Windows: Added missing Ruby/Pango dependency.
-    * Windows: Updated loaders.cache for gdk-pixbuf automatically. 
+    * Windows: Updated loaders.cache for gdk-pixbuf automatically.
 
 ==== Ruby/GStreamer
 
