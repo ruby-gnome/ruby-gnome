@@ -34,8 +34,10 @@ module Gtk
                x_options=nil, y_options=nil,
                x_space=nil, y_space=nil)
       attach_raw(child, left, right, top, bottom,
-                 x_options, y_options,
-                 x_space || 0, y_space || 0)
+                 x_options || [:expand, :fill],
+                 y_options || [:expand, :fill],
+                 x_space || 0,
+                 y_space || 0)
     end
   end
 end
