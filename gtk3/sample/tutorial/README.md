@@ -436,7 +436,7 @@ https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.7
 *    exampleapp3/exampleapp.rb
 
 In this step, we make our application show the content of all the files that it is given on the commandline.
-To this end, we need to easily access widgets from the template. So we use the method `Gtk::Widget#bind_template_child` like in the code below:
+To this end, we need to easily access widgets from the template. So we use the method `Gtk::Widget.bind_template_child` like in the code below:
 
 ```ruby
 class ExampleAppWindow < Gtk::ApplicationWindow
@@ -450,7 +450,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
 ```
 Most of this piece of code have been seen previously, a window widget interface is defined with a template. But the usage of `bind_template_child("stack")` will add a method, to each ExampleAppWindow instance, which name will be `ExampleAppWindow#stack` and that will return the corresponding child widget in the template.
 
-The initial implementation of `Gtk::Widget#bind_template_child` have been done in this [pull request](https://github.com/ruby-gnome2/ruby-gnome2/pull/445)
+The initial implementation of `Gtk::Widget.bind_template_child` have been done in this [pull request](https://github.com/ruby-gnome2/ruby-gnome2/pull/445)
 
 This new way to access the stack widget is used in the following code. We have previously handled the *open* signal in our application like this:
 
