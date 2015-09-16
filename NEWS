@@ -2,6 +2,58 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.0.3: 2015-09-16
+
+It is a compatibility improvement release of 3.0.2.
+
+=== Changes
+
+==== All
+
+  * Improvements
+    * Removed test-unit-notify gem from development dependencies.
+      [GitHub#547] [Patch by cedlemo]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported (({GObjectIntrospection::Repository.prepend_search_path})).
+    * Supported (({GObjectIntrospection::Repository.search_path})).
+    * Windows: Supported requiring library after one
+      (({GObjectIntrospection::Loader#load})).
+      [GitHub#546] [Reported by Abby Archer]
+
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Supported (({Gtk::IconSize.lookup})).
+      [GitHub#544] [Reported by Masafumi Yokoyama]
+    * Supported size name as argument of (({Gtk::Widget#render_icon_pixbuf})).
+      [GitHub#544] [Reported by Masafumi Yokoyama]
+    * Supported (({Gio::Icon})) in (({Gtk::IconTheme#lookup_icon})).
+      [GitHub#544] [Reported by Masafumi Yokoyama]
+    * Supported (({Gtk::TreeModel#iter_parent})).
+    * Supported (({Gtk::TreeIter#parent})).
+    * Updated examples.
+      [GitHub#548] [Patch by cedlemo]
+
+  * Fixes
+    * Fixed a bug that (({Gtk::Widget.bind_template_child})) is
+      required. [GitHub#549] [Reported by cedlemo]
+    * Fixed a bug that default (({x_option})) and (({y_option}))
+      values of (({Gtk::Table#attach})) is wrong.
+      [GitHub#546] [Reported by Abby Archer]
+    * Windows: Fixed a bug that Ruby/RSVG2 isn't required
+      automatically.
+      [GitHub#546] [Reported by Abby Archer]
+
+=== Thanks
+
+  * Masafumi Yokoyama
+  * cedlemo
+  * Abby Archer
+
 == Ruby-GNOME2 3.0.2: 2015-09-13
 
 It is a compatibility improvement release of 3.0.1.
