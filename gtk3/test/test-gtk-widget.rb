@@ -152,4 +152,39 @@ class TestGtkWidget < Test::Unit::TestCase
       window.render_icon_pixbuf(:directory, :menu)
     end
   end
+
+  sub_test_case ".bind_template_child" do
+    setup do
+      only_gtk_version(3, 10, 0)
+      @resource_data = File.read(fixture_path("simple_window.ui"))
+    end
+
+    test "nothing" do
+      data = @resource_data
+      widget_class = Class.new(Gtk::Window) do
+        type_register "BindTemplateChildNothing"
+
+        singleton_class.send(:define_method, :init) do
+          set_template(:data => data)
+        end
+      end
+      widget = widget_class.new
+      assert_nil(widget.get_template_child(widget_class, :label))
+    end
+
+    test "bind" do
+      data = @resource_data
+      widget_class = Class.new(Gtk::Window) do
+        type_register "BindTemplateChildBind"
+
+        singleton_class.send(:define_method, :init) do
+          set_template(:data => data)
+          bind_template_child(:label)
+        end
+      end
+      widget = widget_class.new
+      assert_equal(Gtk::Label,
+                   widget.get_template_child(widget_class, :label).class)
+    end
+  end
 end

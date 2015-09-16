@@ -24,6 +24,10 @@ module Gtk
         @have_template ||= false
       end
 
+      def template_children
+        @template_children ||= []
+      end
+
       if method_defined?(:set_template)
         alias_method :set_template_raw, :set_template
         def set_template(template)
@@ -41,8 +45,7 @@ module Gtk
           internal_child = options[:internal_child]
           internal_child = false if internal_child.nil?
           bind_template_child_full(name, internal_child, 0)
-          @template_children ||= []
-          @template_children << name
+          template_children << name
           attr_reader(name)
         end
       end
@@ -111,8 +114,7 @@ module Gtk
 
       init_template
       gtype = klass.gtype
-      child_names = klass.instance_variable_get(:@template_children)
-      child_names.each do |name|
+      klass.template_children.each do |name|
         instance_variable_set("@#{name}", get_template_child(gtype, name))
       end
     end
