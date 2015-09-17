@@ -435,6 +435,88 @@ https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.7
 
 *    exampleapp3/exampleapp.rb
 
+In this step, we make our application show the content of all the files that it is given on the commandline.
+To this end, we need to easily access widgets from the template. So we use the method `Gtk::Widget.bind_template_child` like in the code below:
+
+```ruby
+class ExampleAppWindow < Gtk::ApplicationWindow
+  type_register
+  class << self
+    def init
+      set_template(:resource => "/org/gtk/exampleapp/window.ui")
+      bind_template_child("stack")
+    end
+  end
+```
+Most of this piece of code have been seen previously, a window widget interface is defined with a template. But the usage of `bind_template_child("stack")` will add a method, to each ExampleAppWindow instance, which name will be `ExampleAppWindow#stack` and that will return the corresponding child widget in the template.
+
+The initial implementation of `Gtk::Widget.bind_template_child` have been done in this [pull request](https://github.com/ruby-gnome2/ruby-gnome2/pull/445)
+
+This new way to access the stack widget is used in the following code. We have previously handled the *open* signal in our application like this:
+
+```ruby
+class ExampleAppWindow < Gtk::ApplicationWindow
+  def open(file)
+    
+  end
+end
+
+class ExampleApp < Gtk::Application
+  def initialize
+    # ...
+
+    signal_connect "open" do |application, files, hin|
+      windows = application.windows
+      win = nil
+      unless windows.empty?
+        win = windows.first
+      else
+        win = ExampleAppWindow.new(application)
+      end
+
+      files.each { |file| win.open(file) }
+        
+      win.present
+    end
+  end
+end
+```
+
+The `open` method of the main window is called with for each file. Now we manage those files like this:
+
+```ruby
+def open(file)
+  basename = file.basename
+  scrolled = Gtk::ScrolledWindow.new
+  scrolled.show
+  scrolled.set_hexpand(true)
+  scrolled.set_vexpand(true)
+  view = Gtk::TextView.new
+  view.set_editable(false)
+  view.set_cursor_visible(false)
+  view.show
+  scrolled.add(view)
+  stack.add_titled(scrolled, basename, basename)
+  stream = file.read
+  view.buffer.text = stream.read
+end
+```
+Each file is opened and loaded in a `Gtk::TextView` with 
+
+```ruby
+  stream = file.read
+  view.buffer.text = stream.read
+```
+
+We get the basename, of the file in argument, that will be used as title for each tab of the stack widget: 
+
+```
+stack.add_titled(scrolled, basename, basename)
+```
+
+In this line, given that `self` is `ExampleAppWindow` the usage of `stack` is a call to the method we have created previously. So here we add a tab with a `Gtk::ScrolledWindow` in the `Gtk::Stack` widget of our template and we display the file content.
+
+
 ### An application menu
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.8
 
