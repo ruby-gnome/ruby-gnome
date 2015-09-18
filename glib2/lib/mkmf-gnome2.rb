@@ -503,6 +503,8 @@ def package_platform
     :redhat
   elsif File.exist?("/etc/SuSE-release")
     :suse
+  elsif find_executable("pacman")
+    :arch
   elsif find_executable("brew")
     :homebrew
   elsif find_executable("port")
@@ -545,6 +547,8 @@ def install_missing_native_package(native_package_info)
     install_command = "brew install #{package_command_line}"
   when :macports
     install_command = "port install -y #{package_command_line}"
+  when :arch
+    install_command = "pacman -S --noconfirm #{package_command_line}"
   else
     return false
   end

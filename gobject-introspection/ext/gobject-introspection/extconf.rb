@@ -60,6 +60,7 @@ unless required_pkg_config_package(package_id,
                                    :debian => "libgirepository1.0-dev",
                                    :redhat => "gobject-introspection-devel",
                                    :homebrew => "gobject-introspection",
+                                   :arch => "gobject-introspection",
                                    :macports => "gobject-introspection")
   exit(false)
 end
