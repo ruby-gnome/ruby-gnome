@@ -27,11 +27,24 @@ rescue LoadError
   require 'atk.so'
 end
 
-if vendor_dir.exist?
-  begin
-    require "gobject-introspection"
-    vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
-    GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
-  rescue LoadError
+require "gobject-introspection"
+vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
+GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
+
+module Atk
+  module Version
+    MAJOR, MINOR, MICRO = Atk::BUILD_VERSION
+    STRING = Atk::BUILD_VERSION.join(".")
+    class << self
+      def or_later?(major, minor, micro=nil)
+        micro ||= 0
+        version = [
+          MAJOR,
+          MINOR,
+          MICRO,
+        ]
+        (version <=> [major, minor, micro]) >= 0
+      end
+    end
   end
 end
