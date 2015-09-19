@@ -542,13 +542,13 @@ def install_missing_native_package(native_package_info)
     install_command = "yum install -y #{package_command_line}"
   when :suse
     install_command = "zypper --non-interactive install #{package_command_line}"
+  when :arch
+    install_command = "pacman -S --noconfirm #{package_command_line}"
   when :homebrew
     need_super_user_priviledge = false
     install_command = "brew install #{package_command_line}"
   when :macports
     install_command = "port install -y #{package_command_line}"
-  when :arch
-    install_command = "pacman -S --noconfirm #{package_command_line}"
   else
     return false
   end
