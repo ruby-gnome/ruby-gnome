@@ -17,12 +17,6 @@
 class TestAtkVersion < Test::Unit::TestCase
   include AtkTestUtils
 
-  setup do
-    unless Atk::Version.const_defined?(:STRING)
-      omit("Atk doesn't provide version information")
-    end
-  end
-
   test "STRING" do
     major = Atk::Version::MAJOR
     minor = Atk::Version::MINOR

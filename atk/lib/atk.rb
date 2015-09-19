@@ -27,9 +27,14 @@ rescue LoadError
   require 'atk.so'
 end
 
-require "gobject-introspection"
-vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
-GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
+if vendor_dir.exist?
+  begin
+    require "gobject-introspection"
+    vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
+    GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
+  rescue LoadError
+  end
+end
 
 module Atk
   module Version
