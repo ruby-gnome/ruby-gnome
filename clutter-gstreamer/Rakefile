@@ -23,7 +23,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/ClutterGStreamer is a Ruby binding of Clutter-GStreamer."
   package.description = "Ruby/ClutterGStreamer is a Ruby binding of Clutter-GStreamer."
   package.dependency.gem.runtime = ["gdk_pixbuf2", "clutter", "gstreamer"]
-  package.dependency.gem.development = ["test-unit-notify"]
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = [

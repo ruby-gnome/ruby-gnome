@@ -23,7 +23,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
   package.description = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
   package.dependency.gem.runtime = ["gobject-introspection", "gtk2"]
-  package.dependency.gem.development = ["test-unit-notify"]
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = ["glib2", "gobject-introspection"]

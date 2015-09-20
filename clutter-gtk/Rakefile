@@ -23,7 +23,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/ClutterGTK is a Ruby binding of Clutter-GTK."
   package.description = "Ruby/ClutterGTK is a Ruby binding of Clutter-GTK."
   package.dependency.gem.runtime = ["clutter", "gtk3"]
-  package.dependency.gem.development = ["test-unit-notify"]
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = [
