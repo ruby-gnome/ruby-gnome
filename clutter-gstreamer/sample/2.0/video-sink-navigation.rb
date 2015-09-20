@@ -28,6 +28,8 @@
 
 require "clutter-gst"
 
+ClutterGst.load_version = "2.0"
+
 stage = Clutter::Stage.new
 stage.user_resizable = true
 stage.signal_connect("destroy") do

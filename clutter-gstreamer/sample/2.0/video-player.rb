@@ -31,6 +31,8 @@ require "optparse"
 
 require "clutter-gst"
 
+ClutterGst.load_version = "2.0"
+
 SEEK_H = 14
 SEEK_W = 440
 
