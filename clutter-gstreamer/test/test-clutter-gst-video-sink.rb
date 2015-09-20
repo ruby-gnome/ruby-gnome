@@ -18,8 +18,17 @@ class ClutterGstVideoSinkTest < Test::Unit::TestCase
   include ClutterGStreamerTestUtils
 
   def test_texture
+    only_older_clutter_gstreamer_version(3, 0)
     texture = Clutter::Texture.new
     sink = ClutterGst::VideoSink.new(texture)
     assert_equal(texture, sink.texture)
+  end
+
+  test "#ready?" do
+    only_clutter_gstreamer_version(3, 0)
+    sink = ClutterGst::VideoSink.new
+    assert do
+      not sink.ready?
+    end
   end
 end

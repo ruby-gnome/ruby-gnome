@@ -24,6 +24,13 @@ module ClutterGStreamerTestUtils
     end
   end
 
+  def only_older_clutter_gstreamer_version(major, minor, micro=nil)
+    micro ||= 0
+    if ClutterGst::Version.or_later?(major, minor, micro)
+      omit("Require Clutter-GStreamer < #{major}.#{minor}.#{micro}")
+    end
+  end
+
   def omit_on_travis_ci
     omit("This test can't be run on Travis CI") if ENV["CI"]
   end
