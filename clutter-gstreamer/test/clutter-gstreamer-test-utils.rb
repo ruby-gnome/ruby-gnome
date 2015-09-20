@@ -17,19 +17,9 @@
 require "test-unit"
 
 module ClutterGStreamerTestUtils
-  def later_version?(major, minor, micro=nil)
-    micro ||= 0
-    clutter_gstreamer_version = [
-      ClutterGst::MAJOR_VERSION,
-      ClutterGst::MINOR_VERSION,
-      ClutterGst::MICRO_VERSION,
-    ]
-    (clutter_gstreamer_version <=> [major, minor, micro]) >= 0
-  end
-
   def only_clutter_gstreamer_version(major, minor, micro=nil)
     micro ||= 0
-    unless later_version?(major, minor, micro)
+    unless ClutterGst::Version.or_later?(major, minor, micro)
       omit("Require Clutter-GStreamer >= #{major}.#{minor}.#{micro}")
     end
   end
