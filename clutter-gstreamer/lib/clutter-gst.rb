@@ -26,7 +26,6 @@ vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 module ClutterGst
-
   LOG_DOMAIN = "Clutter-GStreamer"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
