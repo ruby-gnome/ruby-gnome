@@ -26,6 +26,7 @@ vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 module ClutterGst
+
   LOG_DOMAIN = "Clutter-GStreamer"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
@@ -94,4 +95,22 @@ module ClutterGst
       self.class.reference_gobject(object, :sink => true)
     end
   end
+  module Version
+    MAJOR = ClutterGst::MAJOR_VERSION
+    MINOR = ClutterGst::MINOR_VERSION
+    MICRO = ClutterGst::MICRO_VERSION
+    STRING = ClutterGst::VERSION_S
+    class << self
+      def or_later?(major, minor, micro=nil)
+        micro ||= 0
+        version = [
+          MAJOR,
+          MINOR,
+          MICRO,
+        ]
+        (version <=> [major, minor, micro]) >= 0
+      end
+    end
+  end
+
 end
