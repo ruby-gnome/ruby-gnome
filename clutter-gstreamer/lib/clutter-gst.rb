@@ -30,6 +30,8 @@ module ClutterGst
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
   class << self
+    attr_accessor :load_version
+
     def const_missing(name)
       init
       if const_defined?(name)
@@ -46,10 +48,14 @@ module ClutterGst
       end
       Gst.init if Gst.respond_to?(:init)
       Clutter.init if Clutter.respond_to?(:init)
+
       loader = Loader.new(self, argv)
+      loader.version = load_version
       loader.load
     end
   end
+
+  self.load_version = nil
 
   class Loader < GObjectIntrospection::Loader
     NAMESPACE = "ClutterGst"
