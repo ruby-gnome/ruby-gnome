@@ -1,4 +1,4 @@
-require 'glib2'
+require "glib2"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
