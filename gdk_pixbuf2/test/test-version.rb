@@ -28,20 +28,20 @@ class TestGdkPixbufVersion < Test::Unit::TestCase
   sub_test_case("#or_later?") do
     test "same" do
       assert_true(Gdk::Pixbuf::Version.or_later?(Gdk::Pixbuf::Version::MAJOR,
-                                             Gdk::Pixbuf::Version::MINOR,
-                                             Gdk::Pixbuf::Version::MICRO))
+                                                 Gdk::Pixbuf::Version::MINOR,
+                                                 Gdk::Pixbuf::Version::MICRO))
     end
 
     test "later" do
       assert_true(Gdk::Pixbuf::Version.or_later?(Gdk::Pixbuf::Version::MAJOR,
-                                         Gdk::Pixbuf::Version::MINOR - 1,
-                                         Gdk::Pixbuf::Version::MICRO))
+                                                 Gdk::Pixbuf::Version::MINOR - 1,
+                                                 Gdk::Pixbuf::Version::MICRO))
     end
 
     test "earlier" do
       assert_false(Gdk::Pixbuf::Version.or_later?(Gdk::Pixbuf::Version::MAJOR,
-                                          Gdk::Pixbuf::Version::MINOR + 1,
-                                          Gdk::Pixbuf::Version::MICRO))
+                                                  Gdk::Pixbuf::Version::MINOR + 1,
+                                                  Gdk::Pixbuf::Version::MICRO))
     end
   end
 end
