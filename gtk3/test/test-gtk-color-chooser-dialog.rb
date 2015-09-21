@@ -20,7 +20,7 @@ class TestGtkColorChooserDialog < Test::Unit::TestCase
   sub_test_case ".new" do
     test "no argument" do
       dialog = Gtk::ColorChooserDialog.new
-      if csd_supported?
+      if window_have_default_title?
         assert_equal("", dialog.title)
       else
         assert_nil(dialog.title)

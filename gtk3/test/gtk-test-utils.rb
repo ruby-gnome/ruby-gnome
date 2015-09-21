@@ -51,6 +51,14 @@ module GtkTestUtils
     end
   end
 
+  def window_have_default_title?
+    # Maybe 03213b9509fc1df16c66194ea168aed6c15110e9 in GTK+
+    return false if Gtk::Version.or_later?(3, 17, 0)
+    return true if csd_supported?
+
+    false
+  end
+
   def fixture_path(*components)
     File.join(File.dirname(__FILE__), "fixture", *components)
   end
