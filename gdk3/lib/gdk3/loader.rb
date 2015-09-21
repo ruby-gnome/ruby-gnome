@@ -34,7 +34,6 @@ module Gdk
       setup_pending_rectangle_functions
       define_keyval_module
       define_selection_module
-      load_cairo_rectangle_int
     end
 
     def define_keyval_module
@@ -45,27 +44,6 @@ module Gdk
     def define_selection_module
       @selection_module = Module.new
       @base_module.const_set("Selection", @selection_module)
-    end
-
-    def load_cairo_rectangle_int
-      info = find_cairo_rectangle_int_info
-      klass = self.class.define_class(info.gtype,
-                                      "Rectangle",
-                                      @base_module,
-                                      :size => info.size)
-      @rectangle_class = klass
-      load_fields(info, klass)
-      load_methods(info, klass)
-    end
-
-    def find_cairo_rectangle_int_info
-      repository = GObjectIntrospection::Repository.default
-      repository.each("cairo") do |info|
-        if info.name == "RectangleInt"
-          return info
-        end
-      end
-      nil
     end
 
     def post_load(repository, namespace)
@@ -102,15 +80,41 @@ module Gdk
 
     def apply_pending_rectangle_functions
       get_type_info = @pending_rectangle_get_type_function
-      gtype = get_type_info.invoke({:arguments => []})
-      self.class.register_boxed_class_converter(gtype) do |rectangle|
-        @rectangle_class
+      if get_type_info
+        rectangle_class = load_cairo_rectangle_int
+        gtype = get_type_info.invoke({:arguments => []})
+        self.class.register_boxed_class_converter(gtype) do |rectangle|
+          rectangle_class
+        end
+      else
+        rectangle_class = @base_module.const_get(:Rectangle)
       end
 
       @pending_rectangle_functions.each do |info|
-        name = info.name
-        define_method(info, @rectangle_class, name.gsub(/\Arectangle_/, ""))
+        name = rubyish_method_name(info, :prefix => "rectangle_")
+        define_method(info, rectangle_class, name)
       end
+    end
+
+    def load_cairo_rectangle_int
+      info = find_cairo_rectangle_int_info
+      klass = self.class.define_class(info.gtype,
+                                      "Rectangle",
+                                      @base_module,
+                                      :size => info.size)
+      load_fields(info, klass)
+      load_methods(info, klass)
+      klass
+    end
+
+    def find_cairo_rectangle_int_info
+      repository = GObjectIntrospection::Repository.default
+      repository.each("cairo") do |info|
+        if info.name == "RectangleInt"
+          return info
+        end
+      end
+      nil
     end
 
     def require_libraries
