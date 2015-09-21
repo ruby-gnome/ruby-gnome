@@ -292,8 +292,22 @@ class GNOME2WindowsBinaryBuildTask
       @package.name,
     ]
     dependencies += @package.windows.gobject_introspection_dependencies
+
+    compute_base_dir = lambda do |package|
+      "#{@package.project_root_dir}/#{package}/vendor/local"
+    end
+
+    gi_base_dir = compute_base_dir.call("gobject-introspection")
+    introspection_compiler = "INTROSPECTION_COMPILER="
+    introspection_compiler << "#{gi_base_dir}/bin/g-ir-compiler.exe"
+    dependencies.each do |package|
+      gir_dir = "#{compute_base_dir.call(package)}/share/gir-1.0"
+      introspection_compiler << " --includedir=#{gir_dir}"
+    end
+    common_make_args << introspection_compiler
+
     data_dirs = dependencies.collect do |package|
-      "#{@package.project_root_dir}/#{package}/vendor/local/share"
+      "#{compute_base_dir.call(package)}/share"
     end
     common_make_args << "XDG_DATA_DIRS=#{data_dirs.join(File::PATH_SEPARATOR)}"
   end

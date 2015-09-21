@@ -107,7 +107,7 @@ namespace :windows do
       new_pc << "native_bindir=${native_prefix}/bin\n"
       original_pc.each_line do |line|
         case line
-        when /\Ag_ir_(scanner|compiler)=/
+        when /\Ag_ir_scanner=/
           new_pc << line.gsub(/\${bindir}/, "${native_bindir}").gsub(/\.exe/, "")
         else
           new_pc << line
