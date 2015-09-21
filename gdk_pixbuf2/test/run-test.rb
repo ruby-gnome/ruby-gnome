@@ -40,6 +40,6 @@ require "glib-test-init"
 $LOAD_PATH.unshift(File.join(gdk_pixbuf2_base, "test"))
 require "gdk_pixbuf2-test-utils"
 
-require "gdk3"
+require "gdk_pixbuf2"
 
 exit Test::Unit::AutoRunner.run(true)
