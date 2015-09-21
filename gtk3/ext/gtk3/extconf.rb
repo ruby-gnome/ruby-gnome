@@ -67,6 +67,7 @@ unless required_pkg_config_package(package_id,
                                    :debian => "libgtk-3-dev",
                                    :redhat => "gtk3-devel",
                                    :homebrew => "gtk+3",
+                                   :arch => "gtk3",
                                    :macports => "gtk3")
   exit(false)
 end
