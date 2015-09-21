@@ -2,6 +2,61 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.0.4: 2015-09-21
+
+It is a build fix release for 32bit Windows.
+
+=== Changes
+
+==== All
+
+  * Improvements
+    * Supported auto native package installation on Arch Linux.
+      [GitHub#553][GitHub#563] [Patch by lilole]
+
+==== Ruby/GObjctIntrospection
+
+  * Fixes
+    * 32bit Windows: Fixed strut field accessors access wrong address.
+
+==== Ruby/ATK
+
+  * Improvements
+    * Added (({Atk::Version.or_later?}))
+      [GitHub#552] [Patch by cedlemo]
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements
+    * Added (({Gdk::Pixbuf::Version.or_later?})).
+      [GitHub#561] [Patch by cedlemo]
+
+==== Ruby/GDK3
+
+  * Improvements
+    * Supported GTK+ 3.17.9.
+      [GitHub#558] [Reported by Mamoru TASAKA]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Updated examples.
+      [GitHub#550] [Patch by cedlemo]
+
+==== Ruby/ClutterGstreamer
+
+  * Improvements
+    * Added (({ClutterGst.load_version})).
+    * Added (({ClutterGst.load_version=})).
+    * Added (({ClutterGst::Version.or_later?})).
+      [GitHub#556] [Patch by cedlemo]
+
+=== Thanks
+
+  * cedlemo
+  * lilole
+  * Mamoru TASAKA
+
 == Ruby-GNOME2 3.0.3: 2015-09-16
 
 It is a compatibility improvement release of 3.0.2.
