@@ -63,6 +63,7 @@ setup_windows(module_name, base_dir)
 unless required_pkg_config_package(package_id,
                                    :debian => "libcairo2-dev",
                                    :fedora => "cairo-gobject-devel",
+                                   :arch => "cairo",
                                    :homebrew => "cairo")
   exit(false)
 end

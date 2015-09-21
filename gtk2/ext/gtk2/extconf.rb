@@ -51,6 +51,7 @@ setup_windows(module_name, base_dir)
 unless required_pkg_config_package([package_id, 2, 10, 0],
                                    :debian => "libgtk2.0-dev",
                                    :redhat => "gtk2-devel",
+                                   :arch => "gtk2",
                                    :homebrew => "gtk+",
                                    :macports => "gtk2")
   exit(false)

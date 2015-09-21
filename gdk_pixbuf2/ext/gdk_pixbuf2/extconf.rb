@@ -45,6 +45,7 @@ unless required_pkg_config_package(package_id,
                                    :debian => "libgdk-pixbuf2.0-dev",
                                    :redhat => "gtk2-devel",
                                    :fedora => "gdk-pixbuf2-devel",
+                                   :arch => "gdk-pixbuf2",
                                    :homebrew => "gdk-pixbuf",
                                    :macports => "gdk-pixbuf2")
   exit(false)

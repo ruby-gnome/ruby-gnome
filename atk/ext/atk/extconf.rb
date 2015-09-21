@@ -47,6 +47,7 @@ setup_windows(module_name, base_dir)
 unless required_pkg_config_package([package_id, 1, 12, 0],
                                    :debian => "libatk1.0-dev",
                                    :redhat => "atk-devel",
+                                   :arch => "atk",
                                    :homebrew => "atk",
                                    :macports => "atk")
   exit(false)

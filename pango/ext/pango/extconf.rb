@@ -51,6 +51,7 @@ setup_windows(module_name, base_dir)
 unless required_pkg_config_package([package_id, 1, 14, 0],
                                    :debian => "libpango1.0-dev",
                                    :redhat => "pango-devel",
+                                   :arch => "pango",
                                    :homebrew => "pango",
                                    :macports => "pango")
   exit(false)
