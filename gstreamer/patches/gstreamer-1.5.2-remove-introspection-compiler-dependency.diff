@@ -1,0 +1,60 @@
+diff -ru gstreamer-1.5.2.orig/gst/Makefile.am gstreamer-1.5.2/gst/Makefile.am
+--- gstreamer-1.5.2.orig/gst/Makefile.am	2015-06-22 17:13:25.000000000 +0900
++++ gstreamer-1.5.2/gst/Makefile.am	2015-09-21 14:56:32.995446061 +0900
+@@ -309,7 +309,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)$(INTROSPECTION_COMPILER) --includedir=$(srcdir) --includedir=$(builddir) $(INTROSPECTION_COMPILER_OPTS) $< -o $(@F)
+ 
+ CLEANFILES += $(BUILT_GIRSOURCES) $(typelibs_DATA)
+diff -ru gstreamer-1.5.2.orig/libs/gst/base/Makefile.am gstreamer-1.5.2/libs/gst/base/Makefile.am
+--- gstreamer-1.5.2.orig/libs/gst/base/Makefile.am	2015-06-22 17:13:25.000000000 +0900
++++ gstreamer-1.5.2/libs/gst/base/Makefile.am	2015-09-21 14:56:32.995446061 +0900
+@@ -96,7 +96,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)$(INTROSPECTION_COMPILER) --includedir=$(srcdir) --includedir=$(builddir) --includedir=$(top_builddir)/gst $(INTROSPECTION_COMPILER_OPTS) $< -o $(@F)
+ 
+ CLEANFILES += $(BUILT_GIRSOURCES) $(typelibs_DATA)
+diff -ru gstreamer-1.5.2.orig/libs/gst/check/Makefile.am gstreamer-1.5.2/libs/gst/check/Makefile.am
+--- gstreamer-1.5.2.orig/libs/gst/check/Makefile.am	2015-06-22 17:13:25.000000000 +0900
++++ gstreamer-1.5.2/libs/gst/check/Makefile.am	2015-09-21 14:56:32.999445960 +0900
+@@ -171,7 +171,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)$(INTROSPECTION_COMPILER) --includedir=$(srcdir) --includedir=$(builddir) --includedir=$(top_builddir)/gst $(INTROSPECTION_COMPILER_OPTS) $< -o $(@F)
+ 
+ CLEANFILES += $(BUILT_GIRSOURCES) $(typelibs_DATA)
+diff -ru gstreamer-1.5.2.orig/libs/gst/controller/Makefile.am gstreamer-1.5.2/libs/gst/controller/Makefile.am
+--- gstreamer-1.5.2.orig/libs/gst/controller/Makefile.am	2015-06-22 17:13:25.000000000 +0900
++++ gstreamer-1.5.2/libs/gst/controller/Makefile.am	2015-09-21 14:56:32.999445960 +0900
+@@ -68,7 +68,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)$(INTROSPECTION_COMPILER) --includedir=$(srcdir) --includedir=$(builddir) --includedir=$(top_builddir)/gst $(INTROSPECTION_COMPILER_OPTS) $< -o $(@F)
+ 
+ CLEANFILES += $(BUILT_GIRSOURCES) $(typelibs_DATA)
+diff -ru gstreamer-1.5.2.orig/libs/gst/net/Makefile.am gstreamer-1.5.2/libs/gst/net/Makefile.am
+--- gstreamer-1.5.2.orig/libs/gst/net/Makefile.am	2015-06-22 17:13:25.000000000 +0900
++++ gstreamer-1.5.2/libs/gst/net/Makefile.am	2015-09-21 14:56:32.999445960 +0900
+@@ -89,7 +89,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)$(INTROSPECTION_COMPILER) --includedir=$(srcdir) --includedir=$(builddir) --includedir=$(top_builddir)/gst $(INTROSPECTION_COMPILER_OPTS) $< -o $(@F)
+ 
+ CLEANFILES += $(BUILT_GIRSOURCES) $(typelibs_DATA)

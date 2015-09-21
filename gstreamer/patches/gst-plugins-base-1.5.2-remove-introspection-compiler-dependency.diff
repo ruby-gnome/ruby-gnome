@@ -1,0 +1,132 @@
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/allocators/Makefile.am gst-plugins-base-1.5.2/gst-libs/gst/allocators/Makefile.am
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/allocators/Makefile.am	2015-04-27 17:00:36.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/allocators/Makefile.am	2015-09-21 14:56:41.571230796 +0900
+@@ -53,7 +53,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ 		$(INTROSPECTION_COMPILER) \
+ 		--includedir=$(srcdir) \
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/app/Makefile.am gst-plugins-base-1.5.2/gst-libs/gst/app/Makefile.am
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/app/Makefile.am	2015-06-22 17:15:57.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/app/Makefile.am	2015-09-21 14:56:41.571230796 +0900
+@@ -70,7 +70,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ 		$(INTROSPECTION_COMPILER) \
+ 		--includedir=$(srcdir) \
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/audio/Makefile.am gst-plugins-base-1.5.2/gst-libs/gst/audio/Makefile.am
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/audio/Makefile.am	2015-06-22 17:15:57.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/audio/Makefile.am	2015-09-21 14:56:41.571230796 +0900
+@@ -124,7 +124,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ 		$(INTROSPECTION_COMPILER) \
+ 		--includedir=$(srcdir) \
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/fft/Makefile.am gst-plugins-base-1.5.2/gst-libs/gst/fft/Makefile.am
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/fft/Makefile.am	2015-04-27 17:00:36.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/fft/Makefile.am	2015-09-21 14:56:41.571230796 +0900
+@@ -80,7 +80,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ 		$(INTROSPECTION_COMPILER) \
+ 		--includedir=$(srcdir) \
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/pbutils/Makefile.am gst-plugins-base-1.5.2/gst-libs/gst/pbutils/Makefile.am
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/pbutils/Makefile.am	2015-06-22 17:15:57.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/pbutils/Makefile.am	2015-09-21 14:56:41.571230796 +0900
+@@ -114,7 +114,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ 		$(INTROSPECTION_COMPILER) \
+ 		--includedir=$(srcdir) \
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/riff/Makefile.am gst-plugins-base-1.5.2/gst-libs/gst/riff/Makefile.am
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/riff/Makefile.am	2015-06-22 17:15:57.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/riff/Makefile.am	2015-09-21 14:56:41.571230796 +0900
+@@ -66,7 +66,7 @@
+ #
+ #typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ #
+-#%.typelib: %.gir $(INTROSPECTION_COMPILER)
++#%.typelib: %.gir
+ #	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ #		$(INTROSPECTION_COMPILER) \
+ #		--includedir=$(srcdir) \
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/rtp/Makefile.am gst-plugins-base-1.5.2/gst-libs/gst/rtp/Makefile.am
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/rtp/Makefile.am	2015-06-22 17:15:57.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/rtp/Makefile.am	2015-09-21 14:56:41.571230796 +0900
+@@ -82,7 +82,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ 		$(INTROSPECTION_COMPILER) \
+ 		--includedir=$(srcdir) \
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/rtsp/Makefile.am gst-plugins-base-1.5.2/gst-libs/gst/rtsp/Makefile.am
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/rtsp/Makefile.am	2015-06-22 17:15:57.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/rtsp/Makefile.am	2015-09-21 14:56:41.571230796 +0900
+@@ -90,7 +90,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ 		$(INTROSPECTION_COMPILER) \
+ 		--includedir=$(srcdir) \
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/sdp/Makefile.am gst-plugins-base-1.5.2/gst-libs/gst/sdp/Makefile.am
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/sdp/Makefile.am	2015-04-27 17:00:36.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/sdp/Makefile.am	2015-09-21 14:56:41.575230697 +0900
+@@ -47,7 +47,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ 		$(INTROSPECTION_COMPILER) \
+ 		--includedir=$(srcdir) \
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/tag/Makefile.am gst-plugins-base-1.5.2/gst-libs/gst/tag/Makefile.am
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/tag/Makefile.am	2015-06-22 17:15:57.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/tag/Makefile.am	2015-09-21 14:56:41.575230697 +0900
+@@ -62,7 +62,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ 		$(INTROSPECTION_COMPILER) \
+ 		--includedir=$(srcdir) \
+diff -ru gst-plugins-base-1.5.2.orig/gst-libs/gst/video/Makefile.am gst-plugins-base-1.5.2/gst-libs/gst/video/Makefile.am
+--- gst-plugins-base-1.5.2.orig/gst-libs/gst/video/Makefile.am	2015-06-22 17:15:57.000000000 +0900
++++ gst-plugins-base-1.5.2/gst-libs/gst/video/Makefile.am	2015-09-21 14:56:41.575230697 +0900
+@@ -131,7 +131,7 @@
+ 
+ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ 		$(INTROSPECTION_COMPILER) \
+ 		--includedir=$(srcdir) \

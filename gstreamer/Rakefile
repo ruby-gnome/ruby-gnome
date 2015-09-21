@@ -154,6 +154,10 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "--enable-introspection",
         ],
         :build_concurrently => false,
+        :patches => [
+          "gstreamer-1.5.2-remove-introspection-compiler-dependency.diff",
+        ],
+        :need_autoreconf => true,
         :built_file => "bin/libgstreamer-1.0-0.dll",
       },
     },
@@ -171,7 +175,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :patches => [
           "gst-plugins-base-1.5.2-use-portable-64bit-data-print-modifier.diff",
           "gst-plugins-base-1.5.2-use-portable-cast.diff",
+          "gst-plugins-base-1.5.2-remove-introspection-compiler-dependency.diff",
         ],
+        :need_autoreconf => true,
         :built_file => "lib/gstreamer-1.0/libgstgio.dll",
       },
     },
