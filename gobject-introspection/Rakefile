@@ -94,36 +94,3 @@ namespace :native do
     task :after => "native:gobject-introspection:cross"
   end
 end
-
-namespace :windows do
-  namespace :"gobject-introspection" do
-    pkg_config_dir = package_task.windows.absolute_binary_dir + "lib/pkgconfig"
-    pc_path = pkg_config_dir + "gobject-introspection-1.0.pc"
-    patched_path = pkg_config_dir + "patched"
-    file patched_path.to_s do
-      original_pc = pc_path.read
-      new_pc = ""
-      new_pc << "native_prefix=#{package_task.native.absolute_binary_dir}\n"
-      new_pc << "native_bindir=${native_prefix}/bin\n"
-      original_pc.each_line do |line|
-        case line
-        when /\Ag_ir_scanner=/
-          new_pc << line.gsub(/\${bindir}/, "${native_bindir}").gsub(/\.exe/, "")
-        else
-          new_pc << line
-        end
-      end
-      pc_path.open("w") do |pc_file|
-        pc_file.write(new_pc)
-      end
-      touch(patched_path)
-    end
-
-    desc "Use native tools"
-    task :cross => patched_path.to_s
-  end
-
-  namespace :builder do
-    task :after => "windows:gobject-introspection:cross"
-  end
-end

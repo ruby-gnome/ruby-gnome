@@ -287,6 +287,12 @@ class GNOME2WindowsBinaryBuildTask
       return
     end
 
+    g_ir_scanner = "#{@package.project_root_dir}/gobject-introspection/"
+    g_ir_scanner << "#{@package.native.relative_binary_dir}/bin/g-ir-scanner"
+    introspection_scanner = "INTROSPECTION_SCANNER=#{g_ir_scanner}"
+    common_make_args << introspection_scanner
+
+
     dependencies = [
       "gobject-introspection",
       @package.name,
