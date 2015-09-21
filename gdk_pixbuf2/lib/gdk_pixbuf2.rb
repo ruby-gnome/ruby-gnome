@@ -39,6 +39,7 @@ module Gdk
       loader
     end
   end
+
   class Pixbuf
     LOG_DOMAIN = "GdkPixbuf"
 
@@ -51,6 +52,7 @@ module Gdk
         end
       end
     end
+
     module Version
       MAJOR = Gdk::Pixbuf::MAJOR
       MINOR = Gdk::Pixbuf::MINOR
