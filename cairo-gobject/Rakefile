@@ -23,7 +23,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/CairoGObject is a Ruby binding of cairo-gobject."
   package.description = "Ruby/CairoGObject is a Ruby binding of cairo-gobject."
   package.dependency.gem.runtime = ["cairo", "glib2"]
-  package.dependency.gem.development = ["test-unit-notify"]
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = ["cairo", "glib2"]

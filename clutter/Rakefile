@@ -27,7 +27,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "gobject-introspection",
     "pango"
   ]
-  package.dependency.gem.development = ["test-unit-notify"]
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = [
