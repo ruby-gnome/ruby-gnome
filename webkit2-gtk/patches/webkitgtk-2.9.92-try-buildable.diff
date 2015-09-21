@@ -1,0 +1,54 @@
+diff -ru webkitgtk-2.9.92.orig/Source/CMakeLists.txt webkitgtk-2.9.92/Source/CMakeLists.txt
+--- webkitgtk-2.9.92.orig/Source/CMakeLists.txt	2015-09-16 17:32:43.000000000 +0900
++++ webkitgtk-2.9.92/Source/CMakeLists.txt	2015-09-21 17:34:48.449232820 +0900
+@@ -33,7 +33,9 @@
+ # -----------------------------------------------------------------------------
+ # Set compiler flags for all targets
+ # -----------------------------------------------------------------------------
+-WEBKIT_SET_EXTRA_COMPILER_FLAGS(bmalloc ${ADDITIONAL_COMPILER_FLAGS})
++if (NOT WIN32)
++    WEBKIT_SET_EXTRA_COMPILER_FLAGS(bmalloc ${ADDITIONAL_COMPILER_FLAGS})
++endif ()
+ WEBKIT_SET_EXTRA_COMPILER_FLAGS(WTF ${ADDITIONAL_COMPILER_FLAGS})
+ WEBKIT_SET_EXTRA_COMPILER_FLAGS(JavaScriptCore ${ADDITIONAL_COMPILER_FLAGS})
+ WEBKIT_SET_EXTRA_COMPILER_FLAGS(WebCoreTestSupport ${ADDITIONAL_COMPILER_FLAGS})
+diff -ru webkitgtk-2.9.92.orig/Source/WTF/wtf/Atomics.h webkitgtk-2.9.92/Source/WTF/wtf/Atomics.h
+--- webkitgtk-2.9.92.orig/Source/WTF/wtf/Atomics.h	2015-09-14 16:08:10.000000000 +0900
++++ webkitgtk-2.9.92/Source/WTF/wtf/Atomics.h	2015-09-21 17:55:24.010646484 +0900
+@@ -335,7 +335,7 @@
+         : "memory"
+         );
+     return result;
+-#elif OS(WINDOWS) && CPU(X86)
++#elif OS(WINDOWS) && CPU(X86) && 0
+     // FIXME: We need a 64-bit ASM implementation, but this cannot be inline due to
+     // Microsoft's decision to exclude it from the compiler.
+     bool result = false;
+diff -ru webkitgtk-2.9.92.orig/Source/WTF/wtf/Platform.h webkitgtk-2.9.92/Source/WTF/wtf/Platform.h
+--- webkitgtk-2.9.92.orig/Source/WTF/wtf/Platform.h	2015-09-16 17:32:43.000000000 +0900
++++ webkitgtk-2.9.92/Source/WTF/wtf/Platform.h	2015-09-21 17:49:55.178787573 +0900
+@@ -648,7 +648,7 @@
+ #define HAVE_ALIGNED_MALLOC 1
+ #define HAVE_ISDEBUGGERPRESENT 1
+ 
+-#include <WTF/WTFHeaderDetection.h>
++/* #include <WTF/WTFHeaderDetection.h> */
+ 
+ #endif
+ 
+diff -ru webkitgtk-2.9.92.orig/Tools/CMakeLists.txt webkitgtk-2.9.92/Tools/CMakeLists.txt
+--- webkitgtk-2.9.92.orig/Tools/CMakeLists.txt	2015-09-16 17:32:43.000000000 +0900
++++ webkitgtk-2.9.92/Tools/CMakeLists.txt	2015-09-21 17:44:51.938292338 +0900
+@@ -28,9 +28,9 @@
+ endif ()
+ 
+ if (WIN32)
+-    add_subdirectory(DumpRenderTree)
+-    add_subdirectory(TestWebKitAPI)
+-    add_subdirectory(WinLauncher)
++  # add_subdirectory(DumpRenderTree)
++    # add_subdirectory(TestWebKitAPI)
++    # add_subdirectory(WinLauncher)
+ endif ()
+ 
+ if (ENABLE_WEBKIT2 AND ENABLE_API_TESTS)

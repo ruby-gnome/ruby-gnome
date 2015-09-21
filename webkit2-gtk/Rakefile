@@ -86,7 +86,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "webkitgtk",
       :download_base_url => "http://webkitgtk.org/releases",
       :label => "WebKitGTK+",
-      :version => "2.8.5",
+      :version => "2.9.92",
       :compression_method => "xz",
       :windows => {
         :cmake_args => [
@@ -103,8 +103,17 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "-DSQLITE_LIBRARIES=#{gstreamer_absolute_binary_dir}/lib",
           "-DENABLE_PLUGIN_PROCESS_GTK2=OFF",
           "-DENABLE_X11_TARGET=OFF",
+          "-DENABLE_GTKDOC=OFF",
+          "-DENABLE_CREDENTIAL_STORAGE=OFF",
+          "-DENABLE_GEOLOCATION=OFF",
+          "-DENABLE_OPENGL=OFF",
+          "-DENABLE_SPELLCHECK=OFF",
+          "-DUSE_LIBNOTIFY=OFF",
+          "-DUSE_LIBHYPHEN=OFF",
+          "-DENABLE_API_TESTS=OFF",
         ],
         :patches => [
+          "webkitgtk-2.9.92-try-buildable.diff",
         ],
       },
     },
