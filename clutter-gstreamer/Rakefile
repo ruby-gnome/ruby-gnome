@@ -52,6 +52,10 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
           "--enable-introspection",
         ],
+        :patches => [
+          "clutter-gst-3.0.10-remove-introspection-compiler-dependency.diff",
+        ],
+        :need_autoreconf => true,
         :built_file => "bin/libclutter-gst-3.0-0.dll",
       },
     }
