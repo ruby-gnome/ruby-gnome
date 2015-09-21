@@ -57,7 +57,7 @@ module Gdk
       MAJOR = Gdk::Pixbuf::MAJOR
       MINOR = Gdk::Pixbuf::MINOR
       MICRO = Gdk::Pixbuf::MICRO
-      STRING = "#{MAJOR}.#{MINOR}.#{MICRO}" 
+      STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
       class << self
         def or_later?(major, minor, micro=nil)
           micro ||= 0
