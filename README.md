@@ -2,10 +2,10 @@
 
 [![Build Status](https://travis-ci.org/ruby-gnome2/ruby-gnome2.svg?branch=master)](https://travis-ci.org/ruby-gnome2/ruby-gnome2)
 
-## Ruby-GNOME2 -- Ruby bindings for GNOME-2.x
+## Ruby-GNOME2 -- Ruby bindings for GNOME
 
-This is a set of bindings for the GNOME-2.x and GNOME-3.x libraries to
-use from Ruby 2.0.0, 2.1 and 2.2.
+This is a set of bindings for the GNOME 2.x and 3.x libraries to use
+from Ruby 2.0.0, 2.1 and 2.2.
 
 ## Release packages
 
@@ -20,7 +20,13 @@ use from Ruby 2.0.0, 2.1 and 2.2.
 
 ### ruby-gtk3
 
-* ruby-gtk2 - Ruby/GTK2
+* Ruby/GLib2:           GLib 2.12.x or later
+* Ruby/GIO2:            GIO 2.16.x or later
+* Ruby/ATK:             ATK 1.12.x or later
+* Ruby/Pango:           Pango 1.14.x or later
+* Ruby/GdkPixbuf2:      GTK+ 2.0.x or later
+* Ruby/GObjectIntrospection: GObject Introspection 1.32.1 or later
+* Ruby/CairoGObject:    cairo-gobject 1.12.10 or later
 * Ruby/GDK3:            GTK+ 3.4.2 or later
 * Ruby/GTK3:            GTK+ 3.4.2 or later
 
@@ -30,9 +36,9 @@ use from Ruby 2.0.0, 2.1 and 2.2.
 * Ruby/RSVG:            librsvg 2.8.0 or later
 * Ruby/Poppler:         poppler-glib 0.8.0 or later
 * Ruby/VTE              VTE 0.12.1 or later
+* Ruby/VTE3             VTE 0.37.0 or later
+* Ruby/GStreamer:       GStreamer 1.0.0 or later
 * Ruby/GtkSourceView2:  GtkSourceView 2.0.0 or later
-* Ruby/GIO2:            GIO 2.16.x or later
-* Ruby/CairoGObject:    cairo-gobject 1.12.10 or later
 * Ruby/Clutter:         Clutter 1.12.0 or later
 * Ruby/ClutterGTK:      Clutter-GTK 1.2.0 or later
 * Ruby/ClutterGStreamer:Clutter-GStreamer 2.0.0 or later
@@ -40,7 +46,7 @@ use from Ruby 2.0.0, 2.1 and 2.2.
 * Ruby/VTE3:            VTE 0.32.2 or later
 * Ruby/WebKitGTK:       WebKitGTK+ 1.8.1 or later (for GTK+ 3)
 * Ruby/WebKitGTK2:      WebKitGTK+ 1.8.1 or later (for GTK+ 2)
-* Ruby/GStreamer:       GStreamer 1.0.0 or later
+* Ruby/WebKit2GTK:      WebKitGTK+ 2.0.0 or later (for GTK+ 3)
 
 ### Experimental / Incomplete:
 
@@ -84,35 +90,6 @@ Or you can compile each sub-binding:
 * `CAIRO_PATH`
   * rcairo path (for Win32).
 
-### Dependencies
-
-You should install a sub-binding with its dependencies.  The
-current dependencies are:
-
-* Ruby/GLib
-  * none.
-* Ruby/ATK
-  * depends on Ruby/GLib.
-* Ruby/Pango
-  * depends on Ruby/GLib, rcairo.
-* Ruby/GdkPixbuf
-  * depends on Ruby/GLib.
-* Ruby/GTK
-  * depends on Ruby/GLib, Ruby/ATK, Ruby/Pango,
-    Ruby/GdkPixbuf, rcairo
-* Ruby/RSVG
-  * depends on Ruby/GLib, Ruby/GdkPixbuf2.
-* Ruby/Poppler
-  * depends on Ruby/GLib, Ruby/GdkPixbuf(optional), rcairo.
-* Ruby/VTE
-  * depends on Ruby/GTK.
-* Ruby/GtkSourceView2
-  * depends on Ruby/GTK.
-* Ruby/GIO2
-  * depends on Ruby/GLib.
-* Ruby/GStreamer
-  * depends on Ruby/GLib.
-
 ### Install from GitHub master branch
 
 You can also install these gems from GitHub master branch.
@@ -132,7 +109,6 @@ You can also install these gems from GitHub master branch.
 Please report bugs either in our bug tracker
 
 * [https://github.com/ruby-gnome2/ruby-gnome2/issues](https://github.com/ruby-gnome2/ruby-gnome2/issues) (current)
-* [http://sourceforge.net/tracker/?group_id=53614&atid=470969](http://sourceforge.net/tracker/?group_id=53614&atid=470969) (previous)
 
 or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
 
