@@ -18,16 +18,25 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef RB_GTK3_PRIVATE_H
-#define RB_GTK3_PRIVATE_H
+#include "rb-gtk3-private.h"
 
-#include "rb-gtk3.h"
+static void
+rb_gtk3_cell_layout_mark(gpointer object)
+{
+    GtkCellLayout *cell_layout = object;
+    GList *node;
+    GList *renderers;
 
-G_GNUC_INTERNAL void rbgtk3_class_init_func(gpointer g_class, gpointer class_data);
-G_GNUC_INTERNAL void rbgtk3_initialize(VALUE self);
+    renderers = gtk_cell_layout_get_cells(cell_layout);
+    for (node = renderers; node; node = g_list_next(node)) {
+        GtkCellRenderer *renderer = node->data;
+        rbgobj_gc_mark_instance(renderer);
+    }
+    g_list_free(renderers);
+}
 
-G_GNUC_INTERNAL void rbgtk3_cell_layout_init(void);
-G_GNUC_INTERNAL void rbgtk3_container_init(void);
-G_GNUC_INTERNAL void rbgtk3_widget_init(void);
-
-#endif
+void
+rbgtk3_cell_layout_init(void)
+{
+    rbgobj_register_mark_func(GTK_TYPE_CELL_LAYOUT, rb_gtk3_cell_layout_mark);
+}

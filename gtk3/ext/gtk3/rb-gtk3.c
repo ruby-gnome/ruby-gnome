@@ -430,6 +430,7 @@ Init_gtk3(void)
     rbgobj_register_mark_func(GTK_TYPE_UI_MANAGER, rb_gtk3_ui_manager_mark);
 #endif
 
+    rbgtk3_cell_layout_init();
     rbgtk3_container_init();
     rbgtk3_widget_init();
 
