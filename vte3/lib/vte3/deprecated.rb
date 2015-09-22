@@ -19,7 +19,11 @@ module Vte
 
   class Terminal
     extend GLib::Deprecatable
-    define_deprecated_const :EraseBinding, 'Vte::TerminalEraseBinding'
+    if Vte.const_defined?(:TerminalEraseBinding)
+      define_deprecated_const :EraseBinding, 'Vte::TerminalEraseBinding'
+    else
+      define_deprecated_const :TerminalEraseBinding, 'Vte::EraseBinding'
+    end
     define_deprecated_const :CursorBlinkMode, 'Vte::TerminalCursorBlinkMode'
     define_deprecated_const :CursorShape, 'Vte::TerminalCursorShape'
     define_deprecated_const :WriteFlags, 'Vte::TerminalWriteFlags'

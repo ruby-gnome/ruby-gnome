@@ -56,7 +56,7 @@ class TestTerminalProperties < Test::Unit::TestCase
   end
 
   def test_delete_binding
-    bind = Vte::TerminalEraseBinding::ASCII_DELETE
+    bind = Vte::EraseBinding::ASCII_DELETE
     @terminal.delete_binding = bind
     assert_equal(bind, @terminal.delete_binding)
   end
