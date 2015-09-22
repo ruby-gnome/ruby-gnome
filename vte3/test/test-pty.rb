@@ -20,6 +20,10 @@ class TestPty < Test::Unit::TestCase
     @pty = Vte::Pty.new(flag)
   end
 
+  def teardown
+    @pty.close
+  end
+
   def test_fd
     assert_nothing_raised do
       @pty.fd
