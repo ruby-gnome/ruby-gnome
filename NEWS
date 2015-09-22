@@ -2,6 +2,24 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.0.5: 2015-09-22
+
+It is a bug fix release for mikutter.
+
+=== Changes
+
+==== Ruby/GTK2
+
+  * Fixes
+    * Fixed a bug that (({g_object_ref_sink()})) isn't called for
+      instance of (({type_register}))ed class.
+      [http://dev.mikutter.hachune.net/issues/771#note-3]
+      [Reported by toshi_a]
+
+=== Thanks
+
+  * toshi_a
+
 == Ruby-GNOME2 3.0.4: 2015-09-21
 
 It is a build fix release for 32bit Windows.
