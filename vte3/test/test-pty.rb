@@ -31,10 +31,15 @@ class TestPty < Test::Unit::TestCase
   end
 
   def test_size
-    row = 80
-    col = 24
-    @pty.set_size(row, col)
-    assert_equal([row, col], @pty.size)
+    original = @pty.size
+    begin
+      row = 80
+      col = 24
+      @pty.set_size(row, col)
+      assert_equal([row, col], @pty.size)
+    ensure
+      @pty.set_size(*original)
+    end
   end
 
   def test_utf8
