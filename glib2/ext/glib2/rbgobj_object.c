@@ -176,7 +176,6 @@ gobj_mark(gpointer ptr)
     GObject* gobj = ptr;
     guint n_properties;
     GParamSpec** properties;
-    GValue gval = G_VALUE_INIT;
     guint i;
 
     properties = g_object_class_list_properties(G_OBJECT_GET_CLASS(gobj), &n_properties);
@@ -189,6 +188,7 @@ gobj_mark(gpointer ptr)
         /* FIXME: exclude types that doesn't have identity. */
 
         {
+            GValue gval = G_VALUE_INIT;
             g_value_init(&gval, value_type);
             g_object_get_property(gobj, pspec->name, &gval);
             rbgobj_gc_mark_gvalue(&gval);
