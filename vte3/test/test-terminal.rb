@@ -28,6 +28,15 @@ class TestTerminal < Test::Unit::TestCase
   end
 
   sub_test_case "#fork_command" do
+    teardown do
+      loop = GLib::MainLoop.new
+      GLib::Idle.add do
+        loop.quit
+        GLib::Source::REMOVE
+      end
+      loop.run
+    end
+
     test "success" do
       pid = @terminal.fork_command(:argv => ["echo"])
       assert do
