@@ -17,26 +17,27 @@
 module Vte
   extend GLib::Deprecatable
 
+  if const_defined?(:TerminalEraseBinding)
+    define_deprecated_const :EraseBinding, 'Vte::TerminalEraseBinding'
+  else
+    define_deprecated_const :TerminalEraseBinding, 'Vte::EraseBinding'
+  end
+
+  if const_defined?(:TerminalCursorBlinkMode)
+    define_deprecated_const :CursorBlinkMode, 'Vte::TerminalCursorBlinkMode'
+  else
+    define_deprecated_const :TerminalCursorBlinkMode, 'Vte::CursorBlinkMode'
+  end
+
+  if const_defined?(:TerminalCursorShape)
+    define_deprecated_const :CursorShape, 'Vte::TerminalCursorShape'
+  else
+    define_deprecated_const :TerminalCursorShape, 'Vte::CursorShape'
+  end
+
+
   class Terminal
     extend GLib::Deprecatable
-
-    if Vte.const_defined?(:TerminalEraseBinding)
-      define_deprecated_const :EraseBinding, 'Vte::TerminalEraseBinding'
-    else
-      define_deprecated_const :TerminalEraseBinding, 'Vte::EraseBinding'
-    end
-
-    if Vte.const_defined?(:TerminalCursorBlinkMode)
-      define_deprecated_const :CursorBlinkMode, 'Vte::TerminalCursorBlinkMode'
-    else
-      define_deprecated_const :TerminalCursorBlinkMode, 'Vte::CursorBlinkMode'
-    end
-
-    if Vte.const_defined?(:TerminalCursorShape)
-      define_deprecated_const :CursorShape, 'Vte::TerminalCursorShape'
-    else
-      define_deprecated_const :TerminalCursorShape, 'Vte::CursorShape'
-    end
 
     define_deprecated_const :WriteFlags, 'Vte::TerminalWriteFlags'
 
