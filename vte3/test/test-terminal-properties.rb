@@ -31,12 +31,6 @@ class TestTerminalProperties < Test::Unit::TestCase
     assert_false(@terminal.audible_bell?)
   end
 
-  def test_background_image_file
-    image_name = "image_file"
-    @terminal.background_image_file = image_name
-    assert_equal(image_name, @terminal.background_image_file)
-  end
-
   def test_backspace_binding
     bind = Vte::EraseBinding::DELETE_SEQUENCE
     @terminal.backspace_binding = bind
