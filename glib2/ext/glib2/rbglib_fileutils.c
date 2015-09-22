@@ -72,7 +72,7 @@ rbglib_m_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                        "flags", &rb_flags,
                        NULL);
 
-      return CSTR2RVAL_FREE(g_format_size_full(NUM2ULONG(rb_size),
+      return CSTR2RVAL_FREE(g_format_size_full(NUM2ULL(rb_size),
                                                RVAL2GFORMATSIZEFLAGS(rb_flags)));
     }
 }
