@@ -33,12 +33,6 @@ class TestPty < Test::Unit::TestCase
     assert_equal([row, col], @pty.size)
   end
 
-  def test_term
-    term_type = "vt100"
-    @pty.term = term_type
-    assert_equal(term_type, @pty.term)
-  end
-
   def test_utf8
     assert_nothing_raised do
       @pty.utf8 = true
