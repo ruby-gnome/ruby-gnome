@@ -25,6 +25,19 @@ module Gtk
 
     include Enumerable
 
+    alias_method :add_raw, :add
+    def add(child, properties={})
+      child.freeze_child_notify
+      begin
+        add_raw(child)
+        properties.each do |key, value|
+          child_set_property(child, key, value)
+        end
+      ensure
+        child.thaw_child_notify
+      end
+    end
+
     def <<(widget)
       add(widget)
       self
