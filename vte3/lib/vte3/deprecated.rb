@@ -18,28 +18,28 @@ module Vte
   extend GLib::Deprecatable
 
   if const_defined?(:TerminalEraseBinding)
-    define_deprecated_const :EraseBinding, 'Vte::TerminalEraseBinding'
+    define_deprecated_const :EraseBinding, "Vte::TerminalEraseBinding"
   else
-    define_deprecated_const :TerminalEraseBinding, 'Vte::EraseBinding'
+    define_deprecated_const :TerminalEraseBinding, "Vte::EraseBinding"
   end
 
   if const_defined?(:TerminalCursorBlinkMode)
-    define_deprecated_const :CursorBlinkMode, 'Vte::TerminalCursorBlinkMode'
+    define_deprecated_const :CursorBlinkMode, "Vte::TerminalCursorBlinkMode"
   else
-    define_deprecated_const :TerminalCursorBlinkMode, 'Vte::CursorBlinkMode'
+    define_deprecated_const :TerminalCursorBlinkMode, "Vte::CursorBlinkMode"
   end
 
   if const_defined?(:TerminalCursorShape)
-    define_deprecated_const :CursorShape, 'Vte::TerminalCursorShape'
+    define_deprecated_const :CursorShape, "Vte::TerminalCursorShape"
   else
-    define_deprecated_const :TerminalCursorShape, 'Vte::CursorShape'
+    define_deprecated_const :TerminalCursorShape, "Vte::CursorShape"
   end
 
 
   class Terminal
     extend GLib::Deprecatable
 
-    define_deprecated_const :WriteFlags, 'Vte::TerminalWriteFlags'
+    define_deprecated_const :WriteFlags, "Vte::TerminalWriteFlags"
 
     define_deprecated_method :fork_pty, :raise => "Use 'Vte::Pty#fork'."
     define_deprecated_method :using_xft?, :warn => "Don't use this method." do |_self|
