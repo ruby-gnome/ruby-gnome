@@ -44,7 +44,7 @@ class TestTerminalProperties < Test::Unit::TestCase
   end
 
   def test_cursor_blink_mode
-    cursor_mode = Vte::TerminalCursorBlinkMode::ON
+    cursor_mode = Vte::CursorBlinkMode::ON
     @terminal.cursor_blink_mode = cursor_mode
     assert_equal(cursor_mode, @terminal.cursor_blink_mode)
   end
