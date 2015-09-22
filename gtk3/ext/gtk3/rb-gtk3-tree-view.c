@@ -18,17 +18,25 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef RB_GTK3_PRIVATE_H
-#define RB_GTK3_PRIVATE_H
+#include "rb-gtk3-private.h"
 
-#include "rb-gtk3.h"
+static void
+rb_gtk3_tree_view_mark(gpointer object)
+{
+    GtkTreeView *tree_view = object;
+    GList *node;
+    GList *columns;
 
-G_GNUC_INTERNAL void rbgtk3_class_init_func(gpointer g_class, gpointer class_data);
-G_GNUC_INTERNAL void rbgtk3_initialize(VALUE self);
+    columns = gtk_tree_view_get_columns(tree_view);
+    for (node = columns; node; node = g_list_next(node)) {
+        GtkTreeViewColumn *column = node->data;
+        rbgobj_gc_mark_instance(column);
+    }
+    g_list_free(columns);
+}
 
-G_GNUC_INTERNAL void rbgtk3_cell_layout_init(void);
-G_GNUC_INTERNAL void rbgtk3_container_init(void);
-G_GNUC_INTERNAL void rbgtk3_tree_view_init(void);
-G_GNUC_INTERNAL void rbgtk3_widget_init(void);
-
-#endif
+void
+rbgtk3_tree_view_init(void)
+{
+    rbgobj_register_mark_func(GTK_TYPE_TREE_VIEW, rb_gtk3_tree_view_mark);
+}

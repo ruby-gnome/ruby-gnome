@@ -432,6 +432,7 @@ Init_gtk3(void)
 
     rbgtk3_cell_layout_init();
     rbgtk3_container_init();
+    rbgtk3_tree_view_init();
     rbgtk3_widget_init();
 
     rbgobj_boxed_not_copy_obj(GTK_TYPE_SELECTION_DATA);
