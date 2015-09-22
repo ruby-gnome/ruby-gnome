@@ -60,11 +60,6 @@ class TestTerminalProperties < Test::Unit::TestCase
     @terminal.delete_binding = bind
     assert_equal(bind, @terminal.delete_binding)
   end
-  def test_emulation
-    terminal_type = "vt100"
-    @terminal.emulation = terminal_type
-    assert_equal(terminal_type, @terminal.emulation)
-  end
 
   def test_encoding
     encoding = "UTF-16"
