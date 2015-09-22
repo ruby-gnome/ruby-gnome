@@ -30,7 +30,9 @@ module Gtk
     alias_method :[], :get_value
 
     def set_value(column, value)
-      @model.set_value(self, column, value)
+      gtype = @model.get_column_type(column)
+      gvalue = GLib::Value.new(gtype, value)
+      @model.set_value(self, column, gvalue)
     end
     alias_method :[]=, :set_value
 
