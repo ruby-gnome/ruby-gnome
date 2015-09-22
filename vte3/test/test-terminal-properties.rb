@@ -50,7 +50,7 @@ class TestTerminalProperties < Test::Unit::TestCase
   end
 
   def test_cursor_shape
-    shape = Vte::TerminalCursorShape::IBEAM
+    shape = Vte::CursorShape::IBEAM
     @terminal.cursor_shape = shape
     assert_equal(shape, @terminal.cursor_shape)
   end

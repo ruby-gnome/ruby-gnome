@@ -25,7 +25,11 @@ module Vte
       define_deprecated_const :TerminalEraseBinding, 'Vte::EraseBinding'
     end
     define_deprecated_const :CursorBlinkMode, 'Vte::TerminalCursorBlinkMode'
-    define_deprecated_const :CursorShape, 'Vte::TerminalCursorShape'
+    if Vte.const_defined?(:TerminalCursorShape)
+      define_deprecated_const :CursorShape, 'Vte::TerminalCursorShape'
+    else
+      define_deprecated_const :TerminalCursorShape, 'Vte::CursorShape'
+    end
     define_deprecated_const :WriteFlags, 'Vte::TerminalWriteFlags'
 
     define_deprecated_method :fork_pty, :raise => "Use 'Vte::Pty#fork'."
