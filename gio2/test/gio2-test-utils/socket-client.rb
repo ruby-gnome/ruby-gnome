@@ -25,9 +25,9 @@ module GioTestUtils
     end
 
     def teardown_socket_client
-    teardown_loop
-    teardown_client
-    teardown_server
+      teardown_loop
+      teardown_client
+      teardown_server
     end
 
     def setup_server
