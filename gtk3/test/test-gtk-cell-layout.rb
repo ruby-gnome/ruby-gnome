@@ -32,4 +32,10 @@ class TestGtkCellLayout < Test::Unit::TestCase
       @layout.set_attributes(@renderer, {:text => 1})
     end
   end
+
+  test "#set_cell_data_func" do
+    @layout.set_cell_data_func(@renderer) do
+      # TODO: assert block arguments
+    end
+  end
 end
