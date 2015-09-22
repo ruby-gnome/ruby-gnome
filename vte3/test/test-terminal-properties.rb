@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -115,6 +115,8 @@ class TestTerminalProperties < Test::Unit::TestCase
   end
 
   def test_visible_bell
+    omit_if_not_respond(@terminal, :visible_bell=)
+
     visible = true
     @terminal.visible_bell = visible
     assert_true(@terminal.visible_bell?)
