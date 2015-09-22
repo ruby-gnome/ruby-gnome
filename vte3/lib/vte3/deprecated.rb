@@ -38,6 +38,10 @@ module Vte
       define_deprecated_const :TerminalCursorShape, 'Vte::CursorShape'
     end
 
+    unless Vte.const_defined?(:TerminalEraseBinding)
+      define_deprecated_const :TerminalEraseBinding, 'Vte::EraseBinding'
+    end
+
     define_deprecated_const :WriteFlags, 'Vte::TerminalWriteFlags'
 
     define_deprecated_method :fork_pty, :raise => "Use 'Vte::Pty#fork'."

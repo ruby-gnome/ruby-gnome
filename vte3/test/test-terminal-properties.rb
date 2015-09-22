@@ -38,7 +38,7 @@ class TestTerminalProperties < Test::Unit::TestCase
   end
 
   def test_backspace_binding
-    bind = Vte::TerminalEraseBinding::DELETE_SEQUENCE
+    bind = Vte::EraseBinding::DELETE_SEQUENCE
     @terminal.backspace_binding = bind
     assert_equal(bind, @terminal.backspace_binding)
   end
