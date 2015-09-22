@@ -53,7 +53,7 @@ void        g_dir_close                     (GDir *dir);
 static VALUE
 rbglib_m_format_size_for_display(G_GNUC_UNUSED VALUE self, VALUE size)
 {
-    return CSTR2RVAL_FREE(g_format_size_for_display(NUM2ULONG(size)));
+    return CSTR2RVAL_FREE(g_format_size_for_display(NUM2OFFT(size)));
 }
 #endif
 
@@ -65,7 +65,7 @@ rbglib_m_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
     rb_scan_args(argc, argv, "11", &rb_size, &rb_options);
     if (NIL_P(rb_options)) {
-      return CSTR2RVAL_FREE(g_format_size(NUM2ULONG(rb_size)));
+      return CSTR2RVAL_FREE(g_format_size(NUM2ULL(rb_size)));
     } else {
       VALUE rb_flags;
       rbg_scan_options(rb_options,
