@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
@@ -25,6 +25,39 @@
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cObject
+
+static VALUE
+rg_initialize(int argc, VALUE *argv, VALUE self)
+{
+    GObject *object;
+
+    rb_call_super(argc, argv);
+
+    object = RVAL2GOBJ(self);
+    g_object_ref_sink(object);
+
+    return Qnil;
+}
+
+static VALUE
+rg_s_type_register(int argc, VALUE *argv, VALUE klass)
+{
+    VALUE type_name;
+
+    rb_scan_args(argc, argv, "01", &type_name);
+
+    rbgobj_register_type(klass, type_name, rbgobj_class_init_func);
+
+    {
+        VALUE initialize_module;
+        initialize_module = rb_define_module_under(klass, "WidgetHook");
+        rbg_define_method(initialize_module,
+                          "initialize", rg_initialize, -1);
+        rb_include_module(klass, initialize_module);
+    }
+
+    return Qnil;
+}
 
 /*
 We shouldn't implement it.
@@ -122,6 +155,7 @@ Init_gtk_object(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
 
+    RG_DEF_SMETHOD(type_register, -1);
     RG_DEF_SMETHOD(binding_set, 0);
 
     RG_DEF_METHOD(type_name, 0);
