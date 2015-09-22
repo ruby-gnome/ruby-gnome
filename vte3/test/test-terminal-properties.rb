@@ -84,18 +84,6 @@ class TestTerminalProperties < Test::Unit::TestCase
     assert_true(@terminal.pointer_autohide?)
   end
 
-  def test_rewrap_on_resize
-    omit_if_not_respond(@terminal, :rewrap_on_resize?)
-    @terminal.rewrap_on_resize = false
-    assert_false(@terminal.rewrap_on_resize?)
-  end
-
-  def test_scroll_background
-    scroll = true
-    @terminal.scroll_background = scroll
-    assert_true(@terminal.scroll_background?)
-  end
-
   def test_scroll_on_keystroke
     scroll = true
     @terminal.scroll_on_keystroke = scroll
@@ -112,13 +100,5 @@ class TestTerminalProperties < Test::Unit::TestCase
     lines = 1024
     @terminal.scrollback_lines = lines
     assert_equal(lines, @terminal.scrollback_lines)
-  end
-
-  def test_visible_bell
-    omit_if_not_respond(@terminal, :visible_bell=)
-
-    visible = true
-    @terminal.visible_bell = visible
-    assert_true(@terminal.visible_bell?)
   end
 end
