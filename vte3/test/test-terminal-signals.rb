@@ -20,6 +20,10 @@ class TestTerminalSignals < Test::Unit::TestCase
   end
 
   def test_beep_signal
+    unless Vte::Terminal.signals.include?("beep")
+      omit("Vte::Terminal::beep signal exists only VTE 0.36 or older.")
+    end
+
     called = false
     @terminal.signal_connect("beep") do
       called = true
