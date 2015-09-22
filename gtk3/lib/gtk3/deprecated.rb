@@ -489,10 +489,10 @@ module Gtk
     define_deprecated_method :render_icon, :raise => "Use '#{self}#render_icon_pixbuf'."
   end
 
-  #module IconSize
-  #  extend GLib::Deprecatable
-  #  define_deprecated_enums :IconSize
-  #end
+  class IconSize
+   extend GLib::Deprecatable
+   define_deprecated_const :IconSize, "Gtk::IconSize"
+  end
 
   class IconTheme
     extend GLib::Deprecatable
