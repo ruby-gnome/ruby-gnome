@@ -27,7 +27,7 @@ class TestTerminal < Test::Unit::TestCase
     assert_equal(font, @terminal.font)
   end
 
-  sub_test_case "#fork_command" do
+  sub_test_case "#spawn" do
     teardown do
       loop = GLib::MainLoop.new
       GLib::Idle.add do
@@ -38,7 +38,7 @@ class TestTerminal < Test::Unit::TestCase
     end
 
     test "success" do
-      pid = @terminal.fork_command(:argv => ["echo"])
+      pid = @terminal.spawn(:argv => ["echo"])
       assert do
         pid > 0
       end
@@ -46,7 +46,7 @@ class TestTerminal < Test::Unit::TestCase
 
     test "failure" do
       assert_raise(GLib::SpawnError) do
-        @terminal.fork_command(:argv => ["nonexistent"])
+        @terminal.spawn(:argv => ["nonexistent"])
       end
     end
   end
