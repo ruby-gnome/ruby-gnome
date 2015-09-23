@@ -521,3 +521,87 @@ In this line, given that `self` is `ExampleAppWindow` the usage of `stack` is a 
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.8
 
 *    exampleapp4/exampleapp.rb
+
+An application menu is shown by GNOME shell at the top of the screen. It is meant to collect infrequently used actions that affect the whole application.
+Just like the window template, we specify our application menu in a ui file, and add it as a resource to our binary.
+
+#### Adding the menu interface
+
+*    app-menu.ui
+```xml
+<?xml version="1.0"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <menu id="appmenu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
+        <attribute name="action">app.preferences</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Quit</attribute>
+        <attribute name="action">app.quit</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>
+```
+
+This menu interface is loaded and added to our application with :
+
+```ruby
+builder = Gtk::Builder.new(:resource => "/org/gtk/exampleapp/app-menu.ui")
+app_menu = builder.get_object("appmenu")
+application.set_app_menu(app_menu)
+```
+
+With this, our application has a menu with two items that we can show when clicking on the application icon in the Gnome shell.
+
+#### Linking menu items to actions.
+
+All the actions initialization should be done during the "startup" step, which is guaranteed to be called once for each primary application instance.
+
+The "quit" item in the menu is implemented with this:
+
+```xml
+<section>
+  <item>
+    <attribute name="label" translatable="yes">_Quit</attribute>
+    <attribute name="action">app.quit</attribute>
+  </item>
+</section>
+```
+
+Then we just have to create an `Gio::SimpleAction` named "quit" and configure it in order to quit the application when this action is triggered.
+
+```ruby
+action = Gio::SimpleAction.new("quit")
+action.signal_connect("activate") do |_action, parameter|
+  application.quit
+end
+application.add_action(action)
+
+```
+
+#### Add accelerators for action.
+
+An accelerator is just a keys combination that acts as a shortcut for an action. 
+
+```ruby
+quit_accels = ["<Ctrl>Q"]
+action = Gio::SimpleAction.new("quit")
+action.signal_connect("activate") do |_action, parameter|
+  application.quit
+end
+application.add_action(action)
+application.set_accels_for_action("app.quit", quit_accels)
+```
+
+### A preferences dialog
+https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.9
+
+*    exampleapp5/exampleapp.rb
+*    exampleapp6/exampleapp.rb
+
