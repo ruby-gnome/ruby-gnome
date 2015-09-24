@@ -1,6 +1,6 @@
 # coding: utf-8
 
-# Copyright(C) 2011-2014 Ruby-GNOME2 Project.
+# Copyright(C) 2011-2015 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same license of Ruby-GNOME2.
 

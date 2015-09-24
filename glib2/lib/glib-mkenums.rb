@@ -3,7 +3,7 @@
 #
 # C language enum description generation library like as glib-mkenums tool.
 #
-# Copyright(C) 2006-2013 Ruby-GNOME2 Project.
+# Copyright(C) 2006-2015 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same license of Ruby-GNOME2.
 #

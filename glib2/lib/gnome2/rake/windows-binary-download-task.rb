@@ -1,4 +1,4 @@
-# Copyright(C) 2010-2012 Ruby-GNOME2 Project.
+# Copyright(C) 2010-2015 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same license of Ruby-GNOME2.
 
