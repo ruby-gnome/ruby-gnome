@@ -29,4 +29,4 @@ class Test::Unit::TestCase
   include PopplerTestUtils
 end
 
-exit Test::Unit::AutoRunner.run(true)
+exit Test::Unit::AutoRunner.run(true, File.join(base_dir, "test"))

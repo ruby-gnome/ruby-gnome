@@ -60,4 +60,4 @@ require "vte3-test-utils"
 
 require "vte3"
 
-exit Test::Unit::AutoRunner.run(true)
+exit Test::Unit::AutoRunner.run(true, File.join(vte3_base, "test"))

@@ -25,4 +25,4 @@ require 'pango-test-utils'
 
 require 'pango'
 
-exit Test::Unit::AutoRunner.run(true)
+exit Test::Unit::AutoRunner.run(true, File.join(pango_base, "test"))

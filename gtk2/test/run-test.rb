@@ -29,4 +29,4 @@ require 'gtk-test-utils'
 
 require 'gtk2'
 
-exit Test::Unit::AutoRunner.run(true)
+exit Test::Unit::AutoRunner.run(true, File.join(gtk_base, "test"))

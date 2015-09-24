@@ -43,4 +43,4 @@ require 'gtk-test-utils'
 
 require 'gtksourceview3'
 
-exit Test::Unit::AutoRunner.run(true)
+exit Test::Unit::AutoRunner.run(true, File.join(gtk_source_view3_base, "test"))

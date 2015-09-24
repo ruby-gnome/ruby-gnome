@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -42,4 +42,5 @@ require "gobject-introspection-test-utils"
 
 require "gobject-introspection"
 
-exit Test::Unit::AutoRunner.run(true)
+exit Test::Unit::AutoRunner.run(true,
+                                File.join(gobject_introspection_base, "test"))

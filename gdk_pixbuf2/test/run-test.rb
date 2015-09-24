@@ -42,4 +42,4 @@ require "gdk_pixbuf2-test-utils"
 
 require "gdk_pixbuf2"
 
-exit Test::Unit::AutoRunner.run(true)
+exit Test::Unit::AutoRunner.run(true, File.join(gdk_pixbuf2_base, "test"))

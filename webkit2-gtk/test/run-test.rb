@@ -69,4 +69,4 @@ rescue GLib::Error
   exit(true)
 end
 
-exit Test::Unit::AutoRunner.run(true)
+exit Test::Unit::AutoRunner.run(true, File.join(webkit2_gtk_base, "test"))

@@ -63,4 +63,4 @@ require 'gtk3'
 
 Gtk.init
 
-exit Test::Unit::AutoRunner.run(true)
+exit Test::Unit::AutoRunner.run(true, File.join(gtk3_base, "test"))

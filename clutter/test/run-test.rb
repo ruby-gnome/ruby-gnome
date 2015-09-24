@@ -62,4 +62,4 @@ end
 
 Clutter.init
 
-exit Test::Unit::AutoRunner.run(true, clutter_base)
+exit Test::Unit::AutoRunner.run(true, File.join(clutter_base, "test"))
