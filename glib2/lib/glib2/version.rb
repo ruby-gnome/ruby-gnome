@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 # Copyright (C) 2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
@@ -15,23 +14,24 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
+module GLib
+  module Version
+    MAJOR = GLib::MAJOR_VERSION
+    MINOR = GLib::MINOR_VERSION
+    MICRO = GLib::MICRO_VERSION
+    STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
 
-base = File.expand_path(File.join(File.dirname(__FILE__)))
-top = File.expand_path(File.join(base, ".."))
+    class << self
+      def or_later?(major, minor, micro=nil)
+        micro ||= 0
+        version = [
+          MAJOR,
+          MINOR,
+          MICRO,
+        ]
+        (version <=> [major, minor, micro]) >= 0
+      end
+    end
 
-$LOAD_PATH.unshift(top)
-require 'test/glib-test-init'
-
-if system("which make > /dev/null")
-  system("cd #{top.dump} && make > /dev/null") or exit(1)
+  end
 end
-
-$LOAD_PATH.unshift(File.join(top, "ext", "glib2"))
-$LOAD_PATH.unshift(File.join(top, "lib"))
-
-$LOAD_PATH.unshift(base)
-require 'glib-test-utils'
-
-require 'glib2'
-
-exit Test::Unit::AutoRunner.run(true, base)

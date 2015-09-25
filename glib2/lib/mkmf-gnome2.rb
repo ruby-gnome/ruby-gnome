@@ -3,7 +3,7 @@
 #
 # Extended mkmf for Ruby-GNOME2 and Ruby/GLib based libraries.
 #
-# Copyright(C) 2003-2013 Ruby-GNOME2 Project.
+# Copyright(C) 2003-2015 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same
 # license of Ruby-GNOME2.
