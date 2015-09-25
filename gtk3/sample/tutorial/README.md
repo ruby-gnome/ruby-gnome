@@ -602,6 +602,225 @@ application.set_accels_for_action("app.quit", quit_accels)
 ### A preferences dialog
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.9
 
+### Define and store settings for an application with gschemas
 *    exampleapp5/exampleapp.rb
+
+A typical application will have a some preferences that should be remembered from one run to the next. Even for our simple example application, we may want to change the font that is used for the content.
+We are going to use `Gio::Settings` to store our preferences. `Gio::Settings` requires a schema that describes our settings:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/org/gtk/exampleapp/" id="org.gtk.exampleapp">
+    <key name="font" type="s">
+      <default>'Monospace 12'</default>
+      <summary>Font</summary>
+      <description>The font to be used for content.</description>
+    </key>
+    <key name="transition" type="s">
+      <choices>
+        <choice value='none'/>
+        <choice value='crossfade'/>
+        <choice value='slide-left-right'/>
+      </choices>
+      <default>'none'</default>
+      <summary>Transition</summary>
+      <description>The transition to use when switching tabs.</description>
+    </key>
+  </schema>
+</schemalist>
+```
+
+Before we can make use of this schema in our application, we need to compile it into the binary form that `Gio::Settings` expects. 
+
+```ruby
+system("glib-compile-schemas", data_path)
+```
+In this command, the tool *glib-compile-schemas* searches all files with a name that ends with *.gschema.xml* and compiles it into a binary file called *gschemas.compiled*.
+
+This binary file can be loaded and our custom schema installed  at the begining of our script with:
+
+```ruby
+Gio::SettingsSchemaSource.new(data_path,
+                              Gio::SettingsSchemaSource.default,
+                              false)
+
+```
+This is the corresponding method to the function [g_settings_schema_source_new_from_directory](https://developer.gnome.org/gio/stable/gio-GSettingsSchema-GSettingsSchemaSource.html#g-settings-schema-source-new-from-directory). 
+
+As an alternative, our schema  can just be loaded by using the `GSETTINGS_SCHEMA_DIR` environment variable.
+
+```ruby
+ENV["GSETTINGS_SCHEMA_DIR"] = data_path 
+```
+More informations on the use of gschemas can be found [here](https://developer.gnome.org/gio/stable/gio-GSettingsSchema-GSettingsSchemaSource.html)
+
+Next, we need to connect our settings to the widgets that they are supposed to control. One convenient way to do this is to use `Gio::Settings` bind functionality to bind settings keys to object properties, as we do here for the transition setting. The `Gio::Settings#bind` is the ruby method for the [g_settings_bind](https://developer.gnome.org/gio/stable/GSettings.html#g-settings-bind) fonction of `gio`
+
+```ruby
+class ExampleAppWindow < Gtk::ApplicationWindow
+  type_register
+  class << self
+    def init
+      set_template(:resource => "/org/gtk/exampleapp/window.ui")
+      bind_template_child("stack")
+    end
+  end
+
+  def initialize(application)
+    super(:application => application)
+    settings = Gio::Settings.new("org.gtk.exampleapp")
+    settings.bind("transition",
+                  stack,
+                  "transition-type",
+                  Gio::SettingsBindFlags::DEFAULT)
+  end
+...
+```
+
+#### Configure the settings with a dialog window
+
 *    exampleapp6/exampleapp.rb
+
+The code to connect the font setting is a little more involved, since there is no simple object property that it corresponds to, so we are not going to go into that here.
+At this point, the application will already react if you change one of the settings, e.g. using the gsettings commandline tool. Of course, we expect the application to provide a preference dialog for these. So lets do that now. Our preference dialog will be a subclass of `Gtk::Dialog`, and we'll use the same techniques that we've already seen: templates, bind child widget name to method, settings bindings.
+
+Lets start with the template.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.8 -->
+  <template class="ExampleAppPrefs" parent="GtkDialog">
+    <property name="title" translatable="yes">Preferences</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="vbox">
+        <child>
+          <object class="GtkGrid" id="grid">
+            <property name="visible">True</property>
+            <property name="margin">6</property>
+            <property name="row-spacing">12</property>
+            <property name="column-spacing">6</property>
+            <child>
+              <object class="GtkLabel" id="fontlabel">
+                <property name="visible">True</property>
+                <property name="label">_Font:</property>
+                <property name="use-underline">True</property>
+                <property name="mnemonic-widget">font</property>
+                <property name="xalign">1</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFontButton" id="font">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="transitionlabel">
+                <property name="visible">True</property>
+                <property name="label">_Transition:</property>
+                <property name="use-underline">True</property>
+                <property name="mnemonic-widget">transition</property>
+                <property name="xalign">1</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="transition">
+                <property name="visible">True</property>
+                <items>
+                  <item translatable="yes" id="none">None</item>
+                  <item translatable="yes" id="crossfade">Fade</item>
+                  <item translatable="yes" id="slide-left-right">Slide</item>
+                </items>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
+```
+Next comes the dialog subclass.
+
+```ruby
+class ExampleAppPrefs < Gtk::Dialog
+  type_register
+  class << self
+    def init
+      set_template(:resource => "/org/gtk/exampleapp/prefs.ui")
+      bind_template_child("font")
+      bind_template_child("transition")
+    end
+  end
+  def initialize(args)
+    parent = args[:transient_for]
+    bar = args[:use_header_bar]
+    super(:transient_for => parent, :use_header_bar => 1)
+    settings = Gio::Settings.new("org.gtk.exampleapp")
+    settings.bind("font",
+                  font,
+                  "font",
+                  Gio::SettingsBindFlags::DEFAULT)
+    settings.bind("transition",
+                  transition,
+                  "active-id",
+                  Gio::SettingsBindFlags::DEFAULT)
+  end
+end
+```
+
+Nothing new here, it works like previously. The main difference in our application now is that we define what must be done when the *preferences* menu item is clicked.
+
+```ruby
+action = Gio::SimpleAction.new("preferences")
+action.signal_connect("activate") do |_action, _parameter|
+  win = application.windows.first
+
+  prefs = ExampleAppPrefs.new(:transient_for => win,
+                              :use_header_bar => true)
+  prefs.present
+end
+```
+Here we just says that when the user activate the *preferences* item, we create an `ExampleAppPrefs` instance and display it. The user can then specify the *font* and *transition* settings for the application. Those settings are used in the `ExampleAppWindow#open` method for example:
+
+```ruby
+def open(file)
+  basename = file.basename
+  scrolled = Gtk::ScrolledWindow.new
+  scrolled.show
+  scrolled.set_hexpand(true)
+  scrolled.set_vexpand(true)
+  view = Gtk::TextView.new
+  view.set_editable(false)
+  view.set_cursor_visible(false)
+  view.show
+  scrolled.add(view)
+  stack.add_titled(scrolled, basename, basename)
+  stream = file.read
+  buffer = view.buffer
+  buffer.text = stream.read
+  tag = buffer.create_tag() 
+  @settings.bind("font", tag, "font", Gio::SettingsBindFlags::DEFAULT)
+  buffer.apply_tag(tag, buffer.start_iter, buffer.end_iter)
+end
+``` 
 
