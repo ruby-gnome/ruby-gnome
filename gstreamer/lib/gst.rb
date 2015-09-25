@@ -71,6 +71,7 @@ module Gst
       require "gst/registry"
       require "gst/structure"
       require "gst/type-find-factory"
+      require "gst/version"
       init_base
       init_controller
     end
