@@ -19,6 +19,7 @@ Makefile.lib
 /gtksourceview2/ext/gtksourceview2/rbgtksourceview2version.h
 /gtksourceview3/ext/gtksourceview3/rbgtksourceview3version.h
 /goocanvas/ext/goocanvas/rbgoo_canvasversion.h
+/poppler/test/fixtures/form.pdf
 /poppler/test/tmp/
 /gobject-introspection/ext/gobject-introspection/gobject-introspection-enum-types.c
 /gobject-introspection/ext/gobject-introspection/gobject-introspection-enum-types.h
