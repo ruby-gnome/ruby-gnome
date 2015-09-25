@@ -1,3 +1,5 @@
+# encoding: ascii-8bit
+#
 # Copyright (C) 2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
