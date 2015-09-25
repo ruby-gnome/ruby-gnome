@@ -99,6 +99,20 @@ module Gtk
       end
     end
   end
+
+  module Version
+    MAJOR = Gtk::MAJOR_VERSION
+    MINOR = Gtk::MINOR_VERSION
+    MICRO = Gtk::MICRO_VERSION
+    STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
+    class << self
+      def or_later?(major, minor, micro=nil)
+        micro ||= 0
+        error_message = Gtk.check_version(major, minor, micro)
+        error_message.nil?
+      end
+    end
+  end
 end
 
 GLib::Log.set_log_domain(Gdk::LOG_DOMAIN)
