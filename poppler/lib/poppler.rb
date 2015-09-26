@@ -34,6 +34,23 @@ module Poppler
 
   VERSION = version.split(".").collect {|x| x.to_i}
 
+  module Version
+      MAJOR, MINOR, MICRO = BUILD_VERSION
+      STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
+
+    class << self
+      def or_later?(major, minor, micro = nil)
+        micro || 0
+        version = [
+          MAJOR,
+          MINOR,
+          MICRO,
+        ]
+        (version <=> [major, minor, micro]) >= 0
+      end
+    end
+  end
+  
   class Document
     private
     def pdf_data?(data)
