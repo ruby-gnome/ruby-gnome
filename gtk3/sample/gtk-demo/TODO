@@ -1,4 +1,4 @@
-# C version (3.17.6) versus Ruby version
+# C version (3.18.0) versus Ruby version
 
 C version             Ruby version    Updated
 application.c           no              no
