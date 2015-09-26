@@ -50,7 +50,7 @@ module Poppler
       end
     end
   end
-  
+
   class Document
     private
     def pdf_data?(data)
