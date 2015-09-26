@@ -28,6 +28,7 @@ G_GNUC_INTERNAL void rbgtk3_initialize(VALUE self);
 
 G_GNUC_INTERNAL void rbgtk3_cell_layout_init(void);
 G_GNUC_INTERNAL void rbgtk3_container_init(void);
+G_GNUC_INTERNAL void rbgtk3_tree_model_init(void);
 G_GNUC_INTERNAL void rbgtk3_tree_view_init(void);
 G_GNUC_INTERNAL void rbgtk3_widget_init(void);
 
