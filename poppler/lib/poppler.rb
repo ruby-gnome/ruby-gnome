@@ -39,7 +39,7 @@ module Poppler
       STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
 
     class << self
-      def or_later?(major, minor, micro = nil)
+      def or_later?(major, minor, micro=nil)
         micro || 0
         version = [
           MAJOR,
