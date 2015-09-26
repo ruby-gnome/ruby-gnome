@@ -52,4 +52,6 @@ module Gio
       loader.load("Gio")
     end
   end
+
+  Version = GLib::Version
 end
