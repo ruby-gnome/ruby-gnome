@@ -105,6 +105,7 @@ module Gtk
     MINOR = MINOR_VERSION
     MICRO = MICRO_VERSION
     STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
+
     class << self
       def or_later?(major, minor, micro=nil)
         micro ||= 0
