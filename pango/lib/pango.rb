@@ -74,6 +74,19 @@ module Pango
       end
     end
   end
+  
+  module Version
+    MAJOR, MINOR, MICRO = BUILD_VERSION
+    STRING = Pango.version_string
+
+    class << self
+      def or_later?(major, minor, micro = nil)
+        micro || 0
+        error_message = Pango.check_version(major, minor, micro)
+        error_message.nil?
+      end
+    end
+  end
 end
 
 GLib::Log.set_log_domain(Pango::LOG_DOMAIN)
