@@ -1,4 +1,4 @@
-# Copyright(C) 2006-2009 Ruby-GNOME2 Project.
+# Copyright(C) 2006-2015 Ruby-GNOME2 Project.
 #
 # This library is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -34,6 +34,23 @@ module Poppler
 
   VERSION = version.split(".").collect {|x| x.to_i}
 
+  module Version
+      MAJOR, MINOR, MICRO = BUILD_VERSION
+      STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
+
+    class << self
+      def or_later?(major, minor, micro = nil)
+        micro || 0
+        version = [
+          MAJOR,
+          MINOR,
+          MICRO,
+        ]
+        (version <=> [major, minor, micro]) >= 0
+      end
+    end
+  end
+  
   class Document
     private
     def pdf_data?(data)
