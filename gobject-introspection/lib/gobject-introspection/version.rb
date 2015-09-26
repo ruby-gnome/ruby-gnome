@@ -16,8 +16,8 @@
 
 module GObjectIntrospection
   module Version
-    MAJOR, MINOR, MICRO = GObjectIntrospection::BUILD_VERSION
-    STRING = GObjectIntrospection::BUILD_VERSION.join(".")
+    MAJOR, MINOR, MICRO = BUILD_VERSION
+    STRING = BUILD_VERSION.join(".")
     class << self
       def or_later?(major, minor, micro=nil)
         micro ||= 0
