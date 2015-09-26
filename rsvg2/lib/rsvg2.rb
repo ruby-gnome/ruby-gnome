@@ -78,6 +78,24 @@ module RSVG
       end
     end
   end
+
+  module Version
+    MAJOR, MINOR, MICRO = BUILD_VERSION
+    STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
+
+    class << self
+      def or_later?(major, minor, micro=nil)
+        micro || 0
+        version = [
+          MAJOR,
+          MINOR,
+          MICRO,
+        ]
+        (version <=> [major, minor, micro]) >= 0
+      end
+    end
+  end
+
 end
 
 module Cairo
