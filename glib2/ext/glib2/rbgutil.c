@@ -39,9 +39,11 @@ rbg_define_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int arg
         return;
 
     name += 4;
-    rb_funcall(klass, rbgutil_id_module_eval, 1,
+    rb_funcall(klass, rbgutil_id_module_eval, 3,
                CSTR2RVAL_FREE(g_strdup_printf("def %s=(val); set_%s(val); val; end\n",
-                                              name, name)));
+                                              name, name)),
+               rb_str_new2(__FILE__),
+               INT2NUM(__LINE__));
 }
 
 void
@@ -52,9 +54,11 @@ rbg_define_singleton_method(VALUE obj, const char *name, VALUE (*func)(ANYARGS),
         return;
 
     name += 4;
-    rb_funcall(obj, rbgutil_id_module_eval, 1,
+    rb_funcall(obj, rbgutil_id_module_eval, 3,
                CSTR2RVAL_FREE(g_strdup_printf("def self.%s=(val); set_%s(val); val; end\n",
-                                              name, name)));
+                                              name, name)),
+               rb_str_new2(__FILE__),
+               INT2NUM(__LINE__));
 }
 
 void

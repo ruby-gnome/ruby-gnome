@@ -174,12 +174,13 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
 
         method_id = rb_to_id(rb_str_concat(rb_str_new2(default_handler_method_prefix), rbsignal_name));
 
-        factory = rb_eval_string(
+        factory = ruby_eval_string_from_file(
           "lambda{|klass, id|\n"
           "  lambda{|instance,*args|\n"
           "    klass.instance_method(id).bind(instance).call(*args)\n"
           "  }\n"
-          "}\n");
+          "}\n",
+          __FILE__);
         proc = rb_funcall(factory, rb_intern("call"), 2, self, ID2SYM(method_id));
 
         class_closure = g_rclosure_new(proc, Qnil, NULL);
@@ -629,12 +630,13 @@ gobj_s_method_added(VALUE klass, VALUE id)
     }
 
     {
-        VALUE f = rb_eval_string(
+        VALUE f = ruby_eval_string_from_file(
           "lambda{|klass, id|\n"
           "  lambda{|instance,*args|\n"
           "    klass.instance_method(id).bind(instance).call(*args)\n"
           "  }\n"
-          "}\n");
+          "}\n",
+          __FILE__);
         VALUE proc = rb_funcall(f, rb_intern("call"), 2, klass, id);
         GClosure* rclosure = g_rclosure_new(proc, Qnil,
                                             rbgobj_get_signal_func(signal_id));
@@ -887,7 +889,10 @@ rbgobj_define_action_methods(VALUE klass)
     }
 
     if (source->len > 0)
-        rb_funcall(klass, rb_intern("module_eval"), 1, rb_str_new2(source->str));
+        rb_funcall(klass, rb_intern("module_eval"), 3,
+                   rb_str_new2(source->str),
+                   rb_str_new2(__FILE__),
+                   INT2NUM(__LINE__));
     g_string_free(source, TRUE);
 }
 

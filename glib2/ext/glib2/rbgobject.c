@@ -335,7 +335,10 @@ rbgobj_define_property_accessors(VALUE klass)
     }
 
     if (source->len > 0)
-        rb_funcall(klass, id_module_eval, 1, rb_str_new2(source->str));
+        rb_funcall(klass, id_module_eval, 3,
+                   rb_str_new2(source->str),
+                   rb_str_new2(__FILE__),
+                   INT2NUM(__LINE__));
     g_string_free(source, TRUE);
 }
 

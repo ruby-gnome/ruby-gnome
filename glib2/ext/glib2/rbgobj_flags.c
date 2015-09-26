@@ -165,7 +165,10 @@ rbgobj_init_flags_class(VALUE klass)
         g_free(nick);
     }
 
-    rb_funcall(klass, id_module_eval, 1, rb_str_new2(source->str));
+    rb_funcall(klass, id_module_eval, 3,
+               rb_str_new2(source->str),
+               rb_str_new2(__FILE__),
+               INT2NUM(__LINE__));
     g_string_free(source, TRUE);
 
     g_type_class_unref(gclass);
