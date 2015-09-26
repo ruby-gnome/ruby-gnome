@@ -30,6 +30,8 @@ module Gio
   LOG_DOMAIN = "Gio"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
+  Version = GLib::Version
+
   class Error < StandardError
   end
 
@@ -52,6 +54,4 @@ module Gio
       loader.load("Gio")
     end
   end
-
-  Version = GLib::Version
 end
