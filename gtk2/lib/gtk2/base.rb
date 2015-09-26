@@ -101,9 +101,9 @@ module Gtk
   end
 
   module Version
-    MAJOR = Gtk::MAJOR_VERSION
-    MINOR = Gtk::MINOR_VERSION
-    MICRO = Gtk::MICRO_VERSION
+    MAJOR = MAJOR_VERSION
+    MINOR = MINOR_VERSION
+    MICRO = MICRO_VERSION
     STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
     class << self
       def or_later?(major, minor, micro=nil)
