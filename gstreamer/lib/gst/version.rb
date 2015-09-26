@@ -18,16 +18,18 @@
 module Gst
   module Version
     MAJOR, MINOR, MICRO, NANO = Gst.version
-    STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
+    STRING = "#{MAJOR}.#{MINOR}.#{MICRO}.#{NANO}"
     class << self
-      def or_later?(major, minor, micro=nil)
+      def or_later?(major, minor, micro=nil, nano=nil)
         micro ||= 0
+        nano ||= 0
         version = [
           MAJOR,
           MINOR,
           MICRO,
+          NANO,
         ]
-        (version <=> [major, minor, micro]) >= 0
+        (version <=> [major, minor, micro, nano]) >= 0
       end
     end
   end

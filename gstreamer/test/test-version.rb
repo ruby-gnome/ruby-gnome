@@ -20,7 +20,8 @@ class TestGstVersion < Test::Unit::TestCase
     major = Gst::Version::MAJOR
     minor = Gst::Version::MINOR
     micro = Gst::Version::MICRO
-    assert_equal([major, minor, micro].join("."),
+    nano = Gst::Version::NANO
+    assert_equal([major, minor, micro, nano].join("."),
                  Gst::Version::STRING)
   end
 
@@ -28,19 +29,22 @@ class TestGstVersion < Test::Unit::TestCase
     test "same" do
       assert_true(Gst::Version.or_later?(Gst::Version::MAJOR,
                                          Gst::Version::MINOR,
-                                         Gst::Version::MICRO))
+                                         Gst::Version::MICRO,
+                                         Gst::Version::NANO))
     end
 
     test "later" do
       assert_true(Gst::Version.or_later?(Gst::Version::MAJOR,
                                          Gst::Version::MINOR - 1,
-                                         Gst::Version::MICRO))
+                                         Gst::Version::MICRO,
+                                         Gst::Version::NANO))
     end
 
     test "earlier" do
       assert_false(Gst::Version.or_later?(Gst::Version::MAJOR,
                                           Gst::Version::MINOR + 1,
-                                          Gst::Version::MICRO))
+                                          Gst::Version::MICRO,
+                                          Gst::Version::NANO))
     end
   end
 end
