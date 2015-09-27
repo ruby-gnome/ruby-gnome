@@ -978,6 +978,8 @@ rb_gi_argument_to_ruby_gslist(GIArgument *argument, GITypeInfo *type_info)
         rb_argument = CSTRGSLIST2RVAL(argument->v_pointer);
         break;
     case GI_TYPE_TAG_FILENAME:
+        rb_argument = FILENAMEGSLIST2RVAL(argument->v_pointer);
+        break;
     case GI_TYPE_TAG_ARRAY:
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GSList)[%s] -> Ruby",
@@ -2042,10 +2044,10 @@ rb_gi_return_argument_free_everything_gslist(GIArgument *argument,
                  g_type_tag_to_string(element_type_tag));
         break;
     case GI_TYPE_TAG_UTF8:
+    case GI_TYPE_TAG_FILENAME:
         g_slist_foreach(argument->v_pointer, (GFunc)g_free, NULL);
         g_slist_free(argument->v_pointer);
         break;
-    case GI_TYPE_TAG_FILENAME:
     case GI_TYPE_TAG_ARRAY:
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(GSList)[%s] everything",
