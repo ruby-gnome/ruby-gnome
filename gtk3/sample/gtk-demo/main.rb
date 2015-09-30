@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+#
 # Copyright (C) 2006-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
