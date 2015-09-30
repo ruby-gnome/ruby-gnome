@@ -23,6 +23,8 @@ class Demo < Gtk::Application
   def initialize
     super("org.gtk.Demo", [:non_unique, :handles_command_line])
 
+    @options = {}
+
     signal_connect "startup" do |application|
       puts "startup"
     end
@@ -33,39 +35,60 @@ class Demo < Gtk::Application
 
     signal_connect "command-line" do |application, command_line|
       puts "cmd"
-      options = {}
-      OptionParser.new do |opts|
-        opts.on("-r", "--run EXAMPLE", "Run an example") do |example|
-          options[:name] = example
-        end
-        opts.on("-a", "--autoquit", "Quit after a delay") do |bool|
-          options[:autoquit] = bool
-        end
-        opts.on("-l", "--list", "List examples") do |bool|
-          options[:list] = bool
-        end
-      end.parse!(command_line.arguments)
 
-      if options[:list]
-        puts "list"
-        # list_demos
-        application.quit
+      begin
+        parse_command_line(command_line.arguments)
+      rescue SystemExit => error
+        error.status
+      rescue OptionParser::InvalidOption => error
+        puts error.message
+        1
+      rescue => error
+        puts "#{error.class}: #{error.message}"
+        puts error.backtrace
+        1
+      else
+        run_application
       end
-
-      if options[:name]
-        puts "name"
-        # lookup_for_corresponding_demo
-        # load_demo
-      end
-
-      if options[:autoquit]
-        puts "autoquit"
-        GLib::Timeout.add(1) do 
-          #implement auto_quit
-        end
-      end
-      0
     end
+  end
+
+  private
+  def parse_command_line(arguments)
+    parser = OptionParser.new
+    parser.on("-r", "--run EXAMPLE", "Run an example") do |example|
+      @options[:name] = example
+    end
+    parser.on("-a", "--autoquit", "Quit after a delay") do
+      @options[:autoquit] = true
+    end
+    parser.on("-l", "--list", "List examples") do
+      @options[:list] = true
+    end
+    parser.parse(arguments)
+  end
+
+  def run_application
+    if @options[:list]
+      puts "list"
+      # list_demos
+      quit
+    end
+
+    if @options[:name]
+      puts "name"
+      # lookup_for_corresponding_demo
+      # load_demo
+    end
+
+    if @options[:autoquit]
+      puts "autoquit"
+      GLib::Timeout.add(1) do
+        #implement auto_quit
+      end
+    end
+
+    0
   end
 end
 
