@@ -44,7 +44,7 @@ class Demo < Gtk::Application
         opts.on("-l", "--list", "List examples") do |bool|
           options[:list] = bool
         end
-      end.parse!(command_line.arguments[0])
+      end.parse!(command_line.arguments)
 
       if options[:list]
         puts "list"
