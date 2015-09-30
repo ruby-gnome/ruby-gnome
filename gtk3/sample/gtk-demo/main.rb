@@ -72,4 +72,4 @@ end
 demo = Demo.new
 
 puts ARGV
-demo.run([$PROGRAM_NAME] + ARGV)
+exit(demo.run([$PROGRAM_NAME] + ARGV))
