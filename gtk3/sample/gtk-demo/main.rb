@@ -52,15 +52,20 @@ class Demo < Gtk::Application
 
     signal_connect "startup" do |application|
       puts "startup"
+      @builder = Gtk::Builder.new
+      @builder.add_objects_from_resource("/ui/main.ui",["appmenu"])
+      appmenu = @builder.get_object("appmenu")
+      application.set_app_menu(appmenu)
     end
 
     signal_connect "activate" do |application|
       puts "activate"
+      activate(application)
     end
 
     signal_connect "command-line" do |application, command_line|
       puts "cmd"
-
+      activate(application)
       begin
         parse_command_line(command_line.arguments)
       rescue SystemExit => error
@@ -76,7 +81,7 @@ class Demo < Gtk::Application
         run_application
       end
     end
-  end
+ end
 
   private
   def parse_command_line(arguments)
@@ -115,9 +120,34 @@ class Demo < Gtk::Application
 
     0
   end
+
+  def activate(application)
+#    builder = Gtk::Builder.new
+#    builder.add_objects_from_resource("/ui/main.ui",["appmenu"])
+#    window = builder.get_object("window")
+#    application.add_window(window)
+#
+#    action = Gio::SimpleAction.new("run")
+#    action.signal_connect "activate" do |_action, _parameter|
+#      # activate_run
+#    end
+#    application.add_action(action)
+#
+#    notebook = builder.get_object("notebook")
+#    info_textwiew = builder.get_object("info-textview")
+#    source_textview = builder.get_object("source-textview")
+#    headerbar = builder.get_object("headerbar")
+#    treeview = builder.get_object("treeview")
+#    #model = treeview.model
+#
+#    sw = builder.get_object("source-scrolledwindow")
+#    scrollbar = sw.vscrollbar
+#
+#    window.show_all
+#
+  end
 end
 
 demo = Demo.new
 
-puts ARGV
 exit(demo.run([$PROGRAM_NAME] + ARGV))
