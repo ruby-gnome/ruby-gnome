@@ -122,8 +122,10 @@ class Demo < Gtk::Application
   end
 
   def activate(application)
-#    @builder = Gtk::Builder.new
-#    @builder.add_objects_from_resource("/ui/main.ui",["appmenu"])
+#    unless @builder
+#      @builder = Gtk::Builder.new
+#      @builder.add_objects_from_resource("/ui/main.ui",["appmenu"])
+#    end
 #    window = @builder.get_object("window")
 #    application.add_window(window)
 #
