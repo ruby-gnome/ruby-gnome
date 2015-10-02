@@ -122,9 +122,9 @@ class Demo < Gtk::Application
   end
 
   def activate(application)
-#    builder = Gtk::Builder.new
-#    builder.add_objects_from_resource("/ui/main.ui",["appmenu"])
-#    window = builder.get_object("window")
+#    @builder = Gtk::Builder.new
+#    @builder.add_objects_from_resource("/ui/main.ui",["appmenu"])
+#    window = @builder.get_object("window")
 #    application.add_window(window)
 #
 #    action = Gio::SimpleAction.new("run")
@@ -133,14 +133,14 @@ class Demo < Gtk::Application
 #    end
 #    application.add_action(action)
 #
-#    notebook = builder.get_object("notebook")
-#    info_textwiew = builder.get_object("info-textview")
-#    source_textview = builder.get_object("source-textview")
-#    headerbar = builder.get_object("headerbar")
-#    treeview = builder.get_object("treeview")
+#    notebook = @builder.get_object("notebook")
+#    info_textwiew = @builder.get_object("info-textview")
+#    source_textview = @builder.get_object("source-textview")
+#    headerbar = @builder.get_object("headerbar")
+#    treeview = @builder.get_object("treeview")
 #    #model = treeview.model
 #
-#    sw = builder.get_object("source-scrolledwindow")
+#    sw = @builder.get_object("source-scrolledwindow")
 #    scrollbar = sw.vscrollbar
 #
 #    window.show_all
