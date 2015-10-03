@@ -54,8 +54,9 @@ class Demo < Gtk::Application
     signal_connect "startup" do |application|
       puts "startup"
       @builder = Gtk::Builder.new
-      @builder.add_objects_from_resource("/ui/main.ui",["appmenu"])
-      appmenu = @builder.get_object("appmenu")
+      @builder.add(:resource => "/ui/main.ui",
+                   :object_ids => ["appmenu"])
+      appmenu = @builder["appmenu"]
       application.set_app_menu(appmenu)
     end
 
