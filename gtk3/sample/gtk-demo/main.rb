@@ -141,10 +141,32 @@ class Demo < Gtk::Application
     source_textview = @builder.get_object("source-textview")
     headerbar = @builder.get_object("headerbar")
     treeview = @builder.get_object("treeview")
-    #model = treeview.model
+    model = treeview.model
 
     sw = @builder.get_object("source-scrolledwindow")
     scrollbar = sw.vscrollbar
+
+    menu = Gtk::Menu.new
+
+    item = Gtk::MenuItem.new("Start")
+    menu.append(item)
+    item.signal_connect "activate" do
+      adj = scrollbar.adjustement
+      adj.value = adj.get_lower
+    end
+
+    item = Gtk::MenuItem.new("End")
+    menu.append(item)
+    item.signal_connect "activate" do
+      adj = scrollbar.adjustement
+      adj.value = adj.get_upper - adj.get_page_size
+    end
+    
+    menu.show_all
+  
+    scrollbar.signal_connect "popup-menu" do 
+      menu.popup(nil, nil, Gtk.current_event_time)
+    end
 
     window.show_all
 #
