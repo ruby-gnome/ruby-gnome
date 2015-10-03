@@ -129,30 +129,29 @@ class Demo < Gtk::Application
       end
     end
 
-#    unless @builder
-#      @builder = Gtk::Builder.new
-#      @builder.add_objects_from_resource("/ui/main.ui",["appmenu"])
-#    end
-#    window = @builder.get_object("window")
-#    application.add_window(window)
-#
-#    action = Gio::SimpleAction.new("run")
-#    action.signal_connect "activate" do |_action, _parameter|
-#      # activate_run
-#    end
-#    application.add_action(action)
-#
-#    notebook = @builder.get_object("notebook")
-#    info_textwiew = @builder.get_object("info-textview")
-#    source_textview = @builder.get_object("source-textview")
-#    headerbar = @builder.get_object("headerbar")
-#    treeview = @builder.get_object("treeview")
-#    #model = treeview.model
-#
-#    sw = @builder.get_object("source-scrolledwindow")
-#    scrollbar = sw.vscrollbar
-#
-#    window.show_all
+    @builder = Gtk::Builder.new
+    @builder.add_from_resource("/ui/main.ui")
+
+    window = @builder["window"]
+    add_window(window)
+
+    action = Gio::SimpleAction.new("run")
+    action.signal_connect "activate" do |_action, _parameter|
+      # activate_run
+    end
+    add_action(action)
+
+    notebook = @builder.get_object("notebook")
+    info_textwiew = @builder.get_object("info-textview")
+    source_textview = @builder.get_object("source-textview")
+    headerbar = @builder.get_object("headerbar")
+    treeview = @builder.get_object("treeview")
+    #model = treeview.model
+
+    sw = @builder.get_object("source-scrolledwindow")
+    scrollbar = sw.vscrollbar
+
+    window.show_all
 #
   end
 end
