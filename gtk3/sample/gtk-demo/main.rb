@@ -53,9 +53,7 @@ class Demo < Gtk::Application
 
     signal_connect "startup" do |application|
       puts "startup"
-      @builder = Gtk::Builder.new
-      @builder.add(:resource => "/ui/main.ui",
-                   :object_ids => ["appmenu"])
+      @builder = Gtk::Builder.new(:resource => "/ui/main.ui")
       appmenu = @builder["appmenu"]
       application.set_app_menu(appmenu)
     end
@@ -128,9 +126,6 @@ class Demo < Gtk::Application
         #implement auto_quit
       end
     end
-
-    @builder = Gtk::Builder.new
-    @builder.add_from_resource("/ui/main.ui")
 
     window = @builder["window"]
     add_window(window)
