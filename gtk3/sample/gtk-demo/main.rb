@@ -169,7 +169,6 @@ class Demo < Gtk::Application
     end
 
     window.show_all
-#
   end
 end
 
