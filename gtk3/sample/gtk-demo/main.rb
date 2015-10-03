@@ -49,6 +49,7 @@ class Demo < Gtk::Application
     super("org.gtk.Demo", [:non_unique, :handles_command_line])
 
     @options = {}
+    @exit_status = 0
 
     signal_connect "startup" do |application|
       puts "startup"
@@ -60,12 +61,16 @@ class Demo < Gtk::Application
 
     signal_connect "activate" do |application|
       puts "activate"
-      activate(application)
+      begin
+        run_application
+      rescue => error
+        report_error(error)
+        @exit_status = 1
+      end
     end
 
     signal_connect "command-line" do |application, command_line|
       puts "cmd"
-      activate(application)
       begin
         parse_command_line(command_line.arguments)
       rescue SystemExit => error
@@ -74,11 +79,11 @@ class Demo < Gtk::Application
         puts error.message
         1
       rescue => error
-        puts "#{error.class}: #{error.message}"
-        puts error.backtrace
+        report_error(error)
         1
       else
-        run_application
+        activate
+        @exit_status
       end
     end
  end
@@ -96,6 +101,11 @@ class Demo < Gtk::Application
       @options[:list] = true
     end
     parser.parse(arguments)
+  end
+
+  def report_error(error)
+    puts "#{error.class}: #{error.message}"
+    puts error.backtrace
   end
 
   def run_application
@@ -118,10 +128,6 @@ class Demo < Gtk::Application
       end
     end
 
-    0
-  end
-
-  def activate(application)
 #    unless @builder
 #      @builder = Gtk::Builder.new
 #      @builder.add_objects_from_resource("/ui/main.ui",["appmenu"])
