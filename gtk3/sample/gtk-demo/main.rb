@@ -53,9 +53,7 @@ class Demo < Gtk::Application
 
     signal_connect "startup" do |application|
       puts "startup"
-      @builder = Gtk::Builder.new
-      @builder.add(:resource => "/ui/main.ui",
-                   :object_ids => ["appmenu"])
+      @builder = Gtk::Builder.new(:resource => "/ui/main.ui")
       appmenu = @builder["appmenu"]
       application.set_app_menu(appmenu)
     end
@@ -129,30 +127,48 @@ class Demo < Gtk::Application
       end
     end
 
-#    unless @builder
-#      @builder = Gtk::Builder.new
-#      @builder.add_objects_from_resource("/ui/main.ui",["appmenu"])
-#    end
-#    window = @builder.get_object("window")
-#    application.add_window(window)
-#
-#    action = Gio::SimpleAction.new("run")
-#    action.signal_connect "activate" do |_action, _parameter|
-#      # activate_run
-#    end
-#    application.add_action(action)
-#
-#    notebook = @builder.get_object("notebook")
-#    info_textwiew = @builder.get_object("info-textview")
-#    source_textview = @builder.get_object("source-textview")
-#    headerbar = @builder.get_object("headerbar")
-#    treeview = @builder.get_object("treeview")
-#    #model = treeview.model
-#
-#    sw = @builder.get_object("source-scrolledwindow")
-#    scrollbar = sw.vscrollbar
-#
-#    window.show_all
+    window = @builder["window"]
+    add_window(window)
+
+    action = Gio::SimpleAction.new("run")
+    action.signal_connect "activate" do |_action, _parameter|
+      # activate_run
+    end
+    add_action(action)
+
+    notebook = @builder.get_object("notebook")
+    info_textwiew = @builder.get_object("info-textview")
+    source_textview = @builder.get_object("source-textview")
+    headerbar = @builder.get_object("headerbar")
+    treeview = @builder.get_object("treeview")
+    model = treeview.model
+
+    sw = @builder.get_object("source-scrolledwindow")
+    scrollbar = sw.vscrollbar
+
+    menu = Gtk::Menu.new
+
+    item = Gtk::MenuItem.new("Start")
+    menu.append(item)
+    item.signal_connect "activate" do
+      adj = scrollbar.adjustement
+      adj.value = adj.get_lower
+    end
+
+    item = Gtk::MenuItem.new("End")
+    menu.append(item)
+    item.signal_connect "activate" do
+      adj = scrollbar.adjustement
+      adj.value = adj.get_upper - adj.get_page_size
+    end
+    
+    menu.show_all
+  
+    scrollbar.signal_connect "popup-menu" do 
+      menu.popup(nil, nil, Gtk.current_event_time)
+    end
+
+    window.show_all
 #
   end
 end
