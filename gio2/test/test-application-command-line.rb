@@ -15,11 +15,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestApplicationCommandLine < Test::Unit::TestCase
+  include GioTestUtils::Omissions
   def setup
     @command_line = Gio::ApplicationCommandLine.new
   end
 
   test "#arguments" do
+    omit_on_travis_ci
     assert_equal([], @command_line.arguments)
   end
 end

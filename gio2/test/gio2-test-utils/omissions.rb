@@ -19,5 +19,9 @@ module GioTestUtils
     def omit_on_os_x
       omit("Skip this test on OS X") if RUBY_PLATFORM =~ /darwin/
     end
+
+    def omit_on_travis_ci
+      omit("Skip this test on Travis CI") if ENV["CI"]
+    end
   end
 end
