@@ -81,6 +81,10 @@ class TestGtkBuilder < Test::Unit::TestCase
     end
 
     sub_test_case ":resource" do
+      setup do
+        only_gtk_version(3, 12, 0)
+      end
+
       test "all" do
         builder = Gtk::Builder.new
         register_resource(fixture_path("simple_window.gresource")) do
