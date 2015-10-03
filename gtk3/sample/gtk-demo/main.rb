@@ -161,10 +161,10 @@ class Demo < Gtk::Application
       adj = scrollbar.adjustement
       adj.value = adj.get_upper - adj.get_page_size
     end
-    
+
     menu.show_all
-  
-    scrollbar.signal_connect "popup-menu" do 
+
+    scrollbar.signal_connect "popup-menu" do
       menu.popup(nil, nil, Gtk.current_event_time)
     end
 
