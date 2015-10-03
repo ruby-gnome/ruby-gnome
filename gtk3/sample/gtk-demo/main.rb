@@ -136,14 +136,14 @@ class Demo < Gtk::Application
     end
     add_action(action)
 
-    notebook = @builder.get_object("notebook")
-    info_textwiew = @builder.get_object("info-textview")
-    source_textview = @builder.get_object("source-textview")
-    headerbar = @builder.get_object("headerbar")
-    treeview = @builder.get_object("treeview")
+    notebook = @builder["notebook"]
+    info_textwiew = @builder["info-textview"]
+    source_textview = @builder["source-textview"]
+    headerbar = @builder["headerbar"]
+    treeview = @builder["treeview"]
     model = treeview.model
 
-    sw = @builder.get_object("source-scrolledwindow")
+    sw = @builder["source-scrolledwindow"]
     scrollbar = sw.vscrollbar
 
     menu = Gtk::Menu.new
