@@ -18,12 +18,13 @@ module Gtk
   class Builder
     alias_method :initialize_raw, :initialize
     def initialize(options={})
-      file      = options[:file]
+      path      = options[:path] || options[:file]
       resource  = options[:resource]
       string    = options[:string]
 
-      if file
-        initialize_new_from_file(file)
+      if path
+        path = path.to_path if path.respond_to?(:to_path)
+        initialize_new_from_file(path)
       elsif resource
         initialize_new_from_resource(resource)
       elsif string
@@ -40,15 +41,38 @@ module Gtk
       add_from_string_raw(string, string.bytesize)
     end
 
-    def add(target)
-      if target.respond_to?(:to_path)
-        add_from_file(target.to_path)
-      elsif target.start_with?("<") or target.start_with?(" ")
-        add_from_string(target)
-      elsif File.exist?(target)
-        add_from_file(target)
+    def add(target_or_options={})
+      if target_or_options.is_a?(Hash)
+        options = target_or_options
       else
-        add_from_resource(target)
+        target = target_or_options
+        options = {}
+        if target.respond_to?(:to_path)
+          options[:path] = target.to_path
+        elsif target.start_with?("<") or target.start_with?(" ")
+          options[:string] = target
+        elsif File.exist?(target)
+          options[:path] = target
+        else
+          options[:resource] = target
+        end
+      end
+
+      string   = options[:string]
+      path     = options[:path] || options[:file]
+      resource = options[:resource]
+
+      if path
+        path = path.to_path if path.respond_to?(:to_path)
+        add_from_file(path)
+      elsif resource
+        add_From_resource(resource)
+      elsif string
+        add_from_string(string)
+      else
+        message = ":path (:file), :resource or :string " +
+          "must be specified: #{options.inspect}"
+        raise InvalidArgument, message
       end
     end
 
