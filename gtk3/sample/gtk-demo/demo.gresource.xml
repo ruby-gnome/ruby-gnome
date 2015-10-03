@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/ui">
+    <file preprocess="xml-stripblanks">main.ui</file>
+  </gresource>
+  <gresource prefix="/application">
+    <file>application.ui</file>
+    <file>menus.ui</file>
+  </gresource>
+  <gresource prefix="/builder">
+    <file>demo.ui</file>
+  </gresource>
+  <gresource prefix="/css_accordion">
+    <file>css_accordion.css</file>
+    <file>reset.css</file>
+  </gresource>
+  <gresource prefix="/css_basics">
+    <file>css_basics.css</file>
+    <file>reset.css</file>
+  </gresource>
+  <gresource prefix="/css_multiplebgs">
+    <file>css_multiplebgs.css</file>
+    <file>brick.png</file>
+    <file>brick2.png</file>
+    <file>cssview.css</file>
+    <file>reset.css</file>
+  </gresource>
+  <gresource prefix="/theming_style_classes">
+    <file>theming.ui</file>
+  </gresource>
+  <gresource prefix="/css_pixbufs">
+    <file alias="gtk.css">css_pixbufs.css</file>
+    <file>cssview.css</file>
+    <file>reset.css</file>
+    <file>background.jpg</file>
+    <file>apple-red.png</file>
+    <file>gnome-applets.png</file>
+    <file>gnome-calendar.png</file>
+    <file>gnome-foot.png</file>
+    <file>gnome-gmush.png</file>
+    <file>gnome-gimp.png</file>
+    <file>gnome-gsame.png</file>
+    <file>gnu-keys.png</file>
+  </gresource>
+  <gresource prefix="/css_shadows">
+    <file alias="gtk.css">css_shadows.css</file>
+    <file>cssview.css</file>
+    <file>reset.css</file>
+  </gresource>
+  <gresource prefix="/cursors">
+    <file>alias_cursor.png</file>
+    <file>all_scroll_cursor.png</file>
+    <file>cell_cursor.png</file>
+    <file>col_resize_cursor.png</file>
+    <file>copy_cursor.png</file>
+    <file>crosshair_cursor.png</file>
+    <file>default_cursor.png</file>
+    <file>e_resize_cursor.png</file>
+    <file>ew_resize_cursor.png</file>
+    <file>grabbing_cursor.png</file>
+    <file>grab_cursor.png</file>
+    <file>hand_cursor.png</file>
+    <file>help_cursor.png</file>
+    <file>move_cursor.png</file>
+    <file>ne_resize_cursor.png</file>
+    <file>nesw_resize_cursor.png</file>
+    <file>no_drop_cursor.png</file>
+    <file>none_cursor.png</file>
+    <file>not_allowed_cursor.png</file>
+    <file>n_resize_cursor.png</file>
+    <file>ns_resize_cursor.png</file>
+    <file>nw_resize_cursor.png</file>
+    <file>nwse_resize_cursor.png</file>
+    <file>pointer_cursor.png</file>
+    <file>progress_cursor.png</file>
+    <file>row_resize_cursor.png</file>
+    <file>se_resize_cursor.png</file>
+    <file>s_resize_cursor.png</file>
+    <file>sw_resize_cursor.png</file>
+    <file>text_cursor.png</file>
+    <file>vertical_text_cursor.png</file>
+    <file>wait_cursor.png</file>
+    <file>w_resize_cursor.png</file>
+    <file>zoom_in_cursor.png</file>
+    <file>zoom_out_cursor.png</file>
+  </gresource>
+  <gresource prefix="/iconview">
+    <file preprocess="to-pixdata">gnome-fs-directory.png</file>
+    <file preprocess="to-pixdata">gnome-fs-regular.png</file>
+  </gresource>
+  <gresource prefix="/stack">
+    <file>stack.ui</file>
+  </gresource>
+  <gresource prefix="/revealer">
+    <file>revealer.ui</file>
+  </gresource>
+  <gresource prefix="/images">
+    <file>alphatest.png</file>
+    <file>floppybuddy.gif</file>
+  </gresource>
+  <gresource prefix="/pixbufs">
+    <file>apple-red.png</file>
+    <file>background.jpg</file>
+    <file>gnome-applets.png</file>
+    <file>gnome-calendar.png</file>
+    <file>gnome-foot.png</file>
+    <file>gnome-gmush.png</file>
+    <file>gnome-gimp.png</file>
+    <file>gnome-gsame.png</file>
+    <file>gnu-keys.png</file>
+  </gresource>
+  <gresource prefix="/sources">
+<!--    <file>application.rb</file>
+    <file>assistant.rb</file> 
+    <file>builder.rb</file>
+    <file>button_box.rb</file>
+    <file>changedisplay.rb</file>
+    <file>clipboard.rb</file>
+    <file>colorsel.rb</file>
+    <file>combobox.rb</file>
+    <file>css_accordion.rb</file>
+    <file>css_basics.rb</file>
+    <file>css_multiplebgs.rb</file>
+    <file>css_pixbufs.rb</file>
+    <file>css_shadows.rb</file>
+    <file>cursors.rb</file>
+    <file>dialog.rb</file>
+    <file>drawingarea.rb</file>
+    <file>editable_cells.rb</file>
+    <file>entry_buffer.rb</file>
+    <file>entry_completion.rb</file>
+    <file>event_axes.rb</file>
+    <file>expander.rb</file>
+    <file>filtermodel.rb</file>
+    <file>flowbox.rb</file>
+    <file>font_features.rb</file>
+    <file>gestures.rb</file>
+    <file>glarea.rb</file>
+    <file>headerbar.rb</file>
+    <file>hypertext.rb</file>
+    <file>iconview.rb</file>
+    <file>iconview_edit.rb</file>
+    <file>images.rb</file>
+    <file>infobar.rb</file>
+    <file>links.rb</file>
+    <file>listbox.rb</file>
+    <file>list_store.rb</file>
+    <file>markup.rb</file>
+    <file>menus.rb</file>
+    <file>modelbutton.rb</file>
+    <file>offscreen_window.rb</file>
+    <file>offscreen_window2.rb</file>
+    <file>overlay.rb</file>
+    <file>overlay2.rb</file>
+    <file>pagesetup.rb</file>
+    <file>panes.rb</file>
+    <file>pickers.rb</file>
+    <file>pixbufs.rb</file>
+    <file>popover.rb</file>
+    <file>printing.rb</file>
+    <file>revealer.rb</file>
+    <file>rotated_text.rb</file>
+    <file>scale.rb</file>
+    <file>search_entry.rb</file>
+    <file>search_entry2.rb</file>
+    <file>sizegroup.rb</file>
+    <file>sidebar.rb</file>
+    <file>stack.rb</file>
+    <file>spinbutton.rb</file>
+    <file>spinner.rb</file>
+    <file>textview.rb</file>
+    <file>textscroll.rb</file>
+    <file>theming_style_classes.rb</file>
+    <file>toolpalette.rb</file>
+    <file>transparent.rb</file>
+    <file>tree_store.rb</file>
+    <file>textmask.rb</file> -->
+  </gresource>
+  <gresource prefix="/textview">
+    <file>floppybuddy.gif</file>
+  </gresource>
+  <gresource prefix="/listbox">
+    <file>listbox.ui</file>
+    <file>messages.txt</file>
+    <file>apple-red.png</file>
+  </gresource>
+  <gresource prefix="/popover">
+    <file>popover.ui</file>
+  </gresource>
+  <gresource prefix="/glarea">
+    <file>glarea-fragment.glsl</file>
+    <file>glarea-vertex.glsl</file>
+  </gresource>
+  <gresource prefix="/font-features">
+    <file>font-features.ui</file>
+  </gresource>
+  <gresource prefix="/spinbutton">
+    <file>spinbutton.ui</file>
+  </gresource>
+  <gresource prefix="/filtermodel">
+    <file>filtermodel.ui</file>
+  </gresource>
+  <gresource prefix="/overlay2">
+    <file>decor1.png</file>
+    <file>decor2.png</file>
+  </gresource>
+  <gresource prefix="/markup">
+    <file>markup.txt</file>
+  </gresource>
+  <gresource prefix="/scale">
+    <file>scale.ui</file>
+  </gresource>
+  <gresource prefix="/modelbutton">
+    <file>modelbutton.ui</file>
+  </gresource>
+</gresources>
