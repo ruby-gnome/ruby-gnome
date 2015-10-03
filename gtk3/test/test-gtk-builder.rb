@@ -19,16 +19,18 @@ class TestGtkBuilder < Test::Unit::TestCase
       assert_kind_of(Gtk::Dialog, builder["dialog1"])
     end
 
+    test "path" do
+      only_gtk_version(3, 10, 0)
+      builder = Gtk::Builder.new(:path => ui_definition_file.path)
+      assert_kind_of(Gtk::Dialog, builder["dialog1"])
+    end
+
     test "resource" do
       only_gtk_version(3, 10, 0)
-      resource = Gio::Resource.load(fixture_path("simple_window.gresource"))
-      Gio::Resources.register(resource)
-      begin
+      register_resource(fixture_path("simple_window.gresource")) do
         resource_path = "/simple_window/simple_window.ui"
         builder = Gtk::Builder.new(:resource => resource_path)
         assert_kind_of(Gtk::Window, builder["window"])
-      ensure
-        Gio::Resources.unregister(resource)
       end
     end
 
@@ -39,43 +41,104 @@ class TestGtkBuilder < Test::Unit::TestCase
     end
   end
 
-  def test_add_from_file
-    builder = Gtk::Builder.new
-    assert_nothing_raised do
-      builder.add_from_file(ui_definition_file.path)
-    end
-    assert_kind_of(Gtk::Dialog, builder["dialog1"])
-  end
+  sub_test_case "#add" do
+    sub_test_case ":file" do
+      test "all" do
+        builder = Gtk::Builder.new
+        builder.add(:file => ui_definition_file.path)
+        assert_kind_of(Gtk::Dialog, builder["dialog1"])
+      end
 
-  sub_test_case "#add_from_string" do
-    def test_ascii_only
+      test ":object_ids" do
+        builder = Gtk::Builder.new
+        builder.add(:file => ui_definition_file.path,
+                    :object_ids => ["ok_button"])
+        assert_equal(["ok_button"],
+                     builder.objects.collect(&:builder_name).sort)
+      end
+    end
+
+    sub_test_case ":path" do
+      test "all" do
+        builder = Gtk::Builder.new
+        builder.add(:path => ui_definition_file.path)
+        assert_kind_of(Gtk::Dialog, builder["dialog1"])
+      end
+
+      test ":object_ids" do
+        builder = Gtk::Builder.new
+        builder.add(:path => ui_definition_file.path,
+                    :object_ids => ["ok_button"])
+        assert_equal(["ok_button"],
+                     builder.objects.collect(&:builder_name).sort)
+      end
+    end
+
+    test "path" do
       builder = Gtk::Builder.new
-      builder.add_from_string(ui_definition_simple)
-      assert_kind_of(Gtk::Window, builder["main-window"])
-    end
-
-    def test_multibyte_characters
-      builder = Gtk::Builder.new
-      comment = "<!-- 日本語 -->\n" * 100
-      builder.add_from_string("#{comment}#{ui_definition_simple}")
-      assert_kind_of(Gtk::Window, builder["main-window"])
-    end
-  end
-
-  def test_add_with_file
-    builder = Gtk::Builder.new
-    assert_nothing_raised do
       builder.add(ui_definition_file.path)
+      assert_kind_of(Gtk::ButtonBox, builder["hbuttonbox1"])
     end
-    assert_kind_of(Gtk::ButtonBox, builder["hbuttonbox1"])
-  end
 
-  def test_add_with_string
-    builder = Gtk::Builder.new
-    assert_nothing_raised do
-      builder.add(ui_definition)
+    sub_test_case ":resource" do
+      test "all" do
+        builder = Gtk::Builder.new
+        register_resource(fixture_path("simple_window.gresource")) do
+          resource_path = "/simple_window/simple_window.ui"
+          builder.add(:resource => resource_path)
+          assert_kind_of(Gtk::Window, builder["window"])
+        end
+      end
+
+      test ":object_ids" do
+        builder = Gtk::Builder.new
+        register_resource(fixture_path("simple_window.gresource")) do
+          resource_path = "/simple_window/simple_window.ui"
+          builder.add(:resource => resource_path,
+                      :object_ids => ["label"])
+          assert_equal(["label"],
+                       builder.objects.collect(&:builder_name).sort)
+        end
+      end
     end
-    assert_kind_of(Gtk::Button, builder["ok_button"])
+
+    test "resource" do
+      builder = Gtk::Builder.new
+      register_resource(fixture_path("simple_window.gresource")) do
+        resource_path = "/simple_window/simple_window.ui"
+        builder.add(resource_path)
+        assert_kind_of(Gtk::Window, builder["window"])
+      end
+    end
+
+    sub_test_case ":string" do
+      test "ascii only" do
+        builder = Gtk::Builder.new
+        builder.add(:string => ui_definition_simple)
+        assert_kind_of(Gtk::Window, builder["main-window"])
+      end
+
+      test "multibyte characters" do
+        builder = Gtk::Builder.new
+        comment = "<!-- 日本語 -->\n" * 100
+        builder.add(:string => "#{comment}#{ui_definition_simple}")
+        assert_kind_of(Gtk::Window, builder["main-window"])
+      end
+
+      test ":object_ids" do
+        builder = Gtk::Builder.new
+        builder.add(:string => ui_definition,
+                    :object_ids => ["ok_button"])
+        assert_equal(["ok_button"],
+                     builder.objects.collect(&:builder_name).sort)
+      end
+    end
+
+    test "string" do
+      builder = Gtk::Builder.new
+      builder.add(ui_definition)
+      assert_kind_of(Gtk::Button, builder["ok_button"])
+    end
   end
 
   def test_add_chain
@@ -196,5 +259,15 @@ EOX
     xml.print(ui_definition)
     xml.close
     xml
+  end
+
+  def register_resource(path)
+    resource = Gio::Resource.load(path)
+    Gio::Resources.register(resource)
+    begin
+      yield
+    ensure
+      Gio::Resources.unregister(resource)
+    end
   end
 end

@@ -41,6 +41,11 @@ module Gtk
       add_from_string_raw(string, string.bytesize)
     end
 
+    alias_method :add_objects_from_string_raw, :add_objects_from_string
+    def add_objects_from_string(string, object_ids)
+      add_objects_from_string_raw(string, string.bytesize, object_ids)
+    end
+
     def add(target_or_options={})
       if target_or_options.is_a?(Hash)
         options = target_or_options
@@ -62,13 +67,27 @@ module Gtk
       path     = options[:path] || options[:file]
       resource = options[:resource]
 
+      object_ids = options[:object_ids]
+
       if path
         path = path.to_path if path.respond_to?(:to_path)
-        add_from_file(path)
+        if object_ids
+          add_objects_from_file(path, object_ids)
+        else
+          add_from_file(path)
+        end
       elsif resource
-        add_From_resource(resource)
+        if object_ids
+          add_objects_from_resource(resource, object_ids)
+        else
+          add_from_resource(resource)
+        end
       elsif string
-        add_from_string(string)
+        if object_ids
+          add_objects_from_string(string, object_ids)
+        else
+          add_from_string(string)
+        end
       else
         message = ":path (:file), :resource or :string " +
           "must be specified: #{options.inspect}"
