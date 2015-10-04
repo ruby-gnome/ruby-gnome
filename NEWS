@@ -70,6 +70,7 @@ It is a bug fix release of 3.0.5.
     * Supported option style API by (({Gtk::Builder#add})).
     * Supported (({:object_ids})) by (({Gtk::Builder#add})).
       [GitHub#585][Patch by cedlemo]
+    * Added backward compatible API to (({Gtk.show_uri})).
 
 ==== Ruby/GStreamer
 
