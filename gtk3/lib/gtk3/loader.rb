@@ -129,6 +129,7 @@ module Gtk
       require "gtk3/search-bar"
       require "gtk3/selection-data"
       require "gtk3/spin-button"
+      require "gtk3/show-uri"
       require "gtk3/stack"
       require "gtk3/stock"
       require "gtk3/stock-item"
