@@ -21,6 +21,9 @@ require "optparse"
 require "fileutils"
 
 current_path = File.expand_path(File.dirname(__FILE__))
+
+require "#{current_path}/demos.rb"
+
 gresource_bin = "#{current_path}/demo.gresource"
 gresource_xml = "#{current_path}/demo.gresource.xml"
 
