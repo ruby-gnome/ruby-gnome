@@ -298,7 +298,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         if (!p->info) {
             gchar *nick;
             nick = rbg_name_to_nick(name);
-            p->info = g_enum_get_value_by_nick(p->gclass, name);
+            p->info = g_enum_get_value_by_nick(p->gclass, nick);
             g_free(nick);
         }
         if (!p->info) {
