@@ -2,6 +2,110 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.0.6: 2015-10-04
+
+It is a bug fix release of 3.0.5.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Supported (({GLib.format_size})) on 32bit.
+      [GitHub#565][Reported by Mamoru TASAKA]
+    * Supported (({GLib.format_size_for_display})) on 32bit.
+      [GitHub#565][Reported by Mamoru TASAKA]
+    * Added (({GLib::Version.or_later?})).
+      [GitHub#570][Patch by cedlemo]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Added (({GObjectIntrospection::Version.or_later?})).
+      [GitHub#572][Patch by cedlemo]
+    * Supported (({GSList})) for filename.
+      [ruby-gnome2-devel-en][Reported by Stefan Salewski]
+
+==== Ruby/GIO2
+
+  * Improvements
+    * Added (({Gio::Version.or_later?})).
+      [GitHub#571][Patch by cedlemo]
+    * Made (({Gio::APplicationCommandLine#attributes})) Rubyish.
+
+==== Ruby/Pango
+
+  * Improvements
+    * Added (({Pango::Version.or_later?})).
+      [GitHub#576][Patch by cedlemo]
+
+==== Ruby/GTK2
+
+  * Improvements
+    * Added (({Gtk::Version.or_later?})).
+      [GitHub#574][Patch by cedlemo]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Supported (({Gtk::CellLayout#set_cell_data_func})).
+      [ruby-gnome2-devel-en][Reported by Stefan Salewski]
+    * Supported (({Gtk::Container#add})) with child properties.
+      [ruby-gnome2-devel-en][Reported by Stefan Salewski]
+    * Added (({Gtk::StockItem#[]})) for backward compatibility.
+      [ruby-gnome2-devel-en][Reported by Stefan Salewski]
+    * Added (({Gtk::IconSize::IconSize})) for backward compatibility.
+      [ruby-gnome2-devel-en][Reported by Stefan Salewski]
+    * Supported marking cell renderers in (({Gtk::CellLayout})) for GC.
+      [ruby-gnome2-devel-en][Reported by Stefan Salewski]
+    * Supported (({nil})) for (({Gtk::TreeIter#set_value})).
+    * Supported marking columns in (({Gtk::TreeView})) for GC.
+      [ruby-gnome2-devel-en][Reported by Stefan Salewski]
+    * Updated tutorial samples.
+      [GitHub#567][GitHub#568][GitHub#587][Patch by cedlemo]
+    * Supported marking records in (({Gtk::TreeModel})) for GC.
+      [ruby-gnome2-devel-en][Reported by Stefan Salewski]
+    * Started updating gtk-demo with (({Gtk::Application})).
+      [GitHub#583][GitHub#586][GitHub#588][Patch by cedlemo]
+    * Supported option style API by (({Gtk::Builder#add})).
+    * Supported (({:object_ids})) by (({Gtk::Builder#add})).
+      [GitHub#585][Patch by cedlemo]
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * Added (({Gst::Version.or_later?})).
+      [GitHub#573][Patch by cedlemo]
+
+==== Ruby/Poppler
+
+  * Improvements
+    * Added (({Poppler::Version.or_later?})).
+      [GitHub#577][Patch by cedlemo]
+
+==== Ruby/RSVG2
+
+  * Improvements
+    * Added (({RSVG::Version.or_later?})).
+      [GitHub#578][Patch by cedlemo]
+
+==== Ruby/VTE3
+
+  * Improvements
+    * Stopped to run tests for old VTE with new VTE.
+      [GitHub#566][Reported by Mamoru TASAKA]
+
+==== Ruby/WebKitGTK
+
+  * Improvements
+    * Added (({WebKitGtk::Version.or_later?})).
+
+=== Thanks
+
+  * Stefan Salewski
+  * Mamoru TASAKA
+  * cedlemo
+
 == Ruby-GNOME2 3.0.5: 2015-09-22
 
 It is a bug fix release for mikutter.
