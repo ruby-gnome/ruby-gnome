@@ -168,20 +168,13 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
     signal_flags = NUM2INT(rbsignal_flags);
 
     {
-        VALUE factory;
         VALUE proc;
         ID method_id;
 
         method_id = rb_to_id(rb_str_concat(rb_str_new2(default_handler_method_prefix), rbsignal_name));
 
-        factory = ruby_eval_string_from_file(
-          "lambda{|klass, id|\n"
-          "  lambda{|instance,*args|\n"
-          "    klass.instance_method(id).bind(instance).call(*args)\n"
-          "  }\n"
-          "}\n",
-          __FILE__);
-        proc = rb_funcall(factory, rb_intern("call"), 2, self, ID2SYM(method_id));
+        proc = rb_funcall(mMetaInterface, rb_intern("signal_callback"), 2,
+                          self, ID2SYM(method_id));
 
         class_closure = g_rclosure_new(proc, Qnil, NULL);
         /* TODO: Should this be done even if something below it fails? */
@@ -630,14 +623,8 @@ gobj_s_method_added(VALUE klass, VALUE id)
     }
 
     {
-        VALUE f = ruby_eval_string_from_file(
-          "lambda{|klass, id|\n"
-          "  lambda{|instance,*args|\n"
-          "    klass.instance_method(id).bind(instance).call(*args)\n"
-          "  }\n"
-          "}\n",
-          __FILE__);
-        VALUE proc = rb_funcall(f, rb_intern("call"), 2, klass, id);
+        VALUE proc = rb_funcall(mMetaInterface, rb_intern("signal_callback"), 2,
+                                klass, id);
         GClosure* rclosure = g_rclosure_new(proc, Qnil,
                                             rbgobj_get_signal_func(signal_id));
         g_rclosure_attach((GClosure *)rclosure, klass);

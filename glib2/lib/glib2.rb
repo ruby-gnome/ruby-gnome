@@ -116,7 +116,16 @@ rescue LoadError
 end
 
 module GLib
-  
+  module MetaInterface
+    class << self
+      def signal_callback(klass, id)
+        lambda do |instance, *args|
+          klass.instance_method(id).bind(instance).call(*args)
+        end
+      end
+    end
+  end
+
   class Type
 
     def decendants
