@@ -2,6 +2,31 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.0.7: 2015-10-06
+
+It is a bug fix release of 3.0.6.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Fixes
+    * Fixed a bug that `xxx_yyy` enum name isn't accepted.
+      [ruby-gnome2-devel-en][Reported by Detlef Reichl]
+    * Fixed a bug that internal Ruby API is used.
+      [ruby-gnome2-devel-en][Reported by Detlef Reichl]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Added backward compatibility API to
+      (({Gtk::TreeView#insert_column})).
+      [ruby-gnome2-devel-en][Reported by Detlef Reichl]
+
+=== Thanks
+
+  * Detlef Reichl
+
 == Ruby-GNOME2 3.0.6: 2015-10-04
 
 It is a bug fix release of 3.0.5.
