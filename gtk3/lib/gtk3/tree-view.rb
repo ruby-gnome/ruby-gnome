@@ -37,5 +37,29 @@ module Gtk
       targets = ensure_drag_targets(targets)
       enable_model_drag_dest_raw(targets, actions)
     end
+
+    alias_method :insert_column_raw, :insert_column
+    def insert_column(*args, &block)
+      case args.size
+      when 2
+        column, position = args
+        insert_column_raw(column, position)
+      when 3
+        position, title, cell = args
+        insert_column_with_data_func(position, title, cell, &block)
+      when 4
+        position, title, cell, attributes = args
+        column = TreeViewColumn.new
+        column.sizing = :fixed if fixed_height_mode?
+        column.title = title
+        column.pack_start(cell, true)
+        attributes.each do |name, column_id|
+          column.add_attribute(cell, name, column_id)
+        end
+        insert_column_raw(column, position)
+      else
+        raise ArgumentError, "wrong number of arguments (#{args.size} for 2..4)"
+      end
+    end
   end
 end

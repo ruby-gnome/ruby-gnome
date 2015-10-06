@@ -101,5 +101,32 @@ class TestGtkTreeView < Test::Unit::TestCase
         @view.row_expanded?(parent.path)
       end
     end
+
+    sub_test_case "#insert_column" do
+      def setup
+        @store = Gtk::TreeStore.new(String)
+        @view = Gtk::TreeView.new(@store)
+      end
+
+      test "column, position" do
+        column = Gtk::TreeViewColumn.new("Label",
+                                         Gtk::CellRendererText.new,
+                                         :text => 0)
+        @view.insert_column(column, 0)
+        assert_equal([column], @view.columns)
+      end
+
+      test "position, title, cell" do
+        @view.insert_column(0, "Label", Gtk::CellRendererText.new) do
+        end
+        assert_equal(["Label"], @view.columns.collect(&:title))
+      end
+
+      test "position, title, cell, attributes" do
+        @view.insert_column(0, "Label", Gtk::CellRendererText.new,
+                            :text => 0)
+        assert_equal(["Label"], @view.columns.collect(&:title))
+      end
+    end
   end
 end
