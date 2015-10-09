@@ -22,12 +22,35 @@ class TestGtkClipboard < Test::Unit::TestCase
     @clipboard = @widget.get_clipboard(Gdk::Selection::CLIPBOARD)
   end
 
+  test "#request_contents" do
+    loop = GLib::MainLoop.new
+    received_text = nil
+    utf8_string = Gdk::Atom.intern("UTF8_STRING")
+    @clipboard.request_contents(utf8_string) do |_clipboard, _selection_data|
+      compound_text = Gdk::Atom.intern("COMPOUND_TEXT")
+      @clipboard.request_contents(compound_text) do |_clipboard, selection_data|
+        received_text = selection_data.text
+        GLib::Idle.add do
+          loop.quit
+          GLib::Source::REMOVE
+        end
+      end
+    end
+    @clipboard.text = "hello"
+    loop.run
+
+    assert_equal("hello", received_text)
+  end
+
   test "#request_text" do
     loop = GLib::MainLoop.new
     received_text = nil
     @clipboard.request_text do |_clipboard, text|
       received_text = text
-      loop.quit
+      GLib::Idle.add do
+        loop.quit
+        GLib::Source::REMOVE
+      end
     end
     @clipboard.text = "hello"
     loop.run
