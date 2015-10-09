@@ -22,17 +22,21 @@ class TestGtkClipboard < Test::Unit::TestCase
     @clipboard = @widget.get_clipboard(Gdk::Selection::CLIPBOARD)
   end
 
+  def teardown
+    @clipboard.clear
+  end
+
   test "#request_contents" do
     loop = GLib::MainLoop.new
     received_text = nil
     utf8_string = Gdk::Atom.intern("UTF8_STRING")
     @clipboard.request_contents(utf8_string) do |_clipboard, _selection_data|
       compound_text = Gdk::Atom.intern("COMPOUND_TEXT")
-      @clipboard.request_contents(compound_text) do |_clipboard, selection_data|
-        received_text = selection_data.text
-        GLib::Idle.add do
+      @clipboard.request_contents(compound_text) do |_clipboard, _selection_data|
+        target_string = Gdk::Selection::TARGET_STRING
+        @clipboard.request_contents(target_string) do |_clipboard, selection_data|
+          received_text = selection_data.text
           loop.quit
-          GLib::Source::REMOVE
         end
       end
     end
@@ -47,14 +51,26 @@ class TestGtkClipboard < Test::Unit::TestCase
     received_text = nil
     @clipboard.request_text do |_clipboard, text|
       received_text = text
-      GLib::Idle.add do
-        loop.quit
-        GLib::Source::REMOVE
-      end
+      loop.quit
     end
     @clipboard.text = "hello"
     loop.run
 
     assert_equal("hello", received_text)
+  end
+
+  test "#request_image" do
+    loop = GLib::MainLoop.new
+    received_image = nil
+    @clipboard.request_image do |_clipboard, image|
+      received_image = image
+      loop.quit
+    end
+    image = Gdk::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+    @clipboard.image = image
+    loop.run
+
+    assert_equal([image.width, image.height],
+                 [received_image.width, received_image.height])
   end
 end

@@ -137,6 +137,20 @@ rb_gtk3_clipboard_received_func_callback(GtkClipboard *clipboard,
 }
 
 static void
+rb_gtk3_clipboard_image_received_func_callback(GtkClipboard *clipboard,
+                                               GdkPixbuf *pixbuf,
+                                               gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+
+    rb_funcall(callback_data->rb_callback,
+               id_call,
+               2,
+               GOBJ2RVAL(clipboard),
+               GOBJ2RVAL(pixbuf));
+}
+
+static void
 rb_gtk3_clipboard_text_received_func_callback(GtkClipboard *clipboard,
                                               const gchar *text,
                                               gpointer user_data)
@@ -324,6 +338,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_cell_layout_data_func_callback;
     } else if (name_equal(info, "ClipboardReceivedFunc")) {
         return rb_gtk3_clipboard_received_func_callback;
+    } else if (name_equal(info, "ClipboardImageReceivedFunc")) {
+        return rb_gtk3_clipboard_image_received_func_callback;
     } else if (name_equal(info, "ClipboardTextReceivedFunc")) {
         return rb_gtk3_clipboard_text_received_func_callback;
     } else if (name_equal(info, "TranslateFunc")) {
