@@ -20,6 +20,8 @@
 
 #include "rb-gtk3-private.h"
 
+static ID id_call;
+
 /*
 #if GTK_CHECK_VERSION(3, 10, 0)
 #    define RB_GTK_ACTION_IS_DEPRECATED
@@ -53,9 +55,7 @@ static void
 rb_gtk3_callback_callback(GtkWidget *widget, gpointer user_data)
 {
     RBGICallbackData *callback_data = user_data;
-    ID id_call;
 
-    CONST_ID(id_call, "call");
     rb_funcall(callback_data->rb_callback, id_call, 1,
                GOBJ2RVAL(widget));
 }
@@ -64,10 +64,8 @@ static gint
 rb_gtk3_assistant_page_func_callback(gint current_page, gpointer user_data)
 {
     RBGICallbackData *callback_data = user_data;
-    ID id_call;
     VALUE rb_next_page;
 
-    CONST_ID(id_call, "call");
     rb_next_page = rb_funcall(callback_data->rb_callback, id_call, 1,
                               INT2NUM(current_page));
     return NUM2INT(rb_next_page);
@@ -107,7 +105,6 @@ rb_gtk3_cell_layout_data_func_callback(GtkCellLayout *cell_layout,
 {
     RBGICallbackData *callback_data = user_data;
     ID id_set_model;
-    ID id_call;
     VALUE rb_model;
     VALUE rb_iter;
 
@@ -116,7 +113,6 @@ rb_gtk3_cell_layout_data_func_callback(GtkCellLayout *cell_layout,
     rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
-    CONST_ID(id_call, "call");
     rb_funcall(callback_data->rb_callback,
                id_call,
                4,
@@ -126,15 +122,27 @@ rb_gtk3_cell_layout_data_func_callback(GtkCellLayout *cell_layout,
                rb_iter);
 }
 
+static void
+rb_gtk3_clipboard_text_received_func_callback(GtkClipboard *clipboard,
+                                              const gchar *text,
+                                              gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+
+    rb_funcall(callback_data->rb_callback,
+               id_call,
+               2,
+               GOBJ2RVAL(clipboard),
+               CSTR2RVAL(text));
+}
+
 static const gchar *
 rb_gtk3_translate_func_callback(const gchar *path,
                                 gpointer user_data)
 {
     RBGICallbackData *callback_data = user_data;
-    ID id_call;
     VALUE rb_translated;
 
-    CONST_ID(id_call, "call");
     rb_translated = rb_funcall(callback_data->rb_callback,
                                id_call,
                                1,
@@ -151,7 +159,6 @@ rb_gtk3_tree_cell_data_func_callback(GtkTreeViewColumn *column,
 {
     RBGICallbackData *callback_data = user_data;
     ID id_set_model;
-    ID id_call;
     VALUE rb_model;
     VALUE rb_iter;
 
@@ -160,7 +167,6 @@ rb_gtk3_tree_cell_data_func_callback(GtkTreeViewColumn *column,
     rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
-    CONST_ID(id_call, "call");
     rb_funcall(callback_data->rb_callback,
                id_call,
                4,
@@ -179,7 +185,6 @@ rb_gtk3_tree_model_filter_modify_func_callback(GtkTreeModel *model,
 {
     RBGICallbackData *callback_data = user_data;
     ID id_set_model;
-    ID id_call;
     VALUE rb_model;
     VALUE rb_iter;
     VALUE rb_value;
@@ -191,7 +196,6 @@ rb_gtk3_tree_model_filter_modify_func_callback(GtkTreeModel *model,
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
     rb_column = INT2NUM(column);
 
-    CONST_ID(id_call, "call");
     rb_value = rb_funcall(callback_data->rb_callback,
                           id_call,
                           3,
@@ -208,7 +212,6 @@ rb_gtk3_tree_model_filter_visible_func_callback(GtkTreeModel *model,
 {
     RBGICallbackData *callback_data = user_data;
     ID id_set_model;
-    ID id_call;
     VALUE rb_model;
     VALUE rb_iter;
     VALUE rb_visible;
@@ -219,7 +222,6 @@ rb_gtk3_tree_model_filter_visible_func_callback(GtkTreeModel *model,
     rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
-    CONST_ID(id_call, "call");
     rb_visible = rb_funcall(callback_data->rb_callback,
                             id_call,
                             2,
@@ -238,7 +240,6 @@ rb_gtk3_tree_model_foreach_func_callback(GtkTreeModel *model,
 {
     RBGICallbackData *callback_data = user_data;
     ID id_set_model;
-    ID id_call;
     VALUE rb_model;
     VALUE rb_iter;
     gboolean stop = FALSE;
@@ -248,7 +249,6 @@ rb_gtk3_tree_model_foreach_func_callback(GtkTreeModel *model,
     rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
-    CONST_ID(id_call, "call");
     rb_funcall(callback_data->rb_callback,
                id_call,
                3,
@@ -267,7 +267,6 @@ rb_gtk3_tree_selection_foreach_func_callback(GtkTreeModel *model,
 {
     RBGICallbackData *callback_data = user_data;
     ID id_set_model;
-    ID id_call;
     VALUE rb_model;
     VALUE rb_iter;
 
@@ -276,7 +275,6 @@ rb_gtk3_tree_selection_foreach_func_callback(GtkTreeModel *model,
     rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
-    CONST_ID(id_call, "call");
     rb_funcall(callback_data->rb_callback,
                id_call,
                3,
@@ -291,9 +289,7 @@ rb_gtk3_tree_view_mapping_func_callback(GtkTreeView *tree_view,
                                         gpointer user_data)
 {
     RBGICallbackData *callback_data = user_data;
-    ID id_call;
 
-    CONST_ID(id_call, "call");
     rb_funcall(callback_data->rb_callback,
                id_call,
                2,
@@ -312,6 +308,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_builder_connect_func_callback;
     } else if (name_equal(info, "CellLayoutDataFunc")) {
         return rb_gtk3_cell_layout_data_func_callback;
+    } else if (name_equal(info, "ClipboardTextReceivedFunc")) {
+        return rb_gtk3_clipboard_text_received_func_callback;
     } else if (name_equal(info, "TranslateFunc")) {
         return rb_gtk3_translate_func_callback;
     } else if (name_equal(info, "TreeCellDataFunc")) {
@@ -417,6 +415,8 @@ rbgtk3_initialize(VALUE self)
 void
 Init_gtk3(void)
 {
+    id_call = rb_intern("call");
+
     rb_gi_callback_register_finder(rb_gtk3_callback_finder);
 
 #ifndef RB_GTK_ACTION_IS_DEPRECATED
