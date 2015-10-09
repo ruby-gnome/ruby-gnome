@@ -85,4 +85,28 @@ class TestGtkClipboard < Test::Unit::TestCase
 
     assert_nil(received_atoms)
   end
+
+  test "#request_rich_text" do
+    loop = GLib::MainLoop.new
+    received_format = nil
+    received_text = nil
+    table = Gtk::TextTagTable.new
+    buffer = Gtk::TextBuffer.new(table)
+    buffer.register_deserialize_tagset(nil)
+    @clipboard.request_rich_text(buffer) do |_clipboard, format, text|
+      received_format = format
+      received_text = text
+      loop.quit
+    end
+    loop.run
+
+    assert_equal([
+                   "application/x-gtk-text-buffer-rich-text",
+                   nil,
+                 ],
+                 [
+                   received_format.name,
+                   received_text,
+                 ])
+  end
 end
