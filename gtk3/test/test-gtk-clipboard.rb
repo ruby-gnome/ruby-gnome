@@ -73,4 +73,16 @@ class TestGtkClipboard < Test::Unit::TestCase
     assert_equal([image.width, image.height],
                  [received_image.width, received_image.height])
   end
+
+  test "#request_targets" do
+    loop = GLib::MainLoop.new
+    received_atoms = nil
+    @clipboard.request_targets do |_clipboard, atoms|
+      received_atoms = atoms
+      loop.quit
+    end
+    loop.run
+
+    assert_nil(received_atoms)
+  end
 end
