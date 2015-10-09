@@ -210,6 +210,20 @@ rb_gtk3_clipboard_text_received_func_callback(GtkClipboard *clipboard,
                CSTR2RVAL(text));
 }
 
+static void
+rb_gtk3_clipboard_uri_received_func_callback(GtkClipboard *clipboard,
+                                             gchar **uris,
+                                             gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+
+    rb_funcall(callback_data->rb_callback,
+               id_call,
+               2,
+               GOBJ2RVAL(clipboard),
+               STRV2RVAL(uris));
+}
+
 static const gchar *
 rb_gtk3_translate_func_callback(const gchar *path,
                                 gpointer user_data)
@@ -392,6 +406,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_clipboard_targets_received_func_callback;
     } else if (name_equal(info, "ClipboardTextReceivedFunc")) {
         return rb_gtk3_clipboard_text_received_func_callback;
+    } else if (name_equal(info, "ClipboardURIReceivedFunc")) {
+        return rb_gtk3_clipboard_uri_received_func_callback;
     } else if (name_equal(info, "TranslateFunc")) {
         return rb_gtk3_translate_func_callback;
     } else if (name_equal(info, "TreeCellDataFunc")) {

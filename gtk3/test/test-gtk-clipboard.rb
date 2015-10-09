@@ -109,4 +109,16 @@ class TestGtkClipboard < Test::Unit::TestCase
                    received_text,
                  ])
   end
+
+  test "#request_uris" do
+    loop = GLib::MainLoop.new
+    received_uris = nil
+    @clipboard.request_uris do |_clipboard, uris|
+      received_uris = uris
+      loop.quit
+    end
+    loop.run
+
+    assert_nil(received_uris)
+  end
 end
