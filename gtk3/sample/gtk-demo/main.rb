@@ -45,7 +45,28 @@ Gio::Resources.register(resource)
 
 ENV["GSETTINGS_SCHEMA_DIR"] = current_path
 
+def script_info(path)
+  title = klass = depend = nil
 
+  file = File.open(path)
+  file.each do |ln|
+    if !title && ln =~ /^=\s+(.*)$/
+      title = Regexp.last_match(1)
+      if title =~ /^(.*)\((.+?)\)$/
+        title = Regexp.last_match(1)
+        depend = Regexp.last_match(2)
+      end
+    elsif !klass && ln =~ /\s*class\s+([A-Z][A-Za-z0-9_]*)/
+      klass = Regexp.last_match(1)
+    end
+
+    break if title && klass
+  end
+
+  fail "File not found: #{path}." unless klass
+
+  return title, klass.intern, depend
+end
 
 class Demo < Gtk::Application
   def initialize
