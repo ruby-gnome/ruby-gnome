@@ -68,6 +68,63 @@ def script_info(path)
   return title, klass.intern, depend
 end
 
+
+def generate_index
+  # Target scripts
+  scripts = Dir.glob(File.join(File.dirname(__FILE__), '*.rb'))
+  # Generate index tree
+  children = {}
+  index = []
+
+  scripts.each do |script|
+    # TODO remove the demos.rb when demos list is handled.
+    next if ["common.rb", "main.rb", "demos.rb"].include?(File.basename(script))
+    title, klass, depend = script_info(script)
+
+    if depend and not Gtk.const_defined?(depend)
+      next
+    end
+
+    if title =~ %r{^(.+?)/(.+)$}
+      parent = $1
+      child = $2
+
+      unless children[parent]
+        children[parent] = []
+        index += [[parent, nil, nil, []]]
+      end
+
+      children[parent] += [[child, script, klass]]
+    else
+      index += [[title, script, klass]]
+    end
+  end
+
+  # Sort children
+  children.each_key do |parent|
+    children[parent].sort! do |a, b|
+      a[0] <=> b[0]
+    end
+  end
+
+  # Expand children
+  index.collect! do |row|
+    if row[3]
+      row[3] = children[row[0]]
+    end
+
+    row
+  end
+
+  index.sort! do |a, b|
+    a[0] <=> b[0]
+  end
+
+  index
+end
+
+puts generate_index.inspect
+
 class Demo < Gtk::Application
   def initialize
     super("org.gtk.Demo", [:non_unique, :handles_command_line])
