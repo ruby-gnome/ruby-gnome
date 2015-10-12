@@ -22,7 +22,7 @@ module PopplerTestUtils
   def form_pdf
     file = File.join(fixtures_dir, "form.pdf")
     return file if File.exist?(file)
-    pdf = open("http://www.irs.gov/pub/irs-pdf/fw9.pdf").read
+    pdf = open("https://www.irs.gov/pub/irs-pdf/fw9.pdf").read
     File.open(file, "wb") do |output|
       output.print(pdf)
     end
