@@ -71,8 +71,10 @@ extern "C" {
 #define RBG_INSPECT(object) (rbg_rval_inspect(object))
 
 #define RVAL2CSTR(v) (rbg_rval2cstr(&(v)))
+#define RVAL2CSTR_RAW(v) (rbg_rval2cstr_raw(&(v)))
 #define RVAL2CSTR_PTR(v) (rbg_rval2cstr_ptr(&(v)))
 #define RVAL2CSTR_ACCEPT_NIL(v) (rbg_rval2cstr_accept_nil(&(v)))
+#define RVAL2CSTR_RAW_ACCEPT_NIL(v) (rbg_rval2cstr_raw_accept_nil(&(v)))
 #define RVAL2CSTR_PTR_ACCEPT_NIL(v) (rbg_rval2cstr_ptr_accept_nil(&(v)))
 #define RVAL2CSTR2(v) (RVAL2CSTR_ACCEPT_NIL(v))
 #define RVAL2CSTR_ACCEPT_SYMBOL(v) (rbg_rval2cstr_accept_symbol(&(v)))

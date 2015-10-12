@@ -43,6 +43,14 @@ rbg_rval2cstr(VALUE *str)
 }
 
 const gchar *
+rbg_rval2cstr_raw(VALUE *str)
+{
+    StringValue(*str);
+
+    return StringValueCStr(*str);
+}
+
+const gchar *
 rbg_rval2cstr_ptr(VALUE *str)
 {
     StringValue(*str);
@@ -68,6 +76,12 @@ const gchar *
 rbg_rval2cstr_accept_nil(VALUE *str)
 {
     return NIL_P(*str) ? NULL : RVAL2CSTR(*str);
+}
+
+const gchar *
+rbg_rval2cstr_raw_accept_nil(VALUE *str)
+{
+    return NIL_P(*str) ? NULL : RVAL2CSTR_RAW(*str);
 }
 
 const gchar *
