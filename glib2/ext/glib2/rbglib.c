@@ -75,6 +75,12 @@ rbg_rval2cstr_accept_nil(VALUE *str)
     return NIL_P(*str) ? NULL : RVAL2CSTR(*str);
 }
 
+const gchar *
+rbg_rval2cstr_ptr_accept_nil(VALUE *str)
+{
+    return NIL_P(*str) ? NULL : RVAL2CSTR_PTR(*str);
+}
+
 /* TODO: How do we deal with encodings? */
 const gchar *
 rbg_rval2cstr_accept_symbol(volatile VALUE *value)
