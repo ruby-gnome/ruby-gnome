@@ -308,7 +308,11 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
                 return;
             }
         }
-
+#if GLIB_CHECK_VERSION(2, 26, 0)
+      case G_TYPE_VARIANT:
+        g_value_set_variant(result, rbg_variant_from_ruby(val));
+        break;
+#endif
       default:
         if (!rbgobj_convert_rvalue2gvalue(fundamental_type, val, result)) {
             RValueToGValueFunc func =
