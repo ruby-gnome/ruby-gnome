@@ -45,11 +45,10 @@ Gio::Resources.register(resource)
 
 ENV["GSETTINGS_SCHEMA_DIR"] = current_path
 
-NAME_COLUMN, TITLE_COLUMN, FILENAME_COLUMN, FUNC_COLUMN, STYLE_COLUMN = 1, 2, 3, 4, 5
+TITLE_COLUMN, FILENAME_COLUMN, STYLE_COLUMN = 0, 1, 2
 
 def script_info(path)
   title = klass = depend = nil
-
   file = File.open(path)
   file.each do |ln|
     if !title && ln =~ /^=\s+(.*)$/
@@ -128,25 +127,17 @@ end
 def append_children(model, source, parent = nil)
   source.each do |title, filename, klass, children|
     iter = model.append(parent)
-
-    [title, filename, klass].each_with_index do |value, i|
-      if value
-        iter.set_value(i, value)
-      end
-    end
-    iter.set_value(STYLE_COLUMN, Pango::FontDescription::STYLE_NORMAL)
+    puts "Sentinel: #{__LINE__}"
+    iter[TITLE_COLUMN] = title
+    iter[FILENAME_COLUMN] = filename
+    iter[STYLE_COLUMN] = Pango::FontDescription::STYLE_NORMAL
 
     if children
+      puts "Children Sentinel: #{__LINE__}"
       append_children(model, children, iter)
     end
+    puts "append_children end Sentinel: #{__LINE__}"
   end
-end
-
-def populate_tree_view_model(model)
-  index = generate_index
-  index.each do |e
-  iter = model.append
-  iter.set
 end
 
 class Demo < Gtk::Application
@@ -247,8 +238,8 @@ class Demo < Gtk::Application
     headerbar = @builder["headerbar"]
     treeview = @builder["treeview"]
     model = treeview.model
-
-    populate_treeview_model(model)
+    append_children(model, generate_index)
+    
     sw = @builder["source-scrolledwindow"]
     scrollbar = sw.vscrollbar
 
@@ -275,6 +266,7 @@ class Demo < Gtk::Application
     end
 
     window.show_all
+    puts "Run end Sentinel: #{__LINE__}"
   end
 end
 
