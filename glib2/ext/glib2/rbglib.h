@@ -150,8 +150,11 @@ extern const gchar *rbg_rval_inspect(VALUE object);
 
 extern gchar* rbg_string_value_ptr(volatile VALUE* ptr); /* no longer used */
 extern const gchar *rbg_rval2cstr(VALUE *str);
+extern const gchar *rbg_rval2cstr_raw(VALUE *str);
 extern const gchar *rbg_rval2cstr_ptr(VALUE *str);
 extern const gchar *rbg_rval2cstr_accept_nil(VALUE *str);
+extern const gchar *rbg_rval2cstr_raw_accept_nil(VALUE *str);
+extern const gchar *rbg_rval2cstr_ptr_accept_nil(VALUE *str);
 extern const gchar *rbg_rval2cstr_accept_symbol(volatile VALUE *value);
 extern const gchar *rbg_rval2cstr_accept_symbol_accept_nil(volatile VALUE *value);
 extern const gchar *rbg_rval2glibid(volatile VALUE *value, volatile VALUE *buf, gboolean accept_nil);
