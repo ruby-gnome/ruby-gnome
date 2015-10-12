@@ -47,11 +47,6 @@ rbg_rval2cstr_ptr(VALUE *str)
 {
     StringValue(*str);
 
-#ifdef HAVE_RUBY_ENCODING_H
-    if (rb_enc_get(*str) != rb_utf8_encoding())
-        *str = rb_str_export_to_enc(*str, rb_utf8_encoding());
-#endif
-
     return RSTRING_PTR(*str);
 }
 
