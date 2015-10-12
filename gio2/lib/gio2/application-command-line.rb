@@ -16,6 +16,18 @@
 
 module Gio
   class ApplicationCommandLine
+    def initialize(properties=nil)
+      if properties
+        arguments = properties[:arguments]
+        if arguments and !arguments.is_a?(GLib::Variant)
+          arguments = GLib::Variant.new(arguments,
+                                        GLib::VariantType::BYTESTRING_ARRAY)
+          properties = properties.merge(:arguments => arguments)
+        end
+      end
+      super(properties)
+    end
+
     alias_method :arguments_raw, :arguments
     def arguments
       arguments_raw[0]
