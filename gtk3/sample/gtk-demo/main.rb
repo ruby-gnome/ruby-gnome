@@ -45,7 +45,9 @@ Gio::Resources.register(resource)
 
 ENV["GSETTINGS_SCHEMA_DIR"] = current_path
 
-TITLE_COLUMN, FILENAME_COLUMN, STYLE_COLUMN = 0, 1, 2
+TITLE_COLUMN = 0
+FILENAME_COLUMN = 0
+STYLE_COLUMN = 2
 
 def script_info(path)
   title = klass = depend = nil
@@ -66,13 +68,12 @@ def script_info(path)
 
   fail "File not found: #{path}." unless klass
 
-  return title, klass.intern, depend
+  [title, klass.intern, depend]
 end
-
 
 def generate_index
   # Target scripts
-  scripts = Dir.glob(File.join(File.dirname(__FILE__), '*.rb'))
+  scripts = Dir.glob(File.join(File.dirname(__FILE__), "*.rb"))
   # Generate index tree
   children = {}
   index = []
@@ -82,13 +83,11 @@ def generate_index
     next if ["common.rb", "main.rb", "demos.rb"].include?(File.basename(script))
     title, klass, depend = script_info(script)
 
-    if depend and not Gtk.const_defined?(depend)
-      next
-    end
+    next if depend && !Gtk.const_defined?(depend)
 
     if title =~ %r{^(.+?)/(.+)$}
-      parent = $1
-      child = $2
+      parent = Regexp.last_match(1)
+      child = Regexp.last_match(2)
 
       unless children[parent]
         children[parent] = []
@@ -110,9 +109,7 @@ def generate_index
 
   # Expand children
   index.collect! do |row|
-    if row[3]
-      row[3] = children[row[0]]
-    end
+    row[3] = children[row[0]] if row[3]
 
     row
   end
@@ -127,16 +124,11 @@ end
 def append_children(model, source, parent = nil)
   source.each do |title, filename, klass, children|
     iter = model.append(parent)
-    puts "Sentinel: #{__LINE__}"
     iter[TITLE_COLUMN] = title
     iter[FILENAME_COLUMN] = filename
     iter[STYLE_COLUMN] = Pango::FontDescription::STYLE_NORMAL
 
-    if children
-      puts "Children Sentinel: #{__LINE__}"
-      append_children(model, children, iter)
-    end
-    puts "append_children end Sentinel: #{__LINE__}"
+    append_children(model, children, iter) if children
   end
 end
 
@@ -154,7 +146,7 @@ class Demo < Gtk::Application
       application.set_app_menu(appmenu)
     end
 
-    signal_connect "activate" do |application|
+    signal_connect "activate" do |_application|
       puts "activate"
       begin
         run_application
@@ -164,7 +156,7 @@ class Demo < Gtk::Application
       end
     end
 
-    signal_connect "command-line" do |application, command_line|
+    signal_connect "command-line" do |_application, command_line|
       puts "cmd"
       begin
         parse_command_line(command_line.arguments)
@@ -181,9 +173,10 @@ class Demo < Gtk::Application
         @exit_status
       end
     end
- end
+  end
 
   private
+
   def parse_command_line(arguments)
     parser = OptionParser.new
     parser.on("-r", "--run EXAMPLE", "Run an example") do |example|
@@ -219,7 +212,7 @@ class Demo < Gtk::Application
     if @options[:autoquit]
       puts "autoquit"
       GLib::Timeout.add(1) do
-        #implement auto_quit
+        # implement auto_quit
       end
     end
 
@@ -239,7 +232,7 @@ class Demo < Gtk::Application
     treeview = @builder["treeview"]
     model = treeview.model
     append_children(model, generate_index)
-    
+
     sw = @builder["source-scrolledwindow"]
     scrollbar = sw.vscrollbar
 
