@@ -44,7 +44,7 @@ Gio::Resources.register(resource)
 ENV["GSETTINGS_SCHEMA_DIR"] = current_path
 
 TITLE_COLUMN = 0
-FILENAME_COLUMN = 1 
+FILENAME_COLUMN = 1
 STYLE_COLUMN = 2
 
 def script_info(path)
