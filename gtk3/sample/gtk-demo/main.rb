@@ -48,7 +48,7 @@ FILENAME_COLUMN = 1
 STYLE_COLUMN = 2
 
 def script_info(path)
-  title = klass = depend = nil
+  title = depend = nil
   file = File.open(path)
   file.each do |ln|
     if !title && ln =~ /^=\s+(.*)$/
@@ -57,16 +57,12 @@ def script_info(path)
         title = Regexp.last_match(1)
         depend = Regexp.last_match(2)
       end
-    elsif !klass && ln =~ /\s*class\s+([A-Z][A-Za-z0-9_]*)/
-      klass = Regexp.last_match(1)
     end
 
-    break if title && klass
+    break if title
   end
 
-  fail "File not found: #{path}." unless klass
-
-  [title, klass.intern, depend]
+  [title, depend]
 end
 
 def generate_index
@@ -78,7 +74,7 @@ def generate_index
 
   scripts.each do |script|
     next if ["common.rb", "main.rb"].include?(File.basename(script))
-    title, klass, depend = script_info(script)
+    title, depend = script_info(script)
 
     next if depend && !Gtk.const_defined?(depend)
 
@@ -91,9 +87,9 @@ def generate_index
         index += [[parent, nil, nil, []]]
       end
 
-      children[parent] += [[child, script, klass]]
+      children[parent] += [[child, script]]
     else
-      index += [[title, script, klass]]
+      index += [[title, script]]
     end
   end
 
@@ -119,7 +115,7 @@ def generate_index
 end
 
 def append_children(model, source, parent = nil)
-  source.each do |title, filename, klass, children|
+  source.each do |title, filename, children|
     iter = model.append(parent)
     iter[TITLE_COLUMN] = title
     iter[FILENAME_COLUMN] = filename
