@@ -92,7 +92,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext0"/>
                           <attributes>
-                            <attribute name="style">4</attribute>
+                            <attribute name="style">2</attribute>
                             <attribute name="text">0</attribute>
                           </attributes>
                         </child>
