@@ -22,8 +22,6 @@ require "fileutils"
 
 current_path = File.expand_path(File.dirname(__FILE__))
 
-require "#{current_path}/demos.rb"
-
 gresource_bin = "#{current_path}/demo.gresource"
 gresource_xml = "#{current_path}/demo.gresource.xml"
 
@@ -79,8 +77,7 @@ def generate_index
   index = []
 
   scripts.each do |script|
-    # TODO remove the demos.rb when demos list is handled.
-    next if ["common.rb", "main.rb", "demos.rb"].include?(File.basename(script))
+    next if ["common.rb", "main.rb"].include?(File.basename(script))
     title, klass, depend = script_info(script)
 
     next if depend && !Gtk.const_defined?(depend)
