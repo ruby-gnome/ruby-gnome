@@ -124,6 +124,15 @@ def append_children(model, source, parent = nil)
   end
 end
 
+def list_demos(source, is_child=false)
+  source.each do |title, filename, children|
+    tab = is_child ? "\t" : ""
+    puts "#{tab}#{title} #{filename||""}"
+
+    list_demos(children, true) if children
+  end
+end
+
 class Demo < Gtk::Application
   def initialize
     super("org.gtk.Demo", [:non_unique, :handles_command_line])
@@ -191,7 +200,7 @@ class Demo < Gtk::Application
   def run_application
     if @options[:list]
       puts "list"
-      # list_demos
+      list_demos(generate_index)
       quit
     end
 
