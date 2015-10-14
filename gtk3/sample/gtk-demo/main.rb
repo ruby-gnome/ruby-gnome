@@ -21,6 +21,7 @@ require "optparse"
 require "fileutils"
 
 current_path = File.expand_path(File.dirname(__FILE__))
+
 gresource_bin = "#{current_path}/demo.gresource"
 gresource_xml = "#{current_path}/demo.gresource.xml"
 
@@ -42,7 +43,87 @@ Gio::Resources.register(resource)
 
 ENV["GSETTINGS_SCHEMA_DIR"] = current_path
 
+TITLE_COLUMN = 0
+FILENAME_COLUMN = 1
+STYLE_COLUMN = 2
 
+def script_info(path)
+  title = depend = nil
+  file = File.open(path)
+  file.each do |ln|
+    if !title && ln =~ /^=\s+(.*)$/
+      title = Regexp.last_match(1)
+      if title =~ /^(.*)\((.+?)\)$/
+        title = Regexp.last_match(1)
+        depend = Regexp.last_match(2)
+      end
+    end
+
+    break if title
+  end
+
+  [title, depend]
+end
+
+def generate_index
+  # Target scripts
+  scripts = Dir.glob(File.join(File.dirname(__FILE__), "*.rb"))
+  # Generate index tree
+  children = {}
+  index = []
+
+  scripts.each do |script|
+    next if ["common.rb", "main.rb"].include?(File.basename(script))
+    title, depend = script_info(script)
+
+    next if depend && !Gtk.const_defined?(depend)
+
+    if title =~ %r{^(.+?)/(.+)$}
+      parent = Regexp.last_match(1)
+      child = Regexp.last_match(2)
+
+      unless children[parent]
+        children[parent] = []
+        index += [[parent, nil, nil, []]]
+      end
+
+      children[parent] += [[child, script]]
+    else
+      index += [[title, script]]
+    end
+  end
+
+  # Sort children
+  children.each_key do |parent|
+    children[parent].sort! do |a, b|
+      a[0] <=> b[0]
+    end
+  end
+
+  # Expand children
+  index.collect! do |row|
+    row[3] = children[row[0]] if row[3]
+
+    row
+  end
+
+  index.sort! do |a, b|
+    a[0] <=> b[0]
+  end
+
+  index
+end
+
+def append_children(model, source, parent = nil)
+  source.each do |title, filename, children|
+    iter = model.append(parent)
+    iter[TITLE_COLUMN] = title
+    iter[FILENAME_COLUMN] = filename
+    iter[STYLE_COLUMN] = Pango::FontDescription::STYLE_NORMAL
+
+    append_children(model, children, iter) if children
+  end
+end
 
 class Demo < Gtk::Application
   def initialize
@@ -58,7 +139,7 @@ class Demo < Gtk::Application
       application.set_app_menu(appmenu)
     end
 
-    signal_connect "activate" do |application|
+    signal_connect "activate" do |_application|
       puts "activate"
       begin
         run_application
@@ -68,7 +149,7 @@ class Demo < Gtk::Application
       end
     end
 
-    signal_connect "command-line" do |application, command_line|
+    signal_connect "command-line" do |_application, command_line|
       puts "cmd"
       begin
         parse_command_line(command_line.arguments)
@@ -85,9 +166,10 @@ class Demo < Gtk::Application
         @exit_status
       end
     end
- end
+  end
 
   private
+
   def parse_command_line(arguments)
     parser = OptionParser.new
     parser.on("-r", "--run EXAMPLE", "Run an example") do |example|
@@ -123,7 +205,7 @@ class Demo < Gtk::Application
     if @options[:autoquit]
       puts "autoquit"
       GLib::Timeout.add(1) do
-        #implement auto_quit
+        # implement auto_quit
       end
     end
 
@@ -142,6 +224,7 @@ class Demo < Gtk::Application
     headerbar = @builder["headerbar"]
     treeview = @builder["treeview"]
     model = treeview.model
+    append_children(model, generate_index)
 
     sw = @builder["source-scrolledwindow"]
     scrollbar = sw.vscrollbar

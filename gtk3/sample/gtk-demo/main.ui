@@ -18,14 +18,14 @@
   </menu>
   <object class="GtkTreeStore" id="treestore">
     <columns>
-      <!-- column-name NAME -->
-      <column type="gchararray"/>
+      <!-- column-name NAME
+      <column type="gchararray"/> -->
       <!-- column-name TITLE -->
       <column type="gchararray"/>
       <!-- column-name FILENAME -->
       <column type="gchararray"/>
-      <!-- column-name FUNC -->
-      <column type="gpointer"/>
+      <!-- column-name FUNC
+      <column type="gpointer"/> -->
       <!-- column-name STYLE -->
       <column type="gint"/>
     </columns>
@@ -87,13 +87,13 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn0">
                         <property name="title" translatable="yes">column</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                          <object class="GtkCellRendererText" id="cellrenderertext0"/>
                           <attributes>
-                            <attribute name="style">4</attribute>
-                            <attribute name="text">1</attribute>
+                            <attribute name="style">2</attribute>
+                            <attribute name="text">0</attribute>
                           </attributes>
                         </child>
                       </object>
