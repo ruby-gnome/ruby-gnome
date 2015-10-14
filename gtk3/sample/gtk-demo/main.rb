@@ -84,9 +84,8 @@ def generate_index
 
       unless children[parent]
         children[parent] = []
-        index += [[parent, nil, nil, []]]
+        index += [[parent, nil, []]]
       end
-
       children[parent] += [[child, script]]
     else
       index += [[title, script]]
@@ -102,8 +101,8 @@ def generate_index
 
   # Expand children
   index.collect! do |row|
-    row[3] = children[row[0]] if row[3]
-
+    row[2] = children[row[0]] if row[2]
+      
     row
   end
 
