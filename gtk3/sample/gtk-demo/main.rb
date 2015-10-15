@@ -131,10 +131,19 @@ end
 
 def list_demos(source, is_child=false)
   source.each do |title, filename, children|
-    tab = is_child ? "\t" : ""
-    puts "#{tab}#{title} #{get_demo_name_from_filename(filename)}"
+    if is_child
+      printf("%-30.30s","\t" + title)
+      printf("%-30.30s",get_demo_name_from_filename(filename))
+      puts ""
+    elsif filename
+      printf("%-38.38s",title)
+      printf("%-30.30s", get_demo_name_from_filename(filename))
+      puts ""
+    else
+      puts "#{title} : "
+    end
 
-    list_demos(children, true) if children
+      list_demos(children, true) if children
   end
 end
 
