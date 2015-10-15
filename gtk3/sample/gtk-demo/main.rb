@@ -84,9 +84,8 @@ def generate_index
 
       unless children[parent]
         children[parent] = []
-        index += [[parent, nil, nil, []]]
+        index += [[parent, nil, []]]
       end
-
       children[parent] += [[child, script]]
     else
       index += [[title, script]]
@@ -102,8 +101,8 @@ def generate_index
 
   # Expand children
   index.collect! do |row|
-    row[3] = children[row[0]] if row[3]
-
+    row[2] = children[row[0]] if row[2]
+      
     row
   end
 
@@ -122,6 +121,15 @@ def append_children(model, source, parent = nil)
     iter[STYLE_COLUMN] = Pango::FontDescription::STYLE_NORMAL
 
     append_children(model, children, iter) if children
+  end
+end
+
+def list_demos(source, is_child=false)
+  source.each do |title, filename, children|
+    tab = is_child ? "\t" : ""
+    puts "#{tab}#{title} #{filename||""}"
+
+    list_demos(children, true) if children
   end
 end
 
@@ -192,7 +200,7 @@ class Demo < Gtk::Application
   def run_application
     if @options[:list]
       puts "list"
-      # list_demos
+      list_demos(generate_index)
       quit
     end
 
