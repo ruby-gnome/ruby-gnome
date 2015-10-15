@@ -124,10 +124,15 @@ def append_children(model, source, parent = nil)
   end
 end
 
+def get_demo_name_from_filename(filename)
+  /.*\/(?<demo_name>.*)\.rb/ =~ filename
+  (demo_name || "").gsub("-","_")
+end
+
 def list_demos(source, is_child=false)
   source.each do |title, filename, children|
     tab = is_child ? "\t" : ""
-    puts "#{tab}#{title} #{filename||""}"
+    puts "#{tab}#{title} #{get_demo_name_from_filename(filename)}"
 
     list_demos(children, true) if children
   end
