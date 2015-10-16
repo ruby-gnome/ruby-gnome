@@ -102,7 +102,7 @@ def generate_index
   # Expand children
   index.collect! do |row|
     row[2] = children[row[0]] if row[2]
-      
+
     row
   end
 
@@ -130,7 +130,7 @@ def get_demo_name_from_filename(filename)
 end
 
 def get_module_name_from_filename(filename)
-  pattern = get_demo_name_from_filename(filename) 
+  pattern = get_demo_name_from_filename(filename)
   module_name = pattern.split("_").map{|w| w.capitalize}.join
   module_name << "Demo"
 end
