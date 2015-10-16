@@ -129,6 +129,12 @@ def get_demo_name_from_filename(filename)
   (demo_name || "").gsub("-","_")
 end
 
+def get_module_name_from_filename(filename)
+  pattern = get_demo_name_from_filename(filename) 
+  module_name = pattern.split("_").map{|w| w.capitalize}.join
+  module_name << "Demo"
+end
+
 def list_demos(source, is_child=false)
   source.each do |title, filename, children|
     if is_child
