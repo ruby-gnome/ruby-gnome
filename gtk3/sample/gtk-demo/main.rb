@@ -152,6 +152,43 @@ def list_demos(source, is_child=false)
   end
 end
 
+def find_demo_filename_from_name(source, name)
+  demo_filename = nil
+  source.each do |_title, filename, children|
+    if filename && name == get_demo_name_from_filename(filename)
+      demo_filename = filename
+    end
+    (demo_filename = find_demo_filename_from_name(children, name)) if children
+  end
+  demo_filename
+end
+
+def get_demo_filename_from_name(name)
+  index = generate_index
+  filename = find_demo_filename_from_name(index, name)
+  unless filename
+    puts "Demo not found"
+  end
+  filename
+end
+
+def run_demo_from_file(filename, window)
+
+  module_name =  get_module_name_from_filename(filename)
+
+  unless Module.const_defined?(module_name) == true
+    require filename if filename =~ /test_mod\.rb/ # We just use this for test now
+  end
+
+  module_object = Module::const_get(module_name)
+  demo = module_object.send(:run_demo, window)
+
+  if demo && demo.class == Gtk::Window
+    demo.set_transient_for(window)
+    demo.modal = true
+  end
+end
+
 class Demo < Gtk::Application
   def initialize
     super("org.gtk.Demo", [:non_unique, :handles_command_line])
@@ -223,11 +260,6 @@ class Demo < Gtk::Application
       quit
     end
 
-    if @options[:name]
-      puts "name"
-      # lookup_for_corresponding_demo
-      # load_demo
-    end
 
     if @options[:autoquit]
       puts "autoquit"
@@ -281,19 +313,18 @@ class Demo < Gtk::Application
     treeview.signal_connect "row-activated" do |tree_view,path,column|
       iter = model.get_iter(path)
       filename = iter[1]
-      module_name =  get_module_name_from_filename(filename)
 
-      unless Module.const_defined?(module_name) == true
-        require filename if filename =~ /test_mod\.rb/ # We just use this for test now
-      end
-
-      module_object = Module::const_get(module_name)
-      module_object.send(:run_demo)
+      run_demo_from_file(filename, windows.first)
 
     end
 
     window.show_all
 
+    if @options[:name]
+      puts "name"
+      filename = get_demo_filename_from_name(@options[:name])
+      run_demo_from_file(filename, windows.first)
+    end
   end
 end
 
