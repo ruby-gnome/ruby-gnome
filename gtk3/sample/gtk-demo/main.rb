@@ -125,8 +125,7 @@ def append_children(model, source, parent = nil)
 end
 
 def get_demo_name_from_filename(filename)
-  /.*\/(?<demo_name>.*)\.rb/ =~ filename
-  (demo_name || "").gsub("-","_")
+  File.basename(filename, ".rb").gsub("-", "_")
 end
 
 def get_module_name_from_filename(filename)
