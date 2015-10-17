@@ -187,6 +187,7 @@ def run_demo_from_file(filename, window)
     demo.set_transient_for(window)
     demo.modal = true
   end
+  demo
 end
 
 class Demo < Gtk::Application
@@ -313,9 +314,11 @@ class Demo < Gtk::Application
     treeview.signal_connect "row-activated" do |tree_view,path,column|
       iter = model.get_iter(path)
       filename = iter[1]
-
-      run_demo_from_file(filename, windows.first)
-
+      iter[2] = Pango::FontDescription::STYLE_ITALIC
+      demo = run_demo_from_file(filename, windows.first)
+      demo.signal_connect "destroy" do 
+        iter[2] = Pango::FontDescription::STYLE_NORMAL
+      end
     end
 
     window.show_all
