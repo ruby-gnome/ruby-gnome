@@ -32,6 +32,26 @@ Gtk.main
 ```
 This tutorial will mainly be focused on the use of Gtk::Application, which is the best way to create an application.
 
+## Table of Contents
+*  [Basics](#basics)
+*  [Packing](#packing)
+*  [Building user interfaces](#building-user-interfaces)
+*  [Building Applications](#building-applications)
+  *  [A trivial application](#a trivial application)
+  *  [Populating the window](#populating-the-window)
+    *  [Link a template to a custom class widget](#link-a-template-to-a-custom-class-widget)
+    *  [Load a resource file](#load-a-resource-file)
+  *  [Opening files](#opening-file)
+  *  [An application menu](#an-application-menu)
+    *  [Adding the menu interface](#adding-the-menu-interface)
+    *  [Linking menu items to actions](#linking-menu-items-to-actions)
+    *  [Add accelerators for an action](#add-accelerators-for-an-action)
+  *  [A preference dialog](#a-preference-dialog)
+    *  [Define and store settings for an application with gschemas](#define-and-store-settings-for-an-application-with-gschemas)
+    *  [Configure the settings with a dialog window](#configure-the-settings-with-a-dialog-window)
+  *  [Adding a search bar](#adding-a-search-bar)
+  *  [Adding a sidebar](#adding-a-sidebar)
+
 ## Basics
 https://developer.gnome.org/gtk3/stable/gtk-getting-started.html#id-1.2.3.5
 
@@ -516,7 +536,6 @@ stack.add_titled(scrolled, basename, basename)
 
 In this line, given that `self` is `ExampleAppWindow` the usage of `stack` is a call to the method we have created previously. So here we add a tab with a `Gtk::ScrolledWindow` in the `Gtk::Stack` widget of our template and we display the file content.
 
-
 ### An application menu
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.8
 
@@ -599,10 +618,10 @@ application.add_action(action)
 application.set_accels_for_action("app.quit", quit_accels)
 ```
 
-### A preferences dialog
+### A preference dialog
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.9
 
-### Define and store settings for an application with gschemas
+#### Define and store settings for an application with gschemas
 *    exampleapp5/exampleapp.rb
 
 A typical application will have a some preferences that should be remembered from one run to the next. Even for our simple example application, we may want to change the font that is used for the content.
@@ -824,7 +843,7 @@ def open(file)
 end
 ``` 
 
-## Adding a search bar
+### Adding a search bar
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.10
 
 *    exampleapp7/exampleapp.rb
@@ -939,7 +958,7 @@ Those pieces together mean that the signal *search-changed* of the `Gtk::SearchE
 ### Adding a sidebar
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.11
 
-*    exampleapp8.rb
+*    exampleapp8/exampleapp.rb
 
 As another piece of functionality, we are adding a sidebar, which demonstrates `Gtk::MenuButton`, `Gtk::Revealer` and Gtk::ListBox`.
 
