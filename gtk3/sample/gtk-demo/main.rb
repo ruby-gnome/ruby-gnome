@@ -149,7 +149,7 @@ def list_demos(source, is_child=false)
       puts "#{title} : "
     end
 
-      list_demos(children, true) if children
+    list_demos(children, true) if children
   end
 end
 
