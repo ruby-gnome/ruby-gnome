@@ -102,7 +102,7 @@ def generate_index
   # Expand children
   index.collect! do |row|
     row[2] = children[row[0]] if row[2]
-      
+
     row
   end
 
@@ -124,12 +124,32 @@ def append_children(model, source, parent = nil)
   end
 end
 
+def get_demo_name_from_filename(filename)
+  /.*\/(?<demo_name>.*)\.rb/ =~ filename
+  (demo_name || "").gsub("-","_")
+end
+
+def get_module_name_from_filename(filename)
+  pattern = get_demo_name_from_filename(filename)
+  module_name = pattern.split("_").map{|w| w.capitalize}.join
+  module_name << "Demo"
+end
+
 def list_demos(source, is_child=false)
   source.each do |title, filename, children|
-    tab = is_child ? "\t" : ""
-    puts "#{tab}#{title} #{filename||""}"
+    if is_child
+      printf("%-30.30s","\t" + title)
+      printf("%-30.30s",get_demo_name_from_filename(filename))
+      puts ""
+    elsif filename
+      printf("%-38.38s",title)
+      printf("%-30.30s", get_demo_name_from_filename(filename))
+      puts ""
+    else
+      puts "#{title} : "
+    end
 
-    list_demos(children, true) if children
+      list_demos(children, true) if children
   end
 end
 
