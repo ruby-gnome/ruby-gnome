@@ -278,7 +278,22 @@ class Demo < Gtk::Application
       menu.popup(nil, nil, Gtk.current_event_time)
     end
 
+    treeview.signal_connect "row-activated" do |tree_view,path,column|
+      iter = model.get_iter(path)
+      filename = iter[1]
+      module_name =  get_module_name_from_filename(filename)
+
+      unless Module.const_defined?(module_name) == true
+        require filename if filename =~ /test_mod\.rb/ # We just use this for test now
+      end
+
+      module_object = Module::const_get(module_name)
+      module_object.send(:run_demo)
+
+    end
+
     window.show_all
+
   end
 end
 
