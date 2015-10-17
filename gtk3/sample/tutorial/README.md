@@ -934,5 +934,5 @@ In this part of code, the use of the method `set_connect_func` will allow us to 
 
     <signal name="search-changed" handler="search_text_changed"/>
 
-Those pieces together mean that for the signal *search-changed* of the `Gtk::SearchEntry`, trigger the private method of `ExampleAppWindow` that is called `search_text_changed`.
+Those pieces together mean that the signal *search-changed* of the `Gtk::SearchEntry`, trigger the private method of `ExampleAppWindow` that is called `search_text_changed`.
 
