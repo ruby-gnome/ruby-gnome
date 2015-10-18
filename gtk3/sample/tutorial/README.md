@@ -32,6 +32,26 @@ Gtk.main
 ```
 This tutorial will mainly be focused on the use of Gtk::Application, which is the best way to create an application.
 
+## Table of Contents
+*  [Basics](#basics)
+*  [Packing](#packing)
+*  [Building user interfaces](#building-user-interfaces)
+*  [Building Applications](#building-applications)
+  *  [A trivial application](#a trivial application)
+  *  [Populating the window](#populating-the-window)
+    *  [Link a template to a custom class widget](#link-a-template-to-a-custom-class-widget)
+    *  [Load a resource file](#load-a-resource-file)
+  *  [Opening files](#opening-file)
+  *  [An application menu](#an-application-menu)
+    *  [Adding the menu interface](#adding-the-menu-interface)
+    *  [Linking menu items to actions](#linking-menu-items-to-actions)
+    *  [Add accelerators for an action](#add-accelerators-for-an-action)
+  *  [A preference dialog](#a-preference-dialog)
+    *  [Define and store settings for an application with gschemas](#define-and-store-settings-for-an-application-with-gschemas)
+    *  [Configure the settings with a dialog window](#configure-the-settings-with-a-dialog-window)
+  *  [Adding a search bar](#adding-a-search-bar)
+  *  [Adding a sidebar](#adding-a-sidebar)
+
 ## Basics
 https://developer.gnome.org/gtk3/stable/gtk-getting-started.html#id-1.2.3.5
 
@@ -516,7 +536,6 @@ stack.add_titled(scrolled, basename, basename)
 
 In this line, given that `self` is `ExampleAppWindow` the usage of `stack` is a call to the method we have created previously. So here we add a tab with a `Gtk::ScrolledWindow` in the `Gtk::Stack` widget of our template and we display the file content.
 
-
 ### An application menu
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.8
 
@@ -599,10 +618,10 @@ application.add_action(action)
 application.set_accels_for_action("app.quit", quit_accels)
 ```
 
-### A preferences dialog
+### A preference dialog
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.9
 
-### Define and store settings for an application with gschemas
+#### Define and store settings for an application with gschemas
 *    exampleapp5/exampleapp.rb
 
 A typical application will have a some preferences that should be remembered from one run to the next. Even for our simple example application, we may want to change the font that is used for the content.
@@ -824,7 +843,7 @@ def open(file)
 end
 ``` 
 
-## Adding a search bar
+### Adding a search bar
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.10
 
 *    exampleapp7/exampleapp.rb
@@ -934,5 +953,166 @@ In this part of code, the use of the method `set_connect_func` will allow us to 
 
     <signal name="search-changed" handler="search_text_changed"/>
 
-Those pieces together mean that for the signal *search-changed* of the `Gtk::SearchEntry`, trigger the private method of `ExampleAppWindow` that is called `search_text_changed`.
+Those pieces together mean that the signal *search-changed* of the `Gtk::SearchEntry`, trigger the private method of `ExampleAppWindow` that is called `search_text_changed`.
 
+### Adding a sidebar
+https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.11
+
+*    exampleapp8/exampleapp.rb
+
+As another piece of functionality, we are adding a sidebar, which demonstrates `Gtk::MenuButton`, `Gtk::Revealer` and Gtk::ListBox`.
+
+window.ui :
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.8 -->
+  <template class="ExampleAppWindow" parent="GtkApplicationWindow">
+    <property name="title" translatable="yes">Example Application</property>
+    <property name="default-width">600</property>
+    <property name="default-height">400</property>
+    <child>
+      <object class="GtkBox" id="content_box">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkHeaderBar" id="header">
+            <property name="visible">True</property>
+            <child type="title">
+              <object class="GtkStackSwitcher" id="tabs">
+                <property name="visible">True</property>
+                <property name="margin">6</property>
+                <property name="stack">stack</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="search">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage" id="search-icon">
+                    <property name="visible">True</property>
+                    <property name="icon-name">edit-find-symbolic</property>
+                    <property name="icon-size">1</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkMenuButton" id="gears">
+                <property name="visible">True</property>
+                <property name="direction">none</property>
+                <property name="use-popover">True</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSearchBar" id="searchbar">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkSearchEntry" id="searchentry">
+                <signal name="search-changed" handler="search_text_changed"/>
+                <property name="visible">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="hbox">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkRevealer" id="sidebar">
+                <property name="visible">True</property>
+                <property name="transition-type">slide-right</property>
+                <child>
+                 <object class="GtkScrolledWindow" id="sidebar-sw">
+                   <property name="visible">True</property>
+                   <property name="hscrollbar-policy">never</property>
+                   <property name="vscrollbar-policy">automatic</property>
+                   <child>
+                     <object class="GtkListBox" id="words">
+                       <property name="visible">True</property>
+                       <property name="selection-mode">none</property>
+                     </object>
+                   </child>
+                 </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkStack" id="stack">
+                <signal name="notify::visible-child" handler="visible_child_changed"/>
+                <property name="visible">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
+```
+
+The code to populate the sidebar with buttons for the words found in each file is a little too involved to go into here. But we'll look at the code to add the gears menu.
+As expected by now, the gears menu is specified in a GtkBuilder ui file.
+
+gears-menu.ui
+
+```xml
+<?xml version="1.0"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <menu id="menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Words</attribute>
+        <attribute name="action">win.show-words</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>
+```
+To connect the menuitem to the show-words setting, we use a `Gio::SimpleAction` corresponding to the given `Gio::Settings` key.
+
+```ruby
+class ExampleAppWindow < Gtk::ApplicationWindow
+  # some code
+  def initialize(application)
+    super(:application => application)
+    @settings = Gio::Settings.new("org.gtk.exampleapp")
+    @settings.bind("transition",
+                   stack,
+                   "transition-type",
+                   Gio::SettingsBindFlags::DEFAULT)
+    search.bind_property("active", searchbar, "search-mode-enabled", :bidirectional)
+    @settings.bind("show-words",
+                   sidebar,
+                   "reveal-child",
+                   Gio::SettingsBindFlags::DEFAULT)
+    sidebar.signal_connect "notify::reveal-child" do |_sidebar, _gparamspec|
+      update_words(self)
+    end
+    builder = Gtk::Builder.new(:resource => "/org/gtk/exampleapp/gears-menu.ui")
+    menu = builder.get_object("menu")
+    gears.set_menu_model(menu)
+    action = @settings.create_action("show-words")
+    add_action(action)
+  end
+
+  # some code
+end
+```
