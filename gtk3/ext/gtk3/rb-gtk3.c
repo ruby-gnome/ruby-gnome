@@ -141,7 +141,7 @@ static void
 rb_gtk3_clipboard_rich_text_received_func_callback(GtkClipboard *clipboard,
                                                    GdkAtom format,
                                                    const guint *text,
-                                                   gsize length,
+                                                   G_GNUC_UNUSED gsize length,
                                                    gpointer user_data)
 {
     RBGICallbackData *callback_data = user_data;
@@ -151,7 +151,7 @@ rb_gtk3_clipboard_rich_text_received_func_callback(GtkClipboard *clipboard,
                3,
                GOBJ2RVAL(clipboard),
                Data_Wrap_Struct(cGdkAtom, NULL, NULL, format),
-               CSTR2RVAL(text));
+               CSTR2RVAL((const gchar *)text));
 }
 
 static void
@@ -221,7 +221,7 @@ rb_gtk3_clipboard_uri_received_func_callback(GtkClipboard *clipboard,
                id_call,
                2,
                GOBJ2RVAL(clipboard),
-               STRV2RVAL(uris));
+               STRV2RVAL((const gchar **)uris));
 }
 
 static const gchar *
