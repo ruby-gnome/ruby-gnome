@@ -264,6 +264,37 @@ rb_gtk3_tree_cell_data_func_callback(GtkTreeViewColumn *column,
                rb_iter);
 }
 
+static gint
+rb_gtk3_tree_iter_compare_func_callback(GtkTreeModel *model,
+                                        GtkTreeIter *iter1,
+                                        GtkTreeIter *iter2,
+                                        gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    ID id_set_model;
+    VALUE rb_model;
+    VALUE rb_iter1;
+    VALUE rb_iter2;
+    VALUE rb_result;
+
+    CONST_ID(id_set_model, "model=");
+    rb_model = GOBJ2RVAL(model);
+
+    rb_iter1 = BOXED2RVAL(iter1, GTK_TYPE_TREE_ITER);
+    rb_funcall(rb_iter1, id_set_model, 1, rb_model);
+
+    rb_iter2 = BOXED2RVAL(iter2, GTK_TYPE_TREE_ITER);
+    rb_funcall(rb_iter2, id_set_model, 1, rb_model);
+
+    rb_result = rb_funcall(callback_data->rb_callback,
+                           id_call,
+                           3,
+                           rb_model,
+                           rb_iter1,
+                           rb_iter2);
+    return NUM2INT(rb_result);
+}
+
 static void
 rb_gtk3_tree_model_filter_modify_func_callback(GtkTreeModel *model,
                                                GtkTreeIter *iter,
@@ -412,6 +443,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_translate_func_callback;
     } else if (name_equal(info, "TreeCellDataFunc")) {
         return rb_gtk3_tree_cell_data_func_callback;
+    } else if (name_equal(info, "TreeIterCompareFunc")) {
+        return rb_gtk3_tree_iter_compare_func_callback;
     } else if (name_equal(info, "TreeModelFilterModifyFunc")) {
         return rb_gtk3_tree_model_filter_modify_func_callback;
     } else if (name_equal(info, "TreeModelFilterVisibleFunc")) {
