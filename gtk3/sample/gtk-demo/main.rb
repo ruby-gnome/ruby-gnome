@@ -262,13 +262,6 @@ class Demo < Gtk::Application
     end
 
 
-    if @options[:autoquit]
-      puts "autoquit"
-      GLib::Timeout.add(1) do
-        # implement auto_quit
-      end
-    end
-
     window = @builder["window"]
     add_window(window)
 
@@ -327,6 +320,13 @@ class Demo < Gtk::Application
       puts "name"
       filename = get_demo_filename_from_name(@options[:name])
       run_demo_from_file(filename, windows.first)
+    end
+
+    if @options[:autoquit]
+      puts "autoquit"
+      GLib::Timeout.add_seconds(1) do
+        quit 
+      end
     end
   end
 end
