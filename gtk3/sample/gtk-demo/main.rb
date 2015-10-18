@@ -125,16 +125,16 @@ def append_children(model, source, parent = nil)
 end
 
 def get_demo_name_from_filename(filename)
-  File.basename(filename, ".rb").gsub("-", "_")
+  File.basename(filename, ".rb").tr("-", "_")
 end
 
 def get_module_name_from_filename(filename)
   pattern = get_demo_name_from_filename(filename)
-  module_name = pattern.split("_").map{|w| w.capitalize}.join
+  module_name = pattern.split("_").map(&:capitalize).join
   module_name << "Demo"
 end
 
-def list_demos(source, is_child=false)
+def list_demos(source, is_child = false)
   source.each do |title, filename, children|
     if is_child
       printf("%-30.30s", "\t" + title)
@@ -166,21 +166,19 @@ end
 def get_demo_filename_from_name(name)
   index = generate_index
   filename = find_demo_filename_from_name(index, name)
-  unless filename
-    puts "Demo not found"
-  end
+  puts "Demo not found" unless filename
+
   filename
 end
 
 def run_demo_from_file(filename, window)
-
-  module_name =  get_module_name_from_filename(filename)
+  module_name = get_module_name_from_filename(filename)
 
   unless Module.const_defined?(module_name) == true
     require filename if filename =~ /test_mod\.rb/ # We just use this for test now
   end
 
-  module_object = Module::const_get(module_name)
+  module_object = Module.const_get(module_name)
   demo = module_object.send(:run_demo, window)
 
   if demo && demo.class == Gtk::Window
@@ -261,14 +259,6 @@ class Demo < Gtk::Application
       quit
     end
 
-
-    if @options[:autoquit]
-      puts "autoquit"
-      GLib::Timeout.add(1) do
-        # implement auto_quit
-      end
-    end
-
     window = @builder["window"]
     add_window(window)
 
@@ -311,14 +301,23 @@ class Demo < Gtk::Application
       menu.popup(nil, nil, Gtk.current_event_time)
     end
 
-    treeview.signal_connect "row-activated" do |tree_view,path,column|
+    treeview.signal_connect "row-activated" do |_tree_view, path, _column|
       iter = model.get_iter(path)
       filename = iter[1]
       iter[2] = Pango::FontDescription::STYLE_ITALIC
       demo = run_demo_from_file(filename, windows.first)
-      demo.signal_connect "destroy" do 
+      demo.signal_connect "destroy" do
         iter[2] = Pango::FontDescription::STYLE_NORMAL
       end
+    end
+
+    treeview_selection = @builder["treeview-selection"]
+    treeview_selection.signal_connect "changed" do |selection, _model|
+      iter = selection.selected
+      # filename = iter[1]
+      title = iter[0]
+      # load_file(iter[1]) if filename
+      headerbar.set_title(title)
     end
 
     window.show_all
@@ -327,6 +326,13 @@ class Demo < Gtk::Application
       puts "name"
       filename = get_demo_filename_from_name(@options[:name])
       run_demo_from_file(filename, windows.first)
+    end
+
+    if @options[:autoquit]
+      puts "autoquit"
+      GLib::Timeout.add_seconds(1) do
+        quit
+      end
     end
   end
 end
