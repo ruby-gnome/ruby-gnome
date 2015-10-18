@@ -310,11 +310,11 @@ class Demo < Gtk::Application
         iter[2] = Pango::FontDescription::STYLE_NORMAL
       end
     end
-    
+
     treeview_selection = @builder["treeview-selection"]
-    treeview_selection.signal_connect "changed" do |selection, model|
+    treeview_selection.signal_connect "changed" do |selection, _model|
       iter = selection.selected
-      filename = iter[1]
+      # filename = iter[1]
       title = iter[0]
       # load_file(iter[1]) if filename
       headerbar.set_title(title)
