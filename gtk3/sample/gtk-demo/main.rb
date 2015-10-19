@@ -192,6 +192,28 @@ class Demo < Gtk::Application
   def initialize
     super("org.gtk.Demo", [:non_unique, :handles_command_line])
 
+    action = Gio::SimpleAction.new("quit")
+    action.signal_connect "activate" do |_action, _parameter|
+      quit
+    end
+    add_action(action)
+
+    action = Gio::SimpleAction.new("about")
+    action.signal_connect "activate" do |_action, _parameter|
+      Gtk::AboutDialog.show(active_window,
+                            "program_name" => "GTK+ Demo",
+                            "version" => Gtk::Version::STRING,
+                            "copyright" => "(C) 1997-2013 The GTK+ Team",
+                            "license_type" => Gtk::License::LGPL_2_1,
+                            "website" => "http://www.gtk.org",
+                            "comments" => "Program to demonstrate GTK+ widgets",
+                            "authors" => ["The GTK+ Team"],
+                            "logo_icon_name" => "gtk3-demo",
+                            "title" => "About GTK+ Demo",
+                            )
+    end
+
+    add_action(action)
     @options = {}
     @exit_status = 0
 
@@ -261,12 +283,6 @@ class Demo < Gtk::Application
 
     window = @builder["window"]
     add_window(window)
-
-    action = Gio::SimpleAction.new("run")
-    action.signal_connect "activate" do |_action, _parameter|
-      # activate_run
-    end
-    add_action(action)
 
     notebook = @builder["notebook"]
     info_textwiew = @builder["info-textview"]
