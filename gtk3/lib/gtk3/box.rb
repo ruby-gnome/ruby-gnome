@@ -36,5 +36,27 @@ module Gtk
       padding = options[:padding] || 0
       pack_end_raw(child, expand, fill, padding)
     end
+
+    alias_method :set_child_packing_raw, :set_child_packing
+    def set_child_packing(child, options={})
+      expand    = options[:expand]
+      fill      = options[:fill]
+      padding   = options[:padding]
+      pack_type = options[:pack_type]
+
+      old_expand, old_fill, old_padding, old_pack_type =
+        query_child_packing(child)
+
+      expand    = old_expand    if expand.nil?
+      fill      = old_fill      if fill.nil?
+      padding   = old_padding   if padding.nil?
+      pack_type = old_pack_type if pack_type.nil?
+
+      set_child_packing_raw(child,
+                            expand,
+                            fill,
+                            padding,
+                            pack_type)
+    end
   end
 end
