@@ -1298,16 +1298,20 @@ rb_gi_out_argument_init_array(GIArgument *argument, GIArgInfo *arg_info,
 }
 
 static void
-rb_gi_out_argument_init_interface(GIArgument *argument, GIArgInfo *arg_info,
+rb_gi_out_argument_init_interface(GIArgument *argument,
+                                  G_GNUC_UNUSED GIArgInfo *arg_info,
                                   GITypeInfo *type_info)
 {
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
 
+    /* TODO: Can we use the following code? */
+    /*
     if (!g_arg_info_is_caller_allocates(arg_info)) {
         argument->v_pointer = ALLOC(gpointer);
         return;
     }
+    */
 
     interface_info = g_type_info_get_interface(type_info);
     interface_type = g_base_info_get_type(interface_info);
@@ -1330,10 +1334,32 @@ rb_gi_out_argument_init_interface(GIArgument *argument, GIArgInfo *arg_info,
     }
     break;
     case GI_INFO_TYPE_BOXED:
+      rb_raise(rb_eNotImpError,
+               "TODO: allocates GIArgument(interface)[%s] for output",
+               g_info_type_to_string(interface_type));
+      break;
     case GI_INFO_TYPE_ENUM:
+      {
+          gint *pointer = ALLOC(gint);
+          *pointer = 0;
+          argument->v_pointer = pointer;
+      }
+      break;
     case GI_INFO_TYPE_FLAGS:
+      {
+          guint *pointer = ALLOC(guint);
+          *pointer = 0;
+          argument->v_pointer = pointer;
+      }
+      break;
     case GI_INFO_TYPE_OBJECT:
     case GI_INFO_TYPE_INTERFACE:
+      {
+          gpointer *pointer = ALLOC(gpointer);
+          *pointer = NULL;
+          argument->v_pointer = pointer;
+      }
+      break;
     case GI_INFO_TYPE_CONSTANT:
     case GI_INFO_TYPE_INVALID_0:
     case GI_INFO_TYPE_UNION:
@@ -1370,48 +1396,102 @@ rb_gi_out_argument_init(GIArgument *argument, GIArgInfo *arg_info)
     switch (type_tag) {
       case GI_TYPE_TAG_VOID:
         if (g_type_info_is_pointer(&type_info)) {
-            argument->v_pointer = ALLOC(gpointer);
+            gpointer *pointer = ALLOC(gpointer);
+            *pointer = NULL;
+            argument->v_pointer = pointer;
         }
         break;
       case GI_TYPE_TAG_BOOLEAN:
-        argument->v_pointer = ALLOC(gboolean);
+        {
+            gboolean *pointer = ALLOC(gboolean);
+            *pointer = FALSE;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_INT8:
-        argument->v_pointer = ALLOC(gint8);
+        {
+            gint8 *pointer = ALLOC(gint8);
+            *pointer = 0;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_UINT8:
-        argument->v_pointer = ALLOC(guint8);
+        {
+            guint8 *pointer = ALLOC(guint8);
+            *pointer = 0;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_INT16:
-        argument->v_pointer = ALLOC(gint16);
+        {
+            gint16 *pointer = ALLOC(gint16);
+            *pointer = 0;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_UINT16:
-        argument->v_pointer = ALLOC(guint16);
+        {
+            guint16 *pointer = ALLOC(guint16);
+            *pointer = 0;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_INT32:
-        argument->v_pointer = ALLOC(gint32);
+        {
+            gint32 *pointer = ALLOC(gint32);
+            *pointer = 0;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_UINT32:
-        argument->v_pointer = ALLOC(guint32);
+        {
+            guint32 *pointer = ALLOC(guint32);
+            *pointer = 0;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_INT64:
-        argument->v_pointer = ALLOC(gint64);
+        {
+            gint64 *pointer = ALLOC(gint64);
+            *pointer = 0;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_UINT64:
-        argument->v_pointer = ALLOC(guint64);
+        {
+            guint64 *pointer = ALLOC(guint64);
+            *pointer = 0;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_FLOAT:
-        argument->v_pointer = ALLOC(gfloat);
+        {
+            gfloat *pointer = ALLOC(gfloat);
+            *pointer = 0.0;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_DOUBLE:
-        argument->v_pointer = ALLOC(gdouble);
+        {
+            gdouble *pointer = ALLOC(gdouble);
+            *pointer = 0.0;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_GTYPE:
-        argument->v_pointer = ALLOC(GType);
+        {
+            GType *pointer = ALLOC(GType);
+            *pointer = G_TYPE_INVALID;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_UTF8:
       case GI_TYPE_TAG_FILENAME:
-        argument->v_pointer = ALLOC(gchar *);
+        {
+            gchar **pointer = ALLOC(gchar *);
+            *pointer = NULL;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_ARRAY:
         rb_gi_out_argument_init_array(argument, arg_info, &type_info);
@@ -1422,14 +1502,25 @@ rb_gi_out_argument_init(GIArgument *argument, GIArgInfo *arg_info)
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
-        argument->v_pointer = ALLOC(gpointer);
+        {
+            gpointer *pointer = ALLOC(gpointer);
+            *pointer = NULL;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_ERROR:
-        argument->v_pointer = ALLOC(GError *);
-        memset(argument->v_pointer, 0, sizeof(GError *));
+        {
+            GError **pointer = ALLOC(GError *);
+            *pointer = NULL;
+            argument->v_pointer = pointer;
+        }
         break;
       case GI_TYPE_TAG_UNICHAR:
-        argument->v_pointer = ALLOC(gunichar);
+        {
+            gunichar *pointer = ALLOC(gunichar);
+            *pointer = 0;
+            argument->v_pointer = pointer;
+        }
         break;
       default:
         g_assert_not_reached();
