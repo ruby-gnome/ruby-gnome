@@ -218,7 +218,6 @@ class Demo < Gtk::Application
     @exit_status = 0
 
     signal_connect "startup" do |application|
-      puts "startup"
       @builder = Gtk::Builder.new(:resource => "/ui/main.ui")
       appmenu = @builder["appmenu"]
       application.set_app_menu(appmenu)
@@ -242,7 +241,6 @@ class Demo < Gtk::Application
     end
 
     signal_connect "activate" do |_application|
-      puts "activate"
       begin
         run_application
       rescue => error
@@ -252,7 +250,6 @@ class Demo < Gtk::Application
     end
 
     signal_connect "command-line" do |_application, command_line|
-      puts "cmd"
       begin
         parse_command_line(command_line.arguments)
       rescue SystemExit => error
@@ -293,7 +290,6 @@ class Demo < Gtk::Application
 
   def run_application
     if @options[:list]
-      puts "list"
       list_demos(generate_index)
       quit
     end
@@ -358,13 +354,11 @@ class Demo < Gtk::Application
     window.show_all
 
     if @options[:name]
-      puts "name"
       filename = get_demo_filename_from_name(@options[:name])
       run_demo_from_file(filename, windows.first)
     end
 
     if @options[:autoquit]
-      puts "autoquit"
       GLib::Timeout.add_seconds(1) do
         quit
       end
