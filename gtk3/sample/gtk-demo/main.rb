@@ -209,8 +209,8 @@ class Demo < Gtk::Application
                             "comments" => "Program to demonstrate GTK+ widgets",
                             "authors" => ["The GTK+ Team"],
                             "logo_icon_name" => "gtk3-demo",
-                            "title" => "About GTK+ Demo",
-                            )
+                            "title" => "About GTK+ Demo"
+                           )
     end
 
     add_action(action)
@@ -222,6 +222,23 @@ class Demo < Gtk::Application
       @builder = Gtk::Builder.new(:resource => "/ui/main.ui")
       appmenu = @builder["appmenu"]
       application.set_app_menu(appmenu)
+
+      @info_buffer = Gtk::TextBuffer.new
+      @source_buffer = Gtk::TextBuffer.new
+
+      @info_buffer.create_tag("title",
+                              "font" => "Sans 18")
+
+      @source_buffer.create_tag("comment",
+                                "foreground" => "red")
+      @source_buffer.create_tag("const",
+                                "foreground" => "ForestGreen")
+      @source_buffer.create_tag("string",
+                                "foreground" => "RosyBrown",
+                                "weight" => Pango::FontDescription::WEIGHT_BOLD
+                               )
+      @source_buffer.create_tag("reserved",
+                                "foreground" => "purple")
     end
 
     signal_connect "activate" do |_application|
@@ -284,16 +301,16 @@ class Demo < Gtk::Application
     window = @builder["window"]
     add_window(window)
 
-    notebook = @builder["notebook"]
-    info_textwiew = @builder["info-textview"]
-    source_textview = @builder["source-textview"]
+    @notebook = @builder["notebook"]
+    @info_view = @builder["info-textview"]
+    @source_view = @builder["source-textview"]
     headerbar = @builder["headerbar"]
     treeview = @builder["treeview"]
     model = treeview.model
     append_children(model, generate_index)
 
-    sw = @builder["source-scrolledwindow"]
-    scrollbar = sw.vscrollbar
+    @source_sw = @builder["source-scrolledwindow"]
+    scrollbar = @source_sw.vscrollbar
 
     menu = Gtk::Menu.new
 
@@ -310,6 +327,8 @@ class Demo < Gtk::Application
       adj = scrollbar.adjustement
       adj.value = adj.get_upper - adj.get_page_size
     end
+
+    @info_sw = @builder["info-scrolledwindow"]
 
     menu.show_all
 
@@ -330,9 +349,9 @@ class Demo < Gtk::Application
     treeview_selection = @builder["treeview-selection"]
     treeview_selection.signal_connect "changed" do |selection, _model|
       iter = selection.selected
-      # filename = iter[1]
+      filename = iter[1]
       title = iter[0]
-      # load_file(iter[1]) if filename
+      load_file(filename) if filename
       headerbar.set_title(title)
     end
 
@@ -348,6 +367,112 @@ class Demo < Gtk::Application
       puts "autoquit"
       GLib::Timeout.add_seconds(1) do
         quit
+      end
+    end
+  end
+
+  def fill_buffers_from(file)
+    start = @info_buffer.get_iter_at(:offset => 0)
+    state = :before_header
+
+    file.each do |line|
+      case state
+      when :before_header
+        state = :in_header if line =~ /^=begin$/
+      when :in_header
+        if line =~ /^=end$/
+          state = :body
+          start = @source_buffer.get_iter_at(:offset => 0)
+        elsif line =~ /^=\s+(.*)$/
+          title = Regexp.last_match(1)
+          title.gsub!(/\s*\(.*\)$/, "") # Delete depend field
+
+          last = start
+
+          @info_buffer.insert(last, title)
+          start = last.clone
+
+          start.backward_chars(title.length)
+          @info_buffer.apply_tag("title", start, last)
+
+          start = last
+        else
+          @info_buffer.insert(start, line)
+        end
+      when :body # Reading program body
+        @source_buffer.insert(start, line)
+      end
+    end
+  end
+
+  def load_file(filename)
+    return if filename == @current_file
+
+    # implement add_data_tab
+
+    @info_buffer.delete(*@info_buffer.bounds)
+
+    @source_buffer.delete(*@source_buffer.bounds)
+
+    file = begin
+             File.open(filename)
+           rescue
+             $stderr.puts "Cannot open: #{$ERROR_INFO}" if $DEBUG
+             return
+           end
+
+    fill_buffers_from(file)
+
+    fontify
+
+    @source_view.buffer = @source_buffer
+    @info_view.buffer = @info_buffer
+
+    @current_file = filename
+  end
+
+  def fontify(start_iter = @source_buffer.start_iter,
+                end_iter = @source_buffer.end_iter)
+    str = @source_buffer.get_text(start_iter, end_iter, true)
+    tokenizer = RubyTokonizer.new
+    tokenizer.tokenize(str, start_iter.offset) do |tag, start, last|
+      @source_buffer.apply_tag(tag.to_s,
+                               @source_buffer.get_iter_at(:offset => start),
+                               @source_buffer.get_iter_at(:offset => last))
+    end
+  end
+
+  class RubyTokonizer
+    RESERVED_WORDS = %w(begin end module class def if then else
+                        while unless do case when require yield)
+    RESERVED_WORDS_PATTERN = Regexp.compile(/(^|\s+)(#{RESERVED_WORDS.collect do |pat| Regexp.quote(pat) end.join("|")})(\s+|$)/)
+
+    def tokenize(str, index = 0)
+      until str.empty?
+        tag = nil
+
+        case str
+        when /".+?"/, /'.+?'/
+          tag = :string
+        when /#.*$/
+          tag = :comment
+        when RESERVED_WORDS_PATTERN
+          tag = :reserved
+        when /[A-Z][A-Za-z0-9_]+/
+          tag = :const
+        end
+
+        if tag
+          tokenize($LAST_MATCH_INFO.pre_match, index) do |*args|
+            yield(*args)
+          end
+          yield(tag, index + $LAST_MATCH_INFO.begin(0), index + $LAST_MATCH_INFO.end(0))
+          index += (str.length - $LAST_MATCH_INFO.post_match.length)
+          str = $LAST_MATCH_INFO.post_match
+        else
+          index += str.length
+          str = ""
+        end
       end
     end
   end
