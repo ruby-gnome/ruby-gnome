@@ -308,28 +308,28 @@ class Demo < Gtk::Application
     @source_sw = @builder["source-scrolledwindow"]
     scrollbar = @source_sw.vscrollbar
 
-    menu = Gtk::Menu.new
+    @menu = Gtk::Menu.new
 
     item = Gtk::MenuItem.new("Start")
-    menu.append(item)
+    @menu.append(item)
     item.signal_connect "activate" do
-      adj = scrollbar.adjustement
-      adj.value = adj.get_lower
+      adj = scrollbar.adjustment
+      adj.value = adj.lower
     end
 
     item = Gtk::MenuItem.new("End")
-    menu.append(item)
+    @menu.append(item)
     item.signal_connect "activate" do
-      adj = scrollbar.adjustement
-      adj.value = adj.get_upper - adj.get_page_size
+      adj = scrollbar.adjustment
+      adj.value = adj.upper - adj.page_size
     end
 
     @info_sw = @builder["info-scrolledwindow"]
 
-    menu.show_all
+    @menu.show_all
 
-    scrollbar.signal_connect "popup-menu" do
-      menu.popup(nil, nil, Gtk.current_event_time)
+    scrollbar.signal_connect "popup-menu" do |widget, button, activate_time|
+      @menu.popup(nil, nil, 0, Gtk.current_event_time)
     end
 
     treeview.signal_connect "row-activated" do |_tree_view, path, _column|

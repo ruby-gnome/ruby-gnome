@@ -1,0 +1,16 @@
+/home/cedlemo/.gem/ruby/2.2.0/gems/gobject-introspection-3.0.7/lib/gobject-introspection/loader.rb: line 551
+   Gtk-DEBUG **:Connecting to session manager
+/home/cedlemo/.gem/ruby/2.2.0/gems/gobject-introspection-3.0.7/lib/gobject-introspection/loader.rb:551:in `invoke': Interrupt
+	from /home/cedlemo/.gem/ruby/2.2.0/gems/gobject-introspection-3.0.7/lib/gobject-introspection/loader.rb:551:in `block in define_method'
+	from ./main.rb:478:in `<main>'
+NameError: undefined local variable or method `menu' for #<Demo:0x3228c08 ptr=0x24b8270>
+./main.rb:314:in `run_application'
+./main.rb:245:in `block in initialize'
+/home/cedlemo/.gem/ruby/2.2.0/gems/gobject-introspection-3.0.7/lib/gobject-introspection/loader.rb:551:in `call'
+/home/cedlemo/.gem/ruby/2.2.0/gems/gobject-introspection-3.0.7/lib/gobject-introspection/loader.rb:551:in `invoke'
+/home/cedlemo/.gem/ruby/2.2.0/gems/gobject-introspection-3.0.7/lib/gobject-introspection/loader.rb:551:in `block in define_method'
+./main.rb:264:in `block in initialize'
+/home/cedlemo/.gem/ruby/2.2.0/gems/gobject-introspection-3.0.7/lib/gobject-introspection/loader.rb:551:in `call'
+/home/cedlemo/.gem/ruby/2.2.0/gems/gobject-introspection-3.0.7/lib/gobject-introspection/loader.rb:551:in `invoke'
+/home/cedlemo/.gem/ruby/2.2.0/gems/gobject-introspection-3.0.7/lib/gobject-introspection/loader.rb:551:in `block in define_method'
+./main.rb:478:in `<main>'
