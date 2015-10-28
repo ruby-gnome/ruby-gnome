@@ -175,7 +175,7 @@ def run_demo_from_file(filename, window)
   module_name = get_module_name_from_filename(filename)
 
   unless Module.const_defined?(module_name) == true
-    require filename if filename =~ /test_mod\.rb/ # We just use this for test now
+    require filename
   end
 
   module_object = Module.const_get(module_name)
