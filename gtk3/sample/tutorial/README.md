@@ -51,6 +51,8 @@ This tutorial will mainly be focused on the use of Gtk::Application, which is th
     *  [Configure the settings with a dialog window](#configure-the-settings-with-a-dialog-window)
   *  [Adding a search bar](#adding-a-search-bar)
   *  [Adding a sidebar](#adding-a-sidebar)
+  *  [Properties](#properties)
+  *  [Header Bar](#header-bar)
 
 ## Basics
 https://developer.gnome.org/gtk3/stable/gtk-getting-started.html#id-1.2.3.5
@@ -1116,3 +1118,180 @@ class ExampleAppWindow < Gtk::ApplicationWindow
   # some code
 end
 ```
+
+### Properties
+
+https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.12
+
+Widgets and other objects have many useful properties.
+
+Here we show some ways to use them in new and flexible ways, by wrapping them in actions with `Gio::PropertyAction` or by binding them with `Gio::Binding`.
+To set this up, we add two labels to the header bar in our window template, named *lines_label* and *lines*, and bind them to struct members in the private struct, as we've seen a couple of times by now.
+We add a new "Lines" menu item to the gears menu, which triggers the show-lines action:
+
+```xml
+<?xml version="1.0"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <menu id="menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Words</attribute>
+        <attribute name="action">win.show-words</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Lines</attribute>
+        <attribute name="action">win.show-lines</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>
+```
+
+To make this menu item do something, we create a property action for the visible property of the lines label, and add it to the actions of the window. The effect of this is that the visibility of the label gets toggled every time the action is activated.
+Since we want both labels to appear and disappear together, we bind the visible property of the lines_label widget to the same property of the lines widget.
+
+*    exampleapp9/exampleapp.rb
+
+```ruby
+# ...
+class ExampleAppWindow < Gtk::ApplicationWindow
+# ...
+  def initialize(application)
+    super(:application => application)
+# ...
+    action = Gio::PropertyAction.new("show-lines", lines, "visible")
+    add_action(action)
+    lines.bind_property("visible", lines_label, "visible", :default)
+  end
+```
+We also need a function that counts the lines of the currently active tab, and updates the lines label. See the full source if you are interested in the details.
+
+### Header Bar
+
+https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.13
+
+Our application already uses a `Gtk::HeaderBar`, but so far it still gets a 'normal' window titlebar on top of that. This is a bit redundant, and we will now tell GTK+ to use the header bar as replacement for the titlebar. To do so, we move it around to be a direct child of the window, and set its type to be titlebar.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.8 -->
+  <template class="ExampleAppWindow" parent="GtkApplicationWindow">
+    <property name="title" translatable="yes">Example Application</property>
+    <property name="default-width">600</property>
+    <property name="default-height">400</property>
+        <child type="titlebar">
+          <object class="GtkHeaderBar" id="header">
+            <property name="visible">True</property>
+            <property name="show-close-button">True</property>
+            <child>
+              <object class="GtkLabel" id="lines_label">
+                <property name="visible">False</property>
+                <property name="label" translatable="yes">Lines:</property>
+              </object>
+              <packing>
+                <property name="pack-type">start</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lines">
+                <property name="visible">False</property>
+              </object>
+              <packing>
+                <property name="pack-type">start</property>
+              </packing>
+            </child>
+            <child type="title">
+              <object class="GtkStackSwitcher" id="tabs">
+                <property name="visible">True</property>
+                <property name="margin">6</property>
+                <property name="stack">stack</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="search">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage" id="search-icon">
+                    <property name="visible">True</property>
+                    <property name="icon-name">edit-find-symbolic</property>
+                    <property name="icon-size">1</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkMenuButton" id="gears">
+                <property name="visible">True</property>
+                <property name="direction">none</property>
+                <property name="use-popover">True</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+    <child>
+      <object class="GtkBox" id="content_box">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkSearchBar" id="searchbar">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkSearchEntry" id="searchentry">
+                <signal name="search-changed" handler="search_text_changed"/>
+                <property name="visible">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="hbox">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkRevealer" id="sidebar">
+                <property name="visible">True</property>
+                <property name="transition-type">slide-right</property>
+                <child>
+                 <object class="GtkScrolledWindow" id="sidebar-sw">
+                   <property name="visible">True</property>
+                   <property name="hscrollbar-policy">never</property>
+                   <property name="vscrollbar-policy">automatic</property>
+                   <child>
+                     <object class="GtkListBox" id="words">
+                       <property name="visible">True</property>
+                       <property name="selection-mode">none</property>
+                     </object>
+                   </child>
+                 </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkStack" id="stack">
+                <signal name="notify::visible-child" handler="visible_child_changed"/>
+                <property name="visible">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
+```
+
+A small extra bonus of using a header bar is that we get a fallback application menu for free. 
