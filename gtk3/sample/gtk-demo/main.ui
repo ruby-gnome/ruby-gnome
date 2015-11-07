@@ -112,7 +112,7 @@
             <property name="enable_popup">1</property>
             <property name="show_border">0</property>
             <child>
-              <object class="GtkScrolledWindow" id="scrolledwindow1">
+              <object class="GtkScrolledWindow" id="info-scrolledwindow">
                 <property name="visible">1</property>
                 <property name="can_focus">1</property>
                 <child>

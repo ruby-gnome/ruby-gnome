@@ -56,7 +56,7 @@ sidebar.c               no              no
 sizegroup.c             ok              no
 spinbutton.c            no              no
 spinner.c               ok              no
-stack.c                 no              no
+stack.c                 ok              ok
 textmask.c              no              no
 textview.c              ok              no
 textscroll.c            no              no
