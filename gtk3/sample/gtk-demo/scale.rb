@@ -17,8 +17,6 @@ module ScaleDemo
     window = builder["window1"]
     window.screen = main_window.screen
 
-    window.signal_connect("destroy") { window.destroyed(window) }
-
     if !window.visible?
       window.show_all
     else
