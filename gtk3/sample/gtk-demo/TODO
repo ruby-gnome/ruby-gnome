@@ -49,7 +49,7 @@ popover.c               no              no
 printing.c              ok              no
 revealer.c              no              no
 rotated_text.c          ok              no
-scale.c                 no              no
+scale.c                 ok              ok
 search_entry.c          no              no
 search_entry2.c         no              no
 sidebar.c               no              no
