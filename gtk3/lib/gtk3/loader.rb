@@ -107,6 +107,7 @@ module Gtk
       require "gtk3/container"
       require "gtk3/css-provider"
       require "gtk3/dialog"
+      require "gtk3/entry-buffer"
       require "gtk3/file-chooser-dialog"
       require "gtk3/font-chooser-dialog"
       require "gtk3/gesture-multi-press"
