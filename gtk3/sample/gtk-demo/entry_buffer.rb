@@ -24,10 +24,17 @@ module EntryBufferDemo
     label.set_markup("Entries share a buffer. Typing in one is reflected in the other.")
     vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
+    # Create the buffer that will be shared
     buffer = Gtk::EntryBuffer.new
 
-    entry = Gtk::Entry.new
-    entry.buffer = buffer
+    # first entry
+    entry = Gtk::Entry.new(buffer)
+    vbox.pack_start(entry, :expand => false, :fill => false, :padding => 0)
+
+    # second entry
+    entry = Gtk::Entry.new(buffer)
+    vbox.pack_start(entry, :expand => false, :fill => false, :padding => 0)
+
     if !window.visible?
       window.show_all
     else
