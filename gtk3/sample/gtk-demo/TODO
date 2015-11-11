@@ -63,7 +63,7 @@ stack.c                 ok              ok
 textmask.c              no              no
 textscroll.c            no              no
 textview.c              ok              no
-theming_style_classes.c ok              no
+theming_style_classes.c ok              ok
 toolpalette.c           no              no
 transparent.c           no              no
 tree_store.c            ok              no
