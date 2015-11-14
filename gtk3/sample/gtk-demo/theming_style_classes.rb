@@ -4,7 +4,7 @@
 # This is licensed under the terms of the GNU Lesser General Public
 # License, version 2.1 or (at your option) later.
 #
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -30,19 +30,23 @@ of GTK+ are used for certain effects: primary toolbars,
 inline toolbars and linked buttons.
 =end
 
-require "common"
+module ThemingStyleClassesDemo
+  def self.run_demo(main_window)
+    window = Gtk::Window.new(:toplevel)
+    window.screen = main_window.screen
+    window.set_title("Style Classes")
+    window.set_border_width(12)
 
-module Demo
-  class ThemingStyleClasses < BasicWindow
-    def initialize
-      super("Style Claases")
-      self.border_width = 12
+    builder = Gtk::Builder.new(:resource => "/theming_style_classes/theming.ui")
+    grid = builder["grid"]
+    grid.show_all
+    window.add(grid)
 
-      builder = Gtk::Builder.new
-      builder.add("theming.ui")
-
-      grid = builder.get_object("grid")
-      add(grid)
+    if !window.visible?
+      window.show_all
+    else
+      window.destroy
     end
+    window
   end
 end
