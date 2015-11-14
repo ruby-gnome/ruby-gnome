@@ -18,8 +18,11 @@ module Gtk
   class EntryBuffer
     alias_method :initialize_raw, :initialize
     def initialize(text=nil)
-      text ||= ""
-      initialize_raw(text, text.bytesize)
+      if text.nil?
+        initialize_raw(nil, -1)
+      else
+        initialize_raw(text, text.bytesize)
+      end
     end
   end
 end
