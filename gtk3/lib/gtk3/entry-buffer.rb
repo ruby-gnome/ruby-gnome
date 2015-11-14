@@ -21,7 +21,7 @@ module Gtk
       if text.nil?
         initialize_raw(nil, -1)
       else
-        initialize_raw(text, text.bytesize)
+        initialize_raw(text, text.size)
       end
     end
   end
