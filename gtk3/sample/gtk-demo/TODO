@@ -18,7 +18,7 @@ cursors.c               no              no
 dialog.c                ok              no
 drawingarea.c           ok              no
 editable_cells.c        ok              no
-entry_buffer.c          no              no
+entry_buffer.c          ok              ok
 entry_completion.c      ok              no
 event_axes.c            no              no
 expander.c              ok              no
