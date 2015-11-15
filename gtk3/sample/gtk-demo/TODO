@@ -27,7 +27,7 @@ flowbox.c               no              no
 font_features.c         no              no
 gestures.c              no              no
 glarea.c                no              no
-headerbar.c             no              no
+headerbar.c             ok              ok
 hypertext.c             ok              no
 iconview.c              ok              no
 iconview_edit.c         no              no
