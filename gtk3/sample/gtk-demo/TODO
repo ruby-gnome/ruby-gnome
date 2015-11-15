@@ -36,7 +36,7 @@ infobar.c               ok              no
 links.c                 ok              no
 listbox.c               no              no
 list_store.c            ok              no
-markup.c                no              no
+markup.c                ok              ok
 menus.c                 ok              no
 modelbutton.c           no              no
 offscreen_window.c      no              no
