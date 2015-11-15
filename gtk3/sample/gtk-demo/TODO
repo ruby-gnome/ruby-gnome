@@ -43,7 +43,6 @@ offscreen_window.c      no              no
 offscreen_window2.c     no              no
 overlay.c               no              no
 overlay2.c              no              no
-pagesetup.c             no              no
 panes.c                 ok              no
 pickers.c               no              no
 pixbufs.c               ok              no
@@ -70,3 +69,7 @@ tree_store.c            ok              no
 
 # Ruby version
 Check all the ruby demos that doesn't correspond to a C version.
+
+# Demo that are not to be done
+pagesetup.c
+
