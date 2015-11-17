@@ -15,7 +15,6 @@ def apply_style(widget, provider)
 end
 
 module CssAccordionDemo
-
   def self.run_demo(main_window)
     window = Gtk::Window.new(:toplevel)
     window.screen = main_window.screen
@@ -47,7 +46,7 @@ module CssAccordionDemo
     else
       window.destroy
     end
-  
+
     window
   end
 end
