@@ -44,7 +44,7 @@ offscreen_window2.c     no              no
 overlay.c               no              no
 overlay2.c              no              no
 panes.c                 ok              no
-pickers.c               no              no
+pickers.c               ok              ok
 pixbufs.c               ok              no
 popover.c               no              no
 printing.c              ok              no
