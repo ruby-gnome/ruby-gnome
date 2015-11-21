@@ -59,7 +59,7 @@ sizegroup.c             ok              no
 spinbutton.c            no              no
 spinner.c               ok              no
 stack.c                 ok              ok
-textmask.c              no              no
+textmask.c              ok              ok
 textscroll.c            no              no
 textview.c              ok              no
 theming_style_classes.c ok              ok
