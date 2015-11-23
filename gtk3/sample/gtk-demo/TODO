@@ -19,7 +19,7 @@ dialog.c                ok              no
 drawingarea.c           ok              no
 editable_cells.c        ok              no
 entry_buffer.c          ok              ok
-entry_completion.c      ok              no
+entry_completion.c      ok              ok
 event_axes.c            no              no
 expander.c              ok              no
 filtermodel.c           no              no
