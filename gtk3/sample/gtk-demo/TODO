@@ -19,7 +19,7 @@ dialog.c                ok              no
 drawingarea.c           ok              no
 editable_cells.c        ok              no
 entry_buffer.c          ok              ok
-entry_completion.c      ok              no
+entry_completion.c      ok              ok
 event_axes.c            no              no
 expander.c              ok              no
 filtermodel.c           no              no
@@ -54,7 +54,7 @@ scale.c                 ok              ok
 search_entry.c          no              no
 search_entry2.c         no              no
 shortcuts.c             no              no
-sidebar.c               no              no
+sidebar.c               ok              ok
 sizegroup.c             ok              no
 spinbutton.c            no              no
 spinner.c               ok              no
