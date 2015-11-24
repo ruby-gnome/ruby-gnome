@@ -1,63 +1,51 @@
-# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# Copyright (c) 2015 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
-# $Id: entry_completion.rb,v 1.3 2005/02/25 17:09:24 kzys Exp $
+#
 =begin
-= Entry Completion (EntryCompletion)
+= Entry/Entry Completion
 
 GtkEntryCompletion provides a mechanism for adding support for
 completion in GtkEntry.
 =end
+module EntryCompletionDemo
+  def self.run_demo(main_window)
+    window = Gtk::Window.new(:toplevel)
+    window.screen = main_window.screen
+    window.set_title("Entry Completion")
+    window.set_resizable(true)
 
-require 'common'
+    vbox = Gtk::Box.new(:vertical, 5)
+    window.add(vbox)
+    vbox.set_border_width(5)
 
-module Demo
-  class EntryCompletion < Gtk::Dialog
-    def initialize
-      super('GtkEntryCompletion',
-            nil, # parent
-            0,
-            [Gtk::Stock::CLOSE, Gtk::ResponseType::NONE])
+    label = Gtk::Label.new
+    label.set_markup("Completion demo, try writing <b>total</b> or <b>gnome</b> for example.")
+    vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
-      self.resizable = false
+    entry = Gtk::Entry.new
+    vbox.pack_start(entry, :expand => false, :fill => false, :padding => 0)
 
-      signal_connect('response') do
-        self.destroy
-      end
+    completion = Gtk::EntryCompletion.new
+    entry.completion = completion
 
-      vbox = Gtk::VBox.new(false, 5)
-      self.vbox.pack_start(vbox, :expand => true, :fill => true)
-      vbox.border_width = 5
+    completion.set_model(create_completion_model)
+    completion.set_text_column(0)
 
-      label = Gtk::Label.new
-      label.markup = 'Completion demo, try writing <b>total</b> or <b>gnome</b> for example'
-      vbox.pack_start(label, :expand => false, :fill => false)
+    if !window.visible?
+      window.show_all
+    else
+      window.destroy
+    end
+    window
+  end
 
-      # Create our entry
-      entry = Gtk::Entry.new
-      vbox.pack_start(entry, :expand => false, :fill => false)
-
-      # Create the completion object
-      completion = Gtk::EntryCompletion.new
-
-      # Assign the completion to the entry
-      entry.completion = completion
-
-      # Create a tree model and use it as the completion model
-      completion.model = create_completion_model
-
-      # Use model column 0 as the text column
-      completion.text_column = 0
+  def self.create_completion_model
+    store = Gtk::ListStore.new(String)
+    %w(GNOME total totally).each do |word|
+      iter = store.append
+      iter[0] = word
     end
 
-
-    def create_completion_model
-      store = Gtk::ListStore.new(String)
-      %w(GNOME total totally).each do |word|
-        iter = store.append
-        iter[0] = word
-      end
-
-      store
-    end
+    store
   end
 end
