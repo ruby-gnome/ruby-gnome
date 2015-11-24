@@ -28,7 +28,7 @@ searching on <a href="http://www.google.com/">
 </a>.
 EOF
     label.set_use_markup(true)
-    
+
     label.signal_connect "activate-link" do |_widget, uri|
       if uri == "keynav"
         parent = label.toplevel
@@ -37,7 +37,7 @@ EOF
                                         :type => :info,
                                         :buttons => :ok,
                                         :message => <<EOF)
-The term <i>keynav</i> is a shorthand for 
+The term <i>keynav</i> is a shorthand for
 keyboard navigation and refers to the process of using
 a program (exclusively) via keyboard input.
 EOF
