@@ -9,7 +9,7 @@ changedisplay.c         ok              no
 clipboard.c             ok              no
 colorsel.c              ok              no
 combobox.c              no              no
-css_accordion.c         ok              no
+css_accordion.c         ok              ok
 css_basics.c            ok              no
 css_multiplebgs.c       no              no
 css_pixbufs.c           no              no
