@@ -16,15 +16,15 @@ module LinksDemo
     window.set_border_width(12)
 
     label = Gtk::Label.new(<<EOF)
-Some <a href=\"http://en.wikipedia.org/wiki/Text\"
-title=\"plain text\">text</a> may be marked up\n
+Some <a href="http://en.wikipedia.org/wiki/Text"
+title="plain text">text</a> may be marked up\n
 as hyperlinks, which can be clicked\n
-or activated via <a href=\"keynav\">keynav</a>\n
+or activated via <a href="keynav">keynav</a>\n
 and they work fine with other markup, like when\n
-searching on <a href=\"http://www.google.com/\">
-<span color=\"#0266C8\">G</span><span color=\"#F90101\">o</span>
-<span color=\"#F2B50F\">o</span><span color=\"#0266C8\">g</span>
-<span color=\"#00933B\">l</span><span color=\"#F90101\">e</span>
+searching on <a href="http://www.google.com/">
+<span color="#0266C8">G</span><span color="#F90101">o</span>
+<span color="#F2B50F">o</span><span color="#0266C8">g</span>
+<span color="#00933B">l</span><span color="#F90101">e</span>
 </a>.
 EOF
     label.set_use_markup(true)
