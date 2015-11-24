@@ -41,7 +41,7 @@ menus.c                 ok              no
 modelbutton.c           no              no
 offscreen_window.c      no              no
 offscreen_window2.c     no              no
-overlay.c               no              no
+overlay.c               ok              ok
 overlay2.c              no              no
 panes.c                 ok              no
 pickers.c               ok              ok
