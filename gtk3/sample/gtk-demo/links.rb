@@ -17,10 +17,10 @@ module LinksDemo
 
     label = Gtk::Label.new(<<EOF)
 Some <a href="http://en.wikipedia.org/wiki/Text"
-title="plain text">text</a> may be marked up\n
-as hyperlinks, which can be clicked\n
-or activated via <a href="keynav">keynav</a>\n
-and they work fine with other markup, like when\n
+title="plain text">text</a> may be marked up
+as hyperlinks, which can be clicked
+or activated via <a href="keynav">keynav</a>
+and they work fine with other markup, like when
 searching on <a href="http://www.google.com/">
 <span color="#0266C8">G</span><span color="#F90101">o</span>
 <span color="#F2B50F">o</span><span color="#0266C8">g</span>
