@@ -15,7 +15,7 @@ module LinksDemo
     window.set_title("Links")
     window.set_border_width(12)
 
-    label = Gtk::Label.new(<<EOF)
+    label = Gtk::Label.new(<<-MESSAGE)
 Some <a href="http://en.wikipedia.org/wiki/Text"
 title="plain text">text</a> may be marked up
 as hyperlinks, which can be clicked
@@ -26,7 +26,7 @@ searching on <a href="http://www.google.com/">
 <span color="#F2B50F">o</span><span color="#0266C8">g</span>
 <span color="#00933B">l</span><span color="#F90101">e</span>
 </a>.
-EOF
+    MESSAGE
     label.set_use_markup(true)
 
     label.signal_connect "activate-link" do |_widget, uri|
@@ -36,11 +36,11 @@ EOF
                                         :flags => :destroy_with_parent,
                                         :type => :info,
                                         :buttons => :ok,
-                                        :message => <<EOF)
+                                        :message => <<-MESSAGE)
 The term <i>keynav</i> is a shorthand for
 keyboard navigation and refers to the process of using
 a program (exclusively) via keyboard input.
-EOF
+        MESSAGE
         dialog.set_use_markup(true)
         dialog.set_modal(true)
         dialog.present
