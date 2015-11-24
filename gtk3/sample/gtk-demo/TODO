@@ -57,7 +57,7 @@ shortcuts.c             no              no
 sidebar.c               ok              ok
 sizegroup.c             ok              no
 spinbutton.c            no              no
-spinner.c               ok              no
+spinner.c               ok              ok
 stack.c                 ok              ok
 textmask.c              ok              ok
 textscroll.c            no              no
