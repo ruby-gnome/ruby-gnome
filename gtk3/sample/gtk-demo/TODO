@@ -48,7 +48,7 @@ pickers.c               ok              ok
 pixbufs.c               ok              no
 popover.c               no              no
 printing.c              ok              no
-revealer.c              no              no
+revealer.c              ok              ok
 rotated_text.c          ok              no
 scale.c                 ok              ok
 search_entry.c          no              no
