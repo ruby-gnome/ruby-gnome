@@ -1,42 +1,76 @@
-# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# Copyright (c) 2015 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
-# $Id: expander.rb,v 1.2 2005/02/25 17:09:25 kzys Exp $
+#
 =begin
-= Expander (Expander)
+= Expander
 
 GtkExpander allows to provide additional content that is initially hidden.
 This is also known as "disclosure triangle".
+
+This example also shows how to make the window resizable only if the expander is expanded.
 =end
+module ExpanderDemo
+  def self.run_demo(main_window)
+    toplevel = main_window.toplevel
+    message = "<big><b>Something went wrong</b></big>"
+    window = Gtk::MessageDialog.new(:parent => toplevel,
+                                    :flags  => :destroy_with_parent,
+                                    :type   => :error,
+                                    :buttons_type => :close,
+                                    :message      => message)
 
-require 'common'
+    window.set_use_markup(true)
 
-module Demo
-  class Expander < Gtk::Dialog
-    def initialize
-      # as opposed to the GTK2 dialog, the buttons have to be enclodes by brackeds
-      # together with their ResponseType AND all groups have to bracketed together
-      super(:title => 'GtkExpander',
-            :parent => nil,
-            :flags => 0,
-            :buttons => [[Gtk::Stock::CLOSE, Gtk::ResponseType::NONE]])
-      self.resizable = false
+    message = "Here are some more details but not the full story."
+    window.set_secondary_text(message)
 
-      signal_connect('response') do
-        self.destroy
-      end
+    area = window.message_area
+    box = area.parent
+    box.parent.child_set_property(box, "expand", true)
+    box.parent.child_set_property(box, "fill", true)
 
-      vbox = Gtk::Box.new(:vertical, 5)
-      self.child.pack_start(vbox, :expand => true, :fill => true)
-      vbox.border_width = 5
+    area.each do |child|
+      child.parent.child_set_property(child, "expand", false)
+    end
 
-      label = Gtk::Label.new('Expander demo. CLick on the triangle for details.')
-      vbox.pack_start(label, :expand => false, :fill => false)
+    expander = Gtk::Expander.new("Details:")
+    sw = Gtk::ScrolledWindow.new
+    sw.set_min_content_height(100)
+    sw.set_shadow_type(:in)
+    sw.set_policy(:never, :automatic)
 
-      # Create the expander
-      expander = Gtk::Expander.new('Details')
-      vbox.pack_start(expander, :expand => false, :fill => false)
+    tv = Gtk::TextView.new
+    tv.set_editable(false)
+    tv.set_wrap_mode(:word)
+    tv.buffer.text = <<TEXT
+Finally, the full story with all details.
+And all the inside information, including
+error codes, etc etc. Pages of information,
+you might have to scroll down to read it all,
+or even resize the window - it works !
 
-      expander.add(Gtk::Label.new('Details can be shown or hidden.'))
+A second paragraph will contain even more
+innuendo, just to make you scroll down or
+resize the window. Do it already !"
+TEXT
+
+    sw.add(tv)
+    expander.add(sw)
+    area.pack_end(expander, :expand => true, :fill => true, :padding => 0)
+    expander.show_all
+
+    expander.signal_connect "notify::expanded" do
+      window.set_resizable(expander.expanded?)
+    end
+
+    window.signal_connect "response" do |dialog, _response_id|
+      dialog.destroy
+    end
+
+    if !window.visible?
+      window.show_all
+    else
+      window.destroy
     end
   end
 end
