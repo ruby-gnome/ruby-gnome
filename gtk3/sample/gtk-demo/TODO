@@ -42,7 +42,7 @@ modelbutton.c           no              no
 offscreen_window.c      no              no
 offscreen_window2.c     no              no
 overlay.c               ok              ok
-overlay2.c              no              no
+overlay2.c              ok              ok
 panes.c                 ok              no
 pickers.c               ok              ok
 pixbufs.c               ok              no
