@@ -1,82 +1,66 @@
-# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# Copyright (c) 2015 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: colorsel.rb,v 1.4 2005/02/12 23:02:43 kzys Exp $
 =begin
-= Color Selector
+= Color Chooser
 
-Gtk::ColorSelection lets the user choose a color. Gtk::ColorSelectionDialog
-is a prebuilt dialog containing a Gtk::ColorSelection.
+A GtkColorChooser lets the user choose a color. There are several
+implementations of the GtkColorChooser interface in GTK+. The
+GtkColorChooserDialog is a prebuilt dialog containing a
+GtkColorChooserWidget.
 =end
-require 'common'
+module ColorselDemo
+  def self.run_demo(main_window)
+    color = Gdk::RGBA.new(0, 0, 1, 1)
 
-module Demo
-  class ColorSel < BasicWindow
-    def initialize
-      super('Color Selection')
+    window = Gtk::Window.new(:toplevel)
+    window.screen = main_window.screen
+    window.set_title("Color Chooser")
+    window.set_border_width(8)
 
-      @color = Gdk::RGBA.new(0, 0, 1, 1)
+    vbox = Gtk::Box.new(:vertical, 8)
+    vbox.set_border_width(8)
+    window.add(vbox)
 
-      set_border_width(8)
+    frame = Gtk::Frame.new
+    frame.set_shadow_type(:in)
+    vbox.pack_start(frame, :expand => true, :fill => true, :padding => 0)
 
-      vbox = Gtk::Box.new(:vertical, 0)
-      vbox.set_border_width(8)
-      add(vbox)
-
-      ## Create the color swatch area
-      @frame = Gtk::Frame.new
-      @frame.set_shadow_type(:in)
-      vbox.pack_start(@frame, :expand => true, :fill => true, :padding => 0)
-
-      @da = Gtk::DrawingArea.new
-
-      @da.signal_connect('draw') do |widget, event|
-        if widget.window
-          context = widget.style_context
-          background_color = context.get_background_color(:normal)
-          event.set_source_rgba(background_color.to_a)
-          event.paint
-        end
-      end
-
-      # set a minimum size
-      @da.set_size_request(200, 200)
-      # set the color
-      @da.override_background_color(:normal, @color)
-
-      @frame.add(@da)
-
-      alignment = Gtk::Alignment.new(1.0, 0.5, 0.0, 0.0)
-
-      button = Gtk::Button.new(:mnemonic => '_Change the above color')
-      alignment.add(button)
-
-      vbox.pack_start(alignment, :expand => false, :fill => false, :padding => 0)
-
-      button.signal_connect('clicked') do
-        change_color_callback
-      end
+    da = Gtk::DrawingArea.new
+    da.signal_connect "draw" do |_widget, cr|
+      cr.set_source(color.to_a)
+      cr.paint
     end
 
-    def change_color_callback
-      dialog = Gtk::ColorSelectionDialog.new(:title => 'Changing color')
+    da.set_size_request(200, 200)
 
-      dialog.set_transient_for(self)
+    frame.add(da)
 
-      colorsel = dialog.color_selection
+    button = Gtk::Button.new(:mnemonic => "_Change the above color")
+    button.set_halign(:end)
+    button.set_valign(:center)
 
-      colorsel.set_previous_rgba(@color)
-      colorsel.set_current_rgba(@color)
-      colorsel.set_has_palette(true)
+    vbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
+    button.signal_connect "clicked" do |_widget|
+      dialog = Gtk::ColorChooserDialog.new(:title => "Changing Color",
+                                           :parent => window)
+      dialog.set_modal(true)
+      dialog.set_rgba(color)
 
-      response = dialog.run
-
-      if response == Gtk::ResponseType::OK
-        @color = colorsel.current_rgba
-        @da.override_background_color(:normal, @color)
+      dialog.signal_connect "response" do |widget, response_id|
+        color = widget.rgba if response_id == Gtk::ResponseType::OK
+        da.queue_draw # force da to use the new color now
+        widget.destroy
       end
 
-      dialog.destroy
+      dialog.show_all
     end
+
+    if !window.visible?
+      window.show_all
+    else
+      window.destroy
+    end
+    window
   end
 end

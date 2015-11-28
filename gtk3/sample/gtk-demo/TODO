@@ -7,7 +7,7 @@ builder.c               ok              no
 button_box.c            ok              ok
 changedisplay.c         ok              no
 clipboard.c             ok              no
-colorsel.c              ok              no
+colorsel.c              ok              ok
 combobox.c              no              no
 css_accordion.c         ok              ok
 css_basics.c            ok              no
