@@ -6,14 +6,6 @@
 
 A simple accordion demo written using CSS transitions and multiple backgrounds
 =end
-def apply_style(widget, provider)
-  widget.children.each do |child|
-    style_context = child.style_context
-    style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
-    apply_style(child, provider) if child.respond_to?(:children)
-  end
-end
-
 module CssAccordionDemo
   def self.run_demo(main_window)
     window = Gtk::Window.new(:toplevel)
@@ -48,5 +40,13 @@ module CssAccordionDemo
     end
 
     window
+  end
+
+  def self.apply_style(widget, provider)
+    widget.children.each do |child|
+      style_context = child.style_context
+      style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
+      apply_style(child, provider) if child.respond_to?(:children)
+    end
   end
 end
