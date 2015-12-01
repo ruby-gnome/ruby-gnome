@@ -26,6 +26,7 @@ rb_gtk3_tree_view_mark(gpointer object)
     GtkTreeView *tree_view = object;
     GList *node;
     GList *columns;
+    GtkTreeSelection *selection;
 
     columns = gtk_tree_view_get_columns(tree_view);
     for (node = columns; node; node = g_list_next(node)) {
@@ -33,6 +34,9 @@ rb_gtk3_tree_view_mark(gpointer object)
         rbgobj_gc_mark_instance(column);
     }
     g_list_free(columns);
+
+    selection = gtk_tree_view_get_selection(tree_view);
+    rbgobj_gc_mark_instance(selection);
 }
 
 void
