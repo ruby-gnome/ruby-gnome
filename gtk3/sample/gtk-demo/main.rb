@@ -158,6 +158,7 @@ def find_demo_filename_from_name(source, name)
     if filename && name == get_demo_name_from_filename(filename)
       demo_filename = filename
     end
+    break if demo_filename
     (demo_filename = find_demo_filename_from_name(children, name)) if children
   end
   demo_filename
