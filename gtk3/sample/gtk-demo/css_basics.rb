@@ -7,13 +7,6 @@
 Gtk themes are written using CSS. Every widget is build of multiple items
 that you can style very similarly to a regular website.
 =end
-def apply_style(widget, provider)
-  widget.children.each do |child|
-    style_context = child.style_context
-    style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
-    apply_style(child, provider) if child.respond_to?(:children)
-  end
-end
 module CssBasicsDemo
   def self.run_demo(main_window)
     window = Gtk::Window.new(:toplevel)
@@ -72,5 +65,13 @@ module CssBasicsDemo
       window.destroy
     end
     window
+  end
+
+  def self.apply_style(widget, provider)
+    widget.children.each do |child|
+      style_context = child.style_context
+      style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
+      apply_style(child, provider) if child.respond_to?(:children)
+    end
   end
 end
