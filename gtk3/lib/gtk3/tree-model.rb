@@ -59,6 +59,28 @@ module Gtk
       get_value_raw(iter, column).value
     end
 
+    alias_method :iter_nth_child_raw, :iter_nth_child
+    def iter_nth_child(iter, n)
+      got, iter = iter_nth_child_raw(iter, n)
+      if got
+        setup_iter(iter)
+        iter
+      else
+        nil
+      end
+    end
+
+    alias_method :iter_children_raw, :iter_children
+    def iter_children(iter)
+      got, iter = iter_children_raw(iter)
+      if got
+        setup_iter(iter)
+        iter
+      else
+        nil
+      end
+    end
+
     private
     def setup_iter(iter)
       iter.model = self
