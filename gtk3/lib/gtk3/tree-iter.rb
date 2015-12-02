@@ -45,12 +45,32 @@ module Gtk
       @model.get_path(self)
     end
 
+    def previous!
+      @model.iter_previous(self)
+    end
+
     def next!
       @model.iter_next(self)
     end
 
     def parent
       @model.iter_parent(self)
+    end
+
+    def has_child?
+      @model.iter_has_child(self)
+    end
+
+    def n_children
+      @model.iter_n_children(self)
+    end
+
+    def nth_child(n)
+      @model.iter_nth_child(self, n)
+    end
+
+    def children
+      @model.iter_children(self)
     end
 
     def ==(other)
