@@ -12,7 +12,7 @@ combobox.c              no              no
 css_accordion.c         ok              ok
 css_basics.c            ok              ok
 css_multiplebgs.c       no              no
-css_pixbufs.c           no              no
+css_pixbufs.c           ok              ok
 css_shadows.c           no              no
 cursors.c               no              no
 dialog.c                ok              no
