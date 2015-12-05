@@ -1,21 +1,13 @@
 #
 # pango.rb
-# Copyright(C) 2005, 2009 Ruby-GNOME2 Project.
+# Copyright(C) 2005-2015 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same
 # license of Ruby-GNOME2.
 #
 
 require 'glib2'
-begin
-  begin
-    require 'cairo'
-  rescue LoadError
-    require 'rubygems'
-    require 'cairo'
-  end
-rescue LoadError
-end
+require 'cairo'
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
