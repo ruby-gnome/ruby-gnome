@@ -410,16 +410,17 @@ rb_gtk3_tree_selection_func_callback(GtkTreeSelection *selection,
                                      gpointer data)
 {
     RBGICallbackData *callback_data = data;
-    VALUE rb_selection_state;
+    VALUE rb_selection_is_changeable;
 
-    rb_selection_state = rb_funcall(callback_data->rb_callback,
-                                    id_call,
-                                    4,
-                                    GOBJ2RVAL(selection),
-                                    GOBJ2RVAL(model),
-                                    BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
-                                    CBOOL2RVAL(path_currently_selected));
-    return RVAL2CBOOL(rb_selection_state);
+    rb_selection_is_changeable =
+        rb_funcall(callback_data->rb_callback,
+                   id_call,
+                   4,
+                   GOBJ2RVAL(selection),
+                   GOBJ2RVAL(model),
+                   BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
+                   CBOOL2RVAL(path_currently_selected));
+    return RVAL2CBOOL(rb_selection_is_changeable);
 }
 
 static void
