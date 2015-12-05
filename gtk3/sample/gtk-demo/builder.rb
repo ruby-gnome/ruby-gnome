@@ -1,51 +1,88 @@
-# Copyright (c) 2008-2015 Ruby-GNOME2 Project Team
+# Copyright (c) 2015 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
-= Interface Builder
+=  Builder
 
-Demonstrates an interface loaded from a XML description.
+ Demonstrates an interface loaded from a XML description.
 =end
+module BuilderDemo
+  def self.run_demo(_main_window)
+    builder = Gtk::Builder.new(:resource => "/builder/demo.ui")
+    builder.connect_signals {}
 
-require 'common'
+    window = builder["window1"]
+    toolbar = builder["toolbar1"]
+    toolbar.style_context.add_class("primary-toolbar")
 
-module Demo
-  class Dialog < Demo::BasicWindow
-    def initialize
-      super('Interface Builder')
+    actions = Gio::SimpleActionGroup.new
 
-      available = Gtk::Version.or_later?(2, 12, 0)
-      if available
-        label = Gtk::Label.new("Build an interface from XML description.")
-      else
-        label = Gtk::Label.new("You need GTK+ >= 2.12.0 to run this demo.")
-      end
-      add(label)
-      return unless available
+    action = Gio::SimpleAction.new("quit")
+    action.signal_connect "activate" do |_simple_action, _parameter|
+      window.destroy
+    end
+    actions.add_action(action)
 
-      @builder = Gtk::Builder.new
-      filename = File.join(File.dirname(__FILE__), "demo.ui")
-      @builder << filename
-      @builder.connect_signals {|name| method(name)}
-      @window = @builder["window1"]
-      @window.show_all
-
-      signal_connect("destroy") do
-        @window.destroy unless @window.destroyed?
-      end
+    action = Gio::SimpleAction.new("about")
+    actions.add_action(action)
+    action.signal_connect "activate" do |_simple_action, _parameter|
+      about_dlg = builder["aboutdialog1"]
+      about_dlg.run
+      about_dlg.hide
     end
 
-    private
-    def quit_activate
-      @window.destroy
-      destroy unless destroyed?
+    action = Gio::SimpleAction.new("help")
+    actions.add_action(action)
+    action.signal_connect "activate" do |_simple_action, _parameter|
+      puts "Help not available"
     end
 
-    def about_activate
-      dialog = @builder["aboutdialog1"]
-      dialog.run
-      dialog.hide
+    window.insert_action_group("win", actions)
+
+    accel_group = Gtk::AccelGroup.new
+    window.add_accel_group(accel_group)
+
+    builder["new_item"].add_accelerator("activate", accel_group,
+                                        Gdk::Keyval::KEY_n,
+                                        Gdk::ModifierType::CONTROL_MASK,
+                                        Gtk::AccelFlags::VISIBLE)
+    builder["open_item"].add_accelerator("activate", accel_group,
+                                         Gdk::Keyval::KEY_o,
+                                         Gdk::ModifierType::CONTROL_MASK,
+                                         Gtk::AccelFlags::VISIBLE)
+    builder["save_item"].add_accelerator("activate", accel_group,
+                                         Gdk::Keyval::KEY_s,
+                                         Gdk::ModifierType::CONTROL_MASK,
+                                         Gtk::AccelFlags::VISIBLE)
+    builder["quit_item"].add_accelerator("activate", accel_group,
+                                         Gdk::Keyval::KEY_q,
+                                         Gdk::ModifierType::CONTROL_MASK,
+                                         Gtk::AccelFlags::VISIBLE)
+    builder["copy_item"].add_accelerator("activate", accel_group,
+                                         Gdk::Keyval::KEY_c,
+                                         Gdk::ModifierType::CONTROL_MASK,
+                                         Gtk::AccelFlags::VISIBLE)
+    builder["cut_item"].add_accelerator("activate", accel_group,
+                                        Gdk::Keyval::KEY_x,
+                                        Gdk::ModifierType::CONTROL_MASK,
+                                        Gtk::AccelFlags::VISIBLE)
+    builder["paste_item"].add_accelerator("activate", accel_group,
+                                          Gdk::Keyval::KEY_v,
+                                          Gdk::ModifierType::CONTROL_MASK,
+                                          Gtk::AccelFlags::VISIBLE)
+    builder["help_item"].add_accelerator("activate", accel_group,
+                                         Gdk::Keyval::KEY_F1,
+                                         0,
+                                         Gtk::AccelFlags::VISIBLE)
+    builder["about_item"].add_accelerator("activate", accel_group,
+                                          Gdk::Keyval::KEY_F7,
+                                          0,
+                                          Gtk::AccelFlags::VISIBLE)
+    if !window.visible?
+      window.show_all
+    else
+      window.destroy
     end
+    window
   end
 end
-
