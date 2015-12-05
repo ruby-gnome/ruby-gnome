@@ -2,29 +2,35 @@
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
-= CSS Theming/CSS Basics
+=  CSS Theming/Animated Backgrounds
 
-Gtk themes are written using CSS. Every widget is build of multiple items
-that you can style very similarly to a regular website.
+ This demo is done in honour of the Pixbufs demo further down.
+ It is done exclusively with CSS as the background of the window.
 =end
-module CssBasicsDemo
+module CssPixbufsDemo
   def self.run_demo(main_window)
     window = Gtk::Window.new(:toplevel)
-    window.set_title("CSS Basics")
+    window.set_title("Animated Backgrounds")
     window.set_transient_for(main_window)
     window.set_default_size(400, 300)
 
     text = Gtk::TextBuffer.new
     text.create_tag("warning", "underline" => Pango::UNDERLINE_SINGLE)
     text.create_tag("error", "underline" => Pango::UNDERLINE_ERROR)
-    default_css = Gio::Resources.lookup_data("/css_basics/css_basics.css", 0)
+    default_css = Gio::Resources.lookup_data("/css_pixbufs/gtk.css", 0)
     text.text = default_css
 
     provider = Gtk::CssProvider.new
     provider.load_from_data(default_css)
 
+    paned = Gtk::Paned.new(:vertical)
+    window.add(paned)
+
+    child = Gtk::Box.new(:vertical, 0)
+    paned.add(child)
+
     container = Gtk::ScrolledWindow.new
-    window.add(container)
+    paned.add(container)
 
     child = Gtk::TextView.new(text)
     container.add(child)
