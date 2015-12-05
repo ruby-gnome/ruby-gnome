@@ -404,10 +404,10 @@ rb_gtk3_tree_selection_foreach_func_callback(GtkTreeModel *model,
 
 static gboolean
 rb_gtk3_tree_selection_func_callback(GtkTreeSelection *selection,
-                                        GtkTreeModel *model,
-                                        GtkTreePath *path,
-                                        gboolean path_currently_selected,
-                                        gpointer data)
+                                     GtkTreeModel *model,
+                                     GtkTreePath *path,
+                                     gboolean path_currently_selected,
+                                     gpointer data)
 {
     RBGICallbackData *callback_data = data;
     VALUE rb_selection_state;
