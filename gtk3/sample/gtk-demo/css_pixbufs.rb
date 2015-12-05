@@ -74,10 +74,11 @@ module CssPixbufsDemo
   end
 
   def self.apply_style(widget, provider)
+    style_context = widget.style_context
+    style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
+    return unless widget.respond_to?(:children)
     widget.children.each do |child|
-      style_context = child.style_context
-      style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
-      apply_style(child, provider) if child.respond_to?(:children)
+      apply_style(child, provider)
     end
   end
 end
