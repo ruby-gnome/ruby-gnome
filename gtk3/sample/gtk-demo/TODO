@@ -32,7 +32,7 @@ hypertext.c             ok              no
 iconview.c              ok              no
 iconview_edit.c         no              no
 images.c                ok              no
-infobar.c               ok              no
+infobar.c               ok              ok
 links.c                 ok              ok
 listbox.c               no              no
 list_store.c            ok              no
