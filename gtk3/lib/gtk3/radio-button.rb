@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Gtk
-  class RadioMenuItem
+  class RadioButton
     alias_method :initialize_raw, :initialize
     include Gtk::RadioWidget
     def initialize(options={})
