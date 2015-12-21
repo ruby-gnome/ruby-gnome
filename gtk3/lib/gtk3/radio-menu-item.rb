@@ -15,19 +15,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Gtk
-  class MenuItem
+  class RadioMenuItem
     alias_method :initialize_raw, :initialize
-    def initialize(*args)
-      if args.size == 1
-        label = args.first
-        if label.nil?
-          initialize_raw
-        else
-          initialize_raw(label)
-        end
-      else
-        initialize_raw(*args)
-      end
+    include Gtk::RadioWidget
+    def initialize(options={})
+      initialize_method(options)
     end
   end
 end

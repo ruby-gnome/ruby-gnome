@@ -1,0 +1,75 @@
+# C version (3.19.1) versus Ruby version
+
+C version             Ruby version    Updated
+application.c           no              no
+assistant.c             no              no
+builder.c               ok              ok
+button_box.c            ok              ok
+changedisplay.c         ok              no
+clipboard.c             ok              no
+colorsel.c              ok              ok
+combobox.c              no              no
+css_accordion.c         ok              ok
+css_basics.c            ok              ok
+css_multiplebgs.c       no              no
+css_pixbufs.c           ok              ok
+css_shadows.c           no              no
+cursors.c               no              no
+dialog.c                ok              no
+drawingarea.c           ok              no
+editable_cells.c        ok              no
+entry_buffer.c          ok              ok
+entry_completion.c      ok              ok
+event_axes.c            no              no
+expander.c              ok              ok
+filtermodel.c           no              no
+flowbox.c               no              no
+font_features.c         no              no
+gestures.c              no              no
+glarea.c                no              no
+headerbar.c             ok              ok
+hypertext.c             ok              no
+iconview.c              ok              no
+iconview_edit.c         no              no
+images.c                ok              no
+infobar.c               ok              no
+links.c                 ok              ok
+listbox.c               no              no
+list_store.c            ok              no
+markup.c                ok              ok
+menus.c                 ok              no
+modelbutton.c           no              no
+offscreen_window.c      no              no
+offscreen_window2.c     no              no
+overlay.c               ok              ok
+overlay2.c              ok              ok
+panes.c                 ok              no
+pickers.c               ok              ok
+pixbufs.c               ok              no
+popover.c               no              no
+printing.c              ok              no
+revealer.c              ok              ok
+rotated_text.c          ok              no
+scale.c                 ok              ok
+search_entry.c          no              no
+search_entry2.c         no              no
+shortcuts.c             no              no
+sidebar.c               ok              ok
+sizegroup.c             ok              no
+spinbutton.c            no              no
+spinner.c               ok              ok
+stack.c                 ok              ok
+textmask.c              ok              ok
+textscroll.c            no              no
+textview.c              ok              no
+theming_style_classes.c ok              ok
+toolpalette.c           no              no
+transparent.c           no              no
+tree_store.c            ok              no
+
+# Ruby version
+Check all the ruby demos that doesn't correspond to a C version.
+
+# Demo that are not to be done
+pagesetup.c
+
