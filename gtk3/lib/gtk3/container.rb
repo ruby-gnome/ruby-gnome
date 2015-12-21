@@ -36,11 +36,11 @@ module Gtk
       ensure
         child.thaw_child_notify
       end
-      self
     end
 
     def <<(widget)
       add(widget)
+      self
     end
 
     alias_method :focus_chain_raw, :focus_chain
