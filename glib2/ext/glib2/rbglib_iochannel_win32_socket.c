@@ -31,7 +31,6 @@ rg_initialize(VALUE self, VALUE socket)
     GIOChannel *io = NULL;
     int fd;
 
-    rb_secure(4);
     /* TODO: support IO object */
     fd = NUM2INT(socket);
     io = g_io_channel_win32_new_socket(rb_w32_get_osfhandle(fd));
