@@ -56,7 +56,6 @@ Init_poppler(void)
                                 INT2FIX(POPPLER_MICRO_VERSION)));
 
     G_DEF_CLASS(POPPLER_TYPE_ERROR, "Error", RG_TARGET_NAMESPACE);
-    G_DEF_CLASS(POPPLER_TYPE_ORIENTATION, "Orientation", RG_TARGET_NAMESPACE);
 
     G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_TYPE,
                 "PageTransitionType", RG_TARGET_NAMESPACE);
