@@ -52,5 +52,7 @@ Init_glib_regex(void)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_REGEX, "Regex", mGLib); 
 
     RG_DEF_METHOD(initialize, -1);
-}
 
+    G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib)
+    G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib)
+}
