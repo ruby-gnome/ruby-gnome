@@ -33,7 +33,6 @@ rg_initialize(gint argc, VALUE *argv, VALUE self)
     GError *error = NULL;
     GRegex *regex = NULL;
 
-    rb_secure(4);
     rb_scan_args(argc, argv, "31", &pattern, &compile_options, &match_options);
 
     regex = g_regex_new(RVAL2CSTR(pattern), 
