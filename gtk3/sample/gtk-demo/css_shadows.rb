@@ -20,8 +20,8 @@ module CssShadowsDemo
     paned.add(child)
 
     text = Gtk::TextBuffer.new
-    text.create_tag("warning", "underline" => Pango::UNDERLINE_SINGLE)
-    text.create_tag("error", "underline" => Pango::UNDERLINE_ERROR)
+    text.create_tag("warning", "underline" => :single)
+    text.create_tag("error", "underline" => :error)
     default_css = Gio::Resources.lookup_data("/css_shadows/gtk.css")
     text.text = default_css
 
