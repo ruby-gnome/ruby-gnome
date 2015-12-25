@@ -224,6 +224,40 @@ rb_gtk3_clipboard_uri_received_func_callback(GtkClipboard *clipboard,
                STRV2RVAL((const gchar **)uris));
 }
 
+static void
+rb_gtk3_menu_position_func_callback(GtkMenu *menu,
+                                    gint *x,
+                                    gint *y,
+                                    gboolean *push_in,
+                                    gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    VALUE rb_result_raw;
+    VALUE rb_result;
+
+    rb_result_raw = rb_funcall(callback_data->rb_callback,
+                               id_call,
+                               3,
+                               GOBJ2RVAL(menu),
+                               INT2NUM(*x),
+                               INT2NUM(*y));
+    rb_result = rbg_check_array_type(rb_result_raw);
+    if (NIL_P(rb_result) ||
+        !(RARRAY_LEN(rb_result) == 2 ||
+          RARRAY_LEN(rb_result) == 3)) {
+        /* TODO: Raising an error will abort the program. :< */
+        rb_raise(rb_eArgError,
+                 "block should return [x, y, push_in]: %s",
+                 RBG_INSPECT(rb_result_raw));
+    }
+
+    *x = NUM2INT(RARRAY_PTR(rb_result)[0]);
+    *y = NUM2INT(RARRAY_PTR(rb_result)[1]);
+    if (RARRAY_LEN(rb_result) == 3) {
+        *push_in = RVAL2CBOOL(RARRAY_PTR(rb_result)[2]);
+    }
+}
+
 static const gchar *
 rb_gtk3_translate_func_callback(const gchar *path,
                                 gpointer user_data)
@@ -460,6 +494,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_clipboard_text_received_func_callback;
     } else if (name_equal(info, "ClipboardURIReceivedFunc")) {
         return rb_gtk3_clipboard_uri_received_func_callback;
+    } else if (name_equal(info, "MenuPositionFunc")) {
+        return rb_gtk3_menu_position_func_callback;
     } else if (name_equal(info, "TranslateFunc")) {
         return rb_gtk3_translate_func_callback;
     } else if (name_equal(info, "TreeCellDataFunc")) {
