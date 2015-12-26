@@ -109,7 +109,11 @@ module Gtk
     alias_method :translate_coordinates_raw, :translate_coordinates
     def translate_coordinates(widget, x, y)
       translated, x, y = translate_coordinates_raw(widget, x, y)
-      return [x, y] if translated
+      if translated
+        [x, y]
+      else
+        nil
+      end
     end
 
     private
