@@ -22,6 +22,7 @@ class TestGtkMenu < Test::Unit::TestCase
   end
 
   def test_popup
+    only_gtk_version(3, 4, 0)
     @menu.popup(nil, nil,
                 Gdk::BUTTON_PRIMARY,
                 Gtk.current_event_time) do |menu, x, y|
