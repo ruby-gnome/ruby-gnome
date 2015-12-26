@@ -111,7 +111,7 @@ module Gtk
       translated, x, y = translate_coordinates_raw(widget, x, y)
       return [x, y] if translated
     end
-    
+
     private
     def initialize_post
       klass = self.class
