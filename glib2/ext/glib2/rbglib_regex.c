@@ -46,12 +46,34 @@ rg_initialize(gint argc, VALUE *argv, VALUE self)
     G_INITIALIZE(self, regex); 
     return Qnil;
 }
+
+static VALUE
+rg_match_flags(VALUE self)
+{
+  return UINT2NUM(g_regex_get_match_flags(_SELF(self)));
+}
+
+static VALUE
+rg_compile_flags(VALUE self)
+{
+  return UINT2NUM(g_regex_get_compile_flags(_SELF(self)));
+}
+
+static VALUE
+rb_pattern(VALUE self)
+{
+  return CSTR2VAL(g_regex_get_pattern(_SELF(self)));
+}
+
 void
 Init_glib_regex(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_REGEX, "Regex", mGLib); 
 
     RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(pattern, 0);
+    RG_DEF_METHOD(compile_flags, -1);
+    RG_DEF_METHOD(match_flags, -1);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);
