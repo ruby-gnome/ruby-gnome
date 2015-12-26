@@ -137,6 +137,35 @@ class TestGtkWidget < Test::Unit::TestCase
     end
   end
 
+  sub_test_case "#translate_coordinates" do
+    test "no common toplevel" do
+      win1 = Gtk::Window.new(:toplevel)
+      label1 = Gtk::Label.new("one")
+      win1.add(label1)    
+      win1.show_all
+
+      win2 = Gtk::Window.new(:toplevel)
+      label2 = Gtk::Label.new("one")
+      win2.add(label2)
+      win2.show_all
+
+      assert_equal(nil, label1.translate_coordinates(label2, 0, 0))
+    end
+    test "not realized" do
+      win1 = Gtk::Window.new(:toplevel)
+      label1 = Gtk::Label.new("one")
+      win1.add(label1)    
+      assert_equal(nil, label1.translate_coordinates(win1, 0, 0))
+    end
+    test "translated" do
+      win1 = Gtk::Window.new(:toplevel)
+      label1 = Gtk::Label.new("one")
+      win1.add(label1)    
+      win1.show_all
+      assert_equal([0, 0], label1.translate_coordinates(win1, 0, 0))
+    end
+  end
+
   sub_test_case "predicates" do
     test "#in_destruction?" do
       entry = Gtk::Entry.new
