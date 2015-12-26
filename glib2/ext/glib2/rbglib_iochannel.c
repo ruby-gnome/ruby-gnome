@@ -52,7 +52,6 @@ rg_initialize(gint argc, VALUE *argv, VALUE self)
     VALUE arg1, arg2;
 
     GIOChannel* io = NULL;
-    rb_secure(4);
     rb_scan_args(argc, argv, "11", &arg1, &arg2);
 
     if (TYPE(arg1) != T_STRING){
@@ -406,7 +405,6 @@ rg_write(VALUE self, VALUE buf)
     GIOStatus status;
     GError* err = NULL;
 
-    rb_secure(4);
     buf = rb_obj_as_string(buf);
 
     StringValue(buf);
@@ -426,7 +424,6 @@ rg_putc(VALUE self, VALUE thechar)
     GIOStatus status;
     gunichar unichar;
 
-    rb_secure(4);
     if (TYPE(thechar) == T_FIXNUM) {
         unichar = NUM2UINT(thechar);
     } else {
