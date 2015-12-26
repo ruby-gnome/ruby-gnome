@@ -151,12 +151,14 @@ class TestGtkWidget < Test::Unit::TestCase
 
       assert_equal(nil, label1.translate_coordinates(label2, 0, 0))
     end
+
     test "not realized" do
       win1 = Gtk::Window.new(:toplevel)
       label1 = Gtk::Label.new("one")
       win1.add(label1)
       assert_equal(nil, label1.translate_coordinates(win1, 0, 0))
     end
+
     test "translated" do
       win1 = Gtk::Window.new(:toplevel)
       label1 = Gtk::Label.new("one")
