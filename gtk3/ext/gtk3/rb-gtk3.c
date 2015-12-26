@@ -52,15 +52,6 @@ name_equal(GIArgInfo *info, const gchar *target_name)
     return equal_name_p;
 }
 
-static void
-rb_gtk3_callback_callback(GtkWidget *widget, gpointer user_data)
-{
-    RBGICallbackData *callback_data = user_data;
-
-    rb_funcall(callback_data->rb_callback, id_call, 1,
-               GOBJ2RVAL(widget));
-}
-
 static gint
 rb_gtk3_assistant_page_func_callback(gint current_page, gpointer user_data)
 {
@@ -95,6 +86,15 @@ rb_gtk3_builder_connect_func_callback(GtkBuilder *builder,
                CSTR2RVAL(handler_name),
                GOBJ2RVAL(connect_object),
                GCONNECTFLAGS2RVAL(flags));
+}
+
+static void
+rb_gtk3_callback_callback(GtkWidget *widget, gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+
+    rb_funcall(callback_data->rb_callback, id_call, 1,
+               GOBJ2RVAL(widget));
 }
 
 static void
@@ -222,6 +222,37 @@ rb_gtk3_clipboard_uri_received_func_callback(GtkClipboard *clipboard,
                2,
                GOBJ2RVAL(clipboard),
                STRV2RVAL((const gchar **)uris));
+}
+
+static gboolean
+rb_gtk3_entry_completion_match_func_callback(GtkEntryCompletion *completion,
+                                             const gchar *key,
+                                             GtkTreeIter *iter,
+                                             gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    ID id_set_model;
+    VALUE rb_model;
+    VALUE rb_iter;
+    GtkTreeModel *model;
+    VALUE rb_match;
+    gboolean match = FALSE;
+
+    model = gtk_entry_completion_get_model(completion);
+    CONST_ID(id_set_model, "model=");
+    rb_model = GOBJ2RVAL(model);
+    rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
+    rb_funcall(rb_iter, id_set_model, 1, rb_model);
+
+    rb_match = rb_funcall(callback_data->rb_callback,
+                       id_call,
+                       3,
+                       GOBJ2RVAL(completion),
+                       CSTR2RVAL(key),
+                       rb_iter);
+
+    match = RVAL2CBOOL(rb_match);
+    return match;
 }
 
 static void
@@ -471,46 +502,15 @@ rb_gtk3_tree_view_mapping_func_callback(GtkTreeView *tree_view,
                BOXED2RVAL(path, GTK_TYPE_TREE_PATH));
 }
 
-static gboolean
-rb_gtk3_entry_completion_match_func_callback(GtkEntryCompletion *completion,
-                                             const gchar *key,
-                                             GtkTreeIter *iter,
-                                             gpointer user_data)
-{
-    RBGICallbackData *callback_data = user_data;
-    ID id_set_model;
-    VALUE rb_model;
-    VALUE rb_iter;
-    GtkTreeModel *model;
-    VALUE rb_match;
-    gboolean match = FALSE;
-
-    model = gtk_entry_completion_get_model(completion);
-    CONST_ID(id_set_model, "model=");
-    rb_model = GOBJ2RVAL(model);
-    rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
-    rb_funcall(rb_iter, id_set_model, 1, rb_model);
-
-    rb_match = rb_funcall(callback_data->rb_callback,
-                       id_call,
-                       3,
-                       GOBJ2RVAL(completion),
-                       CSTR2RVAL(key),
-                       rb_iter);
-
-    match = RVAL2CBOOL(rb_match);
-    return match;
-}
-
 static gpointer
 rb_gtk3_callback_finder(GIArgInfo *info)
 {
-    if (name_equal(info, "Callback")) {
-        return rb_gtk3_callback_callback;
-    } else if (name_equal(info, "AssistantPageFunc")) {
+    if (name_equal(info, "AssistantPageFunc")) {
         return rb_gtk3_assistant_page_func_callback;
     } else if (name_equal(info, "BuilderConnectFunc")) {
         return rb_gtk3_builder_connect_func_callback;
+    } else if (name_equal(info, "Callback")) {
+        return rb_gtk3_callback_callback;
     } else if (name_equal(info, "CellLayoutDataFunc")) {
         return rb_gtk3_cell_layout_data_func_callback;
     } else if (name_equal(info, "ClipboardReceivedFunc")) {
@@ -525,6 +525,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_clipboard_text_received_func_callback;
     } else if (name_equal(info, "ClipboardURIReceivedFunc")) {
         return rb_gtk3_clipboard_uri_received_func_callback;
+    } else if (name_equal(info, "EntryCompletionMatchFunc")) {
+        return rb_gtk3_entry_completion_match_func_callback;
     } else if (name_equal(info, "MenuPositionFunc")) {
         return rb_gtk3_menu_position_func_callback;
     } else if (name_equal(info, "TranslateFunc")) {
@@ -545,8 +547,6 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_tree_selection_func_callback;
     } else if (name_equal(info, "TreeViewMappingFunc")) {
         return rb_gtk3_tree_view_mapping_func_callback;
-    } else if (name_equal(info, "EntryCompletionMatchFunc")) {
-        return rb_gtk3_entry_completion_match_func_callback;
     } else {
         return NULL;
     }
