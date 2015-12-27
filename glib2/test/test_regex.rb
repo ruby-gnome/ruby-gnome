@@ -16,14 +16,35 @@
  
 class TestRegex < Test::Unit::TestCase
 
-  def test_regex_compile_flags
+  def test_regex_enum_compile_flags
     assert_const_defined(GLib, :RegexCompileFlags)
     assert_kind_of(GLib::RegexCompileFlags, GLib::RegexCompileFlags::CASELESS)
   end
 
-  def test_regex_match_flags
+  def test_regex_enum_match_flags
     assert_const_defined(GLib, :RegexMatchFlags)
     assert_kind_of(GLib::RegexMatchFlags, GLib::RegexMatchFlags::PARTIAL_HARD)
   end
 
+  def test_regex_new
+    a_regex = GLib::Regex.new("to??", 0, 0)
+    assert_instance_of(GLib::Regex, a_regex)
+  end
+
+  def test_regex_pattern
+    a_regex = GLib::Regex.new("to??", 0, 0)
+    assert_equal(a_regex.pattern, "to??")
+  end
+
+  def test_regex_compile_flags
+    flags = GLib::RegexCompileFlags::CASELESS
+    a_regex = GLib::Regex.new("to??", flags, 0)
+    assert_equal(a_regex.compile_flags, flags) 
+  end
+
+  def test_regex_match_flags
+    flags = GLib::RegexMatchFlags::PARTIAL_HARD
+    a_regex = GLib::Regex.new("to??", 0, flags)
+    assert_equal(a_regex.match_flags, flags) 
+  end
 end
