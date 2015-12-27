@@ -60,9 +60,9 @@ rg_compile_flags(VALUE self)
 }
 
 static VALUE
-rb_pattern(VALUE self)
+rg_pattern(VALUE self)
 {
-  return CSTR2VAL(g_regex_get_pattern(_SELF(self)));
+  return CSTR2RVAL(g_regex_get_pattern(_SELF(self)));
 }
 
 void
@@ -72,8 +72,8 @@ Init_glib_regex(void)
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(pattern, 0);
-    RG_DEF_METHOD(compile_flags, -1);
-    RG_DEF_METHOD(match_flags, -1);
+    RG_DEF_METHOD(compile_flags, 0);
+    RG_DEF_METHOD(match_flags, 0);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);
