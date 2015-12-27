@@ -47,4 +47,15 @@ class TestRegex < Test::Unit::TestCase
     a_regex = GLib::Regex.new("to??", 0, flags)
     assert_equal(a_regex.match_flags, flags) 
   end
+
+  sub_test_case "max_backref" do
+    test "none" do
+      a_regex = GLib::Regex.new("to?o", 0, 0)
+      assert_equal(a_regex.max_backref, 0)
+    end
+    test "one" do
+      a_regex = GLib::Regex.new("(to(?)o)\\g1", 0, 0)
+      assert_equal(a_regex.max_backref, 1)
+    end
+  end
 end
