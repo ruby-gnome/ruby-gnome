@@ -99,4 +99,14 @@ class TestRegex < Test::Unit::TestCase
       assert(a_regex.has_cr_or_lf)
     end
   end
+  sub_test_case "max_lookbehind" do
+    test "none" do
+      a_regex = GLib::Regex.new("to?o", 0, 0)
+      assert_equal(a_regex.max_lookbehind, 0)
+    end
+    test "three" do
+      a_regex = GLib::Regex.new("(?<!foo)bar", 0, 0)
+      assert_equal(a_regex.max_lookbehind, 3)
+    end
+  end
 end
