@@ -58,6 +58,7 @@ class TestRegex < Test::Unit::TestCase
       assert_equal(a_regex.max_backref, 1)
     end
   end
+
   sub_test_case "match_simple" do
     test "true" do
       matched = GLib::Regex.match_simple("to", "tatota", 0, 0)
@@ -66,6 +67,21 @@ class TestRegex < Test::Unit::TestCase
     test "false" do
       matched = GLib::Regex.match_simple("ti", "tatota", 0, 0)
       assert_equal(matched, false)
+    end
+  end
+
+  sub_test_case "capture_count" do
+    test "none" do
+      a_regex = GLib::Regex.new("to?o", 0, 0)
+      assert_equal(a_regex.capture_count, 0)
+    end
+    test "one" do
+      a_regex = GLib::Regex.new("(to(\?)o)", 0, 0)
+      assert_equal(a_regex.capture_count, 1)
+    end
+    test "three" do
+      a_regex = GLib::Regex.new("((red|white) (king|queen))", 0, 0)
+      assert_equal(a_regex.capture_count, 3)
     end
   end
 end
