@@ -72,6 +72,12 @@ rg_max_backref(VALUE self)
 }
 
 static VALUE
+rg_capture_count(VALUE self)
+{
+  return INT2NUM(g_regex_get_capture_count(_SELF(self)));
+}
+
+static VALUE
 rg_s_match_simple(gint argc, VALUE *argv, VALUE self)
 {
     VALUE pattern, string, compile_options, match_options;
@@ -87,6 +93,7 @@ rg_s_match_simple(gint argc, VALUE *argv, VALUE self)
     else
       return Qfalse;
 }
+
 void
 Init_glib_regex(void)
 {
@@ -97,6 +104,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(compile_flags, 0);
     RG_DEF_METHOD(match_flags, 0);
     RG_DEF_METHOD(max_backref, 0);
+    RG_DEF_METHOD(capture_count, 0);
 
     RG_DEF_SMETHOD(match_simple, -1);
 
