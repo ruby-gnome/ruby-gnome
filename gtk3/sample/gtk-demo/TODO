@@ -30,7 +30,7 @@ glarea.c                no              no
 headerbar.c             ok              ok
 hypertext.c             ok              no
 iconview.c              ok              no
-iconview_edit.c         no              no
+iconview_edit.c         ok              ok
 images.c                ok              no
 infobar.c               ok              ok
 links.c                 ok              ok
