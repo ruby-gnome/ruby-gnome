@@ -100,7 +100,7 @@ module GObjectIntrospection
 
     def define_singleton_method(klass, name, info)
       unlock_gvl = should_unlock_gvl?(info, klass)
-      prepare = lambda do |arguments|
+      prepare = lambda do |arguments, &block|
         arguments, block = build_arguments(info, arguments, &block)
         validate_arguments(info, "#{klass}.#{name}", arguments)
         [arguments, block]
