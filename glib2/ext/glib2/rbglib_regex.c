@@ -89,6 +89,13 @@ rg_has_cr_or_lf(VALUE self)
 }
 
 static VALUE
+rg_max_lookbehind(VALUE self)
+{
+  return INT2NUM(g_regex_get_max_lookbehind(_SELF(self)));
+}
+
+
+static VALUE
 rg_s_match_simple(gint argc, VALUE *argv, VALUE self)
 {
     VALUE pattern, string, compile_options, match_options;
@@ -117,6 +124,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(max_backref, 0);
     RG_DEF_METHOD(capture_count, 0);
     RG_DEF_METHOD(has_cr_or_lf, 0);
+    RG_DEF_METHOD(max_lookbehind, 0);
 
     RG_DEF_SMETHOD(match_simple, -1);
 
