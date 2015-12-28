@@ -58,4 +58,14 @@ class TestRegex < Test::Unit::TestCase
       assert_equal(a_regex.max_backref, 1)
     end
   end
+  sub_test_case "match_simple" do
+    test "true" do
+      matched = GLib::Regex.match_simple("to", "tatota", 0, 0)
+      assert(matched)
+    end
+    test "false" do
+      matched = GLib::Regex.match_simple("ti", "tatota", 0, 0)
+      assert_equal(matched, false)
+    end
+  end
 end

@@ -71,7 +71,22 @@ rg_max_backref(VALUE self)
   return INT2NUM(g_regex_get_max_backref(_SELF(self)));
 }
 
-
+static VALUE
+rg_s_match_simple(gint argc, VALUE *argv, VALUE self)
+{
+    VALUE pattern, string, compile_options, match_options;
+    gboolean matched;
+    
+    rb_scan_args(argc, argv, "40", &pattern, &string, &compile_options, &match_options);
+    matched = g_regex_match_simple(RVAL2CSTR(pattern), 
+                                   RVAL2CSTR(string),
+                                   NUM2UINT(compile_options),
+                                   NUM2UINT(match_options));
+    if(matched == TRUE)
+      return Qtrue;
+    else
+      return Qfalse;
+}
 void
 Init_glib_regex(void)
 {
@@ -82,6 +97,8 @@ Init_glib_regex(void)
     RG_DEF_METHOD(compile_flags, 0);
     RG_DEF_METHOD(match_flags, 0);
     RG_DEF_METHOD(max_backref, 0);
+
+    RG_DEF_SMETHOD(match_simple, -1);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);
