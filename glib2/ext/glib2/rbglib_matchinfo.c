@@ -25,6 +25,22 @@
 
 #define RG_TARGET_NAMESPACE cMatchInfo
 #define _SELF(s) ((GMatchInfo*)RVAL2BOXED(s, G_TYPE_MATCH_INFO))
+/* TODO
+ *
+ * g_match_info_ref
+ * g_match_info_unref
+ * g_match_info_free
+ * g_match_info_matches
+ * g_match_info_next
+ * g_match_info_get_match_count
+ * g_match_info_is_partial_match
+ * g_match_info_expand_references
+ * g_match_info_fetch
+ * g_match_info_fetch_pos
+ * g_match_info_fetch_named
+ * g_match_info_fetch_named_pos
+ * g_match_info_fetch_all
+ * */
 void
 Init_glib_matchinfo(void)
 {

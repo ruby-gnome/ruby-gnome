@@ -105,6 +105,8 @@ rg_string_number(gint argc, VALUE *argv, VALUE self)
 
 
 /* TODO
+ * g_regex_ref
+ * g_regex_unref
  * g_regex_split
  * g_regex_split_full
  * g_regex_replace
