@@ -103,6 +103,21 @@ rg_string_number(gint argc, VALUE *argv, VALUE self)
   return INT2NUM(g_regex_get_string_number(_SELF(self), RVAL2CSTR(string)));
 }
 
+
+/* TODO
+ * g_regex_split
+ * g_regex_split_full
+ * g_regex_replace
+ * g_regex_replace_litteral
+ * g_regex_replace_eval
+ *
+ *
+ * implement GLib::MatchInfo first
+ * g_regex_match 
+ * g_regex_match_full
+ * g_regex_match_all
+ * g_regex_match_all_full
+ * */
 static VALUE
 rg_s_match_simple(gint argc, VALUE *argv, VALUE self)
 {
@@ -132,7 +147,11 @@ rg_s_escape_string(gint argc, VALUE *argv, VALUE self)
 /*
  * g_regex_escape_null is not implemented because ruby already escape the null caracter 
 */
- 
+
+/* TODO
+ * g_regex_split_simple
+ * g_regex_check_replacement
+ * */
 void
 Init_glib_regex(void)
 {
