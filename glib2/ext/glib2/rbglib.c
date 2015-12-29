@@ -1186,4 +1186,5 @@ union       GDoubleIEEE754;
     Init_glib_variant_type();
     Init_glib_variant();
     Init_glib_regex();
+    Init_glib_matchinfo();
 }
