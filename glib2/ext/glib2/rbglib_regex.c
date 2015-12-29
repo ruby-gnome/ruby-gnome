@@ -129,6 +129,10 @@ rg_s_escape_string(gint argc, VALUE *argv, VALUE self)
   return CSTR2RVAL(g_regex_escape_string(RVAL2CSTR(string), -1));
 }
 
+/*
+ * g_regex_escape_null is not implemented because ruby already escape the null caracter 
+*/
+ 
 void
 Init_glib_regex(void)
 {
