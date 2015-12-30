@@ -113,11 +113,15 @@ rg_split(gint argc, VALUE *argv, VALUE self)
   strings = g_regex_split(_SELF(self),
                           RVAL2CSTR(string),
                           NUM2UINT(match_options));
+  
   array_of_strings = rb_ary_new();
-  for(;*strings != NULL; strings++)
+  gchar **ptr;
+  for(ptr = strings; *ptr != NULL; ptr++)
   {
-    rb_ary_push(array_of_strings, CSTR2RVAL(*strings));
+    rb_ary_push(array_of_strings, CSTR2RVAL(*ptr));
   }
+  
+  g_strfreev(strings);
   return array_of_strings;
 }
 /* TODO
