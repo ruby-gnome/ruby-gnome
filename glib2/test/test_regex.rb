@@ -133,4 +133,11 @@ class TestRegex < Test::Unit::TestCase
   def test_regex_escape_null
     assert_equal(String.new("ab\0c"), "ab\x00c")
   end
+
+  def test_regex_split
+    a_regex = GLib::Regex.new("\s", 0, 0)
+    string_to_split = "a bc"
+    splited_strings = a_regex.split(string_to_split, 0)
+    assert_equal(splited_strings, ["a", "bc"])
+  end
 end
