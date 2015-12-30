@@ -103,11 +103,26 @@ rg_string_number(gint argc, VALUE *argv, VALUE self)
   return INT2NUM(g_regex_get_string_number(_SELF(self), RVAL2CSTR(string)));
 }
 
+static VALUE
+rg_split(gint argc, VALUE *argv, VALUE self)
+{
+  VALUE string, match_options, array_of_strings;
+  rb_scan_args(argc, argv, "20", &string, &match_options);
+  gchar **strings;
 
+  strings = g_regex_split(_SELF(self),
+                          RVAL2CSTR(string),
+                          NUM2UINT(match_options));
+  array_of_strings = rb_ary_new();
+  for(;*strings != NULL; strings++)
+  {
+    rb_ary_push(array_of_strings, CSTR2RVAL(*strings));
+  }
+  return array_of_strings;
+}
 /* TODO
  * g_regex_ref
  * g_regex_unref
- * g_regex_split
  * g_regex_split_full
  * g_regex_replace
  * g_regex_replace_litteral
@@ -168,6 +183,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(has_cr_or_lf, 0);
     RG_DEF_METHOD(max_lookbehind, 0);
     RG_DEF_METHOD(string_number, -1);
+    RG_DEF_METHOD(split, -1);
 
     RG_DEF_SMETHOD(match_simple, -1);
     RG_DEF_SMETHOD(escape_string, -1);
