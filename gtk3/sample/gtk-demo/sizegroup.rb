@@ -1,118 +1,106 @@
-# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# Copyright (c) 2015 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: sizegroup.rb,v 1.5 2005/02/12 23:02:43 kzys Exp $
 =begin
-= Size Groups
+=  Size Groups
 
-Gtk::SizeGroup provides a mechanism for grouping a number of
-widgets together so they all request the same amount of space.
-This is typically useful when you want a column of widgets to
-have the same size, but you can't use a Gtk::Table widget.
+ GtkSizeGroup provides a mechanism for grouping a number of
+ widgets together so they all request the same amount of space.
+ This is typically useful when you want a column of widgets to
+ have the same size, but you can't use a GtkTable widget.
 
-Note that size groups only affect the amount of space requested,
-not the size that the widgets finally receive. If you want the
-widgets in a Gtk::SizeGroup to actually be the same size, you need
-to pack them in such a way that they get the size they request
-and not more. For example, if you are packing your widgets
-into a table, you would not include the Gtk::FILL flag.
+ Note that size groups only affect the amount of space requested,
+ not the size that the widgets finally receive. If you want the
+ widgets in a GtkSizeGroup to actually be the same size, you need
+ to pack them in such a way that they get the size they request
+ and not more. For example, if you are packing your widgets
+ into a table, you would not include the GTK_FILL flag.
 =end
-require 'common'
+module SizegroupDemo
+  def self.run_demo(main_window)
+    color_options = %w(Red Green Blue)
+    dash_options = %w(Solid Dashed Dotted)
+    end_options = %w(Square Round Double Arrow)
 
-module Demo
-  class SizeGroup < Gtk::Dialog
-    def initialize
-      super('GtkSizeGroup', nil, 0,
-            [Gtk::Stock::CLOSE, Gtk::ResponseType::NONE])
+    window = Gtk::Window.new(:toplevel)
+    window.screen = main_window.screen
+    window.set_title("Size Groups")
+    window.set_resizable(false)
 
-      color_options = %w(Red Green Blue)
-      dash_options = %w(Solid Dashed Dotted)
-      end_options = %w(Square Round Arrow)
+    vbox = Gtk::Box.new(:vertical, 5)
+    window.add(vbox)
+    vbox.set_border_width(5)
 
-      set_resizable(false)
+    size_group = Gtk::SizeGroup.new(:horizontal)
 
-      signal_connect('response') do
-        destroy
-      end
+    # Create one frame holding color options
+    frame = Gtk::Frame.new("Color Options")
+    vbox.pack_start(frame, :expand => true, :fill => true, :padding => 0)
 
-      vbox = Gtk::VBox.new(false, 5)
-      self.vbox.pack_start(vbox, :expand => true, :fill => true, :padding => 0)
-      vbox.set_border_width(5)
+    table = Gtk::Grid.new
+    table.set_border_width(5)
+    table.set_row_spacing(5)
+    table.set_column_spacing(10)
+    frame.add(table)
 
-      size_group = Gtk::SizeGroup.new(Gtk::SizeGroup::HORIZONTAL)
+    add_row(table, 0, size_group, "_Foreground", color_options)
+    add_row(table, 1, size_group, "_Background", color_options)
 
-      ## Create one frame holding color options
-      frame = Gtk::Frame.new('Color Options')
-      vbox.pack_start(frame, :expand => true, :fill => true, :padding => 0)
+    # And another frame holding line style options
+    frame = Gtk::Frame.new("Line options")
+    vbox.pack_start(frame, :expand => false, :fill => false, :padding => 0)
 
-      table = Gtk::Table.new(2, 2, false)
-      table.set_border_width(5)
-      table.set_row_spacings(5)
-      table.set_column_spacings(10)
-      frame.add(table)
+    table = Gtk::Grid.new
+    table.set_border_width(5)
+    table.set_row_spacing(5)
+    table.set_column_spacing(10)
+    frame.add(table)
 
-      add_row(table, 0, size_group, '_Foreground', color_options)
-      add_row(table, 1, size_group, '_Background', color_options)
+    add_row(table, 0, size_group, "_Dashing", dash_options)
+    add_row(table, 1, size_group, "_Line ends", end_options)
 
-      ## And another frame holding line style options
-      frame = Gtk::Frame.new('Line Options')
-      vbox.pack_start(frame, :expand => false, :fill => false, :padding => 0)
+    # And a check button to turn grouping on and off
+    check_button = Gtk::CheckButton.new("_Enable grouping")
+    check_button.set_use_underline(true)
+    vbox.pack_start(check_button, :expand => false, :fill => false, :padding => 0)
 
-      table = Gtk::Table.new(2, 2, false)
-      table.set_border_width(5)
-      table.set_row_spacings(5)
-      table.set_column_spacings(10)
-      frame.add(table)
-
-      add_row(table, 0, size_group, '_Dashing', dash_options)
-      add_row(table, 1, size_group, '_Line ends', end_options)
-
-      # And a check button to turn grouping on and off
-      check_button = Gtk::CheckButton.new('_Enable grouping', true)
-      vbox.pack_start(check_button, :expand => false, :fill => false, :padding => 0)
-
-      check_button.set_active(true)
-      check_button.signal_connect('toggled', size_group) do |check_button, size_group|
-        new_mode = if check_button.active?
-                     Gtk::SizeGroup::HORIZONTAL
-                   else
-                     Gtk::SizeGroup::VERTICAL
-                   end
-        size_group.set_mode(new_mode)
+    check_button.signal_connect("toggled") do |widget|
+      if widget.active?
+        size_group.set_mode(:horizontal)
+      else
+        size_group.set_mode(:none)
       end
     end
 
-    def add_row(table, row, size_group, label_text, options)
-      label = Gtk::Label.new(label_text, true)
-      label.set_alignment(0, 1)
-      table.attach(label,
-                   0, 1,                    row, row + 1,
-                   Gtk::EXPAND | Gtk::FILL, 0,
-                   0,                       0)
-
-      option_menu = create_option_menu(options)
-      label.set_mnemonic_widget(option_menu)
-      size_group.add_widget(option_menu)
-      table.attach(option_menu,
-                   1, 2,                    row, row + 1,
-                   0,                       0,
-                   0,                       0)
+    if !window.visible?
+      window.show_all
+    else
+      window.destroy
     end
+    window
+  end
 
-    def create_option_menu(strings)
-      menu = Gtk::Menu.new
+  def self.add_row(table, row, size_group, label_text, options)
+    label = Gtk::Label.new(label_text, :use_underline => true)
+    label.set_halign(:start)
+    label.set_valign(:baseline)
+    label.set_hexpand(true)
+    table.attach(label, 0, row, 1, 1)
 
-      strings.each do |str|
-        menu_item = Gtk::MenuItem.new(str)
-        menu_item.show
+    combo_box = create_combo_box(options)
+    label.set_mnemonic_widget(combo_box)
+    combo_box.set_halign(:end)
+    combo_box.set_valign(:baseline)
+    size_group.add_widget(combo_box)
+    table.attach(combo_box, 1, row, 1, 1)
+  end
 
-        menu.append(menu_item)
-      end
-
-      option_menu = Gtk::OptionMenu.new
-      option_menu.set_menu(menu)
-
-      return option_menu
+  def self.create_combo_box(options)
+    combo_box = Gtk::ComboBoxText.new
+    options.each do |o|
+      combo_box.append_text(o)
     end
+    combo_box.set_active(0)
+    combo_box
   end
 end
