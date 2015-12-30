@@ -153,11 +153,29 @@ rg_split_full(gint argc, VALUE *argv, VALUE self)
   g_strfreev(strings);
   return array_of_strings;
 }
+static VALUE
+rg_replace(gint argc, VALUE *argv, VALUE self)
+{
+  VALUE string, start_position, replacement, match_options;
+  GError *error = NULL;
+  rb_scan_args(argc, argv, "40", &string, &start_position, &replacement, &match_options);
+  gchar *modified_string;
 
+  modified_string = g_regex_replace(_SELF(self),
+                                    RVAL2CSTR(string),
+                                    -1,
+                                    NUM2INT(start_position),
+                                    RVAL2CSTR(replacement),
+                                    NUM2UINT(match_options),
+                                    &error);
+  if(error)
+    RAISE_GERROR(error);
+ 
+  return CSTR2RVAL(modified_string);
+}
 /* TODO
  * g_regex_ref
  * g_regex_unref
- * g_regex_replace
  * g_regex_replace_litteral
  * g_regex_replace_eval
  *
@@ -218,6 +236,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(string_number, -1);
     RG_DEF_METHOD(split, -1);
     RG_DEF_METHOD(split_full, -1);
+    RG_DEF_METHOD(replace, -1);
 
     RG_DEF_SMETHOD(match_simple, -1);
     RG_DEF_SMETHOD(escape_string, -1);
