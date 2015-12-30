@@ -155,4 +155,12 @@ class TestRegex < Test::Unit::TestCase
     modified_string = a_regex.replace(string_to_modify, 0, replacement, 0)
     assert_equal(modified_string, "a_bc")
   end
+
+  def test_regex_replace_literal
+    a_regex = GLib::Regex.new("\s", 0, 0)
+    string_to_modify = "a bc"
+    replacement ="_"
+    modified_string = a_regex.replace_literal(string_to_modify, 0, replacement, 0)
+    assert_equal(modified_string, "a_bc")
+  end
 end
