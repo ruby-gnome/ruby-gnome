@@ -140,10 +140,19 @@ class TestRegex < Test::Unit::TestCase
     splited_strings = a_regex.split(string_to_split, 0)
     assert_equal(splited_strings, ["a", "bc"])
   end
+
   def test_regex_split_full
     a_regex = GLib::Regex.new("\s", 0, 0)
     string_to_split = "a bc"
     splited_strings = a_regex.split_full(string_to_split, 0, 0, 0)
     assert_equal(splited_strings, ["a", "bc"])
+  end
+
+  def test_regex_replace
+    a_regex = GLib::Regex.new("\s", 0, 0)
+    string_to_modify = "a bc"
+    replacement ="_"
+    modified_string = a_regex.replace(string_to_modify, 0, replacement, 0)
+    assert_equal(modified_string, "a_bc")
   end
 end
