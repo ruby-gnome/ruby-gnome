@@ -569,6 +569,13 @@ module Gtk
 
   class MenuItem
     extend GLib::Deprecatable
+
+    define_deprecated_method_by_hash_args :initialize,
+        "label, use_underline=false",
+        ":label => label, :use_underline => use_underline" do |_self, label, use_underline|
+      [{:label => label, :use_underline => use_underline}]
+    end
+
     define_deprecated_method :remove_submenu, :warn => "Use '#{self}#set_submenu'." do |_self|
       _self.set_submenu(nil)
     end
