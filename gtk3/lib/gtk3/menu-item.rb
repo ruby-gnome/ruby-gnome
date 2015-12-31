@@ -17,16 +17,17 @@
 module Gtk
   class MenuItem
     alias_method :initialize_raw, :initialize
-    def initialize(*args)
-      if args.size == 1
-        label = args.first
-        if label.nil?
-          initialize_raw
+    def initialize(options={})
+      label = options[:label]
+
+      if label
+        if options[:use_underline]
+          initialize_new_with_mnemonic(label)
         else
-          initialize_raw(label)
+          initialize_new_with_label(label)
         end
       else
-        initialize_raw(*args)
+        initialize_raw
       end
     end
   end
