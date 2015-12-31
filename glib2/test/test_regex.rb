@@ -163,4 +163,19 @@ class TestRegex < Test::Unit::TestCase
     modified_string = a_regex.replace_literal(string_to_modify, 0, replacement, 0)
     assert_equal(modified_string, "a_bc")
   end
+  
+  def test_regex_replace_eval
+    a_regex = GLib::Regex.new("1|2|3|4", 0, 0)
+    replacement_strings = { "1" => "one",
+                            "2" => "two",
+                            "3" => "three",
+                            "4" => "four"
+                            }
+    string_to_modify = " 4 3 2 1"
+    modified_string = a_regex.replace_eval(string_to_modify, 0, 0) do |info, result|
+      assert_instance_of(GLib::MatchInfo, info.class)
+      false
+    end
+  end
+
 end

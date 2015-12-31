@@ -203,10 +203,58 @@ rg_replace_literal(gint argc, VALUE *argv, VALUE self)
  
   return CSTR2RVAL(modified_string);
 }
-/* TODO
+
+/* Not to be implemented
  * g_regex_ref
  * g_regex_unref
- * g_regex_replace_litteral
+ * */
+static gboolean
+g_regex_eval_callback( const GMatchInfo *match_info, GString *result, gpointer user_data)
+{
+  VALUE cb_match_info, cb_result, callback, continue_replacement;
+  cb_match_info = Qnil;
+  G_INITIALIZE(cb_match_info, match_info);
+  cb_result = CSTR2RVAL(result->str);
+  callback = (VALUE) user_data;
+  
+  continue_replacement = rb_funcall(callback, rb_intern("call"), 2, cb_match_info, cb_result);
+  
+  if(continue_replacement == Qtrue)
+    return TRUE;
+  else
+    return FALSE;
+}
+/*
+ *  Not sur if this is needed, there must be an easier way (throught ruby)
+ * */
+static VALUE
+rg_replace_eval(gint argc, VALUE *argv, VALUE self)
+{
+  VALUE string, start_position, match_options;
+  rb_scan_args(argc, argv, "30", &string, &start_position, &match_options);
+  char *result;
+  GError *error = NULL;
+  
+  if(rb_block_given_p() == 0)
+      rb_raise(rb_eTypeError, "Need a block");
+  
+  VALUE callback = rb_block_proc();
+  
+  result = g_regex_replace_eval(_SELF(self),
+                                RVAL2CSTR(string),
+                                -1,
+                                NUM2UINT(start_position),
+                                NUM2UINT(match_options),
+                                g_regex_eval_callback,
+                                (gpointer) callback,
+                                &error);
+  if(error)
+    RAISE_GERROR(error);
+  
+  return CSTR2RVAL(result);
+}
+
+/* TODO
  * g_regex_replace_eval
  *
  *
@@ -269,6 +317,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(split_full, -1);
     RG_DEF_METHOD(replace, -1);
     RG_DEF_METHOD(replace_literal, -1);
+    RG_DEF_METHOD(replace_eval, -1);
 
     RG_DEF_SMETHOD(match_simple, -1);
     RG_DEF_SMETHOD(escape_string, -1);
