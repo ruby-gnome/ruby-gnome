@@ -52,7 +52,7 @@ revealer.c              ok              ok
 rotated_text.c          ok              no
 scale.c                 ok              ok
 search_entry.c          no              no
-search_entry2.c         no              no
+search_entry2.c         ok              ok
 shortcuts.c             no              no
 sidebar.c               ok              ok
 sizegroup.c             ok              ok
