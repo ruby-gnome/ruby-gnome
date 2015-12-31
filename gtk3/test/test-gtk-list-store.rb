@@ -99,21 +99,39 @@ class TestGtkListStore < Test::Unit::TestCase
       assert_equal(0, @store.get_iter("1")[0])
     end
 
-    test "#insert" do
-      iter = @store.append
-      @store.set_values(iter, [0, '1'])
-      assert_equal("0", iter.path.to_s)
+    sub_test_case "#insert" do
+      test "no values" do
+        iter = @store.append
+        @store.set_values(iter, [0, '1'])
+        assert_equal("0", iter.path.to_s)
 
-      iter = @store.append
-      @store.set_values(iter, [2, '3'])
-      assert_equal("1", iter.path.to_s)
+        iter = @store.append
+        @store.set_values(iter, [2, '3'])
+        assert_equal("1", iter.path.to_s)
 
-      iter = @store.insert(1)
-      @store.set_values(iter, [4, '5'])
+        iter = @store.insert(1)
+        @store.set_values(iter, [4, '5'])
 
-      assert_equal(0, @store.get_iter("0")[0])
-      assert_equal(4, @store.get_iter("1")[0])
-      assert_equal(2, @store.get_iter("2")[0])
+        assert_equal(0, @store.get_iter("0")[0])
+        assert_equal(4, @store.get_iter("1")[0])
+        assert_equal(2, @store.get_iter("2")[0])
+      end
+
+      test "values" do
+        iter = @store.append
+        @store.set_values(iter, [0, '1'])
+        assert_equal("0", iter.path.to_s)
+
+        iter = @store.append
+        @store.set_values(iter, [2, '3'])
+        assert_equal("1", iter.path.to_s)
+
+        iter = @store.insert(1, [4, '5'])
+
+        assert_equal(0, @store.get_iter("0")[0])
+        assert_equal(4, @store.get_iter("1")[0])
+        assert_equal(2, @store.get_iter("2")[0])
+      end
     end
 
     test "#insert_before" do

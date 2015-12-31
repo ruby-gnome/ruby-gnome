@@ -39,9 +39,10 @@ module Gtk
     end
 
     alias_method :insert_raw, :insert
-    def insert(index)
+    def insert(index, values=nil)
       iter = insert_raw(index)
       setup_iter(iter)
+      set_values(iter, values) if values
       iter
     end
 
