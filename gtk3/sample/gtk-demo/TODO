@@ -14,7 +14,7 @@ css_basics.c            ok              ok
 css_multiplebgs.c       no              no
 css_pixbufs.c           ok              ok
 css_shadows.c           ok              ok
-cursors.c               no              no
+cursors.c               ok              ok
 dialog.c                ok              no
 drawingarea.c           ok              no
 editable_cells.c        ok              no
