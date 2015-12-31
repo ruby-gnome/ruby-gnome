@@ -24,25 +24,6 @@ module Gtk
       initialize_raw(columns)
     end
 
-    def set_values(iter, values)
-      columns = []
-      _values = []
-      if values.is_a?(Hash)
-        values.each do |column_id, value|
-          type = get_column_type(column_id)
-          columns << column_id
-          _values << GLib::Value.new(type, value)
-        end
-      else
-        values.each_with_index do |value, i|
-          type = get_column_type(i)
-          columns << i
-          _values << GLib::Value.new(type, value)
-        end
-      end
-      set(iter, columns, _values)
-    end
-
     alias_method :append_raw, :append
     def append
       iter = append_raw
