@@ -24,35 +24,35 @@ module Gtk
     alias_method :insert_raw, :insert
     def insert(parent, position)
       iter = insert_raw(parent, position)
-      iter.model = self
+      setup_iter(iter)
       iter
     end
 
     alias_method :insert_before_raw, :insert_before
     def insert_before(parent, sibling)
       iter = insert_before_raw(parent, sibling)
-      iter.model = self
+      setup_iter(iter)
       iter
     end
 
     alias_method :insert_after_raw, :insert_after
     def insert_after(parent, sibling)
       iter = insert_after_raw(parent, sibling)
-      iter.model = self
+      setup_iter(iter)
       iter
     end
 
     alias_method :prepend_raw, :prepend
     def prepend(parent)
       iter = prepend_raw(parent)
-      iter.model = self
+      setup_iter(iter)
       iter
     end
 
     alias_method :append_raw, :append
     def append(parent)
       iter = append_raw(parent)
-      iter.model = self
+      setup_iter(iter)
       iter
     end
   end
