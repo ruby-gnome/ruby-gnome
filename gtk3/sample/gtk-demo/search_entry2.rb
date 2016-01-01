@@ -12,23 +12,23 @@
 module SearchEntry2Demo
   def self.run_demo(main_window)
     window = Gtk::Window.new(:toplevel)
-    window.set_title("Delayed Search Entry")
-    window.set_transient_for(main_window)
-    window.set_resizable(true)
+    window.title = "Delayed Search Entry"
+    window.transient_for = main_window
+    window.resizable = true
     window.set_size_request(200, -1)
 
     vbox = Gtk::Box.new(:vertical, 0)
     window.add(vbox)
-    vbox.set_border_width(0)
+    vbox.border_width = 0
 
     entry = Gtk::SearchEntry.new
     container = Gtk::Box.new(:horizontal, 10)
-    container.set_halign(:center)
+    container.halign = :center
     container.pack_start(entry, :expand => false, :fill => false, :padding => 0)
 
     searchbar = Gtk::SearchBar.new
     searchbar.connect_entry(entry)
-    searchbar.set_show_close_button(false)
+    searchbar.show_close_button = false
     searchbar.add(container)
     vbox.pack_start(searchbar, :expand => false, :fill => false, :padding => 0)
 
@@ -49,11 +49,11 @@ module SearchEntry2Demo
     # Result
     hbox = Gtk::Box.new(:horizontal, 10)
     vbox.pack_start(hbox, :expand => true, :fill => true, :padding => 0)
-    hbox.set_border_width(0)
+    hbox.border_width = 0
 
     label = Gtk::Label.new("Result:")
-    label.set_xalign(0.0)
-    label.set_margin_start(6)
+    label.xalign = 0.0
+    label.margin_start = 6
     hbox.pack_start(label, :expand => true, :fill => true, :padding => 0)
 
     label = Gtk::Label.new("")
@@ -70,11 +70,11 @@ module SearchEntry2Demo
 
     hbox = Gtk::Box.new(:horizontal, 10)
     vbox.pack_start(hbox, :expand => true, :fill => true, :padding => 0)
-    hbox.set_border_width(0)
+    hbox.border_width = 0
 
     label = Gtk::Label.new("Signal:")
-    label.set_xalign(0.0)
-    label.set_margin_start(6)
+    label.xalign = 0.0
+    label.margin_start = 6
     hbox.pack_start(label, :expand => true, :fill => true, :padding => 0)
 
     label = Gtk::Label.new("")
