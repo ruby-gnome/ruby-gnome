@@ -28,7 +28,7 @@ class StatusIconSample < Gtk::StatusIcon
     signal_connect("popup-menu") do |w, button, activate_time|
       menu = Gtk::Menu.new
 
-      menuitem = Gtk::MenuItem.new("Quit")
+      menuitem = Gtk::MenuItem.new(:label => "Quit")
       menuitem.signal_connect("activate") do
         set_visible(false)
         Gtk.main_quit
