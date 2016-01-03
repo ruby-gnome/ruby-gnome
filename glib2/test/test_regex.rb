@@ -172,10 +172,23 @@ class TestRegex < Test::Unit::TestCase
                             "4" => "four"
                             }
     string_to_modify = " 4 3 2 1"
+
     modified_string = a_regex.replace_eval(string_to_modify, 0, 0) do |info, result|
       assert_instance_of(GLib::MatchInfo, info)
-      false
+      "to"
     end
-  end
+    assert_equal(modified_string, "to 3 2 1")
 
+    modified_string = a_regex.replace_eval(string_to_modify, 0, 0) do |info, result|
+      assert_instance_of(GLib::MatchInfo, info)
+      ["to"]
+    end
+    assert_equal(modified_string, "to 3 2 1")
+
+    modified_string = a_regex.replace_eval(string_to_modify, 0, 0) do |info, result|
+      assert_instance_of(GLib::MatchInfo, info)
+      [result + "to", false]
+    end
+    assert_equal(modified_string, " to to to to")
+  end
 end

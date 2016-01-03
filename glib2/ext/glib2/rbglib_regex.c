@@ -211,18 +211,41 @@ rg_replace_literal(gint argc, VALUE *argv, VALUE self)
 static gboolean
 g_regex_eval_callback( const GMatchInfo *match_info, GString *result, gpointer user_data)
 {
-  VALUE cb_match_info, cb_result, callback, continue_replacement;
+  VALUE cb_match_info, cb_result, callback, returned_data;
   cb_match_info = Qnil;
   cb_match_info = BOXED2RVAL(match_info, G_TYPE_MATCH_INFO);
   cb_result = CSTR2RVAL(result->str);
   callback = (VALUE) user_data;
+  gboolean continue_replacement =TRUE;
+
+  returned_data = rb_funcall(callback, rb_intern("call"), 2, cb_match_info, cb_result);
   
-  continue_replacement = rb_funcall(callback, rb_intern("call"), 2, cb_match_info, cb_result);
-  
-  if(continue_replacement == Qtrue)
-    return TRUE;
+  /*  User can return in its callback:
+   *  a string, the continue replacement is assumed
+   *
+   *  an array [string, Qnil] 
+   *
+   *  any others value are ignored
+   *
+   * */
+  if (TYPE(returned_data) == T_STRING)
+  {
+    g_string_overwrite(result, 0, RVAL2CSTR(returned_data));
+  }
   else
-    return FALSE;
+  {  
+    if (TYPE(returned_data) == T_ARRAY)
+    {
+      VALUE string = rb_ary_entry(returned_data, 0);
+      if(TYPE(string) == T_STRING)
+        g_string_overwrite(result, 0, RVAL2CSTR(string));
+      
+      if (rb_ary_entry(returned_data, 1) == Qfalse)
+        continue_replacement = FALSE;
+    }
+  }
+  
+  return continue_replacement;
 }
 /*
  *  Not sur if this is needed, there must be an easier way (throught ruby)
