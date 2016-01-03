@@ -311,14 +311,14 @@ class Demo < Gtk::Application
 
     @menu = Gtk::Menu.new
 
-    item = Gtk::MenuItem.new("Start")
+    item = Gtk::MenuItem.new(:label => "Start")
     @menu.append(item)
     item.signal_connect "activate" do
       adj = scrollbar.adjustment
       adj.value = adj.lower
     end
 
-    item = Gtk::MenuItem.new("End")
+    item = Gtk::MenuItem.new(:label => "End")
     @menu.append(item)
     item.signal_connect "activate" do
       adj = scrollbar.adjustment

@@ -64,15 +64,15 @@ menubar = Gtk::MenuBar.new
 box1.pack_start(menubar, :expand => false, :fill => true, :padding => 0)
 
 menu = create_menu(2)
-menuitem = Gtk::MenuItem.new("test\nline2")
+menuitem = Gtk::MenuItem.new(:label => "test\nline2")
 menuitem.set_submenu(menu)
 menubar.append(menuitem)
 
-menuitem = Gtk::MenuItem.new("foo")
+menuitem = Gtk::MenuItem.new(:label => "foo")
 menuitem.set_submenu(create_menu(3))
 menubar.append(menuitem)
 
-menuitem = Gtk::MenuItem.new("bar")
+menuitem = Gtk::MenuItem.new(:label => "bar")
 menuitem.set_submenu(create_menu(4))
 menubar.append(menuitem)
 
