@@ -37,7 +37,7 @@ links.c                 ok              ok
 listbox.c               no              no
 list_store.c            ok              no
 markup.c                ok              ok
-menus.c                 ok              no
+menus.c                 ok              ok
 modelbutton.c           no              no
 offscreen_window.c      no              no
 offscreen_window2.c     no              no

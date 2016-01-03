@@ -1,172 +1,121 @@
-# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# Copyright (c) 2015 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: menus.rb,v 1.4 2005/02/12 23:02:43 kzys Exp $
 =begin
-= Menus
+=  Menus
 
-There are several widgets involved in displaying menus. The
-Gtk::MenuBar widget is a horizontal menu bar, which normally appears
-at the top of an application. The Gtk::Menu widget is the actual menu
-that pops up. Both Gtk::MenuBar and Gtk::Menu are subclasses of
-Gtk::MenuShell; a Gtk::MenuShell contains menu items
-(Gtk::MenuItem). Each menu item contains text and/or images and can
-be selected by the user.
+ There are several widgets involved in displaying menus. The
+ GtkMenuBar widget is a menu bar, which normally appears horizontally
+ at the top of an application, but can also be layed out vertically.
+ The GtkMenu widget is the actual menu that pops up. Both GtkMenuBar
+ and GtkMenu are subclasses of GtkMenuShell; a GtkMenuShell contains
+ menu items (GtkMenuItem). Each menu item contains text and/or images
+ and can be selected by the user.
 
-There are several kinds of menu item, including plain Gtk::MenuItem,
-Gtk::CheckMenuItem which can be checked/unchecked, Gtk::RadioMenuItem
-which is a check menu item that's in a mutually exclusive group,
-Gtk::SeparatorMenuItem which is a separator bar, Gtk::TearoffMenuItem
-which allows a Gtk::Menu to be torn off, and Gtk::ImageMenuItem which
-can place a Gtk::Image or other widget next to the menu text.
+ There are several kinds of menu item, including plain GtkMenuItem,
+ GtkCheckMenuItem which can be checked/unchecked, GtkRadioMenuItem
+ which is a check menu item that's in a mutually exclusive group,
+ GtkSeparatorMenuItem which is a separator bar, GtkTearoffMenuItem
+ which allows a GtkMenu to be torn off, and GtkImageMenuItem which
+ can place a GtkImage or other widget next to the menu text.
 
-A Gtk::MenuItem can have a submenu, which is simply a Gtk::Menu to pop
-up when the menu item is selected. Typically, all menu items in a menu bar
-have submenus.
-
-The Gtk::OptionMenu widget is a button that pops up a Gtk::Menu when clicked.
-It's used inside dialogs and such.
-
-Gtk::ItemFactory provides a higher-level interface for creating menu bars
-and menus; while you can construct menus manually, most people don't
-do that. There's a separate demo for Gtk::ItemFactory.
+ A GtkMenuItem can have a submenu, which is simply a GtkMenu to pop
+ up when the menu item is selected. Typically, all menu items in a menu bar
+ have submenus.
 =end
-require 'common'
+module MenusDemo
+  def self.run_demo(main_window)
+    window = Gtk::Window.new(:toplevel)
+    window.screen = main_window.screen
+    window.title = "Menus"
 
-module Demo
-  class Menus < BasicWindow
-    def initialize
-      super('menus')
-      self.border_width = 0
+    accel_group = Gtk::AccelGroup.new
+    window.add_accel_group(accel_group)
+    window.border_width = 0
 
-      accel_group = Gtk::AccelGroup.new
-      add_accel_group(accel_group)
+    box = Gtk::Box.new(:horizontal, 0)
+    window.add(box)
+    box.show
 
+    box1 = Gtk::Box.new(:horizontal, 0)
+    box.add(box1)
+    box1.show
 
-      box1 = Gtk::VBox.new(false, 0)
-      add(box1)
+    menubar = Gtk::MenuBar.new
+    menubar.expand = true
+    box1.pack_start(menubar, :expand => false, :fill => true, :padding => 0)
+    menubar.show
 
-      menubar = Gtk::MenuBar.new
-      box1.pack_start(menubar, :expand => false, :fill => true, :padding => 0)
+    menu = create_menu(2)
 
-      menu = create_menu(2, true)
+    menuitem = Gtk::MenuItem.new(:label => "test\nline2")
+    menuitem.submenu = menu
+    menubar.append(menuitem)
+    menuitem.show
 
-      menuitem = Gtk::MenuItem.new("test\nline2")
-      menuitem.submenu = menu
-      menubar.append(menuitem)
-      menuitem.show
+    menuitem = Gtk::MenuItem.new(:label => "foo")
+    menuitem.submenu = create_menu(3)
+    menubar.append(menuitem)
+    menuitem.show
 
-      menuitem = Gtk::MenuItem.new('foo')
-      menuitem.submenu = create_menu(3, true)
-      menubar.append(menuitem)
-      menuitem.show
+    menuitem = Gtk::MenuItem.new(:label => "bar")
+    menuitem.submenu = create_menu(4)
+    menubar.append(menuitem)
+    menuitem.show
 
-      menuitem = Gtk::MenuItem.new('bar')
-      menuitem.submenu = create_menu(4, true)
-      menuitem.right_justified = true
-      menubar.append(menuitem)
-      menuitem.show
+    box2 = Gtk::Box.new(:vertical, 10)
+    box2.border_width = 10
+    box1.pack_start(box2, :expand => false, :fill => true, :padding => 0)
+    box2.show
 
-      box2 = Gtk::VBox.new(false, 10)
-      box2.border_width = 10
-      box1.pack_start(box2, :expand => true, :fill => true, :padding => 0)
-      box2.show
+    button = Gtk::Button.new(:label => "Flip")
+    button.signal_connect("clicked") do |_widget|
+      parent = menubar.parent
+      orientation = parent.orientation.to_i
+      parent.orientation = 1 - orientation
 
-      menu = create_menu(1, false)
-      # menu.accel_group = accel_group
-
-      menuitem = Gtk::SeparatorMenuItem.new
-      menu.append(menuitem)
-      menuitem.show
-
-      menuitem = Gtk::CheckMenuItem.new('Accelerate Me')
-      menu.append(menuitem)
-      menuitem.show
-      menuitem.add_accelerator('activate',
-                               accel_group,
-                               Gdk::Keyval::KEY_F1,
-                               0,
-                               Gtk::ACCEL_VISIBLE)
-      menuitem = Gtk::CheckMenuItem.new('Accelerator Locked')
-      menu.append(menuitem)
-      menuitem.show
-      menuitem.add_accelerator('activate',
-                               accel_group,
-                               Gdk::Keyval::KEY_F2,
-                               0,
-                               Gtk::ACCEL_VISIBLE | Gtk::ACCEL_LOCKED)
-      menuitem = Gtk::CheckMenuItem.new('Accelerators Frozen')
-      menu.append(menuitem)
-      menuitem.show
-      menuitem.add_accelerator('activate',
-                               accel_group,
-                               Gdk::Keyval::KEY_F2,
-                               0,
-                               Gtk::ACCEL_VISIBLE)
-      menuitem.add_accelerator('activate',
-                               accel_group,
-                               Gdk::Keyval::KEY_F3,
-                               0,
-                               Gtk::ACCEL_VISIBLE)
-
-      optionmenu = Gtk::OptionMenu.new
-      optionmenu.menu = menu
-      optionmenu.history = 3
-      box2.pack_start(optionmenu, :expand => true, :fill => true, :padding => 0)
-      optionmenu.show
-
-      separator = Gtk::HSeparator.new
-      box1.pack_start(separator, :expand => false, :fill => true, :padding => 0)
-      separator.show
-
-      box2 = Gtk::VBox.new(false, 10)
-      box2.border_width = 10
-      box1.pack_start(box2, :expand => false, :fill => true, :padding => 0)
-      box2.show
-
-      button = Gtk::Button.new('close')
-      button.signal_connect('clicked') do
-        quit
+      if orientation == Gtk::Orientation::VERTICAL
+        menubar.set_property("pack-direction", Gtk::PackDirection::TTB)
+      else
+        menubar.set_property("pack-direction", Gtk::PackDirection::LTR)
       end
-      box2.pack_start(button, :expand => true, :fill => true, :padding => 0)
-      button.flags = Gtk::Widget::CAN_DEFAULT
-      button.grab_default
-      button.show
+    end
+    box2.pack_start(button, :expand => true, :fill => true, :padding => 0)
+    button.show
+    button = Gtk::Button.new(:label => "Close")
+    button.signal_connect("clicked") do |_widget|
+      window.destroy
+    end
+    box2.pack_start(button, :expand => true, :fill => true, :padding => 0)
+    button.can_default = true
+    button.grab_default
+    button.show
+
+    if !window.visible?
+      window.show_all
+    else
+      window.destroy
+    end
+    window
+  end
+
+  def self.create_menu(depth)
+    return nil if depth < 1
+
+    menu = Gtk::Menu.new
+    last_item = nil
+    (0..5).each do |i|
+      j = i + 1
+      label = "item #{depth} - #{j}"
+      menu_item = Gtk::RadioMenuItem.new(nil, label)
+      menu_item.join_group(last_item) if last_item
+      last_item = menu_item
+      menu.append(menu_item)
+      menu_item.show
+      menu_item.sensitive = false if i == 3
+      menu_item.submenu = create_menu(depth - 1)
     end
 
-
-    def create_menu (depth, tearoff)
-      if depth < 1
-        return nil
-      end
-
-      menu = Gtk::Menu.new
-      group = nil
-
-      if tearoff
-        menuitem = Gtk::TearoffMenuItem.new
-        menu.append(menuitem)
-        menuitem.show
-      end
-
-      5.times do |i|
-        buf = sprintf('item %2d - %d', depth, i + 1)
-        menuitem = Gtk::RadioMenuItem.new(buf)
-        group = menuitem.group
-
-        menu.append(menuitem)
-        menuitem.show
-        if i == 3
-          menuitem.sensitive = false
-        end
-
-        if submenu = create_menu(depth - 1, true)
-          menuitem.submenu = submenu
-        end
-      end
-
-      menu.show
-      return menu
-    end
+    menu
   end
 end
