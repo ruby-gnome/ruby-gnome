@@ -574,7 +574,7 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_tree_selection_func_callback;
     } else if (name_equal(info, "TreeViewMappingFunc")) {
         return rb_gtk3_tree_view_mapping_func_callback;
-    } else if (name_equal(info, "TreeViewRowSeparatorFunc ")) {
+    } else if (name_equal(info, "TreeViewRowSeparatorFunc")) {
         return rb_gtk3_tree_view_row_separator_func_callback;
     } else {
         return NULL;
