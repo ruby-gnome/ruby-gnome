@@ -275,6 +275,25 @@ rg_replace_eval(gint argc, VALUE *argv, VALUE self)
   return CSTR2RVAL(result);
 }
 
+static VALUE
+rg_match(gint argc, VALUE *argv, VALUE self)
+{
+  VALUE string, match_options;
+  gboolean matched = FALSE;
+  GMatchInfo *_match_info;
+
+  rb_scan_args(argc, argv, "20", &string, &match_options);
+  
+  matched = g_regex_match(_SELF(self),
+                          RVAL2CSTR(string),
+                          NUM2UINT(match_options),
+                          &_match_info);
+  if (matched == FALSE)
+    return Qnil;
+  else
+    return BOXED2RVAL( _match_info, G_TYPE_MATCH_INFO);
+}
+
 /* TODO
  *
  * implement GLib::MatchInfo first
@@ -337,6 +356,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(replace, -1);
     RG_DEF_METHOD(replace_literal, -1);
     RG_DEF_METHOD(replace_eval, -1);
+    RG_DEF_METHOD(match, -1);
 
     RG_DEF_SMETHOD(match_simple, -1);
     RG_DEF_SMETHOD(escape_string, -1);

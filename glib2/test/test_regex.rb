@@ -209,4 +209,16 @@ class TestRegex < Test::Unit::TestCase
     end
     assert_equal(modified_string, " to to to to")
   end
+
+  sub_test_case "match" do
+    a_regex = GLib::Regex.new("[A-Z]+", 0, 0)
+    
+    test "no match" do
+      assert_equal(nil, a_regex.match("abc def", 0))
+    end
+    
+    test "match" do
+      assert_instance_of(GLib::MatchInfo, a_regex.match("abc DEF", 0))
+    end
+  end
 end
