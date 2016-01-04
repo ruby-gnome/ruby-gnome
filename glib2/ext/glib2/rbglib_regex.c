@@ -247,9 +247,7 @@ g_regex_eval_callback( const GMatchInfo *match_info, GString *result, gpointer u
   
   return stop_replacement;
 }
-/*
- *  Not sur if this is needed, there must be an easier way (throught ruby)
- * */
+
 static VALUE
 rg_replace_eval(gint argc, VALUE *argv, VALUE self)
 {
@@ -278,8 +276,6 @@ rg_replace_eval(gint argc, VALUE *argv, VALUE self)
 }
 
 /* TODO
- * g_regex_replace_eval
- *
  *
  * implement GLib::MatchInfo first
  * g_regex_match 
