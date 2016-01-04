@@ -216,7 +216,7 @@ g_regex_eval_callback( const GMatchInfo *match_info, GString *result, gpointer u
   cb_match_info = BOXED2RVAL(match_info, G_TYPE_MATCH_INFO);
   cb_result = CSTR2RVAL(result->str);
   callback = (VALUE) user_data;
-  gboolean continue_replacement =TRUE;
+  gboolean stop_replacement =TRUE;
 
   returned_data = rb_funcall(callback, rb_intern("call"), 2, cb_match_info, cb_result);
   
@@ -241,11 +241,11 @@ g_regex_eval_callback( const GMatchInfo *match_info, GString *result, gpointer u
         g_string_overwrite(result, 0, RVAL2CSTR(string));
       
       if (rb_ary_entry(returned_data, 1) == Qfalse)
-        continue_replacement = FALSE;
+        stop_replacement = FALSE;
     }
   }
   
-  return continue_replacement;
+  return stop_replacement;
 }
 /*
  *  Not sur if this is needed, there must be an easier way (throught ruby)
