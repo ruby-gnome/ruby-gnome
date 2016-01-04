@@ -297,7 +297,6 @@ rg_match(gint argc, VALUE *argv, VALUE self)
 /* TODO
  *
  * implement GLib::MatchInfo first
- * g_regex_match 
  * g_regex_match_full
  * g_regex_match_all
  * g_regex_match_all_full
