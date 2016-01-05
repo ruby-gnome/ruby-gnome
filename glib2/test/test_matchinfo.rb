@@ -17,19 +17,33 @@
 class TestMatchInfo < Test::Unit::TestCase
   def setup
     @regex_pattern = "[A-Z]+"
-    @string = "abc DEF"
+    @matching_string = "abc DEF"
+    @non_matching_string = "abc def"
     @regex = GLib::Regex.new(@regex_pattern, 0, 0)
-    @match_info = @regex.match(@string, 0)
   end
 
   def test_string
-    assert_equal(@match_info.string, @string)
+    match_info = @regex.match(@matching_string, 0)
+    assert_equal(match_info.string, @matching_string)
   end
 
   def test_regex
-    mi_regex = @match_info.regex
+    match_info = @regex.match(@matching_string, 0)
+    mi_regex = match_info.regex
     assert_equal(mi_regex.pattern, @regex.pattern)
     assert_equal(mi_regex.compile_flags, @regex.compile_flags)
     assert_equal(mi_regex.match_flags, @regex.match_flags)
+  end
+  
+  sub_test_case "matches" do
+    test "none" do
+      # find a way to generate match_info instance with no matches
+      # GLib::Regex#match return nil if no matches
+    end
+
+    test "match" do
+      match_info = @regex.match(@matching_string, 0)
+      assert(match_info.matches)
+    end
   end
 end

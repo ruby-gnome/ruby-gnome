@@ -55,10 +55,17 @@ rg_string(VALUE self)
 {
   return CSTR2RVAL(g_match_info_get_string(_SELF(self)));
 }
+
+static VALUE
+rg_matches(VALUE self)
+{
+  if (g_match_info_matches(_SELF(self)) == TRUE)
+    return Qtrue;
+  else
+    return Qfalse;
+}
 /* TODO
  * 
- * g_match_info_get_regex
- * g_match_info_matches
  * g_match_info_next
  * g_match_info_get_match_count
  * g_match_info_is_partial_match
@@ -77,5 +84,6 @@ Init_glib_matchinfo(void)
                                                          NULL, match_info_free);
     RG_DEF_METHOD(string, 0);
     RG_DEF_METHOD(regex, 0);
+    RG_DEF_METHOD(matches, 0);
 }
 
