@@ -39,6 +39,18 @@ match_info_free(gpointer object)
  * */
 
 static VALUE
+rg_regex(VALUE self)
+{
+  GRegex * regex;
+  regex = g_match_info_get_regex(_SELF(self));
+  g_regex_ref(regex);
+  /*Increase the ref of 1 so that the regex allocated memory is freed only if
+   there are no other instances of the GLib::Regex class that wrapps this regex
+  */
+  return BOXED2RVAL(regex, G_TYPE_REGEX);
+}
+
+static VALUE
 rg_string(VALUE self)
 {
   return CSTR2RVAL(g_match_info_get_string(_SELF(self)));
@@ -46,7 +58,6 @@ rg_string(VALUE self)
 /* TODO
  * 
  * g_match_info_get_regex
- * g_match_info_get_string
  * g_match_info_matches
  * g_match_info_next
  * g_match_info_get_match_count
@@ -65,5 +76,6 @@ Init_glib_matchinfo(void)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_MATCH_INFO, "MatchInfo", mGLib,
                                                          NULL, match_info_free);
     RG_DEF_METHOD(string, 0);
+    RG_DEF_METHOD(regex, 0);
 }
 

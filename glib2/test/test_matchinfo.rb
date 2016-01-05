@@ -25,4 +25,11 @@ class TestMatchInfo < Test::Unit::TestCase
   def test_string
     assert_equal(@match_info.string, @string)
   end
+
+  def test_regex
+    mi_regex = @match_info.regex
+    assert_equal(mi_regex.pattern, @regex.pattern)
+    assert_equal(mi_regex.compile_flags, @regex.compile_flags)
+    assert_equal(mi_regex.match_flags, @regex.match_flags)
+  end
 end
