@@ -15,5 +15,14 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  
 class TestMatchInfo < Test::Unit::TestCase
+  def setup
+    @regex_pattern = "[A-Z]+"
+    @string = "abc DEF"
+    @regex = GLib::Regex.new(@regex_pattern, 0, 0)
+    @match_info = @regex.match(@string, 0)
+  end
 
+  def test_string
+    assert_equal(@match_info.string, @string)
+  end
 end

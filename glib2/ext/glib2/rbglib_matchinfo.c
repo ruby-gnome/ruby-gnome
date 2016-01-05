@@ -33,12 +33,20 @@ match_info_free(gpointer object)
 
     g_match_info_free(match_info);
 }
-
-/* TODO
- *
+/* Not implemented:
  * g_match_info_ref
  * g_match_info_unref
- * g_match_info_free
+ * */
+
+static VALUE
+rg_string(VALUE self)
+{
+  return CSTR2RVAL(g_match_info_get_string(_SELF(self)));
+}
+/* TODO
+ * 
+ * g_match_info_get_regex
+ * g_match_info_get_string
  * g_match_info_matches
  * g_match_info_next
  * g_match_info_get_match_count
@@ -56,5 +64,6 @@ Init_glib_matchinfo(void)
   
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_MATCH_INFO, "MatchInfo", mGLib,
                                                          NULL, match_info_free);
+    RG_DEF_METHOD(string, 0);
 }
 
