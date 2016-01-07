@@ -220,7 +220,12 @@ class TestRegex < Test::Unit::TestCase
     test "match" do
       assert_instance_of(GLib::MatchInfo, a_regex.match("abc DEF", 0))
     end
-  end
+  
+    test "match longer" do
+      a_regex = GLib::Regex.new("<.*>", 0, 0)
+      # TODO test matching "<a> <b> <c>" against the pattern "<.*>;" you would obtain one matche: "<a> <b> <c>"
+    end
+end
 
   sub_test_case "match_full" do
     a_regex = GLib::Regex.new("[A-Z]+", 0, 0)
@@ -231,6 +236,11 @@ class TestRegex < Test::Unit::TestCase
     
     test "match" do
       assert_instance_of(GLib::MatchInfo, a_regex.match_full("abc DEF", 0, 0))
+    end
+    
+    test "match longer" do
+      a_regex = GLib::Regex.new("<.*>", 0, 0)
+      # TODO test matching "<a> <b> <c>" against the pattern "<.*>;" you would obtain one matche: "<a> <b> <c>"
     end
   end
 
@@ -247,7 +257,24 @@ class TestRegex < Test::Unit::TestCase
     
     test "match all" do
       a_regex = GLib::Regex.new("<.*>", 0, 0)
-      # todo test matching "<a> <b> <c>" against the pattern "<.*>;" you would obtain three matches: "<a> <b> <c>", "<a> <b>" and "<a>".
+      # TODO test matching "<a> <b> <c>" against the pattern "<.*>;" you would obtain three matches: "<a> <b> <c>", "<a> <b>" and "<a>".
+    end
+  end
+  
+  sub_test_case "match_all_full" do
+    a_regex = GLib::Regex.new("[A-Z]+", 0, 0)
+    
+    test "no match" do
+      assert_equal(nil, a_regex.match_all_full("abc def", 0, 0))
+    end
+    
+    test "match" do
+      assert_instance_of(GLib::MatchInfo, a_regex.match_all_full("abc DEF", 0, 0))
+    end
+
+    test "match all" do
+      a_regex = GLib::Regex.new("<.*>", 0, 0)
+      # TODO test matching "<a> <b> <c>" against the pattern "<.*>;" you would obtain three matches: "<a> <b> <c>", "<a> <b>" and "<a>".
     end
   end
 end

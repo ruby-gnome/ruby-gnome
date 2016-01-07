@@ -366,11 +366,43 @@ rg_match_all(gint argc, VALUE *argv, VALUE self)
     return match_info;
   }
 }
-/* TODO
- *
- * g_regex_match_all
- * g_regex_match_all_full
- * */
+
+static VALUE
+rg_match_all_full(gint argc, VALUE *argv, VALUE self)
+{
+  VALUE string, start_position, match_options;
+
+  gboolean matched = FALSE;
+  GMatchInfo *_match_info;
+  GError *error = NULL;
+
+  rb_scan_args(argc, argv, "30", &string, &start_position, &match_options);
+
+  VALUE dup_string, match_info;
+  dup_string = rb_str_dup(string);
+  rb_str_freeze(dup_string);
+
+  matched = g_regex_match_all_full(_SELF(self),
+                                   RVAL2CSTR(dup_string),
+                                   -1,
+                                   NUM2INT(start_position),
+                                   NUM2UINT(match_options),
+                                   &_match_info,
+                                   &error);
+
+  if(error)
+    RAISE_GERROR(error);
+
+  if (matched == FALSE)
+    return Qnil;
+  else
+  {  
+    match_info = BOXED2RVAL(_match_info, G_TYPE_MATCH_INFO);
+    rb_iv_set(match_info, "@string", dup_string);
+    return match_info;
+  }
+}
+
 static VALUE
 rg_s_match_simple(gint argc, VALUE *argv, VALUE self)
 {
@@ -428,6 +460,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(match, -1);
     RG_DEF_METHOD(match_full, -1);
     RG_DEF_METHOD(match_all, -1);
+    RG_DEF_METHOD(match_all_full, -1);
 
     RG_DEF_SMETHOD(match_simple, -1);
     RG_DEF_SMETHOD(escape_string, -1);
