@@ -233,4 +233,21 @@ class TestRegex < Test::Unit::TestCase
       assert_instance_of(GLib::MatchInfo, a_regex.match_full("abc DEF", 0, 0))
     end
   end
+
+  sub_test_case "match_all" do
+    a_regex = GLib::Regex.new("[A-Z]+", 0, 0)
+    
+    test "no match" do
+      assert_equal(nil, a_regex.match_all("abc def", 0))
+    end
+    
+    test "match" do
+      assert_instance_of(GLib::MatchInfo, a_regex.match_all("abc DEF", 0))
+    end
+    
+    test "match all" do
+      a_regex = GLib::Regex.new("<.*>", 0, 0)
+      # todo test matching "<a> <b> <c>" against the pattern "<.*>;" you would obtain three matches: "<a> <b> <c>", "<a> <b>" and "<a>".
+    end
+  end
 end

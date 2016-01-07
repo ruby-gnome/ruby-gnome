@@ -339,6 +339,33 @@ rg_match_full(gint argc, VALUE *argv, VALUE self)
   }
 }
 
+static VALUE
+rg_match_all(gint argc, VALUE *argv, VALUE self)
+{
+  VALUE string, match_options;
+  gboolean matched = FALSE;
+  GMatchInfo *_match_info;
+
+  rb_scan_args(argc, argv, "20", &string, &match_options);
+  
+  VALUE dup_string, match_info;
+  dup_string = rb_str_dup(string);
+  rb_str_freeze(dup_string);
+
+  matched = g_regex_match_all(_SELF(self),
+                              RVAL2CSTR(dup_string),
+                              NUM2UINT(match_options),
+                              &_match_info);
+  
+  if (matched == FALSE)
+    return Qnil;
+  else
+  {  
+    match_info = BOXED2RVAL(_match_info, G_TYPE_MATCH_INFO);
+    rb_iv_set(match_info, "@string", dup_string);
+    return match_info;
+  }
+}
 /* TODO
  *
  * g_regex_match_all
@@ -400,6 +427,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(replace_eval, -1);
     RG_DEF_METHOD(match, -1);
     RG_DEF_METHOD(match_full, -1);
+    RG_DEF_METHOD(match_all, -1);
 
     RG_DEF_SMETHOD(match_simple, -1);
     RG_DEF_SMETHOD(escape_string, -1);
