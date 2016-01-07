@@ -413,7 +413,6 @@ argument_from_raw_data_interface(void *raw_arg,
 {
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
-    GType gtype;
 
     interface_info = g_type_info_get_interface(type_info);
     interface_type = g_base_info_get_type(interface_info);
@@ -422,7 +421,14 @@ argument_from_raw_data_interface(void *raw_arg,
     case GI_INFO_TYPE_INVALID:
     case GI_INFO_TYPE_FUNCTION:
     case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: raw data -> GIArgument(interface)[%s]: <%s>",
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
+        break;
     case GI_INFO_TYPE_STRUCT:
+      argument->v_pointer = *((gpointer *)(raw_arg));
+      break;
     case GI_INFO_TYPE_BOXED:
     case GI_INFO_TYPE_ENUM:
     case GI_INFO_TYPE_FLAGS:
