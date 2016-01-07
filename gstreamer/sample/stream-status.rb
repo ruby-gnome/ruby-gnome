@@ -73,13 +73,13 @@ bin.bus.sync_handler do |bus, message|
 
     val = message.stream_status_object
 
-    puts "type:   #{type}"
+    puts "type:   #{type.inspect}"
     puts "source: #{message.src.path_string}"
     puts "owner:  #{owner.path_string}"
     puts "object: type #{val.type.name}, value #{val.value}"
 
     # see if we know how to deal with this object
-    if val.type == Gst::Task
+    if val.type == Gst::Task.gtype
       task = val.value
     end
 
