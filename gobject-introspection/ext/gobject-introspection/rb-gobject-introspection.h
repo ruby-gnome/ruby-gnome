@@ -28,6 +28,8 @@
 
 typedef gpointer (*RBGICallbackFinderFunc)(GIArgInfo *info);
 
+typedef struct _RBGICallback RBGICallback;
+
 typedef struct
 {
     GIArgInfo arg_info;
@@ -49,6 +51,7 @@ typedef struct
 } RBGIArgMetadata;
 
 typedef struct {
+    RBGICallback *callback;
     RBGIArgMetadata *metadata;
     VALUE rb_gc_guard_key;
     VALUE rb_callback;

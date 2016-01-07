@@ -34,6 +34,14 @@
 #define RG_TARGET_NAMESPACE rb_cGIFunctionInfo
 #define SELF(self) RVAL2GI_FUNCTION_INFO(self)
 
+typedef struct _RBGICallback {
+    GIArgInfo *arg_info;
+    GITypeInfo *type_info;
+    GICallbackInfo *callback_info;
+    ffi_cif cif;
+    ffi_closure *closure;
+} RBGICallback;
+
 static VALUE RG_TARGET_NAMESPACE;
 static VALUE rb_cGLibError;
 static const char *callbacks_key = "gi_callbacks";
@@ -148,9 +156,6 @@ fill_metadata_callback(GPtrArray *args_metadata)
         gint destroy_index;
 
         metadata = g_ptr_array_index(args_metadata, i);
-        if (!metadata->callback_p) {
-            continue;
-        }
 
         arg_info = &(metadata->arg_info);
         closure_index = g_arg_info_get_closure(arg_info);
@@ -274,9 +279,22 @@ callback_data_unguard_from_gc(RBGICallbackData *callback_data)
     rb_hash_delete(rb_callbacks, callback_data->rb_gc_guard_key);
 }
 
+static void
+rb_gi_callback_free(RBGICallback *callback)
+{
+    g_callable_info_free_closure(callback->callback_info,
+                                 callback->closure);
+    g_base_info_unref(callback->callback_info);
+    g_base_info_unref(callback->type_info);
+    xfree(callback);
+}
+
 void
 rb_gi_callback_data_free(RBGICallbackData *callback_data)
 {
+    if (callback_data->callback) {
+        rb_gi_callback_free(callback_data->callback);
+    }
     callback_data_unguard_from_gc(callback_data);
     xfree(callback_data->metadata);
     xfree(callback_data);
@@ -380,14 +398,443 @@ source_func_callback_finder(GIArgInfo *arg_info)
     return source_func_callback;
 }
 
+static void arguments_init(GArray **in_args,
+                           GArray **out_args,
+                           GPtrArray **args_metadata);
+static void arguments_free(VALUE rb_arguments,
+                           GArray *in_args,
+                           GArray *out_args,
+                           GPtrArray *args_metadata);
+
+static void
+argument_from_raw_data_interface(void *raw_arg,
+                                 GIArgument *argument,
+                                 GITypeInfo *type_info)
+{
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    GType gtype;
+
+    interface_info = g_type_info_get_interface(type_info);
+    interface_type = g_base_info_get_type(interface_info);
+
+    switch (interface_type) {
+    case GI_INFO_TYPE_INVALID:
+    case GI_INFO_TYPE_FUNCTION:
+    case GI_INFO_TYPE_CALLBACK:
+    case GI_INFO_TYPE_STRUCT:
+    case GI_INFO_TYPE_BOXED:
+    case GI_INFO_TYPE_ENUM:
+    case GI_INFO_TYPE_FLAGS:
+        rb_raise(rb_eNotImpError,
+                 "TODO: raw data -> GIArgument(interface)[%s]: <%s>",
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
+        break;
+    case GI_INFO_TYPE_OBJECT:
+    case GI_INFO_TYPE_INTERFACE:
+      argument->v_pointer = *((gpointer *)(raw_arg));
+      break;
+    case GI_INFO_TYPE_CONSTANT:
+        rb_raise(rb_eNotImpError,
+                 "TODO: raw data -> GIArgument(interface)[%s]: <%s>",
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
+        break;
+    case GI_INFO_TYPE_INVALID_0:
+        g_assert_not_reached();
+        break;
+    case GI_INFO_TYPE_UNION:
+    case GI_INFO_TYPE_VALUE:
+    case GI_INFO_TYPE_SIGNAL:
+    case GI_INFO_TYPE_VFUNC:
+    case GI_INFO_TYPE_PROPERTY:
+    case GI_INFO_TYPE_FIELD:
+    case GI_INFO_TYPE_ARG:
+    case GI_INFO_TYPE_TYPE:
+    case GI_INFO_TYPE_UNRESOLVED:
+    default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: raw data -> GIArgument(interface)[%s]: <%s>",
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
+        break;
+    }
+
+    g_base_info_unref(interface_info);
+}
+
+static void
+argument_from_raw_data(void **raw_args,
+                       GArray *in_args,
+                       GArray *out_args,
+                       GPtrArray *args_metadata,
+                       guint i)
+{
+    RBGIArgMetadata *metadata;
+    GIArgument *argument;
+    GITypeInfo *type_info;
+    GITypeTag type_tag;
+
+    metadata = g_ptr_array_index(args_metadata, i);
+
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        argument = &g_array_index(in_args, GIArgument, metadata->in_arg_index);
+        argument->v_pointer = *((gpointer *)(raw_args[i]));
+        return;
+    } else if (metadata->direction == GI_DIRECTION_OUT) {
+        argument = &g_array_index(out_args, GIArgument, metadata->out_arg_index);
+        argument->v_pointer = *((gpointer *)(raw_args[i]));
+        return;
+    }
+
+    argument = &g_array_index(in_args, GIArgument, metadata->in_arg_index);
+    type_info = g_arg_info_get_type(&(metadata->arg_info));
+    type_tag = g_type_info_get_tag(type_info);
+
+    switch (type_tag) {
+      case GI_TYPE_TAG_VOID:
+        argument->v_pointer = *((gpointer *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_BOOLEAN:
+        argument->v_boolean = *((gboolean *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_INT8:
+        argument->v_int8 = *((gint8 *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_UINT8:
+        argument->v_uint8 = *((guint8 *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_INT16:
+        argument->v_int16 = *((gint16 *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_UINT16:
+        argument->v_uint16 = *((guint16 *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_INT32:
+        argument->v_int32 = *((gint32 *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_UINT32:
+        argument->v_uint32 = *((guint32 *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_INT64:
+        argument->v_int64 = *((gint64 *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_UINT64:
+        argument->v_uint64 = *((guint64 *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_FLOAT:
+        argument->v_float = *((gfloat *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_DOUBLE:
+        argument->v_double = *((gdouble *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_GTYPE:
+        argument->v_size = *((gsize *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+        argument->v_string = *((gchar **)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_ARRAY:
+        argument->v_pointer = *((gpointer *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_INTERFACE:
+        argument_from_raw_data_interface(raw_args[i], argument, type_info);
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+        argument->v_pointer = *((gpointer *)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_ERROR:
+        argument->v_pointer = *((GError **)(raw_args[i]));
+        break;
+      case GI_TYPE_TAG_UNICHAR:
+        argument->v_uint32 = *((gunichar *)(raw_args[i]));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    g_base_info_unref(type_info);
+}
+
+static void
+arguments_from_raw_data(void **args,
+                        GArray *in_args,
+                        GArray *out_args,
+                        GPtrArray *args_metadata)
+{
+    guint i;
+
+    for (i = 0; i < args_metadata->len; i++) {
+        argument_from_raw_data(args,
+                               in_args,
+                               out_args,
+                               args_metadata,
+                               i);
+    }
+}
+
+static void
+in_arguments_to_ruby(GArray *in_args,
+                     GArray *out_args,
+                     GPtrArray *args_metadata,
+                     GArray *rb_args)
+{
+    guint i;
+
+    for (i = 0; i < args_metadata->len; i++) {
+        RBGIArgMetadata *metadata;
+        GIArgument *argument;
+        GITypeInfo *type_info;
+        VALUE rb_arg;
+
+        metadata = g_ptr_array_index(args_metadata, i);
+
+        if (metadata->direction == GI_DIRECTION_OUT) {
+            continue;
+        }
+        if (metadata->closure_p) {
+            continue;
+        }
+
+        argument = &g_array_index(in_args, GIArgument, metadata->in_arg_index);
+        type_info = g_arg_info_get_type(&(metadata->arg_info));
+        rb_arg = GI_ARGUMENT2RVAL(argument,
+                                  FALSE,
+                                  type_info,
+                                  in_args,
+                                  out_args,
+                                  args_metadata);
+        g_array_append_val(rb_args, rb_arg);
+    }
+}
+
+static void
+out_argument_to_raw_data(VALUE rb_result,
+                         gpointer result,
+                         GITypeInfo *type_info,
+                         G_GNUC_UNUSED GITransfer transfer /* TODO */)
+{
+    GIArgument argument;
+    GITypeTag type_tag;
+
+    rb_gi_value_argument_from_ruby(&argument,
+                                   type_info,
+                                   rb_result,
+                                   rb_result);
+    type_tag = g_type_info_get_tag(type_info);
+    switch (type_tag) {
+      case GI_TYPE_TAG_VOID:
+        g_assert_not_reached();
+        break;
+      case GI_TYPE_TAG_BOOLEAN:
+        *((gboolean *)result) = argument.v_boolean;
+        break;
+      case GI_TYPE_TAG_INT8:
+        *((gint8 *)result) = argument.v_int8;
+        break;
+      case GI_TYPE_TAG_UINT8:
+        *((guint8 *)result) = argument.v_uint8;
+        break;
+      case GI_TYPE_TAG_INT16:
+        *((gint16 *)result) = argument.v_int16;
+        break;
+      case GI_TYPE_TAG_UINT16:
+        *((guint16 *)result) = argument.v_uint16;
+        break;
+      case GI_TYPE_TAG_INT32:
+        *((gint32 *)result) = argument.v_int32;
+        break;
+      case GI_TYPE_TAG_UINT32:
+        *((guint32 *)result) = argument.v_uint32;
+        break;
+      case GI_TYPE_TAG_INT64:
+        *((gint64 *)result) = argument.v_int64;
+        break;
+      case GI_TYPE_TAG_UINT64:
+        *((guint64 *)result) = argument.v_uint64;
+        break;
+      case GI_TYPE_TAG_FLOAT:
+        *((gfloat *)result) = argument.v_float;
+        break;
+      case GI_TYPE_TAG_DOUBLE:
+        *((gdouble *)result) = argument.v_double;
+        break;
+      case GI_TYPE_TAG_GTYPE:
+        *((gsize *)result) = argument.v_size;
+        break;
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+        *((gchar **)result) = argument.v_string;
+        break;
+      case GI_TYPE_TAG_ARRAY:
+        *((gpointer *)result) = argument.v_pointer;
+        break;
+      case GI_TYPE_TAG_INTERFACE:
+        /* TODO: should be done at another place. */
+        g_base_info_unref(type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: out raw data(%s)",
+                 g_type_tag_to_string(type_tag));
+        /* *((gpointer *)result) = argument.v_pointer; */
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+        *((gpointer *)result) = argument.v_pointer;
+        break;
+      case GI_TYPE_TAG_ERROR:
+        *((GError **)result) = argument.v_pointer;
+        break;
+      case GI_TYPE_TAG_UNICHAR:
+        *((gunichar *)result) = argument.v_uint32;
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
+out_arguments_to_raw_data(GICallableInfo *callable_info,
+                          VALUE rb_results,
+                          void *result,
+                          GArray *out_args,
+                          GPtrArray *args_metadata)
+{
+    int i_rb_result = 0;
+    guint i;
+    GITypeInfo *return_type_info;
+    GITypeTag return_type_tag;
+
+    return_type_info = g_callable_info_get_return_type(callable_info);
+    return_type_tag = g_type_info_get_tag(return_type_info);
+    if (return_type_tag != GI_TYPE_TAG_VOID) {
+        GITransfer transfer;
+        transfer = g_callable_info_get_caller_owns(callable_info);
+        if (out_args->len == 0) {
+            VALUE rb_return_value = rb_results;
+            out_argument_to_raw_data(rb_return_value,
+                                     result,
+                                     return_type_info,
+                                     transfer);
+        } else {
+            out_argument_to_raw_data(RARRAY_AREF(rb_results, i_rb_result),
+                                     result,
+                                     return_type_info,
+                                     transfer);
+            i_rb_result++;
+        }
+    }
+    g_base_info_unref(return_type_info);
+
+    for (i = 0; i < args_metadata->len; i++) {
+        RBGIArgMetadata *metadata;
+        GIArgument *argument;
+        GITypeInfo *type_info;
+        GITransfer transfer;
+
+        metadata = g_ptr_array_index(args_metadata, i);
+
+        /* TODO: support GI_DIRECTION_INOUT */
+        if (metadata->direction != GI_DIRECTION_OUT) {
+            continue;
+        }
+
+        argument = &g_array_index(out_args, GIArgument, metadata->out_arg_index);
+        type_info = g_arg_info_get_type(&(metadata->arg_info));
+        transfer = g_arg_info_get_ownership_transfer(&(metadata->arg_info));
+        out_argument_to_raw_data(RARRAY_AREF(rb_results, i_rb_result),
+                                 argument->v_pointer,
+                                 type_info,
+                                 transfer);
+        i_rb_result++;
+        g_base_info_unref(type_info);
+    }
+}
+
+static void
+ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
+                     void *result,
+                     void **raw_args,
+                     void *data)
+{
+    RBGICallback *callback = data;
+    RBGICallbackData *callback_data;
+    GArray *in_args;
+    GArray *out_args;
+    GPtrArray *args_metadata;
+    VALUE rb_results;
+
+    arguments_init(&in_args, &out_args, &args_metadata);
+    allocate_arguments(callback->callback_info,
+                       in_args,
+                       out_args,
+                       args_metadata);
+    fill_metadata(args_metadata);
+    arguments_from_raw_data(raw_args,
+                            in_args,
+                            out_args,
+                            args_metadata);
+
+    {
+        guint i;
+
+        for (i = 0; i < args_metadata->len; i++) {
+            RBGIArgMetadata *metadata;
+
+            metadata = g_ptr_array_index(args_metadata, i);
+            if (!metadata->closure_p) {
+                continue;
+            }
+
+            callback_data = *((RBGICallbackData **)(raw_args[i]));
+            break;
+        }
+    }
+
+    {
+        ID id_call;
+        GArray *rb_args;
+
+        rb_args = g_array_new(FALSE, FALSE, sizeof(VALUE));
+        in_arguments_to_ruby(in_args,
+                             out_args,
+                             args_metadata,
+                             rb_args);
+        CONST_ID(id_call, "call");
+        /* TODO: use rb_protect() */
+        rb_results = rb_funcallv(callback_data->rb_callback,
+                                 id_call,
+                                 rb_args->len,
+                                 (VALUE *)(rb_args->data));
+        g_array_free(rb_args, TRUE);
+    }
+
+    out_arguments_to_raw_data(callback->callback_info,
+                              rb_results,
+                              result,
+                              out_args,
+                              args_metadata);
+
+    if (callback_data->metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
+        rb_gi_callback_data_free(callback_data);
+    }
+}
+
 static void
 in_callback_argument_from_ruby(RBGIArgMetadata *metadata, GArray *in_args)
 {
-    gpointer callback;
+    gpointer callback_function;
     GIArgInfo *arg_info;
     GIArgument *callback_argument;
     GIArgument *closure_argument = NULL;
     GIArgument *destroy_argument = NULL;
+    RBGICallback *callback = NULL;
 
     arg_info = &(metadata->arg_info);
 
@@ -416,26 +863,26 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata, GArray *in_args)
         return;
     }
 
-    callback = find_callback_function(arg_info);
-    if (!callback) {
-        GITypeInfo type_info;
-        GIBaseInfo *interface_info;
-        VALUE rb_type_name;
-        g_arg_info_load_type(arg_info, &type_info);
-        interface_info = g_type_info_get_interface(&type_info);
-        rb_type_name = CSTR2RVAL(g_base_info_get_name(interface_info));
-        g_base_info_unref(interface_info);
-        rb_raise(rb_eNotImpError,
-                 "TODO: <%s>(%s) callback is not supported yet.",
-                 RVAL2CSTR(rb_type_name),
-                 g_base_info_get_name(arg_info));
+    callback_function = find_callback_function(arg_info);
+    if (callback_function) {
+        callback_argument->v_pointer = callback_function;
+    } else {
+        callback = ZALLOC(RBGICallback);
+        callback->type_info = g_arg_info_get_type(arg_info);
+        callback->callback_info = g_type_info_get_interface(callback->type_info);
+        callback->closure =
+            g_callable_info_prepare_closure(callback->callback_info,
+                                            &(callback->cif),
+                                            ffi_closure_callback,
+                                            callback);
+        callback_argument->v_pointer = callback->closure;
     }
-    callback_argument->v_pointer = callback;
 
     if (closure_argument) {
         RBGICallbackData *callback_data;
 
         callback_data = ALLOC(RBGICallbackData);
+        callback_data->callback = callback;
         callback_data->metadata = metadata;
         callback_data->rb_callback = rb_block_proc();
         callback_data_guard_from_gc(callback_data);
