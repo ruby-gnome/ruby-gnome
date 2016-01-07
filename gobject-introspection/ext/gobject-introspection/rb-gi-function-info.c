@@ -739,12 +739,10 @@ out_argument_to_raw_data(VALUE rb_result,
         *((gpointer *)result) = argument.v_pointer;
         break;
       case GI_TYPE_TAG_INTERFACE:
-        /* TODO: should be done at another place. */
-        g_base_info_unref(type_info);
-        rb_raise(rb_eNotImpError,
-                 "TODO: out raw data(%s)",
-                 g_type_tag_to_string(type_tag));
-        /* *((gpointer *)result) = argument.v_pointer; */
+        out_argument_to_raw_data_interface(&argument,
+                                           result,
+                                           type_info,
+                                           transfer);
         break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
