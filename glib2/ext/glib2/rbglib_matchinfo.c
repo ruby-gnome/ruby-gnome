@@ -49,11 +49,12 @@ rg_regex(VALUE self)
   */
   return BOXED2RVAL(regex, G_TYPE_REGEX);
 }
+#include <stdio.h>
 
 static VALUE
 rg_string(VALUE self)
 {
-  return CSTR2RVAL(g_match_info_get_string(_SELF(self)));
+  return  rb_iv_get(self, "@string");
 }
 
 static VALUE

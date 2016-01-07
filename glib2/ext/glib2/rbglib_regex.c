@@ -284,16 +284,51 @@ rg_match(gint argc, VALUE *argv, VALUE self)
 
   rb_scan_args(argc, argv, "20", &string, &match_options);
   
+  VALUE dup_string, match_info;
+  dup_string = rb_str_dup(string);
+  rb_str_freeze(dup_string);
+
   matched = g_regex_match(_SELF(self),
-                          RVAL2CSTR(string),
+                          RVAL2CSTR(dup_string),
                           NUM2UINT(match_options),
                           &_match_info);
+  
+  if (matched == FALSE)
+    return Qnil;
+  else
+  {  
+    match_info = BOXED2RVAL(_match_info, G_TYPE_MATCH_INFO);
+    rb_iv_set(match_info, "@string", dup_string);
+    return match_info;
+  }
+}
+
+/*static VALUE
+rg_match_full(gint, VALUE *argv, VALUE self)
+{
+  VALUE string, start_position, match_options;
+
+  gboolean matched = FALSE;
+  GMatchInfo *_match_info;
+  GError *error = NULL;
+
+  rb_scan_args(argc, argv, "20", &string, &start_position, &match_options);
+  matched = g_regex_match(_SELF(self),
+                          RVAL2CSTR(string),
+                          NUM2INT(start_position),
+                          NUM2UINT(match_options),
+                          &_match_info,
+                          &error);
+
+  if(error)
+    RAISE_GERROR(error);
+
   if (matched == FALSE)
     return Qnil;
   else
     return BOXED2RVAL( _match_info, G_TYPE_MATCH_INFO);
 }
-
+*/
 /* TODO
  *
  * implement GLib::MatchInfo first

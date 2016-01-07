@@ -24,6 +24,8 @@ class TestMatchInfo < Test::Unit::TestCase
 
   def test_string
     match_info = @regex.match(@matching_string, 0)
+    assert_equal(match_info.instance_variables, [:@string])
+    assert_equal(match_info.instance_variable_get("@string"), @matching_string)
     assert_equal(match_info.string, @matching_string)
   end
 
