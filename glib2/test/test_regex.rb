@@ -221,4 +221,16 @@ class TestRegex < Test::Unit::TestCase
       assert_instance_of(GLib::MatchInfo, a_regex.match("abc DEF", 0))
     end
   end
+
+  sub_test_case "match_full" do
+    a_regex = GLib::Regex.new("[A-Z]+", 0, 0)
+    
+    test "no match" do
+      assert_equal(nil, a_regex.match_full("abc def", 0, 0))
+    end
+    
+    test "match" do
+      assert_instance_of(GLib::MatchInfo, a_regex.match_full("abc DEF", 0, 0))
+    end
+  end
 end

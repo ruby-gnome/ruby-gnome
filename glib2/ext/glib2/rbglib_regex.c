@@ -303,8 +303,8 @@ rg_match(gint argc, VALUE *argv, VALUE self)
   }
 }
 
-/*static VALUE
-rg_match_full(gint, VALUE *argv, VALUE self)
+static VALUE
+rg_match_full(gint argc, VALUE *argv, VALUE self)
 {
   VALUE string, start_position, match_options;
 
@@ -312,13 +312,19 @@ rg_match_full(gint, VALUE *argv, VALUE self)
   GMatchInfo *_match_info;
   GError *error = NULL;
 
-  rb_scan_args(argc, argv, "20", &string, &start_position, &match_options);
-  matched = g_regex_match(_SELF(self),
-                          RVAL2CSTR(string),
-                          NUM2INT(start_position),
-                          NUM2UINT(match_options),
-                          &_match_info,
-                          &error);
+  rb_scan_args(argc, argv, "30", &string, &start_position, &match_options);
+
+  VALUE dup_string, match_info;
+  dup_string = rb_str_dup(string);
+  rb_str_freeze(dup_string);
+
+  matched = g_regex_match_full(_SELF(self),
+                               RVAL2CSTR(dup_string),
+                               -1,
+                               NUM2INT(start_position),
+                               NUM2UINT(match_options),
+                               &_match_info,
+                               &error);
 
   if(error)
     RAISE_GERROR(error);
@@ -326,13 +332,15 @@ rg_match_full(gint, VALUE *argv, VALUE self)
   if (matched == FALSE)
     return Qnil;
   else
-    return BOXED2RVAL( _match_info, G_TYPE_MATCH_INFO);
+  {  
+    match_info = BOXED2RVAL(_match_info, G_TYPE_MATCH_INFO);
+    rb_iv_set(match_info, "@string", dup_string);
+    return match_info;
+  }
 }
-*/
+
 /* TODO
  *
- * implement GLib::MatchInfo first
- * g_regex_match_full
  * g_regex_match_all
  * g_regex_match_all_full
  * */
@@ -391,6 +399,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(replace_literal, -1);
     RG_DEF_METHOD(replace_eval, -1);
     RG_DEF_METHOD(match, -1);
+    RG_DEF_METHOD(match_full, -1);
 
     RG_DEF_SMETHOD(match_simple, -1);
     RG_DEF_SMETHOD(escape_string, -1);
