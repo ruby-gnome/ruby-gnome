@@ -620,10 +620,68 @@ in_arguments_to_ruby(GArray *in_args,
 }
 
 static void
+out_argument_to_raw_data_interface(GIArgument *argument,
+                                   gpointer result,
+                                   GITypeInfo *type_info,
+                                   G_GNUC_UNUSED GITransfer transfer /* TODO */)
+{
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+
+    interface_info = g_type_info_get_interface(type_info);
+    interface_type = g_base_info_get_type(interface_info);
+
+    switch (interface_type) {
+    case GI_INFO_TYPE_INVALID:
+    case GI_INFO_TYPE_FUNCTION:
+    case GI_INFO_TYPE_CALLBACK:
+    case GI_INFO_TYPE_STRUCT:
+    case GI_INFO_TYPE_BOXED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: out raw data(interface)[%s]: <%s>",
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
+        break;
+    case GI_INFO_TYPE_ENUM:
+      *((gint *)result) = argument->v_int;
+      break;
+    case GI_INFO_TYPE_FLAGS:
+    case GI_INFO_TYPE_OBJECT:
+    case GI_INFO_TYPE_INTERFACE:
+    case GI_INFO_TYPE_CONSTANT:
+        rb_raise(rb_eNotImpError,
+                 "TODO: out raw data(interface)[%s]: <%s>",
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
+        break;
+    case GI_INFO_TYPE_INVALID_0:
+        g_assert_not_reached();
+        break;
+    case GI_INFO_TYPE_UNION:
+    case GI_INFO_TYPE_VALUE:
+    case GI_INFO_TYPE_SIGNAL:
+    case GI_INFO_TYPE_VFUNC:
+    case GI_INFO_TYPE_PROPERTY:
+    case GI_INFO_TYPE_FIELD:
+    case GI_INFO_TYPE_ARG:
+    case GI_INFO_TYPE_TYPE:
+    case GI_INFO_TYPE_UNRESOLVED:
+    default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: out raw data(interface)[%s]: <%s>",
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
+        break;
+    }
+
+    g_base_info_unref(interface_info);
+}
+
+static void
 out_argument_to_raw_data(VALUE rb_result,
                          gpointer result,
                          GITypeInfo *type_info,
-                         G_GNUC_UNUSED GITransfer transfer /* TODO */)
+                         GITransfer transfer)
 {
     GIArgument argument;
     GITypeTag type_tag;
