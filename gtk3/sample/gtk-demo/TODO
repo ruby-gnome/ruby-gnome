@@ -11,7 +11,7 @@ colorsel.c              ok              ok
 combobox.c              no              no
 css_accordion.c         ok              ok
 css_basics.c            ok              ok
-css_multiplebgs.c       no              no
+css_multiplebgs.c       ok              ok
 css_pixbufs.c           ok              ok
 css_shadows.c           ok              ok
 cursors.c               ok              ok
