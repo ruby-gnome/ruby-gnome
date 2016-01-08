@@ -429,6 +429,29 @@ rg_s_escape_string(gint argc, VALUE *argv, VALUE self)
   return CSTR2RVAL(g_regex_escape_string(RVAL2CSTR(string), -1));
 }
 
+static VALUE
+rg_s_split_simple(gint argc, VALUE *argv, VALUE self)
+{
+  VALUE pattern, string, compile_options, match_options;
+  char ** strings;
+  
+  rb_scan_args(argc, argv, "40", &pattern, &string, &compile_options, &match_options);
+  strings = g_regex_split_simple(RVAL2CSTR(pattern),
+                                 RVAL2CSTR(string),
+                                 NUM2UINT(compile_options),
+                                 NUM2UINT(match_options));
+
+  VALUE array_of_strings = rb_ary_new();
+  gchar **ptr;
+  
+  for(ptr = strings; *ptr != NULL; ptr++)
+  {
+    rb_ary_push(array_of_strings, CSTR2RVAL(*ptr));
+  }
+  
+  g_strfreev(strings);
+  return array_of_strings;
+}
 /*
  * g_regex_escape_null is not implemented because ruby already escape the null caracter 
 */
@@ -464,6 +487,7 @@ Init_glib_regex(void)
 
     RG_DEF_SMETHOD(match_simple, -1);
     RG_DEF_SMETHOD(escape_string, -1);
+    RG_DEF_SMETHOD(split_simple, -1);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);

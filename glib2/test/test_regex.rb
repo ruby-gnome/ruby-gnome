@@ -277,4 +277,11 @@ end
       # TODO test matching "<a> <b> <c>" against the pattern "<.*>;" you would obtain three matches: "<a> <b> <c>", "<a> <b>" and "<a>".
     end
   end
+
+  def test_regex_split_simple
+    pattern = "\s*"
+    string_to_split = "a bc"
+    splited_strings = GLib::Regex.split_simple(pattern, string_to_split, 0, 0)
+    assert_equal(splited_strings, ["a", "b", "c"])
+  end
 end
