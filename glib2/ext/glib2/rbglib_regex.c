@@ -452,14 +452,32 @@ rg_s_split_simple(gint argc, VALUE *argv, VALUE self)
   g_strfreev(strings);
   return array_of_strings;
 }
+
+static VALUE
+rg_s_check_replacement(VALUE self, VALUE replacement)
+{
+  gboolean is_valid, has_ref;
+  GError *error = NULL;
+
+  is_valid = g_regex_check_replacement(RVAL2CSTR(replacement), &has_ref, &error);
+
+  if(error)
+    RAISE_GERROR(error);
+  
+  VALUE ret = rb_ary_new();
+  VALUE boolean_val;
+   
+  boolean_val = is_valid == TRUE ? Qtrue : Qfalse;
+  rb_ary_push(ret, boolean_val);
+  boolean_val = has_ref == TRUE ? Qtrue : Qfalse;
+  rb_ary_push(ret, boolean_val);
+
+  return ret;
+}
 /*
  * g_regex_escape_null is not implemented because ruby already escape the null caracter 
 */
 
-/* TODO
- * g_regex_split_simple
- * g_regex_check_replacement
- * */
 void
 Init_glib_regex(void)
 {
@@ -488,6 +506,7 @@ Init_glib_regex(void)
     RG_DEF_SMETHOD(match_simple, -1);
     RG_DEF_SMETHOD(escape_string, -1);
     RG_DEF_SMETHOD(split_simple, -1);
+    RG_DEF_SMETHOD(check_replacement, 1);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);

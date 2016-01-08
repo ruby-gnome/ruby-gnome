@@ -284,4 +284,13 @@ end
     splited_strings = GLib::Regex.split_simple(pattern, string_to_split, 0, 0)
     assert_equal(splited_strings, ["a", "b", "c"])
   end
+
+  sub_test_case "check_replacement" do
+    test "no references" do
+      assert_equal([true, false], GLib::Regex.check_replacement("foo\n"))
+    end
+    test "with references" do
+      assert_equal([true, true], GLib::Regex.check_replacement("\\0\\1"))
+    end
+  end
 end
