@@ -65,13 +65,44 @@ rg_matches(VALUE self)
   else
     return Qfalse;
 }
+
+static VALUE
+rg_next(VALUE self)
+{
+  GError *error = NULL;
+  gboolean matched ;
+
+  matched = g_match_info_next(_SELF(self), &error);
+
+  if(error)
+    RAISE_GERROR(error);
+
+  if(matched == TRUE)
+    return Qtrue;
+  else
+    return Qfalse;
+}
+
+static VALUE
+rg_fetch(VALUE self, VALUE match_num)
+{
+  gchar *match = NULL;
+  match = g_match_info_fetch(_SELF(self), NUM2INT(match_num));
+
+  if(match == NULL)
+    return Qnil;
+  else
+  {
+    VALUE ret = CSTR2RVAL(match);
+    free(match);
+    return ret;
+  }
+}
 /* TODO
  * 
- * g_match_info_next
  * g_match_info_get_match_count
  * g_match_info_is_partial_match
  * g_match_info_expand_references
- * g_match_info_fetch
  * g_match_info_fetch_pos
  * g_match_info_fetch_named
  * g_match_info_fetch_named_pos
@@ -86,5 +117,8 @@ Init_glib_matchinfo(void)
     RG_DEF_METHOD(string, 0);
     RG_DEF_METHOD(regex, 0);
     RG_DEF_METHOD(matches, 0);
+    RG_DEF_METHOD(next, 0);
+    RG_DEF_METHOD(fetch, 1);
+
 }
 

@@ -17,19 +17,19 @@
 class TestMatchInfo < Test::Unit::TestCase
   def setup
     @regex_pattern = "[A-Z]+"
-    @matching_string = "abc DEF"
+    @matching_string = "abc DEF ghi JKL"
     @non_matching_string = "abc def"
     @regex = GLib::Regex.new(@regex_pattern, 0, 0)
   end
 
-  def test_string
+  def test_match_info_string
     match_info = @regex.match(@matching_string, 0)
     assert_equal(match_info.instance_variables, [:@string])
     assert_equal(match_info.instance_variable_get("@string"), @matching_string)
     assert_equal(match_info.string, @matching_string)
   end
 
-  def test_regex
+  def test_match_info_regex
     match_info = @regex.match(@matching_string, 0)
     mi_regex = match_info.regex
     assert_equal(mi_regex.pattern, @regex.pattern)
@@ -47,5 +47,26 @@ class TestMatchInfo < Test::Unit::TestCase
       match_info = @regex.match(@matching_string, 0)
       assert(match_info.matches)
     end
+  end
+  
+  def test_match_info_next 
+    match_info = @regex.match(@matching_string, 0)
+    i = 0
+    while(match_info.matches) do
+      i = i + 1
+      match_info.next  
+    end
+    assert_equal( i, 2)
+  end
+  def test_match_info_fetch 
+    match_info = @regex.match(@matching_string, 0)
+    i = 0 
+    capitalized_parts = %w(DEF JKL)
+    while(match_info.matches) do
+      assert_equal(capitalized_parts[i], match_info.fetch(0))
+      i = i + 1
+      match_info.next  
+    end
+    assert_equal( i, 2)
   end
 end
