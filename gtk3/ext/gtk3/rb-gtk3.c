@@ -53,31 +53,6 @@ name_equal(GIArgInfo *info, const gchar *target_name)
 }
 
 static void
-rb_gtk3_builder_connect_func_callback(GtkBuilder *builder,
-                                      GObject *object,
-                                      const gchar *signal_name,
-                                      const gchar *handler_name,
-                                      GObject *connect_object,
-                                      GConnectFlags flags,
-                                      gpointer user_data)
-{
-    RBGICallbackData *callback_data = user_data;
-    ID id___connect_signals__;
-    VALUE rb_object;
-
-    CONST_ID(id___connect_signals__, "__connect_signals__");
-    rb_object = GOBJ2RVAL(object);
-    G_RELATIVE(rb_object, callback_data->rb_callback);
-    rb_funcall(GOBJ2RVAL(builder), id___connect_signals__, 6,
-               callback_data->rb_callback,
-               rb_object,
-               CSTR2RVAL(signal_name),
-               CSTR2RVAL(handler_name),
-               GOBJ2RVAL(connect_object),
-               GCONNECTFLAGS2RVAL(flags));
-}
-
-static void
 rb_gtk3_callback_callback(GtkWidget *widget, gpointer user_data)
 {
     RBGICallbackData *callback_data = user_data;
@@ -494,9 +469,7 @@ rb_gtk3_tree_view_mapping_func_callback(GtkTreeView *tree_view,
 static gpointer
 rb_gtk3_callback_finder(GIArgInfo *info)
 {
-    if (name_equal(info, "BuilderConnectFunc")) {
-        return rb_gtk3_builder_connect_func_callback;
-    } else if (name_equal(info, "Callback")) {
+    if (name_equal(info, "Callback")) {
         return rb_gtk3_callback_callback;
     } else if (name_equal(info, "CellLayoutDataFunc")) {
         return rb_gtk3_cell_layout_data_func_callback;
