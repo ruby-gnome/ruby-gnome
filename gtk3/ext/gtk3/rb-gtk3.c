@@ -52,17 +52,6 @@ name_equal(GIArgInfo *info, const gchar *target_name)
     return equal_name_p;
 }
 
-static gint
-rb_gtk3_assistant_page_func_callback(gint current_page, gpointer user_data)
-{
-    RBGICallbackData *callback_data = user_data;
-    VALUE rb_next_page;
-
-    rb_next_page = rb_funcall(callback_data->rb_callback, id_call, 1,
-                              INT2NUM(current_page));
-    return NUM2INT(rb_next_page);
-}
-
 static void
 rb_gtk3_builder_connect_func_callback(GtkBuilder *builder,
                                       GObject *object,
@@ -505,9 +494,7 @@ rb_gtk3_tree_view_mapping_func_callback(GtkTreeView *tree_view,
 static gpointer
 rb_gtk3_callback_finder(GIArgInfo *info)
 {
-    if (name_equal(info, "AssistantPageFunc")) {
-        return rb_gtk3_assistant_page_func_callback;
-    } else if (name_equal(info, "BuilderConnectFunc")) {
+    if (name_equal(info, "BuilderConnectFunc")) {
         return rb_gtk3_builder_connect_func_callback;
     } else if (name_equal(info, "Callback")) {
         return rb_gtk3_callback_callback;
