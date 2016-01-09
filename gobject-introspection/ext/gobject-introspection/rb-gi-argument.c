@@ -559,9 +559,9 @@ interface_variant_to_ruby(GVariant *variant)
 }
 
 static VALUE
-interface_to_ruby(GIArgument *argument,
-                  gboolean duplicate,
-                  GITypeInfo *type_info)
+rb_gi_argument_to_ruby_interface(GIArgument *argument,
+                                 gboolean duplicate,
+                                 GITypeInfo *type_info)
 {
     VALUE rb_interface;
     GIBaseInfo *interface_info;
@@ -1098,7 +1098,9 @@ rb_gi_argument_to_ruby(GIArgument *argument,
                                                    args_metadata);
         break;
     case GI_TYPE_TAG_INTERFACE:
-        rb_argument = interface_to_ruby(argument, duplicate, type_info);
+        rb_argument = rb_gi_argument_to_ruby_interface(argument,
+                                                       duplicate,
+                                                       type_info);
         break;
     case GI_TYPE_TAG_GLIST:
         rb_argument = rb_gi_argument_to_ruby_glist(argument, type_info);
