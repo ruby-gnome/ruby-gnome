@@ -407,7 +407,8 @@ static void arguments_free(VALUE rb_arguments,
                            GPtrArray *args_metadata);
 
 static void
-argument_from_raw_data_interface(void *raw_arg,
+argument_from_raw_data_interface(GICallableInfo *callable_info,
+                                 void *raw_arg,
                                  GIArgument *argument,
                                  GITypeInfo *type_info)
 {
@@ -422,7 +423,9 @@ argument_from_raw_data_interface(void *raw_arg,
     case GI_INFO_TYPE_FUNCTION:
     case GI_INFO_TYPE_CALLBACK:
         rb_raise(rb_eNotImpError,
-                 "TODO: raw data -> GIArgument(interface)[%s]: <%s>",
+                 "TODO: %s::%s: raw data -> GIArgument(interface)[%s]: <%s>",
+                 g_base_info_get_namespace(callable_info),
+                 g_base_info_get_name(callable_info),
                  g_info_type_to_string(interface_type),
                  g_base_info_get_name(interface_info));
         break;
@@ -433,7 +436,9 @@ argument_from_raw_data_interface(void *raw_arg,
     case GI_INFO_TYPE_ENUM:
     case GI_INFO_TYPE_FLAGS:
         rb_raise(rb_eNotImpError,
-                 "TODO: raw data -> GIArgument(interface)[%s]: <%s>",
+                 "TODO: %s::%s: raw data -> GIArgument(interface)[%s]: <%s>",
+                 g_base_info_get_namespace(callable_info),
+                 g_base_info_get_name(callable_info),
                  g_info_type_to_string(interface_type),
                  g_base_info_get_name(interface_info));
         break;
@@ -443,7 +448,9 @@ argument_from_raw_data_interface(void *raw_arg,
       break;
     case GI_INFO_TYPE_CONSTANT:
         rb_raise(rb_eNotImpError,
-                 "TODO: raw data -> GIArgument(interface)[%s]: <%s>",
+                 "TODO: %s::%s: raw data -> GIArgument(interface)[%s]: <%s>",
+                 g_base_info_get_namespace(callable_info),
+                 g_base_info_get_name(callable_info),
                  g_info_type_to_string(interface_type),
                  g_base_info_get_name(interface_info));
         break;
@@ -461,7 +468,9 @@ argument_from_raw_data_interface(void *raw_arg,
     case GI_INFO_TYPE_UNRESOLVED:
     default:
         rb_raise(rb_eNotImpError,
-                 "TODO: raw data -> GIArgument(interface)[%s]: <%s>",
+                 "TODO: %s::%s: raw data -> GIArgument(interface)[%s]: <%s>",
+                 g_base_info_get_namespace(callable_info),
+                 g_base_info_get_name(callable_info),
                  g_info_type_to_string(interface_type),
                  g_base_info_get_name(interface_info));
         break;
@@ -471,7 +480,8 @@ argument_from_raw_data_interface(void *raw_arg,
 }
 
 static void
-argument_from_raw_data(void **raw_args,
+argument_from_raw_data(GICallableInfo *callable_info,
+                       void **raw_args,
                        GArray *in_args,
                        GArray *out_args,
                        GPtrArray *args_metadata,
@@ -546,7 +556,10 @@ argument_from_raw_data(void **raw_args,
         argument->v_pointer = *((gpointer *)(raw_args[i]));
         break;
       case GI_TYPE_TAG_INTERFACE:
-        argument_from_raw_data_interface(raw_args[i], argument, type_info);
+        argument_from_raw_data_interface(callable_info,
+                                         raw_args[i],
+                                         argument,
+                                         type_info);
         break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
@@ -568,7 +581,8 @@ argument_from_raw_data(void **raw_args,
 }
 
 static void
-arguments_from_raw_data(void **args,
+arguments_from_raw_data(GICallableInfo *callable_info,
+                        void **args,
                         GArray *in_args,
                         GArray *out_args,
                         GPtrArray *args_metadata)
@@ -576,7 +590,8 @@ arguments_from_raw_data(void **args,
     guint i;
 
     for (i = 0; i < args_metadata->len; i++) {
-        argument_from_raw_data(args,
+        argument_from_raw_data(callable_info,
+                               args,
                                in_args,
                                out_args,
                                args_metadata,
@@ -620,7 +635,8 @@ in_arguments_to_ruby(GArray *in_args,
 }
 
 static void
-out_argument_to_raw_data_interface(GIArgument *argument,
+out_argument_to_raw_data_interface(GICallableInfo *callable_info,
+                                   GIArgument *argument,
                                    gpointer result,
                                    GITypeInfo *type_info,
                                    G_GNUC_UNUSED GITransfer transfer /* TODO */)
@@ -638,7 +654,9 @@ out_argument_to_raw_data_interface(GIArgument *argument,
     case GI_INFO_TYPE_STRUCT:
     case GI_INFO_TYPE_BOXED:
         rb_raise(rb_eNotImpError,
-                 "TODO: out raw data(interface)[%s]: <%s>",
+                 "TODO: %s::%s: out raw data(interface)[%s]: <%s>",
+                 g_base_info_get_namespace(callable_info),
+                 g_base_info_get_name(callable_info),
                  g_info_type_to_string(interface_type),
                  g_base_info_get_name(interface_info));
         break;
@@ -650,7 +668,9 @@ out_argument_to_raw_data_interface(GIArgument *argument,
     case GI_INFO_TYPE_INTERFACE:
     case GI_INFO_TYPE_CONSTANT:
         rb_raise(rb_eNotImpError,
-                 "TODO: out raw data(interface)[%s]: <%s>",
+                 "TODO: %s::%s: out raw data(interface)[%s]: <%s>",
+                 g_base_info_get_namespace(callable_info),
+                 g_base_info_get_name(callable_info),
                  g_info_type_to_string(interface_type),
                  g_base_info_get_name(interface_info));
         break;
@@ -668,7 +688,9 @@ out_argument_to_raw_data_interface(GIArgument *argument,
     case GI_INFO_TYPE_UNRESOLVED:
     default:
         rb_raise(rb_eNotImpError,
-                 "TODO: out raw data(interface)[%s]: <%s>",
+                 "TODO: %s::%s: out raw data(interface)[%s]: <%s>",
+                 g_base_info_get_namespace(callable_info),
+                 g_base_info_get_name(callable_info),
                  g_info_type_to_string(interface_type),
                  g_base_info_get_name(interface_info));
         break;
@@ -678,7 +700,8 @@ out_argument_to_raw_data_interface(GIArgument *argument,
 }
 
 static void
-out_argument_to_raw_data(VALUE rb_result,
+out_argument_to_raw_data(GICallableInfo *callable_info,
+                         VALUE rb_result,
                          gpointer result,
                          GITypeInfo *type_info,
                          GITransfer transfer)
@@ -739,7 +762,8 @@ out_argument_to_raw_data(VALUE rb_result,
         *((gpointer *)result) = argument.v_pointer;
         break;
       case GI_TYPE_TAG_INTERFACE:
-        out_argument_to_raw_data_interface(&argument,
+        out_argument_to_raw_data_interface(callable_info,
+                                           &argument,
                                            result,
                                            type_info,
                                            transfer);
@@ -780,12 +804,14 @@ out_arguments_to_raw_data(GICallableInfo *callable_info,
         transfer = g_callable_info_get_caller_owns(callable_info);
         if (out_args->len == 0) {
             VALUE rb_return_value = rb_results;
-            out_argument_to_raw_data(rb_return_value,
+            out_argument_to_raw_data(callable_info,
+                                     rb_return_value,
                                      result,
                                      return_type_info,
                                      transfer);
         } else {
-            out_argument_to_raw_data(RARRAY_AREF(rb_results, i_rb_result),
+            out_argument_to_raw_data(callable_info,
+                                     RARRAY_AREF(rb_results, i_rb_result),
                                      result,
                                      return_type_info,
                                      transfer);
@@ -810,7 +836,8 @@ out_arguments_to_raw_data(GICallableInfo *callable_info,
         argument = &g_array_index(out_args, GIArgument, metadata->out_arg_index);
         type_info = g_arg_info_get_type(&(metadata->arg_info));
         transfer = g_arg_info_get_ownership_transfer(&(metadata->arg_info));
-        out_argument_to_raw_data(RARRAY_AREF(rb_results, i_rb_result),
+        out_argument_to_raw_data(callable_info,
+                                 RARRAY_AREF(rb_results, i_rb_result),
                                  argument->v_pointer,
                                  type_info,
                                  transfer);
@@ -838,7 +865,8 @@ ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
                        out_args,
                        args_metadata);
     fill_metadata(args_metadata);
-    arguments_from_raw_data(raw_args,
+    arguments_from_raw_data(callback->callback_info,
+                            raw_args,
                             in_args,
                             out_args,
                             args_metadata);
