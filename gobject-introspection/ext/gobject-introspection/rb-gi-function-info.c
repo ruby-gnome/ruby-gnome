@@ -434,7 +434,6 @@ argument_from_raw_data_interface(GICallableInfo *callable_info,
       break;
     case GI_INFO_TYPE_BOXED:
     case GI_INFO_TYPE_ENUM:
-    case GI_INFO_TYPE_FLAGS:
         rb_raise(rb_eNotImpError,
                  "TODO: %s::%s: raw data -> GIArgument(interface)[%s]: <%s>",
                  g_base_info_get_namespace(callable_info),
@@ -442,6 +441,9 @@ argument_from_raw_data_interface(GICallableInfo *callable_info,
                  g_info_type_to_string(interface_type),
                  g_base_info_get_name(interface_info));
         break;
+    case GI_INFO_TYPE_FLAGS:
+      argument->v_int32= *((gint32 *)(raw_arg));
+      break;
     case GI_INFO_TYPE_OBJECT:
     case GI_INFO_TYPE_INTERFACE:
       argument->v_pointer = *((gpointer *)(raw_arg));
