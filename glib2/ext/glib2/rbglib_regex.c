@@ -34,17 +34,31 @@ regex_free(gpointer object)
 static VALUE
 rg_initialize(gint argc, VALUE *argv, VALUE self)
 {
-    VALUE pattern, compile_options, match_options;
     GError *error = NULL;
     GRegex *regex = NULL;
 
-    rb_scan_args(argc, argv, "30", &pattern, &compile_options, &match_options);
-
-    regex = g_regex_new(RVAL2CSTR(pattern), 
-                        NUM2UINT(compile_options),
-                        NUM2UINT(match_options),
-                        &error);
+    VALUE rb_pattern, rb_compile_options, rb_match_options;
+    VALUE rb_options;
+    const char *pattern;
+    GRegexCompileFlags compile_options = 0;
+    GRegexMatchFlags match_options = 0;
     
+    rb_scan_args(argc, argv, "11", &rb_pattern, &rb_options);
+    rbg_scan_options(rb_options,
+                     "compile_options", &rb_compile_options,
+                     "match_options", &rb_match_options,
+                     NULL);
+    
+    pattern = RVAL2CSTR(rb_pattern);
+    if (!NIL_P(rb_compile_options))
+        compile_options = RVAL2GREGEXCOMPILEOPTIONSFLAGS(rb_compile_options);
+    if (!NIL_P(rb_match_options))
+        match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
+    
+    regex = g_regex_new(pattern,
+                        compile_options,
+                        match_options,
+                        &error);  
     if (error)
         RAISE_GERROR(error);
 
