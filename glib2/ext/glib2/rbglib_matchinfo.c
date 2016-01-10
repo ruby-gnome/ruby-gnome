@@ -19,10 +19,6 @@
 
 #include "rbgprivate.h"
 
-#ifdef G_OS_WIN32
-#include <windows.h>
-#endif
-
 #define RG_TARGET_NAMESPACE cMatchInfo
 #define _SELF(s) ((GMatchInfo*)RVAL2BOXED(s, G_TYPE_MATCH_INFO))
 
@@ -41,62 +37,62 @@ match_info_free(gpointer object)
 static VALUE
 rg_regex(VALUE self)
 {
-  GRegex * regex;
-  regex = g_match_info_get_regex(_SELF(self));
-  g_regex_ref(regex);
-  /*Increase the ref of 1 so that the regex allocated memory is freed only if
-   there are no other instances of the GLib::Regex class that wrapps this regex
-  */
-  return BOXED2RVAL(regex, G_TYPE_REGEX);
+    GRegex *regex;
+    regex = g_match_info_get_regex(_SELF(self));
+    g_regex_ref(regex);
+    /*Increase the ref of 1 so that the regex allocated memory is freed only if
+     there are no other instances of the GLib::Regex class that wrapps this regex
+    */
+    return BOXED2RVAL(regex, G_TYPE_REGEX);
 }
 #include <stdio.h>
 
 static VALUE
 rg_string(VALUE self)
 {
-  return  rb_iv_get(self, "@string");
+    return rb_iv_get(self, "@string");
 }
 
 static VALUE
 rg_matches(VALUE self)
 {
-  if (g_match_info_matches(_SELF(self)) == TRUE)
-    return Qtrue;
-  else
-    return Qfalse;
+    if (g_match_info_matches(_SELF(self)) == TRUE)
+      return Qtrue;
+    else
+      return Qfalse;
 }
 
 static VALUE
 rg_next(VALUE self)
 {
-  GError *error = NULL;
-  gboolean matched ;
-
-  matched = g_match_info_next(_SELF(self), &error);
-
-  if(error)
-    RAISE_GERROR(error);
-
-  if(matched == TRUE)
-    return Qtrue;
-  else
-    return Qfalse;
+    GError *error = NULL;
+    gboolean matched ;
+  
+    matched = g_match_info_next(_SELF(self), &error);
+  
+    if(error)
+        RAISE_GERROR(error);
+  
+    if(matched == TRUE)
+        return Qtrue;
+    else
+        return Qfalse;
 }
 
 static VALUE
 rg_fetch(VALUE self, VALUE match_num)
 {
-  gchar *match = NULL;
-  match = g_match_info_fetch(_SELF(self), NUM2INT(match_num));
-
-  if(match == NULL)
-    return Qnil;
-  else
-  {
-    VALUE ret = CSTR2RVAL(match);
-    free(match);
-    return ret;
-  }
+    gchar *match = NULL;
+    match = g_match_info_fetch(_SELF(self), NUM2INT(match_num));
+  
+    if(match == NULL)
+        return Qnil;
+    else
+    {
+        VALUE ret = CSTR2RVAL(match);
+        free(match);
+        return ret;
+    }
 }
 /* TODO
  * 

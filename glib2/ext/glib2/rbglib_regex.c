@@ -45,7 +45,7 @@ rg_initialize(gint argc, VALUE *argv, VALUE self)
                         NUM2UINT(match_options),
                         &error);
     
-    if(error)
+    if (error)
         RAISE_GERROR(error);
 
     G_INITIALIZE(self, regex); 
@@ -87,7 +87,7 @@ rg_has_cr_or_lf(VALUE self)
 {
     gboolean contains_cr_or_lf = g_regex_get_has_cr_or_lf(_SELF(self));
   
-    if(contains_cr_or_lf == TRUE)
+    if (contains_cr_or_lf == TRUE)
         return Qtrue;
     else
         return Qfalse;
@@ -112,16 +112,17 @@ static VALUE
 rg_split(gint argc, VALUE *argv, VALUE self)
 {
     VALUE string, match_options, array_of_strings;
-    rb_scan_args(argc, argv, "20", &string, &match_options);
     gchar **strings;
+    gchar **ptr;
+    
+    rb_scan_args(argc, argv, "20", &string, &match_options);
 
     strings = g_regex_split(_SELF(self),
                             RVAL2CSTR(string),
                             NUM2UINT(match_options));
     
     array_of_strings = rb_ary_new();
-    gchar **ptr;
-    for(ptr = strings; *ptr != NULL; ptr++)
+    for (ptr = strings; *ptr != NULL; ptr++)
     {
         rb_ary_push(array_of_strings, CSTR2RVAL(*ptr));
     }
@@ -135,8 +136,10 @@ rg_split_full(gint argc, VALUE *argv, VALUE self)
 {
     VALUE string, start_position, match_options, max_tokens, array_of_strings;
     GError *error = NULL;
-    rb_scan_args(argc, argv, "40", &string, &start_position, &match_options, &max_tokens);
     gchar **strings;
+    gchar **ptr;
+    
+    rb_scan_args(argc, argv, "40", &string, &start_position, &match_options, &max_tokens);
   
     strings = g_regex_split_full(_SELF(self),
                                  RVAL2CSTR(string),
@@ -145,12 +148,12 @@ rg_split_full(gint argc, VALUE *argv, VALUE self)
                                  NUM2UINT(match_options),
                                  NUM2INT(max_tokens),
                                  &error);
-    if(error)
+    if (error)
       RAISE_GERROR(error);
   
     array_of_strings = rb_ary_new();
-    gchar **ptr;
-    for(ptr = strings; *ptr != NULL; ptr++)
+    
+    for (ptr = strings; *ptr != NULL; ptr++)
     {
         rb_ary_push(array_of_strings, CSTR2RVAL(*ptr));
     }
@@ -164,8 +167,9 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
 {
     VALUE string, start_position, replacement, match_options;
     GError *error = NULL;
-    rb_scan_args(argc, argv, "40", &string, &start_position, &replacement, &match_options);
     gchar *modified_string;
+    
+    rb_scan_args(argc, argv, "40", &string, &start_position, &replacement, &match_options);
   
     modified_string = g_regex_replace(_SELF(self),
                                       RVAL2CSTR(string),
@@ -174,7 +178,7 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
                                       RVAL2CSTR(replacement),
                                       NUM2UINT(match_options),
                                       &error);
-    if(error)
+    if (error)
         RAISE_GERROR(error);
    
     return CSTR2RVAL(modified_string);
@@ -185,9 +189,10 @@ rg_replace_literal(gint argc, VALUE *argv, VALUE self)
 {
     VALUE string, start_position, replacement, match_options;
     GError *error = NULL;
-    rb_scan_args(argc, argv, "40", &string, &start_position, &replacement, &match_options);
     gchar *modified_string;
   
+    rb_scan_args(argc, argv, "40", &string, &start_position, &replacement, &match_options);
+    
     modified_string = g_regex_replace_literal(_SELF(self),
                                       RVAL2CSTR(string),
                                       -1,
@@ -195,7 +200,7 @@ rg_replace_literal(gint argc, VALUE *argv, VALUE self)
                                       RVAL2CSTR(replacement),
                                       NUM2UINT(match_options),
                                       &error);
-    if(error)
+    if (error)
         RAISE_GERROR(error);
    
     return CSTR2RVAL(modified_string);
@@ -209,11 +214,11 @@ static gboolean
 g_regex_eval_callback( const GMatchInfo *match_info, GString *result, gpointer user_data)
 {
     VALUE cb_match_info, cb_result, callback, returned_data;
+    gboolean stop_replacement =TRUE;
     cb_match_info = Qnil;
     cb_match_info = BOXED2RVAL(match_info, G_TYPE_MATCH_INFO);
     cb_result = CSTR2RVAL(result->str);
     callback = (VALUE) user_data;
-    gboolean stop_replacement =TRUE;
   
     returned_data = rb_funcall(callback, rb_intern("call"), 2, cb_match_info, cb_result);
     
@@ -234,7 +239,7 @@ g_regex_eval_callback( const GMatchInfo *match_info, GString *result, gpointer u
         if (TYPE(returned_data) == T_ARRAY)
         {
             VALUE string = rb_ary_entry(returned_data, 0);
-            if(TYPE(string) == T_STRING)
+            if (TYPE(string) == T_STRING)
                 g_string_overwrite(result, 0, RVAL2CSTR(string));
             
             if (rb_ary_entry(returned_data, 1) == Qfalse)
@@ -249,11 +254,12 @@ static VALUE
 rg_replace_eval(gint argc, VALUE *argv, VALUE self)
 {
     VALUE string, start_position, match_options;
-    rb_scan_args(argc, argv, "30", &string, &start_position, &match_options);
     char *result;
     GError *error = NULL;
     
-    if(rb_block_given_p() == 0)
+    rb_scan_args(argc, argv, "30", &string, &start_position, &match_options);
+    
+    if (rb_block_given_p() == 0)
         rb_raise(rb_eTypeError, "Need a block");
     
     VALUE callback = rb_block_proc();
@@ -266,7 +272,7 @@ rg_replace_eval(gint argc, VALUE *argv, VALUE self)
                                   g_regex_eval_callback,
                                   (gpointer) callback,
                                   &error);
-    if(error)
+    if (error)
         RAISE_GERROR(error);
     
     return CSTR2RVAL(result);
@@ -304,6 +310,7 @@ static VALUE
 rg_match_full(gint argc, VALUE *argv, VALUE self)
 {
     VALUE string, start_position, match_options;
+    VALUE dup_string, match_info;
   
     gboolean matched = FALSE;
     GMatchInfo *_match_info;
@@ -311,7 +318,6 @@ rg_match_full(gint argc, VALUE *argv, VALUE self)
   
     rb_scan_args(argc, argv, "30", &string, &start_position, &match_options);
   
-    VALUE dup_string, match_info;
     dup_string = rb_str_dup(string);
     rb_str_freeze(dup_string);
   
@@ -323,7 +329,7 @@ rg_match_full(gint argc, VALUE *argv, VALUE self)
                                  &_match_info,
                                  &error);
   
-    if(error)
+    if (error)
         RAISE_GERROR(error);
   
     if (matched == FALSE)
@@ -342,10 +348,10 @@ rg_match_all(gint argc, VALUE *argv, VALUE self)
     VALUE string, match_options;
     gboolean matched = FALSE;
     GMatchInfo *_match_info;
+    VALUE dup_string, match_info;
   
     rb_scan_args(argc, argv, "20", &string, &match_options);
     
-    VALUE dup_string, match_info;
     dup_string = rb_str_dup(string);
     rb_str_freeze(dup_string);
   
@@ -368,14 +374,13 @@ static VALUE
 rg_match_all_full(gint argc, VALUE *argv, VALUE self)
 {
     VALUE string, start_position, match_options;
-  
     gboolean matched = FALSE;
     GMatchInfo *_match_info;
     GError *error = NULL;
+    VALUE dup_string, match_info;
   
     rb_scan_args(argc, argv, "30", &string, &start_position, &match_options);
   
-    VALUE dup_string, match_info;
     dup_string = rb_str_dup(string);
     rb_str_freeze(dup_string);
   
@@ -387,7 +392,7 @@ rg_match_all_full(gint argc, VALUE *argv, VALUE self)
                                      &_match_info,
                                      &error);
   
-    if(error)
+    if (error)
         RAISE_GERROR(error);
   
     if (matched == FALSE)
@@ -411,7 +416,7 @@ rg_s_match_simple(gint argc, VALUE *argv, VALUE self)
                                    RVAL2CSTR(string),
                                    NUM2UINT(compile_options),
                                    NUM2UINT(match_options));
-    if(matched == TRUE)
+    if (matched == TRUE)
         return Qtrue;
     else
         return Qfalse;
@@ -430,7 +435,8 @@ static VALUE
 rg_s_split_simple(gint argc, VALUE *argv, VALUE self)
 {
     VALUE pattern, string, compile_options, match_options;
-    char ** strings;
+    char **strings;
+    gchar **ptr;
     
     rb_scan_args(argc, argv, "40", &pattern, &string, &compile_options, &match_options);
     strings = g_regex_split_simple(RVAL2CSTR(pattern),
@@ -439,9 +445,8 @@ rg_s_split_simple(gint argc, VALUE *argv, VALUE self)
                                    NUM2UINT(match_options));
   
     VALUE array_of_strings = rb_ary_new();
-    gchar **ptr;
     
-    for(ptr = strings; *ptr != NULL; ptr++)
+    for (ptr = strings; *ptr != NULL; ptr++)
     {
         rb_ary_push(array_of_strings, CSTR2RVAL(*ptr));
     }
@@ -455,14 +460,14 @@ rg_s_check_replacement(VALUE self, VALUE replacement)
 {
     gboolean is_valid, has_ref;
     GError *error = NULL;
+    VALUE boolean_val;
   
     is_valid = g_regex_check_replacement(RVAL2CSTR(replacement), &has_ref, &error);
   
-    if(error)
+    if (error)
         RAISE_GERROR(error);
     
     VALUE ret = rb_ary_new();
-    VALUE boolean_val;
      
     boolean_val = is_valid == TRUE ? Qtrue : Qfalse;
     rb_ary_push(ret, boolean_val);
