@@ -19,9 +19,6 @@
 
 #include "rbgprivate.h"
 
-#ifdef G_OS_WIN32
-#include <windows.h>
-#endif
 
 #define RG_TARGET_NAMESPACE cRegex
 #define _SELF(s) ((GRegex*)RVAL2BOXED(s, G_TYPE_REGEX))
