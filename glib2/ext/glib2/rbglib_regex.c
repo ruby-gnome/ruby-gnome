@@ -85,12 +85,7 @@ rg_capture_count(VALUE self)
 static VALUE
 rg_has_cr_or_lf(VALUE self)
 {
-    gboolean contains_cr_or_lf = g_regex_get_has_cr_or_lf(_SELF(self));
-  
-    if (contains_cr_or_lf == TRUE)
-        return Qtrue;
-    else
-        return Qfalse;
+    return CBOOL2RVAL(g_regex_get_has_cr_or_lf(_SELF(self)));
 }
 
 static VALUE
@@ -416,10 +411,7 @@ rg_s_match_simple(gint argc, VALUE *argv, VALUE self)
                                    RVAL2CSTR(string),
                                    NUM2UINT(compile_options),
                                    NUM2UINT(match_options));
-    if (matched == TRUE)
-        return Qtrue;
-    else
-        return Qfalse;
+    return CBOOL2RVAL(matched);
 }
 
 static VALUE
