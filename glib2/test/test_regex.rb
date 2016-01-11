@@ -30,4 +30,10 @@ class TestRegex < Test::Unit::TestCase
     a_regex = GLib::Regex.new("to??", :compile_options => 0, :match_options => 0)
     assert_equal(a_regex.pattern, "to??")
   end
+
+  def test_regex_compile_flags
+    flags = GLib::RegexCompileFlags::CASELESS
+    a_regex = GLib::Regex.new("to??", :compile_options => flags, :match_options => 0)
+    assert_equal(a_regex.compile_flags, flags) 
+  end
 end
