@@ -13,9 +13,8 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- 
-class TestRegex < Test::Unit::TestCase
 
+class TestRegex < Test::Unit::TestCase
   def test_regex_enum_match_flags
     assert_const_defined(GLib, :RegexMatchFlags)
     assert_kind_of(GLib::RegexMatchFlags, GLib::RegexMatchFlags::PARTIAL_HARD)
@@ -34,12 +33,12 @@ class TestRegex < Test::Unit::TestCase
   def test_regex_compile_flags
     flags = GLib::RegexCompileFlags::CASELESS
     a_regex = GLib::Regex.new("to??", :compile_options => flags, :match_options => 0)
-    assert_equal(a_regex.compile_flags, flags) 
+    assert_equal(a_regex.compile_flags, flags)
   end
 
   def test_regex_match_flags
     flags = GLib::RegexMatchFlags::PARTIAL_HARD
     a_regex = GLib::Regex.new("to??", :compile_options => 0, :match_options => flags)
-    assert_equal(a_regex.match_flags, flags) 
+    assert_equal(a_regex.match_flags, flags)
   end
 end
