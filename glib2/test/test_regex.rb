@@ -36,4 +36,10 @@ class TestRegex < Test::Unit::TestCase
     a_regex = GLib::Regex.new("to??", :compile_options => flags, :match_options => 0)
     assert_equal(a_regex.compile_flags, flags) 
   end
+
+  def test_regex_match_flags
+    flags = GLib::RegexMatchFlags::PARTIAL_HARD
+    a_regex = GLib::Regex.new("to??", :compile_options => 0, :match_options => flags)
+    assert_equal(a_regex.match_flags, flags) 
+  end
 end
