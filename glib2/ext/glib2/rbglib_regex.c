@@ -78,6 +78,12 @@ rg_compile_flags(VALUE self)
     return UINT2NUM(g_regex_get_compile_flags(_SELF(self)));
 }
 
+static VALUE
+rg_match_flags(VALUE self)
+{
+    return UINT2NUM(g_regex_get_match_flags(_SELF(self)));
+}
+
 void
 Init_glib_regex(void)
 {
@@ -87,6 +93,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(pattern, 0);
     RG_DEF_METHOD(compile_flags, 0);
+    RG_DEF_METHOD(match_flags, 0);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);
