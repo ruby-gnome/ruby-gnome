@@ -66,6 +66,12 @@ rg_initialize(gint argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
+static VALUE
+rg_pattern(VALUE self)
+{
+    return CSTR2RVAL(g_regex_get_pattern(_SELF(self)));
+}
+
 void
 Init_glib_regex(void)
 {
@@ -73,6 +79,7 @@ Init_glib_regex(void)
                                                          NULL, regex_free); 
 
     RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(pattern, 0);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);
