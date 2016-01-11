@@ -26,4 +26,8 @@ class TestRegex < Test::Unit::TestCase
     assert_kind_of(GLib::RegexCompileFlags, GLib::RegexCompileFlags::CASELESS)
   end
 
+  def test_regex_pattern
+    a_regex = GLib::Regex.new("to??", :compile_options => 0, :match_options => 0)
+    assert_equal(a_regex.pattern, "to??")
+  end
 end
