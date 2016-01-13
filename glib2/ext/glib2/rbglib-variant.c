@@ -78,15 +78,10 @@ rg_variant_allocate(VALUE klass)
     return Data_Wrap_Struct(klass, NULL, rg_variant_free, NULL);
 }
 
-static VALUE
-rg_initialize(int argc, VALUE *argv, VALUE self)
+static GVariant *
+rg_ruby_to_variant(VALUE rb_value, VALUE rb_variant_type)
 {
-    GVariant *variant;
     const GVariantType *variant_type;
-    VALUE rb_value;
-    VALUE rb_variant_type;
-
-    rb_scan_args(argc, argv, "11", &rb_value, &rb_variant_type);
 
     if (NIL_P(rb_variant_type)) {
         switch (rb_type(rb_value)) {
@@ -114,33 +109,33 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     }
 
     if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_BOOLEAN)) {
-        variant = g_variant_new_boolean(RVAL2CBOOL(rb_value));
+        return g_variant_new_boolean(RVAL2CBOOL(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_BYTE)) {
-        variant = g_variant_new_byte(NUM2UINT(rb_value));
+        return g_variant_new_byte(NUM2UINT(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_INT16)) {
-        variant = g_variant_new_int16(NUM2INT(rb_value));
+        return g_variant_new_int16(NUM2INT(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_UINT16)) {
-        variant = g_variant_new_uint16(NUM2UINT(rb_value));
+        return g_variant_new_uint16(NUM2UINT(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_INT32)) {
-        variant = g_variant_new_int32(NUM2INT(rb_value));
+        return g_variant_new_int32(NUM2INT(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_UINT32)) {
-        variant = g_variant_new_uint32(NUM2UINT(rb_value));
+        return g_variant_new_uint32(NUM2UINT(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_INT64)) {
-        variant = g_variant_new_int64(NUM2LONG(rb_value));
+        return g_variant_new_int64(NUM2LONG(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_UINT64)) {
-        variant = g_variant_new_uint64(NUM2ULONG(rb_value));
+        return g_variant_new_uint64(NUM2ULONG(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_HANDLE)) {
-        variant = g_variant_new_handle(NUM2INT(rb_value));
+        return g_variant_new_handle(NUM2INT(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_DOUBLE)) {
-        variant = g_variant_new_double(NUM2DBL(rb_value));
+        return g_variant_new_double(NUM2DBL(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_STRING)) {
-        variant = g_variant_new_string(RVAL2CSTR_ACCEPT_NIL(rb_value));
+        return g_variant_new_string(RVAL2CSTR_ACCEPT_NIL(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_OBJECT_PATH)) {
-        variant = g_variant_new_object_path(RVAL2CSTR_ACCEPT_NIL(rb_value));
+        return g_variant_new_object_path(RVAL2CSTR_ACCEPT_NIL(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_SIGNATURE)) {
-        variant = g_variant_new_signature(RVAL2CSTR_ACCEPT_NIL(rb_value));
+        return g_variant_new_signature(RVAL2CSTR_ACCEPT_NIL(rb_value));
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_VARIANT)) {
-        variant = g_variant_new_variant(rbg_variant_from_ruby(rb_value));
+        return g_variant_new_variant(rbg_variant_from_ruby(rb_value));
     } else if (g_variant_type_equal(variant_type,
                                     G_VARIANT_TYPE_STRING_ARRAY) ||
                g_variant_type_equal(variant_type,
@@ -161,12 +156,12 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
             }
         }
         if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_STRING_ARRAY)) {
-            variant = g_variant_new_strv(strings, length);
+            return g_variant_new_strv(strings, length);
         } else {
-            variant = g_variant_new_objv(strings, length);
+            return g_variant_new_objv(strings, length);
         }
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_BYTESTRING)) {
-        variant = g_variant_new_bytestring(RVAL2CSTR_RAW_ACCEPT_NIL(rb_value));
+        return g_variant_new_bytestring(RVAL2CSTR_RAW_ACCEPT_NIL(rb_value));
     } else if (g_variant_type_equal(variant_type,
                                     G_VARIANT_TYPE_BYTESTRING_ARRAY)) {
         const gchar **strings;
@@ -184,7 +179,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                 strings[i] = RVAL2CSTR_RAW_ACCEPT_NIL(rb_string);
             }
         }
-        variant = g_variant_new_bytestring_array(strings, length);
+        return g_variant_new_bytestring_array(strings, length);
     } else {
         rb_raise(rb_eNotImpError,
                  "TODO: Ruby -> GVariant(%.*s): %s",
@@ -192,6 +187,17 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                  g_variant_type_peek_string(variant_type),
                  RBG_INSPECT(rb_value));
     }
+}
+
+static VALUE
+rg_initialize(int argc, VALUE *argv, VALUE self)
+{
+    GVariant *variant;
+    VALUE rb_value;
+    VALUE rb_variant_type;
+
+    rb_scan_args(argc, argv, "11", &rb_value, &rb_variant_type);
+    variant = rg_ruby_to_variant(rb_value, rb_variant_type);
     g_variant_ref_sink(variant);
     DATA_PTR(self) = variant;
 
