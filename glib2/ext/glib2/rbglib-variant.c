@@ -39,11 +39,45 @@ rbg_variant_to_ruby(GVariant *variant)
 
     if (g_variant_type_equal(type, G_VARIANT_TYPE_BOOLEAN)) {
         return CBOOL2RVAL(g_variant_get_boolean(variant));
-    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_STRING)) {
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_BYTE)) {
+        return UINT2NUM(g_variant_get_byte(variant));
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_INT16)) {
+        return INT2NUM(g_variant_get_int16(variant));
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_UINT16)) {
+        return UINT2NUM(g_variant_get_uint16(variant));
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_INT32)) {
+        return INT2NUM(g_variant_get_int32(variant));
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_UINT32)) {
+        return UINT2NUM(g_variant_get_uint32(variant));
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_INT64)) {
+        return rbglib_int64_to_num(g_variant_get_int64(variant));
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_UINT64)) {
+        return rbglib_uint64_to_num(g_variant_get_uint64(variant));
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_DOUBLE)) {
+        return rb_float_new(g_variant_get_double(variant));
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_STRING) ||
+               g_variant_type_equal(type, G_VARIANT_TYPE_OBJECT_PATH) ||
+               g_variant_type_equal(type, G_VARIANT_TYPE_SIGNATURE)) {
         const gchar *string;
         gsize string_length;
         string = g_variant_get_string(variant, &string_length);
         return CSTR2RVAL_LEN(string, string_length);
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_HANDLE)) {
+        return INT2NUM(g_variant_get_handle(variant));
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_VARIANT)) {
+        GVariant *val = g_variant_get_variant(variant);
+        VALUE value = rbg_variant_new(val);
+        g_variant_unref(val);
+        return value;
+    } else if (g_variant_type_is_array(type)) {
+        gsize i, len = g_variant_n_children(variant);
+        VALUE ary = rb_ary_new2(len);
+        for (i = 0; i < len; i++) {
+            GVariant *val = g_variant_get_child_value(variant, i);
+            rb_ary_store(ary, i, rbg_variant_to_ruby(val));
+            g_variant_unref(val);
+        }
+        return ary;
     } else {
         rb_raise(rb_eNotImpError,
                  "TODO: GVariant(%.*s) -> Ruby",
