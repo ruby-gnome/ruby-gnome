@@ -98,6 +98,9 @@ rg_ruby_to_variant(VALUE rb_value, VALUE rb_variant_type)
           case RUBY_T_STRING:
             variant_type = G_VARIANT_TYPE_STRING;
             break;
+          case RUBY_T_ARRAY:
+            variant_type = G_VARIANT_TYPE_ARRAY;
+            break;
           default:
             rb_raise(rb_eNotImpError,
                      "TODO: Ruby -> GVariantType: %s",
@@ -160,6 +163,15 @@ rg_ruby_to_variant(VALUE rb_value, VALUE rb_variant_type)
         } else {
             return g_variant_new_objv(strings, length);
         }
+    } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_ARRAY)) {
+        int i;
+        GVariantBuilder builder;
+        g_variant_builder_init(&builder, G_VARIANT_TYPE_ARRAY);
+        for (i = 0; i < RARRAY_LEN(rb_value); i++) {
+            GVariant *val = rg_ruby_to_variant(rb_ary_entry(rb_value, i), Qnil);
+            g_variant_builder_add_value(&builder, val);
+        }
+        return g_variant_builder_end(&builder);
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_BYTESTRING)) {
         return g_variant_new_bytestring(RVAL2CSTR_RAW_ACCEPT_NIL(rb_value));
     } else if (g_variant_type_equal(variant_type,
