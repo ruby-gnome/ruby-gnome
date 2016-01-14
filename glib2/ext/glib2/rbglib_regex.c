@@ -23,14 +23,6 @@
 #define RG_TARGET_NAMESPACE cRegex
 #define _SELF(s) ((GRegex*)RVAL2BOXED(s, G_TYPE_REGEX))
 
-static void
-regex_free(gpointer object)
-{
-    GRegex *regex = object;
-
-    g_regex_unref(regex);
-}
-
 static VALUE
 rg_initialize(gint argc, VALUE *argv, VALUE self)
 {
@@ -87,8 +79,7 @@ rg_match_flags(VALUE self)
 void
 Init_glib_regex(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_REGEX, "Regex", mGLib,
-                                                         NULL, regex_free); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_REGEX, "Regex", mGLib);
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(pattern, 0);
