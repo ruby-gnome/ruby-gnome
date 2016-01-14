@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2015-2016  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -34,27 +34,27 @@ rg_initialize(gint argc, VALUE *argv, VALUE self)
     const char *pattern;
     GRegexCompileFlags compile_options = 0;
     GRegexMatchFlags match_options = 0;
-    
+
     rb_scan_args(argc, argv, "11", &rb_pattern, &rb_options);
     rbg_scan_options(rb_options,
                      "compile_options", &rb_compile_options,
                      "match_options", &rb_match_options,
                      NULL);
-    
+
     pattern = RVAL2CSTR(rb_pattern);
     if (!NIL_P(rb_compile_options))
         compile_options = RVAL2GREGEXCOMPILEOPTIONSFLAGS(rb_compile_options);
     if (!NIL_P(rb_match_options))
         match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
-    
+
     regex = g_regex_new(pattern,
                         compile_options,
                         match_options,
-                        &error);  
+                        &error);
     if (error)
         RAISE_GERROR(error);
 
-    G_INITIALIZE(self, regex); 
+    G_INITIALIZE(self, regex);
     return Qnil;
 }
 
