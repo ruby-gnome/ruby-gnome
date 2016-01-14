@@ -124,7 +124,7 @@ rg_ruby_to_variant(VALUE rb_value, VALUE rb_variant_type)
             variant_type = G_VARIANT_TYPE_BOOLEAN;
             break;
           case RUBY_T_FIXNUM:
-            variant_type = G_VARIANT_TYPE_INT32;
+            variant_type = G_VARIANT_TYPE_INT64;
             break;
           case RUBY_T_FLOAT:
             variant_type = G_VARIANT_TYPE_DOUBLE;
