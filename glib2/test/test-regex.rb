@@ -26,19 +26,19 @@ class TestRegex < Test::Unit::TestCase
   end
 
   def test_pattern
-    a_regex = GLib::Regex.new("to??", :compile_options => 0, :match_options => 0)
-    assert_equal(a_regex.pattern, "to??")
+    regex = GLib::Regex.new("to??", :compile_options => 0, :match_options => 0)
+    assert_equal(regex.pattern, "to??")
   end
 
   def test_compile_flags
     flags = GLib::RegexCompileFlags::CASELESS
-    a_regex = GLib::Regex.new("to??", :compile_options => flags, :match_options => 0)
-    assert_equal(a_regex.compile_flags, flags)
+    regex = GLib::Regex.new("to??", :compile_options => flags, :match_options => 0)
+    assert_equal(regex.compile_flags, flags)
   end
 
   def test_match_flags
     flags = GLib::RegexMatchFlags::PARTIAL_HARD
-    a_regex = GLib::Regex.new("to??", :compile_options => 0, :match_options => flags)
-    assert_equal(a_regex.match_flags, flags)
+    regex = GLib::Regex.new("to??", :compile_options => 0, :match_options => flags)
+    assert_equal(regex.match_flags, flags)
   end
 end
