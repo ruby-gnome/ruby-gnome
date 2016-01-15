@@ -16,22 +16,28 @@ A common use of GtkModelButton is to implement menu-like content
 in popovers.
 =end
 module ModelbuttonDemo
-
   def self.run_demo(main_window)
     builder = Gtk::Builder.new(:resource => "/modelbutton/modelbutton.ui")
-    
-    builder.add_callback_symbol("tool_clicked") 
-    # Wait for issue # 623 
+
+    builder.connect_signals do |name|
+      if name == "tool_clicked"
+        proc do |button|
+          button.active = !button.active?
+        end
+      end
+    end
     window = builder["window1"]
     window.screen = main_window.screen
     actions = Gio::SimpleActionGroup.new
-    actions.add_actions( [
-      {:name => "color", :parameter_type => "s", :state => "red"},
-      {:name => "chocolate", :state => true},
-      {:name => "vanilla", :state => false},
-      {:name => "sprinkles"}
+    actions.add_actions([
+      { :name => "color", :parameter_type => "s", :state => "'red'" },
+      { :name => "chocolate", :state => "true" },
+      { :name => "vanilla", :state => "false" },
+      { :name => "sprinkles" }
     ])
+
     window.insert_action_group("win", actions)
+
     if !window.visible?
       window.show_all
     else
