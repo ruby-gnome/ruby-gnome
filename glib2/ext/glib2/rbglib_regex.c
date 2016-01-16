@@ -79,8 +79,7 @@ rg_match_flags(VALUE self)
 static VALUE
 rg_split(gint argc, VALUE *argv, VALUE self)
 {
-    VALUE rb_string, rb_string_len, rb_start_position,
-          rb_match_options, rb_max_tokens, rb_options;
+    VALUE rb_string, rb_start_position, rb_match_options, rb_max_tokens, rb_options;
     GError *error = NULL;
     gchar **strings;
     const gchar *string;
@@ -92,15 +91,13 @@ rg_split(gint argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &rb_string, &rb_options);
 
     rbg_scan_options(rb_options,
-                     "string_len", &rb_string_len,
                      "start_position", &rb_start_position,
                      "match_options", &rb_match_options,
                      "max_tokens", &rb_max_tokens,
                      NULL);
     string = RVAL2CSTR(rb_string);
+    string_len = RSTRING_LEN(rb_string);
 
-    if (!NIL_P(rb_string_len))
-        string_len = NUM2INT(rb_string_len);
     if (!NIL_P(rb_start_position))
         start_position = NUM2INT(rb_start_position);
     if (!NIL_P(rb_match_options))
