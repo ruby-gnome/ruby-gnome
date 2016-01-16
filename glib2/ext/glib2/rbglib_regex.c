@@ -76,6 +76,49 @@ rg_match_flags(VALUE self)
     return UINT2NUM(g_regex_get_match_flags(_SELF(self)));
 }
 
+static VALUE
+rg_split(gint argc, VALUE *argv, VALUE self)
+{
+    VALUE rb_string, rb_start_position, rb_match_options, rb_max_tokens, rb_options;
+    GError *error = NULL;
+    gchar **strings;
+    const gchar *string;
+    gssize string_len = -1;
+    gint start_position = 0;
+    GRegexMatchFlags match_options = 0;
+    gint max_tokens = 0;
+
+    rb_scan_args(argc, argv, "11", &rb_string, &rb_options);
+
+    rbg_scan_options(rb_options,
+                     "start_position", &rb_start_position,
+                     "match_options", &rb_match_options,
+                     "max_tokens", &rb_max_tokens,
+                     NULL);
+    string = RVAL2CSTR(rb_string);
+    string_len = RSTRING_LEN(rb_string);
+
+    if (!NIL_P(rb_start_position))
+        start_position = NUM2INT(rb_start_position);
+    if (!NIL_P(rb_match_options))
+        match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
+    if (!NIL_P(rb_max_tokens))
+        max_tokens = NUM2INT(rb_max_tokens);
+
+    strings = g_regex_split_full(_SELF(self),
+                                 string,
+                                 string_len,
+                                 start_position,
+                                 match_options,
+                                 max_tokens,
+                                 &error);
+
+    if (error)
+      RAISE_GERROR(error);
+
+    return STRV2RVAL_FREE(strings);
+}
+
 void
 Init_glib_regex(void)
 {
@@ -85,6 +128,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(pattern, 0);
     RG_DEF_METHOD(compile_flags, 0);
     RG_DEF_METHOD(match_flags, 0);
+    RG_DEF_METHOD(split, -1);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);
