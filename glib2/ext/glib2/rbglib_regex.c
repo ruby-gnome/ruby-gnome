@@ -119,7 +119,59 @@ rg_split(gint argc, VALUE *argv, VALUE self)
     return STRV2RVAL_FREE(strings);
 }
 
-void
+static VALUE
+rg_match(gint argc, VALUE *argv, VALUE self)
+{
+    VALUE rb_string, rb_start_position, rb_match_options, 
+          rb_options, dup_string, match_info;
+    GMatchInfo *_match_info = NULL;
+    GError *error = NULL;
+    const gchar *string;
+    gssize string_len = -1;
+    gint start_position = 0;
+    GRegexMatchFlags match_options = 0;
+
+    rb_scan_args(argc, argv, "11", &rb_string, &rb_options);
+
+    rbg_scan_options(rb_options,
+                     "start_position", &rb_start_position,
+                     "match_options", &rb_match_options,
+                     NULL);
+    
+    dup_string = rb_str_dup(rb_string);
+    rb_str_freeze(dup_string);
+
+    string = RVAL2CSTR(dup_string);
+    string_len = RSTRING_LEN(dup_string);
+
+
+    if (!NIL_P(rb_start_position))
+        start_position = NUM2INT(rb_start_position);
+    if (!NIL_P(rb_match_options))
+        match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
+
+    g_regex_match_full(_SELF(self),
+                       string,
+                       string_len  ,
+                       start_position,
+                       match_options,
+                       &_match_info,
+                       &error);
+  
+    if (error)
+        RAISE_GERROR(error);
+
+    if (_match_info)
+    {
+        match_info = BOXED2RVAL(_match_info, G_TYPE_MATCH_INFO);
+        rb_iv_set(match_info, "@string", dup_string);
+        return match_info;
+    }
+    else
+        return Qnil;
+}
+
+  void
 Init_glib_regex(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_REGEX, "Regex", mGLib);
@@ -129,6 +181,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(compile_flags, 0);
     RG_DEF_METHOD(match_flags, 0);
     RG_DEF_METHOD(split, -1);
+    RG_DEF_METHOD(match, -1);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);
