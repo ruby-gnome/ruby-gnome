@@ -45,6 +45,12 @@ rg_string(VALUE self)
     return rb_iv_get(self, "@string");
 }
 
+static VALUE
+rg_matches_p(VALUE self)
+{
+  return CBOOL2RVAL(g_match_info_matches(_SELF(self)));
+}
+
 void
 Init_glib_matchinfo(void)
 {
@@ -53,6 +59,5 @@ Init_glib_matchinfo(void)
                                                          NULL, match_info_free);
     RG_DEF_METHOD(regex, 0);
     RG_DEF_METHOD(string, 0);
+    RG_DEF_METHOD_P(matches, 0);
 }
-
-
