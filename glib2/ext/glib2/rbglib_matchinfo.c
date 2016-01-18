@@ -39,6 +39,12 @@ rg_regex(VALUE self)
     return BOXED2RVAL(regex, G_TYPE_REGEX);
 }
 
+static VALUE
+rg_string(VALUE self)
+{
+    return rb_iv_get(self, "@string");
+}
+
 void
 Init_glib_matchinfo(void)
 {
@@ -46,6 +52,7 @@ Init_glib_matchinfo(void)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_MATCH_INFO, "MatchInfo", mGLib,
                                                          NULL, match_info_free);
     RG_DEF_METHOD(regex, 0);
+    RG_DEF_METHOD(string, 0);
 }
 
 
