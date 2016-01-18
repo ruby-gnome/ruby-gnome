@@ -30,10 +30,22 @@ match_info_free(gpointer object)
     g_match_info_free(match_info);
 }
 
+static VALUE
+rg_regex(VALUE self)
+{
+    GRegex *regex;
+    regex = g_match_info_get_regex(_SELF(self));
+    g_regex_ref(regex);
+    return BOXED2RVAL(regex, G_TYPE_REGEX);
+}
+
 void
 Init_glib_matchinfo(void)
 {
   
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_MATCH_INFO, "MatchInfo", mGLib,
                                                          NULL, match_info_free);
+    RG_DEF_METHOD(regex, 0);
 }
+
+
