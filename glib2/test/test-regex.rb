@@ -47,31 +47,32 @@ class TestRegex < Test::Unit::TestCase
       regex = GLib::Regex.new("\s")
       string_to_split = "a bc"
       splited_strings = regex.split(string_to_split)
-      assert_equal(splited_strings, ["a", "bc"])
+      assert_equal(["a", "bc"], splited_strings)
     end
 
     test "start_position" do
       regex = GLib::Regex.new("\s")
       string_to_split = "a bc"
       splited_strings = regex.split(string_to_split, :start_position => 2)
-      assert_equal(splited_strings, ["bc"])
+      assert_equal(["bc"], splited_strings)
     end
 
     test "max_tokens" do
       regex = GLib::Regex.new("\s")
       string_to_split = "a bc de fg"
       splited_strings = regex.split(string_to_split, :max_tokens => 2)
-      assert_equal(splited_strings, ["a","bc de fg"])
+      assert_equal(["a", "bc de fg"], splited_strings)
     end
 
     test "match_options" do
       regex = GLib::Regex.new("a?b?")
       string_to_split = "toto ab"
       splited_strings = regex.split(string_to_split)
-      assert_equal(splited_strings, ["t","o" ,"t", "o"," "])
+      assert_equal(["t", "o", "t", "o", " "],
+                   splited_strings)
       splited_strings = regex.split(string_to_split,
                                     :match_options => :notempty)
-      assert_equal(splited_strings, ["toto ", ""])
+      assert_equal(["toto ", ""], splited_strings)
     end
   end
 
