@@ -49,18 +49,21 @@ class TestRegex < Test::Unit::TestCase
       splited_strings = a_regex.split(string_to_split)
       assert_equal(splited_strings, ["a", "bc"])
     end
+
     test "start_position" do
       a_regex = GLib::Regex.new("\s")
       string_to_split = "a bc"
       splited_strings = a_regex.split(string_to_split, :start_position => 2)
       assert_equal(splited_strings, ["bc"])
     end
+
     test "max_tokens" do
       a_regex = GLib::Regex.new("\s")
       string_to_split = "a bc de fg"
       splited_strings = a_regex.split(string_to_split, :max_tokens => 2)
       assert_equal(splited_strings, ["a","bc de fg"])
     end
+
     test "match_options" do
       a_regex = GLib::Regex.new("a?b?")
       string_to_split = "toto ab"
