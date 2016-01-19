@@ -15,7 +15,7 @@ css_multiplebgs.c       ok              ok
 css_pixbufs.c           ok              ok
 css_shadows.c           ok              ok
 cursors.c               ok              ok
-dialog.c                ok              no
+dialog.c                ok              ok
 drawingarea.c           ok              no
 editable_cells.c        ok              no
 entry_buffer.c          ok              ok

@@ -1,137 +1,127 @@
-# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# Copyright (c) 2015 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: dialog.rb,v 1.5 2005/02/12 23:02:43 kzys Exp $
 =begin
-= Dialog and Message Boxes
+=  Dialogs and Message Boxes
 
-Dialog widgets are used to pop up a transient window for user feedback.
+ Dialog widgets are used to pop up a transient window for user feedback.
 =end
+module DialogDemo
+  def self.run_demo(main_window)
+    window = Gtk::Window.new(:toplevel)
+    window.screen = main_window.screen
+    window.title = "Dialogs and Message Boxes"
+    window.border_width = 8
 
-require 'common'
+    frame = Gtk::Frame.new("Dialogs")
+    window.add(frame)
 
-module Demo
-  class Dialog < Demo::BasicWindow
-    def initialize
-      @count = 1
+    vbox = Gtk::Box.new(:vertical, 8)
+    vbox.border_width = 8
+    frame.add(vbox)
 
-      super('Dialogs')
-      set_border_width(8)
+    # Standard message dialog
+    hbox = Gtk::Box.new(:horizontal, 8)
+    vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
+    button = Gtk::Button.new(:label => "_Message Dialog",
+                             :use_underline => true)
+    i = 0
 
-      frame = Gtk::Frame.new('Dialogs')
-      add(frame)
-
-      vbox = Gtk::VBox.new(false, 8)
-      vbox.set_border_width(8)
-      frame.add(vbox)
-
-      # Standard message dialog
-      hbox = Gtk::Box.new(:horizontal, 0)
-      vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
-      button = Gtk::Button.new('_Message Dialog', true)
-      button.signal_connect('clicked') do
-        message_dialog_clicked
-      end
-      hbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
-
-      vbox.pack_start(Gtk::HSeparator.new, :expand => false, :fill => false, :padding => 0)
-
-      # Interactive dialog
-      hbox = Gtk::Box.new(:horizontal, 8)
-      vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
-      vbox2 = Gtk::VBox.new(false, 0)
-
-      button = Gtk::Button.new('_Interactive Dialog')
-      button.signal_connect('clicked') do
-        interactive_dialog_clicked
-      end
-      hbox.pack_start(vbox2, :expand => false, :fill => false, :padding => 0)
-      vbox2.pack_start(button, :expand => false, :fill => false, :padding => 0)
-
-      table = Gtk::Table.new(2, 2, false)
-      table.set_row_spacings(4)
-      table.set_column_spacings(4)
-      hbox.pack_start(table, :expand => false, :fill => false, :padding => 0)
-
-      label = Gtk::Label.new('_Entry 1', true)
-      table.attach_defaults(label, 0, 1, 0, 1)
-
-      @entry1 = Gtk::Entry.new
-      table.attach_defaults(@entry1, 1, 2, 0, 1)
-      label.set_mnemonic_widget(@entry1)
-
-      label = Gtk::Label.new('E_ntry 2', true)
-
-      table.attach_defaults(label, 0, 1, 1, 2)
-
-      @entry2 = Gtk::Entry.new
-      table.attach_defaults(@entry2, 1, 2, 1, 2)
-      label.set_mnemonic_widget(@entry2)
-    end
-
-    def message_dialog_clicked
-      dialog = Gtk::MessageDialog.new(self,
-                                      Gtk::Dialog::MODAL |
-                                      Gtk::Dialog::DESTROY_WITH_PARENT,
-                                      Gtk::MessageDialog::INFO,
-                                      Gtk::MessageDialog::BUTTONS_OK,
-                                      <<EOS)
-This message box has been popped up the following
+    button.signal_connect "clicked" do
+      dialog = Gtk::MessageDialog.new(:parent => window,
+                                      :flags => [:modal, :destroy_with_parent],
+                                      :type => :info,
+                                      :buttons => :ok_cancel,
+                                      :message => <<-MESSAGE)
+This message has been popped up the following
 number of times:
-
-#{@count}
-EOS
+MESSAGE
+      dialog.secondary_text = "#{i}"
       dialog.run
       dialog.destroy
-      @count += 1
+      i += 1
     end
 
-    def interactive_dialog_clicked
-      dialog = Gtk::Dialog.new('Interactive Dialog',
-                               self,
-                               Gtk::Dialog::MODAL |
-                               Gtk::Dialog::DESTROY_WITH_PARENT,
-                               [Gtk::Stock::OK, Gtk::ResponseType::OK],
-                               ["_Non-stock Button", Gtk::ResponseType::CANCEL]
-                               )
+    hbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
+    vbox.pack_start(Gtk::Separator.new(:horizontal),
+                    :expand => false,
+                    :fill => false,
+                    :padding => 0)
 
-      hbox = Gtk::Box.new(:horizontal, 0)
-      hbox.set_border_width(8)
-      dialog.vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
+    # Interactive dialog
+    hbox = Gtk::Box.new(:horizontal, 8)
+    vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
+    vbox2 = Gtk::Box.new(:vertical, 0)
 
-      stock = Gtk::Image.new(Gtk::Stock::DIALOG_QUESTION, Gtk::IconSize::DIALOG)
-      hbox.pack_start(stock, :expand => false, :fill => false, :padding => 0)
+    button = Gtk::Button.new(:label => "_Interactive Dialog",
+                             :use_underline => true)
 
-      table = Gtk::Table.new(2, 2, false)
-      table.set_row_spacings(4)
-      table.set_column_spacings(4)
-      hbox.pack_start(table, :expand => true, :fill => true, :padding => 0)
-      label = Gtk::Label.new('_Entry 1', true)
-      table.attach_defaults(label,
-                            0, 1, 0, 1)
+    hbox.pack_start(vbox2, :expand => false, :fill => false, :padding => 0)
+    vbox2.pack_start(button, :expand => false, :fill => false, :padding => 0)
+
+    table = Gtk::Grid.new
+    table.row_spacing = 4
+    table.column_spacing = 4
+    hbox.pack_start(table, :expand => false, :fill => false, :padding => 0)
+
+    label = Gtk::Label.new("_Entry 1", :use_underline => true)
+    table.attach(label, 0, 0, 1, 1)
+
+    entry1 = Gtk::Entry.new
+    table.attach(entry1, 1, 0, 1, 1)
+    label.set_mnemonic_widget(entry1)
+
+    entry2 = Gtk::Entry.new
+    label = Gtk::Label.new("E_ntry 2", :use_underline => true)
+    table.attach(entry2, 1, 1, 1, 1)
+
+    button.signal_connect "clicked" do
+      dialog = Gtk::Dialog.new(:parent => window,
+                               :title => "Interactive Dialog",
+                               :flags => [:modal, :destroy_with_parent],
+                               :buttons => [["_OK", :ok],
+                                            ["_Cancel", :cancel]]
+                              )
+      content_area = dialog.content_area
+      local_hbox = Gtk::Box.new(:horizontal, 8)
+      local_hbox.border_width = 8
+      content_area.pack_start(local_hbox)
+
+      image = Gtk::Image.new(:icon_name => "dialog-question", :size => :dialog)
+      local_hbox.pack_start(image)
+
+      local_table = Gtk::Grid.new
+      local_table.row_spacing = 4
+      local_table.column_spacing = 4
+      local_hbox.pack_start(local_table, :expand => false, :fill => false, :padding => 0)
+
+      label = Gtk::Label.new("_Entry 1", :use_underline => true)
+      local_table.attach(label, 0, 0, 1, 1)
+
       local_entry1 = Gtk::Entry.new
-      local_entry1.text = @entry1.text
-      table.attach_defaults(local_entry1, 1, 2, 0, 1)
+      local_table.attach(local_entry1, 1, 0, 1, 1)
       label.set_mnemonic_widget(local_entry1)
 
-      label = Gtk::Label.new('E_ntry 2', true)
-      table.attach_defaults(label,
-                            0, 1, 1, 2)
-
       local_entry2 = Gtk::Entry.new
-      local_entry2.text = @entry2.text
-      table.attach_defaults(local_entry2, 1, 2, 1, 2)
-      label.set_mnemonic_widget(local_entry2)
+      label = Gtk::Label.new("E_ntry 2", :use_underline => true)
+      local_table.attach(local_entry2, 1, 1, 1, 1)
 
-      hbox.show_all
+      local_hbox.show_all
       response = dialog.run
 
-      if response == Gtk::ResponseType::OK
-        @entry1.text = local_entry1.text
-        @entry2.text = local_entry2.text
+      if response == :ok
+        entry1.text = local_entry1.text
+        entry2.text = local_entry2.text
       end
+
       dialog.destroy
     end
+
+    if !window.visible?
+      window.show_all
+    else
+      window.destroy
+    end
+    window
   end
 end
-
