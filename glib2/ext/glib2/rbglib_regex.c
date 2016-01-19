@@ -164,6 +164,7 @@ rg_match(gint argc, VALUE *argv, VALUE self)
     if (_match_info)
     {
         match_info = BOXED2RVAL(_match_info, G_TYPE_MATCH_INFO);
+        g_match_info_unref(_match_info);
         rb_iv_set(match_info, "@string", dup_string);
         return match_info;
     }
