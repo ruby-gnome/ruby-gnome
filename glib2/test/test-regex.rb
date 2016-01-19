@@ -73,7 +73,7 @@ class TestRegex < Test::Unit::TestCase
   end
 
   sub_test_case "match" do
-    a_regex = GLib::Regex.new("[A-Z]+", :compile_options => 0, :match_options => 0)
+    a_regex = GLib::Regex.new("[A-Z]+")
 
     test "no match no options" do
       match_info = a_regex.match("abc def")
