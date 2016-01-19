@@ -41,6 +41,7 @@ class TestRegex < Test::Unit::TestCase
     regex = GLib::Regex.new("to??", :match_options => flags)
     assert_equal(flags, regex.match_flags)
   end
+
   sub_test_case "split" do
     test "no options" do
       a_regex = GLib::Regex.new("\s")
@@ -68,6 +69,38 @@ class TestRegex < Test::Unit::TestCase
       splited_strings = a_regex.split(string_to_split,
                                       :match_options => :notempty)
       assert_equal(splited_strings, ["toto ", ""])
+    end
+  end
+
+  sub_test_case "match" do
+    a_regex = GLib::Regex.new("[A-Z]+", :compile_options => 0, :match_options => 0)
+
+    test "no match no options" do
+      match_info = a_regex.match("abc def")
+      assert_equal(match_info.string, "abc def")
+      assert_equal(match_info.regex.pattern, a_regex.pattern)
+      assert_equal(match_info.matches?, false)
+    end
+
+    test "matched no options" do
+      match_info = a_regex.match("abc DEF")
+      assert_equal(match_info.string, "abc DEF")
+      assert_equal(match_info.regex.pattern, a_regex.pattern)
+      assert_equal(match_info.matches?, true)
+    end
+
+    test "no match and start position option" do
+      match_info = a_regex.match("abc def", :start_position => 4)
+      assert_equal(match_info.string, "abc def")
+      assert_equal(match_info.regex.pattern, a_regex.pattern)
+      assert_equal(match_info.matches?, false)
+    end
+
+    test "matched  and start position option" do
+      match_info = a_regex.match("abc DEF", :start_position => 4)
+      assert_equal(match_info.string, "abc DEF")
+      assert_equal(match_info.regex.pattern, a_regex.pattern)
+      assert_equal(match_info.matches?, true)
     end
   end
 end
