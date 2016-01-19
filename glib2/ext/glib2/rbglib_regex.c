@@ -123,8 +123,8 @@ static VALUE
 rg_match(gint argc, VALUE *argv, VALUE self)
 {
     VALUE rb_string, rb_start_position, rb_match_options,
-          rb_options, dup_string, match_info;
-    GMatchInfo *_match_info = NULL;
+          rb_options, dup_string, rb_match_info;
+    GMatchInfo *match_info = NULL;
     GError *error = NULL;
     const gchar *string;
     gssize string_len = -1;
@@ -155,18 +155,18 @@ rg_match(gint argc, VALUE *argv, VALUE self)
                        string_len  ,
                        start_position,
                        match_options,
-                       &_match_info,
+                       &match_info,
                        &error);
 
     if (error)
         RAISE_GERROR(error);
 
-    if (_match_info)
+    if (match_info)
     {
-        match_info = BOXED2RVAL(_match_info, G_TYPE_MATCH_INFO);
-        g_match_info_unref(_match_info);
-        rb_iv_set(match_info, "@string", dup_string);
-        return match_info;
+        rb_match_info = BOXED2RVAL(match_info, G_TYPE_MATCH_INFO);
+        g_match_info_unref(match_info);
+        rb_iv_set(rb_match_info, "@string", dup_string);
+        return rb_match_info;
     }
     else
         return Qnil;
