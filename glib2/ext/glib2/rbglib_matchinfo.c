@@ -27,7 +27,6 @@ rg_regex(VALUE self)
 {
     GRegex *regex;
     regex = g_match_info_get_regex(_SELF(self));
-    g_regex_ref(regex);
     return BOXED2RVAL(regex, G_TYPE_REGEX);
 }
 
