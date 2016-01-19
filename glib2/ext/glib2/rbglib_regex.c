@@ -156,7 +156,7 @@ rg_match(gint argc, VALUE *argv, VALUE self)
 
     g_regex_match_full(_SELF(self),
                        string,
-                       string_len  ,
+                       string_len,
                        start_position,
                        match_options,
                        &match_info,
