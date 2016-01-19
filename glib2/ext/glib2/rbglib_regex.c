@@ -114,7 +114,7 @@ rg_split(gint argc, VALUE *argv, VALUE self)
                                  &error);
 
     if (error)
-      RAISE_GERROR(error);
+        RAISE_GERROR(error);
 
     return STRV2RVAL_FREE(strings);
 }
@@ -171,7 +171,7 @@ rg_match(gint argc, VALUE *argv, VALUE self)
         return Qnil;
 }
 
-  void
+void
 Init_glib_regex(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_REGEX, "Regex", mGLib);
