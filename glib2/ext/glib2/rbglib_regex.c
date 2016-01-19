@@ -165,15 +165,13 @@ rg_match(gint argc, VALUE *argv, VALUE self)
     if (error)
         RAISE_GERROR(error);
 
-    if (match_info)
-    {
-        rb_match_info = BOXED2RVAL(match_info, G_TYPE_MATCH_INFO);
-        g_match_info_unref(match_info);
-        rb_iv_set(rb_match_info, "@string", rb_frozen_string);
-        return rb_match_info;
-    }
-    else
+    if (!match_info)
         return Qnil;
+
+    rb_match_info = BOXED2RVAL(match_info, G_TYPE_MATCH_INFO);
+    g_match_info_unref(match_info);
+    rb_iv_set(rb_match_info, "@string", rb_frozen_string);
+    return rb_match_info;
 }
 
 void
