@@ -22,14 +22,6 @@
 #define RG_TARGET_NAMESPACE cMatchInfo
 #define _SELF(s) ((GMatchInfo*)RVAL2BOXED(s, G_TYPE_MATCH_INFO))
 
-static void
-match_info_free(gpointer object)
-{
-    GMatchInfo *match_info = object;
-
-    g_match_info_free(match_info);
-}
-
 static VALUE
 rg_regex(VALUE self)
 {
@@ -54,8 +46,9 @@ rg_matches_p(VALUE self)
 void
 Init_glib_matchinfo(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_MATCH_INFO, "MatchInfo", mGLib,
-                                                         NULL, match_info_free);
+    VALUE RG_TARGET_NAMESPACE;
+
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MATCH_INFO, "MatchInfo", mGLib);
     RG_DEF_METHOD(regex, 0);
     RG_DEF_METHOD(string, 0);
     RG_DEF_METHOD_P(matches, 0);
