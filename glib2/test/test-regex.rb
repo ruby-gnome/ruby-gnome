@@ -77,32 +77,44 @@ class TestRegex < Test::Unit::TestCase
       @regex = GLib::Regex.new("[A-Z]+")
     end
 
-    test "no match no options" do
+    # TODO: Move to test-match-info.rb
+    test "MatchInfo#string" do
       match_info = @regex.match("abc def")
       assert_equal(match_info.string, "abc def")
+    end
+
+    # TODO: Move to test-match-info.rb
+    test "MatchInfo#regex" do
+      match_info = @regex.match("abc def")
       assert_equal(match_info.regex.pattern, @regex.pattern)
-      assert_equal(match_info.matches?, false)
+    end
+
+    test "no match no options" do
+      match_info = @regex.match("abc def")
+      assert do
+        not match_info.matches?
+      end
     end
 
     test "matched no options" do
       match_info = @regex.match("abc DEF")
-      assert_equal(match_info.string, "abc DEF")
-      assert_equal(match_info.regex.pattern, @regex.pattern)
-      assert_equal(match_info.matches?, true)
+      assert do
+        match_info.matches?
+      end
     end
 
     test "no match and start position option" do
       match_info = @regex.match("abc def", :start_position => 4)
-      assert_equal(match_info.string, "abc def")
-      assert_equal(match_info.regex.pattern, @regex.pattern)
-      assert_equal(match_info.matches?, false)
+      assert do
+        not match_info.matches?
+      end
     end
 
-    test "matched  and start position option" do
+    test "matched and start position option" do
       match_info = @regex.match("abc DEF", :start_position => 4)
-      assert_equal(match_info.string, "abc DEF")
-      assert_equal(match_info.regex.pattern, @regex.pattern)
-      assert_equal(match_info.matches?, true)
+      assert do
+        match_info.matches?
+      end
     end
   end
 end
