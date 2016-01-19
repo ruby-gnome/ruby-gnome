@@ -122,7 +122,7 @@ rg_split(gint argc, VALUE *argv, VALUE self)
 static VALUE
 rg_match(gint argc, VALUE *argv, VALUE self)
 {
-    VALUE rb_string, rb_start_position, rb_match_options, 
+    VALUE rb_string, rb_start_position, rb_match_options,
           rb_options, dup_string, match_info;
     GMatchInfo *_match_info = NULL;
     GError *error = NULL;
@@ -137,7 +137,7 @@ rg_match(gint argc, VALUE *argv, VALUE self)
                      "start_position", &rb_start_position,
                      "match_options", &rb_match_options,
                      NULL);
-    
+
     dup_string = rb_str_dup(rb_string);
     rb_str_freeze(dup_string);
 
@@ -157,7 +157,7 @@ rg_match(gint argc, VALUE *argv, VALUE self)
                        match_options,
                        &_match_info,
                        &error);
-  
+
     if (error)
         RAISE_GERROR(error);
 

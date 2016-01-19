@@ -54,7 +54,6 @@ rg_matches_p(VALUE self)
 void
 Init_glib_matchinfo(void)
 {
-  
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_MATCH_INFO, "MatchInfo", mGLib,
                                                          NULL, match_info_free);
     RG_DEF_METHOD(regex, 0);
