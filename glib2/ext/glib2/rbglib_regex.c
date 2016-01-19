@@ -122,8 +122,8 @@ rg_split(gint argc, VALUE *argv, VALUE self)
 static VALUE
 rg_match(gint argc, VALUE *argv, VALUE self)
 {
-    VALUE rb_string, rb_start_position, rb_match_options,
-          rb_options, dup_string, rb_match_info;
+    VALUE rb_string, rb_start_position, rb_match_options, rb_options;
+    VALUE rb_frozen_string, rb_match_info;
     GMatchInfo *match_info = NULL;
     GError *error = NULL;
     const gchar *string;
@@ -138,11 +138,15 @@ rg_match(gint argc, VALUE *argv, VALUE self)
                      "match_options", &rb_match_options,
                      NULL);
 
-    dup_string = rb_str_dup(rb_string);
-    rb_str_freeze(dup_string);
+    if (OBJ_FROZEN(rb_string)) {
+        rb_frozen_string = rb_string;
+    } else {
+        rb_frozen_string = rb_str_dup(rb_string);
+        rb_str_freeze(rb_frozen_string);
+    }
 
-    string = RVAL2CSTR(dup_string);
-    string_len = RSTRING_LEN(dup_string);
+    string = RVAL2CSTR(rb_frozen_string);
+    string_len = RSTRING_LEN(rb_frozen_string);
 
 
     if (!NIL_P(rb_start_position))
@@ -165,7 +169,7 @@ rg_match(gint argc, VALUE *argv, VALUE self)
     {
         rb_match_info = BOXED2RVAL(match_info, G_TYPE_MATCH_INFO);
         g_match_info_unref(match_info);
-        rb_iv_set(rb_match_info, "@string", dup_string);
+        rb_iv_set(rb_match_info, "@string", rb_frozen_string);
         return rb_match_info;
     }
     else
