@@ -18,12 +18,12 @@ class TestMatchInfo < Test::Unit::TestCase
     def test_string
       regex = GLib::Regex.new("[A-Z]+")
       match_info = regex.match("abc def")
-      assert_equal(match_info.string, "abc def")
+      assert_equal("abc def", match_info.string)
     end
 
     def test_regex
       regex = GLib::Regex.new("[A-Z]+")
       match_info = regex.match("abc def")
-      assert_equal(match_info.regex.pattern, regex.pattern)
+      assert_equal(regex.pattern, match_info.regex.pattern)
     end
 end
