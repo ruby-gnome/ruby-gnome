@@ -81,18 +81,6 @@ class TestRegex < Test::Unit::TestCase
       @regex = GLib::Regex.new("[A-Z]+")
     end
 
-    # TODO: Move to test-match-info.rb
-    test "MatchInfo#string" do
-      match_info = @regex.match("abc def")
-      assert_equal(match_info.string, "abc def")
-    end
-
-    # TODO: Move to test-match-info.rb
-    test "MatchInfo#regex" do
-      match_info = @regex.match("abc def")
-      assert_equal(match_info.regex.pattern, @regex.pattern)
-    end
-
     test "no match no options" do
       match_info = @regex.match("abc def")
       assert do
