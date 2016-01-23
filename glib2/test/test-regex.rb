@@ -109,4 +109,15 @@ class TestRegex < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "max_backref" do
+    test "none" do
+      regex = GLib::Regex.new("to?o")
+      assert_equal(0, regex.max_backref)
+    end
+    test "one" do
+      regex = GLib::Regex.new("(to(?)o)\\g1")
+      assert_equal(1, regex.max_backref)
+    end
+  end
 end
