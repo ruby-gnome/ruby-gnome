@@ -138,4 +138,27 @@ class TestRegex < Test::Unit::TestCase
       assert_equal(3, regex.capture_count)
     end
   end
+
+  sub_test_case "has_cr_or_lf" do
+    test "none" do
+      regex = GLib::Regex.new("to?o")
+      assert do
+        not regex.has_cr_or_lf?
+      end
+    end
+
+    test "both" do
+      regex = GLib::Regex.new("to\no")
+      assert do
+        regex.has_cr_or_lf?
+      end
+    end
+
+    test "cr" do
+      regex = GLib::Regex.new("to\rtiti")
+      assert do
+        regex.has_cr_or_lf?
+      end
+    end
+  end
 end
