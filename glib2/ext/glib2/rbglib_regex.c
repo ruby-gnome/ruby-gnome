@@ -174,6 +174,18 @@ rg_match(gint argc, VALUE *argv, VALUE self)
     return rb_match_info;
 }
 
+static VALUE
+rg_max_backref(VALUE self)
+{
+    return INT2NUM(g_regex_get_max_backref(_SELF(self)));
+}
+
+static VALUE
+rg_capture_count(VALUE self)
+{
+    return INT2NUM(g_regex_get_capture_count(_SELF(self)));
+}
+
 void
 Init_glib_regex(void)
 {
@@ -185,6 +197,8 @@ Init_glib_regex(void)
     RG_DEF_METHOD(match_flags, 0);
     RG_DEF_METHOD(split, -1);
     RG_DEF_METHOD(match, -1);
+    RG_DEF_METHOD(max_backref, 0);
+    RG_DEF_METHOD(capture_count, 0);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);
