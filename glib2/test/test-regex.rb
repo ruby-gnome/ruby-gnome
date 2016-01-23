@@ -161,4 +161,16 @@ class TestRegex < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "max_lookbehind" do
+    test "none" do
+      regex = GLib::Regex.new("to?o")
+      assert_equal(0, regex.max_lookbehind)
+    end
+    
+    test "three" do
+      regex = GLib::Regex.new("(?<!foo)bar")
+      assert_equal(3, regex.max_lookbehind)
+    end
+  end
 end
