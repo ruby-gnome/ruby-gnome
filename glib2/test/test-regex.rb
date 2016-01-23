@@ -115,6 +115,7 @@ class TestRegex < Test::Unit::TestCase
       regex = GLib::Regex.new("to?o")
       assert_equal(0, regex.max_backref)
     end
+
     test "one" do
       regex = GLib::Regex.new("(to(?)o)\\g1")
       assert_equal(1, regex.max_backref)
