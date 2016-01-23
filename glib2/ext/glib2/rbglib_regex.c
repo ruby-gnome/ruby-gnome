@@ -180,6 +180,7 @@ rg_max_backref(VALUE self)
     return INT2NUM(g_regex_get_max_backref(_SELF(self)));
 }
 
+static VALUE
 rg_capture_count(VALUE self)
 {
     return INT2NUM(g_regex_get_capture_count(_SELF(self)));
