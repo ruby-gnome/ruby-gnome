@@ -173,4 +173,21 @@ class TestRegex < Test::Unit::TestCase
       assert_equal(3, regex.max_lookbehind)
     end
   end
+
+  sub_test_case "string_number" do
+    test "none" do
+      regex = GLib::Regex.new("too")
+      assert_equal(-1, regex.string_number("a_name"))
+    end
+
+    test "one" do
+      regex = GLib::Regex.new("(?<a_name>foo)bar")
+      assert_equal(1, regex.string_number("a_name"))
+    end
+
+    test "two" do
+      regex = GLib::Regex.new("(?<another_name>foo)(?<a_name>bar)")
+      assert_equal(2, regex.string_number("a_name"))
+    end
+  end
 end
