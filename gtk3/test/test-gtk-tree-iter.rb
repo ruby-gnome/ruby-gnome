@@ -102,6 +102,15 @@ class TestGtkTreeIter < Test::Unit::TestCase
     assert_equal(second_child_iter, @iter.nth_child(1))
   end
 
+  def test_firs_child
+    @iter.values = ["Dad"]
+    first_child_iter = @model.append(@iter)
+    first_child_iter.values = ["First son"]
+    second_child_iter = @model.append(@iter)
+    second_child_iter.values = ["First daughter"]
+    assert_equal(@iter.nth_child(0), @iter.first_child)
+  end
+
   def test_children
     @iter.values = ["Dad"]
     first_child_iter = @model.append(@iter)
