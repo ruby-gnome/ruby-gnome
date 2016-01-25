@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,8 +19,8 @@ class TestGtkTreeIter < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    @model = Gtk::ListStore.new(String)
-    @iter = @model.append
+    @model = Gtk::TreeStore.new(String)
+    @iter = @model.append(nil)
   end
 
   def test_path
@@ -52,7 +52,7 @@ class TestGtkTreeIter < Test::Unit::TestCase
   end
 
   test "#next!" do
-    next_iter = @model.append
+    next_iter = @model.append(nil)
     @iter.values = ["first"]
     next_iter.values = ["second"]
     assert_equal("first", @iter[0])
@@ -61,6 +61,53 @@ class TestGtkTreeIter < Test::Unit::TestCase
   end
 
   test "#parent" do
-    # TODO
+    @iter.values = ["Dad"]
+    child_iter = @model.append(@iter)
+    child_iter.values = ["First son"]
+    assert_equal(@iter, child_iter.parent)
+  end
+
+  sub_test_case "#has_child?" do
+    test "false" do
+      @iter.values = ["Dad"]
+      assert do
+        not @iter.has_child?
+      end
+    end
+
+    test "true" do
+      @iter.values = ["Dad"]
+      child_iter = @model.append(@iter)
+      child_iter.values = ["First son"]
+      assert(@iter.has_child?)
+    end
+  end
+
+  def test_n_children
+    @iter.values = ["Dad"]
+    child_iter = @model.append(@iter)
+    child_iter.values = ["First son"]
+    child_iter = @model.append(@iter)
+    child_iter.values = ["First daughter"]
+    assert_equal(2, @iter.n_children)
+  end
+
+  def test_nth_children
+    @iter.values = ["Dad"]
+    first_child_iter = @model.append(@iter)
+    first_child_iter.values = ["First son"]
+    second_child_iter = @model.append(@iter)
+    second_child_iter.values = ["First daughter"]
+    assert_equal(first_child_iter, @iter.nth_child(0))
+    assert_equal(second_child_iter, @iter.nth_child(1))
+  end
+
+  def test_children
+    @iter.values = ["Dad"]
+    first_child_iter = @model.append(@iter)
+    first_child_iter.values = ["First son"]
+    second_child_iter = @model.append(@iter)
+    second_child_iter.values = ["First daughter"]
+    assert_equal(first_child_iter, @iter.children)
   end
 end
