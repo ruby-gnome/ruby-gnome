@@ -201,6 +201,13 @@ rbg_name_to_nick(const gchar *name)
     return nick;
 }
 
+void *
+rbg_memzero(void *pointer, size_t size)
+{
+    memset(pointer, 0, size);
+    return pointer;
+}
+
 void
 Init_gutil(void)
 {

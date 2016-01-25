@@ -38,6 +38,14 @@ extern "C" {
 #define RBGLIB_MINOR_VERSION 0
 #define RBGLIB_MICRO_VERSION 7
 
+#ifndef RB_ZALLOC
+#  ifdef ZALLOC
+#    define RB_ZALLOC(type) ZALLOC(type)
+#  else
+#    define RB_ZALLOC(type) rbg_memzero(ALLOC(type), sizeof(type))
+#  endif
+#endif
+
 #ifndef RSTRING_PTR
 #  define RSTRING_PTR(s) (RSTRING(s)->ptr)
 #  define RSTRING_LEN(s) (RSTRING(s)->len)

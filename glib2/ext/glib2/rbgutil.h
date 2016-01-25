@@ -109,6 +109,8 @@ extern GSource *rbg_interrupt_source_new(void);
 
 extern gchar *rbg_name_to_nick(const gchar *name);
 
+extern void *rbg_memzero(void *poitner, size_t size);
+
 /*< protected >*/
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;
 extern void rbgutil_glibid_r2g_func(VALUE from, GValue* to);
