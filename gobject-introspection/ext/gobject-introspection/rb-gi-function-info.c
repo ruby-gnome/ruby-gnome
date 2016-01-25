@@ -959,7 +959,7 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata, GArray *in_args)
     if (callback_function) {
         callback_argument->v_pointer = callback_function;
     } else {
-        callback = ZALLOC(RBGICallback);
+        callback = RB_ZALLOC(RBGICallback);
         callback->type_info = g_arg_info_get_type(arg_info);
         callback->callback_info = g_type_info_get_interface(callback->type_info);
         callback->closure =
