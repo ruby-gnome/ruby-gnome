@@ -198,6 +198,12 @@ rg_max_lookbehind(VALUE self)
     return INT2NUM(g_regex_get_max_lookbehind(_SELF(self)));
 }
 
+static VALUE
+rg_string_number(VALUE self, VALUE string)
+{
+    return INT2NUM(g_regex_get_string_number(_SELF(self), RVAL2CSTR(string)));
+}
+
 void
 Init_glib_regex(void)
 {
@@ -213,6 +219,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(capture_count, 0);
     RG_DEF_METHOD_P(has_cr_or_lf, 0);
     RG_DEF_METHOD(max_lookbehind, 0);
+    RG_DEF_METHOD(string_number, 1);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);
