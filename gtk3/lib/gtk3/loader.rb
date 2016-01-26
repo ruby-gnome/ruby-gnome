@@ -338,6 +338,11 @@ module Gtk
           # Ignore deprecated methods
           return
         end
+      when "Gtk::TreePath"
+        case method_name
+        when "next", "prev", "up", "down"
+          method_name += "!"
+        end
       when "Gtk::TreeSelection"
         case method_name
         when "selected_foreach"
