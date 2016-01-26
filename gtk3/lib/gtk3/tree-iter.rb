@@ -74,7 +74,7 @@ module Gtk
     end
 
     def first_child
-      @model.iter_nth_child(self, 0)
+      nth_child(0)
     end
 
     def ==(other)
