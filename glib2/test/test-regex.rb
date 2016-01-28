@@ -194,4 +194,15 @@ class TestRegex < Test::Unit::TestCase
   def test_regex_escape_string
     assert_equal("a\\.b\\*c", GLib::Regex.escape_string("a.b*c"))
   end
+
+  sub_test_case "match_simple" do
+    test "true" do
+      matched = GLib::Regex.match_simple("to", "tatota")
+      assert(matched)
+    end
+    test "false" do
+      matched = GLib::Regex.match_simple("ti", "tatota")
+      assert_equal(matched, false)
+    end
+  end
 end
