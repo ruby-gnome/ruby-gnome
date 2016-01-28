@@ -204,6 +204,12 @@ rg_string_number(VALUE self, VALUE string)
     return INT2NUM(g_regex_get_string_number(_SELF(self), RVAL2CSTR(string)));
 }
 
+static VALUE
+rg_s_escape_string(G_GNUC_UNUSED VALUE self, VALUE string)
+{
+    return CSTR2RVAL(g_regex_escape_string(RVAL2CSTR(string), RSTRING_LEN(string)));
+}
+
 void
 Init_glib_regex(void)
 {
@@ -220,6 +226,8 @@ Init_glib_regex(void)
     RG_DEF_METHOD_P(has_cr_or_lf, 0);
     RG_DEF_METHOD(max_lookbehind, 0);
     RG_DEF_METHOD(string_number, 1);
+
+    RG_DEF_SMETHOD(escape_string, 1);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);

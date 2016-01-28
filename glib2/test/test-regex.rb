@@ -190,4 +190,8 @@ class TestRegex < Test::Unit::TestCase
       assert_equal(2, regex.string_number("a_name"))
     end
   end
+
+  def test_regex_escape_string
+    assert_equal("a\\.b\\*c", GLib::Regex.escape_string("a.b*c"))
+  end
 end
