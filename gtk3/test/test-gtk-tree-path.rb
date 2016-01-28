@@ -1,4 +1,4 @@
-# Copyright (C) 2010-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2010-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,32 @@ class TestGtkTreePath < Test::Unit::TestCase
                  [indices, depth])
   end
 
+  def test_down!
+    path = tree_path("10:4:5")
+    path.down!
+    assert_equal("10:4:5:0", path.to_s)
+  end
+
+  def test_up!
+    path = tree_path("10:4:5")
+    path.up!
+    assert_equal("10:4", path.to_s)
+  end
+
+  def test_next!
+    path = tree_path("10:4:5")
+    path.next!
+    assert_equal("10:4:6", path.to_s)
+  end
+
+  def test_prev!
+    path = tree_path("10:4:5")
+    path.prev!
+    assert_equal("10:4:4", path.to_s)
+  end
+
   private
+
   def tree_path(path)
     Gtk::TreePath.new(path)
   end
