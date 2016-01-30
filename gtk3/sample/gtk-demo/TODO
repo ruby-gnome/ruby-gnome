@@ -22,7 +22,7 @@ entry_buffer.c          ok              ok
 entry_completion.c      ok              ok
 event_axes.c            no              no
 expander.c              ok              ok
-filtermodel.c           no              no
+filtermodel.c           ok              ok
 flowbox.c               no              no
 font_features.c         no              no
 gestures.c              no              no
