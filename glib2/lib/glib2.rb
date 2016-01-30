@@ -1,4 +1,4 @@
-# Copyright (C) 2005-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2005-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -241,6 +241,7 @@ GLib::Log.set_log_domain(GLib::Thread::LOG_DOMAIN)
 GLib::Log.set_log_domain(GLib::Module::LOG_DOMAIN)
 
 require 'glib2/version'
+require "glib2/regex"
 =begin
 Don't we need this?
 ObjectSpace.define_finalizer(GLib) {

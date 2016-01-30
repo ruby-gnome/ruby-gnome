@@ -197,11 +197,11 @@ class TestRegex < Test::Unit::TestCase
 
   sub_test_case "match_simple" do
     test "true" do
-      matched = GLib::Regex.match_simple("to", "tatota")
+      matched = GLib::Regex.match("to", "tatota")
       assert(matched)
     end
     test "false" do
-      matched = GLib::Regex.match_simple("ti", "tatota")
+      matched = GLib::Regex.match("ti", "tatota")
       assert_equal(matched, false)
     end
   end

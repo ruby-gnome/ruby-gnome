@@ -210,38 +210,6 @@ rg_s_escape_string(G_GNUC_UNUSED VALUE self, VALUE string)
     return CSTR2RVAL(g_regex_escape_string(RVAL2CSTR(string), RSTRING_LEN(string)));
 }
 
-static VALUE
-rg_s_match_simple(gint argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
-{
-    VALUE rb_options, rb_pattern, rb_string, rb_compile_options, rb_match_options;
-    gboolean matched;
-    const gchar *pattern;
-    const gchar *string;
-    GRegexCompileFlags compile_options = 0;
-    GRegexMatchFlags match_options = 0;
-
-    rb_scan_args(argc, argv, "21", &rb_pattern, &rb_string, &rb_options);
-    rbg_scan_options(rb_options,
-                     "compile_options", &rb_compile_options,
-                     "match_options", &rb_match_options,
-                     NULL);
-
-    pattern = RVAL2CSTR(rb_pattern);
-    string = RVAL2CSTR(rb_string);
-
-    if (!NIL_P(rb_compile_options))
-        compile_options = RVAL2GREGEXCOMPILEOPTIONSFLAGS(rb_compile_options);
-
-    if (!NIL_P(rb_match_options))
-        match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
-
-    matched = g_regex_match_simple(pattern,
-                                   string,
-                                   compile_options,
-                                   match_options);
-    return CBOOL2RVAL(matched);
-}
-
 void
 Init_glib_regex(void)
 {
@@ -260,7 +228,6 @@ Init_glib_regex(void)
     RG_DEF_METHOD(string_number, 1);
 
     RG_DEF_SMETHOD(escape_string, 1);
-    RG_DEF_SMETHOD(match_simple, -1);
 
     G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
     G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);
