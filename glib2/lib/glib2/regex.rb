@@ -17,7 +17,7 @@
 module GLib
   class Regex
     class << self
-      def match(pattern, string, options={})
+      def match?(pattern, string, options={})
         new(pattern, options).match(string, options).matches?
       end
     end
