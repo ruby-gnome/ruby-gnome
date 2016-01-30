@@ -23,36 +23,36 @@ module FiltermodelDemo
 
     column = builder["treeviewcolumn1"]
     cell = builder["cellrenderertext1"]
-    column.set_cell_data_func(cell) do |_column, current_cell, current_model, current_iter|
-      num = current_model.get_value(current_iter, WIDTH_COLUMN)
+    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
+      num = current_iter[WIDTH_COLUMN]
       current_cell.text = num.to_s
     end
 
     column = builder["treeviewcolumn2"]
     cell = builder["cellrenderertext2"]
-    column.set_cell_data_func(cell) do |_column, current_cell, current_model, current_iter|
-      num = current_model.get_value(current_iter, HEIGHT_COLUMN)
+    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
+      num = current_iter[HEIGHT_COLUMN]
       current_cell.text = num.to_s
     end
 
     column = builder["treeviewcolumn3"]
     cell = builder["cellrenderertext3"]
-    column.set_cell_data_func(cell) do |_column, current_cell, current_model, current_iter|
-      num = current_model.get_value(current_iter, WIDTH_COLUMN)
+    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
+      num = current_iter[WIDTH_COLUMN]
       current_cell.text = num.to_s
     end
 
     column = builder["treeviewcolumn4"]
     cell = builder["cellrenderertext4"]
-    column.set_cell_data_func(cell) do |_column, current_cell, current_model, current_iter|
-      num = current_model.get_value(current_iter, HEIGHT_COLUMN)
+    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
+      num = current_iter[HEIGHT_COLUMN]
       current_cell.text = num.to_s
     end
 
     column = builder["treeviewcolumn5"]
     cell = builder["cellrenderertext5"]
-    column.set_cell_data_func(cell) do |_column, current_cell, current_model, current_iter|
-      num = current_model.get_value(current_iter, AREA_COLUMN)
+    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
+      num = current_iter[AREA_COLUMN]
       current_cell.text = num.to_s
     end
 
@@ -68,10 +68,9 @@ module FiltermodelDemo
     model = Gtk::TreeModelFilter.new(store)
     model.set_modify_func(*types) do |filter_model, filter_iter, filter_column|
       value = nil
-      child_model = filter_model.model
       child_iter = filter_model.convert_iter_to_child_iter(filter_iter)
-      width = child_model.get_value(child_iter, WIDTH_COLUMN)
-      height = child_model.get_value(child_iter, HEIGHT_COLUMN)
+      width = child_iter[WIDTH_COLUMN]
+      height = child_iter[HEIGHT_COLUMN]
       case filter_column
       when WIDTH_COLUMN
         value = width
@@ -89,23 +88,23 @@ module FiltermodelDemo
 
     column = builder["treeviewcolumn7"]
     cell = builder["cellrenderertext6"]
-    column.set_cell_data_func(cell) do |_column, current_cell, current_model, current_iter|
-      num = current_model.get_value(current_iter, WIDTH_COLUMN)
+    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
+      num = current_iter[WIDTH_COLUMN]
       current_cell.text = num.to_s
     end
 
     column = builder["treeviewcolumn8"]
     cell = builder["cellrenderertext7"]
-    column.set_cell_data_func(cell) do |_column, current_cell, current_model, current_iter|
-      num = current_model.get_value(current_iter, HEIGHT_COLUMN)
+    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
+      num = current_iter[HEIGHT_COLUMN]
       current_cell.text = num.to_s
     end
 
     tree = builder["treeview3"]
 
     model = Gtk::TreeModelFilter.new(store)
-    model.set_visible_func do |current_model, current_iter|
-      current_model.get_value(current_iter, WIDTH_COLUMN) < 10
+    model.set_visible_func do |_current_model, current_iter|
+      current_iter[WIDTH_COLUMN] < 10
     end
 
     tree.model = model
