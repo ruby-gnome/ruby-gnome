@@ -201,6 +201,7 @@ class TestRegex < Test::Unit::TestCase
         GLib::Regex.match?("to", "tatota")
       end
     end
+
     test "false" do
       assert do
        not GLib::Regex.match?("ti", "tatota")
