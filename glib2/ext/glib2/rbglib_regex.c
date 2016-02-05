@@ -205,6 +205,61 @@ rg_string_number(VALUE self, VALUE string)
 }
 
 static VALUE
+rg_match_all(gint argc, VALUE *argv, VALUE self)
+{
+    VALUE rb_string, rb_start_position, rb_match_options, rb_options;
+    VALUE rb_frozen_string, rb_match_info;
+    GMatchInfo *match_info = NULL;
+    GError *error = NULL;
+    const gchar *string;
+    gssize string_len = -1;
+    gint start_position = 0;
+    GRegexMatchFlags match_options = 0;
+
+    rb_scan_args(argc, argv, "11", &rb_string, &rb_options);
+
+    rbg_scan_options(rb_options,
+                     "start_position", &rb_start_position,
+                     "match_options", &rb_match_options,
+                     NULL);
+
+    if (OBJ_FROZEN(rb_string)) {
+        rb_frozen_string = rb_string;
+    } else {
+        rb_frozen_string = rb_str_dup(rb_string);
+        rb_str_freeze(rb_frozen_string);
+    }
+
+    string = RVAL2CSTR(rb_frozen_string);
+    string_len = RSTRING_LEN(rb_frozen_string);
+
+
+    if (!NIL_P(rb_start_position))
+        start_position = NUM2INT(rb_start_position);
+    if (!NIL_P(rb_match_options))
+        match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
+
+    g_regex_match_all_full(_SELF(self),
+                       string,
+                       string_len,
+                       start_position,
+                       match_options,
+                       &match_info,
+                       &error);
+
+    if (error)
+        RAISE_GERROR(error);
+
+    if (!match_info)
+        return Qnil;
+
+    rb_match_info = GMATCHINFO2RVAL(match_info);
+    g_match_info_unref(match_info);
+    rb_iv_set(rb_match_info, "@string", rb_frozen_string);
+    return rb_match_info;
+}
+
+static VALUE
 rg_s_escape_string(G_GNUC_UNUSED VALUE self, VALUE string)
 {
     return CSTR2RVAL(g_regex_escape_string(RVAL2CSTR(string), RSTRING_LEN(string)));
@@ -226,6 +281,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD_P(has_cr_or_lf, 0);
     RG_DEF_METHOD(max_lookbehind, 0);
     RG_DEF_METHOD(string_number, 1);
+    RG_DEF_METHOD(match_all, -1);
 
     RG_DEF_SMETHOD(escape_string, 1);
 
