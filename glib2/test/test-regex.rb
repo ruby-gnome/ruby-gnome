@@ -208,23 +208,23 @@ class TestRegex < Test::Unit::TestCase
       end
     end
   end
-  
+
   sub_test_case "match_all" do
-    
+
     test "no match" do
       regex = GLib::Regex.new("[A-Z]+")
-      assert do 
+      assert do
         not regex.match_all("abc def").matches?
       end
     end
-    
+
     test "match" do
       regex = GLib::Regex.new("[A-Z]+")
       assert do
         regex.match_all("abc DEF", 0).matches?
       end
     end
-    
+
     test "match all" do
       regex = GLib::Regex.new("<.*>")
       assert_equal(3, regex.match_all("<a> <b> <c>").match_count)
