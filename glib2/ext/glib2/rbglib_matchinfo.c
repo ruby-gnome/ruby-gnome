@@ -39,7 +39,13 @@ rg_string(VALUE self)
 static VALUE
 rg_matches_p(VALUE self)
 {
-  return CBOOL2RVAL(g_match_info_matches(_SELF(self)));
+    return CBOOL2RVAL(g_match_info_matches(_SELF(self)));
+}
+
+static VALUE
+rg_match_count(VALUE self)
+{
+    return INT2NUM(g_match_info_get_match_count(_SELF(self)));
 }
 
 void
@@ -51,4 +57,5 @@ Init_glib_matchinfo(void)
     RG_DEF_METHOD(regex, 0);
     RG_DEF_METHOD(string, 0);
     RG_DEF_METHOD_P(matches, 0);
+    RG_DEF_METHOD(match_count, 0);
 }
