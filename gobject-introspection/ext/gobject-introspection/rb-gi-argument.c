@@ -1917,9 +1917,13 @@ rb_gi_return_argument_free_everything_interface(GIArgument *argument,
         g_assert_not_reached();
         break;
     case GI_INFO_TYPE_UNION:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free GIArgument(interface)[union] everything");
-        break;
+      if (gtype == G_TYPE_NONE) {
+          rb_raise(rb_eNotImpError,
+                   "TODO: free GIArgument(interface)[union] everything");
+      } else {
+          g_boxed_free(gtype, argument->v_pointer);
+      }
+      break;
     case GI_INFO_TYPE_VALUE:
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(interface)[value] everything");
