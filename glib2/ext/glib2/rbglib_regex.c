@@ -240,12 +240,12 @@ rg_match_all(gint argc, VALUE *argv, VALUE self)
         match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
 
     g_regex_match_all_full(_SELF(self),
-                       string,
-                       string_len,
-                       start_position,
-                       match_options,
-                       &match_info,
-                       &error);
+                           string,
+                           string_len,
+                           start_position,
+                           match_options,
+                           &match_info,
+                           &error);
 
     if (error)
         RAISE_GERROR(error);
