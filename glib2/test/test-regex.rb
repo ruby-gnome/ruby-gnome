@@ -217,10 +217,13 @@ class TestRegex < Test::Unit::TestCase
       end
     end
 
-    test "match" do
-      regex = GLib::Regex.new("[A-Z]+")
+    test ":start_position" do
+      regex = GLib::Regex.new("[A-Z]")
       assert do
-        regex.match_all("abc DEF", 0).matches?
+        regex.match_all("a B c", :start_position => 2).matches?
+      end
+      assert do
+        not regex.match_all("a B c", :start_position => 3).matches?
       end
     end
 
