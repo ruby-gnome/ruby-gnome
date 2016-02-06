@@ -210,7 +210,6 @@ class TestRegex < Test::Unit::TestCase
   end
 
   sub_test_case "match_all" do
-
     test "no match" do
       regex = GLib::Regex.new("[A-Z]+")
       assert do
