@@ -20,6 +20,10 @@ module GLib
       def match?(pattern, string, options={})
         new(pattern, options).match(string, options).matches?
       end
+
+      def split(pattern, string, options={})
+        new(pattern, options).split(string, options)
+      end
     end
   end
 end
