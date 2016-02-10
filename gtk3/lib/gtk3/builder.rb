@@ -99,45 +99,5 @@ module Gtk
       add(target)
       self
     end
-
-    alias_method :connect_signals_raw, :connect_signals
-    def connect_signals
-      connect_signals_raw do |*args|
-        _builder, object, signal_name, handler_name, connect_object, flags = args
-
-        handler_name = normalize_handler_name(handler_name)
-        if connect_object
-          handler = connect_object.method(handler_name)
-        else
-          handler = yield(handler_name)
-        end
-
-        unless handler
-          $stderr.puts("Undefined handler: #{handler_name}") if $DEBUG
-          break
-        end
-
-        if flags.is_a?(Integer)
-          flags = GLib::ConnectFlags.new(flags)
-        end
-
-        if flags.after?
-          signal_connect_method = :signal_connect_after
-        else
-          signal_connect_method = :signal_connect
-        end
-
-        if handler.arity.zero?
-          object.send(signal_connect_method, signal_name) {handler.call}
-        else
-          object.send(signal_connect_method, signal_name, &handler)
-        end
-      end
-    end
-
-    private
-    def normalize_handler_name(name)
-      name.gsub(/[-\s]+/, "_")
-    end
   end
 end
