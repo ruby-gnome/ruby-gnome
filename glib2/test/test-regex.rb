@@ -250,4 +250,16 @@ class TestRegex < Test::Unit::TestCase
       assert_equal(["toto ", ""], splited_strings)
     end
   end
+
+  sub_test_case "replace" do
+    test "simple" do
+      regex = GLib::Regex.new("\s")
+      assert_equal("a_bc", regex.replace("a bc", "_"))
+    end
+
+    test "back reference" do
+      regex = GLib::Regex.new("\s")
+      assert_equal("a_ _bc", regex.replace("a bc", "_\\0_"))
+    end
+  end
 end
