@@ -232,4 +232,22 @@ class TestRegex < Test::Unit::TestCase
       assert_equal(3, regex.match_all("<a> <b> <c>").match_count)
     end
   end
+
+  sub_test_case "split simple" do
+    test "no options" do
+      splited_strings = GLib::Regex.split("\s", "a bc")
+      assert_equal(["a", "bc"], splited_strings)
+    end
+
+    test "match_options" do
+      string_to_split = "toto ab"
+      splited_strings = GLib::Regex.split("a?b?", "toto ab")
+      assert_equal(["t", "o", "t", "o", " "], splited_strings)
+
+      splited_strings = GLib::Regex.split("a?b?",
+                                    "toto ab",
+                                    :match_options => :notempty)
+      assert_equal(["toto ", ""], splited_strings)
+    end
+  end
 end
