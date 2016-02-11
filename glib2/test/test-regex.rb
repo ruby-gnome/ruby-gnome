@@ -240,7 +240,6 @@ class TestRegex < Test::Unit::TestCase
     end
 
     test "match_options" do
-      string_to_split = "toto ab"
       splited_strings = GLib::Regex.split("a?b?", "toto ab")
       assert_equal(["t", "o", "t", "o", " "], splited_strings)
 
@@ -248,6 +247,18 @@ class TestRegex < Test::Unit::TestCase
                                     "toto ab",
                                     :match_options => :notempty)
       assert_equal(["toto ", ""], splited_strings)
+    end
+  end
+
+  sub_test_case "replace" do
+    test "simple" do
+      regex = GLib::Regex.new("\\s")
+      assert_equal("a_bc", regex.replace("a bc", "_"))
+    end
+
+    test "back reference" do
+      regex = GLib::Regex.new("\\s")
+      assert_equal("a_ _bc", regex.replace("a bc", "_\\0_"))
     end
   end
 end
