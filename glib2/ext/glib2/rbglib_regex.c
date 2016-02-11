@@ -297,7 +297,7 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
     if (error)
         RAISE_GERROR(error);
 
-    return CSTR2RVAL(modified_string);
+    return CSTR2RVAL_FREE(modified_string);
 }
 
 static VALUE
