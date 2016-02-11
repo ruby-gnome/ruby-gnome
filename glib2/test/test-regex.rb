@@ -260,17 +260,13 @@ class TestRegex < Test::Unit::TestCase
       regex = GLib::Regex.new("\\s")
       assert_equal("a_ _bc", regex.replace("a bc", "_\\0_"))
     end
-  end
 
-  sub_test_case "replace_literal" do
-    test "simple" do
+    test "literal" do
       regex = GLib::Regex.new("\\s")
-      assert_equal("a_bc", regex.replace_literal("a bc", "_"))
-    end
-
-    test "back reference" do
-      regex = GLib::Regex.new("\\s")
-      assert_equal("a_\\0_bc", regex.replace_literal("a bc", "_\\0_"))
+      assert_equal("a_\\0_bc", regex.replace("a bc",
+                                             "_\\0_",
+                                             :literal => true)
+                  )
     end
   end
 end
