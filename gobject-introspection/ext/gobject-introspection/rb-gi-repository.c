@@ -243,6 +243,14 @@ rg_find(int argc, VALUE *argv, VALUE self)
     return GI_BASE_INFO2RVAL(info);
 }
 
+static VALUE
+rg_get_version(VALUE self, VALUE rb_namespace)
+{
+    const gchar *version;
+    version = g_irepository_get_version(SELF(self), RVAL2CSTR(rb_namespace));
+    return CSTR2RVAL(version);
+}
+
 void
 rb_gi_repository_init(VALUE rb_mGI)
 {
@@ -259,6 +267,7 @@ rb_gi_repository_init(VALUE rb_mGI)
     RG_DEF_METHOD(get_n_infos, 1);
     RG_DEF_METHOD(get_info, 2);
     RG_DEF_METHOD(find, -1);
+    RG_DEF_METHOD(get_version, 1);
 
     G_DEF_CLASS(G_TYPE_I_REPOSITORY_LOAD_FLAGS, "RepositoryLoadFlags", rb_mGI);
     G_DEF_CLASS(G_TYPE_I_REPOSITORY_ERROR, "RepositoryError", rb_mGI);
