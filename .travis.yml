@@ -8,7 +8,6 @@ notifications:
     recipients:
       - ruby-gnome2-cvs@lists.sourceforge.net
 rvm:
-  - 2.0.0
   - 2.1
   - 2.2
   - 2.3.0
