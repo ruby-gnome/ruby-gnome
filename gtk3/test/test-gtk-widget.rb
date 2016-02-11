@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2008-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -186,7 +186,7 @@ class TestGtkWidget < Test::Unit::TestCase
 
   sub_test_case ".bind_template_child" do
     setup do
-      only_gtk_version(3, 10, 0)
+      only_gtk_version(3, 12, 0)
       @resource_data = File.read(fixture_path("simple_window.ui"))
     end
 
