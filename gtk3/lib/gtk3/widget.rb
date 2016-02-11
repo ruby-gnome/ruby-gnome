@@ -58,44 +58,8 @@ module Gtk
       alias_method :set_connect_func_raw, :set_connect_func
       def set_connect_func(&block)
         set_connect_func_raw do |*args|
-          _builder, object, signal_name, handler_name, connect_object, flags =
-            args
-
-          handler_name = normalize_handler_name(handler_name)
-          if connect_object
-            handler = connect_object.method(handler_name)
-          else
-            handler = block.call(handler_name)
-          end
-
-          unless handler
-            $stderr.puts("Undefined handler: #{handler_name}") if $DEBUG
-            break
-          end
-
-          if flags.is_a?(Integer)
-            flags = GLib::ConnectFlags.new(flags)
-          end
-
-          if flags.after?
-            signal_connect_method = :signal_connect_after
-          else
-            signal_connect_method = :signal_connect
-          end
-
-          if handler.arity.zero?
-            object.__send__(signal_connect_method, signal_name) do
-              handler.call
-            end
-          else
-            object.__send__(signal_connect_method, signal_name, &handler)
-          end
+          Builder.connect_signal(*args, &block)
         end
-      end
-
-      private
-      def normalize_handler_name(name)
-        name.gsub(/[-\s]+/, "_")
       end
     end
 
