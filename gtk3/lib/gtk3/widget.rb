@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -58,7 +58,7 @@ module Gtk
       alias_method :set_connect_func_raw, :set_connect_func
       def set_connect_func(&block)
         set_connect_func_raw do |*args|
-          builder, object, signal_name, handler_name, connect_object, flags =
+          _builder, object, signal_name, handler_name, connect_object, flags =
             args
 
           handler_name = normalize_handler_name(handler_name)
