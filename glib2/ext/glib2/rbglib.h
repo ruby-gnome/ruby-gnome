@@ -76,6 +76,12 @@ extern "C" {
 #  define G_SOURCE_CONTINUE TRUE
 #endif
 
+/* For Ruby 2.0. 2.1 or later has rb_funcallv(). */
+#ifndef rb_funcall2
+#  define rb_funcallv(object, id, n_arguments, arguments) \
+    rb_funcall2(object, id, n_arguments, arguments)
+#endif
+
 #define RBG_INSPECT(object) (rbg_rval_inspect(object))
 
 #define RVAL2CSTR(v) (rbg_rval2cstr(&(v)))
