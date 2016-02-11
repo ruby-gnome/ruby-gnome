@@ -301,6 +301,48 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
+rg_replace_literal(gint argc, VALUE *argv, VALUE self)
+{
+    VALUE rb_string, rb_replacement, rb_options,rb_start_position, rb_match_options;
+    GError *error = NULL;
+    gchar *modified_string;
+    const gchar *string;
+    const gchar *replacement;
+    gssize string_len = -1;
+    gint start_position = 0;
+    GRegexMatchFlags match_options = 0;
+
+    rb_scan_args(argc, argv, "21", &rb_string, &rb_replacement, &rb_options);
+
+    rbg_scan_options(rb_options,
+                     "start_position", &rb_start_position,
+                     "match_options", &rb_match_options,
+                     NULL);
+
+    string = RVAL2CSTR(rb_string);
+    string_len = RSTRING_LEN(rb_string);
+    replacement = RVAL2CSTR(rb_replacement);
+
+    if (!NIL_P(rb_start_position))
+        start_position = NUM2INT(rb_start_position);
+    if (!NIL_P(rb_match_options))
+        match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
+
+    modified_string = g_regex_replace_literal(_SELF(self),
+                                              string,
+                                              string_len,
+                                              start_position,
+                                              replacement,
+                                              match_options,
+                                              &error);
+    if (error)
+        RAISE_GERROR(error);
+
+    return CSTR2RVAL_FREE(modified_string);
+}
+
+
+static VALUE
 rg_s_escape_string(G_GNUC_UNUSED VALUE self, VALUE string)
 {
     return CSTR2RVAL(g_regex_escape_string(RVAL2CSTR(string), RSTRING_LEN(string)));
@@ -324,6 +366,7 @@ Init_glib_regex(void)
     RG_DEF_METHOD(string_number, 1);
     RG_DEF_METHOD(match_all, -1);
     RG_DEF_METHOD(replace, -1);
+    RG_DEF_METHOD(replace_literal, -1);
 
     RG_DEF_SMETHOD(escape_string, 1);
 
