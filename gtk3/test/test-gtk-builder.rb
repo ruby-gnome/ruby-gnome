@@ -26,7 +26,7 @@ class TestGtkBuilder < Test::Unit::TestCase
     end
 
     test "resource" do
-      only_gtk_version(3, 10, 0)
+      only_gtk_version(3, 12, 0)
       register_resource(fixture_path("simple_window.gresource")) do
         resource_path = "/simple_window/simple_window.ui"
         builder = Gtk::Builder.new(:resource => resource_path)
