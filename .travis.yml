@@ -1,3 +1,5 @@
+sudo: required
+dist: trusty
 env:
   global:
     - DISPLAY=":99.0"
@@ -6,7 +8,6 @@ notifications:
     recipients:
       - ruby-gnome2-cvs@lists.sourceforge.net
 rvm:
-  - 2.0.0
   - 2.1
   - 2.2
   - 2.3.0
@@ -15,6 +16,8 @@ matrix:
   # allow_failures:
   #   - rvm: 2.1
   fast_finish: true
+before_install:
+  - gem instal bundler
 before_script:
   - ./travis-before-script.sh
   - sh -e /etc/init.d/xvfb start
