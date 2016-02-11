@@ -66,7 +66,7 @@ module WebKit2Gtk
     end
 
     def require_libraries
-      require "webkit2-gtk/version"
+      require "webkit2-gtk/version" if @version_module.const_defined?(:MAJOR)
     end
 
     def initialize_post(object)
