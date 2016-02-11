@@ -240,7 +240,6 @@ class TestRegex < Test::Unit::TestCase
     end
 
     test "match_options" do
-      string_to_split = "toto ab"
       splited_strings = GLib::Regex.split("a?b?", "toto ab")
       assert_equal(["t", "o", "t", "o", " "], splited_strings)
 
