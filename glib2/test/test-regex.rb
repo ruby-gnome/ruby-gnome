@@ -263,10 +263,10 @@ class TestRegex < Test::Unit::TestCase
 
     test "literal" do
       regex = GLib::Regex.new("\\s")
-      assert_equal("a_\\0_bc", regex.replace("a bc",
-                                             "_\\0_",
-                                             :literal => true)
-                  )
+      assert_equal("a_\\0_bc",
+                   regex.replace("a bc",
+                                 "_\\0_",
+                                 :literal => true))
     end
   end
 end
