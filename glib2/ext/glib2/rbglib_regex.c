@@ -262,8 +262,12 @@ rg_match_all(gint argc, VALUE *argv, VALUE self)
 static VALUE
 rg_replace(gint argc, VALUE *argv, VALUE self)
 {
-    VALUE rb_string, rb_replacement, rb_options,rb_start_position,
-          rb_match_options, rb_literal;
+    VALUE rb_string;
+    VALUE rb_replacement;
+    VALUE rb_options;
+    VALUE rb_start_position;
+    VALUE rb_match_options;
+    VALUE rb_literal;
     GError *error = NULL;
     gchar *modified_string;
     const gchar *string;
