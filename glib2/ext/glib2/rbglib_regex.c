@@ -293,7 +293,7 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
     if (!NIL_P(rb_match_options))
         match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
 
-    if (rb_literal == Qtrue) {
+    if (RVAL2CBOOL(rb_literal)) {
         modified_string = g_regex_replace_literal(_SELF(self),
                                                   string,
                                                   string_len,
