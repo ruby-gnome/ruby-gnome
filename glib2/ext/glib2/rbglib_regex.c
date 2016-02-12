@@ -262,7 +262,8 @@ rg_match_all(gint argc, VALUE *argv, VALUE self)
 static VALUE
 rg_replace(gint argc, VALUE *argv, VALUE self)
 {
-    VALUE rb_string, rb_replacement, rb_options,rb_start_position, rb_match_options;
+    VALUE rb_string, rb_replacement, rb_options,rb_start_position,
+          rb_match_options, rb_literal;
     GError *error = NULL;
     gchar *modified_string;
     const gchar *string;
@@ -276,6 +277,7 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
     rbg_scan_options(rb_options,
                      "start_position", &rb_start_position,
                      "match_options", &rb_match_options,
+                     "literal", &rb_literal,
                      NULL);
 
     string = RVAL2CSTR(rb_string);
@@ -287,18 +289,34 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
     if (!NIL_P(rb_match_options))
         match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
 
-    modified_string = g_regex_replace(_SELF(self),
-                                      string,
-                                      string_len,
-                                      start_position,
-                                      replacement,
-                                      match_options,
-                                      &error);
+    if (rb_literal == Qtrue)
+    {
+        modified_string = g_regex_replace_literal(_SELF(self),
+                                                  string,
+                                                  string_len,
+                                                  start_position,
+                                                  replacement,
+                                                  match_options,
+                                                  &error);
+
+    }
+    else
+    {
+        modified_string = g_regex_replace(_SELF(self),
+                                          string,
+                                          string_len,
+                                          start_position,
+                                          replacement,
+                                          match_options,
+                                          &error);
+    }
+
     if (error)
         RAISE_GERROR(error);
 
     return CSTR2RVAL_FREE(modified_string);
 }
+
 
 static VALUE
 rg_s_escape_string(G_GNUC_UNUSED VALUE self, VALUE string)
