@@ -269,4 +269,16 @@ class TestRegex < Test::Unit::TestCase
                                  :literal => true))
     end
   end
+
+  sub_test_case "check_replacement" do
+    test "no references" do
+      assert_equal([true, false],
+                   GLib::Regex.check_replacement("foo\n"))
+    end
+
+    test "with references" do
+      assert_equal([true, true],
+                   GLib::Regex.check_replacement("\\0\\1"))
+    end
+  end
 end
