@@ -273,7 +273,7 @@ class TestRegex < Test::Unit::TestCase
   sub_test_case "check_replacement" do
     test "no references" do
       assert_equal([true, false],
-                   GLib::Regex.check_replacement("foo\n"))
+                   GLib::Regex.check_replacement("foo\\n"))
     end
 
     test "with references" do
