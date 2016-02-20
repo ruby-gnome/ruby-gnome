@@ -272,18 +272,30 @@ class TestRegex < Test::Unit::TestCase
 
   sub_test_case "check_replacement" do
     test "no references" do
-      assert_equal([true, false],
-                   GLib::Regex.check_replacement("foo\\n"))
+      assert_true(GLib::Regex.check_replacement("foo\\n"))
     end
 
     test "with references" do
-      assert_equal([true, true],
-                   GLib::Regex.check_replacement("\\0\\1"))
+      assert_true(GLib::Regex.check_replacement("\\0\\1"))
     end
 
     test "invalid" do
       assert_raise(GLib::Error) do
         GLib::Regex.check_replacement("\\")
+      end
+    end
+  end
+
+  sub_test_case "have_reference?" do
+    test "no references" do
+      assert do
+        not GLib::Regex.have_reference?("foo\\n")
+      end
+    end
+
+    test "with references" do
+      assert do
+        GLib::Regex.have_reference?("\\0\\1")
       end
     end
   end
