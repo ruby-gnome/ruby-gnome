@@ -280,5 +280,11 @@ class TestRegex < Test::Unit::TestCase
       assert_equal([true, true],
                    GLib::Regex.check_replacement("\\0\\1"))
     end
+
+    test "invalid" do
+      assert_raise(GLib::Error) do
+        GLib::Regex.check_replacement("\\")
+      end
+    end
   end
 end
