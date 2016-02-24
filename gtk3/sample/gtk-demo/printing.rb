@@ -24,9 +24,10 @@ module PrintingDemo
     print_operation.signal_connect "begin-print" do |operation, context|
       height = context.height - HEADER_HEIGHT - HEADER_GAP
       lines_per_page = (height / font_size).floor
-      file = File.open(resource_name, "r")
-      file.each_line do |line|
-        lines << line
+      File.open(resource_name, "r") do |file|
+        file.each_line do |line|
+          lines << line
+        end
       end
       num_pages = lines.size / (lines_per_page + 1)
       operation.n_pages = num_pages
@@ -82,21 +83,21 @@ module PrintingDemo
       end
     end
 
-    operation.signal_connect "end-print" do
+    print_operation.signal_connect "end-print" do
       puts "End of print"
     end
 
-    operation.use_full_page = false
-    operation.unit = :points
-    operation.embed_page_setup = true
+    print_operation.use_full_page = false
+    print_operation.unit = :points
+    print_operation.embed_page_setup = true
 
     settings = Gtk::PrintSettings.new
     settings.set(:ouput_basename, "gtk-demo")
 
-    operation.print_settings = settings
+    print_operation.print_settings = settings
 
     begin
-      operation.run(:print_dialog, main_window)
+      print_operation.run(:print_dialog, main_window)
     rescue => error
       dialog = Gtk::MessageDialog.new(:parent => main_window,
                                       :flags => :destroy_with_parent,
