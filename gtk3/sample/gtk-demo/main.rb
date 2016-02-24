@@ -297,13 +297,22 @@ class Demo < Gtk::Application
 
     window = @builder["window"]
     add_window(window)
+    action = Gio::SimpleAction.new("run")
+
+    action.signal_connect "activate" do |_action, _parameter|
+      selection = @treeview.selection
+      iter = selection.selected
+      filename = iter[1]
+      run_demo_from_file(filename, windows.first) if filename
+    end
+    window.add_action(action)
 
     @notebook = @builder["notebook"]
     @info_view = @builder["info-textview"]
     @source_view = @builder["source-textview"]
     headerbar = @builder["headerbar"]
-    treeview = @builder["treeview"]
-    model = treeview.model
+    @treeview = @builder["treeview"]
+    model = @treeview.model
     append_children(model, generate_index)
 
     @source_sw = @builder["source-scrolledwindow"]
@@ -333,7 +342,7 @@ class Demo < Gtk::Application
       @menu.popup(nil, nil, 0, Gtk.current_event_time)
     end
 
-    treeview.signal_connect "row-activated" do |_tree_view, path, _column|
+    @treeview.signal_connect "row-activated" do |_tree_view, path, _column|
       iter = model.get_iter(path)
       filename = iter[1]
       iter[2] = Pango::FontDescription::STYLE_ITALIC
