@@ -47,7 +47,7 @@ panes.c                 ok              no
 pickers.c               ok              ok
 pixbufs.c               ok              no
 popover.c               ok              ok
-printing.c              ok              no
+printing.c              ok              ok
 revealer.c              ok              ok
 rotated_text.c          ok              no
 scale.c                 ok              ok
