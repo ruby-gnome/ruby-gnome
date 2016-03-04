@@ -17,7 +17,7 @@ matrix:
   #   - rvm: 2.1
   fast_finish: true
 before_install:
-  - gem instal bundler
+  - gem install bundler
 before_script:
   - ./travis-before-script.sh
   - sh -e /etc/init.d/xvfb start
