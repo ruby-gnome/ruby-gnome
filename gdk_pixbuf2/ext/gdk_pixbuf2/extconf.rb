@@ -42,6 +42,7 @@ end
 setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
+                                   :altlinux => "gdk-pixbuf-devel",
                                    :debian => "libgdk-pixbuf2.0-dev",
                                    :redhat => "gtk2-devel",
                                    :fedora => "gdk-pixbuf2-devel",

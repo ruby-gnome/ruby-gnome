@@ -46,6 +46,7 @@ end
 setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package([package_id, 2, 16, 1],
+                                   :altlinux => "librsvg-devel",
                                    :debian => "librsvg2-dev",
                                    :redhat => "librsvg2-devel",
                                    :arch => "librsvg",

@@ -49,6 +49,7 @@ end
 setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package([package_id, 1, 14, 0],
+                                   :altlinux => "libpango-devel",
                                    :debian => "libpango1.0-dev",
                                    :redhat => "pango-devel",
                                    :arch => "pango",

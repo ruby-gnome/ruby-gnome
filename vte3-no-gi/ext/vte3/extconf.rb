@@ -33,6 +33,7 @@ end
 setup_win32(module_name, base_dir)
 
 unless required_pkg_config_package([package_id, 0, 26, 0],
+                                   :altlinux => "libvte3-devel",
                                    :debian => "libvte-2.90-dev",
                                    :redhat => "vte3-devel",
                                    :homebrew => "vte3")
