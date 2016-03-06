@@ -46,6 +46,7 @@ end
 setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
+                                   :altlinux => "libgtksourceview3-devel",
                                    :debian => "libgtksourceview-3.0-dev",
                                    :fedora => "gtksourceview3-devel",
                                    :homebrew => "gtksourceview3",

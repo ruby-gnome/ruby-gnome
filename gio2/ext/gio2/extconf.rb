@@ -52,6 +52,7 @@ end
 setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
+                                   :altlinux => "libgio-devel",
                                    :debian => "libglib2.0-dev",
                                    :redhat => "glib2-devel",
                                    :arch => "glib2",

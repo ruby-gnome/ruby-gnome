@@ -503,6 +503,8 @@ def package_platform
     :redhat
   elsif File.exist?("/etc/SuSE-release")
     :suse
+  elsif File.exist?("/etc/altlinux-release")
+    :altlinux
   elsif find_executable("pacman")
     :arch
   elsif find_executable("brew")
@@ -536,7 +538,7 @@ def install_missing_native_package(native_package_info)
   package_command_line = [package_name, *options].join(" ")
   need_super_user_priviledge = true
   case platform
-  when :debian
+  when :debian, :altlinux
     install_command = "apt-get install -V -y #{package_command_line}"
   when :fedora, :redhat
     install_command = "yum install -y #{package_command_line}"
