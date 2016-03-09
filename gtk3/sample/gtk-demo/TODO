@@ -2,7 +2,7 @@
 
 C version             Ruby version    Updated
 application.c           no              no
-assistant.c             no              no
+assistant.c             ok              ok
 builder.c               ok              ok
 button_box.c            ok              ok
 changedisplay.c         ok              no
