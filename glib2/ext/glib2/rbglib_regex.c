@@ -260,7 +260,9 @@ rg_match_all(gint argc, VALUE *argv, VALUE self)
 }
 
 static gboolean
-rg_regex_eval_callback(const GMatchInfo *match_info, GString *result, gpointer user_data)
+rg_regex_eval_callback(const GMatchInfo *match_info,
+                       GString *result,
+                       gpointer user_data)
 {
     VALUE rb_match_info, rb_result, callback, returned_data;
     gboolean stop_replacement =TRUE;
