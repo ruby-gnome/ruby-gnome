@@ -264,7 +264,6 @@ rg_regex_eval_callback(const GMatchInfo *match_info, GString *result, gpointer u
 {
     VALUE cb_match_info, cb_result, callback, returned_data;
     gboolean stop_replacement =TRUE;
-    cb_match_info = Qnil;
     cb_match_info = BOXED2RVAL(match_info, G_TYPE_MATCH_INFO);
     cb_result = CSTR2RVAL(result->str);
     callback = (VALUE) user_data;
