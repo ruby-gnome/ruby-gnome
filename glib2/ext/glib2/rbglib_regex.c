@@ -260,7 +260,7 @@ rg_match_all(gint argc, VALUE *argv, VALUE self)
 }
 
 static gboolean
-g_regex_eval_callback( const GMatchInfo *match_info, GString *result, gpointer user_data)
+rg_regex_eval_callback( const GMatchInfo *match_info, GString *result, gpointer user_data)
 {
     VALUE cb_match_info, cb_result, callback, returned_data;
     gboolean stop_replacement =TRUE;
@@ -379,7 +379,7 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
                                       string_len,
                                       start_position,
                                       match_options,
-                                      g_regex_eval_callback,
+                                      rg_regex_eval_callback,
                                       (gpointer) callback,
                                       &error);
     }
