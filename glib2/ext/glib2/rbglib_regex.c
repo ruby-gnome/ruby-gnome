@@ -340,7 +340,41 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
     GRegexMatchFlags match_options = 0;
 
 
-    if (rb_block_given_p() == 0) {
+    if (rb_block_given_p()) {
+        RGRegexEvalCallbackData data;
+
+        rb_scan_args(argc, argv, "11", &rb_string, &rb_options);
+        rbg_scan_options(rb_options,
+                         "start_position", &rb_start_position,
+                         "match_options", &rb_match_options,
+                         NULL);
+
+        string = RVAL2CSTR(rb_string);
+        string_len = RSTRING_LEN(rb_string);
+
+        if (!NIL_P(rb_start_position))
+            start_position = NUM2INT(rb_start_position);
+        if (!NIL_P(rb_match_options))
+            match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
+
+        data.callback = rb_block_proc();
+        data.status = 0;
+
+        modified_string = g_regex_replace_eval(_SELF(self),
+                                      string,
+                                      string_len,
+                                      start_position,
+                                      match_options,
+                                      rg_regex_eval_callback,
+                                      &data,
+                                      &error);
+        if (!(data.status == 0 || data.status == RUBY_TAG_BREAK)) {
+            if (error)
+                g_error_free(error);
+            g_free(modified_string);
+            rb_jump_tag(data.status);
+        }
+    } else {
         rb_scan_args(argc, argv, "21", &rb_string, &rb_replacement, &rb_options);
 
         rbg_scan_options(rb_options,
@@ -375,40 +409,6 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
                                               replacement,
                                               match_options,
                                               &error);
-        }
-    } else {
-        RGRegexEvalCallbackData data;
-
-        rb_scan_args(argc, argv, "11", &rb_string, &rb_options);
-        rbg_scan_options(rb_options,
-                         "start_position", &rb_start_position,
-                         "match_options", &rb_match_options,
-                         NULL);
-
-        string = RVAL2CSTR(rb_string);
-        string_len = RSTRING_LEN(rb_string);
-
-        if (!NIL_P(rb_start_position))
-            start_position = NUM2INT(rb_start_position);
-        if (!NIL_P(rb_match_options))
-            match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
-
-        data.callback = rb_block_proc();
-        data.status = 0;
-
-        modified_string = g_regex_replace_eval(_SELF(self),
-                                      string,
-                                      string_len,
-                                      start_position,
-                                      match_options,
-                                      rg_regex_eval_callback,
-                                      &data,
-                                      &error);
-        if (!(data.status == 0 || data.status == RUBY_TAG_BREAK)) {
-            if (error)
-                g_error_free(error);
-            g_free(modified_string);
-            rb_jump_tag(data.status);
         }
     }
 
