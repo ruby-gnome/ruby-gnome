@@ -273,12 +273,12 @@ class TestRegex < Test::Unit::TestCase
       regex = GLib::Regex.new("1|2|3|4")
       string_to_modify = " 4 3 2 1"
 
-      modified_string = regex.replace(string_to_modify) do |match_info, result|
+      modified_string = regex.replace(string_to_modify) do |match_info|
         break "to"
       end
       assert_equal(" to 3 2 1", modified_string)
 
-      modified_string = regex.replace(string_to_modify) do |match_info, result|
+      modified_string = regex.replace(string_to_modify) do |match_info|
         "to"
       end
       assert_equal(" to to to to", modified_string)

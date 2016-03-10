@@ -279,7 +279,6 @@ rg_match_all(gint argc, VALUE *argv, VALUE self)
 typedef struct {
     VALUE callback;
     const GMatchInfo *match_info;
-    GString *result;
     int status;
 } RGRegexEvalCallbackData;
 
@@ -288,12 +287,10 @@ rg_regex_eval_callback_body(VALUE user_data)
 {
     RGRegexEvalCallbackData *data = (RGRegexEvalCallbackData *)user_data;
     VALUE rb_match_info;
-    VALUE rb_result;
 
     rb_match_info = BOXED2RVAL(data->match_info, G_TYPE_MATCH_INFO);
-    rb_result = CSTR2RVAL(data->result->str);
 
-    return rb_funcall(data->callback, rb_intern("call"), 2, rb_match_info, rb_result);
+    return rb_funcall(data->callback, rb_intern("call"), 1, rb_match_info);
 }
 
 static gboolean
@@ -305,7 +302,6 @@ rg_regex_eval_callback(const GMatchInfo *match_info,
     RGRegexEvalCallbackData *data = user_data;
 
     data->match_info = match_info;
-    data->result = result;
     returned_data = rb_protect(rg_regex_eval_callback_body,
                                (VALUE)data,
                                &(data->status));
