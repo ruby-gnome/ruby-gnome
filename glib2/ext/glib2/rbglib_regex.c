@@ -262,13 +262,13 @@ rg_match_all(gint argc, VALUE *argv, VALUE self)
 static gboolean
 rg_regex_eval_callback(const GMatchInfo *match_info, GString *result, gpointer user_data)
 {
-    VALUE cb_match_info, cb_result, callback, returned_data;
+    VALUE rb_match_info, rb_result, callback, returned_data;
     gboolean stop_replacement =TRUE;
-    cb_match_info = BOXED2RVAL(match_info, G_TYPE_MATCH_INFO);
-    cb_result = CSTR2RVAL(result->str);
-    callback = (VALUE) user_data;
+    rb_match_info = BOXED2RVAL(match_info, G_TYPE_MATCH_INFO);
+    rb_result = CSTR2RVAL(result->str);
+    callback = (VALUE)user_data;
 
-    returned_data = rb_funcall(callback, rb_intern("call"), 2, cb_match_info, cb_result);
+    returned_data = rb_funcall(callback, rb_intern("call"), 2, rb_match_info, rb_result);
 
     /*  User can return in its callback:
      *  a string, the continue replacement is assumed
