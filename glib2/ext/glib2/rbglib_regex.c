@@ -19,6 +19,23 @@
 
 #include "rbgprivate.h"
 
+/* They MRI are internal definitions. Using them reduces
+ * maintainability. We should reconsider about using them when they
+ * are changed in MRI. */
+/* from vm_core.h */
+#define RUBY_TAG_BREAK 0x2
+
+/* from internal.h */
+struct vm_throw_data {
+    VALUE flags;
+    VALUE reserved;
+    const VALUE throw_obj;
+    /* const struct rb_control_frame_struct *catch_frame; */
+    /* VALUE throw_state; */
+};
+/* from vm_insnhelper.h */
+#define THROW_DATA_VAL(obj) (((struct vm_throw_data *)(obj))->throw_obj)
+
 
 #define RG_TARGET_NAMESPACE cRegex
 #define _SELF(s) ((GRegex*)RVAL2BOXED(s, G_TYPE_REGEX))
@@ -259,41 +276,54 @@ rg_match_all(gint argc, VALUE *argv, VALUE self)
     return rb_match_info;
 }
 
+typedef struct {
+    VALUE callback;
+    const GMatchInfo *match_info;
+    GString *result;
+    int status;
+} RGRegexEvalCallbackData;
+
+static VALUE
+rg_regex_eval_callback_body(VALUE user_data)
+{
+    RGRegexEvalCallbackData *data = (RGRegexEvalCallbackData *)user_data;
+    VALUE rb_match_info;
+    VALUE rb_result;
+
+    rb_match_info = BOXED2RVAL(data->match_info, G_TYPE_MATCH_INFO);
+    rb_result = CSTR2RVAL(data->result->str);
+
+    return rb_funcall(data->callback, rb_intern("call"), 2, rb_match_info, rb_result);
+}
+
 static gboolean
 rg_regex_eval_callback(const GMatchInfo *match_info,
                        GString *result,
                        gpointer user_data)
 {
-    VALUE rb_match_info, rb_result, callback, returned_data;
-    gboolean stop_replacement =TRUE;
-    rb_match_info = BOXED2RVAL(match_info, G_TYPE_MATCH_INFO);
-    rb_result = CSTR2RVAL(result->str);
-    callback = (VALUE)user_data;
+    VALUE returned_data;
+    RGRegexEvalCallbackData *data = user_data;
 
-    returned_data = rb_funcall(callback, rb_intern("call"), 2, rb_match_info, rb_result);
+    data->match_info = match_info;
+    data->result = result;
+    returned_data = rb_protect(rg_regex_eval_callback_body,
+                               (VALUE)data,
+                               &(data->status));
 
-    /*  User can return in its callback:
-     *  a string, the continue replacement is assumed
-     *
-     *  an array [string, Qnil]
-     *
-     *  any others value are ignored
-     *
-     * */
-    if (TYPE(returned_data) == T_STRING) {
-        g_string_overwrite(result, 0, RVAL2CSTR(returned_data));
-    } else {
-        if (TYPE(returned_data) == T_ARRAY) {
-            VALUE string = rb_ary_entry(returned_data, 0);
-            if (TYPE(string) == T_STRING)
-                g_string_overwrite(result, 0, RVAL2CSTR(string));
-
-            if (rb_ary_entry(returned_data, 1) == Qfalse)
-                stop_replacement = FALSE;
-        }
+    if (data->status == RUBY_TAG_BREAK) {
+        returned_data = THROW_DATA_VAL(rb_errinfo());
     }
 
-    return stop_replacement;
+    if (NIL_P(returned_data)) {
+        gchar *matched;
+        matched = g_match_info_fetch(match_info, 0);
+        g_string_append(result, matched);
+        g_free(matched);
+    } else {
+        g_string_append(result, RVAL2CSTR(returned_data));
+    }
+
+    return data->status != 0;
 }
 
 static VALUE
@@ -305,7 +335,6 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
     VALUE rb_start_position;
     VALUE rb_match_options;
     VALUE rb_literal;
-    VALUE callback;
     GError *error = NULL;
     gchar *modified_string;
     const gchar *string;
@@ -352,6 +381,8 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
                                               &error);
         }
     } else {
+        RGRegexEvalCallbackData data;
+
         rb_scan_args(argc, argv, "11", &rb_string, &rb_options);
         rbg_scan_options(rb_options,
                          "start_position", &rb_start_position,
@@ -366,7 +397,8 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
         if (!NIL_P(rb_match_options))
             match_options = RVAL2GREGEXMATCHOPTIONSFLAGS(rb_match_options);
 
-        callback = rb_block_proc();
+        data.callback = rb_block_proc();
+        data.status = 0;
 
         modified_string = g_regex_replace_eval(_SELF(self),
                                       string,
@@ -374,8 +406,14 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
                                       start_position,
                                       match_options,
                                       rg_regex_eval_callback,
-                                      (gpointer) callback,
+                                      &data,
                                       &error);
+        if (!(data.status == 0 || data.status == RUBY_TAG_BREAK)) {
+            if (error)
+                g_error_free(error);
+            g_free(modified_string);
+            rb_jump_tag(data.status);
+        }
     }
 
     if (error)
