@@ -361,13 +361,13 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
         data.status = 0;
 
         modified_string = g_regex_replace_eval(_SELF(self),
-                                      string,
-                                      string_len,
-                                      start_position,
-                                      match_options,
-                                      rg_regex_eval_callback,
-                                      &data,
-                                      &error);
+                                               string,
+                                               string_len,
+                                               start_position,
+                                               match_options,
+                                               rg_regex_eval_callback,
+                                               &data,
+                                               &error);
         if (!(data.status == 0 || data.status == RUBY_TAG_BREAK)) {
             if (error)
                 g_error_free(error);
