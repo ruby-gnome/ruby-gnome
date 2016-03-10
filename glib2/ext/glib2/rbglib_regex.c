@@ -288,7 +288,8 @@ rg_regex_eval_callback_body(VALUE user_data)
     RGRegexEvalCallbackData *data = (RGRegexEvalCallbackData *)user_data;
     VALUE rb_match_info;
 
-    rb_match_info = BOXED2RVAL(data->match_info, G_TYPE_MATCH_INFO);
+    rb_match_info = BOXED2RVAL((GMatchInfo *)(data->match_info),
+                               G_TYPE_MATCH_INFO);
 
     return rb_funcall(data->callback, rb_intern("call"), 1, rb_match_info);
 }
