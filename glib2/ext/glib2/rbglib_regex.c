@@ -260,7 +260,7 @@ rg_match_all(gint argc, VALUE *argv, VALUE self)
 }
 
 static gboolean
-rg_regex_eval_callback( const GMatchInfo *match_info, GString *result, gpointer user_data)
+rg_regex_eval_callback(const GMatchInfo *match_info, GString *result, gpointer user_data)
 {
     VALUE cb_match_info, cb_result, callback, returned_data;
     gboolean stop_replacement =TRUE;
@@ -279,14 +279,10 @@ rg_regex_eval_callback( const GMatchInfo *match_info, GString *result, gpointer 
      *  any others value are ignored
      *
      * */
-    if (TYPE(returned_data) == T_STRING)
-    {
+    if (TYPE(returned_data) == T_STRING) {
         g_string_overwrite(result, 0, RVAL2CSTR(returned_data));
-    }
-    else
-    {
-        if (TYPE(returned_data) == T_ARRAY)
-        {
+    } else {
+        if (TYPE(returned_data) == T_ARRAY) {
             VALUE string = rb_ary_entry(returned_data, 0);
             if (TYPE(string) == T_STRING)
                 g_string_overwrite(result, 0, RVAL2CSTR(string));
@@ -318,8 +314,7 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
     GRegexMatchFlags match_options = 0;
 
 
-    if (rb_block_given_p() == 0)
-    {
+    if (rb_block_given_p() == 0) {
         rb_scan_args(argc, argv, "21", &rb_string, &rb_replacement, &rb_options);
 
         rbg_scan_options(rb_options,
@@ -355,9 +350,7 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
                                               match_options,
                                               &error);
         }
-    }
-    else
-    {
+    } else {
         rb_scan_args(argc, argv, "11", &rb_string, &rb_options);
         rbg_scan_options(rb_options,
                          "start_position", &rb_start_position,
