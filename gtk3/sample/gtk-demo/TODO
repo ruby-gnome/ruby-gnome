@@ -43,7 +43,7 @@ offscreen_window.c      no              no
 offscreen_window2.c     no              no
 overlay.c               ok              ok
 overlay2.c              ok              ok
-panes.c                 ok              no
+panes.c                 ok              ok
 pickers.c               ok              ok
 pixbufs.c               ok              no
 popover.c               ok              ok
