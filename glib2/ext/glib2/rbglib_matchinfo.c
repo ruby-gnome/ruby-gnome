@@ -76,7 +76,7 @@ rg_fetch(VALUE self, VALUE rb_match_reference)
         break;
     }
 
-    return CSTR2RVAL(match);
+    return CSTR2RVAL_FREE(match);
 }
 
 void
