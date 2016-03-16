@@ -38,4 +38,19 @@ class TestMatchInfo < Test::Unit::TestCase
       match_info.partial_match?
     end
   end
+
+  sub_test_case "fetch" do
+    test "match_num" do
+      regex = GLib::Regex.new("[A-Z]+")
+      match_info = regex.match_all("abc DEF ghi JKL mnop")
+      assert_equal("DEF", match_info.fetch(0))
+      assert_equal("DE", match_info.fetch(1))
+    end
+
+    test "match_name" do
+      regex = GLib::Regex.new("(?<a_name>fo+)")
+      match_info = regex.match("tatafoo")
+      assert_equal("foo", match_info.fetch("a_name"))
+    end
+  end
 end

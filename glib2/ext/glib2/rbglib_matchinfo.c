@@ -54,6 +54,31 @@ rg_partial_match_p(VALUE self)
     return CBOOL2RVAL(g_match_info_is_partial_match(_SELF(self)));
 }
 
+static VALUE
+rg_fetch(VALUE self, VALUE rb_match_reference)
+{
+    int match_num = 0;
+    gchar *match_name = NULL;
+    gchar *match;
+
+    switch (TYPE(rb_match_reference))
+    {
+      case T_FIXNUM:
+        match_num = NUM2INT(rb_match_reference);
+        match = g_match_info_fetch(_SELF(self), match_num);
+        break;
+      case T_STRING:
+        match_name = RVAL2CSTR(rb_match_reference);
+        match = g_match_info_fetch_named(_SELF(self), match_name);
+        break;
+      default:
+        rb_raise(rb_eArgError, "Expected a String or an Integer");
+        break;
+    }
+
+    return CSTR2RVAL(match);
+}
+
 void
 Init_glib_matchinfo(void)
 {
@@ -65,4 +90,5 @@ Init_glib_matchinfo(void)
     RG_DEF_METHOD_P(matches, 0);
     RG_DEF_METHOD(match_count, 0);
     RG_DEF_METHOD_P(partial_match, 0);
+    RG_DEF_METHOD(fetch, 1);
 }
