@@ -58,7 +58,7 @@ static VALUE
 rg_fetch(VALUE self, VALUE rb_match_reference)
 {
     int match_num = 0;
-    gchar *match_name = NULL;
+    const gchar *match_name = NULL;
     gchar *match;
 
     switch (TYPE(rb_match_reference)) {
