@@ -67,11 +67,12 @@ rg_fetch(VALUE self, VALUE rb_match_reference)
         match = g_match_info_fetch(_SELF(self), match_num);
         break;
       case RUBY_T_STRING:
-        match_name = RVAL2CSTR(rb_match_reference);
+      case RUBY_T_SYMBOL:
+        match_name = RVAL2CSTR_ACCEPT_SYMBOL(rb_match_reference);
         match = g_match_info_fetch_named(_SELF(self), match_name);
         break;
       default:
-        rb_raise(rb_eArgError, "Expected a String or an Integer");
+        rb_raise(rb_eArgError, "Expected a String, a Symbol or an Integer");
         break;
     }
 
