@@ -58,5 +58,11 @@ class TestMatchInfo < Test::Unit::TestCase
       match_info = regex.match("tatafoo")
       assert_equal("foo", match_info.fetch(:a_name))
     end
+
+    test "[]" do
+      regex = GLib::Regex.new("(?<a_name>fo+)")
+      match_info = regex.match("tatafoo")
+      assert_equal("foo", match_info[:a_name])
+    end
   end
 end
