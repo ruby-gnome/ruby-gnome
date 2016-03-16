@@ -57,19 +57,23 @@ rg_partial_match_p(VALUE self)
 static VALUE
 rg_fetch(VALUE self, VALUE rb_match_reference)
 {
-    int match_num = 0;
-    const gchar *match_name = NULL;
     gchar *match;
 
     switch (TYPE(rb_match_reference)) {
       case RUBY_T_FIXNUM:
-        match_num = NUM2INT(rb_match_reference);
-        match = g_match_info_fetch(_SELF(self), match_num);
+        {
+            gint match_num;
+            match_num = NUM2INT(rb_match_reference);
+            match = g_match_info_fetch(_SELF(self), match_num);
+        }
         break;
       case RUBY_T_STRING:
       case RUBY_T_SYMBOL:
-        match_name = RVAL2CSTR_ACCEPT_SYMBOL(rb_match_reference);
-        match = g_match_info_fetch_named(_SELF(self), match_name);
+        {
+            const gchar *match_name;
+            match_name = RVAL2CSTR_ACCEPT_SYMBOL(rb_match_reference);
+            match = g_match_info_fetch_named(_SELF(self), match_name);
+        }
         break;
       default:
         rb_raise(rb_eArgError, "Expected a String, a Symbol or an Integer");
