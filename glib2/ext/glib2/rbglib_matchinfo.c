@@ -63,11 +63,11 @@ rg_fetch(VALUE self, VALUE rb_match_reference)
 
     switch (TYPE(rb_match_reference))
     {
-      case T_FIXNUM:
+      case RUBY_T_FIXNUM:
         match_num = NUM2INT(rb_match_reference);
         match = g_match_info_fetch(_SELF(self), match_num);
         break;
-      case T_STRING:
+      case RUBY_T_STRING:
         match_name = RVAL2CSTR(rb_match_reference);
         match = g_match_info_fetch_named(_SELF(self), match_name);
         break;
