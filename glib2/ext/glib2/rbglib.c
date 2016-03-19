@@ -894,11 +894,17 @@ rbg_scan_options (VALUE options, ...)
     VALUE *value;
     va_list args;
 
-    options = rbg_check_hash_type(options);
     if (NIL_P(options)) {
         options = rb_hash_new();
-    } else if (options == original_options) {
-        options = rb_funcall(options, rb_intern("dup"), 0);
+    } else {
+        options = rbg_check_hash_type(options);
+        if (options == original_options) {
+            options = rb_funcall(options, rb_intern("dup"), 0);
+        } else if (NIL_P(options)) {
+            rb_raise(rb_eArgError,
+                     "options must be Hash or nil: %+" PRIsVALUE,
+                     original_options);
+        }
     }
 
     available_keys = rb_ary_new();
