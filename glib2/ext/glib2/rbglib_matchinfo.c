@@ -89,7 +89,6 @@ rg_fetch_pos(VALUE self, VALUE rb_match_reference)
     gint start_pos = 0;
     gint end_pos = 0;
     gboolean match = FALSE;
-    VALUE results = rb_ary_new();
 
     switch (TYPE(rb_match_reference)) {
       case RUBY_T_FIXNUM:
@@ -111,11 +110,12 @@ rg_fetch_pos(VALUE self, VALUE rb_match_reference)
         rb_raise(rb_eArgError, "Expected a String, a Symbol or an Integer");
         break;
     }
-    rb_ary_push(results, CBOOL2RVAL(match));
-    rb_ary_push(results, INT2NUM(start_pos));
-    rb_ary_push(results, INT2NUM(end_pos));
 
-    return results;
+    if (!match) {
+        return Qnil;
+    }
+
+    return rb_ary_new_from_args(2, INT2NUM(start_pos), INT2NUM(end_pos));
 }
 
 void

@@ -70,20 +70,20 @@ class TestMatchInfo < Test::Unit::TestCase
     test "Integer" do
       regex = GLib::Regex.new("[A-Z]+")
       match_info = regex.match_all("abc DEF ghi JKL mnop")
-      assert_equal([true, 4, 7], match_info.fetch_pos(0))
-      assert_equal([true, 4, 6], match_info.fetch_pos(1))
+      assert_equal([4, 7], match_info.fetch_pos(0))
+      assert_equal([4, 6], match_info.fetch_pos(1))
     end
 
     test "String" do
       regex = GLib::Regex.new("(?<a_name>fo+)")
       match_info = regex.match("tatafoo")
-      assert_equal([true, 4, 7], match_info.fetch_pos("a_name"))
+      assert_equal([4, 7], match_info.fetch_pos("a_name"))
     end
 
     test "Symbol" do
       regex = GLib::Regex.new("(?<a_name>fo+)")
       match_info = regex.match("tatafoo")
-      assert_equal([true, 4, 7], match_info.fetch_pos(:a_name))
+      assert_equal([4, 7], match_info.fetch_pos(:a_name))
     end
   end
 end
