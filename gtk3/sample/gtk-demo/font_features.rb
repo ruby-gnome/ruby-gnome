@@ -100,7 +100,11 @@ module FontFeaturesDemo
       else
         s += ", " if has_feature
         s += widget.builder_name
-        widget.active? ? s += " 1" : s += " 0"
+        if widget.active?
+          s += " 1"
+        else
+          s += " 0"
+        end
         has_feature = true
       end
     end
