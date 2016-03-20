@@ -134,4 +134,5 @@ Init_glib_matchinfo(void)
     RG_DEF_METHOD(fetch, 1);
     RG_DEF_ALIAS("[]", "fetch");
     RG_DEF_METHOD(fetch_pos, 1);
+    RG_DEF_ALIAS("fetch_position", "fetch_pos");
 }
