@@ -132,6 +132,6 @@ Init_glib_matchinfo(void)
     RG_DEF_METHOD(match_count, 0);
     RG_DEF_METHOD_P(partial_match, 0);
     RG_DEF_METHOD(fetch, 1);
-    RG_DEF_METHOD(fetch_pos, 1);
     RG_DEF_ALIAS("[]", "fetch");
+    RG_DEF_METHOD(fetch_pos, 1);
 }
