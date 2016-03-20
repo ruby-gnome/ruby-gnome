@@ -95,7 +95,8 @@ rg_fetch_pos(VALUE self, VALUE rb_match_reference)
         {
             gint match_num;
             match_num = NUM2INT(rb_match_reference);
-            fetched = g_match_info_fetch_pos(_SELF(self), match_num, &start_pos, &end_pos);
+            fetched = g_match_info_fetch_pos(_SELF(self), match_num,
+                                             &start_pos, &end_pos);
         }
         break;
       case RUBY_T_STRING:
@@ -103,7 +104,8 @@ rg_fetch_pos(VALUE self, VALUE rb_match_reference)
         {
             const gchar *match_name;
             match_name = RVAL2CSTR_ACCEPT_SYMBOL(rb_match_reference);
-            fetched = g_match_info_fetch_named_pos(_SELF(self), match_name, &start_pos, &end_pos);
+            fetched = g_match_info_fetch_named_pos(_SELF(self), match_name,
+                                                   &start_pos, &end_pos);
         }
         break;
       default:
