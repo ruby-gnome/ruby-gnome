@@ -83,6 +83,41 @@ rg_fetch(VALUE self, VALUE rb_match_reference)
     return CSTR2RVAL_FREE(match);
 }
 
+static VALUE
+rg_fetch_pos(VALUE self, VALUE rb_match_reference)
+{
+    gint start_pos = 0;
+    gint end_pos = 0;
+    gboolean match = FALSE;
+    VALUE results = rb_ary_new();
+
+    switch (TYPE(rb_match_reference)) {
+      case RUBY_T_FIXNUM:
+        {
+            gint match_num;
+            match_num = NUM2INT(rb_match_reference);
+            match = g_match_info_fetch_pos(_SELF(self), match_num, &start_pos, &end_pos);
+        }
+        break;
+      case RUBY_T_STRING:
+      case RUBY_T_SYMBOL:
+        {
+            const gchar *match_name;
+            match_name = RVAL2CSTR_ACCEPT_SYMBOL(rb_match_reference);
+            match = g_match_info_fetch_named_pos(_SELF(self), match_name, &start_pos, &end_pos);
+        }
+        break;
+      default:
+        rb_raise(rb_eArgError, "Expected a String, a Symbol or an Integer");
+        break;
+    }
+    rb_ary_push(results, CBOOL2RVAL(match));
+    rb_ary_push(results, INT2NUM(start_pos));
+    rb_ary_push(results, INT2NUM(end_pos));
+
+    return results;
+}
+
 void
 Init_glib_matchinfo(void)
 {
@@ -95,5 +130,6 @@ Init_glib_matchinfo(void)
     RG_DEF_METHOD(match_count, 0);
     RG_DEF_METHOD_P(partial_match, 0);
     RG_DEF_METHOD(fetch, 1);
+    RG_DEF_METHOD(fetch_pos, 1);
     RG_DEF_ALIAS("[]", "fetch");
 }
