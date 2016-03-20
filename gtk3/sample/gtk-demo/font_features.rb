@@ -39,7 +39,7 @@ module FontFeaturesDemo
           toggle.each do |widget|
             if widget.class != Gtk::RadioButton
               widget.active = false
-              widget.set_property("sensitive", false)
+              widget.sensitive = false
             end
           end
         end
@@ -88,7 +88,7 @@ module FontFeaturesDemo
     has_feature = false
 
     toggle.each do |widget|
-      next unless widget.get_property("sensitive")
+      next unless widget.sensitive?
 
       if widget.class == Gtk::RadioButton
         if widget.active?
