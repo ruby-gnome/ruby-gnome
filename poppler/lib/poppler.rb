@@ -54,7 +54,7 @@ module Poppler
   class Document
     private
     def pdf_data?(data)
-      /\A%PDF-1\.\d/ =~ data
+      data.start_with?("%PDF-1.")
     end
 
     def ensure_uri(uri)
