@@ -24,7 +24,7 @@ event_axes.c            no              no
 expander.c              ok              ok
 filtermodel.c           ok              ok
 flowbox.c               no              no
-font_features.c         no              no
+font_features.c         ok              ok
 gestures.c              no              no
 glarea.c                no              no
 headerbar.c             ok              ok
