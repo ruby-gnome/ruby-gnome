@@ -86,4 +86,11 @@ class TestMatchInfo < Test::Unit::TestCase
       assert_equal([4, 7], match_info.fetch_pos(:a_name))
     end
   end
+
+  def test_fetch_all
+    regex = GLib::Regex.new("[A-Z]+")
+    str = "abc DEF ghi JKL mnop"
+    match_info = regex.match_all(str)
+    assert_equal(["DEF", "DE", "D"], match_info.fetch_all)
+  end
 end
