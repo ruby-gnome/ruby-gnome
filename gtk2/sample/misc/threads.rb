@@ -9,7 +9,6 @@
 =end
 
 require 'gtk2'
-require 'thread'
 
 label = Gtk::Label.new
 
