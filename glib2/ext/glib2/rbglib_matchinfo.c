@@ -120,6 +120,14 @@ rg_fetch_pos(VALUE self, VALUE rb_match_reference)
     return rb_ary_new_from_args(2, INT2NUM(start_pos), INT2NUM(end_pos));
 }
 
+static VALUE
+rg_fetch_all(VALUE self)
+{
+    gchar **strings;
+    strings = g_match_info_fetch_all(_SELF(self));
+    return STRV2RVAL_FREE(strings);
+}
+
 void
 Init_glib_matchinfo(void)
 {
@@ -135,4 +143,5 @@ Init_glib_matchinfo(void)
     RG_DEF_ALIAS("[]", "fetch");
     RG_DEF_METHOD(fetch_pos, 1);
     RG_DEF_ALIAS("fetch_position", "fetch_pos");
+    RG_DEF_METHOD(fetch_all, 0);
 }
