@@ -2,6 +2,60 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.0.8: 2016-04-XX
+
+It improves GTK+ 3 support release. Or something...
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Added (({RVAL2CSTR_PTR_ACCEPT_NIL})).
+    * Added (({RVAL2CSTR_RAW})).
+    * Added (({RVAL2CSTR_RAW_ACCEPT_NIL})).
+    * Supported (({GLib::Variant.new(value, type)})).
+  * Fixes
+    * Fixed a bug that raw string is converted to UTF-8.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported allocated output parameter.
+
+==== Ruby/GIO2
+
+  * Improvements
+    * Supported (({Gio::Application.new(:arguments => [...]})).
+      [GitHub#519][Reported by Mamoru TASAKA]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Supported (({Gtk::Clipboard#request_text})).
+      [ruby-gnome2-devel-en][Reported by Detlef Reichl]
+    * Supported (({Gtk::Clipboard#request_contents})).
+    * Supported (({Gtk::Clipboard#request_image})).
+    * Supported (({Gtk::Clipboard#request_targets})).
+    * Supported (({Gtk::Clipboard#request_rich_text})).
+    * Supported (({Gtk::Clipboard#request_uris})).
+    * Updated demo application.
+      [Patch by cedlemo]
+    * Updated sample tutorial.
+      [Patch by cedlemo]
+    * Supported (({Gtk::TreeModel#set_sort_func})).
+      [GitHub#596][Reported by Christopher L. Ramsey]
+    * Supported (({Gtk::Box#set_child_packing})).
+      [GitHub#602][Reported by Ibrahim Tencer]
+
+=== Thanks
+
+  * Detlef Reichl
+  * Mamoru TASAKA
+  * cedlemo
+  * Christopher L. Ramsey
+  * ...
+
 == Ruby-GNOME2 3.0.7: 2015-10-06
 
 It is a bug fix release of 3.0.6.
