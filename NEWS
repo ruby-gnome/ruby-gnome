@@ -39,14 +39,51 @@ It improves GTK+ 3 support release. Or something...
     * Supported (({Gtk::Clipboard#request_targets})).
     * Supported (({Gtk::Clipboard#request_rich_text})).
     * Supported (({Gtk::Clipboard#request_uris})).
-    * Updated demo application.
+    * Updated main demo application.
       [Patch by cedlemo]
-    * Updated sample tutorial.
+    * Updated and finished sample tutorial.
       [Patch by cedlemo]
     * Supported (({Gtk::TreeModel#set_sort_func})).
       [GitHub#596][Reported by Christopher L. Ramsey]
     * Supported (({Gtk::Box#set_child_packing})).
       [GitHub#602][Reported by Ibrahim Tencer]
+    * Updated stack demo
+      [Patch by cedlemo]
+    * Added scale demo
+      [Patch by cedlemo]
+    * Updated theming style classes demo
+      [Patch by cedlemo]
+    * Created entry buffer demo
+      [Patch by cedlemo]
+    * Made Gtk::EntryBuffer#new more rubyish
+      [Patch by cedlemo]
+    * Added markup demo
+      [Patch by cedlemo]
+    * Added headerbar demo
+      [Patch by cedlemo]
+    * Updated css accordion demo
+      [Patch by cedlemo]
+    * Addded pickers demo
+      [Patch by cedlemo]
+    * Updated links demo 
+      [Patch by cedlemo]
+    * Added overlay demo
+      [Patch by cedlemo]
+    * Added textmask demo
+      [Patch by cedlemo]
+    * Added sidebar demo
+      [Patch by cedlemo]
+    * Updated spinner demo
+      [Patch by cedlemo]
+    * Updated entry completion demo
+      [Patch by cedlemo]
+    * Added revealer demo 
+      [Patch by cedlemo]
+    * Updated expander demo
+      [Patch by cedlemo]
+    * Added overlay2 demo
+      [Patch by cedlemo]
+    * Update colorsel demo
 
 === Thanks
 
