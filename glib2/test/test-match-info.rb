@@ -98,9 +98,9 @@ class TestMatchInfo < Test::Unit::TestCase
     regex = GLib::Regex.new("[A-Z]+")
     str = "abc DEF ghi JKL mnop"
     match_info = regex.match(str)
-    assert_equal("DEF", match_info.fetch(0))
-    assert(match_info.next)
-    assert(match_info.matches?)
-    assert_equal("JKL", match_info.fetch(0))
+    assert_equal("DEF", match_info[0])
+    assert {match_info.next}
+    assert_equal("JKL", match_info[0])
+    assert {!match_info.next}
   end
 end
