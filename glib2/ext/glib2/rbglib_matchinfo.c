@@ -128,6 +128,20 @@ rg_fetch_all(VALUE self)
     return STRV2RVAL_FREE(strings);
 }
 
+static VALUE
+rg_next(VALUE self)
+{
+    gboolean matched;
+    GError *error = NULL;
+
+    matched = g_match_info_next(_SELF(self), &error);
+
+    if (error)
+        RAISE_GERROR(error);
+
+    return CBOOL2RVAL(matched);
+}
+
 void
 Init_glib_matchinfo(void)
 {
@@ -144,4 +158,5 @@ Init_glib_matchinfo(void)
     RG_DEF_METHOD(fetch_pos, 1);
     RG_DEF_ALIAS("fetch_position", "fetch_pos");
     RG_DEF_METHOD(fetch_all, 0);
+    RG_DEF_METHOD(next, 0);
 }

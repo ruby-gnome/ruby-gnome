@@ -93,4 +93,14 @@ class TestMatchInfo < Test::Unit::TestCase
     match_info = regex.match_all(str)
     assert_equal(["DEF", "DE", "D"], match_info.fetch_all)
   end
+
+  def test_next
+    regex = GLib::Regex.new("[A-Z]+")
+    str = "abc DEF ghi JKL mnop"
+    match_info = regex.match(str)
+    assert_equal("DEF", match_info.fetch(0))
+    assert(match_info.next)
+    assert(match_info.matches?)
+    assert_equal("JKL", match_info.fetch(0))
+  end
 end
