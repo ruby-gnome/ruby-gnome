@@ -8,6 +8,14 @@ It improves GTK+ 3 support release. Or something...
 
 === Changes
 
+==== Global
+
+  * Droped Ruby 2.0.0 support.
+  * Travis: use Trusty beta image.
+    [Patch by Hiroshi Hatake]
+  * Added AltLinux to supported OSes.
+    [Patch by Malo Skrylevo]
+
 ==== Ruby/GLib2
 
   * Improvements
@@ -15,19 +23,80 @@ It improves GTK+ 3 support release. Or something...
     * Added (({RVAL2CSTR_RAW})).
     * Added (({RVAL2CSTR_RAW_ACCEPT_NIL})).
     * Supported (({GLib::Variant.new(value, type)})).
+    * Added (({GLib::Regex})) class.
+      [Patch by cedlemo]
+    * Supported more variant types in (({rbg_variant_to_ruby})).
+      [Patch by Aurélien Jacobs]
+    * Supported array in (({rg_ruby_to_variant})).
+      [Patch by Aurélien Jacobs]
+    * Added (({GLib::Regex#split})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#match})).
+      [Patch by cedlemo]
+    * Added (({GLib::MatchInfo})) class.
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#max_backref})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#capture_count})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#has_cr_or_lf?})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#max_lookbehind})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#string_number})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex.escape_string})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#match?})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#match_all})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#split})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#replace})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#check_replacement})).
+      [Patch by cedlemo]
+    * Added (({GLib::Regex#replace_eval})).
+      [Patch by cedlemo]
+    * Added (({GLib::MatchInfo#partial_match})).
+      [Patch by cedlemo]
+    * Added (({GLib::MatchInfo#fetch})).
+      [Patch by cedlemo]
+    * Added (({GLib::MatchInfo#[]})).
+    * Added (({GLib::MatchInfo#fetch_pos})).
+      [Patch by cedlemo]
+    * Added (({GLib::MatchInfo#fetch_position})).
+    * Added (({GLib::MatchInfo#fetch_all})).
+      [Patch by cedlemo]
+    * Added (({GLib::MatchInfo#next})).
+      [Patch by cedlemo]
+
   * Fixes
     * Fixed a bug that raw string is converted to UTF-8.
+    * Fixed handling of 64 bits (({FIXNUM})) variant initialization.
 
 ==== Ruby/GObjectIntrospection
 
   * Improvements
     * Supported allocated output parameter.
+    * Supported dynamic callback.
+    * Supported enum as output value.
+    * Added function type name in error message.
+    * Added (({RB_ZALLOC})).
+    * Supported freeing GType-ed union.
+      [GitHub#700][Reported by cedlemo]
+    * Added (({GI::Repository#get_version})).
+  * Fixes
+    * Fixed a bug that block is always ignored in singleton method.
+    [ruby-gnome2-devel-ja][Reported bu Yuuki Harano]
 
 ==== Ruby/GIO2
 
   * Improvements
     * Supported (({Gio::Application.new(:arguments => [...]})).
       [GitHub#519][Reported by Mamoru TASAKA]
+    * Started to use dynamic callback.
 
 ==== Ruby/GTK3
 
@@ -47,43 +116,144 @@ It improves GTK+ 3 support release. Or something...
       [GitHub#596][Reported by Christopher L. Ramsey]
     * Supported (({Gtk::Box#set_child_packing})).
       [GitHub#602][Reported by Ibrahim Tencer]
-    * Updated stack demo
+    * Updated stack demo.
       [Patch by cedlemo]
-    * Added scale demo
+    * Added scale demo.
       [Patch by cedlemo]
-    * Updated theming style classes demo
+    * Updated theming style classes demo.
       [Patch by cedlemo]
-    * Created entry buffer demo
+    * Created entry buffer demo.
       [Patch by cedlemo]
-    * Made Gtk::EntryBuffer#new more rubyish
+    * Made (({Gtk::EntryBuffer#new more rubyish})).
       [Patch by cedlemo]
-    * Added markup demo
+    * Added markup demo.
       [Patch by cedlemo]
-    * Added headerbar demo
+    * Added headerbar demo.
       [Patch by cedlemo]
-    * Updated css accordion demo
+    * Updated css accordion demo.
       [Patch by cedlemo]
-    * Addded pickers demo
+    * Addded pickers demo.
       [Patch by cedlemo]
-    * Updated links demo 
+    * Updated links demo.
       [Patch by cedlemo]
-    * Added overlay demo
+    * Added overlay demo.
       [Patch by cedlemo]
-    * Added textmask demo
+    * Added textmask demo.
       [Patch by cedlemo]
-    * Added sidebar demo
+    * Added sidebar demo.
       [Patch by cedlemo]
-    * Updated spinner demo
+    * Updated spinner demo.
       [Patch by cedlemo]
-    * Updated entry completion demo
+    * Updated entry completion demo.
       [Patch by cedlemo]
-    * Added revealer demo 
+    * Added revealer demo.
       [Patch by cedlemo]
-    * Updated expander demo
+    * Updated expander demo.
       [Patch by cedlemo]
-    * Added overlay2 demo
+    * Added overlay2 demo.
       [Patch by cedlemo]
-    * Update colorsel demo
+    * Updated colorsel demo.
+      [Patch by cedlemo]
+    * (({rbgobj_gc_mark_instance})) has to be called
+      for the (({Gtk::TreeSelection})).
+      [Patch by Hiroyuki Ito]
+    * Updated css basics demo.
+      [Patch by cedlemo]
+    * Made (({Gtk::TreeModel#iter_nth_child})) and
+      (({Gtk::TreeModel#iter_children})) work like
+      (({#get_value})).
+    * Added methods to Gtk::TreeIter:
+      (({Gtk::TreeIter#previous!}))
+      (({Gtk::TreeIter#has_child?}))
+      (({Gtk::TreeIter#n_children}))
+      (({Gtk::TreeIter#nth_child}))
+      (({Gtk::TreeIter#children})).
+      [Patch by Hiroyuki Ito]
+    * Added support for (({Gtk::TreeSelection})).
+      [Patch by dutchhome]
+    * Updated builder demo.
+      [Patch by cedlemo]
+    * Updated css pixbufs demo.
+      [Patch by cedlemo]
+    * Updated button box demo.
+      [Patch by cedlemo]
+    * Created css shadows demo.
+      [Patch by cedlemo]
+    * Updated infobar demo.
+      [Patch by cedlemo]
+    * Added support for MenuPositionFunc in
+      (({Gtk::Menu#popup})).
+      [GitHub#61][Reported by Abby Archer]
+    * Made (({Gtk::Widget#translate_coordinates})) more
+      rubyish.
+      [Patch by cedlemo]
+    * Added support for (({EntryCompletionMatchFunc})).
+      [Patch by Hiroyuki ITo]
+    * Updated iconview edit demo.
+      [Patch by cedlemo]
+    * Updated sizegroup demo.
+      [Patch by cedlemo]
+    * Updated cursors demo.
+      [Patch by cedlemo]
+    * Made (({Gtk::MenuItem#new})) like
+      (({Gtk::CheckMenuItem#new})).
+      [Patch by Hiroyuki ITo]
+    * Move the (({#set_values})) implementation to
+      (({Gtk::TreeModel})) instead of (({Gtk::ListStore})).
+      [GitHub#659][Reported by detlef]
+    * Updated search entry2 demo.
+      [Patch by cedlemo]
+    * Updated menus demo.
+      [Patch by cedlemo]
+    * Updated css multiplebgs demo.
+      [Patch by cedlemo]
+    * Added auto generated callback for AssistantPageFunc.
+    * Added auto generated callback for BuilderConnectFunc.
+    * Updated model button demo.
+      [Patch by cedlemo]
+    * Updated dialog demo.
+      [Patch by cedlemo]
+    * Added another example sample for (({Gtk::TreeStore})).
+      [Patch by cedlemo]
+    * Added the methods:
+        (({Gtk::TreePath#next!}))
+        (({Gtk::TreePath#prev!}))
+        (({Gtk::TreePath#up!}))
+        (({Gtk::TreePath#down!})).
+      [Patch by cedlemo]
+    * Added (({Gtk::TreeIter#first_child})).
+      [Patch by cedlemo]
+    * Updated filtermodel demo.
+      [Patch by cedlemo]
+    * Updated popover demo.
+      [Patch by cedlemo]
+    * Supported (({Gtk::Builder#connect_signals})).
+    * Added new sample icons-theme-viewer.rb.
+      [Patch by cedlemo]
+    * Added new sample menus_from_resources.rb.
+      [Patch by cedlemo]
+    * Updated printing demo.
+      [Patch by cedlemo]
+    * Updated assistant demo.
+      [Patch by cedlemo]
+    * Updated panes demo.
+      [Patch by cedlemo]
+    * Updated font features demo.
+      [Patch by cedlemo]
+
+  * Fixes:
+    * Fixed a bug that (({Gtk::Widget.set_connect_func})) doesn't work.
+      [GitHub#703][Reported by cedlemo]
+
+==== Ruby/Poppler
+  * Improvements:
+    * remove needless (({POPPLER_TYPE_ORIENTATION})) binding.
+      [GiHub#653][Reported bu Rob Brackett]
+    * use start_with? instead of regular expression.
+
+==== Ruby/Webkit2-gtk
+  * Improvements:
+      * Support old WebKit2GTK+.
 
 === Thanks
 
@@ -91,7 +261,15 @@ It improves GTK+ 3 support release. Or something...
   * Mamoru TASAKA
   * cedlemo
   * Christopher L. Ramsey
-  * ...
+  * Hiroyuki ITo
+  * dutchhome Jon Raiford
+  * Rob Brackett
+  * Abby Archer
+  * Yuuki Harano
+  * detlef
+  * Aurélien Jacobs
+  * Hirochi Hatake
+  * Malo Skrylevo
 
 == Ruby-GNOME2 3.0.7: 2015-10-06
 
