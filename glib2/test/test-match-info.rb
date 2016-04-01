@@ -103,4 +103,11 @@ class TestMatchInfo < Test::Unit::TestCase
     assert_equal("JKL", match_info[0])
     assert {!match_info.next}
   end
+
+  def test_expand_references
+    regex = GLib::Regex.new("a(?P<G>.)c")
+    match_info = regex.match("xabcy")
+    expanded_string = match_info.expand_references("X\\g<G>X")
+    assert_equal("XbX", expanded_string)
+  end
 end
