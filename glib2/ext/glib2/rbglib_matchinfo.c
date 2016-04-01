@@ -142,6 +142,22 @@ rg_next(VALUE self)
     return CBOOL2RVAL(matched);
 }
 
+static VALUE
+rg_expand_references(VALUE self, VALUE rb_string)
+{
+    const gchar *string = RVAL2CSTR(rb_string);
+    gchar *expanded_string = NULL;
+    GError *error = NULL;
+
+    expanded_string = g_match_info_expand_references(_SELF(self),
+                                                     string,
+                                                     &error);
+    if (error)
+        RAISE_GERROR(error);
+
+    return CSTR2RVAL_FREE(expanded_string);
+}
+
 void
 Init_glib_matchinfo(void)
 {
@@ -159,4 +175,5 @@ Init_glib_matchinfo(void)
     RG_DEF_ALIAS("fetch_position", "fetch_pos");
     RG_DEF_METHOD(fetch_all, 0);
     RG_DEF_METHOD(next, 0);
+    RG_DEF_METHOD(expand_references, 1);
 }
