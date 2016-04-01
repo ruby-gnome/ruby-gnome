@@ -4,11 +4,11 @@
 
 == Ruby-GNOME2 3.0.8: 2016-04-XX
 
-It improves GTK+ 3 support release. Or something...
+It's a release that improves GTK+ 3 support.
 
 === Changes
 
-==== Global
+==== All
 
   * Droped Ruby 2.0.0 support.
   * Travis: use Trusty beta image.
@@ -89,7 +89,7 @@ It improves GTK+ 3 support release. Or something...
     * Added (({GI::Repository#get_version})).
   * Fixes
     * Fixed a bug that block is always ignored in singleton method.
-    [ruby-gnome2-devel-ja][Reported bu Yuuki Harano]
+      [ruby-gnome2-devel-ja][Reported by Yuuki Harano]
 
 ==== Ruby/GIO2
 
@@ -163,11 +163,11 @@ It improves GTK+ 3 support release. Or something...
       (({Gtk::TreeModel#iter_children})) work like
       (({#get_value})).
     * Added methods to Gtk::TreeIter:
-      (({Gtk::TreeIter#previous!}))
-      (({Gtk::TreeIter#has_child?}))
-      (({Gtk::TreeIter#n_children}))
-      (({Gtk::TreeIter#nth_child}))
-      (({Gtk::TreeIter#children})).
+        * (({Gtk::TreeIter#previous!}))
+        * (({Gtk::TreeIter#has_child?}))
+        * (({Gtk::TreeIter#n_children}))
+        * (({Gtk::TreeIter#nth_child}))
+        * (({Gtk::TreeIter#children})).
       [Patch by Hiroyuki Ito]
     * Added support for (({Gtk::TreeSelection})).
       [Patch by dutchhome]
@@ -188,7 +188,7 @@ It improves GTK+ 3 support release. Or something...
       rubyish.
       [Patch by cedlemo]
     * Added support for (({EntryCompletionMatchFunc})).
-      [Patch by Hiroyuki ITo]
+      [Patch by Hiroyuki Ito]
     * Updated iconview edit demo.
       [Patch by cedlemo]
     * Updated sizegroup demo.
@@ -197,7 +197,7 @@ It improves GTK+ 3 support release. Or something...
       [Patch by cedlemo]
     * Made (({Gtk::MenuItem#new})) like
       (({Gtk::CheckMenuItem#new})).
-      [Patch by Hiroyuki ITo]
+      [Patch by Hiroyuki Ito]
     * Move the (({#set_values})) implementation to
       (({Gtk::TreeModel})) instead of (({Gtk::ListStore})).
       [GitHub#659][Reported by detlef]
@@ -216,10 +216,10 @@ It improves GTK+ 3 support release. Or something...
     * Added another example sample for (({Gtk::TreeStore})).
       [Patch by cedlemo]
     * Added the methods:
-        (({Gtk::TreePath#next!}))
-        (({Gtk::TreePath#prev!}))
-        (({Gtk::TreePath#up!}))
-        (({Gtk::TreePath#down!})).
+        * (({Gtk::TreePath#next!}))
+        * (({Gtk::TreePath#prev!}))
+        * (({Gtk::TreePath#up!}))
+        * (({Gtk::TreePath#down!})).
       [Patch by cedlemo]
     * Added (({Gtk::TreeIter#first_child})).
       [Patch by cedlemo]
@@ -246,14 +246,15 @@ It improves GTK+ 3 support release. Or something...
       [GitHub#703][Reported by cedlemo]
 
 ==== Ruby/Poppler
-  * Improvements:
-    * remove needless (({POPPLER_TYPE_ORIENTATION})) binding.
-      [GiHub#653][Reported bu Rob Brackett]
-    * use start_with? instead of regular expression.
 
-==== Ruby/Webkit2-gtk
   * Improvements:
-      * Support old WebKit2GTK+.
+    * Removed needless (({POPPLER_TYPE_ORIENTATION})) binding.
+      [GiHub#653][Reported by Rob Brackett]
+
+==== Ruby/WebKit2GTK
+
+  * Improvements:
+    * Supported old WebKit2GTK+.
 
 === Thanks
 
@@ -261,7 +262,7 @@ It improves GTK+ 3 support release. Or something...
   * Mamoru TASAKA
   * cedlemo
   * Christopher L. Ramsey
-  * Hiroyuki ITo
+  * Hiroyuki Ito
   * dutchhome Jon Raiford
   * Rob Brackett
   * Abby Archer
