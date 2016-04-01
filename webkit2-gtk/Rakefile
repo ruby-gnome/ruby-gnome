@@ -61,7 +61,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "libwebp",
       :download_base_url => "http://downloads.webmproject.org/releases/webp",
       :label => "WebP",
-      :version => "0.4.3",
+      :version => "0.5.0",
       :windows => {
         :built_file => "bin/libwebp-5.dll",
       },
@@ -86,7 +86,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "webkitgtk",
       :download_base_url => "http://webkitgtk.org/releases",
       :label => "WebKitGTK+",
-      :version => "2.9.92",
+      :version => "2.12.0",
       :compression_method => "xz",
       :windows => {
         :cmake_args => [
