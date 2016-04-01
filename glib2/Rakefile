@@ -70,6 +70,18 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
+      :name => "pcre",
+      :download_base_url => "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre",
+      :label => "PCRE",
+      :version => "8.38",
+      :windows => {
+        :configure_args => [
+          "--enable-unicode-properties",
+        ],
+        :built_file => "bin/libpcre-1.dll",
+      },
+    },
+    {
       :name => "glib",
       :download_site => :gnome,
       :label => "GLib",
