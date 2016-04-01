@@ -113,7 +113,7 @@ namespace :windows do
     architectures.each do |architecture|
       desc "build all packages for Windows #{architecture}"
       task_name = "win#{architecture}"
-      build_tasks << task_name
+      build_tasks << "windows:build:#{task_name}"
       task task_name do
         cd("build") do
           sh("vagrant", "destroy", "--force", task_name)
