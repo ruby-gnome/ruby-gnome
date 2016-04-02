@@ -139,7 +139,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
     {
       :name => "p11-kit",
-      :download_base_url => "http://p11-glue.freedesktop.org/releases",
+      :download_base_url => "https://p11-glue.freedesktop.org/releases",
       :label => "p11-kit",
       :version => "0.23.2",
       :windows => {
