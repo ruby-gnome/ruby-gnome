@@ -1,5 +1,5 @@
 diff --git a/giscanner/ccompiler.py b/giscanner/ccompiler.py
-index 57df9d6..bc81282 100644
+index 57df9d6..95c9c85 100644
 --- a/giscanner/ccompiler.py
 +++ b/giscanner/ccompiler.py
 @@ -20,6 +20,7 @@
@@ -10,16 +10,15 @@ index 57df9d6..bc81282 100644
  import tempfile
  
  import sys
-@@ -83,6 +84,8 @@ class CCompiler(object):
-                 self.compiler.dll_libraries = []
-             if self.compiler.preprocessor is None:
-                 self.compiler.preprocessor = self.compiler.compiler + ['-E']
-+            if self.compiler.exe_extension is None:
-+                self.compiler.exe_extension = '.exe'
+@@ -73,6 +74,7 @@ class CCompiler(object):
+         else:
+             self.compiler = distutils.ccompiler.new_compiler(compiler=compiler_name)
+         customize_compiler(self.compiler)
++        self.compiler.exe_extension = '.exe'
  
-         if self.check_is_msvc():
-             # We trick distutils to believe that we are (always) using a
-@@ -287,12 +290,15 @@ class CCompiler(object):
+         # customize_compiler() from distutils only does customization
+         # for 'unix' compiler type.  Also, avoid linking to msvcrxx.dll
+@@ -287,12 +289,15 @@ class CCompiler(object):
                  args.extend(libtool)
                  args.append('--mode=execute')
              args.extend([os.environ.get('DLLTOOL', 'dlltool.exe'), '--identify'])
@@ -39,7 +38,7 @@ index 57df9d6..bc81282 100644
 diff --git a/giscanner/shlibs.py b/giscanner/shlibs.py
 old mode 100644
 new mode 100755
-index c93d20c..d107a76
+index c93d20c..e155200
 --- a/giscanner/shlibs.py
 +++ b/giscanner/shlibs.py
 @@ -31,6 +31,7 @@ import subprocess
@@ -57,7 +56,7 @@ index c93d20c..d107a76
 -    if os.name == 'nt':
 -        cc = CCompiler()
 +    cc = CCompiler()
-+    if os.name == 'nt' or isinstance(cc.compiler, Mingw32CCompiler):
++    if cc.compiler.exe_extension == '.exe':
          shlibs = cc.resolve_windows_libs(libraries, options)
  
      else:
