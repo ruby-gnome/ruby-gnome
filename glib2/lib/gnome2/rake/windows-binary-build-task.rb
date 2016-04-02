@@ -178,8 +178,8 @@ class GNOME2WindowsBinaryBuildTask
     "CC=#{cc(package)}"
   end
 
-  def dlltool_env(package)
-    "DLLTOOL=#{dlltool(package)}"
+  def dlltool_env
+    "DLLTOOL=#{dlltool}"
   end
 
   def build_packages
@@ -246,7 +246,7 @@ class GNOME2WindowsBinaryBuildTask
     cxx_command_line.compact.join(" ")
   end
 
-  def dlltool(package)
+  def dlltool
     "#{@package.windows.build_host}-dlltool"
   end
 
@@ -320,7 +320,7 @@ class GNOME2WindowsBinaryBuildTask
       introspection_compiler << " --includedir=#{gir_dir}"
     end
     common_make_args << introspection_compiler
-    common_make_args << dlltool_env(package)
+    common_make_args << dlltool_env
 
     data_dirs = dependencies.collect do |package|
       "#{compute_base_dir.call(package)}/share"
