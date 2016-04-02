@@ -155,7 +155,7 @@ class GNOME2WindowsBinaryBuildTask
     sh("autoreconf --install") if package.windows.need_autoreconf?
     sh("./configure",
        cc_env(package),
-       dlltool_env(package),
+       dlltool_env,
        "CPPFLAGS=#{cppflags(package)}",
        "LDFLAGS=#{ldflags(package)}",
        "--prefix=#{dist_dir}",
