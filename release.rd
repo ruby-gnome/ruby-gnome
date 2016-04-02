@@ -19,28 +19,9 @@ ruby-gnome2-all-X.Y.Z.tar.gz:
 
   % rake dist
 
-Here are confirmation steps:
+Here is a confirmation step:
 
-  % cp *.tar.gz /tmp
-  % cd /tmp
-  % tar xvf ruby-gtk2-X.Y.Z.tar.gz
-  % cd ruby-gtk2-X.Y.Z
-  % ruby extconf.rb
-  % make
-  % make install DESTDIR=/tmp/ruby
-  % cd gtk2/sample/gtk-demo
-  % ruby -I/tmp/ruby/usr/local/lib/site_ruby/1.8/{,x86_64-linux} main.rb
-  (...try demo application...)
-  % cd /tmp
-  % rm -rf ruby
-  % tar xvf ruby-gnome2-all-X.Y.Z.tar.gz
-  % cd ruby-gnome2-all-X.Y.Z
-  % ruby extconf.rb
-  % make
-  % make install DESTDIR=/tmp/ruby
-  % cd gtk2/sample/gtk-demo
-  % ruby -I/tmp/ruby/usr/local/lib/site_ruby/1.8/{,x86_64-linux} main.rb
-  (...try demo application...)
+  % rake dist:test
 
 === gem
 
@@ -55,8 +36,8 @@ locally:
 
 Here are confirmation steps:
 
-  % cd gtk2/sample/gtk-demo
-  % ruby -rubygems main.rb
+  % cd gtk3/sample/gtk-demo
+  % ruby main.rb
   (...try demo application...)
   % cd -
 
@@ -67,34 +48,19 @@ gem:install':
 
 === gem for Windows
 
-NOTE: This steps are confirmed on Debian GNU/Linux
-sid. (2011-09-18)
-
 Ruby-GNOME2 gems bundled Windows binary are created by
 cross-compiling. It means that you require GNU/Linux not
 Windows for releasing.
 
-The following steps are needed only the first setup:
+The following command generates gem files to */pkg/*:
 
-  % sudo gem install rake-compiler
-  % sudo aptitude install -y mingw-w64
-  % rake-compiler cross-ruby VERSION=1.8.7-p352 EXTS=--without-extensions
-  % rake-compiler cross-ruby VERSION=1.9.2-p290 EXTS=--without-extensions
-
-The following command downloads GTK+ related binaries for
-Windows:
-
-  % rake gem:windows:download
-
-The following command rebuilds binary gems for Windows:
-
-  % rake gem:windows:clean gem:windows:build
+  % rake windows:build
 
 Here are confirmation steps:
 
   (1) copy */pkg/*-X.Y.Z-x86-mingw32.gem to Windows.
   (2) install copied gems on Windows.
-  (3) cd GEM_PATH/gtk2/sample/gtk-demo/.
+  (3) cd GEM_PATH/gtk3/sample/gtk-demo/.
   (4) run 'ruby main.rb' and try the demo application.
 
 == How to release packages
@@ -114,7 +80,8 @@ The following command uploads */pkg/*-X.Y.Z.gem to rubygems.org:
 
 === gem for Windows
 
-The following command uploads */pkg/*-X.Y.Z-x86-mingw32.gem to rubygems.org:
+The following command uploads */pkg/*-X.Y.Z-x86-mingw32.gem to
+rubygems.org:
 
   % rake gem:windows:push
 
