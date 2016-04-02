@@ -1,5 +1,5 @@
 diff --git a/Makefile-gir.am b/Makefile-gir.am
-index 52f7ee3..c03f4e2 100644
+index a09260a..540e2d1 100644
 --- a/Makefile-gir.am
 +++ b/Makefile-gir.am
 @@ -68,7 +68,8 @@ GLib_2_0_gir_SCANNERFLAGS = \
@@ -46,7 +46,7 @@ index 52f7ee3..c03f4e2 100644
  
  GModule_2_0_gir_PACKAGES = gmodule-2.0
  GModule_2_0_gir_INCLUDES = GLib-2.0
-@@ -171,7 +179,8 @@ Gio_2_0_gir_SCANNERFLAGS = \
+@@ -173,7 +181,8 @@ Gio_2_0_gir_SCANNERFLAGS = \
              --c-include="gio/gio.h" \
              $(GIO_CINCLUDES) \
              --add-include-path=. \
@@ -57,7 +57,7 @@ index 52f7ee3..c03f4e2 100644
  Gio_2_0_gir_PACKAGES = gio-2.0 $(GIO_UNIX_PACKAGES)
  Gio_2_0_gir_INCLUDES = GObject-2.0
 diff --git a/Makefile-giscanner.am b/Makefile-giscanner.am
-index c2273cd..0f47126 100644
+index b0e1373..fd618c9 100644
 --- a/Makefile-giscanner.am
 +++ b/Makefile-giscanner.am
 @@ -1,17 +1,21 @@
@@ -93,41 +93,40 @@ index c2273cd..0f47126 100644
  	giscanner/__init__.py		\
  	giscanner/annotationmain.py	\
 diff --git a/Makefile-tools.am b/Makefile-tools.am
-index 34d2a25..87c3a1f 100644
+index dbd264c..c9b58c2 100644
 --- a/Makefile-tools.am
 +++ b/Makefile-tools.am
-@@ -1,5 +1,8 @@
+@@ -1,5 +1,7 @@
  bin_PROGRAMS += g-ir-compiler g-ir-generate
-+
 +if BUILD_SCANNER
  bin_SCRIPTS += g-ir-scanner g-ir-annotation-tool
 +endif
  
  if BUILD_DOCTOOL
  bin_SCRIPTS += g-ir-doc-tool
-@@ -12,6 +15,7 @@ EXTRA_DIST += 				\
+@@ -10,6 +12,7 @@ EXTRA_DIST += 				\
  
- TOOL_SUBSTITUTIONS = sed -e s,@libdir\@,$(libdir), -e s,@datarootdir\@,$(datarootdir), -e s,@PYTHON\@,$(PYTHON),
+ TOOL_SUBSTITUTIONS = -e s,@libdir\@,$(libdir), -e s,@datarootdir\@,$(datarootdir), -e s,@PYTHON\@,$(PYTHON),
  
 +if BUILD_SCANNER
- g-ir-scanner: tools/g-ir-scanner.in _giscanner.la Makefile
- 	$(AM_V_GEN) $(TOOL_SUBSTITUTIONS) $< > $@.tmp && mv $@.tmp $@
+ g-ir-scanner: tools/g-ir-tool-template.in _giscanner.la Makefile
+ 	$(AM_V_GEN) sed $(TOOL_SUBSTITUTIONS) -e s,@TOOL_MODULE\@,scannermain, -e s,@TOOL_FUNCTION\@,scanner_main, $< > $@.tmp && mv $@.tmp $@
  	@chmod a+x $@
-@@ -19,10 +23,13 @@ g-ir-scanner: tools/g-ir-scanner.in _giscanner.la Makefile
- g-ir-annotation-tool: tools/g-ir-annotation-tool.in _giscanner.la Makefile
- 	$(AM_V_GEN) $(TOOL_SUBSTITUTIONS) $< > $@.tmp && mv $@.tmp $@
+@@ -17,10 +20,13 @@ g-ir-scanner: tools/g-ir-tool-template.in _giscanner.la Makefile
+ g-ir-annotation-tool: tools/g-ir-tool-template.in _giscanner.la Makefile
+ 	$(AM_V_GEN) sed $(TOOL_SUBSTITUTIONS) -e s,@TOOL_MODULE\@,annotationmain, -e s,@TOOL_FUNCTION\@,annotation_main, $< > $@.tmp && mv $@.tmp $@
  	@chmod a+x $@
 +endif
  
 +if BUILD_DOCTOOL
- g-ir-doc-tool: tools/g-ir-doc-tool.in _giscanner.la Makefile
- 	$(AM_V_GEN) $(TOOL_SUBSTITUTIONS) $< > $@.tmp && mv $@.tmp $@
+ g-ir-doc-tool: tools/g-ir-tool-template.in _giscanner.la Makefile
+ 	$(AM_V_GEN) sed $(TOOL_SUBSTITUTIONS) -e s,@TOOL_MODULE\@,docmain, -e s,@TOOL_FUNCTION\@,doc_main, $< > $@.tmp && mv $@.tmp $@
  	@chmod a+x $@
 +endif
  
  g_ir_compiler_SOURCES = tools/compiler.c
  g_ir_compiler_CPPFLAGS = -DGIREPO_DEFAULT_SEARCH_PATH="\"$(libdir)\"" \
-@@ -46,4 +53,10 @@ GCOVSOURCES =					\
+@@ -44,4 +50,10 @@ GCOVSOURCES =					\
  	$(g_ir_compiler_SOURCES)		\
  	$(g_ir_generate_SOURCES)
  
@@ -140,7 +139,7 @@ index 34d2a25..87c3a1f 100644
 +CLEANFILES += g-ir-doc-tool
 +endif
 diff --git a/Makefile.am b/Makefile.am
-index 1a988a5..b14b745 100644
+index b080a89..344598a 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -35,8 +35,11 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --enable-doctool
@@ -150,14 +149,14 @@ index 1a988a5..b14b745 100644
 -	docs/g-ir-generate.1	\
 +	docs/g-ir-generate.1
 +if BUILD_SCANNER
-+man_MANS +=			\
++man_MANS +=	\
  	docs/g-ir-scanner.1
 +endif
  
  pkgconfigdir = $(libdir)/pkgconfig
  pkgconfig_DATA = gobject-introspection-1.0.pc gobject-introspection-no-export-1.0.pc
 diff --git a/common.mk b/common.mk
-index 303622f..30a011a 100644
+index b778f7a..9d10e65 100644
 --- a/common.mk
 +++ b/common.mk
 @@ -9,11 +9,14 @@
@@ -179,15 +178,28 @@ index 303622f..30a011a 100644
  INTROSPECTION_SCANNER_ARGS = \
      --verbose \
 diff --git a/configure.ac b/configure.ac
-index 1fd260a..615ff18 100644
+index 6c91fa5..168a813 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -250,19 +250,42 @@ AC_FUNC_STRTOD
+@@ -250,32 +250,55 @@ AC_FUNC_STRTOD
  AC_CHECK_FUNCS([memchr strchr strspn strstr strtol strtoull])
  AC_CHECK_FUNCS([backtrace backtrace_symbols])
  
 -# Python
--AM_PATH_PYTHON([2.6])
+-# option to specify python interpreter to use; this just sets $PYTHON, so that
+-# we will fallback to reading $PYTHON if --with-python is not given, and
+-# python.m4 will get the expected input
+-AC_ARG_WITH(python,
+-  AS_HELP_STRING([--with-python=PATH],[Path to Python interpreter; searches $PATH if only a program name is given; if not given, searches for a few standard names such as "python3" or "python2"]),
+-  [PYTHON="$withval"], [])
+-if test x"$PYTHON" = xyes; then
+-    AC_MSG_ERROR([--with-python option requires a path or program argument])
+-fi
+-if test -n "$PYTHON" && ! which "$PYTHON"; then
+-    AC_MSG_ERROR([Python interpreter $PYTHON does not exist])
+-fi
+-
+-AM_PATH_PYTHON([2.7])
 -case "$host" in
 -*-*-mingw*)
 -	# Change backslashes to forward slashes in pyexecdir to avoid
@@ -207,13 +219,26 @@ index 1fd260a..615ff18 100644
 +        build_g_ir_scanner=no
 +        ;;
 +xno)
-+        # Python
-+        AM_PATH_PYTHON([2.6])
-+        case "$host" in
-+        *-*-mingw*)
-+                # Change backslashes to forward slashes in pyexecdir to avoid
-+                # quoting issues
-+                pyexecdir=`echo $pyexecdir | tr '\\\\' '/'`
++	# Python
++	# option to specify python interpreter to use; this just sets $PYTHON, so that
++	# we will fallback to reading $PYTHON if --with-python is not given, and
++	# python.m4 will get the expected input
++	AC_ARG_WITH(python,
++	  AS_HELP_STRING([--with-python=PATH],[Path to Python interpreter; searches $PATH if only a program name is given; if not given, searches for a few standard names such as "python3" or "python2"]),
++	  [PYTHON="$withval"], [])
++	if test x"$PYTHON" = xyes; then
++	    AC_MSG_ERROR([--with-python option requires a path or program argument])
++	fi
++	if test -n "$PYTHON" && ! which "$PYTHON"; then
++	    AC_MSG_ERROR([Python interpreter $PYTHON does not exist])
++	fi
++	
++	AM_PATH_PYTHON([2.7])
++	case "$host" in
++	*-*-mingw*)
++		# Change backslashes to forward slashes in pyexecdir to avoid
++		# quoting issues
++		pyexecdir=`echo $pyexecdir | tr '\\\\' '/'`
 +                ;;
 +        esac
 +        AM_CHECK_PYTHON_HEADERS(, AC_MSG_ERROR([Python headers not found]))
@@ -237,7 +262,7 @@ index 1fd260a..615ff18 100644
  
  dnl Not enabled by default until 3.6 cycle when we can propose mako as
  dnl an external dependency
-@@ -347,6 +370,13 @@ fi
+@@ -360,6 +383,13 @@ fi
  
  AC_SUBST(EXTRA_LINK_FLAGS)
  
@@ -276,7 +301,7 @@ index bdd0fa7..70f1825 100644
  CLEANFILES += \
      $(BUILT_SOURCES) \
 diff --git a/tests/offsets/Makefile.am b/tests/offsets/Makefile.am
-index 65d8773..66b00b1 100644
+index a40e90b..9e67a3e 100644
 --- a/tests/offsets/Makefile.am
 +++ b/tests/offsets/Makefile.am
 @@ -11,7 +11,9 @@ EXTRA_PROGRAMS =
@@ -312,7 +337,7 @@ index 65d8773..66b00b1 100644
  ############################################################
  
 diff --git a/tests/repository/Makefile.am b/tests/repository/Makefile.am
-index 882fa9e..89c9069 100644
+index d1cbaa5..6960e29 100644
 --- a/tests/repository/Makefile.am
 +++ b/tests/repository/Makefile.am
 @@ -2,8 +2,10 @@ AM_CFLAGS = $(GOBJECT_CFLAGS)
@@ -320,17 +345,17 @@ index 882fa9e..89c9069 100644
  LIBS = $(GOBJECT_LIBS)
  
 +if ENABLE_TESTS
- EXTRA_PROGRAMS = gitestrepo gitestthrows gitypelibtest
+ EXTRA_PROGRAMS = gitestrepo giteststructinfo gitestthrows gitypelibtest
  CLEANFILES = $(EXTRA_PROGRAMS)
 +endif
  
  gitestrepo_SOURCES = $(srcdir)/gitestrepo.c
  gitestrepo_CPPFLAGS = $(GIREPO_CFLAGS) -I$(top_srcdir)/girepository
 diff --git a/tests/scanner/Makefile.am b/tests/scanner/Makefile.am
-index 92ab12a..41f4de8 100644
+index 13156c3..81f50ef 100644
 --- a/tests/scanner/Makefile.am
 +++ b/tests/scanner/Makefile.am
-@@ -9,6 +9,7 @@ INTROSPECTION_SCANNER_ARGS += --warn-all
+@@ -9,6 +9,7 @@ INTROSPECTION_SCANNER_ARGS += --warn-all --reparse-validate
  
  CLEANFILES =
  
@@ -347,7 +372,7 @@ index 92ab12a..41f4de8 100644
  GI_SCANNER_CFLAGS = -I$(top_srcdir)/tests
  AM_CPPFLAGS = -I$(top_srcdir)/girepository
 @@ -147,7 +149,7 @@ Typedefs_1_0_gir_FILES = $(libtypedefs_la_SOURCES)
- Typedefs_1_0_gir_SCANNERFLAGS = --c-include="typedefs.h" --identifier-prefix=Typedefs --symbol-prefix=typedefs
+ Typedefs_1_0_gir_SCANNERFLAGS = $(INTROSPECTION_SCANNER_ARGS) --c-include="typedefs.h" --identifier-prefix=Typedefs --symbol-prefix=typedefs
  GIRS += Typedefs-1.0.gir
  
 -if !OS_WIN32
