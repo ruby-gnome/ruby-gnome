@@ -1,8 +1,34 @@
 diff --git a/giscanner/ccompiler.py b/giscanner/ccompiler.py
-index 57df9d6..099001a 100644
+index 57df9d6..bc81282 100644
 --- a/giscanner/ccompiler.py
 +++ b/giscanner/ccompiler.py
-@@ -293,6 +293,7 @@ class CCompiler(object):
+@@ -20,6 +20,7 @@
+ 
+ import os
+ import subprocess
++import shlex
+ import tempfile
+ 
+ import sys
+@@ -83,6 +84,8 @@ class CCompiler(object):
+                 self.compiler.dll_libraries = []
+             if self.compiler.preprocessor is None:
+                 self.compiler.preprocessor = self.compiler.compiler + ['-E']
++            if self.compiler.exe_extension is None:
++                self.compiler.exe_extension = '.exe'
+ 
+         if self.check_is_msvc():
+             # We trick distutils to believe that we are (always) using a
+@@ -287,12 +290,15 @@ class CCompiler(object):
+                 args.extend(libtool)
+                 args.append('--mode=execute')
+             args.extend([os.environ.get('DLLTOOL', 'dlltool.exe'), '--identify'])
+-            proc = subprocess.Popen([self.compiler_cmd, '-print-search-dirs'],
++            search_dirs_args = shlex.split(self.compiler_cmd)
++            search_dirs_args += ['-print-search-dirs']
++            proc = subprocess.Popen(search_dirs_args,
+                                     stdout=subprocess.PIPE)
+             o, e = proc.communicate()
              for line in o.decode('ascii').splitlines():
                  if line.startswith('libraries: '):
                      libsearch = line[len('libraries: '):].split(os.pathsep)
@@ -10,3 +36,28 @@ index 57df9d6..099001a 100644
  
          shlibs = []
          not_resolved = []
+diff --git a/giscanner/shlibs.py b/giscanner/shlibs.py
+old mode 100644
+new mode 100755
+index c93d20c..d107a76
+--- a/giscanner/shlibs.py
++++ b/giscanner/shlibs.py
+@@ -31,6 +31,7 @@ import subprocess
+ 
+ from .utils import get_libtool_command, extract_libtool_shlib
+ from .ccompiler import CCompiler
++from distutils.cygwinccompiler import Mingw32CCompiler
+ 
+ 
+ # For .la files, the situation is easy.
+@@ -94,8 +95,8 @@ def _resolve_non_libtool(options, binary, libraries):
+         else:
+             binary.args[0] = old_argdir
+ 
+-    if os.name == 'nt':
+-        cc = CCompiler()
++    cc = CCompiler()
++    if os.name == 'nt' or isinstance(cc.compiler, Mingw32CCompiler):
+         shlibs = cc.resolve_windows_libs(libraries, options)
+ 
+     else:
