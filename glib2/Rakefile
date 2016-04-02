@@ -116,7 +116,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :version => "3.2",
       :windows => {
         :configure_args => [],
-        :built_file => "bin/libnettle-6-1.dll",
+        :built_file => "bin/libnettle-6-2.dll",
       },
     },
     {
