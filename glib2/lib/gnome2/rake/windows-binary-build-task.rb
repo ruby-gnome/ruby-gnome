@@ -152,7 +152,7 @@ class GNOME2WindowsBinaryBuildTask
 
   def configure(package)
     sh("./autogen.sh") if package.windows.need_autogen?
-    sh("autoreconf --install") if package.windows.need_autoreconf?
+    sh("autoreconf", "--install", "--force") if package.windows.need_autoreconf?
     sh("./configure",
        cc_env(package),
        dlltool_env,
