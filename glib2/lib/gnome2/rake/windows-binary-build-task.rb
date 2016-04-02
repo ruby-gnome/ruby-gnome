@@ -155,6 +155,7 @@ class GNOME2WindowsBinaryBuildTask
     sh("autoreconf --install") if package.windows.need_autoreconf?
     sh("./configure",
        cc_env(package),
+       dlltool_env(package),
        "CPPFLAGS=#{cppflags(package)}",
        "LDFLAGS=#{ldflags(package)}",
        "--prefix=#{dist_dir}",
@@ -175,6 +176,10 @@ class GNOME2WindowsBinaryBuildTask
 
   def cc_env(package)
     "CC=#{cc(package)}"
+  end
+
+  def dlltool_env(package)
+    "DLLTOOL=#{dlltool(package)}"
   end
 
   def build_packages
@@ -239,6 +244,10 @@ class GNOME2WindowsBinaryBuildTask
       "#{@package.windows.build_host}-g++",
     ]
     cxx_command_line.compact.join(" ")
+  end
+
+  def dlltool(package)
+    "#{@package.windows.build_host}-dlltool"
   end
 
   def cppflags(package)
@@ -311,6 +320,7 @@ class GNOME2WindowsBinaryBuildTask
       introspection_compiler << " --includedir=#{gir_dir}"
     end
     common_make_args << introspection_compiler
+    common_make_args << dlltool_env(package)
 
     data_dirs = dependencies.collect do |package|
       "#{compute_base_dir.call(package)}/share"
