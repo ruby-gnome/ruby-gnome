@@ -323,7 +323,7 @@ class GNOME2WindowsBinaryBuildTask
       gir_dir = "#{compute_base_dir.call(package)}/share/gir-1.0"
       introspection_compiler_args << " --includedir=#{gir_dir}"
     end
-    if @package.windows.gobject_introspection_compiler_split_args
+    if @package.windows.gobject_introspection_compiler_split_args?
       common_make_args << introspection_compiler
       common_make_args <<
         "INTROSPECTION_COMPILER_ARGS=#{introspection_compiler_args}"
