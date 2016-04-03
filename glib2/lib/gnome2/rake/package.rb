@@ -65,8 +65,7 @@ module GNOME2
                                               :build_dependencies,
                                               :gobject_introspection_dependencies,
                                               :build_packages,
-                                              :build_host,
-                                              :gobject_introspection_complier_split_args)
+                                              :build_host)
 
         attr_reader :relative_binary_dir, :absolute_binary_dir
         def initialize
