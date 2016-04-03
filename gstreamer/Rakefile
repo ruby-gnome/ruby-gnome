@@ -155,7 +155,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         ],
         :build_concurrently => false,
         :patches => [
-          "gstreamer-1.5.2-remove-introspection-compiler-dependency.diff",
         ],
         :need_autoreconf => true,
         :built_file => "bin/libgstreamer-1.0-0.dll",
@@ -176,7 +175,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         ],
         :build_concurrently => false,
         :patches => [
-          "gst-plugins-base-1.5.2-remove-introspection-compiler-dependency.diff",
         ],
         :need_autoreconf => true,
         :built_file => "lib/gstreamer-1.0/libgstgio.dll",
@@ -209,7 +207,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :need_autoreconf => true,
         :patches => [
           "gst-plugins-bad-1.8.0-use-only-I.diff",
-          "gst-plugins-bad-1.5.2-remove-introspection-compiler-dependency.diff",
+          "gst-plugins-bad-1.8.0-add-missing-lole32.diff",
         ],
         :built_file => "lib/gstreamer-1.0/libgstmxf.dll",
       },
