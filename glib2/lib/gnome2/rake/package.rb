@@ -126,6 +126,15 @@ module GNOME2
           end
         end
 
+        def build_arch
+          case build_architecture
+          when "x86"
+            "i686"
+          when "x64"
+            "x86_64"
+          end
+        end
+
         def build_architecture
           ENV["RUBY_GNOME2_BUILD_ARCHITECTURE"] || "x86"
         end

@@ -233,7 +233,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "--with-libav-extra-configure=" +
             "--cross-prefix=#{package.windows.build_host}- " +
             "--target-os=mingw32 " +
-            "--arch=i686 " +
+            "--arch=#{package.windows.build_arch} " +
             "--pkg-config=pkg-config " +
             "--disable-gpl " +
             "--disable-yasm",
