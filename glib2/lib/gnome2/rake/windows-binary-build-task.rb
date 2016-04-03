@@ -315,11 +315,16 @@ class GNOME2WindowsBinaryBuildTask
     gi_base_dir = compute_base_dir.call("gobject-introspection")
     introspection_compiler = "INTROSPECTION_COMPILER="
     introspection_compiler << "#{gi_base_dir}/bin/g-ir-compiler.exe"
+    common_make_args << introspection_compiler
+    introspection_compiler_args = ""
     dependencies.each do |package|
       gir_dir = "#{compute_base_dir.call(package)}/share/gir-1.0"
-      introspection_compiler << " --includedir=#{gir_dir}"
+      introspection_compiler_args << " --includedir=#{gir_dir}"
     end
-    common_make_args << introspection_compiler
+    common_make_args <<
+      "INTROSPECTION_COMPILER_ARGS=#{introspection_compiler_args}"
+    common_make_args <<
+      "INTROSPECTION_COMPILER_OPTS=#{introspection_compiler_args}"
     common_make_args << dlltool_env
 
     data_dirs = dependencies.collect do |package|
