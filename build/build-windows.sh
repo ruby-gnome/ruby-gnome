@@ -53,7 +53,8 @@ if [ ! -f ~/setup.timestamp ]; then
     python-dev \
     wine1.6 \
     mingw-w64 \
-    cmake
+    cmake \
+    valac
 
   run git clone file:///pkg-config/.git
   run git clone file:///rcairo/.git rcairo.${DIRECTORY_SUFFIX}
