@@ -119,7 +119,7 @@ module GNOME2
           s.author                = @author
           s.email                 = @email
           s.homepage              = @homepage
-          s.licenses              = ["LGPLv2.1 or later"]
+          s.licenses              = ["LGPLv2.1+"]
           s.version               = version
           extensions              = FileList["ext/#{@name}/extconf.rb"]
           extensions.existing!
