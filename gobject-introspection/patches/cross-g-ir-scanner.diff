@@ -1,5 +1,5 @@
 diff --git a/giscanner/ccompiler.py b/giscanner/ccompiler.py
-index 57df9d6..95c9c85 100644
+index 57df9d6..8c34cec 100644
 --- a/giscanner/ccompiler.py
 +++ b/giscanner/ccompiler.py
 @@ -20,6 +20,7 @@
@@ -18,7 +18,15 @@ index 57df9d6..95c9c85 100644
  
          # customize_compiler() from distutils only does customization
          # for 'unix' compiler type.  Also, avoid linking to msvcrxx.dll
-@@ -287,12 +289,15 @@ class CCompiler(object):
+@@ -232,6 +234,7 @@ class CCompiler(object):
+ 
+         includes.extend(include_paths)
+         extra_postargs.extend(extra_args)
++        extra_postargs.append('-fno-stack-protector')
+ 
+         return self.compiler.compile(sources=source,
+                                      macros=macros,
+@@ -287,12 +290,15 @@ class CCompiler(object):
                  args.extend(libtool)
                  args.append('--mode=execute')
              args.extend([os.environ.get('DLLTOOL', 'dlltool.exe'), '--identify'])
