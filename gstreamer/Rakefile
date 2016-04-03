@@ -150,7 +150,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :windows => {
         :cc_args => "-std=gnu99",
         :configure_args => [
-          "--enable-check",
+          "--disable-check",
           "--enable-introspection",
         ],
         :build_concurrently => false,
