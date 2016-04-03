@@ -157,6 +157,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :patches => [
         ],
         :need_autoreconf => true,
+        :gobject_introspection_complier_split_args => true,
         :built_file => "bin/libgstreamer-1.0-0.dll",
       },
     },
@@ -177,6 +178,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :patches => [
         ],
         :need_autoreconf => true,
+        :gobject_introspection_complier_split_args => true,
         :built_file => "lib/gstreamer-1.0/libgstgio.dll",
       },
     },
@@ -190,6 +192,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
           "--disable-shout2",
         ],
+        :gobject_introspection_complier_split_args => true,
         :built_file => "lib/gstreamer-1.0/libgstcairo.dll",
       },
     },
@@ -205,6 +208,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "-std=gnu99",
         ],
         :need_autoreconf => true,
+        :gobject_introspection_complier_split_args => true,
         :patches => [
           "gst-plugins-bad-1.8.0-use-only-I.diff",
           "gst-plugins-bad-1.8.0-add-missing-lole32.diff",
@@ -220,6 +224,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     #   :compression_method => "xz",
     #   :windows => {
     #     :configure_args => [],
+    #     :gobject_introspection_complier_split_args => true,
     #   },
     # },
     {
@@ -238,6 +243,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
             "--disable-gpl " +
             "--disable-yasm",
         ],
+        :gobject_introspection_complier_split_args => true,
         :built_file => "lib/gstreamer-1.0/libgstlibav.dll",
       },
       :bundled_packages => [
