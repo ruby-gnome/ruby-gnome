@@ -29,7 +29,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2", "gobject-introspection",
   ]
   xiph_download_url_base = "http://downloads.xiph.org/releases"
-  freedesktop_download_url_base = "http://gstreamer.freedesktop.org/src"
+  freedesktop_download_url_base = "https://gstreamer.freedesktop.org/src"
   sf_net_download_url_base = "http://downloads.sourceforge.net/project"
   libmad_version = "0.15.1b"
   package.external_packages = [
