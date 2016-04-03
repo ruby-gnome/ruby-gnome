@@ -171,6 +171,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
           "--enable-introspection",
         ],
+        :cc_args => [
+          "-std=gnu99",
+        ],
         :build_concurrently => false,
         :patches => [
           "gst-plugins-base-1.5.2-remove-introspection-compiler-dependency.diff",
@@ -201,7 +204,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :windows => {
         :configure_args => ["--disable-librfb"],
         :cc_args => [
-          "-std=c99",
+          "-std=gnu99",
         ],
         :need_autoreconf => true,
         :patches => [
