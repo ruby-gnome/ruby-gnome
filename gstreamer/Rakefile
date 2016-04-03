@@ -187,7 +187,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :label => "GStreamer plugins (good)",
       :version => "1.8.0",
       :compression_method => "xz",
-      :windows => {n
+      :windows => {
         :configure_args => [
           "--disable-shout2",
         ],
