@@ -66,7 +66,7 @@ rbg_variant_to_ruby(GVariant *variant)
         return INT2NUM(g_variant_get_handle(variant));
     } else if (g_variant_type_equal(type, G_VARIANT_TYPE_VARIANT)) {
         GVariant *val = g_variant_get_variant(variant);
-        VALUE value = rbg_variant_new(val);
+        VALUE value = rbg_variant_to_ruby(val);
         g_variant_unref(val);
         return value;
     } else if (g_variant_type_is_array(type)) {
