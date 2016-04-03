@@ -245,7 +245,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           :name => "libav",
           :path => "gst-libs/ext/libav",
           :license_files => [
-            "LICENSE",
+            "LICENSE.md",
             "CREDITS",
             "COPYING.GPLv2",
             "COPYING.GPLv3",
