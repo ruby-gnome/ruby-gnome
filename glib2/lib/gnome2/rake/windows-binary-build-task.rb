@@ -120,7 +120,7 @@ class GNOME2WindowsBinaryBuildTask
       if package.windows.use_cc_environment_variable?
         common_make_args << cc_env(package)
       end
-      add_gobject_introspection_make_args(common_make_args)
+      add_gobject_introspection_make_args(package, common_make_args)
       build_make_args = common_make_args.dup
       install_make_args = common_make_args.dup
       if package.windows.build_concurrently?
@@ -294,7 +294,7 @@ class GNOME2WindowsBinaryBuildTask
     paths
   end
 
-  def add_gobject_introspection_make_args(common_make_args)
+  def add_gobject_introspection_make_args(package, common_make_args)
     unless @package.windows.build_dependencies.include?("gobject-introspection")
       return
     end
@@ -311,19 +311,19 @@ class GNOME2WindowsBinaryBuildTask
     ]
     dependencies += @package.windows.gobject_introspection_dependencies
 
-    compute_base_dir = lambda do |package|
-      "#{@package.project_root_dir}/#{package}/vendor/local"
+    compute_base_dir = lambda do |dependent_package|
+      "#{@package.project_root_dir}/#{dependent_package}/vendor/local"
     end
 
     gi_base_dir = compute_base_dir.call("gobject-introspection")
     introspection_compiler = "INTROSPECTION_COMPILER="
     introspection_compiler << "#{gi_base_dir}/bin/g-ir-compiler.exe"
     introspection_compiler_args = ""
-    dependencies.each do |package|
-      gir_dir = "#{compute_base_dir.call(package)}/share/gir-1.0"
+    dependencies.each do |dependent_package|
+      gir_dir = "#{compute_base_dir.call(dependent_package)}/share/gir-1.0"
       introspection_compiler_args << " --includedir=#{gir_dir}"
     end
-    if @package.windows.gobject_introspection_compiler_split_args?
+    if package.windows.gobject_introspection_compiler_split_args?
       common_make_args << introspection_compiler
       common_make_args <<
         "INTROSPECTION_COMPILER_ARGS=#{introspection_compiler_args}"
@@ -336,8 +336,8 @@ class GNOME2WindowsBinaryBuildTask
 
     common_make_args << dlltool_env
 
-    data_dirs = dependencies.collect do |package|
-      "#{compute_base_dir.call(package)}/share"
+    data_dirs = dependencies.collect do |dependent_package|
+      "#{compute_base_dir.call(dependent_package)}/share"
     end
     common_make_args << "XDG_DATA_DIRS=#{data_dirs.join(File::PATH_SEPARATOR)}"
   end
