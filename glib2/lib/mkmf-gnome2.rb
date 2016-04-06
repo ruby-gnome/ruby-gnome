@@ -151,14 +151,15 @@ def find_gem_spec(package)
   end
 end
 
+def setup_homebrew_libffi
+  return unless package_platform == :homebrew
+
+  PKGConfig.add_path("/usr/local/opt/libffi/lib/pkgconfig")
+end
+
 #add_depend_package("glib2", "ext/glib2", "/...../ruby-gnome2")
 def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
-  if package_platform == :homebrew and target_name == "gobject-introspection"
-    libffi_pkgconfig_path = Pathname("/usr/local/opt/libffi/lib/pkgconfig")
-    if libffi_pkgconfig_path.directory?
-      PKGConfig.add_path(libffi_pkgconfig_path.to_s)
-    end
-  end
+  setup_homebrew_libffi if target_name == "gobject-introspection"
 
   gem_spec = find_gem_spec(target_name)
   if gem_spec
@@ -623,6 +624,9 @@ def required_pkg_config_package(package_info, native_package_info=nil)
     required_package_info = package_info
   else
     required_package_info = [package_info]
+  end
+  if required_package_info.include?("gobject-introspection-1.0")
+    setup_homebrew_libffi
   end
   return true if PKGConfig.have_package(*required_package_info)
 
