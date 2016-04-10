@@ -321,14 +321,8 @@ rbgobj_define_property_accessors(VALUE klass)
             g_string_append_printf(source,
                 "def set_%s(val); set_property('%s', val); end\n",
                 prop_name, pspec->name);
-#ifdef HAVE_NODE_ATTRASGN
             g_string_append_printf(source, "alias %s= set_%s\n",
                                    prop_name, prop_name);
-#else
-            g_string_append_printf(source,
-                "def %s=(val); set_property('%s', val); val; end\n",
-                prop_name, pspec->name);
-#endif
         }
 
         g_free(buf);

@@ -418,34 +418,6 @@ def make_version_header(app_name, pkgname, dir = "src")
       out.close
 end
 
-def check_ruby_func
-  #Other options
-  ruby_header = "ruby.h"
-  have_func("rb_define_alloc_func", ruby_header) # for ruby-1.8
-  have_func("rb_block_proc", ruby_header) # for ruby-1.8
-
-  STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
-  if Object.respond_to? :allocate
-    STDOUT.print "yes\n"
-    $defs << "-DHAVE_OBJECT_ALLOCATE"
-  else
-    STDOUT.print "no\n"
-  end
-
-  STDOUT.print("checking for attribute assignment... ") # for ruby-1.7
-  STDOUT.flush
-  if defined? try_compile and try_compile <<SRC
-#include "ruby.h"
-#include "node.h"
-int node_attrasgn = (int)NODE_ATTRASGN;
-SRC
-    STDOUT.print "yes\n"
-    $defs << "-DHAVE_NODE_ATTRASGN"
-  else
-    STDOUT.print "no\n"
-  end
-end
-
 def add_obj(name)
   ensure_objs
   $objs << name unless $objs.index(name)
@@ -645,8 +617,6 @@ end
 
 add_include_path.call("sitearchdir")
 add_include_path.call("vendorarchdir")
-
-check_ruby_func
 
 if /mingw/ =~ RUBY_PLATFORM
   $ruby.gsub!('\\', '/')
