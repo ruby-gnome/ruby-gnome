@@ -36,7 +36,7 @@ module TextscrollDemo
     textview = Gtk::TextView.new
     swindow.add(textview)
     timeout = setup_scroll(textview, to_end)
-    textview.signal_connect("destroy") { GLib::Source.remove(timeout)}
+    textview.signal_connect("destroy") { GLib::Source.remove(timeout) }
   end
 
   def self.setup_scroll(textview, to_end)
@@ -62,7 +62,7 @@ module TextscrollDemo
         buffer.insert(mark_iter, "\n")
         buffer.insert(mark_iter, " " * count)
         buffer.insert(mark_iter, "Scroll to end scroll to end scroll" +
-                                   " to end scroll to end #{count}")
+                                 " to end scroll to end #{count}")
         # Now scroll the end mark onscreen.
         textview.scroll_mark_onscreen(mark)
 
