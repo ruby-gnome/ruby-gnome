@@ -414,7 +414,9 @@ module GObjectIntrospection
         when InfoType::STRUCT
           match_argument_interface_struct?(arg_info, interface, argument)
         when InfoType::OBJECT,
-             InfoType::INTERFACE
+             InfoType::INTERFACE,
+             InfoType::FLAGS,
+             InfoType::ENUMS
           argument.is_a?(interface.gtype.to_class)
         else
           # TODO
