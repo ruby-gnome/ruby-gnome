@@ -575,6 +575,21 @@ rb_gtk3_ui_manager_mark(gpointer object)
 }
 #endif
 
+static void
+rb_gtk3_text_tag_table_mark_body(GtkTextTag *tag, gpointer data)
+{
+    rbgobj_gc_mark_instance(tag);
+}
+
+static void
+rb_gtk3_text_tag_table_mark(gpointer object)
+{
+    GtkTextTagTable *table;
+
+    table = GTK_TEXT_TAG_TABLE(object);
+    gtk_text_tag_table_foreach(table, rb_gtk3_text_tag_table_mark_body, NULL);
+}
+
 void
 rbgtk3_class_init_func(gpointer g_class, G_GNUC_UNUSED gpointer class_data)
 {
@@ -614,6 +629,8 @@ Init_gtk3(void)
 #ifndef RB_GTK_UI_MANAGER_IS_DEPRECATED
     rbgobj_register_mark_func(GTK_TYPE_UI_MANAGER, rb_gtk3_ui_manager_mark);
 #endif
+    rbgobj_register_mark_func(GTK_TYPE_TEXT_TAG_TABLE,
+                              rb_gtk3_text_tag_table_mark);
 
     rbgtk3_cell_layout_init();
     rbgtk3_container_init();
