@@ -29,6 +29,37 @@ module Gtk
       tag
     end
 
+    alias_method :add_mark_raw, :add_mark
+    def add_mark(mark, where)
+      @marks ||= {}
+      add_mark_raw(mark, where)
+      mark_name = mark.name
+      @marks[mark_name] = mark if mark_name
+    end
+
+    alias_method :create_mark_raw, :create_mark
+    def create_mark(name, where, options={})
+      if options == true or options == false
+        options = {:left_gravity => options}
+      end
+      left_gravity = options[:left_gravity]
+      left_gravity = true if left_gravity.nil?
+      @marks ||= {}
+      if name.nil?
+        create_mark_raw(name, where, left_gravity)
+      else
+        @marks[name] = create_mark_raw(name, where, left_gravity)
+      end
+    end
+
+    alias_method :delete_mark_raw, :delete_mark
+    def delete_mark(mark)
+      @marks ||= {}
+      mark_name = mark.name
+      delete_mark_raw(mark)
+      @marks.delete(mark_name) if mark_name
+    end
+
     # prevent collision with deprecated methods.
     alias_method :get_iter_at_line_offset_raw,  :get_iter_at_line_offset
     alias_method :get_iter_at_line_index_raw,   :get_iter_at_line_index
