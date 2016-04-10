@@ -416,7 +416,7 @@ module GObjectIntrospection
         when InfoType::OBJECT,
              InfoType::INTERFACE,
              InfoType::FLAGS,
-             InfoType::ENUMS
+             InfoType::ENUM
           argument.is_a?(interface.gtype.to_class)
         else
           # TODO
