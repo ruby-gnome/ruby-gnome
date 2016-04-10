@@ -60,7 +60,7 @@ spinbutton.c            no              no
 spinner.c               ok              ok
 stack.c                 ok              ok
 textmask.c              ok              ok
-textscroll.c            no              no
+textscroll.c            ok              ok
 textview.c              ok              no
 theming_style_classes.c ok              ok
 toolpalette.c           no              no
