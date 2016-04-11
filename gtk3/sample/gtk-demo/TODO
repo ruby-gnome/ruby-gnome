@@ -1,34 +1,39 @@
 # C version (3.19.1) versus Ruby version
 
-C version             Ruby version    Updated
-application.c           no              no
-assistant.c             ok              ok
+# Ruby version : is there already a ruby version of the demo
+# Updated 3.19 : if there is a ruby version is it udapted to 3.19
+# Changed? 3.20: does this demo has changed with version 3.20
+#
+C version             Ruby version    Updated 3.19  Changed? in 3.20
+application.c           no              no            y
+assistant.c             ok              ok            y
 builder.c               ok              ok
 button_box.c            ok              ok
-changedisplay.c         ok              no
+changedisplay.c         ok              no            y
 clipboard.c             ok              no
 colorsel.c              ok              ok
-combobox.c              no              no
-css_accordion.c         ok              ok
-css_basics.c            ok              ok
-css_multiplebgs.c       ok              ok
-css_pixbufs.c           ok              ok
-css_shadows.c           ok              ok
+combobox.c              no              no            y
+css_accordion.c         ok              ok            y
+css_basics.c            ok              ok            y
+css_multiplebgs.c       ok              ok            y
+css_pixbufs.c           ok              ok            y
+css_shadows.c           ok              ok            y
 cursors.c               ok              ok
 dialog.c                ok              ok
 drawingarea.c           ok              no
 editable_cells.c        ok              no
 entry_buffer.c          ok              ok
 entry_completion.c      ok              ok
-event_axes.c            no              no
+event_axes.c            no              no            y
 expander.c              ok              ok
 filtermodel.c           ok              ok
 flowbox.c               no              no
-font_features.c         ok              ok
+font_features.c         ok              ok            y
+foreigndrawing          no              no            new
 gestures.c              no              no
-glarea.c                no              no
+glarea.c                no              no            y
 headerbar.c             ok              ok
-hypertext.c             ok              no
+hypertext.c             ok              no            y
 iconview.c              ok              no
 iconview_edit.c         ok              ok
 images.c                ok              no
@@ -36,11 +41,11 @@ infobar.c               ok              ok
 links.c                 ok              ok
 listbox.c               no              no
 list_store.c            ok              no
-markup.c                ok              ok
+markup.c                ok              ok            y
 menus.c                 ok              ok
 modelbutton.c           ok              ok
-offscreen_window.c      no              no
-offscreen_window2.c     no              no
+offscreen_window.c      no              no            y
+offscreen_window2.c     no              no            y
 overlay.c               ok              ok
 overlay2.c              ok              ok
 panes.c                 ok              ok
@@ -53,7 +58,7 @@ rotated_text.c          ok              no
 scale.c                 ok              ok
 search_entry.c          no              no
 search_entry2.c         ok              ok
-shortcuts.c             no              no
+shortcuts.c             no              no            y
 sidebar.c               ok              ok
 sizegroup.c             ok              ok
 spinbutton.c            no              no
@@ -62,7 +67,7 @@ stack.c                 ok              ok
 textmask.c              ok              ok
 textscroll.c            ok              ok
 textview.c              ok              no
-theming_style_classes.c ok              ok
+theming_style_classes.c ok              ok            y
 toolpalette.c           no              no
 transparent.c           no              no
 tree_store.c            ok              no
@@ -72,4 +77,57 @@ Check all the ruby demos that doesn't correspond to a C version.
 
 # Demo that are not to be done
 pagesetup.c
+
+Sumup of the merge of gtk-demo 3.19 -> 3.20
+
+ demos/gtk-demo/application-standalone.c |     3 -
+ demos/gtk-demo/application.c            |   357 +-
+ demos/gtk-demo/application.ui           |   163 +-
+ demos/gtk-demo/application_demo.c       |    95 +
+ demos/gtk-demo/appmenu.ui               |    19 +
+ demos/gtk-demo/assistant.c              |     1 +
+ demos/gtk-demo/changedisplay.c          |    13 +-
+ demos/gtk-demo/combobox.c               |     5 -
+ demos/gtk-demo/css_accordion.c          |     2 +-
+ demos/gtk-demo/css_accordion.css        |    16 +-
+ demos/gtk-demo/css_basics.c             |     2 +-
+ demos/gtk-demo/css_basics.css           |     2 +-
+ demos/gtk-demo/css_multiplebgs.c        |     2 +-
+ demos/gtk-demo/css_pixbufs.c            |     2 +-
+ demos/gtk-demo/css_pixbufs.css          |     4 +-
+ demos/gtk-demo/css_shadows.c            |     2 +-
+ demos/gtk-demo/css_shadows.css          |    10 +-
+ demos/gtk-demo/cssview.css              |    10 +-
+ demos/gtk-demo/demo.gresource.xml       |    14 +-
+ demos/gtk-demo/demo.ui                  |     1 +
+ demos/gtk-demo/event_axes.c             |   299 +-
+ demos/gtk-demo/font-features.ui         |  1329 ++++--
+ demos/gtk-demo/font_features.c          |   404 +-
+ demos/gtk-demo/foreigndrawing.c         |   986 ++++
+ demos/gtk-demo/glarea.c                 |     4 +-
+ demos/gtk-demo/hypertext.c              |    30 +-
+ demos/gtk-demo/main.c                   |    57 +-
+ demos/gtk-demo/main.ui                  |    39 +-
+ demos/gtk-demo/markup.c                 |    71 +-
+ demos/gtk-demo/markup.txt               |     4 +-
+ demos/gtk-demo/offscreen_window.c       |     2 +-
+ demos/gtk-demo/offscreen_window2.c      |     4 +-
+ demos/gtk-demo/org.gtk.Demo.gschema.xml |     9 +
+ demos/gtk-demo/reset.css                |    59 +-
+ demos/gtk-demo/shortcuts-boxes.ui       |   167 +
+ demos/gtk-demo/shortcuts-builder.ui     |   106 +-
+ demos/gtk-demo/shortcuts-clocks.ui      |    18 +
+ demos/gtk-demo/shortcuts-gedit.ui       |    17 +-
+ demos/gtk-demo/shortcuts.c              |    22 +
+ demos/gtk-demo/shortcuts.ui             |    21 +
+ demos/gtk-demo/stack.ui                 |    10 +-
+ demos/gtk-demo/theming.ui               |    80 +-
+ demos/gtk-demo/theming_style_classes.c  |     3 +
+ 
+ delete mode 100644 demos/gtk-demo/application-standalone.c
+ create mode 100644 demos/gtk-demo/application_demo.c
+ create mode 100644 demos/gtk-demo/appmenu.ui
+ create mode 100644 demos/gtk-demo/foreigndrawing.c
+ create mode 100644 demos/gtk-demo/shortcuts-boxes.ui
+
 
