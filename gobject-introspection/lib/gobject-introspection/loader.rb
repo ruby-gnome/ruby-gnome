@@ -539,10 +539,11 @@ module GObjectIntrospection
         validate_arguments(info, "#{klass}\##{method_name}", arguments)
         [arguments, block]
       end
+      require_callback_p = info.require_callback?
       klass.__send__(:define_method, method_name) do |*arguments, &block|
         arguments = [self] + arguments if function_info_p
         arguments, block = prepare.call(arguments, &block)
-        if block.nil? and info.require_callback?
+        if block.nil? and require_callback_p
           to_enum(method_name, *arguments)
         else
           options = {
