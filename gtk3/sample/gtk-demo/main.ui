@@ -3,14 +3,10 @@
   <!-- interface-requires gtk+ 3.10 -->
   <object class="GtkTreeStore" id="treestore">
     <columns>
-      <!-- column-name NAME -->
-      <column type="gchararray"/>
       <!-- column-name TITLE -->
       <column type="gchararray"/>
       <!-- column-name FILENAME -->
       <column type="gchararray"/>
-      <!-- column-name FUNC -->
-      <column type="gpointer"/>
       <!-- column-name STYLE -->
       <column type="gint"/>
     </columns>
@@ -73,8 +69,8 @@
                         <child>
                           <object class="GtkCellRendererText"/>
                           <attributes>
-                            <attribute name="style">4</attribute>
-                            <attribute name="text">1</attribute>
+                            <attribute name="style">2</attribute>
+                            <attribute name="text">0</attribute>
                           </attributes>
                         </child>
                         <child>

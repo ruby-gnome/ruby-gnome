@@ -98,7 +98,7 @@ Sumup of the merge of gtk-demo 3.19 -> 3.20
  demos/gtk-demo/css_shadows.c            |     2 +-
  demos/gtk-demo/css_shadows.css          |    10 +-
  demos/gtk-demo/cssview.css              |    10 +-
- demos/gtk-demo/demo.gresource.xml       |    14 +-
+ demos/gtk-demo/demo.gresource.xml       |    14 +-         done
  demos/gtk-demo/demo.ui                  |     1 +
  demos/gtk-demo/event_axes.c             |   299 +-
  demos/gtk-demo/font-features.ui         |  1329 ++++--
@@ -106,8 +106,8 @@ Sumup of the merge of gtk-demo 3.19 -> 3.20
  demos/gtk-demo/foreigndrawing.c         |   986 ++++
  demos/gtk-demo/glarea.c                 |     4 +-
  demos/gtk-demo/hypertext.c              |    30 +-
- demos/gtk-demo/main.c                   |    57 +-
- demos/gtk-demo/main.ui                  |    39 +-
+ demos/gtk-demo/main.c                   |    57 +-         done
+ demos/gtk-demo/main.ui                  |    39 +-         done
  demos/gtk-demo/markup.c                 |    71 +-
  demos/gtk-demo/markup.txt               |     4 +-
  demos/gtk-demo/offscreen_window.c       |     2 +-
@@ -130,4 +130,6 @@ Sumup of the merge of gtk-demo 3.19 -> 3.20
  create mode 100644 demos/gtk-demo/foreigndrawing.c
  create mode 100644 demos/gtk-demo/shortcuts-boxes.ui
 
+* Update of main.rb and resources files : 3.19.1 -> master : done.
+==> demo.gresource.xml should we use the gresources "sources/" and "application_demo"
 
