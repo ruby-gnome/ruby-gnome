@@ -46,6 +46,7 @@ if [ ! -f ~/setup.timestamp ]; then
     libgdk-pixbuf2.0-dev \
     gobject-introspection \
     libgtk2.0-bin \
+    gtk-3-examples \
     flex \
     bison \
     gperf \
