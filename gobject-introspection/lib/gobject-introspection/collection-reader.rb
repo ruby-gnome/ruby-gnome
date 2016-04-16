@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -24,9 +24,16 @@ module GObjectIntrospection
         singular = name.sub(/s\z/, "")
       end
       getter = "get_#{singular}"
+      cache_name = "@#{name}"
       define_method(name) do
-        send(n_getter).times.collect do |i|
-          send(getter, i)
+        if instance_variable_defined?(cache_name)
+          instance_variable_get(cache_name)
+        else
+          collection = send(n_getter).times.collect do |i|
+            send(getter, i)
+          end
+          instance_variable_set(cache_name, collection)
+          collection
         end
       end
     end
