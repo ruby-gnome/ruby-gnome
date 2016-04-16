@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2015-2016  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -286,10 +286,14 @@ Init_glib_variant_type(void)
         DEF_TYPE(DICT_ENTRY);
         DEF_TYPE(DICTIONARY);
         DEF_TYPE(STRING_ARRAY);
+#  if GLIB_CHECK_VERSION(2, 30, 0)
         DEF_TYPE(OBJECT_PATH_ARRAY);
+#  endif
         DEF_TYPE(BYTESTRING);
         DEF_TYPE(BYTESTRING_ARRAY);
+#  if GLIB_CHECK_VERSION(2, 30, 0)
         DEF_TYPE(VARDICT);
+#  endif
 
 #undef DEF_TYPE
     }
