@@ -100,6 +100,11 @@ module Gtk
       set(iter, columns, _values)
     end
 
+    alias_method :get_column_type_raw, :get_column_type
+    def get_column_type(index)
+      (@column_types ||= {})[index] ||= get_column_type_raw(index)
+    end
+
     private
     def setup_iter(iter)
       iter.model = self
