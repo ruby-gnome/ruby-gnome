@@ -23,6 +23,48 @@ module GObjectIntrospection
     collection_reader("args")
 
     def in_args
+      @in_args ||= compute_in_args
+    end
+
+    def required_in_args
+      @required_in_args ||= in_args.reject do |arg|
+        arg.may_be_null?
+      end
+    end
+
+    def n_in_args
+      in_args.size
+    end
+
+    def n_required_in_args
+      required_in_args.size
+    end
+
+    def require_callback?
+      args.any? do |arg|
+        arg.direction == Direction::IN and
+          arg.scope != ScopeType::INVALID and
+          !arg.may_be_null?
+      end
+    end
+
+    def out_args
+      @out_args ||= args.find_all do |arg|
+        case arg.direction
+        when Direction::OUT, Direction::INOUT
+          true
+        else
+          false
+        end
+      end
+    end
+
+    def n_out_args
+      out_args.size
+    end
+
+    private
+    def compute_in_args
       array_length_indexes = []
       callback_indexes = []
       closure_indexes = []
@@ -60,43 +102,6 @@ module GObjectIntrospection
           false
         end
       end
-    end
-
-    def required_in_args
-      in_args.reject do |arg|
-        arg.may_be_null?
-      end
-    end
-
-    def n_in_args
-      in_args.size
-    end
-
-    def n_required_in_args
-      required_in_args.size
-    end
-
-    def require_callback?
-      args.any? do |arg|
-        arg.direction == Direction::IN and
-          arg.scope != ScopeType::INVALID and
-          !arg.may_be_null?
-      end
-    end
-
-    def out_args
-      args.find_all do |arg|
-        case arg.direction
-        when Direction::OUT, Direction::INOUT
-          true
-        else
-          false
-        end
-      end
-    end
-
-    def n_out_args
-      out_args.size
     end
   end
 end
