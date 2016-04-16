@@ -17,6 +17,13 @@
 module GObjectIntrospection
   class ArgInfo
     def gclosure?
+      @gclosure_p ||= nil
+      return @gclosure_p unless @gclosure_p.nil?
+      @gclosure_p = compute_gclosure?
+    end
+
+    private
+    def compute_gclosure?
       type_info = type
       return false if type_info.tag != TypeTag::INTERFACE
 
