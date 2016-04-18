@@ -174,13 +174,7 @@ rg_ruby_to_variant(VALUE rb_value, VALUE rb_variant_type)
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_VARIANT)) {
         return g_variant_new_variant(rbg_variant_from_ruby(rb_value));
     } else if (g_variant_type_equal(variant_type,
-                                    G_VARIANT_TYPE_STRING_ARRAY)
-#if GLIB_CHECK_VERSION(2, 30, 0)
-               ||
-               g_variant_type_equal(variant_type,
-                                    G_VARIANT_TYPE_OBJECT_PATH_ARRAY)
-#endif
-        ) {
+                                    G_VARIANT_TYPE_STRING_ARRAY)) {
         const gchar **strings;
         gssize length;
         if (NIL_P(rb_value)) {
@@ -196,11 +190,27 @@ rg_ruby_to_variant(VALUE rb_value, VALUE rb_variant_type)
                 strings[i] = RVAL2CSTR_ACCEPT_NIL(rb_string);
             }
         }
-        if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_STRING_ARRAY)) {
-            return g_variant_new_strv(strings, length);
+        return g_variant_new_strv(strings, length);
+#if GLIB_CHECK_VERSION(2, 30, 0)
+    } else if (g_variant_type_equal(variant_type,
+                                    G_VARIANT_TYPE_OBJECT_PATH_ARRAY)) {
+        const gchar **paths;
+        gssize length;
+        if (NIL_P(rb_value)) {
+            paths = NULL;
+            length = 0;
         } else {
-            return g_variant_new_objv(strings, length);
+            gssize i;
+
+            length = RARRAY_LEN(rb_value);
+            paths = ALLOCA_N(const gchar *, length);
+            for (i = 0; i < length; i++) {
+                VALUE rb_path = RARRAY_PTR(rb_value)[i];
+                paths[i] = RVAL2CSTR_ACCEPT_NIL(rb_path);
+            }
         }
+        return g_variant_new_objv(paths, length);
+#endif
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_ARRAY)) {
         int i;
         GVariantBuilder builder;
