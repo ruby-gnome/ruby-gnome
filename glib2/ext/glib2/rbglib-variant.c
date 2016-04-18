@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2015-2016  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -174,9 +174,13 @@ rg_ruby_to_variant(VALUE rb_value, VALUE rb_variant_type)
     } else if (g_variant_type_equal(variant_type, G_VARIANT_TYPE_VARIANT)) {
         return g_variant_new_variant(rbg_variant_from_ruby(rb_value));
     } else if (g_variant_type_equal(variant_type,
-                                    G_VARIANT_TYPE_STRING_ARRAY) ||
+                                    G_VARIANT_TYPE_STRING_ARRAY)
+#if GLIB_CHECK_VERSION(2, 30, 0)
+               ||
                g_variant_type_equal(variant_type,
-                                    G_VARIANT_TYPE_OBJECT_PATH_ARRAY)) {
+                                    G_VARIANT_TYPE_OBJECT_PATH_ARRAY)
+#endif
+        ) {
         const gchar **strings;
         gssize length;
         if (NIL_P(rb_value)) {
