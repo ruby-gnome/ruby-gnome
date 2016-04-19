@@ -193,7 +193,7 @@ rval2glist_body(VALUE data)
     return Qnil;
 }
 
-static G_GNUC_NORETURN VALUE
+static VALUE
 rval2glist_rescue(VALUE data, VALUE e)
 {
     struct rval2glist_args *args = (struct rval2glist_args *)data;
@@ -241,7 +241,7 @@ rval2gslist_body(VALUE data)
     return Qnil;
 }
 
-static G_GNUC_NORETURN VALUE
+static VALUE
 rval2gslist_rescue(VALUE data, VALUE e)
 {
     struct rval2gslist_args *args = (struct rval2gslist_args *)data;
