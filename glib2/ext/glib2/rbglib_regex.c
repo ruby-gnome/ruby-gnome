@@ -136,6 +136,7 @@ rg_split(gint argc, VALUE *argv, VALUE self)
     return STRV2RVAL_FREE(strings);
 }
 
+#if GLIB_CHECK_VERSION(2, 30, 0)
 static VALUE
 rg_match(gint argc, VALUE *argv, VALUE self)
 {
@@ -190,6 +191,7 @@ rg_match(gint argc, VALUE *argv, VALUE self)
     rb_iv_set(rb_match_info, "@string", rb_frozen_string);
     return rb_match_info;
 }
+#endif
 
 static VALUE
 rg_max_backref(VALUE self)
@@ -221,6 +223,7 @@ rg_string_number(VALUE self, VALUE string)
     return INT2NUM(g_regex_get_string_number(_SELF(self), RVAL2CSTR(string)));
 }
 
+#if GLIB_CHECK_VERSION(2, 30, 0)
 static VALUE
 rg_match_all(gint argc, VALUE *argv, VALUE self)
 {
@@ -418,7 +421,7 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
 
     return CSTR2RVAL_FREE(modified_string);
 }
-
+#endif
 
 static VALUE
 rg_s_escape_string(G_GNUC_UNUSED VALUE self, VALUE string)
@@ -466,14 +469,18 @@ Init_glib_regex(void)
     RG_DEF_METHOD(compile_flags, 0);
     RG_DEF_METHOD(match_flags, 0);
     RG_DEF_METHOD(split, -1);
+#if GLIB_CHECK_VERSION(2, 30, 0)
     RG_DEF_METHOD(match, -1);
+#endif
     RG_DEF_METHOD(max_backref, 0);
     RG_DEF_METHOD(capture_count, 0);
     RG_DEF_METHOD_P(has_cr_or_lf, 0);
     RG_DEF_METHOD(max_lookbehind, 0);
     RG_DEF_METHOD(string_number, 1);
+#if GLIB_CHECK_VERSION(2, 30, 0)
     RG_DEF_METHOD(match_all, -1);
     RG_DEF_METHOD(replace, -1);
+#endif
 
     RG_DEF_SMETHOD(escape_string, 1);
     RG_DEF_SMETHOD(check_replacement, 1);
