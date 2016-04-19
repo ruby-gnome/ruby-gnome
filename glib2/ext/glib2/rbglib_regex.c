@@ -205,6 +205,7 @@ rg_capture_count(VALUE self)
     return INT2NUM(g_regex_get_capture_count(_SELF(self)));
 }
 
+#if GLIB_CHECK_VERSION(2, 34, 0)
 static VALUE
 rg_has_cr_or_lf_p(VALUE self)
 {
@@ -216,6 +217,7 @@ rg_max_lookbehind(VALUE self)
 {
     return INT2NUM(g_regex_get_max_lookbehind(_SELF(self)));
 }
+#endif
 
 static VALUE
 rg_string_number(VALUE self, VALUE string)
@@ -474,8 +476,10 @@ Init_glib_regex(void)
 #endif
     RG_DEF_METHOD(max_backref, 0);
     RG_DEF_METHOD(capture_count, 0);
+#if GLIB_CHECK_VERSION(2, 34, 0)
     RG_DEF_METHOD_P(has_cr_or_lf, 0);
     RG_DEF_METHOD(max_lookbehind, 0);
+#endif
     RG_DEF_METHOD(string_number, 1);
 #if GLIB_CHECK_VERSION(2, 30, 0)
     RG_DEF_METHOD(match_all, -1);
