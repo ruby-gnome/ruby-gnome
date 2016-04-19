@@ -22,6 +22,7 @@
 #define RG_TARGET_NAMESPACE cMatchInfo
 #define _SELF(s) ((GMatchInfo*)RVAL2BOXED(s, G_TYPE_MATCH_INFO))
 
+#if GLIB_CHECK_VERSION(2, 30, 0)
 static VALUE
 rg_regex(VALUE self)
 {
@@ -157,10 +158,12 @@ rg_expand_references(VALUE self, VALUE rb_string)
 
     return CSTR2RVAL_FREE(expanded_string);
 }
+#endif
 
 void
 Init_glib_matchinfo(void)
 {
+#if GLIB_CHECK_VERSION(2, 30, 0)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MATCH_INFO, "MatchInfo", mGLib);
@@ -176,4 +179,5 @@ Init_glib_matchinfo(void)
     RG_DEF_METHOD(fetch_all, 0);
     RG_DEF_METHOD(next, 0);
     RG_DEF_METHOD(expand_references, 1);
+#endif
 }
