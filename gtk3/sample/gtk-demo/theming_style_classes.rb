@@ -35,6 +35,7 @@ module ThemingStyleClassesDemo
     window = Gtk::Window.new(:toplevel)
     window.screen = main_window.screen
     window.set_title("Style Classes")
+    window.resizable = false
     window.set_border_width(12)
 
     builder = Gtk::Builder.new(:resource => "/theming_style_classes/theming.ui")
