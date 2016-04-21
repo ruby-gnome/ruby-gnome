@@ -4,7 +4,7 @@
 # This is licensed under the terms of the GNU Lesser General Public
 # License, version 2.1 or (at your option) later.
 #
-# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -34,8 +34,9 @@ module ThemingStyleClassesDemo
   def self.run_demo(main_window)
     window = Gtk::Window.new(:toplevel)
     window.screen = main_window.screen
-    window.set_title("Style Classes")
-    window.set_border_width(12)
+    window.title = "Style Classes"
+    window.resizable = false
+    window.border_width = 12
 
     builder = Gtk::Builder.new(:resource => "/theming_style_classes/theming.ui")
     grid = builder["grid"]

@@ -67,7 +67,7 @@ stack.c                 ok              ok
 textmask.c              ok              ok
 textscroll.c            ok              ok
 textview.c              ok              no
-theming_style_classes.c ok              ok            y
+theming_style_classes.c ok              ok            ok
 toolpalette.c           no              no
 transparent.c           no              no
 tree_store.c            ok              no
@@ -122,7 +122,7 @@ Sumup of the merge of gtk-demo 3.19 -> 3.20
  demos/gtk-demo/shortcuts.ui             |    21 +
  demos/gtk-demo/stack.ui                 |    10 +-
  demos/gtk-demo/theming.ui               |    80 +-
- demos/gtk-demo/theming_style_classes.c  |     3 +
+ demos/gtk-demo/theming_style_classes.c  |     3 +          done
  
  delete mode 100644 demos/gtk-demo/application-standalone.c
  create mode 100644 demos/gtk-demo/application_demo.c
