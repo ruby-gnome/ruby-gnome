@@ -2,7 +2,7 @@
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
-= CSS Theming/CSS Basics
+= Theming/CSS Basics
 
 Gtk themes are written using CSS. Every widget is build of multiple items
 that you can style very similarly to a regular website.

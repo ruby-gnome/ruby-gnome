@@ -20,7 +20,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 =begin
-= CSS Theming/Style Classes
+= Theming/Style Classes
 
 GTK+ uses CSS for theming. Style classes can be associated
 with widgets to inform the theme about intended rendering.

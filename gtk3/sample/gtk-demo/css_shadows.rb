@@ -2,7 +2,7 @@
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
-=  CSS Theming/Shadows
+=  Theming/Shadows
 
  This demo shows how to use CSS shadows.
 =end
