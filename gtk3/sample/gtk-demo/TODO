@@ -13,11 +13,11 @@ changedisplay.c         ok              no            y
 clipboard.c             ok              no
 colorsel.c              ok              ok
 combobox.c              no              no            y
-css_accordion.c         ok              ok            y
-css_basics.c            ok              ok            y
-css_multiplebgs.c       ok              ok            y
-css_pixbufs.c           ok              ok            y
-css_shadows.c           ok              ok            y
+css_accordion.c         ok              ok            ok
+css_basics.c            ok              ok            ok
+css_multiplebgs.c       ok              ok            ok
+css_pixbufs.c           ok              ok            ok
+css_shadows.c           ok              ok            ok
 cursors.c               ok              ok
 dialog.c                ok              ok
 drawingarea.c           ok              no
@@ -88,14 +88,14 @@ Sumup of the merge of gtk-demo 3.19 -> 3.20
  demos/gtk-demo/assistant.c              |     1 +          done
  demos/gtk-demo/changedisplay.c          |    13 +-
  demos/gtk-demo/combobox.c               |     5 -
- demos/gtk-demo/css_accordion.c          |     2 +-
+ demos/gtk-demo/css_accordion.c          |     2 +-         done
  demos/gtk-demo/css_accordion.css        |    16 +-
- demos/gtk-demo/css_basics.c             |     2 +-
+ demos/gtk-demo/css_basics.c             |     2 +-         done
  demos/gtk-demo/css_basics.css           |     2 +-
- demos/gtk-demo/css_multiplebgs.c        |     2 +-
- demos/gtk-demo/css_pixbufs.c            |     2 +-
+ demos/gtk-demo/css_multiplebgs.c        |     2 +-         done
+ demos/gtk-demo/css_pixbufs.c            |     2 +-         done
  demos/gtk-demo/css_pixbufs.css          |     4 +-
- demos/gtk-demo/css_shadows.c            |     2 +-
+ demos/gtk-demo/css_shadows.c            |     2 +-         done
  demos/gtk-demo/css_shadows.css          |    10 +-
  demos/gtk-demo/cssview.css              |    10 +-
  demos/gtk-demo/demo.gresource.xml       |    14 +-         done
