@@ -6,7 +6,7 @@
 #
 C version             Ruby version    Updated 3.19  Changed? in 3.20
 application.c           no              no            y
-assistant.c             ok              ok            y
+assistant.c             ok              ok            ok
 builder.c               ok              ok
 button_box.c            ok              ok
 changedisplay.c         ok              no            y
@@ -85,7 +85,7 @@ Sumup of the merge of gtk-demo 3.19 -> 3.20
  demos/gtk-demo/application.ui           |   163 +-
  demos/gtk-demo/application_demo.c       |    95 +
  demos/gtk-demo/appmenu.ui               |    19 +
- demos/gtk-demo/assistant.c              |     1 +
+ demos/gtk-demo/assistant.c              |     1 +          done
  demos/gtk-demo/changedisplay.c          |    13 +-
  demos/gtk-demo/combobox.c               |     5 -
  demos/gtk-demo/css_accordion.c          |     2 +-

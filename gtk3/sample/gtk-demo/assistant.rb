@@ -60,6 +60,7 @@ module AssistantDemo
 
     entry = Gtk::Entry.new
     entry.activates_default = true
+    entry.valign = :center
     box.pack_start(entry, :expand => true, :fill => true, :padding => 0)
 
     entry.signal_connect "changed" do |widget|
