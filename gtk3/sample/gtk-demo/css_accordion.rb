@@ -1,8 +1,8 @@
-# Copyright (c) 2015 Ruby-GNOME2 Project Team
+# Copyright (c) 2015-2016 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
-= CSS Theming/CSS Accordion
+= Theming/CSS Accordion
 
 A simple accordion demo written using CSS transitions and multiple backgrounds
 =end

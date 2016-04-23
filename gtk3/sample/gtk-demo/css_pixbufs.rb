@@ -1,8 +1,8 @@
-# Copyright (c) 2015 Ruby-GNOME2 Project Team
+# Copyright (c) 2015-2016 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
-=  CSS Theming/Animated Backgrounds
+=  Theming/Animated Backgrounds
 
  This demo is done in honour of the Pixbufs demo further down.
  It is done exclusively with CSS as the background of the window.

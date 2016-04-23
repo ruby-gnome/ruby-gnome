@@ -1,8 +1,8 @@
-# Copyright (c) 2015 Ruby-GNOME2 Project Team
+# Copyright (c) 2015-2016 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
-=  CSS Theming/Multiple Backgrounds
+=  Theming/Multiple Backgrounds
 
  Gtk themes are written using CSS. Every widget is build of multiple items
  that you can style very similarly to a regular website.
