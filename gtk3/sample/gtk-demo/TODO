@@ -41,7 +41,7 @@ infobar.c               ok              ok
 links.c                 ok              ok
 listbox.c               no              no
 list_store.c            ok              no
-markup.c                ok              ok            y
+markup.c                ok              ok            done
 menus.c                 ok              ok
 modelbutton.c           ok              ok
 offscreen_window.c      no              no            y
@@ -82,53 +82,22 @@ Sumup of the merge of gtk-demo 3.19 -> 3.20
 
  demos/gtk-demo/application-standalone.c |     3 -
  demos/gtk-demo/application.c            |   357 +-
- demos/gtk-demo/application.ui           |   163 +-         done
  demos/gtk-demo/application_demo.c       |    95 +
- demos/gtk-demo/appmenu.ui               |    19 +          done
- demos/gtk-demo/assistant.c              |     1 +          done
  demos/gtk-demo/changedisplay.c          |    13 +-
  demos/gtk-demo/combobox.c               |     5 -
- demos/gtk-demo/css_accordion.c          |     2 +-         done
- demos/gtk-demo/css_accordion.css        |    16 +-         done
- demos/gtk-demo/css_basics.c             |     2 +-         done
- demos/gtk-demo/css_basics.css           |     2 +-         done
- demos/gtk-demo/css_multiplebgs.c        |     2 +-         done
- demos/gtk-demo/css_pixbufs.c            |     2 +-         done
- demos/gtk-demo/css_pixbufs.css          |     4 +-         done
- demos/gtk-demo/css_shadows.c            |     2 +-         done
- demos/gtk-demo/css_shadows.css          |    10 +-         done
- demos/gtk-demo/cssview.css              |    10 +-         done
- demos/gtk-demo/demo.gresource.xml       |    14 +-         done
- demos/gtk-demo/demo.ui                  |     1 +          done
  demos/gtk-demo/event_axes.c             |   299 +-
- demos/gtk-demo/font-features.ui         |  1329 ++++--     done
  demos/gtk-demo/font_features.c          |   404 +- 
  demos/gtk-demo/foreigndrawing.c         |   986 ++++
  demos/gtk-demo/glarea.c                 |     4 +-
  demos/gtk-demo/hypertext.c              |    30 +-
- demos/gtk-demo/main.c                   |    57 +-         done
- demos/gtk-demo/main.ui                  |    39 +-         done
- demos/gtk-demo/markup.c                 |    71 +-
- demos/gtk-demo/markup.txt               |     4 +-         done
  demos/gtk-demo/offscreen_window.c       |     2 +-
  demos/gtk-demo/offscreen_window2.c      |     4 +-
- demos/gtk-demo/org.gtk.Demo.gschema.xml |     9 +          done
  demos/gtk-demo/reset.css                |    59 +-
- demos/gtk-demo/shortcuts-boxes.ui       |   167 +          done
- demos/gtk-demo/shortcuts-builder.ui     |   106 +-         done
- demos/gtk-demo/shortcuts-clocks.ui      |    18 +          done
- demos/gtk-demo/shortcuts-gedit.ui       |    17 +-         done
  demos/gtk-demo/shortcuts.c              |    22 +
- demos/gtk-demo/shortcuts.ui             |    21 +          done
- demos/gtk-demo/stack.ui                 |    10 +-         done
- demos/gtk-demo/theming.ui               |    80 +-         done
- demos/gtk-demo/theming_style_classes.c  |     3 +          done
  
  delete mode 100644 demos/gtk-demo/application-standalone.c
  create mode 100644 demos/gtk-demo/application_demo.c
- create mode 100644 demos/gtk-demo/appmenu.ui               done
  create mode 100644 demos/gtk-demo/foreigndrawing.c
- create mode 100644 demos/gtk-demo/shortcuts-boxes.ui       done
 
 * Update of main.rb and resources files : 3.19.1 -> master : done.
 ==> demo.gresource.xml should we use the gresources "sources/" and "application_demo"
