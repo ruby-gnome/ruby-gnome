@@ -17,25 +17,70 @@ module MarkupDemo
     window.screen = main_window.screen
     window.set_default_size(450, 450)
 
-    window.set_title("Markup")
+    stack = Gtk::Stack.new
+    stack.show
+    window.add(stack)
+
+    show_source = Gtk::CheckButton.new("Source")
+    show_source.valign = :center
+
+    header = Gtk::HeaderBar.new
+    header.pack_start(show_source)
+    header.show_close_button = true
+    header.show_all
+    window.titlebar = header
+
+    window.title = "Markup"
 
     view = Gtk::TextView.new
-    view.set_wrap_mode(:word)
-    view.set_left_margin(10)
-    view.set_right_margin(10)
+    view.wrap_mode = :word
+    view.left_margin = 10
+    view.right_margin = 10
 
     sw = Gtk::ScrolledWindow.new(nil, nil)
-    sw.set_policy(:never, :automatic)
+    sw.set_policy(:automatic, :automatic)
 
-    window.add(sw)
     sw.add(view)
+    sw.show_all
+
+    stack.add_named(sw, "formatted")
+
+    view2 = Gtk::TextView.new
+    view2.wrap_mode = :word
+    view2.left_margin = 10
+    view2.right_margin = 10
+
+    sw = Gtk::ScrolledWindow.new(nil, nil)
+    sw.set_policy(:automatic, :automatic)
+
+    sw.add(view2)
+    sw.show_all
+
+    stack.add_named(sw, "source")
 
     markup = Gio::Resources.lookup_data("/markup/markup.txt", 0)
-    
+
+    show_source.signal_connect "toggled" do |button|
+      if button.active?
+        stack.visible_child_name = "source"
+      else
+        buffer = view2.buffer
+        markup = buffer.get_text(buffer.start_iter,
+                                 buffer.end_iter,
+                                 false)
+        buffer = view.buffer
+        buffer.insert_markup(buffer.start_iter, markup, -1)
+        stack.visible_child_name = "formatted"
+      end
+    end
+
     buffer = view.buffer
     buffer.insert_markup(buffer.start_iter, markup, -1)
 
-    sw.show_all
+    buffer = view2.buffer
+    buffer.insert(buffer.start_iter, markup)
+
+    stack.show
 
     if !window.visible?
       window.show_all
