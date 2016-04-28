@@ -4,36 +4,36 @@
 # Updated 3.19 : if there is a ruby version is it udapted to 3.19
 # Changed? 3.20: does this demo has changed with version 3.20
 #
-C version             Ruby version    Updated 3.19  Changed? in 3.20
-application.c           no              no            y
-assistant.c             ok              ok            ok
+C version             Ruby version    Updated 3.20
+application.c           no              no        
+assistant.c             ok              ok        
 builder.c               ok              ok
 button_box.c            ok              ok
-changedisplay.c         ok              no            y
+changedisplay.c         ok              no        
 clipboard.c             ok              no
 colorsel.c              ok              ok
-combobox.c              no              no            y
-css_accordion.c         ok              ok            ok
-css_basics.c            ok              ok            ok
-css_multiplebgs.c       ok              ok            ok
-css_pixbufs.c           ok              ok            ok
-css_shadows.c           ok              ok            ok
+combobox.c              no              no        
+css_accordion.c         ok              ok        
+css_basics.c            ok              ok        
+css_multiplebgs.c       ok              ok        
+css_pixbufs.c           ok              ok        
+css_shadows.c           ok              ok        
 cursors.c               ok              ok
 dialog.c                ok              ok
 drawingarea.c           ok              no
 editable_cells.c        ok              no
 entry_buffer.c          ok              ok
 entry_completion.c      ok              ok
-event_axes.c            no              no            y
+event_axes.c            no              no        
 expander.c              ok              ok
 filtermodel.c           ok              ok
 flowbox.c               no              no
-font_features.c         ok              ok            y
-foreigndrawing          no              no            new
+font_features.c         ok              ok        
+foreigndrawing          no              no        
 gestures.c              no              no
-glarea.c                no              no            y
+glarea.c                no              no        
 headerbar.c             ok              ok
-hypertext.c             ok              no            y
+hypertext.c             ok              no        
 iconview.c              ok              no
 iconview_edit.c         ok              ok
 images.c                ok              no
@@ -41,11 +41,11 @@ infobar.c               ok              ok
 links.c                 ok              ok
 listbox.c               no              no
 list_store.c            ok              no
-markup.c                ok              ok            done
+markup.c                ok              ok       
 menus.c                 ok              ok
 modelbutton.c           ok              ok
-offscreen_window.c      no              no            y
-offscreen_window2.c     no              no            y
+offscreen_window.c      no              no        
+offscreen_window2.c     no              no        
 overlay.c               ok              ok
 overlay2.c              ok              ok
 panes.c                 ok              ok
@@ -58,7 +58,7 @@ rotated_text.c          ok              no
 scale.c                 ok              ok
 search_entry.c          no              no
 search_entry2.c         ok              ok
-shortcuts.c             no              no            y
+shortcuts.c             no              no
 sidebar.c               ok              ok
 sizegroup.c             ok              ok
 spinbutton.c            no              no
@@ -67,7 +67,7 @@ stack.c                 ok              ok
 textmask.c              ok              ok
 textscroll.c            ok              ok
 textview.c              ok              no
-theming_style_classes.c ok              ok            ok
+theming_style_classes.c ok              ok            
 toolpalette.c           no              no
 transparent.c           no              no
 tree_store.c            ok              no
@@ -77,28 +77,3 @@ Check all the ruby demos that doesn't correspond to a C version.
 
 # Demo that are not to be done
 pagesetup.c
-
-Sumup of the merge of gtk-demo 3.19 -> 3.20
-
- demos/gtk-demo/application-standalone.c |     3 -
- demos/gtk-demo/application.c            |   357 +-
- demos/gtk-demo/application_demo.c       |    95 +
- demos/gtk-demo/changedisplay.c          |    13 +-
- demos/gtk-demo/combobox.c               |     5 -
- demos/gtk-demo/event_axes.c             |   299 +-
- demos/gtk-demo/font_features.c          |   404 +- 
- demos/gtk-demo/foreigndrawing.c         |   986 ++++
- demos/gtk-demo/glarea.c                 |     4 +-
- demos/gtk-demo/hypertext.c              |    30 +-
- demos/gtk-demo/offscreen_window.c       |     2 +-
- demos/gtk-demo/offscreen_window2.c      |     4 +-
- demos/gtk-demo/reset.css                |    59 +-
- demos/gtk-demo/shortcuts.c              |    22 +
- 
- delete mode 100644 demos/gtk-demo/application-standalone.c
- create mode 100644 demos/gtk-demo/application_demo.c
- create mode 100644 demos/gtk-demo/foreigndrawing.c
-
-* Update of main.rb and resources files : 3.19.1 -> master : done.
-==> demo.gresource.xml should we use the gresources "sources/" and "application_demo"
-

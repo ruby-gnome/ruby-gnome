@@ -10,7 +10,7 @@
 =end
 module FontFeaturesDemo
   def self.run_demo(main_window)
-    builder = Gtk::Builder.new(:resource => "/font-features/font-features.ui")
+    builder = Gtk::Builder.new(:resource => "/font_features/font-features.ui")
     window = builder["window"]
     label = builder["label"]
     settings = builder["settings"]
