@@ -33,26 +33,26 @@ rg_itemize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "42", &arg1, &arg2, &arg3, &arg4, &arg5, &arg6);
 
     if (TYPE(arg1) == T_STRING) {
-        list = pango_itemize(_SELF(self), 
-                             RVAL2CSTR(arg1),      /* text */ 
-                             NUM2INT(arg2),        /* start_index */ 
+        list = pango_itemize(_SELF(self),
+                             RVAL2CSTR(arg1),      /* text */
+                             NUM2INT(arg2),        /* start_index */
                              NUM2INT(arg3),        /* length */
                              RVAL2PANGOATTRLIST(arg4), /* attrs */
                              NIL_P(arg5) ? NULL : RVAL2PANGOATTRITERATOR(arg5)); /* cached_iter */
     } else {
 #ifdef HAVE_PANGO_ITEMIZE_WITH_BASE_DIR
-        list = pango_itemize_with_base_dir(_SELF(self), 
+        list = pango_itemize_with_base_dir(_SELF(self),
                                            RVAL2PANGODIRECTION(arg1), /* base_dir */
-                                           RVAL2CSTR(arg2),      /* text */ 
-                                           NUM2INT(arg3),        /* start_index */ 
+                                           RVAL2CSTR(arg2),      /* text */
+                                           NUM2INT(arg3),        /* start_index */
                                            NUM2INT(arg4),        /* length */
                                            RVAL2PANGOATTRLIST(arg5), /* attrs */
                                            NIL_P(arg6) ? NULL : RVAL2PANGOATTRITERATOR(arg6)); /* cached_iter */
 #else
         rb_warn("Pango::Context#itemize(base_dir, text, start_index, length, attrs, cached_iter) isn't supported on this environment.");
-        list = pango_itemize(_SELF(self), 
-                             RVAL2CSTR(arg1),      /* text */ 
-                             NUM2INT(arg2),        /* start_index */ 
+        list = pango_itemize(_SELF(self),
+                             RVAL2CSTR(arg1),      /* text */
+                             NUM2INT(arg2),        /* start_index */
                              NUM2INT(arg3),        /* length */
                              RVAL2PANGOATTRLIST(arg4), /* attrs */
                              NIL_P(arg5) ? NULL : RVAL2PANGOATTRITERATOR(arg5)); /* cached_iter */
@@ -111,7 +111,7 @@ rg_language(VALUE self)
 static VALUE
 rg_set_language(VALUE self, VALUE lang)
 {
-    pango_context_set_language(_SELF(self), 
+    pango_context_set_language(_SELF(self),
                                RVAL2PANGOLANGUAGE(lang));
     return self;
 }
@@ -167,7 +167,7 @@ rg_matrix(VALUE self)
 static VALUE
 rg_set_matrix(VALUE self, VALUE matrix)
 {
-    pango_context_set_matrix(_SELF(self), 
+    pango_context_set_matrix(_SELF(self),
                              RVAL2PANGOMATRIX(matrix));
     return self;
 }
@@ -192,8 +192,8 @@ rg_get_metrics(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &desc, &lang);
 
-    return PANGOFONTMETRICS2RVAL(pango_context_get_metrics(_SELF(self), 
-                                                           RVAL2PANGOFONTDESCRIPTION(desc), 
+    return PANGOFONTMETRICS2RVAL(pango_context_get_metrics(_SELF(self),
+                                                           RVAL2PANGOFONTDESCRIPTION(desc),
                                                            NIL_P(lang) ? NULL : RVAL2PANGOLANGUAGE(lang)));
 }
 
@@ -253,6 +253,28 @@ rg_resolution(VALUE self)
 {
     return rb_float_new(pango_cairo_context_get_resolution(_SELF(self)));
 }
+
+static void
+shape_renderer_callback (cairo_t *cr, PangoAttrShape *attr,
+                         gboolean do_path, gpointer data)
+{
+  VALUE rb_cr, rb_attr, rb_do_path, rb_callback;
+  rb_cr = RVAL2CRCONTEXT(cr);
+  rb_attr = RVAL2ATTR(attr);
+  rb_do_path = CBOOL2RVAR(do_path);
+  rb_callback = (VALUE) data;
+  rb_funcall(rb_callback, rb_intern("call"), 3, rb_cr, rb_attr, rb_do_path);
+}
+
+static VALUE
+rg_set_shape_renderer(VALUE self)
+{
+    VALUE func = rb_block_proc();
+    pango_cairo_context_set_shape_renderer(_SELF(self),
+                                           (PangoCairoShapeRendererFunc) func,
+                                           (gpointer) func,
+                                           GDestroyNotify dnotify);
+}
 #endif
 
 static VALUE
@@ -298,6 +320,7 @@ Init_pango_context(VALUE mPango)
     RG_DEF_METHOD(font_options, 0);
     RG_DEF_METHOD(set_resolution, 1);
     RG_DEF_METHOD(resolution, 0);
+    RG_DEF_METHOD(set_shape_renderer, 0);
 #endif
 
     /* This will remove 2 or 3 releases later since 0.14.0. */
