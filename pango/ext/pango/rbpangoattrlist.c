@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2016 Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2005 Masao Mutoh 
  *
  *  This library is free software; you can redistribute it and/or
@@ -64,7 +64,7 @@ rg_splice(VALUE self, VALUE other, VALUE pos, VALUE len)
 static gboolean
 filter_func(PangoAttribute *attr, gpointer data)
 {
-    return CBOOL2RVAL(rb_funcall((VALUE)data, id_call, 1, ATTR2RVAL(attr)));
+    return RVAL2CBOOL(rb_funcall((VALUE)data, id_call, 1, ATTR2RVAL(attr)));
 }
 
 static VALUE
