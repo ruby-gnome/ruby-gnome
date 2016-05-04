@@ -40,13 +40,13 @@ class TestGtkImage < Test::Unit::TestCase
     end
 
     test "resource" do
+      only_gtk_version(3, 18, 0)
       resource = Gio::Resource.load(fixture_path("image.gresource"))
       Gio::Resources.register(resource)
       begin
         resource_path = "/org/ruby/gnome/gnome-logo-icon.png"
         image = Gtk::Image.new(:resource => resource_path,
                                :size => :dialog)
-        omit("GTK+ 3.16 doesn't support getting resource path. See GitHub#461.")
         assert_equal(resource_path,
                      image.resource)
       ensure
