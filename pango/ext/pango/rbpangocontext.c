@@ -21,6 +21,8 @@
 
 #include "rbpangoprivate.h"
 
+static ID id_call;
+
 #define RG_TARGET_NAMESPACE cContext
 #define _SELF(self) (RVAL2PANGOCONTEXT(self))
 
@@ -258,12 +260,12 @@ static void
 shape_renderer_callback (cairo_t *cr, PangoAttrShape *attr,
                          gboolean do_path, gpointer data)
 {
-  VALUE rb_cr, rb_attr, rb_do_path, rb_callback;
-  rb_cr = RVAL2CRCONTEXT(cr);
-  rb_attr = RVAL2ATTR(attr);
-  rb_do_path = CBOOL2RVAR(do_path);
-  rb_callback = (VALUE) data;
-  rb_funcall(rb_callback, rb_intern("call"), 3, rb_cr, rb_attr, rb_do_path);
+    VALUE rb_cr, rb_attr, rb_do_path, rb_callback;
+    rb_cr = CRCONTEXT2RVAL(cr);
+    rb_attr = ATTR2RVAL((PangoAttribute *) attr);
+    rb_do_path = CBOOL2RVAL(do_path);
+    rb_callback = (VALUE) data;
+    rb_funcall(rb_callback, id_call, 3, rb_cr, rb_attr, rb_do_path);
 }
 
 static VALUE
@@ -271,9 +273,10 @@ rg_set_shape_renderer(VALUE self)
 {
     VALUE func = rb_block_proc();
     pango_cairo_context_set_shape_renderer(_SELF(self),
-                                           (PangoCairoShapeRendererFunc) func,
+                                           (PangoCairoShapeRendererFunc) shape_renderer_callback,
                                            (gpointer) func,
-                                           GDestroyNotify dnotify);
+                                           NULL);
+    return self;
 }
 #endif
 
@@ -288,6 +291,8 @@ void
 Init_pango_context(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_CONTEXT, "Context", mPango);
+
+    id_call = rb_intern("call");
 
     RG_DEF_METHOD(itemize, -1);
 
