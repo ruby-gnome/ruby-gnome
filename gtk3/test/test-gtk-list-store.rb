@@ -194,20 +194,26 @@ class TestGtkListStore < Test::Unit::TestCase
     test "iter" do
       GC.start
       n_iterators = count_objects(Gtk::TreeIter)
-      50.times do |i|
+      n_items = 50
+      n_iterators_created = 100
+      n_iterators_for_remove = 1
+
+      n_items.times do |i|
         iter = @store.append
         iter[ID] = i
         iter[NAME] = i.to_s
       end
-      100.times do
+      n_iterators_created.times do
         @store.iter_first
       end
       iter = @store.iter_first
       while @store.remove(iter); end
       assert_equal(0, @store.to_enum(:each).to_a.size)
+
       GC.start
       assert do
-        count_objects(Gtk::TreeIter) <= n_iterators + 1
+        count_objects(Gtk::TreeIter) <
+          (n_iterators + n_items + n_iterators_created + n_iterators_for_remove)
       end
     end
 
