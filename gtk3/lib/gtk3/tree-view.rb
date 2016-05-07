@@ -73,5 +73,18 @@ module Gtk
 
       expand_row_raw(path, open_all)
     end
+
+    private
+    def create_signal_handler(signal_name, callback)
+      case signal_name
+      when "row-collapsed", "row-expanded"
+        lambda do |tree_view, iter, path, *extra_args|
+          iter.model = tree_view.model
+          callback.call(tree_view, iter, path, *extra_args)
+        end
+      else
+        super
+      end
+    end
   end
 end

@@ -190,4 +190,40 @@ class TestGtkTreeView < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case "signal" do
+    def setup
+      @store = Gtk::TreeStore.new(String)
+      @view = Gtk::TreeView.new(@store)
+
+      root = @store.append(nil)
+      root[0] = "root"
+      child = @store.append(root)
+      child[0] = "child"
+      grand_child = @store.append(child)
+      grand_child[0] = "grand child"
+    end
+
+    test "row-collapsed" do
+      @view.expand_all
+
+      values = []
+      @view.signal_connect("row-collapsed") do |_, iter, path|
+        values << iter[0]
+      end
+      @view.collapse_row(Gtk::TreePath.new("0:0"))
+      assert_equal(["child"], values)
+    end
+
+    test "row-expanded" do
+      @view.collapse_all
+
+      values = []
+      @view.signal_connect("row-expanded") do |_, iter, path|
+        values << iter[0]
+      end
+      @view.expand_row(Gtk::TreePath.new("0"))
+      assert_equal(["root", "child"], values)
+    end
+  end
 end
