@@ -87,6 +87,67 @@ class TestGtkTreeView < Test::Unit::TestCase
                    normalized_data)
     end
 
+    sub_test_case "#expand_row" do
+      setup do
+        @parent = @store.append(nil)
+        @parent[0] = "parent"
+        @child = @store.append(@parent)
+        @child[0] = "child"
+        @grand_child = @store.append(@child)
+        @grand_child[0] = "grand child"
+      end
+
+      test "default" do
+        @view.expand_row(@parent.path)
+        assert do
+          @view.row_expanded?(@child.path)
+        end
+        assert do
+          @view.row_expanded?(@grand_child.path)
+        end
+      end
+
+      test "true" do
+        @view.expand_row(@parent.path, true)
+        assert do
+          @view.row_expanded?(@child.path)
+        end
+        assert do
+          @view.row_expanded?(@grand_child.path)
+        end
+      end
+
+      test "false" do
+        @view.expand_row(@parent.path, false)
+        assert do
+          @view.row_expanded?(@child.path)
+        end
+        assert do
+          not @view.row_expanded?(@grand_child.path)
+        end
+      end
+
+      test ":open_all => true" do
+        @view.expand_row(@parent.path, :open_all => true)
+        assert do
+          @view.row_expanded?(@child.path)
+        end
+        assert do
+          @view.row_expanded?(@grand_child.path)
+        end
+      end
+
+      test ":open_all => false" do
+        @view.expand_row(@parent.path, :open_all => false)
+        assert do
+          @view.row_expanded?(@child.path)
+        end
+        assert do
+          not @view.row_expanded?(@grand_child.path)
+        end
+      end
+    end
+
     test "#row_expanded?" do
       parent = @store.append(nil)
       parent[0] = "Hello"

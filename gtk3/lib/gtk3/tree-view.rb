@@ -61,5 +61,17 @@ module Gtk
         raise ArgumentError, "wrong number of arguments (#{args.size} for 2..4)"
       end
     end
+
+    alias_method :expand_row_raw, :expand_row
+    def expand_row(path, options={})
+      if options == true or options == false
+        open_all = options
+      else
+        open_all = options[:open_all]
+        open_all = true if open_all.nil?
+      end
+
+      expand_row_raw(path, open_all)
+    end
   end
 end
