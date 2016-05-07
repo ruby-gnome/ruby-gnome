@@ -126,6 +126,13 @@ module GLib
     end
   end
 
+  class Instantiatable
+    private
+    def create_signal_handler(signal_name, callback)
+      callback
+    end
+  end
+
   class Type
 
     def decendants

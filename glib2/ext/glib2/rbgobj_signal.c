@@ -309,7 +309,18 @@ gobj_sig_connect_impl(gboolean after, int argc, VALUE *argv, VALUE self)
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(eNoSignalError, "no such signal: %s", sig_name);
 
-    func = rb_block_proc();
+    {
+        ID id_create_signal_handler;
+        const char *normalized_signal_name;
+
+        CONST_ID(id_create_signal_handler, "create_signal_handler");
+        normalized_signal_name = g_signal_name(signal_id);
+        func = rb_funcall(self,
+                          rb_intern("create_signal_handler"),
+                          2,
+                          rb_str_new_cstr(normalized_signal_name),
+                          rb_block_proc());
+    }
     rclosure = g_rclosure_new(func, rest, 
                               rbgobj_get_signal_func(signal_id));
     g_rclosure_attach((GClosure *)rclosure, self);
