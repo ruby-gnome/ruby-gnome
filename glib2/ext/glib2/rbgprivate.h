@@ -27,10 +27,6 @@
 #  define rb_errinfo() (ruby_errinfo)
 #endif
 
-#ifndef HAVE_RB_STR_NEW_CSTR
-#  define rb_str_new_cstr(c_string) rb_str_new2(c_string)
-#endif
-
 #ifndef HAVE_RB_EXC_NEW_STR
 #  define rb_exc_new_str(klass, message) rb_exc_new3(klass, message)
 #endif
