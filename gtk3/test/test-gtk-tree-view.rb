@@ -100,50 +100,50 @@ class TestGtkTreeView < Test::Unit::TestCase
       test "default" do
         @view.expand_row(@parent.path)
         assert do
-          @view.row_expanded?(@child.path)
+          @view.row_expanded?(@parent.path)
         end
         assert do
-          @view.row_expanded?(@grand_child.path)
+          @view.row_expanded?(@child.path)
         end
       end
 
       test "true" do
         @view.expand_row(@parent.path, true)
         assert do
-          @view.row_expanded?(@child.path)
+          @view.row_expanded?(@parent.path)
         end
         assert do
-          @view.row_expanded?(@grand_child.path)
+          @view.row_expanded?(@child.path)
         end
       end
 
       test "false" do
         @view.expand_row(@parent.path, false)
         assert do
-          @view.row_expanded?(@child.path)
+          @view.row_expanded?(@parent.path)
         end
         assert do
-          not @view.row_expanded?(@grand_child.path)
+          not @view.row_expanded?(@child.path)
         end
       end
 
       test ":open_all => true" do
         @view.expand_row(@parent.path, :open_all => true)
         assert do
-          @view.row_expanded?(@child.path)
+          @view.row_expanded?(@parent.path)
         end
         assert do
-          @view.row_expanded?(@grand_child.path)
+          @view.row_expanded?(@child.path)
         end
       end
 
       test ":open_all => false" do
         @view.expand_row(@parent.path, :open_all => false)
         assert do
-          @view.row_expanded?(@child.path)
+          @view.row_expanded?(@parent.path)
         end
         assert do
-          not @view.row_expanded?(@grand_child.path)
+          not @view.row_expanded?(@child.path)
         end
       end
     end
