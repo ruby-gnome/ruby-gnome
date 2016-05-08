@@ -91,8 +91,10 @@ class TestContext < Test::Unit::TestCase
   end
 
   def test_families
-    @context.families
-    # TODO don't know how to test
+    family_names = @context.families.collect(&:name)
+    assert do
+      family_names.include?("Monospace")
+    end
   end
 
   def test_font_options
