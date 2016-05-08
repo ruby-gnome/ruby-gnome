@@ -16,18 +16,10 @@
 
 class TestContext < Test::Unit::TestCase
   include PangoTestUtils
-  require "gtk3"
 
   def setup
-    @text = "this is a test"
-    @label = Gtk::Label.new(@text)
-    @layout = @label.layout
-    @context = @layout.context
-    @window = Gtk::Window.new
-    @window.signal_connect("destroy") do
-        Gtk.main_quit
-    end
-    @window.add(@label)
+    font_map = Pango::CairoFontMap.default
+    @context = font_map.create_context
   end
 
   def test_set_font_map
