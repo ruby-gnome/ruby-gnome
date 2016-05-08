@@ -99,8 +99,10 @@ class TestContext < Test::Unit::TestCase
 
   def test_font_options
     options = Cairo::FontOptions.new
+    options.antialias = Cairo::Antialias::BEST
     @context.font_options = options
-    assert(options.eql?(@context.font_options))
+    assert_equal(Cairo::Antialias::BEST,
+                 @context.font_options.antialias)
   end
 
   def test_resolution
