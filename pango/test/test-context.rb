@@ -73,9 +73,11 @@ class TestContext < Test::Unit::TestCase
     description = Pango::FontDescription.new("monospace")
     description.size = 10 * Pango::SCALE
     language = Pango::Language.new("fr")
-    font_set = @context.load_fontset(description, language)
-    # TODO don't work
-    # assert_equal("monospace 10", font_set.name)
+    fontset = @context.load_fontset(description, language)
+    a_unicode = GLib::UTF8.get_char("a")
+    font = fontset.get_font(a_unicode)
+    assert_equal(10,
+                 (font.describe.size.to_f / Pango::SCALE).round)
   end
 
   def test_get_metrics
