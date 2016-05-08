@@ -65,8 +65,8 @@ class TestContext < Test::Unit::TestCase
     description = Pango::FontDescription.new("monospace")
     description.size = 10 * Pango::SCALE
     font = @context.load_font(description)
-    # TODO don't work
-    # assert_equal("monospace 10", font.describe.to_s)
+    assert_equal(10,
+                 (font.describe.size.to_f / Pango::SCALE).round)
   end
 
   def test_load_fontset
