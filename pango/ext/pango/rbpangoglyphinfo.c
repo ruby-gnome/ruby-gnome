@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2016  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -83,11 +83,11 @@ rg_geometry(VALUE self)
 static VALUE
 rg_set_geometry(VALUE self, VALUE width, VALUE x_offset, VALUE y_offset)
 {
-    PangoGlyphGeometry geo = _SELF(self)->geometry;
+    PangoGlyphGeometry *geo = &(_SELF(self)->geometry);
 
-    geo.width = NUM2INT(width);
-    geo.x_offset = NUM2INT(x_offset);
-    geo.y_offset = NUM2INT(y_offset);
+    geo->width = NUM2INT(width);
+    geo->x_offset = NUM2INT(x_offset);
+    geo->y_offset = NUM2INT(y_offset);
 
     return self;
 }
