@@ -85,7 +85,9 @@ class TestContext < Test::Unit::TestCase
     description.size = 10 * Pango::SCALE
     language = Pango::Language.new("fr")
     metrics = @context.get_metrics(description, language)
-    # TODO Don't know how to test is neither
+    assert do
+      metrics.ascent > metrics.descent
+    end
   end
 
   def test_families
