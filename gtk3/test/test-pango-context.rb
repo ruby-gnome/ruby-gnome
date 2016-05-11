@@ -17,41 +17,43 @@
 class TestPangoContext < Test::Unit::TestCase
   include GtkTestUtils
 
-  def setup
-    @text = "this is a test"
-    @label = Gtk::Label.new(@text)
-    @layout = @label.layout
-    @context = @layout.context
-    @window = Gtk::Window.new
-    @window.signal_connect("destroy") do
+  def test_set_shape_renderer
+    text = "this is a test"
+    label = Gtk::Label.new(text)
+    layout = label.layout
+
+    block_arguments = []
+    layout.context.set_shape_renderer do |cr, attr, do_path|
+      block_arguments << [cr.class, attr.class, do_path]
+    end
+
+    metrics = layout.context.get_metrics(layout.font_description)
+    ascent = metrics.ascent
+    logical_rect = Pango::Rectangle.new(0, -ascent, ascent, ascent)
+    ink_rect = logical_rect.dup
+    attrs = Pango::AttrList.new
+    attr = Pango::AttrShape.new(ink_rect, logical_rect, "a")
+    attr.start_index = text[0, text.index("a")].bytesize
+    attr.end_index = attr.start_index + "a".bytesize
+    attrs.insert(attr)
+    label.attributes = attrs
+
+    window = Gtk::Window.new
+    window.signal_connect("destroy") do
       Gtk.main_quit
     end
-    @window.add(@label)
-  end
-
-  def test_set_shape_renderer
-    GLib::Idle.add do
-      @layout.context.set_shape_renderer do |cr, attr, do_path|
-        assert_instance_of(Cairo::Context, cr)
-        assert_instance_of(Pango::Font, attr)
-        assert_instance_of(Pango::AttrShape, attr)
-        assert([true, false].include?(do_path))
-      end
-
-      metrics = @layout.context.get_metrics(@layout.font_description)
-      ascent = metrics.ascent
-      logical_rect = Pango::Rectangle.new(0, -ascent, ascent, ascent)
-      ink_rect = logical_rect.dup
-      attrs = Pango::AttrList.new
-      attr = Pango::AttrShape.new(ink_rect, logical_rect, "a")
-      attr.start_index = @text[0, @text.index("a")].bytesize
-      attr.end_index = attr.start_index + "a".bytesize
-      attrs.insert(attr)
-      @label.attributes = attrs
-      @window.destroy
+    window.add(label)
+    GLib::Timeout.add(1000) do
+      window.destroy
       GLib::Source::REMOVE
     end
-    @window.show_all
+    window.show_all
     Gtk.main
+
+    assert_equal([
+                   [Cairo::Context, Pango::AttrShape, false],
+                   [Cairo::Context, Pango::AttrShape, false],
+                 ],
+                 block_arguments)
   end
 end
