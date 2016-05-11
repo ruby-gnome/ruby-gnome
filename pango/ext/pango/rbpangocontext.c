@@ -278,6 +278,7 @@ static VALUE
 rg_set_shape_renderer(VALUE self)
 {
     VALUE func = rb_block_proc();
+    rb_iv_set(self, "@shape_renderer", func);
     pango_cairo_context_set_shape_renderer(_SELF(self),
                                            shape_renderer_callback,
                                            (gpointer)func,
