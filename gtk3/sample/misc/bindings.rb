@@ -50,20 +50,20 @@ window = Gtk::Window.new
 window.name = "pager_window"
 
 css_provider = Gtk::CssProvider.new
-css_provider.load(:data => <<CSS) 
+css_provider.load(:data => <<CSS)
 @binding-set MoveCursor {
   bind "<Control>j" { "move-cursor" (display-lines, 1, 0) };
   bind "<Control>k" { "move-cursor" (display-lines, -1, 0) };
   bind "<Control>l" { "move-cursor" (buffer-ends, 1, 0) };
   bind "<Control>m" { "move-cursor" (buffer-ends, -1, 0) };
 }
-GtkTextView {
-  -GtkWidget-cursor-color: green;
+textview {
+  caret-color: green;
   -GtkWidget-aspect-ratio: 1.0;
   font: 20 Sans;
   color: #aaa;
   background-color: #333 ;
-  gtk-key-bindings: MoveCursor;
+  -gtk-key-bindings: MoveCursor;
 }
 CSS
 hbox = Gtk::Box.new(:horizontal)
