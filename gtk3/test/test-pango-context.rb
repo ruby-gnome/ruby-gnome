@@ -37,7 +37,7 @@ class TestPangoContext < Test::Unit::TestCase
         assert_instance_of(Pango::AttrShape, attr)
         assert([true, false].include?(do_path))
       end
-      
+
       metrics = @layout.context.get_metrics(@layout.font_description)
       ascent = metrics.ascent
       logical_rect = Pango::Rectangle.new(0, -ascent, ascent, ascent)
