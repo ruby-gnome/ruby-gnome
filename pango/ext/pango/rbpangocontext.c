@@ -257,8 +257,8 @@ rg_resolution(VALUE self)
 }
 
 static void
-shape_renderer_callback (cairo_t *cr, PangoAttrShape *attr,
-                         gboolean do_path, gpointer data)
+shape_renderer_callback(cairo_t *cr, PangoAttrShape *attr,
+                        gboolean do_path, gpointer data)
 {
     VALUE rb_cr, rb_attr, rb_do_path, rb_callback;
     rb_cr = CRCONTEXT2RVAL(cr);
