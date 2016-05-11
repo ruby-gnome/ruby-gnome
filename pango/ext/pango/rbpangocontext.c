@@ -279,7 +279,7 @@ rg_set_shape_renderer(VALUE self)
 {
     VALUE func = rb_block_proc();
     pango_cairo_context_set_shape_renderer(_SELF(self),
-                                           (PangoCairoShapeRendererFunc)shape_renderer_callback,
+                                           shape_renderer_callback,
                                            (gpointer)func,
                                            NULL);
     return self;
