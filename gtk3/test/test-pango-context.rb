@@ -22,9 +22,9 @@ class TestPangoContext < Test::Unit::TestCase
     label = Gtk::Label.new(text)
     layout = label.layout
 
-    block_arguments = []
+    last_block_arguments = nil
     layout.context.set_shape_renderer do |cr, attr, do_path|
-      block_arguments << [cr.class, attr.class, do_path]
+      last_block_arguments = [cr.class, attr.class, do_path]
     end
 
     metrics = layout.context.get_metrics(layout.font_description)
@@ -50,10 +50,7 @@ class TestPangoContext < Test::Unit::TestCase
     window.show_all
     Gtk.main
 
-    assert_equal([
-                   [Cairo::Context, Pango::AttrShape, false],
-                   [Cairo::Context, Pango::AttrShape, false],
-                 ],
-                 block_arguments)
+    assert_equal([Cairo::Context, Pango::AttrShape, false],
+                 last_block_arguments)
   end
 end
