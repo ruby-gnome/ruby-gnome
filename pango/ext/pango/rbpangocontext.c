@@ -268,9 +268,9 @@ shape_renderer_callback(cairo_t *cr,
     VALUE rb_callback;
 
     rb_cr = CRCONTEXT2RVAL(cr);
-    rb_attr = ATTR2RVAL((PangoAttribute *) attr);
+    rb_attr = ATTR2RVAL((PangoAttribute *)attr);
     rb_do_path = CBOOL2RVAL(do_path);
-    rb_callback = (VALUE) data;
+    rb_callback = (VALUE)data;
     rb_funcall(rb_callback, id_call, 3, rb_cr, rb_attr, rb_do_path);
 }
 
@@ -279,8 +279,8 @@ rg_set_shape_renderer(VALUE self)
 {
     VALUE func = rb_block_proc();
     pango_cairo_context_set_shape_renderer(_SELF(self),
-                                           (PangoCairoShapeRendererFunc) shape_renderer_callback,
-                                           (gpointer) func,
+                                           (PangoCairoShapeRendererFunc)shape_renderer_callback,
+                                           (gpointer)func,
                                            NULL);
     return self;
 }
