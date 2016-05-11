@@ -30,27 +30,27 @@ class TestPangoContext < Test::Unit::TestCase
   end
 
   def test_set_shape_renderer
-     GLib::Idle.add do
-        @layout.context.set_shape_renderer do |cr, attr, do_path|
-          assert_instance_of(Cairo::Context, cr)
-          assert_instance_of(Pango::Font, attr)
-          assert_instance_of(Pango::AttrShape, attr)
-          assert([true, false].include?(do_path))
-        end
-        
-        metrics = @layout.context.get_metrics(@layout.font_description)
-        ascent = metrics.ascent
-        logical_rect = Pango::Rectangle.new(0, -ascent, ascent, ascent)
-        ink_rect = logical_rect.dup
-        attrs = Pango::AttrList.new
-        attr = Pango::AttrShape.new(ink_rect, logical_rect, "a")
-        attr.start_index = @text[0, @text.index("a")].bytesize
-        attr.end_index = attr.start_index + "a".bytesize
-        attrs.insert(attr)
-        @label.attributes = attrs
-        @window.destroy
-        GLib::Source::REMOVE
+    GLib::Idle.add do
+      @layout.context.set_shape_renderer do |cr, attr, do_path|
+        assert_instance_of(Cairo::Context, cr)
+        assert_instance_of(Pango::Font, attr)
+        assert_instance_of(Pango::AttrShape, attr)
+        assert([true, false].include?(do_path))
       end
+      
+      metrics = @layout.context.get_metrics(@layout.font_description)
+      ascent = metrics.ascent
+      logical_rect = Pango::Rectangle.new(0, -ascent, ascent, ascent)
+      ink_rect = logical_rect.dup
+      attrs = Pango::AttrList.new
+      attr = Pango::AttrShape.new(ink_rect, logical_rect, "a")
+      attr.start_index = @text[0, @text.index("a")].bytesize
+      attr.end_index = attr.start_index + "a".bytesize
+      attrs.insert(attr)
+      @label.attributes = attrs
+      @window.destroy
+      GLib::Source::REMOVE
+    end
     @window.show_all
     Gtk.main
   end
