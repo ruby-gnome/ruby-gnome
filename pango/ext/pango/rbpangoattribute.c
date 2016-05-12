@@ -229,6 +229,12 @@ attr_shape_value(VALUE self)
     return rb_ary_new3(2, attr_shape_ink_rect(self), attr_shape_logical_rect(self));
 }
 
+static VALUE
+attr_shape_data(VALUE self)
+{
+    return (VALUE)(((PangoAttrShape *)RVAL2ATTR(self))->data);
+}
+
 /*
  * Initialize methods
  */
@@ -464,6 +470,7 @@ Init_pango_attribute(VALUE mPango)
     rbg_define_method(tmpklass, "ink_rect", attr_shape_ink_rect, 0);
     rbg_define_method(tmpklass, "logical_rect", attr_shape_logical_rect, 0);
     rbg_define_method(tmpklass, "value", attr_shape_value, 0);
+    rbg_define_method(tmpklass, "data", attr_shape_data, 0);
     MAKE_ATTR(PANGO_ATTR_SCALE, AttrScale, pattrfloat, 1);
     /* PangoScale */
     rb_define_const(tmpklass, "XX_SMALL", rb_float_new(PANGO_SCALE_XX_SMALL));
