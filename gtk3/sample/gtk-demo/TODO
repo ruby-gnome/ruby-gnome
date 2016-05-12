@@ -54,7 +54,7 @@ pixbufs.c               ok              no
 popover.c               ok              ok
 printing.c              ok              ok
 revealer.c              ok              ok
-rotated_text.c          ok              no
+rotated_text.c          ok              ok
 scale.c                 ok              ok
 search_entry.c          no              no
 search_entry2.c         ok              ok
