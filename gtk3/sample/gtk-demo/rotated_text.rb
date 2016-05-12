@@ -34,9 +34,9 @@ module RotatedTextDemo
     drawing_area.style_context.add_class("view")
 
     drawing_area.signal_connect "draw" do |widget, cr|
-      # Create a cairo context and set up a transformation matrix so that the user
-      # space coordinates for the centered square where we draw are [-RADIUS, RADIUS],
-      # [-RADIUS, RADIUS].
+      # Create a cairo context and set up a transformation matrix so that the
+      # user space coordinates for the centered square where we draw are
+      # [-RADIUS, RADIUS], [-RADIUS, RADIUS].
       # We first center, then change the scale.
       width = widget.allocated_width
       height = widget.allocated_width
@@ -106,8 +106,7 @@ module RotatedTextDemo
     cr.scale(attr.ink_rect.width / Pango::SCALE,
              attr.ink_rect.height / Pango::SCALE)
 
-    # GPOINTER_TO_UINT (attr->data)
-    if attr.to_s == HEART
+    if attr.data == HEART
       cr.move_to(0.5, 0)
       cr.line_to(0.9, -0.4)
       cr.curve_to(1.1, -0.8, 0.5, -0.9, 0.5, -0.5)
