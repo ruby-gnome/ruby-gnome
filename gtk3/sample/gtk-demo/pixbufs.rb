@@ -1,167 +1,125 @@
-# Copyright (c) 2003-2014 Ruby-GNOME2 Project Team
+# Copyright (c) 2016 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: pixbufs.rb,v 1.5 2005/02/12 23:02:43 kzys Exp $
 =begin
-= Pixbufs
+=  Pixbufs
 
-A Gdk::Pixbuf represents an image, normally in RGB or RGBA format.
-Pixbufs are normally used to load files from disk and perform
-image scaling.
+ A GdkPixbuf represents an image, normally in RGB or RGBA format.
+ Pixbufs are normally used to load files from disk and perform
+ image scaling.
 
-This demo is not all that educational, but looks cool. It was written
-by Extreme Pixbuf Hacker Federico Mena Quintero. It also shows
-off how to use Gtk::DrawingArea to do a simple animation.
+ This demo is not all that educational, but looks cool. It was written
+ by Extreme Pixbuf Hacker Federico Mena Quintero. It also shows
+ off how to use GtkDrawingArea to do a simple animation.
 
-Look at the Image demo for additional pixbuf usage examples.
+ Look at the Image demo for additional pixbuf usage examples.
 =end
+module PixbufsDemo
+  IMAGES_NAMES = %w(/pixbufs/apple-red.png /pixbufs/gnome-applets.png
+                    /pixbufs/gnome-calendar.png /pixbufs/gnome-foot.png
+                    /pixbufs/gnome-gmush.png /pixbufs/gnome-gimp.png
+                    /pixbufs/gnome-gsame.png /pixbufs/gnu-keys.png)
+  N_IMAGES = IMAGES_NAMES.size
+  BACKGROUND_NAME = "/pixbufs/background.jpg"
+  CYCLE_TIME = 3_000_000
 
-require "common"
+  def self.run_demo(main_window)
+    window = Gtk::Window.new(:toplevel)
+    window.screen = main_window.screen
+    window.resizable = false
 
-module Demo
-  class Pixbufs < BasicWindow
-    FRAME_DELAY = 50
-
-    BACKGROUND_NAME = "background.jpg"
-
-    IMAGE_NAMES = [
-      "apple-red.png",
-      "gnome-applets.png",
-      "gnome-calendar.png",
-      "gnome-foot.png",
-      "gnome-gmush.png",
-      "gnome-gimp.png",
-      "gnome-gsame.png",
-      "gnu-keys.png",
-      "ruby-gnome2-logo.png",
-    ]
-
-    CYCLE_LEN = 60
-    def initialize
-      super("Pixbufs")
-      set_resizable(false)
-
-      @background = nil
-      @frame = nil
-      @frame_num = 0
-      @images = []
-
-      begin
-        load_pixbufs
-
-        set_size_request(@background.width, @background.height)
-
-        @frame = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB,
-                                 false, 8,
-                                 @background.width, @background.height)
-
-        @da = Gtk::DrawingArea.new
-
-        @da.signal_connect("draw") do |w, e|
-          draw_cb(w, e)
-        end
-
-        add(@da)
-
-        timeout_id = GLib::Timeout.add(FRAME_DELAY) do
-          timeout
-        end
-        signal_connect("destroy") do
-          GLib::Source.remove(timeout_id)
-        end
-      rescue
-        message = "Failed to load an image: #{$!.message}"
-        dialog = Gtk::MessageDialog.new(:parent       => self,
-                                        :flags        => :destroy_with_parent,
-                                        :type         => :error,
-                                        :buttons_type => :close,
-                                        :message      => message)
-
-        dialog.signal_connect("response") do
-          dialog.destroy
-        end
-
-        dialog.show
-      end
+    background_pixbuf = load_pixbuf(window, BACKGROUND_NAME)
+    other_pixbufs = []
+    IMAGES_NAMES.each do |img|
+      other_pixbufs << load_pixbuf(window, img)
     end
 
-    def load_pixbufs
-      # Loads the images for the demo
+    width = background_pixbuf.width
+    height = background_pixbuf.height
+    window.set_size_request(width, height)
 
-      if @background
-        return # already loaded earlier
-      end
+    frame = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB,
+                            false, 8,
+                            width, height)
 
-      # demo_find_file() looks in the the current directory first,
-      # so you can run gtk-demo without installing GTK, then looks
-      # in the location where the file is installed.
-      #
-      filename = Demo.find_file(BACKGROUND_NAME)
-      @background = Gdk::Pixbuf.new(filename)
-
-      IMAGE_NAMES.each_with_index do |basename, i|
-        filename = Demo.find_file(basename)
-
-        @images[i] = Gdk::Pixbuf.new(filename)
-      end
-    end
-
-    def draw_cb(widget, cairo_context)
-      cairo_context.set_source_pixbuf(@frame)
-      cairo_context.paint
+    da = Gtk::DrawingArea.new
+    da.signal_connect "draw" do |_widget, cr|
+      cr.set_source_pixbuf(frame, 0, 0)
+      cr.paint
       true
     end
+    window.add(da)
+    start_time = 0
+    da.add_tick_callback do |_widget, frame_clock|
+      background_pixbuf.copy_area(0, 0, width, height, frame, 0, 0)
+      start_time = frame_clock.frame_time if start_time == 0
+      current_time = frame_clock.frame_time
+      f = ((current_time - start_time) % CYCLE_TIME) / Float(CYCLE_TIME)
+      xmid = width / 2
+      ymid = height / 2
+      radius = [xmid, ymid].min / 2
+      N_IMAGES.times do |i|
+        ang = 2 * Math::PI * i / N_IMAGES - f * 2 * Math::PI
+        iw = other_pixbufs[i].width
+        ih = other_pixbufs[i].height
 
-    # Timeout handler to regenerate the frame
-    def timeout
-      @background.copy_area(0, 0, @background.width, @background.height,
-                           @frame, 0, 0)
+        r = radius + (radius / 3) * Math.sin(f * 2 * Math::PI)
 
-      f = Float(@frame_num % CYCLE_LEN) / CYCLE_LEN;
+        xpos = (xmid + r * Math.cos(ang) - iw / 2 + 0.5).floor
+        ypos = (ymid + r * Math.sin(ang) - ih / 2 + 0.5).floor
+        k = (i & 1) ? Math.sin(f * 2 * Math::PI) : Math.cos(f * 2 * Math::PI)
+        k = 2.0 * k * k
+        k = [0.25, k].max
 
-      xmid = @background.width  / 2.0
-      ymid = @background.height / 2.0
-
-      radius = [xmid, ymid].min / 2.0
-
-      @images.each_with_index do |image, i|
-        ang = 2.0 * Math::PI * Float(i) / IMAGE_NAMES.length - f * 2.0 * Math::PI
-
-        r = radius + (radius / 3.0) * Math.sin(f * 2.0 * Math::PI)
-
-        xpos = (xmid + r * Math.cos(ang) - image.width  / 2.0 + 0.5).floor
-        ypos = (ymid + r * Math.sin(ang) - image.height / 2.0 + 0.5).floor
-
-        k = if (i & 1) == 1
-              Math.sin(f * 2.0 * Math::PI)
-            else
-              Math.cos(f * 2.0 * Math::PI)
-            end
-        k = [0.25, 2.0 * k * k].max
-
-        r1 = Gdk::Rectangle.new(xpos, ypos, image.width * k, image.height * k)
-        r2 = Gdk::Rectangle.new(0, 0, @background.width, @background.height)
+        r1 = Gdk::Rectangle.new(xpos, ypos, iw * k, iw * k)
+        r2 = Gdk::Rectangle.new(0, 0, width, height)
 
         dest = r1.intersect(r2)
-        if dest
-          @frame.composite!(image, dest.x, dest.y, dest.width, dest.height,
-                            xpos, ypos, k, k, Gdk::Pixbuf::INTERP_NEAREST,
-                            if (i & 1) == 1
-                              [
-                                127,
-                                (255 * Math.sin(f * 2.0 * Math::PI)).abs,
-                              ].max
-                            else
-                              [
-                                127,
-                                (255 * Math.cos(f * 2.0 * Math::PI)).abs,
-                              ].max
-                            end)
-        end
+        next unless dest
+        frame.composite!(other_pixbufs[i], dest.x, dest.y, dest.width,
+                         dest.height, xpos, ypos, k, k,
+                         Gdk::Pixbuf::INTERP_NEAREST,
+                         if (i & 1) == 1
+                           [
+                             127, (255 * Math.sin(f * 2.0 * Math::PI)).abs
+                           ].max
+                         else
+                           [
+                             127, (255 * Math.cos(f * 2.0 * Math::PI)).abs
+                           ].max
+                         end)
+
       end
-      @da.queue_draw
-      @frame_num += 1
-      true
+      da.queue_draw
+      GLib::Source::CONTINUE
+    end
+
+    if !window.visible?
+      window.show_all
+    else
+      window.destroy
+    end
+    window
+  end
+
+  def self.show_message_dialog_on(window, error)
+    message = "Failed to load an image: #{error.message}"
+    dialog = Gtk::MessageDialog.new(:parent => window,
+                                    :flags => :destroy_with_parent,
+                                    :type => :error,
+                                    :buttons => :close,
+                                    :message => message)
+    dialog.signal_connect("response", &:destroy)
+    dialog.show
+  end
+
+  def self.load_pixbuf(window, image_name)
+    begin
+      # Is it OK? should we implement gdk_pixbuf_new_from_resource instead?
+      Gtk::Image.new(:resource => image_name).pixbuf
+    rescue StandardError => e
+      show_message_dialog_on(window, e)
+      window.destroy
     end
   end
 end
