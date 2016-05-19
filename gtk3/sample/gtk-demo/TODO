@@ -50,7 +50,7 @@ overlay.c               ok              ok
 overlay2.c              ok              ok
 panes.c                 ok              ok
 pickers.c               ok              ok
-pixbufs.c               ok              no
+pixbufs.c               ok              ok
 popover.c               ok              ok
 printing.c              ok              ok
 revealer.c              ok              ok
