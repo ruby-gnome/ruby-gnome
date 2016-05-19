@@ -50,7 +50,7 @@ from Ruby 2.1, 2.2 and 2.3.
 
 ### Experimental / Incomplete:
 
-* ...
+* Ruby/GSF:             GSF 1.14.0 or later 
 
 ## Install
 
