@@ -28,7 +28,7 @@ goffice_base = File.join(ruby_gnome2_base, "goffice")
 modules = [
   [gobject_introspection_base, "gobject-introspection"],
   [gio2_base, "gio2"],
-  [gsf_base, "gsf"]
+  [gsf_base, "gsf"],
   [gtk3_base, "gtk3"],
   [goffice_base, "goffice"]
 ]
