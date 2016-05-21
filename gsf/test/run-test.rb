@@ -38,6 +38,9 @@ modules.each do |target, module_name|
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
+$LOAD_PATH.unshift(File.join(gsf_base, "test"))
+require "gsf-test-utils"
+
 require "gsf"
 
 exit Test::Unit::AutoRunner.run(true, File.join(gsf_base, "test"))
