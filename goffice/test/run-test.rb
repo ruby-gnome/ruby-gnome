@@ -42,6 +42,9 @@ modules.each do |target, module_name|
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
+$LOAD_PATH.unshift(File.join(goffice_base, "test"))
+require "goffice-test-utils"
+
 require "goffice"
 
 exit Test::Unit::AutoRunner.run(true, File.join(goffice_base, "test"))
