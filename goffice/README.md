@@ -1,6 +1,6 @@
 # Ruby/GOffice
 
-Ruby/GOffice is a Ruby binding of GOFFICE which is needed by GOffice.
+Ruby/GOffice is a Ruby binding of GOffice.
 
 ## Requirements
 
