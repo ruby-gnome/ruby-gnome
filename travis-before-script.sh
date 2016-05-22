@@ -34,5 +34,7 @@ sudo apt-get install -qq -y \
     gir1.2-webkit-1.0 \
     gir1.2-webkit-3.0 \
     gir1.2-webkit2-3.0 \
+    gir1.2-gsf-1 \
+    gir1.2-goffice-0.10 \
     gnome-icon-theme \
     dbus-x11

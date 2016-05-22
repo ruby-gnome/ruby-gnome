@@ -22,13 +22,15 @@ ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 gio2_base = File.join(ruby_gnome2_base, "gio2")
 gsf_base = File.join(ruby_gnome2_base, "gsf")
+gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
 goffice_base = File.join(ruby_gnome2_base, "goffice")
 
 modules = [
   [gobject_introspection_base, "gobject-introspection"],
   [gio2_base, "gio2"],
-  [gsf_base, "gsf"]
+  [gsf_base, "gsf"],
+  [gdk3_base, "gdk3"],
   [gtk3_base, "gtk3"],
   [goffice_base, "goffice"]
 ]
@@ -41,6 +43,9 @@ modules.each do |target, module_name|
   $LOAD_PATH.unshift(File.join(target, "ext", module_name))
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
+
+$LOAD_PATH.unshift(File.join(goffice_base, "test"))
+require "goffice-test-utils"
 
 require "goffice"
 
