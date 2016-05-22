@@ -16,17 +16,7 @@
 
 module GOffice 
   class Loader < GObjectIntrospection::Loader
-     private
-    def load_function_info(info)
-      name = info.name
-      case name
-      when "init"
-        # ignore
-      else
-        super
-      end
-    end
-
+    private
     def pre_load(repository, namespace)
     end
 

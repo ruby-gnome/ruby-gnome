@@ -52,6 +52,10 @@ module GOffice
       Gtk.init if Gtk.respond_to?(:init)
       loader = Loader.new(self)
       loader.load("GOffice")
+      init
+      class << self
+        remove_method(:init)
+      end
     end
   end
 end
