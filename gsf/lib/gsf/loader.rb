@@ -27,6 +27,16 @@ module Gsf
       end
     end
 
+    def load_enum_value(value_info, enum_module)
+      # TODO: Add constant name rename feature to
+      # gobject-introspection and use it.
+      if value_info.name == "2nd"
+        enum_module.const_set("SECOND", value_info.value)
+      else
+        super
+      end
+    end
+
     def pre_load(repository, namespace)
     end
 
@@ -35,6 +45,7 @@ module Gsf
     end
 
     def require_libraries
+      require "gsf/input"
     end
 
     def initialize_post(object)

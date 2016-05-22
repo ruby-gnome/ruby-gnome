@@ -14,9 +14,12 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "tempfile"
-
-require "test-unit"
-
-module GsfTestUtils
+class InputStdioTest < Test::Unit::TestCase
+  test ".new" do
+    file = Tempfile.new("test-input-stdio")
+    file.write("hello")
+    file.close
+    input = Gsf::InputStdio.new(file.path)
+    assert_equal("hello", input.read)
+  end
 end
