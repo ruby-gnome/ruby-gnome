@@ -21,10 +21,12 @@ ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 goffice_base = File.join(ruby_gnome2_base, "goffice")
+gnm_base = File.join(ruby_gnome2_base, "gnm")
 
 modules = [
   [gobject_introspection_base, "gobject-introspection"],
   [goffice_base, "goffice"]
+
 ]
 
 modules.each do |target, module_name|
@@ -36,9 +38,9 @@ modules.each do |target, module_name|
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
-$LOAD_PATH.unshift(File.join(gsf_base, "test"))
+$LOAD_PATH.unshift(File.join(gnm_base, "test"))
 require "gnm-test-utils"
 
 require "gnm"
 
-exit Test::Unit::AutoRunner.run(true, File.join(gsf_base, "test"))
+exit Test::Unit::AutoRunner.run(true, File.join(gnm_base, "test"))
