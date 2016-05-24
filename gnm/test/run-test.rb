@@ -19,14 +19,30 @@
 ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
 ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
+glib_base = File.join(ruby_gnome2_base, "glib2")
+atk_base = File.join(ruby_gnome2_base, "atk")
+pango_base = File.join(ruby_gnome2_base, "pango")
+gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
+cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
+gio2_base = File.join(ruby_gnome2_base, "gio2")
+gdk3_base = File.join(ruby_gnome2_base, "gdk3")
+gtk3_base = File.join(ruby_gnome2_base, "gtk3")
 goffice_base = File.join(ruby_gnome2_base, "goffice")
 gnm_base = File.join(ruby_gnome2_base, "gnm")
 
 modules = [
+  [glib_base, "glib2"],
+  [atk_base, "atk"],
+  [pango_base, "pango"],
+  [cairo_gobject_base, "cairo-gobject"],
+  [gdk_pixbuf_base, "gdk_pixbuf2"],
   [gobject_introspection_base, "gobject-introspection"],
-  [goffice_base, "goffice"]
-
+  [gio2_base, "gio2"],
+  [gdk3_base, "gdk3"],
+  [gtk3_base, "gtk3"],
+  [goffice_base, "goffice"],
+  [gnm_base, "gnm"]
 ]
 
 modules.each do |target, module_name|
