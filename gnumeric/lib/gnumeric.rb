@@ -24,10 +24,10 @@ GLib.prepend_dll_path(vendor_bin_dir)
 vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
-require "gnm/loader"
+require "gnumeric/loader"
 
 module Gnm 
-  LOG_DOMAIN = "Gnm"
+  LOG_DOMAIN = "Gnumeric"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
   class Error < StandardError
@@ -50,7 +50,7 @@ module Gnm
       end
       GOffice.init if GOffice.respond_to?(:init)
       loader = Loader.new(self)
-      loader.load("Gnm")
+      loader.load("Gnumeric")
     end
   end
 end

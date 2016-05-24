@@ -1,16 +1,16 @@
-# Ruby/GNM
+# Ruby/Gnumeric
 
-Ruby/GNM is a Ruby binding of Gnumeric.
+Ruby/Gnumeric is a Ruby binding of Gnumeric.
 
 ## Requirements
 
 * Ruby/GOffice in
   [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/)
-* [GNM](http://www.gnumeric.org/)
+* [Gnunmeric](http://www.gnumeric.org/)
 
 ## Install
 
-    gem install gnm
+    gem install gnumeric
 
 ## License
 

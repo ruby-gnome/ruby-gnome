@@ -29,7 +29,7 @@ gio2_base = File.join(ruby_gnome2_base, "gio2")
 gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
 goffice_base = File.join(ruby_gnome2_base, "goffice")
-gnm_base = File.join(ruby_gnome2_base, "gnm")
+gnumeric_base = File.join(ruby_gnome2_base, "gnumeric")
 
 modules = [
   [glib_base, "glib2"],
@@ -42,7 +42,7 @@ modules = [
   [gdk3_base, "gdk3"],
   [gtk3_base, "gtk3"],
   [goffice_base, "goffice"],
-  [gnm_base, "gnm"]
+  [gnumeric_base, "gnumeric"]
 ]
 
 modules.each do |target, module_name|
@@ -54,9 +54,9 @@ modules.each do |target, module_name|
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
-$LOAD_PATH.unshift(File.join(gnm_base, "test"))
-require "gnm-test-utils"
+$LOAD_PATH.unshift(File.join(gnumeric_base, "test"))
+require "gnumeric-test-utils"
 
-require "gnm"
+require "gnumeric"
 
-exit Test::Unit::AutoRunner.run(true, File.join(gnm_base, "test"))
+exit Test::Unit::AutoRunner.run(true, File.join(gnumeric_base, "test"))
