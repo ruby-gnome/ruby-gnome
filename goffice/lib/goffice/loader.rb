@@ -131,13 +131,9 @@ module GOffice
       end
       infos.each do |info|
         name = "initialize_#{info.name}"
-        puts "name #{name}"
         unlock_gvl = should_unlock_gvl?(info, klass)
         klass.__send__(:define_method, name) do |*arguments, &block|
           arguments, block = prepare.call(info, name, arguments, &block)
-          puts "self #{self.class}"
-          puts "arguments #{arguments}"
-          puts "unlock_gvl #{unlock_gvl}"
           info.invoke({
                         :receiver  => self,
                         :arguments => arguments,

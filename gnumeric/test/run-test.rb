@@ -27,9 +27,9 @@ cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 gio2_base = File.join(ruby_gnome2_base, "gio2")
 gdk3_base = File.join(ruby_gnome2_base, "gdk3")
-gsf_base = File.join(ruby_gnome2_base, "gsf")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
 goffice_base = File.join(ruby_gnome2_base, "goffice")
+gnumeric_base = File.join(ruby_gnome2_base, "gnumeric")
 
 modules = [
   [glib_base, "glib2"],
@@ -41,8 +41,8 @@ modules = [
   [gio2_base, "gio2"],
   [gdk3_base, "gdk3"],
   [gtk3_base, "gtk3"],
-  [gsf_base, "gsf"],
-  [goffice_base, "goffice"]
+  [goffice_base, "goffice"],
+  [gnumeric_base, "gnumeric"]
 ]
 
 modules.each do |target, module_name|
@@ -54,9 +54,9 @@ modules.each do |target, module_name|
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
-$LOAD_PATH.unshift(File.join(goffice_base, "test"))
-require "goffice-test-utils"
+$LOAD_PATH.unshift(File.join(gnumeric_base, "test"))
+require "gnumeric-test-utils"
 
-require "goffice"
+require "gnumeric"
 
-exit Test::Unit::AutoRunner.run(true, File.join(goffice_base, "test"))
+exit Test::Unit::AutoRunner.run(true, File.join(gnumeric_base, "test"))
