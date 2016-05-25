@@ -14,7 +14,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Gnumeric 
+module Gnumeric
   class Loader < GObjectIntrospection::Loader
     private
     def load_function_info(info)
@@ -68,7 +68,7 @@ module Gnumeric
       return unless object.is_a?(GLib::Object)
       self.class.reference_gobject(object, :sink => true)
     end
-    
+
     def rename_class(class_name)
       case class_name
       when /\Aanalysis_tool_engine_t\z/
@@ -82,6 +82,6 @@ module Gnumeric
       else
         class_name
       end
-    end  
+    end
   end
 end

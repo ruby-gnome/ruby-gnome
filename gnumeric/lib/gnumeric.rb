@@ -26,7 +26,7 @@ GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 require "gnumeric/loader"
 
-module Gnm 
+module Gnm
   LOG_DOMAIN = "Gnumeric"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
