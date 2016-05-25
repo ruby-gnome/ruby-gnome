@@ -174,6 +174,9 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "webkit-gtk",
   "webkit-gtk2",
   "webkit2-gtk",
+  "gsf",
+  "goffice",
+  "gnm"
 ]
 gnome2_packages = gnome2_packages.uniq
 
