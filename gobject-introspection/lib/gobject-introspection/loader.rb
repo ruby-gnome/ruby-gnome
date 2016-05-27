@@ -506,6 +506,10 @@ module GObjectIntrospection
       end
     end
 
+    def rubyish_class_name(initial_name)
+      initial_name
+    end
+
     def should_unlock_gvl?(function_info, klass)
       false
     end
