@@ -170,7 +170,7 @@ module GObjectIntrospection
 
     def define_enum(info)
       self.class.define_class(info.gtype,
-                              rubyish_class_class_name(info),
+                              enum_class_name(info),
                               @base_module)
     end
 
