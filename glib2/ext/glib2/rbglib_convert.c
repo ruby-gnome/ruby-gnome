@@ -49,7 +49,6 @@ static VALUE
 rg_s_locale_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
-    VALUE s = Qnil;
     gchar* ret;
     gsize written;
 
@@ -85,7 +84,6 @@ static VALUE
 rg_s_filename_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
-    VALUE s = Qnil;
     gchar* ret;
     gsize written;
 
