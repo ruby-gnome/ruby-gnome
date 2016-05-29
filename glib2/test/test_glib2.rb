@@ -61,16 +61,31 @@ class TestGLib < Test::Unit::TestCase
     assert_equal(GLib.convert(utf8, "UTF-8", "UTF-8"), utf8)
     assert_equal(GLib.convert(utf8, "EUC-JP", "UTF-8"), euc)
     assert_equal(GLib.convert(utf8, "SHIFT_JIS", "UTF-8"), sjis)
+  end
 
-    # rb_define_module_function(mGLib, "locale_to_utf8", rbglib_m_locale_to_utf8, 1);
-    # rb_define_module_function(mGLib, "locale_from_utf8", rbglib_m_locale_from_utf8, 1);
-    # rb_define_module_function(mGLib, "filename_to_utf8", rbglib_m_filename_to_utf8, 1);
-    # rb_define_module_function(mGLib, "filename_from_utf8", rbglib_m_filename_from_utf8, 1);
-    # 
+  def tet_locale_to_utf8
+    assert_equal(Encoding::UTF8,
+                 GLib.locale_to_utf8("ascii").encoding)
+  end
+
+  def tet_locale_from_utf8
+    assert_equal(Encoding::ASCII_8BIT,
+                 GLib.locale_from_utf8("ascii").encoding)
+  end
+
+  def tet_filename_to_utf8
+    assert_equal(Encoding::UTF8,
+                 GLib.filename_to_utf8("ascii.txt").encoding)
+  end
+
+  def tet_filename_from_utf8
+    assert_equal(Encoding::ASCII_8BIT,
+                 GLib.filename_from_utf8("ascii.txt").encoding)
+  end
+
     # rb_define_module_function(mGLib, "filename_to_uri", rbglib_m_filename_to_uri, -1);
     # rb_define_module_function(mGLib, "filename_from_uri", rbglib_m_filename_from_uri, 1);
 
-  end
 
   def test_messages
     #rb_define_module_function(mGLog, "set_handler", rbglib_m_log_set_handler, 2);

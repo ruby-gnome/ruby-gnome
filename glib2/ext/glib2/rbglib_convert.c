@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2016  Ruby-GNOME2 Project Team
  *  Copyright (C) 2009  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003 KUBO Takehiro
  *
@@ -59,9 +59,7 @@ rg_s_locale_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 
     if (err != NULL)
         RAISE_GERROR(err);
-    s = rb_str_new(ret, written);
-    g_free(ret);
-    return s;
+    return CSTR2RVAL_LEN_FREE(ret, written);
 }
 
 static VALUE
@@ -97,9 +95,7 @@ rg_s_filename_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 
     if (err != NULL)
         RAISE_GERROR(err);
-    s = rb_str_new(ret, written);
-    g_free(ret);
-    return s;
+    return CSTR2RVAL_LEN_FREE(ret, written);
 }
 
 static VALUE
