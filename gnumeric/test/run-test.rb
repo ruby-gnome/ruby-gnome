@@ -28,6 +28,7 @@ gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection"
 gio2_base = File.join(ruby_gnome2_base, "gio2")
 gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
+gsf_base = File.join(ruby_gnome2_base, "gsf")
 goffice_base = File.join(ruby_gnome2_base, "goffice")
 gnumeric_base = File.join(ruby_gnome2_base, "gnumeric")
 
@@ -41,6 +42,7 @@ modules = [
   [gio2_base, "gio2"],
   [gdk3_base, "gdk3"],
   [gtk3_base, "gtk3"],
+  [gsf_base, "gsf"],
   [goffice_base, "goffice"],
   [gnumeric_base, "gnumeric"]
 ]
