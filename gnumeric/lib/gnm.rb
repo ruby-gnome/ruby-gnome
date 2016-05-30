@@ -51,6 +51,10 @@ module Gnm
       GOffice.init if GOffice.respond_to?(:init)
       loader = Loader.new(self)
       loader.load("Gnm")
+      init
+      class << self
+        remove_method(:init)
+      end
     end
   end
 end

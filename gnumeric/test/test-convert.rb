@@ -14,12 +14,22 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "tempfile"
+class ConvertTest < Test::Unit::TestCase
+  include GnumericTestUtils
 
-require "test-unit"
-
-module GnumericTestUtils
-  def fixture_file(*components)
-    File.join(__dir__, "fixtures", *components)
+  test ".gnumeric -> .csv" do
+    # TODO: Improve API
+    input_path = fixture_file("hello.gnumeric")
+    output = Tempfile.new(["test-gnumeric", ".csv"])
+    command_context = Gnm::CmdContextStderr.new
+    Gnm.plugins_init(command_context)
+    io_context = GOffice::IOContext.new(command_context)
+    view = Gnm::WorkbookView.new("file://#{input_path}",
+                                 nil,
+                                 io_context,
+                                 "utf-8")
+    saver = GOffice::FileSaver.for_file_name(output.path)
+    Gnm.wb_view_save_as(view, saver, "file://#{output.path}", command_context)
+    assert_equal("hello\n", File.read(output.path))
   end
 end
