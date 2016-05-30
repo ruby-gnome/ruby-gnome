@@ -239,10 +239,15 @@ module Gtk
       end
     end
 
-    def enum_class_name(info)
-      case info.name
-      when /\ARc/
-        "RC#{$POSTMATCH}"
+    def rubyish_class_name(info)
+      case info
+      when GObjectIntrospection::EnumInfo
+        case info.name
+        when /\ARc/
+          "RC#{$POSTMATCH}"
+        else
+          super
+        end
       else
         super
       end

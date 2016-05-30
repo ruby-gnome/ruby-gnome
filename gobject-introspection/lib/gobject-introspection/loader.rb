@@ -170,24 +170,16 @@ module GObjectIntrospection
 
     def define_enum(info)
       self.class.define_class(info.gtype,
-                              enum_class_name(info),
+                              rubyish_class_name(info),
                               @base_module)
-    end
-
-    def enum_class_name(info) # TODO : should be removed? used only in Gtk3 loader
-      info.name
     end
 
     def define_error(info)
       self.class.define_error(info.error_domain,
-                              error_class_name(info),
+                              rubyish_class_name(info),
                               @base_module,
                               :parent => error_parent_class(info),
                               :gtype => info.gtype)
-    end
-
-    def error_class_name(info)
-      info.name
     end
 
     def error_parent_class(info)
@@ -511,9 +503,14 @@ module GObjectIntrospection
 
     def rubyish_class_name(info)
       name = info.name
-      case name
-      when /Class\z/
-        $PREMATCH
+      case info
+      when StructInfo
+        case name
+        when /Class\z/
+          $PREMATCH
+        else
+          name
+        end
       else
         name
       end

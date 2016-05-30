@@ -228,13 +228,12 @@ module Gio
       end
     end
 
-    def error_class_name(info)
-      name = info.name
-      case name
+    def rubyish_class_name(info)
+      case info.name
       when /Enum\z/
         $PREMATCH
       else
-        name
+        super
       end
     end
 
