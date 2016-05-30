@@ -121,11 +121,12 @@ module GObjectIntrospection
     end
 
     def define_struct(info, options={})
+      name = rubyish_class_name(info.name)
       if info.gtype == GLib::Type::NONE
-        klass = self.class.define_struct(info.size, info.name, @base_module,
+        klass = self.class.define_struct(info.size, name, @base_module,
                                          :parent => options[:parent])
       else
-        klass = self.class.define_class(info.gtype, info.name, @base_module,
+        klass = self.class.define_class(info.gtype, name, @base_module,
                                         :parent => options[:parent],
                                         :size   => info.size)
       end
@@ -136,7 +137,7 @@ module GObjectIntrospection
     def load_struct_info(info)
       case info.name
       when /Class\z/
-        base_class_name = $PREMATCH
+        base_class_name = rubyish_class_name($PREMATCH)
         method_infos = info.methods.find_all do |method_info|
           method_info.is_a?(MethodInfo)
         end
@@ -173,7 +174,7 @@ module GObjectIntrospection
                               @base_module)
     end
 
-    def enum_class_name(info)
+    def enum_class_name(info) # TODO : should be removed? used only in Gtk3 loader
       info.name
     end
 
@@ -199,7 +200,7 @@ module GObjectIntrospection
         info.values.each do |value_info|
           load_enum_value(value_info, enum_module)
         end
-        @base_module.const_set(info.name, enum_module)
+        @base_module.const_set(rubyish_class_name(info.name), enum_module)
       else
         if info.error_domain
           define_error(info)
@@ -219,7 +220,7 @@ module GObjectIntrospection
         info.values.each do |value_info|
           load_flag_value(value_info, flags_module)
         end
-        @base_module.const_set(info.name, flags_module)
+        @base_module.const_set(rubyish_class_name(info.name), flags_module)
       else
         self.class.define_class(info.gtype, flags_class_name(info), @base_module)
       end
@@ -230,7 +231,9 @@ module GObjectIntrospection
     end
 
     def load_object_info(info)
-      klass = self.class.define_class(info.gtype, info.name, @base_module)
+      klass = self.class.define_class(info.gtype,
+                                      rubyish_class_name(info.name),
+                                      @base_module)
       load_fields(info, klass)
       load_methods(info, klass)
     end
@@ -506,6 +509,10 @@ module GObjectIntrospection
       end
     end
 
+    def rubyish_class_name(initial_name)
+      initial_name
+    end
+
     def should_unlock_gvl?(function_info, klass)
       false
     end
@@ -580,7 +587,9 @@ module GObjectIntrospection
 
     def load_interface_info(info)
       interface_module =
-        self.class.define_interface(info.gtype, info.name, @base_module)
+        self.class.define_interface(info.gtype,
+                                    rubyish_class_name(info.name),
+                                    @base_module)
       load_methods(info, interface_module)
     end
 
