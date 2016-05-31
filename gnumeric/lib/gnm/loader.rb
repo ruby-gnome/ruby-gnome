@@ -37,30 +37,15 @@ module Gnm
       enum_module.const_set(name, value_info.value)
     end
 
-    def load_enum_info(info)
-      if info.gtype == GLib::Type::NONE
-        enum_module = Module.new
-        info.values.each do |value_info|
-          load_enum_value(value_info, enum_module)
-        end
-        @base_module.const_set(rename_class(info.name), enum_module)
-      else
-        if info.error_domain
-          define_error(info)
-        else
-          define_enum(info)
-        end
-      end
-    end
-
     def initialize_post(object)
       super
       return unless object.is_a?(GLib::Object)
       self.class.reference_gobject(object, :sink => true)
     end
 
-    def rename_class(class_name)
-      case class_name
+    def rubyish_class_name(info)
+      name = info.name.gsub(/Class\z/,"")
+      case name
       when /\Aanalysis_tool_engine_t\z/
         "AnalysisToolEngine"
       when /\Adata_analysis_output_type_t\z/
@@ -70,7 +55,7 @@ module Gnm
       when /\Awb_control_navigator_t\z/
         "WbControlNavigator"
       else
-        class_name
+        name
       end
     end
   end
