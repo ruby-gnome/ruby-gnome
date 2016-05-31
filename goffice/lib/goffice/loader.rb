@@ -46,7 +46,7 @@ module GOffice
     end
 
     def rubyish_class_name(info)
-      name = info.name.gsub(/Class$/,"")
+      name = info.name.gsub(/Class\z/,"")
       case name
       when /\A3DRotationSel\z/
         "Rotation3DSel"
