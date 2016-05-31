@@ -44,7 +44,7 @@ module Gnm
     end
 
     def rubyish_class_name(info)
-      name = info.name.gsub(/Class\z/,"")
+      name = info.name.gsub(/Class\z/, "")
       case name
       when /\Aanalysis_tool_engine_t\z/
         "AnalysisToolEngine"
