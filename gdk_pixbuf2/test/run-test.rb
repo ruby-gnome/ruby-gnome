@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,8 @@ modules = [
   [gdk_pixbuf2_base, "gdk_pixbuf2"]
 ]
 modules.each do |target, module_name|
-  if system("which make > /dev/null")
+  makefile = File.join(target, "Makefile")
+  if File.exist?(makefile) and system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(false)
   end
   $LOAD_PATH.unshift(File.join(target, "ext", module_name))
