@@ -1,0 +1,11 @@
+install-so: install-headers
+install-headers:
+	$(INSTALL_DATA) $(srcdir)/rbgdk-pixbuf.h $(RUBYARCHDIR)
+	$(INSTALL_DATA) $(srcdir)/rbgdk-pixbuf2conversions.h $(RUBYARCHDIR)
+
+install: install-pc
+install-pc:
+	if test -n "$(pkgconfigdir)"; then			\
+	  $(MAKEDIRS) $(pkgconfigdir);				\
+	  $(INSTALL_DATA) ruby-gdk-pixbuf2.pc $(pkgconfigdir);	\
+	fi
