@@ -14,40 +14,36 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gobject-introspection"
-require "gio2"
-
-base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
-vendor_dir = base_dir + "vendor" + "local"
-vendor_bin_dir = vendor_dir + "bin"
-GLib.prepend_dll_path(vendor_bin_dir)
-vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
-GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
-
-require "gdk_pixbuf2/loader"
-
 module GdkPixbuf
-    LOG_DOMAIN = "GdkPixbuf"
-    GLib::Log.set_log_domain(LOG_DOMAIN)
-
-    class << self
-      def const_missing(name)
-        init
-        if const_defined?(name)
-          const_get(name)
+#  class Pixbuf
+    class Loader < GObjectIntrospection::Loader
+      private
+      def load_function_info(info)
+        name = info.name
+        case name
+        when "init"
+          # ignore
         else
           super
         end
       end
 
-      def init
-        class << self
-          remove_method(:init)
-          remove_method(:const_missing)
-        end
-        Gio.init if Gio.respond_to?(:init)
-        loader = Loader.new(self)
-        loader.load(LOG_DOMAIN)
+      def pre_load(repository, namespace)
+      end
+
+      def post_load(repository, namespace)
+        require_libraries
+      end
+
+      def require_libraries
+        require "gdk_pixbuf2/pixbuf"
+      end
+
+      def initialize_post(object)
+        super
+        return unless object.is_a?(GLib::Object)
+        self.class.reference_gobject(object, :sink => true)
       end
     end
+#  end
 end
