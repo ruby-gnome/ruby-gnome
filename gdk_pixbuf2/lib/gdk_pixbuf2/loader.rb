@@ -15,7 +15,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module GdkPixbuf
-#  class Pixbuf
     class Loader < GObjectIntrospection::Loader
       private
       def pre_load(repository, namespace)
@@ -35,5 +34,4 @@ module GdkPixbuf
         self.class.reference_gobject(object, :sink => true)
       end
     end
-#  end
 end
