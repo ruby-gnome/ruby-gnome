@@ -26,6 +26,8 @@ module GdkPixbuf
 
     def require_libraries
       require "gdk_pixbuf2/pixbuf"
+
+      require "gdk_pixbuf2/deprecated"
     end
 
     def initialize_post(object)
