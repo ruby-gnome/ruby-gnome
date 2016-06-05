@@ -14,7 +14,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestGdkPixbuf < Test::Unit::TestCase
+class TestPixbuf < Test::Unit::TestCase
   include GdkPixbufTestUtils
 
   sub_test_case(".new") do
