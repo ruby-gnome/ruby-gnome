@@ -102,8 +102,6 @@ module Gio
     def load_function_info(info)
       name = info.name
       case name
-      when "init"
-        # ignore
       when /\Acontent_type_/
         load_function_info_content_type(info)
       when "content_types_get_registered"
