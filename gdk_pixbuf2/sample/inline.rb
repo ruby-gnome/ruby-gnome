@@ -9,7 +9,7 @@
 
 require 'gtk2'
 
-pixbuf = Gdk::Pixbuf.new("gnome-foot.png")
+pixbuf = Gdk::Pixbuf.new(File.join(__dir__, "gnome-foot.png"))
 
 #pixbuf = Gdk::Pixbuf.new(ARGV[0])
 

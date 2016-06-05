@@ -10,7 +10,7 @@
 require 'gtk2'
 
 loader = Gdk::PixbufLoader.new
-File.open("gnome-foot.png","rb") { |f|
+File.open(File.join(__dir__, "gnome-foot.png"), "rb") { |f|
   loader.last_write(f.read)
 }
 pixbuf = loader.pixbuf
