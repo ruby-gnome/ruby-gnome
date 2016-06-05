@@ -36,6 +36,8 @@ module Gdk
   class Error < StandardError
   end
 
+  include GdkPixbuf
+
   class << self
     def const_missing(name)
       init
