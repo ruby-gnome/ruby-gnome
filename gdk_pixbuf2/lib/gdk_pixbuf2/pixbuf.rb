@@ -21,12 +21,13 @@ module GdkPixbuf
     def initialize(*args)
       case args.size
       when 1
-        if args[0].class == Hash
+        case args[0]
+        when Hash
           initialize_with_hash(args[0])
-        elsif args[0].class == String
+        when String
           puts deprecated_usage_message
           initialize_raw(args[0])
-        elsif args[0].class == Array
+        when Array
           puts deprecated_usage_message
           initialize_new_from_xpm_data(args[0])
         else
@@ -42,10 +43,11 @@ module GdkPixbuf
         puts deprecated_usage_message
         initialize_new_from_file_at_scale(*args)
       when 5
-        if args[0].class == GdkPixbuf::Pixbuf
+        case args[0]
+        when GdkPixbuf::Pixbuf
           puts deprecated_usage_message
           initialize_new_from_subpixbuf(*args)
-        elsif args[0].class == GdkPixbuf::Colorspace # No other value
+        when GdkPixbuf::Colorspace # No other value
           puts deprecated_usage_message
           initialize_new(*args)
         else
