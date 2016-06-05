@@ -15,23 +15,23 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module GdkPixbuf
-    class Loader < GObjectIntrospection::Loader
-      private
-      def pre_load(repository, namespace)
-      end
-
-      def post_load(repository, namespace)
-        require_libraries
-      end
-
-      def require_libraries
-        require "gdk_pixbuf2/pixbuf"
-      end
-
-      def initialize_post(object)
-        super
-        return unless object.is_a?(GLib::Object)
-        self.class.reference_gobject(object, :sink => true)
-      end
+  class Loader < GObjectIntrospection::Loader
+    private
+    def pre_load(repository, namespace)
     end
+
+    def post_load(repository, namespace)
+      require_libraries
+    end
+
+    def require_libraries
+      require "gdk_pixbuf2/pixbuf"
+    end
+
+    def initialize_post(object)
+      super
+      return unless object.is_a?(GLib::Object)
+      self.class.reference_gobject(object, :sink => true)
+    end
+  end
 end
