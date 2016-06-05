@@ -30,24 +30,6 @@ module GdkPixbuf
   LOG_DOMAIN = "GdkPixbuf"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
-  class << self
-    def const_missing(name)
-      init
-      if const_defined?(name)
-        const_get(name)
-      else
-        super
-      end
-    end
-
-    def init
-      class << self
-        remove_method(:init)
-        remove_method(:const_missing)
-      end
-      Gio.init if Gio.respond_to?(:init)
-      loader = Loader.new(self)
-      loader.load(LOG_DOMAIN)
-    end
-  end
+  loader = Loader.new(self)
+  loader.load("GdkPixbuf")
 end
