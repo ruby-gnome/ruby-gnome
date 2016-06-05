@@ -136,5 +136,63 @@ module GdkPixbuf
       #	gdk_pixbuf_new_from_stream_at_scale
       #	gdk_pixbuf_new_from_stream_at_scale_async
     end
+
+    # TODO: test
+    def dup
+      copy
+    end
+
+    # TODO: test
+    def fill!(pixel)
+      fill(pixel)
+    end
+
+    # TODO: test
+    def rotate(angle)
+      rotate_simple(angle)
+    end
+
+    # TODO: test
+    alias_method :saturate_and_pixelate_raw, :saturate_and_pixelate
+    def saturate_and_pixelate(saturation, pixelate)
+      dest = dup
+      saturate_and_pixelate_raw(dest, saturation, pixelate)
+      dest
+    end
+
+    # TODO: test
+    # TODO: Improve API by Hash
+    def save(filename, type, options={})
+      keys = []
+      values = []
+      options.each do |key, value|
+        keys << key
+        values << value
+      end
+      savev(filename, type, keys, values)
+    end
+
+    alias_method :scale_raw, :scale
+    # TODO: test
+    # TODO: Improve API by Hash
+    def scale(*args)
+      case args.size
+      when 2, 3
+        width, height, interp_type = args
+        interp_type ||= :bilinear
+        scale_simple(width, height, interp_type)
+      else
+        scale_raw(*args)
+      end
+    end
+
+    # TODO: test
+    # TODO: Improve API by Hash
+    def scale!(source, *args)
+      if args.size == 8
+        args << :bilinear
+      end
+      source.scale_raw(self, *args)
+    end
   end
 end
