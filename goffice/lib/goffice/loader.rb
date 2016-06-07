@@ -45,7 +45,7 @@ module GOffice
       self.class.reference_gobject(object, :sink => true)
     end
     
-    def load_object_info(info)
+    def load_info(info)
       return if info.name == "_SearchReplace"
       super
     end
