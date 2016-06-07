@@ -44,14 +44,11 @@ module GdkPixbuf
         initialize_new_from_file_at_scale(*args)
       when 5
         case args[0]
-        when GdkPixbuf::Pixbuf
-          puts deprecated_usage_message
-          initialize_new_from_subpixbuf(*args)
         when GdkPixbuf::Colorspace # No other value
           puts deprecated_usage_message
           initialize_new(*args)
         else
-          puts "Wrong type of 1st argument, must be a Pixbuf or Colorspace"
+          puts "Wrong type of 1st argument, must a Colorspace"
         end
       when 7
         puts deprecated_usage_message
@@ -74,9 +71,6 @@ module GdkPixbuf
       has_alpha = options[:has_alpha] || false
       bits_per_sample = options[:bits_per_sample] || 8
       row_stride = options[:row_stride] || 0
-      src_x = options[:src_x] || 0
-      src_y = options[:src_y] || 0
-      src_pixbuf = options[:src_pixbuf] || nil
       data = options[:data] || nil
       bytes = options[:bytes] || nil
       xpm = options[:xpm] || nil
@@ -111,8 +105,6 @@ module GdkPixbuf
 
       elsif xpm
         initialize_new_from_xpm_data(xpm)
-      elsif src_pixbuf && size
-        initialize_new_from_subpixbuf(src_pixbuf, src_x, src_y, width, height)
       elsif size
         initialize_raw(colorspace, has_alpha, bits_per_sample, width, height)
       else
