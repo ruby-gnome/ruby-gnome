@@ -44,6 +44,11 @@ module GOffice
       return unless object.is_a?(GLib::Object)
       self.class.reference_gobject(object, :sink => true)
     end
+    
+    def load_object_info(info)
+      return if info.name == "_SearchReplace"
+      super
+    end
 
     def rubyish_class_name(info)
       name = info.name.gsub(/Class\z/, "")
