@@ -87,7 +87,8 @@ module GdkPixbuf
       height = options[:height] || nil
       size = true if width && height
       scale = options[:scale] || nil
-      preserve_aspect_ratio = options[:preserve_aspect_ratio] || true
+      preserve_aspect_ratio = options[:preserve_aspect_ratio]
+      preserve_aspect_ratio = true if preserve_aspect_ratio.nil?
 
 
       if file && size && scale
