@@ -65,6 +65,14 @@ class TestPixbuf < Test::Unit::TestCase
         pixbuf = GdkPixbuf::Pixbuf.new(r_xpm)
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
       end
+
+      test "from_file_at_size" do
+        pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"),
+                                                    32, 48)
+        assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
+        assert_equal(32, pixbuf.width)
+        assert_equal(32, pixbuf.height)
+      end
     end
 
     sub_test_case("Hash form") do
@@ -95,6 +103,16 @@ class TestPixbuf < Test::Unit::TestCase
       test "from_xpm" do
         pixbuf = GdkPixbuf::Pixbuf.new(:xpm => r_xpm)
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
+      end
+
+      test "from_file_at_size" do
+        filename = fixture_path("gnome-logo-icon.png")
+        pixbuf = GdkPixbuf::Pixbuf.new(:file => filename,
+                                       :width => 32,
+                                       :height => 48)
+        assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
+        assert_equal(32, pixbuf.width)
+        assert_equal(32, pixbuf.height)
       end
     end
   end
