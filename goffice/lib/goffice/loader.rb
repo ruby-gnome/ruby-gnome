@@ -46,8 +46,14 @@ module GOffice
     end
     
     def load_info(info)
-      return if info.name == "_SearchReplace"
-      super
+      case info.name
+      when "_SearchReplace"
+        return
+      when "gViewAllocation"
+        return
+      else
+        super
+      end
     end
 
     def rubyish_class_name(info)
