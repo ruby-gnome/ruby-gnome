@@ -54,6 +54,8 @@ module Gnm
         "GroupBy"
       when /\Awb_control_navigator_t\z/
         "WbControlNavigator"
+      when /\Afile_open_t\z/
+        "FileOpen"
       else
         name
       end
