@@ -16,7 +16,7 @@ Here is the most basic example that illustrate the principles of widget hierarch
 require "gtk3"
 
 window = Gtk::Window.new("First example")
-window.set_request_size(400, 400)
+window.set_size_request(400, 400)
 window.set_border_width(10)
 
 button = Gtk::Button.new(:label => "Say hello")
@@ -157,7 +157,7 @@ app.signal_connect "activate" do |application|
   window.set_title("Window")
   window.set_border_width(10)
 
-  # Here we construct the container that is going pack our buttons 
+  # Here we construct the container that is going pack our buttons
   grid = Gtk::Grid.new
 
   # Pack the container in the window
@@ -281,7 +281,7 @@ Here is the "builder.ui" file that describes the interface:
 The usage of the `Gtk::Builder` is really easy, we just create an instance from the
 file "builder.ui" with `Gtk::Builder.new(:file => builder_file)`. Then you can access every widget or part of the interface thanks to its name: `window = builder.get_object("window")`. Note that `Gtk::Builder` can also be used to construct objects that are not widgets, such as tree models, adjustments, etc.
 
-The XML definition of the interface can be loaded from a file, a string or a path in a gresource binary. More informations related to this XML definition can be found [here](https://developer.gnome.org/gtk3/stable/GtkBuilder.html#BUILDER-UI). Those files are generally built with [glade](https://glade.gnome.org/). 
+The XML definition of the interface can be loaded from a file, a string or a path in a gresource binary. More informations related to this XML definition can be found [here](https://developer.gnome.org/gtk3/stable/GtkBuilder.html#BUILDER-UI). Those files are generally built with [glade](https://glade.gnome.org/).
 
 
 ## Building applications
@@ -296,7 +296,7 @@ require "gtk3"
 class ExampleAppWindow < Gtk::ApplicationWindow
 
   def open(file)
-    
+
   end
 end
 
@@ -318,7 +318,7 @@ class ExampleApp < Gtk::Application
       end
 
       files.each { |file| win.open(file) }
-        
+
       win.present
     end
   end
@@ -393,7 +393,7 @@ Here is the "window.ui" file that contains the template of the window:
 ```
 Unlike regular interface descriptions, in template XML descriptions, a`<template>` tag is expected as a direct child of the toplevel `<interface>` tag. Yhe `<template>` tag must specify the "*class*" attribute which must be the class name of the widget. Optionally, the "*parent*" attribute may be specified to indicate the direct parent class (superclass).
 
-More informations can be found in the part [building composite widgets from template XML](https://developer.gnome.org/gtk3/stable/GtkWidget.html#GtkWidget.description) of the `Gtk::Widget` documentation. 
+More informations can be found in the part [building composite widgets from template XML](https://developer.gnome.org/gtk3/stable/GtkWidget.html#GtkWidget.description) of the `Gtk::Widget` documentation.
 
 #### Link a template to a custom class widget.
 
@@ -411,7 +411,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
   end
 
   def open(file)
-    
+
   end
 end
 ```
@@ -482,7 +482,7 @@ This new way to access the stack widget is used in the following code. We have p
 ```ruby
 class ExampleAppWindow < Gtk::ApplicationWindow
   def open(file)
-    
+
   end
 end
 
@@ -500,7 +500,7 @@ class ExampleApp < Gtk::Application
       end
 
       files.each { |file| win.open(file) }
-        
+
       win.present
     end
   end
@@ -526,14 +526,14 @@ def open(file)
   view.buffer.text = stream.read
 end
 ```
-Each file is opened and loaded in a `Gtk::TextView` with 
+Each file is opened and loaded in a `Gtk::TextView` with
 
 ```ruby
   stream = file.read
   view.buffer.text = stream.read
 ```
 
-We get the basename, of the file in argument, that will be used as title for each tab of the stack widget: 
+We get the basename, of the file in argument, that will be used as title for each tab of the stack widget:
 
 ```
 stack.add_titled(scrolled, basename, basename)
@@ -611,7 +611,7 @@ application.add_action(action)
 
 #### Add accelerators for action.
 
-An accelerator is just a keys combination that acts as a shortcut for an action. 
+An accelerator is just a keys combination that acts as a shortcut for an action.
 
 ```ruby
 quit_accels = ["<Ctrl>Q"]
@@ -655,7 +655,7 @@ We are going to use `Gio::Settings` to store our preferences. `Gio::Settings` re
 </schemalist>
 ```
 
-Before we can make use of this schema in our application, we need to compile it into the binary form that `Gio::Settings` expects. 
+Before we can make use of this schema in our application, we need to compile it into the binary form that `Gio::Settings` expects.
 
 ```ruby
 system("glib-compile-schemas", data_path)
@@ -670,12 +670,12 @@ Gio::SettingsSchemaSource.new(data_path,
                               false)
 
 ```
-This is the corresponding method to the function [g_settings_schema_source_new_from_directory](https://developer.gnome.org/gio/stable/gio-GSettingsSchema-GSettingsSchemaSource.html#g-settings-schema-source-new-from-directory). 
+This is the corresponding method to the function [g_settings_schema_source_new_from_directory](https://developer.gnome.org/gio/stable/gio-GSettingsSchema-GSettingsSchemaSource.html#g-settings-schema-source-new-from-directory).
 
 As an alternative, our schema  can just be loaded by using the `GSETTINGS_SCHEMA_DIR` environment variable.
 
 ```ruby
-ENV["GSETTINGS_SCHEMA_DIR"] = data_path 
+ENV["GSETTINGS_SCHEMA_DIR"] = data_path
 ```
 More informations on the use of gschemas can be found [here](https://developer.gnome.org/gio/stable/gio-GSettingsSchema-GSettingsSchemaSource.html)
 
@@ -842,11 +842,11 @@ def open(file)
   stream = file.read
   buffer = view.buffer
   buffer.text = stream.read
-  tag = buffer.create_tag() 
+  tag = buffer.create_tag()
   @settings.bind("font", tag, "font", Gio::SettingsBindFlags::DEFAULT)
   buffer.apply_tag(tag, buffer.start_iter, buffer.end_iter)
 end
-``` 
+```
 
 ### Adding a search bar
 https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.10
@@ -1297,4 +1297,4 @@ Our application already uses a `Gtk::HeaderBar`, but so far it still gets a 'nor
 </interface>
 ```
 
-A small extra bonus of using a header bar is that we get a fallback application menu for free. 
+A small extra bonus of using a header bar is that we get a fallback application menu for free.
