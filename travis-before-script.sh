@@ -37,5 +37,6 @@ sudo apt-get install -qq -y \
     gir1.2-gsf-1 \
     gir1.2-goffice-0.10 \
     gir1.2-gnumeric\
+    gnumeric\
     gnome-icon-theme \
     dbus-x11
