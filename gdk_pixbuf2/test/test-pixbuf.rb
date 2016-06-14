@@ -81,6 +81,14 @@ class TestPixbuf < Test::Unit::TestCase
         assert_equal(32, pixbuf.width)
         assert_equal(48, pixbuf.height)
       end
+
+      test "from_subpixbuf" do
+        src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+        pixbuf = GdkPixbuf::Pixbuf.new(src_pixbuf, 0, 0, 32, 32)
+        assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
+        assert_equal(32, pixbuf.width)
+        assert_equal(32, pixbuf.height)
+      end
     end
 
     sub_test_case("Hash form") do

@@ -21,6 +21,19 @@ module GdkPixbuf
     define_deprecated_enums "Colorspace", "COLORSPACE"
     define_deprecated_enums "InterpType", "INTERP"
     define_deprecated_enums "PixbufRotation", "ROTATE"
+
+    class << self
+      def new(*args, &block)
+        if args[0].is_a?(Pixbuf)
+          message = "#{caller[0]}: #{self}.new(pixbuf, ...) is deprecated. "
+          message << "Use pixbuf.new_subpixbuf(...)  instead."
+          warn(message)
+          args[0].new_subpixbuf(*args[1..-1])
+        else
+          super
+        end
+      end
+    end
   end
 
   class PixbufFormat
