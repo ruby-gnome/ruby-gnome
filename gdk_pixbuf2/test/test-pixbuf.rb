@@ -142,6 +142,18 @@ class TestPixbuf < Test::Unit::TestCase
         assert_equal(32, pixbuf.width)
         assert_equal(48, pixbuf.height)
       end
+
+      test "from_subpixbuf" do
+        src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+        pixbuf = GdkPixbuf::Pixbuf.new(:src_pixbuf => src_pixbuf,
+                                       :src_x => 0,
+                                       :src_y => 0,
+                                       :width => 32,
+                                       :height => 32)
+        assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
+        assert_equal(32, pixbuf.width)
+        assert_equal(32, pixbuf.height)
+      end
     end
 
     def test_new_subpixbuf

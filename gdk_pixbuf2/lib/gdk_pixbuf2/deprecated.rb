@@ -29,6 +29,21 @@ module GdkPixbuf
           message << "Use pixbuf.new_subpixbuf(...)  instead."
           warn(message)
           args[0].new_subpixbuf(*args[1..-1])
+        elsif args.size == 1 and args[0].is_a?(Hash)
+          options = args[0]
+          src_pixbuf = options[:src_pixbuf]
+          if src_pixbuf
+            message = "#{caller[0]}: "
+            message << "#{self}.new(:src_pixbuf => pixbuf, ...) is deprecated. "
+            message << "Use pixbuf.new_subpixbuf(...)  instead."
+            warn(message)
+            src_pixbuf.new_subpixbuf(options[:src_x],
+                                     options[:src_y],
+                                     options[:width],
+                                     options[:height])
+          else
+            super
+          end
         else
           super
         end
