@@ -56,17 +56,17 @@ class TestPixbuf < Test::Unit::TestCase
         assert_equal(bits_per_sample, pixbuf.bits_per_sample)
       end
 
-      test "from_file" do
+      test "file" do
         pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
       end
 
-      test "from_xpm" do
+      test "xpm" do
         pixbuf = GdkPixbuf::Pixbuf.new(r_xpm)
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
       end
 
-      test "from_file_at_size" do
+      test "file: size" do
         pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"),
                                                     32, 48)
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
@@ -74,7 +74,7 @@ class TestPixbuf < Test::Unit::TestCase
         assert_equal(32, pixbuf.height)
       end
 
-      test "from_file_at_scale" do
+      test "file: scale" do
         pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"),
                                                     32, 48, false)
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
@@ -82,7 +82,7 @@ class TestPixbuf < Test::Unit::TestCase
         assert_equal(48, pixbuf.height)
       end
 
-      test "from_subpixbuf" do
+      test "subpixbuf" do
         src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
         pixbuf = GdkPixbuf::Pixbuf.new(src_pixbuf, 0, 0, 32, 32)
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
@@ -110,18 +110,18 @@ class TestPixbuf < Test::Unit::TestCase
         assert_equal(bits_per_sample, pixbuf.bits_per_sample)
       end
 
-      test "from_file" do
+      test "file" do
         filename = fixture_path("gnome-logo-icon.png")
         pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
       end
 
-      test "from_xpm" do
+      test "xpm" do
         pixbuf = GdkPixbuf::Pixbuf.new(:xpm => r_xpm)
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
       end
 
-      test "from_file_at_size" do
+      test "file: size" do
         filename = fixture_path("gnome-logo-icon.png")
         pixbuf = GdkPixbuf::Pixbuf.new(:file => filename,
                                        :width => 32,
@@ -131,7 +131,7 @@ class TestPixbuf < Test::Unit::TestCase
         assert_equal(32, pixbuf.height)
       end
 
-      test "from_file_at_scale" do
+      test "file: scale" do
         filename = fixture_path("gnome-logo-icon.png")
         pixbuf = GdkPixbuf::Pixbuf.new(:file => filename,
                                        :width => 32,
@@ -143,7 +143,7 @@ class TestPixbuf < Test::Unit::TestCase
         assert_equal(48, pixbuf.height)
       end
 
-      test "from_subpixbuf" do
+      test "subpixbuf" do
         src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
         pixbuf = GdkPixbuf::Pixbuf.new(:src_pixbuf => src_pixbuf,
                                        :src_x => 0,
