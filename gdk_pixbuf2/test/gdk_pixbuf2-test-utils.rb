@@ -17,9 +17,7 @@
 require "test-unit"
 
 module GdkPixbufTestUtils
-
   private
-
   def fixture_path(*components)
     File.join(File.dirname(__FILE__), "fixture", *components)
   end
