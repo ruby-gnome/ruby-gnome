@@ -58,6 +58,8 @@ module GOffice
         "RegressionStatT"
       when /\Ago_regression_stat_tl\z/
         "RegressionStatTl"
+      when /\A\_(.*)\z/
+        Object::Regexp.last_match[1]
       else
         name
       end
