@@ -45,6 +45,17 @@ module GOffice
       self.class.reference_gobject(object, :sink => true)
     end
 
+    def load_info(info)
+      case info.name
+      when "_SearchReplace"
+        return
+      when "gViewAllocation"
+        return
+      else
+        super
+      end
+    end
+
     def rubyish_class_name(info)
       name = info.name.gsub(/Class\z/, "")
       case name
