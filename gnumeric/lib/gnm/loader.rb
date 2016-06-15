@@ -47,7 +47,10 @@ module Gnm
       name = info.name.gsub(/Class\z/, "")
       case name
       when /\A.*_t\z/
-        name.gsub(/_t\z/, "").split("_").map {|s| s.capitalize}.join
+        name.gsub(/_t\z/, "").split("_").map do |component|
+          component[0] = component[0].upcase
+          component
+        end.join
       else
         name
       end
