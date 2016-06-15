@@ -25,50 +25,72 @@ module GdkPixbuf
         when Hash
           initialize_with_hash(args[0])
         when String
-          puts deprecated_usage_message
+          message = "#{caller[0]}: #{self.class}.new(path) is deprecated. "
+          message << "Use #{self.class}.new(:file => path) instead."
+          warn message
           initialize_raw(args[0])
         when Array
-          puts deprecated_usage_message
+          message = "#{caller[0]}: #{self.class}.new(xpm) is deprecated. "
+          message << "Use #{self.class}.new(:xpm => xpm) instead."
+          warn message
           initialize_new_from_xpm_data(args[0])
         else
-          puts "Wrong type of arguments"
-          puts deprecated_usage_message
+          raise ArgumentError, "must be options: #{args[0].inspect}"
         end
       when 2
-        # initialize_from_inline_data is deprecated
+        message = "#{caller[0]}: "
+        message << "#{self.class}.new(data, copy_pixels) is deprecated. "
+        message << "Use Gio::Resource instead."
+        warn message
+        initialize_from_inline(*args)
       when 3
-        puts deprecated_usage_message
+        message = "#{caller[0]}: "
+        message << "#{self.class}.new(path, width, height) is deprecated. "
+        message << "Use #{self.class}.new(:file => path, :width => width, "
+        message << ":height => height) instead."
+        warn message
         initialize_new_from_file_at_size(*args)
       when 4
-        puts deprecated_usage_message
+        message = "#{caller[0]}: "
+        message << "#{self.class}.new(path, width, height, "
+        message << "preserve_aspect_ratio) is deprecated. "
+        message << "Use #{self.class}.new(:file => path, :width => width, "
+        message << ":height => height, "
+        message << ":preserve_aspect_ratio => preserve_aspect_ratio) instead."
+        warn message
         initialize_new_from_file_at_scale(*args)
       when 5
-        case args[0]
-        when GdkPixbuf::Colorspace # No other value
-          puts deprecated_usage_message
-          initialize_new(*args)
-        else
-          puts "Wrong type of 1st argument, must a Colorspace"
-        end
+        message = "#{caller[0]}: "
+        message << "#{self.class}.new(colorspace, has_alpha, bits_per_sample, "
+        message << "width, height) is deprecated."
+        message << "Use #{self.class}.new(:colorspace => colorspace, "
+        message << ":has_alpha => has_alpha, "
+        message << ":bits_per_sample => bits_per_sample, "
+        message << ":width => width, "
+        message << ":height => height) instead."
+        warn message
+        initialize_new(*args)
       when 7
-        puts deprecated_usage_message
+        message = "#{caller[0]}: "
+        message << "#{self.class}.new(data, colorspace, has_alpha, "
+        message << "bits_per_sample, width, height) is deprecated."
+        message << "Use #{self.class}.new(:data => data, "
+        message << ":colorspace => colorspace, "
+        message << ":has_alpha => has_alpha, "
+        message << ":bits_per_sample => bits_per_sample, "
+        message << ":width => width, "
+        message << ":height => height) instead."
+        warn message
         initialize_new_from_data(*args)
       else
-        puts "Wrong number of arguments"
-        puts deprecated_usage_message
+        super
       end
-    end
-
-    def deprecated_usage_message
-      "Please use the hash form for the arguments :colorspace, :has_alpha, " +
-      ":bits_per_sample, :row_stride, :src_x, :src_y, :src_pixbuf, :data, " +
-      ":bytes, :xpm, :file, :stream, :resource, :width, :height, :scale, " +
-      ":preserve_aspect_ration"
     end
 
     def initialize_with_hash(options)
       colorspace = options[:colorspace] || GdkPixbuf::Colorspace::RGB
-      has_alpha = options[:has_alpha] || false
+      has_alpha = options[:has_alpha]
+      has_alpha = false if has_alpha.nil?
       bits_per_sample = options[:bits_per_sample] || 8
       row_stride = options[:row_stride] || 0
       data = options[:data] || nil
@@ -83,7 +105,6 @@ module GdkPixbuf
       scale = options[:scale] || nil
       preserve_aspect_ratio = options[:preserve_aspect_ratio]
       preserve_aspect_ratio = true if preserve_aspect_ratio.nil?
-
 
       if file && size && scale
         initialize_new_from_file_at_scale(file, width, height,
@@ -108,7 +129,9 @@ module GdkPixbuf
       elsif size
         initialize_raw(colorspace, has_alpha, bits_per_sample, width, height)
       else
-        puts "Please provide a width and an height"
+        message =
+          "must specify :file, :resource, :data, :bytes, :xpm, :width or :height"
+        raise ArgumentError, message
       end
       # https://developer.gnome.org/gdk-pixbuf/2.33/gdk-pixbuf-Image-Data-in-Memory.html
       #	gdk_pixbuf_new                                  done
@@ -131,6 +154,7 @@ module GdkPixbuf
       #	gdk_pixbuf_new_from_stream_at_scale
       #	gdk_pixbuf_new_from_stream_at_scale_async
     end
+    private :initialize_with_hash
 
     # TODO: test
     def dup
