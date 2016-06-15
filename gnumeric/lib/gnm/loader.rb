@@ -46,14 +46,8 @@ module Gnm
     def rubyish_class_name(info)
       name = info.name.gsub(/Class\z/, "")
       case name
-      when /\Aanalysis_tool_engine_t\z/
-        "AnalysisToolEngine"
-      when /\Adata_analysis_output_type_t\z/
-        "DataAnalysisOutputType"
-      when /\Agroup_by_t\z/
-        "GroupBy"
-      when /\Awb_control_navigator_t\z/
-        "WbControlNavigator"
+      when /\A.*_t\z/
+        name.gsub(/_t\z/,"").split("_").map {|s| s.capitalize}.join
       else
         name
       end
