@@ -44,7 +44,7 @@ button_open.signal_connect "clicked" do
                                       :buttons => [
                                       [Gtk::Stock::CANCEL, Gtk::ResponseType::CANCEL],
                                       [Gtk::Stock::OPEN, Gtk::ResponseType::ACCEPT]])
-  
+
   dialog.filename = File.expand_path(file_name)
   if dialog.run == Gtk::ResponseType::ACCEPT
     file_name = dialog.filename
@@ -57,7 +57,7 @@ button_open.signal_connect "clicked" do
 end
 
 button_save = Gtk::ToolButton.new(:icon_widget => nil, :label => "Serialize to a file",:stock_id => Gtk::Stock::SAVE)
-button_save.signal_connect "clicked" do 
+button_save.signal_connect "clicked" do
   dialog = Gtk::FileChooserDialog.new(:title => "Serialize to a file",
                                       :parent => window,
                                       :action => :save, #or Gtk::FileChooserAction::SAVE,
@@ -81,21 +81,21 @@ button_clear.signal_connect("clicked") { buffer.delete(buffer.start_iter, buffer
 toolbar.insert(button_clear, 0)
 
 button_color = Gtk::ToolButton.new(:icon_widget => nil, :label => "Color the region",:stock_id => Gtk::Stock::SELECT_COLOR)
-button_color.signal_connect "clicked" do 
+button_color.signal_connect "clicked" do
   dialog = Gtk::ColorChooserDialog.new(:title => "Color the region", :parent => window)
   if dialog.run == Gtk::ResponseType::OK
     bounds = buffer.selection_bounds # returns an array [Gtk::TextIter, Gtk::TextIter]
     rgba = dialog.rgba
     color = Gdk::Color.new(rgba.red*65535, rgba.green*65535, rgba.blue*65535)
-    tag_name = color.to_s 
+    tag_name = color.to_s
     unless tag = buffer.tag_table.lookup(tag_name)
       tag = Gtk::TextTag.new(tag_name)
       tag.set_foreground_gdk(color)
     end
     buffer.tag_table.add(tag)
-    buffer.apply_tag(tag, bounds[0], bounds[1])
+    buffer.apply_tag(tag, bounds[0], bounds[1]) unless bounds.nil?
   end
-  dialog.destroy  
+  dialog.destroy
 end
 
 button_font = Gtk::ToolButton.new(:label => "Set a font to the region", :stock_id => Gtk::Stock::SELECT_FONT)
@@ -108,9 +108,9 @@ button_font.signal_connect "clicked" do
       tag = Gtk::TextTag.new(font).set_font(font)
     end
     buffer.tag_table.add(tag)
-    buffer.apply_tag(tag, bounds[0], bounds[1])
+    buffer.apply_tag(tag, bounds[0], bounds[1]) unless bounds.nil?
   end
-  dialog.destroy  
+  dialog.destroy
 end
 
 button_quit = Gtk::ToolButton.new(:label => "Quit this application", :stock_id => Gtk::Stock::QUIT)

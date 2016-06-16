@@ -37,10 +37,10 @@ end
 
 def textview_query_tooltip(textview, keyboard_tip, x, y, tooltip, tag)
   if keyboard_tip
-    iter = textview.buffer.get_iter_at_offset(textview.buffer.cursor_position)
+    iter = textview.buffer.get_iter_at(:offset => textview.buffer.cursor_position)
   else
     bx, by = textview.window_to_buffer_coords(Gtk::TextWindowType::TEXT, x, y)
-    iter, = textview.get_iter_at_position(bx, by)
+    cond, iter = textview.get_iter_at_position(bx, by)
   end
   if iter.has_tag?(tag)
     tooltip.text = 'Tooltip on text tag'
