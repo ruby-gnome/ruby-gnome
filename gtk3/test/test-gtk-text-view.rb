@@ -24,6 +24,19 @@ class TestGtkTextView < Test::Unit::TestCase
       @text_view = Gtk::TextView.new(@text_buffer)
     end
 
+    sub_test_case "#get_iter_at" do
+      test ":location" do
+        iter = @text_view.get_iter_at(:location => [0, 0])
+        assert_equal("H", iter.char)
+      end
+
+      test "found" do
+        iter, trailing = @text_view.get_iter_at(:position => [0, 0])
+        assert_equal(["H", 0],
+                     [iter.char, trailing])
+      end
+    end
+
     sub_test_case "#get_iter_at_location" do
       test "found" do
         iter = @text_view.get_iter_at_location(0, 0)

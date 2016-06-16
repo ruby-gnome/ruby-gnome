@@ -16,6 +16,20 @@
 
 module Gtk
   class TextView
+    def get_iter_at(options)
+      location = options[:location]
+      position = options[:position]
+
+      if location
+        get_iter_at_location(*location)
+      elsif position
+        get_iter_at_position(*position)
+      else
+        message = "must specify :location or :position: #{options.inspect}"
+        raise ArgumentError, message
+      end
+    end
+
     alias_method :get_iter_at_location_raw, :get_iter_at_location
     def get_iter_at_location(x, y)
       _found, iter = get_iter_at_location_raw(x, y)
