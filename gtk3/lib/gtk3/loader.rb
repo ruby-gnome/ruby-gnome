@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -142,6 +142,7 @@ module Gtk
       require "gtk3/text-buffer"
       require "gtk3/text-iter"
       require "gtk3/text-tag-table"
+      require "gtk3/text-view"
       require "gtk3/toggle-action"
       require "gtk3/toggle-button"
       require "gtk3/tool-button"
