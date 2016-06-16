@@ -44,8 +44,7 @@ class TestGtkTextView < Test::Unit::TestCase
       end
 
       test "not found" do
-        iter = @text_view.get_iter_at_location(100, 0)
-        assert_equal("", iter.char)
+        assert_nil(@text_view.get_iter_at_location(100, 0))
       end
     end
 
@@ -57,9 +56,7 @@ class TestGtkTextView < Test::Unit::TestCase
       end
 
       test "not found" do
-        iter, trailing = @text_view.get_iter_at_position(100, 0)
-        assert_equal(["o", 1],
-                     [iter.char, trailing])
+        assert_nil(@text_view.get_iter_at_position(100, 0))
       end
     end
   end

@@ -32,14 +32,22 @@ module Gtk
 
     alias_method :get_iter_at_location_raw, :get_iter_at_location
     def get_iter_at_location(x, y)
-      _found, iter = get_iter_at_location_raw(x, y)
-      iter
+      found, iter = get_iter_at_location_raw(x, y)
+      if found
+        iter
+      else
+        nil
+      end
     end
 
     alias_method :get_iter_at_position_raw, :get_iter_at_position
     def get_iter_at_position(x, y)
-      _found, iter, trailing = get_iter_at_position_raw(x, y)
-      [iter, trailing]
+      found, iter, trailing = get_iter_at_position_raw(x, y)
+      if found
+        [iter, trailing]
+      else
+        nil
+      end
     end
   end
 end
