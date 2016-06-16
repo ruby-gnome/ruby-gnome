@@ -84,16 +84,18 @@ button_color = Gtk::ToolButton.new(:icon_widget => nil, :label => "Color the reg
 button_color.signal_connect "clicked" do 
   dialog = Gtk::ColorChooserDialog.new(:title => "Color the region", :parent => window)
   if dialog.run == Gtk::ResponseType::OK
-    bounds = buffer.selection_bounds # returns an array [Gtk::TextIter, Gtk::TextIter]
-    rgba = dialog.rgba
-    color = Gdk::Color.new(rgba.red*65535, rgba.green*65535, rgba.blue*65535)
-    tag_name = color.to_s 
-    unless tag = buffer.tag_table.lookup(tag_name)
-      tag = Gtk::TextTag.new(tag_name)
-      tag.set_foreground_gdk(color)
+    bounds = buffer.selection_bounds # returns an array [Gtk::TextIter, Gtk::TextIter] or nil
+    if bounds
+      rgba = dialog.rgba
+      color = Gdk::Color.new(rgba.red*65535, rgba.green*65535, rgba.blue*65535)
+      tag_name = color.to_s 
+      unless tag = buffer.tag_table.lookup(tag_name)
+        tag = Gtk::TextTag.new(tag_name)
+        tag.set_foreground_gdk(color)
+      end
+      buffer.tag_table.add(tag)
+      buffer.apply_tag(tag, bounds[0], bounds[1])
     end
-    buffer.tag_table.add(tag)
-    buffer.apply_tag(tag, bounds[0], bounds[1])
   end
   dialog.destroy  
 end
@@ -103,12 +105,14 @@ button_font.signal_connect "clicked" do
   dialog = Gtk::FontChooserDialog.new(:label => "Set font to the region", :parent => window)
   if dialog.run == Gtk::ResponseType::OK
     bounds = buffer.selection_bounds
-    font = dialog.font
-    unless tag = buffer.tag_table.lookup(font)
-      tag = Gtk::TextTag.new(font).set_font(font)
+    if bounds
+      font = dialog.font
+      unless tag = buffer.tag_table.lookup(font)
+        tag = Gtk::TextTag.new(font).set_font(font)
+      end
+      buffer.tag_table.add(tag)
+      buffer.apply_tag(tag, bounds[0], bounds[1])
     end
-    buffer.tag_table.add(tag)
-    buffer.apply_tag(tag, bounds[0], bounds[1])
   end
   dialog.destroy  
 end
