@@ -160,7 +160,6 @@ module GdkPixbuf
       copy
     end
 
-    # TODO: test
     def fill!(pixel)
       fill(pixel)
     end
