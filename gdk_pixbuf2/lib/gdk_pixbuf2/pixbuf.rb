@@ -156,7 +156,6 @@ module GdkPixbuf
     end
     private :initialize_with_hash
 
-    # TODO: test
     def dup
       copy
     end
