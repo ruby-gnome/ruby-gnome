@@ -165,7 +165,6 @@ module GdkPixbuf
       fill(pixel)
     end
 
-    # TODO: test
     def rotate(angle)
       rotate_simple(angle)
     end
