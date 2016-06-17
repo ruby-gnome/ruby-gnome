@@ -89,7 +89,7 @@ class TestPixbuf < Test::Unit::TestCase
         assert_equal(32, pixbuf.width)
         assert_equal(32, pixbuf.height)
       end
-    
+
       test "data" do
         src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
         data = src_pixbuf.pixels.flatten.pack("C*")
@@ -173,6 +173,20 @@ class TestPixbuf < Test::Unit::TestCase
         src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
         data = src_pixbuf.pixels.flatten.pack("C*")
         pixbuf = GdkPixbuf::Pixbuf.new(:data => data,
+                                       :colorspace => src_pixbuf.colorspace,
+                                       :has_alpha => src_pixbuf.has_alpha?,
+                                       :bits_per_sample => src_pixbuf.bits_per_sample,
+                                       :width => src_pixbuf.width,
+                                       :height => src_pixbuf.height,
+                                       :row_stride => src_pixbuf.rowstride,
+                                       )
+        assert_equal(src_pixbuf.pixels, pixbuf.pixels)
+      end
+
+      test "bytes" do
+        src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+        bytes = src_pixbuf.pixels.flatten.pack("C*")
+        pixbuf = GdkPixbuf::Pixbuf.new(:bytes => bytes,
                                        :colorspace => src_pixbuf.colorspace,
                                        :has_alpha => src_pixbuf.has_alpha?,
                                        :bits_per_sample => src_pixbuf.bits_per_sample,
