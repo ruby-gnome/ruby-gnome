@@ -200,8 +200,9 @@ class TestPixbuf < Test::Unit::TestCase
 
   def test_fill!
     filename = fixture_path("gnome-logo-icon.png")
-    pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
-    assert_equal(pixbuf.fill(0xffffffff).pixels,
-                 pixbuf.fill!(0xffffffff).pixels)
+    pixbuf1 = GdkPixbuf::Pixbuf.new(:file => filename)
+    pixbuf2 = GdkPixbuf::Pixbuf.new(:file => filename)
+    assert_equal(pixbuf1.fill(0xffffffff).pixels,
+                 pixbuf2.fill!(0xffffffff).pixels)
   end
 end
