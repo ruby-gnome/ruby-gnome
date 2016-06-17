@@ -15,10 +15,12 @@ require 'glib-test-init'
  [pango_dir, "pango"],
  [glib_dir, "glib2"],
  [base_dir, "poppler"]].each do |dir, module_name|
-  if have_make
-    system("cd #{dir.dump} && make > /dev/null") or exit(false)
+  if File.exist?(File.join(dir, "Makefile"))
+    if have_make
+      system("cd #{dir.dump} && make > /dev/null") or exit(false)
+    end
+    $LOAD_PATH.unshift(File.join(dir, "ext", module_name))
   end
-  $LOAD_PATH.unshift(File.join(dir, "ext", module_name))
   $LOAD_PATH.unshift(File.join(dir, "lib"))
 end
 require "poppler"
