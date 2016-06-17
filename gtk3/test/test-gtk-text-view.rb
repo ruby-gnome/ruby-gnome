@@ -30,7 +30,7 @@ class TestGtkTextView < Test::Unit::TestCase
         assert_equal("H", iter.char)
       end
 
-      test "found" do
+      test ":position" do
         iter, trailing = @text_view.get_iter_at(:position => [0, 0])
         assert_equal(["H", 0],
                      [iter.char, trailing])
