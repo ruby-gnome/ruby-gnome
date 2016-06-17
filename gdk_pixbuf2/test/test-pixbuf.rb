@@ -89,7 +89,7 @@ class TestPixbuf < Test::Unit::TestCase
         assert_equal(32, pixbuf.width)
         assert_equal(32, pixbuf.height)
       end
-    
+
       test "data" do
         src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
         data = src_pixbuf.pixels.flatten.pack("C*")
@@ -196,5 +196,12 @@ class TestPixbuf < Test::Unit::TestCase
   def test_dup
     pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
     assert_equal(pixbuf.copy.pixels, pixbuf.dup.pixels)
+  end
+
+  def test_rotate
+    pixbuf_ref = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+    pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+    rotated_pixbuf = pixbuf.rotate(:upsidedown).rotate(:upsidedown) # 2 * 180
+    assert_equal(pixbuf_ref.pixels, rotated_pixbuf.pixels)
   end
 end
