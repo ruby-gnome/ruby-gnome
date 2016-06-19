@@ -92,7 +92,7 @@ class TestPixbuf < Test::Unit::TestCase
 
       test "data" do
         src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
-        data = src_pixbuf.pixels.flatten.pack("C*")
+        data = src_pixbuf.pixels.pack("C*")
         pixbuf = GdkPixbuf::Pixbuf.new(data,
                                        src_pixbuf.colorspace,
                                        src_pixbuf.has_alpha?,
@@ -171,7 +171,7 @@ class TestPixbuf < Test::Unit::TestCase
 
       test "data" do
         src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
-        data = src_pixbuf.pixels.flatten.pack("C*")
+        data = src_pixbuf.pixels.pack("C*")
         pixbuf = GdkPixbuf::Pixbuf.new(:data => data,
                                        :colorspace => src_pixbuf.colorspace,
                                        :has_alpha => src_pixbuf.has_alpha?,
