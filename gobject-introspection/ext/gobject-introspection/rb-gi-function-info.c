@@ -215,6 +215,29 @@ fill_metadata_array(GPtrArray *args_metadata)
 }
 
 static void
+fill_metadata_array_from_callable_info(GPtrArray *args_metadata,
+                                       GICallableInfo *info)
+{
+    GITypeInfo return_type_info;
+    RBGIArgMetadata *array_length_metadata;
+    gint array_length_index = -1;
+
+    g_callable_info_load_return_type(info, &return_type_info);
+    if (g_type_info_get_tag(&return_type_info) != GI_TYPE_TAG_ARRAY) {
+        return;
+    }
+
+    array_length_index = g_type_info_get_array_length(&return_type_info);
+    if (array_length_index == -1) {
+        return;
+    }
+
+    array_length_metadata = g_ptr_array_index(args_metadata, array_length_index);
+    array_length_metadata->array_length_p = TRUE;
+    array_length_metadata->rb_arg_index = -1;
+}
+
+static void
 fill_metadata_rb_arg_index(GPtrArray *args_metadata)
 {
     guint i;
@@ -251,10 +274,11 @@ fill_metadata_rb_arg_index(GPtrArray *args_metadata)
 }
 
 static void
-fill_metadata(GPtrArray *args_metadata)
+fill_metadata(GPtrArray *args_metadata, GICallableInfo *info)
 {
     fill_metadata_callback(args_metadata);
     fill_metadata_array(args_metadata);
+    fill_metadata_array_from_callable_info(args_metadata, info);
     fill_metadata_rb_arg_index(args_metadata);
 }
 
@@ -866,7 +890,7 @@ ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
                        in_args,
                        out_args,
                        args_metadata);
-    fill_metadata(args_metadata);
+    fill_metadata(args_metadata, callback->callback_info);
     arguments_from_raw_data(callback->callback_info,
                             raw_args,
                             in_args,
@@ -1071,7 +1095,7 @@ arguments_from_ruby(GICallableInfo *info, VALUE self, VALUE rb_arguments,
     gint i, n_args;
 
     allocate_arguments(info, in_args, out_args, args_metadata);
-    fill_metadata(args_metadata);
+    fill_metadata(args_metadata, info);
 
     n_args = g_callable_info_get_n_args(info);
     for (i = 0; i < n_args; i++) {
