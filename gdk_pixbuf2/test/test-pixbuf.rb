@@ -195,7 +195,7 @@ class TestPixbuf < Test::Unit::TestCase
 
   def test_dup
     pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
-    assert_equal(pixbuf.copy.pixels, pixbuf.dup.pixels)
+    assert_equal(pixbuf.pixels, pixbuf.dup.pixels)
   end
 
   def test_fill!
