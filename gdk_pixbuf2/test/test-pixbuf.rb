@@ -221,9 +221,10 @@ class TestPixbuf < Test::Unit::TestCase
   end
 
   def test_rotate
-    pixbuf_ref = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
     pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
-    rotated_pixbuf = pixbuf.rotate(:upsidedown).rotate(:upsidedown) # 2 * 180
-    assert_equal(pixbuf_ref.pixels, rotated_pixbuf.pixels)
+    inverted_pixbuf = pixbuf.rotate(:upsidedown)
+    assert_not_equal(pixbuf.pixels, inverted_pixbuf.pixels)
+    inverted_twice_pixbuf = inverted_pixbuf.rotate(:upsidedown)
+    assert_equal(pixbuf.pixels, inverted_twice_pixbuf.pixels)
   end
 end
