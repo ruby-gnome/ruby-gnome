@@ -219,4 +219,11 @@ class TestPixbuf < Test::Unit::TestCase
     assert_equal([0xff] * (pixbuf.rowstride * pixbuf.height),
                  pixbuf.pixels)
   end
+
+  def test_rotate
+    pixbuf_ref = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+    pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+    rotated_pixbuf = pixbuf.rotate(:upsidedown).rotate(:upsidedown) # 2 * 180
+    assert_equal(pixbuf_ref.pixels, rotated_pixbuf.pixels)
+  end
 end
