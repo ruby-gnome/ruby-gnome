@@ -196,6 +196,19 @@ class TestPixbuf < Test::Unit::TestCase
                                        )
         assert_equal(src_pixbuf.pixels, pixbuf.pixels)
       end
+      
+      test "resource" do
+        src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+        resource = Gio::Resource.load(fixture_path("image.gresource"))
+        Gio::Resources.register(resource)
+        begin
+          resource_path = "/org/ruby/gnome/gnome-logo-icon.png"
+          pixbuf = GdkPixbuf::Pixbuf.new(:resource => resource_path)
+          assert_equal(src_pixbuf.pixels, pixbuf.pixels)
+        ensure
+          Gio::Resources.unregister(resource)
+        end
+      end
     end
 
     def test_new_subpixbuf
