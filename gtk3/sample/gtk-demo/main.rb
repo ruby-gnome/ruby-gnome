@@ -438,7 +438,7 @@ class Demo < Gtk::Application
   def fontify(start_iter = @source_buffer.start_iter,
                 end_iter = @source_buffer.end_iter)
     str = @source_buffer.get_text(start_iter, end_iter, true)
-    tokenizer = RubyTokonizer.new
+    tokenizer = RubyTokenizer.new
     tokenizer.tokenize(str, start_iter.offset) do |tag, start, last|
       @source_buffer.apply_tag(tag.to_s,
                                @source_buffer.get_iter_at(:offset => start),
@@ -446,7 +446,7 @@ class Demo < Gtk::Application
     end
   end
 
-  class RubyTokonizer
+  class RubyTokenizer
     RESERVED_WORDS = %w(begin end module class def if then else
                         while unless do case when require yield)
     RESERVED_WORDS_PATTERN = Regexp.compile(/(^|\s+)(#{RESERVED_WORDS.collect do |pat| Regexp.quote(pat) end.join("|")})(\s+|$)/)
