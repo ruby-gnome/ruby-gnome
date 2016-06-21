@@ -345,6 +345,7 @@ class Demo < Gtk::Application
     @treeview.signal_connect "row-activated" do |_tree_view, path, _column|
       iter = model.get_iter(path)
       filename = iter[1]
+      next unless filename
       iter[2] = Pango::FontDescription::STYLE_ITALIC
       demo = run_demo_from_file(filename, windows.first)
       demo.signal_connect "destroy" do
