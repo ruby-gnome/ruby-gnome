@@ -210,7 +210,7 @@ class TestPixbuf < Test::Unit::TestCase
         end
       end
 
-       test "resource: scale" do
+      test "resource: scale" do
         resource = Gio::Resource.load(fixture_path("image.gresource"))
         Gio::Resources.register(resource)
         begin
