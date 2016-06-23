@@ -130,7 +130,7 @@ module Gtk
         insert_interactive(iter, target, default_editable)
       else
         case target
-        when Gdk::Pixbuf
+        when GdkPixbuf::Pixbuf
           insert_pixbuf_raw(iter, target)
         when TextChildAnchor
           insert_text_child_anchor_raw(iter, target)
