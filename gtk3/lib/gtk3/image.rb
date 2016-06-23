@@ -21,7 +21,7 @@ module Gtk
     # given.
     #
     # @param Hash{Symbol => Gtk::Stock, String, Gtk::IconSet, Gio::Icon,
-    #                       Gdk::Pixbuf, Gdk::PixbufAnimation, Cairo::Surface,
+    #                       GdkPixbuf::Pixbuf, GdkPixbuf::PixbufAnimation, Cairo::Surface,
     #                       Fixnum}
     #
     # @example Create an empty image.
@@ -45,18 +45,18 @@ module Gtk
     #   icon = Gio::ThemedIcon.new 'gtk-open'
     #   image = Gtk::Image.new :icon => icon, :size => :dialog
     #
-    # @example Create an image from a Gdk::Pixbuf.
-    #   pixbuf = Gdk::Pixbuf.new 'path/to/the/image.png'
+    # @example Create an image from a GdkPixbuf::Pixbuf.
+    #   pixbuf = GdkPixbuf::Pixbuf.new(:file => 'path/to/the/image.png')
     #   image = Gtk::Image.new :pixbuf => pixbuf
     #
     # @example Create an image from an Gtk::IconSet, that itself is created
-    #          from a Gdk::Pixbuf.
-    #   pixbuf = Gdk::Pixbuf.new 'path/to/the/image.png'
+    #          from a GdkPixbuf::Pixbuf.
+    #   pixbuf = GdkPixbuf::Pixbuf.new(:file => 'path/to/the/image.png')
     #   iconSet = Gtk::IconSet.new pixbuf
     #   image = Gtk::Image.new :icon_set => iconSet, :size => :dialog
     #
-    # @example Create an image from a Gdk::PixbufAnimation
-    #   pixAnim = Gdk::PixbufAnimation.new 'anim.gif'
+    # @example Create an image from a GdkPixbuf::PixbufAnimation
+    #   pixAnim = GdkPixbuf::PixbufAnimation.new 'anim.gif'
     #   image = Gtk::Image.new :animation => pixAnim
     #
     # @example Create an image from a file in a resource file
