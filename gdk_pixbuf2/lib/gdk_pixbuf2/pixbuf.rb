@@ -114,7 +114,8 @@ module GdkPixbuf
       elsif file && !size
         initialize_new_from_file(file)
       elsif resource && size && scale
-        initialize_new_from_resource_at_scale(resource, width, height)
+        initialize_new_from_resource_at_scale(resource, width, height,
+                                              preserve_aspect_ratio)
       elsif resource && !scale
         initialize_new_from_resource(resource)
       elsif data && size
