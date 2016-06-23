@@ -10,7 +10,7 @@ require "gtk3"
 window = Gtk::Window.new("Gtk::TreeView sample")
 
 # Create data
-model = Gtk::TreeStore.new(String, String, Gdk::RGBA, Float, Gdk::Pixbuf)
+model = Gtk::TreeStore.new(String, String, Gdk::RGBA, Float, GdkPixbuf::Pixbuf)
 
 # column 1
 root_iter = model.append(nil)
