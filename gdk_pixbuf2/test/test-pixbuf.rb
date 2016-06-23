@@ -227,7 +227,6 @@ class TestPixbuf < Test::Unit::TestCase
           Gio::Resources.unregister(resource)
         end
       end
-
     end
 
     def test_new_subpixbuf
