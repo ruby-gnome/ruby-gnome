@@ -13,7 +13,7 @@ filename = "#{File.expand_path(File.dirname(__FILE__))}/gnome-logo-icon.png"
 window = Gtk::Window.new("Drawable sample")
 window.set_border_width(10)
 
-pixbuf = Gdk::Pixbuf.new(filename)
+pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
 
 drawing_area = Gtk::DrawingArea.new
 window.add(drawing_area)
