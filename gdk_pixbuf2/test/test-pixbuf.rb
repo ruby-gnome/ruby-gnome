@@ -220,9 +220,16 @@ class TestPixbuf < Test::Unit::TestCase
                                          :height => 48,
                                          :scale => true,
                                          :preserve_aspect_ratio => false)
-          assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
-          assert_equal(32, pixbuf.width)
-          assert_equal(48, pixbuf.height)
+          assert_equal([
+                         GdkPixbuf::Colorspace::RGB,
+                         32,
+                         48,
+                       ],
+                       [
+                         pixbuf.colorspace,
+                         pixbuf.width,
+                         pixbuf.height,
+                       ])
         ensure
           Gio::Resources.unregister(resource)
         end
