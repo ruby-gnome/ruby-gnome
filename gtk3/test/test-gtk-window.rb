@@ -26,8 +26,8 @@ class TestGtkWindow < Test::Unit::TestCase
       @window.icon = fixture_path("gnome-logo-icon.png")
     end
 
-    test "Gdk::Pixbuf" do
-      icon = Gdk::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+    test "GdkPixbuf::Pixbuf" do
+      icon = GdkPixbuf::Pixbuf.new(:file => fixture_path("gnome-logo-icon.png"))
       @window.icon = icon
     end
   end
