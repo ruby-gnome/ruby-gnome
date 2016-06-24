@@ -38,9 +38,10 @@ module PixbufsDemo
     height = background_pixbuf.height
     window.set_size_request(width, height)
 
-    frame = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB,
-                            false, 8,
-                            width, height)
+    frame = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
+                                 :has_alpha => false,
+                                 :bits_per_sample => 8,
+                                 :width => width, :height => height)
 
     da = Gtk::DrawingArea.new
     da.signal_connect "draw" do |_widget, cr|
@@ -76,9 +77,9 @@ module PixbufsDemo
 
         dest = r1.intersect(r2)
         next unless dest
-        frame.composite!(other_pixbufs[i], dest.x, dest.y, dest.width,
+        other_pixbufs[i].composite(frame, dest.x, dest.y, dest.width,
                          dest.height, xpos, ypos, k, k,
-                         Gdk::Pixbuf::INTERP_NEAREST,
+                         :nearest,
                          if (i & 1) == 1
                            [
                              127, (255 * Math.sin(f * 2.0 * Math::PI)).abs
@@ -116,7 +117,8 @@ module PixbufsDemo
   def self.load_pixbuf(window, image_name)
     begin
       # Is it OK? should we implement gdk_pixbuf_new_from_resource instead?
-      Gtk::Image.new(:resource => image_name).pixbuf
+      #Gtk::Image.new(:resource => image_name).pixbuf
+      GdkPixbuf::Pixbuf.new(:resource => image_name)
     rescue StandardError => e
       show_message_dialog_on(window, e)
       window.destroy
