@@ -27,7 +27,7 @@ class TestGtkComboBox < Test::Unit::TestCase
       end
 
       test ":model" do
-        model = Gtk::ListStore.new(Gdk::Pixbuf, String)
+        model = Gtk::ListStore.new(GdkPixbuf::Pixbuf, String)
         combo_box = Gtk::ComboBox.new(:entry => true, :model => model)
         assert do
           combo_box.has_entry?
@@ -55,7 +55,7 @@ class TestGtkComboBox < Test::Unit::TestCase
       end
 
       test ":model" do
-        model = Gtk::ListStore.new(Gdk::Pixbuf, String)
+        model = Gtk::ListStore.new(GdkPixbuf::Pixbuf, String)
         combo_box = Gtk::ComboBox.new(:model => model)
         assert do
           not combo_box.has_entry?
