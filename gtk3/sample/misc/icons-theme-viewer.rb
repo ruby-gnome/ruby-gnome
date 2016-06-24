@@ -9,7 +9,7 @@
 require "gtk3"
 
 def fill_model(icons)
-  model = Gtk::ListStore.new(String, Gdk::Pixbuf)
+  model = Gtk::ListStore.new(String, GdkPixbuf::Pixbuf)
   icons.each do |icon|
     pixbuf = Gtk::IconTheme.default.load_icon(icon, 32, 0)
     iter = model.append
