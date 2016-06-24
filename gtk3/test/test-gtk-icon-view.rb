@@ -41,7 +41,7 @@ class TestGtkIconView < Test::Unit::TestCase
   class TestGetCellRect < self
     def setup
       only_gtk_version(3, 6, 0)
-      model = Gtk::ListStore.new(String, Gdk::Pixbuf)
+      model = Gtk::ListStore.new(String, GdkPixbuf::Pixbuf)
       iter = model.append
       model.set_values(iter, ["label", nil])
       @path = iter.path
