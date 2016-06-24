@@ -297,7 +297,7 @@ module Gtk
       case icon
       when Symbol
         context.set_icon(:stock_id => icon, :hot_x => hot_x, :hot_y => hot_y)
-      when Gdk::Pixbuf
+      when GdkPixbuf::Pixbuf
         context.set_icon(:pixbuf => icon, :hot_x => hot_x, :hot_y => hot_y)
       when Gtk::Widget
         context.set_icon(:widget => icon, :hot_x => hot_x, :hot_y => hot_y)
@@ -523,7 +523,7 @@ module Gtk
         end
       when Symbol
         [{:stock => image, :size => size}]
-      when Gdk::Pixbuf
+      when GdkPixbuf::Pixbuf
         [{:pixbuf => image}]
       when Gtk::IconSet
         [{:icon_set => image, :size => size}]
@@ -531,7 +531,7 @@ module Gtk
         [{:icon => image, :size => size}]
       else
         message =
-          "Image must be String, Symbol, Gdk::Pixbuf, Gtk::IconSet or " +
+          "Image must be String, Symbol, GdkPixbuf::Pixbuf, Gtk::IconSet or " +
           "Gio::Icon: #{image.inspect}"
         raise ArgumentError, message
       end
