@@ -24,7 +24,7 @@ class TestGdkCursor < Test::Unit::TestCase
     end
 
     test "pixbuf" do
-      pixbuf = Gdk::Pixbuf.new(:file => fixture_path("ruby-gnome2-logo.png"))
+      pixbuf = GdkPixbuf::Pixbuf.new(:file => fixture_path("ruby-gnome2-logo.png"))
       cursor = Gdk::Cursor.new(pixbuf, 0, 0)
       assert_equal(Gdk::CursorType::CURSOR_IS_PIXMAP, cursor.cursor_type)
     end
