@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 =begin
-  to_drawable.rb - Gdk::Pixbuf(GDK methods) sample script.
+  to_drawable.rb - GdkPixbuf::Pixbuf(GDK methods) sample script.
 
   Copyright (c) 2002-2006 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
@@ -16,7 +16,7 @@ unless filename
   exit(1)
 end
 
-pixbuf = Gdk::Pixbuf.new(filename)
+pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
 
 w = Gtk::Window.new("Drawable sample")
 w.realize

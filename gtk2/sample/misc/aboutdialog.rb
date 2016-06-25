@@ -31,7 +31,7 @@ a.comments  = "This is a sample script for Gtk::AboutDialog"
 a.copyright = "Copyright (C) 2005 Ruby-GNOME2 Project"
 a.documenters = ["Documenter 1 <no1@foo.bar.com>", "Documenter 2 <no2@foo.bar.com>"]
 a.license   = "This program is licenced under the same licence as Ruby-GNOME2."
-a.logo      = Gdk::Pixbuf.new("gnome-logo-icon.png")
+a.logo      = GdkPixbuf::Pixbuf.new(:file => "gnome-logo-icon.png")
 a.program_name = "Gtk::AboutDialog sample"
 a.translator_credits = "Translator 1\nTranslator 2\n"
 a.version   = "1.0.0"

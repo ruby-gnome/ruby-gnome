@@ -35,7 +35,7 @@ end
 #
 # Icon and text
 #
-model = Gtk::ListStore.new(Gdk::Pixbuf, String)
+model = Gtk::ListStore.new(GdkPixbuf::Pixbuf, String)
 [[Gtk::Stock::QUIT, "quit"],
  [Gtk::Stock::CANCEL, "cancel"],
  [Gtk::Stock::OK, "ok"]].each do |stock, name|

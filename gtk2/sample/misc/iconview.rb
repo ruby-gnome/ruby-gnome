@@ -13,7 +13,7 @@ require 'gtk2'
 TEXT_COLUMN   = 0
 PIXBUF_COLUMN = 1
 
-model = Gtk::ListStore.new(String, Gdk::Pixbuf)
+model = Gtk::ListStore.new(String, GdkPixbuf::Pixbuf)
 
 iv = Gtk::IconView.new(model)
 
@@ -23,7 +23,7 @@ iv.pixbuf_column = PIXBUF_COLUMN
 Dir.glob("../gtk-demo/gnome*.png").each do |f|
   iter = model.append
   iter[TEXT_COLUMN]   = File.basename(f)
-  iter[PIXBUF_COLUMN] = Gdk::Pixbuf.new(f)
+  iter[PIXBUF_COLUMN] = GdkPixbuf::Pixbuf.new(:file => f)
 end
 
 iv.signal_connect("item_activated") do |iv, path|
