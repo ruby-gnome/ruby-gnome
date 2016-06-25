@@ -205,15 +205,17 @@ rg_text_layout(VALUE self)
     guint n_rectangles;
 
     if (poppler_page_get_text_layout(SELF(self), &rectangles, &n_rectangles)) {
-        VALUE ary;
+        VALUE rb_rectangles;
         guint i;
-        ary = rb_ary_new2(n_rectangles);
-        for (i = 0; i < n_rectangles; i++) {
-            rb_ary_push(ary, POPPLERRECTANGLE2RVAL(&(rectangles[i])));
-        }
 
+        rb_rectangles = rb_ary_new2(n_rectangles);
+        for (i = 0; i < n_rectangles; i++) {
+            rb_ary_push(rb_rectangles,
+                        POPPLERRECTANGLE2RVAL(&(rectangles[i])));
+        }
         g_free(rectangles);
-        return ary;
+
+        return rb_rectangles;
     } else {
         return Qnil;
     }
