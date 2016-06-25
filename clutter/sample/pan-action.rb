@@ -38,7 +38,7 @@ scroll.add_constraint(Clutter::BindConstraint.new(stage, :size, 0))
 content = Clutter::Actor.new
 content.set_size(720, 720)
 
-pixbuf = Gdk::Pixbuf.new(File.expand_path("redhand.png", File.dirname(__FILE__)))
+pixbuf = GdkPixbuf::Pixbuf.new(:file => File.expand_path("redhand.png", File.dirname(__FILE__)))
 image = Clutter::Image.new
 image.set_data(pixbuf.pixels,
                pixbuf.has_alpha? ? :rgba_8888 : :rgb_888,
