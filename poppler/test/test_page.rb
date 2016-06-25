@@ -30,6 +30,24 @@ class TestPage < Test::Unit::TestCase
     assert_kind_of(Poppler::Annotation, mapping.annotation)
   end
 
+  def test_text_layout
+    if later_version?(0, 16, 0)
+      tmp_stdout = $stdout
+      $stdout    = open('/dev/null', 'w')
+        document = Poppler::Document.new(form_pdf)
+        page = document[0]
+
+        # segmentation fault on poppler.gem 3.0.8
+        10.times {|i|
+          puts page.text_layout[0]
+        }
+      $stdout.close
+      $stdout = tmp_stdout
+
+      assert_equal(true, true)
+    end
+  end
+
   private
   def find_first_image_mapping(document)
     document.each do |page|
