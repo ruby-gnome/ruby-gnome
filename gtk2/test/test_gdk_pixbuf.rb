@@ -23,12 +23,12 @@ class TestGdkPixbuf < Test::Unit::TestCase
     width, height = gdk_window.size
 
     assert_nothing_raised do
-      Gdk::Pixbuf.from_drawable(colormap,
-                                gdk_window,
-                                src_x,
-                                src_y,
-                                width,
-                                height)
+      GdkPixbuf::Pixbuf.from_drawable(colormap,
+                                      gdk_window,
+                                      src_x,
+                                      src_y,
+                                      width,
+                                      height)
     end
   end
 end
