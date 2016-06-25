@@ -66,7 +66,7 @@ class TestGtkClipboard < Test::Unit::TestCase
       received_image = image
       loop.quit
     end
-    image = Gdk::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+    image = GdkPixbuf::Pixbuf.new(:file => fixture_path("gnome-logo-icon.png"))
     @clipboard.image = image
     loop.run
 
