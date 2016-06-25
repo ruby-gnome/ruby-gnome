@@ -115,7 +115,7 @@ def to_pixbuf_with_cairo(input, page_number, scale, rotate)
   temp = Tempfile.new("pdf2")
   cr.target.write_to_png(temp.path)
   cr.target.finish
-  Gdk::Pixbuf.new(temp.path)
+  GdkPixbuf::Pixbuf.new(:file => temp.path)
 end
 
 unless Poppler.cairo_available?
