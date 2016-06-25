@@ -5,7 +5,7 @@
 =begin
 = Pixbufs
 
-A Gdk::Pixbuf represents an image, normally in RGB or RGBA format.
+A GdkPixbuf::Pixbuf represents an image, normally in RGB or RGBA format.
 Pixbufs are normally used to load files from disk and perform
 image scaling.
 
@@ -51,9 +51,11 @@ module Demo
 
 	set_size_request(@background.width, @background.height)
 
-	@frame = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB,
-				 false, 8,
-				 @background.width, @background.height)
+	@frame = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
+				                        :has_alpha => false,
+                                :bits_per_sample => 8,
+                                :width => @background.width,
+                                :height => @background.height)
 
 	@da = Gtk::DrawingArea.new
 
@@ -96,12 +98,12 @@ module Demo
       # in the location where the file is installed.
       #
       filename = Demo.find_file(BACKGROUND_NAME)
-      @background = Gdk::Pixbuf.new(filename)
+      @background = GdkPixbuf::Pixbuf.new(:file => filename)
 
       IMAGE_NAMES.each_with_index do |basename, i|
 	filename = Demo.find_file(basename)
 
-	@images[i] = Gdk::Pixbuf.new(filename)
+	@images[i] = GdkPixbuf::Pixbuf.new(:file => filename)
       end
     end
 
@@ -154,7 +156,7 @@ module Demo
         dest = r1.intersect(r2)
         if dest
           @frame.composite!(image, dest.x, dest.y, dest.width, dest.height,
-                            xpos, ypos, k, k, Gdk::Pixbuf::INTERP_NEAREST,
+                            xpos, ypos, k, k, :nearest,
                             if (i & 1) == 1
                               [
                                 127,

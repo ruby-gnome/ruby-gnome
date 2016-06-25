@@ -188,14 +188,14 @@ module Demo
       # 
 
       filename = Demo.find_file("gtk-logo-rgb.gif")
-      pixbuf = Gdk::Pixbuf.new(filename) if filename
+      pixbuf = GdkPixbuf::Pixbuf.new(:file => filename) if filename
 
       unless pixbuf
 	$stderr.print "Failed to load image file gtk-logo-rgb.gif\n"
 	exit 1
       end
 
-      scaled = pixbuf.scale(32, 32, Gdk::Pixbuf::INTERP_BILINEAR)
+      scaled = pixbuf.scale(32, 32, :bilinear)
       pixbuf = scaled
 
       ##
