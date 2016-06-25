@@ -77,7 +77,7 @@ module PixbufsDemo
 
         dest = r1.intersect(r2)
         next unless dest
-        other_pixbufs[i].composite(frame, dest.x, dest.y, dest.width,
+        frame.composite!(other_pixbufs[i], dest.x, dest.y, dest.width,
                          dest.height, xpos, ypos, k, k,
                          :nearest,
                          if (i & 1) == 1

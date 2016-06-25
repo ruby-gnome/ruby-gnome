@@ -211,5 +211,9 @@ module GdkPixbuf
       end
       source.scale_raw(self, *args)
     end
+
+    def composite!(source, *args)
+      source.composite(self, *args)
+    end
   end
 end
