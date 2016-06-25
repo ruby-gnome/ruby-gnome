@@ -18,7 +18,7 @@ module Gdk
   extend GLib::Deprecatable
   define_deprecated_enums :GrabStatus, 'GRAB'
   define_deprecated_enums :Status
-  define_deprecated_const :Image, :raise => "Use 'Gdk::Pixbuf' or 'Cairo::Surface' instead."
+  define_deprecated_const :Image, :raise => "Use 'GdkPixbuf::Pixbuf' or 'Cairo::Surface' instead."
   define_deprecated_const :Colormap, :raise => "Use 'Gdk::Visual' instead."
   define_deprecated_const :Input, :raise => "Use 'GLib::IOChannel' instead."
   define_deprecated_const :X11, 'GdkX11'
@@ -143,10 +143,10 @@ module Gdk
     define_deprecated_method :initialize, :raise => "Use 'Gdk::Window#create_similar_surface'."
     define_deprecated_singleton_method :create_from_data, :raise => "Use 'Cairo::ImageSurface.new'."
     define_deprecated_singleton_method :create_from_xbm, :raise => "Use 'Cairo::ImageSurface.new'."
-    define_deprecated_singleton_method :create_from_xpm, :raise => "Use 'Gdk::Pixbuf.new'."
-    define_deprecated_singleton_method :create_from_xpm_d, :raise => "Use 'Gdk::Pixbuf.new'."
-    define_deprecated_singleton_method :colormap_create_from_xpm, :raise => "Use 'Gdk::Pixbuf.new'."
-    define_deprecated_singleton_method :colormap_create_from_xpm_d, :raise => "Use 'Gdk::Pixbuf.new'."
+    define_deprecated_singleton_method :create_from_xpm, :raise => "Use 'GdkPixbuf::Pixbuf.new'."
+    define_deprecated_singleton_method :create_from_xpm_d, :raise => "Use 'GdkPixbuf::Pixbuf.new'."
+    define_deprecated_singleton_method :colormap_create_from_xpm, :raise => "Use 'GdkPixbuf::Pixbuf.new'."
+    define_deprecated_singleton_method :colormap_create_from_xpm_d, :raise => "Use 'GdkPixbuf::Pixbuf.new'."
     define_deprecated_singleton_method :foreign_new, :raise => "Don't use this method."
     define_deprecated_singleton_method :lookup, :raise => "Don't use this method."
   end
