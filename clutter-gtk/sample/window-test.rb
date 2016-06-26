@@ -53,7 +53,7 @@ theme = Gtk::IconTheme.default
   iter[1] = pixbuf
 end
 
-icon_view = Gtk::IconView.new(store)
+icon_view = Gtk::IconView.new(:model => store)
 icon_view.text_column = NAME_COLUMN
 icon_view.pixbuf_column = PIXBUF_COLUMN
 
