@@ -90,7 +90,7 @@ clutter_embed.signal_connect("leave-notify-event") do |widget|
 end
 
 # Create the main texture that the spin buttons manipulate
-pixbuf = Gdk::Pixbuf.new(File.expand_path("redhand.png", File.dirname(__FILE__)));
+pixbuf = GdkPixbuf::Pixbuf.new(:file => File.expand_path("redhand.png", File.dirname(__FILE__)));
 hand = ClutterGtk::Texture.new
 hand.from_pixbuf = pixbuf
 stage.add_child(hand)
