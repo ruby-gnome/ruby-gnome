@@ -59,7 +59,7 @@ add_button = lambda do |stock_id, row|
       allocation = image.allocation
 
       # replace the icon itself
-      blank = Gdk::Pixbuf.new(:colorspace => :rgb,
+      blank = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
                               :has_alpha =>  true,
                               :bits_per_sample => 8,
                               :width => allocation.width,
