@@ -118,7 +118,7 @@ box.signal_connect("transitions-completed") do |actor|
   canvas.set_size(actor.width, actor.height)
 end
 
-pixbuf = Gdk::Pixbuf.new(File.expand_path("redhand.png", File.dirname(__FILE__)))
+pixbuf = GdkPixbuf::Pixbuf.new(:file => File.expand_path("redhand.png", File.dirname(__FILE__)))
 image = Clutter::Image.new
 image.set_data(pixbuf.pixels,
                pixbuf.has_alpha? ? :rgba_8888 : :rgb_888,
