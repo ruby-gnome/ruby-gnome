@@ -147,7 +147,7 @@ module Demo
 	    # Make the result the proper size for our thumbnail
 	    w, h = Gtk::IconSize.lookup(size)
 
-	    scaled = info.small_icon.scale(w, h, Gdk::Pixbuf::INTERP_BILINEAR)
+	    scaled = info.small_icon.scale(w, h, GdkPixbuf::Pixbuf::INTERP_BILINEAR)
 	    info.small_icon = scaled
 	  end
 

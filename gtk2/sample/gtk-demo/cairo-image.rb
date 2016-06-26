@@ -18,7 +18,7 @@ module Demo
 
     def draw(cr)
       cr.save do
-        loader = Gdk::PixbufLoader.new
+        loader = GdkPixbuf::PixbufLoader.new
         File.open("background.jpg", "rb") do |f|
           loader.last_write(f.read)
         end

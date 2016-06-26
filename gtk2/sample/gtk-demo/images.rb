@@ -6,7 +6,7 @@
 = Images
 
 Gtk::Image is used to display an image; the image can be in a number of formats.
-Typically, you load an image into a Gdk::Pixbuf, then display the pixbuf.
+Typically, you load an image into a GdkPixbuf::Pixbuf, then display the pixbuf.
 
 This demo code shows some of the more obscure cases, in the simple
 case a call to Gtk::Image.new is all you need.
@@ -55,7 +55,7 @@ module Demo
       pixbuf = nil
       begin
 	filename = Demo.find_file('gtk-logo-rgb.gif')
-	pixbuf = Gdk::Pixbuf.new(filename)
+	pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
       rescue
 	# This code shows off error handling. You can just use
 	# Gtk::Image.new instead if you don't want to report
@@ -159,7 +159,7 @@ module Demo
 	  @pixbuf_loader = nil
 	end
 	
-	@pixbuf_loader = Gdk::PixbufLoader.new
+	@pixbuf_loader = GdkPixbuf::PixbufLoader.new
 	
 	@pixbuf_loader.signal_connect('area_prepared') do |loader|
 	  pixbuf = loader.pixbuf

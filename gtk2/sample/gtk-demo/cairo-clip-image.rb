@@ -23,7 +23,7 @@ module Demo
         
         cr.new_path
         
-        loader = Gdk::PixbufLoader.new
+        loader = GdkPixbuf::PixbufLoader.new
         File.open("background.jpg", "rb") do |f|
           loader.last_write(f.read)
         end

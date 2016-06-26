@@ -184,7 +184,7 @@ write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 ]
 
-      transparent = Gdk::Pixbuf.new(Demo.find_file("gtk-logo-rgb.gif")).add_alpha(true, 0xff, 0xff, 0xff)
+      transparent = GdkPixbuf::Pixbuf.new(:file => Demo.find_file("gtk-logo-rgb.gif")).add_alpha(true, 0xff, 0xff, 0xff)
       
       Gtk::AboutDialog.set_email_hook {|about, link|
 	puts "send mail to #{link}"
@@ -222,7 +222,7 @@ Boston, MA 02111-1307, USA.
       factory.add_default
 
       filename = Demo.find_file('gtk-logo-rgb.gif')
-      pixbuf = Gdk::Pixbuf.new(filename)
+      pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
 
       transparent = pixbuf.add_alpha(true, 0xff, 0xff, 0xff)
 

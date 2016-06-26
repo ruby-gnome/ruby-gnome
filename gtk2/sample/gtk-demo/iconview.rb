@@ -37,10 +37,10 @@ puts path
 
     def initialize
       super('Gtk::IconView demo')
-      @file_pixbuf = Gdk::Pixbuf.new(Demo.find_file("gnome-fs-regular.png"))
-      @folder_pixbuf = Gdk::Pixbuf.new(Demo.find_file("gnome-fs-directory.png"))
+      @file_pixbuf = GdkPixbuf::Pixbuf.new(:file => Demo.find_file("gnome-fs-regular.png"))
+      @folder_pixbuf = GdkPixbuf::Pixbuf.new(:file => Demo.find_file("gnome-fs-directory.png"))
 
-      @store = Gtk::ListStore.new(String, String, TrueClass, Gdk::Pixbuf)
+      @store = Gtk::ListStore.new(String, String, TrueClass, GdkPixbuf::Pixbuf)
       @parent = "/"
 
       @store.set_default_sort_func do |a, b|

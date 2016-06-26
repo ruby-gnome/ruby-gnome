@@ -60,7 +60,7 @@ ifp.create_item("/_Misc", "<LastBranch>")
 ifp.create_item("/_Misc/Tearoff", "<Tearoff>")
 ifp.create_item("/_Misc/Title", "<Title>")
 ifp.create_item("/_Misc/Seperator", "<Separator>")
-ifp.create_item("/_Misc/Image", "<ImageItem>", "", Gdk::Pixbuf.new("gnome-logo-icon.png")) do 
+ifp.create_item("/_Misc/Image", "<ImageItem>", "", GdkPixbuf::Pixbuf.new(:file => "gnome-logo-icon.png")) do 
   p "ImageItem"
 end
 
