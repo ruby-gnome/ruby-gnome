@@ -36,7 +36,7 @@ window.set_default_size(400, 300)
 
 NAME_COLUMN   = 0
 PIXBUF_COLUMN = 1
-store = Gtk::ListStore.new(String, Gdk::Pixbuf)
+store = Gtk::ListStore.new(String, GdkPixbuf::Pixbuf)
 theme = Gtk::IconTheme.default
 [
   "devhelp",
