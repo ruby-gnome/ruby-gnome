@@ -22,14 +22,12 @@ unless filename
   exit(1)
 end
 
-puts fileinfo = Gdk::Pixbuf.get_file_info(filename)[0]
+puts fileinfo = GdkPixbuf::Pixbuf.get_file_info(filename)[0]
 puts "name = #{fileinfo.name}"
 puts "description = #{fileinfo.description}"
 puts "mime_types = #{fileinfo.mime_types.inspect}"
 puts "extensions = #{fileinfo.extensions.inspect}"
 puts "writable = #{fileinfo.writable?}"
-puts "domain = #{fileinfo.domain}"
-puts "signature = #{fileinfo.signature.inspect}"
 
 if Gtk.check_version?(2, 6, 0)
   puts "Since 2.6 --- "
