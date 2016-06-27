@@ -16,7 +16,7 @@ w.signal_connect('delete-event') do
 end
 
 box = Gtk::VBox.new
-src =  Gdk::PixbufAnimation.new(File.join(__dir__, "floppybuddy.gif"))
+src =  GdkPixbuf::PixbufAnimation.new(File.join(__dir__, "floppybuddy.gif"))
 box.pack_start(Gtk::Image.new(src))
 p src.width
 p src.height
