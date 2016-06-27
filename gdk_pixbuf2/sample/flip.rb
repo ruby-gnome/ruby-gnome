@@ -25,7 +25,7 @@ end
 
 vbox = Gtk::VBox.new
 
-src =  Gdk::Pixbuf.new(filename)
+src =  GdkPixbuf::Pixbuf.new(:file => filename)
 vbox.add(Gtk::Image.new(src))
 
 # Horizontal
