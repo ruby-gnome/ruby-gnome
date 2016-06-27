@@ -25,13 +25,13 @@ end
 
 vbox = Gtk::VBox.new
 
-src =  Gdk::Pixbuf.new(filename)
+src =  GdkPixbuf::Pixbuf.new(:file => filename)
 vbox.add(Gtk::Image.new(src))
 
-dst = src.rotate(Gdk::Pixbuf::ROTATE_COUNTERCLOCKWISE)
+dst = src.rotate(:counterclockwise)
 vbox.add(Gtk::Image.new(dst))
 
-dst2 = src.rotate(Gdk::Pixbuf::ROTATE_UPSIDEDOWN)
+dst2 = src.rotate(:upsidedown)
 vbox.add(Gtk::Image.new(dst2))
 
 window = Gtk::Window.new
