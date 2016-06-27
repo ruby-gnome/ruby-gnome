@@ -16,22 +16,30 @@ unless filename
   exit(1)
 end
 
-src =  Gdk::Pixbuf.new(filename)
+src =  GdkPixbuf::Pixbuf.new(:file => filename)
 
 vbox = Gtk::VBox.new
 
-dst = src.composite(100, 100, Gdk::Pixbuf::INTERP_HYPER,
+dst = src.composite_color_simple(100, 100, :hyper,
 		200, 32, 0xFF0000, 0x00FF00)
 vbox.pack_start(Gtk::Image.new(dst))
 
-dst = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB, true, 8, 200, 200)
+dst = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
+                            :has_alpha => true,
+                            :bits_per_sample => 8,
+                            :width =>200,
+                            :height => 200)
 dst.composite!(src, 0, 0, 200, 200, 0, 0, 1.8, 1.8,
-              Gdk::Pixbuf::INTERP_HYPER, 200)
+              :hyper, 200)
 vbox.pack_start(Gtk::Image.new(dst))
 
-dst = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB, true, 8, 200, 200)
-dst.composite!(src, 10, 10, 180, 180, 15, 15, 3, 2, 
-              Gdk::Pixbuf::INTERP_BILINEAR, 200, 100, 100, 16, 
+dst = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
+                            :has_alpha => true,
+                            :bits_per_sample => 8,
+                            :width =>200,
+                            :height => 200)
+src.composite_color(dst, 10, 10, 180, 180, 15, 15, 3, 2,
+              :bilinear, 200, 100, 100, 16,
               0x999999, 0xdddddd)
 vbox.pack_start(Gtk::Image.new(dst))
 
