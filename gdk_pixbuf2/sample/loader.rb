@@ -9,7 +9,7 @@
 =end
 require 'gtk2'
 
-loader = Gdk::PixbufLoader.new
+loader = GdkPixbuf::PixbufLoader.new
 File.open(File.join(__dir__, "gnome-foot.png"), "rb") { |f|
   loader.last_write(f.read)
 }
