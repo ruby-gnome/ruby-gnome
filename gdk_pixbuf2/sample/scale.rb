@@ -2,7 +2,7 @@
 =begin
   scale.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2016 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: scale.rb,v 1.10 2006/06/17 14:38:08 mutoh Exp $
