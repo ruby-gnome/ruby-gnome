@@ -2,7 +2,7 @@
 =begin
   loader.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2003,2006: Ruby-GNOME2 Project Team
+  Copyright (c) 2003-2016: Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: loader.rb,v 1.3 2006/06/17 14:38:08 mutoh Exp $
