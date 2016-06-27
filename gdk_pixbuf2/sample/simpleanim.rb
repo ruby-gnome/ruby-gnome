@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 =begin
   simpleanim.rb - Ruby/GdkPixbuf sample script for Gdk::PixbufSimpleAnim.
-  
+
   Inspired by http://mail.gnome.org/archives/gtk-perl-list/2005-September/msg00110.html
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2016 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: simpleanim.rb,v 1.2 2006/06/17 14:38:08 mutoh Exp $
