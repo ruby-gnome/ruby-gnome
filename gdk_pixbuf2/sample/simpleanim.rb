@@ -14,13 +14,19 @@ require 'gtk2'
 
 $stdout.sync = true
 
-simple_anim = Gdk::PixbufSimpleAnim.new(64, 64, 24)
+simple_anim = GdkPixbuf::PixbufSimpleAnim.new(64, 64, 24)
 store_pixels = []
 
 print 'generating frames'
 for red in 0 .. 126
     store_pixels << pixels = ([ 4*(63-red).abs, 0, 0 ] * (64*64)).pack('C*')
-    pixbuf = Gdk::Pixbuf.new(pixels, Gdk::Pixbuf::COLORSPACE_RGB, false, 8, 64, 64, 64*3)
+    pixbuf = GdkPixbuf::Pixbuf.new(:data => pixels,
+                                   :colorspace => :rgb,
+                                   :has_alpha =>false,
+                                   :bits_per_sample => 8,
+                                   :width => 64,
+                                   :height => 64,
+                                   :row_stride => 64*3)
     simple_anim.add_frame(pixbuf)
     print '.'
 end
