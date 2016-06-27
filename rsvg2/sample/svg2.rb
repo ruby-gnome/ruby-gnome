@@ -38,7 +38,7 @@ def to_pixbuf_with_cairo(input, ratio)
   temp = Tempfile.new("svg2")
   cr.target.write_to_png(temp.path)
   cr.target.finish
-  Gdk::Pixbuf.new(temp.path)
+  GdkPixbuf::Pixbuf.new(:file => temp.path)
 end
 
 def to_pixbuf(input, ratio)
