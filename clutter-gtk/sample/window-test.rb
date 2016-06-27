@@ -36,7 +36,7 @@ window.set_default_size(400, 300)
 
 NAME_COLUMN   = 0
 PIXBUF_COLUMN = 1
-store = Gtk::ListStore.new(String, Gdk::Pixbuf)
+store = Gtk::ListStore.new(String, GdkPixbuf::Pixbuf)
 theme = Gtk::IconTheme.default
 [
   "devhelp",
@@ -53,7 +53,7 @@ theme = Gtk::IconTheme.default
   iter[1] = pixbuf
 end
 
-icon_view = Gtk::IconView.new(store)
+icon_view = Gtk::IconView.new(:model => store)
 icon_view.text_column = NAME_COLUMN
 icon_view.pixbuf_column = PIXBUF_COLUMN
 

@@ -34,7 +34,7 @@ RADIUS        = 150
 fade_p        = false
 fullscreen_p  = false
 
-pixbuf = Gdk::Pixbuf.new(File.expand_path("redhand.png", File.dirname(__FILE__)))
+pixbuf = GdkPixbuf::Pixbuf.new(:file => File.expand_path("redhand.png", File.dirname(__FILE__)))
 
 window = Gtk::Window.new
 window.set_default_size(WINDOW_WIDTH, WINDOW_HEIGHT)
