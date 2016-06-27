@@ -31,8 +31,8 @@ w.signal_connect('delete-event') do
   Gtk.main_quit
 end
 
-src =  Gdk::Pixbuf.new(r_xpm)
-dst = src.scale(300, 300, Gdk::Pixbuf::INTERP_HYPER)
+src =  GdkPixbuf::Pixbuf.new(:xpm => r_xpm)
+dst = src.scale(300, 300, :hyper)
 
 w.add(Gtk::Image.new(dst))
 w.show_all
