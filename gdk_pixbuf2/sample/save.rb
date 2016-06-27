@@ -17,9 +17,9 @@ if ! from or ! to
   exit(1)
 end
 
-src =  Gdk::Pixbuf.new(from)
+src =  GdkPixbuf::Pixbuf.new(from)
 
-dst = src.scale(300, 300, Gdk::Pixbuf::INTERP_HYPER)
+dst = src.scale(300, 300, :hyper)
 # This doesn't work ....
 #dst.save(to, "jpeg", {:quality => 100})
 dst.save(to, "png")
