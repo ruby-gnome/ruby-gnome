@@ -2,7 +2,7 @@
 =begin
   rotate.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2005,2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2005-2016 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: rotate.rb,v 1.3 2006/06/17 14:38:08 mutoh Exp $
@@ -25,13 +25,13 @@ end
 
 vbox = Gtk::VBox.new
 
-src =  Gdk::Pixbuf.new(filename)
+src =  GdkPixbuf::Pixbuf.new(:file => filename)
 vbox.add(Gtk::Image.new(src))
 
-dst = src.rotate(Gdk::Pixbuf::ROTATE_COUNTERCLOCKWISE)
+dst = src.rotate(:counterclockwise)
 vbox.add(Gtk::Image.new(dst))
 
-dst2 = src.rotate(Gdk::Pixbuf::ROTATE_UPSIDEDOWN)
+dst2 = src.rotate(:upsidedown)
 vbox.add(Gtk::Image.new(dst2))
 
 window = Gtk::Window.new
