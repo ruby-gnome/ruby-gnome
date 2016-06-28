@@ -2,7 +2,7 @@
 =begin
   anim.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2016 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: anim.rb,v 1.5 2006/06/17 14:38:08 mutoh Exp $
@@ -16,7 +16,7 @@ w.signal_connect('delete-event') do
 end
 
 box = Gtk::VBox.new
-src =  Gdk::PixbufAnimation.new(File.join(__dir__, "floppybuddy.gif"))
+src =  GdkPixbuf::PixbufAnimation.new(File.join(__dir__, "floppybuddy.gif"))
 box.pack_start(Gtk::Image.new(src))
 p src.width
 p src.height
