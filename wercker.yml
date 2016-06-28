@@ -1,0 +1,58 @@
+box: centos:centos7
+no-response-timeout: 10
+build:
+  steps:
+    - script:
+        name: Install libraries
+        code: |
+          yum update -y
+          yum install -y \
+            which \
+            gir-repository-devel \
+            gstreamer1-plugins-good \
+            clutter-devel \
+            clutter-gst2-devel \
+            clutter-gtk-devel \
+            gtksourceview3-devel \
+            vte3-devel \
+            webkitgtk3-devel \
+            libgsf-devel \
+            goffice-devel \
+            gnome-icon-theme \
+            dbus-x11 \
+            xorg-x11-server-Xvfb
+
+    - script:
+        name: Install rvm
+        code: |
+          curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+          curl -L get.rvm.io | bash -s stable
+    - script:
+        name: Install Ruby 2.2.0
+        code: |
+          source /etc/profile.d/rvm.sh
+          rvm install 2.2.0
+          rvm use 2.2.0 --default
+
+    - script:
+        name: Install bundler
+        code: |
+          source /etc/profile.d/rvm.sh
+          gem install bundler
+    - script:
+        name: Install git
+        code: yum install -y git
+
+    - script:
+        name: Clone Ruby-GNOME2 repository
+        code: |
+          git clone https://github.com/ruby-gnome2/ruby-gnome2.git
+
+    - script:
+        name: Run tests
+        code: |
+          source /etc/profile.d/rvm.sh
+          cd ruby-gnome2
+          bundle exec ruby extconf.rb
+          make -j3
+          DISPLAY=:99 xvfb-run bundle exec ruby run-test.rb
