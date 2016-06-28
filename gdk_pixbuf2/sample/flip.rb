@@ -2,7 +2,7 @@
 =begin
   flip.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2005,2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2005-2016 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: flip.rb,v 1.3 2006/06/17 14:38:08 mutoh Exp $
@@ -25,7 +25,7 @@ end
 
 vbox = Gtk::VBox.new
 
-src =  Gdk::Pixbuf.new(filename)
+src =  GdkPixbuf::Pixbuf.new(:file => filename)
 vbox.add(Gtk::Image.new(src))
 
 # Horizontal
