@@ -2,7 +2,7 @@
 =begin
   save.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2016 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: save.rb,v 1.5 2006/06/17 14:38:08 mutoh Exp $
@@ -17,9 +17,9 @@ if ! from or ! to
   exit(1)
 end
 
-src =  Gdk::Pixbuf.new(from)
+src =  GdkPixbuf::Pixbuf.new(from)
 
-dst = src.scale(300, 300, Gdk::Pixbuf::INTERP_HYPER)
+dst = src.scale(300, 300, :hyper)
 # This doesn't work ....
 #dst.save(to, "jpeg", {:quality => 100})
 dst.save(to, "png")
