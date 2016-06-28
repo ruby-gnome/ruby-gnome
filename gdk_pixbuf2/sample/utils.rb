@@ -2,7 +2,7 @@
 =begin
   utils.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2016 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: utils.rb,v 1.4 2006/06/17 14:38:08 mutoh Exp $
@@ -16,15 +16,18 @@ unless filename
   exit(1)
 end
 
-src =  Gdk::Pixbuf.new(filename)
+src =  GdkPixbuf::Pixbuf.new(:file => filename)
 
 vbox = Gtk::VBox.new
 
 dst = src.add_alpha(true, 0, 0, 0)
 vbox.pack_start(Gtk::Image.new(dst))
 
-dst = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB, true, 8, 
-                      src.width + 20, src.height + 30)
+dst = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
+                            :has_alpha => true,
+                            :bits_per_sample => 8, 
+                            :width => src.width + 20,
+                            :height => src.height + 30)
 src.copy_area(0, 0, src.width / 2, src.height / 2, dst, 10, 20)
 vbox.pack_start(Gtk::Image.new(dst))
 
