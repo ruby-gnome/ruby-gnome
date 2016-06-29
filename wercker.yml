@@ -53,6 +53,7 @@ build:
         code: |
           source /etc/profile.d/rvm.sh
           cd ruby-gnome2
+          bundle install
           bundle exec ruby extconf.rb
           make -j3
           DISPLAY=:99 xvfb-run bundle exec ruby run-test.rb
