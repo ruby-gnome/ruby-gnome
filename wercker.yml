@@ -27,6 +27,7 @@ build:
         code: |
           curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
           curl -L get.rvm.io | bash -s stable
+
     - script:
         name: Install Ruby 2.2.0
         code: |
@@ -39,6 +40,7 @@ build:
         code: |
           source /etc/profile.d/rvm.sh
           gem install bundler
+
     - script:
         name: Install git
         code: yum install -y git
