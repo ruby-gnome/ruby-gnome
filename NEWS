@@ -236,28 +236,28 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
   * Fixes
     * remove needless lazy load.
 
-==== RUBY/GTK2
+==== Ruby/GTK2
 
   * Improvements
   * Fixes
     * use ({{GdkPixbuf::Pixbuf}}) form in library, test and sample files.
       [patch by cedlemo]
 
-==== RUBY/RSVG2
+==== Ruby/RSVG2
 
   * Improvements
   * Fixes
     * use ({{GdkPixbuf::Pixbuf}}) form in library, test and sample files.
       [patch by cedlemo]
 
-==== RUBY/Clutter
+==== Ruby/Clutter
 
   * Improvements
   * Fixes
     * use ({{GdkPixbuf::Pixbuf}}) form in library, test and sample files.
       [patch by cedlemo]
 
-==== RUBY/ClutterGtk
+==== Ruby/ClutterGtk
 
   * Improvements
   * Fixes
