@@ -3,15 +3,18 @@
 = NEWS
 
 == Ruby-GNOME2 3.0.9: 2016-06-03
+
 ??? TODO
 Adapt demos and scripts to Gtk 3.20 changes.
 Add GSF module.
 Add GOffice module.
 Add Gnumeric module.
 Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntrospection.
+
 === Changes
 
 ==== All
+
   * Update Realease date in NEWS.
   * Use the latest Rubies.
   * Readme: update ruby versions supported.
@@ -20,11 +23,15 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
     [patch by Hiroshi Hatake]
   * add GSF, GOffice and Gnumeric in the main Rakefile.
     [patch by cedlemo]
+
 ==== Ruby/GIO2
+
   * Improvements
   * Fixes
     * remove needless lazy initialization
+
 ==== Ruby/GLIB2
+
   * Improvements
     * support for GLib 2.30 on CentOS 6
       [ruby-list:50310][5.5]
@@ -48,7 +55,9 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
     * Ruby 2.1 or later has ({{rb_str_new_cstr}})
     * set UTF-8 encoding to ({{GLIB.XXX_to_utf8}}) return value.
     * remove unused variables in rbglib_convert.c.
+
 ==== Ruby/GStreamer
+
   * Improvements
   * Fixes
     * windows: improve rake file.
@@ -57,7 +66,9 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       * specify x86_64 as arch for 64bit Windows.
       * stop splitting g-ir-compiler args by default.
       * fix typo.
+
 ==== Ruby/Poppler
+
   * Improvements
   * Fixes
     * windows: improve rake file.
@@ -67,7 +78,9 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       [patch by YAMAMOTO Masayuki]
     * use ({{GdkPixbuf::Pixbuf}}) form in sample files.
       [patch by cedlemo]
+
 ==== Ruby/GObjectIntrospection
+
   * Improvements
     * support dispatching by Flags and Enums.
       [GitHub#745][Reported by Mamoru TASAKA]
@@ -85,7 +98,9 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
     * fix a bug that int32[] returns wrong values.
       [GitHub#758][reported by TASAKA]
     * don't return array length output argument for return value.
+
 ==== Ruby/GDK3
+
   * Improvements
   * Fixes
     * windows:
@@ -93,7 +108,9 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
         [GitHub#750][Abby Archer]
     * use ({{GdkPixbuf::Pixbuf}}) form in gdk3 library and test files.
       [patch by cedlemo]
+
 ==== Ruby/GTK3
+
   * Improvements
     * update gtk-demo textscroll.
       [patch by cedlemo]
@@ -142,7 +159,9 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       [patch by cedlemo]
     * use ({{GdkPixbuf::Pixbuf}}) form in test files.
       [patch by cedlemo]
+
 ==== Ruby/Pango
+
   * Improvements
     * add tests for ({{Pango::Context}}).
       [patch by cedlemo]
@@ -155,12 +174,16 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       [patch by cedlemo]
     * fix a bug that ({{Pango#GlyphGeometry#geometry=}}) does nothing.
     * fix GC related problem in rbpangocontext.c.
+
 ==== Ruby/GSF
+
   * Improvements
     * start GSF module.
       [patch by cedlemo]
   * Fixes
+
 ==== Ruby/GOffice
+
   * Improvements
     * start GOffice module.
       [patch by cedlemo]
@@ -170,7 +193,9 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       [patch by cedlemo]
     * add rules in order to fix issues when building objects
       [patch by cedlemo]
+
 ==== Ruby/Gnumeric
+
   * Improvements
     * start Gnumeric module.
       [patch by cedlemo]
@@ -182,6 +207,7 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       [patch by cedlemo]
     * travis : add gnumeric as package to install instead of relying on dep.
       [patch by cedlemo]
+
 ==== Ruby/GdkPixbuf2
   * Improvements
     * replace C implementation with one based on GObject-Introspection.
@@ -203,33 +229,45 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       [patch by cedlemo]
     * update and fix issues in the samples.
       [patch by cedlemo]
+
 ==== Ruby/VTE3
+
   * Improvements
   * Fixes
     * remove needless lazy load.
+
 ==== RUBY/GTK2
+
   * Improvements
   * Fixes
     * use ({{GdkPixbuf::Pixbuf}}) form in library, test and sample files.
       [patch by cedlemo]
+
 ==== RUBY/RSVG2
+
   * Improvements
   * Fixes
     * use ({{GdkPixbuf::Pixbuf}}) form in library, test and sample files.
       [patch by cedlemo]
+
 ==== RUBY/Clutter
+
   * Improvements
   * Fixes
     * use ({{GdkPixbuf::Pixbuf}}) form in library, test and sample files.
       [patch by cedlemo]
+
 ==== RUBY/ClutterGtk
+
   * Improvements
   * Fixes
     * use ({{GdkPixbuf::Pixbuf}}) form in library, test and sample files.
       [patch by cedlemo]
     * Fix issue with initialization of ({{Gtk::IconView}}) without hash argument.
       [patch by cedlemo]
+
 === Thanks
+
   * Mamoru TASAKA
   * rafagf1
   * 5.5
@@ -241,7 +279,6 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
   * tSU_RooT
   * YAMAMOTO Masayuki
   * cedlemo
-
 
 == Ruby-GNOME2 3.0.8: 2016-04-03
 
