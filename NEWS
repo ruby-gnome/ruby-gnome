@@ -2,6 +2,247 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.0.9: 2016-06-03
+??? TODO
+Adapt demos and scripts to Gtk 3.20 changes.
+Add GSF module.
+Add GOffice module.
+Add Gnumeric module.
+Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntrospection.
+=== Changes
+
+==== All
+  * Update Realease date in NEWS.
+  * Use the latest Rubies.
+  * Readme: update ruby versions supported.
+    [Patch by cedlemo]
+  * travis: install experimental gems dependent packages for GSF and GOffice.
+    [patch by Hiroshi Hatake]
+  * add GSF, GOffice and Gnumeric in the main Rakefile.
+    [patch by cedlemo]
+==== Ruby/GIO2
+  * Improvements
+  * Fixes
+    * remove needless lazy initialization
+==== Ruby/GLIB2
+  * Improvements
+    * support for GLib 2.30 on CentOS 6
+      [ruby-list:50310][5.5]
+      [ruby-list:50316][5.5]
+    * add GLib 2.30 check.
+    * add GLib 2.34 check.
+    * support customizing signal callback.
+  * Fixes
+    * windows: improve rake.
+      * split g-ir-compiler args.
+      * add debug option as comment.
+      * fix wrong define location.
+      * use predicate style.
+    * fix wrong function in rbglib-variant.c.
+    * bump version.
+    * use SPDX format for license.
+    * homebrew:
+      * add workaround for libffi.pc isn't found on OS X.
+      * enable libffi workaround for gi.
+    * remove checks for old Ruby.
+    * Ruby 2.1 or later has ({{rb_str_new_cstr}})
+    * set UTF-8 encoding to ({{GLIB.XXX_to_utf8}}) return value.
+    * remove unused variables in rbglib_convert.c.
+==== Ruby/GStreamer
+  * Improvements
+  * Fixes
+    * windows: improve rake file.
+      * update patches.
+      * follow file name change.
+      * specify x86_64 as arch for 64bit Windows.
+      * stop splitting g-ir-compiler args by default.
+      * fix typo.
+==== Ruby/Poppler
+  * Improvements
+  * Fixes
+    * windows: improve rake file.
+      * use https.
+    * add missing Makefile existence check.
+    * segmentation fault in ({{Poppler::Page#text_layout}})
+      [patch by YAMAMOTO Masayuki]
+    * use ({{GdkPixbuf::Pixbuf}}) form in sample files.
+      [patch by cedlemo]
+==== Ruby/GObjectIntrospection
+  * Improvements
+    * support dispatching by Flags and Enums.
+      [GitHub#745][Reported by Mamoru TASAKA]
+    * cache results of methods of ({{GI::CallableInfo}}).
+      [GitHub#749][Reported by rafagf1]
+    * cache collection reader result.
+      [GitHub#749][Reported by rafagf1]
+    * reduce needless function call.
+      [GitHub#749][Reported by rafagf1]
+    * cache ({{GI::AgInfo#gclosure?}}).
+    * add ({{GI::Loader#rubyish_class_name}}).
+      [patch by cedlemo]
+ * Fixes
+    * fix a typo in loader.rb.
+    * fix a bug that int32[] returns wrong values.
+      [GitHub#758][reported by TASAKA]
+    * don't return array length output argument for return value.
+==== Ruby/GDK3
+  * Improvements
+  * Fixes
+    * windows:
+      * support symbolic icons.
+        [GitHub#750][Abby Archer]
+    * use ({{GdkPixbuf::Pixbuf}}) form in gdk3 library and test files.
+      [patch by cedlemo]
+==== Ruby/GTK3
+  * Improvements
+    * update gtk-demo textscroll.
+      [patch by cedlemo]
+    * update gtk-demo data files to Gtk 3.20.
+      [patch by cedlemo]
+    * cache ({{Gtk::TreeModel#get_column_type}}).
+      [GitHub#749][Reported by rafagf1]
+    * update gtk-demo main.rb to Gtk 3.20.
+      [patch by cedlemo]
+    * update theming_style_classes gtk demo to 3.20.
+      [patch by cedlemo]
+    * update assistant gtk demo to 3.20.
+      [patch by cedlemo]
+    * update css related gtk demos to 3.20.
+      [patch by cedlemo]
+    * update markup gtk demo to 3.20.
+      [patch by cedlemo]
+    * update font-features demo to 3.20.
+      [patch by cedlemo]
+    * make ({{Gtk::TreeView#expand_row}}) rubyish.
+    * support "row-collapsed" and "row-expanded" signals for ({{Gtk::TreeView}}).
+      [GitHub#762][Reported Eric Cunningham]
+    * update misc sample bindings.rb to Gtk 3.20.
+      [patch by cedlemo]
+    * update rotated text gtk demo.
+      [patch by cedlemo]
+    * update pixbufs gtk demo.
+      [patch by cedlemo]
+  * Fixes
+    * guard text marks from GC.
+      [GitHub#743][Reported by cedlemo]
+    * fix a bug that GC-ed ({{Gtk::TextTag}}) may be reused.
+    * relax condition in test for ({{Gtk::ListStore}}).
+    * use GTK+ version check in test for ({{Gtk::Image}}).
+    * fix issue in the gtk3 tutorial.
+      [patch from Renich Bon Ciric]
+    * follow ({{Gtk::TextBuffer#select_bounds}}) API change.
+      [GitHub#794][Reported by Miguel Hernandez]
+    * ({{Gtk::TextView#get_iter_at*}}) return nil when not found.
+      [GitHub#794][Reported by Miguel Hernandez]
+    * fix typo at gtk-demo
+      [patch by tSU_RooT]
+    * use ({{GdkPixbuf::Pixbuf}}) form in gtk-demo files.
+      [patch by cedlemo]
+    * use ({{GdkPixbuf::Pixbuf}}) form in sample misc files.
+      [patch by cedlemo]
+    * use ({{GdkPixbuf::Pixbuf}}) form in test files.
+      [patch by cedlemo]
+==== Ruby/Pango
+  * Improvements
+    * add tests for ({{Pango::Context}}).
+      [patch by cedlemo]
+    * improve tests for ({{Pango::Context}}).
+    * implement ({{Pango::Context#set_chape_renderer}}).
+    * add ({{Pango::AttrShape#data}}).
+      [GitHub#766][Reported by cedlemo]
+  * Fixes
+    * fix error with MACRO usage in rbpangoattrlist.c
+      [patch by cedlemo]
+    * fix a bug that ({{Pango#GlyphGeometry#geometry=}}) does nothing.
+    * fix GC related problem in rbpangocontext.c.
+==== Ruby/GSF
+  * Improvements
+    * start GSF module.
+      [patch by cedlemo]
+  * Fixes
+==== Ruby/GOffice
+  * Improvements
+    * start GOffice module.
+      [patch by cedlemo]
+  * Fixes
+    * add tests for GOffice.
+    * use ({{GI::Loader#rubyish_class_nme}}) in loader.rb.
+      [patch by cedlemo]
+    * add rules in order to fix issues when building objects
+      [patch by cedlemo]
+==== Ruby/Gnumeric
+  * Improvements
+    * start Gnumeric module.
+      [patch by cedlemo]
+  * Fixes
+    * add missing dependency in run-test.rb.
+    * use ({{GI::Loader#rubyish_class_nme}}) in loader.rb.
+      [patch by cedlemo]
+    * add rules in order to fix issues when building objects
+      [patch by cedlemo]
+    * travis : add gnumeric as package to install instead of relying on dep.
+      [patch by cedlemo]
+==== Ruby/GdkPixbuf2
+  * Improvements
+    * replace C implementation with one based on GObject-Introspection.
+      [patch by cedlemo]
+    * implement backward compatibility for ({{GdkPixbuf#Pixbuf.new}}).
+      [patch by cedlemo]
+    * add rubyish methods
+    * add ({{GdkPixbuf::Pixbuf#composite!}})
+  * Fixes
+    * remove needless lazy initialization.
+    * improve tests.
+    * add deprecated message for backward compatibility.
+    * add tests for ({{GdkPixbuf#Pixbuf#new}}).
+      [patch by cedlemo]
+    * add tests for ({{GdkPixbuf#Pixbuf#dup}}) and ({{GdkPixbuf#Pixbuf#fill!}}).
+      [patch by cedlemo]
+    * ignore no-gi version of gdk_pixbuf2 in run-test.rb and extconf.rb.
+    * add tests for ({{GdkPixbuf#Pixbuf#rotate}}) and ({{GdkPixbuf#Pixbuf#new}}).
+      [patch by cedlemo]
+    * update and fix issues in the samples.
+      [patch by cedlemo]
+==== Ruby/VTE3
+  * Improvements
+  * Fixes
+    * remove needless lazy load.
+==== RUBY/GTK2
+  * Improvements
+  * Fixes
+    * use ({{GdkPixbuf::Pixbuf}}) form in library, test and sample files.
+      [patch by cedlemo]
+==== RUBY/RSVG2
+  * Improvements
+  * Fixes
+    * use ({{GdkPixbuf::Pixbuf}}) form in library, test and sample files.
+      [patch by cedlemo]
+==== RUBY/Clutter
+  * Improvements
+  * Fixes
+    * use ({{GdkPixbuf::Pixbuf}}) form in library, test and sample files.
+      [patch by cedlemo]
+==== RUBY/ClutterGtk
+  * Improvements
+  * Fixes
+    * use ({{GdkPixbuf::Pixbuf}}) form in library, test and sample files.
+      [patch by cedlemo]
+    * Fix issue with initialization of ({{Gtk::IconView}}) without hash argument.
+      [patch by cedlemo]
+=== Thanks
+  * Mamoru TASAKA
+  * rafagf1
+  * 5.5
+  * Abby Archer
+  * Eric Cunningham
+  * Hiroshi Hatake
+  * Renich Bon Ciric
+  * Miguel Hernandez
+  * tSU_RooT
+  * YAMAMOTO Masayuki
+  * cedlemo
+
+
 == Ruby-GNOME2 3.0.8: 2016-04-03
 
 It's a release that improves GTK+ 3 support.
