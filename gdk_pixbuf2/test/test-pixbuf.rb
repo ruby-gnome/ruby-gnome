@@ -265,4 +265,69 @@ class TestPixbuf < Test::Unit::TestCase
     inverted_twice_pixbuf = inverted_pixbuf.rotate(:upsidedown)
     assert_equal(pixbuf.pixels, inverted_twice_pixbuf.pixels)
   end
+
+  sub_test_case("saturate_and_pixelate") do
+    # Based on the function gdk_pixbuf_saturate_and_pixelate
+    # in gdk-pixbuf-util.c
+    def saturate_and_pixelate_pixels(pixbuf, saturation, pixelate)
+      alpha = pixbuf.has_alpha?
+      width = pixbuf.width
+      height = pixbuf.height
+      pixels = pixbuf.pixels
+      dest_pix = []
+      dark_factor = 0.7
+      height.times do |i|
+        width.times do |k|
+          j =((i ) * width + k) * 4
+          intens = intensity(pixels[j + 0], pixels[j + 1], pixels[j + 2])
+          if pixelate == true && ( (i + k) % 2 == 0)
+            dest_pix << (intens / 2 + 127).floor
+            dest_pix << (intens / 2 + 127).floor
+            dest_pix << (intens / 2 + 127).floor
+          elsif pixelate == true
+            dest_pix << clamp_uchar(saturate(pixels[j + 0],
+                                    saturation, intens) * dark_factor).floor
+            dest_pix << clamp_uchar(saturate(pixels[j + 1],
+                                    saturation, intens) * dark_factor).floor
+            dest_pix << clamp_uchar(saturate(pixels[j + 2],
+                                    saturation, intens) * dark_factor).floor
+          else
+            dest_pix << clamp_uchar(saturate(pixels[j + 0], saturation, intens)).floor
+            dest_pix << clamp_uchar(saturate(pixels[j + 1], saturation, intens)).floor
+            dest_pix << clamp_uchar(saturate(pixels[j + 2], saturation, intens)).floor
+          end
+          dest_pix << pixels[j + 3] if alpha
+        end
+      end
+      dest_pix
+    end
+
+    def saturate(value, saturation, intensity)
+      (1.0 - saturation) * intensity + saturation * (1.0 * value)
+    end
+
+    def clamp_uchar(x)
+      [0, x, 255].sort[1]
+    end
+
+    def intensity(r, g, b)
+      (r * 0.30 + g * 0.59 + b * 0.11).floor
+    end
+
+    test "no modifications" do
+      src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+      pixbuf = src_pixbuf.saturate_and_pixelate(1, false)
+      assert_equal(src_pixbuf.pixels, pixbuf.pixels)
+    end
+
+    test "normal usage" do
+      src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+      pixbuf = src_pixbuf.saturate_and_pixelate(0, true)
+      ref = saturate_and_pixelate_pixels(src_pixbuf, 0, true)
+      assert_equal(ref, pixbuf.pixels, ref.size)
+      pixbuf = src_pixbuf.saturate_and_pixelate(0.5, true)
+      ref = saturate_and_pixelate_pixels(src_pixbuf, 0.5, true)
+      assert_equal(ref, pixbuf.pixels)
+    end
+  end
 end
