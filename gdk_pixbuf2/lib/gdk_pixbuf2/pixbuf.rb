@@ -169,7 +169,6 @@ module GdkPixbuf
       rotate_simple(angle)
     end
 
-    # TODO: test
     alias_method :saturate_and_pixelate_raw, :saturate_and_pixelate
     def saturate_and_pixelate(saturation, pixelate)
       dest = dup
