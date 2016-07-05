@@ -24,9 +24,7 @@
 
 #include <glib-object.h>
 #include "ruby.h"
-#ifdef HAVE_RUBY_ENCODING_H
-#  include <ruby/encoding.h>
-#endif
+#include <ruby/encoding.h>
 #include "rbglib.h"
 #include "rbgutil_list.h"
 #include "rbgutildeprecated.h"

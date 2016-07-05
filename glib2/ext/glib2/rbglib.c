@@ -34,10 +34,8 @@ rbg_rval2cstr(VALUE *str)
 {
     StringValue(*str);
 
-#ifdef HAVE_RUBY_ENCODING_H
     if (rb_enc_get(*str) != rb_utf8_encoding())
         *str = rb_str_export_to_enc(*str, rb_utf8_encoding());
-#endif
 
     return StringValueCStr(*str);
 }
@@ -142,11 +140,7 @@ rbg_cstr2rval_len(const gchar *str, gsize len)
     if (str == NULL)
         return Qnil;
 
-#ifdef HAVE_RUBY_ENCODING_H
     return rb_external_str_new_with_enc(str, len, rb_utf8_encoding());
-#else
-    return rb_str_new(str, len);
-#endif
 }
 
 struct rbg_cstr2rval_len_free_args {
@@ -185,7 +179,6 @@ rbg_cstr2rval_with_encoding(const gchar *str, const gchar *encoding)
     return str != NULL ? CSTR2RVAL_LEN_ENC(str, strlen(str), encoding) : Qnil;
 }
 
-#ifdef HAVE_RUBY_ENCODING_H
 VALUE
 rbg_cstr2rval_len_with_encoding(const gchar *str, gsize len,
                                 const gchar *encoding)
@@ -198,17 +191,6 @@ rbg_cstr2rval_len_with_encoding(const gchar *str, gsize len,
                                             rb_enc_find(encoding) :
                                             rb_utf8_encoding());
 }
-#else
-VALUE
-rbg_cstr2rval_len_with_encoding(const gchar *str, gsize len,
-                                G_GNUC_UNUSED const gchar *encoding)
-{
-    if (str == NULL)
-        return Qnil;
-
-    return rb_str_new(str, len);
-}
-#endif
 
 static VALUE
 rbg_cstr2rval_free_body(VALUE str)
@@ -238,11 +220,8 @@ rbg_cstr2rval_with_free(gchar *str)
     return rbg_cstr2rval_free(str);
 }
 
-#ifdef HAVE_RUBY_ENCODING_H
 static rb_encoding *filename_encoding_if_not_utf8;
-#endif
 
-#ifdef HAVE_RUBY_ENCODING_H
 static VALUE
 rbg_filename_to_ruby_body(VALUE filename)
 {
@@ -267,12 +246,10 @@ rbg_filename_to_ruby_ensure(VALUE filename)
 
     return Qnil;
 }
-#endif
 
 VALUE
 rbg_filename_to_ruby(const gchar *filename)
 {
-#ifdef HAVE_RUBY_ENCODING_H
     gchar *filename_utf8;
     gsize written;
     GError *error = NULL;
@@ -289,15 +266,11 @@ rbg_filename_to_ruby(const gchar *filename)
 
     return rb_ensure(rbg_filename_to_ruby_body, (VALUE)filename_utf8,
                      rbg_filename_to_ruby_ensure, (VALUE)filename_utf8);
-#else
-    return CSTR2RVAL(filename);
-#endif
 }
 
 VALUE
 rbg_filename_to_ruby_free(gchar *filename)
 {
-#ifdef HAVE_RUBY_ENCODING_H
     gchar *filename_utf8;
     gsize written;
 
@@ -318,15 +291,11 @@ rbg_filename_to_ruby_free(gchar *filename)
 
     return rb_ensure(rbg_filename_to_ruby_body, (VALUE)filename_utf8,
                      rbg_filename_to_ruby_ensure, (VALUE)filename_utf8);
-#else
-    return CSTR2RVAL_FREE(filename);
-#endif
 }
 
 gchar *
 rbg_filename_from_ruby(VALUE filename)
 {
-#ifdef HAVE_RUBY_ENCODING_H
     gchar *retval;
     gsize written;
     GError *error = NULL;
@@ -345,9 +314,6 @@ rbg_filename_from_ruby(VALUE filename)
         RAISE_GERROR(error);
 
     return retval;
-#else
-    return g_strdup(RVAL2CSTR(filename));
-#endif
 }
 
 struct rval2strv_args {
@@ -1013,9 +979,7 @@ extern void Init_glib2(void);
 void
 Init_glib2(void)
 {
-#ifdef HAVE_RUBY_ENCODING_H
     const gchar **filename_charsets;
-#endif
 
     id_inspect = rb_intern("inspect");
 
@@ -1096,7 +1060,6 @@ Init_glib2(void)
     rb_define_const(RG_TARGET_NAMESPACE, "SEARCHPATH_SEPARATOR", CSTR2RVAL(G_SEARCHPATH_SEPARATOR_S));
 
     /* discover and store glib filename encoding */
-#ifdef HAVE_RUBY_ENCODING_H
     if (g_get_filename_charsets(&filename_charsets)
         || filename_charsets == NULL
         || filename_charsets[0] == NULL
@@ -1108,7 +1071,6 @@ Init_glib2(void)
     } else {
         filename_encoding_if_not_utf8 = rb_enc_find(filename_charsets[0]);
     }
-#endif
 
 /* Don't implement them.
 #define     G_DIR_SEPARATOR_S
