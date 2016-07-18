@@ -1077,6 +1077,7 @@ rb_gi_argument_to_ruby_gslist(GIArgument *argument, GITypeInfo *type_info)
     case GI_TYPE_TAG_GHASH:
     case GI_TYPE_TAG_ERROR:
     case GI_TYPE_TAG_UNICHAR:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GSList)[%s] -> Ruby",
                  g_type_tag_to_string(element_type_tag));
