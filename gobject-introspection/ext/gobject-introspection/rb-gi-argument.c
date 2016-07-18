@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2016  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -947,8 +947,8 @@ rb_gi_argument_to_ruby_glist(GIArgument *argument, GITypeInfo *type_info)
 
 static VALUE
 rb_gi_argument_to_ruby_gslist_interface(GIArgument *argument,
-                                       G_GNUC_UNUSED GITypeInfo *type_info,
-                                       GITypeInfo *element_type_info)
+                                        G_GNUC_UNUSED GITypeInfo *type_info,
+                                        GITypeInfo *element_type_info)
 {
     VALUE rb_argument = Qnil;
     GIBaseInfo *interface_info;
@@ -1041,25 +1041,29 @@ rb_gi_argument_to_ruby_gslist(GIArgument *argument, GITypeInfo *type_info)
     case GI_TYPE_TAG_FLOAT:
     case GI_TYPE_TAG_DOUBLE:
     case GI_TYPE_TAG_GTYPE:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GSList)[%s] -> Ruby",
                  g_type_tag_to_string(element_type_tag));
         break;
     case GI_TYPE_TAG_UTF8:
+        g_base_info_unref(element_type_info);
         rb_argument = CSTRGSLIST2RVAL(argument->v_pointer);
         break;
     case GI_TYPE_TAG_FILENAME:
+        g_base_info_unref(element_type_info);
         rb_argument = FILENAMEGSLIST2RVAL(argument->v_pointer);
         break;
     case GI_TYPE_TAG_ARRAY:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GSList)[%s] -> Ruby",
                  g_type_tag_to_string(element_type_tag));
         break;
     case GI_TYPE_TAG_INTERFACE:
         rb_argument = rb_gi_argument_to_ruby_gslist_interface(argument,
-                                                             type_info,
-                                                             element_type_info);
+                                                              type_info,
+                                                              element_type_info);
         break;
     case GI_TYPE_TAG_GLIST:
     case GI_TYPE_TAG_GSLIST:
@@ -1071,7 +1075,7 @@ rb_gi_argument_to_ruby_gslist(GIArgument *argument, GITypeInfo *type_info)
                  g_type_tag_to_string(element_type_tag));
         break;
     default:
-    g_base_info_unref(element_type_info);
+        g_base_info_unref(element_type_info);
         g_assert_not_reached();
         break;
     }
