@@ -1034,6 +1034,7 @@ rb_gi_argument_to_ruby_gslist(GIArgument *argument, GITypeInfo *type_info)
 
     element_type_info = g_type_info_get_param_type(type_info, 0);
     element_type_tag = g_type_info_get_tag(element_type_info);
+
     switch (element_type_tag) {
     case GI_TYPE_TAG_VOID:
     case GI_TYPE_TAG_BOOLEAN:
