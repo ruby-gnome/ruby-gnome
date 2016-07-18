@@ -1010,7 +1010,7 @@ rb_gi_argument_to_ruby_gslist_interface(GIArgument *argument,
         g_base_info_unref(interface_info);
         g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(GList)[interface(%s)](%s) -> Ruby",
+                 "TODO: GIArgument(GSList)[interface(%s)](%s) -> Ruby",
                  interface_name,
                  g_type_name(gtype));
         break;
