@@ -965,6 +965,13 @@ rb_gi_argument_to_ruby_gslist_interface(GIArgument *argument,
     case GI_INFO_TYPE_INVALID:
     case GI_INFO_TYPE_FUNCTION:
     case GI_INFO_TYPE_CALLBACK:
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(GSList)[interface(%s)](%s) -> Ruby",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
     case GI_INFO_TYPE_STRUCT:
         if (gtype == G_TYPE_NONE) {
             GSList *node;
