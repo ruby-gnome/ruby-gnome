@@ -628,7 +628,7 @@ typedef struct {
 } RGBindPropertyCallbackData;
 
 static gboolean
-rg_bind_property_transform_to_callback(GBinding *binding, const GValue *from_value,
+rg_bind_property_transform_to_callback(G_GNUC_UNUSED GBinding *binding, const GValue *from_value,
                                        GValue *to_value, gpointer user_data)
 {
     VALUE rb_from_value = rbgobj_gvalue_to_rvalue(from_value);
@@ -646,7 +646,7 @@ rg_bind_property_transform_to_callback(GBinding *binding, const GValue *from_val
 }
 
 static gboolean
-rg_bind_property_transform_from_callback(GBinding *binding, const GValue *from_value,
+rg_bind_property_transform_from_callback(G_GNUC_UNUSED GBinding *binding, const GValue *from_value,
                                          GValue *to_value, gpointer user_data)
 {
     VALUE rb_from_value = rbgobj_gvalue_to_rvalue(from_value);
