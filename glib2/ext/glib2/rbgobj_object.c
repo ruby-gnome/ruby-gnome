@@ -692,39 +692,31 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
     target_property = RVAL2CSTR(rb_target_property);
     flags = RVAL2GBINDINGFLAGS(rb_flags);
 
-    if (argc == 4) {
+    if(NIL_P(rb_transform_to))
+        transform_to = NULL;
+    else
+        transform_to = rg_bind_property_transform_to_callback;
+
+    if(NIL_P(rb_transform_from))
+        transform_from = NULL;
+    else
+        transform_from = rg_bind_property_transform_from_callback;
+
+    if (!transform_to && !transform_from) {
         binding = g_object_bind_property(source, source_property,
                                          target, target_property,
                                          flags);
     } else {
-        if(NIL_P(rb_transform_to))
-            transform_to = NULL;
-        else
-            transform_to = rg_bind_property_transform_to_callback;
-
-        if(NIL_P(rb_transform_from))
-            transform_from = NULL;
-        else
-            transform_from = rg_bind_property_transform_from_callback;
-
-        if (!transform_to && !transform_from) {
-            binding = g_object_bind_property(source, source_property,
-                                             target, target_property,
-                                             flags);
-        } else {
-            RGBindPropertyCallbackData *data;
-            data = (RGBindPropertyCallbackData *)malloc(sizeof(RGBindPropertyCallbackData));
-            data->transform_to_callback = rb_transform_to;
-            data->transform_from_callback = rb_transform_from;
-            binding = g_object_bind_property_full(source, source_property,
-                                                  target, target_property,
-                                                  flags, transform_to,
-                                                  transform_from,
-                                                  (gpointer) data,
-                                                  rg_destroy_bind_property_full_data);
-
-
-        }
+        RGBindPropertyCallbackData *data;
+        data = (RGBindPropertyCallbackData *)malloc(sizeof(RGBindPropertyCallbackData));
+        data->transform_to_callback = rb_transform_to;
+        data->transform_from_callback = rb_transform_from;
+        binding = g_object_bind_property_full(source, source_property,
+                                              target, target_property,
+                                              flags, transform_to,
+                                              transform_from,
+                                              (gpointer) data,
+                                              rg_destroy_bind_property_full_data);
 
     }
     return GOBJ2RVAL(binding);
