@@ -624,6 +624,7 @@ rg_type_name(VALUE self)
 typedef struct {
     VALUE transform_from_callback;
     VALUE transform_to_callback;
+    VALUE self;
 } RGBindPropertyCallbackData;
 
 static gboolean
@@ -633,10 +634,15 @@ rg_bind_property_transform_to_callback(GBinding *binding, const GValue *from_val
     VALUE rb_from_value = rbgobj_gvalue_to_rvalue(from_value);
     VALUE rb_to_value = rbgobj_gvalue_to_rvalue(to_value);
     RGBindPropertyCallbackData *data = (RGBindPropertyCallbackData *)user_data;
-    VALUE proc = (VALUE) data->transform_to_callback;
-    rb_to_value = rb_funcall(proc, rb_intern("call"), 1, rb_from_value);
-    rbgobj_rvalue_to_gvalue(rb_to_value, to_value);
-    return TRUE;
+    VALUE proc = data->transform_to_callback;
+    if(!NIL_P(proc))
+    {
+        G_CHILD_REMOVE(data->self, proc);
+        rb_to_value = rb_funcall(proc, rb_intern("call"), 1, rb_from_value);
+        rbgobj_rvalue_to_gvalue(rb_to_value, to_value);
+        return TRUE;
+    } else
+        return FALSE;
 }
 
 static gboolean
@@ -647,9 +653,14 @@ rg_bind_property_transform_from_callback(GBinding *binding, const GValue *from_v
     VALUE rb_to_value = rbgobj_gvalue_to_rvalue(to_value);
     RGBindPropertyCallbackData *data = (RGBindPropertyCallbackData *)user_data;
     VALUE proc = data->transform_from_callback;
-    rb_to_value = rb_funcall(proc, rb_intern("call"), 1, rb_from_value);
-    rbgobj_rvalue_to_gvalue(rb_to_value, to_value);
-    return TRUE;
+    if(!NIL_P(proc))
+    {
+        G_CHILD_REMOVE(data->self, proc);
+        rb_to_value = rb_funcall(proc, rb_intern("call"), 1, rb_from_value);
+        rbgobj_rvalue_to_gvalue(rb_to_value, to_value);
+        return TRUE;
+    } else
+        return FALSE;
 }
 
 static void
@@ -695,12 +706,18 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
     if(NIL_P(rb_transform_to))
         transform_to = NULL;
     else
+    {
+        G_CHILD_ADD(self, rb_transform_to);
         transform_to = rg_bind_property_transform_to_callback;
+    }
 
     if(NIL_P(rb_transform_from))
         transform_from = NULL;
     else
+    {
+        G_CHILD_ADD(self, rb_transform_from);
         transform_from = rg_bind_property_transform_from_callback;
+    }
 
     if (!transform_to && !transform_from) {
         binding = g_object_bind_property(source, source_property,
@@ -709,6 +726,7 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
     } else {
         RGBindPropertyCallbackData *data;
         data = (RGBindPropertyCallbackData *)xmalloc(sizeof(RGBindPropertyCallbackData));
+        data->self = self;
         data->transform_to_callback = rb_transform_to;
         data->transform_from_callback = rb_transform_from;
         binding = g_object_bind_property_full(source, source_property,
