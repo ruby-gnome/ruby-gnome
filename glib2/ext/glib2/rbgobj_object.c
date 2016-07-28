@@ -655,7 +655,7 @@ rg_bind_property_transform_from_callback(GBinding *binding, const GValue *from_v
 static void
 rg_destroy_bind_property_full_data(gpointer data)
 {
-    free((void *) data);
+    xfree((void *) data);
 }
 
 static VALUE
@@ -708,7 +708,7 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
                                          flags);
     } else {
         RGBindPropertyCallbackData *data;
-        data = (RGBindPropertyCallbackData *)malloc(sizeof(RGBindPropertyCallbackData));
+        data = (RGBindPropertyCallbackData *)xmalloc(sizeof(RGBindPropertyCallbackData));
         data->transform_to_callback = rb_transform_to;
         data->transform_from_callback = rb_transform_from;
         binding = g_object_bind_property_full(source, source_property,
