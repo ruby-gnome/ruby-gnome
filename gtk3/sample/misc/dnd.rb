@@ -2,7 +2,7 @@
   dnd.rb - Drag and Drop sample script.
 
   Copyright (C) 2002-2015 Masao Mutoh
-  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2016 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
 
