@@ -44,9 +44,9 @@ class DestWindow < Gtk::Window
       context.targets.each do |target|
         if target.name == "test" ||
            selection_data.type == Gdk::Selection::TYPE_STRING
-          data_len = selection_data.data[1]
+          data_len = selection_data.data.size
           puts "drag-data-received signal:"
-          puts selection_data.data[0].pack("C#{data_len}")
+          puts selection_data.data.pack("C#{data_len}")
           puts selection_data.text
         else
           next
