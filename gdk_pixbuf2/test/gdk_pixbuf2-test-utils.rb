@@ -18,6 +18,13 @@ require "test-unit"
 
 module GdkPixbufTestUtils
   private
+  def only_version(major, minor, micro=nil)
+    micro ||= 0
+    unless GdkPixbuf::Version.or_later?(major, minor, micro)
+      omit("Require GdkPixbuf >= #{major}.#{minor}.#{micro}")
+    end
+  end
+
   def fixture_path(*components)
     File.join(File.dirname(__FILE__), "fixture", *components)
   end

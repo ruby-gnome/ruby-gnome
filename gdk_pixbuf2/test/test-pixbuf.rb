@@ -184,6 +184,7 @@ class TestPixbuf < Test::Unit::TestCase
       end
 
       test "bytes" do
+        only_version(2, 32)
         src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
         bytes = src_pixbuf.pixels.flatten.pack("C*")
         pixbuf = GdkPixbuf::Pixbuf.new(:bytes => bytes,
