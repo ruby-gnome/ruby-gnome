@@ -19,7 +19,7 @@ class TestGtkTextView < Test::Unit::TestCase
 
   sub_test_case "instance methods" do
     def setup
-      only_gtk_version(3, 10)
+      only_gtk_version(3, 14)
       @text_buffer = Gtk::TextBuffer.new
       @text_buffer.text = "Hello"
       @text_view = Gtk::TextView.new(@text_buffer)
