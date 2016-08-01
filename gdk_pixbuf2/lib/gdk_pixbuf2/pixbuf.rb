@@ -97,7 +97,7 @@ module GdkPixbuf
       bytes = options[:bytes] || nil
       xpm = options[:xpm] || nil
       file = options[:file] || nil
-      stream = options[:stream] || nil
+      # stream = options[:stream] || nil
       resource = options[:resource] || nil
       width = options[:width] || nil
       height = options[:height] || nil
