@@ -16,82 +16,173 @@
 
 class TestGLibBinding < Test::Unit::TestCase
   include GLibTestUtils
+  sub_test_case "bind_property" do
+    class DataObjectDefault < GLib::Object
+      type_register
 
-  class DataObject < GLib::Object
-    type_register
+      install_property(GLib::Param::Int.new("source", # name
+                                            "Source", # nick
+                                            "The source data", # blurb
+                                            0,     # min
+                                            100,   # max
+                                            0,     # default
+                                            GLib::Param::READABLE |
+                                            GLib::Param::WRITABLE))
+      install_property(GLib::Param::Int.new("target", # name
+                                            "Target", # nick
+                                            "The target data", # blurb
+                                            0,     # min
+                                            100,   # max
+                                            0,     # default
+                                            GLib::Param::READABLE |
+                                            GLib::Param::WRITABLE))
 
-    install_property(GLib::Param::Int.new("source", # name
-                                          "Source", # nick
-                                          "The source data", # blurb
-                                          0,     # min
-                                          100,   # max
-                                          0,     # default
-                                          GLib::Param::READABLE |
-                                          GLib::Param::WRITABLE))
-    install_property(GLib::Param::Int.new("target", # name
-                                          "Target", # nick
-                                          "The target data", # blurb
-                                          0,     # min
-                                          100,   # max
-                                          0,     # default
-                                          GLib::Param::READABLE |
-                                          GLib::Param::WRITABLE))
+      attr_reader :source, :target
+      def initialize
+        @source = 0
+        @target = 0
+        super
+      end
 
-    attr_reader :source, :target
-    def initialize
-      @source = 0
-      @target = 0
-      super
+      def source=(value)
+        @source = value
+        notify("source")
+      end
+
+      def target=(value)
+        @target = value
+        notify("target")
+      end
     end
 
-    def source=(value)
-      @source = value
-      notify("source")
+    setup do
+      only_glib_version(2, 26, 0)
     end
 
-    def target=(value)
-      @target = value
-      notify("target")
+    setup do
+      @source = DataObjectDefault.new
+      @target = DataObjectDefault.new
+      @binding = @source.bind_property("source", @target, "target", :default)
+    end
+
+    test "#source" do
+      assert_equal(@source, @binding.source)
+    end
+
+    test "#source_property" do
+      assert_equal("source", @binding.source_property)
+    end
+
+    test "#target" do
+      assert_equal(@target, @binding.target)
+    end
+
+    test "#target_property" do
+      assert_equal("target", @binding.target_property)
+    end
+
+    test "#flags" do
+      assert_equal(GLib::BindingFlags::DEFAULT, @binding.flags)
+    end
+
+    test "#unbind" do
+      only_glib_version(2, 38, 0)
+      assert_equal(0, @target.target)
+      @source.source = 10
+      assert_equal(10, @target.target)
+      @binding.unbind
+      @source.source = 20
+      assert_equal(10, @target.target)
     end
   end
+  sub_test_case "bind_property_full" do
+    class DataObjectBidir < GLib::Object
+      type_register
 
-  setup do
-    only_glib_version(2, 26, 0)
-  end
+      install_property(GLib::Param::Int.new("source", # name
+                                            "Source", # nick
+                                            "The source data", # blurb
+                                            0,     # min
+                                            100,   # max
+                                            0,     # default
+                                            GLib::Param::READABLE |
+                                            GLib::Param::WRITABLE))
+      install_property(GLib::Param::String.new("target", # name
+                                               "Target", # nick
+                                               "The target data", # blurb
+                                               "",     # default
+                                               GLib::Param::READABLE |
+                                               GLib::Param::WRITABLE))
 
-  setup do
-    @source = DataObject.new
-    @target = DataObject.new
-    @binding = @source.bind_property("source", @target, "target", :default)
-  end
+      attr_reader :source, :target
+      def initialize
+        @source = 0
+        @target = "nan"
+        super
+      end
 
-  test "#source" do
-    assert_equal(@source, @binding.source)
-  end
+      def source=(value)
+        @source = value
+        notify("source")
+      end
 
-  test "#source_property" do
-    assert_equal("source", @binding.source_property)
-  end
+      def target=(value)
+        @target = value
+        notify("target")
+      end
+    end
 
-  test "#target" do
-    assert_equal(@target, @binding.target)
-  end
+    setup do
+      only_glib_version(2, 26, 0)
+    end
 
-  test "#target_property" do
-    assert_equal("target", @binding.target_property)
-  end
+    setup do
+      @source = DataObjectBidir.new
+      @target = DataObjectBidir.new
+      transform_to_callback = proc do |source_value|
+        source_value.to_s
+      end
 
-  test "#flags" do
-    assert_equal(GLib::BindingFlags::DEFAULT, @binding.flags)
-  end
+      transform_from_callback = proc do |target_value|
+        target_value.to_i
+      end
 
-  test "#unbind" do
-    only_glib_version(2, 38, 0)
-    assert_equal(0, @target.target)
-    @source.source = 10
-    assert_equal(10, @target.target)
-    @binding.unbind
-    @source.source = 20
-    assert_equal(10, @target.target)
+      @binding = @source.bind_property("source", @target, "target",
+                                       :bidirectional,
+                                       :transform_to => transform_to_callback,
+                                       :transform_from => transform_from_callback)
+    end
+
+    test "#source" do
+      assert_equal(@source, @binding.source)
+    end
+
+    test "#source_property" do
+      assert_equal("source", @binding.source_property)
+    end
+
+    test "#target" do
+      assert_equal(@target, @binding.target)
+    end
+
+    test "#target_property" do
+      assert_equal("target", @binding.target_property)
+    end
+
+    test "#flags" do
+      assert_equal(GLib::BindingFlags::BIDIRECTIONAL, @binding.flags)
+    end
+
+    test "#unbind" do
+      only_glib_version(2, 38, 0)
+      assert_equal("nan", @target.target)
+      @source.source = 10
+      assert_equal("10", @target.target)
+      @target.target = "30"
+      assert_equal(30, @source.source)
+      @binding.unbind
+      @source.source = 20
+      assert_equal("30", @target.target)
+    end
   end
 end
