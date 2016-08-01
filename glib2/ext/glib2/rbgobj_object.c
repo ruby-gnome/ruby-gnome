@@ -690,8 +690,8 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
     const gchar *target_property;
     GBindingFlags flags;
     GBinding *binding;
-    GBindingTransformFunc transform_to;
-    GBindingTransformFunc transform_from;
+    GBindingTransformFunc transform_to = NULL;
+    GBindingTransformFunc transform_from = NULL;
 
     rb_scan_args(argc, argv, "41", &rb_source_property, &rb_target,
                  &rb_target_property, &rb_flags, &rb_options);
@@ -707,18 +707,12 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
     target_property = RVAL2CSTR(rb_target_property);
     flags = RVAL2GBINDINGFLAGS(rb_flags);
 
-    if(NIL_P(rb_transform_to))
-        transform_to = NULL;
-    else
-    {
+    if (!NIL_P(rb_transform_to)) {
         G_CHILD_ADD(self, rb_transform_to);
         transform_to = rg_bind_property_transform_to_callback;
     }
 
-    if(NIL_P(rb_transform_from))
-        transform_from = NULL;
-    else
-    {
+    if (!NIL_P(rb_transform_from)) {
         G_CHILD_ADD(self, rb_transform_from);
         transform_from = rg_bind_property_transform_from_callback;
     }
