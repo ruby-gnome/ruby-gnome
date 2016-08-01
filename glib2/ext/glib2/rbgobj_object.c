@@ -729,11 +729,7 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
         transform_from = rg_bind_property_transform_from_callback;
     }
 
-    if (!transform_to && !transform_from) {
-        binding = g_object_bind_property(source, source_property,
-                                         target, target_property,
-                                         flags);
-    } else {
+    if (transform_to || transform_from) {
         RGBindPropertyCallbackData *data;
         data = (RGBindPropertyCallbackData *)xmalloc(sizeof(RGBindPropertyCallbackData));
         data->self = self;
@@ -745,8 +741,12 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
                                               transform_from,
                                               (gpointer)data,
                                               rg_destroy_bind_property_full_data);
-
+    } else {
+        binding = g_object_bind_property(source, source_property,
+                                         target, target_property,
+                                         flags);
     }
+
     return GOBJ2RVAL(binding);
 }
 #endif
