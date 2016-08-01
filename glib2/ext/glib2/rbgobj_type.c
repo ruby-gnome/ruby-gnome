@@ -399,8 +399,9 @@ init_typemap(void)
     gtype_to_cinfo = g_hash_table_new(g_direct_hash, g_direct_equal);
     rb_global_variable(&klass_to_cinfo);
     klass_to_cinfo = rb_hash_new();
-
+#ifndef RUBY_INTEGER_UNIFICATION
     _register_fundamental_klass_to_gtype(rb_cFixnum, G_TYPE_LONG);
+#endif
     _register_fundamental_klass_to_gtype(rb_cFloat, G_TYPE_DOUBLE);
     _register_fundamental_klass_to_gtype(rb_cInteger, G_TYPE_LONG);
     _register_fundamental_klass_to_gtype(rb_cString, G_TYPE_STRING);
@@ -420,8 +421,13 @@ init_typemap(void)
     _register_fundamental_gtype_to_klass(G_TYPE_UINT64, rb_cInteger);
     _register_fundamental_gtype_to_klass(G_TYPE_INT, rb_cInteger);
     _register_fundamental_gtype_to_klass(G_TYPE_LONG, rb_cInteger);
+#ifdef RUBY_INTEGER_UNIFICATION
+    _register_fundamental_gtype_to_klass(G_TYPE_CHAR, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_UCHAR, rb_cInteger);
+#else
     _register_fundamental_gtype_to_klass(G_TYPE_CHAR, rb_cFixnum);
     _register_fundamental_gtype_to_klass(G_TYPE_UCHAR, rb_cFixnum);
+#endif
     _register_fundamental_gtype_to_klass(G_TYPE_STRING, rb_cString);
     _register_fundamental_gtype_to_klass(G_TYPE_ULONG, rb_cInteger);
     _register_fundamental_gtype_to_klass(G_TYPE_NONE, rb_cNilClass);
