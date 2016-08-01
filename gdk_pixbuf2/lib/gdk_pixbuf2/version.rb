@@ -14,38 +14,20 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "English"
-
 module GdkPixbuf
-  class Loader < GObjectIntrospection::Loader
-    private
-    def pre_load(repository, namespace)
-    end
+  module Version
+    STRING = [MAJOR, MINOR, MICRO].join(".")
 
-    def post_load(repository, namespace)
-      require_libraries
-    end
-
-    def require_libraries
-      require "gdk_pixbuf2/pixbuf"
-      require "gdk_pixbuf2/pixbuf-loader"
-
-      require "gdk_pixbuf2/deprecated"
-
-      require "gdk_pixbuf2/version"
-    end
-
-    def initialize_post(object)
-      super
-      return unless object.is_a?(GLib::Object)
-      self.class.reference_gobject(object, :sink => true)
-    end
-
-    def define_constant(name, info)
-      if /PIXBUF_/ =~ name
-        name = $POSTMATCH
+    class << self
+      def or_later?(major, minor, micro=nil)
+        micro ||= 0
+        version = [
+          MAJOR,
+          MINOR,
+          MICRO,
+        ]
+        (version <=> [major, minor, micro]) >= 0
       end
-      super(name, info)
     end
   end
 end
