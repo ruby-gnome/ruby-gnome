@@ -19,7 +19,7 @@ module Gsf
     alias_method :read_raw, :read
     def read(size=nil)
       size ||= remaining
-      bytes, _n_bytes = read_raw(size)
+      bytes = read_raw(size)
       bytes.pack("C*")
     end
   end
