@@ -27,10 +27,5 @@ module Gio
       end
       super(properties)
     end
-
-    alias_method :arguments_raw, :arguments
-    def arguments
-      arguments_raw[0]
-    end
   end
 end
