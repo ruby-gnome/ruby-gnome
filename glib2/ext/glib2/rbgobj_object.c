@@ -737,7 +737,7 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
                                               target, target_property,
                                               flags, transform_to,
                                               transform_from,
-                                              (gpointer) data,
+                                              (gpointer)data,
                                               rg_destroy_bind_property_full_data);
 
     }
