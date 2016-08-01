@@ -597,7 +597,11 @@ module GObjectIntrospection
     end
 
     def load_constant_info(info)
-      @base_module.const_set(info.name, info.value)
+      define_constant(info.name, info)
+    end
+
+    def define_constant(name, info)
+      @base_module.const_set(name, info.value)
     end
 
     def load_union_info(info)
