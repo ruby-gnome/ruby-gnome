@@ -53,7 +53,7 @@ class TestGtkIconView < Test::Unit::TestCase
     end
 
     def test_not_found
-      indices, _ = @path.indices
+      indices = @path.indices
       not_found_path = Gtk::TreePath.new
       not_found_path.append_index(indices.last + 1)
       assert_nil(@icon_view.get_cell_rect(not_found_path))

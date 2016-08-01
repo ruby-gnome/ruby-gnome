@@ -30,9 +30,7 @@ class TestGtkTreePath < Test::Unit::TestCase
   end
 
   def test_indices
-    indices, depth = tree_path("2").indices
-    assert_equal([[2], 1],
-                 [indices, depth])
+    assert_equal([2], tree_path("2").indices)
   end
 
   def test_down!
