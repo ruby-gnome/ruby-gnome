@@ -633,17 +633,20 @@ rg_bind_property_transform_to_callback(G_GNUC_UNUSED GBinding *binding,
                                        GValue *to_value,
                                        gpointer user_data)
 {
-    VALUE rb_from_value = rbgobj_gvalue_to_rvalue(from_value);
-    VALUE rb_to_value = rbgobj_gvalue_to_rvalue(to_value);
     RGBindPropertyCallbackData *data = (RGBindPropertyCallbackData *)user_data;
-    VALUE proc = data->transform_to_callback;
-    if(!NIL_P(proc))
-    {
-        rb_to_value = rb_funcall(proc, rb_intern("call"), 1, rb_from_value);
-        rbgobj_rvalue_to_gvalue(rb_to_value, to_value);
-        return TRUE;
-    } else
+    VALUE proc;
+    VALUE rb_from_value;
+    VALUE rb_to_value;
+
+    proc = data->transform_to_callback;
+    if (NIL_P(proc))
         return FALSE;
+
+    rb_from_value = rbgobj_gvalue_to_rvalue(from_value);
+    rb_to_value = rbgobj_gvalue_to_rvalue(to_value);
+    rb_to_value = rb_funcall(proc, rb_intern("call"), 1, rb_from_value);
+    rbgobj_rvalue_to_gvalue(rb_to_value, to_value);
+    return TRUE;
 }
 
 static gboolean
@@ -652,17 +655,20 @@ rg_bind_property_transform_from_callback(G_GNUC_UNUSED GBinding *binding,
                                          GValue *to_value,
                                          gpointer user_data)
 {
-    VALUE rb_from_value = rbgobj_gvalue_to_rvalue(from_value);
-    VALUE rb_to_value = rbgobj_gvalue_to_rvalue(to_value);
     RGBindPropertyCallbackData *data = (RGBindPropertyCallbackData *)user_data;
-    VALUE proc = data->transform_from_callback;
-    if(!NIL_P(proc))
-    {
-        rb_to_value = rb_funcall(proc, rb_intern("call"), 1, rb_from_value);
-        rbgobj_rvalue_to_gvalue(rb_to_value, to_value);
-        return TRUE;
-    } else
+    VALUE proc;
+    VALUE rb_from_value;
+    VALUE rb_to_value;
+
+    proc = data->transform_from_callback;
+    if (NIL_P(proc))
         return FALSE;
+
+    rb_from_value = rbgobj_gvalue_to_rvalue(from_value);
+    rb_to_value = rbgobj_gvalue_to_rvalue(to_value);
+    rb_to_value = rb_funcall(proc, rb_intern("call"), 1, rb_from_value);
+    rbgobj_rvalue_to_gvalue(rb_to_value, to_value);
+    return TRUE;
 }
 
 static void
