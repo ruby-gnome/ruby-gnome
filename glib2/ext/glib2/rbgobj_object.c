@@ -639,7 +639,6 @@ rg_bind_property_transform_to_callback(G_GNUC_UNUSED GBinding *binding,
     VALUE proc = data->transform_to_callback;
     if(!NIL_P(proc))
     {
-        G_CHILD_REMOVE(data->self, proc);
         rb_to_value = rb_funcall(proc, rb_intern("call"), 1, rb_from_value);
         rbgobj_rvalue_to_gvalue(rb_to_value, to_value);
         return TRUE;
@@ -659,7 +658,6 @@ rg_bind_property_transform_from_callback(G_GNUC_UNUSED GBinding *binding,
     VALUE proc = data->transform_from_callback;
     if(!NIL_P(proc))
     {
-        G_CHILD_REMOVE(data->self, proc);
         rb_to_value = rb_funcall(proc, rb_intern("call"), 1, rb_from_value);
         rbgobj_rvalue_to_gvalue(rb_to_value, to_value);
         return TRUE;
@@ -668,9 +666,17 @@ rg_bind_property_transform_from_callback(G_GNUC_UNUSED GBinding *binding,
 }
 
 static void
-rg_destroy_bind_property_full_data(gpointer data)
+rg_destroy_bind_property_full_data(gpointer user_data)
 {
-    xfree((void *) data);
+    RGBindPropertyCallbackData *data = (RGBindPropertyCallbackData *)user_data;
+
+    if (!NIL_P(data->transform_to_callback))
+        G_CHILD_REMOVE(data->self, data->transform_to_callback);
+
+    if (!NIL_P(data->transform_from_callback))
+        G_CHILD_REMOVE(data->self, data->transform_from_callback);
+
+    xfree(data);
 }
 
 static VALUE
