@@ -50,11 +50,6 @@ module Gtk
         end
       end
 
-      alias_method :style_properties_raw, :style_properties
-      def style_properties
-        style_properties_raw[0]
-      end
-
       alias_method :set_connect_func_raw, :set_connect_func
       def set_connect_func(&block)
         set_connect_func_raw do |*args|

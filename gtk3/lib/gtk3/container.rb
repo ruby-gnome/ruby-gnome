@@ -16,13 +16,6 @@
 
 module Gtk
   class Container
-    class << self
-      alias_method :child_properties_raw, :child_properties
-      def child_properties
-        child_properties_raw[0]
-      end
-    end
-
     include Enumerable
 
     alias_method :add_raw, :add

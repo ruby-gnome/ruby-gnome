@@ -179,19 +179,9 @@ module Gtk
       end
     end
 
-    alias_method :serialize_formats_raw, :serialize_formats
-    def serialize_formats
-      serialize_formats_raw[0]
-    end
-
-    alias_method :deserialize_formats_raw, :deserialize_formats
-    def deserialize_formats
-      deserialize_formats_raw[0]
-    end
-
     alias_method :serialize_raw, :serialize
     def serialize(*arguments)
-      serialize_raw(*arguments)[0].pack("C*")
+      serialize_raw(*arguments).pack("C*")
     end
 
     alias_method :selection_bounds_raw, :selection_bounds
