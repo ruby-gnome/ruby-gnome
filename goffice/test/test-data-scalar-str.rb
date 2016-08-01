@@ -18,6 +18,9 @@ class DataScalarStrTest < Test::Unit::TestCase
   include GOfficeTestUtils
 
   test ".new" do
+    if GOffice::DataScalarStr.method(:new).arity > 1
+      omit("Require GOffice >= 0.10.27")
+    end
     data = GOffice::DataScalarStr.new("XXX")
     assert_equal("XXX", data.str)
   end
