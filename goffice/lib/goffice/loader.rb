@@ -21,10 +21,20 @@ module GOffice
     end
 
     def post_load(repository, namespace)
+      define_version(repository, namespace)
       require_libraries
     end
 
+    def define_version(repository, namespace)
+      major, minor, micro = repository.get_version(namespace).split(".")
+      @base_module.const_set("MAJOR", Integer(major))
+      @base_module.const_set("MINOR", Integer(minor))
+      micro = Integer(micro) unless micro.nil?
+      @base_module.const_set("MICRO", micro)
+    end
+
     def require_libraries
+      require "goffice/version"
     end
 
     def load_enum_value(value_info, enum_module)
