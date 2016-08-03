@@ -76,4 +76,5 @@ module Gdk
   define_deprecated_const :PixbufLoader, "GdkPixbuf::PixbufLoader"
   define_deprecated_const :PixbufSimpleAnim, "GdkPixbuf::PixbufSimpleAnim"
   define_deprecated_const :Pixdata, "GdkPixbuf::Pixdata"
+  define_deprecated_const :PixbufError, "GdkPixbuf::PixbufError"
 end
