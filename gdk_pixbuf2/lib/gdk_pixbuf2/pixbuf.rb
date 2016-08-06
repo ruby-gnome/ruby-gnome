@@ -211,8 +211,72 @@ module GdkPixbuf
       source.scale_raw(self, *args)
     end
 
-    def composite!(source, *args)
-      source.composite(self, *args)
+    alias_method :composite_raw, :composite
+    def composite(options)
+      destination = options[:destination] || options[:dest]
+      dest_x = options[:destination_x] || options[:dest_x] || 0
+      dest_y = options[:destination_y] || options[:dest_y] || 0
+      dest_width = options[:destination_width] || options[:dest_width]
+      dest_height = options[:destination_height] || options[:dest_height]
+
+      destination ||= Pixbuf.new(colorspace,
+                                 has_alpha?,
+                                 bits_per_sample,
+                                 dest_x + dest_width,
+                                 dest_y + dest_height)
+      destination.composite!(self, options)
+      destination
+    end
+
+    def composite!(source, options)
+      dest_x = options[:destination_x] || options[:dest_x] || 0
+      dest_y = options[:destination_y] || options[:dest_y] || 0
+      dest_width = options[:destination_width] || options[:dest_width]
+      dest_height = options[:destination_height] || options[:dest_height]
+      offset_x = options[:offset_x] || 0.0
+      offset_y = options[:offset_y] || 0.0
+      scale_x = options[:scale_x] || (dest_width / source.width.to_f)
+      scale_y = options[:scale_y] || (dest_height / source.height.to_f)
+      interpolation_type = options[:interpolation_type] ||
+        options[:interp_type] ||
+        :bilinear
+      overall_alpha = options[:overall_alpha] || 255
+      check_x = options[:check_x] || 0
+      check_y = options[:check_y] || 0
+      check_size = options[:check_size]
+      color1 = options[:color1] || 0x999999
+      color2 = options[:color2] || 0xdddddd
+
+      if check_size
+        source.composite_color(self,
+                               dest_x,
+                               dest_y,
+                               dest_width,
+                               dest_height,
+                               offset_x,
+                               offset_y,
+                               scale_x,
+                               scale_y,
+                               interpolation_type,
+                               overall_alpha,
+                               check_x,
+                               check_y,
+                               check_size,
+                               color1,
+                               color2)
+      else
+        source.composite_raw(self,
+                             dest_x,
+                             dest_y,
+                             dest_width,
+                             dest_height,
+                             offset_x,
+                             offset_y,
+                             scale_x,
+                             scale_y,
+                             interpolation_type,
+                             overall_alpha)
+      end
     end
   end
 end

@@ -49,6 +49,86 @@ module GdkPixbuf
         end
       end
     end
+
+    define_deprecated_method_by_hash_args :composite,
+                                          "dest_width, " +
+                                            "dest_height, " +
+                                            "interpolation_type, " +
+                                            "overall_alpha, " +
+                                            "check_size, " +
+                                            "color1, " +
+                                            "color2",
+                                          ":dest_width => dest_width, " +
+                                            ":dest_height => dest_height, " +
+                                            ":interpolation_type => interpolation_type, " +
+                                            ":overall_alpha => overall_alpha, " +
+                                            ":check_size => check_size, " +
+                                            ":color1 => color1, " +
+                                            ":color2 => color2" do |*args|
+      [
+        :dest_width => args[1],
+        :dest_height => args[2],
+        :interpolation_type => args[3],
+        :overall_alpha => args[4],
+        :check_size => args[5],
+        :color1 => args[6],
+        :color2 => args[7],
+      ]
+    end
+
+    define_deprecated_method_by_hash_args :composite!,
+                                          "source, " +
+                                            "dest_x, " +
+                                            "dest_y, " +
+                                            "dest_width, " +
+                                            "dest_height, " +
+                                            "offset_x, " +
+                                            "offset_y, " +
+                                            "scale_x, " +
+                                            "scale_y, " +
+                                            "interpolation_type, " +
+                                            "overall_alpha, " +
+                                            "check_x=0, " +
+                                            "check_y=0, " +
+                                            "check_size=nil, " +
+                                            "color1=0x999999, " +
+                                            "color2=0xdddddd",
+                                          "source, " +
+                                            ":dest_x => dest_x, " +
+                                            ":dest_y => dest_y, " +
+                                            ":dest_width => dest_width, " +
+                                            ":dest_height => dest_height, " +
+                                            ":offset_x => offset_x, " +
+                                            ":offset_y => offset_y, " +
+                                            ":scale_x => scale_x, " +
+                                            ":scale_y => scale_y, " +
+                                            ":interpolation_type => interpolation_type, " +
+                                            ":overall_alpha => overall_alpha, " +
+                                            ":check_x => check_x, " +
+                                            ":check_y => check_y, " +
+                                            ":check_size => check_size, " +
+                                            ":color1 => color1, " +
+                                            ":color2 => color2",
+                                          1 do |*args|
+      [
+        args[1],
+        :dest_x => args[2],
+        :dest_y => args[3],
+        :dest_width => args[4],
+        :dest_height => args[5],
+        :offset_x => args[6],
+        :offset_y => args[7],
+        :scale_x => args[8],
+        :scale_y => args[9],
+        :interpolation_type => args[10],
+        :overall_alpha => args[11],
+        :check_x => args[12],
+        :check_y => args[13],
+        :check_size => args[14],
+        :color1 => args[15],
+        :color2 => args[16],
+      ]
+    end
   end
 
   class PixbufFormat

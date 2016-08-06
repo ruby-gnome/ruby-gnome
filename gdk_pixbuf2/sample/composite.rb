@@ -20,8 +20,13 @@ src =  GdkPixbuf::Pixbuf.new(:file => filename)
 
 vbox = Gtk::VBox.new
 
-dst = src.composite_color_simple(100, 100, :hyper,
-		200, 32, 0xFF0000, 0x00FF00)
+dst = src.composite(:dest_width  => 100,
+                    :dest_height => 100,
+                    :interp_type => :hyper,
+                    :overall_alpha => 255,
+                    :check_size => 32,
+                    :color1 => 0xFF0000,
+                    :color2 => 0x00FF00)
 vbox.pack_start(Gtk::Image.new(dst))
 
 dst = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
@@ -29,8 +34,13 @@ dst = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
                             :bits_per_sample => 8,
                             :width =>200,
                             :height => 200)
-dst.composite!(src, 0, 0, 200, 200, 0, 0, 1.8, 1.8,
-              :hyper, 200)
+dst.composite!(src,
+               :dest_width => 200,
+               :dest_height => 200,
+               :scale_x => 1.8,
+               :scale_y => 1.8,
+               :interp_type => :hyper,
+               :overall_alpha => 200)
 vbox.pack_start(Gtk::Image.new(dst))
 
 dst = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
@@ -38,9 +48,21 @@ dst = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
                             :bits_per_sample => 8,
                             :width =>200,
                             :height => 200)
-src.composite_color(dst, 10, 10, 180, 180, 15, 15, 3, 2,
-              :bilinear, 200, 100, 100, 16,
-              0x999999, 0xdddddd)
+dst.composite!(src,
+               :dest_x => 10,
+               :dest_y => 10,
+               :dest_width => 180,
+               :dest_height => 180,
+               :offset_x => 15,
+               :offset_y => 15,
+               :scale_x => 3,
+               :scale_y => 2,
+               :overall_alpha => 200,
+               :check_x => 100,
+               :check_y => 100,
+               :check_size => 16,
+               :color1 => 0x999999,
+               :color2 => 0xdddddd)
 vbox.pack_start(Gtk::Image.new(dst))
 
 window = Gtk::Window.new.add(vbox)
