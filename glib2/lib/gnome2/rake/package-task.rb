@@ -263,6 +263,7 @@ module GNOME2
             if in_package
               updated_rakefile_content << line.gsub(/#{escaped_version}/,
                                                     latest_version)
+              in_package = false
             else
               updated_rakefile_content << line
             end
