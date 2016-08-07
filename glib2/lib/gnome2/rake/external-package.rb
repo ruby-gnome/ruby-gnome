@@ -210,11 +210,17 @@ module GNOME2
             when /href="#{Regexp.escape(name)}-
                         (\d+(?:\.\d+)*)
                         \.tar\.#{Regexp.escape(compression_method)}"/x
-              versions << $1
+              version = $1
+              next if development_version_freedesktop_gstreamer?(version)
+              versions << version
             end
           end
         end
         sort_versions(versions).last
+      end
+
+      def development_version_freedesktop_gstreamer?(version)
+        version.split(".")[1].to_i.odd?
       end
 
       class WindowsConfiguration < Struct.new(:build,
