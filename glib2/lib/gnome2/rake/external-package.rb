@@ -105,6 +105,8 @@ module GNOME2
           latest_version_gnome
         when :freedesktop
           latest_version_freedesktop
+        when :freedesktop_gstreamer
+          latest_version_freedesktop_gstreamer
         else
           nil
         end
@@ -120,6 +122,9 @@ module GNOME2
         when :freedesktop
           base_url = freedesktop_base_url
           base_url << "/#{name}/release"
+        when :freedesktop_gstreamer
+          base_url = freedesktop_gstreamer_base_url
+          base_url << "/#{name}"
         when :gnu
           base_url = "http://ftp.gnu.org/pub/gnu/#{name}"
         else
@@ -134,6 +139,10 @@ module GNOME2
 
       def freedesktop_base_url
         "https://www.freedesktop.org/software"
+      end
+
+      def freedesktop_gstreamer_base_url
+        "https://gstreamer.freedesktop.org/src"
       end
 
       def sort_versions(versions)
@@ -178,6 +187,22 @@ module GNOME2
 
       def latest_version_freedesktop
         base_url = "#{freedesktop_base_url}/#{name}/release"
+        versions = []
+        open(base_url) do |index|
+          index.read.scan(/<a (.+?)>/) do |content,|
+            case content
+            when /href="#{Regexp.escape(name)}-
+                        (\d+(?:\.\d+)*)
+                        \.tar\.#{Regexp.escape(compression_method)}"/x
+              versions << $1
+            end
+          end
+        end
+        sort_versions(versions).last
+      end
+
+      def latest_version_freedesktop_gstreamer
+        base_url = "#{freedesktop_gstreamer_base_url}/#{name}"
         versions = []
         open(base_url) do |index|
           index.read.scan(/<a (.+?)>/) do |content,|
