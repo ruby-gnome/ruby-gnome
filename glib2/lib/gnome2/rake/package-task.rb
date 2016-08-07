@@ -230,7 +230,7 @@ module GNOME2
               @package.external_packages.each do |package|
                 task_names << package.name
                 task package.name do
-                  latest_version = package.latest_version
+                  latest_version = package.latest_version || package.version
                   if package.version != latest_version
                     update_package_version(package, latest_version)
                   end
