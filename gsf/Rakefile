@@ -34,7 +34,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   ]
   package.external_packages = [
     {
-      :name => "gsf",
+      :name => "libgsf",
       :download_site => :gnome,
       :label => "gsf",
       :version => "1.14.0",
