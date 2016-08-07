@@ -138,7 +138,9 @@ module GNOME2
           index.read.scan(/<a (.+?)>/) do |content,|
             case content
             when /href="(\d+(?:\.\d+)*)\/?"/
-              minor_versions << $1
+              minor_version = $1
+              next if development_minor_version_gnome?(minor_version)
+              minor_versions << minor_version
             end
           end
         end
@@ -157,6 +159,10 @@ module GNOME2
           end
         end
         sort_versions(versions).last
+      end
+
+      def development_minor_version_gnome?(minor_version)
+        minor_version.split(".").last.to_i.odd?
       end
 
       class WindowsConfiguration < Struct.new(:build,
