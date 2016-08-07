@@ -29,7 +29,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2", "gobject-introspection",
   ]
   xiph_download_url_base = "http://downloads.xiph.org/releases"
-  freedesktop_download_url_base = "https://gstreamer.freedesktop.org/src"
   sf_net_download_url_base = "http://downloads.sourceforge.net/project"
   libmad_version = "0.15.1b"
   package.external_packages = [
@@ -143,9 +142,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
     {
       :name => "gstreamer",
-      :download_base_url => "#{freedesktop_download_url_base}/gstreamer",
+      :download_site => :freedesktop_gstreamer,
       :label => "GStreamer",
-      :version => "1.8.0",
+      :version => "1.8.2",
       :compression_method => "xz",
       :windows => {
         :cc_args => "-std=gnu99",
@@ -163,9 +162,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
     {
       :name => "gst-plugins-base",
-      :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-base",
+      :download_site => :freedesktop_gstreamer,
       :label => "GStreamer plugins (base)",
-      :version => "1.8.0",
+      :version => "1.8.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -184,9 +183,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
     {
       :name => "gst-plugins-good",
-      :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-good",
+      :download_site => :freedesktop_gstreamer,
       :label => "GStreamer plugins (good)",
-      :version => "1.8.0",
+      :version => "1.8.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -198,9 +197,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
     {
       :name => "gst-plugins-bad",
-      :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-bad",
+      :download_site => :freedesktop_gstreamer,
       :label => "GStreamer plugins (bad)",
-      :version => "1.8.0",
+      :version => "1.8.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => ["--disable-librfb"],
@@ -218,7 +217,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
     # {
     #   :name => "gst-plugins-ugly",
-    #   :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-ugly",
+    #   :download_site => :freedesktop_gstreamer,
     #   :label => "GStreamer plugins (ugly)",
     #   :version => "1.8.0",
     #   :compression_method => "xz",
@@ -229,7 +228,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     # },
     {
       :name => "gst-libav",
-      :download_base_url => "#{freedesktop_download_url_base}/gst-libav",
+      :download_site => :freedesktop_gstreamer,
       :label => "GStreamer libav",
       :version => "1.8.0",
       :compression_method => "xz",
