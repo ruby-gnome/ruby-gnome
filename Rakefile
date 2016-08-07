@@ -168,6 +168,7 @@ namespace :windows do
     desc "update all external packages for Windows"
     task :update do
       gnome2_packages.each do |package|
+        next if package == "gtk2"
         chdir(package) do
           ruby("-S", "rake", "windows:version:update")
         end
