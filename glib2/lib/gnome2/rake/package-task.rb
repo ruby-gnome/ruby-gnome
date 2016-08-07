@@ -161,6 +161,7 @@ module GNOME2
         define_windows_extension_task
         define_windows_download_task
         define_windows_build_task
+        define_windows_version_update_task
       end
 
       def so_base_name
@@ -219,6 +220,59 @@ module GNOME2
 
       def define_windows_build_task
         GNOME2WindowsBinaryBuildTask.new(@package)
+      end
+
+      def define_windows_version_update_task
+        namespace :windows do
+          namespace :version do
+            task_names = []
+            namespace :update do
+              @package.external_packages.each do |package|
+                task_names << package.name
+                task package.name do
+                  latest_version = package.latest_version
+                  if package.version != latest_version
+                    update_package_version(package, latest_version)
+                  end
+                end
+              end
+            end
+
+            full_task_names = task_names.collect do |name|
+              "windows:version:update:#{name}"
+            end
+            desc "Update Windows package versions"
+            task :update => full_task_names
+          end
+        end
+      end
+
+      def update_package_version(package, latest_version)
+        rakefile_path = ::Rake.application.rakefile
+        rakefile_content = File.read(rakefile_path)
+        updated_rakefile_content = ""
+        in_package = false
+        escaped_name = Regexp.escape(package.name)
+        escaped_version = Regexp.escape(package.version)
+        rakefile_content.each_line do |line|
+          case line
+          when /:name => "#{escaped_name}",/
+            in_package = true
+            updated_rakefile_content << line
+          when /:version => "#{escaped_version}",/
+            if in_package
+              updated_rakefile_content << line.gsub(/#{escaped_version}/,
+                                                    latest_version)
+            else
+              updated_rakefile_content << line
+            end
+          else
+            updated_rakefile_content << line
+          end
+        end
+        File.open(rakefile_path, "w") do |rakefile|
+          rakefile.write(updated_rakefile_content)
+        end
       end
 
       def define_package_tasks

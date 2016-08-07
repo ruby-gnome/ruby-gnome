@@ -97,11 +97,20 @@ module GNOME2
         super || []
       end
 
+      def latest_version
+        case download_site
+        when :gnome
+          latest_version_gnome
+        else
+          nil
+        end
+      end
+
       private
       def download_site_base_url
         case download_site
         when :gnome
-          base_url = "http://ftp.gnome.org/pub/gnome/sources"
+          base_url = gnome_base_url
           release_series = version.gsub(/\A(\d+\.\d+)(?:[^\d].*)?\z/, '\1')
           base_url << "/#{name}/#{release_series}"
         when :gnu
@@ -110,6 +119,44 @@ module GNOME2
           base_url = nil
         end
         base_url
+      end
+
+      def gnome_base_url
+        "http://ftp.gnome.org/pub/gnome/sources"
+      end
+
+      def sort_versions(versions)
+        versions.sort_by do |version|
+          version.split(".").collect(&:to_i)
+        end
+      end
+
+      def latest_version_gnome
+        base_url = "#{gnome_base_url}/#{name}"
+        minor_versions = []
+        open(base_url) do |index|
+          index.read.scan(/<a (.+?)>/) do |content,|
+            case content
+            when /href="(\d+(?:\.\d+)*)\/?"/
+              minor_versions << $1
+            end
+          end
+        end
+        return nil if minor_versions.empty?
+
+        latest_minor_version = sort_versions(minor_versions).last
+        versions = []
+        open("#{base_url}/#{latest_minor_version}") do |index|
+          index.read.scan(/<a (.+?)>/) do |content,|
+            case content
+            when /href="#{Regexp.escape(name)}-
+                        (\d+(?:\.\d+)*)
+                        \.tar\.#{Regexp.escape(compression_method)}"/x
+              versions << $1
+            end
+          end
+        end
+        sort_versions(versions).last
       end
 
       class WindowsConfiguration < Struct.new(:build,
