@@ -16,6 +16,8 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
+require "open-uri"
+
 module GNOME2
   module Rake
     class ExternalPackage < Struct.new(:name,
@@ -101,6 +103,8 @@ module GNOME2
         case download_site
         when :gnome
           latest_version_gnome
+        when :freedesktop
+          latest_version_freedesktop
         else
           nil
         end
@@ -113,6 +117,9 @@ module GNOME2
           base_url = gnome_base_url
           release_series = version.gsub(/\A(\d+\.\d+)(?:[^\d].*)?\z/, '\1')
           base_url << "/#{name}/#{release_series}"
+        when :freedesktop
+          base_url = freedesktop_base_url
+          base_url << "/#{name}/release"
         when :gnu
           base_url = "http://ftp.gnu.org/pub/gnu/#{name}"
         else
@@ -123,6 +130,10 @@ module GNOME2
 
       def gnome_base_url
         "http://ftp.gnome.org/pub/gnome/sources"
+      end
+
+      def freedesktop_base_url
+        "https://www.freedesktop.org/software"
       end
 
       def sort_versions(versions)
@@ -163,6 +174,22 @@ module GNOME2
 
       def development_minor_version_gnome?(minor_version)
         minor_version.split(".").last.to_i.odd?
+      end
+
+      def latest_version_freedesktop
+        base_url = "#{freedesktop_base_url}/#{name}/release"
+        versions = []
+        open(base_url) do |index|
+          index.read.scan(/<a (.+?)>/) do |content,|
+            case content
+            when /href="#{Regexp.escape(name)}-
+                        (\d+(?:\.\d+)*)
+                        \.tar\.#{Regexp.escape(compression_method)}"/x
+              versions << $1
+            end
+          end
+        end
+        sort_versions(versions).last
       end
 
       class WindowsConfiguration < Struct.new(:build,
