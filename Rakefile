@@ -163,6 +163,17 @@ namespace :windows do
 
   desc "build all packages for Windows"
   task :build => build_tasks
+
+  namespace :version do
+    desc "update all external packages for Windows"
+    task :update do
+      gnome2_packages.each do |package|
+        chdir(package) do
+          ruby("-S", "rake", "windows:version:update")
+        end
+      end
+    end
+  end
 end
 
 desc "clean all packages"
