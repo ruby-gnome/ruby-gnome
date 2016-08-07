@@ -91,6 +91,44 @@ def change_environment_variable(variables)
   end
 end
 
+gtk2_base_name = "ruby-gtk2"
+gtk3_base_name = "ruby-gtk3"
+gnome2_base_name = "ruby-gnome2-all"
+
+gtk2_packages = [
+  "glib2",
+  "gobject-introspection",
+  "gio2",
+  "atk",
+  "pango",
+  "gdk_pixbuf2",
+  "gtk2",
+]
+gtk3_packages = gtk2_packages - ["gtk2"] + [
+  "cairo-gobject",
+  "gdk3",
+  "gtk3",
+]
+gnome2_packages = gtk2_packages + gtk3_packages + [
+  "gstreamer",
+  "gtksourceview2",
+  "poppler",
+  "rsvg2",
+  "vte",
+  "vte3",
+  "gtksourceview3",
+  "clutter",
+  "clutter-gtk",
+  "clutter-gstreamer",
+  "webkit-gtk",
+  "webkit-gtk2",
+  "webkit2-gtk",
+  "gsf",
+  "goffice",
+  "gnumeric"
+]
+gnome2_packages = gnome2_packages.uniq
+
 desc "configure all packages"
 task :configure do
   ruby("extconf.rb")
@@ -141,44 +179,6 @@ desc "run tests for all packages"
 task :test => [:build] do
   ruby("run-test.rb")
 end
-
-gtk2_base_name = "ruby-gtk2"
-gtk3_base_name = "ruby-gtk3"
-gnome2_base_name = "ruby-gnome2-all"
-
-gtk2_packages = [
-  "glib2",
-  "gobject-introspection",
-  "gio2",
-  "atk",
-  "pango",
-  "gdk_pixbuf2",
-  "gtk2",
-]
-gtk3_packages = gtk2_packages - ["gtk2"] + [
-  "cairo-gobject",
-  "gdk3",
-  "gtk3",
-]
-gnome2_packages = gtk2_packages + gtk3_packages + [
-  "gstreamer",
-  "gtksourceview2",
-  "poppler",
-  "rsvg2",
-  "vte",
-  "vte3",
-  "gtksourceview3",
-  "clutter",
-  "clutter-gtk",
-  "clutter-gstreamer",
-  "webkit-gtk",
-  "webkit-gtk2",
-  "webkit2-gtk",
-  "gsf",
-  "goffice",
-  "gnumeric"
-]
-gnome2_packages = gnome2_packages.uniq
 
 namespace :dist do
   base_files = ["AUTHORS", "COPYING.LIB", "NEWS",
