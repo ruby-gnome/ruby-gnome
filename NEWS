@@ -2,7 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME2 3.0.9: 2016-06-03
+== Ruby-GNOME2 3.0.9: 2016-08-08
 
 ??? TODO
 Adapt demos and scripts to Gtk 3.20 changes.
@@ -23,22 +23,31 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
     [patch by Hiroshi Hatake]
   * add GSF, GOffice and Gnumeric in the main Rakefile.
     [patch by cedlemo]
+  * ignore no-GI version of gdk_pixbuf2 in main run-test.rb and in the main extconf.rb.
+  * remove conditionnal macro based on HAVE_RUBY_ENCODING_H.
+  * clean code in main Rakefile.
+  * define top level windows:version:update in main Rakefile.
 
 ==== Ruby/GIO2
 
   * Improvements
   * Fixes
-    * remove needless lazy initialization
+    * remove needless lazy initialization.
+    * follow GI API improvement.
 
 ==== Ruby/GLIB2
 
   * Improvements
-    * support for GLib 2.30 on CentOS 6
+    * support for GLib 2.30 on CentOS 6.
       [ruby-list:50310][5.5]
       [ruby-list:50316][5.5]
     * add GLib 2.30 check.
     * add GLib 2.34 check.
     * support customizing signal callback.
+    * support (({GObject#bind_property_full})).
+      [patch by cedlemo]
+    * clean code and style issue.
+    * fix GC bug that alive proc may be GC-ed.
   * Fixes
     * windows: improve rake.
       * split g-ir-compiler args.
@@ -52,9 +61,20 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       * add workaround for libffi.pc isn't found on OS X.
       * enable libffi workaround for gi.
     * remove checks for old Ruby.
-    * Ruby 2.1 or later has (({rb_str_new_cstr}))
+    * Ruby 2.1 or later has (({rb_str_new_cstr})).
     * set UTF-8 encoding to (({GLIB.XXX_to_utf8})) return value.
     * remove unused variables in rbglib_convert.c.
+      [patch by cedlemo]
+    * support Ruby 2.4 Integer unification.
+      [patch Hiroshi Hatake]
+    * gnome2 rake add windows:version:update task.
+    * gnome2 rake reduce too much update.
+    * gnome2 rake accept the latest version isn't found case.
+    * gnome2 rake ignore development series.
+    * windows: update dependencies.
+      * support :freedesktop download site.
+      * support :freedesktop_gstreamer download site.
+      * ignore development version in :freedesktop_gstreamer.
 
 ==== Ruby/GStreamer
 
@@ -66,6 +86,9 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       * specify x86_64 as arch for 64bit Windows.
       * stop splitting g-ir-compiler args by default.
       * fix typo.
+    * windows: update dependencies.
+      * use :freedesktop_gstreamer download_site.
+      * update external packages.
 
 ==== Ruby/Poppler
 
@@ -74,10 +97,12 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
     * windows: improve rake file.
       * use https.
     * add missing Makefile existence check.
-    * segmentation fault in (({Poppler::Page#text_layout}))
+    * segmentation fault in (({Poppler::Page#text_layout})).
       [patch by YAMAMOTO Masayuki]
     * use (({GdkPixbuf::Pixbuf})) form in sample files.
       [patch by cedlemo]
+    * remove needless gdk_pixbuf2 build dependency.
+    * add missing make file existence check in run-test.rb.
 
 ==== Ruby/GObjectIntrospection
 
@@ -93,11 +118,16 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
     * cache (({GI::AgInfo#gclosure?})).
     * add (({GI::Loader#rubyish_class_name})).
       [patch by cedlemo]
+    * accept on_XXX as predicate method name.
+    * support gslist of structure values as return value.
+      [patch by cedlemo]
+    * make constant name easy to customize.
  * Fixes
     * fix a typo in loader.rb.
     * fix a bug that int32[] returns wrong values.
       [GitHub#758][reported by TASAKA]
     * don't return array length output argument for return value.
+    * windows: update dependencies.
 
 ==== Ruby/GDK3
 
@@ -108,6 +138,7 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
         [GitHub#750][Abby Archer]
     * use (({GdkPixbuf::Pixbuf})) form in gdk3 library and test files.
       [patch by cedlemo]
+    * Rake file update GTK+ version.
 
 ==== Ruby/GTK3
 
@@ -139,6 +170,9 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       [patch by cedlemo]
     * update pixbufs gtk demo.
       [patch by cedlemo]
+    * hide "found" return value from (({Gtk::TextView#get_iter_at_XXX})).
+      [GitHub#794][Reported by Miguel Hernández]
+    * add (({Gtk::TextView#get_iter_at}))
   * Fixes
     * guard text marks from GC.
       [GitHub#743][Reported by cedlemo]
@@ -151,7 +185,7 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       [GitHub#794][Reported by Miguel Hernandez]
     * (({Gtk::TextView#get_iter_at*})) return nil when not found.
       [GitHub#794][Reported by Miguel Hernandez]
-    * fix typo at gtk-demo
+    * fix typo at gtk-demo.
       [patch by tSU_RooT]
     * use (({GdkPixbuf::Pixbuf})) form in gtk-demo files.
       [patch by cedlemo]
@@ -159,6 +193,24 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
       [patch by cedlemo]
     * use (({GdkPixbuf::Pixbuf})) form in test files.
       [patch by cedlemo]
+    * gtk3 sample: follow (({Gtk::TextBuffer#select_bounds})) API change.
+      [GitHub#794][Reported by Miguel Hernández]
+    * (({Gtk::TextView#get_iter_at*})) return nil when not found.
+      [GitHub#794][Reported by Miguel Hernández]
+    * fix wrong method used in order to set window size in tutorial samples.
+      [patch by Renich Bon Ciric]
+    * fix label in ((#Gtk::TextView})) tests.
+    * fix typo at gtk-demo.
+      [patch by tSU_RooT]
+    * update all samples, tests, demo, tutorial to use (({GdkPixbuf#Pixbuf})).
+      [patch by cedlemo]
+    * add gtk3 demo transparent.rb.
+      [patch by cedlemo]
+    * update sample with (({Gtk::SeclectionData})) API changes.
+      [patch by cedlemo]
+    * lib and tests follow GI API improvement.
+    * test omit on old GTK+.
+    * require more newer GTK+ version for (({Gtk::TextView})) test.
 
 ==== Ruby/Pango
 
@@ -170,10 +222,11 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
     * add (({Pango::AttrShape#data})).
       [GitHub#766][Reported by cedlemo]
   * Fixes
-    * fix error with MACRO usage in rbpangoattrlist.c
+    * fix error with MACRO usage in rbpangoattrlist.c.
       [patch by cedlemo]
     * fix a bug that (({Pango#GlyphGeometry#geometry=})) does nothing.
     * fix GC related problem in rbpangocontext.c.
+    * windows: update external packages.
 
 ==== Ruby/GSF
 
@@ -181,18 +234,26 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
     * start GSF module.
       [patch by cedlemo]
   * Fixes
+    * follow GI API improvement.
+    * windows: fix external package name.
+    * windows: update external packages.
 
 ==== Ruby/GOffice
 
   * Improvements
     * start GOffice module.
       [patch by cedlemo]
+    * support version.
   * Fixes
     * add tests for GOffice.
     * use (({GI::Loader#rubyish_class_nme})) in loader.rb.
       [patch by cedlemo]
-    * add rules in order to fix issues when building objects
+    * add rules in order to fix issues when building objects.
       [patch by cedlemo]
+    * add availability check in tests.
+    * fix condition issue in test.
+    * make some tests omitted when run by Travis CI.
+    * windows: update external packages.
 
 ==== Ruby/Gnumeric
 
@@ -203,38 +264,91 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
     * add missing dependency in run-test.rb.
     * use (({GI::Loader#rubyish_class_nme})) in loader.rb.
       [patch by cedlemo]
-    * add rules in order to fix issues when building objects
+    * add rules in order to fix issues when building objects.
       [patch by cedlemo]
     * travis : add gnumeric as package to install instead of relying on dep.
       [patch by cedlemo]
+    * improve renaming rules for C structures to ruby Class in GI loader.
+      [patch by cedlemo]
+    * add rules in order to avoid 2 objects information beeing reloaded.
+      [patch by cedlemo]
+    * windows: fix external package version.
 
 ==== Ruby/GdkPixbuf2
   * Improvements
     * replace C implementation with one based on GObject-Introspection.
       [patch by cedlemo]
-    * implement backward compatibility for (({GdkPixbuf#Pixbuf.new})).
+    * implement backward compatibility for (({GdkPixbuf::Pixbuf.new})).
       [patch by cedlemo]
-    * add rubyish methods
-    * add (({GdkPixbuf::Pixbuf#composite!}))
+    * add rubyish methods.
+    * add (({GdkPixbuf::Pixbuf#composite!})).
+    * implement rubyish methods:
+       * (({GdkPixbuf#dup}))
+       * (({GdkPixbuf#fill!}))
+       * (({GdkPixbuf#rotate}))
+       * (({GdkPixbuf#saturate_and_pixelate}))
+       * (({GdkPixbuf#save}))
+       * (({GdkPixbuf#scale}))
+       * (({GdkPixbuf#scale!}))
+    * support version information.
+    * support options in (({GdkPixbuf::Pixbuf#composite})) and (({GdkPixbuf::Pixbuf#composite!})).
   * Fixes
     * remove needless lazy initialization.
     * improve tests.
     * add deprecated message for backward compatibility.
-    * add tests for (({GdkPixbuf#Pixbuf#new})).
+    * add tests for (({GdkPixbuf::Pixbuf#new})).
       [patch by cedlemo]
-    * add tests for (({GdkPixbuf#Pixbuf#dup})) and (({GdkPixbuf#Pixbuf#fill!})).
+    * add tests for (({GdkPixbuf::Pixbuf#dup})) and (({GdkPixbuf::Pixbuf#fill!})).
       [patch by cedlemo]
     * ignore no-gi version of gdk_pixbuf2 in run-test.rb and extconf.rb.
-    * add tests for (({GdkPixbuf#Pixbuf#rotate})) and (({GdkPixbuf#Pixbuf#new})).
+    * add tests for (({GdkPixbuf::Pixbuf#rotate})) and (({GdkPixbuf::Pixbuf#new})).
       [patch by cedlemo]
     * update and fix issues in the samples.
       [patch by cedlemo]
+    * improve gdk_pixbuf2 libs and tests style, and add missing copyright header.
+    * add missing GObjectIntrospection dependency in tests.
+    * add backward compatibility between the old Gdk::Pixbuf and GdkPixbuf::Pixbuf.
+    * supports running on different directory for gdk_pixbuf2 samples.
+    * add (({PixbufLoader#last_write})).
+    * add tests for (({GdkPixbuf#new})).
+      [patch by cedlemo]
+    * add tests for (({GdkPixbuf#new})) with :file and :scale parameters.
+      [patch by cedlemo]
+    * add tests for (({GdkPixbuf#new})) from subpixbuf.
+      [patch by cedlemo]
+    * add backward compatibily for (({GdkPixbuf::Pixbuf#new})) and (({GdkPixbuf::Pixbuf#new_subpixbuf})).
+    * simplify and improve tests.
+    * use warn and raise instead of puts messages.
+    * add test for (({GdkPixbuf::Pixbuf#dup})).
+      [patch by cedlemo]
+    * add test for (({GdkPixbuf::Pixbuf#new})) from data.
+      [patch by cedlemo]
+    * add test for (({GdkPixbuf::Pixbuf#fill!})).
+      [patch by cedlemo]
+    * clean (({GdkPixbuf::Pixbuf#fill!})) tests.
+    * add test for (({GdkPixbuf::Pixbuf#new})) from bytes.
+      [patch by cedlemo]
+    * clean (({GdkPixbuf::Pixbuf#new})) tests.
+    * add (({GdkPixbuf::Pixbuf#rotate})) tests.
+      [patch by cedlemo]
+    * clean (({GdkPixbuf::Pixbuf#rotate})) tests.
+    * add (({GdkPixbuf#new})) from resource test.
+     [patch by cedlemo]
+    * add (({GdkPixbuf::Pixbuf#new})) from resource at scale tests.
+      [patch by cedlemo]
+    * clean (({GdkPixbuf::Pixbuf#new})) tests.
+    * update sample with the GdkPixbuf::Pixbuf form.
+    * add deprecated hook for (({GdkPixbuf::PixbufFormat#signature})).
+    * add tests for (({GdkPixbuf::Pixbuf#saturate_and_pixelate})).
+      [patch by cedlemo]
+    * keep backward compatibility for (({Gdk::PixbufError})).
 
 ==== Ruby/VTE3
 
   * Improvements
   * Fixes
     * remove needless lazy load.
+    * windows: update external package.
 
 ==== Ruby/GTK2
 
@@ -249,6 +363,7 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
   * Fixes
     * use (({GdkPixbuf::Pixbuf})) form in library, test and sample files.
       [patch by cedlemo]
+    * windows: update external packages.
 
 ==== Ruby/Clutter
 
@@ -256,6 +371,7 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
   * Fixes
     * use (({GdkPixbuf::Pixbuf})) form in library, test and sample files.
       [patch by cedlemo]
+    * windows update version.
 
 ==== Ruby/ClutterGtk
 
@@ -266,6 +382,16 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
     * Fix issue with initialization of (({Gtk::IconView})) without hash argument.
       [patch by cedlemo]
 
+=== Ruby/ClutterGstreamer
+  * Improvements
+  * Fixes
+    * add missing gdk_pixbuf2 dependency in tests.
+
+=== Ruby/GtkSourceView3
+  * Improvements
+  * Fixes
+    * windows: update dependencies.
+
 === Thanks
 
   * Mamoru TASAKA
@@ -275,7 +401,7 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
   * Eric Cunningham
   * Hiroshi Hatake
   * Renich Bon Ciric
-  * Miguel Hernandez
+  * Miguel Hernández
   * tSU_RooT
   * YAMAMOTO Masayuki
   * cedlemo
