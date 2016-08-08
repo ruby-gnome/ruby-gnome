@@ -81,59 +81,50 @@ module SpinbuttonDemo
   end
 
   def self.hex_spin_input(button)
-    puts button.class
-    puts "hex_spin_input"
-    puts "intput --#{button.text} #{button.value} #{button.adjustment.value}--"
     value = button.text.to_i(16)
     value = 0 if value < 1e-5
     button.value = value
+    0
   end
 
   def self.hex_spin_output(button)
-    puts "hex_spin_output"
     value = button.value
-    # if value.abs < 1e-5
-      # button.text = "0x00"
-      # puts "0x00"
-    # else
-    puts "output --#{button.text} #{button.value} #{button.adjustment.value}--"
-      button.text = sprintf("0x%.2X", value)
-      puts sprintf("0x%.2X", value)
-    # end
+    button.text = sprintf("0x%.2X", value)
+    button.text = "0x00" if value.abs < 1e-5
+    true
   end
 
   def self.time_spin_input(button)
-    # puts "time_spin_input"
     str = button.text.split(":")
-    found = false
-    if str.length == 2
-      hours = str[0].to_i
-      minutes = str[1].to_i
-      if (0..24).include?(hours) &&
-         (0..60).include?(minutes)
-        return hours * 60 + minutes
-      end
+    hours = str[0].to_i
+    minutes = str[1].to_i
+    value = 0
+    if (0..24).include?(hours) && (0..60).include?(minutes)
+      value = hours * 60 + minutes
+    else
+      value = 0
     end
-    return 0
+    button.value = value
+    0
   end
 
   def self.time_spin_output(button)
-    # puts "time_spin_output"
-    hours = button.adjustment.value / 60.0
+    hours = button.value / 60.0
     minutes = (hours - hours.floor) * 60.0
+    puts hours.floor
+    puts (minutes + 0.5).floor
     button.text = sprintf("%02.0f:%02.0f", hours.floor, (minutes + 0.5).floor)
+    true
   end
 
   def self.month_spin_input(button)
-    # puts "month_spin_input"
-    # puts button.text
-    Date::MONTHNAMES.index(button.text) || 1
+    button.value = Date::MONTHNAMES.index(button.text) || 1
+    0
   end
 
   def self.month_spin_output(button)
-    # puts "month_spin_output"
     value = button.adjustment.value || 1
-    # puts Date::MONTHNAMES[value]
-    Date::MONTHNAMES[value]
+    button.text = Date::MONTHNAMES[value]
+    true
   end
 end
