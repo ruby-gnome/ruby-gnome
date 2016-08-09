@@ -211,7 +211,7 @@ namespace :dist do
     package(gnome2_base_name, base_files + gnome2_packages)
   end
 
-  ruby_versions = ["2.1.10", "2.2.4", "2.3.0"]
+  ruby_versions = ["2.1.10", "2.2.5", "2.3.1"]
   namespace :test do
     ruby_base_url = "ftp://ftp.ruby-lang.org/pub/ruby"
     ruby_versions.each do |ruby_version|
