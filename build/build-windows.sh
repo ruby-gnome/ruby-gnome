@@ -3,8 +3,8 @@
 export LANG=C
 export DEBIAN_FRONTEND=noninteractive
 
-ruby_versions="2.1.10 2.2.4 2.3.0"
-export RUBY_CC_VERSION="2.1.10:2.2.4:2.3.0"
+ruby_versions="2.1.10 2.2.5 2.3.1"
+export RUBY_CC_VERSION="2.1.10:2.2.5:2.3.1"
 
 N_CPUS=$(grep '^processor' /proc/cpuinfo | wc -l)
 export MAKE_N_JOBS=${N_CPUS}
