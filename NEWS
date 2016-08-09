@@ -4,13 +4,6 @@
 
 == Ruby-GNOME2 3.0.9: 2016-08-08
 
-??? TODO
-Adapt demos and scripts to Gtk 3.20 changes.
-Add GSF module.
-Add GOffice module.
-Add Gnumeric module.
-Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntrospection.
-
 === Changes
 
 ==== All
@@ -382,17 +375,31 @@ Replace C implementation of GdkPixbuf2 by an implementation based on GObjectIntr
     * Fix issue with initialization of (({Gtk::IconView})) without hash argument.
       [patch by cedlemo]
 
-=== Ruby/ClutterGstreamer
+==== Ruby/ClutterGstreamer
+
   * Improvements
   * Fixes
     * add missing gdk_pixbuf2 dependency in tests.
 
-=== Ruby/GtkSourceView3
+==== Ruby/GtkSourceView3
+
   * Improvements
   * Fixes
     * windows: update dependencies.
 
-=== Thanks
+==== Ruby/GSF
+
+  * Added.
+
+==== Ruby/GOffice
+
+  * Added.
+
+==== Ruby/Gnumeric
+
+  * Added.
+
+==== Thanks
 
   * Mamoru TASAKA
   * rafagf1
