@@ -12,10 +12,8 @@ class GNOME2WindowsBinaryDownloadTask
   URL_BASE = "http://ftp.gnome.org/pub/gnome/binaries"
   def initialize(package)
     @package = package
-    define
   end
 
-  private
   def define
     namespace :windows do
       namespace :downloader do
@@ -59,6 +57,7 @@ class GNOME2WindowsBinaryDownloadTask
     end
   end
 
+  private
   def dist_dir
     @package.windows.absolute_binary_dir
   end

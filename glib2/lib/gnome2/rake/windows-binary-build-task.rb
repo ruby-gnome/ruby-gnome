@@ -10,10 +10,8 @@ class GNOME2WindowsBinaryBuildTask
 
   def initialize(package)
     @package = package
-    define
   end
 
-  private
   def define
     namespace :windows do
       namespace :builder do
@@ -32,6 +30,11 @@ class GNOME2WindowsBinaryBuildTask
     end
   end
 
+  def rcairo_windows_binary_base_dir
+    rcairo_windows_dir + "vendor" + "local"
+  end
+
+  private
   def define_build_tasks
     namespace :build do
       prepare_task_names = []
@@ -216,10 +219,6 @@ class GNOME2WindowsBinaryBuildTask
   def rcairo_windows_dir
     suffix = @package.windows.build_architecture_suffix
     @package.project_root_dir.parent + "rcairo.#{suffix}"
-  end
-
-  def rcairo_windows_binary_base_dir
-    rcairo_windows_dir + "vendor" + "local"
   end
 
   def rcairo_windows_pkgconfig_path

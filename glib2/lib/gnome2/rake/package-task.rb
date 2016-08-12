@@ -93,6 +93,10 @@ module GNOME2
         @package.external_packages = packages
       end
 
+      def windows_binary_build_task
+        @windows_binary_build_task ||= GNOME2WindowsBinaryBuildTask.new(@package)
+      end
+
       private
       def initialize_variables
         @summary = ""
@@ -215,11 +219,12 @@ module GNOME2
       end
 
       def define_windows_download_task
-        GNOME2WindowsBinaryDownloadTask.new(@package)
+        task = GNOME2WindowsBinaryDownloadTask.new(@package)
+        task.define
       end
 
       def define_windows_build_task
-        GNOME2WindowsBinaryBuildTask.new(@package)
+        windows_binary_build_task.define
       end
 
       def define_windows_version_update_task
