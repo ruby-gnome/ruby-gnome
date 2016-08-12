@@ -210,7 +210,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :gobject_introspection_compiler_split_args => true,
         :patches => [
           "gst-plugins-bad-1.8.0-use-only-I.diff",
-          "gst-plugins-bad-1.8.0-add-missing-lole32.diff",
         ],
         :built_file => "lib/gstreamer-1.0/libgstmxf.dll",
       },
