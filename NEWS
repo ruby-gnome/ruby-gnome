@@ -192,7 +192,7 @@
       [GitHub#794][Reported by Miguel Hernández]
     * fix wrong method used in order to set window size in tutorial samples.
       [patch by Renich Bon Ciric]
-    * fix label in ((#Gtk::TextView})) tests.
+    * fix label in (({#Gtk::TextView})) tests.
     * fix typo at gtk-demo.
       [patch by tSU_RooT]
     * update all samples, tests, demo, tutorial to use (({GdkPixbuf#Pixbuf})).
@@ -326,7 +326,7 @@
       [patch by cedlemo]
     * clean (({GdkPixbuf::Pixbuf#rotate})) tests.
     * add (({GdkPixbuf#new})) from resource test.
-     [patch by cedlemo]
+      [patch by cedlemo]
     * add (({GdkPixbuf::Pixbuf#new})) from resource at scale tests.
       [patch by cedlemo]
     * clean (({GdkPixbuf::Pixbuf#new})) tests.
