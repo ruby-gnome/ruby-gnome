@@ -26,11 +26,14 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.windows.packages = []
   package.windows.dependencies = ["libxml2"]
   package.windows.build_dependencies = [
+    "glib2",
     "gio2",
+    "cairo-gobject",
     "gobject-introspection",
   ]
   package.windows.gobject_introspection_dependencies = [
-    "gio2"
+    "gio2",
+    "cairo-gobject",
   ]
   package.external_packages = [
     {
