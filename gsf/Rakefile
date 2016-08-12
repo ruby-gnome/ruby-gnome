@@ -47,6 +47,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         ],
         :patches => [
         ]
+        :built_file => "bin/libgsf-win32-1-114.dll",
       },
     },
   ]
