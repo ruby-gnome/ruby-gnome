@@ -18,6 +18,7 @@ matrix:
   fast_finish: true
 before_install:
   - gem install bundler
+  - sudo apt-get install -y clutter
 before_script:
   - ./travis-before-script.sh
   - sh -e /etc/init.d/xvfb start
