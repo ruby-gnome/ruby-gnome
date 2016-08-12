@@ -197,10 +197,26 @@ extern void rbgobj_set_signal_func(VALUE klass, const gchar *sig_name, GValToRVa
 extern GValToRValSignalFunc rbgobj_get_signal_func(guint signal_id);
 extern VALUE rbgobj_signal_wrap(guint sig_id);
 
+typedef struct {
+    GValue *return_value;
+    guint n_param_values;
+    const GValue *param_values;
+    VALUE callback;
+    VALUE extra_args;
+} RGClosureCallData;
+typedef void (*RGClosureCallFunc)(RGClosureCallData *data);
+
+extern void rbgobj_set_signal_call_func(VALUE klass,
+                                        const gchar *signal_name,
+                                        RGClosureCallFunc func);
+extern RGClosureCallFunc rbgobj_get_signal_call_func(guint signal_id);
 
 /* rbgobj_closure.c */
 extern GClosure* g_rclosure_new(VALUE callback_proc, VALUE extra_args,
                                 GValToRValSignalFunc func);
+extern GClosure* g_rclosure_new_call(VALUE callback_proc,
+                                     VALUE extra_args,
+                                     RGClosureCallFunc func);
 extern void g_rclosure_attach(GClosure *closure, VALUE object);
 extern void g_rclosure_set_tag(GClosure *closure, const gchar *tag);
 

@@ -51,6 +51,28 @@ rbgobj_get_signal_func(guint signal_id)
     return func;
 }
 
+static VALUE signal_call_func_table;
+
+void
+rbgobj_set_signal_call_func(VALUE klass,
+                            const gchar *signal_name,
+                            RGClosureCallFunc func)
+{
+    VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
+    guint signal_id = g_signal_lookup(signal_name, CLASS2GTYPE(klass));
+    rb_hash_aset(signal_call_func_table, UINT2NUM(signal_id), obj);
+}
+
+RGClosureCallFunc
+rbgobj_get_signal_call_func(guint signal_id)
+{
+    RGClosureCallFunc func = NULL;
+    VALUE func_obj = rb_hash_aref(signal_call_func_table, UINT2NUM(signal_id));
+    if (!NIL_P(func_obj))
+        Data_Get_Struct(func_obj, void, func);
+    return func;
+}
+
 /**********************************************************************/
 
 static VALUE eNoSignalError;
@@ -321,8 +343,19 @@ gobj_sig_connect_impl(gboolean after, int argc, VALUE *argv, VALUE self)
                           rb_str_new_cstr(normalized_signal_name),
                           rb_block_proc());
     }
-    rclosure = g_rclosure_new(func, rest, 
-                              rbgobj_get_signal_func(signal_id));
+    {
+        RGClosureCallFunc call_func;
+        call_func = rbgobj_get_signal_call_func(signal_id);
+        if (call_func) {
+            rclosure = g_rclosure_new_call(func,
+                                           rest,
+                                           call_func);
+        } else {
+            rclosure = g_rclosure_new(func,
+                                      rest,
+                                      rbgobj_get_signal_func(signal_id));
+        }
+    }
     g_rclosure_attach((GClosure *)rclosure, self);
     g_object = RVAL2GOBJ(self);
     tag = g_strdup_printf("%s::%s",
@@ -946,6 +979,9 @@ Init_gobject_gsignal(void)
 
     signal_func_table = rb_hash_new();
     rb_global_variable(&signal_func_table);
+
+    signal_call_func_table = rb_hash_new();
+    rb_global_variable(&signal_call_func_table);
 
     rbg_define_method(mMetaInterface, "signal_new", gobj_s_signal_new, -1);
     rbg_define_method(mMetaInterface, "signals", gobj_s_signals, -1);

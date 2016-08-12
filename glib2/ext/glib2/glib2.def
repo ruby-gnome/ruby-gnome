@@ -56,10 +56,13 @@ EXPORTS
 	rbgobj_register_type
 	rbgobj_set_signal_func
 	rbgobj_get_signal_func
+	rbgobj_set_signal_call_func
+	rbgobj_get_signal_call_func
 	rbgobj_add_constants
 	rbgobj_constant_remap
 	rbgobj_signal_wrap
 	g_rclosure_new
+	g_rclosure_new_call
 	g_rclosure_attach
 	g_rclosure_set_tag
 	rbgobj_ruby_value_get_type

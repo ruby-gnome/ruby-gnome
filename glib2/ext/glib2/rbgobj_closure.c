@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2016  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2006  Ruby-GNOME2 Project
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -38,6 +38,7 @@ struct _GRClosure
     gint count;
     GList *objects;
     GValToRValSignalFunc g2r_func;
+    RGClosureCallFunc call_func;
     gchar tag[TAG_SIZE];
 };
 
@@ -70,37 +71,50 @@ rclosure_alive_p(GRClosure *rclosure)
 static VALUE
 rclosure_marshal_do(VALUE arg_)
 {
-    struct marshal_arg *arg;
-    GRClosure*      rclosure;
-    GValue*         return_value;
-    guint           n_param_values;
-    const GValue*   param_values;
-    /* gpointer        invocation_hint;*/
-    /* gpointer        marshal_data; */
-
     VALUE ret = Qnil;
-    VALUE args;
-    GValToRValSignalFunc func;
+    struct marshal_arg *arg;
+    GRClosure  *rclosure;
+    GValue *return_value;
 
-    arg = (struct marshal_arg*)arg_;
-    rclosure        = (GRClosure *)(arg->closure);
-    return_value    = arg->return_value;   
-    n_param_values  = arg->n_param_values; 
-    param_values    = arg->param_values;
-    /* invocation_hint = arg->invocation_hint; */
-    /* marshal_data    = arg->marshal_data; */
-
-    if (rclosure->g2r_func){
-        func = (GValToRValSignalFunc)rclosure->g2r_func;
-    } else { 
-        func = (GValToRValSignalFunc)rclosure_default_g2r_func;
-    }
-    args = (*func)(n_param_values, param_values);
+    arg = (struct marshal_arg *)arg_;
+    rclosure = (GRClosure *)(arg->closure);
+    return_value = arg->return_value;
 
     if (rclosure_alive_p(rclosure)) {
-        VALUE callback, extra_args;
+        guint n_param_values;
+        const GValue *param_values;
+        /* gpointer invocation_hint;*/
+        /* gpointer marshal_data; */
+        GValToRValSignalFunc g2r_func;
+        VALUE callback;
+        VALUE extra_args;
+        VALUE args;
+
+        n_param_values  = arg->n_param_values;
+        param_values = arg->param_values;
+        /* invocation_hint = arg->invocation_hint; */
+        /* marshal_data = arg->marshal_data; */
+
         callback = rclosure->callback;
         extra_args = rclosure->extra_args;
+
+        if (rclosure->call_func) {
+            RGClosureCallData data;
+            data.return_value = return_value;
+            data.n_param_values = n_param_values;
+            data.param_values = param_values;
+            data.callback = callback;
+            data.extra_args = extra_args;
+            rclosure->call_func(&data);
+            return Qnil;
+        }
+
+        if (rclosure->g2r_func) {
+            g2r_func = (GValToRValSignalFunc)rclosure->g2r_func;
+        } else {
+            g2r_func = (GValToRValSignalFunc)rclosure_default_g2r_func;
+        }
+        args = (*g2r_func)(n_param_values, param_values);
 
         if (!NIL_P(extra_args)) {
             args = rb_ary_concat(args, extra_args);
@@ -210,8 +224,11 @@ gr_closure_holder_free(GRClosure *rclosure)
     }
 }
 
-GClosure*
-g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_func)
+static GClosure *
+g_rclosure_new_raw(VALUE callback_proc,
+                   VALUE extra_args,
+                   GValToRValSignalFunc g2r_func,
+                   RGClosureCallFunc call_func)
 {
     GRClosure* closure;
 
@@ -219,6 +236,7 @@ g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_f
 
     closure->count      = 1;
     closure->g2r_func   = g2r_func;
+    closure->call_func  = call_func;
     closure->objects    = NULL;
     closure->callback   = callback_proc;
     closure->extra_args = extra_args;
@@ -233,6 +251,25 @@ g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_f
                                       &rclosure_invalidate);
 
     return (GClosure*)closure;
+}
+
+GClosure *
+g_rclosure_new(VALUE callback_proc,
+               VALUE extra_args,
+               GValToRValSignalFunc g2r_func)
+{
+    return g_rclosure_new_raw(callback_proc, extra_args, g2r_func, NULL);
+}
+
+GClosure *
+g_rclosure_new_call(VALUE callback_proc,
+                    VALUE extra_args,
+                    RGClosureCallFunc call_func)
+{
+    return g_rclosure_new_raw(callback_proc,
+                              extra_args,
+                              NULL,
+                              call_func);
 }
 
 static void
