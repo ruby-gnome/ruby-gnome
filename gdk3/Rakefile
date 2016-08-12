@@ -92,6 +92,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :version => "3.20",
       :compression_method => "xz",
       :windows => {
+        :use_gobject_introspection => false,
         :configure_args => [],
         :build_concurrently => false,
         :built_file => "share/icons/Adwaita/index.theme",

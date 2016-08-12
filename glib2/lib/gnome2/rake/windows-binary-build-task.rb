@@ -296,9 +296,7 @@ module GNOME2
        end
 
        def add_gobject_introspection_make_args(package, common_make_args)
-         unless @package.windows.build_dependencies.include?("gobject-introspection")
-           return
-         end
+         return unless use_gobject_introspection?(package)
 
          g_ir_scanner = "#{@package.project_root_dir}/gobject-introspection/"
          g_ir_scanner << "#{@package.native.relative_binary_dir}/bin/g-ir-scanner"
@@ -341,6 +339,11 @@ module GNOME2
            "#{compute_base_dir.call(dependent_package)}/share"
          end
          common_make_args << "XDG_DATA_DIRS=#{data_dirs.join(File::PATH_SEPARATOR)}"
+       end
+
+       def use_gobject_introspection?(package)
+         return false unless package.windows.use_gobject_introspection?
+         @package.windows.build_dependencies.include?("gobject-introspection")
        end
      end
    end

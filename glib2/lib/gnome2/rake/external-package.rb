@@ -235,7 +235,8 @@ module GNOME2
                                               :need_autoreconf,
                                               :build_concurrently,
                                               :use_cc_environment_variable,
-                                              :gobject_introspection_compiler_split_args)
+                                              :gobject_introspection_compiler_split_args,
+                                              :use_gobject_introspection)
         def initialize(properties)
           super()
           properties.each do |key, value|
@@ -293,6 +294,10 @@ module GNOME2
 
         def gobject_introspection_compiler_split_args?
           gobject_introspection_compiler_split_args
+        end
+
+        def use_gobject_introspection?
+          use_gobject_introspection.nil? ? true : use_gobject_introspection
         end
       end
 
