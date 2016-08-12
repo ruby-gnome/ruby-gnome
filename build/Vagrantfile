@@ -23,7 +23,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                         :privileged => false,
                         :path => "build-#{target}.sh")
       config.vm.provider("virtualbox") do |virtual_box|
-        virtual_box.cpus = (ENV["N_CPUS"] || 1).to_i
+        system_n_cpus = 1
+        if File.exist?("/proc/cpuinfo")
+          system_n_cpus = File.readlines("/proc/cpuinfo").grep(/^processor/).size
+        end
+        if system_n_cpus > 1
+          vm_n_cpus = system_n_cpus / 2
+        else
+          vm_n_cpus = 1
+        end
+        virtual_box.cpus = (ENV["N_CPUS"] || vm_n_cpus).to_i
       end
     end
   end
