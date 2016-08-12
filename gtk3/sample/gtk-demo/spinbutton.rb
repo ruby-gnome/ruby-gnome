@@ -83,8 +83,7 @@ module SpinbuttonDemo
   def self.hex_spin_input(button)
     value = button.text.to_i(16)
     value = 0 if value < 1e-5
-    button.value = value
-    0
+    value
   end
 
   def self.hex_spin_output(button)
@@ -101,25 +100,19 @@ module SpinbuttonDemo
     value = 0
     if (0..24).include?(hours) && (0..60).include?(minutes)
       value = hours * 60 + minutes
-    else
-      value = 0
     end
-    button.value = value
-    0
+    value
   end
 
   def self.time_spin_output(button)
     hours = button.value / 60.0
     minutes = (hours - hours.floor) * 60.0
-    puts hours.floor
-    puts (minutes + 0.5).floor
     button.text = sprintf("%02.0f:%02.0f", hours.floor, (minutes + 0.5).floor)
     true
   end
 
   def self.month_spin_input(button)
     button.value = Date::MONTHNAMES.index(button.text) || 1
-    0
   end
 
   def self.month_spin_output(button)
