@@ -5,7 +5,7 @@
 require "open-uri"
 require "pathname"
 
-class GNOME2
+module GNOME2
   module Rake
     class WindowsBinaryBuildTask
       include ::Rake::DSL
