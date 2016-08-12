@@ -634,6 +634,7 @@ Init_gtk3(void)
 
     rbgtk3_cell_layout_init();
     rbgtk3_container_init();
+    rbgtk3_spin_button_init();
     rbgtk3_tree_model_init();
     rbgtk3_tree_view_init();
     rbgtk3_widget_init();
