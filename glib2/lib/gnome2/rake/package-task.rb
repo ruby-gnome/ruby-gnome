@@ -94,7 +94,7 @@ module GNOME2
       end
 
       def windows_binary_build_task
-        @windows_binary_build_task ||= GNOME2WindowsBinaryBuildTask.new(@package)
+        @windows_binary_build_task ||= WindowsBinaryBuildTask.new(@package)
       end
 
       private
@@ -219,7 +219,7 @@ module GNOME2
       end
 
       def define_windows_download_task
-        task = GNOME2WindowsBinaryDownloadTask.new(@package)
+        task = WindowsBinaryDownloadTask.new(@package)
         task.define
       end
 
