@@ -33,6 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           vm_n_cpus = 1
         end
         virtual_box.cpus = (ENV["N_CPUS"] || vm_n_cpus).to_i
+        virtual_box.memory = (ENV["VM_MEMORY"] || 1024).to_i
       end
     end
   end
