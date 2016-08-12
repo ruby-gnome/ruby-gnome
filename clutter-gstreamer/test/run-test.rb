@@ -68,4 +68,11 @@ rescue GLib::Error
   exit(true)
 end
 
+begin
+  Clutter.init
+rescue Clutter::InitError
+  puts("Omit because initialization is failed: #{$!.message}")
+  exit(true)
+end
+
 exit Test::Unit::AutoRunner.run(true, File.join(clutter_gstreamer_base, "test"))

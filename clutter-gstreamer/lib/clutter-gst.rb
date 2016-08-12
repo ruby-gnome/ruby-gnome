@@ -57,11 +57,11 @@ module ClutterGst
 
   self.load_version = nil
 
+  class InitError < StandardError
+  end
+
   class Loader < GObjectIntrospection::Loader
     NAMESPACE = "ClutterGst"
-
-    class InitError < StandardError
-    end
 
     def initialize(base_module, init_arguments)
       super(base_module)

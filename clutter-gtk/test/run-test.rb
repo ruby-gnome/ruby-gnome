@@ -76,6 +76,13 @@ rescue GLib::Error
   exit(true)
 end
 
+begin
+  ClutterGtk.init
+rescue ClutterGtk::InitError
+  puts("Omit because initialization is failed: #{$!.message}")
+  exit(true)
+end
+
 # exclude sample/test-*
 clutter_gtk_test_base = File.join(clutter_gtk_base, "test")
 exit Test::Unit::AutoRunner.run(true, clutter_gtk_test_base)

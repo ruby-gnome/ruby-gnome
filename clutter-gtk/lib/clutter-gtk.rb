@@ -50,10 +50,10 @@ module ClutterGtk
     end
   end
 
-  class Loader < GObjectIntrospection::Loader
-    class InitError < StandardError
-    end
+  class InitError < StandardError
+  end
 
+  class Loader < GObjectIntrospection::Loader
     NAMESPACE = "GtkClutter"
 
     def initialize(base_module, init_arguments)
