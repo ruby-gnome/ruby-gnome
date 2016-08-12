@@ -403,6 +403,8 @@ namespace :gem do
       "webkit-gtk",
       "webkit-gtk2",
       "webkit2-gtk",
+      "goffice",
+      "gnumeric",
     ]
     windows_gnome2_packages = gnome2_packages - windows_unsupported_packages
 
