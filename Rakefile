@@ -497,7 +497,9 @@ namespace :gem do
     task :push do
       windows_gnome2_packages.each do |package|
         ruby("-S", "gem", "push",
-             *Dir.glob(File.join(package, "pkg", "*-#{version}-x86-mingw32.gem")))
+             File.join("build", "pkg", "#{package}-#{version}-x86-mingw32.gem"))
+        ruby("-S", "gem", "push",
+             File.join("build", "pkg", "#{package}-#{version}-x64-mingw32.gem"))
       end
     end
   end
