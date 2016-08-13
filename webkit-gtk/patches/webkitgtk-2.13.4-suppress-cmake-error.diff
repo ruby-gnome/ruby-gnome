@@ -1,0 +1,12 @@
+diff -ru webkitgtk-2.13.4.orig/Tools/CMakeLists.txt webkitgtk-2.13.4/Tools/CMakeLists.txt
+--- webkitgtk-2.13.4.orig/Tools/CMakeLists.txt	2016-07-20 12:15:24.000000000 +0000
++++ webkitgtk-2.13.4/Tools/CMakeLists.txt	2016-08-13 07:46:03.212604891 +0000
+@@ -40,7 +40,7 @@
+ if (WIN32)
+     add_subdirectory(DumpRenderTree)
+     add_subdirectory(TestWebKitAPI)
+-    add_subdirectory(MiniBrowser/win)
++#    add_subdirectory(MiniBrowser/win)
+ endif ()
+ 
+ if (ENABLE_WEBKIT2 AND ENABLE_API_TESTS)
