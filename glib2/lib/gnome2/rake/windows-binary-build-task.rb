@@ -36,6 +36,10 @@ module GNOME2
         rcairo_windows_dir + "vendor" + "local"
       end
 
+      def glib2_binary_base_dir
+        @package.glib2_root_dir + "vendor" + "local"
+      end
+
       private
       def define_build_tasks
         namespace :build do
@@ -204,10 +208,6 @@ module GNOME2
 
       def license_dir
         dist_dir + "share" + "license"
-      end
-
-      def glib2_binary_base_dir
-        @package.glib2_root_dir + "vendor" + "local"
       end
 
       def glib2_include_path
