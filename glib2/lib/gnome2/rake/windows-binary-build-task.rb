@@ -32,8 +32,8 @@ module GNOME2
         end
       end
 
-      def rcairo_windows_binary_base_dir
-        rcairo_windows_dir + "vendor" + "local"
+      def rcairo_binary_base_dir
+        rcairo_dir + "vendor" + "local"
       end
 
       def glib2_binary_base_dir
@@ -55,7 +55,7 @@ module GNOME2
               ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
                 File.expand_path(path)
               end.join(":")
-              ENV["PKG_CONFIG_LIBDIR"] = rcairo_windows_pkgconfig_path
+              ENV["PKG_CONFIG_LIBDIR"] = rcairo_pkgconfig_path
             end
 
             prepare_task_names << "pkg_config_for_build"
@@ -218,21 +218,21 @@ module GNOME2
         "#{glib2_binary_base_dir}/lib"
       end
 
-      def rcairo_windows_dir
+      def rcairo_dir
         suffix = @package.windows.build_architecture_suffix
         @package.project_root_dir.parent + "rcairo.#{suffix}"
       end
 
-      def rcairo_windows_pkgconfig_path
-        "#{rcairo_windows_binary_base_dir}/lib/pkgconfig"
+      def rcairo_pkgconfig_path
+        "#{rcairo_binary_base_dir}/lib/pkgconfig"
       end
 
-      def rcairo_windows_include_path
-        "#{rcairo_windows_binary_base_dir}/include"
+      def rcairo_include_path
+        "#{rcairo_binary_base_dir}/include"
       end
 
-      def rcairo_windows_lib_path
-        "#{rcairo_windows_binary_base_dir}/lib"
+      def rcairo_lib_path
+        "#{rcairo_binary_base_dir}/lib"
       end
 
       def cc(package)
@@ -260,7 +260,7 @@ module GNOME2
           include_paths += [glib2_include_path]
         end
         include_paths += [
-          rcairo_windows_include_path,
+          rcairo_include_path,
           dist_dir + 'include',
         ]
         cppflags = include_paths.collect do |path|
@@ -275,7 +275,7 @@ module GNOME2
           library_paths += [glib2_lib_path]
         end
         library_paths += [
-          rcairo_windows_lib_path,
+          rcairo_lib_path,
           dist_dir + 'lib',
         ]
         ldflags = library_paths.collect do |path|
@@ -287,7 +287,7 @@ module GNOME2
       def cmake_root_paths
         paths = [
           "/usr/#{@package.windows.build_host}",
-          rcairo_windows_binary_base_dir.to_path,
+          rcairo_binary_base_dir.to_path,
         ]
         @package.windows.build_dependencies.each do |package|
           paths << "#{@package.project_root_dir}/#{package}/vendor/local"

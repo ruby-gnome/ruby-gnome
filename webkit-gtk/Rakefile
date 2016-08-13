@@ -41,8 +41,8 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "gdk3",
     "gstreamer",
   ]
-  # rcairo_windows_binary_base_dir =
-  #   package.windows_binary_build_task.rcairo_windows_binary_base_dir
+  # rcairo_binary_base_dir =
+  #   package.windows_binary_build_task.rcairo_binary_base_dir
   # glib2_binary_base_dir = package.windows_binary_build_task.glib2_binary_base_dir
   package.external_packages = [
     # {
@@ -111,7 +111,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     #   :windows => {
     #     :built_file => "bin/libxslt-1.dll",
     #     :configure_args => [
-    #       "--with-libxml-prefix=#{rcairo_windows_binary_base_dir}",
+    #       "--with-libxml-prefix=#{rcairo_binary_base_dir}",
     #       "--without-python",
     #     ],
     #     :patches => [
@@ -130,14 +130,14 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     #       "-DPORT=GTK",
     #       "-DJPEG_INCLUDE_DIR=#{package.windows.absolute_binary_dir}/include",
     #       "-DJPEG_LIBRARY=#{package.windows.absolute_binary_dir}/lib",
-    #       "-DPC_FONTCONFIG_INCLUDEDIR=#{rcairo_windows_binary_base_dir}/include",
-    #       "-DPC_FONTCONFIG_LIBDIR=#{rcairo_windows_binary_base_dir}/lib",
+    #       "-DPC_FONTCONFIG_INCLUDEDIR=#{rcairo_binary_base_dir}/include",
+    #       "-DPC_FONTCONFIG_LIBDIR=#{rcairo_binary_base_dir}/lib",
     #       "-DPC_GNUTLS_INCLUDEDIR=#{glib2_binary_base_dir}/include",
     #       "-DPC_GNUTLS_LIBDIR=#{glib2_binary_base_dir}/lib",
-    #       "-DZLIB_INCLUDE_DIR=#{rcairo_windows_binary_base_dir}/include",
-    #       "-DZLIB_LIBRARY=#{rcairo_windows_binary_base_dir}/lib",
-    #       "-DPNG_INCLUDE_DIR=#{rcairo_windows_binary_base_dir}/include",
-    #       "-DPNG_LIBRARY=#{rcairo_windows_binary_base_dir}/lib",
+    #       "-DZLIB_INCLUDE_DIR=#{rcairo_binary_base_dir}/include",
+    #       "-DZLIB_LIBRARY=#{rcairo_binary_base_dir}/lib",
+    #       "-DPNG_INCLUDE_DIR=#{rcairo_binary_base_dir}/include",
+    #       "-DPNG_LIBRARY=#{rcairo_binary_base_dir}/lib",
     #       "-DUSE_SYSTEM_MALLOC=ON",
     #       "-DENABLE_PLUGIN_PROCESS_GTK2=OFF",
     #       "-DENABLE_X11_TARGET=OFF",
