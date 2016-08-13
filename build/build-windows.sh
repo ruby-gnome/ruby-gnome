@@ -21,6 +21,7 @@ run()
 }
 
 if [ ! -f ~/setup.timestamp ]; then
+  run sudo rm -rf /etc/udev/rules.d/70-persistent-net.rules/
   run sudo sed -i'' -e 's,http://us,http://jp,g' /etc/apt/sources.list
   run sudo apt-get update
 
