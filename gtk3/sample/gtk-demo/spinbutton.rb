@@ -112,7 +112,7 @@ module SpinbuttonDemo
   end
 
   def self.month_spin_input(button)
-    button.value = Date::MONTHNAMES.index(button.text) || 1
+    Date::MONTHNAMES.index(button.text) || 1
   end
 
   def self.month_spin_output(button)
