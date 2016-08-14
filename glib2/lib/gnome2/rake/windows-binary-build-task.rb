@@ -140,6 +140,7 @@ module GNOME2
           # ENV["GI_SCANNER_DEBUG"] = "save-temps"
           # build_make_args << "--debug"
           # build_make_args << "V=1"
+          # build_make_args << "VERBOSE=1"
           sh("nice", "make", *build_make_args) or exit(false)
           sh("make", "install", *install_make_args) or exit(false)
 
