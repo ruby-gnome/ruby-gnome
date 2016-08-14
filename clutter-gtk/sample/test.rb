@@ -128,7 +128,7 @@ stage.signal_connect("button-press-event") do |_stage, event|
   Clutter::Event::STOP
 end
 stage.signal_connect("key-release-event") do |_stage, event|
-  puts("*** key press event (key:#{[event.key_unicode].pack('U*')}) ***")
+  puts("*** key press event (key:#{event.key_unicode}) ***")
   case event.key_symbol
   when Clutter::Keys::KEY_q
       Gtk.main_quit
