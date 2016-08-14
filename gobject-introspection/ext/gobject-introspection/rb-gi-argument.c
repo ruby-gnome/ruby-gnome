@@ -2633,16 +2633,16 @@ rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
         argument->v_boolean = RVAL2CBOOL(rb_argument);
         break;
     case GI_TYPE_TAG_INT8:
-        argument->v_int8 = NUM2INT(rb_argument);
+        argument->v_int8 = NUM2CHR(rb_argument);
         break;
     case GI_TYPE_TAG_UINT8:
-        argument->v_uint8 = NUM2UINT(rb_argument);
+        argument->v_uint8 = (guint8)NUM2CHR(rb_argument);
         break;
     case GI_TYPE_TAG_INT16:
-        argument->v_int16 = NUM2INT(rb_argument);
+        argument->v_int16 = NUM2SHORT(rb_argument);
         break;
     case GI_TYPE_TAG_UINT16:
-        argument->v_uint16 = NUM2UINT(rb_argument);
+        argument->v_uint16 = NUM2USHORT(rb_argument);
         break;
     case GI_TYPE_TAG_INT32:
         argument->v_int32 = NUM2INT(rb_argument);
