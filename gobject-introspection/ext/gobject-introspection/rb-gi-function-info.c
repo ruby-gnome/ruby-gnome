@@ -1194,7 +1194,7 @@ arguments_free(VALUE rb_arguments,
                 GIArgument *argument;
 
                 rb_arg_index = metadata->rb_arg_index;
-                if (rb_arg_index > 0) {
+                if (RARRAY_LEN(rb_arguments) > rb_arg_index) {
                     rb_argument = RARRAY_PTR(rb_arguments)[rb_arg_index];
                 }
                 argument = &(g_array_index(in_args, GIArgument, in_arg_index));
