@@ -42,9 +42,7 @@ theme = Gtk::IconTheme.default
   "devhelp",
   "empathy",
   "evince",
-  "gnome-panel",
   "seahorse",
-  "sound-juicer",
   "totem",
 ].each do |icon_name|
   pixbuf = theme.load_icon(icon_name, 48, 0)
