@@ -33,10 +33,15 @@ module GLib
   def exit_application(exception, status)
     msg = exception.message || exception.to_s
     msg = exception.class.to_s if msg == ""
-    backtrace = exception.backtrace
-    $stderr.puts backtrace.shift + ": #{msg}"
+    backtrace = exception.backtrace || []
+    first_line = backtrace.shift
+    if first_line
+      $stderr.puts("#{first_line}: #{msg}")
+    else
+      $stderr.puts(msg)
+    end
     backtrace.each do |v|
-      $stderr.puts "\t from #{v}"
+      $stderr.puts("\t from #{v}")
     end
     exit(status)
   end
