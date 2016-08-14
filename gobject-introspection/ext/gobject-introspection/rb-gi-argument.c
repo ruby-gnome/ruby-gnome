@@ -3015,7 +3015,7 @@ set_in_array_int16_arguments_from_ruby(GIArgument *array_argument,
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(gint16, n_args);
     for (i = 0; i < n_args; i++) {
-        numbers[i] = NUM2INT(RARRAY_PTR(rb_number_array)[i]);
+        numbers[i] = NUM2SHORT(RARRAY_PTR(rb_number_array)[i]);
     }
 
     array_argument->v_pointer = numbers;
@@ -3031,7 +3031,7 @@ set_in_array_uint16_arguments_from_ruby(GIArgument *array_argument,
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(guint16, n_args);
     for (i = 0; i < n_args; i++) {
-        numbers[i] = NUM2UINT(RARRAY_PTR(rb_number_array)[i]);
+        numbers[i] = NUM2USHORT(RARRAY_PTR(rb_number_array)[i]);
     }
 
     array_argument->v_pointer = numbers;
