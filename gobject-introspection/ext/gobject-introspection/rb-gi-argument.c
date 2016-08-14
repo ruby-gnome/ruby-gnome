@@ -3006,6 +3006,38 @@ set_in_array_length_argument(GIArgument *argument,
 }
 
 static void
+set_in_array_int8_arguments_from_ruby(GIArgument *array_argument,
+                                      VALUE rb_number_array)
+{
+    gint8 *numbers;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_number_array);
+    numbers = ALLOC_N(gint8, n_args);
+    for (i = 0; i < n_args; i++) {
+        numbers[i] = NUM2CHR(RARRAY_PTR(rb_number_array)[i]);
+    }
+
+    array_argument->v_pointer = numbers;
+}
+
+static void
+set_in_array_uint8_arguments_from_ruby(GIArgument *array_argument,
+                                       VALUE rb_number_array)
+{
+    guint8 *numbers;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_number_array);
+    numbers = ALLOC_N(guint8, n_args);
+    for (i = 0; i < n_args; i++) {
+        numbers[i] = (guint8)NUM2CHR(RARRAY_PTR(rb_number_array)[i]);
+    }
+
+    array_argument->v_pointer = numbers;
+}
+
+static void
 set_in_array_int16_arguments_from_ruby(GIArgument *array_argument,
                                        VALUE rb_number_array)
 {
@@ -3296,10 +3328,28 @@ in_array_c_argument_from_ruby(GIArgument *array_argument,
                  g_type_tag_to_string(element_type_tag));
         break;
     case GI_TYPE_TAG_INT8:
+        if (RB_TYPE_P(rb_argument, RUBY_T_STRING)) {
+            array_argument->v_pointer = RSTRING_PTR(rb_argument);
+            set_in_array_length_argument(length_argument, length_type_info,
+                                         RSTRING_LEN(rb_argument));
+        } else {
+            rb_argument = rbg_to_array(rb_argument);
+            set_in_array_int8_arguments_from_ruby(array_argument, rb_argument);
+            set_in_array_length_argument(length_argument, length_type_info,
+                                         RARRAY_LEN(rb_argument));
+        }
+        break;
     case GI_TYPE_TAG_UINT8:
-        array_argument->v_pointer = RSTRING_PTR(rb_argument);
-        set_in_array_length_argument(length_argument, length_type_info,
-                                     RSTRING_LEN(rb_argument));
+        if (RB_TYPE_P(rb_argument, RUBY_T_STRING)) {
+            array_argument->v_pointer = RSTRING_PTR(rb_argument);
+            set_in_array_length_argument(length_argument, length_type_info,
+                                         RSTRING_LEN(rb_argument));
+        } else {
+            rb_argument = rbg_to_array(rb_argument);
+            set_in_array_uint8_arguments_from_ruby(array_argument, rb_argument);
+            set_in_array_length_argument(length_argument, length_type_info,
+                                         RARRAY_LEN(rb_argument));
+        }
         break;
     case GI_TYPE_TAG_INT16:
         rb_argument = rbg_to_array(rb_argument);
@@ -3571,7 +3621,8 @@ rb_gi_in_array_argument_from_ruby(GIArgument *array_argument,
 }
 
 static void
-rb_gi_value_argument_free_array_c(GIArgument *argument,
+rb_gi_value_argument_free_array_c(VALUE rb_argument,
+                                  GIArgument *argument,
                                   G_GNUC_UNUSED GITypeInfo *type_info,
                                   GITypeInfo *element_type_info)
 {
@@ -3587,7 +3638,11 @@ rb_gi_value_argument_free_array_c(GIArgument *argument,
         break;
     case GI_TYPE_TAG_INT8:
     case GI_TYPE_TAG_UINT8:
-        /* Do nothing */
+        if (RB_TYPE_P(rb_argument, RUBY_T_STRING)) {
+            /* Do nothing */
+        } else {
+            xfree(argument->v_pointer);
+        }
         break;
     case GI_TYPE_TAG_INT16:
     case GI_TYPE_TAG_UINT16:
@@ -3627,7 +3682,9 @@ rb_gi_value_argument_free_array_c(GIArgument *argument,
 }
 
 static void
-rb_gi_value_argument_free_array(GIArgument *argument, GITypeInfo *type_info)
+rb_gi_value_argument_free_array(VALUE rb_argument,
+                                GIArgument *argument,
+                                GITypeInfo *type_info)
 {
     GIArrayType array_type;
     GITypeInfo *element_type_info;
@@ -3636,7 +3693,8 @@ rb_gi_value_argument_free_array(GIArgument *argument, GITypeInfo *type_info)
     element_type_info = g_type_info_get_param_type(type_info, 0);
     switch (array_type) {
     case GI_ARRAY_TYPE_C:
-        rb_gi_value_argument_free_array_c(argument,
+        rb_gi_value_argument_free_array_c(rb_argument,
+                                          argument,
                                           type_info,
                                           element_type_info);
         break;
@@ -3706,7 +3764,7 @@ rb_gi_value_argument_free(VALUE rb_argument,
     case GI_TYPE_TAG_FILENAME:
         break;
     case GI_TYPE_TAG_ARRAY:
-        rb_gi_value_argument_free_array(argument, type_info);
+        rb_gi_value_argument_free_array(rb_argument, argument, type_info);
         break;
     case GI_TYPE_TAG_INTERFACE:
         rb_gi_value_argument_free_interface(rb_argument, argument, type_info);
