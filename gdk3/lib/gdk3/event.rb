@@ -29,6 +29,16 @@ module Gdk
   end
 
   class EventFocus
+    alias_method :in_raw=, :in=
+    def in=(value)
+      if value == true
+        value = 1
+      elsif !value
+        vaule = 0
+      end
+      self.in_raw = value
+    end
+
     alias_method :in_raw, :in
     remove_method :in
     def in?
