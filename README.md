@@ -1,11 +1,32 @@
-# README
-
 [![Build Status](https://travis-ci.org/ruby-gnome2/ruby-gnome2.svg?branch=master)](https://travis-ci.org/ruby-gnome2/ruby-gnome2)
+[![Gem Version](https://badge.fury.io/rb/gtk3.svg)](https://badge.fury.io/rb/gtk3)
+# Ruby-GNOME2
+![Ruby-GNOME2 Logo](https://avatars1.githubusercontent.com/u/416159?v=3&s=200)
+Ruby bindings for GNOME
 
-## Ruby-GNOME2 -- Ruby bindings for GNOME
 
 This is a set of bindings for the GNOME 2.x and 3.x libraries to use
 from Ruby 2.1, 2.2 and 2.3.
+
+## Installation
+
+### Install the current releases.
+
+The gems of the Ruby-GNOME2 projects can be easily installed with the `gem` command.
+For example in order to install the gtk3 gem and its dependencies:
+
+    gem install gtk3
+
+### Install from GitHub master branch
+
+You can also install these gems from GitHub master branch.
+
+    % git clone https://github.com/ruby-gnome2/ruby-gnome2.git
+    % cd ruby-gnome2
+    % gem install rake rake-compiler mechanize pkg-config cairo
+    % rake gem:build
+    % rake gem:install
+
 
 ## Release packages
 
@@ -54,7 +75,7 @@ from Ruby 2.1, 2.2 and 2.3.
 * Ruby/GOffice:         GOffice 0.10 or later
 * Ruby/Gnumeric:        Gnumeric 1.12 or later
 
-## Install
+## Advanced Installation.
 
     % ruby extconf.rb
     % make
@@ -72,7 +93,7 @@ Or you can compile each sub-binding:
     % make
     % sudo make install
 
-### extconf.rb options
+##### extconf.rb options
 
 * `--ruby`
   * ruby directory
@@ -87,24 +108,11 @@ Or you can compile each sub-binding:
   * if some libraries fail to compile/install, "make"
     command returns 1(exit 1)
 
-### Environment Variables
+##### Environment Variables
 
 * `CAIRO_PATH`
   * rcairo path (for Win32).
 
-### Install from GitHub master branch
-
-You can also install these gems from GitHub master branch.
-
-    % git clone https://github.com/ruby-gnome2/ruby-gnome2.git
-    % cd ruby-gnome2
-    % gem install rake rake-compiler mechanize pkg-config cairo
-    % rake gem:build
-    % rake gem:install
-
-### Experimental
-
-* ...
 
 ## Bugs
 
@@ -118,7 +126,7 @@ or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
 
 ## Copying
 
-Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
+Copyright (c) 2002-2016 Ruby-GNOME2 Project Team
 
 This program is free software.
 You can distribute/modify this program under the terms of
