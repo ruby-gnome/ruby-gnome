@@ -53,10 +53,13 @@ if [ ! -f ~/setup.timestamp ]; then
     gperf \
     libxml2-utils \
     python-dev \
+    python-pip \
     wine1.6 \
     mingw-w64 \
     cmake \
     valac
+
+  run sudo pip install jsmin
 
   run git clone file:///pkg-config/.git
   run git clone file:///rcairo/.git rcairo.${DIRECTORY_SUFFIX}
