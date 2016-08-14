@@ -34,7 +34,7 @@ module Gdk
       if value == true
         value = 1
       elsif !value
-        vaule = 0
+        value = 0
       end
       self.in_raw = value
     end
