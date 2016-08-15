@@ -75,7 +75,7 @@ You can also install these gems from GitHub master branch.
 * Ruby/GOffice:         GOffice 0.10 or later
 * Ruby/Gnumeric:        Gnumeric 1.12 or later
 
-## Advanced Installation.
+## Advanced Installation
 
     % ruby extconf.rb
     % make
@@ -93,7 +93,7 @@ Or you can compile each sub-binding:
     % make
     % sudo make install
 
-##### extconf.rb options
+### extconf.rb options
 
 * `--ruby`
   * ruby directory
@@ -108,7 +108,7 @@ Or you can compile each sub-binding:
   * if some libraries fail to compile/install, "make"
     command returns 1(exit 1)
 
-##### Environment Variables
+### Environment Variables
 
 * `CAIRO_PATH`
   * rcairo path (for Win32).
