@@ -108,12 +108,6 @@ Or you can compile each sub-binding:
   * if some libraries fail to compile/install, "make"
     command returns 1(exit 1)
 
-### Environment Variables
-
-* `CAIRO_PATH`
-  * rcairo path (for Win32).
-
-
 ## Bugs
 
 Please report bugs either in our bug tracker
