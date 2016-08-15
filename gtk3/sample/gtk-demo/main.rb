@@ -128,10 +128,10 @@ def get_demo_name_from_filename(filename)
   File.basename(filename, ".rb").tr("-", "_")
 end
 
-def get_module_name_from_filename(filename)
+def get_class_name_from_filename(filename)
   pattern = get_demo_name_from_filename(filename)
-  module_name = pattern.split("_").map(&:capitalize).join
-  module_name << "Demo"
+  class_name = pattern.split("_").map(&:capitalize).join
+  class_name << "Demo"
 end
 
 def list_demos(source, is_child = false)
@@ -173,20 +173,19 @@ def get_demo_filename_from_name(name)
 end
 
 def run_demo_from_file(filename, window)
-  module_name = get_module_name_from_filename(filename)
+  class_name = get_class_name_from_filename(filename)
 
-  unless Module.const_defined?(module_name) == true
-    require filename
+  require filename unless Object.const_defined?(class_name)
+
+  klass = Object.const_get(class_name)
+  demo = klass.new(window)
+  demo_window = demo.run
+
+  if demo_window && demo_window.is_a?(Gtk::Window)
+    demo_window.set_transient_for(window)
+    demo_window.modal = true
   end
-
-  module_object = Module.const_get(module_name)
-  demo = module_object.send(:run_demo, window)
-
-  if demo && demo.class == Gtk::Window
-    demo.set_transient_for(window)
-    demo.modal = true
-  end
-  demo
+  demo_window
 end
 
 class Demo < Gtk::Application
