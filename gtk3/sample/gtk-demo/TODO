@@ -56,7 +56,7 @@ printing.c              ok              ok
 revealer.c              ok              ok
 rotated_text.c          ok              ok
 scale.c                 ok              ok
-search_entry.c          no              no
+search_entry.c          ok              ok
 search_entry2.c         ok              ok
 shortcuts.c             no              no
 sidebar.c               ok              ok
