@@ -128,10 +128,10 @@ def get_demo_name_from_filename(filename)
   File.basename(filename, ".rb").tr("-", "_")
 end
 
-def get_module_name_from_filename(filename)
+def get_class_name_from_filename(filename)
   pattern = get_demo_name_from_filename(filename)
-  module_name = pattern.split("_").map(&:capitalize).join
-  module_name << "Demo"
+  class_name = pattern.split("_").map(&:capitalize).join
+  class_name << "Demo"
 end
 
 def list_demos(source, is_child = false)
@@ -173,20 +173,19 @@ def get_demo_filename_from_name(name)
 end
 
 def run_demo_from_file(filename, window)
-  module_name = get_module_name_from_filename(filename)
+  class_name = get_class_name_from_filename(filename)
 
-  unless Module.const_defined?(module_name) == true
-    require filename
+  require filename unless Object.const_defined?(class_name)
+
+  klass = Object.const_get(class_name)
+  demo = klass.new(window)
+  demo_window = demo.run
+
+  if demo_window && demo_window.is_a?(Gtk::Window)
+    demo_window.set_transient_for(window)
+    demo_window.modal = true
   end
-
-  module_object = Module.const_get(module_name)
-  demo = module_object.send(:run_demo, window)
-
-  if demo && demo.class == Gtk::Window
-    demo.set_transient_for(window)
-    demo.modal = true
-  end
-  demo
+  demo_window
 end
 
 class Demo < Gtk::Application
@@ -210,8 +209,7 @@ class Demo < Gtk::Application
                             "comments" => "Program to demonstrate GTK+ widgets",
                             "authors" => ["The GTK+ Team"],
                             "logo_icon_name" => "gtk3-demo",
-                            "title" => "About GTK+ Demo"
-                           )
+                            "title" => "About GTK+ Demo")
     end
 
     add_action(action)
@@ -235,8 +233,7 @@ class Demo < Gtk::Application
                                 "foreground" => "ForestGreen")
       @source_buffer.create_tag("string",
                                 "foreground" => "RosyBrown",
-                                "weight" => Pango::FontDescription::WEIGHT_BOLD
-                               )
+                                "weight" => Pango::FontDescription::WEIGHT_BOLD)
       @source_buffer.create_tag("reserved",
                                 "foreground" => "purple")
     end
@@ -338,7 +335,7 @@ class Demo < Gtk::Application
 
     @menu.show_all
 
-    scrollbar.signal_connect "popup-menu" do |widget, button, activate_time|
+    scrollbar.signal_connect "popup-menu" do |_widget, _button, _activate_time|
       @menu.popup(nil, nil, 0, Gtk.current_event_time)
     end
 
@@ -436,7 +433,7 @@ class Demo < Gtk::Application
   end
 
   def fontify(start_iter = @source_buffer.start_iter,
-                end_iter = @source_buffer.end_iter)
+              end_iter = @source_buffer.end_iter)
     str = @source_buffer.get_text(start_iter, end_iter, true)
     tokenizer = RubyTokenizer.new
     tokenizer.tokenize(str, start_iter.offset) do |tag, start, last|
