@@ -209,8 +209,7 @@ class Demo < Gtk::Application
                             "comments" => "Program to demonstrate GTK+ widgets",
                             "authors" => ["The GTK+ Team"],
                             "logo_icon_name" => "gtk3-demo",
-                            "title" => "About GTK+ Demo"
-                           )
+                            "title" => "About GTK+ Demo")
     end
 
     add_action(action)
@@ -234,8 +233,7 @@ class Demo < Gtk::Application
                                 "foreground" => "ForestGreen")
       @source_buffer.create_tag("string",
                                 "foreground" => "RosyBrown",
-                                "weight" => Pango::FontDescription::WEIGHT_BOLD
-                               )
+                                "weight" => Pango::FontDescription::WEIGHT_BOLD)
       @source_buffer.create_tag("reserved",
                                 "foreground" => "purple")
     end
@@ -337,7 +335,7 @@ class Demo < Gtk::Application
 
     @menu.show_all
 
-    scrollbar.signal_connect "popup-menu" do |widget, button, activate_time|
+    scrollbar.signal_connect "popup-menu" do |_widget, _button, _activate_time|
       @menu.popup(nil, nil, 0, Gtk.current_event_time)
     end
 
@@ -435,7 +433,7 @@ class Demo < Gtk::Application
   end
 
   def fontify(start_iter = @source_buffer.start_iter,
-                end_iter = @source_buffer.end_iter)
+              end_iter = @source_buffer.end_iter)
     str = @source_buffer.get_text(start_iter, end_iter, true)
     tokenizer = RubyTokenizer.new
     tokenizer.tokenize(str, start_iter.offset) do |tag, start, last|
