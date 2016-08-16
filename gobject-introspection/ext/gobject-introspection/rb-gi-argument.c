@@ -549,16 +549,14 @@ interface_variant_to_ruby(GVariant *variant)
         g_variant_get(variant, "s", &value);
         rb_value = CSTR2RVAL(value);
     } else if (g_variant_type_equal(type, G_VARIANT_TYPE_STRING_ARRAY)) {
+        GVariantIter iter;
         const char *value;
-        GVariantIter *iter;
 
         rb_value = rb_ary_new();
-        g_variant_get(variant, "as", &iter);
-
-        while (g_variant_iter_loop(iter, "s", &value))
+        g_variant_iter_init(&iter, variant);
+        while (g_variant_iter_loop(&iter, "s", &value)) {
             rb_ary_push(rb_value, CSTR2RVAL(value));
-
-        g_variant_iter_free(iter);
+        }
     } else {
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(interface)[GVariant][%.*s] -> Ruby",
