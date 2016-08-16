@@ -59,9 +59,9 @@ if [ ! -f ~/setup.timestamp ]; then
     cmake \
     valac
 
-  run sudo run update-alternatives --set \
+  run sudo update-alternatives --set \
       ${BUILD_HOST}-gcc /usr/bin/${BUILD_HOST}-gcc-posix
-  run sudo run update-alternatives --set \
+  run sudo update-alternatives --set \
       ${BUILD_HOST}-g++ /usr/bin/${BUILD_HOST}-g++-posix
 
   run sudo pip install jsmin
