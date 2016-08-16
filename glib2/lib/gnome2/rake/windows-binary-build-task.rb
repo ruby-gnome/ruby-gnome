@@ -315,7 +315,7 @@ module GNOME2
         ]
         dependencies += @package.windows.gobject_introspection_dependencies
 
-        gi_base_dir = compute_base_dir.call("gobject-introspection")
+        gi_base_dir = binary_base_dir("gobject-introspection")
         introspection_compiler = "INTROSPECTION_COMPILER="
         introspection_compiler << "#{gi_base_dir}/bin/g-ir-compiler.exe"
         introspection_compiler_args = ""
