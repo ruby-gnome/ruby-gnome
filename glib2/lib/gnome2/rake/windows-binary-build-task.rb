@@ -40,6 +40,10 @@ module GNOME2
         @package.glib2_root_dir + "vendor" + "local"
       end
 
+      def binary_base_dir(package)
+        @package.project_root_dir + package + "vendor" + "local"
+      end
+
       private
       def define_build_tasks
         namespace :build do
@@ -291,7 +295,7 @@ module GNOME2
           rcairo_binary_base_dir.to_path,
         ]
         @package.windows.build_dependencies.each do |package|
-          paths << "#{@package.project_root_dir}/#{package}/vendor/local"
+          paths << binary_base_dir(package).to_path
         end
         paths
       end
@@ -311,16 +315,12 @@ module GNOME2
         ]
         dependencies += @package.windows.gobject_introspection_dependencies
 
-        compute_base_dir = lambda do |dependent_package|
-          "#{@package.project_root_dir}/#{dependent_package}/vendor/local"
-        end
-
         gi_base_dir = compute_base_dir.call("gobject-introspection")
         introspection_compiler = "INTROSPECTION_COMPILER="
         introspection_compiler << "#{gi_base_dir}/bin/g-ir-compiler.exe"
         introspection_compiler_args = ""
         dependencies.each do |dependent_package|
-          gir_dir = "#{compute_base_dir.call(dependent_package)}/share/gir-1.0"
+          gir_dir = "#{binary_base_dir(dependent_package)}/share/gir-1.0"
           introspection_compiler_args << " --includedir=#{gir_dir}"
         end
         if package.windows.gobject_introspection_compiler_split_args?
@@ -337,7 +337,7 @@ module GNOME2
         common_make_args << dlltool_env
 
         data_dirs = dependencies.collect do |dependent_package|
-          "#{compute_base_dir.call(dependent_package)}/share"
+          "#{binary_base_dir(dependent_package)}/share"
         end
         common_make_args << "XDG_DATA_DIRS=#{data_dirs.join(File::PATH_SEPARATOR)}"
       end
