@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -41,122 +41,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "gdk3",
     "gstreamer",
   ]
-  # rcairo_binary_base_dir =
-  #   package.windows_binary_build_task.rcairo_binary_base_dir
-  # glib2_binary_base_dir = package.windows_binary_build_task.glib2_binary_base_dir
   package.external_packages = [
-    # {
-    #   :name => "libjpeg",
-    #   :base_name => "jpeg-9b",
-    #   :archive_base_name => "jpegsrc.v9b.tar.gz",
-    #   :download_base_url => "http://www.ijg.org/files",
-    #   :label => "libjpeg",
-    #   :windows => {
-    #     :configure_args => [],
-    #     :built_file => "bin/libjpeg-9.dll",
-    #   },
-    # },
-    # {
-    #   :name => "libwebp",
-    #   :download_base_url => "https://storage.googleapis.com/downloads.webmproject.org/releases/webp",
-    #   :label => "WebP",
-    #   :version => "0.5.1",
-    #   :windows => {
-    #     :built_file => "bin/libwebp-6.dll",
-    #   },
-    # },
-    # {
-    #   :name => "sqlite-autoconf",
-    #   :download_base_url => "http://www.sqlite.org/2016",
-    #   :label => "SQLite",
-    #   :version => "3140100",
-    #   :compression_method => "gz",
-    #   :windows => {
-    #     :configure_args => [],
-    #     :built_file => "bin/libsqlite3-0.dll",
-    #   },
-    # },
-    # {
-    #   :name => "libsoup",
-    #   :download_site => :gnome,
-    #   :label => "libsoup",
-    #   :version => "2.54.1",
-    #   :compression_method => "xz",
-    #   :windows => {
-    #     :configure_args => [
-    #       "--enable-introspection",
-    #       "--without-apache-httpd",
-    #       "--disable-tls-check",
-    #     ],
-    #     :build_concurrently => false,
-    #     :patches => [
-    #     ],
-    #     :built_file => "bin/libsoup-2.4-1.dll",
-    #   },
-    # },
-    # {
-    #   :name => "libiconv",
-    #   :download_site => :gnu,
-    #   :label => "libiconv",
-    #   :version => "1.14",
-    #   :windows => {
-    #     :built_file => "bin/libiconv-2.dll",
-    #   },
-    # },
-    # {
-    #   :name => "libxslt",
-    #   :version => "1.1.28",
-    #   :download_base_url => "ftp://xmlsoft.org/libxslt",
-    #   :compression_method => "gz",
-    #   :windows => {
-    #     :built_file => "bin/libxslt-1.dll",
-    #     :configure_args => [
-    #       "--with-libxml-prefix=#{rcairo_binary_base_dir}",
-    #       "--without-python",
-    #     ],
-    #     :patches => [
-    #       "libxslt-1.1.28-add-mkdir-fallback.diff",
-    #     ],
-    #   },
-    # },
-    # {
-    #   :name => "webkitgtk",
-    #   :download_base_url => "https://webkitgtk.org/releases",
-    #   :label => "WebKitGTK+",
-    #   :version => "2.13.4",
-    #   :compression_method => "xz",
-    #   :windows => {
-    #     :build_concurrently => false,
-    #     :cmake_args => [
-    #       "-DPORT=GTK",
-    #       "-DJPEG_INCLUDE_DIR=#{package.windows.absolute_binary_dir}/include",
-    #       "-DJPEG_LIBRARY=#{package.windows.absolute_binary_dir}/lib/libjpeng.dll.a",
-    #       "-DPC_FONTCONFIG_INCLUDEDIR=#{rcairo_binary_base_dir}/include",
-    #       "-DPC_FONTCONFIG_LIBDIR=#{rcairo_binary_base_dir}/lib",
-    #       "-DPC_GNUTLS_INCLUDEDIR=#{glib2_binary_base_dir}/include",
-    #       "-DPC_GNUTLS_LIBDIR=#{glib2_binary_base_dir}/lib",
-    #       "-DZLIB_INCLUDE_DIR=#{rcairo_binary_base_dir}/include",
-    #       "-DZLIB_LIBRARY=#{rcairo_binary_base_dir}/lib/libzlib.dll.a",
-    #       "-DPNG_PNG_INCLUDE_DIR=#{rcairo_binary_base_dir}/include",
-    #       "-DPNG_LIBRARY=#{rcairo_binary_base_dir}/lib/libpng.dll.a",
-    #       "-DUSE_SYSTEM_MALLOC=ON",
-    #       "-DENABLE_PLUGIN_PROCESS_GTK2=OFF",
-    #       "-DENABLE_X11_TARGET=OFF",
-    #       "-DENABLE_JIT=OFF",
-    #       "-DENABLE_CREDENTIAL_STORAGE=OFF",
-    #       "-DENABLE_GEOLOCATION=OFF",
-    #       "-DENABLE_OPENGL=OFF",
-    #       "-DENABLE_SPELLCHECK=OFF",
-    #       "-DENABLE_FETCH_API=OFF",
-    #       "-DENABLE_INDEXED_DATABASE=OFF",
-    #       "-DUSE_LIBNOTIFY=OFF",
-    #       "-DUSE_LIBHYPHEN=OFF",
-    #     ],
-    #     :patches => [
-    #       "webkitgtk-2.13.4-suppress-cmake-error.diff",
-    #     ],
-    #   },
-    # },
   ]
 end
 package_task.define

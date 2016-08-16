@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -44,26 +44,21 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "gstreamer",
   ]
 
-  gstreamer_relative_binary_dir =
-    package.package.project_root_dir +
-    "gstreamer" +
-    package.windows.relative_binary_dir
-  gstreamer_absolute_binary_dir = gstreamer_relative_binary_dir.expand_path
-
-  rcairo_relative_binary_dir =
-    package.package.project_root_dir.parent +
-    "rcairo.#{package.windows.build_architecture_suffix}" +
-    package.windows.relative_binary_dir
-  rcairo_absolute_binary_dir = rcairo_relative_binary_dir.expand_path
+  rcairo_binary_base_dir =
+    package.windows_binary_build_task.rcairo_binary_base_dir
+  glib2_binary_base_dir =
+    package.windows_binary_build_task.glib2_binary_base_dir
+  gstreamer_binary_base_dir =
+    package.windows_binary_build_task.binary_base_dir("gstreamer")
 
   package.external_packages = [
     {
       :name => "libwebp",
-      :download_base_url => "http://downloads.webmproject.org/releases/webp",
+      :download_base_url => "https://storage.googleapis.com/downloads.webmproject.org/releases/webp",
       :label => "WebP",
-      :version => "0.5.0",
+      :version => "0.5.1",
       :windows => {
-        :built_file => "bin/libwebp-5.dll",
+        :built_file => "bin/libwebp-6.dll",
       },
     },
     {
@@ -75,7 +70,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :built_file => "bin/libxslt-1.dll",
         :configure_args => [
           "--without-python",
-          "--with-libxml-prefix=#{rcairo_absolute_binary_dir}",
+          "--with-libxml-prefix=#{rcairo_binary_base_dir}",
         ],
         :patches => [
           "libxslt-1.1.28-add-mkdir-fallback.diff",
@@ -84,36 +79,44 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
     {
       :name => "webkitgtk",
-      :download_base_url => "http://webkitgtk.org/releases",
+      :download_base_url => "https://webkitgtk.org/releases",
       :label => "WebKitGTK+",
-      :version => "2.12.0",
+      :version => "2.13.4",
       :compression_method => "xz",
       :windows => {
+        :build_concurrently => false,
         :cmake_args => [
           "-DPORT=GTK",
-          "-DZLIB_INCLUDE_DIR=#{rcairo_absolute_binary_dir}/include",
-          "-DZLIB_LIBRARY=#{rcairo_absolute_binary_dir}/lib",
-          "-DPNG_PNG_INCLUDE_DIR=#{rcairo_absolute_binary_dir}/include",
-          "-DPNG_LIBRARY=#{rcairo_absolute_binary_dir}/lib",
-          "-DJPEG_INCLUDE_DIR=#{gstreamer_absolute_binary_dir}/include",
-          "-DJPEG_LIBRARY=#{gstreamer_absolute_binary_dir}/lib",
-          "-DFONTCONFIG_INCLUDE_DIR=#{rcairo_absolute_binary_dir}/include",
-          "-DFONTCONFIG_LIBRARIES=#{rcairo_absolute_binary_dir}/lib",
-          "-DSQLITE_INCLUDE_DIR=#{gstreamer_absolute_binary_dir}/include",
-          "-DSQLITE_LIBRARIES=#{gstreamer_absolute_binary_dir}/lib",
+          "-DZLIB_INCLUDE_DIR=#{rcairo_binary_base_dir}/include",
+          "-DZLIB_LIBRARY=#{rcairo_binary_base_dir}/lib/libzlib.dll.a",
+          "-DPNG_PNG_INCLUDE_DIR=#{rcairo_binary_base_dir}/include",
+          "-DPNG_LIBRARY=#{rcairo_binary_base_dir}/lib/libpng.dll.a",
+          "-DJPEG_INCLUDE_DIR=#{gstreamer_binary_base_dir}/include",
+          "-DJPEG_LIBRARY=#{gstreamer_binary_base_dir}/lib/libjpeg.dll.a",
+          "-DFONTCONFIG_INCLUDE_DIR=#{rcairo_binary_base_dir}/include",
+          "-DFONTCONFIG_LIBRARIES=#{rcairo_binary_base_dir}/lib",
+          "-DSQLITE_INCLUDE_DIR=#{gstreamer_binary_base_dir}/include",
+          "-DSQLITE_LIBRARIES=#{gstreamer_binary_base_dir}/lib",
+          "-DPC_GNUTLS_INCLUDEDIR=#{glib2_binary_base_dir}/include",
+          "-DPC_GNUTLS_LIBDIR=#{glib2_binary_base_dir}/lib",
           "-DENABLE_PLUGIN_PROCESS_GTK2=OFF",
           "-DENABLE_X11_TARGET=OFF",
+          "-DENABLE_JIT=OFF",
           "-DENABLE_GTKDOC=OFF",
           "-DENABLE_CREDENTIAL_STORAGE=OFF",
           "-DENABLE_GEOLOCATION=OFF",
           "-DENABLE_OPENGL=OFF",
           "-DENABLE_SPELLCHECK=OFF",
+          "-DENABLE_API_TESTS=OFF",
+          "-DENABLE_FETCH_API=OFF",
+          "-DENABLE_INDEXED_DATABASE=OFF",
+          "-DUSE_SYSTEM_MALLOC=ON",
           "-DUSE_LIBNOTIFY=OFF",
           "-DUSE_LIBHYPHEN=OFF",
-          "-DENABLE_API_TESTS=OFF",
+          "-DADDITIONAL_COMPILER_FLAGS=-D_WIN32_WINNT=0x0601 -DWINVER=0x0601",
         ],
         :patches => [
-          "webkitgtk-2.9.92-try-buildable.diff",
+          "webkitgtk-2.13.4-try-buildable.diff",
         ],
       },
     },
