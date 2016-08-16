@@ -10,19 +10,19 @@
 =end
 class AssistantDemo
   def initialize(main_window)
-    @window = Gtk::Assistant.new
-    @window.screen = main_window.screen
+    @assistant = Gtk::Assistant.new
+    @assistant.screen = main_window.screen
 
     create_page1
     create_page2
     create_page3
     progress_bar = create_page4
 
-    @window.signal_connect("cancel", &:destroy)
+    @assistant.signal_connect("cancel", &:destroy)
 
-    @window.signal_connect("close", &:destroy)
+    @assistant.signal_connect("close", &:destroy)
 
-    @window.signal_connect "apply" do |widget|
+    @assistant.signal_connect "apply" do |widget|
       GLib::Timeout.add(100) do
         fraction = progress_bar.fraction + 0.05
         if fraction < 1.0
@@ -34,7 +34,7 @@ class AssistantDemo
       end
     end
 
-    @window.signal_connect "prepare" do |widget, _page|
+    @assistant.signal_connect "prepare" do |widget, _page|
       current_page = widget.current_page
       n_pages = widget.n_pages
 
@@ -45,12 +45,12 @@ class AssistantDemo
   end
 
   def run
-    if !@window.visible?
-      @window.show_all
+    if !@assistant.visible?
+      @assistant.show_all
     else
-      @window.destroy
+      @assistant.destroy
     end
-    @window
+    @assistant
   end
 
   private
@@ -68,20 +68,20 @@ class AssistantDemo
     box.pack_start(entry, :expand => true, :fill => true, :padding => 0)
 
     entry.signal_connect "changed" do |widget|
-      page_number = @window.current_page
-      current_page = @window.get_nth_page(page_number)
+      page_number = @assistant.current_page
+      current_page = @assistant.get_nth_page(page_number)
 
       if widget.text
-        @window.set_page_complete(current_page, true)
+        @assistant.set_page_complete(current_page, true)
       else
-        @window.set_page_complete(current_page, false)
+        @assistant.set_page_complete(current_page, false)
       end
     end
 
     box.show_all
-    @window.append_page(box)
-    @window.set_page_title(box, "Page 1")
-    @window.set_page_type(box, :intro)
+    @assistant.append_page(box)
+    @assistant.set_page_title(box, "Page 1")
+    @assistant.set_page_type(box, :intro)
   end
 
   def create_page2
@@ -95,9 +95,9 @@ LABEL
     box.pack_start(checkbutton, :expand => false, :fill => false, :padding => 0)
 
     box.show_all
-    @window.append_page(box)
-    @window.set_page_complete(box, true)
-    @window.set_page_title(box, "Page 1")
+    @assistant.append_page(box)
+    @assistant.set_page_complete(box, true)
+    @assistant.set_page_title(box, "Page 1")
   end
 
   def create_page3
@@ -105,10 +105,10 @@ LABEL
     label = Gtk::Label.new(message)
     label.show
 
-    @window.append_page(label)
-    @window.set_page_type(label, :confirm)
-    @window.set_page_complete(label, true)
-    @window.set_page_title(label, "Confirmation")
+    @assistant.append_page(label)
+    @assistant.set_page_type(label, :confirm)
+    @assistant.set_page_complete(label, true)
+    @assistant.set_page_title(label, "Confirmation")
   end
 
   def create_page4
@@ -117,13 +117,13 @@ LABEL
     progress_bar.valign = :center
 
     progress_bar.show
-    @window.append_page(progress_bar)
-    @window.set_page_type(progress_bar, :progress)
-    @window.set_page_title(progress_bar, "Applying changes")
+    @assistant.append_page(progress_bar)
+    @assistant.set_page_type(progress_bar, :progress)
+    @assistant.set_page_title(progress_bar, "Applying changes")
 
     # This prevents the assistant window from being
     # closed while we're "busy" applying changes.
-    @window.set_page_complete(progress_bar, false)
+    @assistant.set_page_complete(progress_bar, false)
     progress_bar
   end
 end
