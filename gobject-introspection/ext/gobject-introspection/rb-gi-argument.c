@@ -555,7 +555,9 @@ interface_variant_to_ruby(GVariant *variant)
         rb_value = rb_ary_new();
         g_variant_iter_init(&iter, variant);
         while (g_variant_iter_loop(&iter, "s", &value)) {
-            rb_ary_push(rb_value, CSTR2RVAL(value));
+            VALUE rb_value;
+            rb_value = CSTR2RVAL(value);
+            rb_ary_push(rb_value, rb_value);
         }
     } else {
         rb_raise(rb_eNotImpError,
