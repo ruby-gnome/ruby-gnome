@@ -6,19 +6,18 @@
 
 A simple accordion demo written using CSS transitions and multiple backgrounds
 =end
-module CssAccordionDemo
-  def self.run_demo(main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.screen = main_window.screen
-
-    window.set_title("CSS Accordion")
-    window.set_default_size(600, 300)
+class CssAccordionDemo
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
+    @window.title = "CSS Accordion"
+    @window.set_default_size(600, 300)
 
     container = Gtk::Box.new(:horizontal, 0)
-    container.set_halign(:center)
-    container.set_valign(:center)
+    container.halign = :center
+    container.valign = :center
 
-    window.add(container)
+    @window.add(container)
 
     %w(This Is A CSS Accordion :-).each do |label|
       child = Gtk::Button.new(:label => label)
@@ -28,21 +27,23 @@ module CssAccordionDemo
     provider = Gtk::CssProvider.new
     provider.load_from_resource("/css_accordion/css_accordion.css")
 
-    style_context = window.style_context
+    style_context = @window.style_context
     style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
 
-    apply_style(window, provider)
-
-    if !window.visible?
-      window.show_all
-    else
-      window.destroy
-    end
-
-    window
+    apply_style(@window, provider)
   end
 
-  def self.apply_style(widget, provider)
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+
+    @window
+  end
+
+  def apply_style(widget, provider)
     style_context = widget.style_context
     style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
     return unless widget.respond_to?(:children)
