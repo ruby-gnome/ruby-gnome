@@ -550,14 +550,14 @@ interface_variant_to_ruby(GVariant *variant)
         rb_value = CSTR2RVAL(value);
     } else if (g_variant_type_equal(type, G_VARIANT_TYPE_STRING_ARRAY)) {
         GVariantIter iter;
-        const char *value;
+        const char *element;
 
         rb_value = rb_ary_new();
         g_variant_iter_init(&iter, variant);
-        while (g_variant_iter_loop(&iter, "s", &value)) {
-            VALUE rb_value;
-            rb_value = CSTR2RVAL(value);
-            rb_ary_push(rb_value, rb_value);
+        while (g_variant_iter_loop(&iter, "s", &element)) {
+            VALUE rb_element;
+            rb_element = CSTR2RVAL(element);
+            rb_ary_push(rb_value, rb_element);
         }
     } else {
         rb_raise(rb_eNotImpError,
