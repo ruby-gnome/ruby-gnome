@@ -223,7 +223,7 @@ namespace :dist do
       file "#{base_dir}/#{ruby_tar_bz2_base}" => base_dir do
         generation = ruby_version.scan(/\A\d\.\d/)[0]
         ruby_tar_bz2_url = "#{ruby_base_url}/#{generation}/#{ruby_tar_bz2_base}"
-        Dir.chdir(base_dir) do
+        cd(base_dir) do
           download(ruby_tar_bz2_url)
         end
       end
@@ -232,9 +232,9 @@ namespace :dist do
       expanded_ruby_path = File.expand_path(ruby_path)
       file ruby_path => "#{base_dir}/#{ruby_tar_bz2_base}" do
         expanded_prefix = prefix.expand_path
-        Dir.chdir(base_dir) do
+        cd(base_dir) do
           sh("tar", "xvf", ruby_tar_bz2_base)
-          Dir.chdir(File.basename(ruby_tar_bz2_base, ".tar.bz2")) do
+          cd(File.basename(ruby_tar_bz2_base, ".tar.bz2")) do
             sh("./configure",
                "--prefix=#{expanded_prefix}",
                "--with-out-ext=readline")
@@ -248,7 +248,7 @@ namespace :dist do
       rubygems_tgz = "#{base_dir}/#{rubygems_tgz_base}"
       file rubygems_tgz => base_dir do
         rubygems_url_base = "http://production.cf.rubygems.org/rubygems"
-        Dir.chdir(base_dir) do
+        cd(base_dir) do
           download("#{rubygems_url_base}/#{rubygems_tgz_base}")
         end
       end
@@ -256,9 +256,9 @@ namespace :dist do
       gem_path = "#{prefix}/bin/gem"
       expanded_gem_path = File.expand_path(gem_path)
       file gem_path => [ruby_path, rubygems_tgz] do
-        Dir.chdir(base_dir) do
+        cd(base_dir) do
           sh("tar", "xvf", rubygems_tgz_base)
-          Dir.chdir(File.basename(rubygems_tgz_base, ".tgz")) do
+          cd(File.basename(rubygems_tgz_base, ".tgz")) do
             sh(expanded_ruby_path, "setup.rb")
           end
         end
@@ -283,7 +283,7 @@ namespace :dist do
           namespace name do
             tar_gz = File.expand_path(attributes[:archive_name])
             task :prepare => ["dist:#{name}", gem_path] do
-              Dir.chdir(base_dir) do
+              cd(base_dir) do
                 sh("tar", "xvf", tar_gz)
               end
               if /cairo/ !~ `#{expanded_gem_path} list cairo`
@@ -293,12 +293,12 @@ namespace :dist do
 
             attributes[:packages].each do |sub_package_name|
               task sub_package_name => :prepare do
-                Dir.chdir(base_dir) do
+                cd(base_dir) do
                   package_base_dir = File.basename(tar_gz, ".tar.gz")
                   rm_rf(sub_package_name)
                   sh("cp", "-a",
                      "#{package_base_dir}/#{sub_package_name}", sub_package_name)
-                  Dir.chdir(sub_package_name) do
+                  cd(sub_package_name) do
                     if File.exist?("extconf.rb")
                       sh(expanded_ruby_path, "extconf.rb")
                       sh("make", "-j8")
@@ -366,7 +366,7 @@ namespace :gem do
   desc "build all gems"
   task :build do
     gnome2_packages.each do |package|
-      Dir.chdir(package) do
+      cd(package) do
         ruby("-S", "rake", "gem")
       end
     end
@@ -412,7 +412,7 @@ namespace :gem do
       desc "build all Windows binaries"
       task :vendor do
         windows_gnome2_packages.each do |package|
-          Dir.chdir(package) do
+          cd(package) do
             ruby("-S", "rake", "native:build", "windows:build")
           end
         end
@@ -422,7 +422,7 @@ namespace :gem do
       task :ext do
         change_environment_variable("MAKE" => "make debugflags=") do
           windows_gnome2_packages.each do |package|
-            Dir.chdir(package) do
+            cd(package) do
               tasks = [
                 "cross",
                 "windows:builder:build:prepare:pkg_config",
@@ -487,7 +487,7 @@ namespace :gem do
     desc "download DLL for Windows all gems"
     task :download do
       windows_gnome2_packages.each do |package|
-        Dir.chdir(package) do
+        cd(package) do
           ruby("-S", "rake", "windows:download")
         end
       end
