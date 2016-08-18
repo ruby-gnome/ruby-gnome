@@ -73,8 +73,12 @@ stage.signal_connect("captured-event") do |_stage, event|
   when Clutter::KeyEvent
     if event.type == Clutter::EventType::KEY_PRESS
       format = "the stage got a key press: '%s' (symbol: %d, unicode: 0x%x)"
-      unicode = [event.key_unicode].pack("U")
-      puts(format % [unicode, event.key_symbol, event.key_unicode])
+      if event.key_unicode.empty?
+        unicode = 0
+      else
+        unicode = event.key_unicode.unpack("U")[0]
+      end
+      puts(format % [event.key_unicode, event.key_symbol, unicode])
     end
   end
 
