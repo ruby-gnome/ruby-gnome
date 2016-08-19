@@ -9,22 +9,22 @@ This is also known as "disclosure triangle".
 
 This example also shows how to make the window resizable only if the expander is expanded.
 =end
-module ExpanderDemo
-  def self.run_demo(main_window)
+class ExpanderDemo
+  def initialize(main_window)
     toplevel = main_window.toplevel
     message = "<big><b>Something went wrong</b></big>"
-    window = Gtk::MessageDialog.new(:parent => toplevel,
-                                    :flags  => :destroy_with_parent,
-                                    :type   => :error,
-                                    :buttons_type => :close,
-                                    :message      => message)
+    @window = Gtk::MessageDialog.new(:parent => toplevel,
+                                     :flags  => :destroy_with_parent,
+                                     :type   => :error,
+                                     :buttons_type => :close,
+                                     :message      => message)
 
-    window.set_use_markup(true)
+    @window.use_markup = true
 
     message = "Here are some more details but not the full story."
-    window.set_secondary_text(message)
+    @window.secondary_text = message
 
-    area = window.message_area
+    area = @window.message_area
     box = area.parent
     box.parent.child_set_property(box, "expand", true)
     box.parent.child_set_property(box, "fill", true)
@@ -39,9 +39,35 @@ module ExpanderDemo
     sw.set_shadow_type(:in)
     sw.set_policy(:never, :automatic)
 
+    tv = initialize_text_view
+    sw.add(tv)
+    expander.add(sw)
+    area.pack_end(expander, :expand => true, :fill => true, :padding => 0)
+    expander.show_all
+
+    expander.signal_connect "notify::expanded" do
+      @window.resizable = expander.expanded?
+    end
+
+    @window.signal_connect "response" do |dialog, _response_id|
+      dialog.destroy
+    end
+  end
+
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+  end
+
+  private
+
+  def initialize_text_view
     tv = Gtk::TextView.new
-    tv.set_editable(false)
-    tv.set_wrap_mode(:word)
+    tv.editable  = false
+    tv.wrap_mode = :word
     tv.buffer.text = <<TEXT
 Finally, the full story with all details.
 And all the inside information, including
@@ -53,24 +79,6 @@ A second paragraph will contain even more
 innuendo, just to make you scroll down or
 resize the window. Do it already !"
 TEXT
-
-    sw.add(tv)
-    expander.add(sw)
-    area.pack_end(expander, :expand => true, :fill => true, :padding => 0)
-    expander.show_all
-
-    expander.signal_connect "notify::expanded" do
-      window.set_resizable(expander.expanded?)
-    end
-
-    window.signal_connect "response" do |dialog, _response_id|
-      dialog.destroy
-    end
-
-    if !window.visible?
-      window.show_all
-    else
-      window.destroy
-    end
+    tv
   end
 end
