@@ -1,0 +1,8 @@
+<schemalist>
+  <schema id="jp.ruby-gnome2.test"
+          path="/jp/ruby-gnome2/test/">
+    <key name="boolean" type="b">
+      <default>true</default>
+    </key>
+  </schema>
+</schemalist>

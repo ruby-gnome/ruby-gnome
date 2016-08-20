@@ -42,6 +42,10 @@ Dir.chdir(File.join(gio2_base, "test", "fixture", "resource")) do
   system("rake") or exit(false)
 end
 
+Dir.chdir(File.join(gio2_base, "test", "fixture", "schema")) do
+  system("rake") or exit(false)
+end
+
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 require "glib-test-init"
 

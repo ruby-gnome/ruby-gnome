@@ -13,6 +13,7 @@ Makefile.lib
 /glib2/ext/glib2/glib-enum-types.c
 /glib2/ext/glib2/glib-enum-types.h
 /gio2/test/fixture/resource/ruby-gio2.gresource
+/gio2/test/fixture/schema/gschemas.compiled
 /gtk2/ext/gtk2/rbgdkkeysyms.h
 /gdk3/ext/gdk3/rbgdkkeysyms.h
 /gtk3/test/fixture/simple_window.gresource
