@@ -548,6 +548,10 @@ interface_variant_to_ruby(GVariant *variant)
         const char *value;
         g_variant_get(variant, "s", &value);
         rb_value = CSTR2RVAL(value);
+    } else if (g_variant_type_equal(type, G_VARIANT_TYPE_BOOLEAN)) {
+        gboolean value;
+        g_variant_get(variant, "b", &value);
+        rb_value = CBOOL2RVAL(value);
     } else if (g_variant_type_equal(type, G_VARIANT_TYPE_STRING_ARRAY)) {
         GVariantIter iter;
         const char *element;
