@@ -22,7 +22,7 @@ class TestSettingsSchemaSource < Test::Unit::TestCase
     setup do
       only_gio_version(2, 42, 0)
       @default_source = Gio::SettingsSchemaSource.default
-      @source = Gio::SettingsSchemaSource.new(fixture_path("schema"),
+      @source = Gio::SettingsSchemaSource.new(fixture_path("schema", "source"),
                                               @default_source,
                                               true)
     end
@@ -35,7 +35,7 @@ class TestSettingsSchemaSource < Test::Unit::TestCase
     test "recursive: true" do
       non_relocatables_expected, relocatables_expected =
         @default_source.list_schemas
-      non_relocatables_expected << "jp.ruby-gnome2.test"
+      non_relocatables_expected << "jp.ruby-gnome2.test.source"
       non_relocatables_actual, relocatables_actual =
         @source.list_schemas(:recursive => true)
       assert_equal([
@@ -49,7 +49,7 @@ class TestSettingsSchemaSource < Test::Unit::TestCase
     end
 
     test "recursive: false" do
-      assert_equal([["jp.ruby-gnome2.test"], []],
+      assert_equal([["jp.ruby-gnome2.test.source"], []],
                    @source.list_schemas(:recursive => false))
     end
   end
