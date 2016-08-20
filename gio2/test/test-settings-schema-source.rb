@@ -22,7 +22,8 @@ class TestSettingsSchemaSource < Test::Unit::TestCase
     setup do
       @default_source = Gio::SettingsSchemaSource.default
       @source = Gio::SettingsSchemaSource.new(fixture_path("schema"),
-                                              @default_source)
+                                              @default_source,
+                                              true)
     end
 
     test "recursive: default" do
