@@ -1,4 +1,4 @@
-# Copyright (c) 2015 Ruby-GNOME2 Project Team
+# Copyright (c) 2015-2016 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
@@ -12,18 +12,18 @@ or right.
 
 It is commonly used with gtk_window_set_titlebar()
 =end
-module HeaderbarDemo
-  def self.run_demo(main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.screen = main_window.screen
-    window.set_default_size(600, 400)
+class HeaderbarDemo
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
+    @window.set_default_size(600, 400)
 
     header = Gtk::HeaderBar.new
-    header.set_show_close_button(true)
-    header.set_title("Welcome to Facebook - Log in, sign up or learn more")
-    header.set_has_subtitle(false)
+    header.show_close_button = true
+    header.title = "Welcome to Facebook - Log in, sign up or learn more"
+    header.has_subtitle = false
 
-    button = Gtk::Button.new()
+    button = Gtk::Button.new
 
     icon = Gio::ThemedIcon.new("mail-send-receive-symbolic")
     image = Gtk::Image.new(:icon => icon, :size => :button)
@@ -45,13 +45,15 @@ module HeaderbarDemo
     box.add(button)
 
     header.pack_start(box)
-    window.set_titlebar(header)
-    window.add(Gtk::TextView.new())
+    @window.titlebar = header
+    @window.add(Gtk::TextView.new)
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
     end
   end
 end
