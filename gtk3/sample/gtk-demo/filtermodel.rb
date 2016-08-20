@@ -8,64 +8,87 @@
  just to show a subset of the rows, but also to compute columns
  that are not actually present in the underlying model.
 =end
-module FiltermodelDemo
+class FiltermodelDemo
   WIDTH_COLUMN = 0
   HEIGHT_COLUMN = 1
   AREA_COLUMN = 2
   SQUARE_COLUMN = 3
 
-  def self.run_demo(main_window)
-    builder = Gtk::Builder.new(:resource => "/filtermodel/filtermodel.ui")
-    builder.connect_signals {}
+  def initialize(main_window)
+    initialize_builder
 
-    window = builder["window1"]
-    window.screen = main_window.screen
+    @window = @builder["window1"]
+    @window.screen = main_window.screen
 
-    column = builder["treeviewcolumn1"]
-    cell = builder["cellrenderertext1"]
-    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
-      num = current_iter[WIDTH_COLUMN]
-      current_cell.text = num.to_s
-    end
+    set_treeview_column_data_from_int_to_string("treeviewcolumn1",
+                                                "cellrenderertext1",
+                                                WIDTH_COLUMN)
+    set_treeview_column_data_from_int_to_string("treeviewcolumn2",
+                                                "cellrenderertext2",
+                                                HEIGHT_COLUMN)
 
-    column = builder["treeviewcolumn2"]
-    cell = builder["cellrenderertext2"]
-    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
-      num = current_iter[HEIGHT_COLUMN]
-      current_cell.text = num.to_s
-    end
+    set_treeview_column_data_from_int_to_string("treeviewcolumn3",
+                                                "cellrenderertext3",
+                                                WIDTH_COLUMN)
 
-    column = builder["treeviewcolumn3"]
-    cell = builder["cellrenderertext3"]
-    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
-      num = current_iter[WIDTH_COLUMN]
-      current_cell.text = num.to_s
-    end
+    set_treeview_column_data_from_int_to_string("treeviewcolumn4",
+                                                "cellrenderertext4",
+                                                HEIGHT_COLUMN)
 
-    column = builder["treeviewcolumn4"]
-    cell = builder["cellrenderertext4"]
-    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
-      num = current_iter[HEIGHT_COLUMN]
-      current_cell.text = num.to_s
-    end
+    set_treeview_column_data_from_int_to_string("treeviewcolumn5",
+                                                "cellrenderertext5",
+                                                AREA_COLUMN)
 
-    column = builder["treeviewcolumn5"]
-    cell = builder["cellrenderertext5"]
-    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
-      num = current_iter[AREA_COLUMN]
-      current_cell.text = num.to_s
-    end
-
-    column = builder["treeviewcolumn6"]
-    cell = builder["cellrendererpixbuf1"]
+    column = @builder["treeviewcolumn6"]
+    cell = @builder["cellrendererpixbuf1"]
     column.add_attribute(cell, "visible", SQUARE_COLUMN)
 
-    store = builder["liststore1"]
-    tree = builder["treeview2"]
+    @store = @builder["liststore1"]
+
+    initialize_tree_model_filter_computed
+
+    set_treeview_column_data_from_int_to_string("treeviewcolumn7",
+                                                "cellrenderertext6",
+                                                WIDTH_COLUMN)
+
+    set_treeview_column_data_from_int_to_string("treeviewcolumn8",
+                                                "cellrenderertext7",
+                                                HEIGHT_COLUMN)
+
+    initialize_tree_model_filter_selected
+  end
+
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+    @window
+  end
+
+  private
+
+  def initialize_builder
+    @builder = Gtk::Builder.new(:resource => "/filtermodel/filtermodel.ui")
+    @builder.connect_signals {}
+  end
+
+  def set_treeview_column_data_from_int_to_string(column_name, cell_name, col_index)
+    column = @builder[column_name]
+    cell = @builder[cell_name]
+    column.set_cell_data_func(cell) do |_col, current_cell, _current_model, current_iter|
+      num = current_iter[col_index]
+      current_cell.text = num.to_s
+    end
+  end
+
+  def initialize_tree_model_filter_computed
+    tree = @builder["treeview2"]
 
     types = [Integer, Integer, Integer, TrueClass]
 
-    model = Gtk::TreeModelFilter.new(store)
+    model = Gtk::TreeModelFilter.new(@store)
     model.set_modify_func(*types) do |filter_model, filter_iter, filter_column|
       value = nil
       child_iter = filter_model.convert_iter_to_child_iter(filter_iter)
@@ -85,35 +108,16 @@ module FiltermodelDemo
     end
 
     tree.model = model
+  end
 
-    column = builder["treeviewcolumn7"]
-    cell = builder["cellrenderertext6"]
-    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
-      num = current_iter[WIDTH_COLUMN]
-      current_cell.text = num.to_s
-    end
+  def initialize_tree_model_filter_selected
+    tree = @builder["treeview3"]
 
-    column = builder["treeviewcolumn8"]
-    cell = builder["cellrenderertext7"]
-    column.set_cell_data_func(cell) do |_column, current_cell, _current_model, current_iter|
-      num = current_iter[HEIGHT_COLUMN]
-      current_cell.text = num.to_s
-    end
-
-    tree = builder["treeview3"]
-
-    model = Gtk::TreeModelFilter.new(store)
+    model = Gtk::TreeModelFilter.new(@store)
     model.set_visible_func do |_current_model, current_iter|
       current_iter[WIDTH_COLUMN] < 10
     end
 
     tree.model = model
-
-    if !window.visible?
-      window.show_all
-    else
-      window.destroy
-    end
-    window
   end
 end
