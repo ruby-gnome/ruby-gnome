@@ -1359,16 +1359,18 @@ rb_gi_out_argument_init_array(GIArgument *argument, GIArgInfo *arg_info,
 {
     GIArrayType array_type;
     GITypeInfo *element_type_info;
+    GITypeTag element_type_tag;
 
     array_type = g_type_info_get_array_type(array_type_info);
     element_type_info = g_type_info_get_param_type(array_type_info, 0);
+    element_type_tag = g_type_info_get_tag(element_type_info);
 
     switch (array_type) {
     case GI_ARRAY_TYPE_C:
         g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: allocates GIArgument(array)[c][%s] for output",
-                 g_type_tag_to_string(g_type_info_get_tag(element_type_info)));
+                 g_type_tag_to_string(element_type_tag));
         break;
     case GI_ARRAY_TYPE_ARRAY:
         rb_gi_out_argument_init_array_array(argument,
@@ -1380,13 +1382,13 @@ rb_gi_out_argument_init_array(GIArgument *argument, GIArgInfo *arg_info,
         g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: allocates GIArgument(array)[ptr-array][%s] for output",
-                 g_type_tag_to_string(g_type_info_get_tag(element_type_info)));
+                 g_type_tag_to_string(element_type_tag));
         break;
     case GI_ARRAY_TYPE_BYTE_ARRAY:
         g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: allocates GIArgument(array)[byte-array][%s] for output",
-                 g_type_tag_to_string(g_type_info_get_tag(element_type_info)));
+                 g_type_tag_to_string(element_type_tag));
         break;
     default:
         g_base_info_unref(element_type_info);
