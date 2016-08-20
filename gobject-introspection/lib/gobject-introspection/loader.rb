@@ -335,8 +335,10 @@ module GObjectIntrospection
         in_args.each_with_index do |arg, i|
           nil_indexes << i if arg.may_be_null?
         end
-        nil_indexes[-n_missing_arguments..-1].each do |i|
-          arguments.insert(i, nil)
+        unless nil_indexes.empty?
+          nil_indexes[-n_missing_arguments..-1].each do |i|
+            arguments.insert(i, nil)
+          end
         end
       end
       [arguments, block]
