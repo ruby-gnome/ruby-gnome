@@ -22,5 +22,8 @@ module Gio
       variant_value = GLib::Variant.new(value, schema_key.value_type)
       set_value_raw(key, variant_value)
     end
+
+    alias_method :[], :get_value
+    alias_method :[]=, :set_value
   end
 end

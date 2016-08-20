@@ -18,7 +18,7 @@ class TestSettings < Test::Unit::TestCase
   include GioTestUtils::Fixture
   include GioTestUtils::Omissions
 
-  sub_test_case "#get_value" do
+  sub_test_case "accessor" do
     setup do
       @settings = Gio::Settings.new("jp.ruby-gnome2.test.value")
     end
@@ -26,19 +26,19 @@ class TestSettings < Test::Unit::TestCase
     test "string" do
       @settings.reset("string")
       assert_equal("default-string",
-                   @settings.get_value("string"))
-      @settings.set_value("string", "new-string")
+                   @settings["string"])
+      @settings["string"] = "new-string"
       assert_equal("new-string",
-                   @settings.get_value("string"))
+                   @settings["string"])
     end
 
     test "boolean" do
       @settings.reset("boolean")
       assert_equal(true,
-                   @settings.get_value("boolean"))
-      @settings.set_value("boolean", false)
+                   @settings["boolean"])
+      @settings["boolean"] = false
       assert_equal(false,
-                   @settings.get_value("boolean"))
+                   @settings["boolean"])
     end
   end
 end
