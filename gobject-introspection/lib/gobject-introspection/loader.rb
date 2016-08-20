@@ -323,12 +323,23 @@ module GObjectIntrospection
     end
 
     def build_arguments(info, arguments, &block)
-      last_in_arg = info.in_args.last
+      in_args = info.in_args
+      last_in_arg = in_args.last
       if block and last_in_arg and last_in_arg.gclosure?
-        [arguments + [block], nil]
-      else
-        [arguments, block]
+        arguments += [block]
+        block = nil
       end
+      n_missing_arguments = in_args.size - arguments.size
+      if n_missing_arguments > 0
+        in_args.each_with_index do |arg, i|
+          if arg.may_be_null?
+            arguments.insert(i, nil)
+            n_missing_arguments -= 1
+            break if n_missing_arguments.zero?
+          end
+        end
+      end
+      [arguments, block]
     end
 
     def validate_arguments(info, method_name, arguments)
