@@ -23,5 +23,11 @@ module GioTestUtils
     def omit_on_travis_ci
       omit("Skip this test on Travis CI") if ENV["CI"]
     end
+
+    def only_gio_version(major, minor, micro)
+      unless GLib.check_version?(major, minor, micro)
+        omit("Require GIO >= #{major}.#{minor}.#{micro}")
+      end
+    end
   end
 end

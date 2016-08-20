@@ -20,6 +20,7 @@ class TestSettingsSchemaSource < Test::Unit::TestCase
 
   sub_test_case "#list_schemas" do
     setup do
+      only_gio_version(2, 40, 1)
       @default_source = Gio::SettingsSchemaSource.default
       @source = Gio::SettingsSchemaSource.new(fixture_path("schema"),
                                               @default_source,
