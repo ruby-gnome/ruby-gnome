@@ -1226,6 +1226,58 @@ rb_gi_argument_to_ruby(GIArgument *argument,
 }
 
 static void
+rb_gi_out_argument_init_array_c(GIArgument *argument,
+                                G_GNUC_UNUSED GIArgInfo *arg_info,
+                                G_GNUC_UNUSED GITypeInfo *array_type_info,
+                                GITypeInfo *element_type_info)
+{
+    GITypeTag element_type_tag;
+
+    element_type_tag = g_type_info_get_tag(element_type_info);
+
+    switch (element_type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: allocates GIArgument(array)[c][%s] for output",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+      case GI_TYPE_TAG_UTF8:
+        argument->v_pointer = xmalloc(sizeof(gchar **));
+        break;
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: allocates GIArgument(array)[c][%s] for output",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+      default:
+        g_base_info_unref(element_type_info);
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
 rb_gi_out_argument_init_array_array_interface(GIArgument *argument,
                                               G_GNUC_UNUSED GIArgInfo *arg_info,
                                               GITypeInfo *array_type_info,
@@ -1367,10 +1419,10 @@ rb_gi_out_argument_init_array(GIArgument *argument, GIArgInfo *arg_info,
 
     switch (array_type) {
     case GI_ARRAY_TYPE_C:
-        g_base_info_unref(element_type_info);
-        rb_raise(rb_eNotImpError,
-                 "TODO: allocates GIArgument(array)[c][%s] for output",
-                 g_type_tag_to_string(element_type_tag));
+        rb_gi_out_argument_init_array_c(argument,
+                                        arg_info,
+                                        array_type_info,
+                                        element_type_info);
         break;
     case GI_ARRAY_TYPE_ARRAY:
         rb_gi_out_argument_init_array_array(argument,
@@ -1722,35 +1774,101 @@ rb_gi_out_argument_to_ruby(GIArgument *argument,
                                   args_metadata);
 }
 
+
+static void
+rb_gi_out_argument_fin_array_c(GIArgument *argument,
+                               G_GNUC_UNUSED GIArgInfo *arg_info,
+                               G_GNUC_UNUSED GITypeInfo *array_type_info,
+                               GITypeInfo *element_type_info)
+{
+    GITypeTag element_type_tag;
+
+    element_type_tag = g_type_info_get_tag(element_type_info);
+
+    switch (element_type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: free out GIArgument(array)[c][%s]",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+      case GI_TYPE_TAG_UTF8:
+        xfree(argument->v_pointer);
+        break;
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: free out GIArgument(array)[c][%s]",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+      default:
+        g_base_info_unref(element_type_info);
+        g_assert_not_reached();
+        break;
+    }
+}
+
 static void
 rb_gi_out_argument_fin_array(GIArgument *argument,
-                             G_GNUC_UNUSED GIArgInfo *arg_info,
+                             GIArgInfo *arg_info,
                              GITypeInfo *array_type_info)
 {
     GIArrayType array_type;
+    GITypeInfo *element_type_info;
+    GITypeTag element_type_tag;
 
     array_type = g_type_info_get_array_type(array_type_info);
+    element_type_info = g_type_info_get_param_type(array_type_info, 0);
+    element_type_tag = g_type_info_get_tag(element_type_info);
 
     switch (array_type) {
     case GI_ARRAY_TYPE_C:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free out GIArgument(array)[c]");
+        rb_gi_out_argument_fin_array_c(argument,
+                                       arg_info,
+                                       array_type_info,
+                                       element_type_info);
         break;
     case GI_ARRAY_TYPE_ARRAY:
         g_array_free(argument->v_pointer, TRUE);
         break;
     case GI_ARRAY_TYPE_PTR_ARRAY:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
-                 "TODO: free out GIArgument(array)[ptr-array]");
+                 "TODO: free out GIArgument(array)[ptr-array][%s]",
+                 g_type_tag_to_string(element_type_tag));
         break;
     case GI_ARRAY_TYPE_BYTE_ARRAY:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
-                 "TODO: free out GIArgument(array)[byte-array]");
+                 "TODO: free out GIArgument(array)[byte-array][%s]",
+                 g_type_tag_to_string(element_type_tag));
         break;
     default:
+        g_base_info_unref(element_type_info);
         g_assert_not_reached();
         break;
     }
+
+    g_base_info_unref(element_type_info);
 }
 
 void
