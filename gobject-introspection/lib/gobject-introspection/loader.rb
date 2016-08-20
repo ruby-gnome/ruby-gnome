@@ -331,12 +331,12 @@ module GObjectIntrospection
       end
       n_missing_arguments = in_args.size - arguments.size
       if n_missing_arguments > 0
+        nil_indexes = []
         in_args.each_with_index do |arg, i|
-          if arg.may_be_null?
-            arguments.insert(i, nil)
-            n_missing_arguments -= 1
-            break if n_missing_arguments.zero?
-          end
+          nil_indexes << i if arg.may_be_null?
+        end
+        nil_indexes[-n_missing_arguments..-1].each do |i|
+          arguments.insert(i, nil)
         end
       end
       [arguments, block]
