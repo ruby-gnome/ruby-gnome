@@ -23,83 +23,52 @@
  up when the menu item is selected. Typically, all menu items in a menu bar
  have submenus.
 =end
-module MenusDemo
-  def self.run_demo(main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.screen = main_window.screen
-    window.title = "Menus"
+class MenusDemo
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
+    @window.title = "Menus"
+    @window.border_width = 0
 
     accel_group = Gtk::AccelGroup.new
-    window.add_accel_group(accel_group)
-    window.border_width = 0
+    @window.add_accel_group(accel_group)
 
     box = Gtk::Box.new(:horizontal, 0)
-    window.add(box)
-    box.show
+    @window.add(box)
 
     box1 = Gtk::Box.new(:horizontal, 0)
     box.add(box1)
-    box1.show
 
-    menubar = Gtk::MenuBar.new
-    menubar.expand = true
-    box1.pack_start(menubar, :expand => false, :fill => true, :padding => 0)
-    menubar.show
+    @menubar = Gtk::MenuBar.new
+    @menubar.expand = true
+    box1.pack_start(@menubar, :expand => false, :fill => true, :padding => 0)
 
-    menu = create_menu(2)
-
-    menuitem = Gtk::MenuItem.new(:label => "test\nline2")
-    menuitem.submenu = menu
-    menubar.append(menuitem)
-    menuitem.show
-
-    menuitem = Gtk::MenuItem.new(:label => "foo")
-    menuitem.submenu = create_menu(3)
-    menubar.append(menuitem)
-    menuitem.show
-
-    menuitem = Gtk::MenuItem.new(:label => "bar")
-    menuitem.submenu = create_menu(4)
-    menubar.append(menuitem)
-    menuitem.show
+    { "test\nline2" => 2, "foo" => 3, "bar" => 4 }.each do |k, v|
+      create_menu_item(k, v)
+    end
 
     box2 = Gtk::Box.new(:vertical, 10)
     box2.border_width = 10
     box1.pack_start(box2, :expand => false, :fill => true, :padding => 0)
-    box2.show
 
-    button = Gtk::Button.new(:label => "Flip")
-    button.signal_connect("clicked") do |_widget|
-      parent = menubar.parent
-      orientation = parent.orientation.to_i
-      parent.orientation = 1 - orientation
-
-      if orientation == Gtk::Orientation::VERTICAL
-        menubar.set_property("pack-direction", Gtk::PackDirection::TTB)
-      else
-        menubar.set_property("pack-direction", Gtk::PackDirection::LTR)
-      end
-    end
+    button = generate_flip_button
     box2.pack_start(button, :expand => true, :fill => true, :padding => 0)
-    button.show
-    button = Gtk::Button.new(:label => "Close")
-    button.signal_connect("clicked") do |_widget|
-      window.destroy
-    end
+    button = generate_close_button
     box2.pack_start(button, :expand => true, :fill => true, :padding => 0)
-    button.can_default = true
-    button.grab_default
-    button.show
-
-    if !window.visible?
-      window.show_all
-    else
-      window.destroy
-    end
-    window
   end
 
-  def self.create_menu(depth)
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+    @window
+  end
+
+  private
+
+  def create_menu(depth)
     return nil if depth < 1
 
     menu = Gtk::Menu.new
@@ -111,11 +80,41 @@ module MenusDemo
       menu_item.join_group(last_item) if last_item
       last_item = menu_item
       menu.append(menu_item)
-      menu_item.show
       menu_item.sensitive = false if i == 3
       menu_item.submenu = create_menu(depth - 1)
     end
 
     menu
+  end
+
+  def create_menu_item(label, depth)
+    menuitem = Gtk::MenuItem.new(:label => label)
+    menuitem.submenu = create_menu(depth)
+    @menubar.append(menuitem)
+  end
+
+  def generate_flip_button
+    button = Gtk::Button.new(:label => "Flip")
+    button.signal_connect("clicked") do |_widget|
+      parent = @menubar.parent
+      orientation = parent.orientation.to_i
+      parent.orientation = 1 - orientation
+
+      if orientation == Gtk::Orientation::VERTICAL
+        @menubar.set_property("pack-direction", Gtk::PackDirection::TTB)
+      else
+        @menubar.set_property("pack-direction", Gtk::PackDirection::LTR)
+      end
+    end
+
+    button
+  end
+
+  def generate_close_button
+    button = Gtk::Button.new(:label => "Close")
+    button.signal_connect("clicked") { @window.destroy }
+    button.can_default = true
+    button.grab_default
+    button
   end
 end
