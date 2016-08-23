@@ -1,4 +1,4 @@
-# Copyright (c) 2015 Ruby-GNOME2 Project Team
+# Copyright (c) 2015-2016 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
@@ -8,12 +8,12 @@ GtkLabel can show hyperlinks. The default action is to call
 gtk_show_uri() on their URI, but it is possible to override
 this with a custom handler.
 =end
-module LinksDemo
-  def self.run_demo(main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.screen = main_window.screen
-    window.set_title("Links")
-    window.set_border_width(12)
+class LinksDemo
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
+    @window.title = "Links"
+    @window.border_width = 12
 
     label = Gtk::Label.new(<<-MESSAGE)
 Some <a href="http://en.wikipedia.org/wiki/Text"
@@ -27,40 +27,45 @@ searching on <a href="http://www.google.com/">
 <span color="#00933B">l</span><span color="#F90101">e</span>
 </a>.
     MESSAGE
-    label.set_use_markup(true)
+    label.use_markup = true
 
-    label.signal_connect "activate-link" do |_widget, uri|
+    label.signal_connect "activate-link" do |widget, uri|
       if uri == "keynav"
-        parent = label.toplevel
-        dialog = Gtk::MessageDialog.new(:parent => parent,
-                                        :flags => :destroy_with_parent,
-                                        :type => :info,
-                                        :buttons => :ok,
-                                        :message => <<-MESSAGE)
-The term <i>keynav</i> is a shorthand for
-keyboard navigation and refers to the process of using
-a program (exclusively) via keyboard input.
-        MESSAGE
-        dialog.set_use_markup(true)
-        dialog.set_modal(true)
-        dialog.present
-        dialog.signal_connect "response" do
-          dialog.destroy
-        end
+        generate_dialog(widget)
         true
       else
         false
       end
     end
 
-    window.add(label)
+    @window.add(label)
     label.show
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
     end
-    window
+    @window
+  end
+
+  private
+
+  def generate_dialog(widget)
+    dialog = Gtk::MessageDialog.new(:parent => widget.toplevel,
+                                    :flags => :destroy_with_parent,
+                                    :type => :info,
+                                    :buttons => :ok,
+                                    :message => <<-MESSAGE)
+The term <i>keynav</i> is a shorthand for
+keyboard navigation and refers to the process of using
+a program (exclusively) via keyboard input.
+        MESSAGE
+    dialog.use_markup = true
+    dialog.modal = true
+    dialog.present
+    dialog.signal_connect("response", &:destroy)
   end
 end
