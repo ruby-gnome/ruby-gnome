@@ -37,7 +37,7 @@ module Gio
 
     private
     def actions
-      @acitions ||= {}
+      @actions ||= {}
     end
 
     def convert_to_action(definition)
