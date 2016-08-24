@@ -43,9 +43,10 @@ module Gio
     def convert_to_action(definition)
       name = definition[:name]
       parameter_type = definition[:parameter_type]
+      state = definition[:state]
       callback = definition[:callback]
 
-      action = SimpleAction.new(name, parameter_type)
+      action = SimpleAction.new(name, parameter_type, state)
       if callback
         action.signal_connect("activate") do |*args|
           callback.call(*args)
