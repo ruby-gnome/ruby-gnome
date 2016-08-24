@@ -1,4 +1,4 @@
-# Copyright (c) 2008-2015 Ruby-GNOME2 Project Team
+# Copyright (c) 2008-2016 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
@@ -15,8 +15,8 @@ case, you should set the "role" attribute yourself, and connect to the
 A common use of GtkModelButton is to implement menu-like content
 in popovers.
 =end
-module ModelbuttonDemo
-  def self.run_demo(main_window)
+class ModelbuttonDemo
+  def initialize(main_window)
     builder = Gtk::Builder.new(:resource => "/modelbutton/modelbutton.ui")
 
     builder.connect_signals do |name|
@@ -26,8 +26,8 @@ module ModelbuttonDemo
         end
       end
     end
-    window = builder["window1"]
-    window.screen = main_window.screen
+    @window = builder["window1"]
+    @window.screen = main_window.screen
     actions = Gio::SimpleActionGroup.new
     actions.add_actions([
       { :name => "color", :parameter_type => "s", :state => "'red'" },
@@ -36,12 +36,14 @@ module ModelbuttonDemo
       { :name => "sprinkles" }
     ])
 
-    window.insert_action_group("win", actions)
+    @window.insert_action_group("win", actions)
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
     end
   end
 end
