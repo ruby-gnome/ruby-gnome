@@ -17,12 +17,16 @@
 module Gio
   module Resources
     class << self
-      def register(resource)
-        resource._register
+      unless method_defined?(:register)
+        def register(resource)
+          resource._register
+        end
       end
 
-      def unregister(resource)
-        resource._unregister
+      unless method_defined?(:unregister)
+        def unregister(resource)
+          resource._unregister
+        end
       end
 
       alias_method :lookup_data_raw, :lookup_data
