@@ -160,7 +160,13 @@ module Gio
       when "guess"
         define_singleton_method(@content_type_class, name, info)
       else
-        @content_type_class.__send__(:define_method, name) do
+        case name
+        when /\Aget_/
+          method_name = $POSTMATCH
+        else
+          method_name = name
+        end
+        @content_type_class.__send__(:define_method, method_name) do
           info.invoke([to_s])
         end
       end
