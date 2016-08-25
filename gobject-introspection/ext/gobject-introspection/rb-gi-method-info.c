@@ -36,7 +36,7 @@ gi_method_info_get_type(void)
 }
 
 static VALUE
-rg_invoke(VALUE self, VALUE rb_options)
+rg_invoke(VALUE self, VALUE rb_receiver, VALUE rb_arguments)
 {
     GIFunctionInfo *info;
     VALUE rb_out_args;
@@ -47,7 +47,8 @@ rg_invoke(VALUE self, VALUE rb_options)
     /* TODO: use rb_protect */
     rb_out_args = rb_gi_function_info_invoke_raw(info,
                                                  self,
-                                                 rb_options,
+                                                 rb_receiver,
+                                                 rb_arguments,
                                                  NULL,
                                                  &rb_return_value);
 
@@ -77,5 +78,5 @@ rb_gi_method_info_init(VALUE rb_mGI, VALUE rb_cGIFunctionInfo)
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_METHOD_INFO, "MethodInfo", rb_mGI,
 				rb_cGIFunctionInfo);
 
-    RG_DEF_METHOD(invoke, 1);
+    RG_DEF_METHOD(invoke, 2);
 }

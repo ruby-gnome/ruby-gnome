@@ -35,7 +35,7 @@ module Gtk
       arguments = [
         [$0] + @init_arguments,
       ]
-      succeeded, argv = init_check.invoke(:arguments => arguments)
+      succeeded, argv = init_check.invoke(arguments)
       @init_arguments.replace(argv[1..-1])
       raise InitError, "failed to initialize GTK+" unless succeeded
     end

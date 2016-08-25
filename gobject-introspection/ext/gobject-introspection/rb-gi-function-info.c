@@ -68,6 +68,9 @@ rg_set_unlock_gvl(VALUE self, VALUE rb_boolean)
 static VALUE
 rg_unlock_gvl_p(VALUE self)
 {
+    if (!RVAL2CBOOL(rb_ivar_defined(self, rb_intern("unlock_gv")))) {
+        rb_iv_set(self, "unlock_gvl", Qfalse);
+    }
     return rb_iv_get(self, "unlock_gvl");
 }
 
@@ -1281,7 +1284,8 @@ gobject_based_p(GIBaseInfo *info)
 VALUE
 rb_gi_function_info_invoke_raw(GIFunctionInfo *info,
                                VALUE rb_info,
-                               VALUE rb_options,
+                               VALUE rb_receiver,
+                               VALUE rb_arguments,
                                GIArgument *return_value,
                                VALUE *rb_return_value)
 {
@@ -1293,25 +1297,9 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info,
     gboolean succeeded;
     GError *error = NULL;
     gboolean unlock_gvl = FALSE;
-    VALUE rb_receiver, rb_arguments;
     gboolean rb_receiver_is_class = FALSE;
 
     unlock_gvl = RVAL2CBOOL(rb_funcall(rb_info, rb_intern("unlock_gvl?"), 0));
-
-    if (RB_TYPE_P(rb_options, RUBY_T_ARRAY)) {
-        rb_receiver = Qnil;
-        rb_arguments = rb_options;
-    } else if (NIL_P(rb_options)) {
-        rb_receiver = Qnil;
-        rb_arguments = rb_ary_new();
-    } else {
-        rb_options = rbg_check_hash_type(rb_options);
-        rbg_scan_options(rb_options,
-                         "receiver", &rb_receiver,
-                         "arguments", &rb_arguments,
-                         NULL);
-    }
-
     if (NIL_P(rb_receiver)) {
         receiver.v_pointer = NULL;
     } else {
@@ -1393,7 +1381,7 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info,
 }
 
 static VALUE
-rg_invoke(VALUE self, VALUE rb_options)
+rg_invoke(VALUE self, VALUE rb_arguments)
 {
     GIFunctionInfo *info;
     VALUE rb_out_args;
@@ -1403,7 +1391,8 @@ rg_invoke(VALUE self, VALUE rb_options)
     /* TODO: use rb_protect() */
     rb_out_args = rb_gi_function_info_invoke_raw(info,
                                                  self,
-                                                 rb_options,
+                                                 Qnil,
+                                                 rb_arguments,
                                                  NULL,
                                                  &rb_return_value);
 

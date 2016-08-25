@@ -86,38 +86,31 @@ initialize_receiver(VALUE receiver, GITypeInfo *info, GIArgument *value)
 }
 
 static VALUE
-rg_invoke(VALUE self, VALUE rb_options)
+rg_invoke(VALUE self, VALUE rb_receiver, VALUE rb_arguments)
 {
     GIFunctionInfo *info;
     GICallableInfo *callable_info;
-    VALUE receiver;
     GIArgument return_value;
     GITypeInfo return_value_info;
 
     info = SELF(self);
     callable_info = (GICallableInfo *)info;
 
-    rb_options = rbg_to_hash(rb_options);
-    receiver = rb_hash_delete(rb_options, ID2SYM(rb_intern("receiver")));
-    if (NIL_P(receiver)) {
-        receiver = rb_hash_delete(rb_options, rb_str_new_cstr("receiver"));
-    }
-    if (NIL_P(receiver)) {
-        rb_raise(rb_eArgError,
-                 "receiver is missing: %s",
-                 RBG_INSPECT(rb_options));
+    if (NIL_P(rb_receiver)) {
+        rb_raise(rb_eArgError, "receiver is missing");
     }
     /* TODO: use rb_protect */
     rb_gi_function_info_invoke_raw(info,
                                    self,
-                                   rb_options,
+                                   Qnil,
+                                   rb_arguments,
                                    &return_value,
                                    NULL);
 
     g_callable_info_load_return_type(callable_info, &return_value_info);
-    initialize_receiver(receiver, &return_value_info, &return_value);
+    initialize_receiver(rb_receiver, &return_value_info, &return_value);
 
-    return receiver;
+    return rb_receiver;
 }
 
 void
@@ -130,5 +123,5 @@ rb_gi_constructor_info_init(VALUE rb_mGI, VALUE rb_cGIFunctionInfo)
                                 "ConstructorInfo", rb_mGI,
 				rb_cGIFunctionInfo);
 
-    RG_DEF_METHOD(invoke, 1);
+    RG_DEF_METHOD(invoke, 2);
 }

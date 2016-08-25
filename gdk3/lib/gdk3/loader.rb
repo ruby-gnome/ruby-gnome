@@ -82,7 +82,7 @@ module Gdk
       get_type_info = @pending_rectangle_get_type_function
       if get_type_info
         rectangle_class = load_cairo_rectangle_int
-        gtype = get_type_info.invoke({:arguments => []})
+        gtype = get_type_info.invoke([])
         self.class.register_boxed_class_converter(gtype) do |rectangle|
           rectangle_class
         end

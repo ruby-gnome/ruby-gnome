@@ -88,10 +88,7 @@ module GObjectIntrospection
       target_module.module_eval do
         define_method(name) do |*arguments, &block|
           arguments, block = prepare.call(arguments, &block)
-          function_info.invoke({
-                                 :arguments => arguments,
-                               },
-                               &block)
+          function_info.invoke(arguments, &block)
         end
         module_function(name)
       end
@@ -111,10 +108,7 @@ module GObjectIntrospection
         if block.nil? and require_callback_p
           to_enum(name, *arguments)
         else
-          info.invoke({
-                        :arguments => arguments,
-                      },
-                      &block)
+          info.invoke(arguments, &block)
         end
       end
     end
@@ -298,11 +292,7 @@ module GObjectIntrospection
         info.unlock_gvl = should_unlock_gvl?(info, klass)
         klass.__send__(:define_method, name) do |*arguments, &block|
           arguments, block = prepare.call(info, name, arguments, &block)
-          info.invoke({
-                        :receiver  => self,
-                        :arguments => arguments,
-                      },
-                      &block)
+          info.invoke(self, arguments, &block)
           call_initialize_post.call(self)
         end
         klass.__send__(:private, name)
@@ -567,11 +557,11 @@ module GObjectIntrospection
         if block.nil? and require_callback_p
           to_enum(method_name, *arguments)
         else
-          options = {
-            :arguments => arguments,
-          }
-          options[:receiver] = self unless function_info_p
-          return_value = info.invoke(options, &block)
+          if function_info_p
+            return_value = info.invoke(arguments, &block)
+          else
+            return_value = info.invoke(self, arguments, &block)
+          end
           if no_return_value_p
             self
           else

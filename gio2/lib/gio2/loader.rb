@@ -31,7 +31,7 @@ module Gio
         info = @content_type_guess_for_tree_info
         file_module = @base_module.const_get("File")
         file_module.__send__(:define_method, "guess_content_types") do
-          info.invoke(:arguments => [self]).collect do |type|
+          info.invoke(self).collect do |type|
             content_type_class.new(type)
           end
         end
@@ -108,7 +108,7 @@ module Gio
         load_function_info_content_type(info)
       when "content_types_get_registered"
         @content_type_class.define_singleton_method(:registered) do
-          info.invoke(:arguments => []).collect do |type|
+          info.invoke([]).collect do |type|
             new(type)
           end
         end
@@ -138,19 +138,19 @@ module Gio
             other = other.to_s
           end
           if other.is_a?(String)
-            info.invoke(:arguments => [to_s, other])
+            info.invoke([to_s, other])
           else
             false
           end
         end
       when "from_mime_type"
         @mime_type_class.__send__(:define_method, "content_type") do
-          info.invoke(:arguments => [to_s])
+          info.invoke([to_s])
         end
       when "get_mime_type"
         mime_type_class = @mime_type_class
         @content_type_class.__send__(:define_method, "mime_type") do
-          mime_type = info.invoke(:arguments => [to_s])
+          mime_type = info.invoke([to_s])
           if mime_type
             mime_type_class.new(mime_type)
           else
@@ -166,7 +166,7 @@ module Gio
         end
         @content_type_class.define_singleton_method(:guess) do |*arguments|
           validate.call(arguments)
-          info.invoke(:arguments => arguments)
+          info.invoke(arguments)
         end
       else
         case name
@@ -180,7 +180,7 @@ module Gio
           method_name = name
         end
         @content_type_class.__send__(:define_method, method_name) do
-          info.invoke(:arguments => [to_s])
+          info.invoke([to_s])
         end
       end
     end
@@ -224,7 +224,7 @@ module Gio
       klass.__send__(:define_method, method_name) do |*arguments|
         info = find_info.call(arguments)
         validate.call(info, arguments)
-        info.invoke(:arguments => arguments)
+        info.invoke(arguments)
       end
     end
 
