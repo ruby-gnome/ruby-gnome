@@ -105,7 +105,7 @@ module GObjectIntrospection
         if arg.direction == Direction::IN and
             arg.scope != ScopeType::INVALID and
             !arg.may_be_null?
-          return :require
+          return :required
         end
       end
 
