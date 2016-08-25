@@ -79,15 +79,13 @@ module GObjectIntrospection
 
     def define_module_function(target_module, name, function_info)
       function_info.unlock_gvl = should_unlock_gvl?(function_info, target_module)
-      prepare = lambda do |arguments, &block|
-        arguments, block = build_arguments(function_info, arguments, &block)
-        method_name = "#{target_module}\#.#{name}"
-        validate_arguments(function_info, method_name, arguments)
-        [arguments, block]
-      end
+      method_name = "#{target_module}\#.#{name}"
+      arguments_builder = ArgumentsBuilder.new(function_info, method_name)
       target_module.module_eval do
         define_method(name) do |*arguments, &block|
-          arguments, block = prepare.call(arguments, &block)
+          arguments_builder.build(arguments, block)
+          arguments = arguments_builder.arguments
+          block = arguments_builder.block
           function_info.invoke(arguments, &block)
         end
         module_function(name)
@@ -96,15 +94,13 @@ module GObjectIntrospection
 
     def define_singleton_method(klass, name, info)
       info.unlock_gvl = should_unlock_gvl?(info, klass)
-      prepare = lambda do |arguments, &block|
-        arguments, block = build_arguments(info, arguments, &block)
-        validate_arguments(info, "#{klass}.#{name}", arguments)
-        [arguments, block]
-      end
+      arguments_builder = ArgumentsBuilder.new(info, "#{klass}.#{name}")
       require_callback_p = info.require_callback?
       singleton_class = (class << klass; self; end)
       singleton_class.__send__(:define_method, name) do |*arguments, &block|
-        arguments, block = prepare.call(arguments, &block)
+        arguments_builder.build(arguments, block)
+        arguments = arguments_builder.arguments
+        block = arguments_builder.block
         if block.nil? and require_callback_p
           to_enum(name, *arguments)
         else
@@ -279,19 +275,17 @@ module GObjectIntrospection
     def load_constructor_infos(infos, klass)
       return if infos.empty?
 
-      prepare = lambda do |info, method_name, arguments, &block|
-        arguments, block = build_arguments(info, arguments, &block)
-        validate_arguments(info, "#{klass}\##{method_name}", arguments)
-        [arguments, block]
-      end
       call_initialize_post = lambda do |object|
         initialize_post(object)
       end
       infos.each do |info|
         name = "initialize_#{info.name}"
         info.unlock_gvl = should_unlock_gvl?(info, klass)
+        arguments_builder = ArgumentsBuilder.new(info, "#{klass}\##{name}")
         klass.__send__(:define_method, name) do |*arguments, &block|
-          arguments, block = prepare.call(info, name, arguments, &block)
+          arguments_builder.build(arguments, block)
+          arguments = arguments_builder.arguments
+          block = arguments_builder.block
           info.invoke(self, arguments, &block)
           call_initialize_post.call(self)
         end
@@ -308,43 +302,6 @@ module GObjectIntrospection
     end
 
     def initialize_post(object)
-    end
-
-    def build_arguments(info, arguments, &block)
-      in_args = info.in_args
-      last_in_arg = in_args.last
-      if block and last_in_arg and last_in_arg.gclosure?
-        arguments += [block]
-        block = nil
-      end
-      n_missing_arguments = in_args.size - arguments.size
-      if n_missing_arguments > 0
-        nil_indexes = []
-        in_args.each_with_index do |arg, i|
-          nil_indexes << i if arg.may_be_null?
-        end
-        unless nil_indexes.empty?
-          nil_indexes[-n_missing_arguments..-1].each do |i|
-            arguments.insert(i, nil)
-          end
-        end
-      end
-      [arguments, block]
-    end
-
-    def validate_arguments(info, method_name, arguments)
-      n_in_args = info.n_in_args
-      n_required_in_args = info.n_required_in_args
-      return if (n_required_in_args..n_in_args).cover?(arguments.size)
-
-      detail = "#{arguments.size} for "
-      if n_in_args == n_required_in_args
-        detail << "#{n_in_args}"
-      else
-        detail << "#{n_required_in_args}..#{n_in_args}"
-      end
-      message = "#{method_name}: wrong number of arguments (#{detail})"
-      raise ArgumentError, message
     end
 
     def find_suitable_callable_info(infos, arguments)
@@ -545,15 +502,13 @@ module GObjectIntrospection
       function_info_p = (info.class == FunctionInfo)
       no_return_value_p =
         (info.return_type.tag == TypeTag::VOID and info.n_out_args.zero?)
-      prepare = lambda do |arguments, &block|
-        arguments, block = build_arguments(info, arguments, &block)
-        validate_arguments(info, "#{klass}\##{method_name}", arguments)
-        [arguments, block]
-      end
+      arguments_builder = ArgumentsBuilder.new(info, "#{klass}\##{method_name}")
       require_callback_p = info.require_callback?
       klass.__send__(:define_method, method_name) do |*arguments, &block|
-        arguments = [self] + arguments if function_info_p
-        arguments, block = prepare.call(arguments, &block)
+        arguments.unshift(self) if function_info_p
+        arguments_builder.build(arguments, block)
+        arguments = arguments_builder.arguments
+        block = arguments_builder.block
         if block.nil? and require_callback_p
           to_enum(method_name, *arguments)
         else
@@ -608,6 +563,81 @@ module GObjectIntrospection
       klass = self.class.define_class(info.gtype, info.name, @base_module)
       load_fields(info, klass)
       load_methods(info, klass)
+    end
+
+    class ArgumentsBuilder
+      attr_reader :arguments
+      attr_reader :block
+      def initialize(info, method_name)
+        @info = info
+        @method_name = method_name
+
+        @prepared = false
+
+        @arguments = nil
+        @block = nil
+      end
+
+      def build(arguments, block)
+        prepare
+
+        @arguments = arguments
+        @block = block
+
+        build_arguments
+        validate_arguments
+      end
+
+      private
+      def prepare
+        return if @prepared
+
+        @in_args = @info.in_args
+        @n_in_args = @in_args.size
+        @n_required_in_args = @info.n_required_in_args
+        @last_in_arg = @in_args.last
+        if @last_in_arg
+          @last_in_arg_is_gclosure = @last_in_arg.gclosure?
+        else
+          @last_in_arg_is_gclosure = false
+        end
+        @valid_n_args_range = (@n_required_in_args..@n_in_args)
+
+        @prepared = true
+      end
+
+      def build_arguments
+        if @block and @last_in_arg_is_gclosure
+          @arguments << @block
+          @block = nil
+        end
+
+        n_missing_arguments = @n_in_args - @arguments.size
+        if n_missing_arguments > 0
+          nil_indexes = []
+          @in_args.each_with_index do |arg, i|
+            nil_indexes << i if arg.may_be_null?
+          end
+          unless nil_indexes.empty?
+            nil_indexes[-n_missing_arguments..-1].each do |i|
+              @arguments.insert(i, nil)
+            end
+          end
+        end
+      end
+
+      def validate_arguments
+        return if @valid_n_args_range.cover?(@arguments.size)
+
+        detail = "#{@arguments.size} for "
+        if @n_in_args == @n_required_in_args
+          detail << "#{@n_in_args}"
+        else
+          detail << "#{@n_required_in_args}..#{@n_in_args}"
+        end
+        message = "#{@method_name}: wrong number of arguments (#{detail})"
+        raise ArgumentError, message
+      end
     end
   end
 end
