@@ -53,6 +53,7 @@ module Gio
       require "gio2/action"
       require "gio2/action-map"
       require "gio2/application-command-line"
+      require "gio2/content-type"
       require "gio2/file"
       require "gio2/inet-address"
       require "gio2/input-stream"
@@ -106,26 +107,22 @@ module Gio
       name = info.name
       case name
       when /\Acontent_type_/
-        load_function_info_content_type(info)
+        load_function_info_content_type
       when "content_types_get_registered"
-        @content_type_class.define_singleton_method(:registered) do
-          info.invoke([]).collect do |type|
-            new(type)
-          end
-        end
+        define_singleton_method(@content_type_class, "registered", info)
       when /\Aresources_/
         name = rubyish_method_name(info, :prefix => "resources_")
-        define_module_function(@resources_module, name, info)
+        define_singleton_method(@resources_module, name, info)
       when /\Adbus_/
         name = rubyish_method_name(info, :prefix => "dbus_")
-        define_module_function(@dbus_module, name, info)
+        define_singleton_method(@dbus_module, name, info)
       else
         super
       end
     end
 
     def load_function_info_content_type(info)
-      name = info.name.gsub(/\Acontent_type_/, "")
+      name = rubyish_method_name(info, :prefix => "content_type_")
       case name
       when "equals", "is_a"
         case name
@@ -161,26 +158,9 @@ module Gio
       when "guess_for_tree"
         @content_type_guess_for_tree_info = info
       when "guess"
-        validate = lambda do |arguments|
-          method_name = "#{@content_type_class}.#{name}"
-          validate_arguments(info, method_name, arguments)
-        end
-        @content_type_class.define_singleton_method(:guess) do |*arguments|
-          validate.call(arguments)
-          info.invoke(arguments)
-        end
+        define_singleton_method(@content_type_class, name, info)
       else
-        case name
-        when /\Acan_be_/
-          method_name = "#{$POSTMATCH}?"
-        when /\Ais_/
-          method_name = "#{$POSTMATCH}?"
-        when /\Aget_/
-          method_name = $POSTMATCH
-        else
-          method_name = name
-        end
-        @content_type_class.__send__(:define_method, method_name) do
+        @content_type_class.__send__(:define_method, name) do
           info.invoke([to_s])
         end
       end
