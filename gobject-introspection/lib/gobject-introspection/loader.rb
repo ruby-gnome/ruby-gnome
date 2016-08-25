@@ -105,10 +105,11 @@ module GObjectIntrospection
         validate_arguments(info, "#{klass}.#{name}", arguments)
         [arguments, block]
       end
+      require_callback_p = info.require_callback?
       singleton_class = (class << klass; self; end)
       singleton_class.__send__(:define_method, name) do |*arguments, &block|
         arguments, block = prepare.call(arguments, &block)
-        if block.nil? and info.require_callback?
+        if block.nil? and require_callback_p
           to_enum(name, *arguments)
         else
           info.invoke({
