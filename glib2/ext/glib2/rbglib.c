@@ -854,47 +854,79 @@ rbg_check_hash_type (VALUE object)
 void
 rbg_scan_options (VALUE options, ...)
 {
-    VALUE original_options = options;
-    VALUE available_keys;
     const char *key;
-    VALUE *value;
+    gsize n_keys = 0;
+    gsize n_found_keys = 0;
     va_list args;
+    va_list args_copy;
 
-    if (NIL_P(options)) {
-        options = rb_hash_new();
-    } else {
+    if (!NIL_P(options)) {
+        VALUE original_options = options;
         options = rbg_check_hash_type(options);
-        if (options == original_options) {
-            options = rb_funcall(options, rb_intern("dup"), 0);
-        } else if (NIL_P(options)) {
+        if (NIL_P(options)) {
             rb_raise(rb_eArgError,
                      "options must be Hash or nil: %+" PRIsVALUE,
                      original_options);
         }
     }
 
-    available_keys = rb_ary_new();
     va_start(args, options);
+    va_copy(args_copy, args);
     key = va_arg(args, const char *);
+    n_keys = 0;
+    n_found_keys = 0;
     while (key) {
-        VALUE rb_key;
-        value = va_arg(args, VALUE *);
+        VALUE *value;
 
-        rb_key = ID2SYM(rb_intern(key));
-        rb_ary_push(available_keys, rb_key);
-        *value = rb_funcall(options, rb_intern("delete"), 1, rb_key);
+        value = va_arg(args, VALUE *);
+        if (NIL_P(options)) {
+            *value = Qnil;
+        } else {
+            VALUE rb_key;
+            rb_key = ID2SYM(rb_intern(key));
+            if (RTEST(rb_funcall(options, rb_intern("key?"), 1, rb_key))) {
+                n_found_keys++;
+            }
+            *value = rb_hash_aref(options, rb_key);
+        }
+        n_keys++;
 
         key = va_arg(args, const char *);
     }
     va_end(args);
 
-    if (RVAL2CBOOL(rb_funcall(options, rb_intern("empty?"), 0)))
+    if (NIL_P(options)) {
         return;
+    }
 
-    rb_raise(rb_eArgError,
-             "unexpected key(s) exist: %s: available keys: %s",
-             rbg_inspect(rb_funcall(options, rb_intern("keys"), 0)),
-             rbg_inspect(available_keys));
+    if (n_found_keys == RHASH_SIZE(options)) {
+        return;
+    }
+
+    {
+        VALUE rb_available_keys;
+
+        rb_available_keys = rb_ary_new();
+        key = va_arg(args_copy, const char *);
+        while (key) {
+            VALUE rb_key;
+
+            va_arg(args_copy, VALUE *);
+            rb_key = ID2SYM(rb_intern(key));
+            rb_ary_push(rb_available_keys, rb_key);
+            key = va_arg(args_copy, const char *);
+        }
+        va_end(args_copy);
+
+        rb_raise(rb_eArgError,
+                 "unexpected key(s) exist: %+" PRIsVALUE
+                 ": available keys: %+" PRIsVALUE,
+                 rb_funcall(rb_funcall(options, rb_intern("keys"), 0),
+                            rb_intern("-"),
+                            1,
+                            rb_available_keys),
+                 rb_available_keys);
+    }
 }
 
 #if 0
