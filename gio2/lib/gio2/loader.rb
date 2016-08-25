@@ -53,6 +53,7 @@ module Gio
       require "gio2/action"
       require "gio2/action-map"
       require "gio2/application-command-line"
+      require "gio2/file"
       require "gio2/inet-address"
       require "gio2/input-stream"
       require "gio2/pollable-input-stream"
@@ -185,46 +186,12 @@ module Gio
       end
     end
 
-    def load_function_infos(infos, klass)
-      case klass.name
-      when "Gio::File"
-        load_function_infos_file(infos, klass)
+    def rubyish_method_name(info, options={})
+      case info.name
+      when /\Anew_(?:for_)?/
+        $POSTMATCH
       else
         super
-      end
-    end
-
-    def load_function_infos_file(infos, klass)
-      new_for_commandline_arg_infos = []
-
-      infos.each do |info|
-        name = info.name
-        case name
-        when /\Anew_for_commandline_arg/
-          new_for_commandline_arg_infos << info
-        when /\Anew_(?:for_)?/
-          method_name = $POSTMATCH
-          define_singleton_method(klass, method_name, info)
-        else
-          define_singleton_method(klass, name, info)
-        end
-      end
-
-      define_file_commandline_arg(new_for_commandline_arg_infos, klass)
-    end
-
-    def define_file_commandline_arg(infos, klass)
-      method_name = "commandline_arg"
-      find_info = lambda do |arguments|
-        find_suitable_callable_info(infos, arguments)
-      end
-      validate = lambda do |info, arguments|
-        validate_arguments(info, "#{klass}.#{method_name}", arguments)
-      end
-      klass.__send__(:define_method, method_name) do |*arguments|
-        info = find_info.call(arguments)
-        validate.call(info, arguments)
-        info.invoke(arguments)
       end
     end
 
