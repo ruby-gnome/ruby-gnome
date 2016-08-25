@@ -107,7 +107,7 @@ module Gio
       name = info.name
       case name
       when /\Acontent_type_/
-        load_function_info_content_type
+        load_function_info_content_type(info)
       when "content_types_get_registered"
         define_singleton_method(@content_type_class, "registered", info)
       when /\Aresources_/
