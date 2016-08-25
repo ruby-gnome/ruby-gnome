@@ -41,11 +41,7 @@ module GObjectIntrospection
     end
 
     def require_callback?
-      args.any? do |arg|
-        arg.direction == Direction::IN and
-          arg.scope != ScopeType::INVALID and
-          !arg.may_be_null?
-      end
+      (@require_callback ||= compute_require_callback) == :required
     end
 
     def out_args
@@ -102,6 +98,18 @@ module GObjectIntrospection
           false
         end
       end
+    end
+
+    def compute_require_callback
+      args.each do |arg|
+        if arg.direction == Direction::IN and
+            arg.scope != ScopeType::INVALID and
+            !arg.may_be_null?
+          return :require
+        end
+      end
+
+      :not_required
     end
   end
 end
