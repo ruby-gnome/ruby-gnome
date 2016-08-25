@@ -78,7 +78,7 @@ module GObjectIntrospection
     end
 
     def define_module_function(target_module, name, function_info)
-      unlock_gvl = should_unlock_gvl?(function_info, target_module)
+      function_info.unlock_gvl = should_unlock_gvl?(function_info, target_module)
       prepare = lambda do |arguments, &block|
         arguments, block = build_arguments(function_info, arguments, &block)
         method_name = "#{target_module}\#.#{name}"
@@ -90,7 +90,6 @@ module GObjectIntrospection
           arguments, block = prepare.call(arguments, &block)
           function_info.invoke({
                                  :arguments => arguments,
-                                 :unlock_gvl => unlock_gvl,
                                },
                                &block)
         end
@@ -99,7 +98,7 @@ module GObjectIntrospection
     end
 
     def define_singleton_method(klass, name, info)
-      unlock_gvl = should_unlock_gvl?(info, klass)
+      info.unlock_gvl = should_unlock_gvl?(info, klass)
       prepare = lambda do |arguments, &block|
         arguments, block = build_arguments(info, arguments, &block)
         validate_arguments(info, "#{klass}.#{name}", arguments)
@@ -114,7 +113,6 @@ module GObjectIntrospection
         else
           info.invoke({
                         :arguments => arguments,
-                        :unlock_gvl => unlock_gvl,
                       },
                       &block)
         end
@@ -297,13 +295,12 @@ module GObjectIntrospection
       end
       infos.each do |info|
         name = "initialize_#{info.name}"
-        unlock_gvl = should_unlock_gvl?(info, klass)
+        info.unlock_gvl = should_unlock_gvl?(info, klass)
         klass.__send__(:define_method, name) do |*arguments, &block|
           arguments, block = prepare.call(info, name, arguments, &block)
           info.invoke({
                         :receiver  => self,
                         :arguments => arguments,
-                        :unlock_gvl => unlock_gvl,
                       },
                       &block)
           call_initialize_post.call(self)
@@ -553,7 +550,7 @@ module GObjectIntrospection
     end
 
     def define_method(info, klass, method_name)
-      unlock_gvl = should_unlock_gvl?(info, klass)
+      info.unlock_gvl = should_unlock_gvl?(info, klass)
       remove_existing_method(klass, method_name)
       function_info_p = (info.class == FunctionInfo)
       no_return_value_p =
@@ -572,7 +569,6 @@ module GObjectIntrospection
         else
           options = {
             :arguments => arguments,
-            :unlock_gvl => unlock_gvl,
           }
           options[:receiver] = self unless function_info_p
           return_value = info.invoke(options, &block)

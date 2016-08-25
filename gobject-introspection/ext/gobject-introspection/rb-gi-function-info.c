@@ -60,6 +60,18 @@ gi_function_info_get_type(void)
 }
 
 static VALUE
+rg_set_unlock_gvl(VALUE self, VALUE rb_boolean)
+{
+    return rb_iv_set(self, "unlock_gvl", rb_boolean);
+}
+
+static VALUE
+rg_unlock_gvl_p(VALUE self)
+{
+    return rb_iv_get(self, "unlock_gvl");
+}
+
+static VALUE
 rg_symbol(VALUE self)
 {
     GIFunctionInfo *info;
@@ -1267,8 +1279,11 @@ gobject_based_p(GIBaseInfo *info)
 }
 
 VALUE
-rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
-                               GIArgument *return_value, VALUE *rb_return_value)
+rb_gi_function_info_invoke_raw(GIFunctionInfo *info,
+                               VALUE rb_info,
+                               VALUE rb_options,
+                               GIArgument *return_value,
+                               VALUE *rb_return_value)
 {
     GICallableInfo *callable_info;
     GIArgument receiver;
@@ -1278,23 +1293,22 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
     gboolean succeeded;
     GError *error = NULL;
     gboolean unlock_gvl = FALSE;
-    VALUE rb_receiver, rb_arguments, rb_unlock_gvl;
+    VALUE rb_receiver, rb_arguments;
     gboolean rb_receiver_is_class = FALSE;
+
+    unlock_gvl = RVAL2CBOOL(rb_funcall(rb_info, rb_intern("unlock_gvl?"), 0));
 
     if (RB_TYPE_P(rb_options, RUBY_T_ARRAY)) {
         rb_receiver = Qnil;
         rb_arguments = rb_options;
-        rb_unlock_gvl = Qnil;
     } else if (NIL_P(rb_options)) {
         rb_receiver = Qnil;
         rb_arguments = rb_ary_new();
-        rb_unlock_gvl = Qnil;
     } else {
         rb_options = rbg_check_hash_type(rb_options);
         rbg_scan_options(rb_options,
                          "receiver", &rb_receiver,
                          "arguments", &rb_arguments,
-                         "unlock_gvl", &rb_unlock_gvl,
                          NULL);
     }
 
@@ -1314,9 +1328,6 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
         }
     }
     rb_arguments = rbg_to_array(rb_arguments);
-    if (!NIL_P(rb_unlock_gvl) && RVAL2CBOOL(rb_unlock_gvl)) {
-        unlock_gvl = TRUE;
-    }
 
     callable_info = (GICallableInfo *)info;
     arguments_init(&in_args, &out_args, &args_metadata);
@@ -1391,6 +1402,7 @@ rg_invoke(VALUE self, VALUE rb_options)
     info = SELF(self);
     /* TODO: use rb_protect() */
     rb_out_args = rb_gi_function_info_invoke_raw(info,
+                                                 self,
                                                  rb_options,
                                                  NULL,
                                                  &rb_return_value);
@@ -1425,6 +1437,9 @@ rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 
     callback_finders = g_ptr_array_new();
     rb_gi_callback_register_finder(source_func_callback_finder);
+
+    RG_DEF_METHOD(set_unlock_gvl, 1);
+    RG_DEF_METHOD_P(unlock_gvl, 0);
 
     RG_DEF_METHOD(symbol, 0);
     RG_DEF_METHOD(flags, 0);

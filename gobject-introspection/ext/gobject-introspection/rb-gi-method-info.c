@@ -46,6 +46,7 @@ rg_invoke(VALUE self, VALUE rb_options)
 
     /* TODO: use rb_protect */
     rb_out_args = rb_gi_function_info_invoke_raw(info,
+                                                 self,
                                                  rb_options,
                                                  NULL,
                                                  &rb_return_value);
