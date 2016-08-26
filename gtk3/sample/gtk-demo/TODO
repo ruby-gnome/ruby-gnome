@@ -20,7 +20,7 @@ css_pixbufs.c           ok              ok
 css_shadows.c           ok              ok
 cursors.c               ok              ok
 dialog.c                ok              ok
-drawingarea.c           ok              no
+drawingarea.c           ok              ok
 editable_cells.c        ok              no
 entry_buffer.c          ok              ok
 entry_completion.c      ok              ok
