@@ -134,9 +134,9 @@ class DrawingareaDemo
     true
   end
 
-  def scribble_motion_notify_event(event)
+  def scribble_motion_notify_event(da, event)
     return false unless @surface
-    x, y, state = event.window.get_device_position(event.device)
+    _window, x, y, state = event.window.get_device_position(event.device)
     if (state & Gdk::EventMask::BUTTON_PRESS_MASK.to_i).nonzero?
       draw_brush(da, x, y)
     end
@@ -154,8 +154,8 @@ class DrawingareaDemo
       scribble_configure_event(widget)
     end
 
-    da.signal_connect "motion-notify-event" do |_widget, event|
-      scribble_motion_notify_event(event)
+    da.signal_connect "motion-notify-event" do |widget, event|
+      scribble_motion_notify_event(widget, event)
     end
 
     da.signal_connect "button-press-event" do |widget, event|
