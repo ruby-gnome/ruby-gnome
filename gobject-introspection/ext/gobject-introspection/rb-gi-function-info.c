@@ -68,7 +68,7 @@ rg_set_unlock_gvl(VALUE self, VALUE rb_boolean)
 static VALUE
 rg_unlock_gvl_p(VALUE self)
 {
-    if (!RVAL2CBOOL(rb_ivar_defined(self, rb_intern("unlock_gv")))) {
+    if (!RVAL2CBOOL(rb_ivar_defined(self, rb_intern("unlock_gvl")))) {
         rb_iv_set(self, "unlock_gvl", Qfalse);
     }
     return rb_iv_get(self, "unlock_gvl");
