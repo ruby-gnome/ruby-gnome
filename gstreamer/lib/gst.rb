@@ -62,16 +62,6 @@ module Gst
       end
       loader = Loader.new(self, argv)
       loader.load
-      require "gst/bin"
-      require "gst/bus"
-      require "gst/caps"
-      require "gst/element"
-      require "gst/element-factory"
-      require "gst/plugin-feature"
-      require "gst/registry"
-      require "gst/structure"
-      require "gst/type-find-factory"
-      require "gst/version"
       init_base
       init_controller
     end
@@ -127,6 +117,7 @@ module Gst
 
     def post_load(repository, namespace)
       require_extension
+      require_libraries
       self.class.start_callback_dispatch_thread
     end
 
@@ -137,6 +128,19 @@ module Gst
       rescue LoadError
         require "gstreamer.so"
       end
+    end
+
+    def require_libraries
+      require "gst/bin"
+      require "gst/bus"
+      require "gst/caps"
+      require "gst/element"
+      require "gst/element-factory"
+      require "gst/plugin-feature"
+      require "gst/registry"
+      require "gst/structure"
+      require "gst/type-find-factory"
+      require "gst/version"
     end
 
     def load_function_info(info)
