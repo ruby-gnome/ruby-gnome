@@ -139,12 +139,6 @@ module Gst
       end
     end
 
-    def initialize_post(object)
-      super
-      return unless object.is_a?(GLib::Object)
-      self.class.reference_gobject(object, :sink => true)
-    end
-
     def load_function_info(info)
       case info.name
       when "init"

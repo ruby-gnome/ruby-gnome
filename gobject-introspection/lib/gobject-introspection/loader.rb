@@ -302,6 +302,8 @@ module GObjectIntrospection
     end
 
     def initialize_post(object)
+      return unless object.is_a?(GLib::Object)
+      self.class.reference_gobject(object, :sink => true)
     end
 
     def find_suitable_callable_info(infos, arguments)

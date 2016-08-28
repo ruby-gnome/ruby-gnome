@@ -54,12 +54,6 @@ module Gdk
       define_selection_constants
     end
 
-    def initialize_post(object)
-      super
-      return unless object.is_a?(GLib::Object)
-      self.class.reference_gobject(object, :sink => true)
-    end
-
     def setup_pending_constants
       @pending_constants = []
     end

@@ -35,12 +35,6 @@ module GdkPixbuf
       require "gdk_pixbuf2/version"
     end
 
-    def initialize_post(object)
-      super
-      return unless object.is_a?(GLib::Object)
-      self.class.reference_gobject(object, :sink => true)
-    end
-
     def define_constant(name, info)
       if /PIXBUF_/ =~ name
         name = $POSTMATCH

@@ -55,12 +55,5 @@ module WebKitGtk2
     def load
       super(NAMESPACE)
     end
-
-    private
-    def initialize_post(object)
-      super
-      return unless object.is_a?(GLib::Object)
-      self.class.reference_gobject(object, :sink => true)
-    end
   end
 end

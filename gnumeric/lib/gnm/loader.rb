@@ -37,12 +37,6 @@ module Gnm
       enum_module.const_set(name, value_info.value)
     end
 
-    def initialize_post(object)
-      super
-      return unless object.is_a?(GLib::Object)
-      self.class.reference_gobject(object, :sink => true)
-    end
-
     def rubyish_class_name(info)
       name = info.name.gsub(/Class\z/, "")
       case name

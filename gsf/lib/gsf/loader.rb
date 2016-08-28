@@ -47,11 +47,5 @@ module Gsf
     def require_libraries
       require "gsf/input"
     end
-
-    def initialize_post(object)
-      super
-      return unless object.is_a?(GLib::Object)
-      self.class.reference_gobject(object, :sink => true)
-    end
   end
 end

@@ -69,12 +69,6 @@ module WebKit2Gtk
       require "webkit2-gtk/version" if @version_module.const_defined?(:MAJOR)
     end
 
-    def initialize_post(object)
-      super
-      return unless object.is_a?(GLib::Object)
-      self.class.reference_gobject(object, :sink => true)
-    end
-
     def load_constant_info(info)
       case info.name
       when /_VERSION\z/
