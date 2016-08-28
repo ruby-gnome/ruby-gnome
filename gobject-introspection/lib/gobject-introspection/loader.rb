@@ -620,9 +620,10 @@ module GObjectIntrospection
           @in_args.each_with_index do |arg, i|
             nil_indexes << i if arg.may_be_null?
           end
-          nil_indexes.reverse_each do |i|
-            return if @arguments.size < i
-            @arguments.insert(i, nil)
+          return if nil_indexes.size < n_missing_arguments
+          nil_indexes.each_with_index do |nil_index, i|
+            next if i < n_missing_arguments
+            @arguments.insert(nil_index, nil)
           end
         end
       end
