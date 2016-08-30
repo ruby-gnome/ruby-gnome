@@ -10,52 +10,59 @@ The overlayed widgets can be interactive controls such
 as the entry in this example, or just decorative, like
 the big blue label.
 =end
-module OverlayDemo
-  def self.run_demo(main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.set_default_size(500, 510)
-    window.set_title("Interactive Overlay")
-    window.screen = main_window.screen
+class OverlayDemo
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.set_default_size(500, 510)
+    @window.title = "Interactive Overlay"
+    @window.screen = main_window.screen
 
     overlay = Gtk::Overlay.new
-    grid = Gtk::Grid.new
-    overlay.add(grid)
+    initialize_grid
+    overlay.add(@grid)
 
-    entry = Gtk::Entry.new
-
-    (0..4).each do |i|
-      (0..4).each do |j|
-        text = "#{5 * j + i}"
-        button = Gtk::Button.new(:label => text)
-        button.set_hexpand(true)
-        button.set_vexpand(true)
-        button.signal_connect "clicked" do |widget|
-          entry.text = widget.label
-        end
-        grid.attach(button, i, j, 1, 1)
-      end
-    end
+    @entry = Gtk::Entry.new
+    @entry.placeholder_text = "Your Lucky Number"
 
     vbox = Gtk::Box.new(:vertical, 10)
     overlay.add_overlay(vbox)
     overlay.set_overlay_pass_through(vbox, true)
-    vbox.set_halign(:center)
-    vbox.set_valign(:center)
+    vbox.halign = :center
+    vbox.valign = :center
 
     label = Gtk::Label.new("<span foreground='blue' weight='ultrabold' font='40'>Numbers</span>")
-    label.set_use_markup(true)
+    label.use_markup = true
     vbox.pack_start(label, :expand => false, :fill => false, :padding => 8)
 
-    entry.set_placeholder_text("Your Lucky Number")
-    vbox.pack_start(entry, :expand => false, :fill => false, :padding => 8)
+    vbox.pack_start(@entry, :expand => false, :fill => false, :padding => 8)
 
-    window.add(overlay)
+    @window.add(overlay)
     overlay.show_all
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
+    end
+  end
+
+  private
+
+  def initialize_grid
+    @grid = Gtk::Grid.new
+    (0..4).each do |i|
+      (0..4).each do |j|
+        text = (5 * j + i).to_s
+        button = Gtk::Button.new(:label => text)
+        button.hexpand = true
+        button.vexpand = true
+        button.signal_connect "clicked" do |widget|
+          @entry.text = widget.label
+        end
+        @grid.attach(button, i, j, 1, 1)
+      end
     end
   end
 end
