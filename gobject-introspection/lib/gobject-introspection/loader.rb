@@ -622,7 +622,7 @@ module GObjectIntrospection
           end
           return if nil_indexes.size < n_missing_arguments
           nil_indexes.each_with_index do |nil_index, i|
-            next if i < n_missing_arguments
+            next if i <= n_missing_arguments
             @arguments.insert(nil_index, nil)
           end
         end
