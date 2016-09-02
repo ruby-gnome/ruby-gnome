@@ -680,10 +680,12 @@ out_argument_to_raw_data_interface(GICallableInfo *callable_info,
                                    GIArgument *argument,
                                    gpointer result,
                                    GITypeInfo *type_info,
-                                   G_GNUC_UNUSED GITransfer transfer /* TODO */)
+                                   G_GNUC_UNUSED GITransfer transfer /* TODO */,
+                                   gboolean is_return_value)
 {
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
+    GIFFIReturnValue *ffi_return_value = result;
 
     interface_info = g_type_info_get_interface(type_info);
     interface_type = g_base_info_get_type(interface_info);
@@ -702,7 +704,11 @@ out_argument_to_raw_data_interface(GICallableInfo *callable_info,
                  g_base_info_get_name(interface_info));
         break;
     case GI_INFO_TYPE_ENUM:
-      *((gint *)result) = argument->v_int;
+      if (is_return_value) {
+          ffi_return_value->v_ulong = argument->v_int;
+      } else {
+          *((gint *)result) = argument->v_int;
+      }
       break;
     case GI_INFO_TYPE_FLAGS:
     case GI_INFO_TYPE_OBJECT:
@@ -740,15 +746,50 @@ out_argument_to_raw_data_interface(GICallableInfo *callable_info,
     g_base_info_unref(interface_info);
 }
 
+/*
+  We need to cast from different type for return value. (We don't
+  need it for out arguments.) Because of libffi specification:
+
+  https://github.com/libffi/libffi/blob/master/doc/libffi.texi#L190
+
+  @var{rvalue} is a pointer to a chunk of memory that will hold the
+  result of the function call.  This must be large enough to hold the
+  result, no smaller than the system register size (generally 32 or 64
+  bits), and must be suitably aligned; it is the caller's responsibility
+  to ensure this.  If @var{cif} declares that the function returns
+  @code{void} (using @code{ffi_type_void}), then @var{rvalue} is
+  ignored.
+
+  https://github.com/libffi/libffi/blob/master/doc/libffi.texi#L198
+
+  In most situations, @samp{libffi} will handle promotion according to
+  the ABI.  However, for historical reasons, there is a special case
+  with return values that must be handled by your code.  In particular,
+  for integral (not @code{struct}) types that are narrower than the
+  system register size, the return value will be widened by
+  @samp{libffi}.  @samp{libffi} provides a type, @code{ffi_arg}, that
+  can be used as the return type.  For example, if the CIF was defined
+  with a return type of @code{char}, @samp{libffi} will try to store a
+  full @code{ffi_arg} into the return value.
+
+  See also:
+    * https://github.com/ruby-gnome2/ruby-gnome2/issues/758#issuecomment-243149237
+    * https://github.com/libffi/libffi/pull/216
+
+  This ffi_return_value case implementation is based on
+  gi_type_info_extract_ffi_return_value().
+*/
 static void
 out_argument_to_raw_data(GICallableInfo *callable_info,
                          VALUE rb_result,
                          gpointer result,
                          GITypeInfo *type_info,
-                         GITransfer transfer)
+                         GITransfer transfer,
+                         gboolean is_return_value)
 {
     GIArgument argument;
     GITypeTag type_tag;
+    GIFFIReturnValue *ffi_return_value = result;
 
     rb_gi_value_argument_from_ruby(&argument,
                                    type_info,
@@ -760,25 +801,53 @@ out_argument_to_raw_data(GICallableInfo *callable_info,
         g_assert_not_reached();
         break;
       case GI_TYPE_TAG_BOOLEAN:
-        *((gboolean *)result) = argument.v_boolean;
+        if (is_return_value) {
+            ffi_return_value->v_ulong = argument.v_boolean;
+        } else {
+            *((gboolean *)result) = argument.v_boolean;
+        }
         break;
       case GI_TYPE_TAG_INT8:
-        *((gint8 *)result) = argument.v_int8;
+        if (is_return_value) {
+            ffi_return_value->v_long = argument.v_int8;
+        } else {
+            *((gint8 *)result) = argument.v_int8;
+        }
         break;
       case GI_TYPE_TAG_UINT8:
-        *((guint8 *)result) = argument.v_uint8;
+        if (is_return_value) {
+            ffi_return_value->v_ulong = argument.v_uint8;
+        } else {
+            *((guint8 *)result) = argument.v_uint8;
+        }
         break;
       case GI_TYPE_TAG_INT16:
-        *((gint16 *)result) = argument.v_int16;
+        if (is_return_value) {
+            ffi_return_value->v_long = argument.v_int16;
+        } else {
+            *((gint16 *)result) = argument.v_int16;
+        }
         break;
       case GI_TYPE_TAG_UINT16:
-        *((guint16 *)result) = argument.v_uint16;
+        if (is_return_value) {
+            ffi_return_value->v_ulong = argument.v_uint16;
+        } else {
+            *((guint16 *)result) = argument.v_uint16;
+        }
         break;
       case GI_TYPE_TAG_INT32:
-        *((gint32 *)result) = argument.v_int32;
+        if (is_return_value) {
+            ffi_return_value->v_long = argument.v_int32;
+        } else {
+            *((gint32 *)result) = argument.v_int32;
+        }
         break;
       case GI_TYPE_TAG_UINT32:
-        *((guint32 *)result) = argument.v_uint32;
+        if (is_return_value) {
+            ffi_return_value->v_ulong = argument.v_uint32;
+        } else {
+            *((guint32 *)result) = argument.v_uint32;
+        }
         break;
       case GI_TYPE_TAG_INT64:
         *((gint64 *)result) = argument.v_int64;
@@ -793,32 +862,57 @@ out_argument_to_raw_data(GICallableInfo *callable_info,
         *((gdouble *)result) = argument.v_double;
         break;
       case GI_TYPE_TAG_GTYPE:
-        *((gsize *)result) = argument.v_size;
+        if (is_return_value) {
+            ffi_return_value->v_ulong = argument.v_size;
+        } else {
+            *((gsize *)result) = argument.v_size;
+        }
         break;
       case GI_TYPE_TAG_UTF8:
       case GI_TYPE_TAG_FILENAME:
-        *((gchar **)result) = argument.v_string;
+        if (is_return_value) {
+            ffi_return_value->v_ulong = (gulong)(argument.v_string);
+        } else {
+            *((gchar **)result) = argument.v_string;
+        }
         break;
       case GI_TYPE_TAG_ARRAY:
-        *((gpointer *)result) = argument.v_pointer;
+        if (is_return_value) {
+            ffi_return_value->v_ulong = (gulong)(argument.v_pointer);
+        } else {
+            *((gpointer *)result) = argument.v_pointer;
+        }
         break;
       case GI_TYPE_TAG_INTERFACE:
         out_argument_to_raw_data_interface(callable_info,
                                            &argument,
                                            result,
                                            type_info,
-                                           transfer);
+                                           transfer,
+                                           is_return_value);
         break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
-        *((gpointer *)result) = argument.v_pointer;
+        if (is_return_value) {
+            ffi_return_value->v_ulong = (gulong)(argument.v_pointer);
+        } else {
+            *((gpointer *)result) = argument.v_pointer;
+        }
         break;
       case GI_TYPE_TAG_ERROR:
-        *((GError **)result) = argument.v_pointer;
+        if (is_return_value) {
+            ffi_return_value->v_ulong = (gulong)(argument.v_pointer);
+        } else {
+            *((GError **)result) = argument.v_pointer;
+        }
         break;
       case GI_TYPE_TAG_UNICHAR:
-        *((gunichar *)result) = argument.v_uint32;
+        if (is_return_value) {
+            ffi_return_value->v_ulong = argument.v_uint32;
+        } else {
+            *((gunichar *)result) = argument.v_uint32;
+        }
         break;
       default:
         g_assert_not_reached();
@@ -849,13 +943,15 @@ out_arguments_to_raw_data(GICallableInfo *callable_info,
                                      rb_return_value,
                                      result,
                                      return_type_info,
-                                     transfer);
+                                     transfer,
+                                     TRUE);
         } else {
             out_argument_to_raw_data(callable_info,
                                      RARRAY_AREF(rb_results, i_rb_result),
                                      result,
                                      return_type_info,
-                                     transfer);
+                                     transfer,
+                                     TRUE);
             i_rb_result++;
         }
     }
@@ -881,7 +977,8 @@ out_arguments_to_raw_data(GICallableInfo *callable_info,
                                  RARRAY_AREF(rb_results, i_rb_result),
                                  argument->v_pointer,
                                  type_info,
-                                 transfer);
+                                 transfer,
+                                 FALSE);
         i_rb_result++;
         g_base_info_unref(type_info);
     }
