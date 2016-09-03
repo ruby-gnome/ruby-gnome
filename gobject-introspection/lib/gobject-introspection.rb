@@ -47,6 +47,16 @@ GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 module GObjectIntrospection
   LOG_DOMAIN = "GObjectIntrospection"
+
+  class << self
+    def load(namespace, options={})
+      base_module = Module.new
+      loader = Loader.new(base_module)
+      loader.version = options[:version]
+      loader.load(namespace)
+      base_module
+    end
+  end
 end
 GLib::Log.set_log_domain(GObjectIntrospection::LOG_DOMAIN)
 
