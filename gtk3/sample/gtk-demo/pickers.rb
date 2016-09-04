@@ -7,17 +7,17 @@
 These widgets are mainly intended for use in preference dialogs.
 They allow to select colors, fonts, files, directories and applications.
 =end
-module PickersDemo
-  def self.run_demo(main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.screen = main_window.screen
-    window.set_title("Pickers")
-    window.set_border_width(10)
+class PickersDemo
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
+    @window.set_title("Pickers")
+    @window.set_border_width(10)
 
     table = Gtk::Grid.new
     table.set_row_spacing(3)
     table.set_column_spacing(10)
-    window.add(table)
+    @window.add(table)
 
     label = Gtk::Label.new("Color:")
     label.set_halign(:start)
@@ -59,12 +59,14 @@ module PickersDemo
     picker.set_show_dialog_item(true)
     table.attach(label, 0, 4, 1, 1)
     table.attach(picker, 1, 4, 1, 1)
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
     end
-    window
+    @window
   end
 end
