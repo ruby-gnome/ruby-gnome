@@ -362,7 +362,7 @@ class Demo < Gtk::Application
 
     if @options[:name]
       filename = get_demo_filename_from_name(@options[:name])
-      run_demo_from_file(filename, windows.first)
+      run_demo_from_file(filename, windows.first) if filename
     end
 
     if @options[:autoquit]
