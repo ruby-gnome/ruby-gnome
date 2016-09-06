@@ -373,8 +373,10 @@ class Demo < Gtk::Application
 
     if @options[:name]
       filename = get_demo_filename_from_name(@options[:name])
-      select_treeview_item(@treeview, filename)
-      run_demo_from_file(filename, windows.first)
+      if filename
+        select_treeview_item(@treeview, filename)
+        run_demo_from_file(filename, windows.first)
+      end
     end
 
     if @options[:autoquit]
