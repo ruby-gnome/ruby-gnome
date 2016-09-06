@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2006-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2006-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -188,6 +188,17 @@ def run_demo_from_file(filename, window)
   demo_window
 end
 
+def select_treeview_item(treeview, filename)
+  to_select = nil
+  treeview.model.each do |model, path, iter|
+    if iter[FILENAME_COLUMN] == filename
+      to_select = path
+      break
+    end
+  end
+  treeview.set_cursor(to_select, treeview.columns[FILENAME_COLUMN])
+end
+
 class Demo < Gtk::Application
   def initialize
     super("org.gtk.Demo", [:non_unique, :handles_command_line])
@@ -362,7 +373,8 @@ class Demo < Gtk::Application
 
     if @options[:name]
       filename = get_demo_filename_from_name(@options[:name])
-      run_demo_from_file(filename, windows.first) if filename
+      select_treeview_item(@treeview, filename)
+      run_demo_from_file(filename, windows.first)
     end
 
     if @options[:autoquit]
