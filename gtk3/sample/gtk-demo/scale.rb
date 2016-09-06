@@ -10,17 +10,19 @@ and they can also restrict the values that can be
 chosen.
 =end
 
-module ScaleDemo
-  def self.run_demo(main_window)
+class ScaleDemo
+  def initialize(main_window)
     builder = Gtk::Builder.new(:resource => "/scale/scale.ui")
     builder.connect_signals {}
-    window = builder["window1"]
-    window.screen = main_window.screen
+    @window = builder["window1"]
+    @window.screen = main_window.screen
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
     end
   end
 end
