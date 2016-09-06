@@ -14,7 +14,7 @@
 
  Look at the Image demo for additional pixbuf usage examples.
 =end
-module PixbufsDemo
+class PixbufsDemo
   IMAGES_NAMES = %w(/pixbufs/apple-red.png /pixbufs/gnome-applets.png
                     /pixbufs/gnome-calendar.png /pixbufs/gnome-foot.png
                     /pixbufs/gnome-gmush.png /pixbufs/gnome-gimp.png
@@ -23,20 +23,20 @@ module PixbufsDemo
   BACKGROUND_NAME = "/pixbufs/background.jpg"
   CYCLE_TIME = 3_000_000
 
-  def self.run_demo(main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.screen = main_window.screen
-    window.resizable = false
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
+    @window.resizable = false
 
-    background_pixbuf = load_pixbuf(window, BACKGROUND_NAME)
+    background_pixbuf = load_pixbuf(BACKGROUND_NAME)
     other_pixbufs = []
     IMAGES_NAMES.each do |img|
-      other_pixbufs << load_pixbuf(window, img)
+      other_pixbufs << load_pixbuf(img)
     end
 
     width = background_pixbuf.width
     height = background_pixbuf.height
-    window.set_size_request(width, height)
+    @window.set_size_request(width, height)
 
     frame = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
                                  :has_alpha => false,
@@ -49,7 +49,7 @@ module PixbufsDemo
       cr.paint
       true
     end
-    window.add(da)
+    @window.add(da)
     start_time = 0
     da.add_tick_callback do |_widget, frame_clock|
       background_pixbuf.copy_area(0, 0, width, height, frame, 0, 0)
@@ -77,10 +77,11 @@ module PixbufsDemo
 
         dest = r1.intersect(r2)
         next unless dest
-        frame.composite!(other_pixbufs[i], dest.x, dest.y, dest.width,
-                         dest.height, xpos, ypos, k, k,
-                         :nearest,
-                         if (i & 1) == 1
+        frame.composite!(other_pixbufs[i], :dest_x => dest.x, :dest_y => dest.y,
+                         :dest_width => dest.width, :dest_height => dest.height,
+                         :offset_x => xpos, :offset_y => ypos, :scale_x => k,
+                         :scale_y => k, :interpolation_type => :nearest,
+                         :overall_alpha => if (i & 1) == 1
                            [
                              127, (255 * Math.sin(f * 2.0 * Math::PI)).abs
                            ].max
@@ -89,23 +90,26 @@ module PixbufsDemo
                              127, (255 * Math.cos(f * 2.0 * Math::PI)).abs
                            ].max
                          end)
-
       end
       da.queue_draw
       GLib::Source::CONTINUE
     end
-
-    if !window.visible?
-      window.show_all
-    else
-      window.destroy
-    end
-    window
   end
 
-  def self.show_message_dialog_on(window, error)
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+    @window
+  end
+
+  private
+
+  def show_message_dialog_on(error)
     message = "Failed to load an image: #{error.message}"
-    dialog = Gtk::MessageDialog.new(:parent => window,
+    dialog = Gtk::MessageDialog.new(:parent => @window,
                                     :flags => :destroy_with_parent,
                                     :type => :error,
                                     :buttons => :close,
@@ -114,14 +118,12 @@ module PixbufsDemo
     dialog.show
   end
 
-  def self.load_pixbuf(window, image_name)
+  def load_pixbuf(image_name)
     begin
-      # Is it OK? should we implement gdk_pixbuf_new_from_resource instead?
-      #Gtk::Image.new(:resource => image_name).pixbuf
       GdkPixbuf::Pixbuf.new(:resource => image_name)
     rescue StandardError => e
-      show_message_dialog_on(window, e)
-      window.destroy
+      show_message_dialog_on(e)
+      @window.destroy
     end
   end
 end
