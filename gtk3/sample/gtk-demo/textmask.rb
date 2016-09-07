@@ -1,4 +1,4 @@
-# Copyright (c) 2015 Ruby-GNOME2 Project Team
+# Copyright (c) 2015-2016 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
@@ -7,16 +7,16 @@
 This demo shows how to use PangoCairo to draw text with more than
 just a single color.
 =end
-module TextmaskDemo
-  def self.run_demo(_main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.set_resizable(true)
-    window.set_size_request(400, 200)
-    window.set_title("Text Mask")
+class TextmaskDemo
+  def initialize(_main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.resizable = true
+    @window.set_size_request(400, 200)
+    @window.title = "Text Mask"
 
     da = Gtk::DrawingArea.new
 
-    window.add(da)
+    @window.add(da)
 
     da.signal_connect "draw" do |_widget, cr|
       cr.save
@@ -49,13 +49,14 @@ module TextmaskDemo
       cr.restore
       true
     end
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
     end
-
-    window
+    @window
   end
 end
