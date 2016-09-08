@@ -9,24 +9,24 @@ navigation of a GtkStack object. This widget automatically updates it
 content based on what is presently available in the GtkStack object,
 and using the "title" child property to set the display labels.
 =end
-module SidebarDemo
-  def self.run_demo(_main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.set_resizable(true)
-    window.set_size_request(500, 350)
+class SidebarDemo
+  def initialize(_main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.resizable = true
+    @window.set_size_request(500, 350)
 
     header = Gtk::HeaderBar.new
-    header.set_show_close_button(true)
-    window.set_titlebar(header)
-    window.set_title("Stack Sidebar")
+    header.show_close_button = true
+    @window.titlebar = header
+    @window.title = "Stack Sidebar"
 
     box = Gtk::Box.new(:horizontal, 0)
     sidebar = Gtk::StackSidebar.new
     box.pack_start(sidebar, :expand => false, :fill => false, :padding => 0)
 
     stack = Gtk::Stack.new
-    stack.set_transition_type(:slide_up_down)
-    sidebar.set_stack(stack)
+    stack.transition_type = :slide_up_down
+    sidebar.stack = stack
 
     widget = Gtk::Separator.new(:vertical)
     box.pack_start(widget, :expand => false, :fill => false, :padding => 0)
@@ -41,14 +41,13 @@ module SidebarDemo
              "Page 6",
              "Page 7",
              "Page 8",
-             "Page 9"
-            ]
+             "Page 9"]
 
     pages.each_with_index do |page_string, i|
       child = nil
-      if i == 0
+      if i.zero?
         child = Gtk::Image.new(:icon_name => "help-about", :size => :menu)
-        child.set_pixel_size(256)
+        child.pixel_size = 256
       else
         child = Gtk::Label.new(page_string)
       end
@@ -57,12 +56,14 @@ module SidebarDemo
       stack.child_set_property(child, "title", page_string)
     end
 
-    window.add(box)
+    @window.add(box)
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
     end
   end
 end
