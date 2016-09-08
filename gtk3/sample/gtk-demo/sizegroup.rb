@@ -1,4 +1,4 @@
-# Copyright (c) 2015 Ruby-GNOME2 Project Team
+# Copyright (c) 2015-2016 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
@@ -16,53 +16,38 @@
  and not more. For example, if you are packing your widgets
  into a table, you would not include the GTK_FILL flag.
 =end
-module SizegroupDemo
-  def self.run_demo(main_window)
+class SizegroupDemo
+  def initialize(main_window)
     color_options = %w(Red Green Blue)
     dash_options = %w(Solid Dashed Dotted)
     end_options = %w(Square Round Double Arrow)
 
-    window = Gtk::Window.new(:toplevel)
-    window.screen = main_window.screen
-    window.set_title("Size Groups")
-    window.set_resizable(false)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
+    @window.title = "Size Groups"
+    @window.resizable = false
 
-    vbox = Gtk::Box.new(:vertical, 5)
-    window.add(vbox)
-    vbox.set_border_width(5)
+    @vbox = Gtk::Box.new(:vertical, 5)
+    @window.add(@vbox)
+    @vbox.border_width = 5
 
     size_group = Gtk::SizeGroup.new(:horizontal)
 
     # Create one frame holding color options
-    frame = Gtk::Frame.new("Color Options")
-    vbox.pack_start(frame, :expand => true, :fill => true, :padding => 0)
-
-    table = Gtk::Grid.new
-    table.set_border_width(5)
-    table.set_row_spacing(5)
-    table.set_column_spacing(10)
-    frame.add(table)
-
+    table = initialize_frame("Color Options")
     add_row(table, 0, size_group, "_Foreground", color_options)
     add_row(table, 1, size_group, "_Background", color_options)
 
     # And another frame holding line style options
-    frame = Gtk::Frame.new("Line options")
-    vbox.pack_start(frame, :expand => false, :fill => false, :padding => 0)
-
-    table = Gtk::Grid.new
-    table.set_border_width(5)
-    table.set_row_spacing(5)
-    table.set_column_spacing(10)
-    frame.add(table)
-
+    table = initialize_frame("Line Options")
     add_row(table, 0, size_group, "_Dashing", dash_options)
     add_row(table, 1, size_group, "_Line ends", end_options)
 
     # And a check button to turn grouping on and off
     check_button = Gtk::CheckButton.new("_Enable grouping")
     check_button.set_use_underline(true)
-    vbox.pack_start(check_button, :expand => false, :fill => false, :padding => 0)
+    @vbox.pack_start(check_button,
+                     :expand => false, :fill => false, :padding => 0)
 
     check_button.signal_connect("toggled") do |widget|
       if widget.active?
@@ -71,16 +56,32 @@ module SizegroupDemo
         size_group.set_mode(:none)
       end
     end
-
-    if !window.visible?
-      window.show_all
-    else
-      window.destroy
-    end
-    window
   end
 
-  def self.add_row(table, row, size_group, label_text, options)
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+    @window
+  end
+
+  private
+
+  def initialize_frame(title)
+    frame = Gtk::Frame.new(title)
+    @vbox.pack_start(frame, :expand => false, :fill => false, :padding => 0)
+
+    table = Gtk::Grid.new
+    table.set_border_width(5)
+    table.set_row_spacing(5)
+    table.set_column_spacing(10)
+    frame.add(table)
+    table
+  end
+
+  def add_row(table, row, size_group, label_text, options)
     label = Gtk::Label.new(label_text, :use_underline => true)
     label.set_halign(:start)
     label.set_valign(:baseline)
@@ -95,7 +96,7 @@ module SizegroupDemo
     table.attach(combo_box, 1, row, 1, 1)
   end
 
-  def self.create_combo_box(options)
+  def create_combo_box(options)
     combo_box = Gtk::ComboBoxText.new
     options.each do |o|
       combo_box.append_text(o)
