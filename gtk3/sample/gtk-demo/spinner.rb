@@ -6,57 +6,72 @@
 
 GtkSpinner allows to show that background activity is on-going.
 =end
-module SpinnerDemo
-  def self.run_demo(main_window)
-    window = Gtk::Dialog.new(:title => "Spinner",
-                             :parent => main_window,
-                             :flags => nil,
-                             :buttons => [[:close, :none]])
+class SpinnerDemo
+  def initialize(main_window)
+    @window = Gtk::Dialog.new(:title => "Spinner",
+                              :parent => main_window,
+                              :flags => nil,
+                              :buttons => [[:close, :none]])
 
-    window.set_resizable(false)
-    window.signal_connect("response") { window.destroy }
-    window.signal_connect("destroy") { window.destroy }
+    @window.resizable = false
+    @window.signal_connect("response") { @window.destroy }
+    @window.signal_connect("destroy") { @window.destroy }
 
-    content_area = window.content_area
-
-    vbox = Gtk::Box.new(:vertical, 5)
-    content_area.pack_start(vbox, :expand => true, :fill => true, :padding => 0)
-    vbox.set_border_width(5)
-
-    # Sensitive
-    hbox = Gtk::Box.new(:horizontal, 5)
-    spinner_sensitive = Gtk::Spinner.new
-    hbox.add(spinner_sensitive)
-    hbox.add(Gtk::Entry.new)
-    vbox.add(hbox)
-
-    # Disabled
-    hbox = Gtk::Box.new(:horizontal, 5)
-    spinner_insensitive = Gtk::Spinner.new
-    hbox.add(spinner_insensitive)
-    hbox.add(Gtk::Entry.new)
-    vbox.add(hbox)
-    hbox.set_sensitive(false)
+    initialize_vertical_box
+    initialize_sensitive_box
+    initialize_insensitive_box
 
     button = Gtk::Button.new(:stock_id => :media_play)
     button.signal_connect "clicked" do
-      spinner_sensitive.start
-      spinner_insensitive.start
+      @spinner_sensitive.start
+      @spinner_insensitive.start
     end
-    vbox.add(button)
+    @vbox.add(button)
 
     button = Gtk::Button.new(:stock_id => :media_stop)
     button.signal_connect "clicked" do
-      spinner_sensitive.stop
-      spinner_insensitive.stop
+      @spinner_sensitive.stop
+      @spinner_insensitive.stop
     end
-    vbox.add(button)
+    @vbox.add(button)
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
     end
-    window
+    @window
+  end
+
+  private
+
+  def initialize_vertical_box
+    content_area = @window.content_area
+
+    @vbox = Gtk::Box.new(:vertical, 5)
+    content_area.pack_start(@vbox,
+                            :expand => true, :fill => true, :padding => 0)
+    @vbox.border_width = 5
+  end
+
+  def initialize_sensitive_box
+    # Sensitive
+    hbox = Gtk::Box.new(:horizontal, 5)
+    @spinner_sensitive = Gtk::Spinner.new
+    hbox.add(@spinner_sensitive)
+    hbox.add(Gtk::Entry.new)
+    @vbox.add(hbox)
+  end
+
+  def initialize_insensitive_box
+    # Disabled
+    hbox = Gtk::Box.new(:horizontal, 5)
+    @spinner_insensitive = Gtk::Spinner.new
+    hbox.add(@spinner_insensitive)
+    hbox.add(Gtk::Entry.new)
+    hbox.sensitive = false
+    @vbox.add(hbox)
   end
 end
