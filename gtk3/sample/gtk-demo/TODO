@@ -33,7 +33,7 @@ foreigndrawing          no              no
 gestures.c              no              no
 glarea.c                no              no
 headerbar.c             ok              ok
-hypertext.c             ok              no
+hypertext.c             ok              ok
 iconview.c              ok              no
 iconview_edit.c         ok              ok
 images.c                ok              no
