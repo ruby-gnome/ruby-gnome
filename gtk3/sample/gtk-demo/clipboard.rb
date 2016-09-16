@@ -1,67 +1,160 @@
-# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# Copyright (c) 2016 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
-# $Id: clipboard.rb,v 1.3 2005/07/28 14:30:38 mutoh Exp $
+#
 =begin
-= Clipboard
+=  Clipboard
 
-GtkClipboard is used for clipboard handling. This demo shows how to
-copy and paste text to and from the clipboard.
+ GtkClipboard is used for clipboard handling. This demo shows how to
+ copy and paste text to and from the clipboard.
+
+ It also shows how to transfer images via the clipboard or via
+ drag-and-drop, and how to make clipboard contents persist after
+ the application exits. Clipboard persistence requires a clipboard
+ manager to run.
 =end
+class ClipboardDemo
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
+    @window.title = "Clipboard"
 
-require 'common'
+    @vbox = Gtk::Box.new(:vertical, 0)
+    @vbox.border_width = 0
+    @window.add(@vbox)
 
-module Demo
-  class Clipboard < Demo::BasicWindow
-    def initialize
-      super('Clipboard')
+    text = "\"Copy\" will copy the text\nin the entry to the clipboard"
+    generate_entry(text, "_Copy") do |entry|
+      clipboard = entry.get_clipboard(Gdk::Selection::CLIPBOARD)
+      clipboard.text = entry.text
+    end
 
-      vbox = Gtk::Box.new(:vertical)
-      vbox.border_width = 8
+    text = "\"Paste\" will paste the text from the clipboard to the entry"
+    generate_entry(text, "_Paste") do |entry|
+      clipboard = entry.get_clipboard(Gdk::Selection::CLIPBOARD)
+      clipboard.request_text { |_clip, entry_text| entry.text = entry_text }
+    end
 
-      add(vbox)
+    text = "Images can be transferred via the clipboard, too"
+    label = Gtk::Label.new(text)
+    @vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
-      label = Gtk::Label.new(%Q["Copy" will copy the text\nin the entry to the clipboard])
+    @hbox = Gtk::Box.new(:horizontal, 4)
+    @hbox.border_width = 8
+    @vbox.pack_start(@hbox, :expand => false, :fill => false, :padding => 0)
 
-      vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
+    # Create the first image
+    generate_image("dialog-warning")
 
-      hbox = Gtk::Box.new(:horizontal, 0)
-      hbox.border_width = 8
-      vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
+    # Create the second image
+    generate_image("process-stop")
 
-      # Create the first entry
-      entry = Gtk::Entry.new
-      hbox.pack_start(entry, :expand => true, :fill => true, :padding => 0)
+    # Tell the clipboard manager to make the data persistent
+    clipboard = Gtk::Clipboard.get(Gdk::Selection::CLIPBOARD)
+    clipboard.set_can_store([])
+  end
 
-      # Create the button
-      button = Gtk::Button.new(:stock_id => :copy)
-      hbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
-      button.signal_connect('clicked', entry) do |w, e|
-        clipboard = e.get_clipboard(Gdk::Selection::CLIPBOARD)
-        clipboard.text = e.text
-      end
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+    @window
+  end
 
-      label = Gtk::Label.new(%Q["Paste" will paste the text from the clipboard to the entry])
-      vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
+  private
 
-      hbox = Gtk::Box.new(:horizontal, 4)
-      hbox.border_width = 8
-      vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
+  def get_image_pixbuf(image)
+    return image.pixbuf if image.storage_type == :pixbuf
 
-      # Create the second entry
-      entry = Gtk::Entry.new
-      hbox.pack_start(entry, :expand => true, :fill => true, :padding => 0)
-
-      # Create the button
-      button = Gtk::Button.new(:stock_id => :paste)
-      hbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
-      button.signal_connect('clicked', entry) do |w, e|
-        clipboard = e.get_clipboard(Gdk::Selection::CLIPBOARD)
-        clipboard.request_text do |board, text, data|
-          e.text = text
-        end
-      end
-
+    if image.storage_type == :icon_name
+      icon_name, size = image.icon_name
+      icon_theme = Gtk::IconTheme.get_for_screen(image.screen)
+      width, _height = Gtk::IconSize.lookup(size)
+      return icon_theme.load_icon(icon_name, width, :generic_fallback)
+    else
+      puts "Image storage type #{image.storage_type.to_i} not handled"
     end
   end
-end
 
+  def generate_entry(text, action_name)
+    label = Gtk::Label.new(text)
+    @vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
+
+    hbox = Gtk::Box.new(:horizontal, 4)
+    hbox.border_width = 8
+    @vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
+
+    # Create the first entry
+    entry = Gtk::Entry.new
+    hbox.pack_start(entry, :expand => true, :fill => true, :padding => 0)
+
+    # Create the button
+    button = Gtk::Button.new(:label => action_name, :use_underline => true)
+    hbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
+    button.signal_connect "clicked" do
+      yield(entry) if block_given?
+    end
+  end
+
+  def generate_image(icon_name)
+    # Create the first image
+    image = Gtk::Image.new(:icon_name => icon_name, :size => :button)
+    ebox = Gtk::EventBox.new
+    ebox.add(image)
+    @hbox.add(ebox)
+
+    # Make ebox a drag source
+    ebox.drag_source_set(Gdk::ModifierType::BUTTON1_MASK, [], :copy)
+    ebox.drag_source_add_image_targets
+    ebox.signal_connect "drag-begin" do |_widget, context|
+      pixbuf = get_image_pixbuf(image1)
+      context.set_icon_pixbuf(pixbuf, -2, -2)
+    end
+
+    ebox.signal_connect "drag-data-get" do |_widget, _context, selection_data|
+      pixbuf = get_image_pixbuf(image)
+      selection_data.pixbuf = pixbuf
+    end
+
+    # Accept drops on ebox
+    ebox.drag_dest_set(Gtk::DestDefaults::ALL, [], Gdk::DragAction::COPY)
+    ebox.drag_dest_add_image_targets
+    ebox.signal_connect "drag-data-received" do |_w, _c, _x, _y, selection_data|
+      pixbuf = selection_data.pixbuf
+      image.from_pixbuf = pixbuf
+    end
+
+    # Context menu on ebox
+    ebox.signal_connect "button-press-event" do |_widget, button|
+      manage_button_press_event(image, button)
+      true
+    end
+  end
+
+  def manage_button_press_event(image, button)
+    return false unless button.button == Gdk::BUTTON_SECONDARY
+    menu = Gtk::Menu.new
+    generate_menu_item(menu, "_Copy") do
+      clipboard = Gtk::Clipboard.get(Gdk::Selection::CLIPBOARD)
+      pixbuf = get_image_pixbuf(image)
+      clipboard.image = pixbuf
+    end
+
+    generate_menu_item(menu, "_Paste") do
+      clipboard = Gtk::Clipboard.get(Gdk::Selection::CLIPBOARD)
+      pixbuf = clipboard.wait_for_image
+      image.from_pixbuf = pixbuf if pixbuf
+    end
+    menu.popup(nil, nil, 3, button.time)
+  end
+
+  def generate_menu_item(menu, label)
+    item = Gtk::MenuItem.new(:label => label, :use_underline => true)
+    item.signal_connect "activate" do
+      yield if block_given?
+    end
+    item.show
+    menu.append(item)
+  end
+end

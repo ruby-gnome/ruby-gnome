@@ -10,7 +10,7 @@ assistant.c             ok              ok
 builder.c               ok              ok
 button_box.c            ok              ok
 changedisplay.c         ok              no
-clipboard.c             ok              no
+clipboard.c             ok              ok
 colorsel.c              ok              ok
 combobox.c              no              no
 css_accordion.c         ok              ok
