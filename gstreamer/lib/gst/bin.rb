@@ -16,6 +16,8 @@
 
 module Gst
   class Bin
+    include Enumerable
+
     alias_method :add_element, :add
     def add_elements(*elements)
       elements.each do |element|
@@ -27,6 +29,38 @@ module Gst
     def <<(element)
       add_element(element)
       self
+    end
+
+    def each(options={})
+      return to_enum(:each, options) unless block_given?
+
+      if options[:recurse]
+        iterator = iterate_recurse
+      elsif options[:sink]
+        iterator = iterate_sinks
+      elsif options[:sorted]
+        iterator = iterate_sorted
+      elsif options[:sources]
+        iterator = iterate_sources
+      elsif options[:interface]
+        iterator = iterate_all_by_interface(options[:interface])
+      else
+        iterator = iterate_elements
+      end
+
+      loop do
+        result, element = iterator.next
+        case result
+        when IteratorResult::DONE
+          break
+        when IteratorResult::OK
+          yield(element.value)
+        when IteratorResult::RESYNC
+          iterator.resync
+        when IteratorResult::ERROR
+          raise "failed to iterate"
+        end
+      end
     end
   end
 end
