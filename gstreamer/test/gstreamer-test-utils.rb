@@ -15,3 +15,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 require "test-unit"
+
+module GStreamerTestUtils
+  private
+  def only_gstreamer_version(major, minor, micro=nil)
+    micro ||= 0
+    unless Gst::Version.or_later?(major, minor, micro)
+      omit("Require GStreamer >= #{major}.#{minor}.#{micro}")
+    end
+  end
+end
