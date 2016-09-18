@@ -711,14 +711,6 @@ module Gtk
     alias :update_policy= :set_update_policy
   end
 
-  module RC
-    extend GLib::Deprecatable
-    define_deprecated_const :Flags, "Gtk::RCFlags"
-    define_deprecated_flags :RCFlags
-    define_deprecated_const :TokenType, "Gtk::RCTokenType"
-    define_deprecated_enums :RCTokenType, 'TOKEN'
-  end
-
   class RecentAction
     extend GLib::Deprecatable
     define_deprecated_method_by_hash_args :initialize,
