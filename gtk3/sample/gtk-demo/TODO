@@ -34,7 +34,7 @@ gestures.c              no              no
 glarea.c                no              no
 headerbar.c             ok              ok
 hypertext.c             ok              ok
-iconview.c              ok              no
+iconview.c              ok              ok
 iconview_edit.c         ok              ok
 images.c                ok              no
 infobar.c               ok              ok
