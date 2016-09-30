@@ -57,34 +57,57 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-static gboolean
-quit_loop(gpointer user_data)
+typedef struct {
+    GMainLoop *loop;
+    int state;
+} CheckInterruptData;
+
+static VALUE
+check_interrupt_raw(G_GNUC_UNUSED VALUE user_data)
 {
-    GMainLoop *loop = user_data;
-    g_main_loop_quit(loop);
-    return G_SOURCE_REMOVE;
+    rb_thread_check_ints();
+    return Qnil;
+}
+
+static gboolean
+check_interrupt(gpointer user_data)
+{
+    CheckInterruptData *data = user_data;
+
+    rb_protect(check_interrupt_raw, Qnil, &(data->state));
+    if (data->state == 0) {
+        return G_SOURCE_CONTINUE;
+    } else {
+        g_main_loop_quit(data->loop);
+        return G_SOURCE_REMOVE;
+    }
 }
 
 static VALUE
 rg_run(VALUE self)
 {
-    GMainLoop *loop;
+    CheckInterruptData data;
     GSource *interrupt_source;
 
-    loop = _SELF(self);
+    data.loop = _SELF(self);
+    data.state = 0;
 
     interrupt_source = rbg_interrupt_source_new();
     g_source_set_callback(interrupt_source,
-                          quit_loop,
-                          loop,
+                          check_interrupt,
+                          &data,
                           NULL);
     g_source_attach(interrupt_source,
-                    g_main_loop_get_context(loop));
-    g_main_loop_run(loop);
+                    g_main_loop_get_context(data.loop));
+    g_main_loop_run(data.loop);
     g_source_destroy(interrupt_source);
     g_source_unref(interrupt_source);
 
-    rb_thread_check_ints();
+    if (data.state == 0) {
+        rb_thread_check_ints();
+    } else {
+        rb_jump_tag(data.state);
+    }
 
     return self;
 }
