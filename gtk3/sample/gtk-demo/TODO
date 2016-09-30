@@ -39,7 +39,7 @@ iconview_edit.c         ok              ok
 images.c                ok              no
 infobar.c               ok              ok
 links.c                 ok              ok
-listbox.c               no              no
+listbox.c               ok              ok
 list_store.c            ok              ok
 markup.c                ok              ok
 menus.c                 ok              ok
