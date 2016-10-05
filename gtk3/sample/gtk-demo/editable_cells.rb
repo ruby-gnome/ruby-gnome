@@ -1,173 +1,212 @@
-# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# Copyright (c) 2016 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: editable_cells.rb,v 1.7 2005/02/06 18:25:13 kzys Exp $
 =begin
-= Tree View/Editable Cells
+=  Tree View/Editable Cells
 
-This demo demonstrates the use of editable cells in a Gtk::TreeView. If
-you're new to the Gtk::TreeView widgets and associates, look into
-the Gtk::ListStore example first.
+ This demo demonstrates the use of editable cells in a GtkTreeView. If
+ you're new to the GtkTreeView widgets and associates, look into
+ the GtkListStore example first. It also shows how to use the
+ GtkCellRenderer::editing-started signal to do custom setup of the
+ editable widget.
+
+ The cell renderers used in this demo are GtkCellRendererText,
+ GtkCellRendererCombo and GtkCellRendererProgress.
 =end
-require 'common'
+class EditableCellsDemo
+  Item = Struct.new("Item", :number, :product, :yummy)
+  COL_ITEM_NUM, COL_ITEM_PROD, COL_ITEM_YUMMY = *(0..3).to_a
+  COL_NUM_TEXT = 0
 
-module Demo
-  class EditableCells < BasicWindow
-    Item = Struct.new('Item', :number, :product, :editable)
-    COLUMN_NUMBER, COLUMN_PRODUCT, COLUMN_EDITABLE, NUM_COLUMNS = *(0..4).to_a
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
+    @window.title = "Editable Cells"
+    @window.border_width = 5
 
-    def initialize
-      super('Shopping list')
-      self.border_width = 5
+    vbox = Gtk::Box.new(:vertical, 5)
+    @window.add(vbox)
+    label = Gtk::Label.new("Shopping list (you can edit the cells)")
+    vbox.pack_start(label, :expand => false, :fill => true, :padding => 0)
 
-      vbox = Gtk::VBox.new(false, 5)
-      add(vbox)
+    sw = Gtk::ScrolledWindow.new
+    sw.shadow_type = :etched_in
+    sw.set_policy(:automatic, :automatic)
+    vbox.pack_start(sw, :expand => true, :fill => true, :padding => 0)
 
-      vbox.pack_start(Gtk::Label.new('Shopping list (you can edit the cells!)'),
-                      :expand => false, :fill => false, :padding => 0)
+    # create models
+    create_items_model
+    create_numbers_model
 
-      sw = Gtk::ScrolledWindow.new
-      sw.shadow_type = Gtk::SHADOW_ETCHED_IN
-      sw.set_policy(:automatic, :automatic)
-      vbox.pack_start(sw, :expand => true, :fill => true, :padding => 0)
+    # create tree view
+    @treeview = Gtk::TreeView.new(@items_model)
+    @treeview.selection.mode = :single
 
-      # create model
-      model = create_model
+    add_columns
 
-      # create tree view
-      treeview = Gtk::TreeView.new(model)
-      treeview.rules_hint = true
-      treeview.selection.mode = Gtk::SELECTION_SINGLE
+    sw.add(@treeview)
 
-      add_columns(treeview)
+    # Some buttons
+    hbox = Gtk::Box.new(:horizontal, 4)
+    hbox.homogeneous = true
+    vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
 
-      sw.add(treeview)
+    button = Gtk::Button.new(:label => "Add item")
+    button.signal_connect("clicked") { add_item }
+    hbox.pack_start(button, :expand => true, :fill => true, :padding => 0)
 
-      # some buttons
-      hbox = Gtk::Box.new(:horizontal, 4)
-      hbox.homogeneous = true
-      vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
+    button = Gtk::Button.new(:label => "Remove item")
+    button.signal_connect("clicked") { remove_item }
 
-      button = Gtk::Button.new('Add item')
-      button.signal_connect('clicked') do
-        add_item(model)
-      end
-      hbox.pack_start(button, :expand => true, :fill => true, :padding => 0)
+    hbox.pack_start(button, :expand => true, :fill => true, :padding => 0)
+    @window.set_default_size(320, 200)
+  end
 
-      button = Gtk::Button.new('Remove item')
-      button.signal_connect('clicked') do
-        remove_item(treeview)
-      end
-      hbox.pack_start(button, :expand => true, :fill => true, :padding => 0)
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+    @window
+  end
 
-      set_default_size(320, 200)
+  private
+
+  def add_item
+    return if @items.nil?
+    item = Item.new(0, "Description here", 50)
+    @items << item
+
+    # Insert a row below the current one
+    path = @treeview.cursor[0]
+    iter = if path
+             current = @items_model.get_iter(path)
+             @items_model.insert_after(current)
+           else
+             @items_model.insert(-1)
+           end
+
+    # set the data for the new row
+    item.each_with_index do |value, index|
+      iter[index] = value
     end
 
-    def create_model
-      # create array
-      @articles = []
+    # Move focus to the new row
+    path = @items_model.get_path(iter)
+    column = @treeview.get_column(0)
+    @treeview.set_cursor(path, column, false)
+  end
 
-      add_items
+  def remove_item
+    selection = @treeview.selection
+    iter = selection.selected
+    if iter
+      path = @items_model.get_path(iter)
+      i = path.indices[0]
+      @items_model.remove(iter)
+      @items.delete_at(i)
+    end
+  end
 
-      # create list store
-      model = Gtk::ListStore.new(Integer, String, TrueClass)
+  def add_items
+    @items << Item.new(3, "bottles of coke", 20)
+    @items << Item.new(5, "packages of noodles", 50)
+    @items << Item.new(2, "packages of chocolate chip cookies", 90)
+    @items << Item.new(1, "can vanilla ice cream", 60)
+    @items << Item.new(6, "eggs", 10)
+  end
 
-      # add items
-      @articles.each do |article|
-        iter = model.append
+  def create_items_model
+    @items = []
+    add_items
 
-        article.each_with_index do |value, index|
-          iter.set_value(index, value)
-        end
-      end
-      return model
+    # Create list store
+    @items_model = Gtk::ListStore.new(Integer, String, Integer, TrueClass)
+    @items.each do |item|
+      iter = @items_model.append
+      iter[COL_ITEM_NUM] = item.number
+      iter[COL_ITEM_PROD] = item.product
+      iter[COL_ITEM_YUMMY] = item.yummy
+    end
+  end
+
+  def create_numbers_model
+    @numbers_model = Gtk::ListStore.new(String, Integer)
+    (1..10).each do |n|
+      iter = @numbers_model.append
+      iter[COL_NUM_TEXT] = n.to_s
+    end
+  end
+
+  def add_columns
+    add_number_column
+    add_product_column
+    add_yummy_column
+  end
+
+  def add_number_column
+    renderer = Gtk::CellRendererCombo.new
+    renderer.model = @numbers_model
+    renderer.text_column = COL_NUM_TEXT
+    renderer.has_entry = false
+    renderer.editable = true
+
+    renderer.signal_connect "edited" do |cell, path, new_text|
+      cell_edited(cell, path, new_text)
     end
 
-    def add_items
-      item = Item.new(3, 'bottles of coke', true)
-      @articles.push(item)
-
-      item = Item.new(5, 'packages of noodles', true)
-      @articles.push(item)
-
-      item = Item.new(2, 'packages of chocolate chip cookies', true)
-      @articles.push(item)
-
-      item = Item.new(1, 'can vanilla ice cream', true)
-      @articles.push(item)
-
-      item = Item.new(6, 'eggs', true)
-      @articles.push(item)
-    end
-
-    def add_columns(treeview)
-      model = treeview.model
-
-      # number column
-      renderer = Gtk::CellRendererText.new
-      renderer.signal_connect('edited') do |*args|
-        cell_edited(*args.push(model))
-      end
-      treeview.insert_column(-1, 'Number', renderer,
-                             {
-                               :text => COLUMN_NUMBER,
-                               :editable => COLUMN_EDITABLE,
-                             })
-      def renderer.column
-        COLUMN_NUMBER
-      end
-
-      # product column
-      renderer = Gtk::CellRendererText.new
-      renderer.signal_connect('edited') do |*args|
-        cell_edited(*args.push(model))
-      end
-      def renderer.column
-        COLUMN_PRODUCT
-      end
-      treeview.insert_column(-1, 'Product', renderer,
-                             {
-                               :text => COLUMN_PRODUCT,
-                               :editable => COLUMN_EDITABLE,
-                             })
-    end
-
-    def cell_edited(cell, path_string, new_text, model)
-      path = Gtk::TreePath.new(path_string)
-
-      column = cell.column
-
-      iter = model.get_iter(path)
-      case column
-      when COLUMN_NUMBER
-        i = iter.path.indices[0]
-        @articles[i].number = new_text.to_i
-        iter.set_value(column, @articles[i].number)
-      when COLUMN_PRODUCT
-        i = iter.path.indices[0]
-        @articles[i].product = new_text
-        iter.set_value(column, @articles[i].product)
+    renderer.signal_connect "editing-started" do |_cell, editable, path|
+      editable.set_row_separator_func do |model, iter|
+        path = model.get_path(iter)
+        idx = path.indices[0]
+        idx == 5
       end
     end
 
-    def add_item(model)
-      foo = Item.new(0, 'Description here', true)
-      @articles.concat([foo])
-
-      iter = model.append
-      foo.each_with_index do |value, index|
-        iter.set_value(index, value)
-      end
+    def renderer.column
+      COL_ITEM_NUM
     end
 
-    def remove_item(treeview)
-      model = treeview.model
-      selection = treeview.selection
+    @treeview.insert_column(-1, "Number", renderer, :text => COL_ITEM_NUM)
+  end
 
-      if iter = selection.selected
-        @articles.delete_at(iter.path.indices[0])
-        model.remove(iter)
-      end
+  def add_product_column
+    renderer = Gtk::CellRendererText.new
+    renderer.editable = true
+    renderer.signal_connect "edited" do |cell, path, new_text|
+      cell_edited(cell, path, new_text)
+    end
+
+    def renderer.column
+      COL_ITEM_PROD
+    end
+
+    @treeview.insert_column(-1, "Product", renderer, :text => COL_ITEM_PROD)
+  end
+
+  def add_yummy_column
+    renderer = Gtk::CellRendererProgress.new
+    def renderer.column
+      COL_ITEM_YUMMY
+    end
+    @treeview.insert_column(-1, "Yummy", renderer, :value => COL_ITEM_YUMMY)
+  end
+
+  def cell_edited(cell, path_string, new_text)
+    path = Gtk::TreePath.new(path_string)
+    column = cell.column
+    iter = @items_model.get_iter(path)
+
+    case column
+    when COL_ITEM_NUM
+      i = path.indices[0]
+      @items[i].number = new_text.to_i
+      iter.set_value(column, @items[i].number)
+    when COL_ITEM_PROD
+      i = path.indices[0]
+      @items[i].product = new_text
+      iter.set_value(column, @items[i].product)
     end
   end
 end
