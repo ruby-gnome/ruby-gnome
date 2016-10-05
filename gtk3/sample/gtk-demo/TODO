@@ -21,7 +21,7 @@ css_shadows.c           ok              ok
 cursors.c               ok              ok
 dialog.c                ok              ok
 drawingarea.c           ok              ok
-editable_cells.c        ok              no
+editable_cells.c        ok              ok
 entry_buffer.c          ok              ok
 entry_completion.c      ok              ok
 event_axes.c            no              no
