@@ -125,7 +125,5 @@ class SpinbuttonDemo
     button.text = Date::MONTHNAMES[value]
     true
   end
-
-  
-
+ 
 end
