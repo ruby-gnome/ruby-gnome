@@ -10,19 +10,22 @@ with nice transitions when the visible child changes.
 GtkStackSwitcher adds buttons to control which child is visible.
 =end
 
-module StackDemo
-  def self.run_demo(main_window)
+class StackDemo
+  def initialize(main_window)
     builder = Gtk::Builder.new(:resource => "/stack/stack.ui")
     builder.connect_signals {}
-    window = builder["window1"]
-    window.screen = main_window.screen
+    @window = builder["window1"]
+    @window.screen = main_window.screen
 
-    window.signal_connect("destroy") { window.destroyed(window) }
+    @window.signal_connect("destroy") { window.destroyed(window) }
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
     end
+    @window
   end
 end
