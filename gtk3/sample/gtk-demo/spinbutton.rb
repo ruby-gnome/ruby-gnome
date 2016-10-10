@@ -4,15 +4,15 @@
 =begin
 =  Spin Button
 
- GtkSpinButton provides convenient ways to input data
+ GtkSpinButton2 provides convenient ways to input data
  that can be seen as a value in a range. The examples
  here show that this does not necessarily mean numeric
  values, and it can include custom formatting.
 =end
 require "date"
 
-module SpinbuttonDemo
-  def self.run_demo(main_window)
+class SpinbuttonDemo
+  def initialize(main_window)
     builder = Gtk::Builder.new(:resource => "/spinbutton/spinbutton.ui")
     builder.connect_signals do |name|
       case name
@@ -43,10 +43,10 @@ module SpinbuttonDemo
       else
       end
     end
-    window = builder["window"]
-    window.screen = main_window.screen
-    window.title = "Spin Buttons"
-    window.resizable = false
+    @window = builder["window"]
+    @window.screen = main_window.screen
+    @window.title = "Spin Buttons"
+    @window.resizable = false
 
     value_to_label = proc do |value|
       value.to_s
@@ -72,28 +72,33 @@ module SpinbuttonDemo
     adj.bind_property("value", month_label, "label", :sync_create,
                       :transform_to => value_to_label)
 
-    if !window.visible?
-      window.show_all
-    else
-      window.destroy
-    end
-    window
   end
 
-  def self.hex_spin_input(button)
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+    @window
+  end
+
+  private
+
+  def hex_spin_input(button)
     value = button.text.to_i(16)
     value = 0 if value < 1e-5
     value
   end
 
-  def self.hex_spin_output(button)
+  def hex_spin_output(button)
     value = button.value
     button.text = sprintf("0x%.2X", value)
     button.text = "0x00" if value.abs < 1e-5
     true
   end
 
-  def self.time_spin_input(button)
+  def time_spin_input(button)
     str = button.text.split(":")
     hours = str[0].to_i
     minutes = str[1].to_i
@@ -104,20 +109,23 @@ module SpinbuttonDemo
     value
   end
 
-  def self.time_spin_output(button)
+  def time_spin_output(button)
     hours = button.value / 60.0
     minutes = (hours - hours.floor) * 60.0
     button.text = sprintf("%02.0f:%02.0f", hours.floor, (minutes + 0.5).floor)
     true
   end
 
-  def self.month_spin_input(button)
+  def month_spin_input(button)
     Date::MONTHNAMES.index(button.text) || 1
   end
 
-  def self.month_spin_output(button)
+  def month_spin_output(button)
     value = button.adjustment.value || 1
     button.text = Date::MONTHNAMES[value]
     true
   end
+
+  
+
 end
