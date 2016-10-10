@@ -31,7 +31,7 @@ flowbox.c               no              no
 font_features.c         ok              ok
 foreigndrawing          no              no
 gestures.c              no              no
-glarea.c                no              no
+glarea.c                ok              ok
 headerbar.c             ok              ok
 hypertext.c             ok              ok
 iconview.c              ok              ok
