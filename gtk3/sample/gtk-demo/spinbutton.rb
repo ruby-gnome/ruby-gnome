@@ -4,7 +4,7 @@
 =begin
 =  Spin Button
 
- GtkSpinButton2 provides convenient ways to input data
+ GtkSpinButton provides convenient ways to input data
  that can be seen as a value in a range. The examples
  here show that this does not necessarily mean numeric
  values, and it can include custom formatting.
