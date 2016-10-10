@@ -8,29 +8,33 @@
  GtkTextMarks to keep a text view scrolled to the bottom
  while appending text.
 =end
-module TextscrollDemo
-  def self.run_demo(main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.screen = main_window.screen
+class TextscrollDemo
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
 
-    window.set_default_size(600, 400)
+    @window.set_default_size(600, 400)
 
     hbox = Gtk::Box.new(:horizontal, 6)
     hbox.homogeneous = true
-    window.add(hbox)
+    @window.add(hbox)
 
     create_text_view(hbox, true)
     create_text_view(hbox, false)
-
-    if !window.visible?
-      window.show_all
-    else
-      window.destroy
-    end
-    window
   end
 
-  def self.create_text_view(hbox, to_end)
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+    @window
+  end
+
+  private
+
+  def create_text_view(hbox, to_end)
     swindow = Gtk::ScrolledWindow.new
     hbox.pack_start(swindow, :fill => true, :expand => true, :padding => 0)
     textview = Gtk::TextView.new
@@ -39,7 +43,7 @@ module TextscrollDemo
     textview.signal_connect("destroy") { GLib::Source.remove(timeout) }
   end
 
-  def self.setup_scroll(textview, to_end)
+  def setup_scroll(textview, to_end)
     buffer = textview.buffer
     end_iter = buffer.end_iter
     count = 0
