@@ -30,24 +30,26 @@ of GTK+ are used for certain effects: primary toolbars,
 inline toolbars and linked buttons.
 =end
 
-module ThemingStyleClassesDemo
-  def self.run_demo(main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.screen = main_window.screen
-    window.title = "Style Classes"
-    window.resizable = false
-    window.border_width = 12
+class ThemingStyleClassesDemo
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
+    @window.title = "Style Classes"
+    @window.resizable = false
+    @window.border_width = 12
 
     builder = Gtk::Builder.new(:resource => "/theming_style_classes/theming.ui")
     grid = builder["grid"]
     grid.show_all
-    window.add(grid)
+    @window.add(grid)
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
     end
-    window
+    @window
   end
 end
