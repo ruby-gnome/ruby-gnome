@@ -6,17 +6,17 @@
 
  Use transparent background on GdkWindows to create a shadow effect on a GtkOverlay widget.
 =end
-module TransparentDemo
+class TransparentDemo
   SHADOW_OFFSET_X = 7
   SHADOW_OFFSET_Y = 7
   SHADOW_RADIUS = 5
 
-  def self.run_demo(main_window)
-    window = Gtk::Window.new(:toplevel)
-    window.screen = main_window.screen
-    window.set_default_size(450, 450)
-    window.title = "Transparency"
-    window.border_width = 0
+  def initialize(main_window)
+    @window = Gtk::Window.new(:toplevel)
+    @window.screen = main_window.screen
+    @window.set_default_size(450, 450)
+    @window.title = "Transparency"
+    @window.border_width = 0
 
     view = Gtk::TextView.new
     sw = Gtk::ScrolledWindow.new
@@ -25,7 +25,7 @@ module TransparentDemo
 
     overlay = Gtk::Overlay.new
     overlay.add(sw)
-    window.add(overlay)
+    @window.add(overlay)
 
     entry = Gtk::Entry.new
     css = <<-CSS
@@ -51,16 +51,20 @@ module TransparentDemo
     entry.valign = :center
     entry.halign = :start
     overlay.show_all
-
-    if !window.visible?
-      window.show_all
-    else
-      window.destroy
-    end
-    window
   end
 
-  def self.draw_shadow_box(cr, rect, radius, transparency)
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+    @window
+  end
+
+  private
+
+  def draw_shadow_box(cr, rect, radius, transparency)
     x0 = rect[0]
     x1 = rect[0] + radius
     x2 = rect[0] + rect[2] - radius
