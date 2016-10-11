@@ -42,7 +42,7 @@ ioc_error(GIOStatus status, GError *err)
     } else if (status == G_IO_STATUS_NORMAL){
         /* Do nothing */
     } else {
-        rb_raise(rb_eRuntimeError, "An error occured. status = %d\n", status);
+        rb_raise(rb_eRuntimeError, "An error occurred. status = %d\n", status);
     }
 }
 

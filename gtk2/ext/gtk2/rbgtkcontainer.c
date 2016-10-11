@@ -453,7 +453,7 @@ rg_s_install_child_property(int argc, VALUE *argv, VALUE self)
     pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
 
     if (cinfo->klass != self)
-        rb_raise(rb_eTypeError, "%s isn't registerd class",
+        rb_raise(rb_eTypeError, "%s isn't registered class",
                  rb_class2name(self));
 
     gclass = GTK_CONTAINER_CLASS(g_type_class_ref(cinfo->gtype));
