@@ -1,6 +1,6 @@
 # Ruby/ClutterGTK
 
-Ruby/ClutterGDK is a Ruby binding of Clutter-GDK.
+Ruby/ClutterGDK is a Ruby binding of GDK specific API of Clutter.
 
 ## Requirements
 

@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,8 +20,10 @@ $LOAD_PATH.unshift("./../glib2/lib")
 require "gnome2/rake/package-task"
 
 package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/ClutterGDK is a Ruby binding of Clutter-GDK."
-  package.description = "Ruby/ClutterGDK is a Ruby binding of Clutter-GDK."
+  package.summary =
+    "Ruby/ClutterGDK is a Ruby binding of GDK specific API of Clutter."
+  package.description =
+    "Ruby/ClutterGDK is a Ruby binding of GDK specific API of Clutter."
   package.dependency.gem.runtime = ["clutter", "gdk3"]
   package.windows.packages = []
   package.windows.dependencies = []
