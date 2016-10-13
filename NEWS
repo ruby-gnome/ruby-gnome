@@ -4088,7 +4088,7 @@ Ruby/Libgda:
 Ruby/GLib:
   * Improve signal handlers with pthread ruby(--enable-pthread). [Sjoerd Simons]
   * Added new fundamental object for other bindings. [Sjoerd Simons]
-  * GLib::Source#remove -> GLib::Soruce.remove [Kouhei Sutou]
+  * GLib::Source#remove -> GLib::Source.remove [Kouhei Sutou]
   * Added new macros (GLIST2ARYF, GLIST2ARY2F, GSLIST2ARYF, GLIST2ARY2F,
     G_PROTECT_CALLBACK) [Masao Mutoh]
   * Added GLib.win32_locale, GLib, win32_locale_filename_from_utf8 [Kouhei Sutou]
