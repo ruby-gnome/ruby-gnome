@@ -46,6 +46,7 @@ module Gdk
       end
     end
 
+    @@init_hooks = []
     def init
       class << self
         remove_method(:init)
@@ -56,6 +57,14 @@ module Gdk
       if Object.const_defined?(:Gtk) and Gtk.respond_to?(:init)
         Gtk.init
       end
+
+      @@init_hooks.each do |hook|
+        hook.call
+      end
+    end
+
+    def on_init(&block)
+      @@init_hooks << block
     end
 
     def cairo_available?
