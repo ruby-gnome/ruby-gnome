@@ -17,27 +17,48 @@
 require "clutter"
 require "gdk3"
 
-require "clutter-gdk/loader"
-
 module ClutterGdk
-  class << self
-    def const_missing(name)
-      init
-      if const_defined?(name)
-        const_get(name)
-      else
-        super
-      end
-    end
+  loader = GObjectIntrospection::Loader.new(self)
+  loader.load("ClutterGdk")
+end
 
-    def init
-      class << self
-        remove_method(:init)
-        remove_method(:const_missing)
+init_clutter = lambda do
+  module Clutter
+    class Stage
+      def gdk_window
+        ClutterGdk.get_stage_window(self)
       end
-      Gdk.init if Gdk.respond_to?(:init)
-      loader = Loader.new(self)
-      loader.load("ClutterGdk")
+
+      def set_foreign_window(window)
+        ClutterGdk.set_stage_foreign(self, window)
+      end
+      alias_method :foreign_window=, :set_foreign_window
     end
   end
+end
+
+if Clutter.respond_to?(:init)
+  Clutter.on_init do
+    init_clutter.call
+  end
+else
+  init_clutter.call
+end
+
+init_gdk = lambda do
+  module Gdk
+    class Window
+      def clutter_stage
+        ClutterGdk.get_stage_from_window(self)
+      end
+    end
+  end
+end
+
+if Gdk.respond_to?(:init)
+  Gdk.on_init do
+    init_gdk.call
+  end
+else
+  init_gdk.call
 end
