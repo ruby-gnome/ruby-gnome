@@ -15,6 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 require "clutter"
+require "clutter-gdk"
 require "gtk3"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
