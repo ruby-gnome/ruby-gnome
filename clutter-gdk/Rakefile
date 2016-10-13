@@ -44,22 +44,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "gdk3",
   ]
   package.external_packages = [
-    {
-      :name => "clutter-gdk",
-      :download_site => :gnome,
-      :label => "Clutter-GTK",
-      :version => "1.8.0",
-      :compression_method => "xz",
-      :windows => {
-        :configure_args => [
-          "--enable-introspection",
-        ],
-        :patches => [
-        ],
-        # :need_autoreconf => true,
-        :built_file => "bin/libclutter-gdk-1.0-0.dll",
-      },
-    }
   ]
 end
 package_task.define
