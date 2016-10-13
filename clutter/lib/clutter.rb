@@ -44,6 +44,7 @@ module Clutter
       end
     end
 
+    @@init_hooks = []
     def init(argv=[])
       class << self
         remove_method(:init)
@@ -64,6 +65,14 @@ module Clutter
       require "clutter/text-buffer"
       require "clutter/threads"
       require "clutter/version"
+
+      @@init_hooks.each do |hook|
+        hook.call
+      end
+    end
+
+    def on_init(&block)
+      @@init_hooks << block
     end
   end
 
