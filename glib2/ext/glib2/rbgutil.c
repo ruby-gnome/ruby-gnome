@@ -138,20 +138,20 @@ rbgutil_key_equal(VALUE rb_key, const char *key)
 }
 
 static gboolean
-rbg_interrupt_prepare (G_GNUC_UNUSED GSource *soruce,
+rbg_interrupt_prepare (G_GNUC_UNUSED GSource *source,
                        G_GNUC_UNUSED gint *timeout)
 {
     return rb_thread_interrupted(rb_thread_current());
 }
 
 static gboolean
-rbg_interrupt_check (G_GNUC_UNUSED GSource *soruce)
+rbg_interrupt_check (G_GNUC_UNUSED GSource *source)
 {
     return rb_thread_interrupted(rb_thread_current());
 }
 
 static gboolean
-rbg_interrupt_dispatch (G_GNUC_UNUSED GSource *soruce,
+rbg_interrupt_dispatch (G_GNUC_UNUSED GSource *source,
                         GSourceFunc callback,
                         gpointer user_data)
 {
