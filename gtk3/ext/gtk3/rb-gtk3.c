@@ -19,6 +19,7 @@
  */
 
 #include "rb-gtk3-private.h"
+#include <locale.h>
 
 static ID id_call;
 static VALUE cGdkAtom;
@@ -640,4 +641,5 @@ Init_gtk3(void)
     rbgtk3_widget_init();
 
     rbgobj_boxed_not_copy_obj(GTK_TYPE_SELECTION_DATA);
+    setlocale(LC_NUMERIC, "C");
 }
