@@ -2,7 +2,7 @@
 =begin
   treemodelfilter.rb - Gtk::TreeModelFilter sample
 
-  Copyright (c) 2004-2015 Ruby-GNOME2 Project Team
+  Copyright (c) 2004-2016 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
 
