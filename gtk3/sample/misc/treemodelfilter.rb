@@ -17,7 +17,7 @@ column2 = Gtk::TreeViewColumn.new("data2",
                                   Gtk::CellRendererText.new,
                                   :text => 1)
 
-mf = Gtk::TreeModelFilter.new(:child_model => ls)
+mf = Gtk::TreeModelFilter.new(ls)
 
 mf.set_visible_func do |_model, iter|
   /a/ =~ iter[0]
