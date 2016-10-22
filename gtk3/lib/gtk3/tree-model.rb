@@ -105,6 +105,8 @@ module Gtk
       (@column_types ||= {})[index] ||= get_column_type_raw(index)
     end
 
+    alias_method :create_filter, :filter_new
+
     private
     def setup_iter(iter)
       iter.model = self

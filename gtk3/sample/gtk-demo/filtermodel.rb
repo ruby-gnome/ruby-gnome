@@ -88,7 +88,7 @@ class FiltermodelDemo
 
     types = [Integer, Integer, Integer, TrueClass]
 
-    model = Gtk::TreeModelFilter.new(@store)
+    model = @store.create_filter
     model.set_modify_func(*types) do |filter_model, filter_iter, filter_column|
       value = nil
       child_iter = filter_model.convert_iter_to_child_iter(filter_iter)
@@ -113,7 +113,7 @@ class FiltermodelDemo
   def initialize_tree_model_filter_selected
     tree = @builder["treeview3"]
 
-    model = Gtk::TreeModelFilter.new(@store)
+    model = @store.create_filter
     model.set_visible_func do |_current_model, current_iter|
       current_iter[WIDTH_COLUMN] < 10
     end
