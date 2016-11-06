@@ -2364,6 +2364,7 @@ rb_gi_return_argument_free_everything(GIArgument *argument,
     type_tag = g_type_info_get_tag(type_info);
     switch (type_tag) {
     case GI_TYPE_TAG_VOID:
+        break;
     case GI_TYPE_TAG_BOOLEAN:
     case GI_TYPE_TAG_INT8:
     case GI_TYPE_TAG_UINT8:
