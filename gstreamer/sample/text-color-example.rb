@@ -13,7 +13,7 @@
 # licensed under the terms of the GNU Library General Public License,
 # version 2 or (at your option) later.
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -32,7 +32,7 @@
 require "gst"
 
 bin = Gst::Pipeline.new("pipeline")
-clock = bin.clock
+clock = bin.pipeline_clock
 src = Gst::ElementFactory.make("videotestsrc", nil)
 raise "need videotestsrc from gst-plugins-base" if src.nil?
 src.pattern = 10 # checkers-8
