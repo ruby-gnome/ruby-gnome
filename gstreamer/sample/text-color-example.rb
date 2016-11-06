@@ -32,7 +32,7 @@
 require "gst"
 
 bin = Gst::Pipeline.new("pipeline")
-clock = bin.clock
+clock = bin.pipeline_clock
 src = Gst::ElementFactory.make("videotestsrc", nil)
 raise "need videotestsrc from gst-plugins-base" if src.nil?
 src.pattern = 10 # checkers-8
