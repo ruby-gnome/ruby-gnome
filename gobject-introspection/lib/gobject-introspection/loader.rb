@@ -502,8 +502,7 @@ module GObjectIntrospection
       info.unlock_gvl = should_unlock_gvl?(info, klass)
       remove_existing_method(klass, method_name)
       function_info_p = (info.class == FunctionInfo)
-      no_return_value_p =
-        (info.return_type.tag == TypeTag::VOID and info.n_out_args.zero?)
+      have_return_value_p = info.have_return_value?
       arguments_builder = ArgumentsBuilder.new(info, "#{klass}\##{method_name}")
       require_callback_p = info.require_callback?
       klass.__send__(:define_method, method_name) do |*arguments, &block|
@@ -519,10 +518,10 @@ module GObjectIntrospection
           else
             return_value = info.invoke(self, arguments, &block)
           end
-          if no_return_value_p
-            self
-          else
+          if have_return_value_p
             return_value
+          else
+            self
           end
         end
       end

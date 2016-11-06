@@ -59,6 +59,12 @@ module GObjectIntrospection
       out_args.size
     end
 
+    def have_return_value?
+      return true if return_type.tag != TypeTag::VOID
+      return true if return_type.pointer?
+      not n_out_args.zero?
+    end
+
     private
     def compute_in_args
       array_length_indexes = []
