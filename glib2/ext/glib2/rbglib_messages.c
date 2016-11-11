@@ -56,12 +56,30 @@ logmessage(GLogLevelFlags level)
     return "UNKNOWN";
 }
 
+static VALUE
+rbg_printerr(VALUE message, G_GNUC_UNUSED VALUE user_data)
+{
+    g_printerr("\tfrom %.*s\n",
+               (int)RSTRING_LEN(message),
+               RSTRING_PTR(message));
+    return Qnil;
+}
+
 static void
 rbglib_log_handler(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer user_data)
 {
     if (!log_canceled) {
-        g_printerr("%s: line %d\n", rb_sourcefile(), rb_sourceline());
-        g_printerr("   %s-%s **:%s\n", log_domain, logmessage(log_level), message);
+        g_printerr("%s-%s **: %s\n",
+                   log_domain, logmessage(log_level), message);
+        if (rb_during_gc()) {
+            g_printerr("\tfrom %s:%d\n", rb_sourcefile(), rb_sourceline());
+        } else {
+            VALUE backtrace;
+
+            backtrace = rb_funcall(rb_mKernel, rb_intern("caller"), 0);
+            rb_iterate(rb_each, backtrace,
+                       rbg_printerr, Qnil);
+        }
     } else {
         g_log_default_handler(log_domain, log_level, message, user_data);
     }
