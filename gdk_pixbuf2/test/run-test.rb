@@ -25,6 +25,7 @@ gdk_pixbuf2_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
 
 modules = [
   [glib_base, "glib2"],
+  [gio2_base, "gio2"],
   [gobject_introspection_base, "gobject-introspection"],
   [gdk_pixbuf2_base, "gdk_pixbuf2"],
 ]
