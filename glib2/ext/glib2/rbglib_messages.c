@@ -60,9 +60,6 @@ static void
 rbglib_log_handler(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer user_data)
 {
     if (!log_canceled) {
-#ifdef HAVE_RUBY_SET_CURRENT_SOURCE
-        ruby_set_current_source();
-#endif
         g_printerr("%s: line %d\n", rb_sourcefile(), rb_sourceline());
         g_printerr("   %s-%s **:%s\n", log_domain, logmessage(log_level), message);
     } else {
