@@ -24,14 +24,6 @@
 
 #include "rbgprivate.h"
 
-#ifndef HAVE_RB_SOURCEFILE
-#define rb_sourcefile() (ruby_sourcefile)
-#endif
-
-#ifndef HAVE_RB_SOURCELINE
-#define rb_sourceline() (ruby_sourceline)
-#endif
-
 #define RG_TARGET_NAMESPACE mLog
 
 static VALUE rbglib_log_handler_procs;
