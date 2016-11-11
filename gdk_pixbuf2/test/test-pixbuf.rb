@@ -322,6 +322,9 @@ class TestPixbuf < Test::Unit::TestCase
     end
 
     test "normal usage" do
+      if /\Ai\d86-/ === RUBY_PLATFORM
+        omit("floating point calculation result is different on i386")
+      end
       src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
       pixbuf = src_pixbuf.saturate_and_pixelate(0, true)
       ref = saturate_and_pixelate_pixels(src_pixbuf, 0, true)
