@@ -97,7 +97,7 @@ index dbd264c..c9b58c2 100644
 --- a/Makefile-tools.am
 +++ b/Makefile-tools.am
 @@ -1,5 +1,7 @@
- bin_PROGRAMS += g-ir-compiler g-ir-generate
+ bin_PROGRAMS += g-ir-compiler g-ir-generate g-ir-inspect
 +if BUILD_SCANNER
  bin_SCRIPTS += g-ir-scanner g-ir-annotation-tool
 +endif
@@ -126,11 +126,11 @@ index dbd264c..c9b58c2 100644
  
  g_ir_compiler_SOURCES = tools/compiler.c
  g_ir_compiler_CPPFLAGS = -DGIREPO_DEFAULT_SEARCH_PATH="\"$(libdir)\"" \
-@@ -44,4 +50,10 @@ GCOVSOURCES =					\
+@@ -44,4 +50,12 @@ GCOVSOURCES =					\
  	$(g_ir_compiler_SOURCES)		\
  	$(g_ir_generate_SOURCES)
  
--CLEANFILES += g-ir-scanner g-ir-annotation-tool g-ir-doc-tool
+-CLEANFILES += g-ir-scanner g-ir-annotation-tool g-ir-doc-tool g-ir-inspect
 +if BUILD_SCANNER
 +CLEANFILES += g-ir-scanner g-ir-annotation-tool
 +endif
@@ -138,6 +138,8 @@ index dbd264c..c9b58c2 100644
 +if BUILD_DOCTOOL
 +CLEANFILES += g-ir-doc-tool
 +endif
++
++CLEANFILES += g-ir-inspect
 diff --git a/Makefile.am b/Makefile.am
 index b080a89..344598a 100644
 --- a/Makefile.am
