@@ -70,9 +70,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
           "--enable-introspection",
         ],
-        :patches => [
-          "pango-1.34.0-enable-fc-font.diff",
-        ],
         :built_file => "bin/libpango-1.0-0.dll",
       },
     },
