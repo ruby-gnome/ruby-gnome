@@ -1,0 +1,60 @@
+Author: Chun-wei Fan <fanchunwei@src.gnome.org>
+Date:   Fri Nov 11 21:03:46 2016 +0800
+
+    gdkscreen-win32.c: Also define _WIN32_WINNT
+    
+    As in the last commit on gdkdisplay-win32.c, we need to define that to be
+    0x0600 (Vista) or later so that the items needed in the Windows headers be
+    activated.
+    
+    See: https://bugzilla.gnome.org/show_bug.cgi?id=768081#c62
+---
+ gdk/win32/gdkscreen-win32.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/gdk/win32/gdkscreen-win32.c b/gdk/win32/gdkscreen-win32.c
+index 47f0168..63a6cf7 100644
+--- a/gdk/win32/gdkscreen-win32.c
++++ b/gdk/win32/gdkscreen-win32.c
+@@ -16,6 +16,9 @@
+  */
+ 
+ #include "config.h"
++
++#define _WIN32_WINNT 0x0600
++
+ #include "gdk.h"
+ #include "gdkprivate-win32.h"
+ #include "gdkscreenprivate.h"
+
+Author: Chun-wei Fan <fanchunwei@src.gnome.org>
+Date:   Fri Nov 11 20:53:41 2016 +0800
+
+    gdkdisplay-win32.c: Define _WIN32_WINNT
+    
+    ... to be for Vista (0x0600) or later.  This is so that the necessary
+    items in the Windows headers be activated so that the code will build
+    properly on mingw-w64, and we already require Vista or later for GTK+.
+    
+    Thanks Ting-Wei Lan for pointing this out.
+    
+    See: https://bugzilla.gnome.org/show_bug.cgi?id=768081#c62
+---
+ gdk/win32/gdkdisplay-win32.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/gdk/win32/gdkdisplay-win32.c b/gdk/win32/gdkdisplay-win32.c
+index 8cb0aa0..c701e2e 100644
+--- a/gdk/win32/gdkdisplay-win32.c
++++ b/gdk/win32/gdkdisplay-win32.c
+@@ -17,6 +17,9 @@
+  */
+ 
+ #include "config.h"
++
++#define _WIN32_WINNT 0x0600
++
+ #include "gdk.h"
+ #include "gdkprivate-win32.h"
+ #include "gdkdisplay-win32.h"
+
