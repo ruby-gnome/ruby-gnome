@@ -50,6 +50,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
           "--enable-introspection",
         ],
+        :patches => [
+          "gtksourceview-3.22.1-include-missing-header.diff",
+        ],
         :built_file => "bin/libgtksourceview-3.0-1.dll",
       },
     }

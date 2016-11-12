@@ -1,0 +1,13 @@
+diff --git a/gtksourceview/gtksourceview-init.c b/gtksourceview/gtksourceview-init.c
+index 1403c7e..edefc87 100644
+--- a/gtksourceview/gtksourceview-init.c
++++ b/gtksourceview/gtksourceview-init.c
+@@ -37,6 +37,8 @@
+ #include "gtksourcestyleschememanager.h"
+ 
+ #ifdef G_OS_WIN32
++#include <windows.h>
++
+ static HMODULE gtksourceview_dll;
+ #endif
+ 
