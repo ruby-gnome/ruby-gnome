@@ -57,7 +57,8 @@ if [ ! -f ~/setup.timestamp ]; then
     wine1.6 \
     mingw-w64 \
     cmake \
-    valac
+    valac \
+    libmount-dev
 
   # Enable me when WebKitGTK+ supports Windows.
   # run sudo update-alternatives --set \
