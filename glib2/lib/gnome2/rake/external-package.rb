@@ -107,6 +107,8 @@ module GNOME2
           latest_version_freedesktop
         when :freedesktop_gstreamer
           latest_version_freedesktop_gstreamer
+        when :webkitgtk
+          latest_version_webkitgtk
         else
           nil
         end
@@ -127,6 +129,8 @@ module GNOME2
           base_url << "/#{name}"
         when :gnu
           base_url = "http://ftp.gnu.org/pub/gnu/#{name}"
+        when :webkitgtk
+          base_url = webkitgtk_base_url
         else
           base_url = nil
         end
@@ -143,6 +147,10 @@ module GNOME2
 
       def freedesktop_gstreamer_base_url
         "https://gstreamer.freedesktop.org/src"
+      end
+
+      def webkitgtk_base_url
+        "https://webkitgtk.org/releases"
       end
 
       def sort_versions(versions)
@@ -221,6 +229,22 @@ module GNOME2
 
       def development_version_freedesktop_gstreamer?(version)
         version.split(".")[1].to_i.odd?
+      end
+
+      def latest_version_webkitgtk
+        base_url = webkitgtk_base_url
+        versions = []
+        open(base_url) do |index|
+          index.read.scan(/<a (.+?)>/) do |content,|
+            case content
+            when /href="#{Regexp.escape(name)}-
+                        (\d+(?:\.\d+)*)
+                        \.tar\.#{Regexp.escape(compression_method)}"/x
+              versions << $1
+            end
+          end
+        end
+        sort_versions(versions).last
       end
 
       class WindowsConfiguration < Struct.new(:build,
