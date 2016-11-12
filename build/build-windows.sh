@@ -48,6 +48,7 @@ if [ ! -f ~/setup.timestamp ]; then
     gobject-introspection \
     libgtk2.0-bin \
     gtk-3-examples \
+    libgtk-3-dev \
     flex \
     bison \
     gperf \
