@@ -1,0 +1,15 @@
+diff --git a/gtksourceview/gtksourceregion.c b/gtksourceview/gtksourceregion.c
+index f75e574..8ab5413 100644
+--- a/gtksourceview/gtksourceregion.c
++++ b/gtksourceview/gtksourceregion.c
+@@ -20,6 +20,10 @@
+  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+  */
+ 
++#ifdef HAVE_CONFIG_H
++#include <config.h>
++#endif
++
+ #include "gtksourceregion.h"
+ 
+ /**

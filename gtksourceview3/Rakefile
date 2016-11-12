@@ -52,8 +52,11 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         ],
         :patches => [
           "gtksourceview-3.22.1-include-missing-header.diff",
+          "gtksourceview-3.22.1-remove-unused-definition.diff",
+          "gtksourceview-3.22.1-add-missing-config-include.diff",
         ],
         :built_file => "bin/libgtksourceview-3.0-1.dll",
+        :need_autoreconf => true,
       },
     }
   ]
