@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,6 +27,49 @@ class TestGtkTreeViewColumn < Test::Unit::TestCase
       column = Gtk::TreeViewColumn.new("title")
       assert_equal("title", column.title)
     end
+
+    test "with renderer" do
+      renderer = Gtk::CellRendererText.new
+      column = Gtk::TreeViewColumn.new("title", renderer)
+      assert_equal(1, column.cells.length)
+      assert_equal(Gtk::CellRendererText, column.cells.first.class)
+    end
+
+
+    sub_test_case("option hash") do
+      test "box" do
+        box = Gtk::CellAreaBox.new()
+        options = {:area => box}
+        column = Gtk::TreeViewColumn.new(options)
+        renderer = Gtk::CellRendererText.new
+        box.pack_start renderer, true, true, true
+        renderer = Gtk::CellRendererText.new
+        box.pack_start renderer, true, true, true
+        assert_equal(2, column.cells.length)
+      end
+
+      test "title" do
+        options = {:title => 'title'}
+        column = Gtk::TreeViewColumn.new(options)
+        assert_equal("title", column.title)
+      end
+
+      test "renderer" do
+        renderer = Gtk::CellRendererText.new
+        options = {:renderer => renderer}
+        column = Gtk::TreeViewColumn.new(options)
+        assert_equal(1, column.cells.length)
+        assert_equal(Gtk::CellRendererText, column.cells.first.class)
+      end
+      
+      test "unknown" do
+        options = {:unknown => true}
+        assert_raise(ArgumentError) do
+          Gtk::TreeViewColumn.new(options)
+        end
+      end
+    end
+
 
     sub_test_case("attributes") do
       test "string key" do
