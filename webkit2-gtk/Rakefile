@@ -103,7 +103,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "-DENABLE_X11_TARGET=OFF",
           "-DENABLE_JIT=OFF",
           "-DENABLE_GTKDOC=OFF",
-          "-DENABLE_CREDENTIAL_STORAGE=OFF",
           "-DENABLE_GEOLOCATION=OFF",
           "-DENABLE_OPENGL=OFF",
           "-DENABLE_SPELLCHECK=OFF",
@@ -113,6 +112,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "-DUSE_SYSTEM_MALLOC=ON",
           "-DUSE_LIBNOTIFY=OFF",
           "-DUSE_LIBHYPHEN=OFF",
+          "-DUSE_LIBSECRET=OFF",
           "-DADDITIONAL_COMPILER_FLAGS=-D_WIN32_WINNT=0x0601 -DWINVER=0x0601",
         ],
         :patches => [

@@ -22,9 +22,11 @@ diff -u -r webkitgtk-2.13.4.orig/Tools/CMakeLists.txt webkitgtk-2.13.4/Tools/CMa
 +++ webkitgtk-2.13.4/Tools/CMakeLists.txt	2016-08-16 14:42:28.938336932 +0000
 @@ -40,7 +40,7 @@
  if (WIN32)
-     add_subdirectory(DumpRenderTree)
-     add_subdirectory(TestWebKitAPI)
+-    add_subdirectory(DumpRenderTree)
+-    add_subdirectory(TestWebKitAPI)
 -    add_subdirectory(MiniBrowser/win)
++#    add_subdirectory(DumpRenderTree)
++#    add_subdirectory(TestWebKitAPI)
 +#    add_subdirectory(MiniBrowser/win)
  endif ()
  
