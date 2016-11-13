@@ -1,6 +1,7 @@
 # -*- RD -*-
 
 = NEWS
+
 == Ruby-GNOME2 3.10.0: 2016-11-12
 
 === Changes
@@ -208,6 +209,7 @@
     * follow improved API in event.rb sample.
 
 ==== Ruby/ClutterGdk
+
   * Improvements
     * create a GObject-Introspection loader.
       [Patch by cedlemo]
@@ -217,6 +219,7 @@
     * remove needless code in GObject-Introspection loader. ClutterGdk is part of Clutter.
 
 ==== Ruby/GStreamer
+
   * Improvements
     * add (({Gst::Bin#each})).
       [GitHub#927][Reported by cedlemo]
