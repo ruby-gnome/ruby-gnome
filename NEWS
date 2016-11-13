@@ -1,6 +1,245 @@
 # -*- RD -*-
 
 = NEWS
+== Ruby-GNOME2 3.10.0: 2016-11-12
+
+=== Changes
+
+  * Improvements
+    * update README.
+      [Patch by cedlemo]
+    * fix format in README.
+    * use pthread version of MinGW in build-windows.sh.
+    * improve main Rakefile.
+    * windows : update bundled versions.
+  * Fixes
+    * fix path in gem:windows:push in main Rakefile.
+    * fix markup in NEWS file.
+    * use Win32 thread again in build-windows.sh.
+    * libmount is required for GLib on Linux.
+    * install libgtk-3-dev explicitly.
+
+==== All
+
+==== Ruby/GIO2
+
+  * Improvements
+    * make (({Gio::SettingsSchemaSource#list_schemas})) Rubyish.
+    * make (({Gio::Settings#set_value})) Rubyish.
+    * support array like API for (({Gio::Settings})).
+    * (({Gio::ActionMap#add_action})) accepts :state
+    * simplify, load (({Gio::File})) with GObject-Introspection loader.
+    * simplify (({Gio::ContentType})) implementation.
+  * Fixes
+    * add missing required argument in test-settings-schema-source.rb.
+    * add version check in Gio tests.
+    * increase required version.
+    * fix typo in action-map.rb.
+      [Path by cedlemo]
+
+==== Ruby/GLIB2
+
+  * Improvements
+    * New implementation of GRClosure with new APIS:
+      * RGClosureCallData
+      * RGClosureCallFunc
+      * rbgobj_set_signal_call_func()
+      * rbgobj_get_signal_call_func()
+      * g_rclosure_new_call()
+    * support exit_application error message when no backtrace.
+    * improve rbg_scan_options() performance
+    * show all backtrace on GLib log.
+      [GitHub#935][Suggested by Matijs van Zuijlen]
+
+  * Fixes
+    * windows:
+      * Fix indent in windows-binary-build-task.rb.
+      * Export glib2_binary_base_dir.
+      * Remove needless "windows_" in methods name in windows-binary-build-task.rb.
+      * add a debug argument for make command.
+      * add GNOME2::Rake::WindowsBinaryBuildTask#binary_base_dir
+    * fix a bug that SIGUSR1 breaks main loop.
+      [GitHub#933][Reported by Vegard Sandengen]
+    * fix error messages typo
+      [Patch by dai-vr]
+    * fix typo in rbgutil.c.
+      [Patch by Kazuhiro NISHIYAMA]
+    * fix style in rbglib_messages.c
+    * remove needless check in rbglib_messages.c and extconf.rb
+
+==== Ruby/GStreamer
+
+  * Improvements
+  * Fixes
+    * fix text_color_example.rb demo.
+      [Patch by cedlemo]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * support GVariant string array to Ruby
+      [Patch by Konstantinos Natsakis]
+    * use g_variant_iter_init () to reduce dynamic memory allocation
+    * support omitting allow-null arguments in middle of arguments
+    * improve performance in callable-info.rb.
+    * reduce needless method calls.
+    * simplify invoke arguments in rb-gi-method-info.c, it improves performance.
+    * support "can_be_" as predicate prefix.
+    * improve performance calling a method. It catches data from info.
+    * add GI.load shortcut for fast load.
+  * Fixes
+    * use short for 16bit Integer.
+    * accept Array of numbers for gint8/guint8 array
+    * wrong condition in function info arguments management.
+    * use suitable type macros in ruby to C code from rb-gi-argument.c.
+    * assign temporary Ruby object to local variable to guard from GC.
+    * fix name conflict in rb-gi-argument.c.
+      [Reported by kitone]
+    * touch unrefed object in rb-gi-argument.c.
+    * support array of UTF-8.
+    * fill from last omitted arguments in function arguments loader.
+    * add a missing all required case check in function arguments loader.
+    * use rbg_variant_to_ruby in rb-gi-argument.c.
+    * define unlock_gvl as info method.
+    * fix typo in rb-gi-function-info.c.
+    * don't fill missing arguments when given N arguments is less.
+    * sink created GObject based object by default.
+    * fix wrong default argument fill condition.
+    * fix limit when loading arguments infos.
+      [GitHub#895][Reported by cedlemo]
+    * fix libffi return value handling.
+      [GitHub#758][Reported by Mamoru TASAKA]
+    * do not try to run a gtk demo when the user provide a bad demo name.
+      [Patch by cedlemo]
+    * focus on the related line in the TreeView when running demo from command line.
+      [Patch by cedlemo]
+    * do nothing for void type return type.
+      [GitHub#952][Reported by cedlemo]
+    * return value is return type is void but pointer.
+    * windows : update patch support-external-g-ir-scanner.diff.
+
+==== Ruby/GDK
+
+  * Improvements
+    * make (({Gdk::EventFocus#in})) rubyish.
+    * add init hook as Gdk.on_init
+  * Fixes
+    * backport a patch to fix build error.
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements
+    * support loading from file.
+  * Fixes
+    * fix dependency in Rakefile.
+      [GitHub#862][Reported by Mamoru TASAKA]
+    * add missing gio2 dependency in tests.
+    * add missing variable in tests.
+    * omit a test that failed by float error on i386
+      [GitHub#898][Reported by Mamoru TASAKA]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * support for (({Gtk::SpinButton::input})) signal.
+      [GitHub#855][Reported cedlemo]
+    * new gtk demo spinbutton.
+      [Patch by cedlemo]
+    * add demo search_entry.rb
+      [Patch by cedlemo]
+    * update gtk demos to use class form instead of module form.
+      [Patches by cedlemo]
+    * add listbox gtk demo.
+      [Patch by cedlemo]
+    * update editable_cells demo.
+      [Patch by cedlemo]
+    * add glarea demo.
+      [Patch by cedlemo]
+    * update transparent demo.
+      [Patch by Arjun Menon]
+    * update theming_style_classes demo.
+      [Patch by Arjun Menon]
+    * update textscroll demo.
+      [Patch by Arjun Menon]
+    * update stack demo.
+      [Patch by Arjun Menon]
+    * update spinbutton demo.
+      [Patch by Arjun Menon]
+    * create (({Gtk::TreeModel#create_filter})) as an alias of #filter_new.
+  * Fixes
+    * load demos as classes instead of modules in main.rb.
+      [Patch by cedlemo]
+    * enable Gtk::Rc deprecation.
+    * fix treemodelfilter sample issue.
+    * force LC_NUMERIC to C when gtk3 is initialized.
+      [Patch by cedlemo]
+
+==== Ruby/WebKitGTK
+
+  * Improvements
+  * Fixes
+    * windows :
+      * update dependencies in Rakefile and patches.
+      * use Ubuntu 16.04 as build environment.
+      * install jsmin
+
+==== Ruby/WebKit2GTK
+
+  * Improvements
+  * Fixes
+    * windows :
+      * update Rakefile and patches.
+      * support auto latest version detection.
+
+==== Ruby/ClutterGdk
+
+  * Improvements
+  * Fixes
+    * add init hook as Clutter.on_init.
+    * add Clutter and Gdk integration API.
+
+==== Ruby/ClutterGtk
+
+  * Improvements
+    * add clutter-gdk dependency.
+  * Fixes
+    * window-test.rb sample : use icons only included in the default theme.
+    * remove needless pack method usage in test.rb sample.
+    * follow improved API in event.rb sample.
+
+==== Ruby/ClutterGdk
+  * Improvements
+    * create a GObject-Introspection loader.
+      [Patch by cedlemo]
+  * Fixes
+    * update description in README and in Rakefile.
+    * remove needless code in Rakefile.
+    * remove needless code in GObject-Introspection loader. ClutterGdk is part of Clutter.
+
+==== Ruby/GStreamer
+  * Improvements
+    * add (({Gst::Bin#each})).
+      [GitHub#927][Reported by cedlemo]
+    * add only_gstreamer_version method.
+  * Fixes
+    * use post_load in order to use require_libraries.
+
+==== Ruby/Pango
+
+  * Fixes
+    * pango windows: remove needless patch.
+
+==== Thanks
+
+  * Arjun Menon
+  * cedlemo
+  * dai-vr
+  * Kazuhiro NISHIYAMA
+  * kitone
+  * Konstantinos Natsakis
+  * Mamoru TASAKA
+  * Matijs van Zuijlen
+  * Vegard Sandengen
 
 == Ruby-GNOME2 3.0.9: 2016-08-12
 
