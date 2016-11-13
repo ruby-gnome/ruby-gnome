@@ -238,9 +238,10 @@ namespace :dist do
           cd(File.basename(ruby_tar_bz2_base, ".tar.bz2")) do
             sh("./configure",
                "--prefix=#{expanded_prefix}",
-               "--with-out-ext=readline")
+               "--with-out-ext=readline,tk,openssl",
+               "--disable-install-doc")
             sh("make", "-j8")
-            sh("make", "install-nodoc")
+            sh("make", "install")
           end
         end
       end
@@ -288,7 +289,11 @@ namespace :dist do
                 sh("tar", "xvf", tar_gz)
               end
               if /cairo/ !~ `#{expanded_gem_path} list cairo`
-                sh(expanded_gem_path, "install", "cairo")
+                sh(expanded_gem_path,
+                   "install",
+                   "--clear-sources",
+                   "--source", "http://rubygems.org/",
+                   "cairo")
               end
             end
 
