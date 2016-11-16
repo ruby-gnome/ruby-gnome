@@ -16,18 +16,20 @@
 
 module Gio
   class SettingsSchemaSource
-    alias_method :list_schemas_raw, :list_schemas
-    def list_schemas(recursive_or_options=nil)
-      case recursive_or_options
-      when true, false
-        recursive = recursive_or_options
-      else
-        options = recursive_or_options || {}
-        recursive = options[:recursive]
-        recursive = true if recursive.nil?
-      end
+    if method_defined?(:list_schemas)
+      alias_method :list_schemas_raw, :list_schemas
+      def list_schemas(recursive_or_options=nil)
+        case recursive_or_options
+        when true, false
+          recursive = recursive_or_options
+        else
+          options = recursive_or_options || {}
+          recursive = options[:recursive]
+          recursive = true if recursive.nil?
+        end
 
-      list_schemas_raw(recursive)
+        list_schemas_raw(recursive)
+      end
     end
   end
 end
