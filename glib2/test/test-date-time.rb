@@ -16,7 +16,7 @@
 
 class TestDateTime < Test::Unit::TestCase
   def test_now_local
-    now = GLib::DateTime.now_local
+    now = GLib::DateTime.now(:local)
     format = "%Y-%m-%d-%H-%M"
     assert_equal(Time.now.strftime(format), now.format(format))
   end
