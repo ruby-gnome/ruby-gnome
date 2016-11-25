@@ -57,7 +57,7 @@ rg_s_now(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_format(VALUE self, VALUE rb_format)
 {
-    gchar *format = RVAL2CSTR(rb_format);
+    const gchar *format = RVAL2CSTR(rb_format);
     return CSTR2RVAL(g_date_time_format(_SELF(self), format));
 }
 

@@ -26,7 +26,7 @@ static VALUE
 rg_initialize(gint argc, VALUE *argv, VALUE self)
 {
     VALUE rb_identifier = Qnil;
-    gchar *identifier = NULL;
+    const gchar *identifier = NULL;
     GTimeZone *time_zone = NULL;
 
     rb_scan_args(argc, argv, "01", &rb_identifier);
