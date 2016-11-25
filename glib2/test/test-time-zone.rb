@@ -23,10 +23,9 @@ class TestTimeZone < Test::Unit::TestCase
     end
 
     test "UTC" do
-      local_1 = GLib::TimeZone.utc
-      local_2 = GLib::TimeZone.new("UTC")
-      assert_equal(local_1.offset(0), local_2.offset(0))
+      utc_1 = GLib::TimeZone.utc
+      utc_2 = GLib::TimeZone.new("UTC")
+      assert_equal(utc_1.offset(0), utc_2.offset(0))
     end
-
   end
 end
