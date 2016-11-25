@@ -151,6 +151,7 @@ G_GNUC_INTERNAL void Init_glib_variant(void);
 G_GNUC_INTERNAL void Init_glib_regex(void);
 G_GNUC_INTERNAL void Init_glib_matchinfo(void);
 G_GNUC_INTERNAL void Init_glib_date_time(void);
+G_GNUC_INTERNAL void Init_glib_time_zone(void);
 
 G_GNUC_INTERNAL void Init_gobject_convert(void);
 G_GNUC_INTERNAL void Init_gobject_gtype(void);
