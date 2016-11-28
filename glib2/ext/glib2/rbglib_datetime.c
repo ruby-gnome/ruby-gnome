@@ -23,6 +23,38 @@
 #define _SELF(s) ((GDateTime*)RVAL2BOXED(s, G_TYPE_DATE_TIME))
 
 static VALUE
+rg_s_now(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+{
+    GDateTime *date = NULL;
+    VALUE rb_timezone;
+    ID id_equal;
+    ID id_local;
+    ID id_utc;
+
+    rb_scan_args(argc, argv, "01", &rb_timezone);
+
+    CONST_ID(id_equal, "==");
+    CONST_ID(id_local, "local");
+    CONST_ID(id_utc, "utc");
+    if (NIL_P(rb_timezone) ||
+        RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1,
+                              rb_id2sym(id_local)))) {
+        date = g_date_time_new_now_local();
+    } else if (RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1,
+                                     rb_id2sym(id_utc)))) {
+        date = g_date_time_new_now_utc();
+/* TODO: Support GLib::TimeZone */
+    } else {
+        rb_raise(rb_eArgError,
+                 "timezone must be nil, :local, :utc or GLib::TimeZone: "
+                 "%+" PRIsVALUE,
+                 rb_timezone);
+    }
+
+    return GDATETIME2RVAL(date);
+}
+
+static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     /*
@@ -137,38 +169,6 @@ rg_second(VALUE self)
 }
 
 static VALUE
-rg_s_now(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
-{
-    GDateTime *date = NULL;
-    VALUE rb_timezone;
-    ID id_equal;
-    ID id_local;
-    ID id_utc;
-
-    rb_scan_args(argc, argv, "01", &rb_timezone);
-
-    CONST_ID(id_equal, "==");
-    CONST_ID(id_local, "local");
-    CONST_ID(id_utc, "utc");
-    if (NIL_P(rb_timezone) ||
-        RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1,
-                              rb_id2sym(id_local)))) {
-        date = g_date_time_new_now_local();
-    } else if (RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1,
-                                     rb_id2sym(id_utc)))) {
-        date = g_date_time_new_now_utc();
-/* TODO: Support GLib::TimeZone */
-    } else {
-        rb_raise(rb_eArgError,
-                 "timezone must be nil, :local, :utc or GLib::TimeZone: "
-                 "%+" PRIsVALUE,
-                 rb_timezone);
-    }
-
-    return GDATETIME2RVAL(date);
-}
-
-static VALUE
 rg_format(VALUE self, VALUE rb_format)
 {
     const gchar *format = RVAL2CSTR(rb_format);
@@ -181,6 +181,9 @@ Init_glib_date_time(void)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DATE_TIME, "DateTime", mGLib);
+
+    RG_DEF_SMETHOD(now, -1);
+
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(year, 0);
     RG_DEF_METHOD(month, 0);
@@ -188,6 +191,5 @@ Init_glib_date_time(void)
     RG_DEF_METHOD(hour, 0);
     RG_DEF_METHOD(minute, 0);
     RG_DEF_METHOD(second, 0);
-    RG_DEF_SMETHOD(now, -1);
     RG_DEF_METHOD(format, 1);
 }
