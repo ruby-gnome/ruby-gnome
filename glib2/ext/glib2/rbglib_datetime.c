@@ -34,7 +34,7 @@ is_local_timezone(VALUE rb_timezone)
 
     CONST_ID(id_equal, "==");
     CONST_ID(id_local, "local");
-    return RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1, rb_id2sym(id_local)));
+    return RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1, ID2SYM(id_local)));
 }
 
 static gboolean
@@ -45,7 +45,7 @@ is_utc_timezone(VALUE rb_timezone)
 
     CONST_ID(id_equal, "==");
     CONST_ID(id_utc, "utc");
-    return RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1, rb_id2sym(id_utc)));
+    return RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1, ID2SYM(id_utc)));
 }
 
 static gboolean
