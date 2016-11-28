@@ -101,7 +101,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     VALUE rb_second;
     GDateTime *datetime = NULL;
 
-    rb_scan_args(argc, argv, "10", &rb_options);
+    rb_scan_args(argc, argv, "1", &rb_options);
     rbg_scan_options(rb_options,
                      "unix", &rb_unix,
                      "timezone", &rb_timezone,
