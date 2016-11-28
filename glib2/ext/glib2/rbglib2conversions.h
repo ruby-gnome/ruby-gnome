@@ -64,4 +64,5 @@
 #define GMATCHINFO2RVAL(o)                 (BOXED2RVAL(o, G_TYPE_MATCH_INFO))
 #define GDATETIME2RVAL(o)                  (BOXED2RVAL(o, G_TYPE_DATE_TIME))
 #define GTIMEZONE2RVAL(o)                  (BOXED2RVAL(o, G_TYPE_TIME_ZONE))
+#define RVAL2GTIMEZONE(o)                  ((GTimeZone*)RVAL2BOXED(o, G_TYPE_TIME_ZONE))
 #endif /* __GLIB2CONVERSIONS_H__ */
