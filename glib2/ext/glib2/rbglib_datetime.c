@@ -48,6 +48,15 @@ is_utc_timezone(VALUE rb_timezone)
     return RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1, rb_id2sym(id_utc)));
 }
 
+static gboolean
+is_timezone(VALUE rb_timezone)
+{
+    VALUE rb_cTimeZone;
+
+    rb_cTimeZone = rb_const_get(mGLib, rb_intern("TimeZone"));
+    return RVAL2CBOOL(rb_obj_is_kind_of(rb_timezone, rb_cTimeZone));
+}
+
 static VALUE
 rg_s_now(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -60,7 +69,8 @@ rg_s_now(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         date = g_date_time_new_now_local();
     } else if (is_utc_timezone(rb_timezone)) {
         date = g_date_time_new_now_utc();
-/* TODO: Support GLib::TimeZone */
+    } else if (is_timezone(rb_timezone)) {
+        date = g_date_time_new_now(RVAL2GTIMEZONE(rb_timezone));
     } else {
         rb_raise(rb_eArgError,
                  "timezone must be nil, :local, :utc or GLib::TimeZone: "
@@ -147,7 +157,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                            hour,
                                            minute,
                                            second);
-        } else {
+        } else if (is_timezone(rb_timezone)) {
             GTimeZone *timezone = NULL;
 
             timezone = RVAL2GTIMEZONE(rb_timezone);
@@ -158,6 +168,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                        hour,
                                        minute,
                                        second);
+        } else {
+            rb_raise(rb_eArgError,
+                     ":timezone must be nil, :local, :utc or GLib::TimeZone: "
+                     "%+" PRIsVALUE,
+                     rb_timezone);
         }
     } else {
         rb_raise(rb_eArgError,
