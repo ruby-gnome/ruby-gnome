@@ -113,9 +113,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "second", &rb_second,
                      NULL);
 
-    int full_info = !NIL_P(rb_year) && !NIL_P(rb_month) && !NIL_P(rb_hour) &&
-                    !NIL_P(rb_minute) && !NIL_P(rb_second);
-
     if (!NIL_P(rb_unix)) {
         gint64 unix_time;
 
@@ -129,7 +126,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      ":timezone must be nil, :local or :utc: %+" PRIsVALUE,
                      rb_timezone);
         }
-    } else if (full_info) {
+    } else if (!NIL_P(rb_year) &&
+               !NIL_P(rb_month) &&
+               !NIL_P(rb_hour) &&
+               !NIL_P(rb_minute) &&
+               !NIL_P(rb_second)) {
         gint year = 0;
         gint month = 0;
         gint day = 0;
