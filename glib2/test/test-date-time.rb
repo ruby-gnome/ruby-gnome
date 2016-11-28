@@ -23,25 +23,30 @@ class TestDateTime < Test::Unit::TestCase
 
   sub_test_case "new" do
 
-    test "unix_local" do
+    test "unix: :local" do
       time = Time.now
       format = "%Y-%m-%d-%H-%M"
-      datetime = GLib::DateTime.new(:unix_local => time.to_i)
+      datetime = GLib::DateTime.new(:unix => time.to_i,
+                                    :timezone => :local)
       assert_equal(time.strftime(format), datetime.format(format))
     end
 
-    test "unix_utc" do
+    test "unix: :utc" do
       time = Time.now.utc
       format = "%Y-%m-%d-%H-%M"
-      datetime = GLib::DateTime.new(:unix_utc => time.to_i)
+      datetime = GLib::DateTime.new(:unix => time.to_i,
+                                    :timezone => :utc)
       assert_equal(time.strftime(format), datetime.format(format))
     end
 
-    test "offset_local" do
+    test "timezone: :local" do
       time = Time.now
-      datetime = GLib::DateTime.new(:offset => "local", :year => time.year,
-                                    :month => time.month, :day => time.day,
-                                    :hour => time.hour, :minute => time.min,
+      datetime = GLib::DateTime.new(:timezone => :local,
+                                    :year => time.year,
+                                    :month => time.month,
+                                    :day => time.day,
+                                    :hour => time.hour,
+                                    :minute => time.min,
                                     :second => time.sec)
       assert_equal(time.year, datetime.year)
       assert_equal(time.month, datetime.month)
@@ -51,11 +56,14 @@ class TestDateTime < Test::Unit::TestCase
       assert_equal(time.sec, datetime.second)
     end
 
-    test "offset_utc" do
+    test "timezone: :utc" do
       time = Time.now.utc
-      datetime = GLib::DateTime.new(:offset => "utc", :year => time.year,
-                                    :month => time.month, :day => time.day,
-                                    :hour => time.hour, :minute => time.min,
+      datetime = GLib::DateTime.new(:timezone => :utc,
+                                    :year => time.year,
+                                    :month => time.month,
+                                    :day => time.day,
+                                    :hour => time.hour,
+                                    :minute => time.min,
                                     :second => time.sec)
       assert_equal(time.year, datetime.year)
       assert_equal(time.month, datetime.month)
@@ -65,12 +73,15 @@ class TestDateTime < Test::Unit::TestCase
       assert_equal(time.sec, datetime.second)
     end
 
-    test "timezone_local" do
+    test "timezone: local time zone" do
       time = Time.now
       tz = GLib::TimeZone.local
-      datetime = GLib::DateTime.new(:timezone => tz, :year => time.year,
-                                    :month => time.month, :day => time.day,
-                                    :hour => time.hour, :minute => time.min,
+      datetime = GLib::DateTime.new(:timezone => tz,
+                                    :year => time.year,
+                                    :month => time.month,
+                                    :day => time.day,
+                                    :hour => time.hour,
+                                    :minute => time.min,
                                     :second => time.sec)
       assert_equal(time.year, datetime.year)
       assert_equal(time.month, datetime.month)
@@ -80,12 +91,15 @@ class TestDateTime < Test::Unit::TestCase
       assert_equal(time.sec, datetime.second)
     end
 
-    test "timezone_utc" do
+    test "timezone: UTC time zone" do
       time = Time.now.utc
       tz = GLib::TimeZone.utc
-      datetime = GLib::DateTime.new(:timezone => tz, :year => time.year,
-                                    :month => time.month, :day => time.day,
-                                    :hour => time.hour, :minute => time.min,
+      datetime = GLib::DateTime.new(:timezone => tz,
+                                    :year => time.year,
+                                    :month => time.month,
+                                    :day => time.day,
+                                    :hour => time.hour,
+                                    :minute => time.min,
                                     :second => time.sec)
       assert_equal(time.year, datetime.year)
       assert_equal(time.month, datetime.month)

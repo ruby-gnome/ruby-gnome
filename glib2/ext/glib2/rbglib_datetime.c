@@ -22,26 +22,43 @@
 #define RG_TARGET_NAMESPACE cDateTime
 #define _SELF(s) ((GDateTime*)RVAL2BOXED(s, G_TYPE_DATE_TIME))
 
+static gboolean
+is_local_timezone(VALUE rb_timezone)
+{
+    ID id_equal;
+    ID id_local;
+
+    if (NIL_P(rb_timezone)) {
+        return TRUE;
+    }
+
+    CONST_ID(id_equal, "==");
+    CONST_ID(id_local, "local");
+    return RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1, rb_id2sym(id_local)));
+}
+
+static gboolean
+is_utc_timezone(VALUE rb_timezone)
+{
+    ID id_equal;
+    ID id_utc;
+
+    CONST_ID(id_equal, "==");
+    CONST_ID(id_utc, "utc");
+    return RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1, rb_id2sym(id_utc)));
+}
+
 static VALUE
 rg_s_now(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     GDateTime *date = NULL;
     VALUE rb_timezone;
-    ID id_equal;
-    ID id_local;
-    ID id_utc;
 
     rb_scan_args(argc, argv, "01", &rb_timezone);
 
-    CONST_ID(id_equal, "==");
-    CONST_ID(id_local, "local");
-    CONST_ID(id_utc, "utc");
-    if (NIL_P(rb_timezone) ||
-        RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1,
-                              rb_id2sym(id_local)))) {
+    if (is_local_timezone(rb_timezone)) {
         date = g_date_time_new_now_local();
-    } else if (RVAL2CBOOL(rb_funcall(rb_timezone, id_equal, 1,
-                                     rb_id2sym(id_utc)))) {
+    } else if (is_utc_timezone(rb_timezone)) {
         date = g_date_time_new_now_utc();
 /* TODO: Support GLib::TimeZone */
     } else {
@@ -64,71 +81,93 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
      * https://developer.gnome.org/glib/stable/glib-Date-and-Time-Functions.html#GTimeVal
      * */
     VALUE rb_options;
-    VALUE rb_unix_local;
-    VALUE rb_unix_utc;
+    VALUE rb_unix;
     VALUE rb_timezone;
     VALUE rb_year;
     VALUE rb_month;
     VALUE rb_day;
     VALUE rb_hour;
     VALUE rb_minute;
-    VALUE rb_seconds;
-    VALUE rb_offset;
-    gint year = 0;
-    gint month = 0;
-    gint day = 0;
-    gint hour = 0;
-    gint minute = 0;
-    gdouble seconds = 0.0;
-    GTimeZone *timezone = NULL;
+    VALUE rb_second;
     GDateTime *datetime = NULL;
 
     rb_scan_args(argc, argv, "10", &rb_options);
     rbg_scan_options(rb_options,
-                     "unix_local", &rb_unix_local,
-                     "unix_utc", &rb_unix_utc,
+                     "unix", &rb_unix,
                      "timezone", &rb_timezone,
                      "year", &rb_year,
                      "month", &rb_month,
                      "day", &rb_day,
                      "hour", &rb_hour,
                      "minute", &rb_minute,
-                     "second", &rb_seconds,
-                     "offset", &rb_offset,
+                     "second", &rb_second,
                      NULL);
 
     int full_info = !NIL_P(rb_year) && !NIL_P(rb_month) && !NIL_P(rb_hour) &&
-                    !NIL_P(rb_minute) && !NIL_P(rb_seconds);
+                    !NIL_P(rb_minute) && !NIL_P(rb_second);
 
-    if (!NIL_P(rb_unix_local))
-        datetime = g_date_time_new_from_unix_local(rbglib_num_to_int64(rb_unix_local));
-    else if (!NIL_P(rb_unix_utc))
-        datetime = g_date_time_new_from_unix_utc(rbglib_num_to_int64(rb_unix_utc));
-    else if (full_info) {
+    if (!NIL_P(rb_unix)) {
+        gint64 unix_time;
+
+        unix_time = rbglib_num_to_int64(rb_unix);
+        if (is_local_timezone(rb_timezone)) {
+            datetime = g_date_time_new_from_unix_local(unix_time);
+        } else if (is_utc_timezone(rb_timezone)) {
+            datetime = g_date_time_new_from_unix_utc(unix_time);
+        } else {
+            rb_raise(rb_eArgError,
+                     ":timezone must be nil, :local or :utc: %+" PRIsVALUE,
+                     rb_timezone);
+        }
+    } else if (full_info) {
+        gint year = 0;
+        gint month = 0;
+        gint day = 0;
+        gint hour = 0;
+        gint minute = 0;
+        gdouble second = 0.0;
+
         year = NUM2INT(rb_year);
         month = NUM2INT(rb_month);
         day = NUM2INT(rb_day);
         hour = NUM2INT(rb_hour);
         minute = NUM2INT(rb_minute);
-        seconds = NUM2DBL(rb_seconds);
-        if (!NIL_P(rb_timezone)) {
+        second = NUM2DBL(rb_second);
+        if (is_local_timezone(rb_timezone)) {
+            datetime = g_date_time_new_local(year,
+                                             month,
+                                             day,
+                                             hour,
+                                             minute,
+                                             second);
+        } else if (is_utc_timezone(rb_timezone)) {
+            datetime = g_date_time_new_utc(year,
+                                           month,
+                                           day,
+                                           hour,
+                                           minute,
+                                           second);
+        } else {
+            GTimeZone *timezone = NULL;
+
             timezone = RVAL2GTIMEZONE(rb_timezone);
-            datetime = g_date_time_new(timezone, year, month, day, hour,
-                                       minute, seconds);
+            datetime = g_date_time_new(timezone,
+                                       year,
+                                       month,
+                                       day,
+                                       hour,
+                                       minute,
+                                       second);
         }
-        else if (strcmp(RVAL2CSTR(rb_offset), "utc"))
-            datetime = g_date_time_new_utc(year, month, day, hour, minute, seconds);
-
-        else if (strcmp(RVAL2CSTR(rb_offset), "local"))
-            datetime = g_date_time_new_local(year, month, day, hour, minute, seconds);
-
-        else
-            rb_raise(rb_eArgError, "wrong options: offset value (\":utc\" or \":local\"))");
+    } else {
+        rb_raise(rb_eArgError,
+                 ":unix or (:year, :month, :day, :hour, :minute and :second) "
+                 "must be specified: %+" PRIsVALUE,
+                 rb_options);
     }
-    else
-        rb_raise(rb_eArgError, "wrong options usage");
 
     G_INITIALIZE(self, datetime);
+
     return Qnil;
 }
 
