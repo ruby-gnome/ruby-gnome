@@ -32,6 +32,7 @@ module Gtk
           raise ArgumentError, message
         end
       else
+        area = nil
         title, renderer, attributes = args
       end
       attributes ||= {}
