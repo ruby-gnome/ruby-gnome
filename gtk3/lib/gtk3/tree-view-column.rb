@@ -44,9 +44,11 @@ module Gtk
       end
 
       set_title(title) if title
-      pack_start(renderer, true) if renderer
-      attributes.each_entry do |key, value|
-        add_attribute(renderer, key, value)
+      if renderer
+        pack_start(renderer, true)
+        attributes.each_entry do |key, value|
+          add_attribute(renderer, key, value)
+        end
       end
     end
 
