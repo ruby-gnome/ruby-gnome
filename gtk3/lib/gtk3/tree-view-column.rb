@@ -24,8 +24,13 @@ module Gtk
         renderer = options.delete(:renderer)
         title = options.delete(:title)
         attributes = options.delete(:attributes)
-        raise ArgumentError, 'unknown option(s): ' +
-          options.keys.map{|key| key.to_s}.join(' ') unless options.empty?
+        unless options.empty?
+          names = options.keys.inspect
+          available_names = [:area, :renderer, :title, :attributes].inspect
+          message =
+            "unknown option(s): #{names}: available options: #{available_names}"
+          raise ArgumentError, message
+        end
       else
         title, renderer, attributes = args
       end

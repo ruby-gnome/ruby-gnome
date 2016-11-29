@@ -63,7 +63,9 @@ class TestGtkTreeViewColumn < Test::Unit::TestCase
 
       test "unknown" do
         options = {:unknown => true}
-        assert_raise(ArgumentError) do
+        message = "unknown option(s): [:unknown]: "
+        message << "available options: [:area, :renderer, :title, :attributes]"
+        assert_raise(ArgumentError.new(message)) do
           Gtk::TreeViewColumn.new(options)
         end
       end
