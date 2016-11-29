@@ -17,7 +17,7 @@
 module Gtk
   class TreeViewColumn
     alias_method :initialize_raw, :initialize
-    
+
     def initialize(*args)
       if args.size == 1 and args[0].is_a?(Hash)
         options = args[0]
@@ -31,20 +31,20 @@ module Gtk
         title, renderer, attributes = args
       end
       attributes ||= {}
-      
+
       if area
         initialize_new_with_area(area)
       else
         initialize_raw
       end
-      
+
       set_title(title) if title
       pack_start(renderer, true) if renderer
       attributes.each_entry do |key, value|
         add_attribute(renderer, key, value)
       end
     end
-    
+
     alias_method :add_attribute_raw, :add_attribute
     def add_attribute(renderer, key, value)
       key = key.to_s if key.is_a?(Symbol)

@@ -61,7 +61,7 @@ class TestGtkTreeViewColumn < Test::Unit::TestCase
         assert_equal(1, column.cells.length)
         assert_equal(Gtk::CellRendererText, column.cells.first.class)
       end
-      
+
       test "unknown" do
         options = {:unknown => true}
         assert_raise(ArgumentError) do
