@@ -19,7 +19,7 @@ module Gtk
     alias_method :initialize_raw, :initialize
     def initialize(*args)
       if args.size == 1 and args[0].is_a?(Hash)
-        options = args[0]
+        options = args[0].dup
         area = options.delete(:area)
         renderer = options.delete(:renderer)
         title = options.delete(:title)
