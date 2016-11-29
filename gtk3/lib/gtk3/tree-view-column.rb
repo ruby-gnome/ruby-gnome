@@ -17,7 +17,6 @@
 module Gtk
   class TreeViewColumn
     alias_method :initialize_raw, :initialize
-
     def initialize(*args)
       if args.size == 1 and args[0].is_a?(Hash)
         options = args[0]

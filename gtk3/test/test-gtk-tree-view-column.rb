@@ -35,7 +35,6 @@ class TestGtkTreeViewColumn < Test::Unit::TestCase
       assert_equal(Gtk::CellRendererText, column.cells.first.class)
     end
 
-
     sub_test_case("option hash") do
       test "box" do
         box = Gtk::CellAreaBox.new()
@@ -69,7 +68,6 @@ class TestGtkTreeViewColumn < Test::Unit::TestCase
         end
       end
     end
-
 
     sub_test_case("attributes") do
       test "string key" do
