@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,19 +17,38 @@
 module Gtk
   class TreeViewColumn
     alias_method :initialize_raw, :initialize
-    def initialize(title=nil, cell=nil, attributes={})
-      initialize_raw
+    
+    def initialize(*args)
+      if args.size == 1 and args[0].is_a?(Hash)
+        options = args[0]
+        area = options.delete(:area)
+        renderer = options.delete(:renderer)
+        title = options.delete(:title)
+        attributes = options.delete(:attributes)
+        raise ArgumentError, 'unknown option(s): ' +
+          options.keys.map{|key| key.to_s}.join(' ') unless options.empty?
+      else
+        title, renderer, attributes = args
+      end
+      attributes ||= {}
+      
+      if area
+        initialize_new_with_area(area)
+      else
+        initialize_raw
+      end
+      
       set_title(title) if title
-      pack_start(cell, true) if cell
+      pack_start(renderer, true) if renderer
       attributes.each_entry do |key, value|
-        add_attribute(cell, key, value)
+        add_attribute(renderer, key, value)
       end
     end
-
+    
     alias_method :add_attribute_raw, :add_attribute
-    def add_attribute(cell, key, value)
+    def add_attribute(renderer, key, value)
       key = key.to_s if key.is_a?(Symbol)
-      add_attribute_raw(cell, key, value)
+      add_attribute_raw(renderer, key, value)
     end
   end
 end
