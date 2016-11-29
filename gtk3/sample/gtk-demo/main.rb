@@ -73,7 +73,7 @@ def generate_index
   index = []
 
   scripts.each do |script|
-    next if ["common.rb", "main.rb"].include?(File.basename(script))
+    next if "main.rb" == File.basename(script)
     title, depend = script_info(script)
 
     next if depend && !Gtk.const_defined?(depend)

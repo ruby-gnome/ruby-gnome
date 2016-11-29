@@ -1,18 +1,12 @@
-# C version (3.19.1) versus Ruby version
-
 # Ruby version : is there already a ruby version of the demo
-# Updated 3.19 : if there is a ruby version is it udapted to 3.19
-# Changed? 3.20: does this demo has changed with version 3.20
+# Updated 3.20 : if there is a ruby version is it udapted to 3.19
 #
 C version             Ruby version    Updated 3.20
-application.c           no              no
 assistant.c             ok              ok
 builder.c               ok              ok
 button_box.c            ok              ok
-changedisplay.c         ok              no
 clipboard.c             ok              ok
 colorsel.c              ok              ok
-combobox.c              no              no
 css_accordion.c         ok              ok
 css_basics.c            ok              ok
 css_multiplebgs.c       ok              ok
@@ -24,19 +18,14 @@ drawingarea.c           ok              ok
 editable_cells.c        ok              ok
 entry_buffer.c          ok              ok
 entry_completion.c      ok              ok
-event_axes.c            no              no
 expander.c              ok              ok
 filtermodel.c           ok              ok
-flowbox.c               no              no
 font_features.c         ok              ok
-foreigndrawing          no              no
-gestures.c              no              no
 glarea.c                ok              ok
 headerbar.c             ok              ok
 hypertext.c             ok              ok
 iconview.c              ok              ok
 iconview_edit.c         ok              ok
-images.c                ok              no
 infobar.c               ok              ok
 links.c                 ok              ok
 listbox.c               ok              ok
@@ -44,8 +33,6 @@ list_store.c            ok              ok
 markup.c                ok              ok
 menus.c                 ok              ok
 modelbutton.c           ok              ok
-offscreen_window.c      no              no
-offscreen_window2.c     no              no
 overlay.c               ok              ok
 overlay2.c              ok              ok
 panes.c                 ok              ok
@@ -58,7 +45,6 @@ rotated_text.c          ok              ok
 scale.c                 ok              ok
 search_entry.c          ok              ok
 search_entry2.c         ok              ok
-shortcuts.c             no              no
 sidebar.c               ok              ok
 sizegroup.c             ok              ok
 spinbutton.c            ok              ok
@@ -66,10 +52,22 @@ spinner.c               ok              ok
 stack.c                 ok              ok
 textmask.c              ok              ok
 textscroll.c            ok              ok
-textview.c              ok              no
 theming_style_classes.c ok              ok
-toolpalette.c           no              no
 transparent.c           ok              ok
+
+application.c           no              no
+changedisplay.c         ok              no
+combobox.c              no              no
+event_axes.c            no              no
+flowbox.c               no              no
+foreigndrawing          no              no
+gestures.c              no              no
+images.c                ok              no
+offscreen_window.c      no              no
+offscreen_window2.c     no              no
+shortcuts.c             no              no
+textview.c              ok              no
+toolpalette.c           no              no
 tree_store.c            ok              no
 
 # Ruby version
