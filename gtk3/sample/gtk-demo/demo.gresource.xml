@@ -20,6 +20,13 @@
     <file>css_basics.css</file>
     <file>reset.css</file>
   </gresource>
+  <gresource prefix="/css_blendmodes">
+    <file>css_blendmodes.css</file>
+    <file>blendmodes.ui</file>
+    <file>blends.png</file>
+    <file>ducky.png</file>
+    <file>cmy.jpg</file>
+  </gresource>
   <gresource prefix="/css_multiplebgs">
     <file>css_multiplebgs.css</file>
     <file>brick.png</file>
@@ -54,6 +61,7 @@
     <file>all_scroll_cursor.png</file>
     <file>cell_cursor.png</file>
     <file>col_resize_cursor.png</file>
+    <file>context_menu_cursor.png</file>
     <file>copy_cursor.png</file>
     <file>crosshair_cursor.png</file>
     <file>default_cursor.png</file>
@@ -85,6 +93,9 @@
     <file>w_resize_cursor.png</file>
     <file>zoom_in_cursor.png</file>
     <file>zoom_out_cursor.png</file>
+  </gresource>
+  <gresource prefix="/fishbowl">
+    <file>fishbowl.ui</file>
   </gresource>
   <gresource prefix="/iconview">
     <file preprocess="to-pixdata">gnome-fs-directory.png</file>
@@ -199,8 +210,10 @@
     <file>popover.ui</file>
   </gresource>
   <gresource prefix="/glarea">
-    <file>glarea-fragment.glsl</file>
-    <file>glarea-vertex.glsl</file>
+    <file>glarea-gl.fs.glsl</file>
+    <file>glarea-gl.vs.glsl</file>
+    <file>glarea-gles.fs.glsl</file>
+    <file>glarea-gles.vs.glsl</file>
   </gresource>
   <gresource prefix="/font_features">
     <file>font-features.ui</file>
