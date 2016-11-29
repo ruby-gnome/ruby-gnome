@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.6 -->
+  <object class="GtkWindow" id="window">
+    <property name="title" translatable="yes">Fishbowl</property>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="">
+        <property name="visible">True</property>
+        <property name="show-close-button">True</property>
+        <child>
+          <object class="GtkLabel" id="info_label">
+            <property name="visible">True</property>
+            <property name="label">0 icons - 0 fps</property>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="changes_allow">
+            <property name="active">False</property>
+            <property name="visible" bind-source="changes_allow" bind-property="active" bind-flags="invert-boolean">True</property>
+            <property name="icon-name">changes-allow</property>
+            <property name="relief">none</property>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="changes_prevent">
+            <property name="active" bind-source="changes_allow" bind-property="active" bind-flags="bidirectional|invert-boolean">True</property>
+            <property name="visible" bind-source="changes_prevent" bind-property="active" bind-flags="invert-boolean">False</property>
+            <property name="icon-name">changes-prevent</property>
+            <property name="relief">none</property>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkFixed" id="bowl">
+        <property name="visible">True</property>
+      </object>
+    </child>
+  </object>
+</interface>
