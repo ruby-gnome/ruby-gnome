@@ -16,10 +16,9 @@ class ColorselDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     @window.title = "Color Chooser"
-    @window.border_width = 8
 
     vbox = Gtk::Box.new(:vertical, 8)
-    vbox.border_width = 8
+    vbox.margin = 12
     @window.add(vbox)
     frame = initialize_drawing_area_frame
     vbox.pack_start(frame, :expand => true, :fill => true, :padding => 0)
