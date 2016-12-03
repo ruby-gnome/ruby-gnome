@@ -57,7 +57,6 @@ class AssistantDemo
 
   def create_page1
     box = Gtk::Box.new(:horizontal, 12)
-    box.border_width = 12
 
     label = Gtk::Label.new("You must fill out this entry to continue")
     box.pack_start(label, :expand => true, :fill => true, :padding => 0)
@@ -86,7 +85,6 @@ class AssistantDemo
 
   def create_page2
     box = Gtk::Box.new(:horizontal, 12)
-    box.border_width = 12
 
     checkbutton = Gtk::CheckButton.new(<<-LABEL)
 This is optional data, you may continue
