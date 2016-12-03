@@ -19,7 +19,7 @@ class ClipboardDemo
     @window.title = "Clipboard"
 
     @vbox = Gtk::Box.new(:vertical, 0)
-    @vbox.border_width = 0
+    @vbox.margin = 8
     @window.add(@vbox)
 
     text = "\"Copy\" will copy the text\nin the entry to the clipboard"
@@ -39,7 +39,6 @@ class ClipboardDemo
     @vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
     @hbox = Gtk::Box.new(:horizontal, 4)
-    @hbox.border_width = 8
     @vbox.pack_start(@hbox, :expand => false, :fill => false, :padding => 0)
 
     # Create the first image
@@ -82,7 +81,7 @@ class ClipboardDemo
     @vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
     hbox = Gtk::Box.new(:horizontal, 4)
-    hbox.border_width = 8
+    hbox.margin = 8
     @vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
 
     # Create the first entry
