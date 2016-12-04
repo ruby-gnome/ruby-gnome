@@ -11,16 +11,15 @@ class ButtonBoxDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     @window.title = "Button Boxes"
-    @window.border_width = 10
 
     main_vbox = Gtk::Box.new(:vertical, 0)
     @window.add(main_vbox)
     frame_horz = generate_horizontal_frame
     main_vbox.pack_start(frame_horz,
-                         :expand => true, :fill => true, :padding => 10)
+                         :expand => true, :fill => true, :padding => 0)
     frame_vert = generate_vertical_frame
     main_vbox.pack_start(frame_vert,
-                         :expand => true, :fill => true, :padding => 10)
+                         :expand => true, :fill => true, :padding => 0)
   end
 
   def run
@@ -36,36 +35,35 @@ class ButtonBoxDemo
 
   def generate_horizontal_frame
     frame_horz = Gtk::Frame.new("Horizontal Button Boxes")
-
-    vbox = Gtk::Box.new(:vertical, 0)
-    vbox.border_width = 10
+    frame_horz.margin_top = 10
+    frame_horz.margin_bottom = 10
+    vbox = Gtk::Box.new(:vertical, 10)
     frame_horz.add(vbox)
 
     bbox = create_bbox(true, "Spread", 40, :spread)
     vbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
 
     bbox = create_bbox(true, "Edge", 40, :edge)
-    vbox.pack_start(bbox, :expand => true, :fill => true, :padding => 5)
+    vbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
 
     bbox = create_bbox(true, "Start", 40, :start)
-    vbox.pack_start(bbox, :expand => true, :fill => true, :padding => 5)
+    vbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
 
     bbox = create_bbox(true, "End", 40, :end)
-    vbox.pack_start(bbox, :expand => true, :fill => true, :padding => 5)
+    vbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
 
     bbox = create_bbox(true, "Center", 40, :center)
-    vbox.pack_start(bbox, :expand => true, :fill => true, :padding => 5)
+    vbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
 
     bbox = create_bbox(true, "Expand", 0, :expand)
-    vbox.pack_start(bbox, :expand => true, :fill => true, :padding => 5)
+    vbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
     frame_horz
   end
 
   def generate_vertical_frame
     frame_vert = Gtk::Frame.new("Vertical Button Boxes")
 
-    hbox = Gtk::Box.new(:horizontal, 0)
-    hbox.border_width = 10
+    hbox = Gtk::Box.new(:horizontal, 10)
 
     frame_vert.add(hbox)
 
@@ -73,19 +71,19 @@ class ButtonBoxDemo
     hbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
 
     bbox = create_bbox(false, "Edge", 10, :edge)
-    hbox.pack_start(bbox, :expand => true, :fill => true, :padding => 5)
+    hbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
 
     bbox = create_bbox(false, "Start", 10, :start)
-    hbox.pack_start(bbox, :expand => true, :fill => true, :padding => 5)
+    hbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
 
     bbox = create_bbox(false, "End", 10, :end)
-    hbox.pack_start(bbox, :expand => true, :fill => true, :padding => 5)
+    hbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
 
     bbox = create_bbox(false, "Center", 10, :center)
-    hbox.pack_start(bbox, :expand => true, :fill => true, :padding => 5)
+    hbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
 
     bbox = create_bbox(false, "Expand", 0, :expand)
-    hbox.pack_start(bbox, :expand => true, :fill => true, :padding => 5)
+    hbox.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
     frame_vert
   end
 
@@ -96,7 +94,6 @@ class ButtonBoxDemo
     orientation = horizontal ? :horizontal : :vertical
     bbox = Gtk::ButtonBox.new(orientation)
 
-    bbox.border_width = 5
     frame.add(bbox)
     bbox.layout = layout
     bbox.spacing = spacing
