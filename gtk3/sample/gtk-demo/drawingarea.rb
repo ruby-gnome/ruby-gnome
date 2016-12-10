@@ -21,7 +21,6 @@ class DrawingareaDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     @window.title = "Drawing Area"
-    @window.border_width = 8
 
     initialize_vbox
     create_the_checkerboard_area
@@ -41,7 +40,7 @@ class DrawingareaDemo
 
   def initialize_vbox
     @vbox = Gtk::Box.new(:vertical, 8)
-    @vbox.border_width = 8
+    @vbox.margin = 16
     @window.add(@vbox)
   end
 
