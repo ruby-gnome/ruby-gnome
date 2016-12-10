@@ -11,13 +11,13 @@ class DialogDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     @window.title = "Dialogs and Message Boxes"
-    @window.border_width = 8
 
     frame = Gtk::Frame.new("Dialogs")
+    frame.margin = 8
     @window.add(frame)
 
     vbox = Gtk::Box.new(:vertical, 8)
-    vbox.border_width = 8
+    vbox.margin = 8
     frame.add(vbox)
 
     # Standard message dialog
@@ -111,7 +111,6 @@ MESSAGE
 
   def initialize_interactive_dialog_interface
     hbox = Gtk::Box.new(:horizontal, 8)
-    hbox.border_width = 8
     image = Gtk::Image.new(:icon_name => "dialog-question", :size => :dialog)
     hbox.pack_start(image)
     table, @dialog_entry1, @dialog_entry2 = initialize_grid_with_entries

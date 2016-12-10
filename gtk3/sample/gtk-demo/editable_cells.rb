@@ -22,9 +22,9 @@ class EditableCellsDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     @window.title = "Editable Cells"
-    @window.border_width = 5
 
     vbox = Gtk::Box.new(:vertical, 5)
+    vbox.margin = 5
     @window.add(vbox)
     label = Gtk::Label.new("Shopping list (you can edit the cells)")
     vbox.pack_start(label, :expand => false, :fill => true, :padding => 0)
