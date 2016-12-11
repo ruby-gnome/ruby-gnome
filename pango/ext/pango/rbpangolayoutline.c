@@ -58,11 +58,15 @@ rg_index_to_x(VALUE self, VALUE index, VALUE trailing)
 static VALUE
 rg_x_to_index(VALUE self, VALUE x_pos)
 {
-    int index, trailing;
+    int index = 0;
+    int trailing = 0;
 
     gboolean ret = pango_layout_line_x_to_index(_SELF(self), NUM2INT(x_pos),
                                                 &index, &trailing);
-    return rb_ary_new3(CBOOL2RVAL(ret), INT2NUM(index), INT2NUM(trailing));
+    return rb_ary_new_from_args(3,
+                                CBOOL2RVAL(ret),
+                                INT2NUM(index),
+                                INT2NUM(trailing));
 }
 
 static VALUE
