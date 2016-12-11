@@ -14,7 +14,7 @@ require 'pp'
 puts
 puts "Start----------"
 puts
-str = File.read("sample.txt")
+str = File.read(File.join(__dir__, "sample.txt"))
 context = Gdk::Pango.context
 context.base_dir = Pango::Context::DIRECTION_LTR
 context.language = Pango::Language.new("ja_JP")
