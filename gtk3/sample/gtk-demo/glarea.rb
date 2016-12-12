@@ -24,9 +24,9 @@ class GlareaDemo
     @window.screen = main_window.screen
     @window.title = "OpenGL Area"
     @window.set_default_size(400, 600)
-    @window.border_width = 12
 
     box = Gtk::Box.new(:vertical, false)
+    box.margin = 12
     box.spacing = 6
     @window.add(box)
 
@@ -42,7 +42,7 @@ class GlareaDemo
       widget.make_current
       unless widget.error
         init_buffers
-        @program, @mvp_location = init_shaders
+        @program, @mvp_location = init_shaders(widget)
       end
     end
 
@@ -110,9 +110,18 @@ class GlareaDemo
   end
 
   # Initialize shaders and link them into a programm
-  def init_shaders
-    src_vertex = Gio::Resources.lookup_data("/glarea/glarea-vertex.glsl", 0)
-    src_fragment = Gio::Resources.lookup_data("/glarea/glarea-fragment.glsl", 0)
+  def init_shaders(widget)
+    context = widget.context
+
+    if context.use_es?
+      vertex_path = "/glarea/glarea-gles.vs.glsl"
+      fragment_path = "/glarea/glarea-gles.fs.glsl"
+    else
+      vertex_path = "/glarea/glarea-gl.vs.glsl"
+      fragment_path = "/glarea/glarea-gl.fs.glsl"
+    end
+    src_vertex = Gio::Resources.lookup_data(vertex_path, 0)
+    src_fragment = Gio::Resources.lookup_data(fragment_path, 0)
     vertex = create_shader(GL_VERTEX_SHADER, src_vertex)
     return [0, nil] if vertex.zero?
     fragment = create_shader(GL_FRAGMENT_SHADER, src_fragment)
@@ -160,7 +169,7 @@ class GlareaDemo
       info_log = " " * (len + 1)
       glGetShaderInfoLog(shader, len, nil, info_log)
       type_name = type == GL_VERTEX_SHADER ? "vertex" : "fragment"
-      STDERR.puts "Compile failure in #{type_name}:\n#{info_log}\n"
+      STDERR.puts "Compile failure in #{type_name}:\n#{info_log}"
       return 0
     end
     shader

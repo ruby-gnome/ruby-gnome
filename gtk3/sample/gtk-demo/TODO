@@ -15,12 +15,11 @@ cursors.c               ok              ok
 dialog.c                ok              ok
 drawingarea.c           ok              ok
 editable_cells.c        ok              ok
-entry_buffer.c          ok              no
-entry_completion.c      ok              no
-expander.c              ok              no
-filtermodel.c           ok              no
-font_features.c         ok              no
-glarea.c                ok              no
+entry_buffer.c          ok              ok
+entry_completion.c      ok              ok
+expander.c              ok              ok
+filtermodel.c           ok              ok
+glarea.c                ok              ok
 headerbar.c             ok              no
 hypertext.c             ok              no
 iconview.c              ok              no
@@ -74,3 +73,4 @@ Check all the ruby demos that doesn't correspond to a C version.
 
 # Demo that are not to be done
 pagesetup.c
+font_features.c  -> https://github.com/ruby-gnome2/ruby-gnome2/issues/756

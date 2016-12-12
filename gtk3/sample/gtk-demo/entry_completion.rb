@@ -15,8 +15,8 @@ class EntryCompletionDemo
     @window.resizable = true
 
     vbox = Gtk::Box.new(:vertical, 5)
+    vbox.margin = 5
     @window.add(vbox)
-    vbox.border_width = 5
 
     label = Gtk::Label.new
     markup = "Completion demo, try writing <b>total</b> or <b>gnome</b> for example."
