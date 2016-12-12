@@ -196,6 +196,7 @@ def select_treeview_item(treeview, filename)
       break
     end
   end
+  treeview.expand_to_path(to_select)
   treeview.set_cursor(to_select, treeview.columns[FILENAME_COLUMN])
 end
 
