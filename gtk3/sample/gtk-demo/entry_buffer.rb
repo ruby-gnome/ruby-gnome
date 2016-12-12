@@ -16,8 +16,8 @@ class EntryBufferDemo
     @window.resizable = false
 
     vbox = Gtk::Box.new(:vertical, 5)
+    vbox.margin = 5
     @window.add(vbox)
-    vbox.set_border_width(5)
 
     label = Gtk::Label.new
     markup = "Entries share a buffer. Typing in one is reflected in the other."
