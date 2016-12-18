@@ -28,7 +28,6 @@ class MenusDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     @window.title = "Menus"
-    @window.border_width = 0
 
     accel_group = Gtk::AccelGroup.new
     @window.add_accel_group(accel_group)
@@ -48,7 +47,6 @@ class MenusDemo
     end
 
     box2 = Gtk::Box.new(:vertical, 10)
-    box2.border_width = 10
     box1.pack_start(box2, :expand => false, :fill => true, :padding => 0)
 
     button = generate_flip_button
