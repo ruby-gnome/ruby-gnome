@@ -64,6 +64,8 @@ class MarkupDemo
         buffer = @view2.buffer
         markup = buffer.get_text(buffer.start_iter, buffer.end_iter, false)
         buffer = @view.buffer
+        start_iter, start_end = buffer.bounds
+        buffer.delete(start_iter, start_end)
         buffer.insert_markup(buffer.start_iter, markup, -1)
         @stack.visible_child_name = "formatted"
       end
