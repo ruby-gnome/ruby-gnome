@@ -12,7 +12,6 @@ class PickersDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     @window.title = "Pickers"
-    @window.border_width = 10
 
     initialize_grid
 
@@ -28,6 +27,7 @@ class PickersDemo
 
     label = generate_label("File:")
     picker = Gtk::FileChooserButton.new("Pick a file", :open)
+    picker.local_only = true
     @table.attach(label, 0, 2, 1, 1)
     @table.attach(picker, 1, 2, 1, 1)
 
@@ -38,7 +38,7 @@ class PickersDemo
 
     label = generate_label("Mail:")
     picker = Gtk::AppChooserButton.new("x-scheme-handler/mailto")
-    picker.set_show_dialog_item(true)
+    picker.show_dialog_item = true
     @table.attach(label, 0, 4, 1, 1)
     @table.attach(picker, 1, 4, 1, 1)
   end
@@ -58,14 +58,15 @@ class PickersDemo
     @table = Gtk::Grid.new
     @table.row_spacing = 3
     @table.column_spacing = 10
+    @table.margin = 20
     @window.add(@table)
   end
 
   def generate_label(label)
     label = Gtk::Label.new(label)
-    label.set_halign(:start)
-    label.set_valign(:center)
-    label.set_hexpand(true)
+    label.halign = :start
+    label.valign = :center
+    label.hexpand = :true
     label
   end
 end
