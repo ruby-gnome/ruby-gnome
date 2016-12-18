@@ -74,7 +74,6 @@ class HypertextDemo
     @window.screen = main_window.screen
     @window.title = "Hypertext"
     @window.set_default_size(450, 450)
-    @window.border_width = 0
   end
 
   def initialize_cursors(main_window)
