@@ -19,14 +19,13 @@ class PanesDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     @window.title = "Paned Widgets"
-    @window.border_width = 0
 
     vbox = Gtk::Box.new(:vertical, 0)
     @window.add(vbox)
 
     vpaned = Gtk::Paned.new(:vertical)
     vbox.pack_start(vpaned, :expand => true, :fill => true, :padding => 0)
-    vpaned.border_width = 5
+    vpaned.margin = 5
 
     @hpaned = Gtk::Paned.new(:horizontal)
     vpaned.add1(@hpaned)
@@ -76,7 +75,7 @@ class PanesDemo
     child1 = @hpaned.child1
     child2 = @hpaned.child2
     frame = Gtk::Frame.new(frame_label)
-    frame.border_width = 4
+    frame.margin = 4
 
     @table = Gtk::Grid.new
     frame.add(@table)
