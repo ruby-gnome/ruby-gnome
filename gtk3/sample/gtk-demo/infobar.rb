@@ -13,7 +13,7 @@ class InfobarDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     @window.set_title("Info Bars")
-    @window.set_border_width(8)
+    @window.margin = 8
 
     @vbox = Gtk::Box.new(:vertical, 0)
     @window.add(@vbox)
@@ -27,10 +27,12 @@ class InfobarDemo
     generate_simple_infobar("other")
 
     frame = Gtk::Frame.new("Info bars")
-    @vbox.pack_start(frame, :expand => false, :fill => false, :padding => 8)
+    @vbox.pack_start(frame, :expand => false, :fill => false, :padding => 0)
+    frame.margin_top = 8
+    frame.margin_bottom = 8
 
     vbox2 = Gtk::Box.new(:vertical, 8)
-    vbox2.border_width = 8
+    vbox2.margin = 8
     frame.add(vbox2)
 
     label = Gtk::Label.new("An example of different info bars")
