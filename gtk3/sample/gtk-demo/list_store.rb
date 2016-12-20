@@ -37,7 +37,6 @@ class ListStoreDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     @window.title = "List Store"
-    @window.border_width = 8
     @timeout = 0
     @window.signal_connect "delete-event" do
       @model = nil
@@ -46,6 +45,7 @@ class ListStoreDemo
       false
     end
     vbox = Gtk::Box.new(:vertical, 8)
+    vbox.margin = 8
     @window.add(vbox)
 
     label = Gtk::Label.new(<<-EOF)

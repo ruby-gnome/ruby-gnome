@@ -13,7 +13,6 @@ class LinksDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     @window.title = "Links"
-    @window.border_width = 12
 
     label = Gtk::Label.new(<<-MESSAGE)
 Some <a href="http://en.wikipedia.org/wiki/Text"
