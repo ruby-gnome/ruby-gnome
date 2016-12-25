@@ -16,6 +16,22 @@
 
 module Gio
   class Settings
+    alias_method :initialize_raw, :initialize
+
+    def initialize(*args)
+      if args.size == 1
+        initialize_raw(args[0])
+      elsif args.size == 2
+        schema_id = args[0]
+        options = args[1]
+        # initialize_new_with_backend
+        # initialize_new_with_path
+        # initialize_new_with_backend_and_path
+      else
+        initialize_new_full(*args)
+      end
+    end
+
     alias_method :set_value_raw, :set_value
     def set_value(key, value)
       schema_key = settings_schema.get_key(key)
