@@ -24,11 +24,19 @@ module Gio
       elsif args.size == 2
         schema_id = args[0]
         options = args[1]
-        # initialize_new_with_backend
-        # initialize_new_with_path
-        # initialize_new_with_backend_and_path
-      else
+        path = options[:path] || nil
+        backend = options[:backend] || nil
+        if path && backend
+          initialize_new_with_backend_and_path(schema_id, backend, path)
+        elsif path
+          initialize_new_with_path(schema_id, path)
+        elsif backend
+          initialize_new_with_backend(schema_id, backend)
+        end
+      elsif args.size == 3
         initialize_new_full(*args)
+      else
+        $stderr.puts "Arguments error for Gio::Settings#new"
       end
     end
 
