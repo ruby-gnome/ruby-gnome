@@ -20,6 +20,7 @@ class TestSettings < Test::Unit::TestCase
 
   sub_test_case "accessor" do
     setup do
+      compile_gschema("new")
       @settings = Gio::Settings.new("jp.ruby-gnome2.test.value")
     end
 
@@ -40,5 +41,17 @@ class TestSettings < Test::Unit::TestCase
       assert_equal(false,
                    @settings["boolean"])
     end
+  end
+
+  private
+
+  def compile_gschema(test_name)
+    base = File.expand_path(File.dirname(__FILE__))
+    settings_schema_dir = File.join(base, "fixture", "schema", "settings")
+    tests_schema_dir = File.join(settings_schema_dir, test_name)
+    Dir.chdir(tests_schema_dir) do
+      system("rake") or exit(false)
+    end
+    ENV["GSETTINGS_SCHEMA_DIR"] = tests_schema_dir
   end
 end

@@ -43,11 +43,11 @@ Dir.chdir(File.join(gio2_base, "test", "fixture", "resource")) do
 end
 
 schema_dir = File.join(gio2_base, "test", "fixture", "schema")
-settings_schema_dir = File.join(schema_dir, "settings")
-Dir.chdir(settings_schema_dir) do
-  system("rake") or exit(false)
-end
-ENV["GSETTINGS_SCHEMA_DIR"] = settings_schema_dir
+#settings_schema_dir = File.join(schema_dir, "settings")
+#Dir.chdir(settings_schema_dir) do
+#  system("rake") or exit(false)
+#end
+#ENV["GSETTINGS_SCHEMA_DIR"] = settings_schema_dir
 
 Dir.chdir(File.join(schema_dir, "source")) do
   system("rake") or exit(false)
