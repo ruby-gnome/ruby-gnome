@@ -58,6 +58,20 @@ class TestSettings < Test::Unit::TestCase
     assert_equal("default-string", settings["string"])
   end
 
+  def test_new_with_backend
+    compile_gschema("with_backend")
+    keyfile = "#{ENV["GSETTINGS_SCHEMA_DIR"]}/keyfile.ini"
+    backend = Gio::keyfile_settings_backend_new(keyfile, "/", "keyfile_settings")
+    settings = Gio::Settings.new("jp.ruby-gnome2.test.value", :backend => backend)
+    settings.reset("string")
+    assert_equal("default-string", settings["string"])
+    settings["string"] = "new-string"
+    assert_equal("new-string", settings["string"])
+    keyfile_content_ref = "[jp/ruby-gnome2/test/value]\nstring='new-string'\n"
+    keyfile_content = File.read(keyfile)
+    assert_equal(keyfile_content_ref, keyfile_content)
+  end
+
   private
 
   def compile_gschema(test_name)
