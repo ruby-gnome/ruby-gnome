@@ -43,6 +43,21 @@ class TestSettings < Test::Unit::TestCase
     end
   end
 
+  def test_new
+    compile_gschema("new")
+    settings = Gio::Settings.new("jp.ruby-gnome2.test.value")
+    settings.reset("string")
+    assert_equal("default-string", settings["string"])
+  end
+
+  def test_new_with_path
+    compile_gschema("with_path")
+    settings = Gio::Settings.new("jp.ruby-gnome2.test.value",
+                                 :path => "/jp/ruby-gnome2/test/value/")
+    settings.reset("string")
+    assert_equal("default-string", settings["string"])
+  end
+
   private
 
   def compile_gschema(test_name)
