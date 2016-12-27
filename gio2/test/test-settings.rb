@@ -42,78 +42,80 @@ class TestSettings < Test::Unit::TestCase
     end
   end
 
-  def test_new
-    settings = Gio::Settings.new("jp.ruby-gnome2.test.settings")
-    settings.reset("string")
-    assert_equal("default-string", settings["string"])
-  end
+  sub_test_case ".new" do
+    test "minimum" do
+      settings = Gio::Settings.new("jp.ruby-gnome2.test.settings")
+      settings.reset("string")
+      assert_equal("default-string", settings["string"])
+    end
 
-  def test_new_with_path
-    settings = Gio::Settings.new("jp.ruby-gnome2.test.settings",
-                                 :path => "/jp/ruby-gnome2/test/settings/")
-    settings.reset("string")
-    assert_equal("default-string", settings["string"])
-  end
+    test ":path" do
+      settings = Gio::Settings.new("jp.ruby-gnome2.test.settings",
+                                   :path => "/jp/ruby-gnome2/test/settings/")
+      settings.reset("string")
+      assert_equal("default-string", settings["string"])
+    end
 
-  def test_new_with_backend
-    keyfile = Tempfile.new(["settings", ".ini"])
-    backend = Gio::keyfile_settings_backend_new(keyfile.path, "/", "keyfile_settings")
-    settings = Gio::Settings.new("jp.ruby-gnome2.test.settings",
-                                 :backend => backend)
+    test ":backend" do
+      keyfile = Tempfile.new(["settings", ".ini"])
+      backend = Gio::keyfile_settings_backend_new(keyfile.path, "/", "keyfile_settings")
+      settings = Gio::Settings.new("jp.ruby-gnome2.test.settings",
+                                   :backend => backend)
 
-    settings.reset("string")
-    assert_equal("default-string", settings["string"])
-    settings["string"] = "new-string"
-    assert_equal("new-string", settings["string"])
+      settings.reset("string")
+      assert_equal("default-string", settings["string"])
+      settings["string"] = "new-string"
+      assert_equal("new-string", settings["string"])
 
-    keyfile_content_ref = <<-KEYFILE
+      keyfile_content_ref = <<-KEYFILE
 [jp/ruby-gnome2/test/settings]
 string='new-string'
-    KEYFILE
-    keyfile_content = File.read(keyfile.path)
-    assert_equal(keyfile_content_ref, keyfile_content)
-    FileUtils.rm_f(keyfile)
-  end
+      KEYFILE
+      keyfile_content = File.read(keyfile.path)
+      assert_equal(keyfile_content_ref, keyfile_content)
+      FileUtils.rm_f(keyfile)
+    end
 
-  def test_new_with_backend_and_path
-    keyfile = Tempfile.new(["settings", ".ini"])
-    backend = Gio::keyfile_settings_backend_new(keyfile.path, "/", "keyfile_settings")
-    settings = Gio::Settings.new("jp.ruby-gnome2.test.settings",
-                                 :backend => backend,
-                                 :path => "/jp/ruby-gnome2/test/settings/")
+    test ":backend and :path" do
+      keyfile = Tempfile.new(["settings", ".ini"])
+      backend = Gio::keyfile_settings_backend_new(keyfile.path, "/", "keyfile_settings")
+      settings = Gio::Settings.new("jp.ruby-gnome2.test.settings",
+                                   :backend => backend,
+                                   :path => "/jp/ruby-gnome2/test/settings/")
 
-    settings.reset("string")
-    assert_equal("default-string", settings["string"])
-    settings["string"] = "new-string"
-    assert_equal("new-string", settings["string"])
+      settings.reset("string")
+      assert_equal("default-string", settings["string"])
+      settings["string"] = "new-string"
+      assert_equal("new-string", settings["string"])
 
-    keyfile_content_ref = <<-KEYFILE
+      keyfile_content_ref = <<-KEYFILE
 [jp/ruby-gnome2/test/settings]
 string='new-string'
-    KEYFILE
-    keyfile_content = File.read(keyfile.path)
-    assert_equal(keyfile_content_ref, keyfile_content)
-  end
+      KEYFILE
+      keyfile_content = File.read(keyfile.path)
+      assert_equal(keyfile_content_ref, keyfile_content)
+    end
 
-  def test_full
-    keyfile = Tempfile.new(["settings", ".ini"])
-    backend = Gio::keyfile_settings_backend_new(keyfile.path, "/", "keyfile_settings")
-    schema_source = Gio::SettingsSchemaSource.new(fixture_path("schema"), nil, true)
-    schema = schema_source.lookup("jp.ruby-gnome2.test.settings", true)
-    settings = Gio::Settings.new(schema,
-                                 backend,
-                                 "/jp/ruby-gnome2/test/settings/")
+    test "full" do
+      keyfile = Tempfile.new(["settings", ".ini"])
+      backend = Gio::keyfile_settings_backend_new(keyfile.path, "/", "keyfile_settings")
+      schema_source = Gio::SettingsSchemaSource.new(fixture_path("schema"), nil, true)
+      schema = schema_source.lookup("jp.ruby-gnome2.test.settings", true)
+      settings = Gio::Settings.new(schema,
+                                   backend,
+                                   "/jp/ruby-gnome2/test/settings/")
 
-    settings.reset("string")
-    assert_equal("default-string", settings["string"])
-    settings["string"] = "new-string"
-    assert_equal("new-string", settings["string"])
+      settings.reset("string")
+      assert_equal("default-string", settings["string"])
+      settings["string"] = "new-string"
+      assert_equal("new-string", settings["string"])
 
-    keyfile_content_ref = <<-KEYFILE
+      keyfile_content_ref = <<-KEYFILE
 [jp/ruby-gnome2/test/settings]
 string='new-string'
-    KEYFILE
-    keyfile_content = File.read(keyfile.path)
-    assert_equal(keyfile_content_ref, keyfile_content)
+      KEYFILE
+      keyfile_content = File.read(keyfile.path)
+      assert_equal(keyfile_content_ref, keyfile_content)
+    end
   end
 end
