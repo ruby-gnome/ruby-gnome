@@ -43,6 +43,12 @@ class TestSettings < Test::Unit::TestCase
   end
 
   sub_test_case ".new" do
+    def need_keyfile_settings_backend
+      unless Gio.respond_to?(:keyfile_settings_backend_new)
+        omit("Need Gio.keyfile_settings_backend_new")
+      end
+    end
+
     test "minimum" do
       settings = Gio::Settings.new("jp.ruby-gnome2.test.settings")
       settings.reset("string")
@@ -57,6 +63,7 @@ class TestSettings < Test::Unit::TestCase
     end
 
     test ":backend" do
+      need_keyfile_settings_backend
       keyfile = Tempfile.new(["settings", ".ini"])
       backend = Gio::keyfile_settings_backend_new(keyfile.path, "/", "keyfile_settings")
       settings = Gio::Settings.new("jp.ruby-gnome2.test.settings",
@@ -77,6 +84,7 @@ string='new-string'
     end
 
     test ":backend and :path" do
+      need_keyfile_settings_backend
       keyfile = Tempfile.new(["settings", ".ini"])
       backend = Gio::keyfile_settings_backend_new(keyfile.path, "/", "keyfile_settings")
       settings = Gio::Settings.new("jp.ruby-gnome2.test.settings",
@@ -97,6 +105,7 @@ string='new-string'
     end
 
     test "full" do
+      need_keyfile_settings_backend
       keyfile = Tempfile.new(["settings", ".ini"])
       backend = Gio::keyfile_settings_backend_new(keyfile.path, "/", "keyfile_settings")
       schema_source = Gio::SettingsSchemaSource.new(fixture_path("schema"), nil, true)
