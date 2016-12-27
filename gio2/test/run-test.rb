@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -38,20 +38,11 @@ modules.each do |target, module_name|
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
-Dir.chdir(File.join(gio2_base, "test", "fixture", "resource")) do
+fixture_dir = File.join(gio2_base, "test", "fixture")
+Dir.chdir(fixture_dir) do
   system("rake") or exit(false)
 end
-
-schema_dir = File.join(gio2_base, "test", "fixture", "schema")
-#settings_schema_dir = File.join(schema_dir, "settings")
-#Dir.chdir(settings_schema_dir) do
-#  system("rake") or exit(false)
-#end
-#ENV["GSETTINGS_SCHEMA_DIR"] = settings_schema_dir
-
-Dir.chdir(File.join(schema_dir, "source")) do
-  system("rake") or exit(false)
-end
+ENV["GSETTINGS_SCHEMA_DIR"] = File.join(fixture_dir, "schema", "default")
 
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 require "glib-test-init"

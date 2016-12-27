@@ -1,0 +1,51 @@
+# -*- ruby -*-
+#
+# Copyright (C) 2016  Ruby-GNOME2 Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+require "rake/clean"
+
+generated_files = []
+
+Rake::FileList["resource/**/*.gresource.xml"].each do |gresource_xml|
+  gresource = gresource_xml.gsub(/\.xml\z/, "")
+  gresource_dir = File.dirname(gresource_xml)
+  generated_files << gresource
+  CLEAN << gresource
+  dependencies = [gresource_xml] + Rake::FileList["#{gresource_dir}/*.png"]
+  file gresource => dependencies do
+    cd(gresource_dir) do
+      sh("glib-compile-resources", File.basename(gresource_xml))
+    end
+  end
+end
+
+schema_dirs = [
+  "schema/default",
+  "schema/source",
+]
+schema_dirs.each do |schema_dir|
+  gschema_compiled = File.join(schema_dir, "gschemas.compiled")
+  generated_files << gschema_compiled
+  CLEAN << gschema_compiled
+  file gschema_compiled => Rake::FileList["#{schema_dir}/*.gschema.xml"] do
+    cd(schema_dir) do
+      sh("glib-compile-schemas", ".")
+    end
+  end
+end
+
+task :default => generated_files

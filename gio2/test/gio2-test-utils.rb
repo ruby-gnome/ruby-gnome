@@ -16,6 +16,8 @@
 
 require "test-unit"
 
+require "tempfile"
+
 require "gio2-test-utils/fixture"
 require "gio2-test-utils/omissions"
 require "gio2-test-utils/socket-client"

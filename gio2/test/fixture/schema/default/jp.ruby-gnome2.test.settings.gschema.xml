@@ -1,5 +1,6 @@
 <schemalist>
-  <schema id="jp.ruby-gnome2.test.value">
+  <schema id="jp.ruby-gnome2.test.settings"
+          path="/jp/ruby-gnome2/test/settings/">
     <key name="string" type="s">
       <default>"default-string"</default>
     </key>
