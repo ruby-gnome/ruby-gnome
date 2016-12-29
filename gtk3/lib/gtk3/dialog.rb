@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2016  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -64,12 +64,12 @@ module Gtk
     end
 
     alias_method :get_widget_for_response_raw, :get_widget_for_response
-    def get_widget_for_response response_id
+    def get_widget_for_response(response_id)
       case response_id
       when Symbol
         response_id = ResponseType.new(response_id)
       end
-      get_widget_for_response_raw response_id
+      get_widget_for_response_raw(response_id)
     end
 
     if method_defined?(:use_header_bar)
