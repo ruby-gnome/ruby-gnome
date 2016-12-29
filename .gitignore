@@ -37,5 +37,5 @@ mkmf.log
 /Gemfile.lock
 /Gemfile.local
 /build/.vagrant/
-*/.RUBYLIBDIR*.time
-*/.RUBYARCHDIR.time
+.RUBYLIBDIR*.time
+.RUBYARCHDIR.time
