@@ -13,7 +13,7 @@ class PopoverDemo
     @window = Gtk::Window.new(:toplevel)
     @window.screen = main_window.screen
     box = Gtk::Box.new(:vertical, 24)
-    box.border_width = 24
+    box.margin = 24
     @window.add(box)
 
     widget = add_toggle_button_with_popover
@@ -39,7 +39,7 @@ class PopoverDemo
     popover = Gtk::Popover.new(parent)
     popover.position = pos
     popover.add(child)
-    popover.border_width = 6
+    child.margin = 6
     child.show
     popover
   end
@@ -51,11 +51,6 @@ class PopoverDemo
     content.parent.remove(content)
     window.destroy
     popover = create_popover(parent, content, pos)
-    popover.set_size_request(200, -1)
-    popover.vexpand = true
-    popover.margin_start = 10
-    popover.margin_end = 10
-    popover.margin_bottom = 10
     popover
   end
 
