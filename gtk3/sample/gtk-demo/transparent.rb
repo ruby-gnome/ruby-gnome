@@ -16,7 +16,6 @@ class TransparentDemo
     @window.screen = main_window.screen
     @window.set_default_size(450, 450)
     @window.title = "Transparency"
-    @window.border_width = 0
 
     view = Gtk::TextView.new
     sw = Gtk::ScrolledWindow.new

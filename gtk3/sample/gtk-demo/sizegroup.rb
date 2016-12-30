@@ -29,7 +29,7 @@ class SizegroupDemo
 
     @vbox = Gtk::Box.new(:vertical, 5)
     @window.add(@vbox)
-    @vbox.border_width = 5
+    @vbox.margin = 5
 
     size_group = Gtk::SizeGroup.new(:horizontal)
 
@@ -45,15 +45,16 @@ class SizegroupDemo
 
     # And a check button to turn grouping on and off
     check_button = Gtk::CheckButton.new("_Enable grouping")
-    check_button.set_use_underline(true)
+    check_button.use_underline = true
+    check_button.active = true
     @vbox.pack_start(check_button,
                      :expand => false, :fill => false, :padding => 0)
 
     check_button.signal_connect("toggled") do |widget|
       if widget.active?
-        size_group.set_mode(:horizontal)
+        size_group.mode = :horizontal
       else
-        size_group.set_mode(:none)
+        size_group.mode = :none
       end
     end
   end
@@ -74,24 +75,24 @@ class SizegroupDemo
     @vbox.pack_start(frame, :expand => false, :fill => false, :padding => 0)
 
     table = Gtk::Grid.new
-    table.set_border_width(5)
-    table.set_row_spacing(5)
-    table.set_column_spacing(10)
+    table.margin = 5
+    table.row_spacing = 5
+    table.column_spacing = 10
     frame.add(table)
     table
   end
 
   def add_row(table, row, size_group, label_text, options)
     label = Gtk::Label.new(label_text, :use_underline => true)
-    label.set_halign(:start)
-    label.set_valign(:baseline)
-    label.set_hexpand(true)
+    label.halign = :start
+    label.valign = :baseline
+    label.hexpand = true
     table.attach(label, 0, row, 1, 1)
 
     combo_box = create_combo_box(options)
-    label.set_mnemonic_widget(combo_box)
-    combo_box.set_halign(:end)
-    combo_box.set_valign(:baseline)
+    label.mnemonic_widget = combo_box
+    combo_box.halign = :end
+    combo_box.valign = :baseline
     size_group.add_widget(combo_box)
     table.attach(combo_box, 1, row, 1, 1)
   end
@@ -101,7 +102,7 @@ class SizegroupDemo
     options.each do |o|
       combo_box.append_text(o)
     end
-    combo_box.set_active(0)
+    combo_box.active = 0
     combo_box
   end
 end

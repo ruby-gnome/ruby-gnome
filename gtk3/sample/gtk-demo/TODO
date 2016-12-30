@@ -1,5 +1,5 @@
 # Ruby version : is there already a ruby version of the demo
-# Updated 3.20 : if there is a ruby version is it udapted to 3.19
+# Updated 3.22 : if there is a ruby version is it udapted to 3.22
 #
 C version             Ruby version    Updated 3.22
 assistant.c             ok              ok
@@ -35,23 +35,25 @@ overlay.c               ok              ok
 overlay2.c              ok              ok
 panes.c                 ok              ok
 pickers.c               ok              ok
-pixbufs.c               ok              no
-popover.c               ok              no
+pixbufs.c               ok              ok
+popover.c               ok              ok
 printing.c              ok              ok
-revealer.c              ok              no
-rotated_text.c          ok              no
+revealer.c              ok              ok
+rotated_text.c          ok              ok
 scale.c                 ok              ok
-search_entry.c          ok              no
-search_entry2.c         ok              no
-sidebar.c               ok              no
-sizegroup.c             ok              no
+search_entry.c          ok              ok
+search_entry2.c         ok              ok
+sidebar.c               ok              ok
+sizegroup.c             ok              ok
 spinbutton.c            ok              ok
-spinner.c               ok              no
+spinner.c               ok              ok
 stack.c                 ok              ok
-textmask.c              ok              no
-textscroll.c            ok              no
-theming_style_classes.c ok              no
-transparent.c           ok              no
+textmask.c              ok              ok
+textscroll.c            ok              ok
+theming_style_classes.c ok              ok
+transparent.c           ok              ok
+
+Remains :
 
 application.c           no              no
 changedisplay.c         ok              no

@@ -53,7 +53,7 @@ class SpinnerDemo
     @vbox = Gtk::Box.new(:vertical, 5)
     content_area.pack_start(@vbox,
                             :expand => true, :fill => true, :padding => 0)
-    @vbox.border_width = 5
+    @vbox.margin = 5
   end
 
   def initialize_sensitive_box

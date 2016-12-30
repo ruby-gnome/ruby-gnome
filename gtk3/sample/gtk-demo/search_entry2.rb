@@ -61,7 +61,6 @@ class SearchEntry2Demo
   def initialize_vbox
     @vbox = Gtk::Box.new(:vertical, 0)
     @window.add(@vbox)
-    @vbox.border_width = 0
   end
 
   def initialize_help_label
@@ -81,7 +80,6 @@ class SearchEntry2Demo
   def initialize_result_hbox
     hbox = Gtk::Box.new(:horizontal, 10)
     @vbox.pack_start(hbox, :expand => true, :fill => true, :padding => 0)
-    hbox.border_width = 0
 
     # Result
     label = Gtk::Label.new("Result:")
@@ -101,7 +99,6 @@ class SearchEntry2Demo
   def initialize_signal_hbox
     hbox = Gtk::Box.new(:horizontal, 10)
     @vbox.pack_start(hbox, :expand => true, :fill => true, :padding => 0)
-    hbox.border_width = 0
 
     label = Gtk::Label.new("Signal:")
     label.xalign = 0.0
