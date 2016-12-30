@@ -46,6 +46,7 @@ class SizegroupDemo
     # And a check button to turn grouping on and off
     check_button = Gtk::CheckButton.new("_Enable grouping")
     check_button.use_underline = true
+    check_button.active = true
     @vbox.pack_start(check_button,
                      :expand => false, :fill => false, :padding => 0)
 
