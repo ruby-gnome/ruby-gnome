@@ -40,7 +40,7 @@ class SearchEntryDemo
   def initialize_box
     @vbox = Gtk::Box.new(:vertical, 5)
     @window.add(@vbox)
-    @vbox.border_width = 5
+    @vbox.margin = 5
 
     label = Gtk::Label.new("")
     label.markup = "Search entry demo"
@@ -48,7 +48,6 @@ class SearchEntryDemo
 
     @hbox = Gtk::Box.new(:horizontal, 10)
     @vbox.pack_start(@hbox, :expand => true, :fill => true, :padding => 0)
-    @hbox.border_width = 0
   end
 
   def initialize_entry
