@@ -36,7 +36,6 @@ class ThemingStyleClassesDemo
     @window.screen = main_window.screen
     @window.title = "Style Classes"
     @window.resizable = false
-    @window.border_width = 12
 
     builder = Gtk::Builder.new(:resource => "/theming_style_classes/theming.ui")
     grid = builder["grid"]
