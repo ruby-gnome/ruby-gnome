@@ -45,8 +45,10 @@ class RevealerDemo
       revealer.reveal_child = true
 
       revealer.signal_connect "notify::child-revealed" do |widget|
-        revealed = widget.child_revealed?
-        widget.reveal_child = revealed
+        if widget.mapped?
+          revealed = widget.child_revealed?
+          widget.reveal_child = !revealed
+        end
       end
 
       @count += 1
