@@ -29,7 +29,7 @@ class SizegroupDemo
 
     @vbox = Gtk::Box.new(:vertical, 5)
     @window.add(@vbox)
-    @vbox.border_width = 5
+    @vbox.margin = 5
 
     size_group = Gtk::SizeGroup.new(:horizontal)
 
@@ -74,7 +74,7 @@ class SizegroupDemo
     @vbox.pack_start(frame, :expand => false, :fill => false, :padding => 0)
 
     table = Gtk::Grid.new
-    table.set_border_width(5)
+    table.margin = 5
     table.set_row_spacing(5)
     table.set_column_spacing(10)
     frame.add(table)
