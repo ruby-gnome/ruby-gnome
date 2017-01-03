@@ -187,7 +187,7 @@ module GLib
 
   module Log
     DOMAIN = "Ruby/GLib"
-    LEVELS = { 
+    LEVELS = {
       LEVEL_ERROR => "ERROR",
       LEVEL_CRITICAL => "CRITICAL",
       LEVEL_WARNING => "WARNING",
@@ -209,7 +209,7 @@ module GLib
     def warning(str)
       log(DOMAIN,  LEVEL_WARNING, caller(1)[0] << ": " << str)
     end
-    
+
     def set_log_domain(domain)
       level = GLib::Log::LEVEL_MASK
       if $DEBUG
