@@ -211,11 +211,19 @@ module GLib
     end
 
     def set_log_domain(domain)
-      level = GLib::Log::LEVEL_MASK
+      level =
+        FLAG_RECURSION |
+        FLAG_FATAL |
+        LEVEL_ERROR |
+        LEVEL_CRITICAL |
+        LEVEL_WARNING
+      if $VERBOSE or $DEBUG
+        level |=
+          LEVEL_MESSAGE |
+          LEVEL_INFO
+      end
       if $DEBUG
-        level = 255
-      elsif $VERBOSE
-        level = 127
+        level |= LEVEL_DEBUG
       end
       GLib::Log.set_handler(domain, level)
     end
