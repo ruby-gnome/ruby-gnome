@@ -207,7 +207,7 @@ module GLib
       log(DOMAIN, LEVEL_CRITICAL, caller(1)[0] << ": " << str)
     end
     def warning(str)
-      log(DOMAIN,  LEVEL_WARNING, caller(1)[0] << ": " << str)
+      log(DOMAIN, LEVEL_WARNING, caller(1)[0] << ": " << str)
     end
 
     def set_log_domain(domain)
