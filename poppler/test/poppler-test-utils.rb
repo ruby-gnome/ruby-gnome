@@ -37,6 +37,10 @@ module PopplerTestUtils
     File.join(fixtures_dir, "image.png")
   end
 
+  def outline_pdf
+    File.join(fixtures_dir, "outline.pdf")
+  end
+
   def later_version?(major, minor, micro=nil)
     micro ||= 0
     (Poppler::BUILD_VERSION <=> [major, minor, micro]) >= 0
