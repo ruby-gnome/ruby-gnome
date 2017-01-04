@@ -56,6 +56,9 @@ rg_child(VALUE self)
 
     CHECK_IITER_IS_VALID(self);
     child = poppler_index_iter_get_child(RVAL2POPPLERINDEXITER(self));
+    if (!child)
+        return Qnil;
+
     rb_child = POPPLERINDEXITER2RVAL(child);
     rb_ivar_set(rb_child, id_valid, CBOOL2RVAL(child));
     poppler_index_iter_free(child);
