@@ -308,48 +308,78 @@ Init_poppler_action(VALUE mPoppler)
     rbg_define_method(rb_cPopplerActionAny, "type", action_any_type, 0);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionAny, any, title);
 
-    rb_cPopplerActionUnknown = rb_define_class_under(mPoppler, "ActionUnknown",
-                                                     rb_cPopplerAction);
+    rb_cPopplerActionUnknown =
+        G_DEF_CLASS_WITH_PARENT(POPPLER_ACTION_TYPE_UNKNOWN,
+                                "ActionUnknown",
+                                mPoppler,
+                                rb_cPopplerAction);
 
-    rb_cPopplerActionGotoDest = rb_define_class_under(mPoppler, "ActionGotoDest",
-                                                      rb_cPopplerActionAny);
+    rb_cPopplerActionGotoDest =
+        G_DEF_CLASS_WITH_PARENT(POPPLER_ACTION_TYPE_GOTO_DEST,
+                                "ActionGotoDest",
+                                mPoppler,
+                                rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionGotoDest, goto_dest, dest);
 
-    rb_cPopplerActionGotoRemote = rb_define_class_under(mPoppler, "ActionGotoRemote",
-                                                        rb_cPopplerActionAny);
+    rb_cPopplerActionGotoRemote =
+        G_DEF_CLASS_WITH_PARENT(POPPLER_ACTION_TYPE_GOTO_REMOTE,
+                                "ActionGotoRemote",
+                                mPoppler,
+                                rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionGotoRemote, goto_remote, file_name);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionGotoRemote, goto_remote, dest);
 
-    rb_cPopplerActionLaunch = rb_define_class_under(mPoppler, "ActionLaunch",
-                                                    rb_cPopplerActionAny);
+    rb_cPopplerActionLaunch =
+        G_DEF_CLASS_WITH_PARENT(POPPLER_ACTION_TYPE_LAUNCH,
+                                "ActionLaunch",
+                                mPoppler,
+                                rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionLaunch, launch, file_name);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionLaunch, launch, params);
 
-    rb_cPopplerActionURI = rb_define_class_under(mPoppler, "ActionURI", rb_cPopplerActionAny);
+    rb_cPopplerActionURI =
+        G_DEF_CLASS_WITH_PARENT(POPPLER_ACTION_TYPE_URI,
+                                "ActionURI",
+                                mPoppler,
+                                rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionURI, uri, uri);
 
-    rb_cPopplerActionNamed = rb_define_class_under(mPoppler, "ActionNamed",
-                                                   rb_cPopplerActionAny);
+    rb_cPopplerActionNamed =
+        G_DEF_CLASS_WITH_PARENT(POPPLER_ACTION_TYPE_NAMED,
+                                "ActionNamed",
+                                mPoppler,
+                                rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionNamed, named, named_dest);
 
 #if POPPLER_CHECK_VERSION(0, 14, 0)
-    rb_cPopplerActionMovie = rb_define_class_under(mPoppler, "ActionMovie",
-                                                   rb_cPopplerActionAny);
+    rb_cPopplerActionMovie =
+        G_DEF_CLASS_WITH_PARENT(POPPLER_ACTION_TYPE_MOVIE,
+                                "ActionMovie",
+                                mPoppler,
+                                rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionMovie, movie, movie);
 
-    rb_cPopplerActionRendition = rb_define_class_under(mPoppler, "ActionRendtion",
-                                                       rb_cPopplerActionAny);
+    rb_cPopplerActionRendition =
+        G_DEF_CLASS_WITH_PARENT(POPPLER_ACTION_TYPE_RENDITION,
+                                "ActionRendtion",
+                                mPoppler,
+                                rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionRendition, rendition, media);
 
-    rb_cPopplerActionOCGState = rb_define_class_under(mPoppler, "ActionOCGState",
-                                                      rb_cPopplerActionAny);
+    rb_cPopplerActionOCGState =
+        G_DEF_CLASS_WITH_PARENT(POPPLER_ACTION_TYPE_OCG_STATE,
+                                "ActionOCGState",
+                                mPoppler,
+                                rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionOCGState, ocg_state, state_list);
 #endif
 
 #if POPPLER_CHECK_VERSION(0, 18, 0)
     rb_cPopplerActionJavaScript =
-        rb_define_class_under(mPoppler, "ActionJavaScript",
-                              rb_cPopplerActionAny);
+        G_DEF_CLASS_WITH_PARENT(POPPLER_ACTION_TYPE_JAVASCRIPT,
+                                "ActionJavaScript",
+                                mPoppler,
+                                rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionJavaScript, javascript, script);
 #endif
 
