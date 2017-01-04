@@ -44,7 +44,6 @@ rg_initialize(VALUE self, VALUE document)
     PopplerIndexIter *iter;
     iter = poppler_index_iter_new(RVAL2POPPLERDOCUMENT(document));
     G_INITIALIZE(self, iter);
-    poppler_index_iter_free(iter);
     rb_ivar_set(self, id_valid, CBOOL2RVAL(iter));
     return Qnil;
 }
