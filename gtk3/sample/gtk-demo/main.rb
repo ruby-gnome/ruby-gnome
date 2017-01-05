@@ -204,6 +204,8 @@ class Demo < Gtk::Application
   def initialize
     super("org.gtk.Demo", [:non_unique, :handles_command_line])
 
+    @current_file = nil
+
     action = Gio::SimpleAction.new("quit")
     action.signal_connect "activate" do |_action, _parameter|
       quit
