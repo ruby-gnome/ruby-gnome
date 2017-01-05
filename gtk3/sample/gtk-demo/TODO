@@ -52,6 +52,7 @@ textmask.c              ok              ok
 textscroll.c            ok              ok
 theming_style_classes.c ok              ok
 transparent.c           ok              ok
+images.c                ok              ok
 
 Remains :
 
@@ -64,7 +65,6 @@ fishbowl.c		no		no
 flowbox.c               no              no
 foreigndrawing          no              no
 gestures.c              no              no
-images.c                ok              no
 shortcuts.c             no              no
 textview.c              ok              no
 toolpalette.c           no              no
