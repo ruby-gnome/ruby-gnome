@@ -89,10 +89,10 @@ class ImagesDemo
     pixbuf_loader = nil
     @load_timeout = GLib::Timeout.add(150) do
       if image_stream
-        buf = []
         begin
           buf = image_stream.read(256)
         rescue => error
+          buf = ""
           show_dialog_on_error("Failure reading image file 'alphatest.png': \
                                #{error.message}")
         end
@@ -112,12 +112,14 @@ class ImagesDemo
           rescue => error
             show_dialog_on_error("Failed to load image: #{error.message}")
           end
-        end
-
-        begin
-          pixbuf_loader.write(buf)
-        rescue => error
-          show_dialog_on_error("Failed to load image: #{error.message}")
+          GLib::Source::REMOVE
+        else
+          begin
+            pixbuf_loader.write(buf)
+          rescue => error
+            show_dialog_on_error("Failed to load image: #{error.message}")
+          end
+          GLib::Source::CONTINUE
         end
       else
         begin
@@ -143,10 +145,8 @@ class ImagesDemo
           pixbuf = image.pixbuf
           image.from_pixbuf = pixbuf
         end
+        GLib::Source::CONTINUE
       end
-
-      # leave timeout installed
-      true
     end
     source = GLib::MainContext.default.find_source(@load_timeout)
     source.name = "[gtk+] progressive_timeout"
