@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -38,6 +38,12 @@ class TestPixbuf < Test::Unit::TestCase
     end
 
     sub_test_case("legacy form") do
+      setup do |&block|
+        suppress_warning do
+          block.call
+        end
+      end
+
       test "basic" do
         colorspace =  GdkPixbuf::Colorspace::RGB
         width = 100
@@ -158,19 +164,23 @@ class TestPixbuf < Test::Unit::TestCase
       end
 
       test "subpixbuf" do
-        src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
-        pixbuf = GdkPixbuf::Pixbuf.new(:src_pixbuf => src_pixbuf,
-                                       :src_x => 0,
-                                       :src_y => 0,
-                                       :width => 32,
-                                       :height => 32)
+        filename = fixture_path("gnome-logo-icon.png")
+        src_pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
+        pixbuf = suppress_warning do
+          GdkPixbuf::Pixbuf.new(:src_pixbuf => src_pixbuf,
+                                :src_x => 0,
+                                :src_y => 0,
+                                :width => 32,
+                                :height => 32)
+        end
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
         assert_equal(32, pixbuf.width)
         assert_equal(32, pixbuf.height)
       end
 
       test "data" do
-        src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+        filename = fixture_path("gnome-logo-icon.png")
+        src_pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
         data = src_pixbuf.pixels.pack("C*")
         pixbuf = GdkPixbuf::Pixbuf.new(:data => data,
                                        :colorspace => src_pixbuf.colorspace,
@@ -185,7 +195,8 @@ class TestPixbuf < Test::Unit::TestCase
 
       test "bytes" do
         only_version(2, 32)
-        src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+        filename = fixture_path("gnome-logo-icon.png")
+        src_pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
         bytes = src_pixbuf.pixels.flatten.pack("C*")
         pixbuf = GdkPixbuf::Pixbuf.new(:bytes => bytes,
                                        :colorspace => src_pixbuf.colorspace,
@@ -199,7 +210,8 @@ class TestPixbuf < Test::Unit::TestCase
       end
 
       test "resource" do
-        src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+        filename = fixture_path("gnome-logo-icon.png")
+        src_pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
         resource = Gio::Resource.load(fixture_path("image.gresource"))
         Gio::Resources.register(resource)
         begin
@@ -238,7 +250,8 @@ class TestPixbuf < Test::Unit::TestCase
     end
 
     def test_new_subpixbuf
-      src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+      filename = fixture_path("gnome-logo-icon.png")
+      src_pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
       pixbuf = src_pixbuf.new_subpixbuf(0, 0, 32, 32)
       assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
       assert_equal(32, pixbuf.width)
@@ -247,7 +260,8 @@ class TestPixbuf < Test::Unit::TestCase
   end
 
   def test_dup
-    pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+    filename = fixture_path("gnome-logo-icon.png")
+    pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
     assert_equal(pixbuf.pixels, pixbuf.dup.pixels)
   end
 
@@ -260,7 +274,8 @@ class TestPixbuf < Test::Unit::TestCase
   end
 
   def test_rotate
-    pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+    filename = fixture_path("gnome-logo-icon.png")
+    pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
     inverted_pixbuf = pixbuf.rotate(:upsidedown)
     assert_not_equal(pixbuf.pixels, inverted_pixbuf.pixels)
     inverted_twice_pixbuf = inverted_pixbuf.rotate(:upsidedown)
@@ -316,7 +331,8 @@ class TestPixbuf < Test::Unit::TestCase
     end
 
     test "no modifications" do
-      src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+      filename = fixture_path("gnome-logo-icon.png")
+      src_pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
       pixbuf = src_pixbuf.saturate_and_pixelate(1, false)
       assert_equal(src_pixbuf.pixels, pixbuf.pixels)
     end
@@ -325,7 +341,8 @@ class TestPixbuf < Test::Unit::TestCase
       if /\Ai\d86-/ === RUBY_PLATFORM
         omit("floating point calculation result is different on i386")
       end
-      src_pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
+      filename = fixture_path("gnome-logo-icon.png")
+      src_pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
       pixbuf = src_pixbuf.saturate_and_pixelate(0, true)
       ref = saturate_and_pixelate_pixels(src_pixbuf, 0, true)
       assert_equal(ref, pixbuf.pixels, ref.size)

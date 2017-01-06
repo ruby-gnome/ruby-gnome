@@ -28,4 +28,13 @@ module GdkPixbufTestUtils
   def fixture_path(*components)
     File.join(File.dirname(__FILE__), "fixture", *components)
   end
+
+  def suppress_warning
+    verbose, $VERBOSE = $VERBOSE, nil
+    begin
+      yield
+    ensure
+      $VERBOSE = verbose
+    end
+  end
 end
