@@ -1207,7 +1207,14 @@ rb_gi_out_argument_init_array_c(GIArgument *argument,
       case GI_TYPE_TAG_VOID:
       case GI_TYPE_TAG_BOOLEAN:
       case GI_TYPE_TAG_INT8:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: allocates GIArgument(array)[c][%s] for output",
+                 g_type_tag_to_string(element_type_tag));
+        break;
       case GI_TYPE_TAG_UINT8:
+        argument->v_pointer = xmalloc(sizeof(guint8 *));
+        break;
       case GI_TYPE_TAG_INT16:
       case GI_TYPE_TAG_UINT16:
       case GI_TYPE_TAG_INT32:
@@ -1757,7 +1764,14 @@ rb_gi_out_argument_fin_array_c(GIArgument *argument,
       case GI_TYPE_TAG_VOID:
       case GI_TYPE_TAG_BOOLEAN:
       case GI_TYPE_TAG_INT8:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: free out GIArgument(array)[c][%s]",
+                 g_type_tag_to_string(element_type_tag));
+        break;
       case GI_TYPE_TAG_UINT8:
+        xfree(argument->v_pointer);
+        break;
       case GI_TYPE_TAG_INT16:
       case GI_TYPE_TAG_UINT16:
       case GI_TYPE_TAG_INT32:
