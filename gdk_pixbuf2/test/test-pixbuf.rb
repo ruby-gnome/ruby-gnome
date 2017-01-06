@@ -351,4 +351,33 @@ class TestPixbuf < Test::Unit::TestCase
       assert_equal(ref, pixbuf.pixels)
     end
   end
+
+  sub_test_case("#save") do
+    test("no options") do
+      png_filename = fixture_path("gnome-logo-icon.png")
+      pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
+      jpeg = pixbuf.save("jpeg")
+      assert_equal(["image/jpeg", false],
+                   Gio::ContentType.guess(nil, jpeg))
+    end
+
+    test(":filename") do
+      png_filename = fixture_path("gnome-logo-icon.png")
+      pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
+      output = Tempfile.new(["pixbuf", ".jpeg"])
+      pixbuf.save(output.path, "jpeg")
+      assert_equal(["image/jpeg", false],
+                   Gio::ContentType.guess(nil, output.read))
+    end
+  end
+
+  test("#save_to_buffer") do
+    png_filename = fixture_path("gnome-logo-icon.png")
+    pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
+    jpeg = suppress_warning do
+      pixbuf.save_to_buffer("jpeg")
+    end
+    assert_equal(["image/jpeg", false],
+                 Gio::ContentType.guess(nil, jpeg))
+  end
 end

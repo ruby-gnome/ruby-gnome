@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -189,16 +189,70 @@ module GdkPixbuf
       dest
     end
 
-    # TODO: test
-    # TODO: Improve API by Hash
-    def save(filename, type, options={})
+    # @overload save(type, options={})
+    #
+    #   Save as `type` format.
+    #
+    #   @param type [String] The format to be saved. `"jpeg"`,
+    #     `"png"`, `"ico"` and `"bmp"` are available by default.
+    #
+    #   @param options [Hash<Symbol, String>] The options for
+    #     saving. Key-value pairs except `:filename` key are passed to
+    #     save logic. Available keys are depended on format. For
+    #     example, `:quality => "100"` is available in `"jpeg"`
+    #     format.
+    #   @option options [String] :filename The filename to be outputted.
+    #
+    #   @return [String, void] The saved data. If you specify
+    #     `:filename` option, it returns nothing.
+    #
+    # @overload save(filename, type, options={})
+    #
+    #   Save to `filename` as `type` format.
+    #
+    #   @return [void]
+    #
+    #   @deprecated since 3.1.1. Use `save(type, :filename =>
+    #     filename)` instead.
+    def save(*args)
+      case args.size
+      when 1
+        filename = nil
+        type, = args
+        options = {}
+      when 2
+        if args.last.is_a?(Hash)
+          type, options = args
+          if options.key?(:filename)
+            options = options.dup
+            filename = options.delete(:filename)
+          else
+            filename = nil
+          end
+        else
+          filename, type = args
+          options = {}
+        end
+      when 3
+        filename, type, options = args
+      else
+        message = "wrong number of arguments (given #{args.size}, expected 1..3)"
+        raise ArgumentError, message
+      end
+
       keys = []
       values = []
       options.each do |key, value|
+        key = key.to_s if key.is_a?(Symbol)
         keys << key
         values << value
       end
-      savev(filename, type, keys, values)
+      if filename
+        savev(filename, type, keys, values)
+      else
+        _, data = save_to_bufferv(type, keys, values)
+        data.pack("C*")
+      end
     end
 
     alias_method :scale_raw, :scale

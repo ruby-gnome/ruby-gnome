@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -49,6 +49,8 @@ module GdkPixbuf
         end
       end
     end
+
+    define_deprecated_method :save_to_buffer, :save
 
     define_deprecated_method_by_hash_args :composite,
                                           "dest_width, " +
