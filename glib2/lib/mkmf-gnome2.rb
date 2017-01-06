@@ -140,12 +140,7 @@ end
 
 def find_gem_spec(package)
   begin
-    require 'rubygems'
-    if Gem::Specification.respond_to?(:find_by_name)
-      Gem::Specification.find_by_name(package)
-    else
-      Gem.source_index.find_name(package).last
-    end
+    Gem::Specification.find_by_name(package)
   rescue LoadError
     nil
   end
