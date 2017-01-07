@@ -14,7 +14,9 @@ window = Gtk::Window.new
 window.signal_connect("delete-event") {Gtk.main_quit}
 
 view = GtkSource::View.new
-window.add(Gtk::ScrolledWindow.new.add(view))
+scrolled_window = Gtk::ScrolledWindow.new
+scrolled_window.add view
+window.add scrolled_window
 view.show_line_numbers = true
 view.insert_spaces_instead_of_tabs = true
 view.indent_width = 4
