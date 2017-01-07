@@ -26,15 +26,12 @@ module Gtk
         properties.each do |key, value|
           child_set_property(child, key, value)
         end
+        self
       ensure
         child.thaw_child_notify
       end
     end
-
-    def <<(widget)
-      add(widget)
-      self
-    end
+    alias_method :<<, :add
 
     alias_method :focus_chain_raw, :focus_chain
     def focus_chain
