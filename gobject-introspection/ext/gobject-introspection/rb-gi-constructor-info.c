@@ -56,18 +56,24 @@ initialize_receiver(VALUE receiver,
     switch (interface_type) {
       case GI_INFO_TYPE_OBJECT:
         G_INITIALIZE(receiver, value->v_pointer);
-        g_object_ref_sink(value->v_pointer);
-        switch (g_callable_info_get_caller_owns(callable_info)) {
-          case GI_TRANSFER_NOTHING:
-            break;
-          case GI_TRANSFER_CONTAINER:
-            break;
-          case GI_TRANSFER_EVERYTHING:
-            g_object_unref(value->v_pointer);
-            break;
-          default:
-            g_assert_not_reached();
-            break;
+        {
+            gboolean was_floating;
+            was_floating = g_object_is_floating(value->v_pointer);
+            g_object_ref_sink(value->v_pointer);
+            switch (g_callable_info_get_caller_owns(callable_info)) {
+              case GI_TRANSFER_NOTHING:
+                break;
+              case GI_TRANSFER_CONTAINER:
+                break;
+              case GI_TRANSFER_EVERYTHING:
+                if (!was_floating) {
+                    g_object_unref(value->v_pointer);
+                }
+                break;
+              default:
+                g_assert_not_reached();
+                break;
+            }
         }
         break;
       case GI_INFO_TYPE_STRUCT:
