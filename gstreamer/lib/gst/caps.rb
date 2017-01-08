@@ -18,16 +18,27 @@ module Gst
   class Caps
     class << self
       def any
-        caps = allocate
-        caps.__send__(:initialize_new_any)
-        caps
+        new(:any)
       end
 
       def empty
-        caps = allocate
-        caps.__send__(:initialize_new_empty)
-        caps
+        new(:empty)
       end
+    end
+
+    alias_method :initialize_raw, :initialize
+    def initialize(*args)
+      if args.size == 1
+        case args[0]
+        when :any
+          initialize_new_any
+          return
+        when :empty
+          initialize_new_empty
+          return
+        end
+      end
+      initialize_raw(*args)
     end
 
     def structures
