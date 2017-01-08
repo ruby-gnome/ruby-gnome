@@ -36,23 +36,39 @@ gi_constructor_info_get_type(void)
 }
 
 static void
-initialize_receiver(VALUE receiver, GITypeInfo *info, GIArgument *value)
+initialize_receiver(VALUE receiver,
+                    GICallableInfo *callable_info,
+                    GIArgument *value)
 {
+    GITypeInfo return_value_info;
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
 
-    if (g_type_info_get_tag(info) != GI_TYPE_TAG_INTERFACE) {
+    g_callable_info_load_return_type(callable_info, &return_value_info);
+
+    if (g_type_info_get_tag(&return_value_info) != GI_TYPE_TAG_INTERFACE) {
         rb_raise(rb_eRuntimeError, "TODO: returned value isn't interface");
     }
 
-    interface_info = g_type_info_get_interface(info);
+    interface_info = g_type_info_get_interface(&return_value_info);
     interface_type = g_base_info_get_type(interface_info);
     g_base_info_unref(interface_info);
     switch (interface_type) {
       case GI_INFO_TYPE_OBJECT:
         G_INITIALIZE(receiver, value->v_pointer);
         g_object_ref_sink(value->v_pointer);
-        g_object_unref(value->v_pointer);
+        switch (g_callable_info_get_caller_owns(callable_info)) {
+          case GI_TRANSFER_NOTHING:
+            break;
+          case GI_TRANSFER_CONTAINER:
+            break;
+          case GI_TRANSFER_EVERYTHING:
+            g_object_unref(value->v_pointer);
+            break;
+          default:
+            g_assert_not_reached();
+            break;
+        }
         break;
       case GI_INFO_TYPE_STRUCT:
         G_INITIALIZE(receiver, value->v_pointer);
@@ -93,7 +109,6 @@ rg_invoke(VALUE self, VALUE rb_receiver, VALUE rb_arguments)
     GIFunctionInfo *info;
     GICallableInfo *callable_info;
     GIArgument return_value;
-    GITypeInfo return_value_info;
 
     info = SELF(self);
     callable_info = (GICallableInfo *)info;
@@ -109,8 +124,7 @@ rg_invoke(VALUE self, VALUE rb_receiver, VALUE rb_arguments)
                                    &return_value,
                                    NULL);
 
-    g_callable_info_load_return_type(callable_info, &return_value_info);
-    initialize_receiver(rb_receiver, &return_value_info, &return_value);
+    initialize_receiver(rb_receiver, callable_info, &return_value);
 
     return rb_receiver;
 }
