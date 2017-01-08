@@ -411,6 +411,12 @@ module GObjectIntrospection
       case return_type_tag
       when TypeTag::BOOLEAN
         case name
+        when "equal"
+          if function_info.n_in_args == 1
+            "=="
+          else
+            name
+          end
         when /\A(?:is|get_is|can_be)_/
           "#{$POSTMATCH}?"
         when /\Aget_/
