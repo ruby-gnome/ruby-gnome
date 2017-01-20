@@ -270,7 +270,8 @@ module GObjectIntrospection
           raise "TODO: #{method_info_class}"
         end
       end
-      if klass.method_defined?(:each)
+      if klass.method_defined?(:each) and
+          klass.instance_method(:each).owner == klass
         klass.include(Enumerable)
       end
     end
