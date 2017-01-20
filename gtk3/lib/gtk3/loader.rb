@@ -26,7 +26,6 @@ module Gtk
       call_init_function(repository, namespace)
       define_stock_module
       define_version_module
-      setup_tree_model(repository, namespace)
       setup_pending_constants
     end
 
@@ -48,19 +47,6 @@ module Gtk
     def define_version_module
       @version_module = Module.new
       @base_module.const_set("Version", @version_module)
-    end
-
-    def setup_tree_model(repository, namespace)
-      repository.each(namespace) do |info|
-        case info
-        when GObjectIntrospection::InterfaceInfo
-          case info.name
-          when "TreeModel"
-            info.gtype.to_class.__send__(:include, Enumerable)
-            return
-          end
-        end
-      end
     end
 
     def level_bar_class

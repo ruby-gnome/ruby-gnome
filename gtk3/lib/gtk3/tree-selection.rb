@@ -16,8 +16,6 @@
 
 module Gtk
   class TreeSelection
-    include Enumerable
-
     alias_method :selected_raw, :selected
     def selected
       selected_p, model, iter = selected_raw

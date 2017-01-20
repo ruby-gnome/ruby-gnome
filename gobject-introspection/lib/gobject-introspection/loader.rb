@@ -270,6 +270,9 @@ module GObjectIntrospection
           raise "TODO: #{method_info_class}"
         end
       end
+      if klass.method_defined?(:each)
+        klass.include(Enumerable)
+      end
     end
 
     def load_constructor_infos(infos, klass)
