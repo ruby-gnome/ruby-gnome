@@ -37,7 +37,10 @@ module GObjectIntrospection
       repository.require(namespace, @version)
       pre_load(repository, namespace)
       repository.each(namespace) do |info|
-        load_info(info)
+        load_info(info) if info.is_a?(InterfaceInfo)
+      end
+      repository.each(namespace) do |info|
+        load_info(info) unless info.is_a?(InterfaceInfo)
       end
       post_load(repository, namespace)
     end
