@@ -29,10 +29,14 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.external_packages = [
     {
       :name => "icu",
-      :download_base_url => "http://download.icu-project.org/files/icu4c/57.1",
-      :label => "gobject-introspection",
+      :download_site => :icu,
+      :label => "ICU",
+      :version => "58.2",
       :base_name => "icu",
-      :archive_base_name => "icu4c-57_1-src.tgz",
+      :archive_base_name => lambda do |package|
+        archive_base_name_version = package.version.gsub(".", "_")
+        "icu4c-#{archive_base_name_version}-src.tgz"
+      end,
       :compression_method => "gz",
       :base_dir_in_package => "source",
       :windows => {

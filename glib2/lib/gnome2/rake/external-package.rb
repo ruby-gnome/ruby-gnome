@@ -44,15 +44,15 @@ module GNOME2
       end
 
       def compression_method
-        super || "gz"
+        resolve_value(super) || "gz"
       end
 
       def base_name
-        super || "#{name}-#{version}"
+        resolve_value(super) || "#{name}-#{version}"
       end
 
       def archive_base_name
-        super || "#{base_name}.tar.#{compression_method}"
+        resolve_value(super) || "#{base_name}.tar.#{compression_method}"
       end
 
       def archive_url
@@ -60,7 +60,7 @@ module GNOME2
       end
 
       def download_base_url
-        super || download_site_base_url
+        resolve_value(super) || download_site_base_url
       end
 
       def patches
@@ -76,7 +76,7 @@ module GNOME2
       end
 
       def base_dir_in_package
-        super || "."
+        resolve_value(super) || "."
       end
 
       def windows
@@ -109,12 +109,22 @@ module GNOME2
           latest_version_freedesktop_gstreamer
         when :webkitgtk
           latest_version_webkitgtk
+        when :icu
+          latest_version_icu
         else
           nil
         end
       end
 
       private
+      def resolve_value(value)
+        if value.respond_to?(:call)
+          value.call(self)
+        else
+          value
+        end
+      end
+
       def download_site_base_url
         case download_site
         when :gnome
@@ -131,6 +141,8 @@ module GNOME2
           base_url = "http://ftp.gnu.org/pub/gnu/#{name}"
         when :webkitgtk
           base_url = webkitgtk_base_url
+        when :icu
+          base_url = icu_base_url
         else
           base_url = nil
         end
@@ -151,6 +163,10 @@ module GNOME2
 
       def webkitgtk_base_url
         "https://webkitgtk.org/releases"
+      end
+
+      def icu_base_url
+        "http://download.icu-project.org/files/icu4c"
       end
 
       def sort_versions(versions)
@@ -240,6 +256,20 @@ module GNOME2
             when /href="#{Regexp.escape(name)}-
                         (\d+(?:\.\d+)*)
                         \.tar\.#{Regexp.escape(compression_method)}"/x
+              versions << $1
+            end
+          end
+        end
+        sort_versions(versions).last
+      end
+
+      def latest_version_icu
+        base_url = icu_base_url
+        versions = []
+        open(base_url) do |index|
+          index.read.scan(/<a (.+?)>/) do |content,|
+            case content
+            when /href="(\d+(?:\.\d+)+)\/"/x
               versions << $1
             end
           end
