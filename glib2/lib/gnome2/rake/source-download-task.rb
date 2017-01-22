@@ -76,7 +76,7 @@ module GNOME2
       end
 
       def download(url, output_path)
-        OpenURI.module_eval do
+        OpenURI.singleton_class.class_eval do
           alias_method :redirectable_original?, :redirectable?
           def redirectable?(uri1, uri2)
             redirectable_original?(uri1, uri2) or
@@ -91,7 +91,7 @@ module GNOME2
             end
           end
         ensure
-          OpenURI.module_eval do
+          OpenURI.singleton_class.class_eval do
             alias_method :redirectable?, :redirectable_original?
             remove_method :redirectable_original?
           end
