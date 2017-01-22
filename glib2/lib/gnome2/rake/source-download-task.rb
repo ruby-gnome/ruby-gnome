@@ -51,6 +51,7 @@ module GNOME2
         end
       end
 
+      private
       def define_download_tasks
         namespace :download do
           @package.external_packages.each do |package|
@@ -68,12 +69,31 @@ module GNOME2
             file tar_full_path.to_s => directory_path.to_s do
               archive_url = package.archive_url
               rake_output_message "Downloading... #{archive_url}"
-              open(archive_url) do |downloaded_tar|
-                tar_full_path.open("wb") do |tar_file|
-                  tar_file.print(downloaded_tar.read)
-                end
-              end
+              download(archive_url, tar_full_path)
             end
+          end
+        end
+      end
+
+      def download(url, output_path)
+        OpenURI.module_eval do
+          alias_method :redirectable_original?, :redirectable?
+          def redirectable?(uri1, uri2)
+            redirectable_original?(uri1, uri2) or
+              (uri1.scheme.downcase == "http" and
+               uri2.scheme.downcase == "https")
+          end
+        end
+        begin
+          open(url) do |input|
+            output_path.open("wb") do |output_file|
+              output_file.print(input.read)
+            end
+          end
+        ensure
+          OpenURI.module_eval do
+            alias_method :redirectable?, :redirectable_original?
+            remove_method :redirectable_original?
           end
         end
       end
