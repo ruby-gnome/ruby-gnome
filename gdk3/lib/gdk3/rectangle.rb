@@ -45,5 +45,12 @@ module Gdk
     def to_a
       [x, y, width, height]
     end
+
+    unless instance_method(:==).owner == self
+      def ==(other)
+        other.is_a?(self.class) and
+          self.to_a == other.to_a
+      end
+    end
   end
 end
