@@ -142,7 +142,7 @@ module GNOME2
         when :webkitgtk
           base_url = webkitgtk_base_url
         when :icu
-          base_url = icu_base_url
+          base_url = "#{icu_base_url}/#{version}"
         else
           base_url = nil
         end
