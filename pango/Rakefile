@@ -42,6 +42,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :windows => {
         :configure_args => [
           "--with-cross-build=#{package.package.tmp_dir}/native/icu/icu/source",
+          "CPPFLAGS=-DU_USE_STRTOD_L=0",
         ],
         :built_file => "bin/icu-config",
       },
