@@ -67,7 +67,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "--with-included-immodules",
         ],
         :patches => [
-          "gtk+-3.22.3-add-missing-win32-winnt.diff",
         ],
         :need_autoreconf => true,
         :build_concurrently => false,
