@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -39,7 +39,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     {
       :name => "libgsf",
       :download_site => :gnome,
-      :label => "gsf",
+      :label => "GSF",
       :version => "1.14.41",
       :compression_method => "xz",
       :windows => {
