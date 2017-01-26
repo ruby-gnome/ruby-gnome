@@ -2,9 +2,113 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.1.1: 2017-01-26
+
+=== Changes
+
+==== All
+
+  * Improvements
+    * Windows: Supported Ruby 2.4.
+
+==== Ruby/GLib2
+
+  * Improvements
+    * (({GLib::DateTime})): Added.
+      [GitHub#961][GitHub#965]
+      [Patch by cedlemo]
+    * (({GLib::TimeZone})): Added. [GitHub#963][Patch by cedlemo]
+    * Stopped to show "message", "info" and "debug" level logs by default.
+      You can enable them by (({$DEBUG = true})).
+      [GitHub#981][Reported by PeterWAWood]
+    * Windows: Updated bundled PCRE to 8.40.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported outputting (({guint8})) array.
+    * Supported converting (({equal})) method to (({==})) method.
+    * Supported auto (({Enumerable})) inclusion for classes and
+      modules that have (({each})) method.
+
+==== Ruby/GIO2
+
+  * Improvements
+    * (({Gio::Settings#initialize})): Added backward compatible API
+      again.
+  * Fixes
+    * Supported GIO 2.38 or earlier again.
+
+==== Ruby/Pango
+
+  * Fixes
+    * (({Pango::LayoutLine#x_to_index})): Fixed a crash bug.
+    * Windows: Updated bundled HarfBuzz to 1.4.1.
+    * Windows: Updated bundled ICU to 58.2.
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements
+    * (({GdkPixbuf::Pixbuf#save_to_buffer})): Supported again but it's
+      deprecated. Use (({GdkPixbuf::Pixbuf#save})) instead.
+    * Windows: Updated bundled gdk-pixbuf to 2.36.4.
+
+==== Ruby/GDK3
+
+  * Improvements
+    * Windows: Updated bundled GTK+ to 3.22.7.
+
+==== Ruby/GTK3
+
+  * Improvements
+    * (({Gtk::TreeViewColumn#initialize})): Supported option Hash.
+      [GitHub#958][Patch by Detlef Wagner]
+    * Updated samples. [Patch by cedlemo]
+    * (({Gtk::Dialog#get_widget_for_response_id})): Supported
+      (({Symbol})) as response ID.
+      [GitHub#978][Patch by Detlef Wagner]
+    * (({Gtk::Container#add})): Changed to return (({self})) again.
+    * Windows: u
+
+==== Ruby/Poppler
+
+  * Fixes
+    * (({Poppler::IndexIter})): Fixed a crash bug.
+    * (({Poppler::IndexIter#child})): Added a missing (({NULL}))
+      check.
+    * Fixed types of action classes. They must be (({GLib::Boxed})).
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * Windows: Updated bundled GStreamer to 1.10.2.
+
+==== Ruby/ClutterGStreamer
+
+  * Improvements
+    * Windows: Updated bundled Clutter-GStreamer to 3.0.22.
+
+==== Ruby/GtkSourceView3
+
+  * Improvements
+    * Windows: Updated bundled GtkSourceView to 3.22.2.
+
+==== Ruby/GSF
+
+  * Improvements
+    * Windows: Updated bundled GSF to 1.14.41.
+
+=== Thanks
+
+  * Detlef Wagner
+  * cedlemo
+  * PeterWAWood
+
 == Ruby-GNOME2 3.1.0: 2016-11-13
 
 === Changes
+
+==== All
 
   * Improvements
     * update README.
@@ -19,8 +123,6 @@
     * use Win32 thread again in build-windows.sh.
     * libmount is required for GLib on Linux.
     * install libgtk-3-dev explicitly.
-
-==== All
 
 ==== Ruby/GIO2
 
