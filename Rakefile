@@ -214,7 +214,7 @@ namespace :dist do
 
   ruby_versions = ["2.1.10", "2.2.6", "2.3.3", "2.4.0"]
   namespace :test do
-    ruby_base_url = "ftp://ftp.ruby-lang.org/pub/ruby"
+    ruby_base_url = "https://cache.ruby-lang.org/pub/ruby"
     ruby_versions.each do |ruby_version|
       base_dir = "tmp/dist-test-#{version}/#{ruby_version}"
       directory base_dir
