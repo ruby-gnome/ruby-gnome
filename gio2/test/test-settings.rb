@@ -108,7 +108,10 @@ string='new-string'
       need_keyfile_settings_backend
       keyfile = Tempfile.new(["settings", ".ini"])
       backend = Gio::keyfile_settings_backend_new(keyfile.path, "/", "keyfile_settings")
-      schema_source = Gio::SettingsSchemaSource.new(fixture_path("schema"), nil, true)
+      schema_dir = fixture_path("schema", "default")
+      schema_source = Gio::SettingsSchemaSource.new(schema_dir,
+                                                    nil,
+                                                    true)
       schema = schema_source.lookup("jp.ruby-gnome2.test.settings", true)
       settings = Gio::Settings.new(schema,
                                    backend,
