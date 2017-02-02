@@ -39,6 +39,15 @@ interface_struct_to_ruby(gpointer object,
     name = g_base_info_get_name(interface_info);
     rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
     rb_class = rb_const_get(rb_module, rb_intern(name));
+    if (rb_respond_to(rb_class, rb_intern("gtype"))) {
+        VALUE rb_gtype;
+        GType gtype;
+
+        rb_gtype = rb_funcall(rb_class, rb_intern("gtype"), 0);
+        gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
+        return BOXED2RVAL(target_object, gtype);
+    }
+
     if (duplicate) {
         size_t object_size;
         object_size = g_struct_info_get_size(interface_info);
