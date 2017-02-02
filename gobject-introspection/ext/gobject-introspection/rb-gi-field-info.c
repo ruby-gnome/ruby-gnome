@@ -75,6 +75,7 @@ VALUE
 rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
 {
     GIArgument argument;
+    gboolean processed = FALSE;
     GITypeInfo *type_info;
     GITypeTag type_tag;
     VALUE rb_field_value;
@@ -82,17 +83,51 @@ rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
     type_info = g_field_info_get_type(info);
     type_tag = g_type_info_get_tag(type_info);
 
-    if (!g_field_info_get_field(info, memory, &argument)) {
-        g_base_info_unref(type_info);
-        rb_raise(rb_eArgError, "failed to get field value: %s[%s]",
-                 g_base_info_get_name(info),
-                 g_type_tag_to_string(type_tag));
+    switch (type_tag) {
+      case GI_TYPE_TAG_INTERFACE:
+        {
+            GIBaseInfo *interface_info;
+            GIInfoType interface_type;
+
+            interface_info = g_type_info_get_interface(type_info);
+            interface_type = g_base_info_get_type(interface_info);
+            switch (interface_type) {
+              case GI_INFO_TYPE_STRUCT:
+              case GI_INFO_TYPE_UNION:
+              case GI_INFO_TYPE_BOXED:
+                {
+                    int offset;
+
+                    offset = g_field_info_get_offset(info);
+                    argument.v_pointer = G_STRUCT_MEMBER_P(memory, offset);
+                    processed = TRUE;
+                }
+                break;
+              default:
+                break;
+            }
+            g_base_info_unref(interface_info);
+        }
+        break;
+      case GI_TYPE_TAG_UTF8:
+        {
+            int offset;
+            offset = g_field_info_get_offset(info);
+            argument.v_string = G_STRUCT_MEMBER(gchar *, memory, offset);
+            processed = TRUE;
+        }
+        break;
+      default:
+        break;
     }
 
-    if (type_tag == GI_TYPE_TAG_UTF8) {
-        int offset;
-        offset = g_field_info_get_offset(info);
-        argument.v_string = G_STRUCT_MEMBER(gchar *, memory, offset);
+    if (!processed) {
+        if (!g_field_info_get_field(info, memory, &argument)) {
+            g_base_info_unref(type_info);
+            rb_raise(rb_eArgError, "failed to get field value: %s[%s]",
+                     g_base_info_get_name(info),
+                     g_type_tag_to_string(type_tag));
+        }
     }
 
     rb_field_value = GI_ARGUMENT2RVAL(&argument, FALSE, type_info,
