@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,15 @@ module Gdk
     def send_event?
       not send_event.zero?
     end
+
+    alias_method :type, :event_type
+  end
+
+  class EventButton
+    def click_count
+      _, number = get_click_count
+      number
+    end
   end
 
   class EventFocus
@@ -44,5 +53,31 @@ module Gdk
     def in?
       not in_raw.zero?
     end
+  end
+
+  class EventKey
+    def keyval
+      _, value = get_keyval
+      value
+    end
+
+    def keycode
+      _, value = get_keycode
+      value
+    end
+  end
+
+  class EventScroll
+    def direction
+      _, value = get_scroll_direction
+      value
+    end
+
+    def deltas
+      _, x, y = get_scroll_deltas
+      [x, y]
+    end
+
+    alias_method :stop_event?, :scroll_stop_event?
   end
 end

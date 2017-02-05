@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -34,6 +34,7 @@ module Gdk
       setup_pending_rectangle_functions
       define_keyval_module
       define_selection_module
+      require_pre_libraries
     end
 
     def define_keyval_module
@@ -46,10 +47,14 @@ module Gdk
       @base_module.const_set("Selection", @selection_module)
     end
 
+    def require_pre_libraries
+      require "gdk3/event-readers"
+    end
+
     def post_load(repository, namespace)
       apply_pending_constants
       apply_pending_rectangle_functions
-      require_libraries
+      require_post_libraries
       convert_event_classes
       define_selection_constants
     end
@@ -111,7 +116,7 @@ module Gdk
       nil
     end
 
-    def require_libraries
+    def require_post_libraries
       require "gdk3/atom"
       require "gdk3/color"
       require "gdk3/cursor"
@@ -222,8 +227,11 @@ module Gdk
         when "request_motions"
           define_method(info, event_motion_class, "request")
         else
-          super # TODO
+          define_singleton_method(event_class, name, info)
         end
+      when /\Aevents_/
+        name = $POSTMATCH
+        define_singleton_method(event_class, name, info)
       when /\Acairo_/
         name = $POSTMATCH
         case name
@@ -287,6 +295,25 @@ module Gdk
         @keyval_module.const_set(info.name, info.value)
       else
         super
+      end
+    end
+
+    def load_field(info, i, field_info, klass)
+      return super unless klass.name.start_with?("Gdk::Event")
+
+      case field_info.name
+      when "send_event"
+        super
+      when "in"
+        super
+      when "axes"
+        klass.__send__(:include, EventAxisReader)
+      when "button"
+        klass.__send__(:include, EventButtonReader)
+      when "x"
+        klass.__send__(:include, EventCoordsReader)
+      when "x_root"
+        klass.__send__(:include, EventRootCoordsReader)
       end
     end
   end
