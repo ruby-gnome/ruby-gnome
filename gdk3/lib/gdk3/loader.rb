@@ -230,8 +230,8 @@ module Gdk
           # ignore because moved to Gdk::Event
         end
       when /\Aevents_/
-        name = $POSTMATCH
-        define_singleton_method(event_class, name, info)
+        method_name = rubyish_method_name(info, :prefix => "events_")
+        define_singleton_method(event_class, method_name, info)
       when /\Acairo_/
         name = $POSTMATCH
         case name
