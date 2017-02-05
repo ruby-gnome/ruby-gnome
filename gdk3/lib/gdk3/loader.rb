@@ -300,9 +300,13 @@ module Gdk
 
     def load_field(info, i, field_info, klass)
       return super unless klass.name.start_with?("Gdk::Event")
-      return if klass.name == "Gdk::Event"
 
       field_name = field_info.name
+      if klass.name == "Gdk::Event"
+        super if field_name == "type"
+        return
+      end
+
       case field_name
       when "window", "direction"
         super(info, i, field_info, klass, :readable => false)
