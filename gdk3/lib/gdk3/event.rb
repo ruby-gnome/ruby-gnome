@@ -78,6 +78,8 @@ module Gdk
       [x, y]
     end
 
-    alias_method :stop_event?, :scroll_stop_event?
+    if method_defined?(:scroll_stop_event?)
+      alias_method :stop_event?, :scroll_stop_event?
+    end
   end
 end
