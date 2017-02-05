@@ -181,6 +181,9 @@ module Gtk
         icon_size_class = @base_module.const_get(:IconSize)
         method_name = rubyish_method_name(info, :prefix => "icon_size_")
         define_singleton_method(icon_size_class, method_name, info)
+      when /\Atest_widget_/
+        name = $POSTMATCH
+        define_method(info, Gtk::Widget, name)
       else
         super
       end
