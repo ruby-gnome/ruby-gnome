@@ -227,7 +227,7 @@ module Gdk
         when "request_motions"
           define_method(info, event_motion_class, "request")
         else
-          define_singleton_method(event_class, name, info)
+          # ignore because moved to Gdk::Event
         end
       when /\Aevents_/
         name = $POSTMATCH
