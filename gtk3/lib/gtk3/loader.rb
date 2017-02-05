@@ -184,6 +184,10 @@ module Gtk
       when /\Atest_widget_/
         name = $POSTMATCH
         define_method(info, Gtk::Widget, name)
+      when /\Aaccel_groups_/
+        accel_group_class = @base_module.const_get(:AccelGroup)
+        method_name = rubyish_method_name(info, :prefix => "accel_groups_")
+        define_singleton_method(accel_group_class, method_name, info)
       else
         super
       end
