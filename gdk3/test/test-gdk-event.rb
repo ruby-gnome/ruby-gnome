@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -180,10 +178,8 @@ class TestGdkEvent < Test::Unit::TestCase
       assert_kind_of(Float, @touch.y)
     end
 
-    def test_axes
-      assert_nothing_raised do
-        @touch.axes
-      end
+    def test_axis
+      assert_kind_of(Numeric, @touch.get_axis(:x))
     end
 
     def test_state
@@ -409,11 +405,11 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_x
-      assert_kind_of(Integer, @configure.x)
+      assert_kind_of(Numeric, @configure.x)
     end
 
     def test_y
-      assert_kind_of(Integer, @configure.y)
+      assert_kind_of(Numeric, @configure.y)
     end
 
     def test_width
@@ -552,11 +548,11 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_x_root
-      assert_kind_of(Integer, @dnd.x_root)
+      assert_kind_of(Numeric, @dnd.x_root)
     end
 
     def test_y_root
-      assert_kind_of(Integer, @dnd.y_root)
+      assert_kind_of(Numeric, @dnd.y_root)
     end
   end
 

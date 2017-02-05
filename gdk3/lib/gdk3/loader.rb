@@ -300,20 +300,31 @@ module Gdk
 
     def load_field(info, i, field_info, klass)
       return super unless klass.name.start_with?("Gdk::Event")
+      return if klass.name == "Gdk::Event"
 
-      case field_info.name
-      when "send_event"
-        super
-      when "in"
-        super
+      field_name = field_info.name
+      case field_name
+      when "window", "direction"
+        super(info, i, field_info, klass, :readable => false)
       when "axes"
-        klass.__send__(:include, EventAxisReader)
+        klass.__send__(:prepend, EventAxisReader)
       when "button"
-        klass.__send__(:include, EventButtonReader)
+        klass.__send__(:prepend, EventButtonReader)
+      when "state"
+        case klass.name
+        when "Gdk::EventProperty", "Gdk::EventVisibility"
+          super
+        else
+          klass.__send__(:prepend, EventStateReader)
+        end
       when "x"
-        klass.__send__(:include, EventCoordsReader)
+        klass.__send__(:prepend, EventCoordsReader)
       when "x_root"
-        klass.__send__(:include, EventRootCoordsReader)
+        klass.__send__(:prepend, EventRootCoordsReader)
+      else
+        unless klass.method_defined?(field_name)
+          super
+        end
       end
     end
   end

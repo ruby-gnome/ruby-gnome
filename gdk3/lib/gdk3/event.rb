@@ -26,8 +26,6 @@ module Gdk
     def send_event?
       not send_event.zero?
     end
-
-    alias_method :type, :event_type
   end
 
   class EventButton
@@ -56,26 +54,44 @@ module Gdk
   end
 
   class EventKey
+    alias_method :keyval_raw, :keyval
     def keyval
-      _, value = get_keyval
-      value
+      found, value = keyval_raw
+      if found
+        value
+      else
+        nil
+      end
     end
 
+    alias_method :keycode_raw, :keycode
     def keycode
-      _, value = get_keycode
-      value
+      found, value = keycode_raw
+      if found
+        value
+      else
+        nil
+      end
     end
   end
 
   class EventScroll
     def direction
-      _, value = get_scroll_direction
-      value
+      found, value = scroll_direction
+      if found
+        value
+      else
+        nil
+      end
     end
 
     def deltas
-      _, x, y = get_scroll_deltas
-      [x, y]
+      found, x, y = scroll_deltas
+      if found
+        [x, y]
+      else
+        nil
+      end
     end
 
     if method_defined?(:scroll_stop_event?)

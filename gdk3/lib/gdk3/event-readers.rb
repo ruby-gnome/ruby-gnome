@@ -28,7 +28,18 @@ module Gdk
 
   module EventButtonReader
     def button
-      found, value = get_button
+      found, value = super
+      if found
+        value
+      else
+        nil
+      end
+    end
+  end
+
+  module EventStateReader
+    def state
+      found, value = super
       if found
         value
       else
@@ -45,6 +56,14 @@ module Gdk
       else
         nil
       end
+    end
+
+    def x
+      (coords || [])[0]
+    end
+
+    def y
+      (coords || [])[1]
     end
 
     def get_distance(other_event)
@@ -84,5 +103,15 @@ module Gdk
         nil
       end
     end
+
+    def x_root
+      (root_coords || [])[0]
+    end
+    alias_method :root_x, :x_root
+
+    def y_root
+      (root_coords || [])[1]
+    end
+    alias_method :root_y, :y_root
   end
 end

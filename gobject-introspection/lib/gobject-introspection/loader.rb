@@ -233,11 +233,13 @@ module GObjectIntrospection
       field_info.name
     end
 
-    def load_field(info, i, field_info, klass)
+    def load_field(info, i, field_info, klass, options={})
       name = field_name(field_info, klass)
       flags = field_info.flags
 
-      if flags.readable?
+      readable = options[:readable]
+      readable = flags.readable? if readable.nil?
+      if readable
         if field_info.type.tag == TypeTag::BOOLEAN
           reader_method_name = "#{name}?"
         else
@@ -249,7 +251,9 @@ module GObjectIntrospection
         end
       end
 
-      if flags.writable?
+      writable = options[:writable]
+      writable = flags.writable? if writable.nil?
+      if writable
         klass.__send__(:define_method, "#{name}=") do |value|
           info.set_field_value(self, i, value)
         end
