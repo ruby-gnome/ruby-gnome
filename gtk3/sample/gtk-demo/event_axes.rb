@@ -43,6 +43,17 @@ class EventAxesDemo
   Colors = %w(black orchid fuchsia indigo thistle sienna azure plum
               lime navy maroon burlywood)
   PadActionResults = %w(☢ ♨ ☼ ☄ ⚡ 💫 ◑ ⚛)
+  # type index mode label action_name
+  PadActions = [
+  [ :button, 1, -1, "Nuclear strike", "pad.nuke" ],
+  [ :button, 2, -1, "Release siberian methane reserves", "pad.heat" ],
+  [ :button, 3, -1, "Release solar flare", "pad.fry" ],
+  [ :button, 4, -1, "De-stabilize Oort cloud", "pad.fall" ],
+  [ :button, 5, -1, "Ignite WR-104", "pad.burst" ],
+  [ :button, 6, -1, "Lart whoever asks about this button", "pad.lart" ],
+  [ :ring,  -1, -1, "Earth axial tilt", "pad.tilt" ],
+  [ :strip, -1, -1, "Extent of weak nuclear force", "pad.dissolve" ]],
+
 
   def initialize(main_window)
     @cur_color = 0
@@ -96,7 +107,7 @@ class EventAxesDemo
     @label = Gtk::Label.new("")
     @label.use_markup = true
     box.add(@label)
-    # init_pad_controller
+    init_pad_controller
   end
 
   def run
@@ -111,8 +122,26 @@ class EventAxesDemo
   private
 
   def init_pad_controller
-    @window
-    @label
+    action_group = Gio::SimpleActionGroup.new
+    @pad_controller = Gtk::PadController.new(@window, action_group, nil)
+
+    PadActions.each_with_index do |pad_action, i|
+      action = nil
+      if pad_action[0] == :button
+        action = Gio::SimpleAction.new(pad_action[4])
+      else
+        action = Gio::SimpleAction.new(pad_action[4], "double")
+      end
+      action.signal_connect "activate" do |_action, param|
+        if parameter
+          update_label_and_timeout("#{PadActionResults[i]} #{param}")
+        else
+          update_label_and_timeout(PadActionResults[i])
+        end
+      end
+      action_group.add(action)
+      @pad_controller.set_action(*pad_action)
+    end
   end
 
   def draw_axes_info(cr, info, allocation)
@@ -133,14 +162,14 @@ class EventAxesDemo
       return
     end
 
-    if axes & Gdk::AxisFlag::XTILT && axes & Gdk::AxisFlag::YTILT
+    if axes.include?(Gdk::AxisFlags::XTILT) && axes.include?(Gdk::AxisFlags::YTILT)
       tiltx = info.last_source.get_axis(info.axes, :axis_xtilt)
       tilty = info.last_source.get_axis(info.axes, :axis_ytilt)
 
       render_arrow(cr, tiltx * 100, tilty * 100, "Tilt")
     end
 
-    if axes & Gdk::AxisFlag::DISTANCE
+    if axes.include?(Gdk::AxisFlags::DISTANCE)
       distance = info.last_source.get_axis(info.axes, :axis_distance)
 
       cr.save
@@ -160,7 +189,7 @@ class EventAxesDemo
       cr.restore
     end
 
-    if axes & Gdk::AxisFlag::WHEEL
+    if axes.include?(Gdk::AxisFlags::WHEEL)
       wheel = info.last_source.get_axis(info.axes, :axis_wheel)
       cr.save
       cr.set_line_width(10)
@@ -172,7 +201,7 @@ class EventAxesDemo
       cr.restore
     end
 
-    if axes & Gdk::AxisFlag::ROTATION
+    if axes.include?(Gdk::AxisFlags::ROTATION)
       rotation = info.last_source.get_axis(info.axes, :axis_rotation)
       rotation *= (2 * Math::PI)
 
@@ -187,7 +216,7 @@ class EventAxesDemo
       cr.restore
     end
 
-    if axes & Gdk::AxisFlag::SLIDER
+    if axes.include?(Gdk::AxisFlags::SLIDER)
       slider = info.last_source.get_axis(info.axes, :axis_slider)
 
       cr.save
@@ -224,7 +253,7 @@ class EventAxesDemo
     cr.save
     str = "Source: #{info.last_source.name}"
 
-    str += "\nSequence: #{sequence}" if sequence
+    str += "\nSequence: #{sequence.class.name}" if sequence
 
     if info.last_tool
       tool_type = tool_type_to_string(info.last_tool.tool_type)
@@ -296,15 +325,11 @@ class EventAxesDemo
     end
 
     if event.type == :motion_notify
-      puts "tototche"
-      puts Gdk::Device.methods
-      puts source_device.n_axes
-      @event_data.axes = event.axis[0..source_device.n_axes]
+      info.axes = source_device.axes
     elsif event.type == :button_press || event.type == :button_release
-      @event_data.axes = event.axis[0..source_device.n_axes]
+      info.axes = source_device.axes
     end
-
-    _, x, y = event.coords
+    x, y = event.coords
     info.x = x
     info.y = y
   end
