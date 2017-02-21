@@ -1,0 +1,31 @@
+# -*- ruby -*-
+
+$LOAD_PATH.unshift("./../glib2/lib")
+require "gnome2/rake/package-task"
+
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  package.summary = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
+  package.description = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
+  package.dependency.gem.runtime = ["glib2"]
+  package.windows.packages = []
+  package.windows.dependencies = []
+  package.windows.build_dependencies = ["glib2", "gobject-introspection"]
+  package.external_packages = [
+    {
+      :name => "atk",
+      :download_site => :gnome,
+      :label => "atk",
+      :version => "2.22.0",
+      :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--enable-introspection",
+        ],
+        :build_concurrently => false,
+        :built_file => "bin/libatk-1.0-0.dll",
+      },
+    }
+  ]
+end
+package_task.define
+
