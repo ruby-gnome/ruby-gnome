@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,39 +14,38 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require 'glib2'
+require "gobject-introspection"
+require "glib2"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
 vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_dll_path(vendor_bin_dir)
-begin
-  major, minor, _ = RUBY_VERSION.split(/\./)
-  require "#{major}.#{minor}/atk.so"
-rescue LoadError
-  require 'atk.so'
-end
-
-if vendor_dir.exist?
-  begin
-    require "gobject-introspection"
-    vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
-    GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
-  rescue LoadError
-  end
-end
+vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
+GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 module Atk
+  LOG_DOMAIN = "Atk"
+  GLib::Log.set_log_domain(LOG_DOMAIN)
+
+  class Loader < GObjectIntrospection::Loader
+  end
+
+  loader = Loader.new(self)
+  loader.load("Atk")
+
   module Version
-    MAJOR, MINOR, MICRO = Atk::BUILD_VERSION
-    STRING = Atk::BUILD_VERSION.join(".")
+    MAJOR = MAJOR_VERSION
+    MINOR = MINOR_VERSION
+    MICRO = MICRO_VERSION
+    STRING = "#{MAJOR_VERSION}.#{MINOR_VERSION}.#{MICRO_VERSION}"
     class << self
       def or_later?(major, minor, micro=nil)
         micro ||= 0
         version = [
-          MAJOR,
-          MINOR,
-          MICRO,
+          MAJOR_VERSION,
+          MINOR_VERSION,
+          MICRO_VERSION,
         ]
         (version <=> [major, minor, micro]) >= 0
       end

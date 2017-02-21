@@ -20,7 +20,14 @@ class TestAtkRectangle < Test::Unit::TestCase
   include AtkTestUtils
 
   def test_width
-    rectangle = Atk::TextRectangle.new(0, 10, 20, 30)
+    rectangle = Atk::TextRectangle.new
+    rectangle.x = 0
+    rectangle.y = 10
+    rectangle.width = 20
+    rectangle.height = 30
+    assert_equal(0, rectangle.x)
+    assert_equal(10, rectangle.y)
     assert_equal(20, rectangle.width)
+    assert_equal(30, rectangle.height)
   end
 end
