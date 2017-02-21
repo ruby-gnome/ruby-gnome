@@ -24,6 +24,7 @@ priorlibs = [
 ]
 
 unsupported_libraries = [
+  "atk-no-gi",
   "gdk_pixbuf2-no-gi",
   "gdk3-no-gi",
   "gtk3-no-gi",
