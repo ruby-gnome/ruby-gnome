@@ -30,13 +30,7 @@ class EventAxesDemo
                         :axes,
                         :color,
                         :x,
-                        :y)# do
-#    def initialize(*args)
-#      super(*args)
-#      self.color = Gdk::RGBA.parse(Colors[@cur_color])
-#      @cur_color = (@cur_color + 1) % Colors.size
-#    end
-#  end
+                        :y)
 
   EventData = Struct.new(:pointer_info, :touch_info)
 
@@ -52,7 +46,7 @@ class EventAxesDemo
   [ :button, 5, -1, "Ignite WR-104", "pad.burst" ],
   [ :button, 6, -1, "Lart whoever asks about this button", "pad.lart" ],
   [ :ring,  -1, -1, "Earth axial tilt", "pad.tilt" ],
-  [ :strip, -1, -1, "Extent of weak nuclear force", "pad.dissolve" ]],
+  [ :strip, -1, -1, "Extent of weak nuclear force", "pad.dissolve" ]]
 
 
   def initialize(main_window)
@@ -80,7 +74,6 @@ class EventAxesDemo
 
     box.signal_connect "draw" do |widget, cr|
       y = 0
-      # draw_cb
       allocation = widget.allocation
 
       # Draw Abs info
@@ -130,7 +123,7 @@ class EventAxesDemo
       if pad_action[0] == :button
         action = Gio::SimpleAction.new(pad_action[4])
       else
-        action = Gio::SimpleAction.new(pad_action[4], "double")
+        action = Gio::SimpleAction.new(pad_action[4], "d")
       end
       action.signal_connect "activate" do |_action, param|
         if parameter
@@ -139,7 +132,7 @@ class EventAxesDemo
           update_label_and_timeout(PadActionResults[i])
         end
       end
-      action_group.add(action)
+      action_group.add_action(action)
       @pad_controller.set_action(*pad_action)
     end
   end
@@ -253,7 +246,9 @@ class EventAxesDemo
     cr.save
     str = "Source: #{info.last_source.name}"
 
-    str += "\nSequence: #{sequence.class.name}" if sequence
+    if sequence && sequence.class.name
+      str += "\nSequence: #{sequence.class.name}"
+    end
 
     if info.last_tool
       tool_type = tool_type_to_string(info.last_tool.tool_type)
