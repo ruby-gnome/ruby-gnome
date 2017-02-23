@@ -20,13 +20,11 @@ ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
 ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
 glib_base = File.join(ruby_gnome2_base, "glib2")
-gio2_base = File.join(ruby_gnome2_base, "gio2")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 atk_base = File.join(ruby_gnome2_base, "atk")
 
 modules = [
   [glib_base, "glib2"],
-  [gio2_base, "gio2"],
   [gobject_introspection_base, "gobject-introspection"],
   [atk_base, "atk"]
 ]
