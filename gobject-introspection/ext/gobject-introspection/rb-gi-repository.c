@@ -270,5 +270,9 @@ rb_gi_repository_init(VALUE rb_mGI)
     RG_DEF_METHOD(get_version, 1);
 
     G_DEF_CLASS(G_TYPE_I_REPOSITORY_LOAD_FLAGS, "RepositoryLoadFlags", rb_mGI);
-    G_DEF_CLASS(G_TYPE_I_REPOSITORY_ERROR, "RepositoryError", rb_mGI);
+    G_DEF_ERROR(G_IREPOSITORY_ERROR,
+                "RepositoryError",
+                rb_mGI,
+                rb_eLoadError,
+                G_TYPE_I_REPOSITORY_ERROR);
 }
