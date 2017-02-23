@@ -28,6 +28,7 @@ Pathname.glob((base_dir + "*").to_s) do |dir|
 end
 
 ignored_modules = [
+  "atk-no-gi",
   "gdk_pixbuf2-no-gi",
   "gstreamer-no-gi",
   "gdk3-no-gi",
