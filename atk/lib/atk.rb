@@ -33,6 +33,16 @@ module Atk
   loader = Loader.new(self)
   loader.load("Atk")
 
+  class TextRectangle
+    def initialize(x=nil, y=nil, width=nil, height=nil)
+      super()
+      self.x = x if x
+      self.y = y if y
+      self.width = width if width
+      self.height = height if height
+    end
+  end
+
   module Version
     MAJOR = MAJOR_VERSION
     MINOR = MINOR_VERSION
