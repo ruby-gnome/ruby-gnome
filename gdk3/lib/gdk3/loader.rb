@@ -16,6 +16,10 @@
 
 module Gdk
   class Loader < GObjectIntrospection::Loader
+    def load
+      super("Gdk")
+    end
+
     private
     def window_class
       @window_class ||= @base_module.const_get(:Window)

@@ -28,6 +28,7 @@ vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 require "gdk3/loader"
+require "gdk3/x11-loader"
 
 module Gdk
   LOG_DOMAIN = "Gdk"
@@ -53,7 +54,9 @@ module Gdk
         remove_method(:const_missing)
       end
       loader = Loader.new(self)
-      loader.load("Gdk")
+      loader.load
+      x11_loader = X11Loader.new(self)
+      x11_loader.load
       if Object.const_defined?(:Gtk) and Gtk.respond_to?(:init)
         Gtk.init
       end
