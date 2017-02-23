@@ -417,6 +417,9 @@ module GObjectIntrospection
       if options[:prefix]
         name = name.gsub(/\A#{Regexp.escape(options[:prefix])}/, "")
       end
+      if name == "initialize"
+        name += "_raw"
+      end
       return_type = function_info.return_type
       return_type_tag = return_type.tag
       case return_type_tag
