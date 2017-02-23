@@ -1,4 +1,6 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2013  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,7 +16,11 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "test-unit"
+class TestAtkRectangle < Test::Unit::TestCase
+  include AtkTestUtils
 
-module AtkTestUtils
+  def test_width
+    rectangle = Atk::TextRectangle.new(0, 10, 20, 30)
+    assert_equal(20, rectangle.width)
+  end
 end
