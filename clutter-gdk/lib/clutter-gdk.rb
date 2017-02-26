@@ -22,7 +22,27 @@ module ClutterGdk
   loader.load("ClutterGdk")
 end
 
+init_gdk = lambda do
+  module Gdk
+    class Window
+      def clutter_stage
+        ClutterGdk.get_stage_from_window(self)
+      end
+    end
+  end
+end
+
+if Gdk.respond_to?(:init)
+  Gdk.on_init do
+    init_gdk.call
+  end
+else
+  init_gdk.call
+end
+
 init_clutter = lambda do
+  Gdk.init if Gdk.respond_to?(:init)
+
   module Clutter
     class Stage
       def gdk_window
@@ -43,22 +63,4 @@ if Clutter.respond_to?(:init)
   end
 else
   init_clutter.call
-end
-
-init_gdk = lambda do
-  module Gdk
-    class Window
-      def clutter_stage
-        ClutterGdk.get_stage_from_window(self)
-      end
-    end
-  end
-end
-
-if Gdk.respond_to?(:init)
-  Gdk.on_init do
-    init_gdk.call
-  end
-else
-  init_gdk.call
 end
