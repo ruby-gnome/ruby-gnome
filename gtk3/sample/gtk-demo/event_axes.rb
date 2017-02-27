@@ -360,4 +360,16 @@ class EventAxesDemo
 
     cr.restore
   end
+
+  def update_label_and_timeout(text)
+    GLib::Source.remove(@pad_action_timeout_id) if @pad_action_timeout_id
+
+    @label.markup = "<span font='48.0'>#{text}</span>"
+
+    @pad_action_timeout_id = GLib::Timeout.add(200) do
+      @label.markup = "<span font='48.0'>#{text}</span>"
+      @pad_action_timeout_id = 0
+      GLib::Source::REMOVE
+    end
+  end
 end
