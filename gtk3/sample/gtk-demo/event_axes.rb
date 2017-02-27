@@ -91,7 +91,7 @@ class EventAxesDemo
         y = draw_device_info(widget, cr, nil, y, value)
       end
 
-      @event_data.pointer_info.each do |key, value|
+      @event_data.touch_info.each do |key, value|
         y = draw_device_info(widget, cr, key, y, value)
       end
 
