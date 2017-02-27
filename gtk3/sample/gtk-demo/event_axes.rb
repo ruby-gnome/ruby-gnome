@@ -25,29 +25,30 @@
  touchpoints can be tracked.
 =end
 class EventAxesDemo
-  AxesInfo = Struct.new(:last_source,
-                        :last_tool,
-                        :axes,
-                        :color,
-                        :x,
-                        :y)
+  AXES_INFO = Struct.new(:last_source,
+                         :last_tool,
+                         :axes,
+                         :color,
+                         :x,
+                         :y)
 
-  EventData = Struct.new(:pointer_info, :touch_info)
+  EVENT_DATA = Struct.new(:pointer_info, :touch_info)
 
-  Colors = %w(black orchid fuchsia indigo thistle sienna azure plum
-              lime navy maroon burlywood)
-  PadActionResults = %w(☢ ♨ ☼ ☄ ⚡ 💫 ◑ ⚛)
+  COLORS = %w(black orchid fuchsia indigo thistle sienna azure plum
+              lime navy maroon burlywood).freeze
+  PAD_ACTION_RESULTS = %w(☢ ♨ ☼ ☄ ⚡ 💫 ◑ ⚛).freeze
   # type index mode label action_name
-  PadActions = [
-  [ :button, 1, -1, "Nuclear strike", "pad.nuke" ],
-  [ :button, 2, -1, "Release siberian methane reserves", "pad.heat" ],
-  [ :button, 3, -1, "Release solar flare", "pad.fry" ],
-  [ :button, 4, -1, "De-stabilize Oort cloud", "pad.fall" ],
-  [ :button, 5, -1, "Ignite WR-104", "pad.burst" ],
-  [ :button, 6, -1, "Lart whoever asks about this button", "pad.lart" ],
-  [ :ring,  -1, -1, "Earth axial tilt", "pad.tilt" ],
-  [ :strip, -1, -1, "Extent of weak nuclear force", "pad.dissolve" ]]
-
+  PAD_ACTIONS =
+    [
+      [:button, 1, -1, "Nuclear strike", "pad.nuke"],
+      [:button, 2, -1, "Release siberian methane reserves", "pad.heat"],
+      [:button, 3, -1, "Release solar flare", "pad.fry"],
+      [:button, 4, -1, "De-stabilize Oort cloud", "pad.fall"],
+      [:button, 5, -1, "Ignite WR-104", "pad.burst"],
+      [:button, 6, -1, "Lart whoever asks about this button", "pad.lart"],
+      [:ring,  -1, -1, "Earth axial tilt", "pad.tilt"],
+      [:strip, -1, -1, "Extent of weak nuclear force", "pad.dissolve"]
+    ].freeze
 
   def initialize(main_window)
     @cur_color = 0
@@ -60,11 +61,11 @@ class EventAxesDemo
     @window.add(box)
     box.support_multidevice = true
     box.add_events([:pointer_motion_mask, :button_press_mask,
-                   :button_release_mask, :smooth_scroll_mask,
-                   :enter_notify_mask, :leave_notify_mask,
-                   :touch_mask])
+                    :button_release_mask, :smooth_scroll_mask,
+                    :enter_notify_mask, :leave_notify_mask,
+                    :touch_mask])
 
-    @event_data = EventData.new({}, {})
+    @event_data = EVENT_DATA.new({}, {})
 
     box.signal_connect "event" do |widget, event|
       update_axes_from_event(event)
@@ -77,16 +78,16 @@ class EventAxesDemo
       allocation = widget.allocation
 
       # Draw Abs info
-      @event_data.pointer_info.each do |key, value|
+      @event_data.pointer_info.each do |_key, value|
         draw_axes_info(cr, value, allocation)
       end
 
-      @event_data.touch_info.each do |key, value|
+      @event_data.touch_info.each do |_key, value|
         draw_axes_info(cr, value, allocation)
       end
 
       # Draw name, color legend and misc data
-      @event_data.pointer_info.each do |key, value|
+      @event_data.pointer_info.each do |_key, value|
         y = draw_device_info(widget, cr, nil, y, value)
       end
 
@@ -118,18 +119,17 @@ class EventAxesDemo
     action_group = Gio::SimpleActionGroup.new
     @pad_controller = Gtk::PadController.new(@window, action_group, nil)
 
-    PadActions.each_with_index do |pad_action, i|
-      action = nil
-      if pad_action[0] == :button
-        action = Gio::SimpleAction.new(pad_action[4])
-      else
-        action = Gio::SimpleAction.new(pad_action[4], "d")
-      end
+    PAD_ACTIONS.each_with_index do |pad_action, i|
+      action = if pad_action[0] == :button
+                 Gio::SimpleAction.new(pad_action[4])
+               else
+                 Gio::SimpleAction.new(pad_action[4], "d")
+               end
       action.signal_connect "activate" do |_action, param|
-        if parameter
-          update_label_and_timeout("#{PadActionResults[i]} #{param}")
+        if param
+          update_label_and_timeout("#{PAD_ACTION_RESULTS[i]} #{param}")
         else
-          update_label_and_timeout(PadActionResults[i])
+          update_label_and_timeout(PAD_ACTION_RESULTS[i])
         end
       end
       action_group.add_action(action)
@@ -199,7 +199,7 @@ class EventAxesDemo
       rotation *= (2 * Math::PI)
 
       cr.save
-      cr.rotate( -1 * (Math::PI / 2))
+      cr.rotate(-1 * (Math::PI / 2))
       cr.set_line_cap(Cairo::LINE_CAP_ROUND)
       cr.set_line_width(5)
 
@@ -245,7 +245,6 @@ class EventAxesDemo
   def draw_device_info(widget, cr, sequence, y, info)
     cr.save
     str = "Source: #{info.last_source.name}"
-
     if sequence && sequence.class.name
       str += "\nSequence: #{sequence.class.name}"
     end
@@ -269,7 +268,6 @@ class EventAxesDemo
     y += h
     cr.line_to(0, y)
     cr.stroke
-
     cr.restore
 
     y
@@ -295,9 +293,9 @@ class EventAxesDemo
       info = @event_data.pointer_info[device]
 
       unless info
-        info = AxesInfo.new
-        info.color = Gdk::RGBA.parse(Colors[@cur_color])
-        @cur_color = (@cur_color + 1) % Colors.size
+        info = AXES_INFO.new
+        info.color = Gdk::RGBA.parse(COLORS[@cur_color])
+        @cur_color = (@cur_color + 1) % COLORS.size
 
         @event_data.pointer_info[device] = info
       end
@@ -305,9 +303,9 @@ class EventAxesDemo
       info = @event_data.touch_info[sequence]
 
       unless info
-        info = AxesInfo.new
-        info.color = Gdk::RGBA.parse(Colors[@cur_color])
-        @cur_color = (@cur_color + 1) % Colors.size
+        info = AXES_INFO.new
+        info.color = Gdk::RGBA.parse(COLORS[@cur_color])
+        @cur_color = (@cur_color + 1) % COLORS.size
         @event_data.touch_info[sequence] = info
       end
     end
@@ -332,21 +330,34 @@ class EventAxesDemo
   def tool_type_to_string(tool_type)
     case tool_type
     when Gdk::DeviceToolType::PEN
-       "Pen"
+      "Pen"
     when Gdk::DeviceToolType::ERASER
-       "Eraser"
+      "Eraser"
     when Gdk::DeviceToolType::BRUSH
-       "Brush"
+      "Brush"
     when Gdk::DeviceToolType::PENCIL
-       "Pencil"
+      "Pencil"
     when Gdk::DeviceToolType::AIRBRUSH
-       "Airbrush"
+      "Airbrush"
     when Gdk::DeviceToolType::MOUSE
-       "Mouse"
+      "Mouse"
     when Gdk::DeviceToolType::LENS
-       "Lens cursor"
+      "Lens cursor"
     else
-       "Unknown"
+      "Unknown"
     end
+  end
+
+  def render_arrow(cr, x_diff, y_diff, label)
+    cr.save
+    cr.set_source_rgb(0, 0, 0)
+    cr.new_path
+    cr.move_to(0, 0)
+    cr.line_to(x_diff, y_diff)
+    cr.stroke
+    cr.move_to(x_diff, y_diff)
+    cr.show_text(label)
+
+    cr.restore
   end
 end
