@@ -54,6 +54,7 @@ theming_style_classes.c ok              ok
 transparent.c           ok              ok
 images.c                ok              ok
 textview.c              ok              ok
+event_axes.c            ok              ok
 
 Remains :
 
@@ -61,7 +62,6 @@ application.c           no              no
 changedisplay.c         ok              no
 combobox.c              no              no
 css_blendmodes.c	no		no
-event_axes.c            no              no
 fishbowl.c		no		no
 flowbox.c               no              no
 foreigndrawing          no              no
