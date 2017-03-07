@@ -1,0 +1,10 @@
+<u><span foreground="red" size="x-large" style="italic"
+lang="en">Hello World!</span></u> <span background="yellow" lang="ja"
+font_desc="Sans Italic 20" stretch="normal">こんにちわ世界！</span>
+
+<span size="xx-large" face="Serif" foreground="#006600" background="#ffffee">
+<span size="larger" underline="double" weight="heavy">Ruby/Pango</span> <span
+rise="10000" variant="normal" weight="heavy">$Ruby-GNOME2</span>
+</span>
+
+<span strikethrough="true" size="xx-large" style="oblique" foreground="blue">ABCDEF</span>
