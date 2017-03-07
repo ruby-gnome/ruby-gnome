@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -133,7 +133,7 @@ module GObjectIntrospection
         method_infos = info.methods.find_all do |method_info|
           method_info.is_a?(MethodInfo)
         end
-        unless methods.empty?
+        unless method_infos.empty?
           base_class = @base_module.const_get(base_class_name)
           load_method_infos(method_infos, base_class.singleton_class)
         end
