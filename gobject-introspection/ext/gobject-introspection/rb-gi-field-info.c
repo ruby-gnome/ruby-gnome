@@ -99,7 +99,7 @@ rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
                     int offset;
 
                     offset = g_field_info_get_offset(info);
-                    argument.v_pointer = G_STRUCT_MEMBER_P(memory, offset);
+                    argument.v_pointer = G_STRUCT_MEMBER(gpointer, memory, offset);
                     processed = TRUE;
                 }
                 break;
