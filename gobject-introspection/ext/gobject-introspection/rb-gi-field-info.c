@@ -152,11 +152,43 @@ rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
 
     succeeded = g_field_info_set_field(info, memory, &field_value);
     if (!succeeded) {
-        if (type_tag == GI_TYPE_TAG_UTF8) {
-            int offset;
-            offset = g_field_info_get_offset(info);
-            G_STRUCT_MEMBER(gchar *, memory, offset) = field_value.v_string;
-            succeeded = TRUE;
+        switch (type_tag) {
+          case GI_TYPE_TAG_INTERFACE:
+            {
+                GIBaseInfo *interface_info;
+                GIInfoType interface_type;
+
+                interface_info = g_type_info_get_interface(type_info);
+                interface_type = g_base_info_get_type(interface_info);
+                switch (interface_type) {
+                  case GI_INFO_TYPE_STRUCT:
+                  case GI_INFO_TYPE_UNION:
+                  case GI_INFO_TYPE_BOXED:
+                    {
+                        int offset;
+
+                        offset = g_field_info_get_offset(info);
+                        G_STRUCT_MEMBER(gpointer, memory, offset) =
+                            field_value.v_pointer;
+                        succeeded = TRUE;
+                    }
+                    break;
+                  default:
+                    break;
+                }
+                g_base_info_unref(interface_info);
+            }
+            break;
+          case GI_TYPE_TAG_UTF8:
+            {
+                int offset;
+                offset = g_field_info_get_offset(info);
+                G_STRUCT_MEMBER(gchar *, memory, offset) = field_value.v_string;
+                succeeded = TRUE;
+            }
+            break;
+          default:
+            break;
         }
     }
     rb_gi_value_argument_free(rb_field_value, &field_value, type_info);
