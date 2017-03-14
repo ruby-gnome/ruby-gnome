@@ -24,11 +24,11 @@ GLib.prepend_dll_path(vendor_bin_dir)
 vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
+require "pango/loader"
+
 module Pango
   LOG_DOMAIN = "Pango"
   GLib::Log.set_log_domain(LOG_DOMAIN)
-class Loader < GObjectIntrospection::Loader
-end
 
   loader = Loader.new(self)
   loader.load("Pango")
@@ -51,5 +51,3 @@ end
 #    end
 #  end
 end
-
-
