@@ -66,8 +66,7 @@ struct_alloc(VALUE klass)
 
     rb_size = rb_iv_get(klass, "@size");
     size = NUM2ULONG(rb_size);
-    instance = xmalloc(size);
-    memset(instance, 0, size);
+    instance = xcalloc(1, size);
     return Data_Wrap_Struct(klass, NULL, xfree, instance);
 }
 
