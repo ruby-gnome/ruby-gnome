@@ -33,6 +33,12 @@ module Pango
   loader = Loader.new(self)
   loader.load("Pango")
 
+  module Cairo
+    class Loader < GObjectIntrospection::Loader
+    end
+    loader = Loader.new(self)
+    loader.load("PangoCairo")
+  end
 #  module Version
 #    MAJOR = MAJOR_VERSION
 #    MINOR = MINOR_VERSION
