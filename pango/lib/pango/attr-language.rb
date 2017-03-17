@@ -19,6 +19,7 @@ module Pango
     alias_method :initialize_raw, :initialize
     def initialize(language)
       initialize_raw
+      init(self)
       self.value = language
     end
   end
