@@ -16,30 +16,32 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
- $VERBOSE = true
+$VERBOSE = true
 
- ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
- ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
+ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
+ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
- glib_base = File.join(ruby_gnome2_base, "glib2")
- gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
- pango_base = File.join(ruby_gnome2_base, "pango")
+glib_base = File.join(ruby_gnome2_base, "glib2")
+gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
+cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
+pango_base = File.join(ruby_gnome2_base, "pango")
 
- $LOAD_PATH.unshift(File.join(glib_base, "test"))
+$LOAD_PATH.unshift(File.join(glib_base, "test"))
 
- modules = [
-   [glib_base, "glib2"],
-   [gobject_introspection_base, "gobject-introspection"],
-   [pango_base, "pango"]
- ]
- modules.each do |target, module_name|
-   makefile = File.join(target, "Makefile")
-   if File.exist?(makefile) and system("which make > /dev/null")
-     `make -C #{target.dump} > /dev/null` or exit(false)
-      $LOAD_PATH.unshift(File.join(target, "ext", module_name))
-   end
-   $LOAD_PATH.unshift(File.join(target, "lib"))
- end
+modules = [
+  [glib_base, "glib2"],
+  [gobject_introspection_base, "gobject-introspection"],
+  [cairo_gobject_base, "cairo-gobject"],
+  [pango_base, "pango"],
+]
+modules.each do |target, module_name|
+  makefile = File.join(target, "Makefile")
+  if File.exist?(makefile) and system("which make > /dev/null")
+    `make -C #{target.dump} > /dev/null` or exit(false)
+     $LOAD_PATH.unshift(File.join(target, "ext", module_name))
+  end
+  $LOAD_PATH.unshift(File.join(target, "lib"))
+end
 
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 require "glib-test-init"
