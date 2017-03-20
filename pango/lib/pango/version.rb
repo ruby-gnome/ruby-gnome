@@ -15,35 +15,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Pango
-  class Loader < GObjectIntrospection::Loader
+  module Version
+    STRING = Pango.version_string
+    MAJOR, MINOR, MICRO = STRING.split(".").collect(&:to_i)
 
-    private
-
-    def pre_load(repository, namespace)
-      @pending_attribute_infos = []
-    end
-
-    def post_load(repository, namespace)
-      @pending_attribute_infos.each do |info|
-        define_struct(info, :parent => Attribute)
+    class << self
+      def or_later?(major, minor, micro=nil)
+        micro ||= 0
+        message = Pango.version_check(major, minor, micro)
+        message.nil?
       end
-      require_libraries
-    end
-
-    def load_struct_info(info)
-      case info.name
-      when /Class\z/
-        super
-      when/\AAttr[A-Z]/
-        @pending_attribute_infos << info
-      else
-        super
-      end
-    end
-
-    def require_libraries
-      require "pango/attr-language"
-      require "pango/version"
     end
   end
 end

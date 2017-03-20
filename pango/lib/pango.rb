@@ -39,17 +39,4 @@ module Pango
     loader = Loader.new(self)
     loader.load("PangoCairo")
   end
-
-  module Version
-    STRING = Pango.version_string
-    MAJOR, MINOR, MICRO = STRING.split(".").collect(&:to_i)
-
-    class << self
-      def or_later?(major, minor, micro=nil)
-        micro ||= 0
-        message = Pango.version_check(major, minor, micro)
-        message.nil?
-      end
-    end
-  end
 end
