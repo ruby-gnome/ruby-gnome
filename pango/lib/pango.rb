@@ -16,6 +16,7 @@
 
 require "gobject-introspection"
 require "cairo"
+require "cairo-gobject"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
