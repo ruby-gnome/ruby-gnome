@@ -37,6 +37,17 @@ interface_struct_to_ruby(gpointer object,
 
     namespace = g_base_info_get_namespace(interface_info);
     name = g_base_info_get_name(interface_info);
+
+    if (strcmp(namespace, "cairo") == 0) {
+        gchar *gtype_name;
+        GType gtype;
+
+        gtype_name = g_strdup_printf("Cairo%s", name);
+        gtype = g_type_from_name(gtype_name);
+        g_free(gtype_name);
+        return BOXED2RVAL(target_object, gtype);
+    }
+
     rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
     rb_class = rb_const_get(rb_module, rb_intern(name));
     if (rb_respond_to(rb_class, rb_intern("gtype"))) {
