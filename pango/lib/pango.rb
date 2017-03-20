@@ -1,84 +1,59 @@
+# Copyright (C) 2017  Ruby-GNOME2 Project Team
 #
-# pango.rb
-# Copyright(C) 2005-2015 Ruby-GNOME2 Project.
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
 #
-# This program is licenced under the same
-# license of Ruby-GNOME2.
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
 #
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require 'glib2'
-require 'cairo'
+require "gobject-introspection"
+require "cairo"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
 vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_dll_path(vendor_bin_dir)
-begin
-  major, minor, _ = RUBY_VERSION.split(/\./)
-  require "#{major}.#{minor}/pango.so"
-rescue LoadError
-  require "pango.so"
-end
+vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
+GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
-if vendor_dir.exist?
-  begin
-    require "gobject-introspection"
-    vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
-    GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
-  rescue LoadError
-  end
-end
+require "pango/loader"
 
 module Pango
   LOG_DOMAIN = "Pango"
+  GLib::Log.set_log_domain(LOG_DOMAIN)
 
-  class AttrList
-    def each(text = nil)
-      iter = iterator
-      begin
-        if text
-          s, e = iter.range
-          yield(iter, text[s, e - s], s, e)
-        else
-          yield(iter)
-        end
-      end while iter.next!
+  loader = Loader.new(self)
+  loader.load("Pango")
+
+  module Cairo
+    class Loader < GObjectIntrospection::Loader
     end
+    loader = Loader.new(self)
+    loader.load("PangoCairo")
   end
-
-  # [[klass, prefix], ....]]
-  targets = [[Layout::Alignment, "ALIGN_"], [AttrScale, "SCALE_"], 
-    [Coverage::Level, "COVERAGE_"], [Context::Direction, "DIRECTION_"],
-    [Layout::WrapMode, "WRAP_"], [FontDescription::FontMask, "FONT_MASK_"], 
-    [FontDescription::Stretch, "STRETCH_"], [FontDescription::Style, "STYLE_"],
-    [FontDescription::Variant, "VARIANT_"], [FontDescription::Weight, "WEIGHT_"], 
-    [TabArray::TabAlign, "TAB_"],
-    [AttrUnderline::Underline, "UNDERLINE_"]]
-
-  targets << [Script, "SCRIPT_"] if defined? Script
-  targets << [Layout::EllipsizeMode, "ELLIPSIZE_"] if defined? Layout::EllipsizeMode
-  targets << [Renderer::Part, "PART_"] if defined? Renderer::Part
-
-  targets.each do |klass, prefix|
-    (klass.constants - klass.superclass.constants).each do |name|
-      unless klass.const_get(name).is_a? Class
-	const_set("#{prefix}#{name}", klass.const_get(name))
-      end
-    end
-  end
-  
-  module Version
-    MAJOR, MINOR, MICRO = BUILD_VERSION
-    STRING = Pango.version_string
-
-    class << self
-      def or_later?(major, minor, micro = nil)
-        micro || 0
-        error_message = Pango.check_version(major, minor, micro)
-        error_message.nil?
-      end
-    end
-  end
+#  module Version
+#    MAJOR = MAJOR_VERSION
+#    MINOR = MINOR_VERSION
+#    MICRO = MICRO_VERSION
+#    STRING = "#{MAJOR_VERSION}.#{MINOR_VERSION}.#{MICRO_VERSION}"
+#    class << self
+#      def or_later?(major, minor, micro=nil)
+#        micro ||= 0
+#        version = [
+#          MAJOR_VERSION,
+#          MINOR_VERSION,
+#          MICRO_VERSION,
+#        ]
+#        (version <=> [major, minor, micro]) >= 0
+#      end
+#    end
+#  end
 end
-
-GLib::Log.set_log_domain(Pango::LOG_DOMAIN)
