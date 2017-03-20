@@ -18,12 +18,12 @@ class TestContext < Test::Unit::TestCase
   include PangoTestUtils
 
   def setup
-    font_map = Pango::Cairo::FontMap.default
+    font_map = Pango::CairoFontMap.default
     @context = font_map.create_context
   end
 
   def test_set_font_map
-    font_map = Pango::Cairo::FontMap.default
+    font_map = Pango::CairoFontMap.default
     @context.font_map = font_map
     assert_equal(font_map, @context.font_map)
   end

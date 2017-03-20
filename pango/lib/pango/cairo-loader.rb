@@ -14,26 +14,11 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gobject-introspection"
-require "cairo"
-
-base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
-vendor_dir = base_dir + "vendor" + "local"
-vendor_bin_dir = vendor_dir + "bin"
-GLib.prepend_dll_path(vendor_bin_dir)
-vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
-GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
-
-require "pango/loader"
-require "pango/cairo-loader"
-
 module Pango
-  LOG_DOMAIN = "Pango"
-  GLib::Log.set_log_domain(LOG_DOMAIN)
-
-  loader = Loader.new(self)
-  loader.load("Pango")
-
-  cairo_loader = CairoLoader.new(self)
-  cairo_loader.load("PangoCairo")
+  class CairoLoader < GObjectIntrospection::Loader
+    private
+    def rubyish_class_name(info)
+      "Cairo#{super}"
+    end
+  end
 end
