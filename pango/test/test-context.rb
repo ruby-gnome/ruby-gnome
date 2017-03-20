@@ -23,7 +23,7 @@ class TestContext < Test::Unit::TestCase
   end
 
   def test_set_font_map
-    font_map = Pango::FontMap.default
+    font_map = Pango::Cairo::FontMap.default
     @context.font_map = font_map
     assert_equal(font_map, @context.font_map)
   end
