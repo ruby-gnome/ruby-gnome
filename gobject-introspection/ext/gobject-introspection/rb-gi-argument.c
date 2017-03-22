@@ -1254,7 +1254,14 @@ rb_gi_out_argument_init_array_c(GIArgument *argument,
         break;
       case GI_TYPE_TAG_FILENAME:
       case GI_TYPE_TAG_ARRAY:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: allocates GIArgument(array)[c][%s] for output",
+                 g_type_tag_to_string(element_type_tag));
+        break;
       case GI_TYPE_TAG_INTERFACE:
+        argument->v_pointer = xmalloc(sizeof(gpointer *));
+        break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
@@ -1811,7 +1818,14 @@ rb_gi_out_argument_fin_array_c(GIArgument *argument,
         break;
       case GI_TYPE_TAG_FILENAME:
       case GI_TYPE_TAG_ARRAY:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: free out GIArgument(array)[c][%s]",
+                 g_type_tag_to_string(element_type_tag));
+        break;
       case GI_TYPE_TAG_INTERFACE:
+        xfree(argument->v_pointer);
+        break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
