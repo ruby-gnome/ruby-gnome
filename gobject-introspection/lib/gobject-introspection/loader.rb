@@ -422,6 +422,12 @@ module GObjectIntrospection
       end
       return_type = function_info.return_type
       return_type_tag = return_type.tag
+      if return_type_tag == TypeTag::VOID
+        out_arg_tags = function_info.out_args.collect {|arg| arg.type.tag}
+        if out_arg_tags == [TypeTag::ARRAY, TypeTag::INT32]
+          return_type_tag = TypeTag::ARRAY
+        end
+      end
       case return_type_tag
       when TypeTag::BOOLEAN
         case name
@@ -450,7 +456,7 @@ module GObjectIntrospection
         else
           name
         end
-      when TypeTag::GLIST, TypeTag::GSLIST
+      when TypeTag::GLIST, TypeTag::GSLIST, TypeTag::ARRAY
         case name
         when /\A(?:list|get)_/
           if function_info.n_in_args.zero?

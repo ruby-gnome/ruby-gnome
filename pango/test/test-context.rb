@@ -91,7 +91,7 @@ class TestContext < Test::Unit::TestCase
   end
 
   def test_families
-    family_names = @context.list_families.collect(&:name)
+    family_names = @context.families.collect(&:name)
     assert do
       family_names.include?("Monospace")
     end
