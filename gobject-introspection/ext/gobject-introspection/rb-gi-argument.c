@@ -2951,7 +2951,7 @@ static void
 rb_gi_in_argument_transfer_interface(GIArgument *argument,
                                      G_GNUC_UNUSED GITransfer transfer,
                                      GITypeInfo *type_info,
-                                     G_GNUC_UNUSED VALUE rb_argument)
+                                     VALUE rb_argument)
 {
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
