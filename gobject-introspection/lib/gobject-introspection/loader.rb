@@ -118,9 +118,11 @@ module GObjectIntrospection
         klass = self.class.define_struct(info.size, name, @base_module,
                                          :parent => options[:parent])
       else
+        size = info.size
+        size = nil if size.zero?
         klass = self.class.define_class(info.gtype, name, @base_module,
                                         :parent => options[:parent],
-                                        :size   => info.size)
+                                        :size   => size)
       end
       load_fields(info, klass)
       load_methods(info, klass)
