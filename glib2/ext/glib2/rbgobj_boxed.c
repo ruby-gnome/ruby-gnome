@@ -254,7 +254,7 @@ rbgobj_boxed_unown(VALUE boxed)
 
     if (!holder->own) {
         rb_raise(rb_eArgError,
-                 "The boxed is already unowned: %p",
+                 "The boxed is already unowned: %" PRIsVALUE,
                  boxed);
     }
 
