@@ -22,6 +22,7 @@ EXPORTS
 	rbgobj_create_object
 	rbgobj_gobject_new
 	rbgobj_gobject_initialize
+	rbgobj_boxed_alloc_func
 	rbgobj_boxed_create
 	rbgobj_boxed_get
 	rbgobj_boxed_get_default
@@ -47,6 +48,8 @@ EXPORTS
 	rbgobj_get_enum
 	rbgobj_make_flags
 	rbgobj_get_flags
+	rbgobj_enum_alloc_func
+	rbgobj_flags_alloc_func
 	rbgobj_register_g2r_func
 	rbgobj_register_r2g_func
 	rbgobj_register_class
@@ -54,6 +57,7 @@ EXPORTS
 	rbgobj_register_property_setter
 	rbgobj_class_init_func
 	rbgobj_register_type
+	rbgobj_object_alloc_func
 	rbgobj_set_signal_func
 	rbgobj_get_signal_func
 	rbgobj_set_signal_call_func

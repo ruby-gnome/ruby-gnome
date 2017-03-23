@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
  *  Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -254,8 +254,8 @@ rg_s_values(VALUE self)
                      enum_s_values_ensure, (VALUE)args.gclass);
 }
 
-static VALUE
-enum_s_allocate(VALUE self)
+VALUE
+rbgobj_enum_alloc_func(VALUE self)
 {
     GType gtype = CLASS2GTYPE(self);
 
@@ -426,7 +426,7 @@ Init_gobject_genums(void)
     RG_DEF_SMETHOD(range, 0);
     RG_DEF_SMETHOD(values, 0);
 
-    rb_define_alloc_func(RG_TARGET_NAMESPACE, enum_s_allocate);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, rbgobj_enum_alloc_func);
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(to_i, 0);

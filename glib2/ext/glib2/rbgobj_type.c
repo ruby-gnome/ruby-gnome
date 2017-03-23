@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2002-2017  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -173,6 +173,23 @@ rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
           return NULL;
       }
       cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
+    }
+
+    switch (fundamental_type){
+      case G_TYPE_BOXED:
+        rb_define_alloc_func(cinfo->klass, rbgobj_boxed_alloc_func);
+        break;
+      case G_TYPE_OBJECT:
+        rb_define_alloc_func(cinfo->klass, rbgobj_object_alloc_func);
+        break;
+      case G_TYPE_ENUM:
+        rb_define_alloc_func(cinfo->klass, rbgobj_enum_alloc_func);
+        break;
+      case G_TYPE_FLAGS:
+        rb_define_alloc_func(cinfo->klass, rbgobj_flags_alloc_func);
+        break;
+      default:
+        break;
     }
 
     cinfod = (RGObjClassInfoDynamic *)g_hash_table_lookup(dynamic_gtype_list,

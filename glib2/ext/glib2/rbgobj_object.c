@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2003  Masahiro Sakai
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -77,8 +77,8 @@ holder_free(gobj_holder *holder)
     xfree(holder);
 }
 
-static VALUE
-gobj_s_allocate(VALUE klass)
+VALUE
+rbgobj_object_alloc_func(VALUE klass)
 {
     gobj_holder* holder;
     VALUE result;
@@ -96,7 +96,7 @@ gobj_s_allocate(VALUE klass)
 VALUE
 rbgobj_create_object(VALUE klass)
 {
-    return gobj_s_allocate(klass);
+    return rbgobj_object_alloc_func(klass);
 }
 
 void
@@ -135,7 +135,7 @@ rbgobj_get_ruby_object_from_gobject(GObject* gobj, gboolean alloc)
     } else if (alloc) {
         VALUE obj;
 
-        obj = gobj_s_allocate(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
+        obj = rbgobj_object_alloc_func(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
         gobj = g_object_ref(gobj);
         rbgobj_gobject_initialize(obj, (gpointer)gobj);
         return obj;
@@ -960,7 +960,7 @@ Init_gobject_gobject(void)
 
     RUBY_GOBJECT_OBJ_KEY = g_quark_from_static_string("__ruby_gobject_object__");
 
-    rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))gobj_s_allocate);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, rbgobj_object_alloc_func);
     RG_DEF_SMETHOD_BANG(new, -1);
 
     rbg_define_singleton_method(RG_TARGET_NAMESPACE, "property", &gobj_s_property, 1);

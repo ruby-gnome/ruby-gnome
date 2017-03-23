@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2004-2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2004-2017  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -201,8 +201,8 @@ rg_s_values(VALUE klass)
     return result;
 }
 
-static VALUE
-flags_s_allocate(VALUE self)
+VALUE
+rbgobj_flags_alloc_func(VALUE self)
 {
     GType gtype = CLASS2GTYPE(self);
 
@@ -533,7 +533,7 @@ Init_gobject_gflags(void)
     RG_DEF_SMETHOD(mask, 0);
     RG_DEF_SMETHOD(values, 0);
 
-    rb_define_alloc_func(RG_TARGET_NAMESPACE, flags_s_allocate);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, rbgobj_flags_alloc_func);
 
     RG_DEF_METHOD(initialize, -1);
 

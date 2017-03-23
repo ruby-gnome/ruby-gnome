@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -52,8 +52,8 @@ boxed_free(boxed_holder *holder)
 
 /**********************************************************************/
 
-static VALUE
-rbgobj_boxed_s_allocate(VALUE klass)
+VALUE
+rbgobj_boxed_alloc_func(VALUE klass)
 {
     const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
     boxed_holder *holder;
@@ -147,7 +147,7 @@ rg_initialize_copy(VALUE self, VALUE orig)
 VALUE
 rbgobj_boxed_create(VALUE klass)
 {
-    return rbgobj_boxed_s_allocate(klass);
+    return rbgobj_boxed_alloc_func(klass);
 }
 
 /**********************************************************************/
@@ -199,7 +199,7 @@ rbgobj_make_boxed_raw(gpointer p, GType gtype, VALUE klass, gint flags)
     VALUE result;
     boxed_holder *holder;
 
-    result = rbgobj_boxed_s_allocate(klass);
+    result = rbgobj_boxed_alloc_func(klass);
 
     Data_Get_Struct(result, boxed_holder, holder);
 
@@ -289,7 +289,7 @@ Init_gobject_gboxed(void)
     rbgobj_register_g2r_func(G_TYPE_BOXED, boxed_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_BOXED, boxed_from_ruby);
 
-    rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))rbgobj_boxed_s_allocate);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, rbgobj_boxed_alloc_func);
     rbg_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
     RG_DEF_METHOD(initialize, 0);

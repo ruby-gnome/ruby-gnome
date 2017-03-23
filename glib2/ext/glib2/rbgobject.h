@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
  *  Copyright (C) 2003,2006  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -247,8 +247,10 @@ extern void rbgobj_register_property_setter(GType gtype, const char* prop_name, 
 extern void rbgobj_register_property_getter(GType gtype, const char* prop_name, GValueToRValueFunc func);
 extern void rbgobj_class_init_func(gpointer g_class, gpointer class_data);
 extern void rbgobj_register_type(VALUE klass, VALUE type_name, GClassInitFunc class_init);
+extern VALUE rbgobj_object_alloc_func(VALUE klass);
 
 /* rbgobj_boxed.c */
+extern VALUE rbgobj_boxed_alloc_func(VALUE klass);
 extern VALUE rbgobj_boxed_create(VALUE klass); /* deprecated */
 extern gpointer rbgobj_boxed_get(VALUE obj, GType gtype);
 extern gpointer rbgobj_boxed_get_default(VALUE obj, GType gtype);
@@ -267,6 +269,8 @@ extern gint rbgobj_get_enum(VALUE obj, GType gtype);
 extern VALUE rbgobj_make_flags(guint n, GType gtype);
 extern guint rbgobj_get_flags(VALUE obj, GType gtype);
 extern void rbgobj_define_const(VALUE mod, const char *name, VALUE value);
+extern VALUE rbgobj_enum_alloc_func(VALUE klass);
+extern VALUE rbgobj_flags_alloc_func(VALUE klass);
 
 
 /* rbglib_mainloop.c */
