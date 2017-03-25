@@ -23,5 +23,9 @@ module Pango
       self.green = green
       self.blue = blue
     end
+
+    def to_a
+      [red, green, blue]
+    end
   end
 end
