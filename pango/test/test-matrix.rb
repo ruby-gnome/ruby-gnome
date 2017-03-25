@@ -22,5 +22,10 @@ class TestPangoMatrix < Test::Unit::TestCase
   def test_xx
     matrix = Pango::Matrix.new
     assert_equal(1.0, matrix.xx)
+    assert_equal(1.0, matrix.xy)
+    assert_equal(1.0, matrix.yx)
+    assert_equal(1.0, matrix.yy)
+    assert_equal(1.0, matrix.x0)
+    assert_equal(1.0, matrix.y0)
   end
 end
