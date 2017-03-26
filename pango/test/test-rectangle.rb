@@ -21,14 +21,17 @@ class TestPangoRectangle < Test::Unit::TestCase
     rectangle = Pango::Rectangle.new(0, 10, 20, 30)
     assert_equal(0, rectangle.x)
   end
+
   def test_y
     rectangle = Pango::Rectangle.new(0, 10, 20, 30)
     assert_equal(10, rectangle.y)
   end
+
   def test_width
     rectangle = Pango::Rectangle.new(0, 10, 20, 30)
     assert_equal(20, rectangle.width)
   end
+
   def test_height
     rectangle = Pango::Rectangle.new(0, 10, 20, 30)
     assert_equal(30, rectangle.height)
