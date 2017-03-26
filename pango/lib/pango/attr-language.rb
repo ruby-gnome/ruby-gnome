@@ -19,7 +19,8 @@ module Pango
     alias_method :initialize_raw, :initialize
     def initialize(language)
       initialize_raw
-      init(self)
+      self.start_index = 0
+      self.end_index = GLib::MAXUINT
       self.value = language
     end
   end
