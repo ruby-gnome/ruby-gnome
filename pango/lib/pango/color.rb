@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2017 Ruby-GNOME2 Project Team
+# Copyright (C) 2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,32 +14,18 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestPangoColor < Test::Unit::TestCase
-  include PangoTestUtils
+module Pango
+  class Color
+    alias_method :initialize_raw, :initialize
+    def initialize(red, green, blue)
+      initialize_raw
+      self.red = red
+      self.green = green
+      self.blue = blue
+    end
 
-  def test_red
-    color = Pango::Color.new(0, 0, 0)
-    assert_equal(0, color.red)
-    color.red = 32768
-    assert_equal(32768, color.red)
-  end
-
-  def test_blue
-    color = Pango::Color.new(0, 0, 0)
-    assert_equal(0, color.blue)
-    color.blue = 32768
-    assert_equal(32768, color.blue)
-  end
-
-  def test_green
-    color = Pango::Color.new(0, 0, 0)
-    assert_equal(0, color.green)
-    color.green = 32768
-    assert_equal(32768, color.green)
-  end
-
-  def test_to_a
-    color = Pango::Color.new(65535, 32768, 0)
-    assert_equal([65535, 32768, 0], color.to_a)
+    def to_a
+      [red, green, blue]
+    end
   end
 end
