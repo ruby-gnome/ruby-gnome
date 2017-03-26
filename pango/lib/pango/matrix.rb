@@ -35,5 +35,30 @@ module Pango
         y0,
       ]
     end
+
+    def translate(tx, ty)
+      copied_matrix = dup
+      copied_matrix.translate!(tx, ty)
+      copied_matrix
+    end
+
+    def scale(scale_x, scale_y)
+      copied_matrix = dup
+      copied_matrix.scale!(scale_x, scale_y)
+      copied_matrix
+    end
+
+    def rotate(degree)
+      copied_matrix = dup
+      copied_matrix.rotate!(degree)
+      copied_matrix
+    end
+
+    def concat(matrix)
+      copied_matrix = dup
+      copied_matrix.concat!(matrix)
+      copied_matrix
+    end
+    alias_method :+, :concat
   end
 end

@@ -41,6 +41,17 @@ module Pango
       end
     end
 
+    def load_method_info(info, klass, method_name)
+      case klass.name
+      when "Pango::Matrix"
+        case method_name
+        when "translate", "scale", "rotate", "concat"
+          method_name += "!"
+        end
+      end
+      super(info, klass, method_name)
+    end
+
     def require_libraries
       require "pango/attr-language"
       require "pango/color"

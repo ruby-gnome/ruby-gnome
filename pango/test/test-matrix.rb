@@ -27,4 +27,126 @@ class TestPangoMatrix < Test::Unit::TestCase
                  ],
                  matrix.to_a)
   end
+
+  def test_translate
+    matrix = Pango::Matrix.new
+    new_matrix = matrix.translate(10, 20)
+    assert_equal([
+                   1.0, 0.0,
+                   0.0, 1.0,
+                   10.0,
+                   20.0,
+                 ],
+                 new_matrix.to_a)
+    assert_equal(Pango::Matrix.new.to_a,
+                 matrix.to_a)
+  end
+
+  def test_translate!
+    matrix = Pango::Matrix.new
+    matrix.translate!(10, 20)
+    assert_equal([
+                   1.0, 0.0,
+                   0.0, 1.0,
+                   10.0,
+                   20.0,
+                 ],
+                 matrix.to_a)
+  end
+
+  def test_scale
+    matrix = Pango::Matrix.new
+    new_matrix = matrix.scale(3, 5)
+    assert_equal([
+                   3.0, 0.0,
+                   0.0, 5.0,
+                   0.0,
+                   0.0,
+                 ],
+                 new_matrix.to_a)
+    assert_equal(Pango::Matrix.new.to_a,
+                 matrix.to_a)
+  end
+
+  def test_scale!
+    matrix = Pango::Matrix.new
+    matrix.scale!(3, 5)
+    assert_equal([
+                   3.0, 0.0,
+                   0.0, 5.0,
+                   0.0,
+                   0.0,
+                 ],
+                 matrix.to_a)
+  end
+
+  def test_rotate
+    matrix = Pango::Matrix.new
+    new_matrix = matrix.rotate(60)
+    sin = Math.sin(60 * Math::PI / 180)
+    cos = Math.cos(60 * Math::PI / 180)
+    assert_equal([
+                   cos, sin,
+                   -sin, cos,
+                   0.0,
+                   0.0,
+                 ],
+                 new_matrix.to_a)
+    assert_equal(Pango::Matrix.new.to_a,
+                 matrix.to_a)
+  end
+
+  def test_rotate!
+    matrix = Pango::Matrix.new
+    matrix.rotate!(60)
+    sin = Math.sin(60 * Math::PI / 180)
+    cos = Math.cos(60 * Math::PI / 180)
+    assert_equal([
+                   cos, sin,
+                   -sin, cos,
+                   0.0,
+                   0.0,
+                 ],
+                 matrix.to_a)
+  end
+
+  def test_concat
+    matrix = Pango::Matrix.new
+    new_matrix = matrix.concat(Pango::Matrix.new.scale(3, 5))
+    assert_equal([
+                   3.0, 0.0,
+                   0.0, 5.0,
+                   0.0,
+                   0.0,
+                 ],
+                 new_matrix.to_a)
+    assert_equal(Pango::Matrix.new.to_a,
+                 matrix.to_a)
+  end
+
+  def test_plus
+    matrix = Pango::Matrix.new
+    new_matrix = matrix + Pango::Matrix.new.scale(3, 5)
+    assert_equal([
+                   3.0, 0.0,
+                   0.0, 5.0,
+                   0.0,
+                   0.0,
+                 ],
+                 new_matrix.to_a)
+    assert_equal(Pango::Matrix.new.to_a,
+                 matrix.to_a)
+  end
+
+  def test_concat!
+    matrix = Pango::Matrix.new
+    matrix.concat!(Pango::Matrix.new.scale(3, 5))
+    assert_equal([
+                   3.0, 0.0,
+                   0.0, 5.0,
+                   0.0,
+                   0.0,
+                 ],
+                 matrix.to_a)
+  end
 end
