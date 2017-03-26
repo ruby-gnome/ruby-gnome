@@ -17,14 +17,23 @@
 module Pango
   class Matrix
     alias_method :initialize_raw, :initialize
-    def initialize
+    def initialize(xx=nil, xy=nil, yx=nil, yy=nil, x0=nil, y0=nil)
       initialize_raw
-      self.xx = 1.0
-      self.xy = 1.0
-      self.yx = 1.0
-      self.yy = 1.0
-      self.x0 = 1.0
-      self.y0 = 1.0
+      self.xx = xx || 1.0
+      self.xy = yy || 0.0
+      self.yx = yx || 0.0
+      self.yy = yy || 1.0
+      self.x0 = x0 || 0.0
+      self.y0 = y0 || 0.0
+    end
+
+    def to_a
+      [
+        xx, xy,
+        yx, yy,
+        x0,
+        y0,
+      ]
     end
   end
 end
