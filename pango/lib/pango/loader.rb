@@ -43,6 +43,7 @@ module Pango
 
     def require_libraries
       require "pango/attr-language"
+      require "pango/rectangle"
       require "pango/matrix"
       require "pango/version"
 
