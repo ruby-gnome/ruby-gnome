@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,23 +14,17 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestPangoRectangle < Test::Unit::TestCase
-  include PangoTestUtils
-
-  def test_x
-    rectangle = Pango::Rectangle.new(0, 10, 20, 30)
-    assert_equal(0, rectangle.x)
-  end
-  def test_y
-    rectangle = Pango::Rectangle.new(0, 10, 20, 30)
-    assert_equal(10, rectangle.y)
-  end
-  def test_width
-    rectangle = Pango::Rectangle.new(0, 10, 20, 30)
-    assert_equal(20, rectangle.width)
-  end
-  def test_height
-    rectangle = Pango::Rectangle.new(0, 10, 20, 30)
-    assert_equal(30, rectangle.height)
+module Pango
+  class Matrix
+    alias_method :initialize_raw, :initialize
+    def initialize
+      initialize_raw
+      self.xx = 1.0
+      self.xy = 1.0
+      self.yx = 1.0
+      self.yy = 1.0
+      self.x0 = 1.0
+      self.y0 = 1.0
+    end
   end
 end
