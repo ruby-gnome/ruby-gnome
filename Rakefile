@@ -100,12 +100,12 @@ gtk2_packages = [
   "gobject-introspection",
   "gio2",
   "atk",
+  "cairo-gobject",
   "pango",
   "gdk_pixbuf2",
   "gtk2",
 ]
 gtk3_packages = gtk2_packages - ["gtk2"] + [
-  "cairo-gobject",
   "gdk3",
   "gtk3",
 ]
