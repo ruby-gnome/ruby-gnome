@@ -41,8 +41,8 @@ class TestContext < Test::Unit::TestCase
   end
 
   def test_set_base_dir
-    @context.base_dir = Pango::Context::DIRECTION_LTR
-    assert_equal(Pango::Context::DIRECTION_LTR, @context.base_dir)
+    @context.base_dir = :ltr
+    assert_equal(Pango::Direction::LTR, @context.base_dir)
   end
 
   def test_set_gravity
