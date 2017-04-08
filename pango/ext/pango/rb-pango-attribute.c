@@ -131,6 +131,7 @@ rbpango_attribute_init(VALUE mPango)
                          n_initialize_args);                            \
     } while (FALSE)
 
+    DEFINE_ABSTRACT_ATTRIBUTE(AttrBool);
     DEFINE_ABSTRACT_ATTRIBUTE(AttrColor);
     DEFINE_ABSTRACT_ATTRIBUTE(AttrFloat);
     DEFINE_ATTRIBUTE(AttrFontDesc, attr_font_desc, 1);
