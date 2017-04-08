@@ -22,7 +22,12 @@
 
 #define RG_TARGET_NAMESPACE rb_mCairoGObject
 
-#define DEFINE_CONVERSION(prefix, gtype, rb_klass, RVAL2CR, CR2RVAL)    \
+#define DEFINE_CONVERSION(prefix,                                       \
+                          gtype,                                        \
+                          rb_klass,                                     \
+                          cr_copy_func,                                 \
+                          RVAL2CR,                                      \
+                          CR2RVAL)                                      \
 static gpointer                                                         \
 prefix ## _robj2instance(VALUE rb_object,                               \
                          G_GNUC_UNUSED gpointer user_data)              \
@@ -47,7 +52,7 @@ static VALUE                                                            \
 prefix ## _instance2robj(gpointer cr_object,                            \
                          G_GNUC_UNUSED gpointer user_data)              \
 {                                                                       \
-    return CR2RVAL(cr_object);                                          \
+    return CR2RVAL(cr_copy_func(cr_object));                            \
 }                                                                       \
                                                                         \
 static void                                                             \
@@ -65,21 +70,26 @@ define_ ## prefix ## _conversion(void)                                  \
 }
 
 DEFINE_CONVERSION(context, CAIRO_GOBJECT_TYPE_CONTEXT, rb_cCairo_Context,
-                  RVAL2CRCONTEXT, CRCONTEXT2RVAL)
+                  cairo_reference, RVAL2CRCONTEXT, CRCONTEXT2RVAL)
 DEFINE_CONVERSION(device, CAIRO_GOBJECT_TYPE_DEVICE, rb_cCairo_Device,
-                  RVAL2CRDEVICE, CRDEVICE2RVAL)
+                  cairo_device_reference, RVAL2CRDEVICE, CRDEVICE2RVAL)
 DEFINE_CONVERSION(pattern, CAIRO_GOBJECT_TYPE_PATTERN, rb_cCairo_Pattern,
-                  RVAL2CRPATTERN, CRPATTERN2RVAL)
+                  cairo_pattern_reference, RVAL2CRPATTERN, CRPATTERN2RVAL)
 DEFINE_CONVERSION(surface, CAIRO_GOBJECT_TYPE_SURFACE, rb_cCairo_Surface,
-                  RVAL2CRSURFACE, CRSURFACE2RVAL)
+                  cairo_surface_reference, RVAL2CRSURFACE, CRSURFACE2RVAL)
 DEFINE_CONVERSION(scaled_font, CAIRO_GOBJECT_TYPE_SCALED_FONT,
-                  rb_cCairo_ScaledFont, RVAL2CRSCALEDFONT, CRSCALEDFONT2RVAL)
+                  rb_cCairo_ScaledFont,
+                  cairo_scaled_font_reference,
+                  RVAL2CRSCALEDFONT, CRSCALEDFONT2RVAL)
 DEFINE_CONVERSION(font_face, CAIRO_GOBJECT_TYPE_FONT_FACE, rb_cCairo_FontFace,
+                  cairo_font_face_reference,
                   RVAL2CRFONTFACE, CRFONTFACE2RVAL)
 DEFINE_CONVERSION(font_options, CAIRO_GOBJECT_TYPE_FONT_OPTIONS,
-                  rb_cCairo_FontOptions, RVAL2CRFONTOPTIONS, CRFONTOPTIONS2RVAL)
+                  rb_cCairo_FontOptions,
+                  cairo_font_options_copy,
+                  RVAL2CRFONTOPTIONS, CRFONTOPTIONS2RVAL)
 DEFINE_CONVERSION(region, CAIRO_GOBJECT_TYPE_REGION, rb_cCairo_Region,
-                  RVAL2CRREGION, CRREGION2RVAL)
+                  cairo_region_reference, RVAL2CRREGION, CRREGION2RVAL)
 
 void
 Init_cairo_gobject(void)
