@@ -10,7 +10,6 @@ Makefile.lib
 *.pc
 .rbx/
 gschemas.compiled
-/atk/ext/atk/rbatkversion.h
 /glib2/ext/glib2/glib-enum-types.c
 /glib2/ext/glib2/glib-enum-types.h
 /gio2/test/fixture/resource/ruby-gio2.gresource
