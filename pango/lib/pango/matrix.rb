@@ -20,7 +20,7 @@ module Pango
     def initialize(xx=nil, xy=nil, yx=nil, yy=nil, x0=nil, y0=nil)
       initialize_raw
       self.xx = xx || 1.0
-      self.xy = yy || 0.0
+      self.xy = xy || 0.0
       self.yx = yx || 0.0
       self.yy = yy || 1.0
       self.x0 = x0 || 0.0
