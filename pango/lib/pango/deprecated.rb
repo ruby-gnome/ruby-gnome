@@ -20,4 +20,10 @@ module Pango
 
     define_deprecated_enums :Direction, "DIRECTION"
   end
+
+  class Gravity
+    extend GLib::Deprecatable
+
+    define_deprecated_enums :GravityHint, "HINT"
+  end
 end

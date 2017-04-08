@@ -46,8 +46,8 @@ class TestContext < Test::Unit::TestCase
   end
 
   def test_set_gravity
-    @context.gravity_hint = Pango::Gravity::HINT_STRONG
-    assert_equal(Pango::Gravity::HINT_STRONG, @context.gravity_hint)
+    @context.gravity_hint = :strong
+    assert_equal(Pango::GravityHint::STRONG, @context.gravity_hint)
   end
 
   def test_set_matrix
