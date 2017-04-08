@@ -105,3 +105,5 @@
 
 #define RVAL2PANGOFONTMASK(o)              (RVAL2GFLAGS(o, PANGO_TYPE_FONT_MASK))
 #define PANGOFONTMASK2RVAL(o)              (GFLAGS2RVAL(o, PANGO_TYPE_FONT_MASK))
+
+#define RVAL2PANGOATTR(o)                  (DATA_PTR(o))

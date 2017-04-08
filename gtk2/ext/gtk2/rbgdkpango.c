@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
  *  Copyright (C) 2003,2004 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -20,9 +20,9 @@
  */
 
 #include "global.h"
-#include "rbpango.h"
+#include <rb-pango.h>
 
-#define RG_TARGET_NAMESPACE mPango
+#define RG_TARGET_NAMESPACE mGdkPango
 
 static VALUE
 rg_m_context(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
@@ -55,7 +55,7 @@ gdkpango_attr_embossed_initialize(VALUE self, VALUE embossed)
 static VALUE
 gdkpango_attr_embossed_value(VALUE self)
 {
-    return CBOOL2RVAL(((GdkPangoAttrEmbossed*)RVAL2ATTR(self))->embossed);
+    return CBOOL2RVAL(((GdkPangoAttrEmbossed*)RVAL2PANGOATTR(self))->embossed);
 }
 
 static VALUE
@@ -68,7 +68,7 @@ gdkpango_attr_stipple_initialize(VALUE self, VALUE stipple)
 static VALUE
 gdkpango_attr_stipple_value(VALUE self)
 {
-    return GOBJ2RVAL(((GdkPangoAttrStipple*)RVAL2ATTR(self))->stipple);
+    return GOBJ2RVAL(((GdkPangoAttrStipple*)RVAL2PANGOATTR(self))->stipple);
 }
 
 static VALUE
@@ -130,7 +130,7 @@ gdkpango_attr_emboss_color_initialize(VALUE self, VALUE color)
 static VALUE
 gdkpango_attr_emboss_color_value(VALUE self)
 {
-    return BOXED2RVAL(&(((GdkPangoAttrEmbossColor *)RVAL2ATTR(self))->color),
+    return BOXED2RVAL(&(((GdkPangoAttrEmbossColor *)RVAL2PANGOATTR(self))->color),
                       PANGO_TYPE_COLOR);
 }
 #endif
@@ -139,16 +139,14 @@ void
 Init_gtk_gdk_pango(VALUE mGdk)
 {
     VALUE klass;
-    PangoAttribute* tmpattr;
-    GdkColor color;
-
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Pango");
     VALUE context = GTYPE2CLASS(PANGO_TYPE_CONTEXT);
     VALUE layout = GTYPE2CLASS(PANGO_TYPE_LAYOUT);
     VALUE layoutline = GTYPE2CLASS(PANGO_TYPE_LAYOUT_LINE);
-    VALUE pattr = ATTRTYPE2CLASS(CSTR2RVAL("Attribute"));
-    VALUE pattrbool = ATTRTYPE2CLASS(CSTR2RVAL("AttrBool"));
-    VALUE pattr_color = ATTRTYPE2CLASS(CSTR2RVAL("AttrColor"));
+    VALUE mPango = rb_const_get(rb_cObject, rb_intern("Pango"));
+    VALUE pattr = rb_const_get(mPango, rb_intern("Attribute"));
+    VALUE pattrbool = rb_const_get(mPango, rb_intern("AttrBool"));
+    VALUE pattr_color = rb_const_get(mPango, rb_intern("AttrColor"));
 
     RG_DEF_MODFUNC(context, -1);
 
@@ -159,25 +157,16 @@ Init_gtk_gdk_pango(VALUE mGdk)
 
     klass = rb_define_class_under(mGdk, "PangoAttrEmbossed", pattrbool);
     rb_define_method(klass, "initialize", gdkpango_attr_embossed_initialize, 1);
-    tmpattr = gdk_pango_attr_embossed_new(TRUE);
     rb_define_method(klass, "value", gdkpango_attr_embossed_value, 0);
-    RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
-    pango_attribute_destroy(tmpattr);
 
     klass = rb_define_class_under(mGdk, "PangoAttrStipple", pattr);
     rb_define_method(klass, "initialize", gdkpango_attr_stipple_initialize, 1);
     rb_define_method(klass, "value", gdkpango_attr_stipple_value, 0);
-    tmpattr = gdk_pango_attr_stipple_new(NULL);
-    RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
-    pango_attribute_destroy(tmpattr);
 
 #if GTK_CHECK_VERSION(2, 12, 0)
     klass = rb_define_class_under(mGdk, "PangoAttrEmbossColor", pattr_color);
     rb_define_method(klass, "initialize",
                      gdkpango_attr_emboss_color_initialize, 1);
     rb_define_method(klass, "value", gdkpango_attr_emboss_color_value, 0);
-    tmpattr = gdk_pango_attr_emboss_color_new(&color);
-    RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
-    pango_attribute_destroy(tmpattr);
 #endif
 }
