@@ -27,5 +27,4 @@ Init_pango(void)
 
     mPango = rb_define_module("Pango");
     rbpango_attribute_init(mPango);
-    /* rbpango_attr_iterator_init(mPango); */
 }

@@ -23,4 +23,3 @@
 #include "rb-pango.h"
 
 G_GNUC_INTERNAL void rbpango_attribute_init(VALUE mPango);
-G_GNUC_INTERNAL void rbpango_attr_iterator_init(VALUE mPango);
