@@ -69,8 +69,10 @@ rg_s_now(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         date = g_date_time_new_now_local();
     } else if (is_utc_timezone(rb_timezone)) {
         date = g_date_time_new_now_utc();
+#if GLIB_CHECK_VERSION(2, 34, 0)
     } else if (is_timezone(rb_timezone)) {
         date = g_date_time_new_now(RVAL2GTIMEZONE(rb_timezone));
+#endif
     } else {
         rb_raise(rb_eArgError,
                  "timezone must be nil, :local, :utc or GLib::TimeZone: "
