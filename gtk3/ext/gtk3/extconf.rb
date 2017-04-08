@@ -46,7 +46,8 @@ depended_packages = [
   "pango",
   "gdk_pixbuf2",
   "gdk3",
-].each do |package|
+]
+depended_packages.each do |package|
   directory = "#{package}#{version_suffix}"
   build_base_path = "#{directory}/tmp/#{RUBY_PLATFORM}"
   package_library_name = package.gsub(/-/, "_")
