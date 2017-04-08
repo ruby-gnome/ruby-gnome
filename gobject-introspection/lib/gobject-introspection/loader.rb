@@ -242,11 +242,7 @@ module GObjectIntrospection
       readable = options[:readable]
       readable = flags.readable? if readable.nil?
       if readable
-        if field_info.type.tag == TypeTag::BOOLEAN
-          reader_method_name = "#{name}?"
-        else
-          reader_method_name = name
-        end
+        reader_method_name = rubyish_field_reader_name(field_info)
         remove_existing_method(klass, reader_method_name)
         klass.__send__(:define_method, reader_method_name) do ||
           info.get_field_value(self, i)
@@ -484,6 +480,16 @@ module GObjectIntrospection
         else
           name
         end
+      end
+    end
+
+    def rubyish_field_reader_name(field_info)
+      name = field_info.name
+      case field_info.type.tag
+      when TypeTag::BOOLEAN
+        name.gsub(/\Ais_/, "") + "?"
+      else
+        name
       end
     end
 
