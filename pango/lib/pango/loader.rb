@@ -55,6 +55,8 @@ module Pango
     def require_libraries
       require "pango/attr-language"
       require "pango/color"
+      require "pango/font-description"
+      require "pango/language"
       require "pango/rectangle"
       require "pango/matrix"
       require "pango/version"
