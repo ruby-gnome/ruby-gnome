@@ -57,6 +57,7 @@ module Pango
       require "pango/color"
       require "pango/font-description"
       require "pango/language"
+      require "pango/layout"
       require "pango/rectangle"
       require "pango/matrix"
       require "pango/version"
