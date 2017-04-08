@@ -16,16 +16,22 @@
 
 module Pango
   class Loader < GObjectIntrospection::Loader
-
     private
-
     def pre_load(repository, namespace)
       @pending_attribute_infos = []
     end
 
     def post_load(repository, namespace)
+      require_extension
       @pending_attribute_infos.each do |info|
-        define_struct(info, :parent => Attribute)
+        name = rubyish_class_name(info)
+        if name == "AttrList"
+          define_struct(info)
+        else
+          klass = @base_module.const_get(name)
+          load_fields(info, klass)
+          load_methods(info, klass)
+        end
       end
       require_libraries
     end
@@ -34,8 +40,14 @@ module Pango
       case info.name
       when /Class\z/
         super
-      when/\AAttr[A-Z]/
+      when "Attribute"
         @pending_attribute_infos << info
+      when /\AAttr[A-Z]/
+        if info.name == "AttrIterator"
+          super
+        else
+          @pending_attribute_infos << info
+        end
       else
         super
       end
@@ -52,8 +64,16 @@ module Pango
       super(info, klass, method_name)
     end
 
+    def require_extension
+      begin
+        major, minor, _ = RUBY_VERSION.split(/\./)
+        require "#{major}.#{minor}/pango.so"
+      rescue LoadError
+        require "pango.so"
+      end
+    end
+
     def require_libraries
-      require "pango/attr-language"
       require "pango/color"
       require "pango/font-description"
       require "pango/language"
