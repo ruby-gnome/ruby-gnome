@@ -57,6 +57,12 @@ rg_s_define_interface(G_GNUC_UNUSED VALUE klass,
     return G_DEF_INTERFACE(gtype, RVAL2CSTR(rb_name), rb_module);
 }
 
+static void
+struct_free(void *pointer)
+{
+    xfree(pointer);
+}
+
 static VALUE
 struct_alloc(VALUE klass)
 {
@@ -67,7 +73,7 @@ struct_alloc(VALUE klass)
     rb_size = rb_iv_get(klass, "@size");
     size = NUM2ULONG(rb_size);
     instance = xcalloc(1, size);
-    return Data_Wrap_Struct(klass, NULL, xfree, instance);
+    return Data_Wrap_Struct(klass, NULL, struct_free, instance);
 }
 
 static VALUE
