@@ -23,7 +23,7 @@
  */
 
 #include "global.h"
-#include "rbpango.h"
+#include <rb-pango.h>
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 #endif
