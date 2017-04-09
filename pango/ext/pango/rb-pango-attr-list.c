@@ -20,13 +20,45 @@
 
 #include "rb-pango-private.h"
 
-void
-Init_pango(void)
-{
-    VALUE mPango;
+#define RG_TARGET_NAMESPACE cAttrList
 
-    mPango = rb_define_module("Pango");
-    rbpango_attribute_init(mPango);
-    rbpango_attr_list_init(mPango);
-    rbpango_context_init(mPango);
+static VALUE
+rg_insert(VALUE self, VALUE rb_attribute)
+{
+    PangoAttribute *attribute;
+
+    if (NIL_P(rb_attribute))
+        return self;
+
+    attribute = DATA_PTR(rb_attribute);
+    pango_attr_list_insert(RVAL2PANGOATTRLIST(self),
+                           pango_attribute_copy(attribute));
+
+    return self;
+}
+
+static VALUE
+rg_insert_before(VALUE self, VALUE rb_attribute)
+{
+    PangoAttribute *attribute;
+
+    if (NIL_P(rb_attribute))
+        return self;
+
+    attribute = DATA_PTR(rb_attribute);
+    pango_attr_list_insert_before(RVAL2PANGOATTRLIST(self),
+                                  pango_attribute_copy(attribute));
+
+    return self;
+}
+
+void
+rbpango_attr_list_init(VALUE mPango)
+{
+    VALUE RG_TARGET_NAMESPACE;
+
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ATTR_LIST, "AttrList", mPango);
+
+    RG_DEF_METHOD(insert, 1);
+    RG_DEF_METHOD(insert_before, 1);
 }

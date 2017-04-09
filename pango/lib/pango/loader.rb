@@ -25,13 +25,9 @@ module Pango
       require_extension
       @pending_attribute_infos.each do |info|
         name = rubyish_class_name(info)
-        if name == "AttrList"
-          define_struct(info)
-        else
-          klass = @base_module.const_get(name)
-          load_fields(info, klass)
-          load_methods(info, klass)
-        end
+        klass = @base_module.const_get(name)
+        load_fields(info, klass)
+        load_methods(info, klass)
       end
       require_libraries
     end
@@ -60,6 +56,8 @@ module Pango
         when "translate", "scale", "rotate", "concat"
           method_name += "!"
         end
+      when "Pango::AttrList"
+        return if klass.method_defined?(method_name)
       end
       super(info, klass, method_name)
     end
