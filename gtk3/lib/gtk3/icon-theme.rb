@@ -19,18 +19,18 @@ module Gtk
     alias_method :choose_icon_raw, :choose_icon
     def choose_icon(icon_names, size, flags=nil)
       icon_names = [icon_names] unless icon_names.is_a?(Array)
-      if flags.nil?
-        flags = :generic_fallback
-      end
+      flags ||= 0
       choose_icon_raw(icon_names, size, flags)
     end
 
     alias_method :lookup_icon_raw, :lookup_icon
-    def lookup_icon(icon, size, flags)
+    def lookup_icon(icon, size, flags=nil)
       case icon
       when String, Symbol
+        flags ||= :generic_fallback
         lookup_icon_raw(icon.to_s, size, flags)
       else
+        flags ||= 0
         lookup_by_gicon(icon, size, flags)
       end
     end

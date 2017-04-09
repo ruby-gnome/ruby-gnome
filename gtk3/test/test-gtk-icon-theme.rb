@@ -43,7 +43,7 @@ class TestGtkIconTheme < Test::Unit::TestCase
 
       test "Gio::Icon" do
         icon = Gio::ThemedIcon.new("search")
-        assert_not_nil(@theme.lookup_icon(icon, 16, :generic_fallback))
+        assert_not_nil(@theme.lookup_icon(icon, 16))
       end
     end
   end
