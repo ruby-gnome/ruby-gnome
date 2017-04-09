@@ -247,7 +247,7 @@ module GObjectIntrospection
         need_number_to_bool_convert = true
       end
       if readable
-        reader_method_name = rubyish_field_reader_name(field_info)
+        reader_method_name = rubyish_field_reader_name(field_info, name)
         remove_existing_method(klass, reader_method_name)
         klass.__send__(:define_method, reader_method_name) do ||
           value = info.get_field_value(self, i)
@@ -493,8 +493,7 @@ module GObjectIntrospection
       end
     end
 
-    def rubyish_field_reader_name(field_info)
-      name = field_info.name
+    def rubyish_field_reader_name(field_info, name)
       case field_info.type.tag
       when TypeTag::BOOLEAN
         name.gsub(/\Ais_/, "") + "?"
