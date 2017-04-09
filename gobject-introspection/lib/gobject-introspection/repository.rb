@@ -16,6 +16,13 @@
 
 module GObjectIntrospection
   class Repository
+    class << self
+      alias_method :default_raw, :default
+      def default
+        @@default ||= default_raw
+      end
+    end
+
     include Enumerable
 
     def each(*namespaces)
