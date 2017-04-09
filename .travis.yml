@@ -21,15 +21,13 @@ matrix:
     - env: TYPE=centos-7
 
 install:
-  - |
-    docker build \
-      -t ruby-gnome2/ruby-gnome2-${TYPE} \
-      -f travis/Dockerfile.${TYPE} \
+  - docker build
+      -t ruby-gnome2/ruby-gnome2-${TYPE}
+      -f travis/Dockerfile.${TYPE}
       .
 
 script:
-  - |
-    docker run \
-      ruby-gnome2/ruby-gnome2-${TYPE} \
-      sh -c \
+  - docker run
+      ruby-gnome2/ruby-gnome2-${TYPE}
+      sh -c
         "xvfb-run --server-args '-screen 0 640x480x24' bundle exec rake"
