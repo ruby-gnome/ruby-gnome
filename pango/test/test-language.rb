@@ -2,7 +2,7 @@ class TestLanguage < Test::Unit::TestCase
   include PangoTestUtils
 
   def test_default
-    assert_match(/\A(?:[a-z]{2}-[a-z]{2}|(?:ic))\z/,
+    assert_match(/\A(?:[a-z]{2}-[a-z]{2}|(?i:c))\z/,
                  Pango::Language.default.to_s)
   end
 
