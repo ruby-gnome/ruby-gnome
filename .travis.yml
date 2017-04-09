@@ -3,6 +3,8 @@ notifications:
     recipients:
       - ruby-gnome2-cvs@lists.sourceforge.net
 
+dist: trusty
+
 sudo: required
 
 services:
