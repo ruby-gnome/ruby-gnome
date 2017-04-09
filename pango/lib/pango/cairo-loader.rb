@@ -33,6 +33,10 @@ module Pango
       when /\Acontext_set_(.+)\z/
         method_base_name = $1
         setter_method_name = "set_#{method_base_name}"
+        if @context_class.method_defined?(setter_method_name)
+          # ignore
+          return
+        end
         define_method(info, @context_class, setter_method_name)
         if info.n_args == 2
           equal_method_name = "#{method_base_name}="
