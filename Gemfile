@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,6 +20,7 @@ gem "rake"
 gem "pkg-config"
 gem "cairo"
 gem "test-unit"
+gem "rake-compiler"
 
 local_gemfile = File.join(File.dirname(__FILE__), "Gemfile.local")
 if File.exists?(local_gemfile)
