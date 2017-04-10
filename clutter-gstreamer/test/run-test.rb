@@ -24,6 +24,7 @@ ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 glib_base = File.join(ruby_gnome2_base, "glib2")
 cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
+pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf2_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
 clutter_base = File.join(ruby_gnome2_base, "clutter")
 gstreamer_base = File.join(ruby_gnome2_base, "gstreamer")
@@ -33,6 +34,7 @@ modules = [
   [glib_base, "glib2"],
   [cairo_gobject_base, "cairo-gobject"],
   [gobject_introspection_base, "gobject-introspection"],
+  [pango_base, "pango"],
   [gdk_pixbuf2_base, "gdk_pixbuf2"],
   [clutter_base, "clutter"],
   [gstreamer_base, "gstreamer"],
