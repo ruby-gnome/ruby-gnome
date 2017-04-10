@@ -14,24 +14,24 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Pango
-  class Context
-    extend GLib::Deprecatable
+class TestEnum < Test::Unit::TestCase
+  include PangoTestUtils
 
-    define_deprecated_enums :Direction, "DIRECTION"
+  def test_alignment
+    assert do
+      Pango::Alignment.const_defined?(:LEFT)
+    end
   end
 
-  class Gravity
-    extend GLib::Deprecatable
-
-    define_deprecated_enums :GravityHint, "HINT"
+  def test_ellipsize_mode
+    assert do
+      Pango::EllipsizeMode.const_defined?(:MIDDLE)
+    end
   end
 
-  class Layout
-    extend GLib::Deprecatable
-
-    define_deprecated_enums :Alignment, "ALIGN"
-    define_deprecated_enums :WrapMode, "WRAP"
-    define_deprecated_enums :EllipsizeMode, "ELLIPSIZE"
+  def test_wrap_mode
+    assert do
+      Pango::WrapMode.const_defined?(:CHAR)
+    end
   end
 end

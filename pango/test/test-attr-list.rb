@@ -14,24 +14,15 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Pango
-  class Context
-    extend GLib::Deprecatable
+class TestAttrList < Test::Unit::TestCase
+  include PangoTestUtils
 
-    define_deprecated_enums :Direction, "DIRECTION"
+  def setup
+    @attrs = Pango::AttrList.new
   end
 
-  class Gravity
-    extend GLib::Deprecatable
-
-    define_deprecated_enums :GravityHint, "HINT"
-  end
-
-  class Layout
-    extend GLib::Deprecatable
-
-    define_deprecated_enums :Alignment, "ALIGN"
-    define_deprecated_enums :WrapMode, "WRAP"
-    define_deprecated_enums :EllipsizeMode, "ELLIPSIZE"
+  def test_insert
+    attribute = Pango::AttrLanguage.new(Pango::Language.default)
+    @attrs.insert(attribute)
   end
 end
