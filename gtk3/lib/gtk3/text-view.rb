@@ -58,7 +58,6 @@ module Gtk
         else
           nil
         end
-      else
       end
     end
   end
