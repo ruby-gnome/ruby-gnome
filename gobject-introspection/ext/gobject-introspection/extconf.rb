@@ -57,11 +57,11 @@ end
 setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
-                                   :altlinux => "gobject-introspection-devel",
+                                   :alt_linux => "gobject-introspection-devel",
                                    :debian => "libgirepository1.0-dev",
                                    :redhat => "gobject-introspection-devel",
                                    :homebrew => "gobject-introspection",
-                                   :arch => "gobject-introspection",
+                                   :arch_linux => "gobject-introspection",
                                    :macports => "gobject-introspection")
   exit(false)
 end

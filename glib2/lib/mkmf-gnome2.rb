@@ -13,6 +13,7 @@ require 'English'
 require 'mkmf'
 require 'pkg-config'
 require 'glib-mkenums'
+require "native-package-installer"
 
 $CFLAGS += " #{ENV['CFLAGS']}" if ENV['CFLAGS']
 
@@ -147,7 +148,8 @@ def find_gem_spec(package)
 end
 
 def setup_homebrew_libffi
-  return unless package_platform == :homebrew
+  platform = NativePackageInstaller::Platform.detect
+  return unless platform.is_a?(NativePackageInstaller::Platform::Homebrew)
 
   PKGConfig.add_path("/usr/local/opt/libffi/lib/pkgconfig")
 end
@@ -469,121 +471,8 @@ def check_cairo(options={})
   PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
 end
 
-def package_platform
-  if File.exist?("/etc/debian_version")
-    :debian
-  elsif File.exist?("/etc/fedora-release")
-    :fedora
-  elsif File.exist?("/etc/redhat-release")
-    :redhat
-  elsif File.exist?("/etc/SuSE-release")
-    :suse
-  elsif File.exist?("/etc/altlinux-release")
-    :altlinux
-  elsif find_executable("pacman")
-    :arch
-  elsif find_executable("brew")
-    :homebrew
-  elsif find_executable("port")
-    :macports
-  else
-    :unknown
-  end
-end
-
-def super_user?
-  Process.uid.zero?
-end
-
-def normalize_native_package_info(native_package_info)
-  native_package_info ||= {}
-  native_package_info = native_package_info.dup
-  native_package_info[:fedora] ||= native_package_info[:redhat]
-  native_package_info[:suse] ||= native_package_info[:fedora]
-  native_package_info
-end
-
 def install_missing_native_package(native_package_info)
-  platform = package_platform
-  native_package_info = normalize_native_package_info(native_package_info)
-  package = native_package_info[platform]
-  return false if package.nil?
-
-  package_name, *options = package
-  package_command_line = [package_name, *options].join(" ")
-  need_super_user_priviledge = true
-  case platform
-  when :debian, :altlinux
-    install_command = "apt-get install -V -y #{package_command_line}"
-  when :fedora, :redhat
-    install_command = "yum install -y #{package_command_line}"
-  when :suse
-    install_command = "zypper --non-interactive install #{package_command_line}"
-  when :arch
-    install_command = "pacman -S --noconfirm #{package_command_line}"
-  when :homebrew
-    need_super_user_priviledge = false
-    install_command = "brew install #{package_command_line}"
-  when :macports
-    install_command = "port install -y #{package_command_line}"
-  else
-    return false
-  end
-
-  have_priviledge = (not need_super_user_priviledge or super_user?)
-  unless have_priviledge
-    sudo = find_executable("sudo")
-  end
-
-  installing_message = "installing '#{package_name}' native package... "
-  message("%s", installing_message)
-  failed_to_get_super_user_priviledge = false
-  if have_priviledge
-    succeeded = xsystem(install_command)
-  else
-    if sudo
-      prompt = "[sudo] password for %u to install <#{package_name}>: "
-      sudo_options = "-p #{Shellwords.escape(prompt)}"
-      install_command = "#{sudo} #{sudo_options} #{install_command}"
-      succeeded = xsystem(install_command)
-    else
-      succeeded = false
-      failed_to_get_super_user_priviledge = true
-    end
-  end
-
-  if failed_to_get_super_user_priviledge
-    result_message = "require super user privilege"
-  else
-    result_message = succeeded ? "succeeded" : "failed"
-  end
-  Logging.postpone do
-    "#{installing_message}#{result_message}\n"
-  end
-  message("#{result_message}\n")
-
-  error_message = nil
-  unless succeeded
-    if failed_to_get_super_user_priviledge
-      error_message = <<-EOM
-'#{package_name}' native package is required.
-run the following command as super user to install required native package:
-  \# #{install_command}
-EOM
-    else
-      error_message = <<-EOM
-failed to run '#{install_command}'.
-EOM
-    end
-  end
-  if error_message
-    message("%s", error_message)
-    Logging.message("%s", error_message)
-  end
-
-  Logging.message("--------------------\n\n")
-
-  succeeded
+  NativePackageInstaller.install(native_package_info)
 end
 
 def required_pkg_config_package(package_info, native_package_info=nil)

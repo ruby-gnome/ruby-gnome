@@ -59,10 +59,10 @@ end
 setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package([package_id, 1, 14, 0],
-                                   :altlinux => "libpango-devel",
+                                   :alt_linux => "libpango-devel",
                                    :debian => "libpango1.0-dev",
                                    :redhat => "pango-devel",
-                                   :arch => "pango",
+                                   :arch_linux => "pango",
                                    :homebrew => "pango",
                                    :macports => "pango")
   exit(false)

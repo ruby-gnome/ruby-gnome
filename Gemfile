@@ -18,6 +18,7 @@ source "https://rubygems.org/"
 
 gem "rake"
 gem "pkg-config"
+gem "native-package-installer"
 gem "cairo"
 gem "test-unit"
 gem "rake-compiler"

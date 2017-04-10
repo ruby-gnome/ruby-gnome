@@ -65,10 +65,10 @@ end
 setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
-                                   :altlinux => "libgtk+3-devel",
+                                   :alt_linux => "libgtk+3-devel",
                                    :debian => "libgtk-3-dev",
                                    :redhat => "gtk3-devel",
-                                   :arch => "gtk3",
+                                   :arch_linux => "gtk3",
                                    :homebrew => "gtk+3",
                                    :macports => "gtk3")
   exit(false)

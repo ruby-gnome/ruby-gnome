@@ -44,10 +44,10 @@ end
 setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
-                                   :altlinux => "gstreamer1.0-devel",
+                                   :alt_linux => "gstreamer1.0-devel",
                                    :debian => "libgstreamer1.0-dev",
                                    :redhat => "gstreamer1-devel",
-                                   :arch => "gstreamer",
+                                   :arch_linux => "gstreamer",
                                    :homebrew => "gstreamer",
                                    :macports => "gstreamer")
   exit(false)

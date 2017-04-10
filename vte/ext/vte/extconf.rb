@@ -33,7 +33,7 @@ end
 setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
-                                   :altlinux => "libvte-devel",
+                                   :alt_linux => "libvte-devel",
                                    :debian => "libvte-dev",
                                    :redhat => "vte-devel",
                                    :homebrew => "vte",

@@ -23,9 +23,9 @@ You can also install these gems from GitHub master branch.
 
     % git clone https://github.com/ruby-gnome2/ruby-gnome2.git
     % cd ruby-gnome2
-    % gem install rake rake-compiler mechanize pkg-config cairo
-    % rake gem:build
-    % rake gem:install
+    % bundle install
+    % bundle exec rake gem:build
+    % bundle exec rake gem:install
 
 
 ## Release packages
