@@ -64,7 +64,7 @@ require "webkit2-gtk"
 repository = GObjectIntrospection::Repository.default
 begin
   repository.require(WebKit2Gtk::Loader::NAMESPACE)
-rescue GLib::Error
+rescue GObjectIntrospection::RepositoryError
   puts("Omit because typelib file doesn't exist: #{$!.message}")
   exit(true)
 end

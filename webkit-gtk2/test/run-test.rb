@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,22 +20,24 @@ ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
 ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
 glib_base = File.join(ruby_gnome2_base, "glib2")
+gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 gio_base = File.join(ruby_gnome2_base, "gio2")
 atk_base = File.join(ruby_gnome2_base, "atk")
+cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
 gtk2_base = File.join(ruby_gnome2_base, "gtk2")
-gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 webkit_gtk2_base = File.join(ruby_gnome2_base, "webkit-gtk2")
 
 modules = [
   [glib_base, "glib2"],
+  [gobject_introspection_base, "gobject-introspection"],
   [gio_base, "gio2"],
   [atk_base, "atk"],
+  [cairo_gobject_base, "cairo-gobject"],
   [pango_base, "pango"],
   [gdk_pixbuf_base, "gdk_pixbuf2"],
   [gtk2_base, "gtk2"],
-  [gobject_introspection_base, "gobject-introspection"],
   [webkit_gtk2_base, "webkit-gtk2"],
 ]
 modules.each do |target, module_name|
@@ -61,7 +63,7 @@ repository = GObjectIntrospection::Repository.default
 begin
   repository.require(WebKitGtk2::Loader::NAMESPACE,
                      WebKitGtk2::Loader::VERSION)
-rescue GLib::Error
+rescue GObjectIntrospection::RepositoryError
   puts("Omit because typelib file doesn't exist: #{$!.message}")
   exit(true)
 end

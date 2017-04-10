@@ -65,7 +65,7 @@ require "clutter-gst"
 repository = GObjectIntrospection::Repository.default
 begin
   repository.require(ClutterGst::Loader::NAMESPACE)
-rescue GLib::Error
+rescue GObjectIntrospection::RepositoryError
   puts("Omit because typelib file doesn't exist: #{$!.message}")
   exit(true)
 end

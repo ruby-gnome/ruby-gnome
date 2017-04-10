@@ -71,7 +71,7 @@ require "clutter-gtk"
 repository = GObjectIntrospection::Repository.default
 begin
   repository.require(ClutterGtk::Loader::NAMESPACE)
-rescue GLib::Error
+rescue GObjectIntrospection::RepositoryError
   puts("Omit because typelib file doesn't exist: #{$!.message}")
   exit(true)
 end
