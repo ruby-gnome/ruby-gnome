@@ -77,6 +77,7 @@ module Pango
       require "pango/language"
       require "pango/layout"
       require "pango/rectangle"
+      require "pango/markup"
       require "pango/matrix"
       require "pango/version"
 
