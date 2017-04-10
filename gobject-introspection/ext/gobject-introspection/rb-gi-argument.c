@@ -2839,11 +2839,17 @@ rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
         break;
     case GI_TYPE_TAG_GHASH:
     case GI_TYPE_TAG_ERROR:
-    case GI_TYPE_TAG_UNICHAR:
         rb_raise(rb_eNotImpError,
                  "TODO: Ruby -> GIArgument(%s)",
                  g_type_tag_to_string(type_tag));
         break;
+    case GI_TYPE_TAG_UNICHAR:
+      if (NIL_P(rb_argument)) {
+          argument->v_uint32 = 0;
+      } else {
+          argument->v_uint32 = NUM2UINT(rb_argument);
+      }
+      break;
     default:
         g_assert_not_reached();
         break;
