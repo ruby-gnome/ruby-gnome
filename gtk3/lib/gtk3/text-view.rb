@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -32,21 +32,33 @@ module Gtk
 
     alias_method :get_iter_at_location_raw, :get_iter_at_location
     def get_iter_at_location(x, y)
-      found, iter = get_iter_at_location_raw(x, y)
-      if found
+      result = get_iter_at_location_raw(x, y)
+      if result.is_a?(Gtk::TextIter) # For GTK+ < 3.20
+        iter = result
         iter
       else
-        nil
+        found, iter = result
+        if found
+          iter
+        else
+          nil
+        end
       end
     end
 
     alias_method :get_iter_at_position_raw, :get_iter_at_position
     def get_iter_at_position(x, y)
-      found, iter, trailing = get_iter_at_position_raw(x, y)
-      if found
-        [iter, trailing]
+      result = get_iter_at_position_raw(x, y)
+      if result.size == 2 # For GTK+ < 3.20
+        result
       else
-        nil
+        found, iter, trailing = result
+        if found
+          [iter, trailing]
+        else
+          nil
+        end
+      else
       end
     end
   end
