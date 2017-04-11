@@ -27,7 +27,7 @@ GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 require "goffice/loader"
 
-module GOffice 
+module GOffice
   LOG_DOMAIN = "GOffice"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
