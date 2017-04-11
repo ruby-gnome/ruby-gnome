@@ -18,7 +18,6 @@ class TestApplicationCommandLine < Test::Unit::TestCase
   include GioTestUtils::Omissions
 
   test "#arguments" do
-    omit_on_travis_ci
     command_line = Gio::ApplicationCommandLine.new(:arguments => ["hello"])
     assert_equal(["hello"], command_line.arguments)
   end

@@ -30,8 +30,4 @@ module ClutterTestUtils
       omit("This test can't be run on this environment.")
     end
   end
-
-  def omit_on_travis_ci
-    omit("This test can't be run on Travis CI") if ENV["CI"]
-  end
 end

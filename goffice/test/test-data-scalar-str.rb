@@ -18,7 +18,6 @@ class DataScalarStrTest < Test::Unit::TestCase
   include GOfficeTestUtils
 
   test ".new" do
-    omit_on_travis_ci
     data = GOffice::DataScalarStr.new("XXX")
     assert_equal("XXX", data.str)
   end

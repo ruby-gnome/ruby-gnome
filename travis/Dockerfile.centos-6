@@ -42,5 +42,3 @@ WORKDIR /home/ruby-gnome2/ruby-gnome2
 
 RUN gem install bundler
 RUN bundle install
-
-ENV CI=true
