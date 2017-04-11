@@ -21,6 +21,9 @@ matrix:
     # - env: TYPE=ubuntu-16.10
     - env: TYPE=centos-6
     - env: TYPE=centos-7
+  allow_failures:
+    - env: TYPE=centos-6
+    - env: TYPE=centos-7
 
 install:
   - docker build
