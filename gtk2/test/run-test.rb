@@ -5,6 +5,7 @@ ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
 glib_base = File.join(ruby_gnome2_base, "glib2")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
+gio_base = File.join(ruby_gnome2_base, "gio2")
 atk_base = File.join(ruby_gnome2_base, "atk")
 cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 pango_base = File.join(ruby_gnome2_base, "pango")
@@ -14,6 +15,7 @@ gtk_base = File.join(ruby_gnome2_base, "gtk2")
 [
   [glib_base, "glib2"],
   [gobject_introspection_base, "gobject-introspection"],
+  [gio_base, "gio2"],
   [atk_base, "atk"],
   [cairo_gobject_base, "cairo-gobject"],
   [pango_base, "pango"],
