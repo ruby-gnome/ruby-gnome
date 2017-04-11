@@ -24,7 +24,7 @@ module GOffice
         version = [
           MAJOR,
           MINOR,
-          MICRO,
+          MICRO || 0,
         ].compact
         (version <=> [major, minor, micro]) >= 0
       end
