@@ -160,6 +160,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                            hour,
                                            minute,
                                            second);
+#if GLIB_CHECK_VERSION(2, 34, 0)
         } else if (is_timezone(rb_timezone)) {
             GTimeZone *timezone = NULL;
 
@@ -171,6 +172,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                        hour,
                                        minute,
                                        second);
+#endif
         } else {
             rb_raise(rb_eArgError,
                      ":timezone must be nil, :local, :utc or GLib::TimeZone: "
