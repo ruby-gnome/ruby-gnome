@@ -8,6 +8,7 @@ RUN \
     git \
     bzip2 \
     gcc \
+    gcc-c++ \
     make \
     openssl-devel \
     readline-devel \
