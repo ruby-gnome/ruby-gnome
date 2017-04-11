@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,6 +15,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestTimeZone < Test::Unit::TestCase
+  include GLibTestUtils
+
+  setup do
+    only_glib_version(2, 34, 0)
+  end
+
   sub_test_case "new" do
     test "local" do
       local_1 = GLib::TimeZone.local
