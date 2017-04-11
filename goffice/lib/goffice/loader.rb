@@ -27,10 +27,13 @@ module GOffice
 
     def define_version(repository, namespace)
       major, minor, micro = repository.get_version(namespace).split(".")
-      @base_module.const_set("MAJOR", Integer(major))
-      @base_module.const_set("MINOR", Integer(minor))
-      micro = Integer(micro) unless micro.nil?
-      @base_module.const_set("MICRO", micro)
+      version_module = Module.new do
+        const_set("MAJOR", Integer(major))
+        const_set("MINOR", Integer(minor))
+        micro = Integer(micro) unless micro.nil?
+        const_set("MICRO", micro)
+      end
+      @base_module.const_set("Version", version_module)
     end
 
     def require_libraries
