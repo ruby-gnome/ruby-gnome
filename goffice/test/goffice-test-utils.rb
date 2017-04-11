@@ -17,4 +17,10 @@
 require "test-unit"
 
 module GOfficeTestUtils
+  private
+  def only_goffice_version(major, minor, micro=nil)
+    unless GOffice::Version.or_later?(major, minor, micro)
+      omit("Require GOffice >= #{major}.#{minor}.#{micro}")
+    end
+  end
 end

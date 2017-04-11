@@ -18,6 +18,7 @@ class DataScalarStrTest < Test::Unit::TestCase
   include GOfficeTestUtils
 
   test ".new" do
+    only_goffice_version(0, 10)
     data = GOffice::DataScalarStr.new("XXX")
     assert_equal("XXX", data.str)
   end
