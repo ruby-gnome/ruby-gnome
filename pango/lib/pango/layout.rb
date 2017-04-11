@@ -25,5 +25,13 @@ module Pango
     end
     remove_method :font_description=
     alias_method :font_description=, :set_font_description
+
+    def text=(text)
+      set_text(text, text.length)
+    end
+
+    def markup=(markup)
+      set_markup(markup, markup.length)
+    end
   end
 end
