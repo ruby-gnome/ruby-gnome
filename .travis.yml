@@ -17,7 +17,7 @@ matrix:
     - env: TYPE=ruby-2.3
     - env: TYPE=ruby-2.4
     # - env: TYPE=ubuntu-14.04
-    # - env: TYPE=ubuntu-16.04
+    - env: TYPE=ubuntu-16.04
     - env: TYPE=ubuntu-16.10
     - env: TYPE=centos-6
     - env: TYPE=centos-7
