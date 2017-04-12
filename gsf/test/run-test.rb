@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,11 +19,13 @@
 ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
 ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
+glib2_base = File.join(ruby_gnome2_base, "glib2")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 gio2_base = File.join(ruby_gnome2_base, "gio2")
 gsf_base = File.join(ruby_gnome2_base, "gsf")
 
 modules = [
+  [glib2_base, "glib2"],
   [gobject_introspection_base, "gobject-introspection"],
   [gio2_base, "gio2"],
   [gsf_base, "gsf"]
@@ -42,5 +44,11 @@ $LOAD_PATH.unshift(File.join(gsf_base, "test"))
 require "gsf-test-utils"
 
 require "gsf"
+begin
+  Gsf.init
+rescue GObjectIntrospection::RepositoryError
+  puts("Omit because typelib file doesn't exist: #{$!.message}")
+  exit(true)
+end
 
 exit Test::Unit::AutoRunner.run(true, File.join(gsf_base, "test"))
