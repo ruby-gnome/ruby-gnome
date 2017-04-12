@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -31,6 +31,7 @@ gio_base = File.join(ruby_gnome2_base, "gio2")
 clutter_base = File.join(ruby_gnome2_base, "clutter")
 gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
+clutter_gdk_base = File.join(ruby_gnome2_base, "clutter-gdk")
 clutter_gtk_base = File.join(ruby_gnome2_base, "clutter-gtk")
 
 modules = [
@@ -44,6 +45,7 @@ modules = [
   [clutter_base, "clutter"],
   [gdk3_base, "gdk3"],
   [gtk3_base, "gtk3"],
+  [clutter_gdk_base, "clutter-gdk"],
   [clutter_gtk_base, "clutter-gtk"],
 ]
 modules.each do |target, module_name|
@@ -66,11 +68,8 @@ require "clutter-test-utils"
 $LOAD_PATH.unshift(File.join(clutter_gtk_base, "test"))
 require "clutter-gtk-test-utils"
 
-require "clutter-gtk"
-
-repository = GObjectIntrospection::Repository.default
 begin
-  repository.require(ClutterGtk::Loader::NAMESPACE)
+  require "clutter-gtk"
 rescue GObjectIntrospection::RepositoryError
   puts("Omit because typelib file doesn't exist: #{$!.message}")
   exit(true)
