@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -40,7 +40,7 @@ class TestWebKit2GtkWebView < Test::Unit::TestCase
     loaded = false
 
     loop = GLib::MainLoop.new
-    timeout_id = GLib::Timeout.add(1000) do
+    timeout_id = GLib::Timeout.add(5000) do
       timeout_id = nil
       loop.quit
       GLib::Source::REMOVE
