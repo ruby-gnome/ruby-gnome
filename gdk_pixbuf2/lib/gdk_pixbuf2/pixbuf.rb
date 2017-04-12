@@ -174,6 +174,12 @@ module GdkPixbuf
       copy
     end
 
+    if method_defined?(:pixels_with_length)
+      remove_method :pixels
+      alias_method :pixels, :pixels_with_length
+      remove_method :pixels_with_length
+    end
+
     def fill!(pixel)
       fill(pixel)
     end
