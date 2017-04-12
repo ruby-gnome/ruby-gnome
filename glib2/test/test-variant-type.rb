@@ -111,6 +111,7 @@ class TestGLibVariantType < Test::Unit::TestCase
     end
 
     test "OBJECT_PATH_ARRAY" do
+      only_glib_version(2, 30, 0)
       assert_equal("ao", GLib::VariantType::OBJECT_PATH_ARRAY.to_s)
     end
 
@@ -123,6 +124,7 @@ class TestGLibVariantType < Test::Unit::TestCase
     end
 
     test "VARDICT" do
+      only_glib_version(2, 30, 0)
       assert_equal("a{sv}", GLib::VariantType::VARDICT.to_s)
     end
   end

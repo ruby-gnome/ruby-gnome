@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- 
+
 require 'tempfile'
 
 class TestGLibKeyFile < Test::Unit::TestCase
@@ -35,8 +35,12 @@ class TestGLibKeyFile < Test::Unit::TestCase
     end
     if GLib.check_version?(2, 31, 2)
       assert_equal(temp.path, key_file.load_from_dirs(base_name, search_dirs))
-    else
+    elsif GLib.check_version?(2, 30, 0)
       assert_raise(GLib::KeyFileError::NotFound) do
+        key_file.load_from_dirs(base_name, search_dirs)
+      end
+    else
+      assert_raise(GLib::KeyFileError::Parse) do
         key_file.load_from_dirs(base_name, search_dirs)
       end
     end
