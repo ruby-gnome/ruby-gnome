@@ -12,7 +12,12 @@ RUN \
     make \
     openssl-devel \
     readline-devel \
-    zlib-devel
+    zlib-devel \
+    adwaita-gtk2-theme \
+    vte3 \
+    webkitgtk \
+    webkitgtk3 \
+    libwebkit2-gtk
 
 RUN \
   useradd --user-group --create-home ruby-gnome2
