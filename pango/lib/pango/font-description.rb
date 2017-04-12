@@ -21,7 +21,7 @@ module Pango
         if description
           from_string(description)
         else
-          super
+          super()
         end
       end
     end
