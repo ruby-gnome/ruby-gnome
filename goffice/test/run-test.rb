@@ -58,5 +58,11 @@ $LOAD_PATH.unshift(File.join(goffice_base, "test"))
 require "goffice-test-utils"
 
 require "goffice"
+begin
+  GOffice.init
+rescue GObjectIntrospection::RepositoryError
+  puts("Omit because typelib file doesn't exist: #{$!.message}")
+  exit(true)
+end
 
 exit Test::Unit::AutoRunner.run(true, File.join(goffice_base, "test"))
