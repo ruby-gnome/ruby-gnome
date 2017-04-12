@@ -35,3 +35,9 @@ USER ruby-gnome2
 WORKDIR /home/ruby-gnome2/ruby-gnome2
 
 RUN bundle install
+
+CMD [ \
+  "xvfb-run", \
+     "--server-args", "-screen 0 640x480x24", \
+     "bundle", "exec", "rake" \
+]

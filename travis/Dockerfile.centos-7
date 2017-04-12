@@ -15,11 +15,18 @@ RUN \
     openssl-devel \
     readline-devel \
     zlib-devel \
+    dejavu-sans-fonts \
+    gnome-icon-theme \
     adwaita-gtk2-theme \
     vte3 \
     webkitgtk \
     webkitgtk3 \
-    libwebkit2-gtk
+    libwebkit2-gtk \
+    clutter-gtk \
+    gtksourceview3
+
+RUN \
+  systemd-machine-id-setup
 
 RUN \
   useradd --user-group --create-home ruby-gnome2
@@ -49,3 +56,9 @@ WORKDIR /home/ruby-gnome2/ruby-gnome2
 
 RUN gem install bundler
 RUN bundle install
+
+CMD [ \
+  "xvfb-run", \
+     "--server-args", "-screen 0 640x480x24", \
+     "bundle", "exec", "rake" \
+]

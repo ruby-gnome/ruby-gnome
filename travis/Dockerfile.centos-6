@@ -3,7 +3,6 @@ FROM centos:6
 RUN \
   yum install -y \
     sudo \
-    xorg-x11-server-Xvfb \
     which \
     git \
     bzip2 \
@@ -42,3 +41,5 @@ WORKDIR /home/ruby-gnome2/ruby-gnome2
 
 RUN gem install bundler
 RUN bundle install
+
+CMD cd glib2 && ruby extconf.rb && test/run-test.rb
