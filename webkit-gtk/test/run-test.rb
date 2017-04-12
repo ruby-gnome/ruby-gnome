@@ -60,5 +60,11 @@ $LOAD_PATH.unshift(File.join(webkit_gtk_base, "test"))
 require "webkit-gtk-test-utils"
 
 require "webkit-gtk"
+begin
+  WebKitGtk.init
+rescue GObjectIntrospection::RepositoryError
+  puts("Omit because typelib file doesn't exist: #{$!.message}")
+  exit(true)
+end
 
 exit Test::Unit::AutoRunner.run(true, File.join(webkit_gtk_base, "test"))
