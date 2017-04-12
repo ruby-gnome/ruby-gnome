@@ -25,24 +25,24 @@ class TestGtkIconTheme < Test::Unit::TestCase
     end
 
     def test_context
-      assert_operator(@theme.icons("Actions"), :include?, "go-home")
+      assert_operator(@theme.icons("Actions"), :include?, "edit-find")
     end
   end
 
   sub_test_case "#lookup_icon" do
     sub_test_case "icon" do
       test "String" do
-        assert_not_nil(@theme.lookup_icon("go-home",
+        assert_not_nil(@theme.lookup_icon("edit-find",
                                           16, :generic_fallback))
       end
 
       test "Symbol" do
-        assert_not_nil(@theme.lookup_icon("go-home",
+        assert_not_nil(@theme.lookup_icon("edit-find",
                                           16, :generic_fallback))
       end
 
       test "Gio::Icon" do
-        icon = Gio::ThemedIcon.new("go-home")
+        icon = Gio::ThemedIcon.new("edit-find")
         assert_not_nil(@theme.lookup_icon(icon, 16))
       end
     end
