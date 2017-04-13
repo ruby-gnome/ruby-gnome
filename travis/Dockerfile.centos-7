@@ -57,8 +57,4 @@ WORKDIR /home/ruby-gnome2/ruby-gnome2
 RUN gem install bundler
 RUN bundle install
 
-CMD [ \
-  "xvfb-run", \
-     "--server-args", "-screen 0 640x480x24", \
-     "bundle", "exec", "rake" \
-]
+CMD xvfb-run --server-args "-screen 0 640x480x24" bundle exec rake
