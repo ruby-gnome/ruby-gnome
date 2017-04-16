@@ -50,6 +50,7 @@ module Gtk
 
     def add_buttons(*buttons)
       buttons.each do |text, response_id|
+        response_id = response_id.object_id if response_id.is_a? Symbol
         add_button(text, response_id)
       end
     end
