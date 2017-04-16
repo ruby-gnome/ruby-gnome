@@ -35,6 +35,11 @@ gi_struct_info_get_type(void)
     return type;
 }
 
+/* GObjectIntrospection::StructInfo#n_fields(n)
+ * Obtain the number of fields this structure has.
+ *
+ * @return [Fixnum] The nuber of fields.
+ */
 static VALUE
 rg_n_fields(VALUE self)
 {
@@ -44,6 +49,13 @@ rg_n_fields(VALUE self)
     return INT2NUM(g_struct_info_get_n_fields(info));
 }
 
+/* GObjectIntrospection::StructInfo#get_field(n)
+ * Obtain the type information for field with specified index.
+ *
+ * @param [Fixnum] n The index of the field.
+ *
+ * @return [GObjectIntrospection::BaseInfo] The information to the field.
+ */
 static VALUE
 rg_get_field(VALUE self, VALUE rb_n)
 {
@@ -55,6 +67,8 @@ rg_get_field(VALUE self, VALUE rb_n)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_struct_info_get_field(info, n));
 }
 
+/* Helper to get the struct from a ruby object pointer
+ */
 static gpointer
 extract_raw_struct(VALUE rb_struct,
                    GIStructInfo *struct_info)
@@ -77,6 +91,14 @@ extract_raw_struct(VALUE rb_struct,
     return raw_struct;
 }
 
+/* GObjectIntrospection::StructInfo#get_field_value(struct, n)
+ * Gets nth value in struct.
+ *
+ * @param struct The struct to change.
+ * @param [Fixnum] n The index of the element to change.
+ *
+ * @return The value of the element.
+ */
 static VALUE
 rg_get_field_value(VALUE self, VALUE rb_struct, VALUE rb_n)
 {
@@ -96,6 +118,13 @@ rg_get_field_value(VALUE self, VALUE rb_struct, VALUE rb_n)
     return rb_value;
 }
 
+/* GObjectIntrospection::StructInfo#set_field_value(struct, n, value)
+ * Sets nth value in struct.
+ *
+ * @param struct The struct to change.
+ * @param [Fixnum] n The index of the element to change.
+ * @param value The value to set.
+ */
 static VALUE
 rg_set_field_value(VALUE self, VALUE rb_struct, VALUE rb_n, VALUE rb_value)
 {
@@ -115,6 +144,10 @@ rg_set_field_value(VALUE self, VALUE rb_struct, VALUE rb_n, VALUE rb_value)
     return Qnil;
 }
 
+/* Obtain the number of methods this structure has.
+ *
+ * @return [Integer] The number of methods.
+ */
 static VALUE
 rg_n_methods(VALUE self)
 {
@@ -124,6 +157,13 @@ rg_n_methods(VALUE self)
     return INT2NUM(g_struct_info_get_n_methods(info));
 }
 
+
+/* Obtain the type information for method with specified index or name.
+ *
+ * @param [Fixnum, String] n_or_name The index of the method or it's name.
+ *
+ * @return [GObjectIntrospection::BaseInfo] The information to the method.
+ */
 static VALUE
 rg_get_method(VALUE self, VALUE rb_n_or_name)
 {
@@ -144,6 +184,10 @@ rg_get_method(VALUE self, VALUE rb_n_or_name)
     return GI_BASE_INFO2RVAL_WITH_UNREF(function_info);
 }
 
+/* Obtain the total size of the structure.
+ *
+ * @return [Fixnum] The size of the structure.
+ */
 static VALUE
 rg_size(VALUE self)
 {
@@ -153,6 +197,10 @@ rg_size(VALUE self)
     return UINT2NUM(g_struct_info_get_size(info));
 }
 
+/* Obtain the required alignment of the structure.
+ *
+ * @return [Integer] The required alignment of the sructure.
+ */
 static VALUE
 rg_alignment(VALUE self)
 {
@@ -162,6 +210,12 @@ rg_alignment(VALUE self)
     return UINT2NUM(g_struct_info_get_alignment(info));
 }
 
+/* Return true if this structure represents the "class structure" for some
+ *   GLib::Object or GLib::Interface. This function is mainly useful to hide this
+ *   kind of structure from generated public APIs.
+ *
+ * @return [Boolean] If the struct contains a "class structure".
+*/
 static VALUE
 rg_gtype_struct_p(VALUE self)
 {
@@ -171,6 +225,8 @@ rg_gtype_struct_p(VALUE self)
     return CBOOL2RVAL(g_struct_info_is_gtype_struct(info));
 }
 
+/* ToDo
+ */
 static VALUE
 rg_foreign_p(VALUE self)
 {
