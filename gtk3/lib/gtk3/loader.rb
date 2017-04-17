@@ -97,6 +97,7 @@ module Gtk
       require "gtk3/file-chooser-dialog"
       require "gtk3/font-chooser-dialog"
       require "gtk3/gesture-multi-press"
+      require "gtk3/grid"
       require "gtk3/icon-size"
       require "gtk3/icon-theme"
       require "gtk3/icon-view"
