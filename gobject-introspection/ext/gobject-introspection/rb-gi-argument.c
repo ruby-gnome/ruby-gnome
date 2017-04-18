@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2016  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -218,7 +218,21 @@ array_c_to_ruby_sized(gconstpointer *elements,
         }
         break;
     case GI_TYPE_TAG_UINT32:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[c][%s] -> Ruby",
+                 g_type_tag_to_string(element_type_tag));
+        break;
     case GI_TYPE_TAG_INT64:
+        g_base_info_unref(element_type_info);
+        {
+            const gint64 *numbers = (const gint64 *)elements;
+            for (i = 0; i < n_elements; i++) {
+                rb_ary_push(rb_array, LL2NUM(numbers[i]));
+            }
+        }
+        break;
+      break;
     case GI_TYPE_TAG_UINT64:
     case GI_TYPE_TAG_FLOAT:
     case GI_TYPE_TAG_DOUBLE:
