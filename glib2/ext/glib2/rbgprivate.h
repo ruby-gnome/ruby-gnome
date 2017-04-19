@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2007-2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2007-2017  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -152,6 +152,7 @@ G_GNUC_INTERNAL void Init_glib_regex(void);
 G_GNUC_INTERNAL void Init_glib_matchinfo(void);
 G_GNUC_INTERNAL void Init_glib_date_time(void);
 G_GNUC_INTERNAL void Init_glib_time_zone(void);
+G_GNUC_INTERNAL void Init_glib_bytes(void);
 
 G_GNUC_INTERNAL void Init_gobject_convert(void);
 G_GNUC_INTERNAL void Init_gobject_gtype(void);

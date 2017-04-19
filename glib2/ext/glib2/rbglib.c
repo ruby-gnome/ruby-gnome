@@ -1189,4 +1189,5 @@ union       GDoubleIEEE754;
     Init_glib_matchinfo();
     Init_glib_date_time();
     Init_glib_time_zone();
+    Init_glib_bytes();
 }
