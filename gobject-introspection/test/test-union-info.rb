@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,38 @@
 
 class TestUnionInfo < Test::Unit::TestCase
   def setup
-    # TODO: find UnionInfo
+    @repository = GObjectIntrospection::Repository.default
+    @repository.require("GLib")
+    @info = @repository.find("GLib", "Mutex")
+  end
+
+  def test_n_fields
+    assert_equal(2, @info.n_fields)
+  end
+
+  def test_get_field
+    assert_kind_of(GObjectIntrospection::FieldInfo,
+                   @info.get_field(0))
+  end
+
+  def test_n_methods
+    assert_operator(@info.n_methods, :>=, 5)
+  end
+
+  def test_get_method
+    assert_kind_of(GObjectIntrospection::FunctionInfo,
+                   @info.get_method(0))
+  end
+
+  def test_size
+    assert_operator(@info.size, :>=, 8)
+  end
+
+  def test_alignment
+    assert_operator(@info.alignment, :>=, 8)
+  end
+
+  def test_discriminated
+    assert_false(@info.discriminated?)
   end
 end
