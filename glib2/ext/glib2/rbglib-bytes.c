@@ -55,8 +55,12 @@ rg_to_s(VALUE self)
 
     bytes = _SELF(self);
     data = g_bytes_get_data(bytes, &size);
+#  ifdef HAVE_RB_ENC_STR_NEW_STATIC
     rb_data = rb_enc_str_new_static(data, size, rb_ascii8bit_encoding());
     rb_iv_set(rb_data, "@bytes", self);
+#  else
+    rb_data = rb_enc_str_new(data, size, rb_ascii8bit_encoding());
+#  endif
     return rb_data;
 #endif
 }
