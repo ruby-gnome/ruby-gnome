@@ -62,8 +62,8 @@ rg_to_s(VALUE self)
     rb_data = rb_enc_str_new(data, size, rb_ascii8bit_encoding());
 #  endif
     return rb_data;
-#endif
 }
+#endif
 
 void
 Init_glib_bytes(void)
