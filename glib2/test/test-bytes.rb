@@ -17,6 +17,10 @@
 class TestGLibBytes < Test::Unit::TestCase
   include GLibTestUtils
 
+  setup do
+    only_glib_version(2, 32, 0)
+  end
+
   test "#to_s" do
     data = "Hello"
     bytes = GLib::Bytes.new(data)

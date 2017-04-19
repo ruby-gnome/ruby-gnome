@@ -24,6 +24,7 @@
 
 #define _SELF(s) (RVAL2BOXED(s, G_TYPE_BYTES))
 
+#if GLIB_CHECK_VERSION(2, 32, 0)
 static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
@@ -57,14 +58,17 @@ rg_to_s(VALUE self)
     rb_data = rb_enc_str_new_static(data, size, rb_ascii8bit_encoding());
     rb_iv_set(rb_data, "@bytes", self);
     return rb_data;
+#endif
 }
 
 void
 Init_glib_bytes(void)
 {
+#if GLIB_CHECK_VERSION(2, 32, 0)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BYTES, "Bytes", mGLib);
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(to_s, 0);
     RG_DEF_ALIAS("to_str", "to_s");
+#endif
 }
