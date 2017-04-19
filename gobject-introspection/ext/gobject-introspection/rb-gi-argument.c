@@ -611,12 +611,6 @@ rb_gi_argument_to_ruby_interface(GIArgument *argument,
                                                     duplicate,
                                                     type_info,
                                                     interface_info);
-        } else if (gtype == G_TYPE_BYTES) {
-            GBytes *bytes = argument->v_pointer;
-            gconstpointer data;
-            gsize size;
-            data = g_bytes_get_data(bytes, &size);
-            rb_interface = rb_enc_str_new(data, size, rb_ascii8bit_encoding());
         } else if (gtype == G_TYPE_VARIANT) {
             GVariant *variant = argument->v_pointer;
             rb_interface = rbg_variant_to_ruby(variant);

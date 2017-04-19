@@ -35,7 +35,7 @@ class TestResources < Test::Unit::TestCase
   def test_lookup_data
     data = Gio::Resources.lookup_data("/org/ruby-gnome2/test/logo.png")
     assert_equal(File.open(fixture_path("logo.png"), "rb", &:read),
-                 data)
+                 data.to_s)
   end
 
   def test_open_stream
