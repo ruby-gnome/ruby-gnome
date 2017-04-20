@@ -107,7 +107,7 @@ include_path = nil
 if ENV['GTK_BASEPATH'] and /cygwin/ !~ RUBY_PLATFORM
   include_path = (ENV['GTK_BASEPATH'] + "\\INCLUDE").gsub("\\", "/")
 #  $hdrdir += " -I#{include_path} "
-  $CFLAGS += " -I#{include_path} "
+  $INCFLAGS += " -I#{include_path} "
 end
 
 def windows_platform?
@@ -124,7 +124,7 @@ def setup_windows(target_name, base_dir=nil)
       base_dir = Pathname(base_dir) if base_dir.is_a?(String)
       binary_base_dir = base_dir + "vendor" + "local"
       if binary_base_dir.exist?
-        $CFLAGS += " -I#{binary_base_dir}/include"
+        $INCFLAGS += " -I#{binary_base_dir}/include"
         pkg_config_dir = binary_base_dir + "lib" + "pkgconfig"
         PKGConfig.add_path(pkg_config_dir.to_s)
       end
@@ -465,7 +465,7 @@ def check_cairo(options={})
       add_depend_package("cairo", "ext/cairo", rcairo_source_dir, options)
       $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
     end
-    $CFLAGS += " -I#{rcairo_source_dir}/ext/cairo"
+    $INCFLAGS += " -I#{rcairo_source_dir}/ext/cairo"
   end
 
   PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
