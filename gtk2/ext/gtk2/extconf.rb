@@ -68,9 +68,13 @@ $defs << "-DRUBY_GTK2_TARGET=\\\"#{target}\\\""
 STDOUT.print(target, "\n")
 
 gdk_include_path = nil
-include_paths = $CFLAGS.gsub(/-D\w+/, '').split(/-I/) + ['/usr/include']
+include_paths =
+  $CFLAGS.gsub(/-D\w+/, '').split(/-I/) +
+  $INCFLAGS.split(/-I/) +
+  ['/usr/include']
 include_paths.each do |path|
   path.strip!
+  next if path.empty?
 
   if FileTest.exist?("#{path}/gdk/gdkkeysyms.h")
     gdk_include_path = Pathname("#{path}/gdk")
