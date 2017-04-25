@@ -2,6 +2,139 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.1.2: 2017-04-25
+
+There is an incompatible change. (({GBytes})) to (({String}))
+conversion is changed to (({GBytes})) to (({GLib::Bytes}))
+conversion. You can get (({String})) by (({GLib::Bytes#to_s})).
+
+Other incompatible changes are bugs. Please report them to us.
+
+=== Changes
+
+==== All
+
+  * Improvements
+    * Supported auto depended package install for GObject
+      Introspection based bindings.
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Supported overriding (({alloc_func})) in super class.
+    * Extracted native package installer code as
+      native-package-installer gem.
+    * (({GLib::Bytes})): Added.
+    * Supported pkg-config 1.1.9 or later.
+  * Fixes
+    * Fixed a build error on CentOS 6 and Ubuntu 12.04. They use
+      GLib < 2.34.
+      [GitHub#1012][Reported by Scot]
+
+==== Ruby/GIO2
+
+  * Fixes
+    * Fixed a path in test. [GitHub#990][Reported by Mamoru TASAKA]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported getting interface, union and boxed type as a field value.
+    * Supported setting an interface as a field.
+    * Supported more struct types.
+    * Supported cairo-gobject types.
+    * Supported outputting an array of interfaces.
+      [GitHub#1006][Reported by cedlemo]
+    * Supported Rubyish method name conversion for (({list_XXX}))
+      methods that return an array.
+    * Supported customizing field reader method name.
+    * Supported auto (({int})) to boolean conversion for field value.
+    * (({GObjectIntrospection::Repository.default})): Added a GC guard.
+    * Supported inputting (({unichar})).
+    * Supported inputting (({gint64})) C array.
+    * Supported inputting (({gint8})) C array.
+    * Added tests for (({GObjectIntrospection::UnionInfo})).
+      [GitHub#1016][Patch by cedlemo]
+    * Stopped auto (({GBytes})) to (({String}))
+      conversion. (({GBytes})) is converted to (({GLib::Bytes})). It's
+      for efficient byte sequence handling in Ruby. It's
+      an incompatible change. You can use (({GLib::Bytes#to_s})) to
+      get (({String})).
+  * Fixes
+    * (({GObjectIntrospection::RepositoryError})): Fixed parent class.
+    * Fixed a typo. [GitHub#1002][Reported by cedlemo]
+
+==== Ruby/ATK
+
+  * Improvements
+    * Migrated to GObject Introspection bindings.
+      [GitHub#998][Patch by cedlemo]
+
+==== Ruby/CairoGObject
+
+  * Fixes
+    * Fixed a double free bug.
+
+==== Ruby/Pango
+
+  * Improvements
+    * Migrated to GObject Introspection bindings.
+      [GitHub#1007][GitHub#1008][GitHub#1009][GitHub#1010]
+      [GitHub#1011][Patch by cedlemo]
+      [GitHub#1013][GitHub#1014][Patch by Detlef Wagner]
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements
+    * Supported GdkPixbuf 2.31.6 on CentOS 7 again.
+
+==== Ruby/GDK3
+
+  * Improvements
+    * (({Gdk::Event})) and subclasses: Supported again.
+    * Supported old GDK 3 again.
+    * Supported X11 related features.
+      [GitHub#999][Reported by johnlane]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * (({Gtk::Widget#click})): Added.
+    * (({Gtk::Widget#send_key})): Added.
+    * (({Gtk::Widget#wait_for_draw})): Added.
+    * (({Gtk::WiAccelGroup.activate})): Added.
+    * Updated samples.
+      [GitHub#1002][GitHub#1003]
+      [Patch by cedlemo]
+    * (({Gtk::IconTheme#choose_icon})): Changed the default flags to
+      (({0})) from (({:generic_fallback})).
+    * (({Gtk::IconTheme#lookup_icon})): Changed the default flags to
+      (({0})) from (({:generic_fallback})).
+    * Supported GTK+ < 3.20 again.
+  * Fixes
+    * Updated signal name in document.
+      [GitHub#995][Patch by Arnaud Meuret]
+
+==== Ruby/ClutterGdk
+
+  * Fixes
+    * Ensured initializing GDK.
+      [GitHub#1000][Reported by cedlemo]
+
+==== Ruby/GOffice
+
+  * Improvements
+    * (({GOffice::Version})): Added.
+
+=== Thanks
+
+  * Mamoru TASAKA
+  * Arnaud Meuret
+  * cedlemo
+  * johnlane
+  * Scot
+  * Detlef Wagner
+
 == Ruby-GNOME2 3.1.1: 2017-01-26
 
 === Changes
