@@ -135,12 +135,3 @@ package_task.define
 if Rake::Task.task_defined?("native:clutter:i386-mingw32")
   Rake::Task["native:clutter:i386-mingw32"].prerequisites.clear
 end
-
-namespace :dependency do
-  desc "Install depenencies"
-  task :install do
-    # TODO: Install gir1.2-clutter-1.0 on Debian.
-  end
-end
-
-task :build => "dependency:install"

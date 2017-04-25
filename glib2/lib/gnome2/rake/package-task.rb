@@ -125,12 +125,14 @@ module GNOME2
           s.homepage              = @homepage
           s.licenses              = ["LGPLv2.1+"]
           s.version               = version
-          extensions              = FileList["ext/#{@name}/extconf.rb"]
+          extensions              = FileList["ext/#{@name}/extconf.rb",
+                                             "dependency-check/Rakefile"]
           extensions.existing!
           s.extensions            = extensions
           s.require_paths         = ["lib"]
           files                   = FileList["ChangeLog", "README",
                                              "Rakefile", "extconf.rb",
+                                             "dependency-check/Rakefile",
                                              "lib/**/*.rb",
                                              "ext/**/depend",
                                              "ext/**/*.{c,h,def,rb}",

@@ -1,6 +1,4 @@
-# -*- ruby -*-
-#
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,16 +14,27 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-$LOAD_PATH.unshift("./../glib2/lib")
-require "gnome2/rake/package-task"
+require "pkg-config"
+require "native-package-installer"
 
-package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
-  package.description = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
-  package.dependency.gem.runtime = ["gobject-introspection", "gtk2"]
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = ["glib2", "gobject-introspection"]
-  package.windows.build_packages = []
+case RUBY_PLATFORM
+when /mingw|mswin/
+  task :default => "nothing"
+else
+  task :default => "dependency:check"
 end
-package_task.define
+
+task :nothing do
+end
+
+namespace :dependency do
+  desc "Check dependency"
+  task :check do
+    unless PKGConfig.check_version?("webkit2gtk-4.0")
+      unless NativePackageInstaller.install(:debian => "libwebkit2gtk-4.0-dev",
+                                            :homebrew => "webkitgtk")
+        exit(false)
+      end
+    end
+  end
+end

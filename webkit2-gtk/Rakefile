@@ -123,12 +123,3 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   ]
 end
 package_task.define
-
-namespace :dependency do
-  desc "Install depenencies"
-  task :install do
-    # TODO: Install libwebkit2gtk-4.0-37 on Debian.
-  end
-end
-
-task :build => "dependency:install"
