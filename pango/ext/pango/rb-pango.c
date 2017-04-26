@@ -20,13 +20,24 @@
 
 #include "rb-pango-private.h"
 
+#define RG_TARGET_NAMESPACE mPango
+
+static VALUE
+rg_s_pixels(G_GNUC_UNUSED VALUE self, VALUE pixels)
+{
+    return rb_float_new(PANGO_PIXELS(NUM2DBL(pixels)));
+}
+
 void
 Init_pango(void)
 {
-    VALUE mPango;
+    VALUE RG_TARGET_NAMESPACE;
 
-    mPango = rb_define_module("Pango");
-    rbpango_attribute_init(mPango);
-    rbpango_attr_list_init(mPango);
-    rbpango_context_init(mPango);
+    RG_TARGET_NAMESPACE = rb_define_module("Pango");
+
+    RG_DEF_SMETHOD(pixels, 1);
+
+    rbpango_attribute_init(RG_TARGET_NAMESPACE);
+    rbpango_attr_list_init(RG_TARGET_NAMESPACE);
+    rbpango_context_init(RG_TARGET_NAMESPACE);
 }
