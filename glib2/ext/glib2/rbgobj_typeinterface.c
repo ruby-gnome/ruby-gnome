@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011,2017  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -30,7 +30,7 @@ VALUE RG_TARGET_NAMESPACE;
 static VALUE
 rg_append_features(G_GNUC_UNUSED VALUE self, VALUE klass)
 {
-    if (!rb_obj_is_kind_of(klass, cInstantiatable))
+    if (rb_class_inherited_p(klass, cInstantiatable) != Qtrue)
         rb_raise(rb_eTypeError, "Not a subclass of GLib::Instantiatable");
     return rb_call_super(1, &klass);
 }
