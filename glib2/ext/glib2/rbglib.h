@@ -36,7 +36,7 @@ extern "C" {
 
 #define RBGLIB_MAJOR_VERSION 3
 #define RBGLIB_MINOR_VERSION 1
-#define RBGLIB_MICRO_VERSION 2
+#define RBGLIB_MICRO_VERSION 3
 
 #ifndef RB_ZALLOC
 #  ifdef ZALLOC
