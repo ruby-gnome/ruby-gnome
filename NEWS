@@ -2,7 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME2 3.1.2: 2017-04-25
+== Ruby-GNOME2 3.1.2: 2017-04-26
 
 There is an incompatible change. (({GBytes})) to (({String}))
 conversion is changed to (({GBytes})) to (({GLib::Bytes}))
@@ -30,6 +30,8 @@ Other incompatible changes are bugs. Please report them to us.
     * Fixed a build error on CentOS 6 and Ubuntu 12.04. They use
       GLib < 2.34.
       [GitHub#1012][Reported by Scot]
+    * Fixed a bug that (({GLib::TypePlugin})) can't be included.
+      [GitHub#1019][Patch by Matijs van Zuijlen]
 
 ==== Ruby/GIO2
 
@@ -134,6 +136,7 @@ Other incompatible changes are bugs. Please report them to us.
   * johnlane
   * Scot
   * Detlef Wagner
+  * Matijs van Zuijlen
 
 == Ruby-GNOME2 3.1.1: 2017-01-26
 
