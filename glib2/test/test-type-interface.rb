@@ -15,15 +15,24 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestTypeInterface < Test::Unit::TestCase
-  def test_require_instantiatable_superclass
-    bad_class = Class.new
-    assert_raise do
-      bad_class.class_eval { include GLib::TypePlugin }
+  sub_test_case("#append_features") do
+    def test_not_instantiatable
+      plain_class = Class.new
+      assert_raise(TypeError.new("Not a subclass of GLib::Instantiatable")) do
+        plain_class.class_eval do
+          include GLib::TypePlugin
+        end
+      end
     end
 
-    good_class = Class.new GLib::Object
-    assert_nothing_raised do
-      good_class.class_eval { include GLib::TypePlugin }
+    def test_instantiatable
+      gobject_class = Class.new(GLib::Object)
+      gobject_class.class_eval do
+        include GLib::TypePlugin
+      end
+      assert do
+        gobject_class.method_defined?(:use)
+      end
     end
   end
 end
