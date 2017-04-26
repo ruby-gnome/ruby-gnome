@@ -48,7 +48,10 @@ module Pango
     extend GLib::Deprecatable
 
     define_deprecated_enums :Alignment, "ALIGN"
+    define_deprecated_const :Alignment, "Pango::Alignment"
     define_deprecated_enums :WrapMode, "WRAP"
+    define_deprecated_const :WrapMode, "Pango::WrapMode"
     define_deprecated_enums :EllipsizeMode, "ELLIPSIZE"
+    define_deprecated_const :EllipsizeMode, "Pango::EllipsizeMode"
   end
 end
