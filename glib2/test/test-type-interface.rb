@@ -17,7 +17,7 @@
 class TestTypeInterface < Test::Unit::TestCase
   def test_require_instantiatable_superclass
     bad_class = Class.new
-    assert_raises do
+    assert_raise do
       bad_class.class_eval { include GLib::TypePlugin }
     end
 
