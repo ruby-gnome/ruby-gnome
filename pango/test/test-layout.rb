@@ -39,14 +39,14 @@ class TestLayout < Test::Unit::TestCase
   end
 
   def test_set_text
-    text = "Hello <b>World</b>!"
+    text = "こんにちは <b>World</b>!"
     @layout.text = text
     assert_equal(text, @layout.text)
   end
 
   def test_set_markup
-    markup = "Hello <b>World</b>!"
+    markup = "こんにちは <b>World</b>!"
     @layout.markup = markup
-    assert_equal("Hello World!", @layout.text)
+    assert_equal("こんにちは World!", @layout.text)
   end
 end
