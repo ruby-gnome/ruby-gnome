@@ -295,6 +295,13 @@ namespace :dist do
                    "--source", "http://rubygems.org/",
                    "cairo")
               end
+              if /native-package-installer/ !~ `#{expanded_gem_path} list native-package-installre`
+                sh(expanded_gem_path,
+                   "install",
+                   "--clear-sources",
+                   "--source", "http://rubygems.org/",
+                   "native-package-installer")
+              end
             end
 
             attributes[:packages].each do |sub_package_name|

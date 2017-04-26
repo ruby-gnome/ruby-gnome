@@ -9,7 +9,7 @@ export RUBY_CC_VERSION="2.1.10:2.2.4:2.3.1:2.4.0"
 N_CPUS=$(grep '^processor' /proc/cpuinfo | wc -l)
 export MAKE_N_JOBS=${N_CPUS}
 
-export RUBYLIB="$(pwd)/pkg-config/lib"
+export RUBYLIB="$(pwd)/pkg-config/lib:$(pwd)/native-package-installer/lib"
 
 run()
 {
@@ -70,6 +70,7 @@ if [ ! -f ~/setup.timestamp ]; then
   run sudo pip install jsmin
 
   run git clone file:///pkg-config/.git
+  run git clone file:///native-package-installer/.git
   run git clone file:///rcairo/.git rcairo.${DIRECTORY_SUFFIX}
   run git clone file:///ruby-gnome2/.git ruby-gnome2.${DIRECTORY_SUFFIX}
 
@@ -77,6 +78,7 @@ if [ ! -f ~/setup.timestamp ]; then
       rake \
       bundler \
       pkg-config \
+      native-package-installer \
       rake-compiler \
       mechanize \
       packnga
