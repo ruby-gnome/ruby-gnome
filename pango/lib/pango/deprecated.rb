@@ -15,6 +15,23 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Pango
+  extend GLib::Deprecatable
+
+  define_deprecated_enums :Alignment, "ALIGN"
+  define_deprecated_enums :CoverageLevel, "COVERAGE"
+  define_deprecated_enums :Direction, "DIRECTION"
+  define_deprecated_enums :WrapMode, "WRAP"
+  define_deprecated_enums :FontMask, "FONT_MASK"
+  define_deprecated_enums :Stretch, "STRETCH"
+  define_deprecated_enums :Style, "STYLE"
+  define_deprecated_enums :Variant, "VARIANT"
+  define_deprecated_enums :Weight, "WEIGHT"
+  define_deprecated_enums :TabAlign, "TAB"
+  define_deprecated_enums :Underline, "UNDERLINE"
+  define_deprecated_enums :Script, "SCRIPT"
+  define_deprecated_enums :EllipsizeMode, "ELLIPSIZE"
+  define_deprecated_enums :RenderPart, "PART"
+
   class Context
     extend GLib::Deprecatable
 
