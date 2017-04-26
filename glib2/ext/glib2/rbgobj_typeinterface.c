@@ -30,7 +30,7 @@ VALUE RG_TARGET_NAMESPACE;
 static VALUE
 rg_append_features(G_GNUC_UNUSED VALUE self, VALUE klass)
 {
-    if (rb_class_inherited_p(klass, cInstantiatable) != Qtrue)
+    if (!RVAL2CBOOL(rb_class_inherited_p(klass, cInstantiatable)))
         rb_raise(rb_eTypeError, "Not a subclass of GLib::Instantiatable");
     return rb_call_super(1, &klass);
 }
