@@ -95,6 +95,18 @@ rbpango_attr_shape_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
+rbpango_attr_shape_get_data(VALUE self)
+{
+    PangoAttrShape *attr_shape;
+    VALUE rb_data;
+
+    Data_Get_Struct(self, PangoAttrShape, attr_shape);
+    rb_data = (VALUE)(attr_shape->data);
+    rb_p(rb_data);
+    return rb_data;
+}
+
+static VALUE
 rbpango_attr_size_initialize(VALUE self, VALUE rb_size)
 {
     gint size;
@@ -120,8 +132,7 @@ rbpango_attribute_init(VALUE mPango)
                               cAttribute);                              \
     } while (FALSE)
 
-#define DEFINE_ATTRIBUTE(ClassName, method_name, n_initialize_args)     \
-    do {                                                                \
+#define DEFINE_ATTRIBUTE_BEGIN(ClassName, method_name, n_initialize_args)     \
         VALUE c ## ClassName;                                           \
         c ## ClassName = rb_define_class_under(mPango,                  \
                                                #ClassName,              \
@@ -129,7 +140,12 @@ rbpango_attribute_init(VALUE mPango)
         rb_define_method(c ## ClassName, "initialize",                  \
                          rbpango_ ## method_name ## _initialize,        \
                          n_initialize_args);                            \
-    } while (FALSE)
+
+#define DEFINE_ATTRIBUTE_END                    \
+
+#define DEFINE_ATTRIBUTE(ClassName, method_name, n_initialize_args)     \
+    DEFINE_ATTRIBUTE_BEGIN(ClassName, method_name, n_initialize_args) { \
+    } DEFINE_ATTRIBUTE_END;
 
     DEFINE_ABSTRACT_ATTRIBUTE(AttrBool);
     DEFINE_ABSTRACT_ATTRIBUTE(AttrColor);
@@ -138,7 +154,9 @@ rbpango_attribute_init(VALUE mPango)
     DEFINE_ATTRIBUTE(AttrFontFeatures, attr_font_features, 1);
     DEFINE_ABSTRACT_ATTRIBUTE(AttrInt);
     DEFINE_ATTRIBUTE(AttrLanguage, attr_language, 1);
-    DEFINE_ATTRIBUTE(AttrShape, attr_shape, -1);
+    DEFINE_ATTRIBUTE_BEGIN(AttrShape, attr_shape, -1) {
+        rb_define_method(cAttrShape, "data", rbpango_attr_shape_get_data, 0);
+    } DEFINE_ATTRIBUTE_END;
     DEFINE_ATTRIBUTE(AttrSize, attr_size, 1);
     DEFINE_ABSTRACT_ATTRIBUTE(AttrString);
 

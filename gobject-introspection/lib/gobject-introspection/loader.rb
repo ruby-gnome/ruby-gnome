@@ -241,30 +241,39 @@ module GObjectIntrospection
 
       readable = options[:readable]
       readable = flags.readable? if readable.nil?
-      need_number_to_bool_convert = false
-      if name.start_with?("is_") and
-          field_info.type.tag == TypeTag::UINT32
-        need_number_to_bool_convert = true
-      end
       if readable
         reader_method_name = rubyish_field_reader_name(field_info, name)
-        remove_existing_method(klass, reader_method_name)
-        klass.__send__(:define_method, reader_method_name) do ||
-          value = info.get_field_value(self, i)
-          if need_number_to_bool_convert
-            value != 0
-          else
-            value
-          end
-        end
+        load_field_reader(info, i, field_info, klass, name, reader_method_name)
       end
 
       writable = options[:writable]
       writable = flags.writable? if writable.nil?
       if writable
-        klass.__send__(:define_method, "#{name}=") do |value|
-          info.set_field_value(self, i, value)
+        load_field_writer(info, i, field_info, klass, name, "#{name}=")
+      end
+    end
+
+    def load_field_reader(info, i, field_info, klass, name, method_name)
+      remove_existing_method(klass, method_name)
+
+      need_number_to_bool_convert = false
+      if name.start_with?("is_") and
+          field_info.type.tag == TypeTag::UINT32
+        need_number_to_bool_convert = true
+      end
+      klass.__send__(:define_method, method_name) do ||
+        value = info.get_field_value(self, i)
+        if need_number_to_bool_convert
+          value != 0
+        else
+          value
         end
+      end
+    end
+
+    def load_field_writer(info, i, field_info, klass, name, method_name)
+      klass.__send__(:define_method, method_name) do |value|
+        info.set_field_value(self, i, value)
       end
     end
 

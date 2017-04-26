@@ -49,6 +49,14 @@ module Pango
       end
     end
 
+    def load_field_reader(info, i, field_info, klass, name, method_name)
+      case klass.name
+      when "Pango::AttrShape"
+        return if klass.method_defined?(method_name)
+      end
+      super
+    end
+
     def load_method_info(info, klass, method_name)
       case klass.name
       when "Pango::Matrix"
