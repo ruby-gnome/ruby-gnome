@@ -2,6 +2,32 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.1.3: 2017-04-27
+
+=== Changes
+
+This is a release that improve backward compatibility for Ruby/Pango.
+
+==== Ruby/Pango
+
+  * Improvements
+    * Defined constants under (({Pango})) again for backward compatibility.
+      [GitHub#1022][Reported by Andy Meneely]
+    * Defined constants under (({Pango::Layout})) again for backward
+      compatibility.
+      [GitHub#1022][Reported by Andy Meneely]
+    * (({Pango.pixels})): Added again.
+    * (({Pango::AttrShape#data})): Supported again.
+  * Fixes
+    * (({Pango::Layout#text=})): Fixed a bug that wrong bytesize is
+      used for multibyte string.
+    * (({Pango::Layout#markup=})): Fixed a bug that wrong bytesize
+      is used for multibyte string.
+
+=== Thanks
+
+  * Andy Meneely
+
 == Ruby-GNOME2 3.1.2: 2017-04-26
 
 There is an incompatible change. (({GBytes})) to (({String}))
