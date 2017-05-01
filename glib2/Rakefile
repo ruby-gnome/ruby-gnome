@@ -101,7 +101,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
     {
       :name => "gmp",
-      :download_base_url => "ftp://ftp.gmplib.org/pub/gmp-6.1.0",
+      :download_site => :gnu,
       :label => "GNU MP",
       :version => "6.1.0",
       :compression_method => "xz",
