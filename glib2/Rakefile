@@ -48,7 +48,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "libiconv",
       :download_site => :gnu,
       :label => "libiconv",
-      :version => "1.14",
+      :version => "1.15",
       :windows => {
         :built_file => "bin/libiconv-2.dll",
       },
@@ -57,7 +57,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "gettext",
       :download_site => :gnu,
       :label => "gettext-runtime",
-      :version => "0.19.7",
+      :version => "0.19.8.1",
       :base_dir_in_package => "gettext-runtime",
       :windows => {
         :built_file => "bin/libintl-8.dll",
@@ -127,7 +127,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "libtasn1",
       :download_site => :gnu,
       :label => "Libtasn1",
-      :version => "4.7",
+      :version => "4.10",
       :windows => {
         :built_file => "bin/libtasn1-6.dll",
       },
@@ -136,7 +136,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "libidn",
       :download_site => :gnu,
       :label => "Libidn",
-      :version => "1.32",
+      :version => "1.33",
       :windows => {
         :built_file => "bin/libidn-11.dll",
       },
