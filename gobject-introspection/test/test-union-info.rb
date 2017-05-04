@@ -44,7 +44,7 @@ class TestUnionInfo < Test::Unit::TestCase
   end
 
   def test_alignment
-    assert_operator(@info.alignment, :>=, 8)
+    assert_operator(@info.alignment, :>=, 4)
   end
 
   def test_discriminated
