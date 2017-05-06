@@ -24,7 +24,7 @@ module WebKit2Gtk
         case args[0]
         when Hash
           initialize_with_hash(args[0])
-          Gtk::Loader.reference_gobject self, sink: true
+          Gtk::Loader.reference_gobject(self, sink: true)
         when WebContext
           message = "#{caller[0]}: #{self.class}.new(context) is deprecated. "
           message << "Use #{self.class}.new(:context => context) instead."
@@ -34,7 +34,7 @@ module WebKit2Gtk
           raise ArgumentError, "must be options: #{args[0].inspect}"
         end
       else
-        initialize_raw *args
+        initialize_raw(*args)
       end
     end
 
@@ -44,11 +44,11 @@ module WebKit2Gtk
       user_content_manager = options[:user_content_manager]
 
       if context
-        initialize_new_with_context context
+        initialize_new_with_context(context)
       elsif settings
-        initialize_new_with_settings settings
+        initialize_new_with_settings(settings)
       elsif user_content_manager
-        initialize_new_with_user_content_manager user_content_manager
+        initialize_new_with_user_content_manager(user_content_manager)
       else
         raise ArgumentError, "must specify :context, :settings or :user_content_manager"
       end
@@ -58,7 +58,7 @@ module WebKit2Gtk
     alias_method :new_with_related_view_raw, :new_with_related_view
     def new_with_related_view
       view = new_with_related_view_raw
-      Gtk::Loader.reference_gobject view, sink: true
+      Gtk::Loader.reference_gobject(view, sink: true)
       view
     end
   end

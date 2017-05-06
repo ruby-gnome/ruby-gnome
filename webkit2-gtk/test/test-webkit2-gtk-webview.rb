@@ -19,27 +19,27 @@ class TestWebKit2GtkWebView < Test::Unit::TestCase
     sub_test_case("Hash form") do
       test "with context" do
         context = WebKit2Gtk::WebContext.new
-        webview = WebKit2Gtk::WebView.new context: context
+        webview = WebKit2Gtk::WebView.new(context: context)
         assert_equal(context, webview.context)
         assert_nil(webview.user_content_manager)
       end
 
       test "with settings" do
         settings = WebKit2Gtk::Settings.new
-        webview = WebKit2Gtk::WebView.new settings: settings
+        webview = WebKit2Gtk::WebView.new(settings: settings)
         assert_equal(settings, webview.settings)
         assert_nil(webview.user_content_manager)
       end
 
       test "with user content manager" do
         manager = WebKit2Gtk::UserContentManager.new
-        webview = WebKit2Gtk::WebView.new user_content_manager: manager
+        webview = WebKit2Gtk::WebView.new(user_content_manager: manager)
         assert_equal(manager, webview.user_content_manager)
       end
 
       test "with unknown option" do
         assert_raises do
-          WebKit2Gtk::WebView.new foo: 'bar'
+          WebKit2Gtk::WebView.new(foo: 'bar')
         end
       end
     end
@@ -47,7 +47,7 @@ class TestWebKit2GtkWebView < Test::Unit::TestCase
     sub_test_case("legacy form") do
       test "with unknown argument" do
         assert_raises ArgumentError do
-          WebKit2Gtk::WebView.new 'foo'
+          WebKit2Gtk::WebView.new('foo')
         end
       end
     end
