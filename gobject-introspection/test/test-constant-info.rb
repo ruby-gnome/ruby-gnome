@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,7 +18,14 @@ class TestConstantInfo < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
     @repository.require("GObject")
-    # TODO: find ConstantInfo
-    # @info = @repository.find("GObject", "Object")
+    @info = @repository.find("GObject", "SIGNAL_FLAGS_MASK")
+  end
+
+  def test_type
+    assert_equal(GObjectIntrospection::TypeTag::INT32, @info.type.tag)
+  end
+
+  def test_value
+    assert_equal(511, @info.value)
   end
 end
