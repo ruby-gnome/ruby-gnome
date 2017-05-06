@@ -67,6 +67,7 @@ module WebKit2Gtk
 
     def require_libraries
       require "webkit2-gtk/version" if @version_module.const_defined?(:MAJOR)
+      require "webkit2-gtk/web_view"
     end
 
     def load_constant_info(info)
