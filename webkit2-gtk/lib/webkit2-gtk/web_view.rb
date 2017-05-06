@@ -43,6 +43,8 @@ module WebKit2Gtk
         initialize_new_with_settings settings
       elsif user_content_manager
         initialize_new_with_user_content_manager user_content_manager
+      else
+        raise ArgumentError, "must specify :context, :settings or :user_content_manager"
       end
     end
   end

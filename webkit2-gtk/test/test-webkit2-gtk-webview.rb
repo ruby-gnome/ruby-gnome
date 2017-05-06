@@ -82,6 +82,12 @@ class TestWebKit2GtkWebView < Test::Unit::TestCase
         webview = WebKit2Gtk::WebView.new user_content_manager: manager
         assert_equal(manager, webview.user_content_manager)
       end
+
+      test "with unknown option" do
+        assert_raises do
+          WebKit2Gtk::WebView.new foo: 'bar'
+        end
+      end
     end
   end
 
