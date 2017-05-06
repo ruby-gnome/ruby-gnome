@@ -47,5 +47,6 @@ module WebKit2Gtk
         raise ArgumentError, "must specify :context, :settings or :user_content_manager"
       end
     end
+    private :initialize_with_hash
   end
 end
