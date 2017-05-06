@@ -43,7 +43,7 @@ modules = [
   [webkit2_gtk_base, "webkit2-gtk"],
 ]
 modules.each do |target, module_name|
-  if File.exist?("Makefile") and system("which make > /dev/null")
+  if File.exist?("#{target}/Makefile") and system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(false)
   end
   $LOAD_PATH.unshift(File.join(target, "ext", module_name))
