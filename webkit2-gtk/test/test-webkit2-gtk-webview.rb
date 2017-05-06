@@ -89,6 +89,14 @@ class TestWebKit2GtkWebView < Test::Unit::TestCase
         end
       end
     end
+
+    sub_test_case("legacy form") do
+      test "with unknown argument" do
+        assert_raises ArgumentError do
+          WebKit2Gtk::WebView.new 'foo'
+        end
+      end
+    end
   end
 
   sub_test_case("#new_with_related_view") do

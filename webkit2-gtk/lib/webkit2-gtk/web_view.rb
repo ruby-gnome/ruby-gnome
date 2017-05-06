@@ -30,7 +30,7 @@ module WebKit2Gtk
           warn message
           initialize_raw(args[0])
         else
-          initialize_raw(args[0])
+          raise ArgumentError, "must be options: #{args[0].inspect}"
         end
       else
         initialize_raw *args
