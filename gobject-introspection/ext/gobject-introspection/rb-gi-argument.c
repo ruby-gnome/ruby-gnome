@@ -2150,7 +2150,11 @@ rb_gi_return_argument_free_everything_interface(GIArgument *argument,
         break;
     case GI_INFO_TYPE_OBJECT:
         if (argument->v_pointer) {
-            g_object_unref(argument->v_pointer);
+            GObject *object = argument->v_pointer;
+            if (g_object_is_floating(object)) {
+                g_object_ref_sink(object);
+            }
+            g_object_unref(object);
         }
         break;
     case GI_INFO_TYPE_INTERFACE:
