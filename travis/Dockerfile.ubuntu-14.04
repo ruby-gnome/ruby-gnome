@@ -7,6 +7,9 @@ RUN \
     xvfb \
     git \
     wget \
+    gcc \
+    g++ \
+    make \
     libssl-dev \
     libreadline-dev \
     gstreamer1.0-plugins-good \

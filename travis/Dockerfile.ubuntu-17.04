@@ -4,6 +4,9 @@ RUN \
   apt update && \
   apt install -y \
     sudo \
+    gcc \
+    g++ \
+    make \
     ruby-dev \
     xvfb \
     gstreamer1.0-plugins-good \
