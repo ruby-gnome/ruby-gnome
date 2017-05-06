@@ -40,7 +40,7 @@ module WebKit2Gtk
         when WebContext
           message = "#{caller[0]}: #{self.class}.new(context) is deprecated. "
           message << "Use #{self.class}.new(:context => context) instead."
-          warn message
+          warn(message)
           initialize_raw(args[0])
         else
           raise ArgumentError, "must be options: #{args[0].inspect}"
