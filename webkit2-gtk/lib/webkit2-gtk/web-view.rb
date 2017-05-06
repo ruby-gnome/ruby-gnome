@@ -36,7 +36,6 @@ module WebKit2Gtk
         case args[0]
         when Hash
           initialize_with_hash(args[0])
-          Gtk::Loader.reference_gobject(self, sink: true)
         when WebContext
           message = "#{caller[0]}: #{self.class}.new(context) is deprecated. "
           message << "Use #{self.class}.new(:context => context) instead."
