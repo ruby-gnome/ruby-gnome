@@ -6,18 +6,7 @@ RUN \
     sudo \
     ruby-dev \
     xvfb \
-    libgirepository1.0-dev \
     gstreamer1.0-plugins-good \
-    gir1.2-clutter-1.0 \
-    gir1.2-clutter-gst-3.0 \
-    gir1.2-gtkclutter-1.0 \
-    gir1.2-gtksource-3.0 \
-    gir1.2-vte-2.91 \
-    gir1.2-webkit-3.0 \
-    gir1.2-webkit2-4.0 \
-    gir1.2-gsf-1 \
-    gir1.2-goffice-0.10 \
-    gir1.2-gnumeric \
     gnumeric \
     gnome-icon-theme \
     dbus-x11
