@@ -16,8 +16,20 @@
 
 module WebKit2Gtk
   class WebView
-    alias_method :initialize_raw, :initialize
+    class << self
+      def new(*args)
+        return super unless args.size == 1
+        return super unless args[0].is_a?(Hash)
 
+        related_view = args[0][:related_view]
+        return super unless related_view
+        # TODO: Workaround for webkit_web_view_new_with_related_view is
+        # handled as method not constructor.
+        related_view.new_with_related_view
+      end
+    end
+
+    alias_method :initialize_raw, :initialize
     def initialize(*args)
       case args.size
       when 1
@@ -50,7 +62,9 @@ module WebKit2Gtk
       elsif user_content_manager
         initialize_new_with_user_content_manager(user_content_manager)
       else
-        raise ArgumentError, "must specify :context, :settings or :user_content_manager"
+        message =
+          "must specify :context, :settings, :user_content_manager or :related_view"
+        raise ArgumentError, message
       end
     end
     private :initialize_with_hash

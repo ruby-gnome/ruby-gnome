@@ -37,6 +37,13 @@ class TestWebKit2GtkWebView < Test::Unit::TestCase
         assert_equal(manager, webview.user_content_manager)
       end
 
+      test "with related view" do
+        settings = WebKit2Gtk::Settings.new
+        related = WebKit2Gtk::WebView.new(settings: settings)
+        webview = related.new_with_related_view
+        assert_equal(settings, webview.settings)
+      end
+
       test "with unknown option" do
         assert_raises do
           WebKit2Gtk::WebView.new(foo: 'bar')
@@ -96,15 +103,6 @@ class TestWebKit2GtkWebView < Test::Unit::TestCase
       loop.run
 
       assert_true(loaded)
-    end
-  end
-
-  sub_test_case("#new_with_related_view") do
-    test "create related view" do
-      settings = WebKit2Gtk::Settings.new
-      related = WebKit2Gtk::WebView.new settings: settings
-      webview = related.new_with_related_view
-      assert_equal(settings, webview.settings)
     end
   end
 end
