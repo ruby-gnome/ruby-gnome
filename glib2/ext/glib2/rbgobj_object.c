@@ -784,6 +784,18 @@ gobj_ref_count(VALUE self)
     return INT2NUM(holder->gobj ? holder->gobj->ref_count : 0);
 }
 
+static VALUE
+rg_floating_p(VALUE self)
+{
+    gobj_holder* holder;
+    Data_Get_Struct(self, gobj_holder, holder);
+    if (holder->gobj) {
+        return CBOOL2RVAL(g_object_is_floating(holder->gobj));
+    } else {
+        return Qfalse;
+    }
+}
+
 /**********************************************************************/
 
 static GQuark q_ruby_setter;
@@ -979,6 +991,7 @@ Init_gobject_gobject(void)
 
     RG_DEF_METHOD(initialize, -1);
     rbg_define_method(RG_TARGET_NAMESPACE, "ref_count", gobj_ref_count, 0); /* for debugging */
+    RG_DEF_METHOD_P(floating, 0); /* for debugging */
     RG_DEF_METHOD(unref, 0);
     RG_DEF_METHOD(inspect, 0);
     RG_DEF_METHOD(type_name, 0);
