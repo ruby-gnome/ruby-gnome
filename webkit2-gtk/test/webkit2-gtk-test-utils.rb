@@ -21,7 +21,7 @@ require "webrick"
 module WebKit2GtkTestUtils
   def only_webkit2_gtk_version(major, minor, micro=nil)
     micro ||= 0
-    unless WebKit2Gtk.or_later?(major, minor, micro)
+    unless WebKit2Gtk::Version.or_later?(major, minor, micro)
       omit("Require WebKit2Gtk >= #{major}.#{minor}.#{micro}")
     end
   end
