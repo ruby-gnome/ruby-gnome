@@ -15,6 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestWebKit2GtkWebView < Test::Unit::TestCase
+  include WebKit2GtkTestUtils
+
   sub_test_case(".new") do
     sub_test_case("Hash form") do
       test "with context" do
