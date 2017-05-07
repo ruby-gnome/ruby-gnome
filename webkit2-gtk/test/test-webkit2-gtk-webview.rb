@@ -18,6 +18,7 @@ class TestWebKit2GtkWebView < Test::Unit::TestCase
   sub_test_case(".new") do
     sub_test_case("Hash form") do
       test "with context" do
+        only_webkit2_gtk_version(2, 8)
         context = WebKit2Gtk::WebContext.new
         webview = WebKit2Gtk::WebView.new(context: context)
         assert_equal(context, webview.context)
