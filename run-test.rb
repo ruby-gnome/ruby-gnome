@@ -42,12 +42,21 @@ failed_target_names = []
 targets.each do |target|
   next if ignored_modules.include?(target.basename.to_s)
   Dir.chdir(target.to_s) do
-    puts "#{Time.now} running test for #{target}"
+    puts "#{Time.now.iso8601}: Running test for #{target}"
     puts separator
 
-    args = includes + ["test/run-test.rb"]
-    command = [ruby, *args]
-    unless system(command.collect {|arg| "'#{arg.gsub(/'/, '\\\'')}'"}.join(' '))
+    dependency_check = "dependency-check/Rakefile"
+    if File.exist?(dependency_check)
+      unless system(ruby, *includes, "-S",
+                    "rake", "--rakefile", dependency_check)
+        puts "Failed to resolve dependency: #{target.basename}"
+        puts separator
+        next
+      end
+    end
+
+    unless system(ruby, *includes, "test/run-test.rb")
+      puts "Failed to run test: #{target.basename}"
       failed_target_names << target.basename.to_s
     end
 
