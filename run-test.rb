@@ -5,6 +5,7 @@
 
 require "rbconfig"
 require "pathname"
+require "time"
 
 ruby = File.join(RbConfig::CONFIG['bindir'],
                  RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'])
