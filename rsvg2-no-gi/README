@@ -1,0 +1,35 @@
+Ruby/RSVG
+=========
+
+Ruby/RSVG is a Ruby binding of librsvg.
+
+Requirements
+------------
+
+    Ruby:               http://www.ruby-lang.org/
+    librsvg [*]:        http://librsvg.sourceforge.net/
+    Ruby/GLib2:         http://ruby-gnome2.sourceforge.net/
+    Ruby/GdkPixbuf2:    http://ruby-gnome2.sourceforge.net/
+
+    [*]: 2.8 or later is requried.
+
+Install
+-------
+
+    0. install ruby and librsvg.
+    1. ruby extconf.rb
+    2. make
+    3. su
+    4. make install
+
+Copying
+-------
+   Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+
+   This program is free software.
+   You can distribute/modify this program under the terms of
+   the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
+
+Project Website
+---------------
+   http://ruby-gnome2.sourceforge.jp/
