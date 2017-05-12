@@ -1,6 +1,6 @@
-# Ruby/RSVG2
+# Ruby/Rsvg2
 
-Ruby/RSVG2 is a Ruby binding of [RSVG](https://developer.gnome.org/rsvg/) based on GObject-Introspection.
+Ruby/Rsvg2 is a Ruby binding of [Rsvg](https://developer.gnome.org/rsvg/) based on GObject-Introspection.
 
 ## Requirements
 

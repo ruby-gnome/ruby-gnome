@@ -28,7 +28,7 @@ GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 require "rsvg2/loader"
 
-module RSVG
+module Rsvg
   LOG_DOMAIN = "librsvg"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
