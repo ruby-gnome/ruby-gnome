@@ -16,6 +16,18 @@
 
 module RSVG
   class Handle
+    class << self
+      # For backward compatibility
+      def new_from_data(data)
+        new(:data => data)
+      end
+
+      # For backward compatibility
+      def new_from_file(file_name, options={})
+        new(options.merge(:file => file_name))
+      end
+    end
+
     alias_method :initialize_raw, :initialize
     def initialize(options={})
       flags = options[:flags] || nil
@@ -34,16 +46,6 @@ module RSVG
       else
         initialize_raw
       end
-    end
-
-    # For backward compatibility
-    def new_from_data(data)
-      new(:data => data)
-    end
-
-    # For backward compatibility
-    def new_from_file(file_name, options={})
-      new(options.merge(:file => file_name))
     end
   end
 end
