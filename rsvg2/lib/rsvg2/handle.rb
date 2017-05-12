@@ -15,16 +15,35 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module RSVG
-  class Loader < GObjectIntrospection::Loader
-    private
+  class Handle
+    alias_method :initialize_raw, :initialize
+    def initialize(options={})
+      flags = options[:flags] || nil
+      file = options[:file] || nil
+      data = options[:data] || nil
 
-    def post_load(repository, namespace)
-      require_libraries
+      if file
+        if flags
+          initialize_new_from_file(file)
+          flags = flags
+        else
+          initialize_new_from_file(file)
+        end
+      elsif data
+        initialize_new_from_data(data)
+      else
+        initialize_raw
+      end
     end
 
-    def require_libraries
-      require "rsvg2/handle"
-      require "rsvg2/version"
+    # For backward compatibility
+    def new_from_data(data)
+      new(:data => data)
+    end
+
+    # For backward compatibility
+    def new_from_file(file_name, options={})
+      new(options.merge(:file => file_name))
     end
   end
 end
