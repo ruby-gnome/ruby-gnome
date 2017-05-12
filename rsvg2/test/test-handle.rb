@@ -38,7 +38,8 @@ class TestHandle < Test::Unit::TestCase
       end
 
       def test_empty_options
-        handle = RSVG::Handle.new_from_file(@svg_path, {})
+        handle = RSVG::Handle.new(:file => @svg_path)
+        puts handle.to_s
         assert_equal([0, 0, 0.0, 0.0],
                      handle.dimensions.to_a)
       end
@@ -69,17 +70,10 @@ class TestHandle < Test::Unit::TestCase
         end
       end
 
-      def test_no_option
-        only_rsvg_version(2, 40, 3)
-        assert_raise(RSVG::Error::Failed) do
-          RSVG::Handle.new_from_file(@large_svg_path)
-        end
-      end
-
       def test_unlimited
         only_rsvg_version(2, 40, 3)
-        handle = RSVG::Handle.new_from_file(@large_svg_path,
-                                            :flags => :flag_unlimited)
+        handle = RSVG::Handle.new(:file => @large_svg_path,
+                                  :flags => :flag_unlimited)
         assert_equal([0, 0, 0.0, 0.0],
                      handle.dimensions.to_a)
       end
