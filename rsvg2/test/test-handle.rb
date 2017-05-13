@@ -39,7 +39,6 @@ class TestHandle < Test::Unit::TestCase
 
       def test_empty_options
         handle = Rsvg::Handle.new(:file => @svg_path)
-        puts handle.to_s
         assert_equal([0, 0, 0.0, 0.0],
                      handle.dimensions.to_a)
       end
