@@ -27,8 +27,6 @@ module Gio
     end
 
     def post_load(repository, namespace)
-      file_module = nil
-
       if @content_type_guess_for_tree_info
         content_type_class = @content_type_class
         info = @content_type_guess_for_tree_info
@@ -39,12 +37,6 @@ module Gio
           end
         end
       end
-
-      @file_function_infos.each do |info|
-        name = rubyish_method_name(info, :prefix => "file_")
-        define_singleton_method(file_module, name, info)
-      end
-
       require_extension
       require_libraries
     end
@@ -126,7 +118,7 @@ module Gio
         name = rubyish_method_name(info, :prefix => "dbus_")
         define_singleton_method(@dbus_module, name, info)
       when /\Afile_/
-        @file_function_infos << info
+        # Ignore because they are defined by load_interface_info
       else
         super
       end
@@ -180,15 +172,6 @@ module Gio
         @content_type_class.__send__(:define_method, method_name) do
           info.invoke([to_s])
         end
-      end
-    end
-
-    def rubyish_method_name(info, options={})
-      case info.name
-      when /\Anew_(?:for_)?/
-        $POSTMATCH
-      else
-        super
       end
     end
 

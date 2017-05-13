@@ -17,12 +17,12 @@
 module Gio
   module File
     class << self
-      alias_method :commandline_arg_raw, :commandline_arg
       def commandline_arg(arg, cwd=nil)
+        # TODO: deprecated warning
         if cwd
-          commandline_arg_and_cwd(arg, cwd)
+          new_for_commandline_arg_and_cwd(arg, cwd)
         else
-          commandline_arg_raw(arg)
+          new_for_commandline_arg(arg)
         end
       end
 
