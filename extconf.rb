@@ -24,14 +24,6 @@ priorlibs = [
 ]
 
 unsupported_libraries = [
-  "atk-no-gi",
-  "gdk_pixbuf2-no-gi",
-  "gdk3-no-gi",
-  "gtk3-no-gi",
-  "gtksourceview3-no-gi",
-  "pango-no-gi",
-  "rsvg2-no-gi",
-  "vte3-no-gi",
 ]
 
 #
@@ -66,6 +58,9 @@ if subdirs.size == 0
   priorlibs &= subdirs
   subdirs -= priorlibs
   subdirs = priorlibs + subdirs #Change the order
+end
+subdirs = subdirs.delete_if do |subdir|
+  subdir.end_with?("-no-gi")
 end
 subdirs -= unsupported_libraries
 

@@ -29,18 +29,11 @@ Pathname.glob((base_dir + "*").to_s) do |dir|
 end
 
 ignored_modules = [
-  "atk-no-gi",
-  "gdk_pixbuf2-no-gi",
-  "gstreamer-no-gi",
-  "gdk3-no-gi",
-  "gtk3-no-gi",
-  "gtksourceview3-no-gi",
-  "pango-no-gi",
-  "vte3-no-gi",
 ]
 
 failed_target_names = []
 targets.each do |target|
+  next if target.basename.to_s.end_with?("-no-gi")
   next if ignored_modules.include?(target.basename.to_s)
   Dir.chdir(target.to_s) do
     puts "#{Time.now.iso8601}: Running test for #{target}"
