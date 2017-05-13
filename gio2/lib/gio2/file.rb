@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,34 @@ module Gio
           commandline_arg_and_cwd(arg, cwd)
         else
           commandline_arg_raw(arg)
+        end
+      end
+
+      def open(options={})
+        arg = options[:arg]
+        cwd = options[:cwd]
+        path = options[:path]
+        uri = options[:uri]
+
+        if arg
+          if cwd
+            file = new_for_commandline_arg_and_cmd(arg, cwd)
+          else
+            file = new_for_commandline_arg(arg)
+          end
+        elsif path
+          file = new_for_path(path)
+        elsif uri
+          file = new_for_uri(uri)
+        else
+          message = "must specify :arg, :path or :uri: #{options.inspect}"
+          raise ArgumentError, message
+        end
+
+        if block_given?
+          yield(file)
+        else
+          file
         end
       end
     end

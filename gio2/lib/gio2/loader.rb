@@ -22,10 +22,13 @@ module Gio
       define_mime_type_class
       define_dbus_module
       define_resources_module
+      @file_function_infos = []
       @content_type_guess_for_tree_info = nil
     end
 
     def post_load(repository, namespace)
+      file_module = nil
+
       if @content_type_guess_for_tree_info
         content_type_class = @content_type_class
         info = @content_type_guess_for_tree_info
@@ -36,6 +39,12 @@ module Gio
           end
         end
       end
+
+      @file_function_infos.each do |info|
+        name = rubyish_method_name(info, :prefix => "file_")
+        define_singleton_method(file_module, name, info)
+      end
+
       require_extension
       require_libraries
     end
@@ -116,6 +125,8 @@ module Gio
       when /\Adbus_/
         name = rubyish_method_name(info, :prefix => "dbus_")
         define_singleton_method(@dbus_module, name, info)
+      when /\Afile_/
+        @file_function_infos << info
       else
         super
       end
