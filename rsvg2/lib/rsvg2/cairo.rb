@@ -14,19 +14,10 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Rsvg
-  class Loader < GObjectIntrospection::Loader
-    private
-
-    def post_load(repository, namespace)
-      require_libraries
-    end
-
-    def require_libraries
-      require "rsvg2/cairo"
-      require "rsvg2/dimension-data"
-      require "rsvg2/handle"
-      require "rsvg2/version"
+module Cairo
+  class Context
+    def render_rsvg_handle(handle, *args, &block)
+      handle.render_cairo(self, *args, &block)
     end
   end
 end
