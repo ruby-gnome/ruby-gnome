@@ -16,6 +16,7 @@
 
 require "gobject-introspection"
 require "glib2"
+require "gio2"
 require "gdk_pixbuf2"
 require "cairo"
 

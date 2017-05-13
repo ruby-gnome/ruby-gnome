@@ -30,16 +30,17 @@ module Rsvg
 
     alias_method :initialize_raw, :initialize
     def initialize(options={})
-      flags = options[:flags] || nil
-      file = options[:file] || nil
-      data = options[:data] || nil
+      flags = options[:flags]
+      path = options[:path] || options[:file]
+      data = options[:data]
 
-      if file
+      if path
         if flags
-          initialize_new_from_file(file)
-          flags = flags
+          Gio::File.open(:path => path) do |file|
+            initialize_new_from_gfile_sync(file, flags)
+          end
         else
-          initialize_new_from_file(file)
+          initialize_new_from_file(path)
         end
       elsif data
         initialize_new_from_data(data)
