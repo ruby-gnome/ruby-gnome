@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestHandle < Test::Unit::TestCase
-  include RSVG2TestUtils
+  include Rsvg2TestUtils
 
   sub_test_case ".new_from_file" do
     sub_test_case "options" do
@@ -38,7 +38,8 @@ class TestHandle < Test::Unit::TestCase
       end
 
       def test_empty_options
-        handle = RSVG::Handle.new_from_file(@svg_path, {})
+        handle = Rsvg::Handle.new(:file => @svg_path)
+        puts handle.to_s
         assert_equal([0, 0, 0.0, 0.0],
                      handle.dimensions.to_a)
       end
@@ -69,23 +70,16 @@ class TestHandle < Test::Unit::TestCase
         end
       end
 
-      def test_no_option
-        only_rsvg_version(2, 40, 3)
-        assert_raise(RSVG::Error::Failed) do
-          RSVG::Handle.new_from_file(@large_svg_path)
-        end
-      end
-
       def test_unlimited
         only_rsvg_version(2, 40, 3)
-        handle = RSVG::Handle.new_from_file(@large_svg_path,
-                                            :flags => :flag_unlimited)
+        handle = Rsvg::Handle.new(:file => @large_svg_path,
+                                  :flags => :flag_unlimited)
         assert_equal([0, 0, 0.0, 0.0],
                      handle.dimensions.to_a)
       end
 
       def test_base_uri
-        handle = RSVG::Handle.new
+        handle = Rsvg::Handle.new
         uri_string = "test_base_uri"
         handle.base_uri = uri_string
         assert_match(uri_string, handle.base_uri)

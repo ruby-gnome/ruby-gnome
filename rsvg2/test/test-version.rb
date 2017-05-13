@@ -14,34 +14,34 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestRSVGVersion < Test::Unit::TestCase
-  include RSVG2TestUtils
+class TestRsvgVersion < Test::Unit::TestCase
+  include Rsvg2TestUtils
 
   test "STRING" do
-    major = RSVG::Version::MAJOR
-    minor = RSVG::Version::MINOR
-    micro = RSVG::Version::MICRO
+    major = Rsvg::Version::MAJOR
+    minor = Rsvg::Version::MINOR
+    micro = Rsvg::Version::MICRO
     assert_equal([major, minor, micro].join("."),
-                 RSVG::Version::STRING)
+                 Rsvg::Version::STRING)
   end
 
   sub_test_case("#or_later?") do
     test "same" do
-      assert_true(RSVG::Version.or_later?(RSVG::Version::MAJOR,
-                                          RSVG::Version::MINOR,
-                                          RSVG::Version::MICRO))
+      assert_true(Rsvg::Version.or_later?(Rsvg::Version::MAJOR,
+                                          Rsvg::Version::MINOR,
+                                          Rsvg::Version::MICRO))
     end
 
     test "later" do
-      assert_true(RSVG::Version.or_later?(RSVG::Version::MAJOR,
-                                          RSVG::Version::MINOR - 1,
-                                          RSVG::Version::MICRO))
+      assert_true(Rsvg::Version.or_later?(Rsvg::Version::MAJOR,
+                                          Rsvg::Version::MINOR - 1,
+                                          Rsvg::Version::MICRO))
     end
 
     test "earlier" do
-      assert_false(RSVG::Version.or_later?(RSVG::Version::MAJOR,
-                                           RSVG::Version::MINOR + 1,
-                                           RSVG::Version::MICRO))
+      assert_false(Rsvg::Version.or_later?(Rsvg::Version::MAJOR,
+                                           Rsvg::Version::MINOR + 1,
+                                           Rsvg::Version::MICRO))
     end
   end
 end

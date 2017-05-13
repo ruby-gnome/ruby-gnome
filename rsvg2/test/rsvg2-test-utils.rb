@@ -18,15 +18,10 @@ require "test-unit"
 
 require "fileutils"
 
-module RSVG2TestUtils
-  def later_version?(major, minor, micro=nil)
-    micro ||= 0
-    (RSVG::BUILD_VERSION <=> [major, minor, micro]) >= 0
-  end
-
+module Rsvg2TestUtils
   def only_rsvg_version(major, minor, micro=nil)
     micro ||= 0
-    unless later_version?(major, minor, micro)
+    unless Rsvg::Version.or_later?(major, minor, micro)
       omit("Require librsvg >= #{major}.#{minor}.#{micro}")
     end
   end

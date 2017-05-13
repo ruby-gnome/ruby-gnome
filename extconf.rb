@@ -30,6 +30,7 @@ unsupported_libraries = [
   "gtk3-no-gi",
   "gtksourceview3-no-gi",
   "pango-no-gi",
+  "rsvg2-no-gi",
   "vte3-no-gi",
 ]
 
