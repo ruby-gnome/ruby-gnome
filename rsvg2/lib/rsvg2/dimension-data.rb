@@ -15,17 +15,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Rsvg
-  class Loader < GObjectIntrospection::Loader
-    private
-
-    def post_load(repository, namespace)
-      require_libraries
-    end
-
-    def require_libraries
-      require "rsvg2/dimension-data"
-      require "rsvg2/handle"
-      require "rsvg2/version"
+  class DimensionData
+    def to_a
+      [width, height, em, ex]
     end
   end
 end
