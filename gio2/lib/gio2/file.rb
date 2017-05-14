@@ -17,15 +17,6 @@
 module Gio
   module File
     class << self
-      def commandline_arg(arg, cwd=nil)
-        # TODO: deprecated warning
-        if cwd
-          new_for_commandline_arg_and_cwd(arg, cwd)
-        else
-          new_for_commandline_arg(arg)
-        end
-      end
-
       def open(options={})
         arg = options[:arg]
         cwd = options[:cwd]

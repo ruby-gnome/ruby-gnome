@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -165,7 +165,11 @@ module GLib
         case new_method
         when String, Symbol
           warn "#{msg} Use '#{klass}#{sep}#{new_method}'."
-          __send__(new_method, *margs, &mblock)
+          if block
+            block.call(self, *margs, &mblock)
+          else
+            __send__(new_method, *margs, &mblock)
+          end
         when Hash
           if new_method[:raise]
             raise DeprecatedError.new("#{msg} #{new_method[:raise]}")

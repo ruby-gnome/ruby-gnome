@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2017 Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -31,7 +31,7 @@ class TestGtkPlacesSidebar < Test::Unit::TestCase
   def test_location_accessors
     assert_nil(@places_sidebar.location)
 
-    home = Gio::File.path(ENV["HOME"])
+    home = Gio::File.open(path: ENV["HOME"])
     @places_sidebar.location = home
     assert_equal(home.path, @places_sidebar.location.path)
   end
@@ -42,8 +42,8 @@ class TestGtkPlacesSidebar < Test::Unit::TestCase
   end
 
   def test_shortcuts
-    file_location1 = Gio::File.path("file1")
-    file_location2 = Gio::File.path("file2")
+    file_location1 = Gio::File.open(path: "file1")
+    file_location2 = Gio::File.open(path: "file2")
     @places_sidebar.add_shortcut(file_location1)
     @places_sidebar.add_shortcut(file_location2)
     assert_equal([file_location1, file_location2],

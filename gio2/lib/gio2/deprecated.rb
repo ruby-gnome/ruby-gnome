@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -116,3 +116,23 @@ module GLib
   end
 end
 
+module Gio
+  module File
+    extend GLib::Deprecatable
+
+    define_deprecated_singleton_method(:commandline_arg,
+                                       "open(arg: arg, cwd: cwd)") do |_self, arg, cwd=nil|
+      open(arg: arg, cwd: cwd)
+    end
+
+    define_deprecated_singleton_method(:path,
+                                       "open(path: path)") do |_self, path|
+      open(path: path)
+    end
+
+    define_deprecated_singleton_method(:uri,
+                                       "open(uri: uri)") do |_self, uri|
+      open(uri: uri)
+    end
+  end
+end

@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -38,7 +38,7 @@ GtkWindow {
       file.puts("GtkWindow {background-color: red;}")
       file.close
       assert do
-        @provider.load(:file => Gio::File.path(file.path))
+        @provider.load(:file => Gio::File.open(path: file.path))
       end
       assert_equal(<<-CSS, @provider.to_s)
 GtkWindow {
