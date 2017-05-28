@@ -33,16 +33,10 @@ class TestGdkPixbuf < Test::Unit::TestCase
   end
 
   def test_surface
-    surface = Cairo::ImageSurface.new(:argb32, 290, 200)
-    src_x = 0
-    src_y = 0
     width = 290
     height = 200
-
-    pixbuf = surface.to_pixbuf(src_x,
-                               src_y,
-                               width,
-                               height)
+    surface = Cairo::ImageSurface.new(:argb32, width, height)
+    pixbuf = surface.to_pixbuf
     assert_equal([width, height],
                  [pixbuf.width, pixbuf.height])
   end

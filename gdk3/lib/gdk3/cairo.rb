@@ -61,4 +61,33 @@ module Cairo
       set_source_pixbuf_raw(pixbuf, pixbuf_x, pixbuf_y)
     end
   end
+
+  class Surface
+    alias_method :to_pixbuf_raw, :to_pixbuf
+    def to_pixbuf(options={})
+      src_x = options[:src_x] || 0
+      src_y = options[:src_y] || 0
+      w = options[:width]
+      h = options[:height]
+      if w.nil? and respond_to?(:width)
+        w = width
+      end
+      if h.nil? and respond_to?(:height)
+        h = height
+      end
+      to_pixbuf_raw(src_x, src_y, w, h)
+    end
+
+    extend GLib::Deprecatable
+
+    define_deprecated_method_by_hash_args(:to_pixbuf,
+                                          "src_x, src_y, width, height",
+                                          ":src_x => 0, " +
+                                          ":src_y => 0, " +
+                                          ":width => width, " +
+                                          ":height => height",
+                                          0) do |surface, src_x, src_y, w, h|
+      [{:src_x => src_x, :src_y => src_y, :width => w, :height => h}]
+    end
+  end
 end
