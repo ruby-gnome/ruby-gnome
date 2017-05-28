@@ -16,8 +16,13 @@
 
 module Cairo
   class Context
-    def render_rsvg_handle(handle, *args, &block)
-      handle.render_cairo(self, *args, &block)
+    def render_rsvg_handle(handle, options={})
+      id = options[:id]
+      if id
+        handle.render_cairo_sub(self, id)
+      else
+        handle.render_cairo(self)
+      end
     end
   end
 end
