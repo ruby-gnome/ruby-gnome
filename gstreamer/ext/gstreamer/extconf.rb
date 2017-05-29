@@ -49,7 +49,8 @@ unless required_pkg_config_package(package_id,
                                    :redhat => "gstreamer1-devel",
                                    :arch_linux => "gstreamer",
                                    :homebrew => "gstreamer",
-                                   :macports => "gstreamer")
+                                   :macports => "gstreamer",
+                                   :msys2 => "gstreamer")
   exit(false)
 end
 

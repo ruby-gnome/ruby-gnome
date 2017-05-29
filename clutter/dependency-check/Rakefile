@@ -17,8 +17,7 @@
 require "pkg-config"
 require "native-package-installer"
 
-case RUBY_PLATFORM
-when /mingw|mswin/
+if File.exist?(File.join(__dir__, "..", "vendor"))
   task :default => "nothing"
 else
   task :default => "dependency:check"
@@ -32,7 +31,8 @@ namespace :dependency do
   task :check do
     unless PKGConfig.check_version?("clutter-1.0")
       unless NativePackageInstaller.install(:debian => "libclutter-1.0-dev",
-                                            :homebrew => "clutter")
+                                            :homebrew => "clutter",
+                                            :msys2 => "clutter")
         exit(false)
       end
     end

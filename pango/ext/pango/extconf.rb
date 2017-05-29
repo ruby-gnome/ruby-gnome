@@ -64,7 +64,8 @@ unless required_pkg_config_package([package_id, 1, 14, 0],
                                    :redhat => "pango-devel",
                                    :arch_linux => "pango",
                                    :homebrew => "pango",
-                                   :macports => "pango")
+                                   :macports => "pango",
+                                   :msys2 => "pango")
   exit(false)
 end
 PKGConfig.have_package("pangocairo")

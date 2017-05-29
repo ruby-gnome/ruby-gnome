@@ -17,8 +17,7 @@
 require "pkg-config"
 require "native-package-installer"
 
-case RUBY_PLATFORM
-when /mingw|mswin/
+if File.exist?(File.join(__dir__, "..", "vendor"))
   task :default => "nothing"
 else
   task :default => "dependency:check"
@@ -37,7 +36,8 @@ namespace :dependency do
                                             :fedora => "gdk-pixbuf2-devel",
                                             :arch => "gdk-pixbuf2",
                                             :homebrew => "gdk-pixbuf",
-                                            :macports => "gdk-pixbuf2")
+                                            :macports => "gdk-pixbuf2",
+                                            :msys2 => "gdk-pixbuf2")
         exit(false)
       end
     end

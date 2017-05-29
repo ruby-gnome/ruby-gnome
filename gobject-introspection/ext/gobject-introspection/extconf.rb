@@ -62,7 +62,8 @@ unless required_pkg_config_package(package_id,
                                    :redhat => "gobject-introspection-devel",
                                    :homebrew => "gobject-introspection",
                                    :arch_linux => "gobject-introspection",
-                                   :macports => "gobject-introspection")
+                                   :macports => "gobject-introspection",
+                                   :msys2 => "gobject-introspection")
   exit(false)
 end
 

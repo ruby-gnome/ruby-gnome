@@ -17,8 +17,7 @@
 require "pkg-config"
 require "native-package-installer"
 
-case RUBY_PLATFORM
-when /mingw|mswin/
+if File.exist?(File.join(__dir__, "..", "vendor"))
   task :default => "nothing"
 else
   task :default => "dependency:check"
@@ -36,7 +35,8 @@ namespace :dependency do
                                             :redhat => "librsvg2-devel",
                                             :arch => "librsvg",
                                             :homebrew => "librsvg",
-                                            :macports => "librsvg")
+                                            :macports => "librsvg",
+                                            :msys2 => "librsvg")
         exit(false)
       end
     end

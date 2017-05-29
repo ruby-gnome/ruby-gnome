@@ -59,7 +59,8 @@ unless required_pkg_config_package(package_id,
                                    :debian => "libgtksourceview2.0-dev",
                                    :redhat => "gtksourceview2-devel",
                                    :homebrew => "gtksourceview",
-                                   :macports => "gtksourceview2")
+                                   :macports => "gtksourceview2",
+                                   :msys2 => "gtksourceview2")
   exit(false)
 end
 

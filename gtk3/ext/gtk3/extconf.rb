@@ -70,7 +70,8 @@ unless required_pkg_config_package(package_id,
                                    :redhat => "gtk3-devel",
                                    :arch_linux => "gtk3",
                                    :homebrew => "gtk+3",
-                                   :macports => "gtk3")
+                                   :macports => "gtk3",
+                                   :msys2 => "gtk3")
   exit(false)
 end
 

@@ -54,7 +54,8 @@ unless required_pkg_config_package([package_id, 2, 10, 0],
                                    :redhat => "gtk2-devel",
                                    :arch_linux => "gtk2",
                                    :homebrew => "gtk+",
-                                   :macports => "gtk2")
+                                   :macports => "gtk2",
+                                   :msys2 => "gtk2")
   exit(false)
 end
 

@@ -17,8 +17,7 @@
 require "pkg-config"
 require "native-package-installer"
 
-case RUBY_PLATFORM
-when /mingw|mswin/
+if File.exist?(File.join(__dir__, "..", "vendor"))
   task :default => "nothing"
 else
   task :default => "dependency:check"
@@ -35,7 +34,8 @@ namespace :dependency do
                                             :debian => "libgtksourceview-3.0-dev",
                                             :fedora => "gtksourceview3-devel",
                                             :homebrew => "gtksourceview3",
-                                            :macports => "gtksourceview3")
+                                            :macports => "gtksourceview3",
+                                            :msys2 => "gtksourceview3")
         exit(false)
       end
     end

@@ -17,8 +17,7 @@
 require "pkg-config"
 require "native-package-installer"
 
-case RUBY_PLATFORM
-when /mingw|mswin/
+if File.exist?(File.join(__dir__, "..", "vendor"))
   task :default => "nothing"
 else
   task :default => "dependency:check"
@@ -31,7 +30,8 @@ namespace :dependency do
   desc "Check dependency"
   task :check do
     unless PKGConfig.check_version?("webkitgtk-3.0")
-      unless NativePackageInstaller.install(:debian => "libwebkitgtk-3.0-dev")
+      unless NativePackageInstaller.install(:debian => "libwebkitgtk-3.0-dev",
+                                            :msys2 => "webkitgtk3")
         exit(false)
       end
     end

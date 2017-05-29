@@ -22,7 +22,8 @@ unless required_pkg_config_package([package_id, 2, 12, 0],
                                    :redhat => "glib2-devel",
                                    :arch_linux => "glib2",
                                    :homebrew => "glib",
-                                   :macports => "glib2")
+                                   :macports => "glib2",
+                                   :msys2 => "glib2")
   exit(false)
 end
 PKGConfig.have_package('gthread-2.0')

@@ -51,7 +51,8 @@ unless required_pkg_config_package([package_id, 0, 12, 0],
                                    :redhat => "poppler-glib-devel",
                                    :arch_linux => "poppler",
                                    :homebrew => "poppler",
-                                   :macports => "poppler")
+                                   :macports => "poppler",
+                                   :msys2 => "poppler")
   exit(false)
 end
 
