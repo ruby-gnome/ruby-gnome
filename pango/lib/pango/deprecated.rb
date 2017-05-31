@@ -38,6 +38,13 @@ module Pango
     define_deprecated_enums :Direction, "DIRECTION"
   end
 
+  class FontDescription
+    extend GLib::Deprecatable
+
+    define_deprecated_enums :Weight, "WEIGHT"
+    define_deprecated_enums :Style, "STYLE"
+  end
+
   class Gravity
     extend GLib::Deprecatable
 
