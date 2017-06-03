@@ -102,6 +102,8 @@ module GLib
 
   def prepend_dll_path(path)
     path = Pathname(path) unless path.is_a?(Pathname)
+    return unless path.exist?
+
     begin
       require "ruby_installer/runtime"
     rescue LoadError
