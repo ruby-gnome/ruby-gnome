@@ -107,10 +107,10 @@ module GLib
     begin
       require "ruby_installer/runtime"
     rescue LoadError
-      prepend_path_to_environment_variable(path, "PATH")
     else
       RubyInstaller::Runtime.add_dll_directory(path.to_s)
     end
+    prepend_path_to_environment_variable(path, "PATH")
   end
 end
 
