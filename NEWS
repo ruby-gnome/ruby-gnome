@@ -2,6 +2,17 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.1.6: 2017-06-03
+
+=== Changes
+
+This is a bug fix release for Windows packages.
+
+==== All
+
+  * Fixes
+    * Added a missing path existence check on Windows.
+
 == Ruby-GNOME2 3.1.5: 2017-06-03
 
 === Changes
