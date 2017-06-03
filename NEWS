@@ -2,6 +2,24 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.1.5: 2017-06-03
+
+=== Changes
+
+This is a bug fix release for Windows packages.
+
+==== All
+
+  * Improvements
+    * Supported RubyInstaller2.
+
+==== Ruby/Pango
+
+  * Improvements
+    * Add backward compatibility APIs:
+      * (({Pango::FontDescription::WEIGHT_*}))
+      * (({Pango::FontDescription::STYLE_*}))
+
 == Ruby-GNOME2 3.1.4: 2017-05-30
 
 === Changes
