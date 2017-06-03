@@ -1,4 +1,4 @@
-# Copyright (C) 2005-2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2005-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -87,21 +87,28 @@ module GLib
 
   def prepend_path_to_environment_variable(path, environment_name)
     path = Pathname(path) unless path.is_a?(Pathname)
-    if path.exist?
-      separator = ::File::PATH_SEPARATOR
+    return unless path.exist?
 
-      paths = (ENV[environment_name] || '').split(/#{Regexp.escape(separator)}/)
-      dir = path.to_s
-      dir = dir.gsub(/\//, ::File::ALT_SEPARATOR) if ::File::ALT_SEPARATOR
-      unless paths.include?(dir)
-        paths = [dir] + paths
-        ENV[environment_name] = paths.join(separator)
-      end
+    dir = path.to_s
+    dir = dir.gsub(/\//, ::File::ALT_SEPARATOR) if ::File::ALT_SEPARATOR
+
+    separator = ::File::PATH_SEPARATOR
+    paths = (ENV[environment_name] || '').split(separator)
+    unless paths.include?(dir)
+      paths = [dir] + paths
+      ENV[environment_name] = paths.join(separator)
     end
   end
 
   def prepend_dll_path(path)
-    prepend_path_to_environment_variable(path, "PATH")
+    path = Pathname(path) unless path.is_a?(Pathname)
+    begin
+      require "ruby_installer/runtime"
+    rescue LoadError
+      prepend_path_to_environment_variable(path, "PATH")
+    else
+      RubyInstaller::Runtime.add_dll_directory(path.to_s)
+    end
   end
 end
 
