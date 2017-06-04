@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -26,8 +26,7 @@ vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 if vendor_dir.exist?
-  require "atk"
-  require "gdk_pixbuf2"
+  require "gdk3"
 end
 
 module Clutter
