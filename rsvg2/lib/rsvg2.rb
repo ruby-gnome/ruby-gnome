@@ -18,6 +18,7 @@ require "gobject-introspection"
 require "glib2"
 require "gio2"
 require "gdk_pixbuf2"
+require "cairo-gobject"
 require "cairo"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
