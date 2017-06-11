@@ -118,7 +118,7 @@ def append_children(model, source, parent = nil)
     iter = model.append(parent)
     iter[TITLE_COLUMN] = title
     iter[FILENAME_COLUMN] = filename
-    iter[STYLE_COLUMN] = Pango::FontDescription::STYLE_NORMAL
+    iter[STYLE_COLUMN] = Pango::Style::NORMAL
 
     append_children(model, children, iter) if children
   end
@@ -247,7 +247,7 @@ class Demo < Gtk::Application
                                 "foreground" => "ForestGreen")
       @source_buffer.create_tag("string",
                                 "foreground" => "RosyBrown",
-                                "weight" => Pango::FontDescription::WEIGHT_BOLD)
+                                "weight" => Pango::Weight::BOLD)
       @source_buffer.create_tag("reserved",
                                 "foreground" => "purple")
     end
@@ -356,10 +356,10 @@ class Demo < Gtk::Application
     @treeview.signal_connect "row-activated" do |_tree_view, path, _column|
       iter = model.get_iter(path)
       filename = iter[1]
-      iter[2] = Pango::FontDescription::STYLE_ITALIC
+      iter[2] = Pango::Style::ITALIC
       demo = run_demo_from_file(filename, windows.first)
       demo.signal_connect "destroy" do
-        iter[2] = Pango::FontDescription::STYLE_NORMAL
+        iter[2] = Pango::Style::NORMAL
       end
     end
 
