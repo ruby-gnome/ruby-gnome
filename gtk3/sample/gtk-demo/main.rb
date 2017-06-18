@@ -314,7 +314,14 @@ class Demo < Gtk::Application
       selection = @treeview.selection
       iter = selection.selected
       filename = iter[1]
-      run_demo_from_file(filename, windows.first) if filename
+      if filename
+        begin
+          run_demo_from_file(filename, windows.first)
+        rescue => error
+          puts("failed to run demo: #{filename}")
+          report_error(error)
+        end
+      end
     end
     window.add_action(action)
 
@@ -356,20 +363,28 @@ class Demo < Gtk::Application
     @treeview.signal_connect "row-activated" do |_tree_view, path, _column|
       iter = model.get_iter(path)
       filename = iter[1]
-      iter[2] = Pango::Style::ITALIC
-      demo = run_demo_from_file(filename, windows.first)
-      demo.signal_connect "destroy" do
-        iter[2] = Pango::Style::NORMAL
+      begin
+        demo = run_demo_from_file(filename, windows.first)
+      rescue => error
+        puts("failed to run demo: #{filename}")
+        report_error(error)
+      else
+        iter[2] = Pango::Style::ITALIC
+        demo.signal_connect "destroy" do
+          iter[2] = Pango::Style::NORMAL
+        end
       end
     end
 
     treeview_selection = @builder["treeview-selection"]
     treeview_selection.signal_connect "changed" do |selection, _model|
       iter = selection.selected
-      filename = iter[1]
-      title = iter[0]
-      load_file(filename) if filename
-      headerbar.set_title(title)
+      if iter
+        filename = iter[1]
+        title = iter[0]
+        load_file(filename) if filename
+        headerbar.set_title(title)
+      end
     end
 
     window.show_all
