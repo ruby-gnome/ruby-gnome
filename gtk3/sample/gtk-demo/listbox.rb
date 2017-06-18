@@ -34,7 +34,7 @@ class ListboxDemo
     vbox.show_all
 
     data = Gio::Resources.lookup_data("/listbox/messages.txt", 0)
-    data.each_line do |line|
+    data.to_s.each_line do |line|
       message = Message.new(line)
       row = GtkMessageRow.new(message)
       row.show
