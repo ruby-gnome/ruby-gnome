@@ -25,7 +25,7 @@ class ImagesDemo
     @window.title = "Images"
     @window.signal_connect "destroy" do
       GLib::Source.remove(@load_timeout) if @load_timeout
-      @pixbuf_loader.close
+      @pixbuf_loader.close if @pixbuf_loader
     end
 
     @vbox = Gtk::Box.new(:vertical, 8)
@@ -86,7 +86,7 @@ class ImagesDemo
     # The timeout simply simulates a slow data source by inserting
     # pauses in the reading process.
     image_stream = nil
-    pixbuf_loader = nil
+    @pixbuf_loader = nil
     @load_timeout = GLib::Timeout.add(150) do
       if image_stream
         begin
@@ -108,14 +108,15 @@ class ImagesDemo
           end
 
           begin
-            pixbuf_loader.close
+            @pixbuf_loader.close
           rescue => error
             show_dialog_on_error("Failed to load image: #{error.message}")
           end
+          @pixbuf_loader = nil
           GLib::Source::REMOVE
         else
           begin
-            pixbuf_loader.write(buf)
+            @pixbuf_loader.write(buf)
           rescue => error
             show_dialog_on_error("Failed to load image: #{error.message}")
           end
@@ -127,15 +128,15 @@ class ImagesDemo
         rescue => error
           show_dialog_on_error(error.message)
         end
-        pixbuf_loader.close if pixbuf_loader
-        pixbuf_loader = GdkPixbuf::PixbufLoader.new
-        pixbuf_loader.signal_connect "area-prepared" do |loader|
+        @pixbuf_loader.close if @pixbuf_loader
+        @pixbuf_loader = GdkPixbuf::PixbufLoader.new
+        @pixbuf_loader.signal_connect "area-prepared" do |loader|
           pixbuf = loader.pixbuf
           pixbuf.fill(0xaaaaaaff)
           image.from_pixbuf = pixbuf
         end
 
-        pixbuf_loader.signal_connect "area-updated" do
+        @pixbuf_loader.signal_connect "area-updated" do
           # progressive_updated_callback
           # We know the pixbuf inside the GtkImage has changed, but the image
           # itself doesn't know this; so give it a hint by setting the pixbuf
