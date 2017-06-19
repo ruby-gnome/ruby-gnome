@@ -107,7 +107,7 @@ class ClipboardDemo
     ebox.drag_source_set(Gdk::ModifierType::BUTTON1_MASK, [], :copy)
     ebox.drag_source_add_image_targets
     ebox.signal_connect "drag-begin" do |_widget, context|
-      pixbuf = get_image_pixbuf(image1)
+      pixbuf = get_image_pixbuf(image)
       context.set_icon_pixbuf(pixbuf, -2, -2)
     end
 
