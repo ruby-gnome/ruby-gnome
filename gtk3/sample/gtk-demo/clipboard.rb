@@ -31,7 +31,7 @@ class ClipboardDemo
     text = "\"Paste\" will paste the text from the clipboard to the entry"
     generate_entry(text, "_Paste") do |entry|
       clipboard = entry.get_clipboard(Gdk::Selection::CLIPBOARD)
-      clipboard.request_text { |_clip, entry_text| entry.text = entry_text }
+      clipboard.request_text { |_clip, entry_text| entry.text = entry_text || "" }
     end
 
     text = "Images can be transferred via the clipboard, too"
