@@ -70,7 +70,19 @@ rg_size(VALUE self)
     GBytes *bytes;
 
     bytes = _SELF(self);
-    return UINT2NUM(g_bytes_get_size(bytes));
+    return ULONG2NUM(g_bytes_get_size(bytes));
+}
+
+static VALUE
+rg_pointer(VALUE self)
+{
+    GBytes *bytes;
+    gconstpointer data;
+
+    bytes = _SELF(self);
+    data = g_bytes_get_data(bytes, NULL);
+
+    return ULONG2NUM((guintptr)data);
 }
 #endif
 
@@ -85,5 +97,6 @@ Init_glib_bytes(void)
     RG_DEF_ALIAS("to_str", "to_s");
     RG_DEF_METHOD(size, 0);
     RG_DEF_ALIAS("length", "size");
+    RG_DEF_METHOD(pointer, 0);
 #endif
 }
