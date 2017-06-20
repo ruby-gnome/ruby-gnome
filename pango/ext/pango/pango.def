@@ -1,2 +1,3 @@
 EXPORTS
     Init_pango
+    pango_attr_list_get_type

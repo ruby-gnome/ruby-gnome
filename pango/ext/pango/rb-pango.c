@@ -38,6 +38,7 @@ Init_pango(void)
     RG_DEF_SMETHOD(pixels, 1);
 
     rbpango_attribute_init(RG_TARGET_NAMESPACE);
+    rbpango_attr_iterator_init(RG_TARGET_NAMESPACE);
     rbpango_attr_list_init(RG_TARGET_NAMESPACE);
     rbpango_context_init(RG_TARGET_NAMESPACE);
 }

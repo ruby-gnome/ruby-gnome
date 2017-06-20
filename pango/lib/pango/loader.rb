@@ -36,14 +36,8 @@ module Pango
       case info.name
       when /Class\z/
         super
-      when "Attribute"
+      when "Attribute", /\AAttr[A-Z]/
         @pending_attribute_infos << info
-      when /\AAttr[A-Z]/
-        if info.name == "AttrIterator"
-          super
-        else
-          @pending_attribute_infos << info
-        end
       else
         super
       end
@@ -64,7 +58,7 @@ module Pango
         when "translate", "scale", "rotate", "concat"
           method_name += "!"
         end
-      when "Pango::AttrList"
+      when "Pango::AttrList", "Pango::AttrIterator"
         return if klass.method_defined?(method_name)
       end
       super(info, klass, method_name)

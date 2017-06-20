@@ -52,6 +52,15 @@ rg_insert_before(VALUE self, VALUE rb_attribute)
     return self;
 }
 
+static VALUE
+rg_iterator(VALUE self)
+{
+    PangoAttrIterator *iterator;
+
+    iterator = pango_attr_list_get_iterator(RVAL2PANGOATTRLIST(self));
+    return PANGOATTRITERATOR2RVAL(iterator);
+}
+
 void
 rbpango_attr_list_init(VALUE mPango)
 {
@@ -61,4 +70,5 @@ rbpango_attr_list_init(VALUE mPango)
 
     RG_DEF_METHOD(insert, 1);
     RG_DEF_METHOD(insert_before, 1);
+    RG_DEF_METHOD(iterator, 0);
 }
