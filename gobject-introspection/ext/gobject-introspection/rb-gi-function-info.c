@@ -1400,7 +1400,10 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info,
     if (NIL_P(rb_receiver)) {
         receiver.v_pointer = NULL;
     } else {
-        if (gobject_based_p((GIBaseInfo *)info)) {
+        VALUE rb_receiver_class;
+        rb_receiver_class = rb_class_of(rb_receiver);
+        if (gobject_based_p((GIBaseInfo *)info) ||
+            rb_respond_to(rb_receiver_class, rb_intern("gtype"))) {
             receiver.v_pointer = RVAL2GOBJ(rb_receiver);
         } else if (RVAL2CBOOL(rb_obj_is_kind_of(rb_receiver, rb_cClass)) &&
                    rb_respond_to(rb_receiver, rb_intern("gtype"))) {
