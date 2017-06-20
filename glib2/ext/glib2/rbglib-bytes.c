@@ -63,6 +63,15 @@ rg_to_s(VALUE self)
 #  endif
     return rb_data;
 }
+
+static VALUE
+rg_size(VALUE self)
+{
+    GBytes *bytes;
+
+    bytes = _SELF(self);
+    return UINT2NUM(g_bytes_get_size(bytes));
+}
 #endif
 
 void
@@ -74,5 +83,7 @@ Init_glib_bytes(void)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(to_s, 0);
     RG_DEF_ALIAS("to_str", "to_s");
+    RG_DEF_METHOD(size, 0);
+    RG_DEF_ALIAS("length", "size");
 #endif
 }
