@@ -155,7 +155,7 @@ class GlareaDemo
     # Load the shaders sources
     shader = glCreateShader(type)
 
-    glShaderSource(shader, 1, [source].pack("p"), [source.bytesize].pack("I"))
+    glShaderSource(shader, 1, [source.to_s].pack("p"), [source.to_s.length].pack("I"))
     # Compile the vertex shader
     glCompileShader(shader)
     # Check the vertex shader compilation
