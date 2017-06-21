@@ -2489,7 +2489,6 @@ rb_gi_return_argument_free_everything_gslist(GIArgument *argument,
         rb_gi_return_argument_free_everything_gslist_interface(argument,
                                                                type_info,
                                                                element_type_info);
-        g_base_info_unref(element_type_info);
         break;
     case GI_TYPE_TAG_GLIST:
     case GI_TYPE_TAG_GSLIST:
