@@ -63,7 +63,7 @@ module Gtk
       Gio.init if Gio.respond_to?(:init)
       Gdk.init if Gdk.respond_to?(:init)
       loader = Loader.new(self, argv)
-      loader.load("Gtk")
+      loader.load
     end
   end
 end

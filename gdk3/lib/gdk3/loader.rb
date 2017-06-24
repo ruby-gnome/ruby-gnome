@@ -17,6 +17,7 @@
 module Gdk
   class Loader < GObjectIntrospection::Loader
     def load
+      self.version = "3.0"
       super("Gdk")
     end
 

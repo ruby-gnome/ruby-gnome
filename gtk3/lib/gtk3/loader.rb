@@ -21,6 +21,11 @@ module Gtk
       @init_arguments = init_arguments
     end
 
+    def load
+      self.version = "3.0"
+      super("Gtk")
+    end
+
     private
     def pre_load(repository, namespace)
       call_init_function(repository, namespace)
