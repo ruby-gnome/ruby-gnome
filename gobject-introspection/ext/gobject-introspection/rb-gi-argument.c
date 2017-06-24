@@ -210,11 +210,22 @@ array_c_to_ruby_sized(gconstpointer *elements,
         }
         break;
     case GI_TYPE_TAG_INT16:
+        g_base_info_unref(element_type_info);
+        {
+            const gint16 *numbers = (const gint16 *)elements;
+            for (i = 0; i < n_elements; i++) {
+                rb_ary_push(rb_array, INT2NUM(numbers[i]));
+            }
+        }
+        break;
     case GI_TYPE_TAG_UINT16:
         g_base_info_unref(element_type_info);
-        rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[c][%s] -> Ruby",
-                 g_type_tag_to_string(element_type_tag));
+        {
+            const guint16 *numbers = (const guint16 *)elements;
+            for (i = 0; i < n_elements; i++) {
+                rb_ary_push(rb_array, UINT2NUM(numbers[i]));
+            }
+        }
         break;
     case GI_TYPE_TAG_INT32:
         g_base_info_unref(element_type_info);
@@ -227,9 +238,12 @@ array_c_to_ruby_sized(gconstpointer *elements,
         break;
     case GI_TYPE_TAG_UINT32:
         g_base_info_unref(element_type_info);
-        rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[c][%s] -> Ruby",
-                 g_type_tag_to_string(element_type_tag));
+        {
+            const guint32 *numbers = (const guint32 *)elements;
+            for (i = 0; i < n_elements; i++) {
+                rb_ary_push(rb_array, UINT2NUM(numbers[i]));
+            }
+        }
         break;
     case GI_TYPE_TAG_INT64:
         g_base_info_unref(element_type_info);
@@ -241,8 +255,32 @@ array_c_to_ruby_sized(gconstpointer *elements,
         }
         break;
     case GI_TYPE_TAG_UINT64:
+        g_base_info_unref(element_type_info);
+        {
+            const guint64 *numbers = (const guint64 *)elements;
+            for (i = 0; i < n_elements; i++) {
+                rb_ary_push(rb_array, ULL2NUM(numbers[i]));
+            }
+        }
+        break;
     case GI_TYPE_TAG_FLOAT:
+        g_base_info_unref(element_type_info);
+        {
+            const gfloat *numbers = (const gfloat *)elements;
+            for (i = 0; i < n_elements; i++) {
+                rb_ary_push(rb_array, rb_float_new(numbers[i]));
+            }
+        }
+        break;
     case GI_TYPE_TAG_DOUBLE:
+        g_base_info_unref(element_type_info);
+        {
+            const gdouble *numbers = (const gdouble *)elements;
+            for (i = 0; i < n_elements; i++) {
+                rb_ary_push(rb_array, rb_float_new(numbers[i]));
+            }
+        }
+        break;
     case GI_TYPE_TAG_GTYPE:
         g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
