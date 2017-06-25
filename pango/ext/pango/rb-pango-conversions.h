@@ -23,6 +23,12 @@
 #define PANGO_TYPE_ATTR_ITERATOR pango_attr_iterator_get_type()
 extern GType pango_attr_iterator_get_type(void) G_GNUC_CONST;
 
+extern VALUE rbpango_attribute_to_ruby(PangoAttribute *attribute);
+extern PangoAttribute *rbpango_attribute_from_ruby(VALUE rb_attribute);
+
+#define ATTR2RVAL(attr)    (rbpango_attribute_to_ruby((attr)))
+#define RVAL2ATTR(rb_attr) (rbpango_attribute_from_ruby((rb_attr)))
+
 #define RVAL2PANGOCAIROFONTMAP(o)          (PANGO_CAIRO_FONT_MAP(RVAL2GOBJ(o)))
 #define RVAL2PANGOCONTEXT(o)               (PANGO_CONTEXT(RVAL2GOBJ(o)))
 #define RVAL2PANGOENGINE(o)                (PANGO_ENGINE(RVAL2GOBJ(o)))

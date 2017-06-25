@@ -34,11 +34,6 @@ rg_attrs(VALUE self)
     GSList *attrs;
     GSList *node;
     VALUE rb_attrs;
-    VALUE rb_mPango;
-    VALUE rb_attr_class;
-
-    rb_mPango = rb_const_get(rb_cObject, rb_intern("Pango"));
-    rb_attr_class = rb_const_get(rb_mPango, rb_intern("Attribute"));
 
     attrs = pango_attr_iterator_get_attrs(_SELF(self));
     rb_attrs = rb_ary_new();
@@ -46,11 +41,7 @@ rg_attrs(VALUE self)
         PangoAttribute *attr = node->data;
         VALUE rb_attr;
 
-        /* TODO: Choose more suitable class. */
-        rb_attr = Data_Wrap_Struct(rb_attr_class,
-                                   NULL,
-                                   pango_attribute_destroy,
-                                   attr);
+        rb_attr = rbpango_attribute_to_ruby(attr);
         rb_ary_push(rb_attrs, rb_attr);
     }
     g_slist_free(attrs);

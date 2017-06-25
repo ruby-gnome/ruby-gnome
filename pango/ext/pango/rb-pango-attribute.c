@@ -20,10 +20,148 @@
 
 #include "rb-pango-private.h"
 
+VALUE
+rbpango_attribute_to_ruby(PangoAttribute *attribute)
+{
+    VALUE rb_attr_type;
+    ID id_to_class;
+    VALUE klass;
+
+    rb_attr_type = GENUM2RVAL(attribute->klass->type, PANGO_TYPE_ATTR_TYPE);
+    CONST_ID(id_to_class, "to_class");
+    klass = rb_funcall(rb_attr_type, id_to_class, 0);
+    return Data_Wrap_Struct(klass,
+                            NULL,
+                            pango_attribute_destroy,
+                            pango_attribute_copy(attribute));
+}
+
+PangoAttribute *
+rbpango_attribute_from_ruby(VALUE rb_attribute)
+{
+    PangoAttribute *attribute;
+
+    Data_Get_Struct(rb_attribute, PangoAttribute, attribute);
+
+    return attribute;
+}
+
 static VALUE
 rbpango_attribute_allocate(VALUE klass)
 {
     return Data_Wrap_Struct(klass, NULL, pango_attribute_destroy, 0);
+}
+
+static VALUE
+rbpango_attr_bool_get_value(VALUE self)
+{
+    PangoAttribute *attribute;
+
+    attribute = rbpango_attribute_from_ruby(self);
+
+    return CBOOL2RVAL(((PangoAttrInt *)attribute)->value);
+}
+
+static VALUE
+rbpango_attr_language_initialize(VALUE self, VALUE rb_language)
+{
+    PangoLanguage *language;
+
+    language = RVAL2PANGOLANGUAGE(rb_language);
+    DATA_PTR(self) = pango_attr_language_new(language);
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_family_initialize(VALUE self, VALUE rb_family)
+{
+    DATA_PTR(self) = pango_attr_family_new(RVAL2CSTR(rb_family));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_style_initialize(VALUE self, VALUE rb_style)
+{
+    DATA_PTR(self) = pango_attr_style_new(RVAL2PANGOSTYLE(rb_style));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_style_get_value(VALUE self)
+{
+    PangoAttribute *attribute;
+
+    attribute = rbpango_attribute_from_ruby(self);
+
+    return PANGOSTYLE2RVAL(((PangoAttrInt *)attribute)->value);
+}
+
+static VALUE
+rbpango_attr_weight_initialize(VALUE self, VALUE rb_weight)
+{
+    DATA_PTR(self) = pango_attr_weight_new(RVAL2PANGOWEIGHT(rb_weight));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_weight_get_value(VALUE self)
+{
+    PangoAttribute *attribute;
+
+    attribute = rbpango_attribute_from_ruby(self);
+
+    return PANGOWEIGHT2RVAL(((PangoAttrInt *)attribute)->value);
+}
+
+static VALUE
+rbpango_attr_variant_initialize(VALUE self, VALUE rb_variant)
+{
+    DATA_PTR(self) = pango_attr_variant_new(RVAL2PANGOVARIANT(rb_variant));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_variant_get_value(VALUE self)
+{
+    PangoAttribute *attribute;
+
+    attribute = rbpango_attribute_from_ruby(self);
+
+    return PANGOVARIANT2RVAL(((PangoAttrInt *)attribute)->value);
+}
+
+static VALUE
+rbpango_attr_stretch_initialize(VALUE self, VALUE rb_stretch)
+{
+    DATA_PTR(self) = pango_attr_stretch_new(RVAL2PANGOSTRETCH(rb_stretch));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_stretch_get_value(VALUE self)
+{
+    PangoAttribute *attribute;
+
+    attribute = rbpango_attribute_from_ruby(self);
+
+    return PANGOSTRETCH2RVAL(((PangoAttrInt *)attribute)->value);
+}
+
+static VALUE
+rbpango_attr_size_initialize(VALUE self, VALUE rb_size)
+{
+    gint size;
+
+    size = NUM2INT(rb_size);
+    DATA_PTR(self) = pango_attr_size_new(size);
+
+    return Qnil;
 }
 
 static VALUE
@@ -48,20 +186,61 @@ rbpango_attr_font_desc_initialize(VALUE self, VALUE rb_font_desc)
 }
 
 static VALUE
-rbpango_attr_font_features_initialize(VALUE self, VALUE rb_font_features)
+rbpango_attr_foregound_initialize(VALUE self,
+                                  VALUE rb_red,
+                                  VALUE rb_green,
+                                  VALUE rb_blue)
 {
-    DATA_PTR(self) = pango_attr_font_features_new(RVAL2CSTR(rb_font_features));
+    DATA_PTR(self) = pango_attr_foreground_new(NUM2UINT(rb_red),
+                                               NUM2UINT(rb_green),
+                                               NUM2UINT(rb_blue));
 
     return Qnil;
 }
 
 static VALUE
-rbpango_attr_language_initialize(VALUE self, VALUE rb_language)
+rbpango_attr_background_initialize(VALUE self,
+                                   VALUE rb_red,
+                                   VALUE rb_green,
+                                   VALUE rb_blue)
 {
-    PangoLanguage *language;
+    DATA_PTR(self) = pango_attr_background_new(NUM2UINT(rb_red),
+                                               NUM2UINT(rb_green),
+                                               NUM2UINT(rb_blue));
 
-    language = RVAL2PANGOLANGUAGE(rb_language);
-    DATA_PTR(self) = pango_attr_language_new(language);
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_underline_initialize(VALUE self, VALUE rb_underline)
+{
+    DATA_PTR(self) = pango_attr_underline_new(RVAL2PANGOUNDERLINE(rb_underline));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_underline_get_value(VALUE self)
+{
+    PangoAttribute *attribute;
+
+    attribute = rbpango_attribute_from_ruby(self);
+
+    return PANGOUNDERLINE2RVAL(((PangoAttrInt *)attribute)->value);
+}
+
+static VALUE
+rbpango_attr_strikethrough_initialize(VALUE self, VALUE rb_strikethrough)
+{
+    DATA_PTR(self) = pango_attr_strikethrough_new(RVAL2CBOOL(rb_strikethrough));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_rise_initialize(VALUE self, VALUE rb_rise)
+{
+    DATA_PTR(self) = pango_attr_rise_new(NUM2INT(rb_rise));
 
     return Qnil;
 }
@@ -102,17 +281,126 @@ rbpango_attr_shape_get_data(VALUE self)
 
     Data_Get_Struct(self, PangoAttrShape, attr_shape);
     rb_data = (VALUE)(attr_shape->data);
-    rb_p(rb_data);
     return rb_data;
 }
 
 static VALUE
-rbpango_attr_size_initialize(VALUE self, VALUE rb_size)
+rbpango_attr_scale_initialize(VALUE self, VALUE rb_scale)
 {
-    gint size;
+    DATA_PTR(self) = pango_attr_scale_new(NUM2DBL(rb_scale));
 
-    size = NUM2INT(rb_size);
-    DATA_PTR(self) = pango_attr_size_new(size);
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_fallback_initialize(VALUE self, VALUE rb_enable_fallback)
+{
+    DATA_PTR(self) = pango_attr_fallback_new(RVAL2CBOOL(rb_enable_fallback));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_letter_spacing_initialize(VALUE self, VALUE rb_letter_spacing)
+{
+    DATA_PTR(self) = pango_attr_letter_spacing_new(NUM2INT(rb_letter_spacing));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_underline_color_initialize(VALUE self,
+                                        VALUE rb_red,
+                                        VALUE rb_green,
+                                        VALUE rb_blue)
+{
+    DATA_PTR(self) = pango_attr_underline_color_new(NUM2UINT(rb_red),
+                                                    NUM2UINT(rb_green),
+                                                    NUM2UINT(rb_blue));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_strikethrough_color_initialize(VALUE self,
+                                            VALUE rb_red,
+                                            VALUE rb_green,
+                                            VALUE rb_blue)
+{
+    DATA_PTR(self) = pango_attr_strikethrough_color_new(NUM2UINT(rb_red),
+                                                        NUM2UINT(rb_green),
+                                                        NUM2UINT(rb_blue));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_absolute_size_initialize(VALUE self, VALUE rb_absolute_size)
+{
+    DATA_PTR(self) = pango_attr_size_new_absolute(NUM2INT(rb_absolute_size));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_gravity_initialize(VALUE self, VALUE rb_gravity)
+{
+    DATA_PTR(self) = pango_attr_gravity_new(RVAL2PANGOGRAVITY(rb_gravity));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_gravity_get_value(VALUE self)
+{
+    PangoAttribute *attribute;
+
+    attribute = rbpango_attribute_from_ruby(self);
+
+    return PANGOGRAVITY2RVAL(((PangoAttrInt *)attribute)->value);
+}
+
+static VALUE
+rbpango_attr_gravity_hint_initialize(VALUE self, VALUE rb_gravity_hint)
+{
+    PangoGravityHint hint;
+
+    hint = RVAL2PANGOGRAVITYHINT(rb_gravity_hint);
+    DATA_PTR(self) = pango_attr_gravity_hint_new(hint);
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_gravity_hint_get_value(VALUE self)
+{
+    PangoAttribute *attribute;
+
+    attribute = rbpango_attribute_from_ruby(self);
+
+    return PANGOGRAVITYHINT2RVAL(((PangoAttrInt *)attribute)->value);
+}
+
+static VALUE
+rbpango_attr_font_features_initialize(VALUE self, VALUE rb_font_features)
+{
+    DATA_PTR(self) = pango_attr_font_features_new(RVAL2CSTR(rb_font_features));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_foreground_alpha_initialize(VALUE self, VALUE rb_alpha)
+{
+    DATA_PTR(self) = pango_attr_foreground_alpha_new(NUM2UINT(rb_alpha));
+
+    return Qnil;
+}
+
+static VALUE
+rbpango_attr_background_alpha_initialize(VALUE self, VALUE rb_alpha)
+{
+    DATA_PTR(self) = pango_attr_background_alpha_new(NUM2UINT(rb_alpha));
 
     return Qnil;
 }
@@ -121,45 +409,136 @@ void
 rbpango_attribute_init(VALUE mPango)
 {
     VALUE cAttribute;
+    VALUE cAttrString;
+    VALUE cAttrColor;
+    VALUE cAttrInt;
+    VALUE cAttrBool;
+    VALUE cAttrFloat;
+    VALUE cAttrLanguage;
+    VALUE cAttrFamily;
+    VALUE cAttrStyle;
+    VALUE cAttrWeight;
+    VALUE cAttrVariant;
+    VALUE cAttrStretch;
+    VALUE cAttrSize;
+    VALUE cAttrFontDesc;
+    VALUE cAttrForeground;
+    VALUE cAttrBackground;
+    VALUE cAttrUnderline;
+    VALUE cAttrStrikethrough;
+    VALUE cAttrRise;
+    VALUE cAttrShape;
+    VALUE cAttrScale;
+    VALUE cAttrFallback;
+    VALUE cAttrLetterSpacing;
+    VALUE cAttrUnderlineColor;
+    VALUE cAttrStrikethroughColor;
+    VALUE cAttrAbsoluteSize;
+    VALUE cAttrGravity;
+    VALUE cAttrGravityHint;
+    VALUE cAttrFontFeatures;
+    VALUE cAttrForegroundAlpha;
+    VALUE cAttrBackgroundAlpha;
 
     cAttribute = rb_define_class_under(mPango, "Attribute", rb_cData);
     rb_define_alloc_func(cAttribute, rbpango_attribute_allocate);
 
-#define DEFINE_ABSTRACT_ATTRIBUTE(ClassName)                            \
-    do {                                                                \
-        rb_define_class_under(mPango,                                   \
-                              #ClassName,                               \
-                              cAttribute);                              \
+#define DEFINE_ABSTRACT_ATTRIBUTE_BEGIN(ClassName, parent) do { \
+        c ## ClassName = rb_define_class_under(mPango,          \
+                                               #ClassName,      \
+                                               parent);
+
+#define DEFINE_ABSTRACT_ATTRIBUTE_END()         \
     } while (FALSE)
 
-#define DEFINE_ATTRIBUTE_BEGIN(ClassName, method_name, n_initialize_args)     \
-        VALUE c ## ClassName;                                           \
+#define DEFINE_ABSTRACT_ATTRIBUTE(ClassName, parent)                    \
+    DEFINE_ABSTRACT_ATTRIBUTE_BEGIN(ClassName, parent) {                \
+    } DEFINE_ABSTRACT_ATTRIBUTE_END()
+
+#define DEFINE_ATTRIBUTE_BEGIN(ClassName,                               \
+                               parent,                                  \
+                               method_name,                             \
+                               n_initialize_args) do {                  \
         c ## ClassName = rb_define_class_under(mPango,                  \
                                                #ClassName,              \
-            cAttribute);                                                \
+                                               parent);                 \
         rb_define_method(c ## ClassName, "initialize",                  \
                          rbpango_ ## method_name ## _initialize,        \
                          n_initialize_args);                            \
 
-#define DEFINE_ATTRIBUTE_END                    \
+#define DEFINE_ATTRIBUTE_END()                  \
+    } while (FALSE)
 
-#define DEFINE_ATTRIBUTE(ClassName, method_name, n_initialize_args)     \
-    DEFINE_ATTRIBUTE_BEGIN(ClassName, method_name, n_initialize_args) { \
-    } DEFINE_ATTRIBUTE_END;
+#define DEFINE_ATTRIBUTE(ClassName,             \
+                         parent,                \
+                         method_name,           \
+                         n_initialize_args)     \
+    DEFINE_ATTRIBUTE_BEGIN(ClassName,           \
+                           parent,              \
+                           method_name,         \
+                           n_initialize_args) { \
+    } DEFINE_ATTRIBUTE_END();
 
-    DEFINE_ABSTRACT_ATTRIBUTE(AttrBool);
-    DEFINE_ABSTRACT_ATTRIBUTE(AttrColor);
-    DEFINE_ABSTRACT_ATTRIBUTE(AttrFloat);
-    DEFINE_ATTRIBUTE(AttrFontDesc, attr_font_desc, 1);
-    DEFINE_ATTRIBUTE(AttrFontFeatures, attr_font_features, 1);
-    DEFINE_ABSTRACT_ATTRIBUTE(AttrInt);
-    DEFINE_ATTRIBUTE(AttrLanguage, attr_language, 1);
-    DEFINE_ATTRIBUTE_BEGIN(AttrShape, attr_shape, -1) {
+    DEFINE_ABSTRACT_ATTRIBUTE(AttrString, cAttribute);
+    DEFINE_ABSTRACT_ATTRIBUTE(AttrColor, cAttribute);
+    DEFINE_ABSTRACT_ATTRIBUTE(AttrInt, cAttribute);
+    DEFINE_ABSTRACT_ATTRIBUTE_BEGIN(AttrBool, cAttrInt) {
+        rb_define_method(cAttrBool, "value", rbpango_attr_bool_get_value, 0);
+    } DEFINE_ABSTRACT_ATTRIBUTE_END();
+    DEFINE_ABSTRACT_ATTRIBUTE(AttrFloat, cAttribute);
+
+    DEFINE_ATTRIBUTE(AttrLanguage, cAttribute, attr_language, 1);
+    DEFINE_ATTRIBUTE(AttrFamily, cAttrString, attr_family, 1);
+    DEFINE_ATTRIBUTE_BEGIN(AttrStyle, cAttrInt, attr_style, 1) {
+        rb_define_method(cAttrStyle, "value", rbpango_attr_style_get_value, 0);
+    } DEFINE_ATTRIBUTE_END();
+    DEFINE_ATTRIBUTE_BEGIN(AttrWeight, cAttrInt, attr_weight, 1) {
+        rb_define_method(cAttrWeight, "value", rbpango_attr_weight_get_value, 0);
+    } DEFINE_ATTRIBUTE_END();
+    DEFINE_ATTRIBUTE_BEGIN(AttrVariant, cAttrInt, attr_variant, 1) {
+        rb_define_method(cAttrVariant,
+                         "value", rbpango_attr_variant_get_value, 0);
+    } DEFINE_ATTRIBUTE_END();
+    DEFINE_ATTRIBUTE_BEGIN(AttrStretch, cAttrInt, attr_stretch, 1) {
+        rb_define_method(cAttrStretch,
+                         "value", rbpango_attr_stretch_get_value, 0);
+    } DEFINE_ATTRIBUTE_END();
+    DEFINE_ATTRIBUTE(AttrSize, cAttribute, attr_size, 1);
+    DEFINE_ATTRIBUTE(AttrFontDesc, cAttribute, attr_font_desc, 1);
+    DEFINE_ATTRIBUTE(AttrForeground, cAttrColor, attr_foregound, 3);
+    DEFINE_ATTRIBUTE(AttrBackground, cAttrColor, attr_background, 3);
+    DEFINE_ATTRIBUTE_BEGIN(AttrUnderline, cAttrInt, attr_underline, 1) {
+        rb_define_method(cAttrUnderline,
+                         "value", rbpango_attr_underline_get_value, 0);
+    } DEFINE_ATTRIBUTE_END();
+    DEFINE_ATTRIBUTE(AttrStrikethrough, cAttrBool, attr_strikethrough, 1);
+    DEFINE_ATTRIBUTE(AttrRise, cAttrInt, attr_rise, 1);
+    DEFINE_ATTRIBUTE_BEGIN(AttrShape, cAttribute, attr_shape, -1) {
         rb_define_method(cAttrShape, "data", rbpango_attr_shape_get_data, 0);
-    } DEFINE_ATTRIBUTE_END;
-    DEFINE_ATTRIBUTE(AttrSize, attr_size, 1);
-    DEFINE_ABSTRACT_ATTRIBUTE(AttrString);
+    } DEFINE_ATTRIBUTE_END();
+    DEFINE_ATTRIBUTE(AttrScale, cAttrFloat, attr_scale, 1);
+    DEFINE_ATTRIBUTE(AttrFallback, cAttrBool, attr_fallback, 1);
+    DEFINE_ATTRIBUTE(AttrLetterSpacing, cAttrInt, attr_letter_spacing, 1);
+    DEFINE_ATTRIBUTE(AttrUnderlineColor, cAttrColor, attr_underline_color, 3);
+    DEFINE_ATTRIBUTE(AttrStrikethroughColor, cAttrColor,
+                     attr_strikethrough_color, 3);
+    DEFINE_ATTRIBUTE(AttrAbsoluteSize, cAttrSize, attr_absolute_size, 1);
+    DEFINE_ATTRIBUTE_BEGIN(AttrGravity, cAttrInt, attr_gravity, 1) {
+        rb_define_method(cAttrGravity,
+                         "value", rbpango_attr_gravity_get_value, 0);
+    } DEFINE_ATTRIBUTE_END();
+    DEFINE_ATTRIBUTE_BEGIN(AttrGravityHint, cAttrInt, attr_gravity_hint, 1) {
+        rb_define_method(cAttrGravityHint,
+                         "value", rbpango_attr_gravity_hint_get_value, 0);
+    } DEFINE_ATTRIBUTE_END();
+    DEFINE_ATTRIBUTE(AttrFontFeatures, cAttrString, attr_font_features, 1);
+    DEFINE_ATTRIBUTE(AttrForegroundAlpha, cAttrInt, attr_foreground_alpha, 1);
+    DEFINE_ATTRIBUTE(AttrBackgroundAlpha, cAttrInt, attr_background_alpha, 1);
 
 #undef DEFINE_ABSTRACT_ATTRIBUTE
+#undef DEFINE_ABSTRACT_ATTRIBUTE_BEGIN
+#undef DEFINE_ABSTRACT_ATTRIBUTE_END
 #undef DEFINE_ATTRIBUTE
+#undef DEFINE_ATTRIBUTE_BEGIN
+#undef DEFINE_ATTRIBUTE_END
 }
