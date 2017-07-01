@@ -369,9 +369,11 @@ class Demo < Gtk::Application
         puts("failed to run demo: #{filename}")
         report_error(error)
       else
-        iter[2] = Pango::Style::ITALIC
-        demo.signal_connect "destroy" do
-          iter[2] = Pango::Style::NORMAL
+        if demo.respond_to? :signal_connect
+          iter[2] = Pango::Style::ITALIC
+          demo.signal_connect "destroy" do
+            iter[2] = Pango::Style::NORMAL
+          end
         end
       end
     end
