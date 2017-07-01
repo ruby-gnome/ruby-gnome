@@ -106,7 +106,7 @@ class HypertextDemo
 
   def generate_page_1
     iter = @buffer.get_iter_at(:offset => 0)
-    @buffer.insert(iter, "Some text to show that simple")
+    @buffer.insert(iter, "Some text to show that simple ")
     insert_link(iter, "hyper text", 3)
     @buffer.insert(iter, " can easily be realized with ")
     insert_link(iter, "tags", 2)
