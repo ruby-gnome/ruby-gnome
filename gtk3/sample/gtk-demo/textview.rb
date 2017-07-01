@@ -78,14 +78,14 @@ class TextviewDemo
     # Gtk::TextTag.priority=.
 
     buffer.create_tag("heading",
-                      "weight" => Pango::WEIGHT_BOLD,
+                      "weight" => Pango::Weight::BOLD,
                       "size" => 15 * Pango::SCALE)
 
     buffer.create_tag("italic",
-                      "style" => Pango::STYLE_ITALIC)
+                      "style" => Pango::Style::ITALIC)
 
     buffer.create_tag("bold",
-                      "weight" => Pango::WEIGHT_BOLD)
+                      "weight" => Pango::Weight::BOLD)
 
     buffer.create_tag("big",
                       # points times the PANGO_SCALE factor
@@ -138,10 +138,10 @@ class TextviewDemo
                       "strikethrough" => true)
 
     buffer.create_tag("underline",
-                      "underline" => Pango::UNDERLINE_SINGLE)
+                      "underline" => Pango::UNDERLINE::SINGLE)
 
     buffer.create_tag("double_underline",
-                      "underline" => Pango::UNDERLINE_DOUBLE)
+                      "underline" => Pango::UNDERLINE::DOUBLE)
 
     buffer.create_tag("superscript",
                       "rise" => 10 * Pango::SCALE, #  10 pixels
