@@ -16,8 +16,6 @@ class StackDemo
     builder.connect_signals {}
     @window = builder["window1"]
     @window.screen = main_window.screen
-
-    @window.signal_connect("destroy") { window.destroyed(window) }
   end
 
   def run
