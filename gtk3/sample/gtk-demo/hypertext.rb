@@ -129,7 +129,7 @@ EOF
   def generate_page_3
     iter = @buffer.get_iter_at(:offset => 0)
     tag = @buffer.create_tag(nil,
-                             "weight" => Pango::FontDescription::WEIGHT_BOLD)
+                             "weight" => Pango::Weight::BOLD)
     @buffer.insert(iter, "hypertext:\n", :tags => [tag])
     @buffer.insert(iter, <<-EOF)
 machine-readable text that is not sequential but is organized
@@ -141,7 +141,7 @@ EOF
   def insert_link(iter, text, page)
     tag = @buffer.create_tag(nil,
                              "foreground" => "blue",
-                             "underline" => Pango::AttrUnderline::SINGLE)
+                             "underline" => :single)
     tag.page = page
     @buffer.insert(iter, text, :tags => [tag])
   end
