@@ -11,6 +11,8 @@
 =end
 class HypertextDemo
   def initialize(main_window)
+    @hovering = false
+
     initialize_window(main_window)
     initialize_cursors(main_window)
     initialize_view
