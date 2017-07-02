@@ -32,6 +32,12 @@ module Pango
   define_deprecated_enums :EllipsizeMode, "ELLIPSIZE"
   define_deprecated_enums :RenderPart, "PART"
 
+  class AttrUnderline
+    extend GLib::Deprecatable
+
+    define_deprecated_enums :Underline
+  end
+
   class Context
     extend GLib::Deprecatable
 
