@@ -26,5 +26,16 @@ module Gtk
     end
     undef_method :weight=
     alias_method :weight=, :set_weight
+
+    alias_method :set_scale_raw, :set_scale
+    def set_scale(scale)
+      case scale
+      when Symbol, String
+        scale = Pango::Scale.const_get(scale.to_s.upcase)
+      end
+      set_scale_raw(scale)
+    end
+    undef_method :scale=
+    alias_method :scale=, :set_scale
   end
 end
