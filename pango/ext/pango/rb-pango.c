@@ -41,4 +41,5 @@ Init_pango(void)
     rbpango_attr_iterator_init(RG_TARGET_NAMESPACE);
     rbpango_attr_list_init(RG_TARGET_NAMESPACE);
     rbpango_context_init(RG_TARGET_NAMESPACE);
+    rbpango_scale_init(RG_TARGET_NAMESPACE);
 }

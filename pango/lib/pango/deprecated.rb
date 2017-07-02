@@ -32,6 +32,18 @@ module Pango
   define_deprecated_enums :EllipsizeMode, "ELLIPSIZE"
   define_deprecated_enums :RenderPart, "PART"
 
+  class AttrScale
+    extend GLib::Deprecatable
+
+    define_deprecated_const :XX_SMALL, "Pango::Scale::XX_SMALL"
+    define_deprecated_const :X_SMALL, "Pango::Scale::X_SMALL"
+    define_deprecated_const :SMALL, "Pango::Scale::SMALL"
+    define_deprecated_const :MEDIUM, "Pango::Scale::MEDIUM"
+    define_deprecated_const :LARGE, "Pango::Scale::LARGE"
+    define_deprecated_const :X_LARGE, "Pango::Scale::X_LARGE"
+    define_deprecated_const :XX_LARGE, "Pango::Scale::XX_LARGE"
+  end
+
   class AttrUnderline
     extend GLib::Deprecatable
 
