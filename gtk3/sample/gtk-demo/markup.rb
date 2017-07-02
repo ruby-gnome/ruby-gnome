@@ -66,7 +66,7 @@ class MarkupDemo
         buffer = @view.buffer
         start_iter, start_end = buffer.bounds
         buffer.delete(start_iter, start_end)
-        buffer.insert_markup(buffer.start_iter, markup, -1)
+        buffer.insert_markup(buffer.start_iter, markup)
         @stack.visible_child_name = "formatted"
       end
     end
@@ -96,7 +96,7 @@ class MarkupDemo
     markup = Gio::Resources.lookup_data("/markup/markup.txt", 0)
 
     buffer = @view.buffer
-    buffer.insert_markup(buffer.start_iter, markup, -1)
+    buffer.insert_markup(buffer.start_iter, markup)
 
     buffer = @view2.buffer
     buffer.insert(buffer.start_iter, markup)

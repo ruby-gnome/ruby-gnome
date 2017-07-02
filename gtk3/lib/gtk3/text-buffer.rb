@@ -151,6 +151,17 @@ module Gtk
       self
     end
 
+    alias_method :insert_markup_raw, :insert_markup
+    def insert_markup(iter, markup, n_bytes=nil)
+      case markup
+      when GLib::Bytes
+        n_bytes ||= markup.size
+      else
+        n_bytes ||= markup.bytesize
+      end
+      insert_markup_raw(iter, markup, n_bytes)
+    end
+
     alias_method :insert_at_cursor_raw, :insert_at_cursor
     def insert_at_cursor(text, options={})
       interactive = options[:interactive]
