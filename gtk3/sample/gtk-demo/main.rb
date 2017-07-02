@@ -181,7 +181,7 @@ def run_demo_from_file(filename, window)
   demo = klass.new(window)
   demo_window = demo.run
 
-  if demo_window && demo_window.is_a?(Gtk::Window)
+  if demo_window.is_a?(Gtk::Window)
     demo_window.set_transient_for(window)
     demo_window.modal = true
   end
@@ -369,7 +369,7 @@ class Demo < Gtk::Application
         puts("failed to run demo: #{filename}")
         report_error(error)
       else
-        if demo.respond_to? :signal_connect
+        if demo
           iter[2] = Pango::Style::ITALIC
           demo.signal_connect "destroy" do
             iter[2] = Pango::Style::NORMAL
