@@ -133,6 +133,8 @@ module Gtk
           insert_pixbuf_raw(iter, target)
         when TextChildAnchor
           insert_text_child_anchor_raw(iter, target)
+        when GLib::Bytes
+          insert_raw(iter, target, target.size)
         else
           insert_raw(iter, target, target.bytesize)
         end
