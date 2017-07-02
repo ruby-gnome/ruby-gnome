@@ -134,7 +134,7 @@ module Gtk
         when TextChildAnchor
           insert_text_child_anchor_raw(iter, target)
         else
-          insert_raw(iter, target, target.bytesize)
+          insert_raw(iter, target, target.to_s.length)
         end
       end
 
