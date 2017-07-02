@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,12 @@ class TestGtkTextBuffer < Test::Unit::TestCase
         assert_equal("Hello Ruby World!", @text_buffer.text)
       end
 
+      test "GLib::Bytes" do
+        iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
+        @text_buffer.insert(iter, GLib::Bytes.new("Ruby "))
+        assert_equal("Hello Ruby World!", @text_buffer.text)
+      end
+
       test ":interactive" do
         iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
         @text_buffer.insert(iter, "Ruby ", :interactive => true)
@@ -50,6 +56,26 @@ class TestGtkTextBuffer < Test::Unit::TestCase
                             :interactive => true,
                             :default_editable => false)
         assert_equal("Hello World!", @text_buffer.text)
+      end
+    end
+
+    sub_test_case "#insert_markup" do
+      test "String" do
+        iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
+        @text_buffer.insert_markup(iter, "<b>Ruby</b> ")
+        assert_equal("Hello Ruby World!", @text_buffer.text)
+      end
+
+      test "GLib::Bytes" do
+        iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
+        @text_buffer.insert_markup(iter, GLib::Bytes.new("<b>Ruby</b> "))
+        assert_equal("Hello Ruby World!", @text_buffer.text)
+      end
+
+      test "n_bytes" do
+        iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
+        @text_buffer.insert_markup(iter, "<b>Ruby</b> language", 12)
+        assert_equal("Hello Ruby World!", @text_buffer.text)
       end
     end
 
