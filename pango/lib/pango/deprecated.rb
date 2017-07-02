@@ -28,6 +28,7 @@ module Pango
   define_deprecated_enums :Weight, "WEIGHT"
   define_deprecated_enums :TabAlign, "TAB"
   define_deprecated_enums :Underline, "UNDERLINE"
+  define_deprecated_const :UNDERLINE, "Pango::Underline"
   define_deprecated_enums :Script, "SCRIPT"
   define_deprecated_enums :EllipsizeMode, "ELLIPSIZE"
   define_deprecated_enums :RenderPart, "PART"
