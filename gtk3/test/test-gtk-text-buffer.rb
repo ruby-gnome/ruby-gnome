@@ -60,6 +60,10 @@ class TestGtkTextBuffer < Test::Unit::TestCase
     end
 
     sub_test_case "#insert_markup" do
+      setup do
+        only_gtk_version(3, 16)
+      end
+
       test "String" do
         iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
         @text_buffer.insert_markup(iter, "<b>Ruby</b> ")
