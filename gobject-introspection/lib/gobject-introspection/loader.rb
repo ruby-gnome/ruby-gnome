@@ -546,6 +546,7 @@ module GObjectIntrospection
     def load_method_info(info, klass, method_name)
       define_method(info, klass, method_name)
       define_equal_style_setter(info, klass, method_name)
+      define_inspect(info, klass, method_name)
     end
 
     def remove_existing_method(klass, method_name)
@@ -588,6 +589,14 @@ module GObjectIntrospection
         setter_method_name = "#{$POSTMATCH}="
         remove_existing_method(klass, setter_method_name)
         klass.__send__(:alias_method, setter_method_name, method_name)
+      end
+    end
+
+    def define_inspect(info, klass, method_name)
+      if method_name == "to_s" and info.n_args.zero?
+        klass.__send__(:define_method, "inspect") do ||
+          super().gsub(/\>\z/) {" #{to_s}>"}
+        end
       end
     end
 
