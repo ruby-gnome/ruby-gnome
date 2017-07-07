@@ -18,20 +18,34 @@ module Pango
   extend GLib::Deprecatable
 
   define_deprecated_enums :Alignment, "ALIGN"
+  define_deprecated_enums :Alignment
   define_deprecated_enums :CoverageLevel, "COVERAGE"
+  define_deprecated_enums :CoverageLevel
   define_deprecated_enums :Direction, "DIRECTION"
+  define_deprecated_enums :Direction
   define_deprecated_enums :WrapMode, "WRAP"
+  define_deprecated_enums :WrapMode
   define_deprecated_enums :FontMask, "FONT_MASK"
+  define_deprecated_enums :FontMask
   define_deprecated_enums :Stretch, "STRETCH"
+  define_deprecated_enums :Stretch
   define_deprecated_enums :Style, "STYLE"
+  define_deprecated_enums :Style
   define_deprecated_enums :Variant, "VARIANT"
+  define_deprecated_enums :Variant
   define_deprecated_enums :Weight, "WEIGHT"
+  define_deprecated_enums :Weight
   define_deprecated_enums :TabAlign, "TAB"
+  define_deprecated_enums :TabAlign
   define_deprecated_enums :Underline, "UNDERLINE"
+  define_deprecated_enums :Underline
   define_deprecated_const :UNDERLINE, "Pango::Underline"
   define_deprecated_enums :Script, "SCRIPT"
+  define_deprecated_enums :Script
   define_deprecated_enums :EllipsizeMode, "ELLIPSIZE"
+  define_deprecated_enums :EllipsizeMode
   define_deprecated_enums :RenderPart, "PART"
+  define_deprecated_enums :RenderPart
 
   class AttrScale
     extend GLib::Deprecatable
