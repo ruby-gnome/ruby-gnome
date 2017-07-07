@@ -50,8 +50,8 @@ class CssBasicsDemo
 
   def initialize_text_buffer
     @text = Gtk::TextBuffer.new
-    @text.create_tag("warning", "underline" => Pango::UNDERLINE_SINGLE)
-    @text.create_tag("error", "underline" => Pango::UNDERLINE_ERROR)
+    @text.create_tag("warning", "underline" => :single)
+    @text.create_tag("error", "underline" => :error)
     @text.text = @default_css
     text_buffer_signal_connect_changed
   end
