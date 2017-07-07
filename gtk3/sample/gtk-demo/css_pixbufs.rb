@@ -14,7 +14,7 @@ class CssPixbufsDemo
     @window.transient_for = main_window
     @window.set_default_size(400, 300)
 
-    @default_css = Gio::Resources.lookup_data("/css_pixbufs/gtk.css", 0)
+    @default_css = Gio::Resources.lookup_data("/css_pixbufs/gtk.css", 0).to_s
 
     initialize_text_buffer
     initialize_provider
