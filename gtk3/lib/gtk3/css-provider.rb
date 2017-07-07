@@ -34,5 +34,14 @@ module Gtk
         raise ArgumentError, "#{message}: #{options.inspect}"
       end
     end
+
+    alias_method :load_from_data_raw, :load_from_data
+    def load_from_data(data)
+      if data.is_a?(GLib::Bytes)
+        load_from_data_raw(data.to_s)
+      else
+        load_from_data_raw(data)
+      end
+    end
   end
 end
