@@ -179,7 +179,12 @@ module Gtk
 
     alias_method :set_text_raw, :set_text
     def set_text(text)
-      set_text_raw(text, text.bytesize)
+      if text.is_a?(GLib::Bytes)
+        text, text_size = text.to_s, text.size
+      else
+        text_size = text.bytesize
+      end
+      set_text_raw(text, text_size)
     end
     remove_method :text=
     alias_method :text=, :set_text
@@ -211,12 +216,22 @@ module Gtk
     private
     alias_method :insert_interactive_raw, :insert_interactive
     def insert_interactive(iter, text, default_ediatable)
-      insert_interactive_raw(iter, text, text.bytesize, default_ediatable)
+      if text.is_a?(GLib::Bytes)
+        text, text_size = text.to_s, text.size
+      else
+        text_size = text.bytesize
+      end
+      insert_interactive_raw(iter, text, text_size, default_ediatable)
     end
 
     alias_method :insert_interactive_at_cursor_raw, :insert_interactive_at_cursor
     def insert_interactive_at_cursor(text, default_ediatable)
-      insert_interactive_at_cursor_raw(text, text.bytesize, default_ediatable)
+      if text.is_a?(GLib::Bytes)
+        text, text_size = text.to_s, text.size
+      else
+        text_size = text.bytesize
+      end
+      insert_interactive_at_cursor_raw(text, text_size, default_ediatable)
     end
   end
 end
