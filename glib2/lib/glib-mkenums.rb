@@ -158,7 +158,7 @@ GType #{@enum_name}_get_type (void);
       @target_filename = target_filename
       @include_files = include_files
       @targets = []
-      files.each do |path|
+      files.sort.each do |path|
         data = ""
         File.open(path) do |i|
           data = i.read
