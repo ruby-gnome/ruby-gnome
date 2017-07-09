@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
  *  Copyright (C) 2004  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -146,6 +146,14 @@ rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE paren
     return error_class;
 }
 
+static VALUE
+rbg_error_to_ruby(const GValue *from)
+{
+    GError *error;
+    error = g_value_get_boxed(from);
+    return GERROR2RVAL(error);
+}
+
 void
 Init_glib_error(void)
 {
@@ -161,4 +169,10 @@ Init_glib_error(void)
 
     generic_error = rb_define_class_under(mGLib, "Error", rb_eRuntimeError);
     rb_include_module(generic_error, error_info);
+}
+
+void
+Init_glib_error_conversions(void)
+{
+    rbgobj_register_g2r_func(G_TYPE_ERROR, rbg_error_to_ruby);
 }

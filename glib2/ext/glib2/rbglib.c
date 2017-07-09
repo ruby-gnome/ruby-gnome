@@ -1162,6 +1162,7 @@ union       GDoubleIEEE754;
     Init_gobject();
 
     /* Require GBoxed/GObject */
+    Init_glib_error_conversions();
     Init_glib_utils();
     Init_glib_spawn();
     Init_glib_spawnerror();
