@@ -37,13 +37,7 @@ $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 module_name = "gobject_introspection"
 package_id = "gobject-introspection-1.0"
 
-begin
-  require "mkmf-gnome2"
-rescue LoadError
-  require "rubygems"
-  gem "glib2"
-  require "mkmf-gnome2"
-end
+require "mkmf-gnome2"
 
 ["glib2"].each do |package|
   directory = "#{package}#{version_suffix}"
