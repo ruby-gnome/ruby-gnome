@@ -1,4 +1,4 @@
-# Copyright (c) 2016 Ruby-GNOME2 Project Team
+# Copyright (c) 2016-2017 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 =begin
@@ -56,7 +56,7 @@ class RotatedTextDemo
       fancy_shape_renderer(cr, attr, do_path)
     end
 
-    layout.attributes = create_fancy_attr_list_for_layout(layout)
+    label.attributes = create_fancy_attr_list_for_layout(layout)
   end
 
   def run
@@ -73,8 +73,9 @@ class RotatedTextDemo
   def fancy_shape_renderer(cr, attr, do_path)
     x, y = cr.current_point
     cr.translate(x, y)
-    cr.scale(attr.ink_rect.width / Pango::SCALE,
-             attr.ink_rect.height / Pango::SCALE)
+    rect = attr.ink_rect
+    cr.scale(rect.width / Pango::SCALE,
+             rect.height / Pango::SCALE)
 
     if attr.data == HEART
       cr.move_to(0.5, 0)
@@ -94,7 +95,7 @@ class RotatedTextDemo
     metrics = layout.context.get_metrics(layout.font_description)
     ascent = metrics.ascent
     logical_rect = Pango::Rectangle.new(0, -ascent, ascent, ascent)
-    ink_rect = logical_rect.dup
+    ink_rect = Pango::Rectangle.new(0, -ascent, ascent, ascent)
 
     attrs = Pango::AttrList.new
     attr = Pango::AttrShape.new(ink_rect, logical_rect, HEART)
