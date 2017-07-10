@@ -94,7 +94,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :need_autoreconf => true,
         :patches => [
           "glib-2.48.0-add-missing-exeext.diff",
-          "glib-2.52.1-fix-build-error.diff",
         ],
         :built_file => "bin/libglib-2.0-0.dll",
       },
