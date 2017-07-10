@@ -54,6 +54,8 @@ rb_gi_struct_info_to_ruby(GIStructInfo *info,
     if (gtype == G_TYPE_VARIANT) {
         GVariant *variant = object;
         return rbg_variant_to_ruby(variant);
+    } else if (gtype != G_TYPE_NONE) {
+        return BOXED2RVAL(target_object, gtype);
     }
 
     namespace = g_base_info_get_namespace(base_info);
