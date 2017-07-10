@@ -20,6 +20,8 @@
     * Made stable glib-mkenums output.
       [GitHub#1054][Patch by dai]
     * Supported GError in callback argument.
+    * Windows: Upgraded bundled GLib to 2.52.3.
+    * Windows: Upgraded bundled Libtasn1 to 4.12.
 
 ==== Ruby/GObjectIntrospection
 
@@ -44,6 +46,12 @@
     * Supported (({Pango::Scale})) again.
       [GItHub#1048][Reported by cedlemo]
     * Added missing backward compatibility constants.
+    * Windows: Upgraded bundled Pango to 1.40.6.
+
+==== Ruby/GDK3
+
+  * Improvements
+    * Windows: Upgraded bundled GTK+ to 3.22.16.
 
 ==== Ruby/GTK3
 
@@ -79,12 +87,29 @@
   * Improvements
     * Windows: Built GDK backend again.
       [GitHub:#1034][Reported by Alanzote]
+    * Windows: Upgraded bundled Clutter to 1.26.2.
 
 ==== Ruby/WebKit2GTK
 
   * Improvements
     * Added a sample that saves screenshot.
     * Supported (({WebKit2Gtk::WebContext.new(ephemeral: true)})).
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * Windows: Upgraded bundled libsoup to 2.58.1.
+    * Windows: Upgraded bundled GStreamer to 1.12.1.
+
+==== Ruby/GtkSourceView3
+
+  * Improvements
+    * Windows: Upgraded bundled GtkSourceView to 3.24.3.
+
+==== Ruby/VTE3
+
+  * Improvements
+    * Windows: Upgraded bundled VTE to 0.48.3.
 
 === Thanks
 

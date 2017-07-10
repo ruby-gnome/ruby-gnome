@@ -88,7 +88,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "glib",
       :download_site => :gnome,
       :label => "GLib",
-      :version => "2.52.1",
+      :version => "2.52.3",
       :compression_method => "xz",
       :windows => {
         :need_autoreconf => true,
@@ -127,7 +127,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "libtasn1",
       :download_site => :gnu,
       :label => "Libtasn1",
-      :version => "4.10",
+      :version => "4.12",
       :windows => {
         :built_file => "bin/libtasn1-6.dll",
       },
