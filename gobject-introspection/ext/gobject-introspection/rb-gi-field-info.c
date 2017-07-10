@@ -71,6 +71,69 @@ rg_type(VALUE self)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_field_info_get_type(info));
 }
 
+static VALUE
+rb_gi_field_info_get_field_raw_interface(GIFieldInfo *info,
+                                         gpointer memory,
+                                         GITypeInfo *type_info)
+{
+    VALUE rb_field_value = Qnil;
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+
+    interface_info = g_type_info_get_interface(type_info);
+    interface_type = g_base_info_get_type(interface_info);
+    switch (interface_type) {
+      case GI_INFO_TYPE_INVALID:
+      case GI_INFO_TYPE_FUNCTION:
+      case GI_INFO_TYPE_CALLBACK:
+        break;
+      case GI_INFO_TYPE_STRUCT:
+        {
+            GIStructInfo *struct_info = (GIStructInfo *)interface_info;
+            gint offset;
+
+            offset = g_field_info_get_offset(info);
+            rb_field_value = rb_gi_struct_info_to_ruby(
+                struct_info,
+                (gchar *)memory + offset,
+                g_type_info_is_pointer(type_info));
+            break;
+        }
+      case GI_INFO_TYPE_BOXED:
+      case GI_INFO_TYPE_UNION:
+      case GI_INFO_TYPE_OBJECT:
+        {
+            GIArgument argument;
+            gint offset;
+
+            offset = g_field_info_get_offset(info);
+            argument.v_pointer = G_STRUCT_MEMBER(gpointer, memory, offset);
+            rb_field_value = GI_ARGUMENT2RVAL(&argument, FALSE, type_info,
+                                              NULL, NULL, NULL);
+        }
+        break;
+      case GI_INFO_TYPE_ENUM:
+      case GI_INFO_TYPE_FLAGS:
+      case GI_INFO_TYPE_INTERFACE:
+      case GI_INFO_TYPE_CONSTANT:
+      case GI_INFO_TYPE_INVALID_0:
+      case GI_INFO_TYPE_VALUE:
+      case GI_INFO_TYPE_SIGNAL:
+      case GI_INFO_TYPE_VFUNC:
+      case GI_INFO_TYPE_PROPERTY:
+      case GI_INFO_TYPE_FIELD:
+      case GI_INFO_TYPE_ARG:
+      case GI_INFO_TYPE_TYPE:
+      case GI_INFO_TYPE_UNRESOLVED:
+        break;
+      default:
+        break;
+    }
+    g_base_info_unref(interface_info);
+
+    return rb_field_value;
+}
+
 VALUE
 rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
 {
@@ -78,36 +141,25 @@ rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
     gboolean processed = FALSE;
     GITypeInfo *type_info;
     GITypeTag type_tag;
-    VALUE rb_field_value;
+    VALUE rb_field_value = Qnil;
 
     type_info = g_field_info_get_type(info);
     type_tag = g_type_info_get_tag(type_info);
 
     switch (type_tag) {
-      case GI_TYPE_TAG_INTERFACE:
-        {
-            GIBaseInfo *interface_info;
-            GIInfoType interface_type;
-
-            interface_info = g_type_info_get_interface(type_info);
-            interface_type = g_base_info_get_type(interface_info);
-            switch (interface_type) {
-              case GI_INFO_TYPE_STRUCT:
-              case GI_INFO_TYPE_UNION:
-              case GI_INFO_TYPE_BOXED:
-                {
-                    int offset;
-
-                    offset = g_field_info_get_offset(info);
-                    argument.v_pointer = G_STRUCT_MEMBER(gpointer, memory, offset);
-                    processed = TRUE;
-                }
-                break;
-              default:
-                break;
-            }
-            g_base_info_unref(interface_info);
-        }
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
         break;
       case GI_TYPE_TAG_UTF8:
         {
@@ -116,6 +168,25 @@ rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
             argument.v_string = G_STRUCT_MEMBER(gchar *, memory, offset);
             processed = TRUE;
         }
+        break;
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+        break;
+      case GI_TYPE_TAG_INTERFACE:
+        rb_field_value =
+            rb_gi_field_info_get_field_raw_interface(info,
+                                                     memory,
+                                                     type_info);
+        if (!NIL_P(rb_field_value)) {
+            g_base_info_unref(type_info);
+            return rb_field_value;
+        }
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
         break;
       default:
         break;
@@ -153,6 +224,31 @@ rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
     succeeded = g_field_info_set_field(info, memory, &field_value);
     if (!succeeded) {
         switch (type_tag) {
+          case GI_TYPE_TAG_VOID:
+          case GI_TYPE_TAG_BOOLEAN:
+          case GI_TYPE_TAG_INT8:
+          case GI_TYPE_TAG_UINT8:
+          case GI_TYPE_TAG_INT16:
+          case GI_TYPE_TAG_UINT16:
+          case GI_TYPE_TAG_INT32:
+          case GI_TYPE_TAG_UINT32:
+          case GI_TYPE_TAG_INT64:
+          case GI_TYPE_TAG_UINT64:
+          case GI_TYPE_TAG_FLOAT:
+          case GI_TYPE_TAG_DOUBLE:
+          case GI_TYPE_TAG_GTYPE:
+            break;
+          case GI_TYPE_TAG_UTF8:
+            {
+                int offset;
+                offset = g_field_info_get_offset(info);
+                G_STRUCT_MEMBER(gchar *, memory, offset) = field_value.v_string;
+                succeeded = TRUE;
+            }
+            break;
+          case GI_TYPE_TAG_FILENAME:
+          case GI_TYPE_TAG_ARRAY:
+            break;
           case GI_TYPE_TAG_INTERFACE:
             {
                 GIBaseInfo *interface_info;
@@ -161,9 +257,13 @@ rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
                 interface_info = g_type_info_get_interface(type_info);
                 interface_type = g_base_info_get_type(interface_info);
                 switch (interface_type) {
+                  case GI_INFO_TYPE_INVALID:
+                  case GI_INFO_TYPE_FUNCTION:
+                  case GI_INFO_TYPE_CALLBACK:
+                    break;
                   case GI_INFO_TYPE_STRUCT:
-                  case GI_INFO_TYPE_UNION:
                   case GI_INFO_TYPE_BOXED:
+                  case GI_INFO_TYPE_UNION:
                     {
                         int offset;
 
@@ -173,19 +273,32 @@ rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
                         succeeded = TRUE;
                     }
                     break;
+                  case GI_INFO_TYPE_ENUM:
+                  case GI_INFO_TYPE_FLAGS:
+                  case GI_INFO_TYPE_OBJECT:
+                  case GI_INFO_TYPE_INTERFACE:
+                  case GI_INFO_TYPE_CONSTANT:
+                  case GI_INFO_TYPE_INVALID_0:
+                  case GI_INFO_TYPE_VALUE:
+                  case GI_INFO_TYPE_SIGNAL:
+                  case GI_INFO_TYPE_VFUNC:
+                  case GI_INFO_TYPE_PROPERTY:
+                  case GI_INFO_TYPE_FIELD:
+                  case GI_INFO_TYPE_ARG:
+                  case GI_INFO_TYPE_TYPE:
+                  case GI_INFO_TYPE_UNRESOLVED:
+                    break;
                   default:
                     break;
                 }
                 g_base_info_unref(interface_info);
             }
             break;
-          case GI_TYPE_TAG_UTF8:
-            {
-                int offset;
-                offset = g_field_info_get_offset(info);
-                G_STRUCT_MEMBER(gchar *, memory, offset) = field_value.v_string;
-                succeeded = TRUE;
-            }
+          case GI_TYPE_TAG_GLIST:
+          case GI_TYPE_TAG_GSLIST:
+          case GI_TYPE_TAG_GHASH:
+          case GI_TYPE_TAG_ERROR:
+          case GI_TYPE_TAG_UNICHAR:
             break;
           default:
             break;

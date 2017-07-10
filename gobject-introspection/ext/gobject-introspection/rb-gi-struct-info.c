@@ -28,11 +28,81 @@ gi_struct_info_get_type(void)
 {
     static GType type = 0;
     if (type == 0) {
-	type = g_boxed_type_register_static("GIStructInfo",
+        type = g_boxed_type_register_static("GIStructInfo",
                                             (GBoxedCopyFunc)g_base_info_ref,
                                             (GBoxedFreeFunc)g_base_info_unref);
     }
     return type;
+}
+
+VALUE
+rb_gi_struct_info_to_ruby(GIStructInfo *info,
+                          gpointer object,
+                          gboolean is_pointer)
+{
+    GIBaseInfo *base_info = (GIBaseInfo *)info;
+    GIRegisteredTypeInfo *registered_type_info = (GIRegisteredTypeInfo *)info;
+    GType gtype;
+    const char *namespace;
+    const char *name;
+    VALUE rb_module;
+    VALUE rb_class;
+    gpointer target_object = object;
+    RUBY_DATA_FUNC free_func = NULL;
+
+    gtype = g_registered_type_info_get_g_type(registered_type_info);
+    if (gtype == G_TYPE_VARIANT) {
+        GVariant *variant = object;
+        return rbg_variant_to_ruby(variant);
+    }
+
+    namespace = g_base_info_get_namespace(base_info);
+    name = g_base_info_get_name(base_info);
+
+    if (strcmp(namespace, "cairo") == 0) {
+        gchar *gtype_name;
+        GType gtype;
+
+        gtype_name = g_strdup_printf("Cairo%s", name);
+        gtype = g_type_from_name(gtype_name);
+        g_free(gtype_name);
+        return BOXED2RVAL(target_object, gtype);
+    }
+
+    rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
+    rb_class = rb_const_get(rb_module, rb_intern(name));
+    if (rb_respond_to(rb_class, rb_intern("gtype"))) {
+        VALUE rb_gtype;
+        GType gtype;
+
+        rb_gtype = rb_funcall(rb_class, rb_intern("gtype"), 0);
+        gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
+        return BOXED2RVAL(target_object, gtype);
+    }
+
+    if (!is_pointer) {
+        size_t object_size;
+        object_size = g_struct_info_get_size(info);
+        target_object = xmalloc(object_size);
+        memcpy(target_object, object, object_size);
+        free_func = xfree;
+    }
+
+    return Data_Wrap_Struct(rb_class, NULL, free_func, target_object);
+}
+
+gpointer
+rb_gi_struct_info_from_ruby(GIStructInfo *info, VALUE rb_object)
+{
+    GIRegisteredTypeInfo *registerd_type_info = (GIRegisteredTypeInfo *)info;
+    GType gtype;
+
+    gtype = g_registered_type_info_get_g_type(registerd_type_info);
+    if (gtype == G_TYPE_NONE) {
+        return DATA_PTR(rb_object);
+    } else {
+        return RVAL2BOXED(rb_object, gtype);
+    }
 }
 
 static VALUE

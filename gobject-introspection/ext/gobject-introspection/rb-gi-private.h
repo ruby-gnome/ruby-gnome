@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -104,5 +104,11 @@ VALUE rb_gi_field_info_get_field_raw (GIFieldInfo *info,
 void  rb_gi_field_info_set_field_raw (GIFieldInfo *info,
                                       gpointer     memory,
                                       VALUE        rb_field_value);
+
+VALUE rb_gi_struct_info_to_ruby(GIStructInfo *info,
+                                gpointer object,
+                                gboolean is_pointer);
+gpointer rb_gi_struct_info_from_ruby(GIStructInfo *info,
+                                     VALUE rb_object);
 
 #endif

@@ -22,59 +22,6 @@
 
 static VALUE rb_cGLibValue = Qnil;
 
-static VALUE
-interface_struct_to_ruby(gpointer object,
-                         gboolean duplicate,
-                         G_GNUC_UNUSED GITypeInfo *type_info,
-                         GIBaseInfo *interface_info)
-{
-    const char *namespace;
-    const char *name;
-    VALUE rb_module;
-    VALUE rb_class;
-    gpointer target_object = object;
-    RUBY_DATA_FUNC free_func = NULL;
-
-    namespace = g_base_info_get_namespace(interface_info);
-    name = g_base_info_get_name(interface_info);
-
-    if (strcmp(namespace, "cairo") == 0) {
-        gchar *gtype_name;
-        GType gtype;
-
-        gtype_name = g_strdup_printf("Cairo%s", name);
-        gtype = g_type_from_name(gtype_name);
-        g_free(gtype_name);
-        return BOXED2RVAL(target_object, gtype);
-    }
-
-    rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
-    rb_class = rb_const_get(rb_module, rb_intern(name));
-    if (rb_respond_to(rb_class, rb_intern("gtype"))) {
-        VALUE rb_gtype;
-        GType gtype;
-
-        rb_gtype = rb_funcall(rb_class, rb_intern("gtype"), 0);
-        gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
-        return BOXED2RVAL(target_object, gtype);
-    }
-
-    if (duplicate) {
-        size_t object_size;
-        object_size = g_struct_info_get_size(interface_info);
-        target_object = xmalloc(object_size);
-        memcpy(target_object, object, object_size);
-        free_func = xfree;
-    }
-    return Data_Wrap_Struct(rb_class, NULL, free_func, target_object);
-}
-
-static gpointer
-interface_struct_from_ruby(VALUE rb_object)
-{
-    return DATA_PTR(rb_object);
-}
-
 static void
 array_c_to_ruby_sized_interface(gconstpointer *elements,
                                 gint64 n_elements,
@@ -107,10 +54,9 @@ array_c_to_ruby_sized_interface(gconstpointer *elements,
         if (gtype == G_TYPE_NONE) {
             for (i = 0; i < n_elements; i++) {
                 rb_ary_push(rb_array,
-                            interface_struct_to_ruby((gpointer)elements[i],
-                                                     FALSE,
-                                                     element_type_info,
-                                                     interface_info));
+                            rb_gi_struct_info_to_ruby(interface_info,
+                                                      (gpointer)elements[i],
+                                                      TRUE));
             }
             g_base_info_unref(interface_info);
             g_base_info_unref(element_type_info);
@@ -399,10 +345,9 @@ array_array_interface_to_ruby(GIArgument *array,
                 gpointer element;
                 element = elements->data + (element_size * i);
                 rb_ary_push(rb_array,
-                            interface_struct_to_ruby(element,
-                                                     TRUE,
-                                                     element_type_info,
-                                                     interface_info));
+                            rb_gi_struct_info_to_ruby(interface_info,
+                                                      element,
+                                                      FALSE));
             }
         } else {
             interface_name = g_info_type_to_string(interface_type);
@@ -644,17 +589,9 @@ rb_gi_argument_to_ruby_interface(GIArgument *argument,
                  "TODO: GIArgument(interface)[callback] -> Ruby");
         break;
     case GI_INFO_TYPE_STRUCT:
-        if (gtype == G_TYPE_NONE) {
-            rb_interface = interface_struct_to_ruby(argument->v_pointer,
-                                                    duplicate,
-                                                    type_info,
-                                                    interface_info);
-        } else if (gtype == G_TYPE_VARIANT) {
-            GVariant *variant = argument->v_pointer;
-            rb_interface = rbg_variant_to_ruby(variant);
-        } else {
-            rb_interface = BOXED2RVAL(argument->v_pointer, gtype);
-        }
+        rb_interface = rb_gi_struct_info_to_ruby(interface_info,
+                                                 argument->v_pointer,
+                                                 !duplicate);
         break;
     case GI_INFO_TYPE_BOXED:
         rb_raise(rb_eNotImpError,
@@ -879,10 +816,9 @@ rb_gi_argument_to_ruby_glist_interface(GIArgument *argument,
             rb_argument = rb_ary_new();
             for (node = argument->v_pointer; node; node = g_list_next(node)) {
                 rb_ary_push(rb_argument,
-                            interface_struct_to_ruby(node->data,
-                                                     FALSE,
-                                                     element_type_info,
-                                                     interface_info));
+                            rb_gi_struct_info_to_ruby(interface_info,
+                                                      node->data,
+                                                      TRUE));
             }
         } else {
             rb_argument = BOXEDGLIST2RVAL(argument->v_pointer, gtype);
@@ -1030,10 +966,9 @@ rb_gi_argument_to_ruby_gslist_interface(GIArgument *argument,
             rb_argument = rb_ary_new();
             for (node = argument->v_pointer; node; node = g_slist_next(node)) {
                 rb_ary_push(rb_argument,
-                            interface_struct_to_ruby(node->data,
-                                                     FALSE,
-                                                     element_type_info,
-                                                     interface_info));
+                            rb_gi_struct_info_to_ruby(interface_info,
+                                                      node->data,
+                                                      TRUE));
             }
         } else {
             rb_argument = BOXEDGLIST2RVAL(argument->v_pointer, gtype);
@@ -3479,7 +3414,7 @@ set_in_array_gtype_arguments_from_ruby(GIArgument *array_argument,
 
 typedef struct {
     GType element_gtype;
-    gsize element_size;
+    GIStructInfo *struct_info;
     VALUE rb_argument;
     gint n_args;
     gchar *values;
@@ -3489,23 +3424,22 @@ static VALUE
 set_in_array_interface_struct_arguments_from_ruby_body(VALUE value)
 {
     ArrayInterfaceStructFromRubyData *data;
+    gsize size;
     gint i;
 
     data = (ArrayInterfaceStructFromRubyData *)value;
+    size = g_struct_info_get_size(data->struct_info);
+    data->values = xmalloc(size * data->n_args);
 
     for (i = 0; i < data->n_args; i++) {
         VALUE rb_element;
         gpointer element;
 
         rb_element = RARRAY_PTR(data->rb_argument)[i];
-        if (data->element_gtype == G_TYPE_NONE) {
-            element = interface_struct_from_ruby(rb_element);
-        } else {
-            element = RVAL2BOXED(rb_element, data->element_gtype);
-        }
-        memcpy(data->values + (data->element_size * i),
+        element = rb_gi_struct_info_from_ruby(data->struct_info, rb_element);
+        memcpy(data->values + (size * i),
                element,
-               data->element_size);
+               size);
     }
 
     return Qnil;
@@ -3517,6 +3451,7 @@ set_in_array_interface_struct_arguments_from_ruby_rescue(VALUE value)
     ArrayInterfaceStructFromRubyData *data;
 
     data = (ArrayInterfaceStructFromRubyData *)value;
+    g_base_info_unref((GIBaseInfo *)(data->struct_info));
     xfree(data->values);
 
     rb_exc_raise(rb_errinfo());
@@ -3524,17 +3459,15 @@ set_in_array_interface_struct_arguments_from_ruby_rescue(VALUE value)
 
 static void
 set_in_array_interface_struct_arguments_from_ruby(GIArgument *array_argument,
-                                                  GType element_gtype,
-                                                  gsize element_size,
+                                                  GIStructInfo *struct_info,
                                                   VALUE rb_argument)
 {
     ArrayInterfaceStructFromRubyData data;
 
-    data.element_gtype = element_gtype;
-    data.element_size = element_size;
+    data.struct_info = struct_info;
     data.rb_argument = rb_argument;
     data.n_args = RARRAY_LEN(rb_argument);
-    data.values = xmalloc(data.element_size * data.n_args);
+    data.values = NULL;
     rb_rescue(set_in_array_interface_struct_arguments_from_ruby_body,
               (VALUE)&data,
               set_in_array_interface_struct_arguments_from_ruby_rescue,
@@ -3551,7 +3484,6 @@ set_in_array_interface_arguments_from_ruby(GIArgument *array_argument,
     GIInfoType interface_type;
     GType gtype;
     const char *interface_name;
-    gsize size;
 
     interface_info = g_type_info_get_interface(element_type_info);
     interface_type = g_base_info_get_type(interface_info);
@@ -3569,12 +3501,12 @@ set_in_array_interface_arguments_from_ruby(GIArgument *array_argument,
                  g_type_name(gtype));
         break;
     case GI_INFO_TYPE_STRUCT:
-        size = g_struct_info_get_size(interface_info);
-        g_base_info_unref(interface_info);
-        set_in_array_interface_struct_arguments_from_ruby(array_argument,
-                                                          gtype,
-                                                          size,
-                                                          rb_argument);
+        {
+            GIStructInfo *struct_info = (GIStructInfo *)interface_info;
+            set_in_array_interface_struct_arguments_from_ruby(array_argument,
+                                                              struct_info,
+                                                              rb_argument);
+        }
         break;
     case GI_INFO_TYPE_BOXED:
     case GI_INFO_TYPE_ENUM:
