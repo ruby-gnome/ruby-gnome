@@ -1099,7 +1099,6 @@ rb_gi_argument_to_ruby_ghash_utf8_utf8(GHashTable *table)
     VALUE rb_table;
 
     rb_table = rb_hash_new();
-    rb_p(rb_table);
     g_hash_table_foreach(table,
                          rb_gi_argument_to_ruby_ghash_utf8_utf8_body,
                          (gpointer)(rb_table));
