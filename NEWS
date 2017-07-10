@@ -2,6 +2,98 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.1.7: 2017-07-10
+
+=== Changes
+
+==== All
+
+  * Improvements
+    * Windows: Supported running commands in bundled packages.
+
+==== Ruby/GLib
+
+  * Improvements
+    * (({GLib::Bytes#size})): Added.
+    * (({GLib::Bytes#length})): Added.
+    * (({GLib::Bytes#pointer})): Added.
+    * Made stable glib-mkenums output.
+      [GitHub#1054][Patch by dai]
+    * Supported GError in callback argument.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported freeing GSList.
+    * Supported not GObject Introspection based bindings object for
+      receiver.
+    * Supported int16 array output.
+    * Supported uint16 array output.
+    * Supported uint32 array output.
+    * Supported uint64 array output.
+    * Supported float array output.
+    * Supported double array output.
+    * Supported auto (({#inspect})) defining.
+    * Homebrew: Supported Homebrew not installed at /usr/local.
+
+==== Ruby/Pango
+
+  * Improvements
+    * Supported attribute again.
+      [GItHub#1033][Reported by Mamoru TASAKA]
+    * Supported (({Pango::Scale})) again.
+      [GItHub#1048][Reported by cedlemo]
+    * Added missing backward compatibility constants.
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Updated demo.
+      [GitHub#1038][GitHub#1039][GitHub#1040][GitHub#1044][GitHub#1045]
+      [GitHub#1046][GitHub#1047][GitHub#1049][GitHub#1050][GitHub#1051]
+      [GitHub#1052]
+      [Patch by cedlemo]
+    * Supported working on environment that has GTK+ 4.
+      [GitHub#1041][Reported by cedlemo]
+    * (({Gtk::TextTag#weight=})) accepts (({Pango::Weight})).
+    * (({Gtk::TextBuffer#insert_markup})) stops to require length.
+    * (({Gtk::TextTag#scale=})) accepts scale name such as (({:x_small})).
+    * Supported (({GLib::Bytes})) as text buffer input.
+    * (({Gtk::CssProvider#load_from_data})) accepts (({GLib::Bytes})).
+
+  * Fixes
+    * Fixed a crash bug in demo.
+      [GitHub#1036][Reported by Mamoru TASAKA]
+
+==== Ruby/Rsvg2
+
+  * Improvements
+    * Added samples again.
+
+  * Fixes
+    * Added missing Ruby/CairoGObject dependency.
+      [GitHub#1035][Reported by peret]
+
+==== Ruby/Clutter
+
+  * Improvements
+    * Windows: Built GDK backend again.
+      [GitHub:#1034][Reported by Alanzote]
+
+==== Ruby/WebKit2GTK
+
+  * Improvements
+    * Added a sample that saves screenshot.
+    * Supported (({WebKit2Gtk::WebContext.new(ephemeral: true)})).
+
+=== Thanks
+
+  * Alanzote
+  * peret
+  * cedlemo
+  * Mamoru TASAKA
+  * dai
+
 == Ruby-GNOME2 3.1.6: 2017-06-03
 
 === Changes
