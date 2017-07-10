@@ -19,6 +19,10 @@ class TestWebKit2GtkWebContext < Test::Unit::TestCase
 
   sub_test_case(".new") do
     sub_test_case("Hash form") do
+      setup do
+        only_webkit2_gtk_version(2, 16)
+      end
+
       test "ephemeral: true" do
         context = WebKit2Gtk::WebContext.new(ephemeral: true)
         assert do
