@@ -501,12 +501,21 @@ namespace :gem do
 
     desc "push all Windows gems"
     task :push do
+      threads = []
       windows_gnome2_packages.each do |package|
-        ruby("-S", "gem", "push",
-             File.join("build", "pkg", "#{package}-#{version}-x86-mingw32.gem"))
-        ruby("-S", "gem", "push",
-             File.join("build", "pkg", "#{package}-#{version}-x64-mingw32.gem"))
+        architectures = [
+          "x86-mingw32",
+          "x64-mingw32",
+        ]
+        architectures.each do |architecture|
+          base_name = "#{package}-#{version}-#{architecture}.gem"
+          threads << Thread.new(base_name) do |local_base_name|
+            ruby("-S", "gem", "push",
+                 File.join("build", "pkg", local_base_name))
+          end
+        end
       end
+      threads.each(&:join)
     end
   end
 end
