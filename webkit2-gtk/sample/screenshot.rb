@@ -26,6 +26,10 @@ end
 main_context = GLib::MainContext.default
 
 view = WebKit2Gtk::WebView.new
+window = Gtk::OffscreenWindow.new
+window.add(view)
+window.set_default_size(800, 600)
+window.show_all
 ARGV.each do |uri|
   view.load_uri(uri)
   finished = false
