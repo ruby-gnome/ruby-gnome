@@ -39,6 +39,7 @@ module WebKit2Gtk
     def require_libraries
       require "webkit2-gtk/version" if @version_module.const_defined?(:MAJOR)
 
+      require "webkit2-gtk/web-context"
       require "webkit2-gtk/web-view"
     end
 
