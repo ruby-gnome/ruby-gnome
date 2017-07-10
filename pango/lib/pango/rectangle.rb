@@ -24,5 +24,9 @@ module Pango
       self.width = width
       self.height = height
     end
+
+    def to_a
+      [x, y, width, height]
+    end
   end
 end
