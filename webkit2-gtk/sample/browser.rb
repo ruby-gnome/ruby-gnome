@@ -25,6 +25,13 @@ window.signal_connect("destroy") do
   Gtk.main_quit
 end
 
+# For supporting http_proxy and https_proxy.
+# view_context = WebKit2Gtk::WebContext.new
+# proxy_settings = WebKit2Gtk::NetworkProxySettings.new
+# proxy_settings.add_proxy_for_scheme("http", ENV["http_proxy"])
+# proxy_settings.add_proxy_for_scheme("https", ENV["https_proxy"])
+# view_context.set_network_proxy_settings(:custom, proxy_settings)
+# view = WebKit2Gtk::WebView.new(context: view_context)
 view = WebKit2Gtk::WebView.new
 view.signal_connect("load-changed") do |_, load_event|
   p [:load_changed, view.uri, load_event]
