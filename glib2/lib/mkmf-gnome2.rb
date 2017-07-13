@@ -48,8 +48,8 @@ checking_for(checking_message("--enable-debug-build option")) do
     $CFLAGS = disable_optimization_build_flag($CFLAGS)
     $CFLAGS = enable_debug_build_flag($CFLAGS)
 
-    CONFIG["CXXFLAGS"] = disable_optimization_build_flag(CONFIG["CXXFLAGS"])
-    CONFIG["CXXFLAGS"] = enable_debug_build_flag(CONFIG["CXXFLAGS"])
+    $CXXFLAGS = disable_optimization_build_flag($CXXFLAGS)
+    $CXXFLAGS = enable_debug_build_flag($CXXFLAGS)
   end
   enable_debug_build
 end
