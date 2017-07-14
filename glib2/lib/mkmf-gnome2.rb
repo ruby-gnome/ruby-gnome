@@ -151,7 +151,7 @@ def setup_homebrew_libffi
   platform = NativePackageInstaller::Platform.detect
   return unless platform.is_a?(NativePackageInstaller::Platform::Homebrew)
 
-  libffi_prefix = `brew --prefix libffi`
+  libffi_prefix = `brew --prefix libffi`.chomp
   PKGConfig.add_path("#{libffi_prefix}/lib/pkgconfig")
 end
 
