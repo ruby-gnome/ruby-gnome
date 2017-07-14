@@ -32,7 +32,7 @@ namespace :dependency do
     unless PKGConfig.check_version?("gtksourceview-3.0")
       unless NativePackageInstaller.install(:altlinux => "libgtksourceview3-devel",
                                             :debian => "libgtksourceview-3.0-dev",
-                                            :fedora => "gtksourceview3-devel",
+                                            :redhat => "gtksourceview3-devel",
                                             :homebrew => "gtksourceview3",
                                             :macports => "gtksourceview3",
                                             :msys2 => "gtksourceview3")

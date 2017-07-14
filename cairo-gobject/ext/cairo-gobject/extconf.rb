@@ -63,7 +63,7 @@ setup_windows(module_name, base_dir)
 unless required_pkg_config_package(package_id,
                                    :alt_linux => "libcairo-devel",
                                    :debian => "libcairo2-dev",
-                                   :fedora => "cairo-gobject-devel",
+                                   :redhat => "cairo-gobject-devel",
                                    :arch_linux => "cairo",
                                    :homebrew => "cairo")
   exit(false)
