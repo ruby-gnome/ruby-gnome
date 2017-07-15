@@ -2,6 +2,64 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.1.8: 2017-07-15
+
+This is a bug fix release for macOS install.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Supported (({--enable-debug})) for C++ sources.
+
+  * Fixes
+    * Fixed auto libffi detection for Homebrew.
+      [GitHub#1058][Reported by Andy Meneely]
+
+==== Ruby/Pango
+
+  * Improvements
+    * (({Pango::Rectangle#to_a])): Added.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported non-pointer struct field reader.
+      [GitHub#1042][Reported by cedlemo]
+    * Supported (({GHashTable<UTF-8, UTF-8>})).
+
+==== Ruby/CairoGObject
+
+  * Improvements
+    * CentOS 7: Supported auto native package install.
+
+==== Ruby/GDK3
+
+  * Improvements
+    * CentOS 7: Supported auto native package install.
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Made more demos workable.
+
+==== Ruby/WebKit2GTK
+
+  * Improvements
+    * Added a sample that uses proxy.
+
+==== Ruby/GtkSourceView3
+
+  * Improvements
+    * CentOS 7: Supported auto native package install.
+
+=== Thanks
+
+  * cedlemo
+
+  * Andy Meneely
+
 == Ruby-GNOME2 3.1.7: 2017-07-10
 
 === Changes
