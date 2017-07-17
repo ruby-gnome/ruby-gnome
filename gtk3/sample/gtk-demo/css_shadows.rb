@@ -74,7 +74,7 @@ class CssShadowsDemo
   def initialize_text_buffer
     @text = Gtk::TextBuffer.new
     @text.create_tag("warning", "underline" => :single)
-    @text.create_tag("error", "underline" => :Error)
+    @text.create_tag("error", "underline" => :error)
     @text.text = @default_css
     text_buffer_signal_connect_changed
   end
