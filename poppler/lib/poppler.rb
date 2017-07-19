@@ -1,122 +1,54 @@
-# Copyright(C) 2006-2015 Ruby-GNOME2 Project.
+# Copyright (C) 2017  Ruby-GNOME2 Project Team
 #
-# This library is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation, either version 2.1 of the License.
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
 #
-# Foobar is distributed in the hope that it will be useful,
+# This library is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
 #
-# You should have received a copy of the GNU Lesser General Public License
-# along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "tempfile"
-require "date"
-require "glib2"
-require "gdk_pixbuf2"
-require "cairo"
+require "gobject-introspection"
+require "gio2"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
 vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_dll_path(vendor_bin_dir)
-begin
-  major, minor, = RUBY_VERSION.split(/\./)
-  require "#{major}.#{minor}/poppler.so"
-rescue LoadError
-  require "poppler.so"
-end
+vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
+GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 module Poppler
   LOG_DOMAIN = "Poppler"
+  GLib::Log.set_log_domain(LOG_DOMAIN)
 
-  VERSION = version.split(".").collect {|x| x.to_i}
+  class Loader < GObjectIntrospection::Loader
+  end
+
+  loader = Loader.new(self)
+  loader.load("Poppler")
 
   module Version
-      MAJOR, MINOR, MICRO = BUILD_VERSION
-      STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
-
+    MAJOR = MAJOR_VERSION
+    MINOR = MINOR_VERSION
+    MICRO = MICRO_VERSION
+    STRING = "#{MAJOR_VERSION}.#{MINOR_VERSION}.#{MICRO_VERSION}"
     class << self
       def or_later?(major, minor, micro=nil)
-        micro || 0
+        micro ||= 0
         version = [
-          MAJOR,
-          MINOR,
-          MICRO,
+          MAJOR_VERSION,
+          MINOR_VERSION,
+          MICRO_VERSION,
         ]
         (version <=> [major, minor, micro]) >= 0
       end
     end
   end
-
-  class Document
-    private
-    def pdf_data?(data)
-      data.start_with?("%PDF-1.")
-    end
-
-    def ensure_uri(uri)
-      if pdf_data?(uri)
-        @pdf = Tempfile.new("ruby-poppler-pdf")
-        @pdf.binmode
-        @pdf.print(uri)
-        @pdf.close
-        uri = @pdf.path
-      end
-
-      if GLib.path_is_absolute?(uri)
-        GLib.filename_to_uri(uri)
-      elsif /\A[a-zA-Z][a-zA-Z\d\-+.]*:/.match(uri)
-        uri
-      else
-        GLib.filename_to_uri(File.expand_path(uri))
-      end
-    end
-  end
-
-  if defined?(TextField)
-    class TextField
-      def multiline?
-        type == FormTextType::MULTILINE
-      end
-
-      def file_select?
-        type == FormTextType::FILE_SELECT
-      end
-
-      def normal?
-        type == FormTextType::NORMAL
-      end
-    end
-  end
-
-  if defined?(ChoiceField)
-    class ChoiceField
-      def combo?
-        type == FormChioceType::COMBO
-      end
-
-      def list?
-        type == FormChoiceType::LIST
-      end
-    end
-  end
 end
-
-if Poppler.cairo_available?
-  module Cairo
-    class Context
-      def render_poppler_page(page, *args, &block)
-        page.render(self, *args, &block)
-      end
-
-      def render_poppler_page_selection(page, *args, &block)
-        page.render_selection(self, *args, &block)
-      end
-    end
-  end
-end
-
-GLib::Log.set_log_domain(Poppler::LOG_DOMAIN)
