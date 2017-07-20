@@ -41,21 +41,16 @@ module PopplerTestUtils
     File.join(fixtures_dir, "outline.pdf")
   end
 
-  def later_version?(major, minor, micro=nil)
-    micro ||= 0
-    (Poppler::BUILD_VERSION <=> [major, minor, micro]) >= 0
-  end
-
   def only_poppler_version(major, minor, micro=nil)
     micro ||= 0
-    unless later_version?(major, minor, micro)
+    unless Poppler::Version.or_later?(major, minor, micro)
       omit("Require Poppler >= #{major}.#{minor}.#{micro}")
     end
   end
 
   def only_old_poppler_version(major, minor, micro=nil)
     micro ||= 0
-    if later_version?(major, minor, micro)
+    if Poppler::Version.or_later?(major, minor, micro)
       omit("Require Poppler < #{major}.#{minor}.#{micro}")
     end
   end

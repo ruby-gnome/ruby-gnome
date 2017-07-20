@@ -1,6 +1,6 @@
 class TestConstants < Test::Unit::TestCase
   def test_annotation
-    if later_version?(0, 7, 2)
+    if Poppler::Version.or_later?(0, 7, 2)
       assertion = :assert_const_defined
     else
       assertion = :assert_not_const_defined
@@ -15,7 +15,7 @@ class TestConstants < Test::Unit::TestCase
     if assertion == :assert_const_defined
       assert_equal("3d", Poppler::AnnotationExternalDataType::TYPE_3D.nick)
     end
-    if later_version?(0, 9, 0)
+    if Poppler::Version.or_later?(0, 9, 0)
       assert_not_const_defined(Poppler, :AnnotationTextIcon)
     else
       send(assertion, Poppler, :AnnotationTextIcon)
