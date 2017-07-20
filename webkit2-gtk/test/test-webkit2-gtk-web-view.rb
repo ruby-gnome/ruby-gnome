@@ -89,7 +89,7 @@ class TestWebKit2GtkWebView < Test::Unit::TestCase
       loaded = false
 
       loop = GLib::MainLoop.new
-      timeout_id = GLib::Timeout.add(5000) do
+      timeout_id = GLib::Timeout.add(30000) do
         timeout_id = nil
         loop.quit
         GLib::Source::REMOVE
