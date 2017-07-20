@@ -22,7 +22,7 @@ top = File.expand_path(File.join(base, ".."))
 $LOAD_PATH.unshift(top)
 require 'test/glib-test-init'
 
-if system("which make > /dev/null")
+if File.exist?("#{top}/Makefile") and system("which make > /dev/null")
   system("cd #{top.dump} && make > /dev/null") or exit(1)
 end
 
