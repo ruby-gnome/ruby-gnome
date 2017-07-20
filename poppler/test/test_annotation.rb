@@ -58,9 +58,9 @@ class TestAnnotation < Test::Unit::TestCase
 
   def test_callout_line
     only_poppler_version(0, 7, 2)
-    callout_line = Poppler::AnnotationCalloutLine.new(true,
-                                                      1.1, 2.2, 3.3,
-                                                      4.4, 5.5, 6.6)
+    callout_line = Poppler::AnnotCalloutLine.new(true,
+                                                 1.1, 2.2, 3.3,
+                                                 4.4, 5.5, 6.6)
     assert(callout_line.multiline?)
     assert_equal(1.1, callout_line.x1)
     assert_equal(2.2, callout_line.y1)
