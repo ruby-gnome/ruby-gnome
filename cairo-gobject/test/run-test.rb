@@ -29,7 +29,7 @@ modules = [
   [cairo_gobject_base, "cairo-gobject"],
 ]
 modules.each do |target, module_name|
-  if system("which make > /dev/null")
+  if File.exist?("#{target}/Makefile") and system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(false)
   end
   $LOAD_PATH.unshift(File.join(target, "ext", module_name))
