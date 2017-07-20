@@ -33,24 +33,6 @@ module Poppler
   loader = Loader.new(self)
   loader.load("Poppler")
 
-  module Version
-    MAJOR = MAJOR_VERSION
-    MINOR = MINOR_VERSION
-    MICRO = MICRO_VERSION
-    STRING = "#{MAJOR_VERSION}.#{MINOR_VERSION}.#{MICRO_VERSION}"
-    class << self
-      def or_later?(major, minor, micro=nil)
-        micro ||= 0
-        version = [
-          MAJOR_VERSION,
-          MINOR_VERSION,
-          MICRO_VERSION,
-        ]
-        (version <=> [major, minor, micro]) >= 0
-      end
-    end
-  end
-
   class AnnotCalloutLine
     alias_method :initialize_raw, :initialize
     def initialize(*args)

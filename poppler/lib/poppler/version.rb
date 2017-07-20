@@ -15,17 +15,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Poppler
-  class Loader < GObjectIntrospection::Loader
-    private
-    def pre_load(repository, namespace)
-    end
-
-    def post_load(repository, namespace)
-      require_libraries
-    end
-
-    def require_libraries
-      require "poppler/version"
+  module Version
+    MAJOR = MAJOR_VERSION
+    MINOR = MINOR_VERSION
+    MICRO = MICRO_VERSION
+    STRING = "#{MAJOR_VERSION}.#{MINOR_VERSION}.#{MICRO_VERSION}"
+    class << self
+      def or_later?(major, minor, micro=nil)
+        micro ||= 0
+        version = [
+          MAJOR_VERSION,
+          MINOR_VERSION,
+          MICRO_VERSION,
+        ]
+        (version <=> [major, minor, micro]) >= 0
+      end
     end
   end
 end
