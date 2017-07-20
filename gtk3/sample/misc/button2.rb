@@ -1,4 +1,4 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin
   button2.rb - Ruby/GTK2 sample script.
 

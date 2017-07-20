@@ -1,4 +1,4 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin
   layout.rb - Ruby/Pango sample script.
 
