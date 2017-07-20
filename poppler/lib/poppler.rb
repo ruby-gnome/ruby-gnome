@@ -24,12 +24,11 @@ GLib.prepend_dll_path(vendor_bin_dir)
 vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
+require "poppler/loader"
+
 module Poppler
   LOG_DOMAIN = "Poppler"
   GLib::Log.set_log_domain(LOG_DOMAIN)
-
-  class Loader < GObjectIntrospection::Loader
-  end
 
   loader = Loader.new(self)
   loader.load("Poppler")
@@ -49,6 +48,34 @@ module Poppler
         ]
         (version <=> [major, minor, micro]) >= 0
       end
+    end
+  end
+
+  class AnnotCalloutLine
+    alias_method :initialize_raw, :initialize
+    def initialize(*args)
+      initialize_raw
+      if args.size == 1 && args.class == Hash
+        self.multiline = args[:multiline] || false
+        self.x1 = args[:x1] || 0
+        self.y1 = args[:y1] || 0
+        self.x2 = args[:x2] || 0
+        self.y2 = args[:y2] || 0
+        self.x3 = args[:x3] || 0
+        self.y3 = args[:y3] || 0
+      elsif args.class == Array && args.size == 7
+        self.multiline = args[0]
+        self.x1 = args[1]
+        self.y1 = args[2]
+        self.x2 = args[3]
+        self.y2 = args[4]
+        self.x3 = args[5]
+        self.y3 = args[6]
+      end
+    end
+
+    def to_a
+      [multiline?, x1, y1, x2, y2, x3, y3]
     end
   end
 end
