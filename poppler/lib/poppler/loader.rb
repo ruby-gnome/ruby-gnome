@@ -26,6 +26,7 @@ module Poppler
 
     def require_libraries
       require "poppler/version"
+      require "poppler/annot-callout-line"
     end
   end
 end
