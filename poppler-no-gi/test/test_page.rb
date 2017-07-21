@@ -12,7 +12,7 @@ class TestPage < Test::Unit::TestCase
     page = document[0]
     rectangle = Poppler::Rectangle.new(0, 0, *page.size)
     region = page.get_selection_region(0.5, :word, rectangle)
-    if Poppler::Version.or_later?(0, 7, 2)
+    if later_version?(0, 7, 2)
       assert_kind_of(Poppler::Rectangle, region[0])
     else
       assert_kind_of(Gdk::Region, region)

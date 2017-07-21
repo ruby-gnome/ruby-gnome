@@ -14,23 +14,22 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gobject-introspection"
-require "gio2"
-
-base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
-vendor_dir = base_dir + "vendor" + "local"
-vendor_bin_dir = vendor_dir + "bin"
-GLib.prepend_dll_path(vendor_bin_dir)
-vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
-GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
-
-require "poppler/loader"
-
 module Poppler
-  LOG_DOMAIN = "Poppler"
-  GLib::Log.set_log_domain(LOG_DOMAIN)
-
-  loader = Loader.new(self)
-  loader.load("Poppler")
-
+  module Version
+    MAJOR = MAJOR_VERSION
+    MINOR = MINOR_VERSION
+    MICRO = MICRO_VERSION
+    STRING = "#{MAJOR_VERSION}.#{MINOR_VERSION}.#{MICRO_VERSION}"
+    class << self
+      def or_later?(major, minor, micro=nil)
+        micro ||= 0
+        version = [
+          MAJOR_VERSION,
+          MINOR_VERSION,
+          MICRO_VERSION,
+        ]
+        (version <=> [major, minor, micro]) >= 0
+      end
+    end
+  end
 end
