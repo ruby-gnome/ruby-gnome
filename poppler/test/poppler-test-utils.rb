@@ -1,4 +1,4 @@
-require 'open-uri'
+require 'uri'
 require 'fileutils'
 
 module PopplerTestUtils
@@ -26,7 +26,7 @@ module PopplerTestUtils
     File.open(file, "wb") do |output|
       output.print(pdf)
     end
-    file
+    URI.join('file:///', file.path)
   end
 
   def image_pdf
