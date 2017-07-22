@@ -10,7 +10,7 @@ Ruby/Poppler is a Ruby binding of [poppler-glib](https://developer.gnome.org/pop
 
 ## Install
 
-    gem install atk
+    gem install poppler
 
 ## License
 
