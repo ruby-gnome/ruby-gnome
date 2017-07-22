@@ -16,6 +16,11 @@
 
 module Poppler
   class Document
+    # TODO :
+    # new_from_file
+    # new_from_data
+    # new_from_gstream
+    # new_from_gfile (should we ?)
 
     alias_method :[], :get_page
   end
