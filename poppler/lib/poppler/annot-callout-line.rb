@@ -27,7 +27,7 @@ module Poppler
         self.y2 = args[:y2] || 0
         self.x3 = args[:x3] || 0
         self.y3 = args[:y3] || 0
-      elsif args.class == Array && args.size == 7
+      elsif args.size == 7
         self.multiline = args[0]
         self.x1 = args[1]
         self.y1 = args[2]
