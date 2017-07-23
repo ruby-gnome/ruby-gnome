@@ -1,7 +1,7 @@
 class TestAnnotation < Test::Unit::TestCase
   def test_type
     only_poppler_version(0, 7, 2)
-    assert_kind_of(Poppler::AnnotationType, annotation.type)
+    assert_kind_of(Poppler::AnnotType, annotation)
   end
 
   def test_contents
@@ -21,7 +21,7 @@ class TestAnnotation < Test::Unit::TestCase
 
   def test_flags
     only_poppler_version(0, 7, 2)
-    assert_kind_of(Poppler::AnnotationFlag, annotation.flags)
+    assert_kind_of(Poppler::AnnotFlag, annotation.flags)
   end
 
   def test_color
@@ -32,28 +32,28 @@ class TestAnnotation < Test::Unit::TestCase
   def test_markup
     only_poppler_version(0, 7, 2)
     # We don't have a PDF that has annotation markup...
-    assert_method_defined(Poppler::AnnotationMarkup, :label)
-    assert_method_defined(Poppler::AnnotationMarkup, :popup_is_open?)
-    assert_method_defined(Poppler::AnnotationMarkup, :opacity)
-    assert_method_defined(Poppler::AnnotationMarkup, :date)
-    assert_method_defined(Poppler::AnnotationMarkup, :subject)
-    assert_method_defined(Poppler::AnnotationMarkup, :reply_to)
-    assert_method_defined(Poppler::AnnotationMarkup, :external_data)
+    assert_method_defined(Poppler::AnnotMarkup, :label)
+    assert_method_defined(Poppler::AnnotMarkup, :popup_is_open?)
+    assert_method_defined(Poppler::AnnotMarkup, :opacity)
+    assert_method_defined(Poppler::AnnotMarkup, :date)
+    assert_method_defined(Poppler::AnnotMarkup, :subject)
+    assert_method_defined(Poppler::AnnotMarkup, :reply_to)
+    assert_method_defined(Poppler::AnnotMarkup, :external_data)
   end
 
   def test_text
     only_poppler_version(0, 7, 2)
     # We don't have a PDF that has annotation text...
-    assert_method_defined(Poppler::AnnotationText, :open?)
-    assert_method_defined(Poppler::AnnotationText, :icon)
-    assert_method_defined(Poppler::AnnotationText, :state)
+    assert_method_defined(Poppler::AnnotText, :open?)
+    assert_method_defined(Poppler::AnnotText, :icon)
+    assert_method_defined(Poppler::AnnotText, :state)
   end
 
   def test_free_text
     only_poppler_version(0, 7, 2)
     # We don't have a PDF that has annotation free text...
-    assert_method_defined(Poppler::AnnotationFreeText, :quadding)
-    assert_method_defined(Poppler::AnnotationFreeText, :callout_line)
+    assert_method_defined(Poppler::AnnotFreeText, :quadding)
+    assert_method_defined(Poppler::AnnotFreeText, :callout_line)
   end
 
   def test_callout_line
@@ -75,7 +75,7 @@ class TestAnnotation < Test::Unit::TestCase
   def annotation
     document = Poppler::Document.new(form_pdf)
     page = document[0]
-    page.annotation_mapping[0].annotation
+    page.annot_mapping[0].annot
   end
 
   def assert_method_defined(object, method)
