@@ -27,5 +27,10 @@ module Poppler
     def to_a
       [red, green, blue]
     end
+
+    alias_method :inspect_raw, :inspect
+    def inspect
+      inspect_raw[0..-2] + ": [#{to_a.join(", ")}]>"
+    end
   end
 end
