@@ -26,8 +26,22 @@ module Poppler
 
     def require_libraries
       require "poppler/version"
+
       require "poppler/annot-callout-line"
       require "poppler/document"
+
+      require "poppler/deprecated"
+    end
+
+    def load_method_info(info, klass, method_name)
+      case klass.name
+      when "Poppler::Annot"
+        case method_name
+        when "annot_type"
+          method_name = "type"
+        end
+      end
+      super(info, klass, method_name)
     end
   end
 end
