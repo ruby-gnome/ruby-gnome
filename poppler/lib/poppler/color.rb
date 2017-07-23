@@ -15,34 +15,17 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Poppler
-  class Loader < GObjectIntrospection::Loader
-    private
-    def pre_load(repository, namespace)
+  class Color
+    alias_method :initialize_raw, :initialize
+    def initialize(red, green, blue)
+      initialize_raw
+      self.red = red
+      self.green = green
+      self.blue = blue
     end
 
-    def post_load(repository, namespace)
-      require_libraries
-    end
-
-    def require_libraries
-      require "poppler/version"
-
-      require "poppler/annot-callout-line"
-      require "poppler/color"
-      require "poppler/document"
-
-      require "poppler/deprecated"
-    end
-
-    def load_method_info(info, klass, method_name)
-      case klass.name
-      when "Poppler::Annot"
-        case method_name
-        when "annot_type"
-          method_name = "type"
-        end
-      end
-      super(info, klass, method_name)
+    def to_a
+      [red, green, blue]
     end
   end
 end
