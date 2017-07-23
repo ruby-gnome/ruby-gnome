@@ -19,14 +19,18 @@ module Poppler
     alias_method :initialize_raw, :initialize
     def initialize(*args)
       initialize_raw
-      if args.size == 1 && args.class == Hash
-        self.multiline = args[:multiline] || false
-        self.x1 = args[:x1] || 0
-        self.y1 = args[:y1] || 0
-        self.x2 = args[:x2] || 0
-        self.y2 = args[:y2] || 0
-        self.x3 = args[:x3] || 0
-        self.y3 = args[:y3] || 0
+
+      return if args.empty?
+
+      if args.size == 1 and args[0].is_a?(Hash)
+        options = args[0]
+        self.multiline = options[:multiline]
+        self.x1 = options[:x1] || 0.0
+        self.y1 = options[:y1] || 0.0
+        self.x2 = options[:x2] || 0.0
+        self.y2 = options[:y2] || 0.0
+        self.x3 = options[:x3] || 0.0
+        self.y3 = options[:y3] || 0.0
       elsif args.size == 7
         self.multiline = args[0]
         self.x1 = args[1]
@@ -35,6 +39,14 @@ module Poppler
         self.y2 = args[4]
         self.x3 = args[5]
         self.y3 = args[6]
+      else
+        message =
+          "must be " +
+          "Hash({:multiline => true/false, :x1 => Float, :y1 => Float, " +
+          ":x2 => Float, :y2 => Float, :x3 => Float, :y3 => Float}) or " +
+          "Array([multiline(true/false), x1(Float), y1(Float), x2(Float), " +
+          "y2(Float), x3(Float), y3(Float)])"
+        raise(ArgumentError, message)
       end
     end
 
