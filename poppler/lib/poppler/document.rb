@@ -15,19 +15,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Poppler
-  class Loader < GObjectIntrospection::Loader
-    private
-    def pre_load(repository, namespace)
-    end
+  class Document
+    # TODO :
+    # new_from_file
+    # new_from_data
+    # new_from_gstream
+    # new_from_gfile (should we ?)
 
-    def post_load(repository, namespace)
-      require_libraries
-    end
-
-    def require_libraries
-      require "poppler/version"
-      require "poppler/annot-callout-line"
-      require "poppler/document"
-    end
+    alias_method :[], :get_page
   end
 end
