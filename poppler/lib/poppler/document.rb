@@ -16,12 +16,69 @@
 
 module Poppler
   class Document
-    # TODO :
-    # new_from_file
-    # new_from_data
-    # new_from_gstream
-    # new_from_gfile (should we ?)
+    alias_method :initialize_raw, :initialize
+    def initialize(*args)
+      if args.size == 1 and args[0].is_a?(Hash)
+        options = args[0]
+        data = options[:data]
+        uri = options[:uri]
+        path = options[:path]
+        stream = options[:stream]
+        length = options[:length]
+        file = options[:file]
+        password = options[:password]
+
+        if data
+          initialize_new_from_data(data, password)
+        elsif uri
+          initialize_new_from_file(uri, password)
+        elsif path
+          uri = ensure_uri(path)
+          initialize_new_from_file(uri, password)
+        elsif stream
+          if length.nil?
+            raise(ArgumentError,
+                  "must specify :length for :stream: #{options.inspect}")
+          end
+          initialize_new_from_stream(stream, length, password)
+        elsif file
+          if file.is_a?(String)
+            initialize(path: file, password: password)
+          else
+            initialize_new_from_gfile(file, password)
+          end
+        else
+          message =
+            "must specify one of :data, :uri, :path, :stream or :file: " +
+            options.inspect
+          raise(ArgumentError, message)
+        end
+      else
+        uri_or_data, password = args
+        if pdf_data?(uri_or_data)
+          initialize_new_from_data(uri_or_data, password)
+        else
+          uri = ensure_uri(uri_or_data)
+          initialize_new_from_file(uri, password)
+        end
+      end
+    end
 
     alias_method :[], :get_page
+
+    private
+    def pdf_data?(data)
+      data.start_with?("%PDF-1.")
+    end
+
+    def ensure_uri(uri)
+      if GLib.path_is_absolute?(uri)
+        GLib.filename_to_uri(uri)
+      elsif /\A[a-zA-Z][a-zA-Z\d\-+.]*:/.match(uri)
+        uri
+      else
+        GLib.filename_to_uri(File.expand_path(uri))
+      end
+    end
   end
 end
