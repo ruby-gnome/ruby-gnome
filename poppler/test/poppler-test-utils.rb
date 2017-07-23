@@ -21,13 +21,12 @@ module PopplerTestUtils
 
   def form_pdf
     file = File.join(fixtures_dir, "form.pdf")
-    uri = URI.join("file:///", file)
-    return uri.to_s if File.exist?(file)
+    return file if File.exist?(file)
     pdf = open("https://www.irs.gov/pub/irs-pdf/fw9.pdf").read
     File.open(file, "wb") do |output|
       output.print(pdf)
     end
-    uri.to_s
+    URI.join('file:///', file.path)
   end
 
   def image_pdf
