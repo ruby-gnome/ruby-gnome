@@ -1,7 +1,7 @@
 class TestAnnotation < Test::Unit::TestCase
   def test_type
     only_poppler_version(0, 7, 2)
-    assert_kind_of(Poppler::AnnotType, annotation)
+    assert_kind_of(Poppler::AnnotType, annotation.type)
   end
 
   def test_contents
