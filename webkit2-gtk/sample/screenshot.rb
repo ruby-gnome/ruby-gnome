@@ -23,7 +23,7 @@ if ARGV.empty?
   exit(false)
 end
 
-main_context = GLib::MainContext.default
+main_loop = GLib::MainLoop.new
 
 view_context = WebKit2Gtk::WebContext.new(ephemeral: true)
 view = WebKit2Gtk::WebView.new(context: view_context)
@@ -33,12 +33,11 @@ window.set_default_size(800, 600)
 window.show_all
 ARGV.each do |uri|
   view.load_uri(uri)
-  finished = false
   view.signal_connect("load-changed") do |_, load_event|
     case load_event
     when WebKit2Gtk::LoadEvent::FINISHED
       view.get_snapshot(:full_document, :none) do |_, result|
-        finished = true
+        main_loop.quit
         snapshot_surface = view.get_snapshot_finish(result)
         base_path = CGI.escape(uri)
         snapshot_surface.write_to_png("#{base_path}.png")
@@ -58,13 +57,11 @@ ARGV.each do |uri|
     end
   end
   view.signal_connect("load-failed") do |_, _, failed_uri, error|
-    finished = true
+    main_loop.quit
     message = "failed to load URI: #{failed_uri}: "
     message << "#{error.class}(#{error.code}): #{error.message}"
     puts(message)
     true
   end
-  until finished
-    main_context.iteration(true)
-  end
+  main_loop.run
 end
