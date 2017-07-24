@@ -1,20 +1,13 @@
 class TestConstants < Test::Unit::TestCase
   def test_annotation
-    assertion = :assert_const_defined
-    send(assertion, Poppler, :AnnotationType)
-    if assertion == :assert_const_defined
-      assert_equal("3d", Poppler::AnnotationType::TYPE_3D.nick)
-    end
-    send(assertion, Poppler, :AnnotationFlag)
-    send(assertion, Poppler, :AnnotationMarkupReplyType)
-    send(assertion, Poppler, :AnnotationExternalDataType)
-    if assertion == :assert_const_defined
-      assert_equal("3d", Poppler::AnnotationExternalDataType::TYPE_3D.nick)
-    end
-    assert_not_const_defined(Poppler, :AnnotationTextIcon)
-    send(assertion, Poppler, :AnnotationTextIcon)
-    send(assertion, Poppler, :AnnotationTextState)
-    send(assertion, Poppler, :AnnotationFreeTextQuadding)
+    assert_const_defined(Poppler, :AnnotType)
+    assert_equal("3d", Poppler::AnnotationType::TYPE_3D.nick)
+    assert_const_defined(Poppler, :AnnotFlag)
+    assert_const_defined(Poppler, :AnnotMarkupReplyType)
+    assert_const_defined(Poppler, :AnnotExternalDataType)
+    assert_equal("3d", Poppler::AnnotExternalDataType::TYPE_3D.nick)
+    assert_const_defined(Poppler, :AnnotTextState)
+    assert_const_defined(Poppler, :AnnotFreeTextQuadding)
   end
 
   def test_permissions
