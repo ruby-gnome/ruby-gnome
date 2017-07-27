@@ -286,6 +286,13 @@ module GNOME2
       def define_package_tasks
         Gem::PackageTask.new(@spec) do |pkg|
         end
+        desc "Write #{@spec.name}.gemspec"
+        task :gemspec do
+          File.open("#{@spec.name}.gemspec", 'w') do |f|
+            f.write(@spec.to_ruby)
+          end
+          puts "#{@spec.name}.gemspec created"
+        end
       end
 
       class DependencyConfiguration
