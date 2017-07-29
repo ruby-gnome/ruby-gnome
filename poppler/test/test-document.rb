@@ -5,7 +5,7 @@ class TestDocument < Test::Unit::TestCase
 
     document = Poppler::Document.new(form_pdf)
     find_first_text_field(document).text = "XXX"
-    assert(document.save('file:///' + saved_pdf))
+    assert(document.save("file:///" + saved_pdf))
     assert(File.exist?(saved_pdf))
 
     reread_document = Poppler::Document.new(saved_pdf)
@@ -20,7 +20,7 @@ class TestDocument < Test::Unit::TestCase
     first_text_field = find_first_text_field(document)
     default_text = first_text_field.text
     first_text_field.text = "XXX"
-    assert(document.save_a_copy('file:///' + copied_pdf))
+    assert(document.save_a_copy("file:///" + copied_pdf))
     assert(File.exist?(copied_pdf))
 
     reread_document = Poppler::Document.new(copied_pdf)
