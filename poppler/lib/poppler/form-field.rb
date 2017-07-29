@@ -15,36 +15,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Poppler
-  class Loader < GObjectIntrospection::Loader
-    private
-    def pre_load(repository, namespace)
-    end
+  class FormField
 
-    def post_load(repository, namespace)
-      require_libraries
-    end
-
-    def require_libraries
-      require "poppler/version"
-
-      require "poppler/annot-callout-line"
-      require "poppler/cairo"
-      require "poppler/color"
-      require "poppler/document"
-      require "poppler/form-field"
-
-      require "poppler/deprecated"
-    end
-
-    def load_method_info(info, klass, method_name)
-      case klass.name
-      when "Poppler::Annot"
-        case method_name
-        when "annot_type"
-          method_name = "type"
-        end
-      end
-      super(info, klass, method_name)
-    end
+    alias_method :text, :text_get_text
+    alias_method :text=, :text_set_text
   end
 end

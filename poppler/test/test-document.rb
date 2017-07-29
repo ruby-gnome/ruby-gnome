@@ -4,12 +4,12 @@ class TestDocument < Test::Unit::TestCase
     FileUtils.rm_f(saved_pdf)
 
     document = Poppler::Document.new(form_pdf)
-    find_first_text_field(document).text_set_text("XXX")
+    find_first_text_field(document).text = "XXX"
     assert(document.save('file:///' + saved_pdf))
     assert(File.exist?(saved_pdf))
 
     reread_document = Poppler::Document.new(saved_pdf)
-    assert_equal("XXX", find_first_text_field(reread_document).text_get_text)
+    assert_equal("XXX", find_first_text_field(reread_document).text)
   end
 
   def test_save_a_copy
@@ -18,13 +18,13 @@ class TestDocument < Test::Unit::TestCase
 
     document = Poppler::Document.new(form_pdf)
     first_text_field = find_first_text_field(document)
-    default_text = first_text_field.text_get_text
-    first_text_field.text_set_text("XXX")
+    default_text = first_text_field.text
+    first_text_field.text = "XXX"
     assert(document.save_a_copy('file:///' + copied_pdf))
     assert(File.exist?(copied_pdf))
 
     reread_document = Poppler::Document.new(copied_pdf)
-    assert_equal(default_text, find_first_text_field(reread_document).text_get_text)
+    assert_equal(default_text, find_first_text_field(reread_document).text)
   end
 
   private
