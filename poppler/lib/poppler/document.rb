@@ -68,8 +68,8 @@ module Poppler
 
     def each
       return enum_for(__method__) unless block_given?
-      n = n_pages - 1
-      (0..n).each do |i|
+
+      n_pages.times do |i|
         yield get_page(i)
       end
     end
