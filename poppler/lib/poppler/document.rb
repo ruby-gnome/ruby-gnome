@@ -66,6 +66,12 @@ module Poppler
 
     alias_method :[], :get_page
 
+    def each
+      n = n_pages - 1
+      (0..n).each do |i|
+        yield get_page(i)
+      end if block_given?
+    end
     private
     def pdf_data?(data)
       data.start_with?("%PDF-1.")
