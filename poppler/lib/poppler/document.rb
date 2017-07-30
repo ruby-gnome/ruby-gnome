@@ -67,10 +67,11 @@ module Poppler
     alias_method :[], :get_page
 
     def each
+      return enum_for(__method__) unless block_given?
       n = n_pages - 1
       (0..n).each do |i|
         yield get_page(i)
-      end if block_given?
+      end
     end
 
     alias_method :save_raw, :save
