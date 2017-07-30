@@ -72,6 +72,17 @@ module Poppler
         yield get_page(i)
       end if block_given?
     end
+
+    alias_method :save_raw, :save
+    def save(uri)
+      save_raw(ensure_uri(uri))
+    end
+
+    alias_method :save_a_copy_raw, :save_a_copy
+    def save_a_copy(uri)
+      save_a_copy_raw(ensure_uri(uri))
+    end
+
     private
     def pdf_data?(data)
       data.start_with?("%PDF-1.")
