@@ -1,5 +1,5 @@
-require 'uri'
-require 'fileutils'
+require "open-uri"
+require "fileutils"
 
 module PopplerTestUtils
   def ensure_dir(dir)
@@ -20,13 +20,14 @@ module PopplerTestUtils
   end
 
   def form_pdf
-    file = File.join(fixtures_dir, "form.pdf")
-    return file if File.exist?(file)
-    pdf = open("https://www.irs.gov/pub/irs-pdf/fw9.pdf").read
-    File.open(file, "wb") do |output|
-      output.print(pdf)
+    path = File.join(fixtures_dir, "form.pdf")
+    unless File.exist?(path)
+      pdf = open("https://www.irs.gov/pub/irs-pdf/fw9.pdf").read
+      File.open(path, "wb") do |output|
+        output.print(pdf)
+      end
     end
-    URI.join('file:///', file.path)
+    path
   end
 
   def image_pdf
