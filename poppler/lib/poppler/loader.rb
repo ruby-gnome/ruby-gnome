@@ -37,6 +37,21 @@ module Poppler
       require "poppler/deprecated"
     end
 
+    def load_enum_info(info)
+      case info.name
+      when "AnnotType"
+        self.class.register_constant_rename_map("3D", "TYPE_3D")
+      when "AnnotExternalDataType"
+        self.class.register_constant_rename_map("3D", "TYPE_3D")
+      when "StructureGlyphOrientation"
+        self.class.register_constant_rename_map("0", "DEGREE_0")
+        self.class.register_constant_rename_map("90", "DEGREE_90")
+        self.class.register_constant_rename_map("180", "DEGREE_180")
+        self.class.register_constant_rename_map("270", "DEGREE_270")
+      end
+      super
+    end
+
     def load_method_info(info, klass, method_name)
       case klass.name
       when "Poppler::Annot"
