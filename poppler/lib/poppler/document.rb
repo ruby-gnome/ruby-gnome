@@ -16,6 +16,8 @@
 
 module Poppler
   class Document
+    include Enumerable
+
     alias_method :initialize_raw, :initialize
     def initialize(*args)
       if args.size == 1 and args[0].is_a?(Hash)
@@ -67,7 +69,7 @@ module Poppler
     alias_method :[], :get_page
 
     def each
-      return enum_for(__method__) unless block_given?
+      return to_enum(__method__) unless block_given?
 
       n_pages.times do |i|
         yield get_page(i)

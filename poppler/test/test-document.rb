@@ -23,11 +23,34 @@ class TestDocument < Test::Unit::TestCase
     assert_equal(default_text, find_first_text_field(reread_document).text)
   end
 
+  def test_each
+    document = Poppler::Document.new(multiple_pages_pdf)
+    texts = []
+    document.each do |page|
+      texts << page.text
+    end
+    assert_equal(["The first page", "The second page"],
+                 texts)
+  end
+
+  def test_each_enumerator
+    document = Poppler::Document.new(multiple_pages_pdf)
+    assert_equal(["The first page", "The second page"],
+                 document.each.collect(&:text))
+  end
+
+  def test_enumerable
+    document = Poppler::Document.new(multiple_pages_pdf)
+    assert_equal(["The first page", "The second page"],
+                 document.collect(&:text))
+  end
+
   private
   def find_first_text_field(document)
     document.each do |page|
       page.form_field_mapping.each do |mapping|
         field = mapping.field
+        p field.class
         return field if field.field_type == Poppler::FormFieldType::TEXT
       end
     end

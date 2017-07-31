@@ -15,12 +15,16 @@ module PopplerTestUtils
     ensure_dir(File.join(test_dir, "fixtures"))
   end
 
+  def fixture_path(*components)
+    File.join(fixtures_dir, *components)
+  end
+
   def tmp_dir
     ensure_dir(File.join(test_dir, "tmp"))
   end
 
   def form_pdf
-    path = File.join(fixtures_dir, "form.pdf")
+    path = fixture_path("form.pdf")
     unless File.exist?(path)
       pdf = open("https://www.irs.gov/pub/irs-pdf/fw9.pdf").read
       File.open(path, "wb") do |output|
@@ -31,15 +35,19 @@ module PopplerTestUtils
   end
 
   def image_pdf
-    File.join(fixtures_dir, "image.pdf")
+    fixture_path("image.pdf")
   end
 
   def image_png
-    File.join(fixtures_dir, "image.png")
+    fixture_path("image.png")
   end
 
   def outline_pdf
-    File.join(fixtures_dir, "outline.pdf")
+    fixture_path("outline.pdf")
+  end
+
+  def multiple_pages_pdf
+    fixture_path("multiple-pages.pdf")
   end
 
   def only_poppler_version(major, minor, micro=nil)
