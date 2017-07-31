@@ -3,7 +3,7 @@ class TestDocument < Test::Unit::TestCase
     saved_pdf = File.join(tmp_dir, "saved.pdf")
     FileUtils.rm_f(saved_pdf)
 
-    document = Poppler::Document.new(form_pdf)
+    document = Poppler::Document.new(text_field_pdf)
     find_first_text_field(document).text = "XXX"
     document.save(saved_pdf)
     reread_document = Poppler::Document.new(saved_pdf)
@@ -14,7 +14,7 @@ class TestDocument < Test::Unit::TestCase
     copied_pdf = File.join(tmp_dir, "copied.pdf")
     FileUtils.rm_f(copied_pdf)
 
-    document = Poppler::Document.new(form_pdf)
+    document = Poppler::Document.new(text_field_pdf)
     first_text_field = find_first_text_field(document)
     default_text = first_text_field.text
     first_text_field.text = "XXX"

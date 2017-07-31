@@ -34,6 +34,10 @@ module PopplerTestUtils
     path
   end
 
+  def text_field_pdf
+    fixture_path("text-field.pdf")
+  end
+
   def image_pdf
     fixture_path("image.pdf")
   end
