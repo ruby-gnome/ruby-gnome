@@ -17,6 +17,7 @@
 module Poppler
   extend GLib::Deprecatable
 
+  define_deprecated_const(:Annotation, "Poppler::Annot")
   define_deprecated_const(:AnnotationType, "Poppler::AnnotType")
   define_deprecated_const(:AnnotationFlag, "Poppler::AnnotFlag")
   define_deprecated_const(:AnnotationMarkupReplyType,
