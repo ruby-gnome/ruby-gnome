@@ -50,8 +50,7 @@ class TestDocument < Test::Unit::TestCase
     document.each do |page|
       page.form_field_mapping.each do |mapping|
         field = mapping.field
-        p field.class
-        return field if field.field_type == Poppler::FormFieldType::TEXT
+        return field if field.is_a?(Poppler::TextField)
       end
     end
   end

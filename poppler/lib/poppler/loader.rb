@@ -18,10 +18,12 @@ module Poppler
   class Loader < GObjectIntrospection::Loader
     private
     def pre_load(repository, namespace)
+      @form_field_classes = {}
     end
 
     def post_load(repository, namespace)
       require_libraries
+      convert_field_classes
     end
 
     def require_libraries
@@ -31,7 +33,6 @@ module Poppler
       require "poppler/cairo"
       require "poppler/color"
       require "poppler/document"
-      require "poppler/form-field"
 
       require "poppler/deprecated"
     end
@@ -43,8 +44,47 @@ module Poppler
         when "annot_type"
           method_name = "type"
         end
+      when "Poppler::FormField"
+        case method_name
+        when /\Abutton_/
+          klass = define_field_class("ButtonField")
+          method_name = rubyish_method_name(info, prefix: "button_")
+          method_name = "type" if method_name == "button_type"
+        when /\Atext_/
+          klass = define_field_class("TextField")
+          method_name = rubyish_method_name(info, prefix: "text_")
+          method_name = "type" if method_name == "text_type"
+        when /\Achoice_/
+          klass = define_field_class("ChoiceField")
+          method_name = rubyish_method_name(info, prefix: "choice_")
+          method_name = "type" if method_name == "choice_type"
+        end
       end
       super(info, klass, method_name)
+    end
+
+    def define_field_class(name)
+      klass = @form_field_classes[name]
+      return klass if klass
+
+      field_class = @base_module.const_get("FormField")
+      klass = @form_field_classes[name] = Class.new(field_class)
+      @base_module.const_set(name, klass)
+      klass
+    end
+
+    def convert_field_classes
+      define_field_class("SignatureField")
+
+      field_map = {
+        FormFieldType::BUTTON    => ButtonField,
+        FormFieldType::TEXT      => TextField,
+        FormFieldType::CHOICE    => ChoiceField,
+        FormFieldType::SIGNATURE => SignatureField,
+      }
+      self.class.register_object_class_converter(FormField.gtype) do |field|
+        field_map[field.field_type] || FormField
+      end
     end
   end
 end
