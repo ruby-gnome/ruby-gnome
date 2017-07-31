@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,7 @@
 #define RG_TARGET_NAMESPACE rb_cGILoader
 
 static const gchar *boxed_class_converters_name = "@@boxed_class_converters";
+static const gchar *object_class_converters_name = "@@object_class_converters";
 
 static VALUE
 rg_s_define_class(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
@@ -194,6 +195,76 @@ rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
     return Qnil;
 }
 
+typedef struct {
+    GType type;
+    VALUE rb_converters;
+    VALUE rb_converter;
+} ObjectInstance2RObjData;
+
+static void
+object_class_converter_free(gpointer user_data)
+{
+    ObjectInstance2RObjData *data = user_data;
+    rb_ary_delete(data->rb_converters, data->rb_converter);
+    g_free(data);
+}
+
+static VALUE
+object_instance2robj(gpointer instance, gpointer user_data)
+{
+    ObjectInstance2RObjData *data = user_data;
+    VALUE existing_rb_instance;
+    VALUE default_rb_instance;
+    VALUE klass;
+    ID id_call;
+    VALUE converted_rb_instance;
+    ID id_unref;
+
+    existing_rb_instance = rbgobj_get_ruby_object_from_gobject(instance, FALSE);
+    if (!NIL_P(existing_rb_instance))
+        return existing_rb_instance;
+
+    default_rb_instance = rbgobj_get_ruby_object_from_gobject(instance, TRUE);
+    CONST_ID(id_call, "call");
+    klass = rb_funcall(data->rb_converter, id_call, 1, default_rb_instance);
+    if (klass == rb_class_of(default_rb_instance))
+        return default_rb_instance;
+
+    converted_rb_instance = rbgobj_object_alloc_func(klass);
+    g_object_ref(instance);
+    CONST_ID(id_unref, "unref");
+    rb_funcall(default_rb_instance, id_unref, 0);
+    rbgobj_gobject_initialize(converted_rb_instance, instance);
+    return converted_rb_instance;
+}
+
+static VALUE
+rg_s_register_object_class_converter(VALUE klass, VALUE rb_gtype)
+{
+    RGConvertTable table;
+    ObjectInstance2RObjData *data;
+    ID id_to_i;
+    VALUE object_class_converters;
+
+    memset(&table, 0, sizeof(RGConvertTable));
+    CONST_ID(id_to_i, "to_i");
+    table.type = NUM2ULONG(rb_funcall(rb_gtype, id_to_i, 0));
+    table.klass = Qnil;
+    table.instance2robj = object_instance2robj;
+
+    data = g_new(ObjectInstance2RObjData, 1);
+    data->type = table.type;
+    data->rb_converter = rb_block_proc();
+    object_class_converters = rb_cv_get(klass, object_class_converters_name);
+    rb_ary_push(object_class_converters, data->rb_converter);
+    table.user_data = data;
+    table.notify = object_class_converter_free;
+
+    rbgobj_convert_define(&table);
+
+    return Qnil;
+}
+
 static VALUE
 rg_s_register_constant_rename_map(G_GNUC_UNUSED VALUE klass,
                                   VALUE rb_original,
@@ -260,12 +331,14 @@ rb_gi_loader_init(VALUE rb_mGI)
     RG_TARGET_NAMESPACE = rb_define_class_under(rb_mGI, "Loader", rb_cObject);
 
     rb_cv_set(RG_TARGET_NAMESPACE, boxed_class_converters_name, rb_ary_new());
+    rb_cv_set(RG_TARGET_NAMESPACE, object_class_converters_name, rb_ary_new());
 
     RG_DEF_SMETHOD(define_class, -1);
     RG_DEF_SMETHOD(define_interface, 3);
     RG_DEF_SMETHOD(define_struct, -1);
     RG_DEF_SMETHOD(define_error, -1);
     RG_DEF_SMETHOD(register_boxed_class_converter, 1);
+    RG_DEF_SMETHOD(register_object_class_converter, 1);
     RG_DEF_SMETHOD(register_constant_rename_map, 2);
     RG_DEF_SMETHOD(start_callback_dispatch_thread, 0);
     RG_DEF_SMETHOD(reference_gobject, -1);
