@@ -33,6 +33,8 @@ module Poppler
       require "poppler/cairo"
       require "poppler/color"
       require "poppler/document"
+      require "poppler/page"
+      require "poppler/rectangle"
 
       require "poppler/deprecated"
     end
