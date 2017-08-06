@@ -18,7 +18,7 @@ class TestRegex < Test::Unit::TestCase
   include VteTestUtils
 
   def setup
-    only_vte_version(0, 46)
+    omit_if_not_const_defined("Vte::Regex")
   end
 
   def test_for_match

@@ -24,6 +24,12 @@ module VteTestUtils
     end
   end
 
+  def omit_if_not_const_defined(constant_name)
+    unless Object.const_defined?(constant_name)
+      omit("#{constant_name} is not defined.")
+    end
+  end
+
   def only_vte_version(major, minor, micro=nil)
     micro ||= 0
     unless Vte::Version.or_later?(major, minor, micro)
