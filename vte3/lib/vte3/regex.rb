@@ -26,7 +26,7 @@ module Vte
           initialize_new_for_search(pattern, pattern.bytesize, flags)
         else
           raise(ArgumentError,
-                "must specify usage :for_match or :for_search : #{options.inspect}")
+                "must specify usage :for_match or :for_search: #{options.inspect}")
         end
       end
 
