@@ -15,14 +15,14 @@ class TestPage < Test::Unit::TestCase
     assert_kind_of(Poppler::Rectangle, region[0])
   end
 
-  def test_annotation_mapping
+  def test_annot_mapping
     document = Poppler::Document.new(form_pdf)
     page = document[0]
-    assert_equal([Poppler::AnnotationMapping],
-                 page.annotation_mapping.collect {|mapping| mapping.class}.uniq)
-    mapping = page.annotation_mapping[0]
+    assert_equal([Poppler::AnnotMapping],
+                 page.annot_mapping.collect {|mapping| mapping.class}.uniq)
+    mapping = page.annot_mapping[0]
     assert_kind_of(Poppler::Rectangle, mapping.area)
-    assert_kind_of(Poppler::Annotation, mapping.annotation)
+    assert_kind_of(Poppler::Annot, mapping.annot)
   end
 
   def test_text_layout
