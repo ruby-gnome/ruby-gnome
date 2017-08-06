@@ -32,9 +32,9 @@ module Vte
 
     def require_libraries
       require "vte3/pty"
+      require "vte3/regex"
       require "vte3/terminal"
       require "vte3/version"
-      require "vte3/regex" # need to be after version because I use Version.or_later? in it
 
       require "vte3/deprecated"
     end

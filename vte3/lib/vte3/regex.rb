@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Vte
-  if Version.or_later?(0, 46)
+  if const_defined?(:Regex)
     class Regex
       alias_method :initialize_raw, :initialize
       def initialize(pattern, compile_flags, options)
