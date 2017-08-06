@@ -16,6 +16,17 @@
 
 module Poppler
   class Rectangle
+    alias_method :initialize_raw, :initialize
+    def initialize(*args)
+      super()
+      return if args.empty?
+
+      self.x1 = args[0]
+      self.y1 = args[1]
+      self.x2 = args[2]
+      self.y2 = args[3]
+    end
+
     def to_a
       [x1, y1, x2, y2]
     end
