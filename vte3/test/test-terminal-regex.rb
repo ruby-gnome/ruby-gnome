@@ -18,20 +18,18 @@ class TestTerminalRegex < Test::Unit::TestCase
   include VteTestUtils
 
   def setup
+    only_vte_version(0, 46)
     @terminal = Vte::Terminal.new
   end
 
-  if Vte::Version.or_later?(0, 46)
-    def test_regex_for_match
-      regex = Vte::Regex.new("test", GLib::RegexCompileFlags::OPTIMIZE, :for_match => true)
-      assert_instance_of(Vte::Regex, regex)
-    end
+  def test_regex_for_match
+    regex = Vte::Regex.new("test", GLib::RegexCompileFlags::OPTIMIZE, :for_match => true)
+    assert_instance_of(Vte::Regex, regex)
+  end
 
-    def test_regex_for_match_multiple_flags
-      flags = [:optimize,
-               :multiline]
-      regex = Vte::Regex.new("test", flags, :for_match => true)
-      assert_instance_of(Vte::Regex, regex)
-    end
+  def test_regex_for_match_multiple_flags
+    flags = [:optimize, :multiline]
+    regex = Vte::Regex.new("test", flags, :for_match => true)
+    assert_instance_of(Vte::Regex, regex)
   end
 end

@@ -23,4 +23,11 @@ module VteTestUtils
       omit("#{instance.class}##{method_name} is not respond.")
     end
   end
+
+  def only_vte_version(major, minor, micro=nil)
+    micro ||= 0
+    unless Vte::Version.or_later?(major, minor, micro)
+      omit("Require VTE >= #{major}.#{minor}.#{micro}")
+    end
+  end
 end
