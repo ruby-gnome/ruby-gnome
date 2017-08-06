@@ -21,9 +21,9 @@ module Vte
       def initialize(pattern, compile_flags, options)
         flags = parse_compile_flags(compile_flags)
         if options[:for_match]
-          initialize_new_for_match(pattern, pattern.length, flags)
+          initialize_new_for_match(pattern, pattern.bytesize, flags)
         elsif options[:for_search]
-          initialize_new_for_search(pattern, pattern.length, flags)
+          initialize_new_for_search(pattern, pattern.bytesize, flags)
         else
           raise(ArgumentError,
                 "must specify usage :for_match or :for_search : #{options.inspect}")
