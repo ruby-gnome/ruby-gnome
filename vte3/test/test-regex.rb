@@ -19,17 +19,37 @@ class TestRegex < Test::Unit::TestCase
 
   def setup
     only_vte_version(0, 46)
-    @terminal = Vte::Terminal.new
   end
 
-  def test_regex_for_match
-    regex = Vte::Regex.new("test", GLib::RegexCompileFlags::OPTIMIZE, :for_match => true)
-    assert_instance_of(Vte::Regex, regex)
+  def test_for_match
+    Vte::Regex.new("test", 0, :for_match => true)
+    # TODO: Add assertion
   end
 
-  def test_regex_for_match_multiple_flags
-    flags = [:optimize, :multiline]
-    regex = Vte::Regex.new("test", flags, :for_match => true)
-    assert_instance_of(Vte::Regex, regex)
+  def test_for_search
+    Vte::Regex.new("test", 0, :for_search => true)
+    # TODO: Add assertion
+  end
+
+  sub_test_case("flags") do
+    def test_integer
+      Vte::Regex.new("test",
+                     GLib::RegexCompileFlags::OPTIMIZE.to_i,
+                     :for_match => true)
+      # TODO: Add assertion
+    end
+
+    def test_object
+      Vte::Regex.new("test",
+                     GLib::RegexCompileFlags::OPTIMIZE,
+                     :for_match => true)
+      # TODO: Add assertion
+    end
+
+    def test_array
+      flags = [:optimize, :multiline]
+      Vte::Regex.new("test", flags, :for_match => true)
+      # TODO: Add assertion
+    end
   end
 end
