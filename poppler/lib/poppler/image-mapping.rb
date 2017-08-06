@@ -15,24 +15,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Poppler
-  class Page
-    alias_method :text_layout_raw, :text_layout
-    def text_layout
-      success, rectangles = text_layout_raw
-      if success
-        rectangles
-      else
-        nil
-      end
-    end
+  class ImageMapping
+    attr_accessor :page
 
-    alias_method :image_mapping_raw, :image_mapping
-    def image_mapping
-      mappings = image_mapping_raw
-      mappings.each do |mapping|
-        mapping.page = self
-      end
-      mappings
+    def image
+      @page.get_image(image_id)
     end
   end
 end

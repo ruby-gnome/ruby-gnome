@@ -34,6 +34,7 @@ module Poppler
       require "poppler/cairo"
       require "poppler/color"
       require "poppler/document"
+      require "poppler/image-mapping"
       require "poppler/index-iter"
       require "poppler/page"
       require "poppler/rectangle"
