@@ -39,10 +39,7 @@ module Vte
         return flags unless compile_flags.class == Array
 
         compile_flags.each do |flag|
-          begin
-            flags = flags | GLib::RegexCompileFlags.const_get(flag.to_s.upcase).to_i
-          rescue
-          end
+          flags |= GLib::RegexCompileFlags.new(flag).to_i
         end
 
         flags
