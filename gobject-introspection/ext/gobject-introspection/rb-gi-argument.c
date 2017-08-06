@@ -61,13 +61,14 @@ array_c_to_ruby_sized_interface(gconstpointer *elements,
             g_base_info_unref(interface_info);
             g_base_info_unref(element_type_info);
         } else {
-            interface_name = g_info_type_to_string(interface_type);
+            /* TODO: Should we check caller_allocates? */
+            gsize struct_size = g_struct_info_get_size(interface_info);
+            for (i = 0; i < n_elements; i++) {
+                gpointer element = ((gchar *)elements) + struct_size * i;
+                rb_ary_push(rb_array, BOXED2RVAL(element, gtype));
+            }
             g_base_info_unref(interface_info);
             g_base_info_unref(element_type_info);
-            rb_raise(rb_eNotImpError,
-                     "TODO: GIArgument(array)[c][interface(%s)](%s) -> Ruby",
-                     interface_name,
-                     g_type_name(gtype));
         }
         break;
     case GI_INFO_TYPE_BOXED:
