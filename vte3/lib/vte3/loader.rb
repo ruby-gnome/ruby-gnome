@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,16 +17,6 @@
 module Vte
   class Loader < GObjectIntrospection::Loader
     private
-    def load_function_info(info)
-      name = info.name
-      case name
-      when "init"
-        # ignore
-      else
-        super
-      end
-    end
-
     def pre_load(repository, namespace)
       define_version_module
     end
