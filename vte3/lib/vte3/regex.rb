@@ -31,17 +31,14 @@ module Vte
       end
 
       private
-
       def parse_compile_flags(compile_flags)
-        return compile_flags if compile_flags.class == Integer
+        return compile_flags if compile_flags.is_a?(Integer)
+        return compile_flags unless compile_flags.is_a?(Array)
 
         flags = 0
-        return flags unless compile_flags.class == Array
-
         compile_flags.each do |flag|
           flags |= GLib::RegexCompileFlags.new(flag).to_i
         end
-
         flags
       end
     end
