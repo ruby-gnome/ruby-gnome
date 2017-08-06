@@ -23,6 +23,7 @@ module Poppler
 
     def post_load(repository, namespace)
       require_libraries
+      convert_action_classes
       convert_field_classes
     end
 
@@ -33,6 +34,7 @@ module Poppler
       require "poppler/cairo"
       require "poppler/color"
       require "poppler/document"
+      require "poppler/index-iter"
       require "poppler/page"
       require "poppler/rectangle"
 
@@ -78,6 +80,35 @@ module Poppler
         end
       end
       super(info, klass, method_name)
+    end
+
+    def define_struct(info, options={})
+      case info.name
+      when /\AAction.+/
+        options[:parent] = Action
+      end
+      super(info, options)
+    end
+
+    def convert_action_classes
+      unknown_class = Class.new(Action)
+      @base_module.const_set("ActionUnknown", unknown_class)
+
+      action_map = {
+        ActionType::UNKNOWN     => unknown_class,
+        ActionType::GOTO_DEST   => ActionGotoDest,
+        ActionType::GOTO_REMOTE => ActionGotoRemote,
+        ActionType::LAUNCH      => ActionLaunch,
+        ActionType::URI         => ActionUri,
+        ActionType::NAMED       => ActionNamed,
+        ActionType::MOVIE       => ActionMovie,
+        ActionType::RENDITION   => ActionRendition,
+        ActionType::OCG_STATE   => ActionOCGState,
+        ActionType::JAVASCRIPT  => ActionJavascript,
+      }
+      self.class.register_boxed_class_converter(Action.gtype) do |action|
+        action_map[action.type] || Action
+      end
     end
 
     def define_field_class(name)

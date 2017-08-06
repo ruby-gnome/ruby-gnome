@@ -86,6 +86,10 @@ module Poppler
       save_a_copy_raw(ensure_uri(uri))
     end
 
+    def index_iter
+      IndexIter.new(self)
+    end
+
     private
     def pdf_data?(data)
       data.start_with?("%PDF-1.")

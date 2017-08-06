@@ -36,6 +36,11 @@ module Poppler
   define_deprecated_const(:AnnotationMapping,
                           "Poppler::AnnotMapping")
 
+  define_deprecated_const(:ActionURI,
+                          "Poppler::ActionUri")
+  define_deprecated_const(:ActionJavaScript,
+                          "Poppler::ActionJavascript")
+
   class AnnotMapping
     extend GLib::Deprecatable
 
