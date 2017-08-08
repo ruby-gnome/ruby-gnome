@@ -12,5 +12,5 @@ input_uri = "file://#{File.expand_path(input)}"
 
 doc = Poppler::Document.new(input_uri)
 doc.each do |page|
-  puts page.get_text
+  puts page.text
 end
