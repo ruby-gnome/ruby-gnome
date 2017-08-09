@@ -33,5 +33,4 @@ module Poppler
 
   loader = Loader.new(self)
   loader.load("Poppler")
-
 end
