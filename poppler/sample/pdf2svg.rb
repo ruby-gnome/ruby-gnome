@@ -14,7 +14,7 @@ output = "#{output}.svg" if input == output
 
 doc = Poppler::Document.new(input)
 
-width, height = doc.pages[0].size
+width, height = doc[0].size
 Cairo::SVGSurface.new(output, width, height) do |surface|
   surface.restrict_to_version("1_2")
 
