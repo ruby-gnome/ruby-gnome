@@ -49,6 +49,39 @@ class TestPage < Test::Unit::TestCase
                  layout[0].to_a.collect(&:round))
   end
 
+  sub_test_case("#find_text") do
+    test "no options" do
+      document = Poppler::Document.new(multiple_pages_pdf)
+      page = document[0]
+      texts = page.find_text("firs")
+      assert_equal(1, texts.size)
+      assert_kind_of(Poppler::Rectangle, texts[0])
+    end
+
+    test "with default option" do
+      document = Poppler::Document.new(multiple_pages_pdf)
+      page = document[0]
+      texts = page.find_text("firs", :default)
+      assert_equal(1, texts.size)
+      assert_kind_of(Poppler::Rectangle, texts[0])
+    end
+
+    test "with options and bad text" do
+      document = Poppler::Document.new(multiple_pages_pdf)
+      page = document[0]
+      texts = page.find_text("fIrs", [:whole_words_only, :case_sensitive])
+      assert_equal(0, texts.size)
+    end
+
+    test "with options and good text" do
+      document = Poppler::Document.new(multiple_pages_pdf)
+      page = document[0]
+      texts = page.find_text("first", [:whole_words_only, :case_sensitive])
+      assert_equal(1, texts.size)
+      assert_kind_of(Poppler::Rectangle, texts[0])
+    end
+  end
+
   private
   def find_first_image_mapping(document)
     document.each do |page|
