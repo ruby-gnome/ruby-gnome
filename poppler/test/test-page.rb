@@ -50,35 +50,42 @@ class TestPage < Test::Unit::TestCase
   end
 
   sub_test_case("#find_text") do
+    def normalize_rectangles(rectangles)
+      rectangles.collect do |rectangle|
+        rectangle.to_a.collect(&:round)
+      end
+    end
+
     test "no options" do
       document = Poppler::Document.new(multiple_pages_pdf)
       page = document[0]
-      texts = page.find_text("firs")
-      assert_equal(1, texts.size)
-      assert_kind_of(Poppler::Rectangle, texts[0])
+      text_areas = page.find_text("firs")
+      assert_equal([[78, 771, 94, 785]],
+                   normalize_rectangles(text_areas))
     end
 
     test "with default option" do
       document = Poppler::Document.new(multiple_pages_pdf)
       page = document[0]
-      texts = page.find_text("firs", :default)
-      assert_equal(1, texts.size)
-      assert_kind_of(Poppler::Rectangle, texts[0])
+      text_areas = page.find_text("firs", :default)
+      assert_equal([[78, 771, 94, 785]],
+                   normalize_rectangles(text_areas))
     end
 
     test "with options and bad text" do
       document = Poppler::Document.new(multiple_pages_pdf)
       page = document[0]
-      texts = page.find_text("fIrs", [:whole_words_only, :case_sensitive])
-      assert_equal(0, texts.size)
+      text_areas = page.find_text("fIrs", [:whole_words_only, :case_sensitive])
+      assert_equal([],
+                   normalize_rectangles(text_areas))
     end
 
     test "with options and good text" do
       document = Poppler::Document.new(multiple_pages_pdf)
       page = document[0]
-      texts = page.find_text("first", [:whole_words_only, :case_sensitive])
-      assert_equal(1, texts.size)
-      assert_kind_of(Poppler::Rectangle, texts[0])
+      text_areas = page.find_text("first", [:whole_words_only, :case_sensitive])
+      assert_equal([[78, 771, 98, 785]],
+                   normalize_rectangles(text_areas))
     end
   end
 

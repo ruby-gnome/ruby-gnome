@@ -50,7 +50,6 @@ module Poppler
     end
 
     alias_method :find_text_raw, :find_text
-
     def find_text(text, options=nil)
       if options.nil?
         find_text_raw(text)
