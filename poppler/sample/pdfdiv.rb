@@ -11,7 +11,7 @@ input, output = ARGV
 
 doc = Poppler::Document.new(input)
 
-width, height = doc.pages[0].size
+width, height = doc[0].size
 Cairo::PDFSurface.new(output, width / 2, height) do |surface|
   context = Cairo::Context.new(surface)
 
