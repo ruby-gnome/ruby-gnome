@@ -48,5 +48,15 @@ module Poppler
         text
       end
     end
+
+    alias_method :find_text_raw, :find_text
+
+    def find_text(text, options=nil)
+      if options.nil?
+        find_text_raw(text)
+      else
+        find_text_with_options(text, options)
+      end
+    end
   end
 end
