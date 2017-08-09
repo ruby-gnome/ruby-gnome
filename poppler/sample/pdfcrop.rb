@@ -11,7 +11,7 @@ input, output = ARGV
 
 doc = Poppler::Document.new(input)
 
-width, height = doc.pages[0].size
+width, height = doc[0].size
 x_margin = width * 0.1
 y_margin = height * 0.1
 croped_width = width - (2 * x_margin)
