@@ -56,5 +56,12 @@ module Poppler
     extend GLib::Deprecatable
 
     define_deprecated_method(:annotation_mapping, :annot_mapping)
+    define_deprecated_method_by_hash_args(:get_text,
+                                          "area=nil, style=nil",
+                                          ":area => Poppler::Rectangle, " +
+                                          ":style => Poppler::SelectionStyle"
+                                          ) do |page, *args, &block|
+      [{:area => args[0], :style => args[1]}]
+    end
   end
 end

@@ -34,5 +34,19 @@ module Poppler
       end
       mappings
     end
+
+    def get_text(options={})
+      area = options[:area]
+      style = options[:style]
+      if area
+        if style
+          get_selected_text(style, area)
+        else
+          get_text_for_area(area)
+        end
+      else
+        text
+      end
+    end
   end
 end
