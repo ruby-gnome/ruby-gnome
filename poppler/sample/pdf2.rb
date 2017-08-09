@@ -118,10 +118,6 @@ def to_pixbuf_with_cairo(input, page_number, scale, rotate)
   GdkPixbuf::Pixbuf.new(:file => temp.path)
 end
 
-unless Poppler.cairo_available?
-  puts "cairo isn't available."
-  exit(false)
-end
 pixbuf = to_pixbuf_with_cairo(input, page, scale, rotate)
 
 if pixbuf.nil?
