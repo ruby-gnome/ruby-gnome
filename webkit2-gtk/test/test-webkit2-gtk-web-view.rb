@@ -43,7 +43,7 @@ class TestWebKit2GtkWebView < Test::Unit::TestCase
       test "with related view" do
         settings = WebKit2Gtk::Settings.new
         related = WebKit2Gtk::WebView.new(settings: settings)
-        webview = related.new_with_related_view
+        webview = WebKit2Gtk::WebView.new(related_view: related)
         assert_equal(settings, webview.settings)
       end
 

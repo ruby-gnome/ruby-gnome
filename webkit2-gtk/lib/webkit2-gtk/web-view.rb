@@ -16,16 +16,16 @@
 
 module WebKit2Gtk
   class WebView
-    class << self
-      def new(*args)
-        return super unless args.size == 1
-        return super unless args[0].is_a?(Hash)
+    unless private_method_defined?(:initialize_new_with_related_view)
+      class << self
+        def new(*args)
+          return super unless args.size == 1
+          return super unless args[0].is_a?(Hash)
 
-        related_view = args[0][:related_view]
-        return super unless related_view
-        # TODO: Workaround for webkit_web_view_new_with_related_view is
-        # handled as method not constructor.
-        related_view.new_with_related_view
+          related_view = args[0][:related_view]
+          return super unless related_view
+          related_view.new_with_related_view
+        end
       end
     end
 
@@ -53,6 +53,7 @@ module WebKit2Gtk
       context = options[:context]
       settings = options[:settings]
       user_content_manager = options[:user_content_manager]
+      related_view = options[:related_view]
 
       if context
         initialize_new_with_context(context)
@@ -60,6 +61,8 @@ module WebKit2Gtk
         initialize_new_with_settings(settings)
       elsif user_content_manager
         initialize_new_with_user_content_manager(user_content_manager)
+      elsif related_view
+        initialize_new_with_related_view(related_view)
       else
         message =
           "must specify :context, :settings, :user_content_manager or :related_view"
