@@ -24,14 +24,12 @@ class TestWebKit2GtkWebView < Test::Unit::TestCase
         context = WebKit2Gtk::WebContext.new
         webview = WebKit2Gtk::WebView.new(context: context)
         assert_equal(context, webview.context)
-        assert_nil(webview.user_content_manager)
       end
 
       test "with settings" do
         settings = WebKit2Gtk::Settings.new
         webview = WebKit2Gtk::WebView.new(settings: settings)
         assert_equal(settings, webview.settings)
-        assert_nil(webview.user_content_manager)
       end
 
       test "with user content manager" do
