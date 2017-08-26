@@ -10,6 +10,7 @@
 
  How the options are displayed is controlled by cell renderers.
 =end
+
 Icon = Struct.new(:name, :label)
 CapitalItem = Struct.new(:group, :name)
 
@@ -35,8 +36,8 @@ class ComboboxDemo
     box.margin = 5
     frame.add(box)
 
-    model = create_icon_store
-    combo = Gtk::ComboBox.new(:model => model)
+    store = create_icon_store
+    combo = Gtk::ComboBox.new(:model => store)
     box.add(combo)
 
     renderer = Gtk::CellRendererPixbuf.new
@@ -56,7 +57,7 @@ class ComboboxDemo
     end
 
     combo.set_row_separator_func do |model, iter|
-      is_separator(model, iter)
+      separator?(model, iter)
     end
 
     combo.active = 0
@@ -69,19 +70,19 @@ class ComboboxDemo
     box.margin = 5
     frame.add(box)
 
-    model = create_capital_store
-    combo = Gtk::ComboBox.new(:model => model)
+    store = create_capital_store
+    combo = Gtk::ComboBox.new(:model => store)
     box.add(combo)
 
     renderer = Gtk::CellRendererText.new
     combo.pack_start(renderer, true)
     combo.set_attributes(renderer, "text" => 0)
     combo.set_cell_data_func(renderer) do |_layout, cell_renderer, model, iter|
-      is_capital_sensitive(cell_renderer, model, iter)
+      capital_sensitive?(cell_renderer, model, iter)
     end
 
     path = Gtk::TreePath.new([0, 8, -1])
-    iter = model.get_iter(path)
+    iter = store.get_iter(path)
     combo.set_active_iter(iter)
 
     # A GtkComboBoxEntry with validation
@@ -164,7 +165,7 @@ class ComboboxDemo
     cell_renderer.sensitive = indices[0] != 1
   end
 
-  def is_separator(model, iter)
+  def separator?(model, iter)
     path = model.get_path(iter)
     path.indices[0] == 4
   end
@@ -223,7 +224,7 @@ class ComboboxDemo
     capitals << CapitalItem.new(nil, "Santa Fe")
     capitals << CapitalItem.new(nil, "Springfield")
     capitals << CapitalItem.new(nil, "St. Paul")
-    capitals << CapitalItem.new("T - Z", nil )
+    capitals << CapitalItem.new("T - Z", nil)
     capitals << CapitalItem.new(nil, "Tallahassee")
     capitals << CapitalItem.new(nil, "Topeka")
     capitals << CapitalItem.new(nil, "Trenton")
@@ -242,7 +243,7 @@ class ComboboxDemo
     model
   end
 
-  def is_capital_sensitive(cell, tree_model, iter)
+  def capital_sensitive?(cell, tree_model, iter)
     sensitive = !tree_model.iter_has_child(iter)
     cell.sensitive = sensitive
   end
@@ -257,28 +258,24 @@ end
 
 class MaskEntry < Gtk::Entry
   type_register
+  attr_writer :mask
   def initialize
     super
-    signal_connect "changed" do |editable|
+    signal_connect "changed" do
       set_background
     end
-  end
-
-  def mask=(value)
-    @mask = value
   end
 
   private
 
   def set_background
-    if @mask
-      if !GLib::Regex.match?(@mask, text)
-        attrs = Pango::AttrList.new
-        attrs.insert(Pango::AttrForeground.new(65535, 32767, 32767))
-        set_attributes(attrs)
-      else
-        set_attributes(nil)
-      end
+    return unless @mask
+    if !GLib::Regex.match?(@mask, text)
+      attrs = Pango::AttrList.new
+      attrs.insert(Pango::AttrForeground.new(65_535, 32_767, 32_767))
+      set_attributes(attrs)
+    else
+      set_attributes(nil)
     end
   end
 end
