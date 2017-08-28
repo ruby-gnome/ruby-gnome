@@ -16,7 +16,7 @@ class CssBlendmodesDemo
     @window.transient_for = main_window
 
     # Setup the CSS provider for window
-    @provider  = Gtk::CssProvider.new
+    @provider = Gtk::CssProvider.new
     Gtk::StyleContext.add_provider_for_screen(Gdk::Screen.default,
                                               @provider,
                                               Gtk::StyleProvider::PRIORITY_APPLICATION)
@@ -61,7 +61,7 @@ class CssBlendmodesDemo
     listbox = Gtk::ListBox.new
     @builder["scrolledwindow"].add(listbox)
 
-    listbox.signal_connect "row-activated" do |widget, w_row, w_provider|
+    listbox.signal_connect "row-activated" do |_widget, w_row, _provider|
       blend_mode = @blend_modes[w_row.index].id
       update_css_for_blend_mode(blend_mode)
     end
@@ -72,7 +72,6 @@ class CssBlendmodesDemo
       label.xalign = 0
       row.add(label)
       listbox.add(row)
-
       normal_row = row if blend_mode.id == "normal"
     end
 
@@ -84,7 +83,7 @@ class CssBlendmodesDemo
 
   def update_css_for_blend_mode(blend_mode)
     raw_css = Gio::Resources.lookup_data("/css_blendmodes/css_blendmodes.css", 0)
-    css = sprintf(raw_css, blend_mode, blend_mode, blend_mode)
+    css = format(raw_css, blend_mode, blend_mode, blend_mode)
     @provider.load_from_data(css)
   end
 end
