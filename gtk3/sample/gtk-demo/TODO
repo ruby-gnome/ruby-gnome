@@ -56,12 +56,12 @@ images.c                ok              ok
 textview.c              ok              ok
 event_axes.c            ok              ok
 combobox.c              ok              ok
+css_blendmodes.c	ok		ok
 
 Remains :
 
 application.c           no              no
 changedisplay.c         ok              no
-css_blendmodes.c	no		no
 fishbowl.c		no		no
 flowbox.c               no              no
 foreigndrawing          no              no
