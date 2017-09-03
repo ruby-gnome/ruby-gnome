@@ -31,7 +31,7 @@ end
 class Fish < Gtk::Image
   attr_accessor :x, :y, :x_speed, :y_speed
   def initialize
-    super(:icon_name => get_random_icon_name, :size => :dialog)
+    super(:icon_name => random_icon_name, :size => :dialog)
     @x = 10
     @y = 10
     @x_speed = rand(1..200)
@@ -40,11 +40,11 @@ class Fish < Gtk::Image
 
   private
 
-  def get_random_icon_name
+  def random_icon_name
     theme = Gtk::IconTheme.default
     icon_list = theme.icons
-    icons = icon_list.select do |e| ! e.include?("symbolic") end
-    icons[rand (icons.size)]
+    icons = icon_list.reject { |e| e.include?("symbolic") }
+    icons[rand(icons.size)]
   end
 end
 
@@ -60,8 +60,8 @@ class FishbowlDemo
     @changes_allow.image = Gtk::Image.new(:icon_name => "changes-allow")
     @window.screen = main_window.screen
     @window.realize
-    @bowl.add_tick_callback do |widget, frame_clock|
-      move_fish(widget, frame_clock)
+    @bowl.add_tick_callback do
+      move_fish
     end
   end
 
@@ -76,7 +76,7 @@ class FishbowlDemo
 
   private
 
-  def move_fish(widget, frame_clock)
+  def move_fish
     elapsed = 0
     suggested_change = 0
     elapsed, suggested_change = do_stats(!@changes_allow.active?)
@@ -106,8 +106,8 @@ class FishbowlDemo
       end
 
       index = @stats.stats_index
-      new_label = sprintf("%u icons - %.1f fps", @stats.item_counter[index],
-                                                 STATS_UPDATE_TIME * n_frames / (N_STATS * STATS_UPDATE_TIME))
+      fps = STATS_UPDATE_TIME * n_frames / (N_STATS * STATS_UPDATE_TIME)
+      new_label = format("%u icons - %.1f fps", @stats.item_counter[index], fps)
       @info_label.label = new_label
 
       if @stats.frame_counter[index] >= 19 * @stats.frame_counter_max / 20
@@ -136,8 +136,8 @@ class FishbowlDemo
       else
         @stats.last_suggestion = 0
       end
-    else
-      suggested_change = 0 if suggested_change
+    elsif suggested_change
+      suggested_change = 0
     end
 
     @stats.last_frame = frame_time
@@ -154,7 +154,6 @@ class FishbowlDemo
       @bowl.put(new_fish, 10, 10)
       stats_update(n_fish)
     end
-
   end
 
   def stats_update(n_items)
