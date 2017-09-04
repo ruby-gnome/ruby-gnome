@@ -95,7 +95,7 @@ class FishbowlDemo
 
   def do_stats(suggested_change)
     suggested_change = 0
-    @stats = Stats.new(@bowl) unless @stats
+    @stats ||= Stats.new(@bowl)
     frame_time = @bowl.frame_clock.frame_time
     elapsed = frame_time - @stats.last_frame
     n_frames = 0
