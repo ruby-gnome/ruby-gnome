@@ -67,7 +67,7 @@ class FishbowlDemo
 
   def run
     if !@window.visible?
-      @window.show_all
+      @window.show
     else
       @window.destroy
     end
