@@ -77,9 +77,7 @@ class FishbowlDemo
   private
 
   def move_fish
-    elapsed = 0
-    suggested_change = 0
-    elapsed, suggested_change = do_stats(!@changes_allow.active?)
+    elapsed, suggested_change = do_stats
     @bowl.each do |widget|
       move_one_fish(widget, elapsed)
     end
@@ -87,14 +85,13 @@ class FishbowlDemo
     if suggested_change > 0
       add_fish(suggested_change)
     elsif suggested_change < 0
-      remove_fish(- suggested_change)
+      remove_fish(-suggested_change)
     end
 
     GLib::Source::CONTINUE
   end
 
-  def do_stats(suggested_change)
-    suggested_change = 0
+  def do_stats
     @stats ||= Stats.new(@bowl)
     frame_time = @bowl.frame_clock.frame_time
     elapsed = frame_time - @stats.last_frame
@@ -131,12 +128,11 @@ class FishbowlDemo
       @stats.item_counter[@stats.stats_index] = @stats.item_counter[(@stats.stats_index + N_STATS - 1) % N_STATS]
       @stats.last_stats = frame_time
 
-      if suggested_change
-        suggested_change = @stats.last_suggestion
-      else
+      if @changes_allow.active?
         @stats.last_suggestion = 0
       end
-    elsif suggested_change
+      suggested_change = @stats.last_suggestion
+    else
       suggested_change = 0
     end
 
