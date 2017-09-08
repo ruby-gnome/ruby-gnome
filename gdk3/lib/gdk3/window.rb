@@ -22,5 +22,11 @@ module Gdk
     def user_data
       Loader.instantiate_gobject_pointer(user_data_raw)
     end
+
+    alias_method :origin_raw, :origin
+    def origin
+      _, x, y = origin_raw
+      [x, y]
+    end
   end
 end
