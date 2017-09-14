@@ -99,8 +99,8 @@ class ComboboxDemo
     entry = MaskEntry.new
     entry.mask = "^([0-9]*|One|Two|2\302\275|Three)$"
 
-    combo.remove(combo.child.gtype)
-    combo.add(entry)
+    combo.remove_child(combo.child)
+    combo.add_child(entry)
 
     # A combobox with string IDs
     frame = Gtk::Frame.new("String IDs")

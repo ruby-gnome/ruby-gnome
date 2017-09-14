@@ -31,6 +31,9 @@ module Gtk
     end
     alias_method :<<, :add
 
+    alias_method :add_child, :add
+    alias_method :remove_child, :remove
+
     alias_method :focus_chain_raw, :focus_chain
     def focus_chain
       set_explicitly, widgets = focus_chain_raw
