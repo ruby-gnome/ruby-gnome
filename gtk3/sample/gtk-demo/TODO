@@ -58,12 +58,12 @@ event_axes.c            ok              ok
 combobox.c              ok              ok
 css_blendmodes.c	ok		ok
 fishbowl.c		ok		ok
+flowbox.c               ok              ok
 
 Remains :
 
 application.c           no              no
 changedisplay.c         ok              no
-flowbox.c               no              no
 foreigndrawing          no              no
 gestures.c              no              no
 shortcuts.c             no              no
