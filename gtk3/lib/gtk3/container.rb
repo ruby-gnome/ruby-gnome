@@ -31,7 +31,14 @@ module Gtk
     end
     alias_method :<<, :add
 
-    alias_method :add_child, :add
+    def add_child(*args, &block)
+      if defined?(super)
+        super
+      else
+        add(*args, &block)
+      end
+    end
+
     alias_method :remove_child, :remove
 
     alias_method :focus_chain_raw, :focus_chain
