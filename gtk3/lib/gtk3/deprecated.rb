@@ -93,6 +93,12 @@ module Gtk
   define_deprecated_singleton_method :idle_remove, :warn => "Use 'GLib::Source.remove'." do |_self, id|
     GLib::Source.remove(id)
   end
+  define_deprecated_singleton_method :grab_add, :warn => "Use 'Gtk::Widget#grab_add'." do |_self, widget|
+    widget.grab_add
+  end
+  define_deprecated_singleton_method :grab_remove, :warn => "Use 'Gtk::Widget#grab_remove'." do |_self, widget|
+    widget.grab_remove
+  end
 
   class AboutDialog
     extend GLib::Deprecatable
