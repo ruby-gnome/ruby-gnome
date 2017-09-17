@@ -1155,8 +1155,15 @@ rb_gi_argument_to_ruby_ghash(GIArgument *argument, GITypeInfo *type_info)
             g_base_info_unref(value_type_info);
             rb_argument =
                 rb_gi_argument_to_ruby_ghash_utf8_utf8(argument->v_pointer);
-            break;
+        } else {
+            g_base_info_unref(key_type_info);
+            g_base_info_unref(value_type_info);
+            rb_raise(rb_eNotImpError,
+                     "TODO: GIArgument(GHash)[%s][%s] -> Ruby",
+                     g_type_tag_to_string(key_type_tag),
+                     g_type_tag_to_string(value_type_tag));
         }
+        break;
       case GI_TYPE_TAG_FILENAME:
       case GI_TYPE_TAG_ARRAY:
       case GI_TYPE_TAG_INTERFACE:
