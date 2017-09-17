@@ -3347,6 +3347,22 @@ set_in_array_length_argument(GIArgument *argument,
 }
 
 static void
+set_in_array_boolean_arguments_from_ruby(GIArgument *array_argument,
+                                         VALUE rb_boolean_array)
+{
+    gboolean *booleans;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_boolean_array);
+    booleans = ALLOC_N(gboolean, n_args);
+    for (i = 0; i < n_args; i++) {
+        booleans[i] = RVAL2CBOOL(RARRAY_PTR(rb_boolean_array)[i]);
+    }
+
+    array_argument->v_pointer = booleans;
+}
+
+static void
 set_in_array_int8_arguments_from_ruby(GIArgument *array_argument,
                                       VALUE rb_number_array)
 {
@@ -3660,10 +3676,15 @@ in_array_c_argument_from_ruby(GIArgument *array_argument,
     element_type_tag = g_type_info_get_tag(element_type_info);
     switch (element_type_tag) {
     case GI_TYPE_TAG_VOID:
-    case GI_TYPE_TAG_BOOLEAN:
         rb_raise(rb_eNotImpError,
                  "TODO: Ruby -> GIArgument(array)[%s]",
                  g_type_tag_to_string(element_type_tag));
+        break;
+    case GI_TYPE_TAG_BOOLEAN:
+        rb_argument = rbg_to_array(rb_argument);
+        set_in_array_boolean_arguments_from_ruby(array_argument, rb_argument);
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_INT8:
         if (RB_TYPE_P(rb_argument, RUBY_T_STRING)) {
@@ -3969,10 +3990,12 @@ rb_gi_value_argument_free_array_c(VALUE rb_argument,
     element_type_tag = g_type_info_get_tag(element_type_info);
     switch (element_type_tag) {
     case GI_TYPE_TAG_VOID:
-    case GI_TYPE_TAG_BOOLEAN:
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(array)[%s]",
                  g_type_tag_to_string(element_type_tag));
+        break;
+    case GI_TYPE_TAG_BOOLEAN:
+        xfree(argument->v_pointer);
         break;
     case GI_TYPE_TAG_INT8:
     case GI_TYPE_TAG_UINT8:
@@ -4001,6 +4024,7 @@ rb_gi_value_argument_free_array_c(VALUE rb_argument,
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(array)[%s]",
                  g_type_tag_to_string(element_type_tag));
+        break;
     case GI_TYPE_TAG_INTERFACE:
         xfree(argument->v_pointer);
         break;
