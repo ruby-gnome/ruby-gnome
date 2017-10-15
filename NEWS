@@ -2,6 +2,110 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.1.9: 2017-10-16
+
+This is a release that includes GObject Introspection migrated Ruby/Poppler.
+
+=== Changes
+
+==== All
+
+  * Improvements
+
+    * Added (({Makefile})) existence check before running (({make})).
+      [GitHub#1065][Patch by HIGUCHI Daisuke]
+
+  * Fixes
+
+    * Fixed shebang paths.
+      [GitHub#1066][Patch by HIGUCHI Daisuke]
+
+==== Ruby/GLib
+
+  * Improvements
+
+    * Windows: Updated required cairo gem dependency.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * (({GObjectIntrospection::Loader.register_object_class_converter})):
+      Added.
+
+    * Added (({gboolean *})) output support.
+
+    * Added (({[GBoxed]})) output support.
+
+    * Added (({[gboolean]})) input support.
+
+==== Ruby/GDK3
+
+  * Improvements
+
+    * (({Gdk::Window#origin})): Ignored garbage return value.
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * Added more demos.
+      [GitHub#1096][GitHub#1098][GitHub#1099][GitHub#1103]
+      [Patch by cedlemo]
+
+    * (({Gtk::Container#add_child})): Added.
+      [GitHub#1101][Reported by Robert A. Heiler]
+
+    * (({Gtk::Container#remove_child})): Added.
+      [GitHub#1101][Reported by Robert A. Heiler]
+
+==== Ruby/Poppler
+
+  * Improvements
+
+    * Migrated to GObject Introspection bindings.
+      [Patch by cedlemo]
+
+==== Ruby/WebKit2GTK
+
+  * Improvements
+
+    * Reduced fragile test failure.
+      [GitHub#1067][Patch by HIGUCHI Daisuke]
+
+    * Followed upstream fix for
+      (({webkit_web_view_new_with_related_view})).
+      [GitHub#1095][Reported by Jeremy Bicha]
+
+    * Relaxed test to support the latest WebKit2GTK+.
+      [GitHub#1095][Reported by Jeremy Bicha]
+
+==== Ruby/Rsvg2
+
+  * Improvements
+
+    * Added document how to install on Heroku.
+      [GitHub#1071][Patch by Ciocanel Razvan]
+
+==== Ruby/VTE3
+
+  * Improvements
+
+    * (({Vte::Regex})): Added.
+      [GitHub#1087][Patch by cedlemo]
+
+=== Thanks
+
+  * HIGUCHI Daisuke
+
+  * cedlemo
+
+  * Ciocanel Razvan
+
+  * Jeremy Bicha
+
+  * Robert A. Heiler
+
 == Ruby-GNOME2 3.1.8: 2017-07-15
 
 This is a bug fix release for macOS install.
