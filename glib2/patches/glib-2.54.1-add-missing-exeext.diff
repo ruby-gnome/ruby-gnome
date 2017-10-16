@@ -1,0 +1,12 @@
+diff -ru glib-2.54.1.orig/gio/tests/Makefile.am glib-2.54.1/gio/tests/Makefile.am
+--- glib-2.54.1.orig/gio/tests/Makefile.am	2017-10-02 14:58:06.000000000 +0000
++++ glib-2.54.1/gio/tests/Makefile.am	2017-10-16 00:08:45.899226582 +0000
+@@ -543,7 +543,7 @@
+ libresourceplugin_la_LDFLAGS += -rpath /
+ endif
+ 
+-glib_compile_resources=$(top_builddir)/gio/glib-compile-resources
++glib_compile_resources=$(top_builddir)/gio/glib-compile-resources$(EXEEXT)
+ 
+ test-generated.txt: test1.txt
+ 	$(AM_V_GEN) echo "Generated" > $@ && \
