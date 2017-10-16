@@ -23,7 +23,8 @@ RUN \
     webkitgtk3 \
     libwebkit2-gtk \
     clutter-gtk \
-    gtksourceview3
+    gtksourceview3 \
+    dbus-x11
 
 RUN \
   systemd-machine-id-setup
