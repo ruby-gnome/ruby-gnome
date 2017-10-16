@@ -28,17 +28,28 @@ class TestTerminal < Test::Unit::TestCase
   end
 
   sub_test_case "#spawn" do
-    teardown do
-      loop = GLib::MainLoop.new
-      GLib::Idle.add do
-        loop.quit
-        GLib::Source::REMOVE
+    setup do
+      @loop = GLib::MainLoop.new
+      @wait_child_exited = false
+      @child_exit_callback_id = @terminal.signal_connect("child-exited") do
+        @loop.quit
       end
-      loop.run
+    end
+
+    teardown do
+      unless @wait_child_exited
+        GLib::Idle.add do
+          @loop.quit
+          GLib::Source::REMOVE
+        end
+      end
+      @loop.run
+      @terminal.signal_handler_disconnect(@child_exit_callback_id)
     end
 
     test "success" do
       pid = @terminal.spawn(:argv => ["echo"])
+      @wait_child_exited = true
       assert do
         pid > 0
       end
@@ -47,6 +58,7 @@ class TestTerminal < Test::Unit::TestCase
     test "failure" do
       assert_raise(GLib::SpawnError) do
         @terminal.spawn(:argv => ["nonexistent"])
+        @wait_child_exited = true
       end
     end
   end
