@@ -59,7 +59,8 @@ if [ ! -f ~/setup.timestamp ]; then
     mingw-w64 \
     cmake \
     valac \
-    libmount-dev
+    libmount-dev \
+    python3-pip
 
   # Enable me when WebKitGTK+ supports Windows.
   # run sudo update-alternatives --set \
@@ -67,7 +68,7 @@ if [ ! -f ~/setup.timestamp ]; then
   # run sudo update-alternatives --set \
   #     ${BUILD_HOST}-g++ /usr/bin/${BUILD_HOST}-g++-posix
 
-  run sudo pip install jsmin
+  run sudo pip3 install jsmin meson ninja
 
   run git clone file:///pkg-config/.git
   run git clone file:///native-package-installer/.git
