@@ -305,6 +305,7 @@ module GNOME2
                                               :include_paths,
                                               :library_paths,
                                               :configure_args,
+                                              :meson_args,
                                               :cmake_args,
                                               :cc_args,
                                               :patches,
@@ -335,6 +336,10 @@ module GNOME2
         end
 
         def configure_args
+          super || []
+        end
+
+        def meson_args
           super || []
         end
 

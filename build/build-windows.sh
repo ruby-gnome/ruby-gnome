@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export LANG=C
+export LANG=C.UTF-8
 export DEBIAN_FRONTEND=noninteractive
 
 ruby_versions="2.1.10 2.2.4 2.3.1 2.4.0"

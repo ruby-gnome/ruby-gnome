@@ -4,6 +4,8 @@
 
 require "open-uri"
 require "pathname"
+require "tempfile"
+require "tmpdir"
 
 module GNOME2
   module Rake
@@ -122,11 +124,6 @@ module GNOME2
           package.windows.patches.each do |patch|
             sh("patch -p1 < #{@package.patches_dir}/#{patch}")
           end
-          if File.exist?("configure")
-            configure(package)
-          else
-            cmake(package)
-          end
           common_make_args = []
           common_make_args << "MAKE=make"
           common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
@@ -142,11 +139,29 @@ module GNOME2
           end
           ENV["GREP_OPTIONS"] = "--text"
           # ENV["GI_SCANNER_DEBUG"] = "save-temps"
-          # build_make_args << "--debug"
-          # build_make_args << "V=1"
-          # build_make_args << "VERBOSE=1"
-          sh("nice", "make", *build_make_args) or exit(false)
-          sh("make", "install", *install_make_args) or exit(false)
+          if File.exist?("meson.build") and not File.exist?("Makefile.am")
+            source_dir = Dir.pwd
+            build_dir = "build"
+            mkdir_p(build_dir)
+            Dir.chdir(build_dir) do
+              meson(package, source_dir)
+              sh(make_args_to_env(build_make_args),
+                 "nice", "ninja") or exit(false)
+              sh(make_args_to_env(install_make_args),
+                 "ninja", "install") or exit(false)
+            end
+          else
+            if File.exist?("Makefile.in")
+              configure(package)
+            else
+              cmake(package)
+            end
+            # build_make_args << "--debug"
+            # build_make_args << "V=1"
+            # build_make_args << "VERBOSE=1"
+            sh("nice", "make", *build_make_args) or exit(false)
+            sh("make", "install", *install_make_args) or exit(false)
+          end
 
           package_license_dir = license_dir + package.name
           mkdir_p(package_license_dir)
@@ -178,6 +193,37 @@ module GNOME2
            "--prefix=#{dist_dir}",
            "--host=#{@package.windows.build_host}",
            *package.windows.configure_args) or exit(false)
+      end
+
+      def meson(package, source_dir)
+        cross_file = Tempfile.new("meson-cross-file")
+        cross_file.puts(<<-CROSS_FILE)
+[host_machine]
+system = 'windows'
+cpu_family = 'x86_64'
+cpu = 'x86_64'
+endian = 'littel'
+
+[binaries]
+c = '/usr/bin/#{cc(package)}'
+cpp = '/usr/bin/#{cxx(package)}'
+ar = '/usr/bin/#{ar}'
+strip = '/usr/bin/#{strip}'
+dlltool = '/usr/bin/#{dlltool}'
+pkgconfig = '/usr/bin/pkg-config'
+        CROSS_FILE
+        cross_file.close
+        sh({
+             "PATH" => "#{g_ir_scanner_bin_dir}:#{ENV["PATH"]}",
+             "CPPFLAGS" => cppflags(package),
+             "LDFLAGS" => ldflags(package),
+           },
+           "meson",
+           source_dir,
+           ".",
+           "--prefix=#{dist_dir}",
+           "--cross-file=#{cross_file.path}",
+           *package.windows.meson_args) or exit(false)
       end
 
       def cmake(package)
@@ -255,8 +301,25 @@ module GNOME2
         cxx_command_line.compact.join(" ")
       end
 
+      def ar
+        "#{@package.windows.build_host}-ar"
+      end
+
+      def strip
+        "#{@package.windows.build_host}-strip"
+      end
+
       def dlltool
         "#{@package.windows.build_host}-dlltool"
+      end
+
+      def g_ir_scanner_bin_dir
+        "#{@package.project_root_dir}/gobject-introspection/" +
+          "#{@package.native.relative_binary_dir}/bin"
+      end
+
+      def g_ir_scanner
+        "#{g_ir_scanner_bin_dir}/g-ir-scanner"
       end
 
       def cppflags(package)
@@ -300,11 +363,18 @@ module GNOME2
         paths
       end
 
+      def make_args_to_env(make_args)
+        env = {}
+        make_args.each do |arg|
+          key, value = arg.split("=", 2)
+          env[key] = value
+        end
+        env
+      end
+
       def add_gobject_introspection_make_args(package, common_make_args)
         return unless use_gobject_introspection?(package)
 
-        g_ir_scanner = "#{@package.project_root_dir}/gobject-introspection/"
-        g_ir_scanner << "#{@package.native.relative_binary_dir}/bin/g-ir-scanner"
         introspection_scanner = "INTROSPECTION_SCANNER=#{g_ir_scanner}"
         common_make_args << introspection_scanner
 
