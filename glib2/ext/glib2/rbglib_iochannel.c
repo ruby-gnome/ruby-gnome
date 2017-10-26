@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -26,6 +26,8 @@ static ID id_puts;
 static ID id_unpack;
 
 static VALUE default_rs;
+
+static VALUE rb_mIOChannelSource;
 
 #define RG_TARGET_NAMESPACE cIOChannel
 #define _SELF(s) ((GIOChannel*)RVAL2BOXED(s, G_TYPE_IO_CHANNEL))
@@ -499,8 +501,17 @@ rg_close(gint argc, VALUE *argv, VALUE self)
 static VALUE
 rg_create_watch(VALUE self, VALUE condition)
 {
-    return BOXED2RVAL(g_io_create_watch(_SELF(self), NUM2INT(condition)), 
-                      G_TYPE_SOURCE);
+    VALUE rb_source;
+
+    rb_source = BOXED2RVAL(g_io_create_watch(_SELF(self), NUM2INT(condition)),
+                           G_TYPE_SOURCE);
+    rb_extend_object(rb_source, rb_mIOChannelSource);
+    if (rb_block_given_p()) {
+        ID id_set_callback;
+        CONST_ID(id_set_callback, "set_callback");
+        rb_funcall(rb_source, id_set_callback, 0);
+    }
+    return rb_source;
 }
 
 static gboolean
@@ -528,6 +539,20 @@ guint       g_io_add_watch_full             (GIOChannel *channel,
                                              gpointer user_data,
                                              GDestroyNotify notify);
 */
+
+static VALUE
+rg_io_channel_source_set_callback(VALUE self)
+{
+    VALUE callback;
+
+    callback = rb_block_proc();
+    G_RELATIVE(self, callback);
+    g_source_set_callback(RVAL2BOXED(self, G_TYPE_SOURCE),
+                          (GSourceFunc)io_func,
+                          (gpointer)callback,
+                          (GDestroyNotify)NULL);
+    return self;
+}
 
 static VALUE
 rg_buffer_size(VALUE self)
@@ -818,4 +843,10 @@ Init_glib_io_channel(void)
     rb_define_const(RG_TARGET_NAMESPACE, "FLAG_MASK", INT2NUM(G_IO_FLAG_MASK));
     rb_define_const(RG_TARGET_NAMESPACE, "FLAG_GET_MASK", INT2NUM(G_IO_FLAG_GET_MASK));
     rb_define_const(RG_TARGET_NAMESPACE, "FLAG_SET_MASK", INT2NUM(G_IO_FLAG_SET_MASK));
+
+    rb_mIOChannelSource = rb_define_module_under(mGLib, "IOChannelSource");
+    rb_define_method(rb_mIOChannelSource,
+                     "set_callback",
+                     rg_io_channel_source_set_callback,
+                     0);
 }

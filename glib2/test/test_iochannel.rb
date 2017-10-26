@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- 
+
 require 'test/unit'
 require 'glib2'
 
@@ -285,5 +285,41 @@ class TestGIOChannel < Test::Unit::TestCase
       # No such file or directory
       GLib::IOChannel.new("foo")
     }
+  end
+
+  sub_test_case("#create_watch") do
+    def setup
+      super
+      @context = GLib::MainContext.new
+    end
+
+    def test_with_block
+      GLib::IOChannel.open(@file.path) do |channel|
+        received_condition = nil
+        source = channel.create_watch(GLib::IOChannel::IN) do |_, condition|
+          received_condition = condition
+        end
+        source.attach(@context)
+        10.times do
+          @context.iteration(false)
+        end
+        assert_equal(GLib::IOCondition::IN, received_condition)
+      end
+    end
+
+    def test_set_callback
+      GLib::IOChannel.open(@file.path) do |channel|
+        received_condition = nil
+        source = channel.create_watch(GLib::IOChannel::IN)
+        source.set_callback do |_, condition|
+          received_condition = condition
+        end
+        source.attach(@context)
+        10.times do
+          @context.iteration(false)
+        end
+        assert_equal(GLib::IOCondition::IN, received_condition)
+      end
+    end
   end
 end
