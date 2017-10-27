@@ -42,4 +42,4 @@ WORKDIR /home/ruby-gnome2/ruby-gnome2
 RUN gem install bundler
 RUN bundle install
 
-CMD cd glib2 && ruby extconf.rb && test/run-test.rb
+CMD cd glib2 && ruby extconf.rb && test/run-test.rb -v
