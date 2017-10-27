@@ -62,7 +62,7 @@ class TestGIOChannel < Test::Unit::TestCase
     GLib::IOChannel.open(write_test_file.path, "w") do |_io|
       io = _io
       assert_raises(RuntimeError) do
-	assert_equal(@content, io.read)
+        assert_equal(@content, io.read)
       end
     end
 
@@ -78,8 +78,8 @@ class TestGIOChannel < Test::Unit::TestCase
   def test_getc
     io = GLib::IOChannel.new(@file.path)
     ["a", "b", "c", "あ"].each do |v|
-      3.times do 
-	assert_equal(v.unpack("U")[0], io.getc)
+      3.times do
+        assert_equal(v.unpack("U")[0], io.getc)
       end
       assert_equal("\n".unpack("U")[0], io.getc)
     end
@@ -159,7 +159,7 @@ class TestGIOChannel < Test::Unit::TestCase
     io = GLib::IOChannel.new(@file.path)
     assert_raises(RuntimeError) {
       io.each {|line|
-	raise "test"
+        raise "test"
       }
     }
     io.close
@@ -176,7 +176,7 @@ class TestGIOChannel < Test::Unit::TestCase
     GLib::IOChannel.open(@file.path) do |_io|
       io = _io
       io.each_with_index do |line, _i|
-	assert_equal(lines[_i], line)
+        assert_equal(lines[_i], line)
       end
     end
 
