@@ -22,16 +22,21 @@ require 'gnome2-raketask'
 package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/Poppler is a Ruby binding of poppler-glib."
   package.description = "Ruby/Poppler is a Ruby binding of poppler-glib."
-  package.dependency.gem.runtime = [["cairo", ">= 1.14.0"], "gdk_pixbuf2"]
+  package.dependency.gem.runtime = [
+    "cairo-gobject",
+    "gio2",
+  ]
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = [
     "glib2",
     "gobject-introspection",
-    "gdk_pixbuf2",
+    "gio2",
+    "cairo-gobject",
   ]
   package.windows.gobject_introspection_dependencies = [
-    "gdk_pixbuf2",
+    "gio2",
+    "cairo-gobject",
   ]
   package.external_packages = [
     {
