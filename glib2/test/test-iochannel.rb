@@ -18,14 +18,11 @@ require 'test/unit'
 require 'glib2'
 
 require 'tempfile'
-require 'nkf'
-
-$KCODE = "U" unless defined?(:Encoding)
 
 class TestGIOChannel < Test::Unit::TestCase
   def setup
     @content = "aaa\nbbb\nccc\nあああ\n"
-    @sjis_content = NKF.nkf("-sW", @content)
+    @sjis_content = @content.encode("CP932")
 
     @file = Tempfile.new("glib2-content")
     @file.open
