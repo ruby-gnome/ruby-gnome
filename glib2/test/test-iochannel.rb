@@ -295,12 +295,17 @@ class TestGIOChannel < Test::Unit::TestCase
         received_condition = nil
         source = channel.create_watch(GLib::IOChannel::IN) do |_, condition|
           received_condition = condition
+          GLib::Source::CONTINUE
         end
-        source.attach(@context)
-        10.times do
-          @context.iteration(false)
+        begin
+          source.attach(@context)
+          10.times do
+            @context.iteration(false)
+          end
+          assert_equal(GLib::IOCondition::IN, received_condition)
+        ensure
+          source.destroy
         end
-        assert_equal(GLib::IOCondition::IN, received_condition)
       end
     end
 
@@ -310,12 +315,17 @@ class TestGIOChannel < Test::Unit::TestCase
         source = channel.create_watch(GLib::IOChannel::IN)
         source.set_callback do |_, condition|
           received_condition = condition
+          GLib::Source::CONTINUE
         end
-        source.attach(@context)
-        10.times do
-          @context.iteration(false)
+        begin
+          source.attach(@context)
+          10.times do
+            @context.iteration(false)
+          end
+          assert_equal(GLib::IOCondition::IN, received_condition)
+        ensure
+          source.destroy
         end
-        assert_equal(GLib::IOCondition::IN, received_condition)
       end
     end
   end
