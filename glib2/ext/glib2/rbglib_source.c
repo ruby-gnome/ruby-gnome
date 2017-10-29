@@ -25,6 +25,17 @@ static ID id_call;
 
 /*****************************************/
 #if !GLIB_CHECK_VERSION(2,30,0)
+static void
+source_free(GSource *source)
+{
+    if (g_source_is_destroyed(source)) {
+        return;
+    }
+
+    g_source_unref(source);
+    g_source_destroy(source);
+}
+
 GType
 g_source_get_type(void)
 {
@@ -32,7 +43,7 @@ g_source_get_type(void)
   if (our_type == 0)
     our_type = g_boxed_type_register_static ("GSource",
                     (GBoxedCopyFunc)g_source_ref,
-                    (GBoxedFreeFunc)g_source_unref);
+                    (GBoxedFreeFunc)source_free);
   return our_type;
 }
 #endif
