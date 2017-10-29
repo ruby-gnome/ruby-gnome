@@ -28,6 +28,10 @@ static ID id_call;
 static void
 source_free(GSource *source)
 {
+    if (g_source_is_destroyed(source)) {
+        return;
+    }
+
     g_source_unref(source);
     g_source_destroy(source);
 }
