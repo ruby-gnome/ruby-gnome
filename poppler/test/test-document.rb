@@ -1,4 +1,13 @@
 class TestDocument < Test::Unit::TestCase
+  sub_test_case("#initialize") do
+    def test_data
+      data = File.read(outline_pdf, :encoding => "ASCII-8BIT")
+      document = Poppler::Document.new(:data => data)
+      assert_equal("Heading1\nHeading2\nHeading3",
+                   document[0].text)
+    end
+  end
+
   def test_save
     saved_pdf = File.join(tmp_dir, "saved.pdf")
     FileUtils.rm_f(saved_pdf)

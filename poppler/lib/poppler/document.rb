@@ -14,6 +14,8 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
+require "tempfile"
+
 module Poppler
   class Document
     include Enumerable
@@ -22,47 +24,75 @@ module Poppler
     def initialize(*args)
       if args.size == 1 and args[0].is_a?(Hash)
         options = args[0]
-        data = options[:data]
-        uri = options[:uri]
-        path = options[:path]
-        stream = options[:stream]
-        length = options[:length]
-        file = options[:file]
-        password = options[:password]
-
-        if data
-          initialize_new_from_data(data, password)
-        elsif uri
-          initialize_new_from_file(uri, password)
-        elsif path
-          uri = ensure_uri(path)
-          initialize_new_from_file(uri, password)
-        elsif stream
-          if length.nil?
-            raise(ArgumentError,
-                  "must specify :length for :stream: #{options.inspect}")
-          end
-          initialize_new_from_stream(stream, length, password)
-        elsif file
-          if file.is_a?(String)
-            initialize(path: file, password: password)
-          else
-            initialize_new_from_gfile(file, password)
-          end
-        else
-          message =
-            "must specify one of :data, :uri, :path, :stream or :file: " +
-            options.inspect
-          raise(ArgumentError, message)
-        end
       else
         uri_or_data, password = args
         if pdf_data?(uri_or_data)
-          initialize_new_from_data(uri_or_data, password)
+          options = {
+            :data => uri_or_data,
+            :password => password
+          }
         else
-          uri = ensure_uri(uri_or_data)
-          initialize_new_from_file(uri, password)
+          options = {
+            :uri => ensure_uri(uri_or_data),
+            :password => password
+          }
         end
+      end
+
+      data = options[:data]
+      uri = options[:uri]
+      path = options[:path]
+      stream = options[:stream]
+      length = options[:length]
+      file = options[:file]
+      password = options[:password]
+
+      if data
+        # Workaround: poppler_document_new_from_data()'s .gir
+        # accepts PDF data as UTF-8 string. PDF data is not UTF-8
+        # string. So UTF-8 validation is failed.
+        #
+        # TODO: Enable the following:
+        # initialize_new_from_data(data, password
+
+        # Whey does not the following work?
+        # stream = Gio::MemoryInputStream.new(data)
+        # begin
+        #   initialize_new_from_stream(stream, data.bytesize, password)
+        # ensure
+        #   stream.close
+        # end
+
+        file = Tempfile.new(["poppler", ".pdf"])
+        begin
+          file.print(data)
+          file.flush
+          initialize_new_from_file(ensure_uri(file.path), password)
+        ensure
+          file.close!
+        end
+      elsif uri
+        initialize_new_from_file(uri, password)
+      elsif path
+        uri = ensure_uri(path)
+        initialize_new_from_file(uri, password)
+      elsif stream
+        if length.nil?
+          raise(ArgumentError,
+                "must specify :length for :stream: #{options.inspect}")
+        end
+        initialize_new_from_stream(stream, length, password)
+      elsif file
+        if file.is_a?(String)
+          initialize(path: file, password: password)
+        else
+          initialize_new_from_gfile(file, password)
+        end
+      else
+        message =
+          "must specify one of :data, :uri, :path, :stream or :file: " +
+          options.inspect
+        raise(ArgumentError, message)
       end
     end
 
