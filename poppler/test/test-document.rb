@@ -59,6 +59,12 @@ class TestDocument < Test::Unit::TestCase
     assert_equal(2, document.size)
   end
 
+  def test_pages
+    document = Poppler::Document.new(multiple_pages_pdf)
+    assert_equal(["The first page", "The second page"],
+                 document.pages.collect(&:text))
+  end
+
   private
   def find_first_text_field(document)
     document.each do |page|

@@ -122,6 +122,8 @@ module Poppler
 
     alias_method :size, :n_pages
 
+    alias_method :pages, :to_a
+
     private
     def pdf_data?(data)
       data.start_with?("%PDF-1.")
