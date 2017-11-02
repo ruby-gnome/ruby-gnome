@@ -120,6 +120,8 @@ module Poppler
       IndexIter.new(self)
     end
 
+    alias_method :size, :n_pages
+
     private
     def pdf_data?(data)
       data.start_with?("%PDF-1.")
