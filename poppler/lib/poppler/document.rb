@@ -14,8 +14,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "tempfile"
-
 module Poppler
   class Document
     include Enumerable
@@ -53,24 +51,11 @@ module Poppler
         # string. So UTF-8 validation is failed.
         #
         # TODO: Enable the following:
-        # initialize_new_from_data(data, password
+        # initialize_new_from_data(data, password)
 
-        # Whey does not the following work?
-        # stream = Gio::MemoryInputStream.new(data)
-        # begin
-        #   initialize_new_from_stream(stream, data.bytesize, password)
-        # ensure
-        #   stream.close
-        # end
-
-        file = Tempfile.new(["poppler", ".pdf"])
-        begin
-          file.print(data)
-          file.flush
-          initialize_new_from_file(ensure_uri(file.path), password)
-        ensure
-          file.close!
-        end
+        @bytes = GLib::Bytes.new(data)
+        @stream = Gio::MemoryInputStream.new(@bytes)
+        initialize_new_from_stream(@stream, data.bytesize, password)
       elsif uri
         initialize_new_from_file(uri, password)
       elsif path

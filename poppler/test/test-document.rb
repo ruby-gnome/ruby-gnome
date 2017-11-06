@@ -1,10 +1,14 @@
 class TestDocument < Test::Unit::TestCase
   sub_test_case("#initialize") do
     def test_data
-      data = File.read(outline_pdf, :encoding => "ASCII-8BIT")
-      document = Poppler::Document.new(:data => data)
-      assert_equal("Heading1\nHeading2\nHeading3",
-                   document[0].text)
+      pdf = StringIO.new
+      surface = Cairo::PDFSurface.new(pdf, 100, 100)
+      context = Cairo::Context.new(surface)
+      context.show_text("Hello")
+      surface.finish
+
+      document = Poppler::Document.new(:data => pdf.string)
+      assert_equal("Hello", document[0].text)
     end
   end
 
