@@ -2,6 +2,52 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.2.0: 2017-11-07
+
+This is a bug fix release for Ruby/Poppler.
+
+=== Changes
+
+==== Ruby/GLib
+
+  * Improvements
+
+    * (({GLib::IOChannel#create_watch})): Supported.
+      [GitHub#1106][Reported by kspt-johs]
+
+    * (({GLib::IOChannel#create_watch})): Supported.
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * Added a sample.
+      [GitHub#1109][Patch by cedlemo]
+
+==== Ruby/Poppler
+
+  * Improvements
+
+    * (({Poppler#Document#size})): Added again.
+
+    * (({Poppler#Document#pages})): Added again.
+
+  * Fixes
+
+    * Updated dependencies.
+      [GitHub#1107][Reported by OBATA Akio]
+
+    * (({Poppler#Document#initialize(:data => data)})): Added
+      workaround. It should be fixed in upstream.
+
+=== Thanks
+
+  * kspt-johs
+
+  * OBATA Akio
+
+  * cedlemo
+
 == Ruby-GNOME2 3.1.9: 2017-10-16
 
 This is a release that includes GObject Introspection migrated Ruby/Poppler.
