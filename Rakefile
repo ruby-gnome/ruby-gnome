@@ -91,6 +91,26 @@ def change_environment_variable(variables)
   end
 end
 
+def gem_exist?(name, version)
+  gem_uri = "https://rubygems.org/gems/#{name}/versions/#{version}"
+  begin
+    open(gem_uri)
+    true
+  rescue OpenURI::HTTPError
+    false
+  end
+end
+
+def gem_push(path, name, version)
+  return if gem_exist?(name, version)
+  begin
+    ruby("-S", "gem", "push", path)
+  rescue
+    puts("failed to push gem: #{path}")
+    puts("#{$!.class}: #{$!}")
+  end
+end
+
 gtk2_base_name = "ruby-gtk2"
 gtk3_base_name = "ruby-gtk3"
 gnome2_base_name = "ruby-gnome2-all"
@@ -381,8 +401,10 @@ namespace :gem do
   desc "push all gems"
   task :push do
     gnome2_packages.each do |package|
-      Dir.glob(File.join(package, "pkg", "*-#{version}.gem")) do |gem|
-        ruby("-S", "gem", "push", gem)
+      Dir.glob(File.join(package, "pkg", "*-#{version}.gem")) do |gem_path|
+        gem_base_path = File.basename(gem_path, ".gem")
+        gem_name = gem_base_path.gsub(/-#{Regexp.escape(version)}\z/, "")
+        gem_push(gem_path, gem_name, version)
       end
     end
   end
@@ -508,9 +530,10 @@ namespace :gem do
           "x64-mingw32",
         ]
         architectures.each do |architecture|
-          base_name = "#{package}-#{version}-#{architecture}.gem"
-          ruby("-S", "gem", "push",
-               File.join("build", "pkg", base_name))
+          gem_version = "#{version}-#{architecture}"
+          base_name = "#{package}-#{gem_version}.gem"
+          gem_path = File.join("build", "pkg", base_name)
+          gem_push(gem_path, package, gem_version)
         end
       end
     end
