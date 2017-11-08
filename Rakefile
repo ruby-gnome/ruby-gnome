@@ -233,6 +233,7 @@ namespace :dist do
   end
 
   ruby_versions = ["2.1.10", "2.2.8", "2.3.5", "2.4.2"]
+  ruby_versions -= ["2.2.8"] # TODO: Ruby 2.2.8 is broken?
   namespace :test do
     ruby_base_url = "https://cache.ruby-lang.org/pub/ruby"
     ruby_versions.each do |ruby_version|
