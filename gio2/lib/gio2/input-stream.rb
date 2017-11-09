@@ -23,7 +23,7 @@ module Gio
         buffer_size = 8192
         buffer = " ".force_encoding("ASCII-8BIT") * buffer_size
         loop do
-          read_bytes = read_raw_compatible(buffer)
+          _, read_bytes = read_all_raw_compatible(buffer)
           all << buffer.byteslice(0, read_bytes)
           break if read_bytes != buffer_size
         end
@@ -36,12 +36,28 @@ module Gio
       end
     end
 
+    alias_method :read_all_raw, :read_all
+    def read_all(size)
+      buffer = " " * size
+      _, read_bytes = read_all_raw_compatible(buffer)
+      buffer.replace(buffer.byteslice(0, read_bytes))
+      buffer
+    end
+
     private
     def read_raw_compatible(buffer)
       if (GLib::VERSION <=> [2, 36, 0]) >= 0
         read_raw(buffer)
       else
         read_raw(buffer, buffer.bytesize)
+      end
+    end
+
+    def read_all_raw_compatible(buffer)
+      if (GLib::VERSION <=> [2, 36, 0]) >= 0
+        read_all_raw(buffer)
+      else
+        read_all_raw(buffer, buffer.bytesize)
       end
     end
   end

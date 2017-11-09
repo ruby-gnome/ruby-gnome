@@ -187,5 +187,19 @@ module Gio
     def error_parent_class(info)
       Error
     end
+
+    def should_unlock_gvl?(function_info, klass)
+      case klass.name
+      when "Gio::InputStream"
+        case function_info.name
+        when "read", "read_all"
+          true
+        else
+          false
+        end
+      else
+        false
+      end
+    end
   end
 end

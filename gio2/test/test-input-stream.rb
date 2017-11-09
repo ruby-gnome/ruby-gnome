@@ -26,11 +26,35 @@ class TestInputStream < Test::Unit::TestCase
     teardown_socket_client
   end
 
-  def test_read
-    data = "Hello\n"
+  sub_test_case("#read") do
+    def test_with_size
+      data = "Hello\n"
+      client = @server.accept
+      client.write(data)
+      client.flush
+      assert_equal("Hell", @stream.read(4))
+    end
+
+    def test_without_size
+      data = "Hello\n"
+      client = @server.accept
+      client.write(data)
+      client.flush
+      client.close
+      assert_equal(data, @stream.read)
+    end
+  end
+
+  def test_read_all
     client = @server.accept
-    client.write(data)
+    client.write("He")
     client.flush
-    assert_equal(data, @stream.read)
+    thread = Thread.new do
+      sleep(0.1)
+      client.write("llo")
+      client.flush
+    end
+    assert_equal("Hell", @stream.read_all(4))
+    thread.join
   end
 end
