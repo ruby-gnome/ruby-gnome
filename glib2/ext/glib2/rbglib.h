@@ -46,6 +46,11 @@ extern "C" {
 #  endif
 #endif
 
+/* For Ruby < 2.3 */
+#ifndef RB_OBJ_FROZEN
+#  define RB_OBJ_FROZEN(obj) OBJ_FROZEN(obj)
+#endif
+
 #ifndef RSTRING_PTR
 #  define RSTRING_PTR(s) (RSTRING(s)->ptr)
 #  define RSTRING_LEN(s) (RSTRING(s)->len)
