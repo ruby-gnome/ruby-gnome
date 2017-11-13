@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2015-2017  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -639,6 +639,7 @@ Init_gtk3(void)
     rbgtk3_tree_model_init();
     rbgtk3_tree_view_init();
     rbgtk3_widget_init();
+    rbgtk3_window_init();
 
     rbgobj_boxed_not_copy_obj(GTK_TYPE_SELECTION_DATA);
     setlocale(LC_NUMERIC, "C");
