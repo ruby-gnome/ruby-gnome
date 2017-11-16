@@ -20,7 +20,7 @@ class TestGtkStyleProperties < Test::Unit::TestCase
   end
 
   class TestGet < self
-    def test_eixstent
+    def test_existent
       key = "border-radius"
       state = :normal
       value = 29
@@ -31,7 +31,7 @@ class TestGtkStyleProperties < Test::Unit::TestCase
       assert_equal(value, @properties.get_property(key, state))
     end
 
-    def test_noneixstent
+    def test_nonexistent
       assert_nil(@properties.get_property("nonexistent", :normal))
     end
   end
