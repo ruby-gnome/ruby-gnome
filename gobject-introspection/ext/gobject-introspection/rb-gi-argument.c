@@ -22,6 +22,21 @@
 
 static VALUE rb_cGLibValue = Qnil;
 
+static const gchar *
+rb_gi_transfer_to_string(GITransfer transfer)
+{
+    switch(transfer) {
+      case GI_TRANSFER_NOTHING:
+        return "nothing";
+      case GI_TRANSFER_CONTAINER:
+        return "container";
+      case GI_TRANSFER_EVERYTHING:
+        return "everything";
+      default:
+        return "unknown";
+    }
+}
+
 static void
 array_c_to_ruby_sized_interface(gconstpointer *elements,
                                 gint64 n_elements,
@@ -1580,6 +1595,8 @@ rb_gi_out_argument_init_interface(GIArgument *argument,
     {
         gsize struct_size;
 
+        /* Should we care gtype?
+           Related: rb_gi_out_argument_fin_interface() */
         struct_size = g_struct_info_get_size(interface_info);
         argument->v_pointer = xmalloc(struct_size);
         memset(argument->v_pointer, 0, struct_size);
@@ -1877,7 +1894,8 @@ static void
 rb_gi_out_argument_fin_array_c(GIArgument *argument,
                                G_GNUC_UNUSED GIArgInfo *arg_info,
                                G_GNUC_UNUSED GITypeInfo *array_type_info,
-                               GITypeInfo *element_type_info)
+                               GITypeInfo *element_type_info,
+                               GITransfer transfer)
 {
     GITypeTag element_type_tag;
 
@@ -1893,6 +1911,9 @@ rb_gi_out_argument_fin_array_c(GIArgument *argument,
                  g_type_tag_to_string(element_type_tag));
         break;
       case GI_TYPE_TAG_UINT8:
+        if (transfer == GI_TRANSFER_EVERYTHING) {
+            g_free(*((guint8 **)(argument->v_pointer)));
+        }
         xfree(argument->v_pointer);
         break;
       case GI_TYPE_TAG_INT16:
@@ -1910,6 +1931,9 @@ rb_gi_out_argument_fin_array_c(GIArgument *argument,
                  g_type_tag_to_string(element_type_tag));
         break;
       case GI_TYPE_TAG_UTF8:
+        if (transfer != GI_TRANSFER_NOTHING) {
+            g_free(*((gchar **)argument->v_pointer));
+        }
         xfree(argument->v_pointer);
         break;
       case GI_TYPE_TAG_FILENAME:
@@ -1920,6 +1944,16 @@ rb_gi_out_argument_fin_array_c(GIArgument *argument,
                  g_type_tag_to_string(element_type_tag));
         break;
       case GI_TYPE_TAG_INTERFACE:
+        if (transfer == GI_TRANSFER_EVERYTHING) {
+            g_base_info_unref(element_type_info);
+            rb_raise(rb_eNotImpError,
+                     "TODO: free out transfer GIArgument(array)[c][%s][%s]",
+                     g_type_tag_to_string(element_type_tag),
+                     rb_gi_transfer_to_string(transfer));
+        }
+        if (transfer != GI_TRANSFER_NOTHING) {
+            g_free(*((gpointer *)argument->v_pointer));
+        }
         xfree(argument->v_pointer);
         break;
       case GI_TYPE_TAG_GLIST:
@@ -1942,7 +1976,8 @@ rb_gi_out_argument_fin_array_c(GIArgument *argument,
 static void
 rb_gi_out_argument_fin_array(GIArgument *argument,
                              GIArgInfo *arg_info,
-                             GITypeInfo *array_type_info)
+                             GITypeInfo *array_type_info,
+                             GITransfer transfer)
 {
     GIArrayType array_type;
     GITypeInfo *element_type_info;
@@ -1957,9 +1992,17 @@ rb_gi_out_argument_fin_array(GIArgument *argument,
         rb_gi_out_argument_fin_array_c(argument,
                                        arg_info,
                                        array_type_info,
-                                       element_type_info);
+                                       element_type_info,
+                                       transfer);
         break;
     case GI_ARRAY_TYPE_ARRAY:
+        if (transfer != GI_TRANSFER_NOTHING) {
+            g_base_info_unref(element_type_info);
+            rb_raise(rb_eNotImpError,
+                     "TODO: free out transfer GIArgument(array)[ptr-array][%s][%s]",
+                     g_type_tag_to_string(element_type_tag),
+                     rb_gi_transfer_to_string(transfer));
+        }
         g_array_free(argument->v_pointer, TRUE);
         break;
     case GI_ARRAY_TYPE_PTR_ARRAY:
@@ -1983,11 +2026,88 @@ rb_gi_out_argument_fin_array(GIArgument *argument,
     g_base_info_unref(element_type_info);
 }
 
+static void
+rb_gi_out_argument_fin_interface(GIArgument *argument,
+                                 G_GNUC_UNUSED GIArgInfo *arg_info,
+                                 GITypeInfo *interface_type_info,
+                                 GITransfer transfer)
+{
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+
+    interface_info = g_type_info_get_interface(interface_type_info);
+    interface_type = g_base_info_get_type(interface_info);
+    g_base_info_unref(interface_info);
+
+    switch (interface_type) {
+      case GI_INFO_TYPE_INVALID:
+      case GI_INFO_TYPE_FUNCTION:
+      case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free out transfer GIArgument(interface)[%s][%s]",
+                 g_info_type_to_string(interface_type),
+                 rb_gi_transfer_to_string(transfer));
+        break;
+      case GI_INFO_TYPE_STRUCT:
+        /* Should we care gtype?
+           Related: rb_gi_out_argument_init_interface() */
+        xfree(argument->v_pointer);
+        break;
+      case GI_INFO_TYPE_BOXED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free out transfer GIArgument(interface)[%s][%s]",
+                 g_info_type_to_string(interface_type),
+                 rb_gi_transfer_to_string(transfer));
+        break;
+      case GI_INFO_TYPE_ENUM:
+      case GI_INFO_TYPE_FLAGS:
+        break;
+      case GI_INFO_TYPE_OBJECT:
+        if (transfer != GI_TRANSFER_NOTHING) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: free out transfer GIArgument(interface)[%s][%s]",
+                     g_info_type_to_string(interface_type),
+                     rb_gi_transfer_to_string(transfer));
+        }
+        xfree(argument->v_pointer);
+        break;
+      case GI_INFO_TYPE_INTERFACE:
+        if (transfer != GI_TRANSFER_NOTHING) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: free out transfer GIArgument(interface)[%s][%s]",
+                     g_info_type_to_string(interface_type),
+                     rb_gi_transfer_to_string(transfer));
+        }
+        xfree(argument->v_pointer);
+        break;
+      case GI_INFO_TYPE_CONSTANT:
+      case GI_INFO_TYPE_INVALID_0:
+      case GI_INFO_TYPE_UNION:
+      case GI_INFO_TYPE_VALUE:
+      case GI_INFO_TYPE_SIGNAL:
+      case GI_INFO_TYPE_VFUNC:
+      case GI_INFO_TYPE_PROPERTY:
+      case GI_INFO_TYPE_FIELD:
+      case GI_INFO_TYPE_ARG:
+      case GI_INFO_TYPE_TYPE:
+      case GI_INFO_TYPE_UNRESOLVED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free out transfer GIArgument(interface)[%s][%s]",
+                 g_info_type_to_string(interface_type),
+                 rb_gi_transfer_to_string(transfer));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
 void
 rb_gi_out_argument_fin(GIArgument *argument, GIArgInfo *arg_info)
 {
     GITypeInfo type_info;
     GITypeTag type_tag;
+    GITransfer transfer;
 
     if (g_arg_info_get_direction(arg_info) != GI_DIRECTION_OUT) {
         return;
@@ -1995,6 +2115,7 @@ rb_gi_out_argument_fin(GIArgument *argument, GIArgInfo *arg_info)
 
     g_arg_info_load_type(arg_info, &type_info);
     type_tag = g_type_info_get_tag(&type_info);
+    transfer = g_arg_info_get_ownership_transfer(arg_info);
 
     switch (type_tag) {
     case GI_TYPE_TAG_VOID:
@@ -2010,7 +2131,12 @@ rb_gi_out_argument_fin(GIArgument *argument, GIArgInfo *arg_info)
     case GI_TYPE_TAG_FLOAT:
     case GI_TYPE_TAG_DOUBLE:
     case GI_TYPE_TAG_GTYPE:
+        xfree(argument->v_pointer);
+        break;
     case GI_TYPE_TAG_UTF8:
+        if (transfer != GI_TRANSFER_NOTHING) {
+            g_free(*((gchar **)argument->v_pointer));
+        }
         xfree(argument->v_pointer);
         break;
     case GI_TYPE_TAG_FILENAME:
@@ -2019,13 +2145,37 @@ rb_gi_out_argument_fin(GIArgument *argument, GIArgInfo *arg_info)
                  g_type_tag_to_string(type_tag));
         break;
     case GI_TYPE_TAG_ARRAY:
-        rb_gi_out_argument_fin_array(argument, arg_info, &type_info);
+        rb_gi_out_argument_fin_array(argument, arg_info, &type_info, transfer);
         break;
     case GI_TYPE_TAG_INTERFACE:
+        rb_gi_out_argument_fin_interface(argument,
+                                         arg_info,
+                                         &type_info,
+                                         transfer);
+        break;
     case GI_TYPE_TAG_GLIST:
+        if (transfer == GI_TRANSFER_EVERYTHING) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: free out transfer GIArgument(%s)[%s]",
+                     g_type_tag_to_string(type_tag),
+                     rb_gi_transfer_to_string(transfer));
+        }
+        if (transfer != GI_TRANSFER_NOTHING) {
+            g_list_free(*((GList **)argument->v_pointer));
+        }
+        xfree(argument->v_pointer);
+        break;
     case GI_TYPE_TAG_GSLIST:
     case GI_TYPE_TAG_GHASH:
     case GI_TYPE_TAG_ERROR:
+        if (transfer != GI_TRANSFER_NOTHING) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: free out transfer GIArgument(%s)[%s]",
+                     g_type_tag_to_string(type_tag),
+                     rb_gi_transfer_to_string(transfer));
+        }
+        xfree(argument->v_pointer);
+        break;
     case GI_TYPE_TAG_UNICHAR:
         xfree(argument->v_pointer);
         break;
