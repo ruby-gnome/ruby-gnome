@@ -40,6 +40,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         const gchar *data = RVAL2CSTR_PTR(rb_data);
         if (RB_OBJ_FROZEN(rb_data)) {
             bytes = g_bytes_new_static(data, RSTRING_LEN(rb_data));
+            rb_iv_set(self, "source", rb_data);
         } else {
             bytes = g_bytes_new(data, RSTRING_LEN(rb_data));
         }

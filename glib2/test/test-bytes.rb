@@ -21,6 +21,21 @@ class TestGLibBytes < Test::Unit::TestCase
     only_glib_version(2, 32, 0)
   end
 
+  sub_test_case ".new" do
+    def create_bytes(options={})
+      data = "Hello"
+      data.freeze if options[:freeze]
+      [data.object_id, GLib::Bytes.new(data)]
+    end
+
+    test "frozen" do
+      id, bytes = create_bytes(:freeze => true)
+      GC.start
+      assert_equal(bytes.to_s,
+                   ObjectSpace._id2ref(id))
+    end
+  end
+
   test "#to_s" do
     data = "Hello"
     bytes = GLib::Bytes.new(data)
