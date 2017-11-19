@@ -151,7 +151,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
     {
       :name => "gnutls",
-      :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4",
+      :download_base_url => "https://www.gnutls.org/ftp/gcrypt/gnutls/v3.4",
       :label => "GnuTLS",
       :version => "3.4.10",
       :compression_method => "xz",
