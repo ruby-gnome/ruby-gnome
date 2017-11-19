@@ -2,6 +2,51 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.2.1: 2017-11-19
+
+This is a memory related bug fix release.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * (({GLib::Bytes#initialize})): Stopped to copy data for frozen
+      (({String})).
+
+==== Ruby/GObjectIntrospection
+
+  * Fixes
+
+    * Fixed memory leaks for output parameters.
+      [GitHub#1113][Reported by Will Bryant]
+
+==== Ruby/GIO2
+
+  * Improvements
+
+    * (({Gio::InputStream#read_all})): Made workable.
+      [GitHub#1110][Reported by Paul van Tilburg]
+
+    * (({Gio::InputStream#read})): If the given size is (({nil})),
+      read until EOF or error. It's compatible with Ruby's IO objects.
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * Marked top-level windows automatically.
+      [GitHub#1103][Reported by cedlemo]
+
+=== Thanks
+
+  * Paul van Tilburg
+
+  * cedlemo
+
+  * Will Bryant
+
 == Ruby-GNOME2 3.2.0: 2017-11-07
 
 This is a bug fix release for Ruby/Poppler.
