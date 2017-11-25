@@ -21,6 +21,9 @@ matrix:
     - env: TYPE=ubuntu-17.04
     - env: TYPE=centos-6
     - env: TYPE=centos-7
+    - os: osx
+      install: bundle install
+      script: bundle exec rake
   # allow_failures:
   #   - env: TYPE=centos-6
   #   - env: TYPE=centos-7
