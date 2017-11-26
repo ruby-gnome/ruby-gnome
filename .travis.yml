@@ -26,11 +26,7 @@ matrix:
       install:
         - bundle install
       script:
-        - which brew
-        - head $(which brew)
-        - brew update && brew install glib
-        - bundle exec brew install glib
-        - bundle exec rake
+        - rake
   allow_failures:
   #   - env: TYPE=centos-6
   #   - env: TYPE=centos-7
@@ -39,11 +35,7 @@ matrix:
       install:
         - bundle install
       script:
-        - which brew
-        - head $(which brew)
-        - brew update && brew install glib
-        - bundle exec brew install glib
-        - bundle exec rake
+        - rake
 
 install:
   - docker build
