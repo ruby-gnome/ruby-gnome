@@ -22,23 +22,27 @@ matrix:
     - env: TYPE=centos-6
     - env: TYPE=centos-7
     - os: osx
-      rvm: 2.3.1
+      rvm: 2.2
       install:
         - bundle install
       script:
+        - which brew
+        - head $(which brew)
+        - brew update && brew install glib
         - bundle exec brew install glib
-        - brew install glib
         - bundle exec rake
   allow_failures:
   #   - env: TYPE=centos-6
   #   - env: TYPE=centos-7
     - os: osx
-      rvm: 2.3.1
+      rvm: 2.2
       install:
         - bundle install
       script:
+        - which brew
+        - head $(which brew)
+        - brew update && brew install glib
         - bundle exec brew install glib
-        - brew install glib
         - bundle exec rake
 
 install:
