@@ -24,6 +24,7 @@ matrix:
     - os: osx
       rvm: 2.2
       install:
+        - brew update
         - bundle install
       script:
         - rake
@@ -33,6 +34,7 @@ matrix:
     - os: osx
       rvm: 2.2
       install:
+        - brew update
         - bundle install
       script:
         - rake
