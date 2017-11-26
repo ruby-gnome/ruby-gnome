@@ -27,6 +27,7 @@ matrix:
         - bundle install
       script:
         - bundle exec brew install glib
+        - brew install glib
         - bundle exec rake
   allow_failures:
   #   - env: TYPE=centos-6
@@ -37,6 +38,7 @@ matrix:
         - bundle install
       script:
         - bundle exec brew install glib
+        - brew install glib
         - bundle exec rake
 
 install:
