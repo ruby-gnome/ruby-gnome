@@ -22,7 +22,7 @@ matrix:
     - env: TYPE=centos-6
     - env: TYPE=centos-7
     - os: osx
-      rvm: 2.4.2
+      rvm: 2.3.1
       install:
         - bundle install
       script:
