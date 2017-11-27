@@ -23,9 +23,11 @@ class ConvertTest < Test::Unit::TestCase
     output = Tempfile.new(["test-gnumeric", ".csv"])
     command_context = Gnm::CmdContextStderr.new
     Gnm.plugins_init(command_context)
+    opener = nil # TODO:
+    omit("opener can be nil but .gir file doesn't mark as nullable")
     io_context = GOffice::IOContext.new(command_context)
     view = Gnm::WorkbookView.new("file://#{input_path}",
-                                 nil,
+                                 opener,
                                  io_context,
                                  "utf-8")
     saver = GOffice::FileSaver.for_file_name(output.path)
