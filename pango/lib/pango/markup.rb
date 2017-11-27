@@ -18,6 +18,7 @@ module Pango
   class << self
     alias_method :parse_markup_raw, :parse_markup
     def parse_markup(markup_text, accel_marker=nil)
+      accel_marker ||= 0
       success, attr_list, text, accel_char =
         parse_markup_raw(markup_text,
                          markup_text.bytesize,
