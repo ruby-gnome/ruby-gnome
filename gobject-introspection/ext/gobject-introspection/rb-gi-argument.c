@@ -3406,14 +3406,35 @@ rb_gi_in_argument_transfer(GIArgument *argument, GITransfer transfer,
 }
 
 GIArgument *
-rb_gi_in_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
-                            VALUE rb_argument, VALUE self)
+rb_gi_in_argument_from_ruby(GIArgument *argument,
+                            GIArgInfo *arg_info,
+                            guint nth_rb_argument,
+                            VALUE rb_argument,
+                            VALUE self)
 {
     GITypeInfo type_info;
 
-    if (g_arg_info_may_be_null(arg_info) && NIL_P(rb_argument)) {
-        memset(argument, 0, sizeof(GIArgument));
-        return argument;
+    if (NIL_P(rb_argument)) {
+        if (g_arg_info_may_be_null(arg_info)) {
+            memset(argument, 0, sizeof(GIArgument));
+            return argument;
+        } else {
+            const char *suffix;
+            if (nth_rb_argument == 1) {
+                suffix = "st";
+            } else if (nth_rb_argument == 2) {
+                suffix = "nd";
+            } else if (nth_rb_argument == 3) {
+                suffix = "rd";
+            } else {
+                suffix = "th";
+            }
+            rb_raise(rb_eArgError,
+                     "the %u%s argument must not nil: <%s>",
+                     nth_rb_argument,
+                     suffix,
+                     g_base_info_get_name(arg_info));
+        }
     }
 
     g_arg_info_load_type(arg_info, &type_info);

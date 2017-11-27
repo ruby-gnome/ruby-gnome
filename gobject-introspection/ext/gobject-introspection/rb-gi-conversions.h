@@ -46,9 +46,6 @@
 #define RVAL2GI_VALUE_ARGUMENT(argument, type_info, rb_argument, self)  \
     (rb_gi_value_argument_from_ruby((argument), (type_info),            \
                                     (rb_argument), (self)))
-#define RVAL2GI_IN_ARGUMENT(argument, arg_info, rb_argument, self)      \
-    (rb_gi_in_argument_from_ruby((argument), (arg_info),                \
-                                 (rb_argument), (self)))
 #define RVAL2GI_IN_ARRAY_ARGUMENT(array_argument, length_argument,      \
                                   array_arg_info, length_arg_info,      \
                                   rb_argument)                          \
@@ -129,6 +126,7 @@ GIArgument *rb_gi_value_argument_from_ruby    (GIArgument     *argument,
                                                VALUE           self);
 GIArgument *rb_gi_in_argument_from_ruby       (GIArgument     *argument,
                                                GIArgInfo      *arg_info,
+                                               guint           nth_rb_argument,
                                                VALUE           rb_argument,
                                                VALUE           self);
 GIArgument *rb_gi_in_array_argument_from_ruby (GIArgument     *array_argument,

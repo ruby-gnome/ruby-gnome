@@ -1172,10 +1172,11 @@ in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE rb_arguments,
             rb_argument = RARRAY_PTR(rb_arguments)[metadata->rb_arg_index];
         }
         argument = &(g_array_index(in_args, GIArgument, metadata->in_arg_index));
-        RVAL2GI_IN_ARGUMENT(argument,
-                            &(metadata->arg_info),
-                            rb_argument,
-                            self);
+        rb_gi_in_argument_from_ruby(argument,
+                                    &(metadata->arg_info),
+                                    metadata->rb_arg_index,
+                                    rb_argument,
+                                    self);
     }
 }
 
