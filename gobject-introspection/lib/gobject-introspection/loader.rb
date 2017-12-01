@@ -437,6 +437,12 @@ module GObjectIntrospection
       if name == "initialize"
         name += "_raw"
       end
+
+      n_in_args = function_info.n_in_args
+      if options[:n_in_args_offset]
+        n_in_args += options[:n_in_args_offset]
+      end
+
       return_type = function_info.return_type
       return_type_tag = return_type.tag
       if return_type_tag == TypeTag::VOID
@@ -445,11 +451,12 @@ module GObjectIntrospection
           return_type_tag = TypeTag::ARRAY
         end
       end
+
       case return_type_tag
       when TypeTag::BOOLEAN
         case name
         when "equal"
-          if function_info.n_in_args == 1
+          if n_in_args == 1
             "=="
           else
             name
@@ -457,7 +464,7 @@ module GObjectIntrospection
         when /\A(?:is|get_is|can_be)_/
           "#{$POSTMATCH}?"
         when /\Aget_/
-          if function_info.n_in_args.zero?
+          if n_in_args.zero?
             if function_info.n_out_args.zero?
               "#{$POSTMATCH}?"
             else
@@ -476,7 +483,7 @@ module GObjectIntrospection
       when TypeTag::GLIST, TypeTag::GSLIST, TypeTag::ARRAY
         case name
         when /\A(?:list|get)_/
-          if function_info.n_in_args.zero?
+          if n_in_args.zero?
             $POSTMATCH
           else
             name
@@ -487,7 +494,7 @@ module GObjectIntrospection
       else
         case name
         when /\Aget_/
-          if function_info.n_in_args.zero?
+          if n_in_args.zero?
             $POSTMATCH
           else
             name
