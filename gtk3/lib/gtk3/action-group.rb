@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -80,7 +80,7 @@ module Gtk
                                   :label    => translate_string(label),
                                   :tooltip  => translate_string(tooltip),
                                   :stock_id => stock_id)
-        action.active = is_active
+        action.active = true if is_active
         action.signal_connect("activate") do
           callback.call(self, action)
         end

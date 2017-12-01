@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2017  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -36,6 +36,34 @@ class TestGtkToggleAction < Test::Unit::TestCase
     test(":stock_id") do
       action = Gtk::ToggleAction.new("add", :stock_id => "gtk-add")
       assert_equal("gtk-add", action.stock_id)
+    end
+  end
+
+  sub_test_case("instance methods") do
+    def setup
+      @action = Gtk::ToggleAction.new("add")
+    end
+
+    sub_test_case("#active=") do
+      def test_nil
+        assert_raise(ArgumentError) do
+          @action.active = nil
+        end
+      end
+
+      def test_true
+        @action.active = true
+        assert do
+          @action.active?
+        end
+      end
+
+      def test_false
+        @action.active = false
+        assert do
+          not @action.active?
+        end
+      end
     end
   end
 end
