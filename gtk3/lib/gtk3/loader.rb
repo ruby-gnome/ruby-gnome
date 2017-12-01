@@ -179,7 +179,9 @@ module Gtk
         method_name = rubyish_method_name(info)
         define_method(info, widget_class, method_name)
       when /\Adrag_/
-        method_name = rubyish_method_name(info, :prefix => "drag_")
+        method_name = rubyish_method_name(info,
+                                          :prefix => "drag_",
+                                          :n_in_args_offset => -1)
         define_method(info, Gdk::DragContext, method_name)
       when /\Abinding_/
         # Ignore because singleton methods are defined.
