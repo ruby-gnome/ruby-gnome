@@ -1123,8 +1123,11 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata, GArray *in_args)
 }
 
 static void
-in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE rb_arguments,
-                      GArray *in_args, GPtrArray *args_metadata,
+in_argument_from_ruby(GICallableInfo *callable_info,
+                      RBGIArgMetadata *metadata,
+                      VALUE rb_arguments,
+                      GArray *in_args,
+                      GPtrArray *args_metadata,
                       VALUE self)
 {
     if (metadata->callback_p && !metadata->destroy_p) {
@@ -1172,7 +1175,8 @@ in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE rb_arguments,
             rb_argument = RARRAY_PTR(rb_arguments)[metadata->rb_arg_index];
         }
         argument = &(g_array_index(in_args, GIArgument, metadata->in_arg_index));
-        rb_gi_in_argument_from_ruby(argument,
+        rb_gi_in_argument_from_ruby(callable_info,
+                                    argument,
                                     &(metadata->arg_info),
                                     metadata->rb_arg_index,
                                     rb_argument,
@@ -1216,8 +1220,12 @@ arguments_from_ruby(GICallableInfo *info, VALUE self, VALUE rb_arguments,
 
         metadata = g_ptr_array_index(args_metadata, i);
         if (metadata->in_arg_index != -1) {
-            in_argument_from_ruby(metadata, rb_arguments,
-                                  in_args, args_metadata, self);
+            in_argument_from_ruby(info,
+                                  metadata,
+                                  rb_arguments,
+                                  in_args,
+                                  args_metadata,
+                                  self);
         } else {
             out_argument_from_ruby(metadata, out_args);
         }

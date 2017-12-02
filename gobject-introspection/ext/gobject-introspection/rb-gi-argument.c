@@ -3406,7 +3406,8 @@ rb_gi_in_argument_transfer(GIArgument *argument, GITransfer transfer,
 }
 
 GIArgument *
-rb_gi_in_argument_from_ruby(GIArgument *argument,
+rb_gi_in_argument_from_ruby(GICallableInfo *callable_info,
+                            GIArgument *argument,
                             GIArgInfo *arg_info,
                             guint nth_rb_argument,
                             VALUE rb_argument,
@@ -3419,7 +3420,12 @@ rb_gi_in_argument_from_ruby(GIArgument *argument,
             memset(argument, 0, sizeof(GIArgument));
             return argument;
         } else {
+            const char *module_name;
+            GIBaseInfo *klass;
             const char *suffix;
+
+            module_name = g_base_info_get_namespace(callable_info);
+            klass = g_base_info_get_container(callable_info);
             if (nth_rb_argument == 1) {
                 suffix = "st";
             } else if (nth_rb_argument == 2) {
@@ -3430,7 +3436,12 @@ rb_gi_in_argument_from_ruby(GIArgument *argument,
                 suffix = "th";
             }
             rb_raise(rb_eArgError,
-                     "the %u%s argument must not nil: <%s>",
+                     "<%s%s%s%s%s>: the %u%s argument must not nil: <%s>",
+                     module_name,
+                     klass ? "::" : "",
+                     klass ? g_base_info_get_name(klass) : "",
+                     klass ? "#" : ".",
+                     g_base_info_get_name(callable_info),
                      nth_rb_argument,
                      suffix,
                      g_base_info_get_name(arg_info));
