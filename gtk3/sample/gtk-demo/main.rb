@@ -197,7 +197,7 @@ def select_treeview_item(treeview, filename)
     end
   end
   treeview.expand_to_path(to_select)
-  treeview.set_cursor(to_select, treeview.columns[FILENAME_COLUMN])
+  treeview.set_cursor(to_select, nil, false)
 end
 
 class Demo < Gtk::Application
