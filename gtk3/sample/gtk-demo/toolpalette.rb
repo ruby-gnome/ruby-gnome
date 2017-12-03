@@ -99,7 +99,7 @@ class ToolpaletteDemo
       drag_palette = context.source_widget
       drag_item = nil
       drop_group = nil
-      while (drag_palette && drag_palette.class = Gtk::ToolPalette) do
+      while (drag_palette && drag_palette.class != Gtk::ToolPalette) do
         drag_palette = drag_palette.parent
       end
 
@@ -121,42 +121,42 @@ class ToolpaletteDemo
                                       Gtk::ToolPaletteDragTargets::GROUPS],
                                      Gdk::DragAction::COPY)
     # Passive DnD dest
-    contents = Gtk::DrawingArea.new
-    contents.signal_connect "draw" do |widget, cr|
+    passive_contents = Gtk::DrawingArea.new
+    passive_contents.signal_connect "draw" do |widget, cr|
       canvas_draw(widget, cr)
     end
-    contents.signal_connect "drag-data-received" do |widget, context, x, y, selection, info, time|
+    passive_contents.signal_connect "drag-data-received" do |widget, context, x, y, selection, info, time|
       # find the tool button which is the source of this DnD operation
-      palette = context.drag_get_source_widget
-      while (palette && palette.class = Gtk::ToolPalette) do
-        palette = palette.parent
-      end
+#        palette = context.source_widget
+#        while (palette && palette.class != Gtk::ToolPalette) do
+#          palette = palette.parent
+#        end
       tool_item = nil
-      tool_item = palette.get_drag_item(selection) if palette
+      tool_item = @palette.get_drag_item(selection) #if palette
 
       # append a new canvas item when a tool button was found
-      if tool_item.class == Gtk::ToolItem
-        canvas_item = CanvasItem.new
+      if tool_item.class == Gtk::ToolButton
+        canvas_item = CanvasItem.new(widget, tool_item, x, y)
         @canvas_items << canvas_item
         widget.queue_draw
       end
     end
-    @palette.add_drag_dest(@palette, Gtk::DestDefaults::ALL,
+    @palette.add_drag_dest(passive_contents, Gtk::DestDefaults::ALL,
                                      [Gtk::ToolPaletteDragTargets::ITEMS],
                                      Gdk::DragAction::COPY)
     contents_scroller = Gtk::ScrolledWindow.new
     contents_scroller.set_policy(:automatic, :always)
-    contents_scroller.add(contents)
+    contents_scroller.add(passive_contents)
     notebook.append_page(contents_scroller, Gtk::Label.new("Passive DnD Mode"))
     contents_scroller.margin = 6
 
     # Interactive DnD dest
-    contents = Gtk::DrawingArea.new
-    contents.signal_connect "draw" do |widget, cr|
+    interactive_contents = Gtk::DrawingArea.new
+    interactive_contents.signal_connect "draw" do |widget, cr|
       canvas_draw(widget, cr)
     end
 
-    contents.signal_connect "drag-motion" do |widget, context, x, y, time|
+    interactive_contents.signal_connect "drag-motion" do |widget, context, x, y, time|
       if @drop_item
         # already have a drop indicator - just update position
         @drop_item.x = x
@@ -173,37 +173,38 @@ class ToolpaletteDemo
       true
     end
 
-    contents.signal_connect "drag-data-received" do |widget, context, x, y, selection, info, time|
+    interactive_contents.signal_connect "drag-data-received" do |widget, context, x, y, selection, info, time|
       # find the tool button which is the source of this DnD operation
-      palette = context.drag_get_source_widget
-      while (palette && palette.class = Gtk::ToolPalette) do
-        palette = palette.parent
-      end
+#      palette = context.source_widget
+#      while (palette && palette.class != Gtk::ToolPalette) do
+#        palette = palette.parent
+#      end
       tool_item = nil
-      tool_item = palette.get_drag_item(selection) if palette
-      return unless tool_item.class == Gtk::ToolItem
+      tool_item = @palette.get_drag_item(selection) #if palette
 
-      item = CanvasItem.new(widget, tool_item, x, y)
+      if tool_item.class == Gtk::ToolButton
+        item = CanvasItem.new(widget, tool_item, x, y)
 
-      # Either create a new item or just create a preview item, depending on
-      # why the drag data was requested.
-      if @drag_data_requested_for_drop
-        @canvas_items << item
-        context.drag_finish(true, false, time)
-        @drop_item = nil
-      else
-        @drop_item = item
-        Gdk.drag_status(context, Gdk::DragAction::COPY, time)
+        # Either create a new item or just create a preview item, depending on
+        # why the drag data was requested.
+        if @drag_data_requested_for_drop
+          @canvas_items << item
+          context.finish(:success => true, :delete => false, :time => time)
+          @drop_item = nil
+        else
+          @drop_item = item
+          Gdk.drag_status(context, Gdk::DragAction::COPY, time)
+        end
+        widget.queue_draw
       end
-      widget.queue_draw
     end
 
-    contents.signal_connect "drag-leave" do |widget|
+    interactive_contents.signal_connect "drag-leave" do |widget|
       @drop_item = nil if @drop_item
       widget.queue_draw
     end
 
-    contents.signal_connect "drag-drop" do |widget, context, x, y, time|
+    interactive_contents.signal_connect "drag-drop" do |widget, context, x, y, time|
       target = widget.drag_dest_find_target(context, nil)
       if target
         @drag_data_requested_for_drop = true
@@ -212,12 +213,12 @@ class ToolpaletteDemo
       false
     end
 
-    @palette.add_drag_dest(contents, Gtk::DestDefaults::HIGHLIGHT,
+    @palette.add_drag_dest(interactive_contents, Gtk::DestDefaults::HIGHLIGHT,
                            [Gtk::ToolPaletteDragTargets::ITEMS],
                            Gdk::DragAction::COPY)
     contents_scroller = Gtk::ScrolledWindow.new
     contents_scroller.set_policy(:automatic, :always)
-    contents_scroller.add(contents)
+    contents_scroller.add(interactive_contents)
     notebook.append_page(contents_scroller, Gtk::Label.new("Interactive DnD Mode"))
   end
 
@@ -416,16 +417,16 @@ class ToolpaletteDemo
 end
 
 class CanvasItem
-  attr_reader :pixbuf, :x, :y
+  attr_reader :pixbuf
+  attr_accessor :x, :y
 
   def initialize(widget, button, x, y)
     icon_name = button.icon_name
     icon_theme = Gtk::IconTheme.get_for_screen(widget.screen)
-    Gtk::IconSize.lookup(:dialog)
-    @pixbuf = Gtk::IconTheme.load_icon(icon_theme,
-                                       icon_name,
-                                       width,
-                                       Gtk::IconLookup::GENERIC_FALLBACK)
+    width, height = Gtk::IconSize.lookup(:dialog)
+    @pixbuf = icon_theme.load_icon(icon_name,
+                                   width,
+                                   Gtk::IconLookupFlags::GENERIC_FALLBACK)
     return nil unless @pixbuf
     @x = x
     @y = y
@@ -437,7 +438,7 @@ class CanvasItem
     cr.set_source_pixbuf(@pixbuf, @x - cx * 0.5, @y - cy * 0.5)
 
     if preview
-      cr.paint_with_alpha(0.6)
+      cr.paint(0.6)
     else
       cr.paint
     end
