@@ -14,28 +14,38 @@ class ToolpaletteDemo
     @window.title = "Tool Palette"
     @window.set_default_size(200, 600)
     @canvas_items = []
+
     # Add widgets to control the ToolPalette appearance
-    box = Gtk::Box.new(:vertical, 6)
-    box.margin= 6
-    @window.add(box)
+    @box = Gtk::Box.new(:vertical, 6)
+    @box.margin = 6
+    @window.add(@box)
 
-    # Orientation combo box:
-    orientation_model = Gtk::ListStore.new(String, Integer)
-    iter = orientation_model.append
-    iter[0] = "Horizontal"
-    iter[1] = Gtk::Orientation::HORIZONTAL
-    iter = orientation_model.append
-    iter[0] = "Vertical"
-    iter[1] = Gtk::Orientation::VERTICAL
+    create_orientation_combobox
+    create_style_combobox
 
-    combo_orientation = Gtk::ComboBox.new(:model => orientation_model)
-    cell_renderer = Gtk::CellRendererText.new
-    combo_orientation.pack_start(cell_renderer, true)
-    combo_orientation.set_attributes(cell_renderer, "text" => 0)
-    combo_orientation.active_iter = iter
-    box.pack_start(combo_orientation, :expand => false, :fill => false, :padding => 0)
+    # Add hbox.
+    @hbox = Gtk::Box.new(:horizontal, 5)
+    @box.pack_start(@hbox, :expand => true, :fill => true, :padding => 0)
 
-    # Style combo box:
+    create_and_fill_the_toolpalette
+    add_comboboxes_signals
+
+    # Notebook
+    create_and_fill_the_notebook
+  end
+
+  def run
+    if !@window.visible?
+      @window.show_all
+    else
+      @window.destroy
+    end
+    @window
+  end
+
+  private
+
+  def create_style_combobox
     style_model = Gtk::ListStore.new(String, Integer)
     iter = style_model.append
     iter[0] = "Text"
@@ -52,18 +62,36 @@ class ToolpaletteDemo
     iter = style_model.append
     iter[0] = "Default"
     iter[1] = -1 # A custom meaning for this demo.
-    combo_style = Gtk::ComboBox.new(:model => style_model)
+    @combo_style = Gtk::ComboBox.new(:model => style_model)
     cell_renderer = Gtk::CellRendererText.new
-    combo_style.pack_start(cell_renderer, true)
-    combo_style.set_attributes(cell_renderer, "text" => 0)
-    combo_style.active_iter = iter
-    box.pack_start(combo_style, :expand => false, :fill => false, :padding => 0)
+    @combo_style.pack_start(cell_renderer, true)
+    @combo_style.set_attributes(cell_renderer, "text" => 0)
+    @combo_style.active_iter = iter
+    @box.pack_start(@combo_style, :expand => false,
+                                  :fill => false,
+                                  :padding => 0)
+  end
 
-    # Add hbox.
-    hbox = Gtk::Box.new(:horizontal, 5)
-    box.pack_start(hbox, :expand => true, :fill => true, :padding => 0)
+  def create_orientation_combobox
+    orientation_model = Gtk::ListStore.new(String, Integer)
+    iter = orientation_model.append
+    iter[0] = "Horizontal"
+    iter[1] = Gtk::Orientation::HORIZONTAL
+    iter = orientation_model.append
+    iter[0] = "Vertical"
+    iter[1] = Gtk::Orientation::VERTICAL
 
-    # Add and fill the ToolPalette
+    @combo_orientation = Gtk::ComboBox.new(:model => orientation_model)
+    cell_renderer = Gtk::CellRendererText.new
+    @combo_orientation.pack_start(cell_renderer, true)
+    @combo_orientation.set_attributes(cell_renderer, "text" => 0)
+    @combo_orientation.active_iter = iter
+    @box.pack_start(@combo_orientation, :expand => false,
+                                        :fill => false,
+                                        :padding => 0)
+  end
+
+  def create_and_fill_the_toolpalette
     @palette = Gtk::ToolPalette.new
     load_icon_items
     load_toggle_items
@@ -74,65 +102,51 @@ class ToolpaletteDemo
     palette_scroller.margin = 6
     palette_scroller.hexpand = true
     palette_scroller.add(@palette)
-    hbox.add(palette_scroller)
-    box.show_all
+    @hbox.add(palette_scroller)
+    @box.show_all
+    add_dnd_for_tool_items_to_palette
+  end
 
-    # Connect signals:
-    combo_orientation.signal_connect "changed" do |widget|
-      on_combo_orientation_changed(widget)
-    end
-
-    combo_style.signal_connect "changed" do |widget|
-      on_combo_style_changed(widget)
-    end
-
-    # Kepp the widgets in sync
-    on_combo_orientation_changed(combo_orientation)
-
-    # Notebook
-    notebook = Gtk::Notebook.new
-    notebook.margin = 6
-    hbox.pack_end(notebook, :expand => false, :fill => false, :padding => false)
-
-    # DnD for tool items
-    @palette.signal_connect "drag-data-received" do |widget, context, x, y, selection, info, time|
-      drag_palette = context.source_widget
-      drag_item = nil
-      drop_group = nil
-      while (drag_palette && drag_palette.class != Gtk::ToolPalette) do
-        drag_palette = drag_palette.parent
-      end
-
-      if drag_palette
-        drag_item = drag_palette.drag_item
-        drop_group = widget.get_drop_group(x, y)
-      end
+  def add_dnd_for_tool_items_to_palette
+    @palette.signal_connect "drag-data-received" do |widget, context, x, y|
+      drag_item = @drag_palette.drag_item
+      drop_group = widget.get_drop_group(x, y)
 
       if drag_item.class == Gtk::ToolItemGroup
         palette_drop_group(drag_palette, drag_item, drop_group)
-      elsif drag_item.class == Gtk::ToolItem && drop_group
+      elsif drag_item.class == Gtk::ToolButton && drop_group
         allocation = drop_group.allocation
         palette_drop_item(drag_item, drop_group, x - allocation.x, y - allocation.y)
       end
     end
 
-    @palette.add_drag_dest(@palette, Gtk::DestDefaults::ALL,
-                                     [Gtk::ToolPaletteDragTargets::ITEMS,
-                                      Gtk::ToolPaletteDragTargets::GROUPS],
-                                     Gdk::DragAction::COPY)
-    # Passive DnD dest
-    passive_contents = Gtk::DrawingArea.new
-    passive_contents.signal_connect "draw" do |widget, cr|
+    @palette.add_drag_dest(@palette,
+                           Gtk::DestDefaults::ALL,
+                           [Gtk::ToolPaletteDragTargets::ITEMS,
+                            Gtk::ToolPaletteDragTargets::GROUPS],
+                           Gdk::DragAction::COPY)
+  end
+
+  def add_comboboxes_signals
+    @combo_orientation.signal_connect "changed" do |widget|
+      on_combo_orientation_changed(widget)
+    end
+
+    @combo_style.signal_connect "changed" do |widget|
+      on_combo_style_changed(widget)
+    end
+
+    # Kepp the widgets in sync
+    on_combo_orientation_changed(@combo_orientation)
+  end
+
+  def create_passive_contents
+    @passive_contents = Gtk::DrawingArea.new
+    @passive_contents.signal_connect "draw" do |widget, cr|
       canvas_draw(widget, cr)
     end
-    passive_contents.signal_connect "drag-data-received" do |widget, context, x, y, selection, info, time|
-      # find the tool button which is the source of this DnD operation
-#        palette = context.source_widget
-#        while (palette && palette.class != Gtk::ToolPalette) do
-#          palette = palette.parent
-#        end
-      tool_item = nil
-      tool_item = @palette.get_drag_item(selection) #if palette
+    @passive_contents.signal_connect "drag-data-received" do |widget, _context, x, y, selection, _info, _time|
+      tool_item = @palette.get_drag_item(selection)
 
       # append a new canvas item when a tool button was found
       if tool_item.class == Gtk::ToolButton
@@ -141,22 +155,15 @@ class ToolpaletteDemo
         widget.queue_draw
       end
     end
-    @palette.add_drag_dest(passive_contents, Gtk::DestDefaults::ALL,
-                                     [Gtk::ToolPaletteDragTargets::ITEMS],
-                                     Gdk::DragAction::COPY)
-    contents_scroller = Gtk::ScrolledWindow.new
-    contents_scroller.set_policy(:automatic, :always)
-    contents_scroller.add(passive_contents)
-    notebook.append_page(contents_scroller, Gtk::Label.new("Passive DnD Mode"))
-    contents_scroller.margin = 6
+  end
 
-    # Interactive DnD dest
-    interactive_contents = Gtk::DrawingArea.new
-    interactive_contents.signal_connect "draw" do |widget, cr|
+  def create_interactive_contents
+    @interactive_contents = Gtk::DrawingArea.new
+    @interactive_contents.signal_connect "draw" do |widget, cr|
       canvas_draw(widget, cr)
     end
 
-    interactive_contents.signal_connect "drag-motion" do |widget, context, x, y, time|
+    @interactive_contents.signal_connect "drag-motion" do |widget, context, x, y, time|
       if @drop_item
         # already have a drop indicator - just update position
         @drop_item.x = x
@@ -173,14 +180,9 @@ class ToolpaletteDemo
       true
     end
 
-    interactive_contents.signal_connect "drag-data-received" do |widget, context, x, y, selection, info, time|
+    @interactive_contents.signal_connect "drag-data-received" do |widget, context, x, y, selection, _info, time|
       # find the tool button which is the source of this DnD operation
-#      palette = context.source_widget
-#      while (palette && palette.class != Gtk::ToolPalette) do
-#        palette = palette.parent
-#      end
-      tool_item = nil
-      tool_item = @palette.get_drag_item(selection) #if palette
+      tool_item = @palette.get_drag_item(selection)
 
       if tool_item.class == Gtk::ToolButton
         item = CanvasItem.new(widget, tool_item, x, y)
@@ -199,12 +201,12 @@ class ToolpaletteDemo
       end
     end
 
-    interactive_contents.signal_connect "drag-leave" do |widget|
+    @interactive_contents.signal_connect "drag-leave" do |widget|
       @drop_item = nil if @drop_item
       widget.queue_draw
     end
 
-    interactive_contents.signal_connect "drag-drop" do |widget, context, x, y, time|
+    @interactive_contents.signal_connect "drag-drop" do |widget, context, _x, _y, time|
       target = widget.drag_dest_find_target(context, nil)
       if target
         @drag_data_requested_for_drop = true
@@ -212,26 +214,34 @@ class ToolpaletteDemo
       end
       false
     end
+  end
 
-    @palette.add_drag_dest(interactive_contents, Gtk::DestDefaults::HIGHLIGHT,
+  def create_and_fill_the_notebook
+    notebook = Gtk::Notebook.new
+    notebook.margin = 6
+    @hbox.pack_end(notebook, :expand => false, :fill => false, :padding => false)
+
+    # Passive DnD dest
+    create_passive_contents
+    @palette.add_drag_dest(@passive_contents, Gtk::DestDefaults::ALL,
+                                     [Gtk::ToolPaletteDragTargets::ITEMS],
+                                     Gdk::DragAction::COPY)
+    contents_scroller = Gtk::ScrolledWindow.new
+    contents_scroller.set_policy(:automatic, :always)
+    contents_scroller.add(@passive_contents)
+    notebook.append_page(contents_scroller, Gtk::Label.new("Passive DnD Mode"))
+    contents_scroller.margin = 6
+
+    # Interactive DnD dest
+    create_interactive_contents
+    @palette.add_drag_dest(@interactive_contents, Gtk::DestDefaults::HIGHLIGHT,
                            [Gtk::ToolPaletteDragTargets::ITEMS],
                            Gdk::DragAction::COPY)
     contents_scroller = Gtk::ScrolledWindow.new
     contents_scroller.set_policy(:automatic, :always)
-    contents_scroller.add(interactive_contents)
+    contents_scroller.add(@interactive_contents)
     notebook.append_page(contents_scroller, Gtk::Label.new("Interactive DnD Mode"))
   end
-
-  def run
-    if !@window.visible?
-      @window.show_all
-    else
-      @window.destroy
-    end
-    @window
-  end
-
-  private
 
   def canvas_draw(widget, cr)
     cr.set_source_rgb(1, 1, 1)
@@ -288,7 +298,6 @@ class ToolpaletteDemo
   end
 
   def on_combo_style_changed(combo_box)
-    sw = @palette.parent
     iter = combo_box.active_iter
     return unless iter
 
@@ -338,7 +347,7 @@ class ToolpaletteDemo
     toggle_group = nil
 
     (1..10).each do |i|
-      label = "##{i.to_s}"
+      label = "##{i}"
       item = Gtk::RadioToolButton.new(toggle_group)
       item.label = label
       group .insert(item, -1)
@@ -423,7 +432,7 @@ class CanvasItem
   def initialize(widget, button, x, y)
     icon_name = button.icon_name
     icon_theme = Gtk::IconTheme.get_for_screen(widget.screen)
-    width, height = Gtk::IconSize.lookup(:dialog)
+    width, _height = Gtk::IconSize.lookup(:dialog)
     @pixbuf = icon_theme.load_icon(icon_name,
                                    width,
                                    Gtk::IconLookupFlags::GENERIC_FALLBACK)
