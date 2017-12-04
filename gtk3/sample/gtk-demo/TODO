@@ -60,6 +60,7 @@ css_blendmodes.c	ok		ok
 fishbowl.c		ok		ok
 flowbox.c               ok              ok
 tree_store.c            ok              ok
+toolpalette.c           ok              ok
 
 Remains :
 
@@ -68,7 +69,6 @@ changedisplay.c         ok              no
 foreigndrawing          no              no
 gestures.c              no              no
 shortcuts.c             no              no
-toolpalette.c           no              no
 
 # Ruby version
 Check all the ruby demos that doesn't correspond to a C version.
