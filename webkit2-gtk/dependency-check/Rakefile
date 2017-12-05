@@ -31,6 +31,7 @@ namespace :dependency do
   task :check do
     unless PKGConfig.check_version?("webkit2gtk-4.0")
       unless NativePackageInstaller.install(:debian => "libwebkit2gtk-4.0-dev",
+                                            :redhat => "pkgconfig(webkit2gtk-4.0)",
                                             :homebrew => "webkitgtk")
         exit(false)
       end

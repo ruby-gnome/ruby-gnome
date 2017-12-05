@@ -32,7 +32,7 @@ namespace :dependency do
     unless PKGConfig.check_version?("gdk-3.0")
       unless NativePackageInstaller.install(:altlinux => "libgtk+3-devel",
                                             :debian => "libgtk-3-dev",
-                                            :redhat => "gtk3-devel",
+                                            :redhat => "pkgconfig(gdk-3.0)",
                                             :homebrew => "gtk+3",
                                             :macports => "gtk3",
                                             :msys2 => "gtk3")

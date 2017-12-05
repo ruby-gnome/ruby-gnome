@@ -48,13 +48,14 @@ namespace :dependency do
     unless PKGConfig.check_version?("libgoffice-0.10")
       goffice010_spec = {
         :debian => "libgoffice-0.10-dev",
+        :redhat => "pkgconfig(libgoffice-0.10)",
         :homebrew => "goffice",
       }
       unless NativePackageInstaller.install(goffice010_spec)
         unless PKGConfig.check_version?("libgoffice-0.8")
           goffice08_spec = {
             :debian => "libgoffice-0.8-dev",
-            :redhat => "goffice08-devel",
+            :redhat => "pkgconfig(libgoffice-0.8)",
             :homebrew => "goffice",
           }
           unless NativePackageInstaller.install(goffice08_spec)

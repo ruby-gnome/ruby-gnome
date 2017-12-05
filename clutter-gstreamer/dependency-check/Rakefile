@@ -31,6 +31,7 @@ namespace :dependency do
   task :check do
     unless PKGConfig.check_version?("clutter-gst-3.0")
       unless NativePackageInstaller.install(:debian => "libclutter-gst-3.0-dev",
+                                            :redhat => "pkgconfig(clutter-gst-3.0)",
                                             :homebrew => "clutter-gst",
                                             :msys2 => "clutter-gst")
         exit(false)

@@ -31,6 +31,7 @@ namespace :dependency do
   task :check do
     unless PKGConfig.check_version?("webkitgtk-3.0")
       unless NativePackageInstaller.install(:debian => "libwebkitgtk-3.0-dev",
+                                            :redhat => "pkgconfig(webkitgtk-3.0)",
                                             :msys2 => "webkitgtk3")
         exit(false)
       end
