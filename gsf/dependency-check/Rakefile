@@ -31,6 +31,7 @@ namespace :dependency do
   task :check do
     unless PKGConfig.check_version?("libgsf-1")
       unless NativePackageInstaller.install(:debian => "libgsf-1-dev",
+                                            :redhat => "pkgconfig(libgsf-1)",
                                             :homebrew => "libgsf",
                                             :msys2 => "libgsf")
         exit(false)

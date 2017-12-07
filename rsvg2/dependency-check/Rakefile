@@ -32,7 +32,7 @@ namespace :dependency do
     unless PKGConfig.check_version?("librsvg-2.0")
       unless NativePackageInstaller.install(:altlinux => "librsvg-devel",
                                             :debian => "librsvg2-dev",
-                                            :redhat => "librsvg2-devel",
+                                            :redhat => "pkgconfig(librsvg-2.0)",
                                             :arch => "librsvg",
                                             :homebrew => "librsvg",
                                             :macports => "librsvg",
