@@ -29,8 +29,16 @@ end
 namespace :dependency do
   desc "Check dependency"
   task :check do
-    unless NativePackageInstaller.install(:debian => "gir1.2-gnumeric")
-      exit(false)
+    require "gobject-introspection"
+    repository = GObjectIntrospection::Repository.default
+    begin
+      repository.require("Gnm")
+    rescue GObjectIntrospection::RepositoryError::TypelibNotFound
+      unless NativePackageInstaller.install(:arch_linux => "gnumeric",
+                                            :debian => "gir1.2-gnumeric",
+                                            :redhat => "pkgconfig(libspreadsheet-1.12)")
+        exit(false)
+      end
     end
   end
 end
