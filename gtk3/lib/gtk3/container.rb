@@ -31,11 +31,11 @@ module Gtk
     end
     alias_method :<<, :add
 
-    def add_child(*args, &block)
-      if defined?(super)
-        super
+    def add_child(*args)
+      if args.size == 1
+        add(*args)
       else
-        add(*args, &block)
+        super
       end
     end
 

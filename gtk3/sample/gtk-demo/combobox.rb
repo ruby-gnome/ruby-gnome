@@ -100,7 +100,7 @@ class ComboboxDemo
     entry.mask = "^([0-9]*|One|Two|2\302\275|Three)$"
 
     combo.remove_child(combo.child)
-    combo.add(entry)
+    combo.add_child(entry)
 
     # A combobox with string IDs
     frame = Gtk::Frame.new("String IDs")
