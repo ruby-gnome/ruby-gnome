@@ -61,6 +61,7 @@ fishbowl.c		ok		ok
 flowbox.c               ok              ok
 tree_store.c            ok              ok
 toolpalette.c           ok              ok
+shortcuts.c             ok              ok
 
 Remains :
 
@@ -68,7 +69,6 @@ application.c           no              no
 changedisplay.c         ok              no
 foreigndrawing          no              no
 gestures.c              no              no
-shortcuts.c             no              no
 
 # Ruby version
 Check all the ruby demos that doesn't correspond to a C version.
