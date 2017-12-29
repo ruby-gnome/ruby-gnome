@@ -89,6 +89,37 @@ class TestPage < Test::Unit::TestCase
     end
   end
 
+  sub_test_case("#thumbnail_size") do
+    def create_document
+      pdf = StringIO.new
+      surface = Cairo::PDFSurface.new(pdf, 10, 20)
+      yield(surface) if block_given?
+      surface.finish
+      Poppler::Document.new(pdf.string)
+    end
+
+    def only_cairo_version(major, minor, micro=nil)
+      unless Cairo.satisfied_version?(major, minor, micro)
+        omit("Require cairo >= #{major}.#{minor}.#{micro}")
+      end
+    end
+
+    def test_exist
+      only_cairo_version(1, 15, 4)
+      document = create_document do |surface|
+        surface.set_thumbnail_size(5, 10)
+      end
+      page = document[0]
+      assert_equal([5, 10], page.thumbnail_size)
+    end
+
+    def test_not_exist
+      document = create_document
+      page = document[0]
+      assert_nil(page.thumbnail_size)
+    end
+  end
+
   private
   def find_first_image_mapping(document)
     document.each do |page|

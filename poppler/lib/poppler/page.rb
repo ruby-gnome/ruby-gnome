@@ -57,5 +57,15 @@ module Poppler
         find_text_with_options(text, options)
       end
     end
+
+    alias_method :thumbnail_size_raw, :thumbnail_size
+    def thumbnail_size
+      have_thumnbial, width, height = thumbnail_size_raw
+      if have_thumnbial
+        [width, height]
+      else
+        nil
+      end
+    end
   end
 end
