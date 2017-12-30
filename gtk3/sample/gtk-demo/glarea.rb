@@ -6,11 +6,19 @@
 
  GtkGLArea is a widget that allows custom drawing using OpenGL calls.
 =end
-require "opengl"
+
+begin
+  require "opengl"
+rescue LoadError
+  puts("opengl-bindings gem is required")
+  raise
+end
+
 OpenGL.load_lib
-include OpenGL
 
 class GlareaDemo
+  include OpenGL
+
   X_AXIS, Y_AXIS, Z_AXIS = (0..2).to_a
   # The object we are drawing
   VERTEX_DATA = [0.0, 0.5, 0.0, 1.0,
