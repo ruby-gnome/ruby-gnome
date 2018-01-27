@@ -14,13 +14,21 @@ Ruby/GTK3 is a Ruby binding of GTK+ 3.
 
     gem install gtk3
 
+## Tutorials, examples:
+
+* gtk3/sample/misc: a lot of simple examples.
+* gtk3/sample/gtk-demo: the ruby version of `gtk-demo`.
+* gtk3/sample/tutorial: the ruby version of the [offical Gtk3 tutorial "getting started"](https://developer.gnome.org/gtk3/stable/gtk-getting-started.html).
+* a well written tutorial [on how to create a todo application](http://iridakos.com/tutorials/2018/01/25/creating-a-gtk-todo-application-with-ruby)
+
 ## License
 
-Copyright (c) 2002-2014 Ruby-GNOME2 Project Team
+Copyright (c) 2002-2018 Ruby-GNOME2 Project Team
 
 This program is free software. You can distribute/modify this program
 under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
-## Project Website
+## Project Websites
 
-http://ruby-gnome2.sourceforge.jp/
+* https://github.com/ruby-gnome2/ruby-gnome2
+* http://ruby-gnome2.sourceforge.jp/
