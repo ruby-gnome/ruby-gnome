@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2018 Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,6 +19,11 @@ class TestRegex < Test::Unit::TestCase
 
   def setup
     omit_if_not_const_defined("Vte::Regex")
+    begin
+      Vte::Regex.new("test", 0, :for_match => true)
+    rescue Vte::Regex::NotSupported
+      omti("PCRE2 isn't enabled.")
+    end
   end
 
   def test_for_match
