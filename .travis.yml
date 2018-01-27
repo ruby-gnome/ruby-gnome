@@ -22,7 +22,7 @@ matrix:
     - env: TYPE=ubuntu-17.10
     - env: TYPE=centos-6
     - env: TYPE=centos-7
-    - env: TYPE=gtk+4
+    - env: TYPE=gtk-4
     - os: osx
       rvm: 2.2
       install:
@@ -33,7 +33,7 @@ matrix:
   allow_failures:
   #   - env: TYPE=centos-6
   #   - env: TYPE=centos-7
-    - env: TYPE=gtk+4
+    - env: TYPE=gtk-4
     - os: osx
       rvm: 2.2
       install:
