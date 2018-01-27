@@ -29,6 +29,7 @@ Pathname.glob((base_dir + "*").to_s) do |dir|
 end
 
 ignored_modules = [
+  "gdk4",
 ]
 
 failed_target_names = []

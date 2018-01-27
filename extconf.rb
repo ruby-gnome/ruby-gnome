@@ -24,7 +24,6 @@ priorlibs = [
 ]
 
 unsupported_libraries = [
-  "gdk4",
 ]
 
 #
