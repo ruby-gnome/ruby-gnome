@@ -20,6 +20,7 @@ ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
 ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
 glib_base = File.join(ruby_gnome2_base, "glib2")
+gio2_base = File.join(ruby_gnome2_base, "gio2")
 atk_base = File.join(ruby_gnome2_base, "atk")
 cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 pango_base = File.join(ruby_gnome2_base, "pango")
@@ -29,6 +30,7 @@ gdk4_base = File.join(ruby_gnome2_base, "gdk4")
 
 [
   [glib_base, "glib2"],
+  [gio2_base, "gio2"],
   [atk_base, "atk"],
   [cairo_gobject_base, "cairo-gobject"],
   [pango_base, "pango"],
