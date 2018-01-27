@@ -16,7 +16,7 @@
 
 module Gdk
   module Version
-    STRING = "#{MAJOR_VERSION}.#{MINOR_VERSION}.#{MICRO_VERSION}"
+    STRING = "#{MAJOR}.#{MINOR}.#{MICRO}"
     class << self
       def or_later?(major, minor, micro=nil)
         micro ||= 0
