@@ -18,6 +18,7 @@ module Gdk
   class X11Loader < GObjectIntrospection::Loader
     def load
       begin
+        self.version = "3.0"
         super("GdkX11")
       rescue GObjectIntrospection::RepositoryError::TypelibNotFound
         # Ignore. Some environments such as Windows don't have it.
