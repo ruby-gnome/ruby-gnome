@@ -7,7 +7,7 @@ Ruby/GDK3 is a Ruby binding of GDK 3.
 * Ruby/GLib2, Ruby/ATK, Ruby/Pango and Ruby/GdkPixbuf2 in
   [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/)
 * [rcairo](https://github.com/rcairo/rcairo)
-* [GTK+](http://cairographics.org/) 3.4.2 or later
+* [GTK+](https://www.gtk.org/) 3.4.2 or later
 
 ## Install
 
