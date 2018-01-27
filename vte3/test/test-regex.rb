@@ -21,7 +21,7 @@ class TestRegex < Test::Unit::TestCase
     omit_if_not_const_defined("Vte::Regex")
     begin
       Vte::Regex.new("test", 0, :for_match => true)
-    rescue Vte::Regex::Error::NotSupported
+    rescue Vte::RegexError::NotSupported
       omti("PCRE2 isn't enabled.")
     end
   end
