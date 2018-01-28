@@ -22,7 +22,7 @@ class TestRegex < Test::Unit::TestCase
     begin
       Vte::Regex.new("test", 0, :for_match => true)
     rescue Vte::RegexError::NotSupported
-      omti("PCRE2 isn't enabled.")
+      omit("PCRE2 isn't enabled.")
     end
   end
 
