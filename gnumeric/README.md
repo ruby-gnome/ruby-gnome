@@ -6,7 +6,7 @@ Ruby/Gnumeric is a Ruby binding of Gnumeric.
 
 * Ruby/GOffice in
   [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/)
-* [Gnunmeric](http://www.gnumeric.org/)
+* [Gnumeric](http://www.gnumeric.org/)
 
 ## Install
 
