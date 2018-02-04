@@ -37,6 +37,11 @@ runtest.sh
 runtest.sh TestGdkRectangle
 ```
 
+## Gtk/Gdk Roadmap
+
+* https://wiki.gnome.org/Projects/GTK+/Roadmap/GTK4
+* https://wiki.gnome.org/Projects/GTK+/gdk4
+
 ## Install
 
     gem install gdk4
