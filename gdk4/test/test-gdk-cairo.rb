@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Copyright (C) 2014-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
@@ -23,14 +21,13 @@ class TestGdkCairo < Test::Unit::TestCase
     output = StringIO.new
     surface = Cairo::PDFSurface.new(output, 10, 10)
     @context = Cairo::Context.new(surface)
-    puts @context.methods
   end
 
   sub_test_case "#set_source_rgba" do
     sub_test_case "RGBA" do
       def test_rgba
         rgba = Gdk::RGBA.new(0.1, 0.2, 0.3, 0.4)
-        @context.set_source_rgba(rgba.to_a)
+        @context.source_rgba = rgba
         assert_equal(Cairo::Color::RGB.new(0.1, 0.2, 0.3, 0.4),
                      @context.source.color)
       end

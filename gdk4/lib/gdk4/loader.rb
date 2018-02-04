@@ -43,9 +43,39 @@ module Gdk
 
     def require_libraries
       # require "gdk4/atom"
+      require "gdk4/cairo"
       require "gdk4/rectangle"
       require "gdk4/rgba"
       require "gdk4/version"
+    end
+
+    def load_function_info(info)
+      name = info.name
+      case name
+      when /\Apixbuf_/
+        target_class = nil
+        case $POSTMATCH
+        when "get_from_surface"
+          target_class = Cairo::Surface
+        end
+        if target_class
+          define_method(info, target_class, "to_pixbuf")
+        else
+          super
+        end
+      when /\Acairo_/
+        name = $POSTMATCH
+        case name
+        when "set_source_rgba"
+          define_method(info, Cairo::Context, "set_source_gdk_rgba")
+        when "rectangle"
+          define_method(info, Cairo::Context, "gdk_rectangle")
+        else
+          define_method(info, Cairo::Context, name)
+        end
+      else
+        super
+      end
     end
   end
 end
