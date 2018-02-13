@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -47,7 +47,7 @@ static VALUE
 invoke_callback(VALUE data)
 {
     struct callback_arg *arg = (struct callback_arg *)data;
-    return rb_funcall(arg->callback, id_call, 1, arg->a, arg->b);
+    return rb_funcall(arg->callback, id_call, 2, arg->a, arg->b);
 }
 
 static void
