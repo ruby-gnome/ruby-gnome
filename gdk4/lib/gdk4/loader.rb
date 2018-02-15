@@ -42,7 +42,6 @@ module Gdk
     end
 
     def require_libraries
-      require "gdk4/atom"
       require "gdk4/cairo"
       require "gdk4/rectangle"
       require "gdk4/rgba"
