@@ -30,6 +30,7 @@ end
 
 ignored_modules = [
   "gdk4",
+  "gtk4",
 ]
 
 failed_target_names = []
