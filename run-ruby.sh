@@ -1,10 +1,11 @@
 #!/bin/sh
 
+GDB=${GDB:-}
 RUBY=${RUBY:-ruby}
 
 base_dir=$(cd . && pwd)
 
-${RUBY} \
+${GDB} ${RUBY} \
   -I "${base_dir}/glib2/lib" \
   -I "${base_dir}/glib2/ext/glib2" \
   -I "${base_dir}/gobject-introspection/lib" \
