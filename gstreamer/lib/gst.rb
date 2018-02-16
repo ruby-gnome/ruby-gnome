@@ -165,6 +165,15 @@ module Gst
       end
     end
 
+    def load_method_info(info, klass, method_name)
+      case method_name
+      when "ref", "unref"
+        # Ignore
+      else
+        super
+      end
+    end
+
     RENAME_MAP = {
       "uri_protocol_is_valid"     => "valid_uri_protocol?",
       "uri_protocol_is_supported" => "supported_uri_protocol?",
