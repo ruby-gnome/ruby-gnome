@@ -54,8 +54,6 @@ end
 
 require "gtk4"
 
-Gtk.init
-
 app = Gtk::Application.new("org.gtk.example", :flags_none)
 
 app.signal_connect "activate" do |app|
