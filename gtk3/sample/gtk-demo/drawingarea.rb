@@ -74,7 +74,7 @@ class DrawingareaDemo
       j = spacing
       ycount = xcount % 2 # start with even/odd depending on row
       while j < da.allocated_height
-        if ycount % 2
+        if ycount % 2 == 0
           cr.set_source_rgb(0.45777, 0, 0.45777)
         else
           cr.set_source_rgb(1, 1, 1)
@@ -83,10 +83,10 @@ class DrawingareaDemo
         cr.rectangle(i, j, check_size, check_size)
         cr.fill
         j += check_size + spacing
-        ++ycount
+        ycount += 1
       end
       i += check_size + spacing
-      ++xcount
+      xcount += 1
     end
   end
 
