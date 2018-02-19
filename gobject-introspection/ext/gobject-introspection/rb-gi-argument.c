@@ -1264,10 +1264,10 @@ rb_gi_argument_to_ruby(GIArgument *argument,
         rb_argument = UINT2NUM(argument->v_uint32);
         break;
     case GI_TYPE_TAG_INT64:
-        rb_argument = LONG2NUM(argument->v_int64);
+        rb_argument = LL2NUM(argument->v_int64);
         break;
     case GI_TYPE_TAG_UINT64:
-        rb_argument = ULONG2NUM(argument->v_uint64);
+        rb_argument = ULL2NUM(argument->v_uint64);
         break;
     case GI_TYPE_TAG_FLOAT:
         rb_argument = DBL2NUM(argument->v_float);
@@ -3136,10 +3136,10 @@ rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
         argument->v_uint32 = NUM2UINT(rb_argument);
         break;
     case GI_TYPE_TAG_INT64:
-        argument->v_int64 = NUM2LONG(rb_argument);
+        argument->v_int64 = NUM2LL(rb_argument);
         break;
     case GI_TYPE_TAG_UINT64:
-        argument->v_uint64 = NUM2ULONG(rb_argument);
+        argument->v_uint64 = NUM2ULL(rb_argument);
         break;
     case GI_TYPE_TAG_FLOAT:
         argument->v_float = NUM2DBL(rb_argument);
