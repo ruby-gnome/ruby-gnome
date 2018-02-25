@@ -16,7 +16,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-
 # example from https://github.com/GNOME/gtk/blob/master/examples/hello-world.c
 
 ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
@@ -54,14 +53,12 @@ end
 
 require "gtk4"
 
-Gtk.init
+application = Gtk::Application.new("org.gtk.example", :flags_none)
 
-app = Gtk::Application.new("org.gtk.example", :flags_none)
-
-app.signal_connect "activate" do |app|
+application.signal_connect "activate" do |app|
   win = Gtk::ApplicationWindow.new(app)
-  win.set_title("window")
-  win.set_default_size 200, 200
+  win.title = "window"
+  win.set_default_size(200, 200)
 
   button_box = Gtk::ButtonBox.new(:horizontal)
   win.add(button_box)
