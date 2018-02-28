@@ -57,6 +57,7 @@ module Gtk
     end
 
     def require_libraries
+      require "gtk4/builder"
       require "gtk4/button"
       require "gtk4/version"
     end
