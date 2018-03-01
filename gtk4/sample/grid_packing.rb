@@ -18,8 +18,7 @@
 
 # example from https://github.com/GNOME/gtk/blob/master/examples/grid-packing.c
 
-path = File.expand_path(File.dirname(__FILE__))
-require "#{path}/utils"
+require_relative "utils"
 
 load_gtk4
 
