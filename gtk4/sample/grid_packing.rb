@@ -20,7 +20,7 @@
 
 require_relative "utils"
 
-load_gtk4
+require_gtk4
 
 application = Gtk::Application.new("org.gtk.example", :flags_none)
 

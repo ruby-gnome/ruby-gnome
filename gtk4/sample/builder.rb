@@ -20,7 +20,7 @@
 
 require_relative "utils"
 
-load_gtk4
+require_gtk4
 
 # Construct a GtkBuilder instance and load our UI description
 builder = Gtk::Builder.new(:file => "#{path}/builder.ui")

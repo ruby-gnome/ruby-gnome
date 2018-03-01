@@ -14,7 +14,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-def load_gtk4
+def require_gtk4
   ruby_gnome2_base = File.join(__dir__, "..", "..")
   ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
