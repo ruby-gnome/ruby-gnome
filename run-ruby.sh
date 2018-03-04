@@ -3,7 +3,7 @@
 GDB=${GDB:-}
 RUBY=${RUBY:-ruby}
 
-base_dir=$(cd . && pwd)
+base_dir=$(cd $(dirname $0) && pwd)
 
 ${GDB} ${RUBY} \
   -I "${base_dir}/glib2/lib" \
