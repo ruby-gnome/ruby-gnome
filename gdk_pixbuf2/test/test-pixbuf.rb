@@ -382,6 +382,7 @@ class TestPixbuf < Test::Unit::TestCase
   end
 
   test("#read_pixel_bytes") do
+    only_version(2, 32)
     png_filename = fixture_path("gnome-logo-icon.png")
     pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
     assert_equal(pixbuf.pixels.pack("C*"),
