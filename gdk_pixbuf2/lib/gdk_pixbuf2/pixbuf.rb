@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -169,6 +169,8 @@ module GdkPixbuf
       alias_method :initialize_new_from_file_at_scale,
                    :initialize_new_from_file_at_scale_utf8
     end
+
+    alias_method :row_stride, :rowstride
 
     def dup
       copy

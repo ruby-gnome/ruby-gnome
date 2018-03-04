@@ -105,7 +105,7 @@ class TestPixbuf < Test::Unit::TestCase
                                        src_pixbuf.bits_per_sample,
                                        src_pixbuf.width,
                                        src_pixbuf.height,
-                                       src_pixbuf.rowstride,
+                                       src_pixbuf.row_stride,
                                        )
         assert_equal(src_pixbuf.pixels, pixbuf.pixels)
       end
@@ -188,7 +188,7 @@ class TestPixbuf < Test::Unit::TestCase
                                        :bits_per_sample => src_pixbuf.bits_per_sample,
                                        :width => src_pixbuf.width,
                                        :height => src_pixbuf.height,
-                                       :row_stride => src_pixbuf.rowstride,
+                                       :row_stride => src_pixbuf.row_stride,
                                        )
         assert_equal(src_pixbuf.pixels, pixbuf.pixels)
       end
@@ -204,7 +204,7 @@ class TestPixbuf < Test::Unit::TestCase
                                        :bits_per_sample => src_pixbuf.bits_per_sample,
                                        :width => src_pixbuf.width,
                                        :height => src_pixbuf.height,
-                                       :row_stride => src_pixbuf.rowstride,
+                                       :row_stride => src_pixbuf.row_stride,
                                        )
         assert_equal(src_pixbuf.pixels, pixbuf.pixels)
       end
@@ -269,7 +269,7 @@ class TestPixbuf < Test::Unit::TestCase
     filename = fixture_path("gnome-logo-icon.png")
     pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
     pixbuf.fill!(0xffffffff)
-    assert_equal([0xff] * (pixbuf.rowstride * pixbuf.height),
+    assert_equal([0xff] * (pixbuf.row_stride * pixbuf.height),
                  pixbuf.pixels)
   end
 
