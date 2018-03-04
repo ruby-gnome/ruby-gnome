@@ -361,6 +361,15 @@ class TestPixbuf < Test::Unit::TestCase
                    Gio::ContentType.guess(nil, jpeg))
     end
 
+    test("filename") do
+      png_filename = fixture_path("gnome-logo-icon.png")
+      pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
+      output = Tempfile.new(["pixbuf", ".jpg"])
+      pixbuf.save(output)
+      assert_equal(["image/jpeg", false],
+                   Gio::ContentType.guess(nil, output.read))
+    end
+
     test(":filename") do
       png_filename = fixture_path("gnome-logo-icon.png")
       pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)

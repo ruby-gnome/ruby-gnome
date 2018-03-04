@@ -225,8 +225,22 @@ module GdkPixbuf
     def save(*args)
       case args.size
       when 1
-        filename = nil
-        type, = args
+        arg1 = args[0]
+        if arg1.respond_to?(:to_path)
+          filename = arg1.to_path
+        elsif arg1.is_a?(String) and arg1.include?(".")
+          filename = args[0]
+        else
+          filename = nil
+          type = arg1
+        end
+        if filename
+          type = File.extname(filename).gsub(/\A\./, "").downcase
+          case type
+          when "jpg"
+            type = "jpeg"
+          end
+        end
         options = {}
       when 2
         if args.last.is_a?(Hash)
