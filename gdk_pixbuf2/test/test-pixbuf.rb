@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -379,5 +379,12 @@ class TestPixbuf < Test::Unit::TestCase
     end
     assert_equal(["image/jpeg", false],
                  Gio::ContentType.guess(nil, jpeg))
+  end
+
+  test("#read_pixel_bytes") do
+    png_filename = fixture_path("gnome-logo-icon.png")
+    pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
+    assert_equal(pixbuf.pixels.pack("C*"),
+                 pixbuf.read_pixel_bytes.to_s)
   end
 end
