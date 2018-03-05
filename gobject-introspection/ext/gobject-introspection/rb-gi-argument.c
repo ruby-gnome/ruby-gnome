@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -21,6 +21,7 @@
 #include "rb-gi-private.h"
 
 static VALUE rb_cGLibValue = Qnil;
+static VALUE rb_cGLibBytes = Qnil;
 
 static const gchar *
 rb_gi_transfer_to_string(GITransfer transfer)
@@ -2869,13 +2870,17 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
             }
             argument->v_pointer = gvalue;
         } else if (gtype == G_TYPE_BYTES) {
-            VALUE rb_string;
-            GBytes *gbytes;
+            if (RVAL2CBOOL(rb_obj_is_kind_of(rb_argument, rb_cGLibBytes))) {
+                argument->v_pointer = RVAL2BOXED(rb_argument, G_TYPE_BYTES);
+            } else {
+                VALUE rb_string;
+                GBytes *gbytes;
 
-            rb_string = StringValue(rb_argument);
-            gbytes = g_bytes_new(RSTRING_PTR(rb_string),
-                                 RSTRING_LEN(rb_string));
-            argument->v_pointer = gbytes;
+                rb_string = StringValue(rb_argument);
+                gbytes = g_bytes_new(RSTRING_PTR(rb_string),
+                                     RSTRING_LEN(rb_string));
+                argument->v_pointer = gbytes;
+            }
         } else if (gtype == G_TYPE_CLOSURE) {
             GClosure *rclosure = NULL;
 
@@ -4438,4 +4443,5 @@ void
 rb_gi_argument_init(void)
 {
     rb_cGLibValue = rb_const_get(mGLib, rb_intern("Value"));
+    rb_cGLibBytes = rb_const_get(mGLib, rb_intern("Bytes"));
 }
