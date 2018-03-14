@@ -48,7 +48,7 @@ module GNOME2
       end
 
       def base_name
-        resolve_value(super) || "#{name}-#{version}"
+        resolve_value(super) || "#{name.split('/').last}-#{version}"
       end
 
       def archive_base_name
@@ -113,6 +113,8 @@ module GNOME2
           latest_version_webkitgtk
         when :icu
           latest_version_icu
+        when :github
+          latest_version_github
         else
           nil
         end
@@ -146,6 +148,9 @@ module GNOME2
           base_url = webkitgtk_base_url
         when :icu
           base_url = "#{icu_base_url}/#{version}"
+        when :github
+          base_url = github_base_url
+          base_url << "/#{name}/releases/download/#{version}"
         else
           base_url = nil
         end
@@ -174,6 +179,10 @@ module GNOME2
 
       def icu_base_url
         "http://download.icu-project.org/files/icu4c"
+      end
+
+      def github_base_url
+        "https://github.com"
       end
 
       def sort_versions(versions)
@@ -299,6 +308,13 @@ module GNOME2
           end
         end
         sort_versions(versions).last
+      end
+
+      def latest_version_github
+        latest_url = "#{github_base_url}/#{name}/releases/latest"
+        open(latest_url) do |latest_page|
+          return latest_page.base_url.split("/").last
+        end
       end
 
       class WindowsConfiguration < Struct.new(:build,
