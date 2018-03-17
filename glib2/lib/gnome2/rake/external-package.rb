@@ -313,7 +313,7 @@ module GNOME2
       def latest_version_github
         latest_url = "#{github_base_url}/#{name}/releases/latest"
         open(latest_url) do |latest_page|
-          return latest_page.base_url.split("/").last
+          return latest_page.base_uri.path.split("/").last
         end
       end
 
