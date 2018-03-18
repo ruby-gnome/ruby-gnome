@@ -175,10 +175,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :version => "2.56.0",
       :compression_method => "xz",
       :windows => {
-        :configure_args => [
-          "--without-libproxy",
-          "--without-gnome-proxy",
-          "--without-ca-certificates",
+        :meson_args => [
+          "-Dlibproxy_support=false",
+          "-Dgnome_proxy_support=false",
         ],
         :built_file => "lib/gio/modules/libgiognutls.dll",
       },
