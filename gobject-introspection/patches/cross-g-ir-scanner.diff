@@ -1,16 +1,8 @@
 diff --git a/giscanner/ccompiler.py b/giscanner/ccompiler.py
-index 57df9d6..8c34cec 100644
+index a8bd5b13..f3949f24 100644
 --- a/giscanner/ccompiler.py
 +++ b/giscanner/ccompiler.py
-@@ -20,6 +20,7 @@
- 
- import os
- import subprocess
-+import shlex
- import tempfile
- 
- import sys
-@@ -73,6 +74,7 @@ class CCompiler(object):
+@@ -74,6 +74,7 @@ class CCompiler(object):
          else:
              self.compiler = distutils.ccompiler.new_compiler(compiler=compiler_name)
          customize_compiler(self.compiler)
@@ -18,7 +10,7 @@ index 57df9d6..8c34cec 100644
  
          # customize_compiler() from distutils only does customization
          # for 'unix' compiler type.  Also, avoid linking to msvcrxx.dll
-@@ -232,6 +234,7 @@ class CCompiler(object):
+@@ -243,6 +244,7 @@ class CCompiler(object):
  
          includes.extend(include_paths)
          extra_postargs.extend(extra_args)
@@ -26,7 +18,7 @@ index 57df9d6..8c34cec 100644
  
          return self.compiler.compile(sources=source,
                                       macros=macros,
-@@ -287,12 +290,15 @@ class CCompiler(object):
+@@ -285,7 +287,9 @@ class CCompiler(object):
                  args.extend(libtool)
                  args.append('--mode=execute')
              args.extend([os.environ.get('DLLTOOL', 'dlltool.exe'), '--identify'])
@@ -36,35 +28,4 @@ index 57df9d6..8c34cec 100644
 +            proc = subprocess.Popen(search_dirs_args,
                                      stdout=subprocess.PIPE)
              o, e = proc.communicate()
-             for line in o.decode('ascii').splitlines():
-                 if line.startswith('libraries: '):
-                     libsearch = line[len('libraries: '):].split(os.pathsep)
-+        libsearch = options.library_paths + libsearch
- 
-         shlibs = []
-         not_resolved = []
-diff --git a/giscanner/shlibs.py b/giscanner/shlibs.py
-old mode 100644
-new mode 100755
-index c93d20c..e155200
---- a/giscanner/shlibs.py
-+++ b/giscanner/shlibs.py
-@@ -31,6 +31,7 @@ import subprocess
- 
- from .utils import get_libtool_command, extract_libtool_shlib
- from .ccompiler import CCompiler
-+from distutils.cygwinccompiler import Mingw32CCompiler
- 
- 
- # For .la files, the situation is easy.
-@@ -94,8 +95,8 @@ def _resolve_non_libtool(options, binary, libraries):
-         else:
-             binary.args[0] = old_argdir
- 
--    if os.name == 'nt':
--        cc = CCompiler()
-+    cc = CCompiler()
-+    if cc.compiler.exe_extension == '.exe':
-         shlibs = cc.resolve_windows_libs(libraries, options)
- 
-     else:
+             libsearch = options.library_paths

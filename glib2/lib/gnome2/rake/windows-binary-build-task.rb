@@ -375,6 +375,8 @@ pkgconfig = '/usr/bin/pkg-config'
       def add_gobject_introspection_make_args(package, common_make_args)
         return unless use_gobject_introspection?(package)
 
+        common_make_args << "GI_HOST_NAME=nt"
+
         introspection_scanner = "INTROSPECTION_SCANNER=#{g_ir_scanner}"
         common_make_args << introspection_scanner
 
