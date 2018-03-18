@@ -1,5 +1,5 @@
 diff --git a/Makefile-gir.am b/Makefile-gir.am
-index a09260a..540e2d1 100644
+index 86ab5bf1..28d9da8b 100644
 --- a/Makefile-gir.am
 +++ b/Makefile-gir.am
 @@ -68,7 +68,8 @@ GLib_2_0_gir_SCANNERFLAGS = \
@@ -57,24 +57,24 @@ index a09260a..540e2d1 100644
  Gio_2_0_gir_PACKAGES = gio-2.0 $(GIO_UNIX_PACKAGES)
  Gio_2_0_gir_INCLUDES = GObject-2.0
 diff --git a/Makefile-giscanner.am b/Makefile-giscanner.am
-index b0e1373..fd618c9 100644
+index 06bc4be4..628a8ce2 100644
 --- a/Makefile-giscanner.am
 +++ b/Makefile-giscanner.am
 @@ -1,17 +1,21 @@
  ## Process this file with automake to produce Makefile.in
  
 +if BUILD_SCANNER
- BUILT_SOURCES += 		\
- 	scannerparser.c		\
- 	scannerparser.h 	\
- 	scannerlexer.c 		\
- 	scannerlexer.h
+ BUILT_SOURCES += 			\
+ 	giscanner/scannerparser.c	\
+ 	giscanner/scannerparser.h 	\
+ 	giscanner/scannerlexer.c 	\
+ 	giscanner/scannerlexer.h
 +endif
  
  AM_YFLAGS = -d -t
  
  # Why do I have to do this automake?
- scannerlexer.h: scannerlexer.c
+ giscanner/scannerlexer.h: giscanner/scannerlexer.c
  
 +if BUILD_SCANNER
  noinst_LTLIBRARIES += libgiscanner.la
@@ -93,7 +93,7 @@ index b0e1373..fd618c9 100644
  	giscanner/__init__.py		\
  	giscanner/annotationmain.py	\
 diff --git a/Makefile-tools.am b/Makefile-tools.am
-index dbd264c..c9b58c2 100644
+index 95293735..cb9754a7 100644
 --- a/Makefile-tools.am
 +++ b/Makefile-tools.am
 @@ -1,5 +1,7 @@
@@ -126,7 +126,7 @@ index dbd264c..c9b58c2 100644
  
  g_ir_compiler_SOURCES = tools/compiler.c
  g_ir_compiler_CPPFLAGS = -DGIREPO_DEFAULT_SEARCH_PATH="\"$(libdir)\"" \
-@@ -44,4 +50,12 @@ GCOVSOURCES =					\
+@@ -50,4 +56,12 @@ GCOVSOURCES =					\
  	$(g_ir_compiler_SOURCES)		\
  	$(g_ir_generate_SOURCES)
  
@@ -141,7 +141,7 @@ index dbd264c..c9b58c2 100644
 +
 +CLEANFILES += g-ir-inspect
 diff --git a/Makefile.am b/Makefile.am
-index b080a89..344598a 100644
+index dafea384..80d8c997 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -35,8 +35,11 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --enable-doctool
@@ -158,7 +158,7 @@ index b080a89..344598a 100644
  pkgconfigdir = $(libdir)/pkgconfig
  pkgconfig_DATA = gobject-introspection-1.0.pc gobject-introspection-no-export-1.0.pc
 diff --git a/common.mk b/common.mk
-index b778f7a..9d10e65 100644
+index b778f7aa..9d10e65e 100644
 --- a/common.mk
 +++ b/common.mk
 @@ -9,11 +9,14 @@
@@ -180,10 +180,10 @@ index b778f7a..9d10e65 100644
  INTROSPECTION_SCANNER_ARGS = \
      --verbose \
 diff --git a/configure.ac b/configure.ac
-index 6c91fa5..168a813 100644
+index 367f2dba..a275b0ce 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -250,32 +250,55 @@ AC_FUNC_STRTOD
+@@ -251,32 +251,55 @@ AC_FUNC_STRTOD
  AC_CHECK_FUNCS([memchr strchr strspn strstr strtol strtoull])
  AC_CHECK_FUNCS([backtrace backtrace_symbols])
  
@@ -264,9 +264,9 @@ index 6c91fa5..168a813 100644
  
  dnl Not enabled by default until 3.6 cycle when we can propose mako as
  dnl an external dependency
-@@ -360,6 +383,13 @@ fi
- 
- AC_SUBST(EXTRA_LINK_FLAGS)
+@@ -367,6 +390,13 @@ dnl
+ AM_CONDITIONAL(MSVC_BASE_NO_TOOLSET_SET, [test x$MSVC_BASE_TOOLSET = x])
+ AM_CONDITIONAL(MSVC_NO_TOOLSET_SET, [test x$MSVC_TOOLSET = x])
  
 +AC_ARG_ENABLE(tests,
 +              [AS_HELP_STRING([--disable-tests],
@@ -279,7 +279,7 @@ index 6c91fa5..168a813 100644
  Makefile
  tests/Makefile
 diff --git a/tests/Makefile.am b/tests/Makefile.am
-index bdd0fa7..70f1825 100644
+index bdd0fa7c..70f18256 100644
 --- a/tests/Makefile.am
 +++ b/tests/Makefile.am
 @@ -17,7 +17,9 @@ tests_DATA =		    \
@@ -303,7 +303,7 @@ index bdd0fa7..70f1825 100644
  CLEANFILES += \
      $(BUILT_SOURCES) \
 diff --git a/tests/offsets/Makefile.am b/tests/offsets/Makefile.am
-index a40e90b..9e67a3e 100644
+index 0df9c151..2d8a2ba6 100644
 --- a/tests/offsets/Makefile.am
 +++ b/tests/offsets/Makefile.am
 @@ -11,7 +11,9 @@ EXTRA_PROGRAMS =
@@ -339,7 +339,7 @@ index a40e90b..9e67a3e 100644
  ############################################################
  
 diff --git a/tests/repository/Makefile.am b/tests/repository/Makefile.am
-index d1cbaa5..6960e29 100644
+index 6b4b782f..d3851005 100644
 --- a/tests/repository/Makefile.am
 +++ b/tests/repository/Makefile.am
 @@ -2,8 +2,10 @@ AM_CFLAGS = $(GOBJECT_CFLAGS)
@@ -351,10 +351,10 @@ index d1cbaa5..6960e29 100644
  CLEANFILES = $(EXTRA_PROGRAMS)
 +endif
  
- gitestrepo_SOURCES = $(srcdir)/gitestrepo.c
+ gitestrepo_SOURCES = gitestrepo.c
  gitestrepo_CPPFLAGS = $(GIREPO_CFLAGS) -I$(top_srcdir)/girepository
 diff --git a/tests/scanner/Makefile.am b/tests/scanner/Makefile.am
-index 13156c3..81f50ef 100644
+index 6b705f5d..33d4e6e5 100644
 --- a/tests/scanner/Makefile.am
 +++ b/tests/scanner/Makefile.am
 @@ -9,6 +9,7 @@ INTROSPECTION_SCANNER_ARGS += --warn-all --reparse-validate
