@@ -58,6 +58,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "support-external-g-ir-scanner.diff",
         ],
         :need_autoreconf => true,
+        :build_concurrently => false,
         :built_file => "bin/libgirepository-1.0-1.dll",
       },
       :native => {
