@@ -66,6 +66,7 @@ rg_to_s(VALUE self)
 #  else
     rb_data = rb_enc_str_new(data, size, rb_ascii8bit_encoding());
 #  endif
+    rb_obj_freeze(rb_data);
     return rb_data;
 }
 
