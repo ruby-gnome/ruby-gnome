@@ -49,32 +49,7 @@ module GNOME2
       private
       def define_build_tasks
         namespace :build do
-          prepare_task_names = []
-          namespace :prepare do
-            prepare_task_names << "pkg_config"
-            task :pkg_config do
-              depended_packages = @package.windows.build_dependencies
-              use_packages = [@package.name] + depended_packages
-              pkg_config_path = use_packages.collect do |package|
-                "../#{package}/#{@package.windows.relative_binary_dir}/lib/pkgconfig"
-              end
-              ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
-                File.expand_path(path)
-              end.join(":")
-              ENV["PKG_CONFIG_LIBDIR"] = rcairo_pkgconfig_path
-            end
-
-            prepare_task_names << "pkg_config_for_build"
-            task :pkg_config_for_build do
-              # XXX: Is it needless?
-              # ENV["PKG_CONFIG_FOR_BUILD"] = "env - pkg-config"
-            end
-          end
-
-          full_prepare_task_names = prepare_task_names.collect do |name|
-            "windows:builder:build:prepare:#{name}"
-          end
-          task :prepare => full_prepare_task_names
+          task :prepare
 
           build_packages.each do |package|
             namespace package.name do
@@ -118,6 +93,7 @@ module GNOME2
           sh("tar", "xf", tar_full_path.to_s)
         end
 
+        env = build_env
         package_dir_path =
           package_tmp_dir + package.base_name + package.base_dir_in_package
         Dir.chdir(package_dir_path.to_s) do
@@ -137,30 +113,29 @@ module GNOME2
             make_n_jobs = ENV["MAKE_N_JOBS"]
             build_make_args << "-j#{make_n_jobs}" if make_n_jobs
           end
-          ENV["GREP_OPTIONS"] = "--text"
-          # ENV["GI_SCANNER_DEBUG"] = "save-temps"
+          # build_make_args << "--debug"
+          # build_make_args << "V=1"
+          # build_make_args << "VERBOSE=1"
+          # env["GI_SCANNER_DEBUG"] = "save-temps"
           if File.exist?("meson.build") and not File.exist?("Makefile.am")
             source_dir = Dir.pwd
             build_dir = "build"
             mkdir_p(build_dir)
             Dir.chdir(build_dir) do
-              meson(package, source_dir)
-              sh(make_args_to_env(build_make_args),
+              meson(env, package, source_dir)
+              sh(env.merge(make_args_to_env(build_make_args)),
                  "nice", "ninja") or exit(false)
-              sh(make_args_to_env(install_make_args),
+              sh(env.merge(make_args_to_env(install_make_args)),
                  "ninja", "install") or exit(false)
             end
           else
             if File.exist?("Makefile.in")
-              configure(package)
+              configure(env, package)
             else
-              cmake(package)
+              cmake(env, package)
             end
-            # build_make_args << "--debug"
-            # build_make_args << "V=1"
-            # build_make_args << "VERBOSE=1"
-            sh("nice", "make", *build_make_args) or exit(false)
-            sh("make", "install", *install_make_args) or exit(false)
+            sh(env, "nice", "make", *build_make_args) or exit(false)
+            sh(env, "make", "install", *install_make_args) or exit(false)
           end
 
           package_license_dir = license_dir + package.name
@@ -182,10 +157,31 @@ module GNOME2
         end
       end
 
-      def configure(package)
-        sh("./autogen.sh") if package.windows.need_autogen?
-        sh("autoreconf", "--install", "--force") if package.windows.need_autoreconf?
-        sh("./configure",
+      def build_env
+        env = {
+          "GI_HOST_OS" => "nt",
+          "GREP_OPTIONS" => "--text",
+        }
+        depended_packages = @package.windows.build_dependencies
+        use_packages = [@package.name] + depended_packages
+        pkg_config_path = use_packages.collect do |package|
+          "../#{package}/#{@package.windows.relative_binary_dir}/lib/pkgconfig"
+        end
+        env["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
+          File.expand_path(path)
+        end.join(":")
+        env["PKG_CONFIG_LIBDIR"] = rcairo_pkgconfig_path
+        env
+      end
+
+      def configure(env, package)
+        sh(env, "./autogen.sh") if package.windows.need_autogen?
+        if package.windows.need_autoreconf?
+          sh(env, "autoreconf", "--install", "--force")
+        end
+        sh(env, "env")
+        sh(env,
+           "./configure",
            cc_env(package),
            dlltool_env,
            "CPPFLAGS=#{cppflags(package)}",
@@ -195,7 +191,7 @@ module GNOME2
            *package.windows.configure_args) or exit(false)
       end
 
-      def meson(package, source_dir)
+      def meson(env, package, source_dir)
         cross_file = Tempfile.new("meson-cross-file")
         cross_file.puts(<<-CROSS_FILE)
 [host_machine]
@@ -213,11 +209,11 @@ dlltool = '/usr/bin/#{dlltool}'
 pkgconfig = '/usr/bin/pkg-config'
         CROSS_FILE
         cross_file.close
-        sh({
-             "PATH" => "#{g_ir_scanner_bin_dir}:#{ENV["PATH"]}",
-             "CPPFLAGS" => cppflags(package),
-             "LDFLAGS" => ldflags(package),
-           },
+        sh(env.merge({
+                       "PATH" => "#{g_ir_scanner_bin_dir}:#{ENV["PATH"]}",
+                       "CPPFLAGS" => cppflags(package),
+                       "LDFLAGS" => ldflags(package),
+                     }),
            "meson",
            source_dir,
            ".",
@@ -226,8 +222,9 @@ pkgconfig = '/usr/bin/pkg-config'
            *package.windows.meson_args) or exit(false)
       end
 
-      def cmake(package)
-        sh("cmake",
+      def cmake(env, package)
+        sh(env,
+           "cmake",
            ".",
            "-DCMAKE_INSTALL_PREFIX=#{dist_dir}",
            "-DCMAKE_SYSTEM_NAME=Windows",
@@ -374,8 +371,6 @@ pkgconfig = '/usr/bin/pkg-config'
 
       def add_gobject_introspection_make_args(package, common_make_args)
         return unless use_gobject_introspection?(package)
-
-        common_make_args << "GI_HOST_NAME=nt"
 
         introspection_scanner = "INTROSPECTION_SCANNER=#{g_ir_scanner}"
         common_make_args << introspection_scanner
