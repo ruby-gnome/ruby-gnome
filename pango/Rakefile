@@ -88,6 +88,19 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
+      :name => "fribidi/fribidi",
+      :download_site => :github,
+      :label => "FriBidi",
+      :version => "v1.0.2",
+      :compression_method => "bz2",
+      :windows => {
+        :configure_args => [
+          "--disable-docs",
+        ],
+        :built_file => "bin/libfribidi-0.dll",
+      },
+    },
+    {
       :name => "pango",
       :download_site => :gnome,
       :label => "Pango",

@@ -48,7 +48,8 @@ module GNOME2
       end
 
       def base_name
-        resolve_value(super) || "#{name.split('/').last}-#{version}"
+        resolve_value(super) ||
+          "#{name.split('/').last}-#{version.gsub(/\Av/, '')}"
       end
 
       def archive_base_name
