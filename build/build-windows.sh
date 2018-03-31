@@ -23,6 +23,7 @@ run()
 if [ ! -f ~/setup.timestamp ]; then
   run sudo rm -rf /etc/udev/rules.d/70-persistent-net.rules/
   run sudo sed -i'' -e 's,http://us,http://jp,g' /etc/apt/sources.list
+  run sudo dpkg --add-architecture i386
   run sudo apt-get update
 
   echo ttf-mscorefonts-installer \
@@ -55,7 +56,8 @@ if [ ! -f ~/setup.timestamp ]; then
     libxml2-utils \
     python-dev \
     python-pip \
-    wine1.6 \
+    wine-stable \
+    wine-binfmt \
     mingw-w64 \
     cmake \
     valac \
