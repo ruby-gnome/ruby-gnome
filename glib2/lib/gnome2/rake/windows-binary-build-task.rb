@@ -160,6 +160,7 @@ module GNOME2
       def build_env
         env = {
           "GI_HOST_OS" => "nt",
+          "MSYSTEM" => "MINGW64",
           "GREP_OPTIONS" => "--text",
         }
         depended_packages = @package.windows.build_dependencies

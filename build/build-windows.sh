@@ -72,32 +72,6 @@ if [ ! -f ~/setup.timestamp ]; then
 
   run sudo pip3 install jsmin meson ninja
 
-  (run cd /usr/local/lib/python3.6/dist-packages && \
-     run sudo patch -p1) < <<EOF
-diff --git a/mesonbuild/modules/gnome.py b/mesonbuild/modules/gnome.py
-index 8b6397ea..5c0532a1 100644
---- a/mesonbuild/modules/gnome.py
-+++ b/mesonbuild/modules/gnome.py
-@@ -400,7 +400,7 @@ class GnomeModule(ExtensionModule):
-                 self.gir_dep = PkgConfigDependency('gobject-introspection-1.0',
-                                                    state.environment,
-                                                    {'native': True})
--            pkgargs = self.gir_dep.get_compile_args()
-+            pkgargs = self.gir_dep.get_compile_args().copy()
-         except Exception:
-             raise MesonException('gobject-introspection dependency was not found, gir cannot be generated.')
-         ns = kwargs.pop('namespace')
-@@ -413,6 +413,8 @@ class GnomeModule(ExtensionModule):
-         gir_inc_dirs = []
- 
-         scan_command = [giscanner]
-+        pkgargs.remove("-mms-bitfields")
-+        pkgargs.remove("-pthread")
-         scan_command += pkgargs
-         scan_command += ['--no-libtool', '--namespace=' + ns, '--nsversion=' + nsversion, '--warn-all',
-                          '--output', '@OUTPUT@']
-EOF
-
   run git clone file:///pkg-config/.git
   run git clone file:///native-package-installer/.git
   run git clone file:///rcairo/.git rcairo.${DIRECTORY_SUFFIX}
