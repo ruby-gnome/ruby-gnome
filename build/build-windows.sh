@@ -106,6 +106,7 @@ if [ ! -f ~/setup.timestamp ]; then
         echo -n "${wine_ruby_gnome2}/atk/${bin_dir};";
         echo -n "${wine_ruby_gnome2}/gtk2/${bin_dir};";
         echo -n "${wine_ruby_gnome2}/gdk3/${bin_dir};";
+        echo -n "${wine_ruby_gnome2}/clutter/tmp/windows/json-glib/json-glib-1.4.2/build/json-glib;";
       ) | \
         sed -e 's,/,\\\\\\\\,g')
     run sed -i'' -r \
