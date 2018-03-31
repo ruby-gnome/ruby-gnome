@@ -56,7 +56,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         ],
         :patches => [
           "support-external-g-ir-scanner.diff",
-          "workaround-g-ir-compiler.diff",
         ],
         :need_autoreconf => true,
         :build_concurrently => false,
@@ -88,18 +87,6 @@ namespace :native do
         rm_f(Dir.glob("*.{pyc,pyo}"))
       end
       touch(g_ir_scanner_patched_path)
-    end
-
-    share_dir = package_task.native.absolute_binary_dir
-    share_dir += "share/gobject-introspection-1.0"
-    share_patched_path = share_dir + "patched"
-    patched_paths << share_patched_path
-    file share_patched_path.to_s do
-      Dir.chdir(share_dir.to_s) do
-        patch = "#{package_task.package.patches_dir}/workaround-dumper.diff"
-        sh("patch -p2 < #{patch}")
-      end
-      touch(share_patched_path)
     end
 
     desc "Make g-ir-scanner workable for Windows on non Windows"
