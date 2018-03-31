@@ -100,6 +100,7 @@ if [ ! -f ~/setup.timestamp ]; then
         echo -n "${wine_ruby_gnome2}/glib2/${bin_dir};";
         echo -n "${wine_ruby_gnome2}/gdk_pixbuf2/${bin_dir};"
         echo -n "${wine_ruby_gnome2}/pango/${bin_dir};";
+        echo -n "${wine_ruby_gnome2}/pango/tmp/windows/graphene/graphene-1.8.0/build/src;";
         echo -n "${wine_ruby_gnome2}/atk/${bin_dir};";
         echo -n "${wine_ruby_gnome2}/gtk2/${bin_dir};";
         echo -n "${wine_ruby_gnome2}/gdk3/${bin_dir};";
