@@ -56,6 +56,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         ],
         :patches => [
           "support-external-g-ir-scanner.diff",
+          "workaround-g-ir-compiler.diff",
         ],
         :need_autoreconf => true,
         :build_concurrently => false,
@@ -64,7 +65,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :native => {
         :build => true,
         :patches => [
-          # "cross-compilable-g-ir-scanner.diff",
         ],
         :built_file => "bin/g-ir-scanner",
       }
@@ -75,20 +75,35 @@ package_task.define
 
 namespace :native do
   namespace :"gobject-introspection" do
+    patched_paths = []
+
     g_ir_scanner_dir = package_task.native.absolute_binary_dir
     g_ir_scanner_dir += "lib/gobject-introspection/giscanner"
-    patched_path = g_ir_scanner_dir + "patched"
-    file patched_path.to_s do
+    g_ir_scanner_patched_path = g_ir_scanner_dir + "patched"
+    patched_paths << g_ir_scanner_patched_path
+    file g_ir_scanner_patched_path.to_s do
       Dir.chdir(g_ir_scanner_dir.to_s) do
         patch = "#{package_task.package.patches_dir}/cross-g-ir-scanner.diff"
         sh("patch -p2 < #{patch}")
         rm_f(Dir.glob("*.{pyc,pyo}"))
       end
-      touch(patched_path)
+      touch(g_ir_scanner_patched_path)
+    end
+
+    share_dir = package_task.native.absolute_binary_dir
+    share_dir += "share/gobject-introspection-1.0"
+    share_patched_path = share_dir + "patched"
+    patched_paths << share_patched_path
+    file share_patched_path.to_s do
+      Dir.chdir(share_dir.to_s) do
+        patch = "#{package_task.package.patches_dir}/workaround-dumper.diff"
+        sh("patch -p2 < #{patch}")
+      end
+      touch(share_patched_path)
     end
 
     desc "Make g-ir-scanner workable for Windows on non Windows"
-    task :cross => patched_path
+    task :cross => patched_paths
   end
 
   namespace :builder do

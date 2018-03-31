@@ -1,0 +1,59 @@
+diff --git a/tools/compiler.c b/tools/compiler.c
+index 06d87d91..ab67d5a3 100644
+--- a/tools/compiler.c
++++ b/tools/compiler.c
+@@ -54,8 +54,6 @@ write_out_typelib (gchar *prefix,
+   gsize written;
+   GFile *file_obj;
+   gchar *filename;
+-  GFile *tmp_file_obj;
+-  gchar *tmp_filename;
+   GError *error = NULL;
+   gboolean success = FALSE;
+ 
+@@ -64,8 +62,6 @@ write_out_typelib (gchar *prefix,
+       file = stdout;
+       file_obj = NULL;
+       filename = NULL;
+-      tmp_filename = NULL;
+-      tmp_file_obj = NULL;
+ #ifdef G_OS_WIN32
+       setmode (fileno (file), _O_BINARY);
+ #endif
+@@ -77,14 +73,12 @@ write_out_typelib (gchar *prefix,
+       else
+ 	filename = g_strdup (output);
+       file_obj = g_file_new_for_path (filename);
+-      tmp_filename = g_strdup_printf ("%s.tmp", filename);
+-      tmp_file_obj = g_file_new_for_path (tmp_filename);
+-      file = g_fopen (tmp_filename, "wb");
++      file = g_fopen (filename, "wb");
+ 
+       if (file == NULL)
+ 	{
+           g_fprintf (stderr, "failed to open '%s': %s\n",
+-                     tmp_filename, g_strerror (errno));
++                     filename, g_strerror (errno));
+           goto out;
+ 	}
+     }
+@@ -98,19 +92,9 @@ write_out_typelib (gchar *prefix,
+ 
+   if (output != NULL)
+     fclose (file);
+-  if (tmp_filename != NULL)
+-    {
+-      if (!g_file_move (tmp_file_obj, file_obj, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL, &error))
+-        {
+-	  g_fprintf (stderr, "ERROR: failed to rename %s to %s: %s", tmp_filename, filename, error->message);
+-          g_clear_error (&error);
+-	  goto out;
+-        }
+-    }
+   success = TRUE;
+ out:
+   g_free (filename);
+-  g_free (tmp_filename);
+ 
+   return success;
+ }
