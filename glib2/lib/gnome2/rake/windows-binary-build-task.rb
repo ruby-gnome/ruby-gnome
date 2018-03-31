@@ -219,6 +219,7 @@ pkgconfig = '/usr/bin/pkg-config'
            source_dir,
            ".",
            "--prefix=#{dist_dir}",
+           "--libdir=lib",
            "--cross-file=#{cross_file.path}",
            *package.windows.meson_args) or exit(false)
       end
