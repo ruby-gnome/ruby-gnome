@@ -267,6 +267,14 @@ array_c_to_ruby_sized(gconstpointer *elements,
         }
         break;
     case GI_TYPE_TAG_FILENAME:
+        g_base_info_unref(element_type_info);
+        {
+            const gchar **strings = (const gchar **)elements;
+            for (i = 0; i < n_elements; i++) {
+                rb_ary_push(rb_array, CSTR2RVAL(strings[i]));
+            }
+        }
+        break;
     case GI_TYPE_TAG_ARRAY:
         g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
@@ -2281,6 +2289,8 @@ rb_gi_return_argument_free_everything_array_c(GIArgument *argument,
         g_strfreev(argument->v_pointer);
         break;
     case GI_TYPE_TAG_FILENAME:
+        g_strfreev(argument->v_pointer);
+        break;
     case GI_TYPE_TAG_ARRAY:
     case GI_TYPE_TAG_INTERFACE:
     case GI_TYPE_TAG_GLIST:
