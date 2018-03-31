@@ -133,12 +133,13 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
-      :name => "libidn",
+      :name => "libidn2",
       :download_site => :gnu,
-      :label => "Libidn",
-      :version => "1.33",
+      :download_name => "libidn",
+      :label => "Libidn2",
+      :version => "2.0.4",
       :windows => {
-        :built_file => "bin/libidn-11.dll",
+        :built_file => "bin/libidn2-0.dll",
       },
     },
     {

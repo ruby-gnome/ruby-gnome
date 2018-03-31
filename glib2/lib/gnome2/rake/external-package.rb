@@ -1,6 +1,4 @@
-# -*- ruby -*-
-#
-# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,6 +19,7 @@ require "open-uri"
 module GNOME2
   module Rake
     class ExternalPackage < Struct.new(:name,
+                                       :download_name,
                                        :base_name,
                                        :archive_base_name,
                                        :label,
@@ -45,6 +44,10 @@ module GNOME2
 
       def compression_method
         resolve_value(super) || "gz"
+      end
+
+      def download_name
+        resolve_value(super) || name
       end
 
       def base_name
@@ -135,23 +138,23 @@ module GNOME2
         when :gnome
           base_url = gnome_base_url
           release_series = version.gsub(/\A(\d+\.\d+)(?:[^\d].*)?\z/, '\1')
-          base_url << "/#{name}/#{release_series}"
+          base_url << "/#{download_name}/#{release_series}"
         when :freedesktop
           base_url = freedesktop_base_url
-          base_url << "/#{name}/release"
+          base_url << "/#{download_name}/release"
         when :freedesktop_gstreamer
           base_url = freedesktop_gstreamer_base_url
-          base_url << "/#{name}"
+          base_url << "/#{download_name}"
         when :gnu
           base_url = gnu_base_url
-          base_url << "/#{name}"
+          base_url << "/#{download_name}"
         when :webkitgtk
           base_url = webkitgtk_base_url
         when :icu
           base_url = "#{icu_base_url}/#{version}"
         when :github
           base_url = github_base_url
-          base_url << "/#{name}/releases/download/#{version}"
+          base_url << "/#{download_name}/releases/download/#{version}"
         else
           base_url = nil
         end
@@ -193,7 +196,7 @@ module GNOME2
       end
 
       def latest_version_gnome
-        base_url = "#{gnome_base_url}/#{name}"
+        base_url = "#{gnome_base_url}/#{download_name}"
         minor_versions = []
         open(base_url) do |index|
           index.read.scan(/<a (.+?)>/) do |content,|
@@ -227,7 +230,7 @@ module GNOME2
       end
 
       def latest_version_freedesktop
-        base_url = "#{freedesktop_base_url}/#{name}/release"
+        base_url = "#{freedesktop_base_url}/#{download_name}/release"
         versions = []
         open(base_url) do |index|
           index.read.scan(/<a (.+?)>/) do |content,|
@@ -243,7 +246,7 @@ module GNOME2
       end
 
       def latest_version_freedesktop_gstreamer
-        base_url = "#{freedesktop_gstreamer_base_url}/#{name}"
+        base_url = "#{freedesktop_gstreamer_base_url}/#{download_name}"
         versions = []
         open(base_url) do |index|
           index.read.scan(/<a (.+?)>/) do |content,|
@@ -265,7 +268,7 @@ module GNOME2
       end
 
       def latest_version_gnu
-        base_url = "#{gnu_base_url}/#{name}"
+        base_url = "#{gnu_base_url}/#{download_name}"
         versions = []
         open(base_url) do |index|
           index.read.scan(/<a (.+?)>/) do |content,|
@@ -312,7 +315,7 @@ module GNOME2
       end
 
       def latest_version_github
-        latest_url = "#{github_base_url}/#{name}/releases/latest"
+        latest_url = "#{github_base_url}/#{download_name}/releases/latest"
         open(latest_url) do |latest_page|
           return latest_page.base_uri.path.split("/").last
         end
