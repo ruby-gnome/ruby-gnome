@@ -56,6 +56,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
       :native => {
         :build => true,
+        :configure_args => [
+          "CPPFLAGS=-DU_USE_STRTOD_L=0",
+        ],
         :built_file => "bin/icu-config",
       },
     },
