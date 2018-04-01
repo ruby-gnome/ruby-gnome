@@ -455,7 +455,6 @@ namespace :gem do
             cd(package) do
               tasks = [
                 "cross",
-                "windows:builder:build:prepare:pkg_config",
                 "native",
                 "gem",
               ]
