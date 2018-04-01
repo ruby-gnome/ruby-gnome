@@ -74,8 +74,8 @@ if [ ! -f ~/setup.timestamp ]; then
 
   run git clone file:///pkg-config/.git
   run git clone file:///native-package-installer/.git
-  run git clone file:///rcairo/.git rcairo.${DIRECTORY_SUFFIX}
-  run git clone file:///ruby-gnome2/.git ruby-gnome2.${DIRECTORY_SUFFIX}
+  run git clone file:///rcairo/.git rcairo
+  run git clone file:///ruby-gnome2/.git ruby-gnome2
 
   run sudo gem install --no-document \
       rake \
@@ -93,8 +93,8 @@ if [ ! -f ~/setup.timestamp ]; then
     done
     sleep 10
     wine_home="z:/home/vagrant"
-    wine_rcairo="${wine_home}/rcairo.${DIRECTORY_SUFFIX}"
-    wine_ruby_gnome2="${wine_home}/ruby-gnome2.${DIRECTORY_SUFFIX}"
+    wine_rcairo="${wine_home}/rcairo"
+    wine_ruby_gnome2="${wine_home}/ruby-gnome2"
     bin_dir="vendor/local/bin"
     path=$(
       (
@@ -146,24 +146,24 @@ if [ ! -f ~/rake-compiler.timestamp ]; then
 fi
 
 if [ ! -f ~/native.timestamp ]; then
-  run cd ~/rcairo.${DIRECTORY_SUFFIX}
+  run cd ~/rcairo
   run git pull --rebase
   run rake windows:gcc:dll:bundle windows:zlib:build
 
-  run cd ~/ruby-gnome2.${DIRECTORY_SUFFIX}
+  run cd ~/ruby-gnome2
   run git pull --rebase
 
-  run cd ~/ruby-gnome2.${DIRECTORY_SUFFIX}/glib2
+  run cd ~/ruby-gnome2/glib2
   run rake native:build windows:build
 
-  run cd ~/ruby-gnome2.${DIRECTORY_SUFFIX}/gobject-introspection
+  run cd ~/ruby-gnome2/gobject-introspection
   run rake native:build
 
   run touch ~/native.timestamp
 fi
 
 if [ ! -f ~/rcairo.timestamp ]; then
-  run cd ~/rcairo.${DIRECTORY_SUFFIX}
+  run cd ~/rcairo
   run git pull --rebase
   run rake windows:build
   run rake cross compile native
@@ -171,7 +171,7 @@ if [ ! -f ~/rcairo.timestamp ]; then
   run touch ~/rcairo.timestamp
 fi
 
-run cd ~/ruby-gnome2.${DIRECTORY_SUFFIX}
+run cd ~/ruby-gnome2
 run git pull --rebase
 run rake gem:windows:clean:gem gem:windows:build
 
