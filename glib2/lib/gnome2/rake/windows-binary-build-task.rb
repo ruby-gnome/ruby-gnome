@@ -158,10 +158,12 @@ module GNOME2
       end
 
       def build_env
+        path = "#{g_ir_scanner_bin_dir}:#{ENV["PATH"]}"
         env = {
           "GI_HOST_OS" => "nt",
           "MSYSTEM" => "MINGW64",
           "GREP_OPTIONS" => "--text",
+          "PATH" => path,
         }
         depended_packages = @package.windows.build_dependencies
         use_packages = [@package.name] + depended_packages
@@ -211,7 +213,6 @@ pkgconfig = '/usr/bin/pkg-config'
         CROSS_FILE
         cross_file.close
         sh(env.merge({
-                       "PATH" => "#{g_ir_scanner_bin_dir}:#{ENV["PATH"]}",
                        "CPPFLAGS" => cppflags(package),
                        "LDFLAGS" => ldflags(package),
                      }),
