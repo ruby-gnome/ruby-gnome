@@ -47,7 +47,7 @@ extern "C" {
 #endif
 
 #ifndef RB_ALLOC_N
-#  define RB_ALLOC_NC(type, n) ALLOC_N(type, n)
+#  define RB_ALLOC_N(type, n) ALLOC_N(type, n)
 #endif
 
 /* For Ruby < 2.3 */
