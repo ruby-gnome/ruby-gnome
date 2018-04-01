@@ -431,17 +431,7 @@ end
 def check_cairo(options={})
   rcairo_source_dir = options[:rcairo_source_dir]
   if rcairo_source_dir.nil?
-    suffix = nil
-    if windows_platform?
-      case RUBY_PLATFORM
-      when /\Ax86-mingw/
-        suffix = "win32"
-      when /\Ax64-mingw/
-        suffix = "win64"
-      end
-    end
     rcairo_source_base_dir = "rcairo"
-    rcairo_source_base_dir << ".#{suffix}" if suffix
     top_dir = options[:top_dir]
     if top_dir
       rcairo_source_dir = File.join(top_dir, "..", rcairo_source_base_dir)
