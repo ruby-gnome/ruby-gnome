@@ -270,9 +270,9 @@ array_c_to_ruby_sized(gconstpointer *elements,
     case GI_TYPE_TAG_FILENAME:
         g_base_info_unref(element_type_info);
         {
-            const gchar **strings = (const gchar **)elements;
+            const gchar **filenames = (const gchar **)elements;
             for (i = 0; i < n_elements; i++) {
-                rb_ary_push(rb_array, CSTR2RVAL(strings[i]));
+                rb_ary_push(rb_array, CSTR2FILENAME2RVAL(filenames[i]));
             }
         }
         break;
