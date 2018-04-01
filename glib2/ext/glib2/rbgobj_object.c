@@ -58,8 +58,9 @@ holder_mark(gobj_holder *holder)
 }
 
 static void
-holder_unref(gobj_holder *holder)
+holder_unref(void *data)
 {
+    gobj_holder *holder = data;
     if (holder->gobj) {
         if (!holder->destroyed) {
             g_object_set_qdata(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
@@ -71,8 +72,9 @@ holder_unref(gobj_holder *holder)
 }
 
 static void
-holder_free(gobj_holder *holder)
+holder_free(void *data)
 {
+    gobj_holder *holder = data;
     holder_unref(holder);
     xfree(holder);
 }
