@@ -272,8 +272,7 @@ pkgconfig = '/usr/bin/pkg-config'
       end
 
       def rcairo_dir
-        suffix = @package.windows.build_architecture_suffix
-        @package.project_root_dir.parent + "rcairo.#{suffix}"
+        @package.project_root_dir.parent + "rcairo"
       end
 
       def rcairo_pkgconfig_path
