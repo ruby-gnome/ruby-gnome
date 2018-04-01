@@ -39,6 +39,9 @@ EXPORTS
 	rbgobj_rvalue_to_gvalue
 	rbgobj_initialize_gvalue
 	rbgobj_initialize_object
+	rbgobj_class_info_lookup
+	rbgobj_class_info_lookup_by_gtype
+	rbgobj_class_info_define
 	rbgobj_lookup_class
 	rbgobj_lookup_class_by_gtype
 	rbgobj_gtype_to_ruby_class

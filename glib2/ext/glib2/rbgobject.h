@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
  *  Copyright (C) 2003,2006  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -134,6 +134,8 @@ typedef struct {
     RGMarkFunc mark;
     RGFreeFunc free;
     int flags; /* RGObjClassFlag */
+    gchar *name;
+    rb_data_type_t *data_type;
 } RGObjClassInfo;
 
 /* rbgobject.c */
@@ -170,8 +172,17 @@ extern gboolean rbgobj_gc_mark_instance(gpointer instance);
 
 
 /* rbgobj_type.c */
+extern const RGObjClassInfo *rbgobj_class_info_lookup(VALUE klass);
+extern const RGObjClassInfo *rbgobj_class_info_lookup_by_gtype(GType gtype);
+extern RGObjClassInfo *rbgobj_class_info_define(GType gtype,
+                                                const gchar *name,
+                                                VALUE module,
+                                                VALUE parent);
+/* deprecated */
 extern const RGObjClassInfo *rbgobj_lookup_class(VALUE klass);
+/* deprecated */
 extern const RGObjClassInfo *rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent);
+/* deprecated */
 extern const RGObjClassInfo *rbgobj_lookup_class_by_gtype_full(GType gtype,
 							       VALUE parent,
 							       gboolean create_object);

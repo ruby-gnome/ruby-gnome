@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2002-2018  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -48,133 +48,93 @@ typedef struct {
 } RGObjClassInfoDynamic;
 
 typedef struct {
-    VALUE parent;
     GType gtype;
-    gboolean create_class;
-} RGObjClassByGtypeData;
+    const gchar *name;
+    VALUE module;
+    VALUE parent;
+} RGObjDefineClassData;
 
 static void
-cinfo_mark(RGObjClassInfo* cinfo)
+cinfo_mark(void *data)
 {
+    RGObjClassInfo *cinfo = data;
     rb_gc_mark(cinfo->klass);
 }
 
-const RGObjClassInfo *
-rbgobj_lookup_class(VALUE klass)
+static void
+cinfo_free(void *data)
 {
-    VALUE data = rb_hash_aref(klass_to_cinfo, klass);
-    if (!NIL_P(data)){
-        RGObjClassInfo* cinfo;
-        Data_Get_Struct(data, RGObjClassInfo, cinfo);
-        return cinfo;
-    }
-
-    if (TYPE(klass) == T_CLASS) {
-        VALUE super;
-        super = rb_funcall(klass, id_superclass, 0);
-        return rbgobj_lookup_class(super);
-    }
-
-    rb_raise(rb_eRuntimeError, "can't get gobject class information");
+    RGObjClassInfo *cinfo = data;
+    xfree(cinfo->name);
+    xfree(cinfo->data_type);
 }
 
-static const RGObjClassInfo *rbgobj_lookup_class_by_gtype_without_lock(GType gtype,
-                                                                       VALUE parent,
-                                                                       gboolean create_class);
+static RGObjClassInfo *
+rbgobj_class_info_define_without_lock(GType gtype,
+                                      const gchar *name,
+                                      VALUE module,
+                                      VALUE parent);
 
-static VALUE
-get_superclass(GType gtype)
+static void
+rbgobj_class_info_fill_name(RGObjClassInfo *cinfo)
 {
-    VALUE super_class;
+    VALUE rb_name;
 
-    if (rbgobj_convert_get_superclass(gtype, &super_class))
-        return super_class;
-
-    switch (gtype) {
-      case G_TYPE_PARAM:
-      case G_TYPE_OBJECT:
-        return cInstantiatable;
-      case G_TYPE_BOXED:
-        return rb_cObject;
-      case G_TYPE_POINTER:
-        return rb_cData;
-      case G_TYPE_ENUM:
-      case G_TYPE_FLAGS:
-        return rb_cObject;
-      default:
-      {
-          GType parent_type;
-
-          parent_type = g_type_parent(gtype);
-          if (parent_type == G_TYPE_INVALID) {
-              return cInstantiatable;
-          } else {
-              const RGObjClassInfo *cinfo_super;
-              cinfo_super =
-                  rbgobj_lookup_class_by_gtype_without_lock(parent_type,
-                                                            Qnil,
-                                                            TRUE);
-              return cinfo_super->klass;
-          }
-      }
+    if (cinfo->name) {
+        return;
     }
+
+    if (!RB_TYPE_P(cinfo->klass, RUBY_T_CLASS)) {
+        return;
+    }
+
+    rb_name = rb_funcall(cinfo->klass, rb_intern("name"), 0);
+    if (NIL_P(rb_name)) {
+        return;
+    }
+
+    cinfo->name = RB_ALLOC_N(char, RSTRING_LEN(rb_name) + 1);
+    memcpy(cinfo->name, RSTRING_PTR(rb_name), RSTRING_LEN(rb_name));
+    cinfo->name[RSTRING_LEN(rb_name)] = '\0';
+    cinfo->data_type->wrap_struct_name = cinfo->name;
 }
 
-static const RGObjClassInfo *
-rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
-                                          gboolean create_class)
+static RGObjClassInfo *
+rbgobj_class_info_register_without_lock(GType gtype, VALUE klass)
 {
+    rb_data_type_t *data_type;
+    RGObjClassInfo *cinfo;
     GType fundamental_type;
-    RGObjClassInfo* cinfo;
-    RGObjClassInfoDynamic* cinfod;
-    void* gclass = NULL;
+    RGObjClassInfoDynamic *cinfod;
+    void *gclass = NULL;
     VALUE c;
 
-    if (gtype == G_TYPE_INVALID)
-        return NULL;
+    data_type = RB_ZALLOC(rb_data_type_t);
+    data_type->function.dmark = cinfo_mark;
+    data_type->function.dfree = cinfo_free;
+    if (RB_TYPE_P(klass, RUBY_T_CLASS)) {
+        VALUE p = RCLASS_SUPER(klass);
+        while (p != rb_cObject) {
+            if (RTYPEDDATA_P(p)) {
+                data_type->parent = RTYPEDDATA_TYPE(p);
+                break;
+            }
+            p = RCLASS_SUPER(p);
+        }
+    }
+    data_type->flags = RUBY_TYPED_FREE_IMMEDIATELY;
 
-    cinfo = g_hash_table_lookup(gtype_to_cinfo, GUINT_TO_POINTER(gtype));
-    if (cinfo)
-        return cinfo;
-
-    if (!create_class)
-        return NULL;
-
-    c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
+    c = TypedData_Make_Struct(rb_cData, RGObjClassInfo, data_type, cinfo);
+    cinfo->klass = klass;
     cinfo->gtype = gtype;
     cinfo->mark  = NULL;
     cinfo->free  = NULL;
     cinfo->flags = 0;
+    cinfo->name = NULL;
+    cinfo->data_type = data_type;
+    rbgobj_class_info_fill_name(cinfo);
 
     fundamental_type = G_TYPE_FUNDAMENTAL(gtype);
-    switch (fundamental_type){
-    case G_TYPE_POINTER:
-    case G_TYPE_BOXED:
-    case G_TYPE_PARAM:
-    case G_TYPE_OBJECT:
-    case G_TYPE_ENUM:
-    case G_TYPE_FLAGS:
-        if (NIL_P(parent)) parent = get_superclass(gtype);
-        cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
-        break;
-
-    case G_TYPE_INTERFACE:
-        cinfo->klass = rb_module_new();
-        break;
-
-    default:
-      if (NIL_P(parent)) parent = get_superclass(gtype);
-      if (NIL_P(parent)) {
-          fprintf(stderr,
-                  "%s: %s's fundamental type %s isn't supported\n",
-                  "rbgobj_lookup_class_by_gtype",
-                  g_type_name(gtype),
-                  g_type_name(fundamental_type));
-          return NULL;
-      }
-      cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
-    }
-
     switch (fundamental_type){
       case G_TYPE_BOXED:
         rb_define_alloc_func(cinfo->klass, rbgobj_boxed_alloc_func);
@@ -217,10 +177,14 @@ rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
         interfaces = g_type_interfaces(gtype, &n_interfaces);
         for (i = 0; i < n_interfaces; i++){
             const RGObjClassInfo *iface_cinfo;
-            iface_cinfo =
-            rbgobj_lookup_class_by_gtype_without_lock(interfaces[i],
-                                                      Qnil,
-                                                      TRUE);
+            iface_cinfo = rbgobj_class_info_lookup_by_gtype(interfaces[i]);
+            if (!iface_cinfo) {
+                iface_cinfo =
+                    rbgobj_class_info_define_without_lock(interfaces[i],
+                                                          NULL,
+                                                          rb_cObject,
+                                                          Qnil);
+            }
             rb_include_module(cinfo->klass, iface_cinfo->klass);
         }
         g_free(interfaces);
@@ -253,55 +217,198 @@ rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
 }
 
 static VALUE
-rbgobj_lookup_class_by_gtype_body(VALUE data)
+get_superclass(GType gtype, VALUE module)
 {
-    RGObjClassByGtypeData *cdata = (RGObjClassByGtypeData *)data;
+    VALUE super_class;
+
+    if (rbgobj_convert_get_superclass(gtype, &super_class))
+        return super_class;
+
+    switch (gtype) {
+      case G_TYPE_PARAM:
+      case G_TYPE_OBJECT:
+        return cInstantiatable;
+      case G_TYPE_BOXED:
+        return rb_cObject;
+      case G_TYPE_POINTER:
+        return rb_cData;
+      case G_TYPE_ENUM:
+      case G_TYPE_FLAGS:
+        return rb_cObject;
+      default:
+      {
+          GType parent_type;
+
+          parent_type = g_type_parent(gtype);
+          if (parent_type == G_TYPE_INVALID) {
+              return cInstantiatable;
+          } else {
+              const RGObjClassInfo *cinfo_super;
+              cinfo_super = rbgobj_class_info_lookup_by_gtype(parent_type);
+              if (!cinfo_super) {
+                  cinfo_super = rbgobj_class_info_define_without_lock(parent_type,
+                                                                      NULL,
+                                                                      module,
+                                                                      Qnil);
+              }
+              return cinfo_super->klass;
+          }
+      }
+    }
+}
+
+static RGObjClassInfo *
+rbgobj_class_info_define_without_lock(GType gtype,
+                                      const gchar *name,
+                                      VALUE module,
+                                      VALUE parent)
+{
+    GType fundamental_type;
+    VALUE klass;
+
+    fundamental_type = G_TYPE_FUNDAMENTAL(gtype);
+    switch (fundamental_type){
+    case G_TYPE_POINTER:
+    case G_TYPE_BOXED:
+    case G_TYPE_PARAM:
+    case G_TYPE_OBJECT:
+    case G_TYPE_ENUM:
+    case G_TYPE_FLAGS:
+        if (NIL_P(parent)) parent = get_superclass(gtype, module);
+        klass = rb_funcall(rb_cClass, id_new, 1, parent);
+        break;
+
+    case G_TYPE_INTERFACE:
+        klass = rb_module_new();
+        break;
+
+    default:
+      if (NIL_P(parent)) parent = get_superclass(gtype, module);
+      if (NIL_P(parent)) {
+          fprintf(stderr,
+                  "rbgobj_class_info_define: "
+                  "Unsupported fundamental type: <%s>(%s)\n",
+                  g_type_name(fundamental_type),
+                  g_type_name(gtype));
+          return NULL;
+      }
+      klass = rb_funcall(rb_cClass, id_new, 1, parent);
+    }
+
+    if (name) {
+        rb_define_const(module, name, klass);
+    }
+    return rbgobj_class_info_register_without_lock(gtype, klass);
+}
+
+static VALUE
+rbgobj_class_info_define_body(VALUE data)
+{
+    RGObjDefineClassData *cdata = (RGObjDefineClassData *)data;
     const RGObjClassInfo *cinfo;
 
-    cinfo = rbgobj_lookup_class_by_gtype_without_lock(cdata->gtype,
-                                                      cdata->parent,
-                                                      cdata->create_class);
+    cinfo = rbgobj_class_info_define_without_lock(cdata->gtype,
+                                                  cdata->name,
+                                                  cdata->module,
+                                                  cdata->parent);
     return (VALUE)cinfo;
 }
 
 static VALUE
-rbgobj_lookup_class_by_gtype_ensure(G_GNUC_UNUSED VALUE data)
+rbgobj_class_info_define_ensure(G_GNUC_UNUSED VALUE data)
 {
     rb_funcall(lookup_class_mutex, id_unlock, 0);
     return Qundef;
 }
 
+RGObjClassInfo *
+rbgobj_class_info_define(GType gtype,
+                         const gchar *name,
+                         VALUE module,
+                         VALUE parent)
+{
+    RGObjDefineClassData data;
+
+    data.gtype = gtype;
+    data.name = name;
+    data.module = module;
+    data.parent = parent;
+
+    rb_funcall(lookup_class_mutex, id_lock, 0);
+    return (RGObjClassInfo *)rb_ensure(rbgobj_class_info_define_body,
+                                       (VALUE)&data,
+                                       rbgobj_class_info_define_ensure,
+                                       (VALUE)&data);
+}
+
+/* deprecated */
+const RGObjClassInfo *
+rbgobj_lookup_class(VALUE klass)
+{
+    return rbgobj_class_info_lookup(klass);
+}
+
+const RGObjClassInfo *
+rbgobj_class_info_lookup(VALUE klass)
+{
+    VALUE data = rb_hash_aref(klass_to_cinfo, klass);
+    if (!NIL_P(data)) {
+        RGObjClassInfo *cinfo;
+        if (RTYPEDDATA_P(data)) {
+            TypedData_Get_Struct(data,
+                                 RGObjClassInfo,
+                                 RTYPEDDATA_TYPE(data),
+                                 cinfo);
+        } else {
+            Data_Get_Struct(data, RGObjClassInfo, cinfo);
+        }
+        return cinfo;
+    }
+
+    if (TYPE(klass) == T_CLASS) {
+        VALUE super;
+        super = rb_funcall(klass, id_superclass, 0);
+        return rbgobj_lookup_class(super);
+    }
+
+    rb_raise(rb_eRuntimeError, "can't get gobject class information");
+    return NULL;
+}
+
+const RGObjClassInfo *
+rbgobj_class_info_lookup_by_gtype(GType gtype)
+{
+    if (gtype == G_TYPE_INVALID)
+        return NULL;
+
+    return g_hash_table_lookup(gtype_to_cinfo, GUINT_TO_POINTER(gtype));
+}
+
+/* deprecated */
 const RGObjClassInfo *
 rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent)
 {
     return rbgobj_lookup_class_by_gtype_full(gtype, parent, TRUE);
 }
 
+/* deprecated */
 const RGObjClassInfo *
 rbgobj_lookup_class_by_gtype_full(GType gtype, VALUE parent,
                                   gboolean create_class)
 {
     const RGObjClassInfo *info;
-    RGObjClassByGtypeData data;
 
-    info = rbgobj_lookup_class_by_gtype_without_lock(gtype, parent, FALSE);
-    if (info) {
-        return info;
-    }
-
-    if (!create_class) {
+    if (gtype == G_TYPE_INVALID)
         return NULL;
-    }
 
-    data.gtype = gtype;
-    data.parent = parent;
-    data.create_class = create_class;
+    info = rbgobj_class_info_lookup_by_gtype(gtype);
+    if (info)
+        return info;
 
-    rb_funcall(lookup_class_mutex, id_lock, 0);
-    return (RGObjClassInfo *)rb_ensure(rbgobj_lookup_class_by_gtype_body,
-                                       (VALUE)&data,
-                                       rbgobj_lookup_class_by_gtype_ensure,
-                                       (VALUE)&data);
+    if (!create_class)
+        return NULL;
+
+    return rbgobj_class_info_define(gtype, NULL, rb_cObject, parent);
 }
 
 VALUE
@@ -317,14 +424,22 @@ VALUE
 rbgobj_define_class(GType gtype, const gchar *name, VALUE module,
                     RGMarkFunc mark, RGFreeFunc free, VALUE parent)
 {
-    RGObjClassInfo* cinfo;
-    if (gtype == 0)
-        rb_bug("rbgobj_define_class: Invalid gtype [%s]\n", name);
+    RGObjClassInfo *cinfo;
 
-    cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype, parent);
+    if (gtype == G_TYPE_INVALID)
+        rb_bug("rbgobj_define_class: Invalid GType: <%s>\n", name);
+
+    cinfo = (RGObjClassInfo *)rbgobj_class_info_lookup_by_gtype(gtype);
+    if (cinfo) {
+        if (!rb_const_defined(module, rb_intern(name))) {
+            rb_define_const(module, name, cinfo->klass);
+            rbgobj_class_info_fill_name(cinfo);
+        }
+    } else {
+        cinfo = rbgobj_class_info_define(gtype, name, module, parent);
+    }
     cinfo->mark = mark;
     cinfo->free = free;
-    rb_define_const(module, name, cinfo->klass);
     return cinfo->klass;
 }
 
@@ -381,8 +496,9 @@ rbgobj_register_class(VALUE klass,
     RGObjClassInfo* cinfo = NULL;
     VALUE c = Qnil;
 
-    if (klass2gtype)
+    if (klass2gtype) {
         c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
+    }
     if (gtype2klass && !cinfo)
         cinfo = g_new(RGObjClassInfo, 1);
 

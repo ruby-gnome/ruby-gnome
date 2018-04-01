@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2003  Masahiro Sakai
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -77,13 +77,30 @@ holder_free(gobj_holder *holder)
     xfree(holder);
 }
 
+static const rb_data_type_t rg_glib_object_type = {
+    "GLib::Object",
+    {
+        holder_mark,
+        holder_free,
+        NULL,
+        NULL,
+        NULL,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
+
 VALUE
 rbgobj_object_alloc_func(VALUE klass)
 {
     gobj_holder* holder;
     VALUE result;
 
-    result = Data_Make_Struct(klass, gobj_holder, holder_mark, holder_free, holder);
+    result = TypedData_Make_Struct(klass,
+                                   gobj_holder,
+                                   &rg_glib_object_type,
+                                   holder);
     holder->self  = result;
     holder->gobj  = NULL;
     holder->cinfo = NULL;
@@ -105,7 +122,7 @@ rbgobj_gobject_initialize(VALUE obj, gpointer cobj)
     gobj_holder* holder = g_object_get_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY);
     if (holder)
         rb_raise(rb_eRuntimeError, "ruby wrapper for this GObject* already exists.");
-    Data_Get_Struct(obj, gobj_holder, holder);
+    TypedData_Get_Struct(obj, gobj_holder, &rg_glib_object_type, holder);
     holder->cinfo = RVAL2CINFO(obj);
     holder->gobj  = (GObject*)cobj;
     holder->destroyed = FALSE;
@@ -149,10 +166,7 @@ rbgobj_get_gobject(VALUE obj)
 {
     gobj_holder* holder;
 
-    if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, GTYPE2CLASS(G_TYPE_OBJECT))))
-        rb_raise(rb_eTypeError, "not a GLib::Object");
-
-    Data_Get_Struct(obj, gobj_holder, holder);
+    TypedData_Get_Struct(obj, gobj_holder, &rg_glib_object_type, holder);
 
     if (holder->destroyed)
         rb_raise(rb_eTypeError, "destroyed GLib::Object");
@@ -566,10 +580,7 @@ rg_destroyed_p(VALUE self)
 {
     gobj_holder* holder;
 
-    if (!RVAL2CBOOL(rb_obj_is_kind_of(self, GTYPE2CLASS(G_TYPE_OBJECT))))
-        rb_raise(rb_eTypeError, "not a GLib::Object");
-
-    Data_Get_Struct(self, gobj_holder, holder);
+    TypedData_Get_Struct(self, gobj_holder, &rg_glib_object_type, holder);
 
     return CBOOL2RVAL(holder->destroyed);
 }
@@ -582,7 +593,7 @@ rg_inspect(VALUE self)
     char *s;
     VALUE result;
 
-    Data_Get_Struct(self, gobj_holder, holder);
+    TypedData_Get_Struct(self, gobj_holder, &rg_glib_object_type, holder);
 
     class_name = rb_class2name(CLASS_OF(self));
     if (!holder->destroyed)
@@ -602,7 +613,7 @@ rg_unref(VALUE self)
 {
     gobj_holder* holder;
 
-    Data_Get_Struct(self, gobj_holder, holder);
+    TypedData_Get_Struct(self, gobj_holder, &rg_glib_object_type, holder);
 
     if (holder->destroyed)
         rb_raise(rb_eTypeError, "destroyed GLib::Object");
@@ -780,7 +791,7 @@ static VALUE
 gobj_ref_count(VALUE self)
 {
     gobj_holder* holder;
-    Data_Get_Struct(self, gobj_holder, holder);
+    TypedData_Get_Struct(self, gobj_holder, &rg_glib_object_type, holder);
     return INT2NUM(holder->gobj ? holder->gobj->ref_count : 0);
 }
 
@@ -788,7 +799,7 @@ static VALUE
 rg_floating_p(VALUE self)
 {
     gobj_holder* holder;
-    Data_Get_Struct(self, gobj_holder, holder);
+    TypedData_Get_Struct(self, gobj_holder, &rg_glib_object_type, holder);
     if (holder->gobj) {
         return CBOOL2RVAL(g_object_is_floating(holder->gobj));
     } else {
