@@ -191,6 +191,8 @@ module GNOME2
            "LDFLAGS=#{ldflags(package)}",
            "--prefix=#{dist_dir}",
            "--host=#{@package.windows.build_host}",
+           "--target=#{@package.windows.build_host}",
+           "--build=x86_64-pc-linux-gnu",
            *package.windows.configure_args) or exit(false)
       end
 
