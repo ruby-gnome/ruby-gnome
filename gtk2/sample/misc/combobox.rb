@@ -17,7 +17,7 @@ if str = Gtk.check_version(2, 4, 0)
 end
 
 window = Gtk::Window.new("Gtk::ComboBox sample")
-window.signal_connect("destroy"){Gtk.main_quit}
+window.signal_connect(:destroy){ Gtk.main_quit }
 
 #
 # Text only
