@@ -2,6 +2,121 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.2.2: 2018-04-02
+
+This is a release to support Ruby 2.5 on Windows.
+
+=== Changes
+
+==== All
+
+  * Windows: Added Ruby 2.5 support.
+    [GitHub#1148][Reported by Andy Meneely]
+
+  * Red Hat: Use (({pkgconfig(name)})) style.
+    [GitHub#1117][Patch by Mamoru TASAKA]
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * (({GLib::Bytes#to_s})): Changed to return a frozen string to
+      reduce data copy.
+
+    * Migrated to (({TypedData})) from (({Data})).
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added (({nil})) argument check.
+
+    * (({GObjectIntrospection::Loader#rubyish_method_name})):
+      Added (({:n_in_args_offset})) option.
+
+    * Suppressed a needless copy of (({GLib::Bytes})).
+
+    * Added filename array support.
+      [GitHub#1151][Patch by cedlemo]
+
+  * Fixes
+
+    * Fixed a overflow bug on 32bit.
+      [Debian#766020][Reported by Mario Lang]
+      [GitHub#1137][Forwarded by HIGUCHI Daisuke]
+
+==== Ruby/GTK2
+
+  * Fixes
+
+    * Fix the wrong number of arguments.
+      [GitHub#1133][Reported by Mamoru TASAKA]
+
+==== Ruby/GDK3
+
+  * Improvements
+
+    * Ensured loading GDK 3.
+      [GitHub#1126][Patch by cedlemo]
+
+  * Fixes
+
+    * (({Gdk::Screen.default})): Fixed a GC related crash.
+
+    * (({Gtk::Widget#style_context})): Fixed a GC related crash.
+      [GitHub#1149][Reported by Valentin Pelloin]
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * Added a tool palette demo.
+      [GitHub#1116][Patch by cedlemo]
+
+    * Added a shortcut demo.
+      [GitHub#1120][Patch by cedlemo]
+
+    * Updated demo.
+      [Reported by Titouan Teyssier]
+      [GitHub#1139][Patch by Titouan Teyssier]
+
+    * Updated README.
+      [GitHub#1127][Patch by cedlemo]
+
+  * Fixes
+
+    * (({Gtk::Container#add_child(child)})): Made workable again.
+
+==== Ruby/Poppler
+
+  * Fixes
+
+    * (({Poppler::Page#thumbnail_size})): Fixed return value.
+      [GitHub:rcairo/rcairo#51][Reported by Mamoru TASAKA]
+
+==== Ruby/Gnumeric
+
+  * Improvements
+
+    * Improved .typelib for Gnumeric detection.
+      [GitHub#1118][Reported by cedlemo]
+
+=== Thanks
+
+  * cedlemo
+
+  * Mamoru TASAKA
+
+  * Titouan Teyssier
+
+  * Mario Lang
+
+  * HIGUCHI Daisuke
+
+  * Andy Meneely
+
+  * Valentin Pelloin
+
 == Ruby-GNOME2 3.2.1: 2017-11-19
 
 This is a memory related bug fix release.
