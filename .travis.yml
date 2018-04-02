@@ -12,6 +12,7 @@ services:
 
 matrix:
   include:
+    - env: TYPE=ruby-2.1
     - env: TYPE=ruby-2.2
     - env: TYPE=ruby-2.3
     - env: TYPE=ruby-2.4
