@@ -2,7 +2,7 @@
 =begin
   entry.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2018 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: entry.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
@@ -22,7 +22,7 @@ box1.add(entry)
 box1.add(Gtk::HSeparator.new)
 
 button = Gtk::Button.new("close")
-button.signal_connect("clicked") do
+button.signal_connect(:clicked) do
   Gtk.main_quit
 end
 box1.add(button)
