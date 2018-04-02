@@ -2,7 +2,7 @@
 =begin
   frame.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2018 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: frame.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
@@ -11,7 +11,7 @@
 require 'gtk2'
 
 window = Gtk::Window.new("buttons")
-window.signal_connect("destroy") do
+window.signal_connect(:destroy) do
   Gtk.main_quit
 end
 window.border_width = 0
@@ -59,7 +59,7 @@ box2.border_width = 10
 box1.pack_start(box2, false, true, 0)
 
 button = Gtk::Button.new("close")
-button.signal_connect("clicked") do
+button.signal_connect(:clicked) do
   Gtk.main_quit
 end
 box2.pack_start(button)
