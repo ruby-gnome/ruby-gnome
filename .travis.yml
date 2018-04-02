@@ -12,14 +12,13 @@ services:
 
 matrix:
   include:
-    - env: TYPE=ruby-2.1
     - env: TYPE=ruby-2.2
     - env: TYPE=ruby-2.3
     - env: TYPE=ruby-2.4
     - env: TYPE=ruby-2.5
     - env: TYPE=ubuntu-14.04
     - env: TYPE=ubuntu-16.04
-    - env: TYPE=ubuntu-17.10
+    - env: TYPE=ubuntu-18.04
     - env: TYPE=centos-6
     - env: TYPE=centos-7
     - os: osx
