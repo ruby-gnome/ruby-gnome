@@ -23,12 +23,12 @@ window.signal_connect("destroy"){Gtk.main_quit}
 # Text only
 #
 combo1 = Gtk::ComboBox.new
-["foo", "bar", "fuga", "hoge"].each do |val|
+%w( foo bar fuga hoge ).each do |val|
   combo1.append_text(val)
 end
 combo1.active = 1
 
-combo1.signal_connect("changed") do
+combo1.signal_connect(:changed) do
   p "combo1: #{combo1.active}, #{combo1.active_iter[0]}"
 end
 
@@ -58,7 +58,7 @@ combo2.set_attributes(renderer, :text => 1)
 
 combo2.active = 2
 
-combo2.signal_connect("changed") do
+combo2.signal_connect(:changed) do
   p "combo2: #{combo2.active}, #{combo2.active_iter[1]}"
 end
 
@@ -66,12 +66,12 @@ end
 # Gtk::ComboBoxEntry
 #
 combo3 = Gtk::ComboBoxEntry.new
-["foo", "bar", "fuga", "hoge"].each do |val|
+%w( foo bar fuga hoge ).each do |val|
   combo3.append_text(val)
 end
 combo3.active = 1
 
-combo3.signal_connect("changed") do
+combo3.signal_connect(:changed) do
   if combo3.active_iter
     p "combo3: #{combo3.active}, #{combo3.active_iter[0]}"
   end
