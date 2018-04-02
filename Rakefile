@@ -232,8 +232,7 @@ namespace :dist do
     package(gnome2_base_name, base_files + gnome2_packages)
   end
 
-  ruby_versions = ["2.1.10", "2.2.8", "2.3.5", "2.4.2"]
-  ruby_versions -= ["2.2.8"] # TODO: Ruby 2.2.8 is broken?
+  ruby_versions = ["2.2.10", "2.3.7", "2.4.4", "2.5.1"]
   namespace :test do
     ruby_base_url = "https://cache.ruby-lang.org/pub/ruby"
     ruby_versions.each do |ruby_version|
@@ -267,7 +266,7 @@ namespace :dist do
         end
       end
 
-      rubygems_tgz_base = "rubygems-2.2.2.tgz"
+      rubygems_tgz_base = "rubygems-2.7.6.tgz"
       rubygems_tgz = "#{base_dir}/#{rubygems_tgz_base}"
       file rubygems_tgz => base_dir do
         rubygems_url_base = "http://production.cf.rubygems.org/rubygems"
