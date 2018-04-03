@@ -85,8 +85,6 @@ static const rb_data_type_t rg_glib_object_type = {
         holder_mark,
         holder_free,
         NULL,
-        NULL,
-        NULL,
     },
     NULL,
     NULL,
