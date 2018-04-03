@@ -2,6 +2,18 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.2.3: 2018-04-03
+
+This is a bug fix release of 3.2.2.
+
+=== Changes
+
+==== Ruby/GObjectIntrospection
+
+  * Fixes
+
+    * Fixed a crash bug when (({GLib::Bytes})) is passed as an argument.
+
 == Ruby-GNOME2 3.2.2: 2018-04-02
 
 This is a release to support Ruby 2.5 on Windows.
