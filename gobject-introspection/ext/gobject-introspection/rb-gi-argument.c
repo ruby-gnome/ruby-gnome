@@ -2882,6 +2882,7 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
         } else if (gtype == G_TYPE_BYTES) {
             if (RVAL2CBOOL(rb_obj_is_kind_of(rb_argument, rb_cGLibBytes))) {
                 argument->v_pointer = RVAL2BOXED(rb_argument, G_TYPE_BYTES);
+                g_bytes_ref(argument->v_pointer);
             } else {
                 VALUE rb_string;
                 GBytes *gbytes;
