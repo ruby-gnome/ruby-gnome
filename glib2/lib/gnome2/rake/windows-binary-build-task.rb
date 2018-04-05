@@ -107,6 +107,7 @@ module GNOME2
             common_make_args << cc_env(package)
           end
           add_gobject_introspection_make_args(package, common_make_args)
+          common_make_args.concat(package.windows.make_args)
           build_make_args = common_make_args.dup
           install_make_args = common_make_args.dup
           if package.windows.build_concurrently?
@@ -194,6 +195,13 @@ module GNOME2
            # "--target=#{@package.windows.build_host}",
            # "--build=x86_64-pc-linux-gnu",
            *package.windows.configure_args) or exit(false)
+        if package.windows.force_to_disable_deplibs_check?
+          sh(env,
+             "sed",
+             "-i''",
+             "-e", "s/valid_a_lib=false/valid_a_lib=:/g",
+             "libtool")
+        end
       end
 
       def meson(env, package, source_dir)

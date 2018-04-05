@@ -1,0 +1,82 @@
+diff --git a/Makefile.am b/Makefile.am
+index cd7324a1..9de93150 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -115,9 +115,7 @@ else
+ CARGO_RELEASE_ARGS=--release
+ endif
+ 
+-if CROSS_COMPILING
+-CARGO_TARGET_ARGS=--target=$(host)
+-endif
++CARGO_TARGET_ARGS=--target=$(RUST_TARGET)
+ 
+ CARGO_VERBOSE = $(cargo_verbose_$(V))
+ cargo_verbose_ = $(cargo_verbose_$(AM_DEFAULT_VERBOSITY))
+@@ -147,6 +145,7 @@ $(RUST_LIB): $(RUST_SRC)
+ 	PKG_CONFIG='$(PKG_CONFIG)'						\
+ 	CARGO_TARGET_DIR=$(CARGO_TARGET_DIR)					\
+ 	cargo build $(CARGO_VERBOSE) $(CARGO_TARGET_ARGS) $(CARGO_RELEASE_ARGS)
++	$(RUST_LIB_RENAME)
+ 
+ librsvg_@RSVG_API_MAJOR_VERSION@_la_CPPFLAGS = \
+ 	-I$(top_srcdir) 			\
+@@ -171,9 +170,9 @@ librsvg_@RSVG_API_MAJOR_VERSION@_la_LDFLAGS = \
+ 	$(AM_LDFLAGS)
+ 
+ librsvg_@RSVG_API_MAJOR_VERSION@_la_LIBADD = \
++	$(RUST_LIB)		\
+ 	$(LIBRSVG_LIBS) 	\
+-	$(LIBM)			\
+-	$(RUST_LIB)
++	$(LIBM)
+ 
+ librsvgincdir = $(includedir)/librsvg-$(RSVG_API_VERSION)/librsvg
+ librsvginc_HEADERS =			\
+diff --git a/configure.ac b/configure.ac
+index 10bcfe3c..e89f3a9a 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -275,6 +275,21 @@ AC_ARG_ENABLE(debug,
+ 		fi
+ 	      ])
+ 
++AC_MSG_CHECKING([for Rust target])
++case "$host" in
++  i686-w64-mingw32)
++    RUST_TARGET=i686-pc-windows-gnu
++    ;;
++  x86_64-w64-mingw32)
++    RUST_TARGET=x86_64-pc-windows-gnu
++    ;;
++  *)
++    RUST_TARGET=$host
++    ;;
++esac
++AC_MSG_RESULT($RUST_TARGET)
++AC_SUBST(RUST_TARGET)
++
+ AC_MSG_CHECKING(whether to build Rust code with debugging information)
+ if test "x$debug_release" = "xyes" ; then
+ 	AC_MSG_RESULT(yes)
+@@ -286,11 +301,17 @@ fi
+ AM_CONDITIONAL([DEBUG_RELEASE], [test "x$debug_release" = "xyes"])
+ 
+ AM_CONDITIONAL(CROSS_COMPILING, test $cross_compiling = yes)
+-if test "x$cross_compiling" = "xyes" ; then
+-	RUST_TARGET_SUBDIR="$host/$RUST_TARGET_SUBDIR"
+-fi
++
++RUST_TARGET_SUBDIR="$RUST_TARGET/$RUST_TARGET_SUBDIR"
+ AC_SUBST([RUST_TARGET_SUBDIR])
+ 
++if test "$platform_win32" = "yes" ; then
++	RUST_LIB_RENAME="cp \$(abs_top_builddir)/target/\$(RUST_TARGET_SUBDIR)/rsvg_internals.lib \$(RUST_LIB)"
++else
++	RUST_LIB_RENAME=:
++fi
++AC_SUBST(RUST_LIB_RENAME)
++
+ dnl ===========================================================================
+ dnl Build introspectable bindings
+ 

@@ -327,11 +327,13 @@ module GNOME2
                                               :configure_args,
                                               :meson_args,
                                               :cmake_args,
+                                              :make_args,
                                               :cc_args,
                                               :patches,
                                               :built_file,
                                               :need_autogen,
                                               :need_autoreconf,
+                                              :force_to_disable_deplibs_check,
                                               :build_concurrently,
                                               :use_cc_environment_variable,
                                               :gobject_introspection_compiler_split_args,
@@ -371,6 +373,10 @@ module GNOME2
           super || []
         end
 
+        def make_args
+          super || []
+        end
+
         def patches
           super || []
         end
@@ -385,6 +391,14 @@ module GNOME2
 
         def need_autoreconf?
           need_autoreconf.nil? ? false : need_autoreconf
+        end
+
+        def force_to_disable_deplibs_check?
+          if force_to_disable_deplibs_check.nil?
+            false
+          else
+            force_to_disable_deplibs_check
+          end
         end
 
         def build_concurrently?

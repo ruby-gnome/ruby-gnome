@@ -11,6 +11,8 @@ export MAKE_N_JOBS=${N_CPUS}
 
 export RUBYLIB="$(pwd)/pkg-config/lib:$(pwd)/native-package-installer/lib"
 
+export PATH="${HOME}/.cargo/bin:${PATH}"
+
 run()
 {
   "$@"
@@ -71,6 +73,16 @@ if [ ! -f ~/setup.timestamp ]; then
   #     ${BUILD_HOST}-g++ /usr/bin/${BUILD_HOST}-g++-posix
 
   run sudo pip3 install jsmin meson ninja
+
+  run curl https://sh.rustup.rs -sSf > rustup.sh
+  run chmod +x rustup.sh
+  run ./rustup.sh -y
+  run rm rustup.sh
+  if [ ${BUILD_HOST} = "x86_64-w64-mingw32" ]; then
+    run rustup target add x86_64-pc-windows-gnu
+  else
+    run rustup target add i686-pc-windows-gnu
+  fi
 
   run git clone file:///pkg-config/.git
   run git clone file:///native-package-installer/.git
