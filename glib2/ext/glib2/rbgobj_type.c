@@ -431,7 +431,7 @@ rbgobj_define_class(GType gtype, const gchar *name, VALUE module,
 
     cinfo = (RGObjClassInfo *)rbgobj_class_info_lookup_by_gtype(gtype);
     if (cinfo) {
-        if (!rb_const_defined(module, rb_intern(name))) {
+        if (!rb_const_defined_at(module, rb_intern(name))) {
             rb_define_const(module, name, cinfo->klass);
             rbgobj_class_info_fill_name(cinfo);
         }
