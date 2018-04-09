@@ -198,7 +198,7 @@ module GNOME2
         if package.windows.force_to_disable_deplibs_check?
           sh(env,
              "sed",
-             "-i''",
+             "-i",
              "-e", "s/valid_a_lib=false/valid_a_lib=:/g",
              "libtool")
         end
