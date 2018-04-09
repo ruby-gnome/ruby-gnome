@@ -89,6 +89,10 @@ module GNOME2
         ["major", "minor", "micro"].collect {|type| versions[type]}.compact.join(".")
       end
 
+      def external_packages
+        @package.external_packages
+      end
+
       def external_packages=(packages)
         @package.external_packages = packages
       end

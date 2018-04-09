@@ -1,5 +1,5 @@
 diff --git a/Makefile.am b/Makefile.am
-index cd7324a1..9de93150 100644
+index cd7324a1..4402ac63 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -115,9 +115,7 @@ else
@@ -25,10 +25,11 @@ index cd7324a1..9de93150 100644
  	$(AM_LDFLAGS)
  
  librsvg_@RSVG_API_MAJOR_VERSION@_la_LIBADD = \
-+	$(RUST_LIB)		\
- 	$(LIBRSVG_LIBS) 	\
+-	$(LIBRSVG_LIBS) 	\
 -	$(LIBM)			\
 -	$(RUST_LIB)
++	$(RUST_LIB)		\
++	$(LIBRSVG_LIBS)		\
 +	$(LIBM)
  
  librsvgincdir = $(includedir)/librsvg-$(RSVG_API_VERSION)/librsvg
