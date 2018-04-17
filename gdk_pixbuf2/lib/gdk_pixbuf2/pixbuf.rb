@@ -62,7 +62,7 @@ module GdkPixbuf
       when 5
         message = "#{caller[0]}: "
         message << "#{self.class}.new(colorspace, has_alpha, bits_per_sample, "
-        message << "width, height) is deprecated."
+        message << "width, height) is deprecated. "
         message << "Use #{self.class}.new(:colorspace => colorspace, "
         message << ":has_alpha => has_alpha, "
         message << ":bits_per_sample => bits_per_sample, "
@@ -73,7 +73,7 @@ module GdkPixbuf
       when 7
         message = "#{caller[0]}: "
         message << "#{self.class}.new(data, colorspace, has_alpha, "
-        message << "bits_per_sample, width, height) is deprecated."
+        message << "bits_per_sample, width, height) is deprecated. "
         message << "Use #{self.class}.new(:data => data, "
         message << ":colorspace => colorspace, "
         message << ":has_alpha => has_alpha, "
