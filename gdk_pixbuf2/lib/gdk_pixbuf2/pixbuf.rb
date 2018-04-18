@@ -308,11 +308,11 @@ module GdkPixbuf
       dest_width = options[:destination_width] || options[:dest_width]
       dest_height = options[:destination_height] || options[:dest_height]
 
-      destination ||= Pixbuf.new(colorspace,
-                                 has_alpha?,
-                                 bits_per_sample,
-                                 dest_x + dest_width,
-                                 dest_y + dest_height)
+      destination ||= Pixbuf.new(:colorspace => colorspace,
+                                 :has_alpha => has_alpha?,
+                                 :bits_per_sample => bits_per_sample,
+                                 :dest_width => dest_x + dest_width,
+                                 :dest_height => dest_y + dest_height)
       destination.composite!(self, options)
       destination
     end
