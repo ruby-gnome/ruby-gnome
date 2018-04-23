@@ -56,15 +56,14 @@ You can also install these gems from GitHub master branch.
 * ruby-gtk2 + ruby-gtk3
 * Ruby/RSVG:            librsvg 2.8.0 or later
 * Ruby/Poppler:         poppler-glib 0.8.0 or later
-* Ruby/VTE              VTE 0.12.1 or later
-* Ruby/VTE3             VTE 0.37.0 or later
+* Ruby/VTE:             VTE 0.12.1 or later
+* Ruby/VTE3:            VTE 0.37.0 or later
 * Ruby/GStreamer:       GStreamer 1.0.0 or later
 * Ruby/GtkSourceView2:  GtkSourceView 2.0.0 or later
 * Ruby/Clutter:         Clutter 1.12.0 or later
 * Ruby/ClutterGTK:      Clutter-GTK 1.2.0 or later
 * Ruby/ClutterGStreamer:Clutter-GStreamer 2.0.0 or later
 * Ruby/GtkSourceView3:  GtkSourceView 3.4.2 or later
-* Ruby/VTE3:            VTE 0.32.2 or later
 * Ruby/WebKitGTK:       WebKitGTK+ 1.8.1 or later (for GTK+ 3)
 * Ruby/WebKitGTK2:      WebKitGTK+ 1.8.1 or later (for GTK+ 2)
 * Ruby/WebKit2GTK:      WebKitGTK+ 2.0.0 or later (for GTK+ 3)
