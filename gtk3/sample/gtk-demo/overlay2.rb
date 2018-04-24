@@ -57,7 +57,7 @@ class Overlay2Demo
     @adjustment.signal_connect "value-changed" do |widget|
       value = widget.value
       @text.set_left_margin(value)
-      @tag.set_property("pixels-above-lines", value)
+      @tag.set_property("pixels_above_lines", value)
     end
     @adjustment.value = 100
   end
@@ -80,7 +80,7 @@ class Overlay2Demo
     buffer = @text.buffer
     buffer.text = "Dear Diary..."
 
-    @tag = buffer.create_tag("top-margin", "pixels-above-lines" => 0)
+    @tag = buffer.create_tag("top-margin", "pixels_above_lines" => 0)
 
     word_end = buffer.start_iter
     word_end.forward_word_end
