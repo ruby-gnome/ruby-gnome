@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,8 @@ module Gtk
       return nil unless succeeded
 
       properties.each do |name, value|
-        tag.__send__("#{name}=", value)
+        property_name = name.to_s.gsub(/-/, "_")
+        tag.__send__("#{property_name}=", value)
       end
 
       tag
