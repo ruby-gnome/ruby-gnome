@@ -44,6 +44,7 @@ weak_notify(gpointer data, G_GNUC_UNUSED GObject *where_the_object_was)
 
     rbgobj_instance_call_cinfo_free(holder->gobj);
     g_hash_table_unref(holder->rb_relatives);
+    holder->rb_relatives = NULL;
     holder->destroyed = TRUE;
 
     g_object_unref(holder->gobj);
@@ -112,9 +113,11 @@ rbgobj_object_add_relative(VALUE rb_gobject, VALUE rb_relative)
                          gobj_holder,
                          &rg_glib_object_type,
                          holder);
-    g_hash_table_insert(holder->rb_relatives,
-                        (gpointer)(rb_relative),
-                        (gpointer)(rb_relative));
+    if (holder->rb_relatives) {
+        g_hash_table_insert(holder->rb_relatives,
+                            (gpointer)(rb_relative),
+                            (gpointer)(rb_relative));
+    }
 }
 
 void
@@ -125,8 +128,10 @@ rbgobj_object_remove_relative(VALUE rb_gobject, VALUE rb_relative)
                          gobj_holder,
                          &rg_glib_object_type,
                          holder);
-    g_hash_table_remove(holder->rb_relatives,
-                        (gpointer)(rb_relative));
+    if (holder->rb_relatives) {
+        g_hash_table_remove(holder->rb_relatives,
+                            (gpointer)(rb_relative));
+    }
 }
 
 static gboolean
@@ -749,13 +754,6 @@ static void
 rg_destroy_bind_property_full_data(gpointer user_data)
 {
     RGBindPropertyCallbackData *data = (RGBindPropertyCallbackData *)user_data;
-
-    if (!NIL_P(data->transform_to_callback))
-        G_CHILD_REMOVE(data->self, data->transform_to_callback);
-
-    if (!NIL_P(data->transform_from_callback))
-        G_CHILD_REMOVE(data->self, data->transform_from_callback);
-
     xfree(data);
 }
 
@@ -778,6 +776,7 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
     GBinding *binding;
     GBindingTransformFunc transform_to = NULL;
     GBindingTransformFunc transform_from = NULL;
+    VALUE rb_binding;
 
     rb_scan_args(argc, argv, "41", &rb_source_property, &rb_target,
                  &rb_target_property, &rb_flags, &rb_options);
@@ -794,18 +793,16 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
     flags = RVAL2GBINDINGFLAGS(rb_flags);
 
     if (!NIL_P(rb_transform_to)) {
-        G_CHILD_ADD(self, rb_transform_to);
         transform_to = rg_bind_property_transform_to_callback;
     }
 
     if (!NIL_P(rb_transform_from)) {
-        G_CHILD_ADD(self, rb_transform_from);
         transform_from = rg_bind_property_transform_from_callback;
     }
 
     if (transform_to || transform_from) {
         RGBindPropertyCallbackData *data;
-        data = (RGBindPropertyCallbackData *)xmalloc(sizeof(RGBindPropertyCallbackData));
+        data = RB_ALLOC(RGBindPropertyCallbackData);
         data->self = self;
         data->transform_to_callback = rb_transform_to;
         data->transform_from_callback = rb_transform_from;
@@ -815,13 +812,21 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
                                               transform_from,
                                               (gpointer)data,
                                               rg_destroy_bind_property_full_data);
+        rb_binding = GOBJ2RVAL(binding);
+        if (!NIL_P(rb_transform_to)) {
+            rbgobj_object_add_relative(rb_binding, rb_transform_to);
+        }
+        if (!NIL_P(rb_transform_from)) {
+            rbgobj_object_add_relative(rb_binding, rb_transform_from);
+        }
     } else {
         binding = g_object_bind_property(source, source_property,
                                          target, target_property,
                                          flags);
+        rb_binding = GOBJ2RVAL(binding);
     }
 
-    return GOBJ2RVAL(binding);
+    return rb_binding;
 }
 #endif
 

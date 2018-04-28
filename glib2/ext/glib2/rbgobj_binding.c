@@ -28,7 +28,15 @@
 static VALUE
 rg_unbind(VALUE self)
 {
-    g_binding_unbind(_SELF(self));
+    GBinding *binding = _SELF(self);
+    GObject *source;
+    VALUE rb_source;
+
+    source = g_binding_get_source(binding);
+    rb_source = GOBJ2RVAL(source);
+    rbgobj_object_remove_relative(rb_source, self);
+    g_binding_unbind(binding);
+
     return self;
 }
 #endif
