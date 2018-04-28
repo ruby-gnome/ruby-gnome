@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -13,6 +13,8 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+require "tempfile"
 
 module Poppler
   class Document
@@ -53,9 +55,10 @@ module Poppler
         # TODO: Enable the following:
         # initialize_new_from_data(data, password)
 
-        @bytes = GLib::Bytes.new(data)
-        @stream = Gio::MemoryInputStream.new(@bytes)
-        initialize_new_from_stream(@stream, data.bytesize, password)
+        @file = Tempfile.new(["poppler", ".pdf"])
+        @file.write(data)
+        @file.close
+        initialize_new_from_file(ensure_uri(@file.path), password)
       elsif uri
         initialize_new_from_file(uri, password)
       elsif path
