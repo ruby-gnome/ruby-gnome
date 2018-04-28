@@ -46,6 +46,10 @@ extern "C" {
 #  endif
 #endif
 
+#ifndef RB_ALLOC
+#  define RB_ALLOC(type) ALLOC(type)
+#endif
+
 #ifndef RB_ALLOC_N
 #  define RB_ALLOC_N(type, n) ALLOC_N(type, n)
 #endif
