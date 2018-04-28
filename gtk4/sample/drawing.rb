@@ -22,7 +22,6 @@ require_relative "utils"
 
 require_gtk4
 
-
 def clear_surface(surface)
   cr = Cairo::Context.new(surface)
   cr.set_source_rgb(1, 1, 1)
@@ -48,7 +47,7 @@ def generate_surface_from_widget(widget)
   surface
 end
 
-myapp = Gtk::Application.new "org.gtk.example", :flags_none
+myapp = Gtk::Application.new("org.gtk.example", :flags_none)
 
 myapp.signal_connect "activate" do |app|
   win = Gtk::ApplicationWindow.new(app)
@@ -60,7 +59,6 @@ myapp.signal_connect "activate" do |app|
     surface.destroy if surface
     win.destroy
   end
-
 
   frame = Gtk::Frame.new
   frame.shadow_type = Gtk::ShadowType::IN
