@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2018 Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -83,7 +83,11 @@ rg_pack_end(VALUE self, VALUE cell, VALUE expand)
 static VALUE
 rg_clear(VALUE self)
 {
-    G_CHILD_REMOVE_ALL(self);
+    static VALUE rb_cGtkCellRenderer = Qnil;
+    if (NIL_P(rb_cGtkCellRenderer)) {
+        rb_cGtkCellRenderer = GTYPE2CLASS(GTK_TYPE_CELL_RENDERER);
+    }
+    rbgobj_object_remove_relatives(self, rb_cGtkCellRenderer);
     gtk_tree_view_column_clear(_SELF(self));
     return self;
 }
