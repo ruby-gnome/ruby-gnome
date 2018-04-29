@@ -14,21 +14,24 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Gtk
-  class MenuItem
-    alias_method :initialize_raw, :initialize
-    def initialize(options={})
-      label = options[:label]
+class TestGtkMenuItem < Test::Unit::TestCase
+  include GtkTestUtils
 
-      if label
-        if options[:use_underline]
-          initialize_new_with_mnemonic(label)
-        else
-          initialize_new_with_label(label)
-        end
-      else
-        initialize_raw
-      end
+  sub_test_case ".new" do
+    test "without arguments" do
+      item = Gtk::MenuItem.new()
+      assert_equal("", item.label)
+    end
+
+    test "with label" do
+      item = Gtk::MenuItem.new(:label => "Label")
+      assert_equal("Label", item.label)
+    end
+
+    test "with mnemonic" do
+      item = Gtk::MenuItem.new(:label => "Label", :use_underline => true)
+      assert_equal("Label", item.label)
+      assert(item.use_underline?)
     end
   end
 end
