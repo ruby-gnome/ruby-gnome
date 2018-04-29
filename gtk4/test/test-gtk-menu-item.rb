@@ -26,12 +26,17 @@ class TestGtkMenuItem < Test::Unit::TestCase
     test "with label" do
       item = Gtk::MenuItem.new(:label => "Label")
       assert_equal("Label", item.label)
+      assert do
+        not item.use_underline?
+      end
     end
 
     test "with mnemonic" do
-      item = Gtk::MenuItem.new(:label => "Label", :use_underline => true)
+      item = Gtk::MenuItem.new(:label => "_Label", :use_underline => true)
       assert_equal("Label", item.label)
-      assert(item.use_underline?)
+      assert do
+        item.use_underline?
+      end
     end
   end
 end
