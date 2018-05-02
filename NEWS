@@ -2,6 +2,80 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.2.5: 2018-05-02
+
+This is a bug fix release of 3.2.4.
+
+=== Changes
+
+==== Document
+
+  * Fixes
+
+    * Fixed typos.
+      [GitHub#1158][Patch by kojix2]
+      [GitHub#1160][Patch by kojix2]
+
+==== Ruby/GLib2
+
+  * Fixes
+
+    * Fixed a GC related crash bug.
+      [GitHub#1162][Reported by Izumi Tsutsui]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Disabled NULL check for GObject Introspection < 1.42. Because
+      GObject Introspection < 1.42 doesn't support "(nullable)"
+      annotation yet.
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements
+
+    * (({GdkPixbuf::Pixbuf#composite})): Suppressed wrong warning.
+      [GitHub#1156][Reported by Chaistrin]
+      [GitHub#1157][Patch by cedlemo]
+
+  * Fixes
+
+    * Added a missing white space into message.
+      [GitHub#1155][Reported by Robert A. Heiler]
+
+    * (({GdkPixbuf::Pixbuf#composite})): Fixed a bug that width and
+      height are ignored.
+      [Patch by cedlemo]
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * (({Gtk::TextBuffer#initialize})): Accepted "property-name" form.
+      [GitHub#1161][Reported by kojix2]
+
+==== Ruby/Poppler
+
+  * Improvements
+
+    * Added a workaround for poppler-glib 0.63 bug.
+      [GitHub#1159][Reported by HIGUCHI Daisuke]
+
+=== Thanks
+
+  * Robert A. Heiler
+
+  * Chaistrin
+
+  * cedlemo
+
+  * kojix2
+
+  * Izumi Tsutsui
+
+  * HIGUCHI Daisuke
+
 == Ruby-GNOME2 3.2.4: 2018-04-09
 
 This is a bug fix release of 3.2.3.
@@ -19,7 +93,7 @@ This is a bug fix release of 3.2.3.
       [GitHub#1154][Debian#894816][mikutter#1199]
       [Reported by Akira Ouchi][Forwarded by HIGUCHI Daisuke]
 
-==== RubyRsvg2
+==== Ruby/Rsvg2
 
   * Improvements
 
