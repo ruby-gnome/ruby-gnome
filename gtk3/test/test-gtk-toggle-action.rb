@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -46,6 +46,9 @@ class TestGtkToggleAction < Test::Unit::TestCase
 
     sub_test_case("#active=") do
       def test_nil
+        if (GObjectIntrospection::BUILD_VERSION <=> [1, 42, 0]) < 0
+          omit("require GObjectIntrospection 1.42.0 or later.")
+        end
         assert_raise(ArgumentError) do
           @action.active = nil
         end
