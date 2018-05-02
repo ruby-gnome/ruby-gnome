@@ -23,6 +23,21 @@
 static VALUE rb_cGLibValue = Qnil;
 static VALUE rb_cGLibBytes = Qnil;
 
+static gboolean
+rb_gi_arg_info_may_be_null(GIArgInfo *arg_info)
+{
+#if GI_CHECK_VERSION(1, 42, 0)
+    return g_arg_info_may_be_null(arg_info);
+#else
+    /*
+      GObject Introspection < 1.42 doesn't support "(nullable)" yet.
+      So, we assume that all argument may be NULL. It's danger but
+      convenient.
+    */
+    return TRUE;
+#endif
+}
+
 static const gchar *
 rb_gi_transfer_to_string(GITransfer transfer)
 {
@@ -3432,7 +3447,7 @@ rb_gi_in_argument_from_ruby(GICallableInfo *callable_info,
     GITypeInfo type_info;
 
     if (NIL_P(rb_argument)) {
-        if (g_arg_info_may_be_null(arg_info)) {
+        if (rb_gi_arg_info_may_be_null(arg_info)) {
             memset(argument, 0, sizeof(GIArgument));
             return argument;
         } else {
@@ -4140,7 +4155,7 @@ rb_gi_in_array_argument_from_ruby(GIArgument *array_argument,
     GITypeInfo length_type_info;
     GITypeInfo *length_type_info_arg = NULL;
 
-    if (g_arg_info_may_be_null(array_arg_info) && NIL_P(rb_argument)) {
+    if (NIL_P(rb_argument) && rb_gi_arg_info_may_be_null(array_arg_info)) {
         memset(array_argument, 0, sizeof(GIArgument));
         if (length_argument) {
             memset(length_argument, 0, sizeof(GIArgument));
