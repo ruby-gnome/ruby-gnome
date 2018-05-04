@@ -300,6 +300,8 @@ g_rclosure_attach(GClosure *closure, VALUE object)
         rclosure->count++;
         g_object_weak_ref(gobject, rclosure_weak_notify, rclosure);
         rclosure->objects = g_list_prepend(rclosure->objects, gobject);
+    } else {
+        rbgobj_add_relative(object, rclosure->rb_holder);
     }
 }
 
