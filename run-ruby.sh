@@ -4,8 +4,11 @@ GDB=${GDB:-}
 RUBY=${RUBY:-ruby}
 
 base_dir=$(cd $(dirname $0) && pwd)
+rcairo_dir=$(dirname $base_dir)/$(basename $base_dir | sed -e 's/ruby-gnome2/rcairo/')
 
 ${GDB} ${RUBY} \
+  -I "${rcairo_dir}/lib" \
+  -I "${rcairo_dir}/cairo/ext/cairo" \
   -I "${base_dir}/glib2/lib" \
   -I "${base_dir}/glib2/ext/glib2" \
   -I "${base_dir}/gobject-introspection/lib" \
