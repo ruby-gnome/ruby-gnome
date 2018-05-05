@@ -270,13 +270,16 @@ module Gdk
     def load_struct_info(info)
       return if info.gtype_struct?
 
-      options = {}
       case info.name
       when /\AEvent/
-        options[:parent] = event_class
+        name = rubyish_class_name(info)
+        klass = Class.new(event_class)
+        @base_module.const_set(name, klass)
+        load_fields(info, klass)
+        load_methods(info, klass)
+      else
+        define_struct(info)
       end
-
-      define_struct(info, options)
     end
 
     def define_enum(info)
