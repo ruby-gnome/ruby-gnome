@@ -175,6 +175,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
     GType *param_types;
     long n_params;
     guint signal;
+    VALUE rb_signal;
 
     rb_scan_args(argc, argv, "4*",
                  &rbsignal_name, &rbsignal_flags, &accumulator, &rbreturn_type, &params);
@@ -203,8 +204,6 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
                           self, ID2SYM(method_id));
 
         class_closure = g_rclosure_new(proc, Qnil, NULL);
-        /* TODO: Should this be done even if something below it fails? */
-        g_rclosure_attach(class_closure, self);
         g_rclosure_set_tag(class_closure, RVAL2CSTR(rb_method_name));
     }
 
@@ -227,10 +226,13 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
     if (!signal)
         rb_raise(rb_eRuntimeError, "g_signal_newv failed");
 
+    rb_signal = rbgobj_signal_wrap(signal);
     if (!NIL_P(accumulator))
-        G_RELATIVE(self, accumulator); /* FIXME */
+        rbgobj_add_relative(rb_signal, accumulator);
+    g_rclosure_attach(class_closure, rb_signal);
+    rbgobj_add_relative(self, rb_signal);
 
-    return rbgobj_signal_wrap(signal);
+    return rb_signal;
 }
 
 static void

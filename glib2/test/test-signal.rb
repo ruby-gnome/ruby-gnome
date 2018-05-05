@@ -36,6 +36,25 @@ class TestSignal < Test::Unit::TestCase
     type_register
 
     signal_new(:changed, :run_first, nil, nil)
+
+    attr_reader :n_changed
+    def initialize
+      super
+      @n_changed = 0
+    end
+
+    def signal_do_changed
+      @n_changed += 1
+    end
   end
 
+  def test_gc
+    n = 10
+    custom_signal_object = CustomSignalObject.new
+    n.times do
+      custom_signal_object.signal_emit(:changed)
+      GC.start
+    end
+    assert_equal(n, custom_signal_object.n_changed)
+  end
 end
