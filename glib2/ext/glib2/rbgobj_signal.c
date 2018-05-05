@@ -190,10 +190,14 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
     signal_flags = GFLAGS2RVAL(rbsignal_flags, G_TYPE_SIGNAL_FLAGS);
 
     {
+        VALUE rb_method_name;
         VALUE proc;
         ID method_id;
 
-        method_id = rb_to_id(rb_str_concat(rb_str_new2(default_handler_method_prefix), rbsignal_name));
+        rb_method_name =
+            rb_str_concat(rb_str_new_cstr(default_handler_method_prefix),
+                          rbsignal_name);
+        method_id = rb_to_id(rb_method_name);
 
         proc = rb_funcall(mMetaInterface, rb_intern("signal_callback"), 2,
                           self, ID2SYM(method_id));
@@ -201,6 +205,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
         class_closure = g_rclosure_new(proc, Qnil, NULL);
         /* TODO: Should this be done even if something below it fails? */
         g_rclosure_attach(class_closure, self);
+        g_rclosure_set_tag(class_closure, RVAL2CSTR(rb_method_name));
     }
 
     return_type = rbgobj_gtype_get(rbreturn_type);
