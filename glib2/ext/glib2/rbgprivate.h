@@ -21,6 +21,15 @@
 #ifndef __RBGPRIVATE_H__
 #define __RBGPRIVATE_H__
 
+/*
+ * CentOS 6: GLib 2.28
+ * CentOS 7: GLib 2.50
+ * Ubuntu 14.04: GLib 2.40
+ * Ubuntu 16.04: GLib 2.48
+ * Ubuntu 18.04: GLib 2.54
+ */
+#define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_28
+
 #include "rbgobject.h"
 
 #ifndef HAVE_RB_ERRINFO

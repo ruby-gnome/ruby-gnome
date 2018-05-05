@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Sjoerd Simons, Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -19,7 +19,6 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgobject.h"
 #include "rbgprivate.h"
 
 static GHashTable *tables, *class_to_g_type_map;
