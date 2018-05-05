@@ -70,6 +70,7 @@ EXPORTS
 	rbgobj_get_signal_call_func
 	rbgobj_add_constants
 	rbgobj_constant_remap
+	rbgobj_signal_new
 	rbgobj_signal_wrap
 	g_rclosure_new
 	g_rclosure_new_call

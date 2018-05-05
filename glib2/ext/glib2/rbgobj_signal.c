@@ -260,7 +260,7 @@ gobj_s_define_signal(int argc, VALUE* argv, VALUE self)
     if (!signal)
         rb_raise(rb_eRuntimeError, "g_signal_newv failed");
 
-    rb_signal = rbgobj_signal_wrap(signal);
+    rb_signal = rbgobj_signal_new(signal);
     if (!NIL_P(accumulator))
         rbgobj_add_relative(rb_signal, accumulator);
     g_rclosure_attach(class_closure, rb_signal);
@@ -321,7 +321,7 @@ gobj_s_signal(VALUE self, VALUE name)
     if (!sig_id)
         rb_raise(eNoSignalError, "no such signal: %s", sig_name);
 
-    return rbgobj_signal_wrap(sig_id);
+    return rbgobj_signal_new(sig_id);
 }
 
 static VALUE
@@ -429,7 +429,7 @@ gobj_sig_get_invocation_hint(VALUE self)
     GSignalInvocationHint* hint;
     hint = g_signal_get_invocation_hint(RVAL2GOBJ(self));
     return rb_ary_new3(3,
-                       rbgobj_signal_wrap(hint->signal_id),
+                       rbgobj_signal_new(hint->signal_id),
                        hint->detail ? rb_str_new2(g_quark_to_string(hint->detail)) : Qnil,
                        INT2NUM(hint->run_type));
 }
