@@ -99,20 +99,15 @@ rbgobj_class_info_fill_name(RGObjClassInfo *cinfo)
     cinfo->data_type->wrap_struct_name = cinfo->name;
 }
 
-static RGObjClassInfo *
-rbgobj_class_info_register_without_lock(GType gtype, VALUE klass)
+static rb_data_type_t *
+rbgobj_class_info_create_data_type(VALUE klass)
 {
     rb_data_type_t *data_type;
-    RGObjClassInfo *cinfo;
-    GType fundamental_type;
-    RGObjClassInfoDynamic *cinfod;
-    void *gclass = NULL;
-    VALUE c;
 
     data_type = RB_ZALLOC(rb_data_type_t);
     data_type->function.dmark = cinfo_mark;
     data_type->function.dfree = cinfo_free;
-    if (RB_TYPE_P(klass, RUBY_T_CLASS)) {
+    if (RB_TYPE_P(klass, RUBY_T_CLASS) && klass != rb_cObject) {
         VALUE p = RCLASS_SUPER(klass);
         while (p != rb_cObject) {
             if (RTYPEDDATA_P(p)) {
@@ -124,6 +119,20 @@ rbgobj_class_info_register_without_lock(GType gtype, VALUE klass)
     }
     data_type->flags = RUBY_TYPED_FREE_IMMEDIATELY;
 
+    return data_type;
+}
+
+static RGObjClassInfo *
+rbgobj_class_info_register_without_lock(GType gtype, VALUE klass)
+{
+    rb_data_type_t *data_type;
+    RGObjClassInfo *cinfo;
+    GType fundamental_type;
+    RGObjClassInfoDynamic *cinfod;
+    void *gclass = NULL;
+    VALUE c;
+
+    data_type = rbgobj_class_info_create_data_type(klass);
     c = TypedData_Make_Struct(rb_cData, RGObjClassInfo, data_type, cinfo);
     cinfo->klass = klass;
     cinfo->gtype = gtype;
@@ -493,11 +502,13 @@ rbgobj_register_class(VALUE klass,
                       gboolean klass2gtype,
                       gboolean gtype2klass)
 {
-    RGObjClassInfo* cinfo = NULL;
+    rb_data_type_t *data_type = NULL;
+    RGObjClassInfo *cinfo = NULL;
     VALUE c = Qnil;
 
     if (klass2gtype) {
-        c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
+        data_type = rbgobj_class_info_create_data_type(klass);
+        c = TypedData_Make_Struct(rb_cData, RGObjClassInfo, data_type, cinfo);
     }
     if (gtype2klass && !cinfo)
         cinfo = g_new(RGObjClassInfo, 1);
@@ -508,6 +519,7 @@ rbgobj_register_class(VALUE klass,
         cinfo->mark  = NULL;
         cinfo->free  = NULL;
         cinfo->flags = 0;
+        cinfo->data_type = data_type;
     }
 
     if (klass2gtype)
