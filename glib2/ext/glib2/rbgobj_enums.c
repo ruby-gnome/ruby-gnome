@@ -107,18 +107,31 @@ typedef struct {
 } enum_holder;
 
 static void
-enum_free(enum_holder* p)
+enum_free(void *data)
 {
-    g_type_class_unref(p->gclass);
-    free(p);
+    enum_holder *holder = data;
+    g_type_class_unref(holder->gclass);
+    xfree(holder);
 }
 
-static enum_holder*
-enum_get_holder(VALUE obj)
+static const rb_data_type_t rg_glib_enum_type = {
+    "GLib::Enum",
+    {
+        NULL,
+        enum_free,
+        NULL,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
+
+static enum_holder *
+enum_get_holder(VALUE rb_enum)
 {
-    enum_holder* p;
-    Data_Get_Struct(obj, enum_holder, p);
-    return p;
+    enum_holder *holder;
+    TypedData_Get_Struct(rb_enum, enum_holder, &rg_glib_enum_type, holder);
+    return holder;
 }
 
 static VALUE
@@ -262,11 +275,16 @@ rbgobj_enum_alloc_func(VALUE self)
     if (G_TYPE_IS_ABSTRACT(gtype)) {
         rb_raise(rb_eTypeError, "abstract class");
     } else {
-        enum_holder* p;
-        VALUE result = Data_Make_Struct(self, enum_holder, NULL, enum_free, p);
-        p->gclass = g_type_class_ref(gtype);
-        p->info   = NULL;
-        return result;
+        enum_holder *holder;
+        VALUE rb_enum;
+
+        rb_enum = TypedData_Make_Struct(self,
+                                        enum_holder,
+                                        &rg_glib_enum_type,
+                                        holder);
+        holder->gclass = g_type_class_ref(gtype);
+        holder->info   = NULL;
+        return rb_enum;
     }
 }
 
