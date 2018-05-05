@@ -290,18 +290,17 @@ g_rclosure_attach(GClosure *closure, VALUE object)
     static VALUE cGLibObject = Qnil;
     GRClosure *rclosure = (GRClosure *)closure;
 
+    rbgobj_add_relative(object, rclosure->rb_holder);
+
     if (NIL_P(cGLibObject)) {
         cGLibObject = rb_const_get(mGLib, rb_intern("Object"));
     }
     if (rb_obj_is_kind_of(object, cGLibObject)) {
         GObject *gobject;
-        rbgobj_object_add_relative(object, rclosure->rb_holder);
         gobject = RVAL2GOBJ(object);
         rclosure->count++;
         g_object_weak_ref(gobject, rclosure_weak_notify, rclosure);
         rclosure->objects = g_list_prepend(rclosure->objects, gobject);
-    } else {
-        rbgobj_add_relative(object, rclosure->rb_holder);
     }
 }
 
