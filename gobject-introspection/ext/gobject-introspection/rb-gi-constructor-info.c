@@ -28,7 +28,7 @@ gi_constructor_info_get_type(void)
 {
     static GType type = 0;
     if (type == 0) {
-	type = g_boxed_type_register_static("GIConstructorInfo",
+        type = g_boxed_type_register_static("GIConstructorInfo",
                                             (GBoxedCopyFunc)g_base_info_ref,
                                             (GBoxedFreeFunc)g_base_info_unref);
     }
@@ -141,9 +141,9 @@ rb_gi_constructor_info_init(VALUE rb_mGI, VALUE rb_cGIFunctionInfo)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE =
-	G_DEF_CLASS_WITH_PARENT(GI_TYPE_CONSTRUCTOR_INFO,
+        G_DEF_CLASS_WITH_PARENT(GI_TYPE_CONSTRUCTOR_INFO,
                                 "ConstructorInfo", rb_mGI,
-				rb_cGIFunctionInfo);
+                                rb_cGIFunctionInfo);
 
     RG_DEF_METHOD(invoke, 2);
 }
