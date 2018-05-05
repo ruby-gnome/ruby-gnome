@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -50,6 +50,26 @@ boxed_free(boxed_holder *holder)
     xfree(holder);
 }
 
+static const rb_data_type_t rg_glib_boxed_type = {
+    "GLib::Boxed",
+    {
+        boxed_mark,
+        boxed_free,
+        NULL,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
+
+static boxed_holder *
+rbgobj_boxed_get_raw(VALUE rb_boxed)
+{
+    boxed_holder *holder;
+    TypedData_Get_Struct(rb_boxed, boxed_holder, &rg_glib_boxed_type, holder);
+    return holder;
+}
+
 /**********************************************************************/
 
 VALUE
@@ -57,18 +77,20 @@ rbgobj_boxed_alloc_func(VALUE klass)
 {
     const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
     boxed_holder *holder;
-    VALUE result;
+    VALUE rb_boxed;
 
     if (cinfo->gtype == G_TYPE_BOXED)
         rb_raise(rb_eTypeError, "abstract class");
 
-    result = Data_Make_Struct(klass, boxed_holder,
-                              boxed_mark, boxed_free, holder);
+    rb_boxed = TypedData_Make_Struct(klass,
+                                     boxed_holder,
+                                     &rg_glib_boxed_type,
+                                     holder);
     holder->type  = cinfo->gtype;
     holder->boxed = NULL;
     holder->own   = FALSE;
 
-    return result;
+    return rb_boxed;
 }
 
 static VALUE
@@ -102,21 +124,14 @@ static VALUE
 rg_inspect(VALUE self)
 {
     boxed_holder *holder;
-    gchar *s;
-    VALUE result;
 
-    Data_Get_Struct(self, boxed_holder, holder);
+    holder = rbgobj_boxed_get_raw(self);
 
-    s = g_strdup_printf("#<%s:%p ptr=%p own=%s>",
-                        rb_class2name(CLASS_OF(self)),
-                        (void *)self,
-                        holder->boxed,
-                        holder->own ? "true" : "false");
-
-    result = rb_str_new2(s);
-    g_free(s);
-
-    return result;
+    return rb_sprintf("#<%" PRIsVALUE ":%p ptr=%p own=%s>",
+                      CLASS_OF(self),
+                      (gpointer)self,
+                      holder->boxed,
+                      holder->own ? "true" : "false");
 }
 
 static VALUE
@@ -131,8 +146,8 @@ rg_initialize_copy(VALUE self, VALUE orig)
         rb_raise(rb_eTypeError, "wrong argument class");
     }
 
-    Data_Get_Struct(self, boxed_holder, holder1);
-    Data_Get_Struct(orig, boxed_holder, holder2);
+    holder1 = rbgobj_boxed_get_raw(self);
+    holder2 = rbgobj_boxed_get_raw(orig);
 
     holder1->boxed = g_boxed_copy(holder2->type, holder2->boxed);
     holder1->own   = TRUE;
@@ -156,7 +171,7 @@ void
 rbgobj_boxed_initialize(VALUE obj, gpointer boxed)
 {
     boxed_holder *holder;
-    Data_Get_Struct(obj, boxed_holder, holder);
+    holder = rbgobj_boxed_get_raw(obj);
     holder->boxed = boxed;
     holder->own   = TRUE;
 }
@@ -167,13 +182,15 @@ rbgobj_boxed_get_default(VALUE obj, GType gtype)
     boxed_holder *holder;
 
     if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, GTYPE2CLASS(gtype))))
-        rb_raise(rb_eArgError, "invalid argument %s (expect %s)",
-                 rb_class2name(CLASS_OF(obj)),
-                 rb_class2name(GTYPE2CLASS(gtype)));
+        rb_raise(rb_eArgError,
+                 "invalid argument %" PRIsVALUE " (expect %" PRIsVALUE ")",
+                 CLASS_OF(obj),
+                 GTYPE2CLASS(gtype));
 
-    Data_Get_Struct(obj, boxed_holder, holder);
+    holder = rbgobj_boxed_get_raw(obj);
     if (!holder->boxed)
-        rb_raise(rb_eArgError, "uninitialize %s", rb_class2name(CLASS_OF(obj)));
+        rb_raise(rb_eArgError, "uninitialize %" PRIsVALUE,
+                 CLASS_OF(obj));
 
     return holder->boxed;
 }
@@ -201,7 +218,7 @@ rbgobj_make_boxed_raw(gpointer p, GType gtype, VALUE klass, gint flags)
 
     result = rbgobj_boxed_alloc_func(klass);
 
-    Data_Get_Struct(result, boxed_holder, holder);
+    holder = rbgobj_boxed_get_raw(result);
 
     if (flags & RBGOBJ_BOXED_NOT_COPY) {
         holder->boxed = p;
@@ -250,7 +267,7 @@ rbgobj_boxed_unown(VALUE boxed)
 {
     boxed_holder *holder;
 
-    Data_Get_Struct(boxed, boxed_holder, holder);
+    holder = rbgobj_boxed_get_raw(boxed);
 
     if (!holder->own) {
         rb_raise(rb_eArgError,
