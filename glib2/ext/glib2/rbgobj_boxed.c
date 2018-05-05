@@ -26,8 +26,9 @@
 VALUE RG_TARGET_NAMESPACE;
 
 static void
-boxed_mark(boxed_holder *holder)
+boxed_mark(void *data)
 {
+    boxed_holder *holder = data;
     const RGObjClassInfo *cinfo;
 
     cinfo = GTYPE2CINFO_NO_CREATE(holder->type);
@@ -36,8 +37,9 @@ boxed_mark(boxed_holder *holder)
 }
 
 static void
-boxed_free(boxed_holder *holder)
+boxed_free(void *data)
 {
+    boxed_holder *holder = data;
     const RGObjClassInfo *cinfo;
 
     cinfo = GTYPE2CINFO_NO_CREATE(holder->type);
