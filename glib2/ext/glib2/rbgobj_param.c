@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -34,36 +34,57 @@ typedef struct {
 } pspec_holder;
 
 static void
-pspec_mark(pspec_holder *holder)
+pspec_mark(void *data)
 {
+    pspec_holder *holder = data;
     if (holder->instance)
         rbgobj_instance_call_cinfo_mark(holder->instance);
 }
 
 static void
-pspec_free(pspec_holder *holder)
+pspec_free(void *data)
 {
+    pspec_holder *holder = data;
     if (holder->instance){
         rbgobj_instance_call_cinfo_free(holder->instance);
         g_param_spec_set_qdata(holder->instance, qparamspec, NULL);
         g_param_spec_unref(holder->instance);
     }
-    free(holder);
+    xfree(holder);
+}
+
+static const rb_data_type_t rg_glib_param_type = {
+    "GLib::Param",
+    {
+        pspec_mark,
+        pspec_free,
+        NULL,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
+
+static pspec_holder *
+rbgobj_param_get_raw(VALUE rb_param)
+{
+    pspec_holder *holder;
+    TypedData_Get_Struct(rb_param, pspec_holder, &rg_glib_param_type, holder);
+    return holder;
 }
 
 GParamSpec*
 rbgobj_get_param_spec(VALUE obj)
 {
-    pspec_holder* holder;
-    Data_Get_Struct(obj, pspec_holder, holder);
-    return G_PARAM_SPEC(holder->instance);
+    return G_PARAM_SPEC(rbgobj_param_get_raw(obj)->instance);
 }
 
 void
 rbgobj_param_spec_initialize(VALUE self, GParamSpec *pspec)
 {
-    pspec_holder* holder;
-    Data_Get_Struct(self, pspec_holder, holder);
+    pspec_holder *holder;
+
+    holder = rbgobj_param_get_raw(self);
 
     pspec = g_param_spec_ref(pspec);
     g_param_spec_sink(pspec);
@@ -97,30 +118,29 @@ pspec_s_allocate(VALUE klass)
         rb_raise(rb_eTypeError, "abstract class");
 
     {
-        pspec_holder* holder;
-        VALUE result;
+        pspec_holder *holder;
+        VALUE rb_param;
 
-        result = Data_Make_Struct(klass, pspec_holder, pspec_mark, pspec_free,
-                                  holder);
+        rb_param = TypedData_Make_Struct(klass,
+                                         pspec_holder,
+                                         &rg_glib_param_type,
+                                         holder);
         holder->instance = NULL;
         holder->cinfo    = NULL;
 
-        return result;
+        return rb_param;
     }
 }
 
 static VALUE
 rg_inspect(VALUE self)
 {
-    GParamSpec* pspec = rbgobj_get_param_spec(self);
-    VALUE v = rb_inspect(GTYPE2CLASS(pspec->owner_type));
-    gchar* str = g_strdup_printf("#<%s: %s#%s>",
-                                 rb_class2name(CLASS_OF(self)),
-                                 StringValuePtr(v),
-                                 g_param_spec_get_name(pspec));
-    VALUE result = rb_str_new2(str);
-    g_free(str);
-    return result;
+    GParamSpec *pspec = rbgobj_get_param_spec(self);
+
+    return rb_sprintf("#<%" PRIsVALUE "%" PRIsVALUE "#%s",
+                      CLASS_OF(self),
+                      GTYPE2CLASS(pspec->owner_type),
+                      g_param_spec_get_name(pspec));
 }
 
 static VALUE
