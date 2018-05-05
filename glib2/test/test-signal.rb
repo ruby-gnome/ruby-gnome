@@ -57,4 +57,10 @@ class TestSignal < Test::Unit::TestCase
     end
     assert_equal(n, custom_signal_object.n_changed)
   end
+
+  def test_inspect
+    signal = CustomSignalObject.signal(:changed)
+    assert_equal("\#<GLib::Signal TestSignal::CustomSignalObject\#changed>",
+                 signal.inspect)
+  end
 end

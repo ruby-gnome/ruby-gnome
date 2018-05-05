@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -30,6 +30,40 @@ VALUE rbgobj_signal_wrap(guint sig_id);
 #define default_handler_method_prefix "signal_do_"
 
 /**********************************************************************/
+
+static const rb_data_type_t rg_glib_signal_type = {
+    "GLib::Signal",
+    {
+        NULL,
+        NULL,
+        NULL,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
+
+VALUE
+rbgobj_signal_new(guint id)
+{
+    VALUE rb_query;
+    GSignalQuery *query;
+
+    rb_query = TypedData_Make_Struct(RG_TARGET_NAMESPACE,
+                                     GSignalQuery,
+                                     &rg_glib_signal_type,
+                                     query);
+    g_signal_query(id, query);
+    return rb_query;
+}
+
+static GSignalQuery *
+rbgobj_signal_get_raw(VALUE rb_signal)
+{
+    GSignalQuery *query;
+    TypedData_Get_Struct(rb_signal, GSignalQuery, &rg_glib_signal_type, query);
+    return query;
+}
 
 static VALUE signal_func_table;
 
@@ -696,71 +730,54 @@ gobj_s_method_added(VALUE klass, VALUE id)
 VALUE
 rbgobj_signal_wrap(guint sig_id)
 {
-    VALUE result;
-    GSignalQuery* query;
-
-    result = Data_Make_Struct(RG_TARGET_NAMESPACE, GSignalQuery, NULL, free, query);
-    g_signal_query(sig_id, query);
-    return result;
+    return rbgobj_signal_new(sig_id);
 }
 
 static VALUE
 rg_id(VALUE self)
 {
-    GSignalQuery* query;
-    Data_Get_Struct(self, GSignalQuery, query);
-    return UINT2NUM(query->signal_id);
+    return UINT2NUM(rbgobj_signal_get_raw(self)->signal_id);
 }
 
 static VALUE
 rg_name(VALUE self)
 {
-    GSignalQuery* query;
-    Data_Get_Struct(self, GSignalQuery, query);
-    return rb_str_new2(query->signal_name);
+    return CSTR2RVAL(rbgobj_signal_get_raw(self)->signal_name);
 }
 
 static VALUE
 rg_itype(VALUE self)
 {
-    GSignalQuery* query;
-    Data_Get_Struct(self, GSignalQuery, query);
-    return rbgobj_gtype_new(query->itype);
+    return rbgobj_gtype_new(rbgobj_signal_get_raw(self)->itype);
 }
 
 static VALUE
 rg_owner(VALUE self)
 {
-    GSignalQuery* query;
-    Data_Get_Struct(self, GSignalQuery, query);
-    return GTYPE2CLASS(query->itype);
+    return GTYPE2CLASS(rbgobj_signal_get_raw(self)->itype);
 }
 
 static VALUE
 rg_return_type(VALUE self)
 {
-    GSignalQuery* query;
-    Data_Get_Struct(self, GSignalQuery, query);
-    return rbgobj_gtype_new(query->return_type);
+    return rbgobj_gtype_new(rbgobj_signal_get_raw(self)->return_type);
 }
 
 static VALUE
 rg_flags(VALUE self)
 {
-    GSignalQuery* query;
-    Data_Get_Struct(self, GSignalQuery, query);
-    return UINT2NUM(query->signal_flags);
+    return UINT2NUM(rbgobj_signal_get_raw(self)->signal_flags);
 }
 
 static VALUE
 rg_param_types(VALUE self)
 {
-    GSignalQuery* query;
+    GSignalQuery *query;
     VALUE result;
     guint i;
-    Data_Get_Struct(self, GSignalQuery, query);
 
-    result = rb_ary_new2(query->n_params);
+    query = rbgobj_signal_get_raw(self);
+    result = rb_ary_new_capa(query->n_params);
     for (i = 0; i < query->n_params; i++)
         rb_ary_store(result, i, rbgobj_gtype_new(query->param_types[i]));
 
@@ -770,31 +787,19 @@ rg_param_types(VALUE self)
 static VALUE
 rg_inspect(VALUE self)
 {
-    GSignalQuery* query;
-    gchar* s;
-    VALUE result, v;
-
-    Data_Get_Struct(self, GSignalQuery, query);
-
-    v = rb_inspect(GTYPE2CLASS(query->itype));
-
-    s = g_strdup_printf("#<%s: %s#%s>",
-                        rb_class2name(CLASS_OF(self)),
-                        StringValuePtr(v),
-                        query->signal_name);
-    result = rb_str_new2(s);
-    g_free(s);
-
-    return result;
+    GSignalQuery *query;
+    query = rbgobj_signal_get_raw(self);
+    return rb_sprintf("#<%" PRIsVALUE " %+" PRIsVALUE "#%s>",
+                      CLASS_OF(self),
+                      GTYPE2CLASS(query->itype),
+                      query->signal_name);
 }
 
 #define query_is_flag(flag) \
     static VALUE \
     query_is_##flag(VALUE self) \
     { \
-        GSignalQuery* query; \
-        Data_Get_Struct(self, GSignalQuery, query); \
-        return CBOOL2RVAL(query->signal_flags & flag); \
+        return CBOOL2RVAL(rbgobj_signal_get_raw(self)->signal_flags & flag); \
     }
 
 query_is_flag(G_SIGNAL_RUN_FIRST)
@@ -811,8 +816,8 @@ hook_func(GSignalInvocationHint* ihint,
           const GValue*          param_values,
           gpointer               data)
 {
-    GClosure* closure = data;
-    GValue ret_val =G_VALUE_INIT;
+    GClosure *closure = data;
+    GValue ret_val = G_VALUE_INIT;
     gboolean ret;
 
     g_value_init(&ret_val, G_TYPE_BOOLEAN);
@@ -840,13 +845,13 @@ g_signal_add_emission_hook_closure (guint     signal_id,
 static VALUE
 rg_add_emission_hook(int argc, VALUE* argv, VALUE self)
 {
-    GSignalQuery* query;
+    GSignalQuery *query;
     VALUE proc;
     guint hook_id;
     GQuark detail = 0;
     GClosure* closure;
 
-    Data_Get_Struct(self, GSignalQuery, query);
+    query = rbgobj_signal_get_raw(self);
 
     if (query->signal_flags & G_SIGNAL_DETAILED) {
         VALUE detail_obj;
@@ -854,7 +859,7 @@ rg_add_emission_hook(int argc, VALUE* argv, VALUE self)
             if (SYMBOL_P(detail_obj))
                 detail = g_quark_from_string(rb_id2name(SYM2ID(detail_obj)));
             else
-                detail = g_quark_from_string(StringValuePtr(detail_obj));
+                detail = g_quark_from_string(RVAL2CSTR(detail_obj));
         }
     } else {
         rb_scan_args(argc, argv, "00&", &proc);
@@ -870,9 +875,8 @@ rg_add_emission_hook(int argc, VALUE* argv, VALUE self)
 static VALUE
 rg_remove_emission_hook(VALUE self, VALUE hook_id)
 {
-    GSignalQuery* query;
-    Data_Get_Struct(self, GSignalQuery, query);
-    g_signal_remove_emission_hook(query->signal_id, NUM2ULONG(hook_id));
+    g_signal_remove_emission_hook(rbgobj_signal_get_raw(self)->signal_id,
+                                  NUM2ULONG(hook_id));
     return Qnil;
 }
 
