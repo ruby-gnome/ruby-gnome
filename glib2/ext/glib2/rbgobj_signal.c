@@ -198,7 +198,7 @@ rbg_rval2gtypes_accept_nil(volatile VALUE *value, long *n)
 #define RVAL2GTYPES_ACCEPT_NIL(value, n) rbg_rval2gtypes_accept_nil(&(value), &(n))
 
 static VALUE
-gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
+gobj_s_define_signal(int argc, VALUE* argv, VALUE self)
 {
     const RGObjClassInfo *cinfo = rbgobj_lookup_class(self);
     VALUE rbsignal_name, rbsignal_flags, accumulator, rbreturn_type, params;
@@ -994,7 +994,8 @@ Init_gobject_gsignal(void)
     signal_call_func_table = rb_hash_new();
     rb_global_variable(&signal_call_func_table);
 
-    rbg_define_method(mMetaInterface, "signal_new", gobj_s_signal_new, -1);
+    rbg_define_method(mMetaInterface, "define_signal", gobj_s_define_signal, -1);
+    rb_define_alias(mMetaInterface, "signal_new", "define_signal");
     rbg_define_method(mMetaInterface, "signals", gobj_s_signals, -1);
     rbg_define_method(mMetaInterface, "signal", gobj_s_signal, 1);
 

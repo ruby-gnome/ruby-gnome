@@ -35,7 +35,7 @@ class TestSignal < Test::Unit::TestCase
   class CustomSignalObject < GLib::Object
     type_register
 
-    signal_new(:changed, :run_first, nil, nil)
+    define_signal(:changed, :run_first, nil, nil)
 
     attr_reader :n_changed
     def initialize

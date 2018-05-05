@@ -32,12 +32,12 @@ class MyButton < Gtk::Button
   end
 
   # define new signal "hoge"
-  signal_new("hoge",                  # name
-             GLib::Signal::RUN_FIRST, # flags
-             nil,                     # accumulator (XXX: not supported yet)
-             nil,                     # return type (void == nil)
-	     Integer, Integer         # parameter types
-             )
+  define_signal("hoge",                  # name
+                GLib::Signal::RUN_FIRST, # flags
+                nil,                     # accumulator (XXX: not supported yet)
+                nil,                     # return type (void == nil)
+                Integer, Integer         # parameter types
+                )
   # define default handler of "hoge" signal
   def signal_do_hoge(a, b)
     puts "MyButton#signal_do_hoge enter"
