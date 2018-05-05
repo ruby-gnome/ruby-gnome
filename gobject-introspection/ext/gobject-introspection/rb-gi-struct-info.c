@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -141,7 +141,7 @@ extract_raw_struct(VALUE rb_struct,
         gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
     }
     if (gtype == G_TYPE_NONE) {
-        raw_struct = DATA_PTR(rb_struct);
+        raw_struct = rb_gi_struct_get_raw(rb_struct);
     } else {
         raw_struct = RVAL2BOXED(rb_struct, gtype);
     }
