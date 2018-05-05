@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2004-2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2004-2018  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -68,18 +68,31 @@ typedef struct {
 } flags_holder;
 
 static void
-flags_free(flags_holder* p)
+flags_free(void *data)
 {
-    g_type_class_unref(p->gclass);
-    free(p);
+    flags_holder *holder = data;
+    g_type_class_unref(holder->gclass);
+    xfree(holder);
 }
 
+static const rb_data_type_t rg_glib_flags_type = {
+    "GLib::Flags",
+    {
+        NULL,
+        flags_free,
+        NULL,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
+
 static flags_holder*
-flags_get_holder(VALUE obj)
+flags_get_holder(VALUE rb_flags)
 {
-    flags_holder* p;
-    Data_Get_Struct(obj, flags_holder, p);
-    return p;
+    flags_holder *holder;
+    TypedData_Get_Struct(rb_flags, flags_holder, &rg_glib_flags_type, holder);
+    return holder;
 }
 
 static VALUE
@@ -209,12 +222,16 @@ rbgobj_flags_alloc_func(VALUE self)
     if (G_TYPE_IS_ABSTRACT(gtype)) {
         rb_raise(rb_eTypeError, "abstract class");
     } else {
-        flags_holder* p;
-        VALUE result = Data_Make_Struct(self, flags_holder, NULL, flags_free, p);
-        p->gclass = g_type_class_ref(gtype);
-        p->value  = 0;
-        p->info   = NULL;
-        return result;
+        flags_holder *holder;
+        VALUE rb_flags;
+        rb_flags = TypedData_Make_Struct(self,
+                                         flags_holder,
+                                         &rg_glib_flags_type,
+                                         holder);
+        holder->gclass = g_type_class_ref(gtype);
+        holder->value  = 0;
+        holder->info   = NULL;
+        return rb_flags;
     }
 }
 
