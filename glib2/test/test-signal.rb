@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- 
+
 class TestSignal < Test::Unit::TestCase
   def test_signal_flags
     assert_const_defined(GLib, :SignalFlags)
@@ -31,4 +31,11 @@ class TestSignal < Test::Unit::TestCase
     assert_kind_of(GLib::SignalMatchType, GLib::Signal::MATCH_ID)
     assert_equal(GLib::SignalMatchType::MASK, GLib::Signal::MATCH_MASK)
   end
+
+  class CustomSignalObject < GLib::Object
+    type_register
+
+    signal_new(:changed, :run_first, nil, nil)
+  end
+
 end
