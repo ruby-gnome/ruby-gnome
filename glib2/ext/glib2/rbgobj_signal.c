@@ -187,7 +187,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
         rbsignal_name = rb_str_new2(rb_id2name(SYM2ID(rbsignal_name)));
     signal_name = RVAL2CSTR(rbsignal_name);
 
-    signal_flags = GFLAGS2RVAL(rbsignal_flags, G_TYPE_SIGNAL_FLAGS);
+    signal_flags = RVAL2GFLAGS(rbsignal_flags, G_TYPE_SIGNAL_FLAGS);
 
     {
         VALUE rb_method_name;
