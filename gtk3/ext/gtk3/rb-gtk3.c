@@ -132,7 +132,7 @@ rb_gtk3_clipboard_targets_received_func_callback(GtkClipboard *clipboard,
         rb_atoms = rb_ary_new2(n_atoms);
         for (i = 0; i < n_atoms; i++) {
             VALUE rb_atom;
-            rb_atom = Data_Wrap_Struct(cGdkAtom, NULL, NULL, atoms[i]);
+            rb_atom = rb_gi_struct_new_raw(cGdkAtom, atoms[i], FALSE);
             rb_ary_push(rb_atoms, rb_atom);
         }
     }
