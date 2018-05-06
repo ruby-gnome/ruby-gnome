@@ -87,6 +87,7 @@ class TestGtkClipboard < Test::Unit::TestCase
   end
 
   test "#request_rich_text" do
+    only_gtk_version(3, 12, 0)
     loop = GLib::MainLoop.new
     received_format = nil
     received_text = nil
