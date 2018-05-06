@@ -122,8 +122,8 @@ module GdkPixbuf
         initialize_new_from_data(data, colorspace, has_alpha, bits_per_sample,
                                  width, height, row_stride)
       elsif bytes && size
-         initialize_new_from_bytes(bytes, colorspace, has_alpha, bits_per_sample,
-                                   width, height, row_stride)
+        initialize_new_from_bytes(bytes, colorspace, has_alpha, bits_per_sample,
+                                  width, height, row_stride)
 
       elsif xpm
         initialize_new_from_xpm_data(xpm)
