@@ -46,7 +46,7 @@ static VALUE
 rclosure_default_g2r_func(guint num, const GValue *values)
 {
     guint i;
-    VALUE args = rb_ary_new2(num);
+    VALUE args = rb_ary_new_capa(num);
     for (i = 0; i < num; i++)
         rb_ary_store(args, i, GVAL2RVAL(&values[i]));
     return args;
