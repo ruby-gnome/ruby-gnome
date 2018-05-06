@@ -54,16 +54,39 @@ MENU_UI =
   </menu>
 </interface>"
 
-def action(name, parent)
+def action(name, window)
   action = Gio::SimpleAction.new(name)
   action.signal_connect "activate" do |_simple_action, _parameter|
-    dialog = Gtk::Dialog.new(:parent => parent,
-                             :flags => :destroy_with_parent,
-                             :buttons => :close,
-                             :message => "Action #{name} activated.")
+    dialog = Gtk::MessageDialog.new(:parent => window,
+                                    :flags => :destroy_with_parent,
+                                    :buttons => :close,
+                                    :message => "Action #{name} activated.")
+    dialog.signal_connect(:response) do
+      dialog.destroy
+    end
     dialog.show
   end
   action
+end
+
+def action_save(window)
+  action("save", window)
+end
+
+def action_print(window)
+  action("print", window)
+end
+
+def action_share(window)
+  action("share", window)
+end
+
+def action_fullscreen(window)
+  action("fullscreen", window)
+end
+
+def action_close(window)
+  action("close", window)
 end
 
 application = Gtk::Application.new("org.gtk.example", :flags_none)
@@ -71,33 +94,33 @@ application = Gtk::Application.new("org.gtk.example", :flags_none)
 application.signal_connect "activate" do |app|
   win = Gtk::ApplicationWindow.new(app)
   win.set_default_size(200, 300)
-  doc_actions = Gio::SimpleActionGroup.new
-  doc_actions.add_action(action("save", win))
-  doc_actions.add_action(action("print", win))
-  doc_actions.add_action(action("share", win))
-  win.insert_action_group("doc_actions", doc_actions)
 
-  win_actions = Gio::SimpleActionGroup.new
-  win_actions.add_action(action("fullscreen", win))
-  win_actions.add_action(action("close", win))
-  win.insert_action_group("win", win_actions)
+  doc_actions = Gio::SimpleActionGroup.new
+  doc_actions.add_action(action_save(win))
+  doc_actions.add_action(action_share(win))
+  doc_actions.add_action(action_print(win))
+
+  win.add_action(action_close(win))
+  win.add_action(action_fullscreen(win))
 
   builder = Gtk::Builder.new(:string => MENU_UI)
   docmenu = builder["doc-menu"]
   winmenu = builder["win-menu"]
 
-  buttonmenu = Gtk::Menu.new
-  section = Gio::MenuItem.new("", :section => docmenu)
-  section.set_attribute("action-namespace", "s", "doc")
-  buttonmenu.append(section)
+  buttonmenu = Gio::Menu.new
 
-  section = Gio::MenuItem.new(:section => winmenu)
-  section.set_attribute("action-namespace", "s", "win")
-  buttonmenu.append(section)
+  section = Gio::MenuItem.new(nil, docmenu)
+  section.action_namespace = "doc"
+  buttonmenu.append_item(section)
+
+  section = Gio::MenuItem.new(nil, winmenu)
+  section.action_namespace = "win"
+  buttonmenu.append_item(section)
+
   button = Gtk::MenuButton.new
   button.label = "Menu"
   button.insert_action_group("doc", doc_actions)
-  button.model(button_menu)
+  button.menu_model = buttonmenu
   button.halign = :center
   button.valign = :start
   win.add(button)
@@ -105,5 +128,3 @@ application.signal_connect "activate" do |app|
 end
 
 application.run(ARGV)
-
-
