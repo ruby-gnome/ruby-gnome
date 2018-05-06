@@ -23,7 +23,7 @@ end
 
 def disable_optimization_build_flag(flags)
   if gcc?
-    flags.gsub(/(^|\s)?-O\d(\s|$)?/, '\\1-O0\\2')
+    RbConfig.expand(flags.dup).gsub(/(^|\s)?-O\d(\s|$)?/, '\\1-O0\\2')
   else
     flags
   end
@@ -31,9 +31,10 @@ end
 
 def enable_debug_build_flag(flags)
   if gcc?
+    expanded_flags = RbConfig.expand(flags.dup)
     debug_option_pattern = /(^|\s)-g\d?(\s|$)/
-    if debug_option_pattern =~ flags
-      flags.gsub(debug_option_pattern, '\\1-g3\\2')
+    if debug_option_pattern =~ expanded_flags
+      expanded_flags.gsub(debug_option_pattern, '\\1-g3\\2')
     else
       flags + " -g3"
     end
