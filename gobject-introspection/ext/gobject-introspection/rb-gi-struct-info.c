@@ -35,6 +35,51 @@ gi_struct_info_get_type(void)
     return type;
 }
 
+typedef struct {
+    gpointer instance;
+    gboolean is_owned;
+} RBGIStructData;
+
+static void
+struct_free(void *data)
+{
+    RBGIStructData *struct_data = data;
+    if (struct_data->is_owned) {
+        xfree(struct_data->instance);
+    }
+    xfree(struct_data);
+}
+
+static const rb_data_type_t rb_gi_struct_type = {
+    "GObjectIntrospection::Struct",
+    {
+        NULL,
+        struct_free,
+        NULL,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
+
+VALUE
+rb_gi_struct_new_raw(VALUE klass, gpointer instance, gboolean is_owned)
+{
+    RBGIStructData *data;
+    data = RB_ALLOC(RBGIStructData);
+    data->instance = instance;
+    data->is_owned = is_owned;
+    return TypedData_Wrap_Struct(klass, &rb_gi_struct_type, data);
+}
+
+gpointer
+rb_gi_struct_get_raw(VALUE rb_struct)
+{
+    RBGIStructData *data;
+    TypedData_Get_Struct(rb_struct, RBGIStructData, &rb_gi_struct_type, data);
+    return data->instance;
+}
+
 VALUE
 rb_gi_struct_info_to_ruby(GIStructInfo *info,
                           gpointer object,
@@ -47,15 +92,13 @@ rb_gi_struct_info_to_ruby(GIStructInfo *info,
     const char *name;
     VALUE rb_module;
     VALUE rb_class;
-    gpointer target_object = object;
-    RUBY_DATA_FUNC free_func = NULL;
 
     gtype = g_registered_type_info_get_g_type(registered_type_info);
     if (gtype == G_TYPE_VARIANT) {
         GVariant *variant = object;
         return rbg_variant_to_ruby(variant);
     } else if (gtype != G_TYPE_NONE) {
-        return BOXED2RVAL(target_object, gtype);
+        return BOXED2RVAL(object, gtype);
     }
 
     namespace = g_base_info_get_namespace(base_info);
@@ -68,7 +111,7 @@ rb_gi_struct_info_to_ruby(GIStructInfo *info,
         gtype_name = g_strdup_printf("Cairo%s", name);
         gtype = g_type_from_name(gtype_name);
         g_free(gtype_name);
-        return BOXED2RVAL(target_object, gtype);
+        return BOXED2RVAL(object, gtype);
     }
 
     rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
@@ -79,18 +122,21 @@ rb_gi_struct_info_to_ruby(GIStructInfo *info,
 
         rb_gtype = rb_funcall(rb_class, rb_intern("gtype"), 0);
         gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
-        return BOXED2RVAL(target_object, gtype);
+        return BOXED2RVAL(object, gtype);
     }
 
-    if (!is_pointer) {
+    if (is_pointer) {
+        return rb_gi_struct_new_raw(rb_class, object, FALSE);
+    } else {
         size_t object_size;
-        object_size = g_struct_info_get_size(info);
-        target_object = xmalloc(object_size);
-        memcpy(target_object, object, object_size);
-        free_func = xfree;
-    }
+        gpointer copied_object;
 
-    return Data_Wrap_Struct(rb_class, NULL, free_func, target_object);
+        object_size = g_struct_info_get_size(info);
+        copied_object = xmalloc(object_size);
+        memcpy(copied_object, object, object_size);
+
+        return rb_gi_struct_new_raw(rb_class, copied_object, TRUE);
+    }
 }
 
 gpointer
@@ -101,7 +147,7 @@ rb_gi_struct_info_from_ruby(GIStructInfo *info, VALUE rb_object)
 
     gtype = g_registered_type_info_get_g_type(registerd_type_info);
     if (gtype == G_TYPE_NONE) {
-        return DATA_PTR(rb_object);
+        return rb_gi_struct_get_raw(rb_object);
     } else {
         return RVAL2BOXED(rb_object, gtype);
     }

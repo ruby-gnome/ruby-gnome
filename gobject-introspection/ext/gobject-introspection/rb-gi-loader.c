@@ -58,43 +58,23 @@ rg_s_define_interface(G_GNUC_UNUSED VALUE klass,
     return G_DEF_INTERFACE(gtype, RVAL2CSTR(rb_name), rb_module);
 }
 
-static void
-struct_free(void *pointer)
-{
-    xfree(pointer);
-}
-
-static const rb_data_type_t rb_gi_struct_type = {
-    "GObjectIntrospection::Struct",
-    {
-        NULL,
-        struct_free,
-        NULL,
-    },
-    NULL,
-    NULL,
-    RUBY_TYPED_FREE_IMMEDIATELY,
-};
-
 static VALUE
 struct_alloc(VALUE klass)
 {
     VALUE rb_size;
     size_t size;
     gpointer instance;
+    gboolean is_owned;
 
     rb_size = rb_iv_get(klass, "@size");
-    size = NUM2ULONG(rb_size);
-    instance = xcalloc(1, size);
-    return TypedData_Wrap_Struct(klass, &rb_gi_struct_type, instance);
-}
-
-gpointer
-rb_gi_struct_get_raw(VALUE rb_struct)
-{
-    gpointer instance;
-    TypedData_Get_Struct(rb_struct, gpointer, &rb_gi_struct_type, instance);
-    return instance;
+    if (NIL_P(rb_size)) {
+        is_owned = FALSE;
+    } else {
+        size = NUM2ULONG(rb_size);
+        instance = xcalloc(1, size);
+        is_owned = TRUE;
+    }
+    return rb_gi_struct_new_raw(klass, instance, is_owned);
 }
 
 static VALUE
