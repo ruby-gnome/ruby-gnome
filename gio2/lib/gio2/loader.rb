@@ -58,6 +58,7 @@ module Gio
       require "gio2/file"
       require "gio2/inet-address"
       require "gio2/input-stream"
+      require "gio2/menu-item"
       require "gio2/pollable-input-stream"
       require "gio2/pollable-output-stream"
       require "gio2/resources"
