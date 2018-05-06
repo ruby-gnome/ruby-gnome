@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2015-2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2015-2018  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -100,23 +100,6 @@ rb_gtk3_clipboard_received_func_callback(GtkClipboard *clipboard,
                2,
                GOBJ2RVAL(clipboard),
                BOXED2RVAL(selection_data, GTK_TYPE_SELECTION_DATA));
-}
-
-static void
-rb_gtk3_clipboard_rich_text_received_func_callback(GtkClipboard *clipboard,
-                                                   GdkAtom format,
-                                                   const guint *text,
-                                                   G_GNUC_UNUSED gsize length,
-                                                   gpointer user_data)
-{
-    RBGICallbackData *callback_data = user_data;
-
-    rb_funcall(callback_data->rb_callback,
-               id_call,
-               3,
-               GOBJ2RVAL(clipboard),
-               Data_Wrap_Struct(cGdkAtom, NULL, NULL, format),
-               CSTR2RVAL((const gchar *)text));
 }
 
 static void
@@ -476,8 +459,6 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_cell_layout_data_func_callback;
     } else if (name_equal(info, "ClipboardReceivedFunc")) {
         return rb_gtk3_clipboard_received_func_callback;
-    } else if (name_equal(info, "ClipboardRichTextReceivedFunc")) {
-        return rb_gtk3_clipboard_rich_text_received_func_callback;
     } else if (name_equal(info, "ClipboardImageReceivedFunc")) {
         return rb_gtk3_clipboard_image_received_func_callback;
     } else if (name_equal(info, "ClipboardTargetsReceivedFunc")) {
