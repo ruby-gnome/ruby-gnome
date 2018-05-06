@@ -63,6 +63,7 @@ void rb_gi_callback_data_free       (RBGICallbackData       *callback_data);
 VALUE rb_gi_struct_new_raw(VALUE klass,
                            gpointer instance,
                            gboolean is_owned);
-gpointer rb_gi_struct_get_raw(VALUE rb_struct);
+gpointer rb_gi_struct_get_raw(VALUE rb_struct,
+                              GType gtype);
 
 #endif

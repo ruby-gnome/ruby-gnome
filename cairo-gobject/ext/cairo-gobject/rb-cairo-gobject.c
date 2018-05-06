@@ -55,6 +55,12 @@ prefix ## _instance2robj(gpointer cr_object,                            \
     return CR2RVAL(cr_copy_func(cr_object));                            \
 }                                                                       \
                                                                         \
+static VALUE                                                            \
+prefix ## _s_gtype(G_GNUC_UNUSED VALUE klass)                           \
+{                                                                       \
+    return rbgobj_gtype_new(gtype);                                     \
+}                                                                       \
+                                                                        \
 static void                                                             \
 define_ ## prefix ## _conversion(void)                                  \
 {                                                                       \
@@ -67,6 +73,11 @@ define_ ## prefix ## _conversion(void)                                  \
     table.instance2robj = prefix ## _instance2robj;                     \
                                                                         \
     RG_DEF_CONVERSION(&table);                                          \
+                                                                        \
+    rb_define_singleton_method(rb_klass,                                \
+                               "gtype",                                 \
+                               prefix ## _s_gtype,                      \
+                               0);                                      \
 }
 
 DEFINE_CONVERSION(context, CAIRO_GOBJECT_TYPE_CONTEXT, rb_cCairo_Context,

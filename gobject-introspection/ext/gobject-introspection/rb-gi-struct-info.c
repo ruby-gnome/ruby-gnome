@@ -73,11 +73,32 @@ rb_gi_struct_new_raw(VALUE klass, gpointer instance, gboolean is_owned)
 }
 
 gpointer
-rb_gi_struct_get_raw(VALUE rb_struct)
+rb_gi_struct_get_raw(VALUE rb_struct, GType gtype)
 {
-    RBGIStructData *data;
-    TypedData_Get_Struct(rb_struct, RBGIStructData, &rb_gi_struct_type, data);
-    return data->instance;
+    gpointer raw_struct;
+
+    if (gtype == G_TYPE_NONE) {
+        VALUE rb_struct_class;
+
+        rb_struct_class = rb_class_of(rb_struct);
+        if (rb_respond_to(rb_struct_class, rb_intern("gtype"))) {
+            VALUE rb_gtype;
+            rb_gtype = rb_funcall(rb_struct_class, rb_intern("gtype"), 0);
+            gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
+        }
+    }
+    if (gtype == G_TYPE_NONE) {
+        RBGIStructData *data;
+        TypedData_Get_Struct(rb_struct,
+                             RBGIStructData,
+                             &rb_gi_struct_type,
+                             data);
+        raw_struct = data->instance;
+    } else {
+        raw_struct = RVAL2BOXED(rb_struct, gtype);
+    }
+
+    return raw_struct;
 }
 
 VALUE
@@ -146,11 +167,7 @@ rb_gi_struct_info_from_ruby(GIStructInfo *info, VALUE rb_object)
     GType gtype;
 
     gtype = g_registered_type_info_get_g_type(registerd_type_info);
-    if (gtype == G_TYPE_NONE) {
-        return rb_gi_struct_get_raw(rb_object);
-    } else {
-        return RVAL2BOXED(rb_object, gtype);
-    }
+    return rb_gi_struct_get_raw(rb_object, gtype);
 }
 
 static VALUE
@@ -173,28 +190,6 @@ rg_get_field(VALUE self, VALUE rb_n)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_struct_info_get_field(info, n));
 }
 
-static gpointer
-extract_raw_struct(VALUE rb_struct,
-                   GIStructInfo *struct_info)
-{
-    GType gtype;
-    gpointer raw_struct;
-
-    gtype = g_registered_type_info_get_g_type(struct_info);
-    if (gtype == G_TYPE_NONE && rb_respond_to(rb_struct, rb_intern("gtype"))) {
-        VALUE rb_gtype;
-        rb_gtype = rb_funcall(rb_struct, rb_intern("gtype"), 0);
-        gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
-    }
-    if (gtype == G_TYPE_NONE) {
-        raw_struct = rb_gi_struct_get_raw(rb_struct);
-    } else {
-        raw_struct = RVAL2BOXED(rb_struct, gtype);
-    }
-
-    return raw_struct;
-}
-
 static VALUE
 rg_get_field_value(VALUE self, VALUE rb_struct, VALUE rb_n)
 {
@@ -205,7 +200,7 @@ rg_get_field_value(VALUE self, VALUE rb_struct, VALUE rb_n)
     VALUE rb_value;
 
     info = SELF(self);
-    raw_struct = extract_raw_struct(rb_struct, info);
+    raw_struct = rb_gi_struct_info_from_ruby(info, rb_struct);
     n = NUM2INT(rb_n);
     field_info = g_struct_info_get_field(info, n);
     rb_value = rb_gi_field_info_get_field_raw(field_info, raw_struct);
@@ -223,7 +218,7 @@ rg_set_field_value(VALUE self, VALUE rb_struct, VALUE rb_n, VALUE rb_value)
     GIFieldInfo *field_info;
 
     info = SELF(self);
-    raw_struct = extract_raw_struct(rb_struct, info);
+    raw_struct = rb_gi_struct_info_from_ruby(info, rb_struct);
     n = NUM2INT(rb_n);
     field_info = g_struct_info_get_field(info, n);
     rb_gi_field_info_set_field_raw(field_info, raw_struct, rb_value);

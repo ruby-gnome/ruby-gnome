@@ -2884,13 +2884,7 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
     case GI_INFO_TYPE_STRUCT:
         gtype = g_registered_type_info_get_g_type(interface_info);
         if (gtype == G_TYPE_NONE) {
-            if (RVAL2CBOOL(rb_obj_is_kind_of(rb_argument, rb_cGLibBoxed))) {
-                GType boxed_gtype;
-                boxed_gtype = CLASS2GTYPE(CLASS_OF(rb_argument));
-                argument->v_pointer = rbgobj_boxed_get(rb_argument, boxed_gtype);
-            } else {
-                argument->v_pointer = rb_gi_struct_get_raw(rb_argument);
-            }
+            argument->v_pointer = rb_gi_struct_get_raw(rb_argument, gtype);
         } else if (gtype == G_TYPE_VALUE) {
             GValue *gvalue;
             if (RVAL2CBOOL(rb_obj_is_kind_of(rb_argument, rb_cGLibValue))) {

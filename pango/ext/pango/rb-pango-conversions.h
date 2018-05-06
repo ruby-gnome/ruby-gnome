@@ -75,7 +75,7 @@ extern PangoAttribute *rbpango_attribute_from_ruby(VALUE rb_attribute);
 #define PANGOLOGATTR2RVAL(o)               (BOXED2RVAL(o, PANGO_TYPE_LOG_ATTR))
 #define RVAL2PANGOMATRIX(o)                ((PangoMatrix*)RVAL2BOXED(o, PANGO_TYPE_MATRIX))
 #define PANGOMATRIX2RVAL(o)                (BOXED2RVAL(o, PANGO_TYPE_MATRIX))
-#define RVAL2PANGORECTANGLE(o)             ((PangoRectangle *)rb_gi_struct_get_raw(o))
+#define RVAL2PANGORECTANGLE(o)             ((PangoRectangle *)rb_gi_struct_get_raw(o, G_TYPE_NONE))
 #define RVAL2PANGOSCRIPTITER(o)            ((PangoScriptIter*)RVAL2BOXED(o, PANGO_TYPE_SCRIPT_ITER))
 #define PANGOSCRIPTITER2RVAL(o)            (BOXED2RVAL(o, PANGO_TYPE_SCRIPT_ITER))
 #define RVAL2PANGOTABARRAY(o)              ((PangoTabArray*)RVAL2BOXED(o, PANGO_TYPE_TAB_ARRAY))

@@ -1421,7 +1421,7 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info,
             object_class = g_type_class_ref(CLASS2GTYPE(rb_receiver));
             receiver.v_pointer = object_class;
         } else {
-            receiver.v_pointer = rb_gi_struct_get_raw(rb_receiver);
+            receiver.v_pointer = rb_gi_struct_get_raw(rb_receiver, G_TYPE_NONE);
         }
     }
     rb_arguments = rbg_to_array(rb_arguments);
