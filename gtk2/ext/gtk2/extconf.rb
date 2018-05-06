@@ -38,6 +38,7 @@ have_func("rb_errinfo")
   "atk",
   "pango",
   "gdk_pixbuf2",
+  "gobject-introspection",
 ].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
@@ -63,6 +64,8 @@ unless required_pkg_config_package([package_id, 2, 10, 0],
                                    :msys2 => "gtk2")
   exit(false)
 end
+
+PKGConfig.have_package("gobject-introspection-1.0")
 
 have_header("st.h")
 have_header("ruby/st.h")
