@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -40,6 +40,7 @@ require "mkmf-gnome2"
 
 depended_packages = [
   "glib2",
+  "gobject-introspection",
 ]
 depended_packages.each do |package|
   directory = "#{package}#{version_suffix}"
@@ -76,6 +77,8 @@ end
 if PKGConfig.have_package("pangoft2")
   $defs << " -DHAVE_PANGO_FT2"
 end
+
+PKGConfig.have_package("gobject-introspection-1.0")
 
 pango_header = "pango/pango.h"
 have_func("pango_attr_strikethrough_color_new", pango_header)

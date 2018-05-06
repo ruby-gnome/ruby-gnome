@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -20,6 +20,17 @@
 
 #include "rb-pango-private.h"
 
+static GType
+pango_attribute_get_type(void)
+{
+    static GType our_type = 0;
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static("PangoAttribute",
+                                                (GBoxedCopyFunc)pango_attribute_copy,
+                                                (GBoxedFreeFunc)pango_attribute_destroy);
+    return our_type;
+}
+
 VALUE
 rbpango_attribute_to_ruby(PangoAttribute *attribute)
 {
@@ -30,26 +41,16 @@ rbpango_attribute_to_ruby(PangoAttribute *attribute)
     rb_attr_type = GENUM2RVAL(attribute->klass->type, PANGO_TYPE_ATTR_TYPE);
     CONST_ID(id_to_class, "to_class");
     klass = rb_funcall(rb_attr_type, id_to_class, 0);
-    return Data_Wrap_Struct(klass,
-                            NULL,
-                            pango_attribute_destroy,
-                            pango_attribute_copy(attribute));
+    return rbgobj_make_boxed_raw(pango_attribute_copy(attribute),
+                                 pango_attribute_get_type(),
+                                 klass,
+                                 0);
 }
 
 PangoAttribute *
 rbpango_attribute_from_ruby(VALUE rb_attribute)
 {
-    PangoAttribute *attribute;
-
-    Data_Get_Struct(rb_attribute, PangoAttribute, attribute);
-
-    return attribute;
-}
-
-static VALUE
-rbpango_attribute_allocate(VALUE klass)
-{
-    return Data_Wrap_Struct(klass, NULL, pango_attribute_destroy, 0);
+    return rbgobj_boxed_get(rb_attribute, pango_attribute_get_type());
 }
 
 static VALUE
@@ -68,7 +69,7 @@ rbpango_attr_language_initialize(VALUE self, VALUE rb_language)
     PangoLanguage *language;
 
     language = RVAL2PANGOLANGUAGE(rb_language);
-    DATA_PTR(self) = pango_attr_language_new(language);
+    G_INITIALIZE(self, pango_attr_language_new(language));
 
     return Qnil;
 }
@@ -76,7 +77,7 @@ rbpango_attr_language_initialize(VALUE self, VALUE rb_language)
 static VALUE
 rbpango_attr_family_initialize(VALUE self, VALUE rb_family)
 {
-    DATA_PTR(self) = pango_attr_family_new(RVAL2CSTR(rb_family));
+    G_INITIALIZE(self, pango_attr_family_new(RVAL2CSTR(rb_family)));
 
     return Qnil;
 }
@@ -84,7 +85,7 @@ rbpango_attr_family_initialize(VALUE self, VALUE rb_family)
 static VALUE
 rbpango_attr_style_initialize(VALUE self, VALUE rb_style)
 {
-    DATA_PTR(self) = pango_attr_style_new(RVAL2PANGOSTYLE(rb_style));
+    G_INITIALIZE(self, pango_attr_style_new(RVAL2PANGOSTYLE(rb_style)));
 
     return Qnil;
 }
@@ -102,7 +103,7 @@ rbpango_attr_style_get_value(VALUE self)
 static VALUE
 rbpango_attr_weight_initialize(VALUE self, VALUE rb_weight)
 {
-    DATA_PTR(self) = pango_attr_weight_new(RVAL2PANGOWEIGHT(rb_weight));
+    G_INITIALIZE(self, pango_attr_weight_new(RVAL2PANGOWEIGHT(rb_weight)));
 
     return Qnil;
 }
@@ -120,7 +121,7 @@ rbpango_attr_weight_get_value(VALUE self)
 static VALUE
 rbpango_attr_variant_initialize(VALUE self, VALUE rb_variant)
 {
-    DATA_PTR(self) = pango_attr_variant_new(RVAL2PANGOVARIANT(rb_variant));
+    G_INITIALIZE(self, pango_attr_variant_new(RVAL2PANGOVARIANT(rb_variant)));
 
     return Qnil;
 }
@@ -138,7 +139,7 @@ rbpango_attr_variant_get_value(VALUE self)
 static VALUE
 rbpango_attr_stretch_initialize(VALUE self, VALUE rb_stretch)
 {
-    DATA_PTR(self) = pango_attr_stretch_new(RVAL2PANGOSTRETCH(rb_stretch));
+    G_INITIALIZE(self, pango_attr_stretch_new(RVAL2PANGOSTRETCH(rb_stretch)));
 
     return Qnil;
 }
@@ -159,7 +160,7 @@ rbpango_attr_size_initialize(VALUE self, VALUE rb_size)
     gint size;
 
     size = NUM2INT(rb_size);
-    DATA_PTR(self) = pango_attr_size_new(size);
+    G_INITIALIZE(self, pango_attr_size_new(size));
 
     return Qnil;
 }
@@ -180,7 +181,7 @@ rbpango_attr_font_desc_initialize(VALUE self, VALUE rb_font_desc)
                                   rb_intern("new"), 1, rb_font_desc);
     }
     font_desc = RVAL2PANGOFONTDESCRIPTION(rb_font_desc);
-    DATA_PTR(self) = pango_attr_font_desc_new(font_desc);
+    G_INITIALIZE(self, pango_attr_font_desc_new(font_desc));
 
     return Qnil;
 }
@@ -191,9 +192,10 @@ rbpango_attr_foregound_initialize(VALUE self,
                                   VALUE rb_green,
                                   VALUE rb_blue)
 {
-    DATA_PTR(self) = pango_attr_foreground_new(NUM2UINT(rb_red),
-                                               NUM2UINT(rb_green),
-                                               NUM2UINT(rb_blue));
+    G_INITIALIZE(self,
+                 pango_attr_foreground_new(NUM2UINT(rb_red),
+                                           NUM2UINT(rb_green),
+                                           NUM2UINT(rb_blue)));
 
     return Qnil;
 }
@@ -204,9 +206,10 @@ rbpango_attr_background_initialize(VALUE self,
                                    VALUE rb_green,
                                    VALUE rb_blue)
 {
-    DATA_PTR(self) = pango_attr_background_new(NUM2UINT(rb_red),
-                                               NUM2UINT(rb_green),
-                                               NUM2UINT(rb_blue));
+    G_INITIALIZE(self,
+                 pango_attr_background_new(NUM2UINT(rb_red),
+                                           NUM2UINT(rb_green),
+                                           NUM2UINT(rb_blue)));
 
     return Qnil;
 }
@@ -214,7 +217,8 @@ rbpango_attr_background_initialize(VALUE self,
 static VALUE
 rbpango_attr_underline_initialize(VALUE self, VALUE rb_underline)
 {
-    DATA_PTR(self) = pango_attr_underline_new(RVAL2PANGOUNDERLINE(rb_underline));
+    G_INITIALIZE(self,
+                 pango_attr_underline_new(RVAL2PANGOUNDERLINE(rb_underline)));
 
     return Qnil;
 }
@@ -232,7 +236,8 @@ rbpango_attr_underline_get_value(VALUE self)
 static VALUE
 rbpango_attr_strikethrough_initialize(VALUE self, VALUE rb_strikethrough)
 {
-    DATA_PTR(self) = pango_attr_strikethrough_new(RVAL2CBOOL(rb_strikethrough));
+    G_INITIALIZE(self,
+                 pango_attr_strikethrough_new(RVAL2CBOOL(rb_strikethrough)));
 
     return Qnil;
 }
@@ -240,7 +245,7 @@ rbpango_attr_strikethrough_initialize(VALUE self, VALUE rb_strikethrough)
 static VALUE
 rbpango_attr_rise_initialize(VALUE self, VALUE rb_rise)
 {
-    DATA_PTR(self) = pango_attr_rise_new(NUM2INT(rb_rise));
+    G_INITIALIZE(self, pango_attr_rise_new(NUM2INT(rb_rise)));
 
     return Qnil;
 }
@@ -256,18 +261,21 @@ rbpango_attr_shape_initialize(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "21", &rb_ink_rect, &rb_logical_rect, &rb_data);
 
+    rb_p(rb_funcall(rb_ink_rect, rb_intern("to_a"), 0));
+    rb_p(rb_funcall(rb_logical_rect, rb_intern("to_a"), 0));
     ink_rect = RVAL2PANGORECTANGLE(rb_ink_rect);
     logical_rect = RVAL2PANGORECTANGLE(rb_logical_rect);
 
     if (NIL_P(rb_data)) {
-        DATA_PTR(self) = pango_attr_shape_new(ink_rect, logical_rect);
+        G_INITIALIZE(self, pango_attr_shape_new(ink_rect, logical_rect));
     } else {
         G_RELATIVE(self, rb_data);
-        DATA_PTR(self) = pango_attr_shape_new_with_data(ink_rect,
-                                                        logical_rect,
-                                                        (gpointer)rb_data,
-                                                        NULL,
-                                                        NULL);
+        G_INITIALIZE(self,
+                     pango_attr_shape_new_with_data(ink_rect,
+                                                    logical_rect,
+                                                    (gpointer)rb_data,
+                                                    NULL,
+                                                    NULL));
     }
 
     return Qnil;
@@ -279,7 +287,7 @@ rbpango_attr_shape_get_data(VALUE self)
     PangoAttrShape *attr_shape;
     VALUE rb_data;
 
-    Data_Get_Struct(self, PangoAttrShape, attr_shape);
+    attr_shape = (PangoAttrShape *)rbpango_attribute_from_ruby(self);
     rb_data = (VALUE)(attr_shape->data);
     return rb_data;
 }
@@ -287,7 +295,7 @@ rbpango_attr_shape_get_data(VALUE self)
 static VALUE
 rbpango_attr_scale_initialize(VALUE self, VALUE rb_scale)
 {
-    DATA_PTR(self) = pango_attr_scale_new(NUM2DBL(rb_scale));
+    G_INITIALIZE(self, pango_attr_scale_new(NUM2DBL(rb_scale)));
 
     return Qnil;
 }
@@ -295,7 +303,7 @@ rbpango_attr_scale_initialize(VALUE self, VALUE rb_scale)
 static VALUE
 rbpango_attr_fallback_initialize(VALUE self, VALUE rb_enable_fallback)
 {
-    DATA_PTR(self) = pango_attr_fallback_new(RVAL2CBOOL(rb_enable_fallback));
+    G_INITIALIZE(self, pango_attr_fallback_new(RVAL2CBOOL(rb_enable_fallback)));
 
     return Qnil;
 }
@@ -303,7 +311,8 @@ rbpango_attr_fallback_initialize(VALUE self, VALUE rb_enable_fallback)
 static VALUE
 rbpango_attr_letter_spacing_initialize(VALUE self, VALUE rb_letter_spacing)
 {
-    DATA_PTR(self) = pango_attr_letter_spacing_new(NUM2INT(rb_letter_spacing));
+    G_INITIALIZE(self,
+                 pango_attr_letter_spacing_new(NUM2INT(rb_letter_spacing)));
 
     return Qnil;
 }
@@ -314,9 +323,10 @@ rbpango_attr_underline_color_initialize(VALUE self,
                                         VALUE rb_green,
                                         VALUE rb_blue)
 {
-    DATA_PTR(self) = pango_attr_underline_color_new(NUM2UINT(rb_red),
-                                                    NUM2UINT(rb_green),
-                                                    NUM2UINT(rb_blue));
+    G_INITIALIZE(self,
+                 pango_attr_underline_color_new(NUM2UINT(rb_red),
+                                                NUM2UINT(rb_green),
+                                                NUM2UINT(rb_blue)));
 
     return Qnil;
 }
@@ -327,9 +337,10 @@ rbpango_attr_strikethrough_color_initialize(VALUE self,
                                             VALUE rb_green,
                                             VALUE rb_blue)
 {
-    DATA_PTR(self) = pango_attr_strikethrough_color_new(NUM2UINT(rb_red),
-                                                        NUM2UINT(rb_green),
-                                                        NUM2UINT(rb_blue));
+    G_INITIALIZE(self,
+                 pango_attr_strikethrough_color_new(NUM2UINT(rb_red),
+                                                    NUM2UINT(rb_green),
+                                                    NUM2UINT(rb_blue)));
 
     return Qnil;
 }
@@ -337,7 +348,8 @@ rbpango_attr_strikethrough_color_initialize(VALUE self,
 static VALUE
 rbpango_attr_absolute_size_initialize(VALUE self, VALUE rb_absolute_size)
 {
-    DATA_PTR(self) = pango_attr_size_new_absolute(NUM2INT(rb_absolute_size));
+    G_INITIALIZE(self,
+                 pango_attr_size_new_absolute(NUM2INT(rb_absolute_size)));
 
     return Qnil;
 }
@@ -345,7 +357,7 @@ rbpango_attr_absolute_size_initialize(VALUE self, VALUE rb_absolute_size)
 static VALUE
 rbpango_attr_gravity_initialize(VALUE self, VALUE rb_gravity)
 {
-    DATA_PTR(self) = pango_attr_gravity_new(RVAL2PANGOGRAVITY(rb_gravity));
+    G_INITIALIZE(self, pango_attr_gravity_new(RVAL2PANGOGRAVITY(rb_gravity)));
 
     return Qnil;
 }
@@ -366,7 +378,7 @@ rbpango_attr_gravity_hint_initialize(VALUE self, VALUE rb_gravity_hint)
     PangoGravityHint hint;
 
     hint = RVAL2PANGOGRAVITYHINT(rb_gravity_hint);
-    DATA_PTR(self) = pango_attr_gravity_hint_new(hint);
+    G_INITIALIZE(self, pango_attr_gravity_hint_new(hint));
 
     return Qnil;
 }
@@ -384,7 +396,8 @@ rbpango_attr_gravity_hint_get_value(VALUE self)
 static VALUE
 rbpango_attr_font_features_initialize(VALUE self, VALUE rb_font_features)
 {
-    DATA_PTR(self) = pango_attr_font_features_new(RVAL2CSTR(rb_font_features));
+    G_INITIALIZE(self,
+                 pango_attr_font_features_new(RVAL2CSTR(rb_font_features)));
 
     return Qnil;
 }
@@ -392,7 +405,7 @@ rbpango_attr_font_features_initialize(VALUE self, VALUE rb_font_features)
 static VALUE
 rbpango_attr_foreground_alpha_initialize(VALUE self, VALUE rb_alpha)
 {
-    DATA_PTR(self) = pango_attr_foreground_alpha_new(NUM2UINT(rb_alpha));
+    G_INITIALIZE(self, pango_attr_foreground_alpha_new(NUM2UINT(rb_alpha)));
 
     return Qnil;
 }
@@ -400,7 +413,7 @@ rbpango_attr_foreground_alpha_initialize(VALUE self, VALUE rb_alpha)
 static VALUE
 rbpango_attr_background_alpha_initialize(VALUE self, VALUE rb_alpha)
 {
-    DATA_PTR(self) = pango_attr_background_alpha_new(NUM2UINT(rb_alpha));
+    G_INITIALIZE(self, pango_attr_background_alpha_new(NUM2UINT(rb_alpha)));
 
     return Qnil;
 }
@@ -440,8 +453,7 @@ rbpango_attribute_init(VALUE mPango)
     VALUE cAttrForegroundAlpha;
     VALUE cAttrBackgroundAlpha;
 
-    cAttribute = rb_define_class_under(mPango, "Attribute", rb_cData);
-    rb_define_alloc_func(cAttribute, rbpango_attribute_allocate);
+    cAttribute = G_DEF_CLASS(pango_attribute_get_type(), "Attribute", mPango);
 
 #define DEFINE_ABSTRACT_ATTRIBUTE_BEGIN(ClassName, parent) do { \
         c ## ClassName = rb_define_class_under(mPango,          \

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -30,7 +30,7 @@ rg_insert(VALUE self, VALUE rb_attribute)
     if (NIL_P(rb_attribute))
         return self;
 
-    attribute = DATA_PTR(rb_attribute);
+    attribute = rbpango_attribute_from_ruby(rb_attribute);
     pango_attr_list_insert(RVAL2PANGOATTRLIST(self),
                            pango_attribute_copy(attribute));
 
@@ -45,7 +45,7 @@ rg_insert_before(VALUE self, VALUE rb_attribute)
     if (NIL_P(rb_attribute))
         return self;
 
-    attribute = DATA_PTR(rb_attribute);
+    attribute = rbpango_attribute_from_ruby(rb_attribute);
     pango_attr_list_insert_before(RVAL2PANGOATTRLIST(self),
                                   pango_attribute_copy(attribute));
 

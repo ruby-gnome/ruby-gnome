@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -75,7 +75,7 @@ extern PangoAttribute *rbpango_attribute_from_ruby(VALUE rb_attribute);
 #define PANGOLOGATTR2RVAL(o)               (BOXED2RVAL(o, PANGO_TYPE_LOG_ATTR))
 #define RVAL2PANGOMATRIX(o)                ((PangoMatrix*)RVAL2BOXED(o, PANGO_TYPE_MATRIX))
 #define PANGOMATRIX2RVAL(o)                (BOXED2RVAL(o, PANGO_TYPE_MATRIX))
-#define RVAL2PANGORECTANGLE(o)             ((PangoRectangle *)DATA_PTR(o))
+#define RVAL2PANGORECTANGLE(o)             ((PangoRectangle *)rb_gi_struct_get_raw(o))
 #define RVAL2PANGOSCRIPTITER(o)            ((PangoScriptIter*)RVAL2BOXED(o, PANGO_TYPE_SCRIPT_ITER))
 #define PANGOSCRIPTITER2RVAL(o)            (BOXED2RVAL(o, PANGO_TYPE_SCRIPT_ITER))
 #define RVAL2PANGOTABARRAY(o)              ((PangoTabArray*)RVAL2BOXED(o, PANGO_TYPE_TAB_ARRAY))
@@ -115,4 +115,4 @@ extern PangoAttribute *rbpango_attribute_from_ruby(VALUE rb_attribute);
 #define RVAL2PANGOFONTMASK(o)              (RVAL2GFLAGS(o, PANGO_TYPE_FONT_MASK))
 #define PANGOFONTMASK2RVAL(o)              (GFLAGS2RVAL(o, PANGO_TYPE_FONT_MASK))
 
-#define RVAL2PANGOATTR(o)                  (DATA_PTR(o))
+#define RVAL2PANGOATTR(o)                  (rbpango_attribute_from_ruby(o))
