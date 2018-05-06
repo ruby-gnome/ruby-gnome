@@ -261,8 +261,6 @@ rbpango_attr_shape_initialize(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "21", &rb_ink_rect, &rb_logical_rect, &rb_data);
 
-    rb_p(rb_funcall(rb_ink_rect, rb_intern("to_a"), 0));
-    rb_p(rb_funcall(rb_logical_rect, rb_intern("to_a"), 0));
     ink_rect = RVAL2PANGORECTANGLE(rb_ink_rect);
     logical_rect = RVAL2PANGORECTANGLE(rb_logical_rect);
 
