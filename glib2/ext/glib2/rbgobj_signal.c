@@ -379,7 +379,7 @@ gobj_sig_connect_impl(gboolean after, int argc, VALUE *argv, VALUE self)
         CONST_ID(id_create_signal_handler, "create_signal_handler");
         normalized_signal_name = g_signal_name(signal_id);
         func = rb_funcall(self,
-                          rb_intern("create_signal_handler"),
+                          id_create_signal_handler,
                           2,
                           rb_str_new_cstr(normalized_signal_name),
                           rb_block_proc());
