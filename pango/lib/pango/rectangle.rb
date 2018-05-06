@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,6 +27,12 @@ module Pango
 
     def to_a
       [x, y, width, height]
+    end
+
+    def dup
+      duplicated = self.class.new(x, y, width, height)
+      duplicated.taint if tainted?
+      duplicated
     end
   end
 end
