@@ -366,6 +366,8 @@ module GObjectIntrospection
     end
 
     def match_argument?(arg_info, argument)
+      return true if argument.nil? and arg_info.may_be_null?
+
       type = arg_info.type
       case type.tag
       when TypeTag::BOOLEAN
