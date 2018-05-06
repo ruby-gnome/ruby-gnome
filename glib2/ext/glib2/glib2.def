@@ -166,6 +166,7 @@ EXPORTS
 	rbglib_int64_to_num
 	rbg_variant_to_ruby
 	rbg_variant_from_ruby
+	rbg_variant_type_from_ruby
 
 	g_source_get_type
 	g_connect_flags_get_type

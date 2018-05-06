@@ -26,6 +26,23 @@
 
 static VALUE RG_TARGET_NAMESPACE;
 
+GVariantType *
+rbg_variant_type_from_ruby(VALUE rb_variant_type)
+{
+    if (NIL_P(rb_variant_type)) {
+        return NULL;
+    }
+
+    if (RB_TYPE_P(rb_variant_type, RUBY_T_STRING)) {
+        rb_variant_type = rb_funcall(RG_TARGET_NAMESPACE,
+                                     rb_intern("new"),
+                                     1,
+                                     rb_variant_type);
+    }
+
+    return RVAL2BOXED(rb_variant_type, G_TYPE_VARIANT_TYPE);
+}
+
 static VALUE
 rg_s_valid_p(G_GNUC_UNUSED VALUE klass, VALUE rb_string)
 {
