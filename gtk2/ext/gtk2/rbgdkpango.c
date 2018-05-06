@@ -48,7 +48,7 @@ gdkpango_context_set_colormap(VALUE self, VALUE colormap)
 static VALUE
 gdkpango_attr_embossed_initialize(VALUE self, VALUE embossed)
 {
-    DATA_PTR(self) = gdk_pango_attr_embossed_new(RVAL2CBOOL(embossed));
+    G_INITIALIZE(self, gdk_pango_attr_embossed_new(RVAL2CBOOL(embossed)));
     return Qnil;
 }
 
@@ -61,7 +61,8 @@ gdkpango_attr_embossed_value(VALUE self)
 static VALUE
 gdkpango_attr_stipple_initialize(VALUE self, VALUE stipple)
 {
-    DATA_PTR(self) = gdk_pango_attr_stipple_new(GDK_BITMAP(RVAL2GOBJ(stipple)));
+    G_INITIALIZE(self,
+                 gdk_pango_attr_stipple_new(GDK_BITMAP(RVAL2GOBJ(stipple))));
     return Qnil;
 }
 
@@ -123,7 +124,7 @@ gdkpango_layout_line_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_ori
 static VALUE
 gdkpango_attr_emboss_color_initialize(VALUE self, VALUE color)
 {
-    DATA_PTR(self) = gdk_pango_attr_emboss_color_new(RVAL2GDKCOLOR(color));
+    G_INITIALIZE(self, gdk_pango_attr_emboss_color_new(RVAL2GDKCOLOR(color)));
     return Qnil;
 }
 
