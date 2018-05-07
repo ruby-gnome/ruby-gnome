@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2018 Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,11 +14,23 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Gtk
-  class Box
-    alias_method :initialize_raw, :initialize
-    def initialize(orientation, spacing=0)
-      initialize_raw(orientation, spacing || 0)
+class TestGtkBox < Test::Unit::TestCase
+  include GtkTestUtils
+
+  sub_test_case ".new" do
+    sub_test_case "spacing" do
+      def test_nil
+        box = Gtk::Box.new(:vertical, nil)
+        assert_equal(0, box.spacing)
+      end
     end
+  end
+
+  test "set_child_packing" do
+    box = Gtk::Box.new(:vertical)
+    child = Gtk::Label.new("test")
+    box.add(child)
+    box.set_child_packing(child, :end)
+    assert_equal(Gtk::PackType::END, box.query_child_packing(child))
   end
 end
