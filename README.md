@@ -139,4 +139,4 @@ See gtk3/examples/ directory for details.
 
 ## Project Website
 
-[http://ruby-gnome2.sourceforge.jp/](http://ruby-gnome2.sourceforge.jp/)
+[https://ruby-gnome2.osdn.jp/](https://ruby-gnome2.osdn.jp/)

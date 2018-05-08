@@ -5,7 +5,7 @@ Ruby/GObjectIntrospection is a Ruby binding of GObject Introspect.
 ## Requirements
 
 * Ruby/GLib2 in
-  [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/)
+  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
 * [GObject Introspection](http://live.gnome.org/GObjectIntrospection)
 
 ## Install
@@ -21,4 +21,4 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 ## Project Website
 
-http://ruby-gnome2.sourceforge.jp/
+https://ruby-gnome2.osdn.jp/

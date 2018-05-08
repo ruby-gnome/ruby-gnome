@@ -23,7 +23,7 @@ a.logo = GdkPixbuf::Pixbuf.new(:file => File.join(__dir__, "gnome-logo-icon.png"
 a.program_name = "Gtk::AboutDialog sample"
 a.translator_credits = "Translator 1\nTranslator 2\n"
 a.version   = "1.0.0"
-a.website   = "http://ruby-gnome2.sourceforge.jp"
+a.website   = "https://ruby-gnome2.osdn.jp"
 a.website_label = "Ruby-GNOME2 Project Website"
 
 a.signal_connect("activate-link") do |about_dialog, uri|

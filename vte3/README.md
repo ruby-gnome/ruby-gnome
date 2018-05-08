@@ -5,7 +5,7 @@ Ruby/VTE3 is a Ruby binding of VTE for use with GTK3.
 ## Requirements
 
 * Ruby/GTK3 in
-  [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/)
+  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
 * [VTE](https://live.gnome.org/Terminal/VTE)
 
 ## Install
@@ -21,4 +21,4 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 ## Project Website
 
-http://ruby-gnome2.sourceforge.jp/
+https://ruby-gnome2.osdn.jp/

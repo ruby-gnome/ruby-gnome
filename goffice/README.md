@@ -5,7 +5,7 @@ Ruby/GOffice is a Ruby binding of GOffice.
 ## Requirements
 
 * Ruby/GTK3 and Ruby/GSF in
-  [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/)
+  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
 * [GOffice](https://developer.gnome.org/goffice/)
 
 ## Install
@@ -21,5 +21,5 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 ## Project Websites
 
-*   http://ruby-gnome2.sourceforge.jp/
+*   https://ruby-gnome2.osdn.jp/
 *   https://github.com/ruby-gnome2/ruby-gnome2

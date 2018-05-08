@@ -5,7 +5,7 @@ Ruby/ClutterGDK is a Ruby binding of GDK specific API of Clutter.
 ## Requirements
 
 * Ruby/Clutter and Ruby/GTK3 in
-  [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/)
+  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
 * [Clutter-gdk](http://blogs.gnome.org/clutter/)
 
 ## Install
@@ -26,4 +26,4 @@ https://developer.gnome.org/clutter/stable/clutter-GDK-Specific-Support.html
 ## Project Websites
 
 *  https://github.com/ruby-gnome2/ruby-gnome2
-*  http://ruby-gnome2.sourceforge.jp/
+*  https://ruby-gnome2.osdn.jp/
