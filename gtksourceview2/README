@@ -5,7 +5,7 @@ Ruby/GtkSourceView2 is a Ruby binding of gtksourceview-2.x.
 Requirements
 ------------
    Ruby:          http://www.ruby-lang.org/
-   Ruby-GNOME2:   http://ruby-gnome2.sourceforge.jp/
+   Ruby-GNOME2:   https://ruby-gnome2.osdn.jp/
    GtkSourceView: ftp://ftp.gnome.org/pub/GNOME/sources/gtksourceview
 
 Install
@@ -26,4 +26,4 @@ Copying
 
 Project Website
 ---------------
-   http://ruby-gnome2.sourceforge.jp/
+   https://ruby-gnome2.osdn.jp/

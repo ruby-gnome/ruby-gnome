@@ -23,7 +23,7 @@ Gtk::AboutDialog.show(nil,
 		      "program_name" => "Gtk::AboutDialog sample",
 		      "translator_credits" => "Translator 1 <no1@foo.bar.com>\nTranslator 2 <no2@foo.bar.com>\n",
 		      "version" => "1.0.0",
-		      "website" => "http://ruby-gnome2.sourceforge.jp",
+		      "website" => "https://ruby-gnome2.osdn.jp",
 		      "website_label" => "Ruby-GNOME2 Project Website"
 		      )
 

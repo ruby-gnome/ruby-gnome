@@ -39,4 +39,4 @@ Install ruby-1.9.x or later, pkg-config.rb and GLib-2.12.x.
 
 ## Project Website
 
-   http://ruby-gnome2.sourceforge.jp/
+   https://ruby-gnome2.osdn.jp/

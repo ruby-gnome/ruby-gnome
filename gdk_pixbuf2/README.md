@@ -26,5 +26,5 @@ Copying
 
 Project Websites
 ----------------
-   http://ruby-gnome2.sourceforge.jp/
+   https://ruby-gnome2.osdn.jp/
    https://github.com/ruby-gnome2/ruby-gnome2

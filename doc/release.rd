@@ -99,7 +99,7 @@ rubygems.org:
 === Announces the current release
 
   (1) post release announce to
-      http://ruby-gnome2.sourceforge.jp/hiki.cgi?create_news
+      https://ruby-gnome2.osdn.jp/hiki.cgi?create_news
 
       Here is a template:
         Your name: kou
@@ -129,7 +129,7 @@ rubygems.org:
         Hi,
 
         The Ruby-GNOME2 project released Ruby-GNOME2 X.Y.Z:
-          http://ruby-gnome2.sourceforge.jp/hiki.cgi?News_20110713_1
+          https://ruby-gnome2.osdn.jp/hiki.cgi?News_20110713_1
           REPLACE THIS WITH POSTED URL AT (1).
 
 
@@ -154,7 +154,7 @@ rubygems.org:
         The Ruby-GNOME2 project released Ruby-GNOME2 X.Y.Z.
 
         Web:
-          http://ruby-gnome2.sourceforge.jp/
+          https://ruby-gnome2.osdn.jp/
 
         Install:
           gem install gtk2
@@ -222,7 +222,7 @@ rubygems.org:
         Ruby-GNOME2プロジェクトはRuby-GNOME2 1.0.0をリリースしました。
 
         Web:
-          http://ruby-gnome2.sourceforge.jp/
+          https://ruby-gnome2.osdn.jp/
 
         インストール:
           gem install gtk2
@@ -264,7 +264,7 @@ rubygems.org:
           http://sourceforge.net/mail/?group_id=53614
 
         - Ruby-GNOME2 APIリファレンス
-          http://ruby-gnome2.sourceforge.jp/ja/hiki.cgi?Ruby-GNOME2+API+Reference
+          https://ruby-gnome2.osdn.jp/ja/hiki.cgi?Ruby-GNOME2+API+Reference
 
         - チュートリアル
-          http://ruby-gnome2.sourceforge.jp/ja/hiki.cgi?tutorials
+          https://ruby-gnome2.osdn.jp/ja/hiki.cgi?tutorials

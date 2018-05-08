@@ -16,14 +16,14 @@ window.signal_connect("destroy"){Gtk.main_quit}
 vbox = Gtk::VBox.new
 
 # URI only
-button1 = Gtk::LinkButton.new("http://ruby-gnome2.sourceforge.jp/")
+button1 = Gtk::LinkButton.new("https://ruby-gnome2.osdn.jp/")
 button1.signal_connect("clicked") do
   puts button1.uri
 end
 vbox.pack_start(button1)
 
 # URI with a label
-button2 = Gtk::LinkButton.new("http://ruby-gnome2.sourceforge.jp/",
+button2 = Gtk::LinkButton.new("https://ruby-gnome2.osdn.jp/",
 			      "Ruby-GNOME2 Website")
 button2.signal_connect("clicked") do
   puts button2.uri

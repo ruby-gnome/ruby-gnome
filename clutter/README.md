@@ -5,7 +5,7 @@ Ruby/Clutter is a Ruby binding of Clutter.
 ## Requirements
 
 * Ruby/GObjectIntrospection in
-  [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/)
+  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
 * [Clutter](http://blogs.gnome.org/clutter/)
 
 ## Install
@@ -28,4 +28,4 @@ are licensed under the LGPL v2.1 or later.
 
 ## Project Website
 
-http://ruby-gnome2.sourceforge.jp/
+https://ruby-gnome2.osdn.jp/
