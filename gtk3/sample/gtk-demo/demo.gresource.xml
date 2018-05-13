@@ -11,6 +11,7 @@
   </gresource>-->
   <gresource prefix="/builder">
     <file>demo.ui</file>
+    <file>demo-3.18.ui</file>
   </gresource>
   <gresource prefix="/css_accordion">
     <file>css_accordion.css</file>

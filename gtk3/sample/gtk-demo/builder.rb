@@ -8,7 +8,12 @@
 =end
 class BuilderDemo
   def initialize(_main_window)
-    @builder = Gtk::Builder.new(:resource => "/builder/demo.ui")
+    if Gtk::Version.or_later?(3, 20)
+      ui_path = "/builder/demo.ui"
+    else
+      ui_path = "/builder/demo-3.18.ui"
+    end
+    @builder = Gtk::Builder.new(:resource => ui_path)
     @builder.connect_signals {}
 
     @window = @builder["window1"]
