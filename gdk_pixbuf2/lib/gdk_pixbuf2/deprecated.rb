@@ -26,21 +26,21 @@ module GdkPixbuf
       def new(*args, &block)
         if args[0].is_a?(Pixbuf)
           message = "#{caller[0]}: #{self}.new(pixbuf, ...) is deprecated. "
-          message << "Use pixbuf.new_subpixbuf(...)  instead."
+          message << "Use pixbuf.subpixbuf(...)  instead."
           warn(message)
-          args[0].new_subpixbuf(*args[1..-1])
+          args[0].subpixbuf(*args[1..-1])
         elsif args.size == 1 and args[0].is_a?(Hash)
           options = args[0]
           src_pixbuf = options[:src_pixbuf]
           if src_pixbuf
             message = "#{caller[0]}: "
             message << "#{self}.new(:src_pixbuf => pixbuf, ...) is deprecated. "
-            message << "Use pixbuf.new_subpixbuf(...)  instead."
+            message << "Use pixbuf.subpixbuf(...)  instead."
             warn(message)
-            src_pixbuf.new_subpixbuf(options[:src_x],
-                                     options[:src_y],
-                                     options[:width],
-                                     options[:height])
+            src_pixbuf.subpixbuf(options[:src_x],
+                                 options[:src_y],
+                                 options[:width],
+                                 options[:height])
           else
             super
           end
@@ -49,6 +49,8 @@ module GdkPixbuf
         end
       end
     end
+
+    define_deprecated_method :new_subpixbuf, :subpixbuf
 
     define_deprecated_method :save_to_buffer, :save
 

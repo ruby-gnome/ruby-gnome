@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -40,6 +40,15 @@ module GdkPixbuf
         name = $POSTMATCH
       end
       super(name, info)
+    end
+
+    def rubyish_method_name(function_info, options={})
+      name = function_info.name
+      if name == "new_subpixbuf"
+        "subpixbuf"
+      else
+        super
+      end
     end
   end
 end
