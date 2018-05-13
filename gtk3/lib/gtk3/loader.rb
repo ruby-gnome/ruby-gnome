@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -83,6 +83,7 @@ module Gtk
       require "gtk3/about-dialog"
       require "gtk3/action"
       require "gtk3/action-group"
+      require "gtk3/application"
       require "gtk3/binding-set"
       require "gtk3/border"
       require "gtk3/box"
