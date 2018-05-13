@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -24,5 +24,7 @@ module Cairo
         handle.render_cairo(self)
       end
     end
+
+    alias_method :show_rsvg_handle, :render_rsvg_handle
   end
 end
