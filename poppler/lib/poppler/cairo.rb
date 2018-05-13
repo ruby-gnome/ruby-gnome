@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,5 +19,7 @@ module Cairo
     def render_poppler_page(page, options={})
       page.render(self)
     end
+
+    alias_method :show_poppler_page, :render_poppler_page
   end
 end
