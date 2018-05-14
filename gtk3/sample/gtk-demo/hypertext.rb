@@ -112,7 +112,7 @@ tags don't have to affect appearance. They can instead affect the
 behavior of mouse and key presses, "lock" a range of text so the
 user can't edit it, or countless other things.\n
 EOF
-    insert_link(iter, "Goback", 1)
+    insert_link(iter, "Go back", 1)
   end
 
   def generate_page_3
