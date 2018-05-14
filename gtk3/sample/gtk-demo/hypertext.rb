@@ -27,21 +27,8 @@ class HypertextDemo
       false
     end
 
-    # Links can also be activated by clicking or tapping.
     @view.signal_connect "event-after" do |widget, event|
-      if event.is_a?(Gdk::EventButton) && event.button == 1
-        buffer = widget.buffer
-
-        # we shouldn't follow a link if the user has selected something
-        range = buffer.selection_bounds
-        return false if range && range[0].offset != range[1].offset
-
-        x, y = widget.window_to_buffer_coords(:widget, event.x, event.y)
-        iter = widget.get_iter_at_location(x, y)
-        follow_if_link(iter) if iter
-      else
-        false
-      end
+      event_after(event)
     end
 
     @view.signal_connect "motion-notify-event" do |widget, event|
@@ -146,6 +133,28 @@ EOF
                              "underline" => :single)
     tag.page = page
     @buffer.insert(iter, text, :tags => [tag])
+  end
+
+  # Links can also be activated by clicking or tapping.
+  def event_after(event)
+    case event.type
+    when Gdk::EventType::BUTTON_RELEASE
+      return false unless event.button == Gdk::BUTTON_PRIMARY
+    when Gdk::EventType::TOUCH_END
+    else
+      return false
+    end
+
+    buffer = @view.buffer
+
+    # we shouldn't follow a link if the user has selected something
+    range = buffer.selection_bounds
+    return false if range && range[0].offset != range[1].offset
+
+    x, y = @view.window_to_buffer_coords(:widget, event.x, event.y)
+    iter = @view.get_iter_at_location(x, y)
+    follow_if_link(iter) if iter
+    true
   end
 
   # Looks at all tags covering the position of iter in the text view,
