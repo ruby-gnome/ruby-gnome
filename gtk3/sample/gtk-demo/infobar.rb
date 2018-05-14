@@ -108,7 +108,9 @@ class InfobarDemo
                                       :buttons => :ok,
                                       :message => "You clicked a button on an info bar")
       dialog.secondary_text = "Your response has id #{response_id}"
-      dialog.signal_connect("response", &:destroy)
+      dialog.signal_connect("response") do
+        dialog.destroy
+      end
       dialog.show_all
     end
   end
