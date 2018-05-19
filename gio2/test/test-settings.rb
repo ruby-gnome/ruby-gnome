@@ -125,4 +125,77 @@ string='new-string'
       FileUtils.rm_f(keyfile)
     end
   end
+
+  sub_test_case ".new hash arguments" do
+    setup do
+      @path = "/jp/ruby-gnome2/test/settings/"
+      @schema_id = "jp.ruby-gnome2.test.settings"
+      @keyfile_content_ref = <<-KEYFILE
+[jp/ruby-gnome2/test/settings]
+string='new-string'
+      KEYFILE
+    end
+
+    def need_keyfile_settings_backend
+      unless Gio.respond_to?(:keyfile_settings_backend_new)
+        omit("Need Gio.keyfile_settings_backend_new")
+      end
+    end
+
+    test ":schema_id" do
+      settings = Gio::Settings.new(:schema_id => @schema_id)
+      settings.reset("string")
+      assert_equal("default-string", settings["string"])
+    end
+
+    test ":schema_id and :path" do
+      settings = Gio::Settings.new(:schema_id => @schema_id, :path => @path)
+      settings.reset("string")
+      assert_equal("default-string", settings["string"])
+    end
+
+    test ":schema_id and :backend" do
+      need_keyfile_settings_backend
+      keyfile, backend = gen_keyfile_and_backend
+      settings = Gio::Settings.new(:schema_id => @schema_id, :backend => backend)
+
+      check_settings_with_backend(settings)
+
+      keyfile_content = File.read(keyfile.path)
+      assert_equal(@keyfile_content_ref, keyfile_content)
+      FileUtils.rm_f(keyfile)
+    end
+
+    test ":schema_id and :backend and :path" do
+      need_keyfile_settings_backend
+
+      keyfile, backend = gen_keyfile_and_backend
+      settings = Gio::Settings.new(:schema_id => @schema_id,
+                                   :backend => backend,
+                                   :path => @path)
+
+      check_settings_with_backend(settings)
+
+      keyfile_content = File.read(keyfile.path)
+      assert_equal(@keyfile_content_ref, keyfile_content)
+      FileUtils.rm_f(keyfile)
+    end
+
+    test "full" do
+      need_keyfile_settings_backend
+      keyfile, backend = gen_keyfile_and_backend
+      schema_dir = fixture_path("schema", "default")
+      schema_source = Gio::SettingsSchemaSource.new(schema_dir, nil, true)
+      schema = schema_source.lookup(@schema_id, true)
+      settings = Gio::Settings.new(:schema => schema,
+                                   :backend => backend,
+                                   :path => @path)
+
+      check_settings_with_backend(settings)
+
+      keyfile_content = File.read(keyfile.path)
+      assert_equal(@keyfile_content_ref, keyfile_content)
+      FileUtils.rm_f(keyfile)
+    end
+  end
 end
