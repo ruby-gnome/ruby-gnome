@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -181,7 +181,42 @@ string='new-string'
       FileUtils.rm_f(keyfile)
     end
 
-    test "full" do
+    test ":schema" do
+      schema_dir = fixture_path("schema", "default")
+      schema_source = Gio::SettingsSchemaSource.new(schema_dir, nil, true)
+      schema = schema_source.lookup(@schema_id, true)
+      settings = Gio::Settings.new(:schema => schema)
+      settings.reset("string")
+      assert_equal("default-string", settings["string"])
+    end
+
+    test ":schema and :path" do
+      schema_dir = fixture_path("schema", "default")
+      schema_source = Gio::SettingsSchemaSource.new(schema_dir, nil, true)
+      schema = schema_source.lookup(@schema_id, true)
+      settings = Gio::Settings.new(:schema => schema,
+                                   :path => @path)
+      settings.reset("string")
+      assert_equal("default-string", settings["string"])
+    end
+
+    test ":schema and :backend" do
+      need_keyfile_settings_backend
+      keyfile, backend = gen_keyfile_and_backend
+      schema_dir = fixture_path("schema", "default")
+      schema_source = Gio::SettingsSchemaSource.new(schema_dir, nil, true)
+      schema = schema_source.lookup(@schema_id, true)
+      settings = Gio::Settings.new(:schema => schema,
+                                   :backend => backend)
+
+      check_settings_with_backend(settings)
+
+      keyfile_content = File.read(keyfile.path)
+      assert_equal(@keyfile_content_ref, keyfile_content)
+      FileUtils.rm_f(keyfile)
+    end
+
+    test ":schema and :backend and :path" do
       need_keyfile_settings_backend
       keyfile, backend = gen_keyfile_and_backend
       schema_dir = fixture_path("schema", "default")

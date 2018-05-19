@@ -59,7 +59,7 @@ module Gio
         else
           initialize_raw(schema_id)
         end
-      elsif schema && path
+      elsif schema
         initialize_new_full(schema, backend, path)
       else
         message =
