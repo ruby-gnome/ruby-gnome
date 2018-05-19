@@ -45,7 +45,11 @@ class PopoverDemo
   end
 
   def create_complex_popover(parent, pos)
-    builder = Gtk::Builder.new(:resource => "/popover/popover.ui")
+    if Gtk::Version.or_later?(3, 20)
+      builder = Gtk::Builder.new(:resource => "/popover/popover.ui")
+    else
+      builder = Gtk::Builder.new(:resource => "/popover/popover-3.18.ui")
+    end
     window = builder["window"]
     content = window.child
     content.parent.remove(content)
