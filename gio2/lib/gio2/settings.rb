@@ -40,7 +40,14 @@ module Gio
       elsif args.size == 3
         initialize_new_full(*args)
       else
-        $stderr.puts "Arguments error for Gio::Settings#new"
+        message =
+          "must specify one of the following combinations: " +
+          "schema_id, " +
+          "options, " +
+          "schema_id and options, " +
+          "schema and backend and path " +
+          "instead of: #{args.inspect}"
+        raise ArgumentError, message
       end
     end
 
@@ -63,13 +70,17 @@ module Gio
         initialize_new_full(schema, backend, path)
       else
         message =
-          "Must specify one of the following combinaisons:\n
-          :schema_id and :path\n
-          :schema_id and :backend\n
-          :schema_id and :backend and :path\n
-          or :schema and :backend and :path\n
-          instead of : #{options.inspect}"
-        $stderr.puts "Arguments error for Gio::Settings#new : " + message
+          "must specify one of the following combinations: " +
+          ":schema_id, " +
+          ":schema_id and :path, " +
+          ":schema_id and :backend, " +
+          ":schema_id and :backend and :path, " +
+          ":schema, " +
+          ":schema and :path, " +
+          ":schema and :backend, " +
+          "or :schema and :backend and :path " +
+          "instead of: #{options.inspect}"
+        raise ArgumentError, message
       end
     end
 
