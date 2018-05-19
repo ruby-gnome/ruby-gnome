@@ -57,18 +57,23 @@ class IconviewEditDemo
     @icon_view.set_cell_data_func(renderer) do |_layout, cell_renderer, model, iter|
       text = model.get_value(iter, COL_TEXT)
       if text
-        color = Gdk::RGBA.parse(text)
-        pixel = nil
+        begin
+          color = Gdk::RGBA.parse(text)
+        rescue ArgumentError
+          color = nil
+        end
         if color
           pixel = (color.red * 255).to_i << 24 |
                   (color.green * 255).to_i << 16 |
                   (color.blue * 255).to_i << 8 |
                   (color.alpha * 255).to_i
+        else
+          pixel = 0
         end
         pixbuf = GdkPixbuf::Pixbuf.new(:colorspace => :rgb, :has_alpha => true,
                                        :bits_per_sample => 8,
                                        :width => 24, :height => 24)
-        pixbuf.fill!(pixel) if pixel
+        pixbuf.fill!(pixel)
         cell_renderer.set_property("pixbuf", pixbuf)
       end
     end
