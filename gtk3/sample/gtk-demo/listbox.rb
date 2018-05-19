@@ -158,9 +158,9 @@ class GtkMessageRow < Gtk::ListBoxRow
     content_label.text = @message.message
     short_time_label.text = Time.at(@message.time).utc.strftime("%e %b %y")
     detailed_time_label.text = Time.at(@message.time).utc.strftime("%Y - %e %b %Y")
-    n_favorites_label.visible = @message.n_favorites.nonzero?
+    n_favorites_label.visible = !@message.n_favorites.zero?
     n_favorites_label.markup = "<b>#{@message.n_favorites}</b>\nFavorites"
-    n_reshares_label.visible = @message.n_reshares.nonzero?
+    n_reshares_label.visible = !@message.n_reshares.zero?
     n_reshares_label.markup = "<b>#{@message.n_reshares}</b>\nReshares"
     resent_box.visible = !@message.resent_by.nil?
     resent_by_button.label = @message.resent_by if @message.resent_by
