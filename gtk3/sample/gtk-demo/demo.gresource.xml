@@ -209,6 +209,7 @@
   </gresource>
   <gresource prefix="/popover">
     <file>popover.ui</file>
+    <file>popover-3.18.ui</file>
   </gresource>
   <gresource prefix="/glarea">
     <file>glarea-gl.fs.glsl</file>
