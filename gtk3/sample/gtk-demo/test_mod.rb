@@ -6,17 +6,20 @@
 
 Demonstrates the demo interface.
 =end
-module TestModDemo
 
-  def self.run_demo(window)
+class TestModDemo
+  def initialize(window)
     puts "ok"
-    window = Gtk::Window.new(:toplevel)
-    window.add(Gtk::Label.new("This is a test"))
+    @window = Gtk::Window.new(:toplevel)
+    @window.add(Gtk::Label.new("This is a test"))
+  end
 
-    if !window.visible?
-      window.show_all
+  def run
+    if !@window.visible?
+      @window.show_all
     else
-      window.destroy
+      @window.destroy
     end
+    @window
   end
 end
