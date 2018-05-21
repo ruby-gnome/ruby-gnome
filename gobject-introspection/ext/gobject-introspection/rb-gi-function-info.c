@@ -1023,6 +1023,29 @@ ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
             callback_data = *((RBGICallbackData **)(raw_args[i]));
             break;
         }
+
+        if (!callback_data && args_metadata->len > 0) {
+            RBGIArgMetadata *metadata;
+            GIArgInfo *arg_info;
+            GITypeInfo *type_info;
+            GITypeTag type_tag;
+            gboolean is_pointer;
+            const gchar *arg_name;
+
+            i = args_metadata->len - 1;
+            metadata = g_ptr_array_index(args_metadata, i);
+            arg_info = &(metadata->arg_info);
+            type_info = g_arg_info_get_type(arg_info);
+            type_tag = g_type_info_get_tag(type_info);
+            is_pointer = g_type_info_is_pointer(type_info);
+            g_base_info_unref(type_info);
+            arg_name = g_base_info_get_name(arg_info);
+            if (type_tag == GI_TYPE_TAG_VOID &&
+                is_pointer &&
+                strcmp(arg_name, "data") == 0) {
+                callback_data = *((RBGICallbackData **)(raw_args[i]));
+            }
+        }
     }
 
     {
