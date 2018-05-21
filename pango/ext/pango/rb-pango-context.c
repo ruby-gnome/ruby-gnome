@@ -35,20 +35,13 @@ shape_renderer_callback(cairo_t *cr,
                         gpointer data)
 {
     VALUE rb_cr;
-    VALUE rb_mPango;
-    VALUE rb_cPangoAttrShape;
     VALUE rb_attr;
     VALUE rb_do_path;
     VALUE rb_callback;
     ID id_call;
 
     rb_cr = CRCONTEXT2RVAL(cr);
-    rb_mPango = rb_const_get(rb_cObject, rb_intern("Pango"));
-    rb_cPangoAttrShape = rb_const_get(rb_mPango, rb_intern("AttrShape"));
-    rb_attr = Data_Wrap_Struct(rb_cPangoAttrShape,
-                               NULL,
-                               pango_attribute_destroy,
-                               pango_attribute_copy((PangoAttribute *)attr));
+    rb_attr = rbpango_attribute_to_ruby((PangoAttribute *)attr);
     rb_do_path = CBOOL2RVAL(do_path);
     rb_callback = (VALUE)data;
     CONST_ID(id_call, "call");
