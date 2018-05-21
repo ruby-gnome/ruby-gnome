@@ -79,15 +79,21 @@ rb_gi_field_info_get_field_raw_interface(GIFieldInfo *info,
     VALUE rb_field_value = Qnil;
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
+    GType gtype;
     gint offset;
 
     interface_info = g_type_info_get_interface(type_info);
     interface_type = g_base_info_get_type(interface_info);
+    gtype = g_registered_type_info_get_g_type(interface_info);
     offset = g_field_info_get_offset(info);
     switch (interface_type) {
       case GI_INFO_TYPE_INVALID:
       case GI_INFO_TYPE_FUNCTION:
       case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIField(interface)[%s](%s)",
+                 g_info_type_to_string(interface_type),
+                 g_type_name(gtype));
         break;
       case GI_INFO_TYPE_STRUCT:
         {
@@ -117,6 +123,17 @@ rb_gi_field_info_get_field_raw_interface(GIFieldInfo *info,
         }
         break;
       case GI_INFO_TYPE_ENUM:
+        {
+            gint32 raw_value;
+
+            raw_value = G_STRUCT_MEMBER(gint32, memory, offset);
+            if (gtype == G_TYPE_NONE) {
+                rb_field_value = INT2NUM(raw_value);
+            } else {
+                rb_field_value = GENUM2RVAL(raw_value, gtype);
+            }
+        }
+        break;
       case GI_INFO_TYPE_FLAGS:
       case GI_INFO_TYPE_INTERFACE:
       case GI_INFO_TYPE_CONSTANT:
@@ -129,6 +146,10 @@ rb_gi_field_info_get_field_raw_interface(GIFieldInfo *info,
       case GI_INFO_TYPE_ARG:
       case GI_INFO_TYPE_TYPE:
       case GI_INFO_TYPE_UNRESOLVED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIField(interface)[%s](%s)",
+                 g_info_type_to_string(interface_type),
+                 g_type_name(gtype));
         break;
       default:
         break;
