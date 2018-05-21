@@ -79,9 +79,11 @@ rb_gi_field_info_get_field_raw_interface(GIFieldInfo *info,
     VALUE rb_field_value = Qnil;
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
+    gint offset;
 
     interface_info = g_type_info_get_interface(type_info);
     interface_type = g_base_info_get_type(interface_info);
+    offset = g_field_info_get_offset(info);
     switch (interface_type) {
       case GI_INFO_TYPE_INVALID:
       case GI_INFO_TYPE_FUNCTION:
@@ -90,13 +92,17 @@ rb_gi_field_info_get_field_raw_interface(GIFieldInfo *info,
       case GI_INFO_TYPE_STRUCT:
         {
             GIStructInfo *struct_info = (GIStructInfo *)interface_info;
-            gint offset;
+            gboolean is_pointer;
+            gpointer target;
 
-            offset = g_field_info_get_offset(info);
-            rb_field_value = rb_gi_struct_info_to_ruby(
-                struct_info,
-                (gchar *)memory + offset,
-                g_type_info_is_pointer(type_info));
+            is_pointer = g_type_info_is_pointer(type_info);
+            target = (gpointer)((guint8 *)memory + offset);
+            if (is_pointer) {
+                target = *((gpointer *)target);
+            }
+            rb_field_value = rb_gi_struct_info_to_ruby(struct_info,
+                                                       target,
+                                                       is_pointer);
             break;
         }
       case GI_INFO_TYPE_BOXED:
@@ -104,9 +110,7 @@ rb_gi_field_info_get_field_raw_interface(GIFieldInfo *info,
       case GI_INFO_TYPE_OBJECT:
         {
             GIArgument argument;
-            gint offset;
 
-            offset = g_field_info_get_offset(info);
             argument.v_pointer = G_STRUCT_MEMBER(gpointer, memory, offset);
             rb_field_value = GI_ARGUMENT2RVAL(&argument, FALSE, type_info,
                                               NULL, NULL, NULL);
