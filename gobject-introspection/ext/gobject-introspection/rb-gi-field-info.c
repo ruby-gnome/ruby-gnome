@@ -135,6 +135,17 @@ rb_gi_field_info_get_field_raw_interface(GIFieldInfo *info,
         }
         break;
       case GI_INFO_TYPE_FLAGS:
+        {
+            gint32 raw_value;
+
+            raw_value = G_STRUCT_MEMBER(gint32, memory, offset);
+            if (gtype == G_TYPE_NONE) {
+                rb_field_value = INT2NUM(raw_value);
+            } else {
+                rb_field_value = GFLAGS2RVAL(raw_value, gtype);
+            }
+        }
+        break;
       case GI_INFO_TYPE_INTERFACE:
       case GI_INFO_TYPE_CONSTANT:
       case GI_INFO_TYPE_INVALID_0:
