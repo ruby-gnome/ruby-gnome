@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -30,10 +30,22 @@ module Pango
         load_methods(info, klass)
       end
       require_libraries
+      convert_attribute_classes
+    end
+
+    def convert_attribute_classes
+      self.class.register_boxed_class_converter(Attribute.gtype) do |attribute|
+        attribute.klass.type.to_class
+      end
     end
 
     def load_struct_info(info)
       case info.name
+      when "AttrClass"
+        klass = self.class.define_struct(info.size,
+                                         info.name,
+                                         @base_module)
+        load_fields(info, klass)
       when /Class\z/
         super
       when "Attribute", /\AAttr[A-Z]/
