@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -49,10 +49,11 @@ rg_gst_bus_func_callback(GstBus *bus, GstMessage *message, gpointer user_data)
     ID id_call;
 
     CONST_ID(id_call, "call");
-    rb_keep = rb_funcall(callback_data->rb_callback, id_call, 2,
+    rb_keep = rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
+                         id_call, 2,
                          GOBJ2RVAL(bus),
                          BOXED2RVAL(message, GST_MINI_OBJECT_TYPE(message)));
-    if (callback_data->metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
+    if (rb_gi_callback_data_get_metadata(callback_data)->scope_type == GI_SCOPE_TYPE_ASYNC) {
         rb_gi_callback_data_free(callback_data);
     }
     return RVAL2CBOOL(rb_keep);
@@ -77,10 +78,11 @@ rg_gst_bus_sync_handler_callback(GstBus *bus, GstMessage *message,
 
     CONST_ID(id_call, "call");
     rb_bus_sync_reply =
-        rb_funcall(callback_data->rb_callback, id_call, 2,
+        rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
+                   id_call, 2,
                    GOBJ2RVAL(bus),
                    BOXED2RVAL(message, GST_MINI_OBJECT_TYPE(message)));
-    if (callback_data->metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
+    if (rb_gi_callback_data_get_metadata(callback_data)->scope_type == GI_SCOPE_TYPE_ASYNC) {
         rb_gi_callback_data_free(callback_data);
     }
     return RVAL2GENUM(rb_bus_sync_reply, GST_TYPE_BUS_SYNC_REPLY);
@@ -103,7 +105,8 @@ rg_gst_tag_foreach_func_callback(const GstTagList *list, const gchar *tag,
     ID id_call;
 
     CONST_ID(id_call, "call");
-    rb_funcall(callback_data->rb_callback, id_call, 2,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
+               id_call, 2,
                /*
                 * XXX: Use gst_tag_list_copy() instead if we don't trust
                 * users. Users should not use destructive methods such as
@@ -112,7 +115,7 @@ rg_gst_tag_foreach_func_callback(const GstTagList *list, const gchar *tag,
                 */
                BOXED2RVAL((GstTagList *)list, GST_MINI_OBJECT_TYPE(list)),
                CSTR2RVAL(tag));
-    if (callback_data->metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
+    if (rb_gi_callback_data_get_metadata(callback_data)->scope_type == GI_SCOPE_TYPE_ASYNC) {
         rb_gi_callback_data_free(callback_data);
     }
 }

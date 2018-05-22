@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2016  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -41,6 +41,12 @@ typedef struct _RBGICallback {
     ffi_cif cif;
     ffi_closure *closure;
 } RBGICallback;
+
+struct RBGICallbackData_ {
+    RBGICallback *callback;
+    RBGIArgMetadata *metadata;
+    VALUE rb_callback;
+};
 
 static VALUE RG_TARGET_NAMESPACE;
 static VALUE rb_cGLibError;
@@ -300,22 +306,13 @@ fill_metadata(GPtrArray *args_metadata, GICallableInfo *info)
 static void
 callback_data_guard_from_gc(RBGICallbackData *callback_data)
 {
-    VALUE rb_callbacks;
-
-    rb_callbacks = rb_iv_get(RG_TARGET_NAMESPACE, callbacks_key);
-    callback_data->rb_gc_guard_key = rb_class_new_instance(0, NULL, rb_cObject);
-    rb_hash_aset(rb_callbacks,
-                 callback_data->rb_gc_guard_key,
-                 callback_data->rb_callback);
+    rbg_gc_guard(callback_data, callback_data->rb_callback);
 }
 
 static void
 callback_data_unguard_from_gc(RBGICallbackData *callback_data)
 {
-    VALUE rb_callbacks;
-
-    rb_callbacks = rb_iv_get(RG_TARGET_NAMESPACE, callbacks_key);
-    rb_hash_delete(rb_callbacks, callback_data->rb_gc_guard_key);
+    rbg_gc_unguard(callback_data);
 }
 
 static void
@@ -337,6 +334,18 @@ rb_gi_callback_data_free(RBGICallbackData *callback_data)
     callback_data_unguard_from_gc(callback_data);
     xfree(callback_data->metadata);
     xfree(callback_data);
+}
+
+RBGIArgMetadata *
+rb_gi_callback_data_get_metadata(RBGICallbackData *callback_data)
+{
+    return callback_data->metadata;
+}
+
+VALUE
+rb_gi_callback_data_get_rb_callback(RBGICallbackData *callback_data)
+{
+    return callback_data->rb_callback;
 }
 
 static void

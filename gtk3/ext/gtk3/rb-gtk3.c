@@ -58,7 +58,8 @@ rb_gtk3_callback_callback(GtkWidget *widget, gpointer user_data)
 {
     RBGICallbackData *callback_data = user_data;
 
-    rb_funcall(callback_data->rb_callback, id_call, 1,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
+               id_call, 1,
                GOBJ2RVAL(widget));
 }
 
@@ -79,7 +80,7 @@ rb_gtk3_cell_layout_data_func_callback(GtkCellLayout *cell_layout,
     rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
-    rb_funcall(callback_data->rb_callback,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                id_call,
                4,
                GOBJ2RVAL(cell_layout),
@@ -95,7 +96,7 @@ rb_gtk3_clipboard_received_func_callback(GtkClipboard *clipboard,
 {
     RBGICallbackData *callback_data = user_data;
 
-    rb_funcall(callback_data->rb_callback,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                id_call,
                2,
                GOBJ2RVAL(clipboard),
@@ -109,7 +110,7 @@ rb_gtk3_clipboard_image_received_func_callback(GtkClipboard *clipboard,
 {
     RBGICallbackData *callback_data = user_data;
 
-    rb_funcall(callback_data->rb_callback,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                id_call,
                2,
                GOBJ2RVAL(clipboard),
@@ -137,7 +138,7 @@ rb_gtk3_clipboard_targets_received_func_callback(GtkClipboard *clipboard,
         }
     }
 
-    rb_funcall(callback_data->rb_callback,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                id_call,
                2,
                GOBJ2RVAL(clipboard),
@@ -151,7 +152,7 @@ rb_gtk3_clipboard_text_received_func_callback(GtkClipboard *clipboard,
 {
     RBGICallbackData *callback_data = user_data;
 
-    rb_funcall(callback_data->rb_callback,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                id_call,
                2,
                GOBJ2RVAL(clipboard),
@@ -165,7 +166,7 @@ rb_gtk3_clipboard_uri_received_func_callback(GtkClipboard *clipboard,
 {
     RBGICallbackData *callback_data = user_data;
 
-    rb_funcall(callback_data->rb_callback,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                id_call,
                2,
                GOBJ2RVAL(clipboard),
@@ -192,7 +193,7 @@ rb_gtk3_entry_completion_match_func_callback(GtkEntryCompletion *completion,
     rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
-    rb_match = rb_funcall(callback_data->rb_callback,
+    rb_match = rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                        id_call,
                        3,
                        GOBJ2RVAL(completion),
@@ -214,7 +215,7 @@ rb_gtk3_menu_position_func_callback(GtkMenu *menu,
     VALUE rb_result_raw;
     VALUE rb_result;
 
-    rb_result_raw = rb_funcall(callback_data->rb_callback,
+    rb_result_raw = rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                                id_call,
                                3,
                                GOBJ2RVAL(menu),
@@ -244,7 +245,7 @@ rb_gtk3_translate_func_callback(const gchar *path,
     RBGICallbackData *callback_data = user_data;
     VALUE rb_translated;
 
-    rb_translated = rb_funcall(callback_data->rb_callback,
+    rb_translated = rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                                id_call,
                                1,
                                CSTR2RVAL(path));
@@ -268,7 +269,7 @@ rb_gtk3_tree_cell_data_func_callback(GtkTreeViewColumn *column,
     rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
-    rb_funcall(callback_data->rb_callback,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                id_call,
                4,
                GOBJ2RVAL(column),
@@ -299,7 +300,7 @@ rb_gtk3_tree_iter_compare_func_callback(GtkTreeModel *model,
     rb_iter2 = BOXED2RVAL(iter2, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter2, id_set_model, 1, rb_model);
 
-    rb_result = rb_funcall(callback_data->rb_callback,
+    rb_result = rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                            id_call,
                            3,
                            rb_model,
@@ -328,7 +329,7 @@ rb_gtk3_tree_model_filter_modify_func_callback(GtkTreeModel *model,
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
     rb_column = INT2NUM(column);
 
-    rb_value = rb_funcall(callback_data->rb_callback,
+    rb_value = rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                           id_call,
                           3,
                           rb_model,
@@ -354,7 +355,7 @@ rb_gtk3_tree_model_filter_visible_func_callback(GtkTreeModel *model,
     rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
-    rb_visible = rb_funcall(callback_data->rb_callback,
+    rb_visible = rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                             id_call,
                             2,
                             rb_model,
@@ -381,7 +382,7 @@ rb_gtk3_tree_model_foreach_func_callback(GtkTreeModel *model,
     rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
-    rb_funcall(callback_data->rb_callback,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                id_call,
                3,
                rb_model,
@@ -407,7 +408,7 @@ rb_gtk3_tree_selection_foreach_func_callback(GtkTreeModel *model,
     rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
-    rb_funcall(callback_data->rb_callback,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                id_call,
                3,
                rb_model,
@@ -426,7 +427,7 @@ rb_gtk3_tree_selection_func_callback(GtkTreeSelection *selection,
     VALUE rb_selection_is_changeable;
 
     rb_selection_is_changeable =
-        rb_funcall(callback_data->rb_callback,
+        rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                    id_call,
                    4,
                    GOBJ2RVAL(selection),
@@ -443,7 +444,7 @@ rb_gtk3_tree_view_mapping_func_callback(GtkTreeView *tree_view,
 {
     RBGICallbackData *callback_data = user_data;
 
-    rb_funcall(callback_data->rb_callback,
+    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
                id_call,
                2,
                GOBJ2RVAL(tree_view),
