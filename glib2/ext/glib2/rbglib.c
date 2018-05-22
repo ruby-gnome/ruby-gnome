@@ -1146,6 +1146,9 @@ union       GDoubleIEEE754;
     rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_LOW", INT2FIX(G_PRIORITY_LOW));
 
 /*    Init_mem(); */
+
+    Init_glib_gc();
+
     Init_gutil();
     Init_gutil_callback();
 

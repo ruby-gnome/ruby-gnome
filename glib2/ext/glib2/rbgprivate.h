@@ -123,6 +123,8 @@ G_GNUC_INTERNAL void rg_enum_add_constants(VALUE mod, GType enum_type, const gch
 G_GNUC_INTERNAL void rg_flags_add_constants(VALUE mod, GType flags_type, const gchar *strip_prefix);
 G_GNUC_INTERNAL char *rg_obj_constant_lookup(const char *name);
 
+G_GNUC_INTERNAL void Init_glib_gc(void);
+
 G_GNUC_INTERNAL void Init_gutil(void);
 G_GNUC_INTERNAL void Init_gutil_callback(void);
 G_GNUC_INTERNAL void Init_glib_gettext(void);

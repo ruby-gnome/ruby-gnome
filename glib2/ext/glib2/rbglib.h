@@ -235,6 +235,9 @@ extern GVariant *rbg_variant_from_ruby(VALUE rb_variant);
 extern GVariantType *rbg_variant_type_from_ruby(VALUE rb_variant_type);
 
 
+extern void rbg_gc_guard(gpointer key, VALUE rb_object);
+extern void rbg_gc_unguard(gpointer key);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

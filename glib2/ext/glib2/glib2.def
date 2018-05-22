@@ -168,6 +168,9 @@ EXPORTS
 	rbg_variant_from_ruby
 	rbg_variant_type_from_ruby
 
+	rbg_gc_guard
+	rbg_gc_unguard
+
 	g_source_get_type
 	g_connect_flags_get_type
 	g_poll_fd_get_type
