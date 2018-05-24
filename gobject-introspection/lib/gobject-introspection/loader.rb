@@ -503,6 +503,8 @@ module GObjectIntrospection
           end
         when "to_string"
           "to_s"
+        when "to_integer"
+          "to_i"
         when "foreach"
           "each"
         else
