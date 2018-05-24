@@ -93,16 +93,16 @@ module GdkPixbuf
       has_alpha = false if has_alpha.nil?
       bits_per_sample = options[:bits_per_sample] || 8
       row_stride = options[:row_stride] || 0
-      data = options[:data] || nil
-      bytes = options[:bytes] || nil
-      xpm = options[:xpm] || nil
-      file = options[:file] || nil
-      # stream = options[:stream] || nil
-      resource = options[:resource] || nil
-      width = options[:width] || nil
-      height = options[:height] || nil
+      data = options[:data]
+      bytes = options[:bytes]
+      xpm = options[:xpm]
+      file = options[:file]
+      # stream = options[:stream]
+      resource = options[:resource]
+      width = options[:width]
+      height = options[:height]
       size = true if width && height
-      scale = options[:scale] || nil
+      scale = options[:scale]
       preserve_aspect_ratio = options[:preserve_aspect_ratio]
       preserve_aspect_ratio = true if preserve_aspect_ratio.nil?
 
