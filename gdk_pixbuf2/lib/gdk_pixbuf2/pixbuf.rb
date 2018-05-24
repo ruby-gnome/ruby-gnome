@@ -92,7 +92,7 @@ module GdkPixbuf
       has_alpha = options[:has_alpha]
       has_alpha = false if has_alpha.nil?
       bits_per_sample = options[:bits_per_sample] || 8
-      row_stride = options[:row_stride] || 0
+      row_stride = options[:row_stride]
       data = options[:data]
       bytes = options[:bytes]
       xpm = options[:xpm]
@@ -119,9 +119,11 @@ module GdkPixbuf
       elsif resource && !scale
         initialize_new_from_resource(resource)
       elsif data && size
+        row_stride ||= data.bytesize / height
         initialize_new_from_data(data, colorspace, has_alpha, bits_per_sample,
                                  width, height, row_stride)
       elsif bytes && size
+        row_stride ||= bytes.size / height
         initialize_new_from_bytes(bytes, colorspace, has_alpha, bits_per_sample,
                                   width, height, row_stride)
 
