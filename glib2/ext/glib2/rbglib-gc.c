@@ -41,6 +41,7 @@ gc_marker_free(void *data)
 {
     GHashTable *hash_table = data;
     g_hash_table_unref(hash_table);
+    rbg_objects = NULL;
 }
 
 static const rb_data_type_t rbg_gc_marker_type = {
@@ -58,6 +59,9 @@ static const rb_data_type_t rbg_gc_marker_type = {
 void
 rbg_gc_guard(gpointer key, VALUE rb_object)
 {
+    if (!rbg_objects)
+        return;
+
     g_hash_table_insert(rbg_objects,
                         key,
                         (gpointer)rb_object);
@@ -66,6 +70,9 @@ rbg_gc_guard(gpointer key, VALUE rb_object)
 void
 rbg_gc_unguard(gpointer key)
 {
+    if (!rbg_objects)
+        return;
+
     g_hash_table_remove(rbg_objects, key);
 }
 
