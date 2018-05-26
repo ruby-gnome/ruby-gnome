@@ -121,9 +121,6 @@ module GNOME2
       end
 
       def define_spec
-        puts "noioiuiououiouououuuuuuuuuuuuuuuuuuuhohiohohhhohohohiohohohohoiobobob########################
-        ##############################7
-        ###############"
         @spec = Gem::Specification.new do |s|
           s.name                  = @name
           s.summary               = @summary
