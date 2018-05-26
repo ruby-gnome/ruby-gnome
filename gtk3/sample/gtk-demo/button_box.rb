@@ -89,7 +89,6 @@ class ButtonBoxDemo
 
   def create_bbox(horizontal, title, spacing, layout)
     frame = Gtk::Frame.new(title)
-    bbox = nil
 
     orientation = horizontal ? :horizontal : :vertical
     bbox = Gtk::ButtonBox.new(orientation)
