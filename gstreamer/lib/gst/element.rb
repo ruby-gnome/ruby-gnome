@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,12 @@
 
 module Gst
   class Element
+    class << self
+      def [](name)
+        ElementFactory.make(name)
+      end
+    end
+
     def stop
       set_state(State::NULL)
     end
