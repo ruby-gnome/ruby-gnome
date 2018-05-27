@@ -1,6 +1,4 @@
-# -*- ruby -*-
-#
-# Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,17 +14,17 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-$LOAD_PATH.unshift("./../glib2/lib")
-require "gnome2/rake/package-task"
+def ruby_glib2_version
+  env_version = ENV["RUBY_GLIB2_VERSION"]
+  return env_version if env_version
 
-package_name = File.basename(__dir__)
-spec = Gem::Specification.load("#{package_name}.gemspec")
-
-package_task = GNOME2::Rake::PackageTask.new(spec) do |package|
-  package.dependency.gem.runtime = ["glib2", "gobject-introspection"]
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = ["glib2", "gobject-introspection"]
-  package.windows.gobject_introspection_dependencies = ["glib2"]
+  versions = {}
+  File.open("#{__dir__}/ext/glib2/rbglib.h") do |rbglib_h|
+    rbglib_h.each_line do |line|
+      if /#define\s+RBGLIB_([A-Z]+)_VERSION\s+(\d+)/ =~ line
+        versions[$1.downcase] = $2.to_i
+      end
+    end
+  end
+  ["major", "minor", "micro"].collect {|type| versions[type]}.compact.join(".")
 end
-package_task.define
