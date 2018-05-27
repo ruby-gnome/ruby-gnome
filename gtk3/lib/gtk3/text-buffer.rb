@@ -144,7 +144,13 @@ module Gtk
       if tags
         start_iter = get_iter_at(:offset => start_offset)
         tags.each do |tag|
-          tag = tag_table.lookup(tag) if tag.is_a?(String)
+          if tag.is_a?(String)
+            resolved_tag = tag_table.lookup(tag)
+            if resolved_tag.nil?
+              raise ArgumentError "unknown tag: #{tag.inspect}"
+            end
+            tag = resolved_tag
+          end
           apply_tag(tag, start_iter, iter)
         end
       end
