@@ -26,7 +26,10 @@ libffi_lib_dir     = nil
 
 build_host         = nil
 
-package_task = GNOME2::Rake::PackageTask.new do |package|
+package_name = File.basename(__dir__)
+spec = Gem::Specification.load("#{package_name}.gemspec")
+
+package_task = GNOME2::Rake::PackageTask.new(spec) do |package|
   bin_dir            = (package.windows.absolute_binary_dir + "bin").to_s
   include_dir        = (package.windows.absolute_binary_dir + "include").to_s
   glib2_include_dir  = File.join(include_dir, "glib-2.0")

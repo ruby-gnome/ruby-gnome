@@ -24,7 +24,7 @@ module GNOME2
 
       attr_accessor :name, :summary, :description, :author, :email, :homepage, :required_ruby_version, :post_install_message
       attr_reader :root_dir
-      def initialize
+      def initialize(spec=nil)
         initialize_variables
         initialize_configurations
         file, line, method = caller[1].scan(/^(.*):(\d+)(?::.*`(.*)')?\Z/).first
@@ -33,6 +33,7 @@ module GNOME2
         @name = @package.name
         @cross_compiling_hooks = []
         yield(self) if block_given?
+        @spec = spec
       end
 
       def cross_compiling(&block)
@@ -41,7 +42,7 @@ module GNOME2
 
       def define
         task :default => :build
-        define_spec
+        define_spec if @spec.nil?
         define_source_tasks
         define_native_tasks
         define_windows_tasks
