@@ -34,13 +34,15 @@ Gem::Specification.new do |s|
   s.version       = ruby_glib2_version
   s.extensions    = ["ext/#{s.name}/extconf.rb"]
   s.require_paths = ["lib"]
-  s.files = FileList["COPYING.LIB",
-                     "README.md",
-                     "Rakefile",
-                     "#{s.name}.gemspec",
-                     "extconf.rb",
-                     "lib/**/*.rb",
-                     "ext/#{s.name}/depend",
-                     "ext/#{s.name}/*.{c,h,def,rb}",
-                     "test/**/*"]
+  s.files = [
+    "COPYING.LIB",
+    "README.md",
+    "Rakefile",
+    "#{s.name}.gemspec",
+    "extconf.rb",
+    "ext/#{s.name}/depend",
+  ]
+  s.files += Dir.glob("lib/**/*.rb")
+  s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
+  s.files += Dir.glob("test/**/*")
 end
