@@ -16,7 +16,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require_relative "version"
+require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
   s.name          = "gio2"
@@ -31,15 +31,14 @@ Gem::Specification.new do |s|
   s.version       = ruby_glib2_version
   s.extensions    = ["ext/#{s.name}/extconf.rb"]
   s.require_paths = ["lib"]
-  s.files = FileList["COPYING.LIB",
-                     "README.md",
-                     "Rakefile",
-                     "#{s.name}.gemspec",
-                     "extconf.rb",
-                     "version.rb",
-                     "lib/**/*.rb",
-                     "ext/#{s.name}/depend",
-                     "ext/#{s.name}/*.{c,h,def,rb}",
-                     "sample/**/*",
-                     "test/**/*"]
+  s.files = [
+    "COPYING.LIB",
+    "README.md",
+    "Rakefile",
+    "#{s.name}.gemspec",
+    "extconf.rb",
+  ]
+  s.files += Dir.glob("lib/**/*.rb")
+  s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
+  s.files += Dir.glob("test/**/*")
 end
