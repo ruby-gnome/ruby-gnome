@@ -16,16 +16,16 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require_relative "version"
+require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
-  s.name          = "glib2"
+  s.name          = "gobject-introspection"
   s.summary       =
     "Ruby/GObjectIntrospection is a " +
     "Ruby binding of GObject Introspection."
   s.description   =
     "Ruby/GObjectIntrospection provides bindings of GObject Introspection " +
-    "and a Loader module that can generate dynamically ruby bindings " +
+    "and a loader module that can generate dynamically Ruby bindings " +
     "of any GObject C libraries"
   s.author        = "The Ruby-GNOME2 Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
@@ -39,10 +39,8 @@ Gem::Specification.new do |s|
                      "Rakefile",
                      "#{s.name}.gemspec",
                      "extconf.rb",
-                     "version.rb",
                      "lib/**/*.rb",
                      "ext/#{s.name}/depend",
                      "ext/#{s.name}/*.{c,h,def,rb}",
-                     "sample/**/*",
                      "test/**/*"]
 end
