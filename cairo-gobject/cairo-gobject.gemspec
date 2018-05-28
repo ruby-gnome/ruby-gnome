@@ -16,7 +16,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require_relative "version"
+require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
   s.name          = "cairo-gobject"
@@ -34,10 +34,7 @@ Gem::Specification.new do |s|
                      "Rakefile",
                      "#{s.name}.gemspec",
                      "extconf.rb",
-                     "version.rb",
                      "lib/**/*.rb",
-                     "ext/#{s.name}/depend",
                      "ext/#{s.name}/*.{c,h,def,rb}",
-                     "sample/**/*",
                      "test/**/*"]
 end
