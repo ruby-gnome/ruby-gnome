@@ -19,9 +19,10 @@
 $LOAD_PATH.unshift("./../glib2/lib")
 require "gnome2/rake/package-task"
 
-package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/GdkPixbuf2 is a Ruby binding of GdkPixbuf-2.x."
-  package.description = "Ruby/GdkPixbuf2 is a Ruby binding of GdkPixbuf-2.x."
+package_name = File.basename(__dir__)
+spec = Gem::Specification.load("#{package_name}.gemspec")
+
+package_task = GNOME2::Rake::PackageTask.new(spec) do |package|
   package.dependency.gem.runtime = [
     "gio2",
   ]
