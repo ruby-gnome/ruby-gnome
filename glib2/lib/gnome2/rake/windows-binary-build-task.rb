@@ -165,16 +165,18 @@ module GNOME2
           "MSYSTEM" => "MINGW64",
           "GREP_OPTIONS" => "--text",
           "PATH" => path,
+          "PKG_CONFIG" => pkg_config,
         }
         depended_packages = @package.windows.build_dependencies
         use_packages = [@package.name] + depended_packages
-        pkg_config_path = use_packages.collect do |package|
-          "../#{package}/#{@package.windows.relative_binary_dir}/lib/pkgconfig"
+        pkg_config_path = [rcairo_pkgconfig_path]
+        use_packages.each do |package|
+          path = "../#{package}/#{@package.windows.relative_binary_dir}/lib/pkgconfig"
+          pkg_config_path << path
         end
         env["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
           File.expand_path(path)
         end.join(":")
-        env["PKG_CONFIG_LIBDIR"] = rcairo_pkgconfig_path
         env
       end
 
@@ -209,8 +211,8 @@ module GNOME2
         cross_file.puts(<<-CROSS_FILE)
 [host_machine]
 system = 'windows'
-cpu_family = 'x86_64'
-cpu = 'x86_64'
+cpu_family = '#{meson_cpu_family}'
+cpu = '#{meson_cpu}'
 endian = 'littel'
 
 [binaries]
@@ -219,7 +221,12 @@ cpp = '/usr/bin/#{cxx(package)}'
 ar = '/usr/bin/#{ar}'
 strip = '/usr/bin/#{strip}'
 dlltool = '/usr/bin/#{dlltool}'
-pkgconfig = '/usr/bin/pkg-config'
+pkgconfig = '/usr/bin/#{pkg_config}'
+windres = '/usr/bin/#{windres}'
+exe_wrapper = 'wine'
+
+[properties]
+root = '/usr/#{@package.windows.build_host}'
         CROSS_FILE
         cross_file.close
         sh(env.merge({
@@ -233,6 +240,24 @@ pkgconfig = '/usr/bin/pkg-config'
            "--libdir=lib",
            "--cross-file=#{cross_file.path}",
            *package.windows.meson_args) or exit(false)
+      end
+
+      def meson_cpu_family
+        case @package.windows.build_architecture
+        when "x86"
+          "x86"
+        when "x86_64"
+          "x86_64"
+        end
+      end
+
+      def meson_cpu
+        case @package.windows.build_architecture
+        when "x86"
+          "i686"
+        when "x86_64"
+          "x86_64"
+        end
       end
 
       def cmake(env, package)
@@ -320,6 +345,14 @@ pkgconfig = '/usr/bin/pkg-config'
 
       def dlltool
         "#{@package.windows.build_host}-dlltool"
+      end
+
+      def pkg_config
+        "#{@package.windows.build_host}-pkg-config"
+      end
+
+      def windres
+        "#{@package.windows.build_host}-windres"
       end
 
       def g_ir_scanner_bin_dir

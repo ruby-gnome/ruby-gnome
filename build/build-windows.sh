@@ -13,6 +13,21 @@ export RUBYLIB="$(pwd)/pkg-config/lib:$(pwd)/native-package-installer/lib"
 
 export PATH="${HOME}/.cargo/bin:${PATH}"
 
+wine_home="z:/home/vagrant"
+wine_rcairo="${wine_home}/rcairo"
+wine_ruby_gnome2="${wine_home}/ruby-gnome2"
+bin_dir="vendor/local/bin"
+WINEPATH="${wine_rcairo}/${bin_dir}"
+WINEPATH="${WINEPATH};${wine_ruby_gnome2}/glib2/${bin_dir}"
+WINEPATH="${WINEPATH};${wine_ruby_gnome2}/gdk_pixbuf2/${bin_dir}"
+WINEPATH="${WINEPATH};${wine_ruby_gnome2}/pango/${bin_dir}"
+WINEPATH="${WINEPATH};${wine_ruby_gnome2}/pango/tmp/windows/graphene/graphene-1.8.0/build/src"
+WINEPATH="${WINEPATH};${wine_ruby_gnome2}/atk/${bin_dir}"
+WINEPATH="${WINEPATH};${wine_ruby_gnome2}/gtk2/${bin_dir}"
+WINEPATH="${WINEPATH};${wine_ruby_gnome2}/gdk3/${bin_dir}"
+WINEPATH="${WINEPATH};${wine_ruby_gnome2}/clutter/tmp/windows/json-glib/json-glib-1.4.2/build/json-glib"
+export WINEPATH
+
 run()
 {
   "$@"
@@ -61,6 +76,7 @@ if [ ! -f ~/setup.timestamp ]; then
     wine-stable \
     wine-binfmt \
     mingw-w64 \
+    mingw-w64-tools \
     cmake \
     valac \
     libmount-dev \
@@ -100,30 +116,6 @@ if [ ! -f ~/setup.timestamp ]; then
 
   if [ ! -d ~/.wine/ ]; then
     run wineboot
-    until [ -f ~/.wine/system.reg ]; do
-      sleep 1
-    done
-    sleep 10
-    wine_home="z:/home/vagrant"
-    wine_rcairo="${wine_home}/rcairo"
-    wine_ruby_gnome2="${wine_home}/ruby-gnome2"
-    bin_dir="vendor/local/bin"
-    path=$(
-      (
-        echo -n "${wine_rcairo}/${bin_dir};";
-        echo -n "${wine_ruby_gnome2}/glib2/${bin_dir};";
-        echo -n "${wine_ruby_gnome2}/gdk_pixbuf2/${bin_dir};"
-        echo -n "${wine_ruby_gnome2}/pango/${bin_dir};";
-        echo -n "${wine_ruby_gnome2}/pango/tmp/windows/graphene/graphene-1.8.0/build/src;";
-        echo -n "${wine_ruby_gnome2}/atk/${bin_dir};";
-        echo -n "${wine_ruby_gnome2}/gtk2/${bin_dir};";
-        echo -n "${wine_ruby_gnome2}/gdk3/${bin_dir};";
-        echo -n "${wine_ruby_gnome2}/clutter/tmp/windows/json-glib/json-glib-1.4.2/build/json-glib;";
-      ) | \
-        sed -e 's,/,\\\\\\\\,g')
-    run sed -i'' -r \
-        -e "s,^(\"PATH\"=str\\(2\\):\"),\\1${path},g" \
-        ~/.wine/system.reg
   fi
 
   run wget https://www.opengl.org/registry/api/GL/glext.h
@@ -143,6 +135,8 @@ EOF
         /usr/share/mingw-w64/include/GL/gl.h
     run rm -f /tmp/insert.txt
   fi
+
+  run sudo ln -s /usr/include/KHR/ /usr/x86_64-w64-mingw32/include/
 
   run touch ~/setup.timestamp
 fi
