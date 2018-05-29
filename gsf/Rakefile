@@ -29,6 +29,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "glib2",
     "gio2",
     "cairo-gobject",
+    "gdk_pixbuf2",
     "gobject-introspection",
   ]
   package.windows.gobject_introspection_dependencies = [
