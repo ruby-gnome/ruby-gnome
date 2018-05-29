@@ -22,8 +22,8 @@ Gem::Specification.new do |s|
   s.name          = "gio2"
   s.summary       = "Ruby/GIO2 is a Ruby binding of gio-2.x."
   s.description   =
-    "Ruby/GIO2 provide Ruby binding to a VFS API and useful APIs "+
-    + "for desktop applications (such as networking and D-Bus support)."
+    "Ruby/GIO2 provide Ruby binding to a VFS API and useful APIs " +
+    "for desktop applications (such as networking and D-Bus support)."
   s.author        = "The Ruby-GNOME2 Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome2.osdn.jp/"
@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "#{s.name}.gemspec",
     "extconf.rb",
+    "ext/#{s.name}/depend",
   ]
   s.files += Dir.glob("lib/**/*.rb")
   s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
