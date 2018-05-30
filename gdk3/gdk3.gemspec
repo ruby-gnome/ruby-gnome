@@ -20,8 +20,8 @@ require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
   s.name          = "gdk3"
-  s.summary = "Ruby/GDK3 is a Ruby binding of GDK-3.x."
-  s.description = "Ruby/GDK3 is a Ruby binding of GDK-3.x."
+  s.summary       = "Ruby/GDK3 is a Ruby binding of GDK-3.x."
+  s.description   = "Ruby/GDK3 is a Ruby binding of GDK-3.x."
   s.author        = "The Ruby-GNOME2 Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome2.osdn.jp/"
@@ -34,10 +34,8 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "#{s.name}.gemspec",
-    "extconf.rb",
-    "ext/#{s.name}/depend",
+    "dependency-check/Rakefile",
   ]
   s.files += Dir.glob("lib/**/*.rb")
-  s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
   s.files += Dir.glob("test/**/*")
 end
