@@ -169,10 +169,8 @@ extern VALUE rbgobj_create_object(VALUE klass); /* deprecated */
 
 extern VALUE rbgobj_get_ruby_object_from_gobject(GObject* gobj, gboolean alloc);
 
-/* For Ruby/GStreamer */
+/* For Ruby/Gstreamer */
 extern void rbgobj_gobject_initialize(VALUE obj, gpointer cobj);
-/* For Ruby/GObjectIntrospection */
-extern gboolean rbgobj_gobject_is_initialized(gpointer cobj);
 
 /* deprecated */
 extern void rbgobj_add_abstract_but_create_instance_class(GType gtype);
