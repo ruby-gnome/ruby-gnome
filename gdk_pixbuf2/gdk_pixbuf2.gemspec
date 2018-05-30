@@ -27,17 +27,16 @@ Gem::Specification.new do |s|
   s.homepage      = "https://ruby-gnome2.osdn.jp/"
   s.licenses      = ["LGPL-2.1+"]
   s.version       = ruby_glib2_version
-  s.extensions    = ["ext/#{s.name}/extconf.rb"]
+  s.extensions    = ["dependency-check/Rakefile"]
   s.require_paths = ["lib"]
   s.files = [
     "COPYING.LIB",
     "README.md",
     "Rakefile",
     "#{s.name}.gemspec",
-    "extconf.rb",
-    "ext/#{s.name}/depend",
+    "dependency-check/Rakefile",
   ]
   s.files += Dir.glob("lib/**/*.rb")
-  s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
+  s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("test/**/*")
 end
