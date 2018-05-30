@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -337,6 +337,21 @@ module Gdk
         unless klass.method_defined?(field_name)
           super
         end
+      end
+    end
+
+    def may_be_cached?(constructor_info, klass)
+      case klass.name
+      when "Gdk::Cursor"
+        case constructor_info.name
+        when "new_from_name", "new_for_display"
+          true
+          # false
+        else
+          false
+        end
+      else
+        false
       end
     end
   end

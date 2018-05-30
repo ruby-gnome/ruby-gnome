@@ -16,6 +16,19 @@
 
 module Gdk
   class Cursor
+    @caches = {}
+    class << self
+      def new(*args)
+        first_arg = args.first
+        case first_arg
+        when String, Symbol, CursorType
+          @caches[first_arg] ||= super
+        else
+          super
+        end
+      end
+    end
+
     alias_method :initialize_raw, :initialize
     def initialize(*args)
       if args.last.is_a?(Hash)

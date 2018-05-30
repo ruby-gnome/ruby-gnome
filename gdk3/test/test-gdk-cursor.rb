@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,14 @@ class TestGdkCursor < Test::Unit::TestCase
       assert_equal(Gdk::CursorType::ARROW, cursor.cursor_type)
     end
 
+    test "type - multiple" do
+      3.times do |i|
+        cursor = Gdk::Cursor.new(:arrow)
+        assert_equal([i, Gdk::CursorType::ARROW],
+                     [i, cursor.cursor_type])
+      end
+    end
+
     test "pixbuf" do
       pixbuf = GdkPixbuf::Pixbuf.new(:file => fixture_path("ruby-gnome2-logo.png"))
       cursor = Gdk::Cursor.new(pixbuf, 0, 0)
@@ -39,6 +47,14 @@ class TestGdkCursor < Test::Unit::TestCase
     test "name" do
       cursor = Gdk::Cursor.new("cross")
       assert_equal(Gdk::CursorType::CURSOR_IS_PIXMAP, cursor.cursor_type)
+    end
+
+    test "name - multiple" do
+      3.times do |i|
+        cursor = Gdk::Cursor.new("cross")
+        assert_equal([i, Gdk::CursorType::CURSOR_IS_PIXMAP],
+                     [i, cursor.cursor_type])
+      end
     end
   end
 end
