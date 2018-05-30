@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -35,14 +35,31 @@ gi_constructor_info_get_type(void)
     return type;
 }
 
+static VALUE
+rg_set_may_be_cached(VALUE self, VALUE rb_boolean)
+{
+    return rb_iv_set(self, "may_be_cached", rb_boolean);
+}
+
+static VALUE
+rg_may_be_cached_p(VALUE self)
+{
+    if (!RVAL2CBOOL(rb_ivar_defined(self, rb_intern("may_be_cached")))) {
+        rb_iv_set(self, "may_be_cached", Qfalse);
+    }
+    return rb_iv_get(self, "may_be_cached");
+}
+
 static void
-initialize_receiver(VALUE receiver,
+initialize_receiver(VALUE self,
+                    VALUE receiver,
                     GICallableInfo *callable_info,
                     GIArgument *value)
 {
     GITypeInfo return_value_info;
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
+    gboolean may_be_cached;
 
     g_callable_info_load_return_type(callable_info, &return_value_info);
 
@@ -53,9 +70,18 @@ initialize_receiver(VALUE receiver,
     interface_info = g_type_info_get_interface(&return_value_info);
     interface_type = g_base_info_get_type(interface_info);
     g_base_info_unref(interface_info);
+
+    may_be_cached = RVAL2CBOOL(rg_may_be_cached_p(self));
+
     switch (interface_type) {
       case GI_INFO_TYPE_OBJECT:
-        G_INITIALIZE(receiver, value->v_pointer);
+        if (may_be_cached) {
+            if (!rbgobj_gobject_is_initialized(value->v_pointer)) {
+                G_INITIALIZE(receiver, value->v_pointer);
+            }
+        } else {
+            G_INITIALIZE(receiver, value->v_pointer);
+        }
         {
             gboolean was_floating;
             was_floating = g_object_is_floating(value->v_pointer);
@@ -130,7 +156,10 @@ rg_invoke(VALUE self, VALUE rb_receiver, VALUE rb_arguments)
                                    &return_value,
                                    NULL);
 
-    initialize_receiver(rb_receiver, callable_info, &return_value);
+    initialize_receiver(self,
+                        rb_receiver,
+                        callable_info,
+                        &return_value);
 
     return rb_receiver;
 }
@@ -144,6 +173,9 @@ rb_gi_constructor_info_init(VALUE rb_mGI, VALUE rb_cGIFunctionInfo)
         G_DEF_CLASS_WITH_PARENT(GI_TYPE_CONSTRUCTOR_INFO,
                                 "ConstructorInfo", rb_mGI,
                                 rb_cGIFunctionInfo);
+
+    RG_DEF_METHOD(set_may_be_cached, 1);
+    RG_DEF_METHOD_P(may_be_cached, 0);
 
     RG_DEF_METHOD(invoke, 2);
 }
