@@ -21,6 +21,7 @@ EXPORTS
 	rbgobj_get_ruby_object_from_gobject
 	rbgobj_create_object
 	rbgobj_gobject_new
+	rbgobj_gobject_is_initialized
 	rbgobj_gobject_initialize
 	rbgobj_boxed_alloc_func
 	rbgobj_boxed_create

@@ -184,6 +184,12 @@ rbgobj_create_object(VALUE klass)
     return rbgobj_object_alloc_func(klass);
 }
 
+gboolean
+rbgobj_gobject_is_initialized(gpointer cobj)
+{
+    return g_object_get_qdata(G_OBJECT(cobj), RUBY_GOBJECT_OBJ_KEY) != NULL;
+}
+
 void
 rbgobj_gobject_initialize(VALUE obj, gpointer cobj)
 {
