@@ -1,3 +1,4 @@
 EXPORTS
     Init_pango
     pango_attr_list_get_type
+    rbpango_attribute_from_ruby
