@@ -34,8 +34,12 @@ module GNOME2
         @spec = spec
         initialize_variables
         initialize_configurations
-        file, line, method = caller[1].scan(/^(.*):(\d+)(?::.*`(.*)')?\Z/).first
-        @package = Package.new(File.dirname(file))
+        if @spec
+          @package = Package.new(@spec.name)
+        else
+          file, line, method = caller[1].scan(/^(.*):(\d+)(?::.*`(.*)')?\Z/).first
+          @package = Package.new(File.dirname(file))
+        end
         @packages = FileList["#{@package.root_dir.parent}/*"].map{|f| File.directory?(f) ? File.basename(f) : nil}.compact
         @name = @package.name
         @cross_compiling_hooks = []
