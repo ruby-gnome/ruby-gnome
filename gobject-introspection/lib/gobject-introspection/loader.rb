@@ -309,7 +309,6 @@ module GObjectIntrospection
       infos.each do |info|
         name = "initialize_#{info.name}"
         info.unlock_gvl = should_unlock_gvl?(info, klass)
-        info.may_be_cached = may_be_cached?(info, klass)
         arguments_builder = ArgumentsBuilder.new(info, "#{klass}\##{name}")
         klass.__send__(:define_method, name) do |*arguments, &block|
           arguments_builder.build(arguments, block)
@@ -545,10 +544,6 @@ module GObjectIntrospection
     end
 
     def should_unlock_gvl?(function_info, klass)
-      false
-    end
-
-    def may_be_cached?(constructor_info, klass)
       false
     end
 
