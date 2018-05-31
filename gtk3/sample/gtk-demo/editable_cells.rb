@@ -15,7 +15,7 @@
 =end
 class EditableCellsDemo
   Item = Struct.new("Item", :number, :product, :yummy)
-  COL_ITEM_NUM, COL_ITEM_PROD, COL_ITEM_YUMMY = *(0..3).to_a
+  COL_ITEM_NUM, COL_ITEM_PROD, COL_ITEM_YUMMY = 0, 1, 2
   COL_NUM_TEXT = 0
 
   def initialize(main_window)
