@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2016-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,32 +16,26 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-$LOAD_PATH.unshift("./../glib2/lib")
-require "gnome2/rake/package-task"
+require_relative "../glib2/version"
 
-package_name = File.basename(__dir__)
-spec = Gem::Specification.load("#{package_name}.gemspec")
-
-GNOME2::Rake::PackageTask.define(spec) do |package|
-  package.dependency.gem.runtime = ["clutter", "gdk3"]
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = [
-    "glib2",
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "gobject-introspection",
-    "clutter",
-    "gdk3",
+Gem::Specification.new do |s|
+  s.name          = "clutter-gdk"
+  s.summary =
+    "Ruby/ClutterGDK is a Ruby binding of GDK specific API of Clutter."
+  s.description =
+    "Ruby/ClutterGDK is a Ruby binding of GDK specific API of Clutter."
+  s.author        = "The Ruby-GNOME2 Project Team"
+  s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
+  s.homepage      = "https://ruby-gnome2.osdn.jp/"
+  s.licenses      = ["LGPL-2.1+"]
+  s.version       = ruby_glib2_version
+  s.require_paths = ["lib"]
+  s.files = [
+    "COPYING.LIB",
+    "README.md",
+    "Rakefile",
+    "#{s.name}.gemspec",
   ]
-  package.windows.gobject_introspection_dependencies = [
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "clutter",
-    "gdk3",
-  ]
-  package.external_packages = [
-  ]
+  s.files += Dir.glob("lib/**/*.rb")
+  s.files += Dir.glob("test/**/*")
 end
