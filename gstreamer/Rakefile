@@ -19,9 +19,10 @@
 $LOAD_PATH.unshift("./../glib2/lib")
 require 'gnome2/rake/package-task'
 
-package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/GStreamer is a Ruby binding for GStreamer."
-  package.description = "Ruby/GStreamer is a Ruby binding for GStreamer."
+package_name = File.basename(__dir__)
+spec = Gem::Specification.load("#{package_name}.gemspec")
+
+GNOME2::Rake::PackageTask.define(spec) do |package|
   package.dependency.gem.runtime = ["glib2", "gobject-introspection"]
   package.windows.packages = []
   package.windows.dependencies = []
@@ -267,4 +268,3 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     end
   end
 end
-package_task.define
