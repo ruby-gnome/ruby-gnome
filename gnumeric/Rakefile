@@ -19,9 +19,10 @@
 $LOAD_PATH.unshift("./../glib2/lib")
 require 'gnome2/rake/package-task'
 
-package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/Gnumeric is a Ruby binding of Gnumeric."
-  package.description = "Ruby/Gnumeric is a Ruby binding of Gnumeric."
+package_name = File.basename(__dir__)
+spec = Gem::Specification.load("#{package_name}.gemspec")
+
+GNOME2::Rake::PackageTask.define(spec) do |package|
   package.dependency.gem.runtime = ["goffice", "gobject-introspection"]
   package.windows.packages = []
   package.windows.dependencies = ["libxml2"]
@@ -48,4 +49,3 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
   ]
 end
-package_task.define
