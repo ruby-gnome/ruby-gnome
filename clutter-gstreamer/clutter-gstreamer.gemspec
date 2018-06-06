@@ -37,6 +37,6 @@ Gem::Specification.new do |s|
     "dependency-check/Rakefile",
   ]
   s.files += Dir.glob("lib/**/*.rb")
-  s.files += Dir.glob("sample/*")
+  s.files += Dir.glob("sample/**/*.rb")
   s.files += Dir.glob("test/**/*")
 end
