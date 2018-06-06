@@ -96,7 +96,6 @@ package_task = GNOME2::Rake::PackageTask.new(spec, __dir__) do |package|
         :need_autoreconf => true,
         :patches => [
           "glib-2.54.1-add-missing-exeext.diff",
-          "glib-2.56.0-add-missing-weekday-full-is-locale.patch",
         ],
         :built_file => "bin/libglib-2.0-0.dll",
       },
