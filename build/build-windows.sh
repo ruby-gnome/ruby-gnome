@@ -137,6 +137,7 @@ EOF
   fi
 
   run sudo ln -s /usr/include/KHR/ /usr/x86_64-w64-mingw32/include/
+  run sudo ln -s /usr/include/KHR/ /usr/i686-w64-mingw32/include/
 
   run touch ~/setup.timestamp
 fi
