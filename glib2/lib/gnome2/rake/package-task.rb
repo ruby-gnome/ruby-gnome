@@ -21,8 +21,8 @@ module GNOME2
   module Rake
     class PackageTask
       class << self
-        def define(spec, &block)
-          new(spec, &block).define
+        def define(spec, root_dir, &block)
+          new(spec, root_dir, &block).define
         end
       end
 
@@ -30,15 +30,16 @@ module GNOME2
 
       attr_accessor :name, :summary, :description, :author, :email, :homepage, :required_ruby_version, :post_install_message
       attr_reader :root_dir
-      def initialize(spec=nil)
+      def initialize(spec=nil, root_dir=nil)
         @spec = spec
         initialize_variables
         initialize_configurations
         if @spec
-          @package = Package.new(@spec.name)
+          @package = Package.new(@spec.name, root_dir)
         else
           file, line, method = caller[1].scan(/^(.*):(\d+)(?::.*`(.*)')?\Z/).first
-          @package = Package.new(File.dirname(file))
+          root_dir = File.dirname(file)
+          @package = Package.new(File.basename(root_dir), root_dir)
         end
         @packages = FileList["#{@package.root_dir.parent}/*"].map{|f| File.directory?(f) ? File.basename(f) : nil}.compact
         @name = @package.name

@@ -26,9 +26,9 @@ module GNOME2
       attr_reader :windows
       attr_reader :native
       attr_writer :external_packages
-      def initialize(root_dir)
+      def initialize(name, root_dir)
+        @name = name
         @root_dir = Pathname.new(root_dir).expand_path
-        @name = @root_dir.basename.to_s
         @windows = WindowsConfiguration.new
         @native = NativeConfiguration.new
         @external_packages = []
