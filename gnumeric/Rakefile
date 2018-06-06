@@ -38,7 +38,7 @@ GNOME2::Rake::PackageTask.define(spec) do |package|
       :name => "gnumeric",
       :download_site => :gnome,
       :label => "gnumeric",
-      :version => "1.12.39",
+      :version => "1.12.41",
       :compression_method => "xz",
       :windows => {
         :configure_args => [

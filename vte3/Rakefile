@@ -47,7 +47,7 @@ GNOME2::Rake::PackageTask.define(spec) do |package|
       :name => "vte",
       :download_site => :gnome,
       :label => "vte",
-      :version => "0.52.0",
+      :version => "0.52.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => [

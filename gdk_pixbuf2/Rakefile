@@ -37,7 +37,7 @@ GNOME2::Rake::PackageTask.define(spec) do |package|
       :name => "gdk-pixbuf",
       :download_site => :gnome,
       :label => "gdk-pixbuf",
-      :version => "2.36.11",
+      :version => "2.36.12",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
