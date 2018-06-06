@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
     "ext/#{s.name}/depend",
   ]
   s.files += Dir.glob("lib/**/*.rb")
-  s.files += Dir.glob("sample/*")
+  s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
   s.files += Dir.glob("test/**/*")
 end
