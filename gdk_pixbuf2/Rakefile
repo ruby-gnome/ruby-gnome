@@ -22,7 +22,7 @@ require "gnome2/rake/package-task"
 package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
-GNOME2::Rake::PackageTask.define(spec) do |package|
+GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
   package.dependency.gem.runtime = [
     "gio2",
   ]
