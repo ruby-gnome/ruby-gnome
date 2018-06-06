@@ -47,6 +47,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
         ],
         :patches => [
+          "0001-Include-sys-stat.h-instead-of-struct-stat-forward-de.patch",
         ],
         :built_file => "bin/libgsf-win32-1-114.dll",
       },

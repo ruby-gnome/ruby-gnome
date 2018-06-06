@@ -1,0 +1,61 @@
+From 8d195ddb4f2d2fe87723faedb2c6daa3dd4c4f87 Mon Sep 17 00:00:00 2001
+From: Kouhei Sutou <kou@clear-code.com>
+Date: Wed, 6 Jun 2018 15:37:19 +0900
+Subject: [PATCH] Include <sys/stat.h> instead of "struct stat" forward
+ declaration
+
+It causes a build error with MinGW:
+
+      CC       gsf-input.lo
+    gsf-input.c:632:1: error: conflicting types for 'gsf_input_set_modtime_from_stat'
+     gsf_input_set_modtime_from_stat (GsfInput *input,
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    In file included from ../gsf/gsf.h:54:0,
+                     from gsf-input.c:24:
+    ../gsf/gsf-input-impl.h:67:10: note: previous declaration of 'gsf_input_set_modtime_from_stat' was here
+     gboolean gsf_input_set_modtime_from_stat (GsfInput *input,
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Makefile:705: recipe for target 'gsf-input.lo' failed
+
+<sys/stat.h> is enough portable because glib/gstdio.h uses it.
+---
+ gsf/gsf-input-impl.h | 3 ++-
+ gsf/gsf-input.c      | 1 -
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/gsf/gsf-input-impl.h b/gsf/gsf-input-impl.h
+index 2f08e91..c8fb6c4 100644
+--- a/gsf/gsf-input-impl.h
++++ b/gsf/gsf-input-impl.h
+@@ -22,6 +22,8 @@
+ #ifndef GSF_INPUT_IMPL_H
+ #define GSF_INPUT_IMPL_H
+ 
++#include <sys/stat.h>
++
+ #include <gsf/gsf-fwd.h>
+ 
+ G_BEGIN_DECLS
+@@ -63,7 +65,6 @@ gboolean gsf_input_set_size	 (GsfInput *input, gsf_off_t size);
+ gboolean gsf_input_set_modtime   (GsfInput *input, GDateTime *modtime);
+ gboolean gsf_input_seek_emulate  (GsfInput *input, gsf_off_t pos);
+ 
+-struct stat;
+ gboolean gsf_input_set_modtime_from_stat (GsfInput *input,
+ 					  const struct stat *st);
+ 
+diff --git a/gsf/gsf-input.c b/gsf/gsf-input.c
+index aabf8a5..752268b 100644
+--- a/gsf/gsf-input.c
++++ b/gsf/gsf-input.c
+@@ -25,7 +25,6 @@
+ #include <glib/gi18n-lib.h>
+ 
+ #include <string.h>
+-#include <sys/stat.h>
+ 
+ 
+ /*
+-- 
+2.17.1
+
