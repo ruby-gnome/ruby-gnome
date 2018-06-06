@@ -2,6 +2,195 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.2.6: 2018-06-06
+
+This is a bug fix release of 3.2.5.
+
+=== Changes
+
+==== Document
+
+  * Improvements
+
+    * Updated project URL.
+      [GitHub#1174][Patch by okkez]
+
+==== All
+
+  * Improvements
+
+    * Added support for using unreleased version with Bundler.
+      [Patch by cedlemo]
+
+    * Windows: Upgraded bundled library versions.
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * (({GLib::Object.define_signal})): Added.
+      (({GLib::Object.signal_new})) is deprecated.
+
+    * (({GLib::Object.signal_new})): Changed to accept (({Symbol})) as
+      flags.
+
+    * (({GLib::Signal})): Migrated to (({TypedData})).
+
+    * (({GLib::Enum})): Migrated to (({TypedData})).
+
+    * (({GLib::Flags})): Migrated to (({TypedData})).
+
+    * (({GLib::Boxed})): Migrated to (({TypedData})).
+
+    * (({GLib::Param})): Migrated to (({TypedData})).
+
+    * (({rbgobj_signal_new()})): Added.
+      (({rbgobj_signal_wrap()})) is deprecated.
+
+    * Dropped GLib < 2.28 support.
+
+    * (({GLib::Variant.new})): Changed to accept (({String})) as
+      variant type.
+
+    * (({rbg_variant_type_from_ruby()})): Added.
+
+    * (({rbg_gc_guard()})): Added.
+
+    * (({rbg_gc_unguard()})): Added.
+
+  * Fixes
+
+    * Fixed a bug that signal created by (({GLib::Object.signal_new}))
+      may be GC-ed.
+      [GitHub#1166][Reported by Izumi Tsutsui]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * (({GObjectIntrospection::Struct})): Migrated to (({TypedData})).
+
+    * Improved better function detection.
+
+    * Added heuristic callback data detection.
+
+    * Added support for getting flags field value.
+
+    * (({RBGICallbackData})): Hidden details.
+
+    * (({rb_gi_callback_data_get_metadata()})): Added.
+
+    * (({rb_gi_callback_data_get_rb_callback()})): Added.
+
+    * Added (({to_integer})) to (({to_i})) mapping.
+      [GitHub#1191][Patch by yosuke shiro]
+
+==== Ruby/CairoGObject
+
+  * Improvements
+
+    * Added (({gtype})) class methods.
+
+==== Ruby/GIO2
+
+  * Improvements
+
+    * (({Gio::MenuItem#set_attribute_value})): Improved argument conversion.
+      Callers don't need to create (({GLib::Variant})).
+
+    * (({Gio::Settings.new})): Added support for keyword (({Hash})).
+      [GitHub#1187][Patch by cedlemo]
+
+==== Ruby/Pango
+
+  * Improvements
+
+    * (({Pango::Attribute})): Migrated to (({GLib::Boxed})).
+
+    * (({Pango::Rectangle#dup})): Added.
+
+    * (({rbpango_attribute_from_ruby()})): Added.
+
+  * Fixes
+
+    * Fixed a bug that wrong (({Pango::Attribute})) conversion.
+      [GitHub#1188][Reported by kojix2]
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements
+
+    * (({GdkPixbuf::Pixbuf#subpixbuf})): Added.
+      (({GdkPixbuf::Pixbuf#new_subpixbuf})) is deprecated.
+
+    * (({GdkPixbuf::Pixbuf#new})): Improved the default
+      (({row_stride})) value.
+
+==== Ruby/GDK3
+
+  * Improvements
+
+    * (({Gdk::Cursor.new})): Added multiple calls with the same value.
+      [GitHub#1195][Reported by kojix2]
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * Removed needless custom callback handlers.
+
+    * Dropped GTK+ 3.10 support.
+
+    * (({Gtk::Application.new})): Changed to all arguments are omittable.
+
+    * (({Gtk::TextBuffer#insert})): Changed to raise an exception for
+      unknown tag.
+
+  * Fixes
+
+    * Fixed a bug that (({Gtk::Version.or_later?})) requires the 3rd
+      argument.
+
+    * Fixed demo.
+      * [GitHub#1175][GitHub#1176][GitHub#1177][GitHub#1178][GitHub#1183]
+        [GitHub#1184][GitHub#1185]
+        [Reported by kojix2]
+      * [GitHub#1181][GitHub#1186][GitHub#1197][GitHub#1210]
+        [Patch by kojix2]
+
+==== Ruby/Poppler
+
+  * Improvements
+
+    * (({Cairo::Context#show_poppler_page})): Added for consistency.
+
+==== Ruby/RSVG2
+
+  * Improvements
+
+    * (({Cairo::Context#show_rsvg_handle})): Added for consistency.
+
+==== Ruby/GStreamer
+
+  * Improvements
+
+    * (({Gst::Element.[]})): Added as a shortcut of
+      (({Gst::ElementFactory.make})).
+
+    * (({Gst::Bus#poll})): Made all arguments omittable.
+
+=== Thanks
+
+  * Izumi Tsutsui
+
+  * okkez
+
+  * kojix2
+
+  * cedlemo
+
+  * yosuke shiro
+
 == Ruby-GNOME2 3.2.5: 2018-05-02
 
 This is a bug fix release of 3.2.4.
