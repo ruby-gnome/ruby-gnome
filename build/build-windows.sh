@@ -123,7 +123,14 @@ if [ ! -f ~/setup.timestamp ]; then
   run rm -f glext.h
 
   if ! grep -q GL/glext /usr/share/mingw-w64/include/GL/gl.h; then
-    cat <<EOF > /tmp/insert.txt
+    if [ "${BUILD_HOST}" = "i686-w64-mingw32" ]; then
+      cat <<EOF > /tmp/insert.txt
+
+#include <GL/glext.h>
+
+EOF
+    else
+      cat <<EOF > /tmp/insert.txt
 
 typedef ptrdiff_t GLintptr;
 typedef ptrdiff_t GLsizeiptr;
@@ -131,13 +138,14 @@ typedef char GLchar;
 #include <GL/glext.h>
 
 EOF
+    fi
     run sudo sed -i'' -e '/typedef void GLvoid;/ r /tmp/insert.txt' \
         /usr/share/mingw-w64/include/GL/gl.h
     run rm -f /tmp/insert.txt
   fi
 
-  run sudo ln -s /usr/include/KHR/ /usr/x86_64-w64-mingw32/include/
   run sudo ln -s /usr/include/KHR/ /usr/i686-w64-mingw32/include/
+  run sudo ln -s /usr/include/KHR/ /usr/x86_64-w64-mingw32/include/
 
   run touch ~/setup.timestamp
 fi
