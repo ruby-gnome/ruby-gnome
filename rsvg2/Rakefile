@@ -19,9 +19,10 @@
 $LOAD_PATH.unshift("./../glib2/lib")
 require 'gnome2-raketask'
 
-package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/Rsvg is a Ruby binding of librsvg-2.x."
-  package.description = "Ruby/Rsvg is a Ruby binding of librsvg-2.x."
+package_name = File.basename(__dir__)
+spec = Gem::Specification.load("#{package_name}.gemspec")
+
+GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
   package.dependency.gem.runtime = [
     ["cairo", ">= 1.12.8"],
     "gdk_pixbuf2",
@@ -93,4 +94,3 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
   ]
 end
-package_task.define
