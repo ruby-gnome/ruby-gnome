@@ -2,6 +2,23 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.2.7: 2018-06-07
+
+This is a packaging bug fix release of 3.2.6.
+
+=== Changes
+
+==== All
+
+  * Improvements
+
+    * Added support for using unreleased version with Bundler.
+      [Patch by cedlemo]
+
+  * Fixes
+
+    * Fixed a packaging bug that dependencies are missing.
+
 == Ruby-GNOME2 3.2.6: 2018-06-06
 
 This is a bug fix release of 3.2.5.
