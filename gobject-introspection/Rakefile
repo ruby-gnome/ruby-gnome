@@ -23,10 +23,6 @@ package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 package_task = GNOME2::Rake::PackageTask.new(spec, __dir__) do |package|
-  package.summary = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
-  package.description = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
-  package.dependency.gem.runtime = ["glib2"]
-  package.dependency.gem.development = [["test-unit", ">= 2"]]
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = ["glib2"]

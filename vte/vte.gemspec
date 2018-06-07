@@ -41,4 +41,6 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
   s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("test/**/*")
+
+  s.add_runtime_dependency("gtk2", "= #{s.version}")
 end

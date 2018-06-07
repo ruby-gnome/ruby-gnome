@@ -41,4 +41,8 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
   s.files += Dir.glob("test/**/*")
+
+  s.add_runtime_dependency("glib2", "= #{s.version}")
+
+  s.post_install_message = "This library is experimental."
 end

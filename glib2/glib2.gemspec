@@ -45,4 +45,8 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
   s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("test/**/*")
+
+  s.add_runtime_dependency("pkg-config", ">= 1.2.2")
+  s.add_runtime_dependency("native-package-installer", ">= 1.0.3")
+  s.add_development_dependency("test-unit", ">= 2")
 end

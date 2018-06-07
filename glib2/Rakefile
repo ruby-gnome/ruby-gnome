@@ -38,11 +38,6 @@ package_task = GNOME2::Rake::PackageTask.new(spec, __dir__) do |package|
   build_host         = package.windows.build_host
 
   package.description = "Ruby/GLib2 is a Ruby binding of GLib-2.x."
-  package.dependency.gem.runtime = [
-    ["pkg-config", ">= 1.2.2"],
-    ["native-package-installer", ">= 1.0.3"],
-  ]
-  package.dependency.gem.development = [["test-unit", ">= 2"]]
   package.windows.packages = []
   package.windows.dependencies = []
   package.external_packages = [

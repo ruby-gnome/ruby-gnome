@@ -39,4 +39,8 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("lib/**/*.rb")
   s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("test/**/*")
+
+  s.add_runtime_dependency("cairo-gobject", "= #{s.version}")
+  s.add_runtime_dependency("gobject-introspection", "= #{s.version}")
+  s.add_runtime_dependency("pango", "= #{s.version}")
 end

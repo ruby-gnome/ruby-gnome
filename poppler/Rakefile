@@ -22,11 +22,7 @@ require 'gnome2-raketask'
 package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
-package_task = GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.dependency.gem.runtime = [
-    "cairo-gobject",
-    "gio2",
-  ]
+GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = [

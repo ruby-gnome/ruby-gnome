@@ -41,4 +41,8 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
   s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("test/**/*")
+
+  s.add_runtime_dependency("atk", "= #{s.version}")
+  s.add_runtime_dependency("pango", "= #{s.version}")
+  s.add_runtime_dependency("gdk_pixbuf2", "= #{s.version}")
 end

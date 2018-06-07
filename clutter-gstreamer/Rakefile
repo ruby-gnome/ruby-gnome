@@ -23,7 +23,6 @@ package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.dependency.gem.runtime = ["gdk_pixbuf2", "clutter", "gstreamer"]
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = [
