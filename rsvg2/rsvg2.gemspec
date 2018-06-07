@@ -40,5 +40,7 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("sample/*")
   s.files += Dir.glob("test/**/*")
 
-  s.add_runtime_dependency("gio2", "= #{s.version}")
+  s.add_runtime_dependency("cairo", ">= 1.12.8")
+  s.add_runtime_dependency("gdk_pixbuf2", "= #{s.version}")
+  s.add_runtime_dependency("cairo-gobject", "= #{s.version}")
 end
