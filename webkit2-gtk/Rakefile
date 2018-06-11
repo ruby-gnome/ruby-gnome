@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2015-2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,10 +19,10 @@
 $LOAD_PATH.unshift("./../glib2/lib")
 require "gnome2/rake/package-task"
 
-package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/WebKit2GTK is a Ruby binding of WebKit2GTK+."
-  package.description = "Ruby/WebKit2GTK is a Ruby binding of WebKit2GTK+."
-  package.dependency.gem.runtime = ["gobject-introspection", "gtk3"]
+package_name = File.basename(__dir__)
+spec = Gem::Specification.load("#{package_name}.gemspec")
+
+GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = [
@@ -122,4 +122,3 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
   ]
 end
-package_task.define
