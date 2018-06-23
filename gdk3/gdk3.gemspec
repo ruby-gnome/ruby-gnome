@@ -42,4 +42,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("pango", "= #{s.version}")
   s.add_runtime_dependency("gdk_pixbuf2", "= #{s.version}")
   s.add_runtime_dependency("cairo-gobject", "= #{s.version}")
+
+  s.metadata["msys2_mingw_dependencies"] = "gtk3"
 end

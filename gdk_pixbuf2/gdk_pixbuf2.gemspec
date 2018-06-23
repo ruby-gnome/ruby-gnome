@@ -41,4 +41,6 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("test/**/*")
 
   s.add_runtime_dependency("gio2", "= #{s.version}")
+
+  s.metadata["msys2_mingw_dependencies"] = "gdk-pixbuf2"
 end

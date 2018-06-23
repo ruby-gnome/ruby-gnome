@@ -47,4 +47,6 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("test/**/*")
 
   s.add_runtime_dependency("glib2", "= #{s.version}")
+
+  s.metadata["msys2_mingw_dependencies"] = "gobject-introspection"
 end

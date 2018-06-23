@@ -45,4 +45,6 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("glib2", "= #{s.version}")
   s.add_runtime_dependency("gobject-introspection", "= #{s.version}")
+
+  s.metadata["msys2_mingw_dependencies"] = "glib-networking"
 end

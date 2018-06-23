@@ -45,4 +45,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("atk", "= #{s.version}")
   s.add_runtime_dependency("pango", "= #{s.version}")
   s.add_runtime_dependency("gdk_pixbuf2", "= #{s.version}")
+
+  s.metadata["msys2_mingw_dependencies"] = "gtk2"
 end

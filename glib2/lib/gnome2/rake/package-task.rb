@@ -197,6 +197,8 @@ module GNOME2
           ext.cross_compile = true
           ext.cross_compiling do |spec|
             if /mingw|mswin/ =~ spec.platform.to_s
+              spec.metadata.delete("msys2_mingw_dependencies")
+
               windows_binary_dir = @package.windows.relative_binary_dir
               windows_files = []
               if windows_binary_dir.exist?

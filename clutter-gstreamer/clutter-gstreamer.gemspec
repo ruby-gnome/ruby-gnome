@@ -43,4 +43,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("gdk_pixbuf2", "= #{s.version}")
   s.add_runtime_dependency("clutter", "= #{s.version}")
   s.add_runtime_dependency("gstreamer", "= #{s.version}")
+
+  s.metadata["msys2_mingw_dependencies"] = "clutter-gst"
 end

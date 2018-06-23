@@ -43,4 +43,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("clutter", "= #{s.version}")
   s.add_runtime_dependency("clutter-gdk", "= #{s.version}")
   s.add_runtime_dependency("gtk3", "= #{s.version}")
+
+  s.metadata["msys2_mingw_dependencies"] = "clutter-gtk"
 end
