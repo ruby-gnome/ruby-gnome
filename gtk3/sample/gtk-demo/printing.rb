@@ -69,6 +69,7 @@ class PrintingDemo
       end
       dialog.show
     end
+    nil
   end
 
   private
