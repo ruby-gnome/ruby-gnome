@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -49,7 +49,7 @@ rg_value(VALUE self)
 {
     GIConstantInfo *info;
     GIArgument value;
-    gint value_size;
+    G_GNUC_UNUSED gint value_size;
     GITypeInfo *type_info;
     VALUE rb_value;
 
