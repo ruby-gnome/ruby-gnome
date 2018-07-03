@@ -46,6 +46,7 @@ struct RBGICallbackData_ {
     RBGICallback *callback;
     RBGIArgMetadata *metadata;
     VALUE rb_callback;
+    VALUE rb_owner;
 };
 
 static VALUE RG_TARGET_NAMESPACE;
@@ -304,18 +305,6 @@ fill_metadata(GPtrArray *args_metadata, GICallableInfo *info)
 }
 
 static void
-callback_data_guard_from_gc(RBGICallbackData *callback_data)
-{
-    rbg_gc_guard(callback_data, callback_data->rb_callback);
-}
-
-static void
-callback_data_unguard_from_gc(RBGICallbackData *callback_data)
-{
-    rbg_gc_unguard(callback_data);
-}
-
-static void
 rb_gi_callback_free(RBGICallback *callback)
 {
     g_callable_info_free_closure(callback->callback_info,
@@ -331,7 +320,8 @@ rb_gi_callback_data_free(RBGICallbackData *callback_data)
     if (callback_data->callback) {
         rb_gi_callback_free(callback_data->callback);
     }
-    callback_data_unguard_from_gc(callback_data);
+    rbgobj_object_remove_relative(callback_data->rb_owner,
+                                  callback_data->rb_callback);
     xfree(callback_data->metadata);
     xfree(callback_data);
 }
@@ -1087,7 +1077,10 @@ ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
 }
 
 static void
-in_callback_argument_from_ruby(RBGIArgMetadata *metadata, GArray *in_args)
+in_callback_argument_from_ruby(RBGIArgMetadata *metadata,
+                               GArray *in_args,
+                               VALUE self,
+                               VALUE rb_arguments)
 {
     gpointer callback_function;
     GIArgInfo *arg_info;
@@ -1145,7 +1138,13 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata, GArray *in_args)
         callback_data->callback = callback;
         callback_data->metadata = metadata;
         callback_data->rb_callback = rb_block_proc();
-        callback_data_guard_from_gc(callback_data);
+        if (NIL_P(self)) {
+            callback_data->rb_owner = rb_ary_entry(rb_arguments, 0);
+        } else {
+            callback_data->rb_owner = self;
+        }
+        rbgobj_object_add_relative(callback_data->rb_owner,
+                                   callback_data->rb_callback);
         closure_argument->v_pointer = callback_data;
     }
 
@@ -1163,7 +1162,7 @@ in_argument_from_ruby(GICallableInfo *callable_info,
                       VALUE self)
 {
     if (metadata->callback_p && !metadata->destroy_p) {
-        in_callback_argument_from_ruby(metadata, in_args);
+        in_callback_argument_from_ruby(metadata, in_args, self, rb_arguments);
         return;
     }
 
