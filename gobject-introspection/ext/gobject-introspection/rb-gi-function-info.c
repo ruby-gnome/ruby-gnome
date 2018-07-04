@@ -314,14 +314,28 @@ rb_gi_callback_free(RBGICallback *callback)
     xfree(callback);
 }
 
+static void
+rb_gi_callback_data_weak_notify(gpointer data, GObject* where_the_object_was)
+{
+    RBGICallbackData *callback_data = data;
+    callback_data->rb_owner = Qnil;
+}
+
 void
 rb_gi_callback_data_free(RBGICallbackData *callback_data)
 {
     if (callback_data->callback) {
         rb_gi_callback_free(callback_data->callback);
     }
-    rbgobj_object_remove_relative(callback_data->rb_owner,
-                                  callback_data->rb_callback);
+    if (!NIL_P(callback_data->rb_owner)) {
+        GObject *gobject;
+        gobject = RVAL2GOBJ(callback_data->rb_owner);
+        g_object_weak_unref(gobject,
+                            rb_gi_callback_data_weak_notify,
+                            callback_data);
+        rbgobj_object_remove_relative(callback_data->rb_owner,
+                                      callback_data->rb_callback);
+    }
     xfree(callback_data->metadata);
     xfree(callback_data);
 }
@@ -339,7 +353,7 @@ rb_gi_callback_data_get_rb_callback(RBGICallbackData *callback_data)
 }
 
 static void
-destroy_notify(gpointer data)
+rb_gi_callback_data_destroy_notify(gpointer data)
 {
     RBGICallbackData *callback_data = data;
     rb_gi_callback_data_free(callback_data);
@@ -1145,11 +1159,18 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata,
         }
         rbgobj_object_add_relative(callback_data->rb_owner,
                                    callback_data->rb_callback);
+        {
+            GObject *gobject;
+            gobject = RVAL2GOBJ(callback_data->rb_owner);
+            g_object_weak_ref(gobject,
+                              rb_gi_callback_data_weak_notify,
+                              callback_data);
+        }
         closure_argument->v_pointer = callback_data;
     }
 
     if (destroy_argument) {
-        destroy_argument->v_pointer = destroy_notify;
+        destroy_argument->v_pointer = rb_gi_callback_data_destroy_notify;
     }
 }
 
