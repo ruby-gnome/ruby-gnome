@@ -596,7 +596,7 @@ module GObjectIntrospection
     end
 
     def define_equal_style_setter(info, klass, method_name)
-      if /\Aset_/ =~ method_name and info.n_args == 1
+      if /\Aset_/ =~ method_name and info.n_in_args == 1
         setter_method_name = "#{$POSTMATCH}="
         remove_existing_method(klass, setter_method_name)
         klass.__send__(:alias_method, setter_method_name, method_name)
