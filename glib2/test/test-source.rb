@@ -55,7 +55,6 @@ class TestGLibSource < Test::Unit::TestCase
     only_glib_version(2, 26, 0)
 
     source = GLib::Idle.source_new
-    assert_nil(source.name)
 
     source_name = "glib source"
     source.name = source_name
