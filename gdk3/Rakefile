@@ -40,13 +40,11 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
   package.external_packages = [
     {
       :name => "libepoxy",
-      :download_base_url => "https://github.com/anholt/libepoxy/releases/download/v1.3.1",
+      :download_site => :gnome,
       :label => "Epoxy",
-      :version => "1.3.1",
-      :compression_method => "bz2",
+      :version => "1.5.2",
+      :compression_method => "xz",
       :windows => {
-        :configure_args => [
-        ],
         :built_file => "bin/libepoxy-0.dll",
       },
     },
