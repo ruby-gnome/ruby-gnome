@@ -137,6 +137,7 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "vte",
   "vte3",
   "gtksourceview3",
+  "gtksourceview4",
   "clutter",
   "clutter-gdk",
   "clutter-gtk",
