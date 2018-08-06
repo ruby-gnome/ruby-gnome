@@ -81,7 +81,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "webkitgtk",
       :download_site => :webkitgtk,
       :label => "WebKitGTK+",
-      :version => "2.21.3",
+      :version => "2.21.5",
       :compression_method => "xz",
       :windows => {
         :build_concurrently => false,

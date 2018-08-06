@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -144,7 +144,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "gstreamer",
       :download_site => :freedesktop_gstreamer,
       :label => "GStreamer",
-      :version => "1.14.1",
+      :version => "1.14.2",
       :compression_method => "xz",
       :windows => {
         :cc_args => "-std=gnu99",
@@ -164,7 +164,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "gst-plugins-base",
       :download_site => :freedesktop_gstreamer,
       :label => "GStreamer plugins (base)",
-      :version => "1.14.1",
+      :version => "1.14.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -185,7 +185,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "gst-plugins-good",
       :download_site => :freedesktop_gstreamer,
       :label => "GStreamer plugins (good)",
-      :version => "1.14.1",
+      :version => "1.14.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -199,7 +199,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "gst-plugins-bad",
       :download_site => :freedesktop_gstreamer,
       :label => "GStreamer plugins (bad)",
-      :version => "1.14.1",
+      :version => "1.14.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => ["--disable-librfb"],
@@ -228,7 +228,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "gst-libav",
       :download_site => :freedesktop_gstreamer,
       :label => "GStreamer libav",
-      :version => "1.14.1",
+      :version => "1.14.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => [

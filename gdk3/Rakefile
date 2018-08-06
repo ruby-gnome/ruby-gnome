@@ -54,7 +54,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "gtk+",
       :download_site => :gnome,
       :label => "GTK+",
-      :version => "3.22.30",
+      :version => "3.23.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
