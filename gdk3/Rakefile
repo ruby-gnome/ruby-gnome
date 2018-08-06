@@ -71,7 +71,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "hicolor-icon-theme",
       :download_base_url => "https://icon-theme.freedesktop.org/releases",
       :label => "gtk-hi-color-icon-theme",
-      :version => "0.15",
+      :version => "0.17",
       :compression_method => "xz",
       :windows => {
         :configure_args => [],
