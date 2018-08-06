@@ -79,9 +79,12 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :version => "1.8.2",
       :compression_method => "xz",
       :windows => {
-        :configure_args => [
-          "--enable-introspection",
-          "--disable-benchmarks",
+        :meson_args => [
+          "-Dtests=false",
+          "-Dbenchmarks=false",
+        ],
+        :patches => [
+          "graphene-disable-werror-float-conversion.diff",
         ],
         :built_file => "bin/libgraphene-1.0-0.dll",
       },
