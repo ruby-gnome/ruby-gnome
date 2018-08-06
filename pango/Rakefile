@@ -35,7 +35,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "icu",
       :download_site => :icu,
       :label => "ICU",
-      :version => "62.1",
+      :version => "58.2",
       :base_name => "icu",
       :archive_base_name => lambda do |package|
         archive_base_name_version = package.version.gsub(".", "_")
