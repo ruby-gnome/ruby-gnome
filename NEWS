@@ -2,6 +2,60 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.2.8: 2018-08-06
+
+This is an installation improvement release of 3.2.7.
+
+=== Changes
+
+==== All
+
+  * Improvements
+
+    * Added support for static gemspec.
+      [Patch by cedlemo]
+
+    * Added support for msys2_mingw_dependencies.
+      [GitHub#1194]
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * test: Removed a needless assertion.
+      [GitHub#1235][Patch by Iain Lane]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Improved setter method detection.
+      [GitHub#1233][Patch by yosuke shiro]
+
+  * Fixes
+
+    * Fixed a memory leak for callback method.
+      [GitHub#1230][GitHub#1231][Reported by Izumi Tsutsui]
+
+==== Ruby/GTK3
+
+  * Fixes
+
+    * demo: Fix a crash bug.
+      [GitHub#1193][Reported by kojix2]
+
+=== Thanks
+
+  * cedlemo
+
+  * kojix2
+
+  * Izumi Tsutsui
+
+  * yosuke shiro
+
+  * Iain Lane
+
 == Ruby-GNOME2 3.2.7: 2018-06-07
 
 This is a packaging bug fix release of 3.2.6.
