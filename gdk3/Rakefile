@@ -60,6 +60,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
           "--with-included-immodules",
         ],
         :patches => [
+          "gtk-3.23.2-fix-pangoft2.diff",
         ],
         :need_autoreconf => true,
         :build_concurrently => false,
