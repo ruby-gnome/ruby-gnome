@@ -2,6 +2,29 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.2.9: 2018-08-08
+
+This is a packaging bug fix release of 3.2.8.
+
+=== Changes
+
+==== All
+
+  * Fixes
+
+    * Fixed wrong gem content.
+      [GitHub#1236][Reported by Izumi Tsutsui]
+
+==== Ruby/GtkSourceView4
+
+  * Improvements
+
+    * Added.
+
+=== Thanks
+
+  * Izumi Tsutsui
+
 == Ruby-GNOME2 3.2.8: 2018-08-06
 
 This is an installation improvement release of 3.2.7.
