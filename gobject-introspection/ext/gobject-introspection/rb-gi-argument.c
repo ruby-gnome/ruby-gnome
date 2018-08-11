@@ -2093,7 +2093,12 @@ rb_gi_out_argument_fin_interface(GIArgument *argument,
             break;
           case GI_TRANSFER_CONTAINER:
           case GI_TRANSFER_EVERYTHING:
-            g_object_unref(*((GObject **)argument->v_pointer));
+            {
+                GObject *object = *((GObject **)argument->v_pointer);
+                if (object) {
+                    g_object_unref(object);
+                }
+            }
             break;
           default:
             rb_raise(rb_eNotImpError,
