@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2008-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -45,7 +45,7 @@ class TestPage < Test::Unit::TestCase
     document = Poppler::Document.new(form_pdf)
     page = document[0]
     layout = page.text_layout
-    assert_equal([60, 31, 79, 60],
+    assert_equal([91, 133, 97, 146],
                  layout[0].to_a.collect(&:round))
   end
 

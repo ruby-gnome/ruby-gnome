@@ -24,14 +24,7 @@ module PopplerTestUtils
   end
 
   def form_pdf
-    path = fixture_path("form.pdf")
-    unless File.exist?(path)
-      pdf = open("https://www.irs.gov/pub/irs-pdf/fw9.pdf").read
-      File.open(path, "wb") do |output|
-        output.print(pdf)
-      end
-    end
-    path
+    fixture_path("form.pdf")
   end
 
   def text_field_pdf
