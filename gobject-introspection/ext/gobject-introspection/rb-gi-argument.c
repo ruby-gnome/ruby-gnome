@@ -2088,11 +2088,19 @@ rb_gi_out_argument_fin_interface(GIArgument *argument,
       case GI_INFO_TYPE_FLAGS:
         break;
       case GI_INFO_TYPE_OBJECT:
-        if (transfer != GI_TRANSFER_NOTHING) {
+        switch (transfer) {
+          case GI_TRANSFER_NOTHING:
+            break;
+          case GI_TRANSFER_CONTAINER:
+          case GI_TRANSFER_EVERYTHING:
+            g_object_unref(*((GObject **)argument->v_pointer));
+            break;
+          default:
             rb_raise(rb_eNotImpError,
                      "TODO: free out transfer GIArgument(interface)[%s][%s]",
                      g_info_type_to_string(interface_type),
                      rb_gi_transfer_to_string(transfer));
+            break;
         }
         xfree(argument->v_pointer);
         break;
