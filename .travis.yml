@@ -1,7 +1,6 @@
 notifications:
-  email:
-    recipients:
-      - ruby-gnome2@ml.commit-email.info
+  webhooks:
+    - https://webhook.commit-email.info/
 
 dist: trusty
 
