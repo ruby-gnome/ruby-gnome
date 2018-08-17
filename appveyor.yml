@@ -17,6 +17,7 @@ install:
   - bundler --version
   - ridk exec pacman -Syu --noconfirm
   - bundle config --local force_ruby_platform true
+  - bundle install
 
 build_script:
   - bundle exec ruby -rdevkit -S rake build
