@@ -1,0 +1,25 @@
+version: "{build}"
+clone_depth: 10
+
+notifications:
+  - provider: Webhook
+    url: https://webhook.commit-email.info/
+
+environment:
+  matrix:
+    - ruby_version: "24-x64"
+    - ruby_version: "25-x64"
+
+install:
+  - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
+  - ruby --version
+  - gem --version
+  - bundler --version
+  - ridk exec pacman -Syu --noconfirm
+  - bundle config --local force_ruby_platform true
+
+build_script:
+  - bundle exec ruby -rdevkit -S rake build
+
+test_script:
+  - bundle exec rake
