@@ -40,6 +40,6 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
   s.files += Dir.glob("test/**/*")
 
-  s.add_runtime_dependency("cairo")
+  s.add_runtime_dependency("cairo", ">= 1.15.14")
   s.add_runtime_dependency("glib2", "= #{s.version}")
 end
