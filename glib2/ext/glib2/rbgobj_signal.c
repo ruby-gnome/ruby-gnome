@@ -131,7 +131,7 @@ accumulator_func(G_GNUC_UNUSED GSignalInvocationHint *ihint,
         continue_emission = RVAL2CBOOL(rb_ary_entry(tmp, 0));
         val = rb_ary_entry(tmp, 1);
     } else {
-        val = tmp;        
+        val = tmp;
     }
     rbgobj_rvalue_to_gvalue(val, return_accu);
 
