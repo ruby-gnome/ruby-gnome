@@ -21,12 +21,21 @@ For example in order to install the gtk3 gem and its dependencies:
 
 You can also install these gems from GitHub master branch.
 
-    % git clone https://github.com/ruby-gnome2/ruby-gnome2.git
-    % cd ruby-gnome2
-    % bundle install
-    % bundle exec rake gem:build
-    % bundle exec rake gem:install
+Create `Gemfile` like the following:
 
+```ruby
+source "https://rubygems.org/"
+
+git "https://github.com/ruby-gnome2/ruby-gnome2.git" do
+  gem "gtk3"
+end
+```
+
+Install these gems by Bundler:
+
+```console
+% bundle install
+```
 
 ## Release packages
 
