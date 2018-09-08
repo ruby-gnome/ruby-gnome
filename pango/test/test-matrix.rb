@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -101,13 +101,14 @@ class TestPangoMatrix < Test::Unit::TestCase
     matrix.rotate!(60)
     sin = Math.sin(60 * Math::PI / 180)
     cos = Math.cos(60 * Math::PI / 180)
+    n_digits = 10
     assert_equal([
                    cos, sin,
                    -sin, cos,
                    0.0,
                    0.0,
-                 ],
-                 matrix.to_a)
+                 ].collect {|number| number.round(n_digits)},
+                 matrix.to_a.collect {|number| number.round(n_digits)})
   end
 
   def test_concat
