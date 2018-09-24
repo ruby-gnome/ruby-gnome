@@ -59,5 +59,13 @@ module Gtk
       setup_iter(iter)
       iter
     end
+
+    alias_method :set_column_types_raw, :set_column_types
+    def set_column_types(*types)
+      if types.size == 1 and types[0].is_a?(Array)
+        types = types[0]
+      end
+      set_column_types_raw(types)
+    end
   end
 end

@@ -190,6 +190,34 @@ class TestGtkListStore < Test::Unit::TestCase
                  normalized_data)
   end
 
+  sub_test_case "#set_column_types" do
+    class SubListStore < Gtk::ListStore
+      type_register
+    end
+
+    def setup
+      @store = SubListStore.new
+    end
+
+    test "Array" do
+      @store.set_column_types([String, Integer])
+      iter = @store.append
+      iter[0] = "string"
+      iter[1] = 29
+      assert_equal(["string", 29],
+                   [iter[0], iter[1]])
+    end
+
+    test "String, Integer" do
+      @store.set_column_types(String, Integer)
+      iter = @store.append
+      iter[0] = "string"
+      iter[1] = 29
+      assert_equal(["string", 29],
+                   [iter[0], iter[1]])
+    end
+  end
+
   sub_test_case "GC" do
     test "iter" do
       GC.start
