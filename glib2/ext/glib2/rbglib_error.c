@@ -127,12 +127,15 @@ rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE paren
             gchar *code_class_name;
 
             code_constant_name = nick_to_constant_name(entry->value_nick);
-            rbgobj_define_const(error_class,
-                                code_constant_name,
-                                INT2NUM(entry->value));
+            code_class_name = nick_to_class_name(entry->value_nick);
+
+            if (strcmp(code_constant_name, code_class_name) != 0) {
+                rbgobj_define_const(error_class,
+                                    code_constant_name,
+                                    INT2NUM(entry->value));
+            }
             g_free(code_constant_name);
 
-            code_class_name = nick_to_class_name(entry->value_nick);
             code_class = rb_define_class_under(error_class,
                                                code_class_name,
                                                error_class);
