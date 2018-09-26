@@ -1,3 +1,7 @@
+// This is based on examples/HowToUseJIT/HowToUseJIT.cpp in LLVM source archive.
+// This file is distributed under the University of Illinois Open Source
+// License. See http://releases.llvm.org/6.0.1/LICENSE.TXT for details.
+
 #include <stdio.h>
 
 #include <memory>
