@@ -119,7 +119,14 @@ module GdkPixbuf
       elsif resource && !scale
         initialize_new_from_resource(resource)
       elsif data && size
-        row_stride ||= data.bytesize / height
+        if row_stride.nil?
+          if data.is_a?(Array)
+            total_size = data.size
+          else
+            total_size = data.bytesize
+          end
+          row_stride = total_size / height
+        end
         initialize_new_from_data(data, colorspace, has_alpha, bits_per_sample,
                                  width, height, row_stride)
       elsif bytes && size
