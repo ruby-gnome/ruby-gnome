@@ -30,8 +30,7 @@ class TestNode < Test::Unit::TestCase
     save.process
 
     output.open
-    assert do
-      output.read.start_with?("\xFF\xD8\xFF\xE0\x00\x10JFIF")
-    end
+    assert_equal("\xFF\xD8\xFF\xE0\x00\x10JFIF".b,
+                 output.read(10))
   end
 end
