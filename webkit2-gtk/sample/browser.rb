@@ -19,37 +19,38 @@ require "webkit2-gtk"
 
 uri = URI.parse(ARGV.shift || "https://webkitgtk.org/")
 
-window = Gtk::Window.new
-window.set_default_size(800, 600)
-window.signal_connect("destroy") do
-  Gtk.main_quit
+app = Gtk::Application.new("com.github.ruby-gnome2.webkit2-gtk.sample.browser",
+                           :flags_none)
+app.signal_connect(:activate) do |_|
+  window = Gtk::ApplicationWindow.new(app)
+  window.set_default_size(800, 600)
+
+  # For supporting http_proxy and https_proxy.
+  # view_context = WebKit2Gtk::WebContext.new
+  # proxy_settings = WebKit2Gtk::NetworkProxySettings.new
+  # proxy_settings.add_proxy_for_scheme("http", ENV["http_proxy"])
+  # proxy_settings.add_proxy_for_scheme("https", ENV["https_proxy"])
+  # view_context.set_network_proxy_settings(:custom, proxy_settings)
+  # view = WebKit2Gtk::WebView.new(context: view_context)
+  view = WebKit2Gtk::WebView.new
+  view.signal_connect("load-changed") do |_, load_event|
+    p [:load_changed, view.uri, load_event]
+  end
+  view.signal_connect("load-failed") do |_, _, failed_uri, error|
+    message = "failed to load URI: #{failed_uri}: "
+    message << "#{error.class}(#{error.code}): #{error.message}"
+    puts(message)
+    true
+  end
+
+  if uri.class == URI::Generic
+    view.load_html(File.read(uri.path), uri.to_s)
+  else
+    view.load_uri(uri.to_s)
+  end
+
+  window.add(view)
+  window.show_all
 end
 
-# For supporting http_proxy and https_proxy.
-# view_context = WebKit2Gtk::WebContext.new
-# proxy_settings = WebKit2Gtk::NetworkProxySettings.new
-# proxy_settings.add_proxy_for_scheme("http", ENV["http_proxy"])
-# proxy_settings.add_proxy_for_scheme("https", ENV["https_proxy"])
-# view_context.set_network_proxy_settings(:custom, proxy_settings)
-# view = WebKit2Gtk::WebView.new(context: view_context)
-view = WebKit2Gtk::WebView.new
-view.signal_connect("load-changed") do |_, load_event|
-  p [:load_changed, view.uri, load_event]
-end
-view.signal_connect("load-failed") do |_, _, failed_uri, error|
-  message = "failed to load URI: #{failed_uri}: "
-  message << "#{error.class}(#{error.code}): #{error.message}"
-  puts(message)
-  true
-end
-
-if uri.class == URI::Generic
-  view.load_html(File.read(uri.path), uri.to_s)
-else
-  view.load_uri(uri.to_s)
-end
-
-window.add(view)
-window.show_all
-
-Gtk.main
+app.run
