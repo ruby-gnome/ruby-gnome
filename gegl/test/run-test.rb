@@ -48,6 +48,11 @@ require_relative "helper"
 
 $VERBOSE = true
 
-require "gegl"
+begin
+  require "gegl"
+rescue GObjectIntrospection::RepositoryError
+  puts("Omit because typelib file doesn't exist: #{$!.message}")
+  exit(true)
+end
 
 exit(Test::Unit::AutoRunner.run(true, File.join(gegl_base, "test")))
