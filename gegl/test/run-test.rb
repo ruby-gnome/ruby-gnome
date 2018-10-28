@@ -46,6 +46,8 @@ require "glib-test-init"
 $LOAD_PATH.unshift(File.join(gegl_base, "test"))
 require_relative "helper"
 
+$VERBOSE = true
+
 require "gegl"
 
 exit(Test::Unit::AutoRunner.run(true, File.join(gegl_base, "test")))

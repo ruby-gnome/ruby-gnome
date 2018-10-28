@@ -21,11 +21,11 @@ class TestNode < Test::Unit::TestCase
     graph = Gegl::Node.new
 
     load = graph.create_child("gegl:load")
-    load.set_property("path", fixture_path("gnome-logo-icon.png"))
+    load[:path] = fixture_path("gnome-logo-icon.png")
 
     save = graph.create_child("gegl:save")
     output = Tempfile.new(["node-save", ".jpeg"])
-    save.set_property("path", output.path)
+    save[:path] = output.path
     load << save
     save.process
 

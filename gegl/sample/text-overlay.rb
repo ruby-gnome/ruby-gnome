@@ -30,18 +30,18 @@ to = ARGV[2]
 graph = Gegl::Node.new
 
 load = graph.create_child("gegl:load")
-load.set_property("path", from)
+load[:path] = from
 
 text = graph.create_child("gegl:text")
-text.set_property("string", message)
-text.set_property("size", 48)
+text[:string] = message
+text[:size] = 48
 
 over = graph.create_child("gegl:over")
 load.connect_to("output", over, "input")
 text.connect_to("output", over, "aux")
 
 save = graph.create_child("gegl:save")
-save.set_property("path", to)
+save[:path] = to
 over.connect_to("output", save, "input")
 
 save.process

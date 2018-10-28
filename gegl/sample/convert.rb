@@ -28,8 +28,8 @@ to = ARGV[1]
 
 graph = Gegl::Node.new
 load = graph.create_child("gegl:load")
-load.set_property("path", from)
+load[:path] = from
 save = graph.create_child("gegl:save")
-save.set_property("path", to)
+save[:path] = to
 load << save
 save.process

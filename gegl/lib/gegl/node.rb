@@ -16,6 +16,14 @@
 
 module Gegl
   class Node
+    def [](name)
+      get_property(name)
+    end
+
+    def []=(name, value)
+      set_property(name, value)
+    end
+
     def <<(sink)
       self.link(sink)
       self
