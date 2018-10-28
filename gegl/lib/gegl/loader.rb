@@ -1,0 +1,46 @@
+# Copyright (C) 2018  Ruby-GNOME2 Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+require "English"
+
+module Gegl
+  class Loader < GObjectIntrospection::Loader
+    private
+    def pre_load(repository, namespace)
+      init = repository.find(namespace, "init")
+      init.invoke([[$0]])
+    end
+
+    def post_load(repository, namespace)
+      require_libraries
+    end
+
+    def require_libraries
+      require "gegl/node"
+      require "gegl/version"
+    end
+
+    def load_function_info(info)
+      name = info.name
+      case name
+      when "init"
+        # ignore
+      else
+        super
+      end
+    end
+  end
+end

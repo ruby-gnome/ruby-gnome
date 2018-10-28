@@ -41,5 +41,6 @@ RUBYLIB="${base_dir}/gtksourceview3/lib:${RUBYLIB}"
 RUBYLIB="${base_dir}/gsf/lib:${RUBYLIB}"
 RUBYLIB="${base_dir}/goffice/lib:${RUBYLIB}"
 RUBYLIB="${base_dir}/gnumeric/lib:${RUBYLIB}"
+RUBYLIB="${base_dir}/gegl/lib:${RUBYLIB}"
 
 "$@"
