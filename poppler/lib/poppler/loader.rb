@@ -53,6 +53,10 @@ module Poppler
         self.class.register_constant_rename_map("90", "DEGREE_90")
         self.class.register_constant_rename_map("180", "DEGREE_180")
         self.class.register_constant_rename_map("270", "DEGREE_270")
+      when "PDFPart"
+        1.upto(8) do |i|
+          self.class.register_constant_rename_map("#{i}", "PART_#{i}")
+        end
       end
       super
     end
