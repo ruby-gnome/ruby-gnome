@@ -10,6 +10,7 @@
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">label</property>
         <property name="ellipsize">end</property>
+        <signal name="move-cursor" handler="on_move_cursor" swapped="no"/>
       </object>
     </child>
   </object>

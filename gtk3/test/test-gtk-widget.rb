@@ -218,4 +218,32 @@ class TestGtkWidget < Test::Unit::TestCase
                    widget.get_template_child(widget_class, :label).class)
     end
   end
+
+  sub_test_case ".set_connect_func" do
+    setup do
+      only_gtk_version(3, 12, 0)
+      @resource_data = File.read(fixture_path("simple_window.ui"))
+    end
+
+    test "connect" do
+      data = @resource_data
+      handler_names = []
+      widget_class = Class.new(Gtk::Window) do
+        type_register "SetConnectFunc"
+
+        singleton_class.send(:define_method, :init) do
+          set_template(:data => data)
+          bind_template_child(:label)
+          set_connect_func do |handler_name|
+            handler_names << handler_name
+            lambda do
+              # Do nothing
+            end
+          end
+        end
+      end
+      widget_class.new
+      assert_equal(["on_move_cursor"], handler_names)
+    end
+  end
 end
