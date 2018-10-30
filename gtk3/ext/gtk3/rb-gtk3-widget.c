@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2015-2018  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -19,6 +19,8 @@
  */
 
 #include "rb-gtk3-private.h"
+
+#include <rb_cairo.h>
 
 #define RG_TARGET_NAMESPACE cWidget
 #define _SELF(self) (RVAL2GTKWIDGET(self))
@@ -58,6 +60,28 @@ rg_s_type_register(int argc, VALUE *argv, VALUE klass)
     return Qnil;
 }
 
+static void
+rb_gtk3_widget_draw(RGClosureCallData *data)
+{
+    VALUE rb_widget;
+    VALUE rb_cairo_context;
+    VALUE rb_args;
+    VALUE rb_stop_propagate;
+
+    rb_widget = GVAL2RVAL(&(data->param_values[0]));
+    rb_cairo_context = GVAL2RVAL(&(data->param_values[1]));
+    rb_args = rb_ary_new_from_args(2, rb_widget, rb_cairo_context);
+    if (!NIL_P(data->extra_args)) {
+        rb_ary_concat(rb_args, data->extra_args);
+    }
+    rb_stop_propagate = rb_apply(data->callback,
+                                 rb_intern("call"),
+                                 rb_args);
+    rb_funcall(rb_cairo_context, rb_intern("destroy"), 0);
+    g_value_set_boolean(data->return_value,
+                        RVAL2CBOOL(rb_stop_propagate));
+}
+
 void
 rbgtk3_widget_init(void)
 {
@@ -68,4 +92,8 @@ rbgtk3_widget_init(void)
     RG_TARGET_NAMESPACE = rb_const_get(mGtk, rb_intern("Widget"));
 
     RG_DEF_SMETHOD(type_register, -1);
+
+    rbgobj_set_signal_call_func(RG_TARGET_NAMESPACE,
+                                "draw",
+                                rb_gtk3_widget_draw);
 }
