@@ -148,6 +148,7 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "gsf",
   "goffice",
   "gnumeric"
+  "gegl",
 ]
 gnome2_packages = gnome2_packages.uniq
 
