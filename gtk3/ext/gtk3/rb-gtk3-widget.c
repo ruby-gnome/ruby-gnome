@@ -77,9 +77,7 @@ rb_gtk3_widget_draw(RGClosureCallData *data)
     rb_stop_propagate = rb_apply(data->callback,
                                  rb_intern("call"),
                                  rb_args);
-    /* TODO: Replace this with
-       RVAL2CBOOL(rb_funcall(rb_cairo_context, rb_intern("destroyed?"), 0)) */
-    if (DATA_PTR(rb_cairo_context)) {
+    if (!RVAL2CBOOL(rb_funcall(rb_cairo_context, rb_intern("destroyed?"), 0))) {
         rb_funcall(rb_cairo_context, rb_intern("destroy"), 0);
     }
     g_value_set_boolean(data->return_value,
