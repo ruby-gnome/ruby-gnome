@@ -38,6 +38,7 @@ run()
 }
 
 if [ ! -f ~/setup.timestamp ]; then
+  run sudo systemctl stop apt-daily.service apt-daily.timer
   run sudo rm -rf /etc/udev/rules.d/70-persistent-net.rules/
 
   run sudo sed \
