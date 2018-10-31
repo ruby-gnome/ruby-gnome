@@ -2,6 +2,112 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.3.0: 2018-10-31
+
+This is a release for fixing memory leak bugs of cairo-gobject,
+improving macOS support and adding support for GEGL.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * Added support for the same constant name and class name for error.
+
+  * Fixes
+
+    * Fixed wrong constant values:
+
+      * (({GLib2::MINLONG}))
+
+      * (({GLib2::MAXLONG}))
+
+      * (({GLib2::MAXULONG}))
+
+      * (({GLib2::MINUINT64}))
+
+      * (({GLib2::MAXSIZE}))
+
+      * (({GLib2::MINFLOAT}))
+
+      * (({GLib2::MINDOUBLE}))
+
+      [GitHub#1244][Reported by cobodo]
+
+==== Ruby/CairoGObject
+
+  * Fixes
+
+    * Fixed a memory leak.
+      [GitHub#1232][Reported by Jean-Christophe Le Lann]
+
+    * Stopped to increase needless reference.
+      [GitHub#1079][Reported by noanoa07]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for transfer full output parameter.
+
+  * Fixes
+
+    * Fixed a bug that class method closure doesn't work.
+      [GitHub#1245][Reported by kojix2]
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements
+
+    * (({GdkPixbuf::Pixbuf.new})): Added support for auto row stride
+      detection for (({[Integer]})) data.
+
+==== Ruby/Pango
+
+  * Improvements
+
+    * Made test more robust.
+      [GitHub#1239][Reported by Michael Hudson-Doyle]
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * Improved backward compatibility for (({Gtk::ListStore#set_column_types})).
+      [GitHub#1240][Reported by Edward Hennessy]
+
+  * Fixes
+
+    * Fixed wrong size used bug on HiDPI.
+      [GitHub#1079][Reported by noanoa07]
+
+==== Ruby/Poppler
+
+  * Improvements
+
+    * Added support for Popper 0.70.0.
+
+==== Ruby/GEGL
+
+  * Improvements
+
+    * Added.
+
+=== Thanks
+
+  * Jean-Christophe Le Lann
+
+  * Michael Hudson-Doyle
+
+  * Edward Hennessy
+
+  * cobodo
+
+  * kojix2
+
+  * noanoa07
+
 == Ruby-GNOME2 3.2.9: 2018-08-08
 
 This is a packaging bug fix release of 3.2.8.
