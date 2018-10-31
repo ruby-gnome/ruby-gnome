@@ -54,7 +54,7 @@ if [ ! -f ~/setup.timestamp ]; then
     run sudo debconf-set-selections
 
   run \
-    sudo apt-get install -y -V \
+    sudo apt install -y -V \
     git \
     ruby \
     ruby-dev \
@@ -85,7 +85,8 @@ if [ ! -f ~/setup.timestamp ]; then
     cmake \
     valac \
     libmount-dev \
-    python3-pip
+    python3-pip \
+    libselinux1-dev
 
   # Enable me when WebKitGTK+ supports Windows.
   # run sudo update-alternatives --set \
