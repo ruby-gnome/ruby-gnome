@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -90,24 +90,18 @@ module GNOME2
           package.native.patches.each do |patch|
             sh("patch -p1 < #{@package.patches_dir}/#{patch}")
           end
-          sh("./autogen.sh") if package.native.need_autogen?
-          sh("autoreconf --install") if package.native.need_autoreconf?
-          sh("./configure",
-             "PKG_CONFIG_PATH=#{pkg_config_path}",
-             "--prefix=#{dist_dir}",
-             *package.native.configure_args) or exit(false)
+          build_dir = "build"
           env = []
           env << "PKG_CONFIG_PATH=#{pkg_config_path}"
-          common_make_args = []
-          common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
-          build_make_args = common_make_args.dup
-          install_make_args = common_make_args.dup
-          if package.native.build_concurrently?
-            make_n_jobs = ENV["MAKE_N_JOBS"]
-            build_make_args << "-j#{make_n_jobs}" if make_n_jobs
-          end
-          sh("env", *env, "nice", "make", *build_make_args) or exit(false)
-          sh("env", *env, "make", "install", *install_make_args) or exit(false)
+          env << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
+          sh("env",
+             *env,
+             "meson",
+             build_dir,
+             "--prefix=#{dist_dir}",
+             "--libdir=lib") or exit(false)
+          sh("env", *env, "nice", "ninja", "-C", build_dir) or exit(false)
+          sh("env", *env, "ninja", "-C", build_dir, "install") or exit(false)
         end
       end
 
