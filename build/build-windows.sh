@@ -39,7 +39,11 @@ run()
 
 if [ ! -f ~/setup.timestamp ]; then
   run sudo rm -rf /etc/udev/rules.d/70-persistent-net.rules/
-  run sudo sed -i'' -e 's,http://us,http://jp,g' /etc/apt/sources.list
+
+  run sudo sed \
+      -i'' \
+      -e 's,archive.ubuntu.com/ubuntu,ftp.iij.ad.jp/pub/linux/ubuntu/archive/,g' \
+      /etc/apt/sources.list
   run sudo dpkg --add-architecture i386
   run sudo apt-get update
 
