@@ -118,7 +118,7 @@ module GNOME2
           # build_make_args << "V=1"
           # build_make_args << "VERBOSE=1"
           # env["GI_SCANNER_DEBUG"] = "save-temps"
-          if File.exist?("meson.build") and not File.exist?("Makefile.am")
+          if File.exist?("meson.build")
             source_dir = Dir.pwd
             build_dir = "build"
             mkdir_p(build_dir)
@@ -130,7 +130,7 @@ module GNOME2
                  "ninja", "install") or exit(false)
             end
           else
-            if File.exist?("Makefile.am")
+            if File.exist?("Makefile.am") or File.exist?("Makefile.in")
               configure(env, package)
             else
               cmake(env, package)
