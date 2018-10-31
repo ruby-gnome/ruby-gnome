@@ -35,7 +35,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "icu",
       :download_site => :icu,
       :label => "ICU",
-      :version => "58.2",
+      :version => "63.1",
       :base_name => "icu",
       :archive_base_name => lambda do |package|
         archive_base_name_version = package.version.gsub(".", "_")
@@ -62,7 +62,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "harfbuzz",
       :download_site => :freedesktop,
       :label => "HarfBuzz",
-      :version => "1.8.5",
+      :version => "2.1.0",
       :compression_method => "bz2",
       :windows => {
         :configure_args => [
@@ -106,7 +106,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "pango",
       :download_site => :gnome,
       :label => "Pango",
-      :version => "1.42.3",
+      :version => "1.42.4",
       :compression_method => "xz",
       :windows => {
         :configure_args => [

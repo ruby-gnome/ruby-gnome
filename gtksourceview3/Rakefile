@@ -44,7 +44,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "gtksourceview",
       :download_site => :gnome,
       :label => "GtkSourceView",
-      :version => "3.24.7",
+      :version => "3.24.9",
       :compression_method => "xz",
       :windows => {
         :configure_args => [

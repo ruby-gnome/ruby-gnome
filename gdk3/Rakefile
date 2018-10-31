@@ -42,7 +42,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "libepoxy",
       :download_site => :gnome,
       :label => "Epoxy",
-      :version => "1.5.2",
+      :version => "1.5.3",
       :compression_method => "xz",
       :windows => {
         :built_file => "bin/libepoxy-0.dll",
@@ -52,7 +52,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "gtk+",
       :download_site => :gnome,
       :label => "GTK+",
-      :version => "3.23.2",
+      :version => "3.24.1",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -83,7 +83,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "adwaita-icon-theme",
       :download_site => :gnome,
       :label => "adwaita-icon-theme",
-      :version => "3.28.0",
+      :version => "3.30.0",
       :compression_method => "xz",
       :windows => {
         :use_gobject_introspection => false,

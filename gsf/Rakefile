@@ -41,7 +41,7 @@ GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
       :name => "libgsf",
       :download_site => :gnome,
       :label => "GSF",
-      :version => "1.14.43",
+      :version => "1.14.44",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
