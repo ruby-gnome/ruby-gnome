@@ -130,7 +130,7 @@ module GNOME2
                  "ninja", "install") or exit(false)
             end
           else
-            if File.exist?("Makefile.in")
+            if File.exist?("Makefile.am")
               configure(env, package)
             else
               cmake(env, package)
