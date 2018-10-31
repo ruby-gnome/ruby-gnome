@@ -31,20 +31,7 @@ static gpointer                                                         \
 prefix ## _robj2instance(VALUE rb_object,                               \
                          G_GNUC_UNUSED gpointer user_data)              \
 {                                                                       \
-    ID id_gboxed;                                                       \
-    VALUE rb_boxed = Qnil;                                              \
-                                                                        \
-    CONST_ID(id_gboxed, "gboxed");                                      \
-    if (rb_ivar_defined(rb_object, id_gboxed)) {                        \
-        rb_boxed = rb_ivar_get(rb_object, id_gboxed);                   \
-    }                                                                   \
-    if (NIL_P(rb_boxed)) {                                              \
-        gpointer cr_object = RVAL2CR(rb_object);                        \
-        rb_boxed = rbgobj_make_boxed_default(cr_object, gtype);         \
-        rb_ivar_set(rb_object, id_gboxed, rb_boxed);                    \
-    }                                                                   \
-                                                                        \
-    return rbgobj_boxed_get_default(rb_boxed, gtype);                   \
+    return RVAL2CR(rb_object);                                          \
 }                                                                       \
                                                                         \
 static VALUE                                                            \
