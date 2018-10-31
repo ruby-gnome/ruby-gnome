@@ -1,7 +1,8 @@
-diff -ru glib-2.54.1.orig/gio/tests/Makefile.am glib-2.54.1/gio/tests/Makefile.am
---- glib-2.54.1.orig/gio/tests/Makefile.am	2017-10-02 14:58:06.000000000 +0000
-+++ glib-2.54.1/gio/tests/Makefile.am	2017-10-16 00:08:45.899226582 +0000
-@@ -543,7 +543,7 @@
+diff --git a/gio/tests/Makefile.am b/gio/tests/Makefile.am
+index 1f0bed7b6..6fa002685 100644
+--- a/gio/tests/Makefile.am
++++ b/gio/tests/Makefile.am
+@@ -578,7 +578,7 @@ if !ENABLE_INSTALLED_TESTS
  libresourceplugin_la_LDFLAGS += -rpath /
  endif
  
