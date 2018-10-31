@@ -7,7 +7,17 @@
 This is a release for fixing memory leak bugs of cairo-gobject,
 improving macOS support and adding support for GEGL.
 
+We stopped to provide fat gems for Windows. You can use normal gems
+with MSYS2 packages.
+
 === Changes
+
+==== All
+
+  * Improvements
+
+    * Windows: Stopped to provide fat gems. You can use normal gems with
+      MSYS2 packages.
 
 ==== Ruby/GLib2
 
