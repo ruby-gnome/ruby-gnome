@@ -173,8 +173,7 @@ rectangles = [ Rectangle.new(10, 10, 0.0, 0.0, 0.9, "Blue box!"),
 drawingarea = Gtk::DrawingArea.new
 drawingarea.set_size_request(320, 240)
 drawingarea.has_tooltip = true
-drawingarea.signal_connect('draw') {
-  cr = drawingarea.window.create_cairo_context
+drawingarea.signal_connect('draw') do |_widget, cr|
   cr.rectangle(0, 0, drawingarea.allocation.width, drawingarea.allocation.height)
   cr.set_source_rgb(1.0, 1.0, 1.0)
   cr.fill
@@ -186,7 +185,7 @@ drawingarea.signal_connect('draw') {
     cr.set_source_rgba(r.r, r.g, r.b, 0.5)
     cr.fill
   }
-}
+end
 drawingarea.signal_connect('query-tooltip') { |widget, x, y, keyboard_tip, tooltip|
   drawingarea_query_tooltip(keyboard_tip, x, y, tooltip, rectangles)
 }
