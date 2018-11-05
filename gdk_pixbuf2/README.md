@@ -4,9 +4,9 @@ Ruby/GdkPixbuf2 is a Ruby binding of GdkPixbuf-2.x.
 
 Requirements
 ------------
-   Ruby: http://www.ruby-lang.org/
-   GTK+: http://www.gtk.org/
-   Ruby/GLib2, Ruby/GTK2: http://ruby-gnome2.sourceforge.net/
+*  Ruby: http://www.ruby-lang.org/
+*  GTK+: http://www.gtk.org/
+*  Ruby/GLib2, Ruby/GTK2: http://ruby-gnome2.sourceforge.net/
 
 Install
 -------
@@ -18,7 +18,7 @@ Install
 
 Copying
 -------
-   Copyright (c) 2002-2016 Ruby-GNOME2 Project Team
+   Copyright (c) 2002-2018 Ruby-GNOME2 Project Team
 
    This program is free software.
    You can distribute/modify this program under the terms of
@@ -26,5 +26,5 @@ Copying
 
 Project Websites
 ----------------
-   https://ruby-gnome2.osdn.jp/
-   https://github.com/ruby-gnome2/ruby-gnome2
+*  https://ruby-gnome2.osdn.jp/
+*  https://github.com/ruby-gnome2/ruby-gnome2
