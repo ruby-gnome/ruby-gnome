@@ -119,21 +119,26 @@ module GdkPixbuf
       elsif resource && !scale
         initialize_new_from_resource(resource)
       elsif data && size
-        if row_stride.nil?
-          if data.is_a?(Array)
-            total_size = data.size
-          else
-            total_size = data.bytesize
-          end
-          row_stride = total_size / height
-        end
-        initialize_new_from_data(data, colorspace, has_alpha, bits_per_sample,
-                                 width, height, row_stride)
+        data = data.pack("C*") if data.is_a?(Array)
+        row_stride ||= data.bytesize / height
+        initialize_new_from_data(data,
+                                 colorspace,
+                                 has_alpha,
+                                 bits_per_sample,
+                                 width,
+                                 height,
+                                 row_stride)
+        @data = data
       elsif bytes && size
         row_stride ||= bytes.size / height
-        initialize_new_from_bytes(bytes, colorspace, has_alpha, bits_per_sample,
-                                  width, height, row_stride)
-
+        initialize_new_from_bytes(bytes,
+                                  colorspace,
+                                  has_alpha,
+                                  bits_per_sample,
+                                  width,
+                                  height,
+                                  row_stride)
+        @bytes = bytes
       elsif xpm
         initialize_new_from_xpm_data(xpm)
       elsif size
