@@ -63,7 +63,7 @@ Install these gems by Bundler:
 ### ruby-gnome2-all
 
 * ruby-gtk2 + ruby-gtk3
-* Ruby/RSVG:            librsvg 2.8.0 or later
+* Ruby/RSVG2:            librsvg 2.8.0 or later
 * Ruby/Poppler:         poppler-glib 0.8.0 or later
 * Ruby/VTE:             VTE 0.12.1 or later
 * Ruby/VTE3:            VTE 0.37.0 or later
