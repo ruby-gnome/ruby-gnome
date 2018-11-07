@@ -20,8 +20,8 @@ require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
   s.name          = "rsvg2"
-  s.summary = "Ruby/Rsvg is a Ruby binding of librsvg-2.x."
-  s.description = "Ruby/Rsvg is a Ruby binding of librsvg-2.x."
+  s.summary       = "Ruby/RSVG2 is a Ruby binding of librsvg-2.x."
+  s.description   = "Ruby/RSVG2 is a Ruby binding of librsvg-2.x."
   s.author        = "The Ruby-GNOME2 Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome2.osdn.jp/"
