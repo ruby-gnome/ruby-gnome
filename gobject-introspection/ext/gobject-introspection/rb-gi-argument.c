@@ -2957,7 +2957,16 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
         break;
     case GI_INFO_TYPE_OBJECT:
     case GI_INFO_TYPE_INTERFACE:
+        gtype = g_registered_type_info_get_g_type(interface_info);
         argument->v_pointer = RVAL2GOBJ(rb_argument);
+        if (argument->v_pointer &&
+            gtype != G_TYPE_NONE &&
+            !G_TYPE_CHECK_INSTANCE_TYPE(argument->v_pointer, gtype)) {
+            rb_raise(rb_eArgError,
+                     "must be <%s> object: <%" PRIsVALUE ">",
+                     g_type_name(gtype),
+                     rb_argument);
+        }
         break;
     case GI_INFO_TYPE_CONSTANT:
         rb_raise(rb_eNotImpError,
@@ -3007,9 +3016,16 @@ rb_gi_value_argument_from_ruby_glist(GIArgument *argument,
 {
     GITypeInfo *element_type_info;
     GITypeTag element_type_tag;
+    GType gtype = G_TYPE_NONE;
 
     element_type_info = g_type_info_get_param_type(type_info, 0);
     element_type_tag = g_type_info_get_tag(element_type_info);
+    if (element_type_tag == GI_TYPE_TAG_INTERFACE) {
+        GIBaseInfo *interface_info;
+        interface_info = g_type_info_get_interface(element_type_info);
+        gtype = g_registered_type_info_get_g_type(interface_info);
+        g_base_info_unref(interface_info);
+    }
     g_base_info_unref(element_type_info);
 
     switch (element_type_tag) {
@@ -3035,6 +3051,19 @@ rb_gi_value_argument_from_ruby_glist(GIArgument *argument,
         break;
     case GI_TYPE_TAG_INTERFACE:
         argument->v_pointer = RVAL2GOBJGLIST(rb_argument);
+        if (gtype != G_TYPE_NONE) {
+            GList *node;
+            for (node = argument->v_pointer; node; node = g_list_next(node)) {
+                GObject *object = node->data;
+                if (!G_TYPE_CHECK_INSTANCE_TYPE(object, gtype)) {
+                    g_list_free(argument->v_pointer);
+                    rb_raise(rb_eArgError,
+                             "must be <%s> objects: <%" PRIsVALUE ">",
+                             g_type_name(gtype),
+                             rb_argument);
+                }
+            }
+        }
         break;
     case GI_TYPE_TAG_GLIST:
     case GI_TYPE_TAG_GSLIST:
@@ -3059,9 +3088,16 @@ rb_gi_value_argument_from_ruby_gslist(GIArgument *argument,
 {
     GITypeInfo *element_type_info;
     GITypeTag element_type_tag;
+    GType gtype = G_TYPE_NONE;
 
     element_type_info = g_type_info_get_param_type(type_info, 0);
     element_type_tag = g_type_info_get_tag(element_type_info);
+    if (element_type_tag == GI_TYPE_TAG_INTERFACE) {
+        GIBaseInfo *interface_info;
+        interface_info = g_type_info_get_interface(element_type_info);
+        gtype = g_registered_type_info_get_g_type(interface_info);
+        g_base_info_unref(interface_info);
+    }
     g_base_info_unref(element_type_info);
 
     switch (element_type_tag) {
@@ -3087,6 +3123,19 @@ rb_gi_value_argument_from_ruby_gslist(GIArgument *argument,
         break;
     case GI_TYPE_TAG_INTERFACE:
         argument->v_pointer = RVAL2GOBJGSLIST(rb_argument);
+        if (gtype != G_TYPE_NONE) {
+            GSList *node;
+            for (node = argument->v_pointer; node; node = g_slist_next(node)) {
+                GObject *object = node->data;
+                if (!G_TYPE_CHECK_INSTANCE_TYPE(object, gtype)) {
+                    g_slist_free(argument->v_pointer);
+                    rb_raise(rb_eArgError,
+                             "must be <%s> objects: <%" PRIsVALUE ">",
+                             g_type_name(gtype),
+                             rb_argument);
+                }
+            }
+        }
         break;
     case GI_TYPE_TAG_GLIST:
     case GI_TYPE_TAG_GSLIST:
