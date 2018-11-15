@@ -32,6 +32,5 @@ module GLib
         (version <=> [major, minor, micro]) >= 0
       end
     end
-
   end
 end
