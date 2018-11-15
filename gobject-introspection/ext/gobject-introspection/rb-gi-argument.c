@@ -2855,50 +2855,52 @@ rb_gi_return_argument_free_everything(GIArgument *argument,
 
     type_tag = g_type_info_get_tag(type_info);
     switch (type_tag) {
-    case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_VOID:
         break;
-    case GI_TYPE_TAG_BOOLEAN:
-    case GI_TYPE_TAG_INT8:
-    case GI_TYPE_TAG_UINT8:
-    case GI_TYPE_TAG_INT16:
-    case GI_TYPE_TAG_UINT16:
-    case GI_TYPE_TAG_INT32:
-    case GI_TYPE_TAG_UINT32:
-    case GI_TYPE_TAG_INT64:
-    case GI_TYPE_TAG_UINT64:
-    case GI_TYPE_TAG_FLOAT:
-    case GI_TYPE_TAG_DOUBLE:
-    case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(%s) everything",
                  g_type_tag_to_string(type_tag));
         break;
-    case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_UTF8:
         g_free(argument->v_string);
         break;
-    case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_FILENAME:
         g_free(argument->v_string);
         break;
-    case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_ARRAY:
         rb_gi_return_argument_free_everything_array(argument, type_info);
         break;
-    case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_INTERFACE:
         rb_gi_return_argument_free_everything_interface(argument, type_info);
         break;
-    case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GLIST:
         rb_gi_return_argument_free_everything_glist(argument, type_info);
         break;
-    case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GSLIST:
         rb_gi_return_argument_free_everything_gslist(argument, type_info);
         break;
-    case GI_TYPE_TAG_GHASH:
-    case GI_TYPE_TAG_ERROR:
-    case GI_TYPE_TAG_UNICHAR:
+      case GI_TYPE_TAG_GHASH:
+        g_hash_table_unref(argument->v_pointer);
+        break;
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(%s) everything",
                  g_type_tag_to_string(type_tag));
         break;
-    default:
+      default:
         g_assert_not_reached();
         break;
     }
