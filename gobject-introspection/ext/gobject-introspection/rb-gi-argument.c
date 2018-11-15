@@ -1128,47 +1128,25 @@ rb_gi_argument_to_ruby_gslist(GIArgument *argument, GITypeInfo *type_info)
     return rb_argument;
 }
 
-static void
-rb_gi_argument_to_ruby_ghash_utf8_utf8_body(gpointer key,
-                                            gpointer value,
-                                            gpointer user_data)
-{
-    VALUE rb_table = (VALUE)user_data;
-    VALUE rb_key;
-    VALUE rb_value;
-
-    rb_key = CSTR2RVAL(key);
-    rb_value = CSTR2RVAL(value);
-    rb_hash_aset(rb_table, rb_key, rb_value);
-}
-
-static VALUE
-rb_gi_argument_to_ruby_ghash_utf8_utf8(GHashTable *table)
-{
+typedef struct {
+    GIArgument *argument;
     VALUE rb_table;
-
-    rb_table = rb_hash_new();
-    g_hash_table_foreach(table,
-                         rb_gi_argument_to_ruby_ghash_utf8_utf8_body,
-                         (gpointer)(rb_table));
-    return rb_table;
-}
-
-static VALUE
-rb_gi_argument_to_ruby_ghash(GIArgument *argument, GITypeInfo *type_info)
-{
-    VALUE rb_argument;
     GITypeInfo *key_type_info;
     GITypeTag key_type_tag;
     GITypeInfo *value_type_info;
     GITypeTag value_type_tag;
+} GHashToRubyData;
 
-    key_type_info = g_type_info_get_param_type(type_info, 0);
-    key_type_tag = g_type_info_get_tag(key_type_info);
-    value_type_info = g_type_info_get_param_type(type_info, 1);
-    value_type_tag = g_type_info_get_tag(value_type_info);
+static void
+rb_gi_argument_to_ruby_ghash_foreach_body(gpointer key,
+                                          gpointer value,
+                                          gpointer user_data)
+{
+    GHashToRubyData *data = user_data;
+    VALUE rb_key;
+    VALUE rb_value;
 
-    switch (key_type_tag) {
+    switch (data->key_type_tag) {
       case GI_TYPE_TAG_VOID:
       case GI_TYPE_TAG_BOOLEAN:
       case GI_TYPE_TAG_INT8:
@@ -1182,51 +1160,140 @@ rb_gi_argument_to_ruby_ghash(GIArgument *argument, GITypeInfo *type_info)
       case GI_TYPE_TAG_FLOAT:
       case GI_TYPE_TAG_DOUBLE:
       case GI_TYPE_TAG_GTYPE:
-        g_base_info_unref(key_type_info);
-        g_base_info_unref(value_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GHash)[%s][%s] -> Ruby",
-                 g_type_tag_to_string(key_type_tag),
-                 g_type_tag_to_string(value_type_tag));
+                 g_type_tag_to_string(data->key_type_tag),
+                 g_type_tag_to_string(data->value_type_tag));
         break;
       case GI_TYPE_TAG_UTF8:
-        if (value_type_tag == GI_TYPE_TAG_UTF8) {
-            g_base_info_unref(key_type_info);
-            g_base_info_unref(value_type_info);
-            rb_argument =
-                rb_gi_argument_to_ruby_ghash_utf8_utf8(argument->v_pointer);
-        } else {
-            g_base_info_unref(key_type_info);
-            g_base_info_unref(value_type_info);
-            rb_raise(rb_eNotImpError,
-                     "TODO: GIArgument(GHash)[%s][%s] -> Ruby",
-                     g_type_tag_to_string(key_type_tag),
-                     g_type_tag_to_string(value_type_tag));
-        }
+        rb_key = CSTR2RVAL(key);
         break;
       case GI_TYPE_TAG_FILENAME:
       case GI_TYPE_TAG_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(GHash)[%s][%s] -> Ruby",
+                 g_type_tag_to_string(data->key_type_tag),
+                 g_type_tag_to_string(data->value_type_tag));
+        break;
       case GI_TYPE_TAG_INTERFACE:
+        {
+            GIArgument key_argument;
+            key_argument.v_pointer = key;
+            rb_key = rb_gi_argument_to_ruby_interface(&key_argument,
+                                                      FALSE,
+                                                      data->key_type_info);
+        }
+        break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
       case GI_TYPE_TAG_ERROR:
       case GI_TYPE_TAG_UNICHAR:
-        g_base_info_unref(key_type_info);
-        g_base_info_unref(value_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GHash)[%s][%s] -> Ruby",
-                 g_type_tag_to_string(key_type_tag),
-                 g_type_tag_to_string(value_type_tag));
+                 g_type_tag_to_string(data->key_type_tag),
+                 g_type_tag_to_string(data->value_type_tag));
         break;
       default:
-        g_base_info_unref(key_type_info);
-        g_base_info_unref(value_type_info);
         g_assert_not_reached();
         break;
     }
 
-    return rb_argument;
+    switch (data->value_type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(GHash)[%s][%s] -> Ruby",
+                 g_type_tag_to_string(data->key_type_tag),
+                 g_type_tag_to_string(data->value_type_tag));
+        break;
+      case GI_TYPE_TAG_UTF8:
+        rb_value = CSTR2RVAL(value);
+        break;
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(GHash)[%s][%s] -> Ruby",
+                 g_type_tag_to_string(data->key_type_tag),
+                 g_type_tag_to_string(data->value_type_tag));
+        break;
+      case GI_TYPE_TAG_INTERFACE:
+        {
+            GIArgument value_argument;
+            value_argument.v_pointer = value;
+            rb_value = rb_gi_argument_to_ruby_interface(&value_argument,
+                                                        FALSE,
+                                                        data->value_type_info);
+        }
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(GHash)[%s][%s] -> Ruby",
+                 g_type_tag_to_string(data->key_type_tag),
+                 g_type_tag_to_string(data->value_type_tag));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    rb_hash_aset(data->rb_table, rb_key, rb_value);
+}
+
+static VALUE
+rb_gi_argument_to_ruby_ghash_body(VALUE user_data)
+{
+    GHashToRubyData *data = (GHashToRubyData *)user_data;
+
+    g_hash_table_foreach(data->argument->v_pointer,
+                         rb_gi_argument_to_ruby_ghash_foreach_body,
+                         data);
+
+    return data->rb_table;
+}
+
+static VALUE
+rb_gi_argument_to_ruby_ghash_ensure(VALUE user_data)
+{
+    GHashToRubyData *data = (GHashToRubyData *)user_data;
+
+    g_base_info_unref(data->key_type_info);
+    g_base_info_unref(data->value_type_info);
+
+    return Qnil;
+}
+
+static VALUE
+rb_gi_argument_to_ruby_ghash(GIArgument *argument, GITypeInfo *type_info)
+{
+    GHashToRubyData data;
+
+    data.argument = argument;
+    data.rb_table = rb_hash_new();
+
+    data.key_type_info = g_type_info_get_param_type(type_info, 0);
+    data.key_type_tag = g_type_info_get_tag(data.key_type_info);
+
+    data.value_type_info = g_type_info_get_param_type(type_info, 1);
+    data.value_type_tag = g_type_info_get_tag(data.value_type_info);
+
+    return rb_ensure(rb_gi_argument_to_ruby_ghash_body, (VALUE)&data,
+                     rb_gi_argument_to_ruby_ghash_ensure, (VALUE)&data);
 }
 
 static VALUE
