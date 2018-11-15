@@ -47,6 +47,7 @@ struct RBGICallbackData_ {
     RBGIArgMetadata *metadata;
     VALUE rb_callback;
     GObject *owner;
+    VALUE rb_owner;
 };
 
 static VALUE RG_TARGET_NAMESPACE;
@@ -337,6 +338,11 @@ rb_gi_callback_data_free(RBGICallbackData *callback_data)
         if (!NIL_P(rb_owner)) {
             rbgobj_object_remove_relative(rb_owner, callback_data->rb_callback);
         }
+    }
+    if (callback_data->rb_owner) {
+        rbgobj_remove_relative(callback_data->rb_owner,
+                               (ID)0,
+                               callback_data->rb_callback);
     }
     xfree(callback_data->metadata);
     xfree(callback_data);
@@ -1149,35 +1155,42 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata,
 
     if (closure_argument) {
         RBGICallbackData *callback_data;
-        VALUE rb_owner;
+        VALUE rb_owner = self;
+        static VALUE mGLibObject = Qnil;
 
         callback_data = ALLOC(RBGICallbackData);
         callback_data->callback = callback;
         callback_data->metadata = metadata;
         callback_data->rb_callback = rb_block_proc();
-        if (NIL_P(self)) {
-            rb_owner = rb_ary_entry(rb_arguments, 0);
+        if (NIL_P(mGLibObject)) {
+            mGLibObject = rb_const_get(mGLib, rb_intern("Object"));
+        }
+        if (rb_obj_is_kind_of(rb_owner, mGLibObject)) {
+            rbgobj_object_add_relative(rb_owner, callback_data->rb_callback);
+            callback_data->owner = RVAL2GOBJ(rb_owner);
+            g_object_weak_ref(callback_data->owner,
+                              rb_gi_callback_data_weak_notify,
+                              callback_data);
+            callback_data->rb_owner = Qnil;
         } else {
-            rb_owner = self;
-        }
-        {
-            static VALUE mGLibObject = Qnil;
-            if (NIL_P(mGLibObject)) {
-                mGLibObject = rb_const_get(mGLib, rb_intern("Object"));
-            }
-            if (rb_obj_is_kind_of(rb_owner, mGLibObject)) {
-                rbgobj_object_add_relative(rb_owner, callback_data->rb_callback);
-                callback_data->owner = RVAL2GOBJ(rb_owner);
-                g_object_weak_ref(callback_data->owner,
-                                  rb_gi_callback_data_weak_notify,
-                                  callback_data);
+            /* Callback is GC-ed only when callback is invalidated. */
+            if (NIL_P(rb_owner)) {
+                /* Module function case. */
+                static VALUE rb_mGI = Qnil;
+                if (NIL_P(rb_mGI)) {
+                    rb_mGI = rb_const_get(rb_cObject,
+                                          rb_intern("GObjectIntrospection"));
+                }
+                rbgobj_add_relative(rb_mGI, callback_data->rb_callback);
+                callback_data->rb_owner = rb_mGI;
             } else {
-                /* Class method case. Callback is never GC-ed. (OK?) */
+                /* Class method case. */
                 rbgobj_add_relative(rb_owner, callback_data->rb_callback);
-                callback_data->owner = NULL;
+                callback_data->rb_owner = rb_owner;
             }
-            closure_argument->v_pointer = callback_data;
+            callback_data->owner = NULL;
         }
+        closure_argument->v_pointer = callback_data;
     }
 
     if (destroy_argument) {
