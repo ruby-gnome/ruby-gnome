@@ -253,26 +253,30 @@ rbgobj_get_relative_removable(VALUE obj, ID obj_ivar_id, VALUE hash_key)
 }
 
 void
-rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key)
+rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE relative)
 {
     static VALUE cGLibObject = Qnil;
     if (NIL_P(cGLibObject)) {
         cGLibObject = rb_const_get(mGLib, rb_intern("Object"));
     }
 
+    if (obj_ivar_id == (ID)0) {
+        obj_ivar_id = id_relatives;
+    }
+
     if ((obj_ivar_id == id_relatives || obj_ivar_id == rbgobj_id_children) &&
         rb_obj_is_kind_of(obj, cGLibObject)) {
-        rbgobj_object_remove_relative(obj, hash_key);
+        rbgobj_object_remove_relative(obj, relative);
     } else {
-        VALUE hash = Qnil;
+        VALUE relatives = Qnil;
 
         if (RVAL2CBOOL(rb_ivar_defined(obj, obj_ivar_id)))
-            hash = rb_ivar_get(obj, obj_ivar_id);
+            relatives = rb_ivar_get(obj, obj_ivar_id);
 
-        if (NIL_P(hash) || TYPE(hash) != RUBY_T_HASH) {
+        if (NIL_P(relatives) || TYPE(relatives) != RUBY_T_HASH) {
             /* should not happen. */
         } else {
-            rb_funcall(hash, id_delete, 1, hash_key);
+            rb_funcall(relatives, id_delete, 1, relative);
         }
     }
 }
