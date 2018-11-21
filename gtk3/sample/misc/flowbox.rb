@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #
 # Copyright (c)  2014  Gian Mario Tagliaretti
-# Copyright (c)  2015  Ruby-GNOME2 Project Team
+# Copyright (c)  2015-2018  Ruby-GNOME2 Project Team
 #
 # Permission is granted to copy, distribute and/or modify this document
 # under the terms of the GNU Free Documentation License, Version 1.3
@@ -37,7 +37,7 @@ class FlowBoxWindow < Gtk::Window
     set_default_size(300, 250)
 
     header = Gtk::HeaderBar.new
-    header.set_title("Flow Box")
+    header.title = "Flow Box"
     header.subtitle = "Sample FlowBox app"
     header.show_close_button = true
 
@@ -46,13 +46,17 @@ class FlowBoxWindow < Gtk::Window
     scrolled = Gtk::ScrolledWindow.new
     scrolled.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC)
 
-    @flowbox = Gtk::FlowBox.new
-    @flowbox.set_valign(Gtk::Align::START)
-    @flowbox.set_max_children_per_line(30)
-    @flowbox.set_selection_mode(Gtk::SelectionMode::NONE)
-    fill_flowbox
+    flowbox = Gtk::FlowBox.new
+    flowbox.set_valign(Gtk::Align::START)
+    flowbox.set_max_children_per_line(30)
+    flowbox.set_selection_mode(Gtk::SelectionMode::NONE)
 
-    scrolled.add(@flowbox)
+    COLORS.each do |color|
+      swatch = create_color_swatch(color)
+      flowbox.add swatch
+    end
+
+    scrolled.add(flowbox)
     add(scrolled)
 
     signal_connect("destroy") { Gtk.main_quit }
@@ -60,23 +64,18 @@ class FlowBoxWindow < Gtk::Window
 
   private
 
-  def color_swatch_new(color_name)
-    color = Gdk::RGBA.parse(color_name)
+  def create_color_swatch(color_name)
     button = Gtk::Button.new
 
     area = Gtk::DrawingArea.new
     area.set_size_request(24, 24)
-    area.override_background_color(0, color)
+    area.signal_connect("draw") do |_, context|
+      color = Gdk::RGBA.parse(color_name)
+      context.set_source_rgba(color)
+      context.paint
+    end 
 
     button.add(area)
-
-    button
-  end
-
-  def fill_flowbox
-    COLORS.each do |color|
-      @flowbox.add(color_swatch_new(color))
-    end
   end
 end
 
