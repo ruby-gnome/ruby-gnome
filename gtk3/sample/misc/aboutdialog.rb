@@ -26,8 +26,8 @@ a.version   = "1.0.0"
 a.website   = "https://ruby-gnome2.osdn.jp"
 a.website_label = "Ruby-GNOME2 Project Website"
 
-a.signal_connect("activate-link") do |about_dialog, uri|
-  p widget.class
+a.signal_connect("activate-link") do |_widget, uri|
+  p _widget.class
   p uri
 end
 
