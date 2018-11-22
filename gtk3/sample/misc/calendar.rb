@@ -1,7 +1,7 @@
 =begin
   calendar.rb - Gtk::Calendar sample script.
 
-  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2018 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
 
@@ -29,38 +29,30 @@ cal.mark_day(date.day)
 
 cal.set_display_options(Gtk::CalendarDisplayOptions::SHOW_HEADING |
                         Gtk::CalendarDisplayOptions::SHOW_DAY_NAMES |
-                        Gtk::CalendarDisplayOptions::NO_MONTH_CHANGE |
                         Gtk::CalendarDisplayOptions::SHOW_WEEK_NUMBERS)
-year, month, day = cal.date
-puts "this is #{month} #{day}, #{year}"
+
+puts "this is #{cal.month} #{cal.day}, #{cal.year}"
 
 cal.signal_connect("day_selected") do
-  year, month, day = cal.date
-  puts "selected day: #{day}"
+  puts "selected day: #{cal.day}"
 end
 cal.signal_connect("month_changed") do
-  year, month, day = cal.date
-  puts "changed month: #{month}"
+  puts "changed month: #{cal.month}"
 end
 cal.signal_connect("day_selected_double_click") do
-  year, month, day = cal.date
-  puts "dclicked day: #{day}"
+  puts "dclicked day: #{cal.day}"
 end
 cal.signal_connect("prev_month") do
-  year, month, day = cal.date
-  puts "prev month: #{month}"
+  puts "prev month: #{cal.month}"
 end
 cal.signal_connect("next_month") do
-  year, month, day = cal.date
-  puts "next_month: #{month}"
+  puts "next_month: #{cal.month}"
 end
 cal.signal_connect("prev_year") do
-  year, month, day = cal.date
-  puts "prev_year: #{year}"
+  puts "prev_year: #{cal.year}"
 end
 cal.signal_connect("next_year") do
-  year, month, day = cal.date
-  puts "next year: #{year}"
+  puts "next year: #{cal.year}"
 end
 
 Gtk.main
