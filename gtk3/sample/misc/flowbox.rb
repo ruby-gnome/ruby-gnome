@@ -47,9 +47,9 @@ class FlowBoxWindow < Gtk::Window
     scrolled.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC)
 
     flowbox = Gtk::FlowBox.new
-    flowbox.set_valign(Gtk::Align::START)
-    flowbox.set_max_children_per_line(30)
-    flowbox.set_selection_mode(Gtk::SelectionMode::NONE)
+    flowbox.valign = :start
+    flowbox.max_children_per_line = 30
+    flowbox.selection_mode = :none
 
     COLORS.each do |color|
       swatch = create_color_swatch(color)
@@ -65,12 +65,12 @@ class FlowBoxWindow < Gtk::Window
   private
 
   def create_color_swatch(color_name)
+    color = Gdk::RGBA.parse(color_name)
     button = Gtk::Button.new
 
     area = Gtk::DrawingArea.new
     area.set_size_request(24, 24)
     area.signal_connect("draw") do |_, context|
-      color = Gdk::RGBA.parse(color_name)
       context.set_source_rgba(color)
       context.paint
     end 
