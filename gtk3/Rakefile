@@ -24,11 +24,4 @@ package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.cross_compiling do |spec|
-    if /mingw|mswin/ =~ spec.platform.to_s
-      spec.add_runtime_dependency("rsvg2", "= #{package.version}")
-    end
-  end
 end
