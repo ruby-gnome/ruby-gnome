@@ -6,7 +6,7 @@ Ruby/GEGL is a Ruby binding of GEGL.
 
 * Ruby/GObjectIntrospection in
   [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
-* [GEGO](https://gegl.org/)
+* [GEGL](https://gegl.org/)
 
 ## Install
 
