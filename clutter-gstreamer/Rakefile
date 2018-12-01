@@ -23,43 +23,4 @@ package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = [
-    "glib2",
-    "gobject-introspection",
-    "gdk_pixbuf2",
-    "atk",
-    "pango",
-    "gdk3",
-    "clutter",
-    "gstreamer",
-  ]
-  package.windows.gobject_introspection_dependencies = [
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "gdk3",
-    "clutter",
-    "gstreamer",
-  ]
-  package.external_packages = [
-    {
-      :name => "clutter-gst",
-      :download_site => :gnome,
-      :label => "Clutter-GStreamer",
-      :version => "3.0.26",
-      :compression_method => "xz",
-      :windows => {
-        :configure_args => [
-          "--enable-introspection",
-        ],
-        :patches => [
-          "clutter-gst-3.0.10-remove-introspection-compiler-dependency.diff",
-        ],
-        :need_autoreconf => true,
-        :built_file => "bin/libclutter-gst-3.0-0.dll",
-      },
-    }
-  ]
 end
