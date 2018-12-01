@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,34 +17,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require 'gnome2/rake/package-task'
+require "gnome2/rake/package-task"
 
 package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.windows.packages = []
-  package.windows.dependencies = ["libxml2"]
-  package.windows.build_dependencies = [
-    "goffice",
-    "gobject-introspection",
-  ]
-  package.windows.gobject_introspection_dependencies = [
-    "gio2"
-  ]
-  package.external_packages = [
-    {
-      :name => "gnumeric",
-      :download_site => :gnome,
-      :label => "gnumeric",
-      :version => "1.12.43",
-      :compression_method => "xz",
-      :windows => {
-        :configure_args => [
-        ],
-        :patches => [
-        ]
-      },
-    },
-  ]
 end
