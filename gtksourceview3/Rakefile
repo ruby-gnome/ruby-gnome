@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -23,39 +23,4 @@ package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = [
-    "glib2",
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "gdk3",
-    "gobject-introspection",
-  ]
-  package.windows.gobject_introspection_dependencies = [
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "gdk3",
-  ]
-  package.external_packages = [
-    {
-      :name => "gtksourceview",
-      :download_site => :gnome,
-      :label => "GtkSourceView",
-      :version => "3.24.9",
-      :compression_method => "xz",
-      :windows => {
-        :configure_args => [
-          "--enable-introspection",
-        ],
-        :patches => [
-          "gtksourceview-3.22.1-remove-unused-definition.diff",
-        ],
-        :built_file => "bin/libgtksourceview-3.0-1.dll",
-        :need_autoreconf => true,
-      },
-    }
-  ]
 end
