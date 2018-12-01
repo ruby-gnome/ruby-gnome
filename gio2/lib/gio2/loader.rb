@@ -42,12 +42,7 @@ module Gio
     end
 
     def require_extension
-      begin
-        major, minor, _ = RUBY_VERSION.split(/\./)
-        require "#{major}.#{minor}/gio2.so"
-      rescue LoadError
-        require "gio2.so"
-      end
+      require "gio2.so"
     end
 
     def require_libraries
