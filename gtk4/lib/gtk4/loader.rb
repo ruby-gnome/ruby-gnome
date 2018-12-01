@@ -49,11 +49,7 @@ module Gtk
     end
 
     def post_load(repository, namespace)
-      require_extension
       require_libraries
-    end
-
-    def require_extension
     end
 
     def require_libraries
