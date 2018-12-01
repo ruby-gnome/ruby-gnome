@@ -122,6 +122,13 @@ G_GNUC_INTERNAL void rg_enum_add_constants(VALUE mod, GType enum_type, const gch
 G_GNUC_INTERNAL void rg_flags_add_constants(VALUE mod, GType flags_type, const gchar *strip_prefix);
 G_GNUC_INTERNAL char *rg_obj_constant_lookup(const char *name);
 
+G_GNUC_INTERNAL VALUE rbg_gc_marker_new(void);
+G_GNUC_INTERNAL void rbg_gc_marker_guard(VALUE rb_gc_marker,
+                                         VALUE rb_object);
+G_GNUC_INTERNAL void rbg_gc_marker_unguard(VALUE rb_gc_marker,
+                                           VALUE rb_object);
+G_GNUC_INTERNAL void rbg_gc_marker_unguard_all(VALUE rb_gc_marker);
+
 G_GNUC_INTERNAL void Init_glib_gc(void);
 
 G_GNUC_INTERNAL void Init_gutil(void);

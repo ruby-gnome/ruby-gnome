@@ -188,16 +188,16 @@ rbgobj_add_relative(VALUE obj, VALUE relative)
     if (rb_obj_is_kind_of(obj, mGLibObject)) {
         rbgobj_object_add_relative(obj, relative);
     } else {
-        VALUE hash = Qnil;
+        VALUE rb_gc_marker = Qnil;
 
         if (RVAL2CBOOL(rb_ivar_defined(obj, id_relatives)))
-            hash = rb_ivar_get(obj, id_relatives);
+            rb_gc_marker = rb_ivar_get(obj, id_relatives);
 
-        if (NIL_P(hash) || TYPE(hash) != RUBY_T_HASH) {
-            hash = rb_hash_new();
-            rb_ivar_set(obj, id_relatives, hash);
+        if (NIL_P(rb_gc_marker)) {
+            rb_gc_marker = rbg_gc_marker_new();
+            rb_ivar_set(obj, id_relatives, rb_gc_marker);
         }
-        rb_hash_aset(hash, relative, Qnil);
+        rbg_gc_marker_guard(rb_gc_marker, relative);
     }
 }
 
@@ -265,15 +265,19 @@ rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE relative)
         rb_obj_is_kind_of(obj, cGLibObject)) {
         rbgobj_object_remove_relative(obj, relative);
     } else {
-        VALUE relatives = Qnil;
+        VALUE rb_gc_marker = Qnil;
 
         if (RVAL2CBOOL(rb_ivar_defined(obj, obj_ivar_id)))
-            relatives = rb_ivar_get(obj, obj_ivar_id);
+            rb_gc_marker = rb_ivar_get(obj, obj_ivar_id);
 
-        if (NIL_P(relatives) || TYPE(relatives) != RUBY_T_HASH) {
+        if (NIL_P(rb_gc_marker)) {
             /* should not happen. */
-        } else {
+        } else if (RB_TYPE_P(rb_gc_marker, RUBY_T_HASH)) {
+            /* For backward compatibility. */
+            VALUE relatives = rb_gc_marker;
             rb_funcall(relatives, id_delete, 1, relative);
+        } else {
+            rbg_gc_marker_unguard(rb_gc_marker, relative);
         }
     }
 }

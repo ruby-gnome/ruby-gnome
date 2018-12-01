@@ -41,7 +41,9 @@ gc_marker_free(void *data)
 {
     GHashTable *hash_table = data;
     g_hash_table_unref(hash_table);
-    rbg_objects = NULL;
+    if (hash_table == rbg_objects) {
+        rbg_objects = NULL;
+    }
 }
 
 static const rb_data_type_t rbg_gc_marker_type = {
@@ -76,14 +78,75 @@ rbg_gc_unguard(gpointer key)
     g_hash_table_remove(rbg_objects, key);
 }
 
+static VALUE
+rbg_gc_marker_new_raw(GHashTable *rb_objects)
+{
+    VALUE gc_marker;
+
+    gc_marker = TypedData_Wrap_Struct(rb_cData,
+                                      &rbg_gc_marker_type,
+                                      rb_objects);
+    return gc_marker;
+}
+
+VALUE
+rbg_gc_marker_new(void)
+{
+    GHashTable *rb_objects;
+
+    rb_objects = g_hash_table_new(g_direct_hash, g_direct_equal);
+    return rbg_gc_marker_new_raw(rb_objects);
+}
+
+void
+rbg_gc_marker_guard(VALUE rb_gc_marker, VALUE rb_object)
+{
+    GHashTable *rb_objects;
+
+    TypedData_Get_Struct(rb_gc_marker,
+                         GHashTable,
+                         &rbg_gc_marker_type,
+                         rb_objects);
+    g_hash_table_insert(rb_objects,
+                        (gpointer)rb_object,
+                        (gpointer)rb_object);
+}
+
+void
+rbg_gc_marker_unguard(VALUE rb_gc_marker, VALUE rb_object)
+{
+    GHashTable *rb_objects;
+
+    if (!RB_TYPE_P(rb_gc_marker, RUBY_T_DATA))
+        return;
+    if (!RTYPEDDATA_P(rb_gc_marker))
+        return;
+
+    TypedData_Get_Struct(rb_gc_marker,
+                         GHashTable,
+                         &rbg_gc_marker_type,
+                         rb_objects);
+    g_hash_table_remove(rb_objects, (gpointer)rb_object);
+}
+
+void
+rbg_gc_marker_unguard_all(VALUE rb_gc_marker)
+{
+    GHashTable *rb_objects;
+
+    TypedData_Get_Struct(rb_gc_marker,
+                         GHashTable,
+                         &rbg_gc_marker_type,
+                         rb_objects);
+    g_hash_table_remove_all(rb_objects);
+}
+
 void
 Init_glib_gc(void)
 {
     VALUE gc_marker;
 
     rbg_objects = g_hash_table_new(g_direct_hash, g_direct_equal);
-    gc_marker = TypedData_Wrap_Struct(rb_cData,
-                                      &rbg_gc_marker_type,
-                                      rbg_objects);
+    gc_marker = rbg_gc_marker_new_raw(rbg_objects);
     rb_ivar_set(mGLib, rb_intern("gc_marker"), gc_marker);
 }
