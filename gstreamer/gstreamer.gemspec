@@ -42,7 +42,6 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("test/**/*")
 
-  s.add_runtime_dependency("glib2", "= #{s.version}")
   s.add_runtime_dependency("gobject-introspection", "= #{s.version}")
 
   s.metadata["msys2_mingw_dependencies"] = "gstreamer"
