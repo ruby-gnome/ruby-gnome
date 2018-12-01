@@ -23,11 +23,8 @@
  *  MA  02110-1301  USA
  */
 
-#include "ruby.h"
 #include "rbgprivate.h"
 #include <ctype.h>
-
-#include "rbgprivate.h"
 
 static ID id_relatives;
 static ID id_delete;
