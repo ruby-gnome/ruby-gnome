@@ -17,45 +17,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require 'gnome2/rake/package-task'
+require "gnome2/rake/package-task"
 
 package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = [
-    "glib2",
-    "gio2",
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "gdk3",
-    "gobject-introspection",
-  ]
-  package.windows.gobject_introspection_dependencies = [
-    "gio2",
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "gdk3",
-  ]
-  package.external_packages = [
-    {
-      :name => "vte",
-      :download_site => :gnome,
-      :label => "vte",
-      :version => "0.54.2",
-      :compression_method => "xz",
-      :windows => {
-        :configure_args => [
-          "--disable-vala",
-        ],
-        :patches => [
-        ],
-        :need_autoreconf => true,
-      },
-    },
-  ]
 end
