@@ -69,12 +69,7 @@ module Gtk
     end
 
     def require_extension
-      begin
-        major, minor, _ = RUBY_VERSION.split(/\./)
-        require "#{major}.#{minor}/gtk3.so"
-      rescue LoadError
-        require "gtk3.so"
-      end
+      require "gtk3.so"
     end
 
     def require_libraries
