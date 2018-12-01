@@ -17,61 +17,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require 'gnome2/rake/package-task'
+require "gnome2/rake/package-task"
 
 package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = [
-    "glib2",
-    "cairo-gobject",
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "gdk3",
-    "rsvg2",
-    "gsf",
-    "gobject-introspection",
-  ]
-  package.windows.gobject_introspection_dependencies = [
-    "gdk3",
-    "rsvg2",
-    "gsf",
-  ]
-  # rcairo_binary_base_dir =
-  #   package.windows_binary_build_task.rcairo_binary_base_dir
-  package.external_packages = [
-    # {
-    #   :name => "libxslt",
-    #   :version => "1.1.28",
-    #   :download_base_url => "ftp://xmlsoft.org/libxslt",
-    #   :compression_method => "gz",
-    #   :windows => {
-    #     :built_file => "bin/libxslt-1.dll",
-    #     :configure_args => [
-    #       "--with-libxml-prefix=#{rcairo_binary_base_dir}",
-    #       "--without-python",
-    #     ],
-    #     :patches => [
-    #       "libxslt-1.1.28-add-mkdir-fallback.diff",
-    #     ],
-    #   },
-    # },
-    # {
-    #   :name => "goffice",
-    #   :download_site => :gnome,
-    #   :label => "goffice",
-    #   :version => "0.10.31",
-    #   :compression_method => "xz",
-    #   :windows => {
-    #     :configure_args => [
-    #     ],
-    #     :patches => [
-    #     ],
-    #   },
-    # },
-  ]
 end
