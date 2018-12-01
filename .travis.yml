@@ -22,7 +22,7 @@ matrix:
     - env: TYPE=centos-6
     - env: TYPE=centos-7
     - os: osx
-      rvm: 2.2
+      rvm: 2.5.3
       install:
         - brew update
         - bundle install
@@ -32,7 +32,7 @@ matrix:
   #   - env: TYPE=centos-6
   #   - env: TYPE=centos-7
     - os: osx
-      rvm: 2.2
+      rvm: 2.5.3
       install:
         - brew update
         - bundle install
