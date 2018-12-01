@@ -423,7 +423,7 @@ timeout_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     id = g_timeout_add_full(priority,
                             NUM2UINT(interval),
                             source_func,
-                            (gpointer)info,
+                            info,
                             source_destroy_notify);
     info->id = id;
     rb_id = UINT2NUM(id);
@@ -448,7 +448,7 @@ timeout_add_seconds(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     id = g_timeout_add_seconds_full(priority,
                                     NUM2UINT(interval),
                                     source_func,
-                                    (gpointer)info,
+                                    info,
                                     source_destroy_notify);
     info->id = id;
     rb_id = UINT2NUM(id);
@@ -486,7 +486,7 @@ idle_add(gint argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     info->callback = func;
     id = g_idle_add_full(priority,
                          source_func,
-                         (gpointer)info,
+                         info,
                          source_destroy_notify);
     info->id = id;
     rb_id = UINT2NUM(id);
