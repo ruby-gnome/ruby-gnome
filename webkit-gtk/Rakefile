@@ -23,26 +23,4 @@ package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.summary = "Ruby/WebKitGTK is a Ruby binding of WebKitGTK+."
-  package.description = "Ruby/WebKitGTK is a Ruby binding of WebKitGTK+."
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = [
-    "glib2",
-    "gobject-introspection",
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "gdk3",
-    "gstreamer",
-  ]
-  package.windows.gobject_introspection_dependencies = [
-    "atk",
-    "gdk_pixbuf2",
-    "pango",
-    "gdk3",
-    "gstreamer",
-  ]
-  package.external_packages = [
-  ]
 end
