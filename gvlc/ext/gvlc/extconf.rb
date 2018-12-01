@@ -41,7 +41,8 @@ end
 
 unless required_pkg_config_package([package_id, 2, 0, 0],
                                    :alt_linux => "libvlc-devel",
-                                   :debian => "libvlc-dev")
+                                   :debian => "libvlc-dev",
+                                   :msys2 => "vlc")
   exit(false)
 end
 

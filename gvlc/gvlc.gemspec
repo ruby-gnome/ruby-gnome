@@ -45,4 +45,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("glib2", "= #{s.version}")
 
   s.post_install_message = "This library is experimental."
+
+  s.metadata["msys2_mingw_dependencies"] = "vlc"
 end
