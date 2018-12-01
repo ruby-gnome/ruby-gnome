@@ -427,7 +427,7 @@ timeout_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                             source_destroy_notify);
     info->id = id;
     rb_id = UINT2NUM(id);
-    rbgobj_add_relative(mGLibSource, rb_id);
+    rbgobj_add_relative(mGLibSource, func);
     return rb_id;
 }
 
