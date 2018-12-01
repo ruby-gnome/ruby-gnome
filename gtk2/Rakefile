@@ -17,62 +17,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require 'gnome2/rake/package-task'
+require "gnome2/rake/package-task"
 
 package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = [
-    "glib2", "atk", "pango", "gdk_pixbuf2",
-  ]
-  package.external_packages = [
-    {
-      :name => "gtk+",
-      :download_site => :gnome,
-      :label => "gtk+",
-      :version => "2.24.30",
-      :compression_method => "xz",
-      :windows => {
-        :configure_args => [
-          "--with-included-immodules",
-        ],
-        :need_autoreconf => true,
-        :patches => [
-          "gtk+-2.24.25-add-missing-exeext-and-fix-directory.diff",
-          "gtk+-2.24.22-remove-PRIVATE-from-def.diff",
-        ],
-        :built_file => "bin/libgtk-win32-2.0-0.dll",
-      },
-    },
-    {
-      :name => "hicolor-icon-theme",
-      :download_base_url => "https://icon-theme.freedesktop.org/releases",
-      :label => "gtk-hi-color-icon-theme",
-      :version => "0.15",
-      :compression_method => "xz",
-      :windows => {
-        :configure_args => [],
-        :build_concurrently => false,
-        :built_file => "share/icons/hicolor/index.theme",
-      }
-    },
-  ]
-end
-
-namespace :windows do
-  desc "create default gtkrc"
-  task :gtkrc do
-    gtkrc_path = File.join("vendor", "local", "etc", "gtk-2.0", "gtkrc")
-    mkdir_p(File.dirname(gtkrc_path))
-    File.open(gtkrc_path, "w") do |gtkrc|
-      gtkrc.puts('gtk-theme-name = "MS-Windows"')
-    end
-  end
-
-  namespace :builder do
-    task :after => ["windows:gtkrc"]
-  end
 end
