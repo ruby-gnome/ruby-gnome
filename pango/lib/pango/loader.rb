@@ -77,12 +77,7 @@ module Pango
     end
 
     def require_extension
-      begin
-        major, minor, _ = RUBY_VERSION.split(/\./)
-        require "#{major}.#{minor}/pango.so"
-      rescue LoadError
-        require "pango.so"
-      end
+      require "pango.so"
     end
 
     def require_libraries
