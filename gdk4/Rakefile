@@ -19,85 +19,8 @@
 $LOAD_PATH.unshift("./../glib2/lib")
 require "gnome2/rake/package-task"
 
-package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/GDK4 is a Ruby binding of GDK-4.x."
-  package.description = "Ruby/GDK4 is a Ruby binding of GDK-4.x."
-  package.dependency.gem.runtime = [
-    "pango",
-    "gdk_pixbuf2",
-    "cairo-gobject",
-    "gobject-introspection",
-  ]
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = [
-    "glib2",
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "gobject-introspection",
-  ]
-  package.windows.gobject_introspection_dependencies = [
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-  ]
-  package.external_packages = [
-    {
-      :name => "libepoxy",
-      :download_base_url => "https://github.com/anholt/libepoxy/releases/download/v1.3.1",
-      :label => "Epoxy",
-      :version => "1.3.1",
-      :compression_method => "bz2",
-      :windows => {
-        :configure_args => [
-        ],
-        :built_file => "bin/libepoxy-0.dll",
-      },
-    },
-    {
-      :name => "gtk+",
-      :download_site => :gnome,
-      :label => "GTK+",
-      :version => "3.93.0",
-      :compression_method => "xz",
-      :windows => {
-        :configure_args => [
-          "--enable-introspection",
-          "--with-included-immodules",
-        ],
-        :patches => [
-        ],
-        :need_autoreconf => true,
-        :build_concurrently => false,
-        :built_file => "bin/libgdk-4-0.dll",
-      },
-    },
-    {
-      :name => "hicolor-icon-theme",
-      :download_base_url => "https://icon-theme.freedesktop.org/releases",
-      :label => "gtk-hi-color-icon-theme",
-      :version => "0.15",
-      :compression_method => "xz",
-      :windows => {
-        :configure_args => [],
-        :build_concurrently => false,
-        :built_file => "share/icons/hicolor/index.theme",
-      }
-    },
-    {
-      :name => "adwaita-icon-theme",
-      :download_site => :gnome,
-      :label => "adwaita-icon-theme",
-      :version => "3.26.0",
-      :compression_method => "xz",
-      :windows => {
-        :use_gobject_introspection => false,
-        :configure_args => [],
-        :build_concurrently => false,
-        :built_file => "share/icons/Adwaita/index.theme",
-      }
-    },
-  ]
+package_name = File.basename(__dir__)
+spec = Gem::Specification.load("#{package_name}.gemspec")
+
+GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
 end
-package_task.define
