@@ -17,12 +17,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require 'gnome2/rake/package-task'
+require "gnome2/rake/package-task"
 
 package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.windows.packages = ["gtksourceview"]
-  package.windows.dependencies = ["libxml2"]
 end
