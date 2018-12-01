@@ -1,4 +1,4 @@
-# Copyright (C) 2005-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2005-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -114,20 +114,7 @@ module GLib
   end
 end
 
-
-base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
-vendor_dir = base_dir + "vendor" + "local"
-if vendor_dir.exist?
-  require "cairo"
-end
-
-GLib.prepend_dll_path(vendor_dir + "bin")
-begin
-  major, minor, _ = RUBY_VERSION.split(/\./)
-  require "#{major}.#{minor}/glib2.so"
-rescue LoadError
-  require 'glib2.so'
-end
+require "glib2.so"
 
 module GLib
   module MetaInterface
