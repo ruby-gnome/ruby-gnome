@@ -18,8 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RBGPRIVATE_H__
-#define __RBGPRIVATE_H__
+#pragma once
 
 /*
  * CentOS 6: GLib 2.28
@@ -189,5 +188,3 @@ G_GNUC_INTERNAL void Init_gobject_gtypemodule(void);
 G_GNUC_INTERNAL void Init_gobject_gbinding(void);
 
 G_END_DECLS
-
-#endif

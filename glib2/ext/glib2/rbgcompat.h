@@ -19,11 +19,4 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RBGCOMPAT_H__
-#define __RBGCOMPAT_H__
-
-G_BEGIN_DECLS
-
-G_END_DECLS
-
-#endif
+#pragma once

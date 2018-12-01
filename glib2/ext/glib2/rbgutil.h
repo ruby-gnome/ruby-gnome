@@ -19,19 +19,16 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RBGUTIL_H__
-#define __RBGUTIL_H__
+#pragma once
 
 #include <glib-object.h>
-#include "ruby.h"
+#include <ruby.h>
 #include <ruby/encoding.h>
 #include "rbglib.h"
 #include "rbgutil_list.h"
 #include "rbgutildeprecated.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+G_BEGIN_DECLS
 
 #define RG_DEF_MODFUNC(method, argc) \
         rb_define_module_function(RG_TARGET_NAMESPACE, #method, rg_m_ ## method, argc)
@@ -114,8 +111,4 @@ RUBY_GLIB2_VAR ID rbgutil_id_module_eval;
 extern void rbgutil_glibid_r2g_func(VALUE from, GValue* to);
 extern VALUE rbgutil_sym_g2r_func(const GValue *from);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
-#endif /* __RBGUTIL_H__ */
+G_END_DECLS

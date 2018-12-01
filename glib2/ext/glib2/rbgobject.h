@@ -20,17 +20,14 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RBGOBJECT_H__
-#define __RBGOBJECT_H__
+#pragma once
 
 #include <glib-object.h>
-#include "ruby.h"
+#include <ruby.h>
 #include "rbglib.h"
 #include "rbgutil.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+G_BEGIN_DECLS
 
 /* macros */
 
@@ -335,10 +332,6 @@ typedef struct {
 
 extern void rbgobj_convert_define(const RGConvertTable *table);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
-#endif /* __RBGOBJECT_H__ */
+G_END_DECLS
 
 #include "rbgcompat.h"
