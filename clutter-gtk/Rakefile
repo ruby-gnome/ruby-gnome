@@ -23,41 +23,4 @@ package_name = File.basename(__dir__)
 spec = Gem::Specification.load("#{package_name}.gemspec")
 
 GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
-  package.dependency.gem.runtime = ["clutter", "clutter-gdk", "gtk3"]
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = [
-    "glib2",
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "gobject-introspection",
-    "clutter",
-    "gdk3",
-  ]
-  package.windows.gobject_introspection_dependencies = [
-    "atk",
-    "pango",
-    "gdk_pixbuf2",
-    "clutter",
-    "gdk3",
-  ]
-  package.external_packages = [
-    {
-      :name => "clutter-gtk",
-      :download_site => :gnome,
-      :label => "Clutter-GTK",
-      :version => "1.8.4",
-      :compression_method => "xz",
-      :windows => {
-        :configure_args => [
-          "--enable-introspection",
-        ],
-        :patches => [
-        ],
-        # :need_autoreconf => true,
-        :built_file => "bin/libclutter-gtk-1.0-0.dll",
-      },
-    }
-  ]
 end
