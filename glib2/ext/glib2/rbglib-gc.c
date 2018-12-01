@@ -23,7 +23,9 @@
 static GHashTable *rbg_objects = NULL;
 
 static void
-gc_marker_mark_each(gpointer key, gpointer value, gpointer user_data)
+gc_marker_mark_each(G_GNUC_UNUSED gpointer key,
+                    gpointer value,
+                    G_GNUC_UNUSED gpointer user_data)
 {
     VALUE rb_object = (VALUE)value;
     rb_gc_mark(rb_object);
