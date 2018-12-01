@@ -131,7 +131,7 @@ source_current_source(G_GNUC_UNUSED VALUE self)
 }
 
 static gboolean
-source_invoke_func(gpointer data)
+source_func(gpointer data)
 {
     callback_info_t *info = (callback_info_t *)data;
 
@@ -422,7 +422,7 @@ timeout_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     info->callback = func;
     id = g_timeout_add_full(priority,
                             NUM2UINT(interval),
-                            source_invoke_func,
+                            source_func,
                             (gpointer)info,
                             source_destroy_notify);
     info->id = id;
@@ -447,7 +447,7 @@ timeout_add_seconds(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     info->callback = func;
     id = g_timeout_add_seconds_full(priority,
                                     NUM2UINT(interval),
-                                    source_invoke_func,
+                                    source_func,
                                     (gpointer)info,
                                     source_destroy_notify);
     info->id = id;
@@ -485,7 +485,7 @@ idle_add(gint argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     info = ALLOC(callback_info_t);
     info->callback = func;
     id = g_idle_add_full(priority,
-                         source_invoke_func,
+                         source_func,
                          (gpointer)info,
                          source_destroy_notify);
     info->id = id;
