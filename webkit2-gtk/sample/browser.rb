@@ -21,9 +21,21 @@ uri = URI.parse(ARGV.shift || "https://webkitgtk.org/")
 
 app = Gtk::Application.new("com.github.ruby-gnome2.webkit2-gtk.sample.browser",
                            :flags_none)
-app.signal_connect(:activate) do |_|
+app.signal_connect(:activate) do
   window = Gtk::ApplicationWindow.new(app)
   window.set_default_size(800, 600)
+
+  view = nil
+
+  box = Gtk::Box.new(:vertical)
+  window.add(box)
+
+  entry = Gtk::Entry.new
+  entry.signal_connect("activate") do
+    view.load_uri(entry.text)
+  end
+
+  box.pack_start(entry)
 
   # For supporting http_proxy and https_proxy.
   # view_context = WebKit2Gtk::WebContext.new
@@ -35,6 +47,7 @@ app.signal_connect(:activate) do |_|
   view = WebKit2Gtk::WebView.new
   view.signal_connect("load-changed") do |_, load_event|
     p [:load_changed, view.uri, load_event]
+    entry.text = view.uri
   end
   view.signal_connect("load-failed") do |_, _, failed_uri, error|
     message = "failed to load URI: #{failed_uri}: "
@@ -49,7 +62,8 @@ app.signal_connect(:activate) do |_|
     view.load_uri(uri.to_s)
   end
 
-  window.add(view)
+  box.pack_start(view, expand: true, fill: true)
+
   window.show_all
 end
 
