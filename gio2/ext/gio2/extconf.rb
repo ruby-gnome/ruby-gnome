@@ -61,7 +61,7 @@ unless required_pkg_config_package(package_id,
   exit(false)
 end
 
-unless PKGConfig.have_package("gobject-introspection-1.0")
+unless required_pkg_config_package("gobject-introspection-1.0")
   exit(false)
 end
 
