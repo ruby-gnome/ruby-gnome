@@ -46,10 +46,9 @@ unless required_pkg_config_package([package_id, 2, 0, 0],
   exit(false)
 end
 
-have_library('vlc')
-have_header('vlc/vlc.h')
-
-$INCFLAGS = [$INCFLAGS, PKGConfig.cflags_only_I('glib-2.0')].join(' ')
+unless required_pkg_config_package("glib-2.0")
+  exit(false)
+end
 
 create_pkg_config_file("Ruby/VLC", package_id)
 $defs << "-DRUBY_VLC_COMPILATION"
