@@ -456,7 +456,7 @@ def required_pkg_config_package(package_info, native_package_info=nil)
   else
     required_package_info = [package_info]
   end
-  if required_package_info.include?("gobject-introspection-1.0")
+  if required_package_info[0] == "gobject-introspection-1.0"
     setup_homebrew_libffi
   end
   return true if PKGConfig.have_package(*required_package_info)
