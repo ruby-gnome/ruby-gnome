@@ -46,7 +46,7 @@ unless required_pkg_config_package([package_id, 2, 0, 0],
   exit(false)
 end
 
-unless required_pkg_config_package("glib-2.0")
+unless required_pkg_config_package("gobject-2.0")
   exit(false)
 end
 
