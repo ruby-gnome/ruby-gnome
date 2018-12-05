@@ -115,24 +115,10 @@ def windows_platform?
   /cygwin|mingw|mswin/ === RUBY_PLATFORM
 end
 
+# For backward compatibility
 def setup_windows(target_name, base_dir=nil)
   checking_for(checking_message("Windows")) do
-    if windows_platform?
-      import_library_name = "libruby-#{target_name}.a"
-      $DLDFLAGS << " -Wl,--out-implib=#{import_library_name}"
-      $cleanfiles << import_library_name
-      base_dir ||= Pathname($0).dirname.parent.parent.expand_path
-      base_dir = Pathname(base_dir) if base_dir.is_a?(String)
-      binary_base_dir = base_dir + "vendor" + "local"
-      if binary_base_dir.exist?
-        $INCFLAGS += " -I#{binary_base_dir}/include"
-        pkg_config_dir = binary_base_dir + "lib" + "pkgconfig"
-        PKGConfig.add_path(pkg_config_dir.to_s)
-      end
-      true
-    else
-      false
-    end
+    windows_platform?
   end
 end
 # For backward compatibility
@@ -214,16 +200,13 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
     $INCFLAGS = "-I#{target_build_dir} #{$INCFLAGS}"
   end
 
-  if windows_platform?
-    library_base_name = "ruby-#{target_name.gsub(/-/, '_')}"
-    case RUBY_PLATFORM
-    when /cygwin|mingw/
-      $LDFLAGS << " -L#{target_build_dir}"
-      $libs << " -l#{library_base_name}"
-    when /mswin/
-      $DLDFLAGS << " /libpath:#{target_build_dir}"
-      $libs << " lib#{library_base_name}.lib"
-    end
+  library_base_name = taget_name.gsub(/-/, "_")
+  case RUBY_PLATFORM
+  when /cygwin|mingw/
+    $libs << " " << File.join(target_build_dir, "#{library_base_name}.so")
+  when /mswin/
+    $DLDFLAGS << " /libpath:#{target_build_dir}"
+    $libs << " #{library_base_name}-$(arch).lib"
   end
 end
 
