@@ -2360,6 +2360,10 @@ rb_gi_return_argument_free_everything_array_c(GIArgument *argument,
 
     switch (element_type_tag) {
     case GI_TYPE_TAG_VOID:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(array)[c][%s] everything",
+                 g_type_tag_to_string(element_type_tag));
+        break;
     case GI_TYPE_TAG_BOOLEAN:
         g_free(argument->v_pointer);
         break;
