@@ -2360,15 +2360,13 @@ rb_gi_return_argument_free_everything_array_c(GIArgument *argument,
 
     switch (element_type_tag) {
     case GI_TYPE_TAG_VOID:
-    case GI_TYPE_TAG_BOOLEAN:
-    case GI_TYPE_TAG_INT8:
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(array)[c][%s] everything",
                  g_type_tag_to_string(element_type_tag));
         break;
+    case GI_TYPE_TAG_BOOLEAN:
+    case GI_TYPE_TAG_INT8:
     case GI_TYPE_TAG_UINT8:
-        g_free(argument->v_pointer);
-        break;
     case GI_TYPE_TAG_INT16:
     case GI_TYPE_TAG_UINT16:
     case GI_TYPE_TAG_INT32:
@@ -2377,6 +2375,8 @@ rb_gi_return_argument_free_everything_array_c(GIArgument *argument,
     case GI_TYPE_TAG_UINT64:
     case GI_TYPE_TAG_FLOAT:
     case GI_TYPE_TAG_DOUBLE:
+        g_free(argument->v_pointer);
+        break;
     case GI_TYPE_TAG_GTYPE:
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(array)[c][%s] everything",
