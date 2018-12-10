@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -35,5 +35,25 @@ class TestPangoRectangle < Test::Unit::TestCase
   def test_height
     rectangle = Pango::Rectangle.new(0, 10, 20, 30)
     assert_equal(30, rectangle.height)
+  end
+
+  def test_ascent
+    rectangle = Pango::Rectangle.new(5, 10, 20, 30)
+    assert_equal(-10, rectangle.ascent)
+  end
+
+  def test_descent
+    rectangle = Pango::Rectangle.new(5, 10, 20, 30)
+    assert_equal(40, rectangle.descent)
+  end
+
+  def test_left_bearing
+    rectangle = Pango::Rectangle.new(5, 10, 20, 30)
+    assert_equal(5, rectangle.left_bearing)
+  end
+
+  def test_right_bearing
+    rectangle = Pango::Rectangle.new(5, 10, 20, 30)
+    assert_equal(25, rectangle.right_bearing)
   end
 end

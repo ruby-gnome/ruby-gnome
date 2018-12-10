@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -95,5 +95,12 @@ module Pango
     define_deprecated_const :EllipsizeMode, "Pango::EllipsizeMode"
 
     define_deprecated_method :get_pixel_extents, :pixel_extents
+  end
+
+  class Rectangle
+    extend GLib::Deprecatable
+
+    define_deprecated_method :lbearing, :left_bearing
+    define_deprecated_method :rbearing, :right_bearing
   end
 end

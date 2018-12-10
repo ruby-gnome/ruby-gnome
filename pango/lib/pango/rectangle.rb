@@ -25,6 +25,22 @@ module Pango
       self.height = height
     end
 
+    def ascent
+      -y
+    end
+
+    def descent
+      y + height
+    end
+
+    def left_bearing
+      x
+    end
+
+    def right_bearing
+      x + width
+    end
+
     def to_a
       [x, y, width, height]
     end
