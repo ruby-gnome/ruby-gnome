@@ -93,5 +93,7 @@ module Pango
     define_deprecated_const :WrapMode, "Pango::WrapMode"
     define_deprecated_enums :EllipsizeMode, "ELLIPSIZE"
     define_deprecated_const :EllipsizeMode, "Pango::EllipsizeMode"
+
+    define_deprecated_method :get_pixel_extents, :pixel_extents
   end
 end
