@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -365,13 +365,10 @@ module GObjectIntrospection
       raise ArgumentError, "wrong number of arguments (#{detail})"
     end
 
-    def match_argument?(arg_info, argument)
-      return true if argument.nil? and arg_info.may_be_null?
-
-      type = arg_info.type
-      case type.tag
+    def match_type?(type_info, value)
+      case type_info.tag
       when TypeTag::BOOLEAN
-        argument == true or argument == false
+        value == true or value == false
       when TypeTag::INT8,
            TypeTag::UINT8,
            TypeTag::INT16,
@@ -382,39 +379,41 @@ module GObjectIntrospection
            TypeTag::UINT64,
            TypeTag::FLOAT,
            TypeTag::DOUBLE
-        argument.is_a?(Numeric)
+        value.is_a?(Numeric)
       when TypeTag::GTYPE
-        argument.is_a?(GLib::Type)
+        value.is_a?(GLib::Type)
       when TypeTag::UTF8
-        argument.is_a?(String)
+        value.is_a?(String)
       when TypeTag::FILENAME
-        argument.is_a?(String)
+        value.is_a?(String)
       when TypeTag::ARRAY
-        argument.is_a?(Array)
+        element_type_info = type_info.get_param_type(0)
+        value.is_a?(Array) and value.all? {|v| match_type?(element_type_info, v)}
       when TypeTag::INTERFACE
-        interface = type.interface
+        interface = type_info.interface
         case interface.type
         when InfoType::STRUCT
-          match_argument_interface_struct?(arg_info, interface, argument)
+          match_type_interface_struct?(interface, value)
         when InfoType::OBJECT,
              InfoType::INTERFACE,
              InfoType::FLAGS,
              InfoType::ENUM
-          argument.is_a?(interface.gtype.to_class)
+          value.is_a?(interface.gtype.to_class)
         else
           # TODO
           false
         end
       when TypeTag::GLIST,
            TypeTag::GSLIST
-        argument.is_a?(Array)
+        element_type_info = type_info.get_param_type(0)
+        value.is_a?(Array) and value.all? {|v| match_type?(element_type_info, v)}
       else
         # TODO
         false
       end
     end
 
-    def match_argument_interface_struct?(arg_info, interface, argument)
+    def match_type_interface_struct?(interface, value)
       gtype = interface.gtype
       case gtype.name
       when "void"
@@ -422,13 +421,19 @@ module GObjectIntrospection
         false
       when "CairoSurface"
         if Object.const_defined?(:Cairo)
-          argument.is_a?(Cairo::Surface)
+          value.is_a?(Cairo::Surface)
         else
           false
         end
       else
-        argument.is_a?(gtype.to_class)
+      value.is_a?(gtype.to_class)
       end
+    end
+
+    def match_argument?(arg_info, argument)
+      return true if argument.nil? and arg_info.may_be_null?
+
+      match_type?(arg_info.type, argument)
     end
 
     def rubyish_method_name(function_info, options={})
