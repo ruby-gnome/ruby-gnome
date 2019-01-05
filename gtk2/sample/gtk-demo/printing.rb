@@ -109,7 +109,7 @@ module Demo
 
     def draw_body(cr, operation, context, page_number, data)
       layout = context.create_pango_layout
-      description = Pango::FontDescription.new("monosapce")
+      description = Pango::FontDescription.new("monospace")
       description.size = data.font_size * Pango::SCALE
       layout.font_description = description
 
