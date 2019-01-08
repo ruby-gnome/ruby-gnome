@@ -2,9 +2,9 @@
 
 = NEWS
 
-== Ruby-GNOME2 3.3.1: 2019-01-08
+== Ruby-GNOME2 3.3.1: 2019-01-09
 
-TODO: bec2104f1d54427853ab7f89e85ca9bb1b230239
+This is a release that improves GObject Introspection support.
 
 === Changes
 
@@ -19,6 +19,17 @@ TODO: bec2104f1d54427853ab7f89e85ca9bb1b230239
 
     * (({GLib::Idle.remove})): Deprecated. Use
       (({GLib::Source.remove})) instead.
+
+  * Fixes
+
+    * Fixed typos in samples.
+      [GitHub#1267][Patch by kojix2]
+
+==== Ruby/CairoGObject
+
+  * Improvements
+
+    * Started to require cairo gem 1.16.2 or later.
 
 ==== Ruby/GObjectIntrospection
 
@@ -37,6 +48,22 @@ TODO: bec2104f1d54427853ab7f89e85ca9bb1b230239
     * Added support for freeing array of primitive types.
       [GitHub#1266][Patch by Yosuke Shiro]
 
+    * Improved suitable method detection for array and list.
+
+    * Added support for converting an array of (({GObject})).
+
+    * Added support for renaming compare operations:
+
+      * (({not_equal})): (({!=}))
+
+      * (({less_than})): (({<}))
+
+      * (({less_than_or_equal})): (({<=}))
+
+      * (({greater_than})): (({>}))
+
+      * (({greater_than_or_equal})): (({>=}))
+
 ==== Ruby/GdkPixbuf2
 
   * Fixes
@@ -46,6 +73,36 @@ TODO: bec2104f1d54427853ab7f89e85ca9bb1b230239
 
     * Fixed a bug that data passed to (({GdkPixbuf::Pixbuf.new(data:
       array)})) is corrupt by GC.
+
+==== Ruby/Pango
+
+  * Improvements
+
+    * (({Pango::Layout#get_pixel_extents})): Added for backward
+      compatibility.
+
+    * (({Pango::Rectangle#ascent})): Added for backward
+      compatibility.
+
+    * (({Pango::Rectangle#descent})): Added for backward
+      compatibility.
+
+    * (({Pango::Rectangle#lbearing})): Added for backward
+      compatibility.
+
+    * (({Pango::Rectangle#rbearing})): Added for backward
+      compatibility.
+
+    * (({Pango::Rectangle#left_bearing})): Added.
+
+    * (({Pango::Rectangle#right_bearing})): Added.
+
+==== Ruby/GTK2
+
+  * Fixes
+
+    * Fixed typos in samples.
+      [GitHub#1268][Patch by kojix2]
 
 ==== Ruby/GTK3
 
