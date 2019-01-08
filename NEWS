@@ -2,6 +2,88 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.3.1: 2019-01-08
+
+TODO: bec2104f1d54427853ab7f89e85ca9bb1b230239
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * (({rbgobj_remove_relative()})): Added support for removing a
+      relative added by (({rbgobj_add_relative()})).
+
+    * Stopped to use raw (({Hash})) to guard objects from GC.
+
+    * (({GLib::Idle.remove})): Deprecated. Use
+      (({GLib::Source.remove})) instead.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for input object validation.
+
+    * Added support for callback with module function such as
+      (({Gdk.threads_add_idle})).
+      [GitHub#1256][Reported by xetum]
+
+    * Added support for converting (({GHash<utf8, GObject>})).
+
+    * Added support for transfer full (({GHash})).
+
+    * Added support for freeing array of primitive types.
+      [GitHub#1266][Patch by Yosuke Shiro]
+
+==== Ruby/GdkPixbuf2
+
+  * Fixes
+
+    * Fixed markup.
+      [GitHub#1250][Patch by kojix2]
+
+    * Fixed a bug that data passed to (({GdkPixbuf::Pixbuf.new(data:
+      array)})) is corrupt by GC.
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * Updated sample to work on HiDPI environment.
+      [GitHub#1246][Patch by noanoa07]
+
+    * Updated samples.
+      [GitHub#1258][GitHub#1259][GitHub#1260][Patch by kojix2]
+
+==== Ruby/RSVG2
+
+  * Fixes
+
+    * Fixed typos.
+      [GitHub#1253][Patch by kojix2]
+
+    * Removed needless rsvg2 gem dependency for Windows.
+      [GitHub#1261][Reported by noanoa07]
+
+==== Ruby/GEGL
+
+  * Fixes
+
+    * Fixed a typo in README.
+      [GitHub#1263][Patch by kojix2]
+
+=== Thanks
+
+  * noanoa07
+
+  * kojix2
+
+  * xetum
+
+  * Yosuke Shiro
+
 == Ruby-GNOME2 3.3.0: 2018-10-31
 
 This is a release for fixing memory leak bugs of cairo-gobject,
