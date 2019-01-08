@@ -468,6 +468,36 @@ module GObjectIntrospection
           else
             name
           end
+        when "not_equal"
+          if n_in_args == 1
+            "!="
+          else
+            name
+          end
+        when "less_than"
+          if n_in_args == 1
+            "<"
+          else
+            name
+          end
+        when "less_than_or_equal"
+          if n_in_args == 1
+            "<="
+          else
+            name
+          end
+        when "greater_than"
+          if n_in_args == 1
+            ">"
+          else
+            name
+          end
+        when "greater_than_or_equal"
+          if n_in_args == 1
+            ">="
+          else
+            name
+          end
         when /\A(?:is|get_is|can_be)_/
           "#{$POSTMATCH}?"
         when /\Aget_/
