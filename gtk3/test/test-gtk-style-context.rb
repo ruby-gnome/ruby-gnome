@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,10 +21,30 @@ class TestGtkStyleContext < Test::Unit::TestCase
     @style_context = Gtk::StyleContext.new
   end
 
-  def test_add_provider
-    provider = Gtk::CssProvider.new
-    assert_nothing_raised do
-      @style_context.add_provider(provider, GLib::MAXUINT)
+  sub_test_case("#add_provider") do
+    def setup
+      super
+      @provider = Gtk::CssProvider.new
     end
+
+    test("provider, Integer") do
+      @style_context.add_provider(@provider,
+                                  Gtk::StyleProvider::PRIORITY_APPLICATION)
+    end
+
+    test("provider, Symbol") do
+      @style_context.add_provider(@provider, :application)
+    end
+
+    test("provider") do
+      @style_context.add_provider(@provider)
+    end
+  end
+
+  test("#remove_provider") do
+    provider = Gtk::CssProvider.new
+    @style_context.add_provider(provider,
+                                Gtk::StyleProvider::PRIORITY_APPLICATION)
+    @style_context.remove_provider(provider)
   end
 end
