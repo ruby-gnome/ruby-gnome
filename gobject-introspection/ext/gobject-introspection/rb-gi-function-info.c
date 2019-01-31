@@ -1174,6 +1174,16 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata,
         if (NIL_P(mGLibObject)) {
             mGLibObject = rb_const_get(mGLib, rb_intern("Object"));
         }
+        if (NIL_P(rb_owner)) {
+            /* Module function case. */
+            VALUE rb_first_argument = rb_ary_entry(rb_arguments, 0);
+            if (rb_obj_is_kind_of(rb_first_argument, mGLibObject)) {
+                /* If the first argument of the module function call is
+                   GObject, it's suitable for owner.
+                   For example: pango_cairo_context_set_shape_renderer() */
+                rb_owner = rb_first_argument;
+            }
+        }
         if (rb_obj_is_kind_of(rb_owner, mGLibObject)) {
             rbgobj_object_add_relative(rb_owner, callback_data->rb_callback);
             callback_data->owner = RVAL2GOBJ(rb_owner);
