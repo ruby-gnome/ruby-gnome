@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2019  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -135,6 +135,7 @@ allocate_arguments(GICallableInfo *info,
         memset(&argument, 0, sizeof(GIArgument));
 
         metadata = ALLOC(RBGIArgMetadata);
+        metadata->callable_info = info;
         arg_info = &(metadata->arg_info);
         g_callable_info_load_arg(info, i, arg_info);
         metadata->scope_type = g_arg_info_get_scope(arg_info);
@@ -1157,6 +1158,14 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata,
         RBGICallbackData *callback_data;
         VALUE rb_owner = self;
         static VALUE mGLibObject = Qnil;
+
+        if (rb_gi_is_debug_mode()) {
+            GICallableInfo *callable_info = metadata->callable_info;
+            g_print("[rb-gi] callback: %s::%s()\n",
+                    g_base_info_get_namespace(callable_info),
+                    g_base_info_get_name(callable_info));
+            rb_p(rb_ary_new_from_args(2, self, rb_arguments));
+        }
 
         callback_data = ALLOC(RBGICallbackData);
         callback_data->callback = callback;

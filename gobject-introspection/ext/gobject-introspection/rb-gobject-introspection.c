@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2019  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -22,10 +22,25 @@
 
 #define RG_TARGET_NAMESPACE rb_mGObjectIntrospection
 
+static gboolean is_debug_mode = FALSE;
+
+gboolean
+rb_gi_is_debug_mode(void)
+{
+    return is_debug_mode;
+}
+
 void
 Init_gobject_introspection(void)
 {
     VALUE RG_TARGET_NAMESPACE;
+
+    {
+        const char *rb_gi_debug_env = getenv("RB_GI_DEBUG");
+        if (rb_gi_debug_env && strcmp(rb_gi_debug_env, "yes") == 0) {
+            is_debug_mode = TRUE;
+        }
+    }
 
     RG_TARGET_NAMESPACE = rb_define_module("GObjectIntrospection");
 

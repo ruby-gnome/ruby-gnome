@@ -30,6 +30,7 @@ typedef gpointer (*RBGICallbackFinderFunc)(GIArgInfo *info);
 
 typedef struct
 {
+    GICallableInfo *callable_info;
     GIArgInfo arg_info;
     GIScopeType scope_type;
     GIDirection direction;
