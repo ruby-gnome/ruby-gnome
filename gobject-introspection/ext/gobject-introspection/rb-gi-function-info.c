@@ -339,7 +339,7 @@ rb_gi_callback_data_free(RBGICallbackData *callback_data)
             rbgobj_object_remove_relative(rb_owner, callback_data->rb_callback);
         }
     }
-    if (callback_data->rb_owner) {
+    if (!NIL_P(callback_data->rb_owner)) {
         rbgobj_remove_relative(callback_data->rb_owner,
                                (ID)0,
                                callback_data->rb_callback);
