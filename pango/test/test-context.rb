@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -109,5 +109,25 @@ class TestContext < Test::Unit::TestCase
     dpi = 72
     @context.resolution = dpi
     assert_equal(dpi, @context.resolution)
+  end
+
+  sub_test_case("#set_shape_renderer") do
+    def test_gc
+      GC.start
+      n_contexts = ObjectSpace.each_object(Pango::Context) {}
+      n_procs = ObjectSpace.each_object(Proc) {}
+      n = 1000
+      n.times do
+        context = Pango::CairoFontMap.default.create_context
+        context.set_shape_renderer do
+        end
+      end
+      GC.start
+      n_contexts_after = ObjectSpace.each_object(Pango::Context) {}
+      n_procs_after = ObjectSpace.each_object(Proc) {}
+      assert do
+        (n_contexts_after < n_contexts + n) and (n_procs_after < n_procs + n)
+      end
+    end
   end
 end
