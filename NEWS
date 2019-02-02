@@ -2,6 +2,42 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.3.2: 2019-02-03
+
+This is a bug fix release of 3.3.1.
+
+=== Changes
+
+==== Ruby/GObjectIntrospection
+
+  * Fixed
+
+    * Fixed wrong nil check.
+      [GitHub#1270][Patch by moveccr]
+
+    * Fixed a memory leak when module function is used with block.
+      [GitHub#1270][Reported by Izumi Tsutsui]
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * Add backward compatibility APIs:
+
+      * (({Gtk::Screen#add_style_provider}))
+
+      * (({Gtk::Screen#remove_style_provider}))
+
+      * (({Gtk::StyleContext.add_provider_for_screen}))
+
+      * (({Gtk::StyleContext#add_provider}))
+
+=== Thanks
+
+  * moveccr
+
+  * Izumi Tsutsui
+
 == Ruby-GNOME2 3.3.1: 2019-01-09
 
 This is a release that improves GObject Introspection support.
