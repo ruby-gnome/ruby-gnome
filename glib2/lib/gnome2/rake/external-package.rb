@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -13,8 +13,6 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-
-require "open-uri"
 
 module GNOME2
   module Rake
@@ -104,24 +102,8 @@ module GNOME2
       end
 
       def latest_version
-        case download_site
-        when :gnome
-          latest_version_gnome
-        when :freedesktop
-          latest_version_freedesktop
-        when :freedesktop_gstreamer
-          latest_version_freedesktop_gstreamer
-        when :gnu
-          latest_version_gnu
-        when :webkitgtk
-          latest_version_webkitgtk
-        when :icu
-          latest_version_icu
-        when :github
-          latest_version_github
-        else
-          nil
-        end
+        warn("this feature is no longer supported.")
+        nil
       end
 
       private
@@ -130,194 +112,6 @@ module GNOME2
           value.call(self)
         else
           value
-        end
-      end
-
-      def download_site_base_url
-        case download_site
-        when :gnome
-          base_url = gnome_base_url
-          release_series = version.gsub(/\A(\d+\.\d+)(?:[^\d].*)?\z/, '\1')
-          base_url << "/#{download_name}/#{release_series}"
-        when :freedesktop
-          base_url = freedesktop_base_url
-          base_url << "/#{download_name}/release"
-        when :freedesktop_gstreamer
-          base_url = freedesktop_gstreamer_base_url
-          base_url << "/#{download_name}"
-        when :gnu
-          base_url = gnu_base_url
-          base_url << "/#{download_name}"
-        when :webkitgtk
-          base_url = webkitgtk_base_url
-        when :icu
-          base_url = "#{icu_base_url}/#{version}"
-        when :github
-          base_url = github_base_url
-          base_url << "/#{download_name}/releases/download/#{version}"
-        else
-          base_url = nil
-        end
-        base_url
-      end
-
-      def gnome_base_url
-        "http://ftp.gnome.org/pub/gnome/sources"
-      end
-
-      def freedesktop_base_url
-        "https://www.freedesktop.org/software"
-      end
-
-      def freedesktop_gstreamer_base_url
-        "https://gstreamer.freedesktop.org/src"
-      end
-
-      def gnu_base_url
-        "https://ftp.gnu.org/pub/gnu"
-      end
-
-      def webkitgtk_base_url
-        "https://webkitgtk.org/releases"
-      end
-
-      def icu_base_url
-        "http://download.icu-project.org/files/icu4c"
-      end
-
-      def github_base_url
-        "https://github.com"
-      end
-
-      def sort_versions(versions)
-        versions.sort_by do |version|
-          version.split(".").collect(&:to_i)
-        end
-      end
-
-      def latest_version_gnome
-        base_url = "#{gnome_base_url}/#{download_name}"
-        minor_versions = []
-        open(base_url) do |index|
-          index.read.scan(/<a (.+?)>/) do |content,|
-            case content
-            when /href="(\d+(?:\.\d+)*)\/?"/
-              minor_version = $1
-              next if development_minor_version_gnome?(minor_version)
-              minor_versions << minor_version
-            end
-          end
-        end
-        return nil if minor_versions.empty?
-
-        latest_minor_version = sort_versions(minor_versions).last
-        versions = []
-        open("#{base_url}/#{latest_minor_version}") do |index|
-          index.read.scan(/<a (.+?)>/) do |content,|
-            case content
-            when /href="#{Regexp.escape(name)}-
-                        (\d+(?:\.\d+)*)
-                        \.tar\.#{Regexp.escape(compression_method)}"/x
-              versions << $1
-            end
-          end
-        end
-        sort_versions(versions).last
-      end
-
-      def development_minor_version_gnome?(minor_version)
-        minor_version.split(".").last.to_i.odd?
-      end
-
-      def latest_version_freedesktop
-        base_url = "#{freedesktop_base_url}/#{download_name}/release"
-        versions = []
-        open(base_url) do |index|
-          index.read.scan(/<a (.+?)>/) do |content,|
-            case content
-            when /href="#{Regexp.escape(name)}-
-                        (\d+(?:\.\d+)*)
-                        \.tar\.#{Regexp.escape(compression_method)}"/x
-              versions << $1
-            end
-          end
-        end
-        sort_versions(versions).last
-      end
-
-      def latest_version_freedesktop_gstreamer
-        base_url = "#{freedesktop_gstreamer_base_url}/#{download_name}"
-        versions = []
-        open(base_url) do |index|
-          index.read.scan(/<a (.+?)>/) do |content,|
-            case content
-            when /href="#{Regexp.escape(name)}-
-                        (\d+(?:\.\d+)*)
-                        \.tar\.#{Regexp.escape(compression_method)}"/x
-              version = $1
-              next if development_version_freedesktop_gstreamer?(version)
-              versions << version
-            end
-          end
-        end
-        sort_versions(versions).last
-      end
-
-      def development_version_freedesktop_gstreamer?(version)
-        version.split(".")[1].to_i.odd?
-      end
-
-      def latest_version_gnu
-        base_url = "#{gnu_base_url}/#{download_name}"
-        versions = []
-        open(base_url) do |index|
-          index.read.scan(/<a (.+?)>/) do |content,|
-            case content
-            when /href="#{Regexp.escape(name)}-
-                        (\d+(?:\.\d+)*)
-                        \.tar\.#{Regexp.escape(compression_method)}"/x
-              version = $1
-              versions << version
-            end
-          end
-        end
-        sort_versions(versions).last
-      end
-
-      def latest_version_webkitgtk
-        base_url = webkitgtk_base_url
-        versions = []
-        open(base_url) do |index|
-          index.read.scan(/<a (.+?)>/) do |content,|
-            case content
-            when /href="#{Regexp.escape(name)}-
-                        (\d+(?:\.\d+)*)
-                        \.tar\.#{Regexp.escape(compression_method)}"/x
-              versions << $1
-            end
-          end
-        end
-        sort_versions(versions).last
-      end
-
-      def latest_version_icu
-        base_url = icu_base_url
-        versions = []
-        open(base_url) do |index|
-          index.read.scan(/<a (.+?)>/) do |content,|
-            case content
-            when /href="(\d+(?:\.\d+)+)\/"/x
-              versions << $1
-            end
-          end
-        end
-        sort_versions(versions).last
-      end
-
-      def latest_version_github
-        latest_url = "#{github_base_url}/#{download_name}/releases/latest"
-        open(latest_url) do |latest_page|
-          return latest_page.base_uri.path.split("/").last
         end
       end
 

@@ -21,8 +21,6 @@ gem "pkg-config"
 gem "native-package-installer"
 gem "cairo"
 gem "test-unit"
-gem "rake-compiler"
-gem "mechanize"
 
 local_gemfile = File.join(File.dirname(__FILE__), "Gemfile.local")
 if File.exists?(local_gemfile)
