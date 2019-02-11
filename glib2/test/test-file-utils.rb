@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -13,9 +13,13 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- 
+
 class TestGLibFileUtils < Test::Unit::TestCase
   include GLibTestUtils
+
+  def normalize_space(string)
+    string.gsub("\u{00A0}", " ")
+  end
 
   sub_test_case "#format_size_for_display" do
     def setup
@@ -50,26 +54,30 @@ class TestGLibFileUtils < Test::Unit::TestCase
     end
 
     def test_kb
-      assert_equal("1.0 kB", GLib.format_size(1000))
+      assert_equal("1.0 kB",
+                   normalize_space(GLib.format_size(1000)))
     end
 
     def test_mb
-      assert_equal("1.0 MB", GLib.format_size(1000 * 1000))
+      assert_equal("1.0 MB",
+                   normalize_space(GLib.format_size(1000 * 1000)))
     end
 
     def test_gb
-      assert_equal("1.0 GB", GLib.format_size(1000 * 1000 * 1000))
+      assert_equal("1.0 GB",
+                   normalize_space(GLib.format_size(1000 * 1000 * 1000)))
     end
 
     def test_over_guint32_value
       guint32_max = 2 ** 32 - 1
-      assert_equal("4.3 GB", GLib.format_size(guint32_max + 1))
+      assert_equal("4.3 GB",
+                   normalize_space(GLib.format_size(guint32_max + 1)))
     end
 
     sub_test_case "flags" do
       sub_test_case ":iec_units" do
         def format_size(size)
-          GLib.format_size(size, :flags => :iec_units)
+          normalize_space(GLib.format_size(size, :flags => :iec_units))
         end
 
         def test_kib
