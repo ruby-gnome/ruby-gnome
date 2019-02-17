@@ -54,6 +54,7 @@ static const rb_data_type_t rbg_gc_marker_type = {
         gc_marker_mark,
         gc_marker_free,
         NULL,
+        NULL,
     },
     NULL,
     NULL,
