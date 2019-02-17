@@ -79,9 +79,9 @@ class TestHandle < Test::Unit::TestCase
 
       def test_base_uri
         handle = Rsvg::Handle.new
-        uri_string = "test_base_uri"
+        uri_string = GLib.filename_to_uri(File.expand_path("test_base_uri"))
         handle.base_uri = uri_string
-        assert_match(uri_string, handle.base_uri)
+        assert_equal(uri_string, handle.base_uri)
       end
     end
   end
