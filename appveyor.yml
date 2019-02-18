@@ -20,6 +20,7 @@ install:
   - gem --version
   - bundle --version
   - ridk exec pacman -Syu --noconfirm
+  - gem install cairo
   - bundle config --local force_ruby_platform true
   - bundle install
 
