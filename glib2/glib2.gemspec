@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2018-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -46,7 +46,7 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("test/**/*")
 
-  s.add_runtime_dependency("pkg-config", ">= 1.2.2")
+  s.add_runtime_dependency("pkg-config", ">= 1.3.4")
   s.add_runtime_dependency("native-package-installer", ">= 1.0.3")
   s.add_development_dependency("test-unit", ">= 2")
 
