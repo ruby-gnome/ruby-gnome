@@ -29,7 +29,9 @@ class TestGtkIconTheme < Test::Unit::TestCase
     end
 
     def test_context
-      assert_operator(@theme.icons("Actions"), :include?, "edit-find")
+      assert do
+        @theme.icons("Emotes").include?("face-cool")
+      end
     end
   end
 end
