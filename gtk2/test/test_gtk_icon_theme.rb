@@ -20,12 +20,16 @@ class TestGtkIconTheme < Test::Unit::TestCase
   def test_contexts
     only_gtk_version(2, 12)
 
-    assert_operator(@theme.contexts, :include?, "MimeTypes")
+    assert do
+      @theme.contexts.include?("MimeTypes")
+    end
   end
 
   class TestIcons < self
     def test_no_argument
-      assert_operator(@theme.icons, :include?, "face-cool")
+      assert do
+        @theme.icons.include?("face-cool")
+      end
     end
 
     def test_context
