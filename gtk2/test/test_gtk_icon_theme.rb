@@ -34,7 +34,7 @@ class TestGtkIconTheme < Test::Unit::TestCase
 
     def test_context
       assert do
-        @theme.icons("Emotes").include?("face-cool")
+        @theme.icons("Emotes").any? {|name| name.start_with?("face-cool")}
       end
     end
   end
