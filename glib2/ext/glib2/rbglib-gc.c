@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2018-2019  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -54,7 +54,7 @@ static const rb_data_type_t rbg_gc_marker_type = {
         gc_marker_mark,
         gc_marker_free,
         NULL,
-        NULL,
+        {0},
     },
     NULL,
     NULL,
