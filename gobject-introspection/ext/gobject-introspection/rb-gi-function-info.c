@@ -317,7 +317,8 @@ rb_gi_callback_free(RBGICallback *callback)
 }
 
 static void
-rb_gi_callback_data_weak_notify(gpointer data, GObject* where_the_object_was)
+rb_gi_callback_data_weak_notify(gpointer data,
+                                G_GNUC_UNUSED GObject *where_the_object_was)
 {
     RBGICallbackData *callback_data = data;
     callback_data->owner = NULL;
@@ -1084,7 +1085,7 @@ ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
         rb_results = rb_funcallv(callback_data->rb_callback,
                                  id_call,
                                  rb_args->len,
-                                 (VALUE *)(rb_args->data));
+                                 (VALUE *)(void *)(rb_args->data));
         g_array_free(rb_args, TRUE);
     }
 
