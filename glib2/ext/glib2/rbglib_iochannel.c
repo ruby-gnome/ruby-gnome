@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -247,19 +247,20 @@ rg_readline(gint argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "01", &line_term);
 
-    if (! NIL_P(line_term)){
+    if (!NIL_P(line_term)) {
         StringValue(line_term);
         old_line_term = g_io_channel_get_line_term(_SELF(self), &old_line_term_len);
 
-        g_io_channel_set_line_term(_SELF(self), RVAL2CSTR(line_term),
-                                   RSTRING_LEN(line_term));   
+        g_io_channel_set_line_term(_SELF(self),
+                                   StringValuePtr(line_term),
+                                   (gint)RSTRING_LEN(line_term));
     }
 
     status = g_io_channel_read_line(_SELF(self), &str, NULL, NULL, &err);
 
-    if (! NIL_P(line_term)){
+    if (!NIL_P(line_term)) {
         g_io_channel_set_line_term(_SELF(self), old_line_term, old_line_term_len);
-    }   
+    }
 
     ioc_error(status, err);
 
@@ -282,19 +283,20 @@ rg_gets(gint argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "01", &line_term);
 
-    if (! NIL_P(line_term)){
+    if (!NIL_P(line_term)) {
         StringValue(line_term);
 
         old_line_term = g_io_channel_get_line_term(_SELF(self), &old_line_term_len);
-        g_io_channel_set_line_term(_SELF(self), RVAL2CSTR(line_term),
-                                   RSTRING_LEN(line_term));   
+        g_io_channel_set_line_term(_SELF(self),
+                                   StringValuePtr(line_term),
+                                   (gint)RSTRING_LEN(line_term));
     }
 
     status = g_io_channel_read_line(_SELF(self), &str, NULL, NULL, &err);
 
-    if (! NIL_P(line_term)){
+    if (! NIL_P(line_term)) {
         g_io_channel_set_line_term(_SELF(self), old_line_term, old_line_term_len);
-    }   
+    }
 
     if (status == G_IO_STATUS_EOF){
         ret = Qnil;
@@ -317,8 +319,9 @@ ioc_set_line_term(VALUE args)
 
     if (doit == Qtrue){
         StringValue(line_term);
-        g_io_channel_set_line_term(_SELF(self), RVAL2CSTR(line_term),
-                                   RSTRING_LEN(line_term));  
+        g_io_channel_set_line_term(_SELF(self),
+                                   StringValuePtr(line_term),
+                                   (gint)RSTRING_LEN(line_term));
     }
     return self;
 }
@@ -345,8 +348,9 @@ rg_each(gint argc, VALUE *argv, VALUE self)
         StringValue(line_term);
 
         old_line_term = g_io_channel_get_line_term(channel, &old_line_term_len);
-        g_io_channel_set_line_term(channel, RVAL2CSTR(line_term),
-                                   RSTRING_LEN(line_term));
+        g_io_channel_set_line_term(channel,
+                                   StringValuePtr(line_term),
+                                   (gint)RSTRING_LEN(line_term));
     }
 
     while (TRUE) {
