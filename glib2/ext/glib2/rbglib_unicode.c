@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Kouhei Sutou
  *
  *  This library is free software; you can redistribute it and/or
@@ -38,11 +38,11 @@ rg_s_canonical_ordering(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
     VALUE normalized_ucs4;
     gchar *original_str;
     gunichar *ucs4;
-    gint len;
+    long len;
 
     original_str = StringValuePtr(rb_ucs4);
     len = RSTRING_LEN(rb_ucs4);
-    ucs4 = g_memdup(original_str, len);
+    ucs4 = g_memdup(original_str, (guint)len);
     g_unicode_canonical_ordering(ucs4, len);
     normalized_ucs4 = CSTR2RVAL_LEN_UCS4((const char *)ucs4, len);
     g_free(ucs4);
