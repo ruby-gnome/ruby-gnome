@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2019  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -580,7 +580,7 @@ rb_gi_array_argument_to_ruby(GIArgument *array_argument,
 {
     VALUE rb_array;
     GIArrayType array_type;
-    gint n_elements;
+    gint64 n_elements;
 
     array_type = g_type_info_get_array_type(array_type_info);
     n_elements = get_array_length(length_argument, length_type_info);
@@ -1513,9 +1513,11 @@ rb_gi_out_argument_init_array_array_interface(GIArgument *argument,
         break;
     case GI_INFO_TYPE_STRUCT:
     {
-        gsize struct_size;
+        gsize raw_struct_size;
+        guint struct_size;
 
-        struct_size = g_struct_info_get_size(interface_info);
+        raw_struct_size = g_struct_info_get_size(interface_info);
+        struct_size = (guint)raw_struct_size;
         argument->v_pointer = g_array_new(zero_terminated_p,
                                           TRUE,
                                           struct_size);
@@ -3658,10 +3660,10 @@ set_in_array_length_argument(GIArgument *argument,
         argument->v_uint16 = length;
         break;
     case GI_TYPE_TAG_INT32:
-        argument->v_int32 = length;
+        argument->v_int32 = (gint32)length;
         break;
     case GI_TYPE_TAG_UINT32:
-        argument->v_uint32 = length;
+        argument->v_uint32 = (guint32)length;
         break;
     case GI_TYPE_TAG_INT64:
         argument->v_int64 = length;
@@ -3696,7 +3698,7 @@ set_in_array_boolean_arguments_from_ruby(GIArgument *array_argument,
                                          VALUE rb_boolean_array)
 {
     gboolean *booleans;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_boolean_array);
     booleans = ALLOC_N(gboolean, n_args);
@@ -3712,7 +3714,7 @@ set_in_array_int8_arguments_from_ruby(GIArgument *array_argument,
                                       VALUE rb_number_array)
 {
     gint8 *numbers;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(gint8, n_args);
@@ -3728,7 +3730,7 @@ set_in_array_uint8_arguments_from_ruby(GIArgument *array_argument,
                                        VALUE rb_number_array)
 {
     guint8 *numbers;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(guint8, n_args);
@@ -3744,7 +3746,7 @@ set_in_array_int16_arguments_from_ruby(GIArgument *array_argument,
                                        VALUE rb_number_array)
 {
     gint16 *numbers;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(gint16, n_args);
@@ -3760,7 +3762,7 @@ set_in_array_uint16_arguments_from_ruby(GIArgument *array_argument,
                                         VALUE rb_number_array)
 {
     guint16 *numbers;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(guint16, n_args);
@@ -3776,7 +3778,7 @@ set_in_array_int32_arguments_from_ruby(GIArgument *array_argument,
                                        VALUE rb_number_array)
 {
     gint32 *numbers;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(gint32, n_args);
@@ -3792,7 +3794,7 @@ set_in_array_uint32_arguments_from_ruby(GIArgument *array_argument,
                                         VALUE rb_number_array)
 {
     guint32 *numbers;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(guint32, n_args);
@@ -3808,7 +3810,7 @@ set_in_array_int64_arguments_from_ruby(GIArgument *array_argument,
                                        VALUE rb_number_array)
 {
     gint64 *numbers;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(gint64, n_args);
@@ -3824,7 +3826,7 @@ set_in_array_uint64_arguments_from_ruby(GIArgument *array_argument,
                                         VALUE rb_number_array)
 {
     guint64 *numbers;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(guint64, n_args);
@@ -3840,7 +3842,7 @@ set_in_array_float_arguments_from_ruby(GIArgument *array_argument,
                                        VALUE rb_number_array)
 {
     gfloat *numbers;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(gfloat, n_args);
@@ -3856,7 +3858,7 @@ set_in_array_double_arguments_from_ruby(GIArgument *array_argument,
                                         VALUE rb_number_array)
 {
     gdouble *numbers;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_number_array);
     numbers = ALLOC_N(gdouble, n_args);
@@ -3872,7 +3874,7 @@ set_in_array_gtype_arguments_from_ruby(GIArgument *array_argument,
                                        VALUE rb_class_array)
 {
     GType *types;
-    gint i, n_args;
+    long i, n_args;
 
     n_args = RARRAY_LEN(rb_class_array);
     types = ALLOC_N(GType, n_args);
@@ -3886,7 +3888,7 @@ set_in_array_gtype_arguments_from_ruby(GIArgument *array_argument,
 typedef struct {
     GIStructInfo *struct_info;
     VALUE rb_argument;
-    gint n_args;
+    long n_args;
     gchar *values;
 } ArrayInterfaceStructFromRubyData;
 
@@ -3947,7 +3949,7 @@ set_in_array_interface_struct_arguments_from_ruby(GIArgument *array_argument,
 
 typedef struct {
     VALUE rb_argument;
-    gint n_args;
+    long n_args;
     gpointer *values;
 } ArrayInterfaceObjectFromRubyData;
 
