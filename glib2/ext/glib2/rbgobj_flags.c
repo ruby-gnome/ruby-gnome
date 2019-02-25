@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2004-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2004-2019  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -38,7 +38,7 @@ rg_flags_add_constants(VALUE mod, GType flags_type, const gchar *strip_prefix)
 {
     GFlagsClass *gclass;
     guint i;
-    int prefix_len = strlen(strip_prefix);
+    size_t prefix_len = strlen(strip_prefix);
 
     gclass = G_FLAGS_CLASS(g_type_class_ref(flags_type));
 
@@ -81,6 +81,7 @@ static const rb_data_type_t rg_glib_flags_type = {
         NULL,
         flags_free,
         NULL,
+        {0},
     },
     NULL,
     NULL,
@@ -273,7 +274,7 @@ resolve_flags_value(VALUE klass, GFlagsClass *gclass, VALUE flag_or_flags)
     }
     case RUBY_T_ARRAY:
     {
-        int i, n;
+        long i, n;
         n = RARRAY_LEN(flag_or_flags);
         for (i = 0; i < n; i++) {
             value |= resolve_flags_value(klass,
