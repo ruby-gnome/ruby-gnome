@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
  *  Copyright (C) 2004  Ruby-GNOME2 Project Team
  *  Copyright (C) 2004  Pascal Terjan
  *
@@ -243,7 +243,7 @@ void        g_atexit                        (GVoidFunc func);
 static VALUE
 rg_s_parse_debug_string(G_GNUC_UNUSED VALUE self, VALUE string, VALUE keys)
 {
-    gint i, nkeys;
+    long i, nkeys;
     VALUE ary;
     GDebugKey* gkeys;
 
@@ -256,7 +256,7 @@ rg_s_parse_debug_string(G_GNUC_UNUSED VALUE self, VALUE string, VALUE keys)
         gkeys[i].value = NUM2UINT(RARRAY_PTR(RARRAY_PTR(ary)[i])[1]);
     }
 
-    return UINT2NUM(g_parse_debug_string(RVAL2CSTR(string), gkeys, nkeys));
+    return UINT2NUM(g_parse_debug_string(RVAL2CSTR(string), gkeys, (guint)nkeys));
 }
 
 /*
