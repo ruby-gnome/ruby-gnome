@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -59,7 +59,7 @@ module Gst
       when 2
         events, timeout = args
       else
-        mesasge = "wrong number of arguments "
+        message = "wrong number of arguments "
         message << "(given #{n_args}, expected 0..2)"
         raise ArgumentError, message
       end
