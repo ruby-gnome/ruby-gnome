@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -37,6 +37,7 @@ static const rb_data_type_t rg_glib_signal_type = {
         NULL,
         NULL,
         NULL,
+        {0},
     },
     NULL,
     NULL,
@@ -252,7 +253,7 @@ gobj_s_define_signal(int argc, VALUE* argv, VALUE self)
                            NIL_P(accumulator) ? NULL : (gpointer)accumulator,
                            NULL, /* c_marshaller */
                            return_type,
-                           n_params,
+                           (guint)n_params,
                            param_types);
 
     g_free(param_types);
@@ -833,7 +834,7 @@ g_signal_add_emission_hook_closure (guint     signal_id,
                                     GQuark    detail,
                                     GClosure* closure)
 {
-    guint hook_id;
+    gulong hook_id;
     g_closure_ref(closure);
     g_closure_sink(closure);
     hook_id = g_signal_add_emission_hook(signal_id, detail,
@@ -847,7 +848,7 @@ rg_add_emission_hook(int argc, VALUE* argv, VALUE self)
 {
     GSignalQuery *query;
     VALUE proc;
-    guint hook_id;
+    gulong hook_id;
     GQuark detail = 0;
     GClosure* closure;
 
