@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -63,7 +63,7 @@ rg_initialize(VALUE self, VALUE fd, VALUE events, VALUE revents)
 static VALUE
 rg_set_fd(VALUE self, VALUE fd)
 {
-    _SELF(self)->fd = fd;
+    _SELF(self)->fd = NUM2INT(fd);
     return self;
 }
 static VALUE
