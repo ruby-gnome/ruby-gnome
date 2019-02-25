@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -181,7 +181,7 @@ rval2glist_body(VALUE data)
 {
     struct rval2glist_args *args = (struct rval2glist_args *)data;
     VALUE rb_array;
-    int i, n;
+    long i, n;
 
     rb_array = rbg_to_array(args->rb_array);
     n = RARRAY_LEN(rb_array);
@@ -229,7 +229,7 @@ rval2gslist_body(VALUE data)
 {
     struct rval2gslist_args *args = (struct rval2gslist_args *)data;
     VALUE rb_array;
-    int i, n;
+    long i, n;
 
     rb_array = rbg_to_array(args->rb_array);
     n = RARRAY_LEN(rb_array);
