@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Kouhei Sutou
  *
  *  This library is free software; you can redistribute it and/or
@@ -33,7 +33,7 @@ rg_s_to_ucs4(G_GNUC_UNUSED VALUE self, VALUE rb_utf16)
     glong len, items_written;
     GError *error = NULL;
 
-    utf16 = (gunichar2 *)StringValueCStr(rb_utf16);
+    utf16 = (gunichar2 *)(void *)StringValueCStr(rb_utf16);
     len = RSTRING_LEN(rb_utf16) / sizeof(*utf16);
 
     ucs4 = g_utf16_to_ucs4(utf16, len, NULL, &items_written, &error);
@@ -55,7 +55,7 @@ rg_s_to_utf8(G_GNUC_UNUSED VALUE self, VALUE rb_utf16)
     glong len, items_written;
     GError *error = NULL;
 
-    utf16 = (gunichar2 *)StringValueCStr(rb_utf16);
+    utf16 = (gunichar2 *)(void *)StringValueCStr(rb_utf16);
     len = RSTRING_LEN(rb_utf16) / sizeof(*utf16);
 
     utf8 = g_utf16_to_utf8(utf16, len, NULL, &items_written, &error);
