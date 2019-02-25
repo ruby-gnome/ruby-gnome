@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,7 +14,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require 'rbconfig'
+require "rbconfig"
 
 class TestGLibSpawn < Test::Unit::TestCase
   include GLibTestUtils
@@ -41,8 +41,19 @@ class TestGLibSpawn < Test::Unit::TestCase
                        RbConfig::CONFIG['RUBY_INSTALL_NAME'] +
                          RbConfig::CONFIG['EXEEXT'])
     end
-    pid = GLib::Spawn.async(Dir.pwd, [ruby, '-e', 'exit 1 unless ENV.empty?'], [], GLib::Spawn::DO_NOT_REAP_CHILD)
+    test_env_name = "RUBY_GLIB2_TEST"
+    ENV[test_env_name] = "yes"
+    pid = GLib::Spawn.async(Dir.pwd,
+                            [
+                              ruby,
+                              "-e",
+                              "exit(!ENV.key?(#{test_env_name.dump}))",
+                            ],
+                            [],
+                            GLib::Spawn::DO_NOT_REAP_CHILD)
     _, status = *Process.waitpid2(pid)
-    assert status.success?
+    assert do
+      status.success?
+    end
   end
 end
