@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Sjoerd Simons
  *
  *  This library is free software; you can redistribute it and/or
@@ -83,7 +83,7 @@ value_array_from_ruby(const VALUE from, GValue *to)
 
     args.ary = rb_ary_to_ary(from);
     args.n = RARRAY_LEN(args.ary);
-    args.result = g_value_array_new(args.n);
+    args.result = g_value_array_new((guint)args.n);
 
     rb_rescue(value_array_from_ruby_body, (VALUE)&args,
               value_array_from_ruby_rescue, (VALUE)&args);
