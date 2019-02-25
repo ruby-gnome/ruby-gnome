@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2003  Masahiro Sakai
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -52,7 +52,9 @@ weak_notify(gpointer data, G_GNUC_UNUSED GObject *where_the_object_was)
 }
 
 static void
-holder_relatives_mark(gpointer key, gpointer value, gpointer user_data)
+holder_relatives_mark(G_GNUC_UNUSED gpointer key,
+                      gpointer value,
+                      G_GNUC_UNUSED gpointer user_data)
 {
     VALUE rb_relative = (VALUE)value;
     rb_gc_mark(rb_relative);
@@ -99,6 +101,7 @@ static const rb_data_type_t rg_glib_object_type = {
         holder_mark,
         holder_free,
         NULL,
+        {0},
     },
     NULL,
     NULL,
@@ -135,7 +138,7 @@ rbgobj_object_remove_relative(VALUE rb_gobject, VALUE rb_relative)
 }
 
 static gboolean
-rbgobj_object_remove_relatives_body(gpointer key,
+rbgobj_object_remove_relatives_body(G_GNUC_UNUSED gpointer key,
                                     gpointer value,
                                     gpointer user_data)
 {
@@ -381,10 +384,10 @@ rbgobj_gobject_new(GType gtype, VALUE params_hash)
     if (NIL_P(params_hash)) {
         result = g_object_newv(gtype, 0, NULL);
     } else {
-        size_t param_size;
+        guint param_size;
         struct param_setup_arg arg;
 
-        param_size = NUM2INT(rb_funcall(params_hash, rb_intern("length"), 0));
+        param_size = NUM2UINT(rb_funcall(params_hash, rb_intern("length"), 0));
 
         arg.param_size = param_size;
         arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
