@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
  *  Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -78,7 +78,7 @@ rg_enum_add_constants(VALUE mod, GType enum_type, const gchar *strip_prefix)
 {
     GEnumClass *gclass;
     guint i;
-    int prefix_len = strlen(strip_prefix);
+    size_t prefix_len = strlen(strip_prefix);
 
     gclass = G_ENUM_CLASS(g_type_class_ref(enum_type));
 
@@ -120,6 +120,7 @@ static const rb_data_type_t rg_glib_enum_type = {
         NULL,
         enum_free,
         NULL,
+        {0},
     },
     NULL,
     NULL,
