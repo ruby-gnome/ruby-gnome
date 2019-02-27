@@ -56,6 +56,7 @@ module Poppler
         # initialize_new_from_data(data, password)
 
         @file = Tempfile.new(["poppler", ".pdf"])
+        @file.binmode
         @file.write(data)
         @file.close
         initialize_new_from_file(ensure_uri(@file.path), password)
