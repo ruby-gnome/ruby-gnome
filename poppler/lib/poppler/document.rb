@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,6 +14,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
+require "pathname"
 require "tempfile"
 
 module Poppler
@@ -72,7 +73,8 @@ module Poppler
         end
         initialize_new_from_stream(stream, length, password)
       elsif file
-        if file.is_a?(String)
+        case file
+        when String, Pathname
           initialize(path: file, password: password)
         else
           initialize_new_from_gfile(file, password)
@@ -119,7 +121,9 @@ module Poppler
     end
 
     def ensure_uri(uri)
-      if GLib.path_is_absolute?(uri)
+      if uri.is_a?(Pathname)
+        GLib.filename_to_uri(uri.to_s)
+      elsif GLib.path_is_absolute?(uri)
         GLib.filename_to_uri(uri)
       elsif /\A[a-zA-Z][a-zA-Z\d\-+.]*:/.match(uri)
         uri

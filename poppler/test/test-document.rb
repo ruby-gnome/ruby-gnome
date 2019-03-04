@@ -1,29 +1,43 @@
 class TestDocument < Test::Unit::TestCase
   sub_test_case("#initialize") do
-    def with_default_internal(encoding)
-      original_verbose = $VERBOSE
-      original_encoding = Encoding.default_internal
-      begin
-        $VERBOSE = false
-        Encoding.default_internal = encoding
-        yield
-      ensure
-        Encoding.default_internal = original_encoding
-        $VERBOSE = original_verbose
+    sub_test_case(":data") do
+      def with_default_internal(encoding)
+        original_verbose = $VERBOSE
+        original_encoding = Encoding.default_internal
+        begin
+          $VERBOSE = false
+          Encoding.default_internal = encoding
+          yield
+        ensure
+          Encoding.default_internal = original_encoding
+          $VERBOSE = original_verbose
+        end
+      end
+
+      def test_default_internal
+        pdf = StringIO.new("".b)
+        surface = Cairo::PDFSurface.new(pdf, 100, 100)
+        context = Cairo::Context.new(surface)
+        context.show_text("Hello")
+        surface.finish
+
+        document = with_default_internal(Encoding::UTF_8) do
+          Poppler::Document.new(:data => pdf.string)
+        end
+        assert_equal("Hello", document[0].text)
       end
     end
 
-    def test_data
-      pdf = StringIO.new("".b)
-      surface = Cairo::PDFSurface.new(pdf, 100, 100)
-      context = Cairo::Context.new(surface)
-      context.show_text("Hello")
-      surface.finish
-
-      document = with_default_internal(Encoding::UTF_8) do
-        Poppler::Document.new(:data => pdf.string)
+    sub_test_case(":path") do
+      def test_string
+        document = Poppler::Document.new(path: multiple_pages_pdf)
+        assert_equal("The first page", document[0].text)
       end
-      assert_equal("Hello", document[0].text)
+
+      def test_pathname
+        document = Poppler::Document.new(path: Pathname(multiple_pages_pdf))
+        assert_equal("The first page", document[0].text)
+      end
     end
   end
 
