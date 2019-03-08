@@ -13,15 +13,11 @@ jobs:
       - script: gem install bundler
       - script: bundle install
       - script: rake
-  - job: macos25
-    displayName: "macOS: 2.5"
+  - job: macos
+    displayName: "macOS"
     pool:
       vmImage: "macOS-10.13"
     steps:
-      - task: UseRubyVersion@0
-        inputs:
-          versionSpec: "2.5"
-          addToPath: true
       - checkout: self
         fetchDepth: 10
       - script: gem install bundler
