@@ -58,8 +58,6 @@ unless check_cairo(:top_dir => top_dir)
   exit(false)
 end
 
-setup_windows(module_name, base_dir)
-
 unless required_pkg_config_package(package_id,
                                    :alt_linux => "libcairo-devel",
                                    :debian => "libcairo2-dev",

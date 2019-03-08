@@ -49,8 +49,6 @@ require "mkmf-gnome2"
                      :target_build_dir => build_dir)
 end
 
-setup_windows(module_name, base_dir)
-
 unless required_pkg_config_package(package_id,
                                    :alt_linux => "libgio-devel",
                                    :debian => "libglib2.0-dev",

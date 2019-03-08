@@ -14,8 +14,6 @@ package_id = "gobject-2.0"
 
 require 'mkmf-gnome2'
 
-setup_windows(module_name, base_dir)
-
 unless required_pkg_config_package([package_id, 2, 12, 0],
                                    :alt_linux => "glib2-devel",
                                    :debian => "libglib2.0-dev",
