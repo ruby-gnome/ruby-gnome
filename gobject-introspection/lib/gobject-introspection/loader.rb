@@ -589,7 +589,7 @@ module GObjectIntrospection
         ensure_prepared
 
         if receiver and @function_info_p
-          arguments.prepend(receiver)
+          arguments.unshift(receiver)
         end
 
         arguments, block = build(receiver, arguments, block)
