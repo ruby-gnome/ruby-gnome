@@ -1,0 +1,13 @@
+jobs:
+  - job: 26
+    displayName: 2.6
+    pool:
+      vmImage: "vs2017-win2016"
+    steps:
+      - task: UseRubyVersion@0
+        inputs:
+          versionSpec: "= 2.6"
+          addToPath: true
+      - checkout: self
+        fetchDepth: 1
+      - script: ruby -v
