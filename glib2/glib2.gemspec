@@ -46,7 +46,7 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("test/**/*")
 
-  s.add_runtime_dependency("pkg-config", ">= 1.3.4")
+  s.add_runtime_dependency("pkg-config", ">= 1.3.5")
   s.add_runtime_dependency("native-package-installer", ">= 1.0.3")
   s.add_development_dependency("test-unit", ">= 2")
 
