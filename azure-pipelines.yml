@@ -1,6 +1,6 @@
 jobs:
   - job: windows26
-    displayName: Windows: 2.6
+    displayName: "Windows: 2.6"
     pool:
       vmImage: "vs2017-win2016"
     steps:
