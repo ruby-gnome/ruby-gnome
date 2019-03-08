@@ -63,12 +63,15 @@ ignore_headers = [
 unless windows_platform?
   ignore_headers << "gwin32.h"
 end
+if PKGConfig.check_version?(package_id, 2, 60, 0)
+  ignore_headers << "gunicode.h"
+end
 headers = include_paths.split.inject([]) do |result, path|
   result + Dir.glob(File.join(path.sub(/^-I/, ""), "glib", "*.h"))
 end.reject do |file|
   ignore_headers.include?(File.basename(file))
 end
-include_paths = PKGConfig.cflags_only_I("gobject-2.0")
+include_paths = PKGConfig.cflags_only_I(package_id)
 headers = include_paths.split.inject(headers) do |result, path|
   result + Dir.glob(File.join(path.sub(/^-I/, ""), "gobject", "gsignal.h"))
 end
