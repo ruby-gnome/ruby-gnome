@@ -2,6 +2,63 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.3.3: 2019-03-09
+
+This is a minor improvement release.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * Made tests more robust.
+      [GitHub#1272][Reported by Jeremy Bicha]
+
+    * Required pkg-config 1.3.5 or later.
+
+  * Fixes
+
+    * (({GLib::PollFD#fd=})): Fixed wrong conversion.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Improved auto (({#==}))/(({#!=})) implementations.
+      They returns (({true}))/(({false})) for invalid argument instead
+      of raising an error.
+
+==== Ruby/GTK2
+
+  * Improvements
+
+    * Made tests more robust.
+      [GitHub#1275][Reported by Jeremy Bicha]
+
+==== Ruby/RSVG2
+
+  * Improvements
+
+    * Made tests more robust.
+      [GitHub#1273][Reported by Mamoru TASAKA]
+
+==== Ruby/Poppler
+
+  * Improvements
+
+    * (({Poppler::Document.new(data:)})):
+      Added support for (({Encoding.default_internal})).
+
+    * (({Poppler::Document.new})):
+      Added support for (({#to_path})) objects as path.
+
+=== Thanks
+
+  * Jeremy Bicha
+
+  * Mamoru TASAKA
+
 == Ruby-GNOME2 3.3.2: 2019-02-03
 
 This is a bug fix release of 3.3.1.
