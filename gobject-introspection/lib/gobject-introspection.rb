@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -48,13 +48,16 @@ module GObjectIntrospection
 end
 GLib::Log.set_log_domain(GObjectIntrospection::LOG_DOMAIN)
 
-require "gobject-introspection/repository"
 require "gobject-introspection/arg-info"
-require "gobject-introspection/callable-info"
-require "gobject-introspection/object-info"
-require "gobject-introspection/interface-info"
-require "gobject-introspection/struct-info"
 require "gobject-introspection/boxed-info"
+require "gobject-introspection/callable-info"
+require "gobject-introspection/interface-info"
+require "gobject-introspection/object-info"
+require "gobject-introspection/registered-type-info"
+require "gobject-introspection/repository"
+require "gobject-introspection/struct-info"
+require "gobject-introspection/type-info"
 require "gobject-introspection/union-info"
+
 require "gobject-introspection/version"
 require "gobject-introspection/loader"

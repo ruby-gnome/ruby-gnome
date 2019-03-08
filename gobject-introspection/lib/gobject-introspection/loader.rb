@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -82,14 +82,11 @@ module GObjectIntrospection
 
     def define_module_function(target_module, name, function_info)
       function_info.unlock_gvl = should_unlock_gvl?(function_info, target_module)
-      method_name = "#{target_module}\#.#{name}"
-      arguments_builder = ArgumentsBuilder.new(function_info, method_name)
+      full_method_name = "#{target_module}\#.#{name}"
+      invoker = Invoker.new(function_info, name, full_method_name)
       target_module.module_eval do
         define_method(name) do |*arguments, &block|
-          arguments_builder.build(arguments, block)
-          arguments = arguments_builder.arguments
-          block = arguments_builder.block
-          function_info.invoke(arguments, &block)
+          invoker.invoke(nil, arguments, block)
         end
         module_function(name)
       end
@@ -97,18 +94,9 @@ module GObjectIntrospection
 
     def define_singleton_method(klass, name, info)
       info.unlock_gvl = should_unlock_gvl?(info, klass)
-      arguments_builder = ArgumentsBuilder.new(info, "#{klass}.#{name}")
-      require_callback_p = info.require_callback?
-      singleton_class = (class << klass; self; end)
-      singleton_class.__send__(:define_method, name) do |*arguments, &block|
-        arguments_builder.build(arguments, block)
-        arguments = arguments_builder.arguments
-        block = arguments_builder.block
-        if block.nil? and require_callback_p
-          to_enum(name, *arguments)
-        else
-          info.invoke(arguments, &block)
-        end
+      invoker = Invoker.new(info, name, "#{klass}.#{name}")
+      klass.singleton_class.__send__(:define_method, name) do |*arguments, &block|
+        invoker.invoke(nil, arguments, block)
       end
     end
 
@@ -309,12 +297,9 @@ module GObjectIntrospection
       infos.each do |info|
         name = "initialize_#{info.name}"
         info.unlock_gvl = should_unlock_gvl?(info, klass)
-        arguments_builder = ArgumentsBuilder.new(info, "#{klass}\##{name}")
+        invoker = Invoker.new(info, name, "#{klass}\##{name}")
         klass.__send__(:define_method, name) do |*arguments, &block|
-          arguments_builder.build(arguments, block)
-          arguments = arguments_builder.arguments
-          block = arguments_builder.block
-          info.invoke(self, arguments, &block)
+          invoker.invoke(self, arguments, block)
           call_initialize_post.call(self)
         end
         klass.__send__(:private, name)
@@ -365,75 +350,10 @@ module GObjectIntrospection
       raise ArgumentError, "wrong number of arguments (#{detail})"
     end
 
-    def match_type?(type_info, value)
-      case type_info.tag
-      when TypeTag::BOOLEAN
-        value == true or value == false
-      when TypeTag::INT8,
-           TypeTag::UINT8,
-           TypeTag::INT16,
-           TypeTag::UINT16,
-           TypeTag::INT32,
-           TypeTag::UINT32,
-           TypeTag::INT64,
-           TypeTag::UINT64,
-           TypeTag::FLOAT,
-           TypeTag::DOUBLE
-        value.is_a?(Numeric)
-      when TypeTag::GTYPE
-        value.is_a?(GLib::Type)
-      when TypeTag::UTF8
-        value.is_a?(String)
-      when TypeTag::FILENAME
-        value.is_a?(String)
-      when TypeTag::ARRAY
-        element_type_info = type_info.get_param_type(0)
-        value.is_a?(Array) and value.all? {|v| match_type?(element_type_info, v)}
-      when TypeTag::INTERFACE
-        interface = type_info.interface
-        case interface.type
-        when InfoType::STRUCT
-          match_type_interface_struct?(interface, value)
-        when InfoType::OBJECT,
-             InfoType::INTERFACE,
-             InfoType::FLAGS,
-             InfoType::ENUM
-          value.is_a?(interface.gtype.to_class)
-        else
-          # TODO
-          false
-        end
-      when TypeTag::GLIST,
-           TypeTag::GSLIST
-        element_type_info = type_info.get_param_type(0)
-        value.is_a?(Array) and value.all? {|v| match_type?(element_type_info, v)}
-      else
-        # TODO
-        false
-      end
-    end
-
-    def match_type_interface_struct?(interface, value)
-      gtype = interface.gtype
-      case gtype.name
-      when "void"
-        # TODO
-        false
-      when "CairoSurface"
-        if Object.const_defined?(:Cairo)
-          value.is_a?(Cairo::Surface)
-        else
-          false
-        end
-      else
-      value.is_a?(gtype.to_class)
-      end
-    end
-
     def match_argument?(arg_info, argument)
       return true if argument.nil? and arg_info.may_be_null?
 
-      match_type?(arg_info.type, argument)
+      arg_info.type.match?(argument)
     end
 
     def rubyish_method_name(function_info, options={})
@@ -604,29 +524,9 @@ module GObjectIntrospection
     def define_method(info, klass, method_name)
       info.unlock_gvl = should_unlock_gvl?(info, klass)
       remove_existing_method(klass, method_name)
-      function_info_p = (info.class == FunctionInfo)
-      have_return_value_p = info.have_return_value?
-      arguments_builder = ArgumentsBuilder.new(info, "#{klass}\##{method_name}")
-      require_callback_p = info.require_callback?
+      invoker = Invoker.new(info, method_name, "#{klass}\##{method_name}")
       klass.__send__(:define_method, method_name) do |*arguments, &block|
-        arguments.unshift(self) if function_info_p
-        arguments_builder.build(arguments, block)
-        arguments = arguments_builder.arguments
-        block = arguments_builder.block
-        if block.nil? and require_callback_p
-          to_enum(method_name, *arguments)
-        else
-          if function_info_p
-            return_value = info.invoke(arguments, &block)
-          else
-            return_value = info.invoke(self, arguments, &block)
-          end
-          if have_return_value_p
-            return_value
-          else
-            self
-          end
-        end
+        invoker.invoke(self, arguments, block)
       end
     end
 
@@ -677,31 +577,48 @@ module GObjectIntrospection
       load_methods(info, klass)
     end
 
-    class ArgumentsBuilder
-      attr_reader :arguments
-      attr_reader :block
-      def initialize(info, method_name)
+    class Invoker
+      def initialize(info, method_name, full_method_name)
         @info = info
         @method_name = method_name
-
+        @full_method_name = full_method_name
         @prepared = false
-
-        @arguments = nil
-        @block = nil
       end
 
-      def build(arguments, block)
-        prepare
+      def invoke(receiver, arguments, block)
+        ensure_prepared
 
-        @arguments = arguments
-        @block = block
+        if receiver and @function_info_p
+          arguments.prepend(receiver)
+        end
 
-        build_arguments
-        validate_arguments
+        arguments, block = build(receiver, arguments, block)
+        unless valid?(arguments)
+          if @on_invalid == :fallback
+            return @value_on_invalid
+          else
+            raise ArgumentError, invalid_error_message(invoke_arguments)
+          end
+        end
+
+        if block.nil? and @require_callback_p
+          receiver.to_enum(@method_name, *arguments)
+        else
+          if @function_info_p
+            return_value = @info.invoke(arguments, &block)
+          else
+            return_value = @info.invoke(receiver, arguments, &block)
+          end
+          if @have_return_value_p
+            return_value
+          else
+            receiver
+          end
+        end
       end
 
       private
-      def prepare
+      def ensure_prepared
         return if @prepared
 
         @in_args = @info.in_args
@@ -715,40 +632,70 @@ module GObjectIntrospection
         end
         @valid_n_args_range = (@n_required_in_args..@n_in_args)
 
+        @in_arg_types = []
+        @in_arg_nil_indexes = []
+        @in_args.each_with_index do |arg, i|
+          @in_arg_types << arg.type
+          @in_arg_nil_indexes << i if arg.may_be_null?
+        end
+
+        @function_info_p = (@info.class == FunctionInfo)
+        @have_return_value_p = @info.have_return_value?
+        @require_callback_p = @info.require_callback?
+
+        prepare_on_invalid
+
         @prepared = true
       end
 
-      def build_arguments
-        if @block and @last_in_arg_is_gclosure
-          @arguments << @block
-          @block = nil
-        end
-
-        n_missing_arguments = @n_in_args - @arguments.size
-        if n_missing_arguments > 0
-          nil_indexes = []
-          @in_args.each_with_index do |arg, i|
-            nil_indexes << i if arg.may_be_null?
-          end
-          return if nil_indexes.size < n_missing_arguments
-          nil_indexes.each_with_index do |nil_index, i|
-            next if i <= n_missing_arguments
-            @arguments.insert(nil_index, nil)
-          end
+      def prepare_on_invalid
+        case @method_name
+        when "=="
+          @value_on_invalid = false
+          @on_invalid = :fallback
+        when "!="
+          @value_on_invalid = true
+          @on_invalid = :fallback
+        else
+          @on_invalid = :raise
         end
       end
 
-      def validate_arguments
-        return if @valid_n_args_range.cover?(@arguments.size)
+      def build(receiver, arguments, block)
+        if block and @last_in_arg_is_gclosure
+          arguments << block
+          block = nil
+        end
 
-        detail = "#{@arguments.size} for "
+        n_missing_arguments = @n_in_args - arguments.size
+        if 0 < n_missing_arguments
+          @in_arg_nil_indexes.each_with_index do |nil_index, i|
+            next if i <= n_missing_arguments
+            arguments.insert(nil_index, nil)
+          end
+        end
+
+        return arguments, block
+      end
+
+      def valid?(arguments)
+        return false unless @valid_n_args_range.cover?(arguments.size)
+        if @on_invalid == :fallback
+          arguments.zip(@in_arg_types) do |argument, type|
+            return false unless type.match?(argument)
+          end
+        end
+        true
+      end
+
+      def invalid_error_message(argumetns)
+        detail = "#{arguments.size} for "
         if @n_in_args == @n_required_in_args
           detail << "#{@n_in_args}"
         else
           detail << "#{@n_required_in_args}..#{@n_in_args}"
         end
-        message = "#{@method_name}: wrong number of arguments (#{detail})"
-        raise ArgumentError, message
+        "#{@full_method_name}: wrong number of arguments (#{detail})"
       end
     end
   end

@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,31 +14,10 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gobject-introspection/collection-reader"
-
 module GObjectIntrospection
-  class StructInfo
-    extend CollectionReader
-
-    alias_method :__methods__, :methods
-
-    collection_reader("fields")
-    collection_reader("methods")
-
+  class RegisteredTypeInfo
     def match?(value)
-      case gtype.name
-      when "void"
-        # TODO
-        false
-      when "CairoSurface"
-        if Object.const_defined?(:Cairo)
-          value.is_a?(Cairo::Surface)
-        else
-          false
-        end
-      else
-        super
-      end
+      value.is_a?(gtype.to_class)
     end
   end
 end
