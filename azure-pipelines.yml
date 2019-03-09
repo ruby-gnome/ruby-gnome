@@ -10,10 +10,10 @@ jobs:
           addToPath: true
       - checkout: self
         fetchDepth: 10
-      - script: ruby -e "require 'devkit'"
-      - script: gem install bundler
+      - script: ridk exec pacman -Syu --noconfirm
+      - script: gem install cairo bundler
       - script: bundle install
-      - script: rake
+      - script: bundle exec ruby -rdevkit -S rake build
   - job: macos
     displayName: "macOS"
     pool:
