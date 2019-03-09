@@ -54,7 +54,7 @@ rg_s_define_interface(G_GNUC_UNUSED VALUE klass,
 {
     GType gtype;
 
-    gtype = NUM2ULONG(rb_to_int(rb_gtype));
+    gtype = rbgobj_gtype_get(rb_gtype);
     return G_DEF_INTERFACE(gtype, RVAL2CSTR(rb_name), rb_module);
 }
 
