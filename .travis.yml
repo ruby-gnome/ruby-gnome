@@ -26,15 +26,10 @@ matrix:
       rvm: 2.6
       install:
         - brew update
-        - bundle install
-      script:
-        - rake
-  allow_failures:
-    - os: osx
-      rvm: 2.6
-      install:
-        - brew update
-        - brew install glib
+        - brew install cairo
+        - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo-gobject.h
+        - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo-featurs.h
+        - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo.h
         - bundle install
       script:
         - rake
