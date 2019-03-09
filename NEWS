@@ -2,6 +2,18 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.3.5: 2019-03-10
+
+This is a follow-up release of 3.3.4.
+
+=== Changes
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Ignored no (({GType})) interface.
+
 == Ruby-GNOME2 3.3.4: 2019-03-09
 
 This is a real release to support GLib 2.60.
