@@ -62,14 +62,14 @@ static VALUE
 struct_alloc(VALUE klass)
 {
     VALUE rb_size;
-    size_t size;
-    gpointer instance;
+    gpointer instance = NULL;
     gboolean is_owned;
 
     rb_size = rb_iv_get(klass, "@size");
     if (NIL_P(rb_size)) {
         is_owned = FALSE;
     } else {
+        size_t size;
         size = NUM2ULONG(rb_size);
         instance = xcalloc(1, size);
         is_owned = TRUE;
