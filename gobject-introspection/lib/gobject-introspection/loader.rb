@@ -135,6 +135,7 @@ module GObjectIntrospection
     end
 
     def define_boxed(info)
+      return if info.gtype == GLib::Type::NONE
       klass = self.class.define_class(info.gtype, info.name, @base_module)
       _ = klass # TODO: Remove me. It is just for suppressing a warning.
       # TODO
@@ -151,6 +152,8 @@ module GObjectIntrospection
     end
 
     def define_enum(info)
+      # TODO: Can we do the same things for flags on NONE GType?
+      return if info.gtype == GLib::Type::NONE
       self.class.define_class(info.gtype,
                               rubyish_class_name(info),
                               @base_module)
@@ -205,6 +208,7 @@ module GObjectIntrospection
     end
 
     def load_object_info(info)
+      return if info.gtype == GLib::Type::NONE
       klass = self.class.define_class(info.gtype,
                                       rubyish_class_name(info),
                                       @base_module)
@@ -573,6 +577,7 @@ module GObjectIntrospection
     end
 
     def load_union_info(info)
+      return if info.gtype == GLib::Type::NONE
       klass = self.class.define_class(info.gtype, info.name, @base_module)
       load_fields(info, klass)
       load_methods(info, klass)
