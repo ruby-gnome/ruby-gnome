@@ -12,7 +12,7 @@ jobs:
         fetchDepth: 10
       - script: ridk exec pacman -Rs --noconfirm catgets
       - script: ridk exec pacman -Syu --noconfirm
-      - script: gem install cairo bundler
+      - script: gem install bundler
       - script: bundle install
       - script: bundle exec ruby -rdevkit -S rake build
   - job: macos
@@ -24,4 +24,4 @@ jobs:
         fetchDepth: 10
       - script: gem install bundler
       - script: bundle install
-      - script: rake
+      - script: bundle exec rake build
