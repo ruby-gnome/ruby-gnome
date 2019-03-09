@@ -28,8 +28,8 @@ matrix:
         - brew update
         - brew install cairo
         - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo-gobject.h
-        - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo-featurs.h
         - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo.h
+        - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo-features.h
         - bundle install
       script:
         - rake
