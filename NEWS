@@ -4,7 +4,7 @@
 
 == Ruby-GNOME2 3.3.3: 2019-03-09
 
-This is a minor improvement release.
+This is a release to support GLib 2.60.
 
 === Changes
 
@@ -16,6 +16,10 @@ This is a minor improvement release.
       [GitHub#1272][Reported by Jeremy Bicha]
 
     * Required pkg-config 1.3.5 or later.
+
+    * Added support for GLib 2.60.
+
+    * Windows: Removed support for static compilation.
 
   * Fixes
 
