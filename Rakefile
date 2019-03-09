@@ -280,7 +280,7 @@ namespace :dist do
                 sh(expanded_gem_path,
                    "install",
                    "--clear-sources",
-                   "--source", "http://rubygems.org/",
+                   "--source", "https://rubygems.org/",
                    "cairo")
               end
             end
