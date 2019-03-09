@@ -556,6 +556,7 @@ module GObjectIntrospection
     end
 
     def load_interface_info(info)
+      return if info.gtype == GLib::Type::NONE
       interface_module =
         self.class.define_interface(info.gtype,
                                     rubyish_class_name(info),
