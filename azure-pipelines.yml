@@ -10,7 +10,7 @@ jobs:
           addToPath: true
       - checkout: self
         fetchDepth: 10
-      - script: ridk exec pacman -R --noconfirm catgets
+      - script: ridk exec pacman -R --noconfirm libcatgets
       - script: ridk exec pacman -Syu --noconfirm
       - script: gem install cairo bundler
       - script: bundle install
