@@ -10,6 +10,7 @@ jobs:
           addToPath: true
       - checkout: self
         fetchDepth: 10
+      - script: ruby -e "require 'devkit'"
       - script: gem install bundler
       - script: bundle install
       - script: rake
