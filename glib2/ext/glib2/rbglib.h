@@ -155,7 +155,7 @@ extern "C" {
 #define G_DEF_ERROR2(domain, name, module, parent) \
     rbgerr_define_gerror(domain, name, module, parent, G_TYPE_INVALID)
 
-#if defined(G_PLATFORM_WIN32) && !defined(RUBY_GLIB2_STATIC_COMPILATION)
+#ifdef G_PLATFORM_WIN32
 #  ifdef RUBY_GLIB2_COMPILATION
 #    define RUBY_GLIB2_VAR __declspec(dllexport)
 #  else
