@@ -190,16 +190,6 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
     $INCFLAGS = "-I#{target_source_dir} #{$INCFLAGS}"
   end
 
-  if windows_platform?
-    target_base_dir = Pathname.new(target_source_dir).parent.parent
-    target_binary_base_dir = target_base_dir + "vendor" + "local"
-    if target_binary_base_dir.exist?
-      $INCFLAGS = "-I#{target_binary_base_dir}/include #{$INCFLAGS}"
-      target_pkg_config_dir = target_binary_base_dir + "lib" + "pkgconfig"
-      PKGConfig.add_path(target_pkg_config_dir.to_s)
-    end
-  end
-
   return unless File.exist?(target_build_dir)
   if target_source_dir != target_build_dir
     $INCFLAGS = "-I#{target_build_dir} #{$INCFLAGS}"
@@ -436,19 +426,15 @@ def check_cairo(options={})
   end
 
   unless rcairo_source_dir.nil?
-    if windows_platform?
-      options = {}
-      build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
-      if File.exist?(File.join(rcairo_source_dir, build_dir))
-        options[:target_build_dir] = build_dir
-      end
-      add_depend_package("cairo", "ext/cairo", rcairo_source_dir, options)
-      $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
+    options = {}
+    build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
+    if File.exist?(File.join(rcairo_source_dir, build_dir))
+      options[:target_build_dir] = build_dir
     end
-    $INCFLAGS += " -I#{rcairo_source_dir}/ext/cairo"
+    add_depend_package("cairo", "ext/cairo", rcairo_source_dir, options)
   end
 
-  PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
+  PKGConfig.have_package("cairo") and have_header("rb_cairo.h")
 end
 
 def install_missing_native_package(native_package_info)
