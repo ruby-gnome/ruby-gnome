@@ -27,17 +27,8 @@ matrix:
       install:
         - bundle install
       script:
-        - rake configure
-        - (cd glib2 && make)
-        - |
-            cat cairo-gobject/ext/cairo-gobject/Makefile || :
-        - |
-            cat cairo-gobject/ext/cairo-gobject/mkmf.log || :
-        - |
-            PKG_CONFIG_PATH=$(brew --prefix libffi)/lib/pkgconfig:$PKG_CONFIG_PATH pkg-config --cflags cairo || :
-        - |
-            PKG_CONFIG_PATH=$(brew --prefix libffi)/lib/pkgconfig:$PKG_CONFIG_PATH bundle exec ruby -r pkg-config -e 'puts PKGConfig.cflags("cairo")' || :
-        - (cd cairo-gobject && make V=1)
+        - bundle exec rake build
+        # TODO: Run tests
 
 install:
   - docker build
