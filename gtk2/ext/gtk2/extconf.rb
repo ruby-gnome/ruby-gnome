@@ -1,8 +1,22 @@
-=begin
-extconf.rb for Ruby/GTK extention library
-=end
+#!/usr/bin/env ruby
+#
+# Copyright (C) 2010-2019  Ruby-GNOME2 Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require 'pathname'
+require "pathname"
 
 source_dir = Pathname(__FILE__).dirname
 base_dir = source_dir.parent.parent.expand_path
@@ -23,13 +37,7 @@ $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 module_name = "gtk2"
 package_id = "gtk+-2.0"
 
-begin
-  require 'mkmf-gnome2'
-rescue LoadError
-  require 'rubygems'
-  gem 'glib2'
-  require 'mkmf-gnome2'
-end
+require "mkmf-gnome2"
 
 have_func("rb_errinfo")
 
@@ -50,10 +58,6 @@ have_func("rb_errinfo")
                      :target_build_dir => build_dir)
 end
 
-unless check_cairo(:top_dir => top_dir)
-  exit(false)
-end
-
 unless required_pkg_config_package([package_id, 2, 10, 0],
                                    :alt_linux => "libgtk+2-devel",
                                    :debian => "libgtk2.0-dev",
@@ -62,6 +66,10 @@ unless required_pkg_config_package([package_id, 2, 10, 0],
                                    :homebrew => "gtk+",
                                    :macports => "gtk2",
                                    :msys2 => "gtk2")
+  exit(false)
+end
+
+unless check_cairo(:top_dir => top_dir)
   exit(false)
 end
 

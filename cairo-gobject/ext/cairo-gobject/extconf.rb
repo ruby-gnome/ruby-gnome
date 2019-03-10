@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -37,13 +37,7 @@ $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 module_name = "cairo_gobject"
 package_id = "cairo-gobject"
 
-begin
-  require "mkmf-gnome2"
-rescue LoadError
-  require "rubygems"
-  gem "glib2"
-  require "mkmf-gnome2"
-end
+require "mkmf-gnome2"
 
 ["glib2"].each do |package|
   directory = "#{package}#{version_suffix}"
@@ -54,16 +48,16 @@ end
                      :target_build_dir => build_dir)
 end
 
-unless check_cairo(:top_dir => top_dir)
-  exit(false)
-end
-
 unless required_pkg_config_package(package_id,
                                    :alt_linux => "libcairo-devel",
                                    :debian => "libcairo2-dev",
                                    :redhat => "cairo-gobject-devel",
                                    :arch_linux => "cairo",
                                    :homebrew => "cairo")
+  exit(false)
+end
+
+unless check_cairo(:top_dir => top_dir)
   exit(false)
 end
 

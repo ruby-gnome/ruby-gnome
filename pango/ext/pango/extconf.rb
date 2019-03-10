@@ -53,10 +53,6 @@ depended_packages.each do |package|
                      :target_build_dir => build_dir)
 end
 
-unless check_cairo(:top_dir => top_dir)
-  exit(false)
-end
-
 unless required_pkg_config_package([package_id, 1, 14, 0],
                                    :alt_linux => "libpango-devel",
                                    :debian => "libpango1.0-dev",
@@ -67,6 +63,11 @@ unless required_pkg_config_package([package_id, 1, 14, 0],
                                    :msys2 => "pango")
   exit(false)
 end
+
+unless check_cairo(:top_dir => top_dir)
+  exit(false)
+end
+
 PKGConfig.have_package("pangocairo")
 
 if PKGConfig.have_package("pangowin32")
