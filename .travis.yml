@@ -28,10 +28,10 @@ matrix:
         - bundle install
       script:
         - rake configure
-        - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo-gobject.h
-        - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo.h
-        - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo-features.h
         - (cd glib2 && make)
+        - cat cairo-gobject/ext/cairo-gobject/mkmf.log || :
+        - PKG_CONFIG_PATH=$(brew --prefix libffi)/lib/pkgconfig:$PKG_CONFIG_PATH pkg-config --cflags cairo || :
+        - PKG_CONFIG_PATH=$(brew --prefix libffi)/lib/pkgconfig:$PKG_CONFIG_PATH bundle exec ruby -r pkg-config -e 'puts PKGConfig.cflags("cairo")' || :
         - (cd cairo-gobject && make V=1)
 
 install:
