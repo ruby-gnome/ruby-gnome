@@ -31,7 +31,8 @@ matrix:
         - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo-gobject.h
         - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo.h
         - cat /usr/local/Cellar/cairo/1.16.0/include/cairo/cairo-features.h
-        - rake build
+        - cd glib2 && make
+        - cd cairo-gobject && make V=1
 
 install:
   - docker build
