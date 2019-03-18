@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,13 +18,31 @@ class TestFile < Test::Unit::TestCase
   include GioTestUtils::Fixture
   include GioTestUtils::Omissions
 
-  class TestContentType < self
+  sub_test_case("instance methods") do
+    def setup
+      @file = Gio::File.open(path: __FILE__)
+    end
+
     def test_guess_content_type
       omit_on_os_x
       path = fixture_path("content-type", "x-content", "unix-software")
       dir = Gio::File.open(path: path)
       assert_equal(["x-content/unix-software"],
                    dir.guess_content_types.collect(&:to_s))
+    end
+
+    sub_test_case("#read") do
+      def test_no_block
+        input_stream = @file.read
+        assert_equal(File.read(__FILE__), input_stream.read)
+      end
+
+      def test_with_block
+        content = @file.read do |input_stream|
+          input_stream.read
+        end
+        assert_equal(File.read(__FILE__), content)
+      end
     end
   end
 end
