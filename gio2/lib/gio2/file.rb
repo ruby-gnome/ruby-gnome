@@ -30,6 +30,7 @@ module Gio
             file = new_for_commandline_arg(arg)
           end
         elsif path
+          path = path.to_path if path.respond_to?(:to_path)
           file = new_for_path(path)
         elsif uri
           file = new_for_uri(uri)

@@ -18,6 +18,28 @@ class TestFile < Test::Unit::TestCase
   include GioTestUtils::Fixture
   include GioTestUtils::Omissions
 
+  sub_test_case(".open") do
+    sub_test_case(":path") do
+      def test_string
+        path = __FILE__
+        Gio::File.open(path: path) do |file|
+          file.read do |input|
+            assert_equal(File.read(__FILE__), input.read)
+          end
+        end
+      end
+
+      def test_pathname
+        path = Pathname(__FILE__)
+        Gio::File.open(path: path) do |file|
+          file.read do |input|
+            assert_equal(File.read(__FILE__), input.read)
+          end
+        end
+      end
+    end
+  end
+
   sub_test_case("instance methods") do
     def setup
       @file = Gio::File.open(path: __FILE__)
