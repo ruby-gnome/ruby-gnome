@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,19 @@
 
 module Gio
   class InputStream
+    class << self
+      def open(*arguments)
+        input_stream = new(*arguments)
+        return input_stream unless block_given?
+
+        begin
+          yield(input_stream)
+        ensure
+          input_stream.close unless input_stream.closed?
+        end
+      end
+    end
+
     alias_method :read_raw, :read
     def read(size=nil)
       if size.nil?
