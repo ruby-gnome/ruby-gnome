@@ -603,7 +603,7 @@ module GObjectIntrospection
           if @on_invalid == :fallback
             return @value_on_invalid
           else
-            raise ArgumentError, invalid_error_message(invoke_arguments)
+            raise ArgumentError, invalid_error_message(arguments)
           end
         end
 
@@ -694,7 +694,7 @@ module GObjectIntrospection
         true
       end
 
-      def invalid_error_message(argumetns)
+      def invalid_error_message(arguments)
         detail = "#{arguments.size} for "
         if @n_in_args == @n_required_in_args
           detail << "#{@n_in_args}"
