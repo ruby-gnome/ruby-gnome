@@ -2,6 +2,37 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.3.6: 2019-03-21
+
+This is a follow-up release of 3.3.5.
+
+=== Changes
+
+==== Ruby/GIO2
+
+  * Improvements
+
+    * (({Gio::File#read})): Added support for block.
+
+    * (({Gio::File.open})): Added support for (({Pathname})).
+
+    * (({Gio::InputStream.open})): Added support for block.
+
+==== Ruby/CairoGObject
+
+  * Fixes
+
+    * Fixed a bug that old cairo may be used.
+
+==== Ruby/GObjectIntrospection
+
+  * Fixes
+
+    * Fixed a bug that 64bit integer conversion may be failed for
+      large integer.
+
+    * Fixed typos.
+
 == Ruby-GNOME2 3.3.5: 2019-03-10
 
 This is a follow-up release of 3.3.4.
