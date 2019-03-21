@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -81,6 +81,7 @@ module Pango
     end
 
     def require_libraries
+      require "pango/attr-list"
       require "pango/attr-type"
       require "pango/color"
       require "pango/font-description"

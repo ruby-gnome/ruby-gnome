@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,20 +14,16 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestAttrList < Test::Unit::TestCase
-  include PangoTestUtils
+module Pango
+  class AttrList
+    include Enumerable
 
-  def setup
-    @attrs = Pango::AttrList.new
-  end
-
-  def test_insert
-    attribute = Pango::AttrLanguage.new(Pango::Language.default)
-    @attrs.insert(attribute)
-    assert_equal([
-                   [attribute.value.to_s],
-                   [],
-                 ],
-                 @attrs.collect {|iter| iter.attrs.collect {|a| a.value.to_s}})
+    def each(&block)
+      iter = iterator
+      yield(iter)
+      while iter.next
+        yield(iter)
+      end
+    end
   end
 end
