@@ -37,7 +37,7 @@ This tutorial will mainly be focused on the use of Gtk::Application, which is th
 *  [Packing](#packing)
 *  [Building user interfaces](#building-user-interfaces)
 *  [Building Applications](#building-applications)
-  *  [A trivial application](#a trivial application)
+  *  [A trivial application](#a-trivial-application)
   *  [Populating the window](#populating-the-window)
     *  [Link a template to a custom class widget](#link-a-template-to-a-custom-class-widget)
     *  [Load a resource file](#load-a-resource-file)
