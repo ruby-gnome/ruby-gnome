@@ -965,7 +965,7 @@ https://developer.gnome.org/gtk3/stable/ch01s04.html#id-1.2.3.12.11
 
 *    exampleapp8/exampleapp.rb
 
-As another piece of functionality, we are adding a sidebar, which demonstrates `Gtk::MenuButton`, `Gtk::Revealer` and Gtk::ListBox`.
+As another piece of functionality, we are adding a sidebar, which demonstrates `Gtk::MenuButton`, `Gtk::Revealer` and `Gtk::ListBox`.
 
 window.ui :
 
