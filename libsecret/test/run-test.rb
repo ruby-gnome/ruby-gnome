@@ -53,4 +53,11 @@ rescue GObjectIntrospection::RepositoryError
   exit(true)
 end
 
+require "pkg-config"
+
+unless PkgConfig.check_version?("libsecret-1", 0, 18, 9)
+  puts("Omit because libsecret is old")
+  exit(true)
+end
+
 exit(Test::Unit::AutoRunner.run(true, File.join(libsecret_base, "test")))
