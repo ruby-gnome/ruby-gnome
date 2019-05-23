@@ -3223,6 +3223,280 @@ rb_gi_value_argument_from_ruby_gslist(GIArgument *argument,
     }
 }
 
+typedef struct {
+    VALUE rb_value;
+    GType gtype;
+    const gchar *context;
+} RubyToCData;
+
+typedef gpointer (*RubyToCFunc)(RubyToCData *data);
+
+static gpointer
+ruby_to_c_utf8(RubyToCData *data)
+{
+    return g_strdup(RVAL2CSTR(data->rb_value));
+}
+
+static gpointer
+ruby_to_c_interface_enum(RubyToCData *data)
+{
+    gint32 value;
+    if (data->gtype == G_TYPE_NONE) {
+        value = NUM2INT(data->rb_value);
+    } else {
+        value = RVAL2GENUM(data->rb_value, data->gtype);
+    }
+    return GINT_TO_POINTER(value);
+}
+
+typedef struct {
+    GIArgument *argument;
+    GITypeInfo *type_info;
+    VALUE rb_argument;
+    VALUE self;
+} ArgumentFromRubyData;
+
+typedef struct {
+    GHashTable *hash_table;
+    RubyToCFunc key_ruby_to_c_func;
+    RubyToCData *key_ruby_to_c_data;
+    RubyToCFunc value_ruby_to_c_func;
+    RubyToCData *value_ruby_to_c_data;
+} ArgumentFromRubyGHashData;
+
+static int
+rb_gi_value_argument_from_ruby_ghash_convert(VALUE rb_key,
+                                             VALUE rb_value,
+                                             VALUE user_data)
+{
+    ArgumentFromRubyGHashData *data = (ArgumentFromRubyGHashData *)user_data;
+    gpointer key;
+    gpointer value;
+    data->key_ruby_to_c_data->rb_value = rb_key;
+    key = data->key_ruby_to_c_func(data->key_ruby_to_c_data);
+    data->value_ruby_to_c_data->rb_value = rb_value;
+    value = data->key_ruby_to_c_func(data->value_ruby_to_c_data);
+    g_hash_table_insert(data->hash_table, key, value);
+    return ST_CONTINUE;
+}
+
+static VALUE
+rb_gi_value_argument_from_ruby_ghash_body(VALUE value_data)
+{
+    ArgumentFromRubyData *data = (ArgumentFromRubyData *)value_data;
+    GIArgument *argument = data->argument;
+    GITypeInfo *type_info = data->type_info;
+    VALUE rb_argument = data->rb_argument;
+    GHashFunc hash_func = NULL;
+    GEqualFunc equal_func = NULL;
+    GDestroyNotify key_destroy_func = NULL;
+    GDestroyNotify value_destroy_func = NULL;
+    GITypeInfo *key_type_info;
+    GITypeTag key_type_tag;
+    GIInfoType key_interface_type = GI_INFO_TYPE_INVALID;
+    RubyToCFunc key_ruby_to_c_func = NULL;
+    RubyToCData key_ruby_to_c_data;
+    GITypeInfo *value_type_info;
+    GITypeTag value_type_tag;
+    GIInfoType value_interface_type = GI_INFO_TYPE_INVALID;
+    RubyToCFunc value_ruby_to_c_func = NULL;
+    RubyToCData value_ruby_to_c_data;
+    ArgumentFromRubyGHashData convert_data;
+
+    key_type_info = g_type_info_get_param_type(type_info, 0);
+    key_type_tag = g_type_info_get_tag(key_type_info);
+    key_ruby_to_c_data.gtype = G_TYPE_NONE;
+    if (key_type_tag == GI_TYPE_TAG_INTERFACE) {
+        GIBaseInfo *interface_info;
+        interface_info = g_type_info_get_interface(key_type_info);
+        key_ruby_to_c_data.gtype =
+            g_registered_type_info_get_g_type(interface_info);
+        key_interface_type = g_base_info_get_type(interface_info);
+        g_base_info_unref(interface_info);
+    }
+    g_base_info_unref(key_type_info);
+
+    value_type_info = g_type_info_get_param_type(type_info, 1);
+    value_type_tag = g_type_info_get_tag(value_type_info);
+    value_ruby_to_c_data.gtype = G_TYPE_NONE;
+    if (value_type_tag == GI_TYPE_TAG_INTERFACE) {
+        GIBaseInfo *interface_info;
+        interface_info = g_type_info_get_interface(value_type_info);
+        value_ruby_to_c_data.gtype =
+            g_registered_type_info_get_g_type(interface_info);
+        value_interface_type = g_base_info_get_type(interface_info);
+        g_base_info_unref(interface_info);
+    }
+    g_base_info_unref(value_type_info);
+
+    switch (key_type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(GHash)[key][%s]",
+                 g_type_tag_to_string(key_type_tag));
+        break;
+      case GI_TYPE_TAG_UTF8:
+        hash_func = g_str_hash;
+        equal_func = g_str_equal;
+        key_destroy_func = g_free;
+        key_ruby_to_c_func = ruby_to_c_utf8;
+        key_ruby_to_c_data.context = "Ruby -> GIArgument(GHash)[key][utf8]";
+        break;
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(GHash)[key][%s]",
+                 g_type_tag_to_string(key_type_tag));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    switch (value_type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(GHash)[value][%s]",
+                 g_type_tag_to_string(value_type_tag));
+        break;
+      case GI_TYPE_TAG_INTERFACE:
+        switch (value_interface_type) {
+          case GI_INFO_TYPE_INVALID:
+          case GI_INFO_TYPE_FUNCTION:
+          case GI_INFO_TYPE_CALLBACK:
+          case GI_INFO_TYPE_STRUCT:
+          case GI_INFO_TYPE_BOXED:
+            rb_raise(rb_eNotImpError,
+                     "TODO: Ruby -> GIArgument(GHash)[value][%s][%s]",
+                     g_type_tag_to_string(value_type_tag),
+                     g_info_type_to_string(value_interface_type));
+            break;
+          case GI_INFO_TYPE_ENUM:
+            value_destroy_func = NULL;
+            value_ruby_to_c_func = ruby_to_c_interface_enum;
+            value_ruby_to_c_data.context =
+                "Ruby -> GIArgument(GHash)[value][interface]";
+            break;
+          case GI_INFO_TYPE_FLAGS:
+          case GI_INFO_TYPE_OBJECT:
+          case GI_INFO_TYPE_INTERFACE:
+          case GI_INFO_TYPE_CONSTANT:
+          case GI_INFO_TYPE_INVALID_0:
+          case GI_INFO_TYPE_UNION:
+          case GI_INFO_TYPE_VALUE:
+          case GI_INFO_TYPE_SIGNAL:
+          case GI_INFO_TYPE_VFUNC:
+          case GI_INFO_TYPE_PROPERTY:
+          case GI_INFO_TYPE_FIELD:
+          case GI_INFO_TYPE_ARG:
+          case GI_INFO_TYPE_TYPE:
+          case GI_INFO_TYPE_UNRESOLVED:
+            rb_raise(rb_eNotImpError,
+                     "TODO: Ruby -> GIArgument(GHash)[value][%s][%s]",
+                     g_type_tag_to_string(value_type_tag),
+                     g_info_type_to_string(value_interface_type));
+            break;
+          default:
+            g_assert_not_reached();
+            break;
+        }
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(GHash)[value][%s]",
+                 g_type_tag_to_string(value_type_tag));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    argument->v_pointer = g_hash_table_new_full(hash_func,
+                                                equal_func,
+                                                key_destroy_func,
+                                                value_destroy_func);
+    convert_data.hash_table = argument->v_pointer;
+    convert_data.key_ruby_to_c_func = key_ruby_to_c_func;
+    convert_data.key_ruby_to_c_data = &key_ruby_to_c_data;
+    convert_data.value_ruby_to_c_func = value_ruby_to_c_func;
+    convert_data.value_ruby_to_c_data = &value_ruby_to_c_data;
+    rb_hash_foreach(rb_argument,
+                    rb_gi_value_argument_from_ruby_ghash_convert,
+                    (VALUE)&convert_data);
+
+    return Qnil;
+}
+
+static VALUE
+rb_gi_value_argument_from_ruby_ghash_rescue(VALUE value_data,
+                                            VALUE exception)
+{
+    ArgumentFromRubyData *data = (ArgumentFromRubyData *)value_data;
+    GIArgument *argument = data->argument;
+
+    if (argument->v_pointer) {
+        g_hash_table_unref(argument->v_pointer);
+        argument->v_pointer = NULL;
+    }
+
+    rb_exc_raise(exception);
+
+    return Qnil;
+}
+
+static void
+rb_gi_value_argument_from_ruby_ghash(GIArgument *argument,
+                                     GITypeInfo *type_info,
+                                     VALUE rb_argument,
+                                     VALUE self)
+{
+    ArgumentFromRubyData data;
+    argument->v_pointer = NULL;
+    data.argument = argument;
+    data.type_info = type_info;
+    data.rb_argument = rb_argument;
+    data.self = self;
+    rb_rescue(rb_gi_value_argument_from_ruby_ghash_body, (VALUE)&data,
+              rb_gi_value_argument_from_ruby_ghash_rescue, (VALUE)&data);
+}
+
 static void
 rb_gi_value_argument_from_ruby_void(GIArgument *argument, GITypeInfo *type_info,
                                     VALUE rb_argument)
@@ -3340,6 +3614,9 @@ rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
                                               rb_argument, self);
         break;
     case GI_TYPE_TAG_GHASH:
+        rb_gi_value_argument_from_ruby_ghash(argument, type_info,
+                                             rb_argument, self);
+        break;
     case GI_TYPE_TAG_ERROR:
         rb_raise(rb_eNotImpError,
                  "TODO: Ruby -> GIArgument(%s)",
