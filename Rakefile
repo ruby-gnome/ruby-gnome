@@ -150,7 +150,7 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "gnumeric",
   "gegl",
   "wnck3",
-  "secret",
+  "libsecret",
 ]
 gnome2_packages = gnome2_packages.uniq
 
