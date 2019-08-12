@@ -59,6 +59,7 @@ unless required_pkg_config_package(package_id,
   exit(false)
 end
 
+# TODO: Remove this when we dropped support for GObject Introspection < 1.60
 make_version_header("GI", package_id, ".")
 
 gi_headers = ["girepository.h"]

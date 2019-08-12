@@ -28,7 +28,9 @@
 #include <girffi.h>
 #include "gobject-introspection-enum-types.h"
 
-#include "rbgiversion.h"
+#ifndef GI_CHECK_VERSION
+#  include "rbgiversion.h"
+#endif
 
 #include "rb-gi-types.h"
 #include "rb-gi-conversions.h"
