@@ -20,6 +20,15 @@
 
 #include "rb-pango-private.h"
 
+#ifndef PANGO_CHECK_VERSION
+#  define PANGO_CHECK_VERSION(major, minor, micro)                      \
+    (PANGO_VERSION_MAJOR > (major) ||                                   \
+     (PANGO_VERSION_MAJOR == (major) && PANGO_VERSION_MINOR > (minor)) || \
+     (PANGO_VERSION_MAJOR == (major) && PANGO_VERSION_MINOR == (minor) && \
+      PANGO_VERSION_MICRO >= (micro)))
+#endif
+
+#if !PANGO_CHECK_VERSION(1, 44, 0)
 static GType
 pango_attribute_get_type(void)
 {
@@ -30,6 +39,7 @@ pango_attribute_get_type(void)
                                                 (GBoxedFreeFunc)pango_attribute_destroy);
     return our_type;
 }
+#endif
 
 VALUE
 rbpango_attribute_to_ruby(PangoAttribute *attribute)
