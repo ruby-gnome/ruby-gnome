@@ -2,6 +2,59 @@
 
 = NEWS
 
+== Ruby-GNOME2 3.3.7: 2019-08-17
+
+This is the bug fix release of 3.3.6.
+
+=== Changes
+
+==== Ruby/Pango
+
+  * Improvements
+
+    * (({Pango::AttrList#each})): Added.
+
+    * (({Pango::AttrType})): Added support for (({PANGO_ATTR_FONT_DESC})).
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for (({GHashTable<utf8, enum>})).
+
+    * Added support for GObject Introspection 1.60.0.
+
+==== Ruby/Pango
+
+  * Improvements
+
+    * Added support for Pango 1.44.
+      [GitHub#1288][Reported by Toshiaki Asai]
+
+==== Ruby/GTK3
+
+  * Fixes
+
+    * Fixed document markup.
+      [GitHub#1280][GitHub#1281][GitHub#1282][Patch by İsmail Arılık]
+
+==== Ruby/WNCK3
+
+  * Added.
+    [GitHub#1284][Reported by Christopher L. Ramsey]
+
+==== Ruby/libsecret
+
+  * Added.
+
+=== Thanks
+
+  * İsmail Arılık
+
+  * Christopher L. Ramsey
+
+  * Toshiaki Asai
+
 == Ruby-GNOME2 3.3.6: 2019-03-21
 
 This is a follow-up release of 3.3.5.
