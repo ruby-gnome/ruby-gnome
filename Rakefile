@@ -66,7 +66,7 @@ end
 
 def download(url, local_path=nil)
   local_path ||= File.basename(url)
-  open(url) do |remote_file|
+  URI.open(url) do |remote_file|
     File.open(local_path, "wb") do |local_file|
       local_file.print(remote_file.read)
     end
@@ -94,7 +94,7 @@ end
 def gem_exist?(name, version)
   gem_uri = "https://rubygems.org/gems/#{name}/versions/#{version}"
   begin
-    open(gem_uri)
+    URI.open(gem_uri)
     true
   rescue OpenURI::HTTPError
     false
@@ -335,7 +335,7 @@ task :dist => ["dist:gtk2", "dist:gtk3", "dist:gnome2"]
 directory "misc"
 file "misc/release.rb" => "misc" do |task|
   release_rb = "https://raw.github.com/clear-code/cutter/master/misc/release.rb"
-  open(release_rb) do |remote_release_rb|
+  URI.open(release_rb) do |remote_release_rb|
     File.open(task.name, "w") do |local_release_rb|
       local_release_rb.print(remote_release_rb.read)
     end
