@@ -202,7 +202,7 @@ namespace :dist do
     package(gnome2_base_name, base_files + gnome2_packages)
   end
 
-  ruby_versions = ["2.3.8", "2.4.5", "2.5.3", "2.6.1"]
+  ruby_versions = ["2.4.6", "2.5.5", "2.6.3"]
   namespace :test do
     ruby_base_url = "https://cache.ruby-lang.org/pub/ruby"
     ruby_versions.each do |ruby_version|
