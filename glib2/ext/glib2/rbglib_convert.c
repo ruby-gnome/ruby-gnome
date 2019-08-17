@@ -35,12 +35,18 @@ rg_s_convert(G_GNUC_UNUSED VALUE self, VALUE str, VALUE to, VALUE from)
 
     StringValue(str);
     ret = g_convert(RSTRING_PTR(str), RSTRING_LEN(str),
-                    StringValuePtr(to), StringValuePtr(from),
+                    StringValueCStr(to), StringValueCStr(from),
                     NULL, &written, &err);
 
     if (err != NULL)
         RAISE_GERROR(err);
-    s = rb_str_new(ret, written);
+    {
+        rb_encoding *encoding = rb_enc_find(StringValueCStr(to));
+        if (!encoding) {
+            encoding = rb_ascii8bit_encoding();
+        }
+        s = rb_enc_str_new(ret, written, encoding);
+    }
     g_free(ret);
     return s;
 }
@@ -110,7 +116,7 @@ rg_s_filename_from_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 
     if (err != NULL)
         RAISE_GERROR(err);
-    s = rb_str_new(ret, written);
+    s = rb_enc_str_new(ret, written, rbg_filename_encoding);
     g_free(ret);
     return s;
 }

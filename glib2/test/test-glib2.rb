@@ -1,6 +1,6 @@
-# encoding: ascii-8bit
+# coding: ascii-8bit
 #
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2019  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -49,18 +49,18 @@ class TestGLib < Test::Unit::TestCase
   def test_convert
     assert_kind_of(String, GLib.charset)
 
-    sjis = "\202\261\202\361\202\311\202\277\202\315\220\242\212E"
-    euc  = "\244\263\244\363\244\313\244\301\244\317\300\244\263\246"
-    utf8 = "\343\201\223\343\202\223\343\201\253\343\201\241\343\201\257\344\270\226\347\225\214"
-    assert_equal(GLib.convert(sjis, "UTF-8", "SHIFT_JIS"), utf8)
-    assert_equal(GLib.convert(sjis, "EUC-JP", "SHIFT_JIS"), euc)
-    assert_equal(GLib.convert(sjis, "SHIFT_JIS", "SHIFT_JIS"), sjis)
-    assert_equal(GLib.convert(euc, "UTF-8", "EUC-JP"), utf8)
-    assert_equal(GLib.convert(euc, "EUC-JP", "EUC-JP"), euc)
-    assert_equal(GLib.convert(euc, "SHIFT_JIS", "EUC-JP"), sjis)
-    assert_equal(GLib.convert(utf8, "UTF-8", "UTF-8"), utf8)
-    assert_equal(GLib.convert(utf8, "EUC-JP", "UTF-8"), euc)
-    assert_equal(GLib.convert(utf8, "SHIFT_JIS", "UTF-8"), sjis)
+    sjis = "\202\261\202\361\202\311\202\277\202\315\220\242\212E".force_encoding("Shift_JIS")
+    euc  = "\244\263\244\363\244\313\244\301\244\317\300\244\263\246".force_encoding("EUC-JP")
+    utf8 = "\343\201\223\343\202\223\343\201\253\343\201\241\343\201\257\344\270\226\347\225\214".force_encoding("UTF-8")
+    assert_equal(utf8, GLib.convert(sjis, "UTF-8", "SHIFT_JIS"))
+    assert_equal(euc, GLib.convert(sjis, "EUC-JP", "SHIFT_JIS"))
+    assert_equal(sjis, GLib.convert(sjis, "SHIFT_JIS", "SHIFT_JIS"))
+    assert_equal(utf8, GLib.convert(euc, "UTF-8", "EUC-JP"))
+    assert_equal(euc, GLib.convert(euc, "EUC-JP", "EUC-JP"))
+    assert_equal(sjis, GLib.convert(euc, "SHIFT_JIS", "EUC-JP"))
+    assert_equal(utf8, GLib.convert(utf8, "UTF-8", "UTF-8"))
+    assert_equal(euc, GLib.convert(utf8, "EUC-JP", "UTF-8"))
+    assert_equal(sjis, GLib.convert(utf8, "SHIFT_JIS", "UTF-8"))
   end
 
   def tet_locale_to_utf8
