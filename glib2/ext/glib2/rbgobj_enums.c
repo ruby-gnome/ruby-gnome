@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
- *  Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2004-2006  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -27,9 +27,11 @@
 
 VALUE RG_TARGET_NAMESPACE;
 
+static ID id_find;
 static ID id_new;
-static ID id_to_s;
 static ID id_to_i;
+static ID id_to_s;
+static ID id_values;
 
 /**********************************************************************/
 
@@ -49,47 +51,26 @@ nick_to_const_name(const gchar *nick)
         else
             *p = g_ascii_toupper(*p);
     }
-    if (const_name[0] >= 'A' && const_name[0] <= 'Z') {
-        return const_name;
-    } else {
-        gchar *replaced_const_name = rg_obj_constant_lookup(const_name);
-        if (replaced_const_name) {
-            g_free(const_name);
-            return replaced_const_name;
-        } else {
-            return const_name;
-        }
-    }
+    return const_name;
 }
 
 VALUE
 rg_enum_resolve_value(VALUE klass, VALUE nick)
 {
-    VALUE value = Qnil;
-    gchar *const_nick;
-    ID const_nick_id;
-
     if (RVAL2CBOOL(rb_obj_is_kind_of(nick, klass)))
         return nick;
-
-    nick = rb_funcall(nick, id_to_s, 0);
-    const_nick = nick_to_const_name(RVAL2CSTR(nick));
-    const_nick_id = rb_intern(const_nick);
-    if (rb_const_defined(klass, const_nick_id)) {
-        value = rb_const_get(klass, const_nick_id);
-    }
-    g_free(const_nick);
-
-    return value;
+    return rb_funcall(klass, id_find, 1, nick);
 }
 
 void
 rg_enum_add_constants(VALUE mod, GType enum_type, const gchar *strip_prefix)
 {
+    VALUE klass;
     GEnumClass *gclass;
     guint i;
     size_t prefix_len = strlen(strip_prefix);
 
+    klass = GTYPE2CLASS(enum_type);
     gclass = G_ENUM_CLASS(g_type_class_ref(enum_type));
 
     for (i = 0; i < gclass->n_values; i++) {
@@ -100,8 +81,9 @@ rg_enum_add_constants(VALUE mod, GType enum_type, const gchar *strip_prefix)
                       value->value_name, strip_prefix);
         } else {
             const char* name = value->value_name + prefix_len;
-            rbgobj_define_const(mod, name,
-                                rbgobj_make_enum(value->value, enum_type));
+            rbgobj_define_const(mod,
+                                name,
+                                rb_funcall(klass, id_find, 1, INT2NUM(value->value)));
         }
     }
 
@@ -148,26 +130,10 @@ enum_get_holder(VALUE rb_enum)
 VALUE
 rbgobj_make_enum(gint n, GType gtype)
 {
-    VALUE klass;
-    GEnumClass *gclass;
-    guint i;
-    VALUE enum_value = Qnil;
+    VALUE klass = GTYPE2CLASS(gtype);
+    VALUE enum_value;
 
-    klass = GTYPE2CLASS(gtype);
-    gclass = g_type_class_ref(gtype);
-    for (i = 0; i < gclass->n_values; i++) {
-        GEnumValue *entry = &(gclass->values[i]);
-        if (entry->value == n) {
-            gchar *const_nick_name = nick_to_const_name(entry->value_nick);
-            if (const_nick_name) {
-                enum_value = rb_const_get(klass, rb_intern(const_nick_name));
-                g_free(const_nick_name);
-            }
-            break;
-        }
-    }
-    g_type_class_unref(gclass);
-
+    enum_value = rb_funcall(klass, id_find, 1, INT2NUM(n));
     if (NIL_P(enum_value)) {
         enum_value = rb_funcall(klass,
                                 id_new,
@@ -214,16 +180,22 @@ void
 rbgobj_init_enum_class(VALUE klass)
 {
     GEnumClass* gclass = g_type_class_ref(CLASS2GTYPE(klass));
+    VALUE values;
     guint i;
 
+    values = rb_hash_new();
+    rb_iv_set(klass, "values", values);
     for (i = 0; i < gclass->n_values; i++) {
         GEnumValue* entry = &(gclass->values[i]);
+        VALUE rb_raw_enum_value;
+        VALUE value;
         gchar *const_nick_name;
 
+        rb_raw_enum_value = INT2NUM(entry->value);
+        value = rb_funcall(klass, id_new, 1, rb_raw_enum_value);
+        rb_hash_aset(values, rb_raw_enum_value, value);
         const_nick_name = nick_to_const_name(entry->value_nick);
         if (const_nick_name) {
-            VALUE value;
-            value = rb_funcall(klass, id_new, 1, INT2NUM(entry->value));
             rbgobj_define_const(klass, const_nick_name, value);
             g_free(const_nick_name);
         }
@@ -243,47 +215,32 @@ rg_s_range(VALUE self)
     return result;
 }
 
-struct enum_s_values_body_args {
-    GEnumClass *gclass;
-    VALUE self;
-};
-
-static VALUE
-enum_s_values_body(VALUE value)
-{
-    struct enum_s_values_body_args *args = (struct enum_s_values_body_args *)value;
-    VALUE result = rb_ary_new();
-    guint i;
-
-    for (i = 0; i < args->gclass->n_values; i++) {
-        rb_ary_push(result,
-                    rb_funcall(args->self,
-                               id_new,
-                               1,
-                               INT2NUM(args->gclass->values[i].value)));
-    }
-
-    return result;
-}
-
-static VALUE
-enum_s_values_ensure(VALUE gclass)
-{
-    g_type_class_unref((GEnumClass *)gclass);
-
-    return Qnil;
-}
-
 static VALUE
 rg_s_values(VALUE self)
 {
-    struct enum_s_values_body_args args = {
-        g_type_class_ref(CLASS2GTYPE(self)),
-        self
-    };
+    VALUE values = rb_iv_get(self, "values");
+    return rb_funcall(values, id_values, 0);
+}
 
-    return rb_ensure(enum_s_values_body, (VALUE)&args,
-                     enum_s_values_ensure, (VALUE)args.gclass);
+static VALUE
+rg_s_find(VALUE self, VALUE key)
+{
+    if (RB_TYPE_P(key, RUBY_T_FIXNUM)) {
+        VALUE values = rb_iv_get(self, "values");
+        return rb_hash_aref(values, key);
+    } else if (RB_TYPE_P(key, RUBY_T_STRING) || RB_TYPE_P(key, RUBY_T_SYMBOL)) {
+        VALUE nick = rb_funcall(key, id_to_s, 0);
+        gchar *const_nick = nick_to_const_name(RVAL2CSTR(nick));
+        ID const_nick_id = rb_intern(const_nick);
+        g_free(const_nick);
+        if (rb_const_defined(self, const_nick_id)) {
+            return rb_const_get(self, const_nick_id);
+        } else {
+            return Qnil;
+        }
+    } else {
+        return Qnil;
+    }
 }
 
 VALUE
@@ -451,9 +408,11 @@ rg_coerce(VALUE self, VALUE other)
 void
 Init_gobject_genums(void)
 {
+    id_find = rb_intern("find");
     id_new = rb_intern("new");
-    id_to_s = rb_intern("to_s");
     id_to_i = rb_intern("to_i");
+    id_to_s = rb_intern("to_s");
+    id_values = rb_intern("values");
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ENUM, "Enum", mGLib);
 
@@ -462,6 +421,7 @@ Init_gobject_genums(void)
 
     RG_DEF_SMETHOD(range, 0);
     RG_DEF_SMETHOD(values, 0);
+    RG_DEF_SMETHOD(find, 1);
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rbgobj_enum_alloc_func);
 
