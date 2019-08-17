@@ -135,16 +135,36 @@ enum_get_holder(VALUE rb_enum)
     return holder;
 }
 
-static VALUE
-make_enum(gint n, VALUE klass)
-{
-    return rb_funcall(klass, id_new, 1, INT2NUM(n));
-}
-
 VALUE
 rbgobj_make_enum(gint n, GType gtype)
 {
-    return make_enum(n, GTYPE2CLASS(gtype));
+    VALUE klass;
+    GEnumClass *gclass;
+    guint i;
+    VALUE enum_value = Qnil;
+
+    klass = GTYPE2CLASS(gtype);
+    gclass = g_type_class_ref(gtype);
+    for (i = 0; i < gclass->n_values; i++) {
+        GEnumValue *entry = &(gclass->values[i]);
+        if (entry->value == n) {
+            gchar *const_nick_name = nick_to_const_name(entry->value_nick);
+            if (const_nick_name) {
+                enum_value = rb_const_get(klass, rb_intern(const_nick_name));
+                g_free(const_nick_name);
+            }
+            break;
+        }
+    }
+    g_type_class_unref(gclass);
+
+    if (NIL_P(enum_value)) {
+        enum_value = rb_funcall(klass,
+                                id_new,
+                                1,
+                                INT2NUM(n));
+    }
+    return enum_value;
 }
 
 gint
@@ -191,29 +211,12 @@ rbgobj_init_enum_class(VALUE klass)
         gchar *const_nick_name;
 
         const_nick_name = nick_to_const_name(entry->value_nick);
-
-#if 0
-        {
-            ID id = rb_intern(const_nick_name);
-            if (rb_is_const_id(id)) {
-                VALUE value;
-
-                value = make_enum(entry->value, klass);
-                rb_define_const(klass, const_nick_name, value);
-            }
+        if (const_nick_name) {
+            VALUE value;
+            value = rb_funcall(klass, id_new, 1, INT2NUM(entry->value));
+            rbgobj_define_const(klass, const_nick_name, value);
+            g_free(const_nick_name);
         }
-#else
-        {
-            if (const_nick_name) {
-                VALUE value;
-
-                value = make_enum(entry->value, klass);
-                rbgobj_define_const(klass, const_nick_name, value);
-            }
-        }
-#endif
-
-        g_free(const_nick_name);
     }
 
     g_type_class_unref(gclass);
@@ -242,8 +245,13 @@ enum_s_values_body(VALUE value)
     VALUE result = rb_ary_new();
     guint i;
 
-    for (i = 0; i < args->gclass->n_values; i++)
-        rb_ary_push(result, make_enum(args->gclass->values[i].value, args->self));
+    for (i = 0; i < args->gclass->n_values; i++) {
+        rb_ary_push(result,
+                    rb_funcall(args->self,
+                               id_new,
+                               1,
+                               INT2NUM(args->gclass->values[i].value)));
+    }
 
     return result;
 }
