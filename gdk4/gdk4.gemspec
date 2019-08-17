@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2018  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.name          = "gdk4"
   s.summary       = "Ruby/GDK4 is a Ruby binding of GDK-4.x."
   s.description   = "Ruby/GDK4 is a Ruby binding of GDK-4.x."
-  s.author        = "The Ruby-GNOME2 Project Team"
+  s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome2.osdn.jp/"
   s.licenses      = ["LGPL-2.1+"]

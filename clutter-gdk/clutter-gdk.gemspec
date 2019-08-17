@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2018  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
     "Ruby/ClutterGDK is a Ruby binding of GDK specific API of Clutter."
   s.description =
     "Ruby/ClutterGDK is a Ruby binding of GDK specific API of Clutter."
-  s.author        = "The Ruby-GNOME2 Project Team"
+  s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome2.osdn.jp/"
   s.licenses      = ["LGPL-2.1+"]

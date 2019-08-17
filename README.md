@@ -1,18 +1,18 @@
-[![Build Status](https://travis-ci.org/ruby-gnome2/ruby-gnome2.svg?branch=master)](https://travis-ci.org/ruby-gnome2/ruby-gnome2)
+[![Build Status](https://travis-ci.org/ruby-gnome/ruby-gnome.svg?branch=master)](https://travis-ci.org/ruby-gnome/ruby-gnome)
 [![Gem Version](https://badge.fury.io/rb/gtk3.svg)](https://badge.fury.io/rb/gtk3)
-# Ruby-GNOME2
-![Ruby-GNOME2 Logo](https://avatars1.githubusercontent.com/u/416159?v=3&s=200)
+# Ruby-GNOME
+![Ruby-GNOME Logo](https://avatars1.githubusercontent.com/u/416159?v=3&s=200)
 Ruby bindings for GNOME
 
 
 This is a set of bindings for the GNOME 2.x and 3.x libraries to use
-from Ruby 2.1, 2.2, 2.3, 2.4 and 2.5.
+from Ruby 2.4, 2.5 and 2.6.
 
 ## Installation
 
 ### Install the current releases.
 
-The gems of the Ruby-GNOME2 projects can be easily installed with the `gem` command.
+The gems of the Ruby-GNOME projects can be easily installed with the `gem` command.
 For example in order to install the gtk3 gem and its dependencies:
 
     gem install gtk3
@@ -26,7 +26,7 @@ Create `Gemfile` like the following:
 ```ruby
 source "https://rubygems.org/"
 
-git "https://github.com/ruby-gnome2/ruby-gnome2.git" do
+git "https://github.com/ruby-gnome/ruby-gnome.git" do
   gem "gtk3"
 end
 ```
@@ -60,7 +60,7 @@ Install these gems by Bundler:
 * Ruby/GDK3:            GTK+ 3.4.2 or later
 * Ruby/GTK3:            GTK+ 3.4.2 or later
 
-### ruby-gnome2-all
+### ruby-gnome-all
 
 * ruby-gtk2 + ruby-gtk3
 * Ruby/RSVG2:            librsvg 2.8.0 or later
@@ -121,7 +121,7 @@ Or you can compile each sub-binding:
 
 Please report bugs either in our bug tracker
 
-* [https://github.com/ruby-gnome2/ruby-gnome2/issues](https://github.com/ruby-gnome2/ruby-gnome2/issues) (current)
+* [https://github.com/ruby-gnome/ruby-gnome/issues](https://github.com/ruby-gnome/ruby-gnome/issues) (current)
 
 or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
 
@@ -129,7 +129,7 @@ or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
 
 ## Copying
 
-Copyright (c) 2002-2018 Ruby-GNOME2 Project Team
+Copyright (c) 2002-2019 Ruby-GNOME Project Team
 
 This program is free software.
 You can distribute/modify this program under the terms of
