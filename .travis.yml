@@ -2,10 +2,6 @@ notifications:
   webhooks:
     - https://webhook.commit-email.info/
 
-dist: trusty
-
-sudo: required
-
 services:
   - docker
 
@@ -28,7 +24,7 @@ matrix:
 
 install:
   - docker build
-      -t ruby-gnome2/ruby-gnome2-${TYPE}
+      -t ruby-gnome/ruby-gnome-${TYPE}
       -f travis/Dockerfile.${TYPE}
       .
 
@@ -36,4 +32,4 @@ script:
   - docker run
       --interactive
       --tty
-      ruby-gnome2/ruby-gnome2-${TYPE}
+      ruby-gnome/ruby-gnome-${TYPE}
