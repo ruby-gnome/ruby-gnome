@@ -49,7 +49,17 @@ nick_to_const_name(const gchar *nick)
         else
             *p = g_ascii_toupper(*p);
     }
-    return const_name;
+    if (const_name[0] >= 'A' && const_name[0] <= 'Z') {
+        return const_name;
+    } else {
+        gchar *replaced_const_name = rg_obj_constant_lookup(const_name);
+        if (replaced_const_name) {
+            g_free(const_name);
+            return replaced_const_name;
+        } else {
+            return const_name;
+        }
+    }
 }
 
 VALUE
