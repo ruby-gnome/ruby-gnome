@@ -63,23 +63,23 @@ class TestGLib < Test::Unit::TestCase
     assert_equal(sjis, GLib.convert(utf8, "SHIFT_JIS", "UTF-8"))
   end
 
-  def tet_locale_to_utf8
-    assert_equal(Encoding::UTF8,
+  def test_locale_to_utf8
+    assert_equal(Encoding::UTF_8,
                  GLib.locale_to_utf8("ascii").encoding)
   end
 
-  def tet_locale_from_utf8
+  def test_locale_from_utf8
     assert_equal(Encoding::ASCII_8BIT,
                  GLib.locale_from_utf8("ascii").encoding)
   end
 
-  def tet_filename_to_utf8
-    assert_equal(Encoding::UTF8,
+  def test_filename_to_utf8
+    assert_equal(Encoding::UTF_8,
                  GLib.filename_to_utf8("ascii.txt").encoding)
   end
 
-  def tet_filename_from_utf8
-    assert_equal(Encoding::ASCII_8BIT,
+  def test_filename_from_utf8
+    assert_equal(GLib::FILENAME_ENCODING,
                  GLib.filename_from_utf8("ascii.txt").encoding)
   end
 

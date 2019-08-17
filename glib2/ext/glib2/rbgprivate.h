@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2007-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2007-2019  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -60,6 +60,7 @@ typedef struct {
 } boxed_holder;
 
 G_GNUC_INTERNAL extern GStaticPrivate rg_polling_key;
+G_GNUC_INTERNAL extern rb_encoding *rbg_filename_encoding;
 
 extern VALUE rbgobj_cEnum;
 extern VALUE rbgobj_cFlags;
