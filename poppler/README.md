@@ -4,8 +4,8 @@ Ruby/Poppler is a Ruby binding of [poppler-glib](https://developer.gnome.org/pop
 
 ## Requirements
 
-* [Ruby/GObject-Introspection](https://github.com/ruby-gnome2/ruby-gnome2)
-* [Ruby/Gio2](https://github.com/ruby-gnome2/ruby-gnome2)
+* [Ruby/GObject-Introspection](https://github.com/ruby-gnome/ruby-gnome)
+* [Ruby/Gio2](https://github.com/ruby-gnome/ruby-gnome)
 * [rcairo](https://github.com/rcairo/rcairo)
 
 ## Install
@@ -22,4 +22,4 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 ## Project Websites
 
 *   https://ruby-gnome2.osdn.jp/
-*   https://github.com/ruby-gnome2/ruby-gnome2
+*   https://github.com/ruby-gnome/ruby-gnome
