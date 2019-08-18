@@ -25,5 +25,5 @@ https://developer.gnome.org/clutter/stable/clutter-GDK-Specific-Support.html
 
 ## Project Websites
 
-*  https://github.com/ruby-gnome2/ruby-gnome2
+*  https://github.com/ruby-gnome/ruby-gnome
 *  https://ruby-gnome2.osdn.jp/

@@ -4,8 +4,8 @@ Ruby/ATK is a Ruby binding of ATK-1.12.x or later based on GObject-Introspection
 
 ## Requirements
 
-* [Ruby/GObject-Introspection](https://github.com/ruby-gnome2/ruby-gnome2)
-* [Ruby/GLib2](https://github.com/ruby-gnome2/ruby-gnome2)
+* [Ruby/GObject-Introspection](https://github.com/ruby-gnome/ruby-gnome)
+* [Ruby/GLib2](https://github.com/ruby-gnome/ruby-gnome)
 
 ## Install
 
@@ -21,4 +21,4 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 ## Project Websites
 
 *   https://ruby-gnome2.osdn.jp/
-*   https://github.com/ruby-gnome2/ruby-gnome2
+*   https://github.com/ruby-gnome/ruby-gnome

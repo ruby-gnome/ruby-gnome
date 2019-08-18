@@ -28,5 +28,5 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 ## Project Websites
 
-* https://github.com/ruby-gnome2/ruby-gnome2
+* https://github.com/ruby-gnome/ruby-gnome
 * https://ruby-gnome2.osdn.jp/
