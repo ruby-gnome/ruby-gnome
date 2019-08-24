@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2017-2019  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -37,13 +37,14 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (NIL_P(rb_data)) {
         bytes = g_bytes_new(NULL, 0);
     } else {
-        const gchar *data = RVAL2CSTR_PTR(rb_data);
-        if (RB_OBJ_FROZEN(rb_data)) {
-            bytes = g_bytes_new_static(data, RSTRING_LEN(rb_data));
-            rb_iv_set(self, "source", rb_data);
-        } else {
-            bytes = g_bytes_new(data, RSTRING_LEN(rb_data));
+        const gchar *data;
+        if (!RB_OBJ_FROZEN(rb_data)) {
+            rb_data = rb_str_dup(rb_data);
+            rb_str_freeze(rb_data);
         }
+        data = RVAL2CSTR_PTR(rb_data);
+        bytes = g_bytes_new_static(data, RSTRING_LEN(rb_data));
+        rb_iv_set(self, "source", rb_data);
     }
     G_INITIALIZE(self, bytes);
 
