@@ -22,6 +22,14 @@ module GObjectIntrospection
       @gclosure_p = compute_gclosure?
     end
 
+    def inspect
+      super.gsub(/>\z/) do
+        " name=#{name.inspect}" +
+          " may_be_null?=#{may_be_null?.inspect}" +
+          " type=#{type.inspect}>"
+      end
+    end
+
     private
     def compute_gclosure?
       type_info = type

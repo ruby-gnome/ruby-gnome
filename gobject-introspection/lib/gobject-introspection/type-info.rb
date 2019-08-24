@@ -23,5 +23,11 @@ module GObjectIntrospection
     def description
       tag.description(self)
     end
+
+    def inspect
+      super.gsub(/>\z/) do
+        " tag=#{tag.inspect}>"
+      end
+    end
   end
 end
