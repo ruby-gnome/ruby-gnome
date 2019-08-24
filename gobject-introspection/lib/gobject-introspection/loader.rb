@@ -643,9 +643,7 @@ module GObjectIntrospection
       end
 
       def signature_description
-        argument_descriptions = @in_args.collect do |arg_info|
-          "#{arg_info.name}: #{arg_info.type.description}"
-        end
+        argument_descriptions = @in_args.collect(&:signature)
         "(" + argument_descriptions.join(", ") + ")"
       end
 

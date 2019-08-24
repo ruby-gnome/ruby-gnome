@@ -51,6 +51,7 @@ GLib::Log.set_log_domain(GObjectIntrospection::LOG_DOMAIN)
 require "gobject-introspection/arg-info"
 require "gobject-introspection/boxed-info"
 require "gobject-introspection/callable-info"
+require "gobject-introspection/function-info"
 require "gobject-introspection/interface-info"
 require "gobject-introspection/object-info"
 require "gobject-introspection/registered-type-info"

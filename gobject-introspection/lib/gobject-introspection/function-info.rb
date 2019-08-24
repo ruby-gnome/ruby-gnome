@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2019  Ruby-GNOME Project Team
+# Copyright (C) 2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,32 +15,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module GObjectIntrospection
-  class ArgInfo
-    def gclosure?
-      @gclosure_p ||= nil
-      return @gclosure_p unless @gclosure_p.nil?
-      @gclosure_p = compute_gclosure?
-    end
-
-    def signature
-      "#{name}: #{type.description}"
-    end
-
+  class FunctionInfo
     def inspect
       super.gsub(/>\z/) do
-        " name=#{name.inspect}" +
-          " may_be_null?=#{may_be_null?.inspect}" +
-          " type=#{type.inspect}>"
+        " unlock_gvl?=#{unlock_gvl?.inspect}>"
       end
-    end
-
-    private
-    def compute_gclosure?
-      type_info = type
-      return false if type_info.tag != TypeTag::INTERFACE
-
-      struct_info = type_info.interface
-      struct_info.gtype.name == "GClosure"
     end
   end
 end

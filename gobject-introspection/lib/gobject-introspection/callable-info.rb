@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -63,6 +63,21 @@ module GObjectIntrospection
       return true if return_type.tag != TypeTag::VOID
       return true if return_type.pointer?
       not n_out_args.zero?
+    end
+
+    def signature
+      argument_signatures = args.collect(&:signature).join(", ")
+      "#{name}(#{argument_signatures}): #{return_type.description}"
+    end
+
+    def inspect
+      super.gsub(/>\z/) do
+        " signature=<#{signature}>" +
+          " name=#{name.inspect}" +
+          " arguments=#{args.inspect}" +
+          " return_type=#{return_type.inspect}" +
+          " may_return_type_null=#{may_return_null?.inspect}>"
+      end
     end
 
     private
