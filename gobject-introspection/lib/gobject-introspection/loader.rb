@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -298,10 +298,12 @@ module GObjectIntrospection
       call_initialize_post = lambda do |object|
         initialize_post(object)
       end
+      invokers = []
       infos.each do |info|
         name = "initialize_#{info.name}"
         info.unlock_gvl = should_unlock_gvl?(info, klass)
         invoker = Invoker.new(info, name, "#{klass}\##{name}")
+        invokers << invoker
         klass.__send__(:define_method, name) do |*arguments, &block|
           invoker.invoke(self, arguments, block)
           call_initialize_post.call(self)
@@ -309,12 +311,26 @@ module GObjectIntrospection
         klass.__send__(:private, name)
       end
 
-      find_info = lambda do |arguments|
-        find_suitable_callable_info(infos, arguments)
+      initialize = lambda do |receiver, arguments, block|
+        invokers.each do |invoker|
+          catch do |tag|
+            invoker.invoke(receiver, arguments.dup, block, tag)
+            call_initialize_post.call(receiver)
+            return
+          end
+        end
+        message = "wrong arguments: "
+        message << "#{klass.name}#initialize("
+        message << arguments.collect(&:inspect).join(", ")
+        message << "): "
+        message << "available signatures"
+        invokers.each do |invoker|
+          message << ": #{invoker.signature_description}"
+        end
+        raise ArgumentError, message
       end
       klass.__send__(:define_method, "initialize") do |*arguments, &block|
-        info = find_info.call(arguments, &block)
-        __send__("initialize_#{info.name}", *arguments, &block)
+        initialize.call(self, arguments, block)
       end
     end
 
@@ -591,7 +607,7 @@ module GObjectIntrospection
         @prepared = false
       end
 
-      def invoke(receiver, arguments, block)
+      def invoke(receiver, arguments, block, abort_tag=nil)
         ensure_prepared
 
         if receiver and @function_info_p
@@ -599,12 +615,15 @@ module GObjectIntrospection
         end
 
         arguments, block = build(receiver, arguments, block)
-        unless valid?(arguments)
-          if @on_invalid == :fallback
-            return @value_on_invalid
+        if wrong_number_of_arguments?(arguments)
+          if abort_tag
+            throw(abort_tag)
           else
             raise ArgumentError, invalid_error_message(arguments)
           end
+        end
+        unless normalize_arguments!(arguments, abort_tag)
+          return @value_on_invalid
         end
 
         if block.nil? and @require_callback_p
@@ -621,6 +640,13 @@ module GObjectIntrospection
             receiver
           end
         end
+      end
+
+      def signature_description
+        argument_descriptions = @in_args.collect do |arg_info|
+          "#{arg_info.name}: #{arg_info.type.description}"
+        end
+        "(" + argument_descriptions.join(", ") + ")"
       end
 
       private
@@ -684,12 +710,26 @@ module GObjectIntrospection
         return arguments, block
       end
 
-      def valid?(arguments)
-        return false unless @valid_n_args_range.cover?(arguments.size)
-        if @on_invalid == :fallback
-          arguments.zip(@in_arg_types) do |argument, type|
-            return false unless type.match?(argument)
+      def wrong_number_of_arguments?(arguments)
+        not @valid_n_args_range.cover?(arguments.size)
+      end
+
+      def normalize_arguments!(arguments, abort_tag)
+        arguments.size.times do |i|
+          argument = arguments[i]
+          next if argument.nil?
+          type = @in_arg_types[i]
+          converted_argument = type.try_convert(argument)
+          if converted_argument.nil?
+            if abort_tag
+              throw(abort_tag)
+            elsif @on_invalid == :fallback
+              return false
+            else
+              next
+            end
           end
+          arguments[i] = converted_argument
         end
         true
       end

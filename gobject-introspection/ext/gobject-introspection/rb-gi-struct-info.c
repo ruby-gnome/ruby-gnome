@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2019  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -124,17 +124,6 @@ rb_gi_struct_info_to_ruby(GIStructInfo *info,
 
     namespace = g_base_info_get_namespace(base_info);
     name = g_base_info_get_name(base_info);
-
-    if (strcmp(namespace, "cairo") == 0) {
-        gchar *gtype_name;
-        GType gtype;
-
-        gtype_name = g_strdup_printf("Cairo%s", name);
-        gtype = g_type_from_name(gtype_name);
-        g_free(gtype_name);
-        return BOXED2RVAL(object, gtype);
-    }
-
     rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
     rb_class = rb_const_get(rb_module, rb_intern(name));
     if (rb_respond_to(rb_class, rb_intern("gtype"))) {

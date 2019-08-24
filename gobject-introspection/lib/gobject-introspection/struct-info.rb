@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -24,21 +24,5 @@ module GObjectIntrospection
 
     collection_reader("fields")
     collection_reader("methods")
-
-    def match?(value)
-      case gtype.name
-      when "void"
-        # TODO
-        false
-      when "CairoSurface"
-        if Object.const_defined?(:Cairo)
-          value.is_a?(Cairo::Surface)
-        else
-          false
-        end
-      else
-        super
-      end
-    end
   end
 end

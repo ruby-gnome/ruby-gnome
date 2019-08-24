@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,6 +19,27 @@ class TestGLibBytes < Test::Unit::TestCase
 
   setup do
     only_glib_version(2, 32, 0)
+  end
+
+  sub_test_case ".try_convert" do
+    def test_nil
+      assert_nil(GLib::Bytes.try_convert(nil))
+    end
+
+    def test_bytes
+      bytes = GLib::Bytes.new("Hello")
+      assert_equal(bytes,
+                   GLib::Bytes.try_convert(bytes))
+    end
+
+    def test_string
+      assert_equal("Hello",
+                   GLib::Bytes.try_convert("Hello").to_s)
+    end
+
+    def test_unconvertable
+      assert_nil(GLib::Bytes.try_convert([]))
+    end
   end
 
   sub_test_case ".new" do

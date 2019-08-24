@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,10 +14,41 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require 'test/unit'
-require 'glib2'
-
 class TestEnum < Test::Unit::TestCase
+  sub_test_case(".try_convert") do
+    def test_nil
+      assert_nil(GLib::NormalizeMode.try_convert(nil))
+    end
+
+    def test_enum
+      assert_equal(GLib::NormalizeMode::NFD,
+                   GLib::NormalizeMode.try_convert(GLib::NormalizeMode::NFD))
+    end
+
+    def test_integer
+      assert_equal(GLib::NormalizeMode::NFD,
+                   GLib::NormalizeMode.try_convert(GLib::NormalizeMode::NFD.to_i))
+    end
+
+    def test_string
+      assert_equal(GLib::NormalizeMode::NFD,
+                   GLib::NormalizeMode.try_convert("nfd"))
+    end
+
+    def test_symbol
+      assert_equal(GLib::NormalizeMode::NFD,
+                   GLib::NormalizeMode.try_convert(:nfd))
+    end
+
+    def test_nonexistent
+      assert_nil(GLib::NormalizeMode.try_convert(:nonexistent))
+    end
+
+    def test_unconveratbl
+      assert_nil(GLib::NormalizeMode.try_convert([]))
+    end
+  end
+
   def test_enum_by_symbol
     original = [0x00c1].pack("U*") # A with acute
 

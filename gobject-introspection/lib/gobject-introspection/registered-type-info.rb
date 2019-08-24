@@ -1,4 +1,4 @@
-# Copyright (C) 2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,8 +16,23 @@
 
 module GObjectIntrospection
   class RegisteredTypeInfo
-    def match?(value)
-      value.is_a?(gtype.to_class)
+    def try_convert(value)
+      return nil if value.nil?
+      klass = gtype.to_class
+      case value
+      when klass
+        value
+      else
+        if klass.respond_to?(:try_convert)
+          klass.try_convert(value)
+        else
+          nil
+        end
+      end
+    end
+
+    def description
+      gtype.to_class
     end
   end
 end

@@ -28,6 +28,26 @@
 static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
+rg_s_try_convert(VALUE self, VALUE value)
+{
+    if (NIL_P(value)) {
+        return value;
+    }
+
+    if (RVAL2CBOOL(rb_obj_is_kind_of(value, self))) {
+        return value;
+    }
+
+    if (RB_TYPE_P(value, RUBY_T_STRING)) {
+        ID id_new;
+        CONST_ID(id_new, "new");
+        return rb_funcall(self, id_new, 1, value);
+    }
+
+    return Qnil;
+}
+
+static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GBytes *bytes;
@@ -98,6 +118,8 @@ Init_glib_bytes(void)
 {
 #if GLIB_CHECK_VERSION(2, 32, 0)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BYTES, "Bytes", mGLib);
+
+    RG_DEF_SMETHOD(try_convert, 1);
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(to_s, 0);

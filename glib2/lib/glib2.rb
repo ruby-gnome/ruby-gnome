@@ -1,4 +1,4 @@
-# Copyright (C) 2005-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2005-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -148,23 +148,35 @@ module GLib
 
 
   class Enum
-    def _dump(limit)
-      Marshal.dump(to_i, limit)
+    class << self
+      def try_convert(value)
+        if value.is_a?(self)
+          value
+        else
+          find(value)
+        end
+      end
+
+      def _load(obj)
+        new(Marshal.load(obj))
+      end
     end
 
-    def self._load(obj)
-      new(Marshal.load(obj))
+    def _dump(limit)
+      Marshal.dump(to_i, limit)
     end
   end
 
 
   class Flags
-    def _dump(limit)
-      Marshal.dump(to_i, limit)
+    class << self
+      def _load(obj)
+        new(Marshal.load(obj))
+      end
     end
 
-    def self._load(obj)
-      new(Marshal.load(obj))
+    def _dump(limit)
+      Marshal.dump(to_i, limit)
     end
 
     # FIXME

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2013-2019  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -22,8 +22,11 @@
 
 #define RG_TARGET_NAMESPACE rb_mCairoGObject
 
+static VALUE RG_TARGET_NAMESPACE;
+
 #define DEFINE_CONVERSION(prefix,                                       \
                           gtype,                                        \
+                          ClassName,                                    \
                           rb_klass,                                     \
                           RVAL2CR,                                      \
                           CR2RVAL)                                      \
@@ -47,10 +50,22 @@ prefix ## _s_gtype(G_GNUC_UNUSED VALUE klass)                           \
     return rbgobj_gtype_new(gtype);                                     \
 }                                                                       \
                                                                         \
+static VALUE                                                            \
+rg_ ## prefix ## _s_try_convert(VALUE klass, VALUE value)               \
+{                                                                       \
+    if (RTEST(rb_obj_is_kind_of(value, klass))) {                       \
+        return value;                                                   \
+    } else {                                                            \
+        gpointer raw_object = RVAL2CR(value);                           \
+        return BOXED2RVAL(raw_object, gtype);                           \
+    }                                                                   \
+}                                                                       \
+                                                                        \
 static void                                                             \
 define_ ## prefix ## _conversion(void)                                  \
 {                                                                       \
     RGConvertTable table;                                               \
+    VALUE rg_klass;                                                     \
                                                                         \
     memset(&table, 0, sizeof(RGConvertTable));                          \
     table.type          = gtype;                                        \
@@ -64,32 +79,66 @@ define_ ## prefix ## _conversion(void)                                  \
                                "gtype",                                 \
                                prefix ## _s_gtype,                      \
                                0);                                      \
+                                                                        \
+    rg_klass = G_DEF_CLASS(gtype, ClassName, RG_TARGET_NAMESPACE);      \
+    rb_define_singleton_method(rg_klass,                                \
+                               "try_convert",                           \
+                               rg_ ## prefix ## _s_try_convert,         \
+                               1);                                      \
 }
 
-DEFINE_CONVERSION(context, CAIRO_GOBJECT_TYPE_CONTEXT, rb_cCairo_Context,
-                  RVAL2CRCONTEXT, CRCONTEXT2RVAL)
-DEFINE_CONVERSION(device, CAIRO_GOBJECT_TYPE_DEVICE, rb_cCairo_Device,
-                  RVAL2CRDEVICE, CRDEVICE2RVAL)
-DEFINE_CONVERSION(pattern, CAIRO_GOBJECT_TYPE_PATTERN, rb_cCairo_Pattern,
-                  RVAL2CRPATTERN, CRPATTERN2RVAL)
-DEFINE_CONVERSION(surface, CAIRO_GOBJECT_TYPE_SURFACE, rb_cCairo_Surface,
-                  RVAL2CRSURFACE, CRSURFACE2RVAL)
-DEFINE_CONVERSION(scaled_font, CAIRO_GOBJECT_TYPE_SCALED_FONT,
+DEFINE_CONVERSION(context,
+                  CAIRO_GOBJECT_TYPE_CONTEXT,
+                  "Context",
+                  rb_cCairo_Context,
+                  RVAL2CRCONTEXT,
+                  CRCONTEXT2RVAL)
+DEFINE_CONVERSION(device,
+                  CAIRO_GOBJECT_TYPE_DEVICE,
+                  "Device",
+                  rb_cCairo_Device,
+                  RVAL2CRDEVICE,
+                  CRDEVICE2RVAL)
+DEFINE_CONVERSION(pattern,
+                  CAIRO_GOBJECT_TYPE_PATTERN,
+                  "Pattern",
+                  rb_cCairo_Pattern,
+                  RVAL2CRPATTERN,
+                  CRPATTERN2RVAL)
+DEFINE_CONVERSION(surface,
+                  CAIRO_GOBJECT_TYPE_SURFACE,
+                  "Surface",
+                  rb_cCairo_Surface,
+                  RVAL2CRSURFACE,
+                  CRSURFACE2RVAL)
+DEFINE_CONVERSION(scaled_font,
+                  CAIRO_GOBJECT_TYPE_SCALED_FONT,
+                  "ScaledFont",
                   rb_cCairo_ScaledFont,
-                  RVAL2CRSCALEDFONT, CRSCALEDFONT2RVAL)
-DEFINE_CONVERSION(font_face, CAIRO_GOBJECT_TYPE_FONT_FACE, rb_cCairo_FontFace,
-                  RVAL2CRFONTFACE, CRFONTFACE2RVAL)
-DEFINE_CONVERSION(font_options, CAIRO_GOBJECT_TYPE_FONT_OPTIONS,
+                  RVAL2CRSCALEDFONT,
+                  CRSCALEDFONT2RVAL)
+DEFINE_CONVERSION(font_face,
+                  CAIRO_GOBJECT_TYPE_FONT_FACE,
+                  "FontFace",
+                  rb_cCairo_FontFace,
+                  RVAL2CRFONTFACE,
+                  CRFONTFACE2RVAL)
+DEFINE_CONVERSION(font_options,
+                  CAIRO_GOBJECT_TYPE_FONT_OPTIONS,
+                  "FontOptions",
                   rb_cCairo_FontOptions,
-                  RVAL2CRFONTOPTIONS, CRFONTOPTIONS2RVAL)
-DEFINE_CONVERSION(region, CAIRO_GOBJECT_TYPE_REGION, rb_cCairo_Region,
-                  RVAL2CRREGION, CRREGION2RVAL)
+                  RVAL2CRFONTOPTIONS,
+                  CRFONTOPTIONS2RVAL)
+DEFINE_CONVERSION(region,
+                  CAIRO_GOBJECT_TYPE_REGION,
+                  "Region",
+                  rb_cCairo_Region,
+                  RVAL2CRREGION,
+                  CRREGION2RVAL)
 
 void
 Init_cairo_gobject(void)
 {
-    VALUE RG_TARGET_NAMESPACE;
-
     RG_TARGET_NAMESPACE = rb_define_module("CairoGObject");
 
     rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
