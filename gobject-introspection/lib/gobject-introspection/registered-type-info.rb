@@ -32,7 +32,7 @@ module GObjectIntrospection
     end
 
     def description
-      gtype.to_class
+      "#{gtype.to_class}(#{gtype.name})"
     end
   end
 end
