@@ -23,12 +23,17 @@ module GObjectIntrospection
     end
 
     def signature
-      "#{name}: #{type.description}"
+      sig = "#{name}:"
+      sig << " (optional)" if optional?
+      sig << " (may be null)" if may_be_null?
+      sig << " #{type.description}"
+      sig
     end
 
     def inspect
       super.gsub(/>\z/) do
         " name=#{name.inspect}" +
+          " optional?=#{optional?.inspect}" +
           " may_be_null?=#{may_be_null?.inspect}" +
           " type=#{type.inspect}>"
       end
