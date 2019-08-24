@@ -44,7 +44,7 @@ class TestEnum < Test::Unit::TestCase
       assert_nil(GLib::NormalizeMode.try_convert(:nonexistent))
     end
 
-    def test_unconveratbl
+    def test_unconvertable
       assert_nil(GLib::NormalizeMode.try_convert([]))
     end
   end

@@ -170,6 +170,21 @@ module GLib
 
   class Flags
     class << self
+      def try_convert(value)
+        case value
+        when self
+          value
+        when Integer, String, Symbol, Array
+          begin
+            new(value)
+          rescue ArgumentError
+            nil
+          end
+        else
+          nil
+        end
+      end
+
       def _load(obj)
         new(Marshal.load(obj))
       end

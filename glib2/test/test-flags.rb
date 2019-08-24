@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -13,11 +13,47 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- 
-require 'test/unit'
-require 'glib2'
 
 class TestFlags < Test::Unit::TestCase
+  sub_test_case(".try_convert") do
+    def test_nil
+      assert_nil(GLib::KeyFile::Flags.try_convert(nil))
+    end
+
+    def test_flags
+      assert_equal(GLib::KeyFile::Flags::KEEP_COMMENTS,
+                   GLib::KeyFile::Flags.try_convert(GLib::KeyFile::Flags::KEEP_COMMENTS))
+    end
+
+    def test_integer
+      assert_equal(GLib::KeyFile::Flags.new(1),
+                   GLib::KeyFile::Flags.try_convert(1))
+    end
+
+    def test_string
+      assert_equal(GLib::KeyFile::Flags.new("keep_comments"),
+                   GLib::KeyFile::Flags.try_convert("keep_comments"))
+    end
+
+    def test_symbol
+      assert_equal(GLib::KeyFile::Flags.new(:keep_comments),
+                   GLib::KeyFile::Flags.try_convert(:keep_comments))
+    end
+
+    def test_array
+      assert_equal(GLib::KeyFile::Flags.new(1 | 2),
+                   GLib::KeyFile::Flags.try_convert([1, :keep_translations]))
+    end
+
+    def test_nonexistent
+      assert_nil(GLib::KeyFile::Flags.try_convert(:nonexistent))
+    end
+
+    def test_unconvertable
+      assert_nil(GLib::KeyFile::Flags.try_convert({}))
+    end
+  end
+
   {
     '<=>' => [
       [0b0000, 0.0, nil],
