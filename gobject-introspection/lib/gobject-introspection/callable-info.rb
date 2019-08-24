@@ -65,6 +65,10 @@ module GObjectIntrospection
       not n_out_args.zero?
     end
 
+    def description
+      signature
+    end
+
     def signature
       argument_signatures = args.collect(&:signature).join(", ")
       "#{name}(#{argument_signatures}): #{return_type.description}"
