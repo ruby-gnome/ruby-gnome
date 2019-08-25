@@ -80,6 +80,10 @@ module GObjectIntrospection
       define_singleton_method(@base_module, name, info)
     end
 
+    def load_function_info_singleton_method(info, klass, method_name)
+      define_singleton_method(klass, method_name, info)
+    end
+
     def define_module_function(target_module, name, function_info)
       function_info.unlock_gvl = should_unlock_gvl?(function_info, target_module)
       full_method_name = "#{target_module}\#.#{name}"
@@ -125,7 +129,7 @@ module GObjectIntrospection
         end
         unless method_infos.empty?
           base_class = @base_module.const_get(base_class_name)
-          load_method_infos(method_infos, base_class.singleton_class)
+          load_methods_method(method_infos, base_class.singleton_class)
         end
       else
         return if info.gtype_struct?
@@ -277,11 +281,11 @@ module GObjectIntrospection
         next if method_infos.empty?
         case method_infos.first
         when ConstructorInfo
-          load_constructor_infos(method_infos, klass)
+          load_methods_constructor(method_infos, klass)
         when MethodInfo
-          load_method_infos(method_infos, klass)
+          load_methods_method(method_infos, klass)
         when FunctionInfo
-          load_function_infos(method_infos, klass)
+          load_methods_function(method_infos, klass)
         else
           raise "TODO: #{method_info_class}"
         end
@@ -292,7 +296,7 @@ module GObjectIntrospection
       end
     end
 
-    def load_constructor_infos(infos, klass)
+    def load_methods_constructor(infos, klass)
       return if infos.empty?
 
       call_initialize_post = lambda do |object|
@@ -522,7 +526,7 @@ module GObjectIntrospection
       false
     end
 
-    def load_method_infos(infos, klass)
+    def load_methods_method(infos, klass)
       infos.each do |info|
         method_name = rubyish_method_name(info)
         load_method_info(info, klass, method_name)
@@ -566,12 +570,12 @@ module GObjectIntrospection
       end
     end
 
-    def load_function_infos(infos, klass)
+    def load_methods_function(infos, klass)
       infos.each do |info|
         name = rubyish_method_name(info)
         next if name == "new"
         next if name == "alloc"
-        define_singleton_method(klass, name, info)
+        load_function_info_singleton_method(info, klass, name)
       end
     end
 
