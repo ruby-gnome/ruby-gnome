@@ -4148,15 +4148,16 @@ set_in_array_double_arguments_from_ruby(GIArgument *array_argument,
 
 static void
 set_in_array_gtype_arguments_from_ruby(GIArgument *array_argument,
-                                       VALUE rb_class_array)
+                                       VALUE rb_types)
 {
     GType *types;
-    long i, n_args;
+    long i, n_types;
 
-    n_args = RARRAY_LEN(rb_class_array);
-    types = ALLOC_N(GType, n_args);
-    for (i = 0; i < n_args; i++) {
-        types[i] = CLASS2GTYPE(RARRAY_PTR(rb_class_array)[i]);
+    n_types = RARRAY_LEN(rb_types);
+    types = ALLOC_N(GType, n_types);
+    for (i = 0; i < n_types; i++) {
+        VALUE rb_type = RARRAY_PTR(rb_types)[i];
+        types[i] = rbgobj_gtype_get(rb_type);
     }
 
     array_argument->v_pointer = types;
