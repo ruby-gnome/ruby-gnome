@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -51,6 +51,7 @@ module Gio
       require "gio2/application-command-line"
       require "gio2/content-type"
       require "gio2/file"
+      require "gio2/icon"
       require "gio2/inet-address"
       require "gio2/input-stream"
       require "gio2/menu-item"
@@ -113,7 +114,7 @@ module Gio
       when /\Adbus_/
         name = rubyish_method_name(info, :prefix => "dbus_")
         define_singleton_method(@dbus_module, name, info)
-      when /\Afile_/
+      when /\A{file,icon}_/
         # Ignore because they are defined by load_interface_info
       else
         super
@@ -168,6 +169,17 @@ module Gio
         @content_type_class.__send__(:define_method, method_name) do
           info.invoke([to_s])
         end
+      end
+    end
+
+    def load_function_info_singleton_method(info, klass, method_name)
+      case "#{klass.name}##{method_name}"
+      when "Gio::Icon#hash"
+        define_method(info, klass, method_name)
+      when "Gio::Icon#new_for_string"
+        super(info, klass, "find")
+      else
+        super
       end
     end
 
