@@ -617,7 +617,7 @@ rg_s_try_convert(VALUE self, VALUE value)
     if (RVAL2CBOOL(rb_obj_is_kind_of(value, RG_TARGET_NAMESPACE)))
         return value;
 
-    if (RB_INTEGER_TYPE_P(value)) {
+    if (RVAL2CBOOL(rb_obj_is_kind_of(type, rb_cInteger))) {
         GType gtype = NUM2ULONG(value);
         if (!g_type_name(gtype))
             return Qnil;
