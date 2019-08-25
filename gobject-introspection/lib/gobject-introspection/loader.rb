@@ -325,7 +325,7 @@ module GObjectIntrospection
         message << "): "
         message << "available signatures"
         invokers.each do |invoker|
-          message << ": #{invoker.signature_description}"
+          message << ": #{invoker.signature}"
         end
         raise ArgumentError, message
       end
@@ -642,9 +642,10 @@ module GObjectIntrospection
         end
       end
 
-      def signature_description
-        argument_descriptions = @in_args.collect(&:signature)
-        "(" + argument_descriptions.join(", ") + ")"
+      def signature
+        ensure_prepared
+        argument_signatures = @in_args.collect(&:signature)
+        "(" + argument_signatures.join(", ") + ")"
       end
 
       private
