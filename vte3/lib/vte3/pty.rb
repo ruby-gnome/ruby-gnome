@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,16 @@
 
 module Vte
   class Pty
+    alias_method :initialize_raw, :initialize
+    def initialize(*args)
+      case args[0]
+      when PtyFlags
+        initialize_new_sync(*args)
+      else
+        initialize_raw(*args)
+      end
+    end
+
     alias_method :size_raw, :size
     def size
       succeeded, rows, columns = size_raw
