@@ -7,14 +7,22 @@ services:
 
 matrix:
   include:
-    - env: TYPE=ruby-2.4
-    - env: TYPE=ruby-2.5
-    - env: TYPE=ruby-2.6
-    - env: TYPE=ubuntu-16.04
-    - env: TYPE=ubuntu-18.04
-    - env: TYPE=centos-6
-    - env: TYPE=centos-7
-    - os: osx
+    - name: Ruby 2.4
+      env: TYPE=ruby-2.4
+    - name: Ruby 2.5
+      env: TYPE=ruby-2.5
+    - name: Ruby 2.6
+      env: TYPE=ruby-2.6
+    - name: Ubuntu 16.04
+      env: TYPE=ubuntu-16.04
+    - name: Ubuntu 18.04
+      env: TYPE=ubuntu-18.04
+    - name: CentOS 6
+      env: TYPE=centos-6
+    - name: CentOS 7
+      env: TYPE=centos-7
+    - name: macOS
+      os: osx
       rvm: 2.6
       install:
         - bundle install
