@@ -18,7 +18,11 @@ module GObjectIntrospection
   class RegisteredTypeInfo
     def try_convert(value)
       return nil if value.nil?
-      klass = gtype.to_class
+
+      type = gtype
+      return value if type == GLib::Type::NONE
+
+      klass = type.to_class
       case value
       when klass
         value
