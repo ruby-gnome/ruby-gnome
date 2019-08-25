@@ -73,24 +73,7 @@ module GObjectIntrospection
 
     class << GTYPE
       def try_convert(type_info, value)
-        case value
-        when GLib::Type
-          value
-        when String
-          begin
-            GLib::Type[value]
-          rescue ArgumentError
-            nil
-          end
-        when Symbol
-          begin
-            GLib::Type[value.to_s]
-          rescue ArgumentError
-            nil
-          end
-        else
-          nil
-        end
+        GLib::Type.try_convert(value)
       end
     end
 

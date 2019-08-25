@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2002-2019  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -377,7 +377,7 @@ rbgobj_class_info_lookup(VALUE klass)
     if (TYPE(klass) == T_CLASS) {
         VALUE super;
         super = rb_funcall(klass, id_superclass, 0);
-        return rbgobj_lookup_class(super);
+        return rbgobj_class_info_lookup(super);
     }
 
     rb_raise(rb_eRuntimeError, "can't get gobject class information");
@@ -603,6 +603,61 @@ rbgobj_gtype_get(VALUE self)
         return CLASS2GTYPE(self);
     }
     rb_raise(rb_eTypeError, "Not a GLib::Type");
+}
+
+static VALUE
+rg_s_try_convert(VALUE self, VALUE value)
+{
+    ID id_new;
+    CONST_ID(id_new, "new");
+
+    if (NIL_P(value))
+        return Qnil;
+
+    if (RVAL2CBOOL(rb_obj_is_kind_of(value, RG_TARGET_NAMESPACE)))
+        return value;
+
+    if (RB_INTEGER_TYPE_P(value)) {
+        GType gtype = NUM2ULONG(value);
+        if (!g_type_name(gtype))
+            return Qnil;
+        return rb_funcall(self, id_new, 1, value);
+    }
+
+    if (RB_TYPE_P(value, RUBY_T_SYMBOL)) {
+        value = rb_sym2str(value);
+    }
+
+    if (RB_TYPE_P(value, RUBY_T_STRING)) {
+        GType gtype = g_type_from_name(RVAL2CSTR(value));
+        if (gtype == G_TYPE_INVALID) {
+            return Qnil;
+        }
+        return rb_funcall(self, id_new, 1, value);
+    }
+
+    if (RVAL2CBOOL(rb_obj_is_kind_of(value, rb_cClass))) {
+        for (; !NIL_P(value); value = rb_funcall(value, id_superclass, 0)) {
+            RGObjClassInfo *cinfo;
+            VALUE data = rb_hash_aref(klass_to_cinfo, value);
+
+            if (NIL_P(data))
+                continue;
+
+            if (RTYPEDDATA_P(data)) {
+                TypedData_Get_Struct(data,
+                                     RGObjClassInfo,
+                                     RTYPEDDATA_TYPE(data),
+                                     cinfo);
+            } else {
+                Data_Get_Struct(data, RGObjClassInfo, cinfo);
+            }
+            return rb_funcall(self, id_new, 1, ULONG2NUM(cinfo->gtype));
+        }
+        return Qnil;
+    }
+
+    return Qnil;
 }
 
 static VALUE
@@ -929,6 +984,8 @@ Init_gobject_gtype(void)
     id_gtype = rb_intern("__gobject_gtype__");
 
     RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Type", rb_cObject);
+
+    RG_DEF_SMETHOD(try_convert, 1);
 
     rb_define_alias(CLASS_OF(RG_TARGET_NAMESPACE), "[]", "new");
     RG_DEF_METHOD(initialize, 1);
