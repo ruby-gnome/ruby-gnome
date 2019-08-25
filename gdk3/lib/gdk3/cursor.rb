@@ -38,7 +38,11 @@ module Gdk
       end
       display = options[:display] || Display.default
 
-      initialize_raw(display, *args)
+      if args.size == 1 and args[0].is_a?(String)
+        initialize_new_from_name(display, *args)
+      else
+        initialize_raw(display, *args)
+      end
     end
   end
 end
