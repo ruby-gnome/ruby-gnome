@@ -1,7 +1,9 @@
 FROM archlinux/base
 
 RUN \
+  pacman --sync --noconfirm --refresh && \
   pacman --sync --noconfirm \
+    awk \
     dbus \
     gcc \
     gnome-icon-theme \
@@ -13,7 +15,7 @@ RUN \
     xorg-server-xvfb
 
 RUN \
-  gem install bundler
+  gem install --no-user-install bundler
 
 RUN \
   useradd --user-group --create-home ruby-gnome

@@ -9,6 +9,7 @@ RUN \
     gnumeric \
     gstreamer1-plugins-good \
     make \
+    redhat-rpm-config \
     ruby-devel \
     sudo \
     xorg-x11-server-Xvfb
