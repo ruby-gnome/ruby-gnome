@@ -11,17 +11,17 @@ RUN \
     dbus-x11
 
 RUN \
-  useradd --user-group --create-home ruby-gnome2
+  useradd --user-group --create-home ruby-gnome
 
 RUN \
-  echo "ruby-gnome2 ALL=(ALL:ALL) NOPASSWD:ALL" | \
-    EDITOR=tee visudo -f /etc/sudoers.d/ruby-gnome2
+  echo "ruby-gnome ALL=(ALL:ALL) NOPASSWD:ALL" | \
+    EDITOR=tee visudo -f /etc/sudoers.d/ruby-gnome
 
-COPY . /home/ruby-gnome2/ruby-gnome2
-RUN chown -R ruby-gnome2:ruby-gnome2 /home/ruby-gnome2/ruby-gnome2
+COPY . /home/ruby-gnome/ruby-gnome
+RUN chown -R ruby-gnome:ruby-gnome /home/ruby-gnome/ruby-gnome
 
-USER ruby-gnome2
-WORKDIR /home/ruby-gnome2/ruby-gnome2
+USER ruby-gnome
+WORKDIR /home/ruby-gnome/ruby-gnome
 
 RUN bundle install
 
