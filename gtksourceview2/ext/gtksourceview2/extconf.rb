@@ -58,11 +58,12 @@ end
 
 unless required_pkg_config_package(package_id,
                                    :altlnux => "libgtksourceview-devel",
+                                   :arch_linux => "gtksourceview2",
                                    :debian => "libgtksourceview2.0-dev",
-                                   :redhat => "gtksourceview2-devel",
                                    :homebrew => "gtksourceview",
                                    :macports => "gtksourceview2",
-                                   :msys2 => "gtksourceview2")
+                                   :msys2 => "gtksourceview2",
+                                   :redhat => "gtksourceview2-devel")
   exit(false)
 end
 
