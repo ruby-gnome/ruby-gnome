@@ -22,6 +22,8 @@ base_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 have_make = system("which make > /dev/null")
 
 glib_dir = File.expand_path(File.join(base_dir, "..", "glib2"))
+gio_dir = File.expand_path(File.join(base_dir, "..", "gio2"))
+cairo_gobject_dir = File.expand_path(File.join(base_dir, "..", "cairo-gobject"))
 gdk_pixbuf_dir = File.expand_path(File.join(base_dir, "..", "gdk_pixbuf2"))
 pango_dir = File.join(File.join(base_dir, ".." , "pango"))
 gobject_introspection_dir =
@@ -32,6 +34,8 @@ require 'glib-test-init'
 
 [
   [glib_dir, "glib2"],
+  [gio_dir, "gio2"],
+  [cairo_gobject_dir, "cairo-gobject"],
   [gdk_pixbuf_dir, "gdk_pixbuf2"],
   [pango_dir, "pango"],
   [gobject_introspection_dir, "gobject-introspection"],
