@@ -33,7 +33,7 @@ namespace :dependency do
       unless NativePackageInstaller.install(:alt_linux => "libpoppler-glib-devel",
                                             :debian => "libpoppler-glib-dev",
                                             :redhat => "pkgconfig(poppler-glib)",
-                                            :arch_linux => "poppler",
+                                            :arch_linux => "poppler-glib",
                                             :homebrew => "poppler",
                                             :macports => "poppler",
                                             :msys2 => "poppler")
