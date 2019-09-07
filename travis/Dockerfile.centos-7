@@ -7,7 +7,7 @@ RUN \
     adwaita-gtk2-theme \
     bzip2 \
     clutter-gtk \
-    dbus \
+    dbus-daemon \
     dejavu-sans-fonts \
     gcc \
     gcc-c++ \
