@@ -4,27 +4,27 @@ RUN \
   yum install -y epel-release
 RUN \
   yum install -y \
-    sudo \
-    xorg-x11-server-Xvfb \
-    which \
-    git \
+    adwaita-gtk2-theme \
     bzip2 \
+    clutter-gtk \
+    dbus \
+    dejavu-sans-fonts \
     gcc \
     gcc-c++ \
+    git \
+    gnome-icon-theme \
+    gtksourceview3 \
+    libwebkit2-gtk \
     make \
     openssl-devel \
     readline-devel \
-    zlib-devel \
-    dejavu-sans-fonts \
-    gnome-icon-theme \
-    adwaita-gtk2-theme \
+    sudo \
     vte3 \
     webkitgtk \
     webkitgtk3 \
-    libwebkit2-gtk \
-    clutter-gtk \
-    gtksourceview3 \
-    dbus-x11
+    which \
+    xorg-x11-server-Xvfb \
+    zlib-devel
 
 RUN \
   systemd-machine-id-setup
@@ -58,4 +58,7 @@ WORKDIR /home/ruby-gnome/ruby-gnome
 RUN gem install bundler
 RUN bundle install
 
-CMD xvfb-run --server-args "-screen 0 640x480x24" bundle exec rake
+CMD \
+  dbus-run-session \
+    xvfb-run --server-args "-screen 0 640x480x24" \
+    bundle exec rake

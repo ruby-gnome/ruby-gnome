@@ -1,8 +1,8 @@
-FROM fedora
+FROM fedora:rawhide
 
 RUN \
   dnf install -y \
-    dbus-x11 \
+    dbus \
     gcc \
     gcc-c++ \
     gnome-icon-theme \
@@ -12,6 +12,7 @@ RUN \
     redhat-rpm-config \
     ruby-devel \
     sudo \
+    which \
     xorg-x11-server-Xvfb
 
 RUN \
@@ -30,6 +31,9 @@ RUN chown -R ruby-gnome: /home/ruby-gnome/ruby-gnome
 USER ruby-gnome
 WORKDIR /home/ruby-gnome/ruby-gnome
 
-RUN bundle install
+RUN bundle install --path vendor/bundle
 
-CMD xvfb-run --server-args "-screen 0 640x480x24" bundle exec rake
+CMD \
+  dbus-run-session \
+    xvfb-run --server-args "-screen 0 640x480x24" \
+    bundle exec rake

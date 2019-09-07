@@ -3,12 +3,12 @@ FROM ruby:2.4
 RUN \
   apt update && \
   apt install -y \
-    sudo \
-    xvfb \
-    gstreamer1.0-plugins-good \
-    gnumeric \
+    dbus \
     gnome-icon-theme \
-    dbus-x11
+    gnumeric \
+    gstreamer1.0-plugins-good \
+    sudo \
+    xvfb
 
 RUN \
   useradd --user-group --create-home ruby-gnome
@@ -25,4 +25,7 @@ WORKDIR /home/ruby-gnome/ruby-gnome
 
 RUN bundle install
 
-CMD xvfb-run --server-args "-screen 0 640x480x24" bundle exec rake
+CMD \
+  dbus-run-session \
+    xvfb-run --server-args "-screen 0 640x480x24" \
+    bundle exec rake
