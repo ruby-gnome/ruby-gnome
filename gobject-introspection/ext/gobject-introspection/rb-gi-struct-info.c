@@ -124,6 +124,19 @@ rb_gi_struct_info_to_ruby(GIStructInfo *info,
 
     namespace = g_base_info_get_namespace(base_info);
     name = g_base_info_get_name(base_info);
+
+    /* Workaround for old cairo-gobject. 1.14.6 on Ubuntu 16.04
+     * doesn't provide GType for cairo_font_options_t. */
+    if (strcmp(namespace, "cairo") == 0) {
+        gchar *gtype_name;
+        GType gtype;
+
+        gtype_name = g_strdup_printf("Cairo%s", name);
+        gtype = g_type_from_name(gtype_name);
+        g_free(gtype_name);
+        return BOXED2RVAL(object, gtype);
+    }
+
     rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
     rb_class = rb_const_get(rb_module, rb_intern(name));
     if (rb_respond_to(rb_class, rb_intern("gtype"))) {
