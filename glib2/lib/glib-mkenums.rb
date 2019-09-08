@@ -112,7 +112,10 @@ GType #{@enum_name}_get_type (void);
       data.force_encoding("utf-8") if data.respond_to?(:force_encoding)
       data.scan(/^\s*typedef\s+enum\s*(\/\*<\s*flags\s*>\*\/)?\s*
                 \{?\s*(.*?)
-                \}\s*(\w+)\s*([\w\(\)]*);/mx) do |force_flags, constants, name, deprecation_flag|
+                \}\s*(\w+)
+                # GLIB_DEPRECATED_TYPE_IN_2_38_FOR(GTestSubprocessFlags)
+                (?:\s+[\w()\s]+)?
+                ;/mx) do |force_flags, constants, name|
         enum_options = {}
         enum_options[:force_flags] = !force_flags.nil?
         force_flags_patterns = [(options[:force_flags] || [])].flatten
