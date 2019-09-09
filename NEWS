@@ -2,6 +2,88 @@
 
 = NEWS
 
+== Ruby-GNOME 3.3.8: 2019-09-10
+
+This is a partially GLib 2.62.0 support release.
+
+=== Changes
+
+==== All
+
+  * Improvements
+
+    * Changed our project name to Ruby-GNOME from Ruby-GNOME2.
+      [GitHub#1277][Suggested by kojix2]
+      [GitHub#1291][Patch by kojix2]
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * (({GLib.convert})): Changed to set correct encoding.
+
+    * (({GLib::FILENAME_ENCODING})): Added.
+
+    * Changed to use the same enum object for the same enum value.
+
+    * (({GLib::Enum.find})): Added.
+
+    * (({GLib::Bytes#initialize})): Changed to reuse (({String})) data
+      even if the given (({String})) isn't frozen.
+
+    * (({GLib::Bytes.try_convert})): Added.
+
+    * (({GLib::Enum.try_convert})): Added.
+
+    * (({GLib::Flags.try_convert})): Added.
+
+    * (({GLib::Type.try_convert})): Added.
+
+    * (({GLib::MkEnums.create})): Added support for flags to enum
+      definition.
+      [GitHub#1295][Patch by Mamoru TASAKA]
+
+==== Ruby/GIO2
+
+  * Fixes
+
+    * Renamed to (({Gio::Icon#hash})) from (({Gio::Icon.hash})).
+      [GitHub#1293][Reported by Erik Czumadewski]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Introduced (({try_convert})) protocol.
+
+==== Ruby/CairoGObject
+
+  * Improvements
+
+    * (({Cairo::Context.try_convert})): Added.
+
+    * (({Cairo::Device.try_convert})): Added.
+
+    * (({Cairo::Pattern.try_convert})): Added.
+
+    * (({Cairo::Surface.try_convert})): Added.
+
+    * (({Cairo::ScaledFont.try_convert})): Added.
+
+    * (({Cairo::FontFace.try_convert})): Added.
+
+    * (({Cairo::FontOptions.try_convert})): Added.
+
+    * (({Cairo::Region.try_convert})): Added.
+
+=== Thanks
+
+  * kojix2
+
+  * Erik Czumadewski
+
+  * Mamoru TASAKA
+
 == Ruby-GNOME2 3.3.7: 2019-08-17
 
 This is the bug fix release of 3.3.6.
