@@ -16,6 +16,9 @@ This is a partially GLib 2.62.0 support release.
       [GitHub#1277][Suggested by kojix2]
       [GitHub#1291][Patch by kojix2]
 
+    * Stopped to release (({.tar.gz})) because they are no longer
+      used.
+
 ==== Ruby/GLib2
 
   * Improvements
