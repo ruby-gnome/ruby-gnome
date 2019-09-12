@@ -33,6 +33,8 @@ matrix:
       script:
         - bundle exec rake build
         # TODO: Run tests
+    - name: Apache Arrow
+      env: TYPE=apache-arrow
 
 install:
   - docker build
