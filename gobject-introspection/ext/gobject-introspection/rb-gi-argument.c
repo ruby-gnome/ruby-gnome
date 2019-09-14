@@ -4378,8 +4378,17 @@ in_array_c_argument_from_ruby(GIArgument *array_argument,
     case GI_TYPE_TAG_INT8:
         if (RB_TYPE_P(rb_argument, RUBY_T_STRING)) {
             array_argument->v_pointer = RSTRING_PTR(rb_argument);
-            set_in_array_length_argument(length_argument, length_type_info,
+            set_in_array_length_argument(length_argument,
+                                         length_type_info,
                                          RSTRING_LEN(rb_argument));
+        } else if (RVAL2CBOOL(rb_obj_is_kind_of(rb_argument, rb_cGLibBytes))) {
+            GBytes *bytes = RVAL2BOXED(rb_argument, G_TYPE_BYTES);
+            gsize size;
+            gconstpointer data = g_bytes_get_data(bytes, &size);
+            array_argument->v_pointer = (gpointer)data;
+            set_in_array_length_argument(length_argument,
+                                         length_type_info,
+                                         size);
         } else {
             rb_argument = rbg_to_array(rb_argument);
             set_in_array_int8_arguments_from_ruby(array_argument, rb_argument);
@@ -4390,8 +4399,17 @@ in_array_c_argument_from_ruby(GIArgument *array_argument,
     case GI_TYPE_TAG_UINT8:
         if (RB_TYPE_P(rb_argument, RUBY_T_STRING)) {
             array_argument->v_pointer = RSTRING_PTR(rb_argument);
-            set_in_array_length_argument(length_argument, length_type_info,
+            set_in_array_length_argument(length_argument,
+                                         length_type_info,
                                          RSTRING_LEN(rb_argument));
+        } else if (RVAL2CBOOL(rb_obj_is_kind_of(rb_argument, rb_cGLibBytes))) {
+            GBytes *bytes = RVAL2BOXED(rb_argument, G_TYPE_BYTES);
+            gsize size;
+            gconstpointer data = g_bytes_get_data(bytes, &size);
+            array_argument->v_pointer = (gpointer)data;
+            set_in_array_length_argument(length_argument,
+                                         length_type_info,
+                                         size);
         } else {
             rb_argument = rbg_to_array(rb_argument);
             set_in_array_uint8_arguments_from_ruby(array_argument, rb_argument);
@@ -4689,6 +4707,8 @@ rb_gi_value_argument_free_array_c(VALUE rb_argument,
     case GI_TYPE_TAG_INT8:
     case GI_TYPE_TAG_UINT8:
         if (RB_TYPE_P(rb_argument, RUBY_T_STRING)) {
+            /* Do nothing */
+        } else if (RVAL2CBOOL(rb_obj_is_kind_of(rb_argument, rb_cGLibBytes))) {
             /* Do nothing */
         } else {
             xfree(argument->v_pointer);

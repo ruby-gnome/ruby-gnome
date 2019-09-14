@@ -141,7 +141,10 @@ module GObjectIntrospection
       def try_convert(type_info, value)
         case get_element_type_info(type_info).tag
         when INT8, UINT8
-          return value if value.is_a?(String)
+          case value
+          when String, GLib::Bytes
+            return value
+          end
         end
         super
       end
