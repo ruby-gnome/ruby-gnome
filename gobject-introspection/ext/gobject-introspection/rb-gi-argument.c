@@ -4199,7 +4199,8 @@ set_in_array_interface_struct_arguments_from_ruby_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-set_in_array_interface_struct_arguments_from_ruby_rescue(VALUE value)
+set_in_array_interface_struct_arguments_from_ruby_rescue(VALUE value,
+                                                         VALUE error)
 {
     ArrayInterfaceStructFromRubyData *data;
 
@@ -4207,7 +4208,7 @@ set_in_array_interface_struct_arguments_from_ruby_rescue(VALUE value)
     g_base_info_unref((GIBaseInfo *)(data->struct_info));
     xfree(data->values);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 static void
@@ -4254,14 +4255,15 @@ set_in_array_interface_object_arguments_from_ruby_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-set_in_array_interface_object_arguments_from_ruby_rescue(VALUE value)
+set_in_array_interface_object_arguments_from_ruby_rescue(VALUE value,
+                                                         VALUE error)
 {
     ArrayInterfaceObjectFromRubyData *data;
 
     data = (ArrayInterfaceObjectFromRubyData *)value;
     xfree(data->values);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 static void
