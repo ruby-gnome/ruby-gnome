@@ -684,7 +684,6 @@ module GObjectIntrospection
           next if argument.nil?
           type = @in_arg_types[i]
           converted_argument = type.try_convert(argument)
-          pp [argument, converted_argument]
           if converted_argument.nil?
             if abort_tag
               throw(abort_tag)
