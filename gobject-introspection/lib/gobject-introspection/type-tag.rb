@@ -115,7 +115,7 @@ module GObjectIntrospection
       def try_convert(type_info, value)
         value = Array.try_convert(value)
         return nil if value.nil?
-        element_type_info = type_info.get_param_type(0)
+        element_type_info = get_element_type_info(type_info)
         value.collect do |v|
           unless v.nil?
             v = element_type_info.try_convert(v)
@@ -129,9 +129,24 @@ module GObjectIntrospection
         element_type_info = type_info.get_param_type(0)
         "#{super}(#{element_type_info.description})"
       end
+
+      def get_element_type_info(type_info)
+        type_info.get_param_type(0)
+      end
     end
 
-    ARRAY.extend(ArrayTypeTag)
+    class << ARRAY
+      include ArrayTypeTag
+
+      def try_convert(type_info, value)
+        case get_element_type_info(type_info).tag
+        when INT8, UINT8
+          return value if value.is_a?(String)
+        end
+        super
+      end
+    end
+
     GLIST.extend(ArrayTypeTag)
     GSLIST.extend(ArrayTypeTag)
 
