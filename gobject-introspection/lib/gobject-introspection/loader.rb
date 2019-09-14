@@ -341,45 +341,6 @@ module GObjectIntrospection
     def initialize_post(object)
     end
 
-    def find_suitable_callable_info(infos, arguments)
-      min_n_args = nil
-      max_n_args = nil
-      candidate_infos = []
-      infos.each do |info|
-        n_in_args = info.n_in_args
-        n_required_in_args = info.n_required_in_args
-        if (n_required_in_args..n_in_args).cover?(arguments.size)
-          candidate_infos << info
-        end
-        min_n_args = [min_n_args || n_required_in_args, n_required_in_args].min
-        max_n_args = [max_n_args || n_in_args, n_in_args].max
-      end
-
-      if candidate_infos.size == 1
-        return candidate_infos.first
-      elsif candidate_infos.size > 1
-        candidate_info = candidate_infos.find do |info|
-          in_arg_infos = info.in_args
-          arguments.each.with_index.all? do |argument, i|
-            match_argument?(in_arg_infos[i], argument)
-          end
-        end
-        return candidate_info || candidate_infos.first
-      end
-
-      detail = "#{arguments.size} for #{min_n_args}"
-      if min_n_args < max_n_args
-        detail << "..#{max_n_args}"
-      end
-      raise ArgumentError, "wrong number of arguments (#{detail})"
-    end
-
-    def match_argument?(arg_info, argument)
-      return true if argument.nil? and arg_info.may_be_null?
-
-      arg_info.type.match?(argument)
-    end
-
     def rubyish_method_name(function_info, options={})
       name = function_info.name
       if options[:prefix]
@@ -723,6 +684,7 @@ module GObjectIntrospection
           next if argument.nil?
           type = @in_arg_types[i]
           converted_argument = type.try_convert(argument)
+          pp [argument, converted_argument]
           if converted_argument.nil?
             if abort_tag
               throw(abort_tag)
