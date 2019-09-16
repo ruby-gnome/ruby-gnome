@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2004  Ruby-GNOME Project Team
  *  Copyright (C) 2002-2003  Masahiro Sakai
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
@@ -100,8 +100,6 @@ static const rb_data_type_t rg_glib_object_type = {
     {
         holder_mark,
         holder_free,
-        NULL,
-        {0},
     },
     NULL,
     NULL,

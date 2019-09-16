@@ -36,8 +36,6 @@ static const rb_data_type_t rg_glib_signal_type = {
     {
         NULL,
         NULL,
-        NULL,
-        {0},
     },
     NULL,
     NULL,
