@@ -226,8 +226,9 @@ struct validate_arg{
 };
 
 static VALUE
-value_validate_body(struct validate_arg* arg)
+value_validate_body(VALUE rb_arg)
 {
+    struct validate_arg *arg = (struct validate_arg *)rb_arg;
     VALUE ret;
     gboolean b;
 
@@ -238,8 +239,9 @@ value_validate_body(struct validate_arg* arg)
 }
 
 static VALUE
-value_validate_ensure(struct validate_arg* arg)
+value_validate_ensure(VALUE rb_arg)
 {
+    struct validate_arg *arg = (struct validate_arg *)rb_arg;
     g_value_unset(arg->value);
     return Qnil;
 }

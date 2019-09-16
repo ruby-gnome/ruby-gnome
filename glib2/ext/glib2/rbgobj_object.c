@@ -350,16 +350,18 @@ _params_setup(VALUE arg, struct param_setup_arg *param_setup_arg)
 }
 
 static VALUE
-gobj_new_body(struct param_setup_arg* arg)
+gobj_new_body(VALUE rb_arg)
 {
+    struct param_setup_arg *arg = (struct param_setup_arg *)rb_arg;
     rb_iterate(rb_each, (VALUE)arg->params_hash, _params_setup, (VALUE)arg);
     return (VALUE)g_object_newv(G_TYPE_FROM_CLASS(arg->gclass),
                                 arg->param_size, arg->params);
 }
 
 static VALUE
-gobj_new_ensure(struct param_setup_arg* arg)
+gobj_new_ensure(VALUE rb_arg)
 {
+    struct param_setup_arg *arg = (struct param_setup_arg *)rb_arg;
     guint i;
     g_type_class_unref(arg->gclass);
     for (i = 0; i < arg->param_size; i++) {

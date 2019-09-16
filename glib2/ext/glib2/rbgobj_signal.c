@@ -444,8 +444,9 @@ struct emit_arg {
 };
 
 static VALUE
-emit_body(struct emit_arg* arg)
+emit_body(VALUE rb_arg)
 {
+    struct emit_arg *arg = (struct emit_arg *)rb_arg;
     GValue param = G_VALUE_INIT;
 
     g_value_init(&param, G_TYPE_FROM_INSTANCE(RVAL2GOBJ(arg->self)));
@@ -489,8 +490,9 @@ emit_body(struct emit_arg* arg)
 }
 
 static VALUE
-emit_ensure(struct emit_arg* arg)
+emit_ensure(VALUE rb_arg)
 {
+    struct emit_arg *arg = (struct emit_arg *)rb_arg;
     g_value_array_free(arg->instance_and_params);
     return Qnil;
 }
@@ -623,8 +625,9 @@ guint    g_signal_handlers_disconnect_matched (gpointer         instance,
 #endif
 
 static VALUE
-chain_from_overridden_body(struct emit_arg* arg)
+chain_from_overridden_body(VALUE rb_arg)
 {
+    struct emit_arg *arg = (struct emit_arg *)rb_arg;
     g_value_init(arg->instance_and_params->values,
                  G_TYPE_FROM_INSTANCE(RVAL2GOBJ(arg->self)));
     rbgobj_rvalue_to_gvalue(arg->self, arg->instance_and_params->values);
