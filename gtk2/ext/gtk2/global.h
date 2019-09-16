@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2013 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2002-2019 Ruby-GNOME Project Team
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
  *                          Hiroshi Igarashi
@@ -23,6 +23,14 @@
 
 #ifndef _RBGTK_GLOBAL_H
 #define _RBGTK_GLOBAL_H
+
+/*
+ * CentOS 6: GLib 2.28
+ * CentOS 7: GLib 2.50
+ * Ubuntu 16.04: GLib 2.48
+ * Ubuntu 18.04: GLib 2.54
+ */
+#define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_28
 
 #include "rbgtk.h"
 #ifdef HAVE_RUBY_ST_H
