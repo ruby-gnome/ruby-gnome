@@ -466,7 +466,7 @@ rg_operator_flags_lt(VALUE self, VALUE rhs)
 }
 
 static VALUE
-rg_operator_flags_not(VALUE self, G_GNUC_UNUSED VALUE rhs)
+rg_operator_flags_not(VALUE self)
 {
     flags_holder* p = flags_get_holder(self);
     return rbgobj_make_flags((~ p->value) & p->gclass->mask,
