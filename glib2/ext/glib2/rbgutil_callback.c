@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2007  Ruby-GNOME2 Project
+ *  Copyright (C) 2007-2019  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -82,8 +81,9 @@ exec_callback(VALUE data)
 }
 
 static VALUE
-process_request(CallbackRequest *request)
+process_request(void *user_data)
 {
+    CallbackRequest *request = user_data;
     g_mutex_lock(request->done_mutex);
     request->result = rbgutil_protect(exec_callback, (VALUE)request);
     g_cond_signal(request->done_cond);
@@ -93,7 +93,7 @@ process_request(CallbackRequest *request)
 }
 
 static VALUE
-mainloop(void)
+mainloop(G_GNUC_UNUSED void *user_data)
 {
     for (;;) {
         CallbackRequest *request;
