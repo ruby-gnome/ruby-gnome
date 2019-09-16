@@ -111,8 +111,6 @@ static const rb_data_type_t rg_glib_enum_type = {
     {
         NULL,
         enum_free,
-        NULL,
-        {0},
     },
     NULL,
     NULL,

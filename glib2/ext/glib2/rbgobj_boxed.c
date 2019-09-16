@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -57,8 +57,6 @@ static const rb_data_type_t rg_glib_boxed_type = {
     {
         boxed_mark,
         boxed_free,
-        NULL,
-        {0},
     },
     NULL,
     NULL,

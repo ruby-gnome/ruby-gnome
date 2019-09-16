@@ -80,8 +80,6 @@ static const rb_data_type_t rg_glib_flags_type = {
     {
         NULL,
         flags_free,
-        NULL,
-        {0},
     },
     NULL,
     NULL,
