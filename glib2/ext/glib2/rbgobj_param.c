@@ -332,16 +332,20 @@ rg_ref_count(VALUE self)
     param_is_##flag(VALUE self) \
     { \
         GParamSpec* pspec = G_PARAM_SPEC(rbgobj_get_param_spec(self)); \
-        return CBOOL2RVAL(pspec->flags & flag); \
+        return CBOOL2RVAL((pspec->flags & flag) == flag); \
     }
 
 param_is_flag(G_PARAM_READABLE)
 param_is_flag(G_PARAM_WRITABLE)
+param_is_flag(G_PARAM_READWRITE)
 param_is_flag(G_PARAM_CONSTRUCT)
 param_is_flag(G_PARAM_CONSTRUCT_ONLY)
 param_is_flag(G_PARAM_LAX_VALIDATION)
-param_is_flag(G_PARAM_PRIVATE)
-param_is_flag(G_PARAM_READWRITE)
+param_is_flag(G_PARAM_STATIC_NAME)
+param_is_flag(G_PARAM_STATIC_NICK)
+param_is_flag(G_PARAM_STATIC_BLURB)
+param_is_flag(G_PARAM_EXPLICIT_NOTIFY)
+param_is_flag(G_PARAM_DEPRECATED)
 
 /**********************************************************************/
 
@@ -352,15 +356,32 @@ Init_gobject_gparam(void)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_PARAM, "Param", mGLib);
 
     /* GParamFlags */
-    rb_define_const(RG_TARGET_NAMESPACE, "READABLE",       INT2FIX(G_PARAM_READABLE));
-    rb_define_const(RG_TARGET_NAMESPACE, "WRITABLE",       INT2FIX(G_PARAM_WRITABLE));
-    rb_define_const(RG_TARGET_NAMESPACE, "CONSTRUCT",      INT2FIX(G_PARAM_CONSTRUCT));
-    rb_define_const(RG_TARGET_NAMESPACE, "CONSTRUCT_ONLY", INT2FIX(G_PARAM_CONSTRUCT_ONLY));
-    rb_define_const(RG_TARGET_NAMESPACE, "LAX_VALIDATION", INT2FIX(G_PARAM_LAX_VALIDATION));
-    rb_define_const(RG_TARGET_NAMESPACE, "PRIVATE",        INT2FIX(G_PARAM_PRIVATE));
-    rb_define_const(RG_TARGET_NAMESPACE, "READWRITE",      INT2FIX(G_PARAM_READWRITE));
-    rb_define_const(RG_TARGET_NAMESPACE, "MASK",           INT2FIX(G_PARAM_MASK));
-    rb_define_const(RG_TARGET_NAMESPACE, "USER_SHIFT",     INT2FIX(G_PARAM_USER_SHIFT));
+    rb_define_const(RG_TARGET_NAMESPACE, "READABLE",
+                    INT2FIX(G_PARAM_READABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "WRITABLE",
+                    INT2FIX(G_PARAM_WRITABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "READWRITE",
+                    INT2FIX(G_PARAM_READWRITE));
+    rb_define_const(RG_TARGET_NAMESPACE, "CONSTRUCT",
+                    INT2FIX(G_PARAM_CONSTRUCT));
+    rb_define_const(RG_TARGET_NAMESPACE, "CONSTRUCT_ONLY",
+                    INT2FIX(G_PARAM_CONSTRUCT_ONLY));
+    rb_define_const(RG_TARGET_NAMESPACE, "LAX_VALIDATION",
+                    INT2FIX(G_PARAM_LAX_VALIDATION));
+    rb_define_const(RG_TARGET_NAMESPACE, "STATIC_NAME",
+                    INT2FIX(G_PARAM_STATIC_NAME));
+    rb_define_const(RG_TARGET_NAMESPACE, "STATIC_NICK",
+                    INT2FIX(G_PARAM_STATIC_NICK));
+    rb_define_const(RG_TARGET_NAMESPACE, "STATIC_BLURB",
+                    INT2FIX(G_PARAM_STATIC_BLURB));
+    rb_define_const(RG_TARGET_NAMESPACE, "EXPLICIT_NOTIFY",
+                    INT2FIX(G_PARAM_EXPLICIT_NOTIFY));
+    rb_define_const(RG_TARGET_NAMESPACE, "DEPRECATED",
+                    INT2FIX(G_PARAM_DEPRECATED));
+    rb_define_const(RG_TARGET_NAMESPACE, "MASK",
+                    INT2FIX(G_PARAM_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "USER_SHIFT",
+                    INT2FIX(G_PARAM_USER_SHIFT));
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, pspec_s_allocate);
 
@@ -389,11 +410,26 @@ Init_gobject_gparam(void)
     /* for debugging */
     RG_DEF_METHOD(ref_count, 0);
 
-    rbg_define_method(RG_TARGET_NAMESPACE, "readable?",       param_is_G_PARAM_READABLE, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "writable?",       param_is_G_PARAM_WRITABLE, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "construct?",      param_is_G_PARAM_CONSTRUCT, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "construct_only?", param_is_G_PARAM_CONSTRUCT_ONLY, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "lax_validation?", param_is_G_PARAM_LAX_VALIDATION, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "private?",        param_is_G_PARAM_PRIVATE, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "readwrite?",      param_is_G_PARAM_READWRITE, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "readable?",
+                      param_is_G_PARAM_READABLE, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "writable?",
+                      param_is_G_PARAM_WRITABLE, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "readwrite?",
+                      param_is_G_PARAM_READWRITE, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "construct?",
+                      param_is_G_PARAM_CONSTRUCT, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "construct_only?",
+                      param_is_G_PARAM_CONSTRUCT_ONLY, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "lax_validation?",
+                      param_is_G_PARAM_LAX_VALIDATION, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "static_name?",
+                      param_is_G_PARAM_STATIC_NAME, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "static_nick?",
+                      param_is_G_PARAM_STATIC_NICK, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "static_blurb?",
+                      param_is_G_PARAM_STATIC_BLURB, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "explicit_notify?",
+                      param_is_G_PARAM_EXPLICIT_NOTIFY, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "deprecated?",
+                      param_is_G_PARAM_DEPRECATED, 0);
 }
