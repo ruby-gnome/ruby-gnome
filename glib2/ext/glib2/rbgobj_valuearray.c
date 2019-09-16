@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
  *  Copyright (C) 2006  Sjoerd Simons
  *
  *  This library is free software; you can redistribute it and/or
@@ -63,11 +63,11 @@ value_array_from_ruby_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-value_array_from_ruby_rescue(VALUE value)
+value_array_from_ruby_rescue(VALUE value, VALUE error)
 {
     g_value_array_free(((struct value_array_from_ruby_args *)value)->result);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 static void
