@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
  *  Copyright (C) 2002-2005 Masao Mutoh
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
@@ -49,7 +49,11 @@ logmessage(GLogLevelFlags level)
 }
 
 static VALUE
-rbg_printerr(VALUE message, G_GNUC_UNUSED VALUE user_data)
+rbg_printerr(VALUE message,
+             G_GNUC_UNUSED VALUE user_data,
+             G_GNUC_UNUSED int argc,
+             G_GNUC_UNUSED const VALUE *argv,
+             G_GNUC_UNUSED VALUE block)
 {
     g_printerr("\tfrom %.*s\n",
                (int)RSTRING_LEN(message),

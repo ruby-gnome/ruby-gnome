@@ -315,8 +315,14 @@ struct param_setup_arg {
 };
 
 static VALUE
-_params_setup(VALUE arg, struct param_setup_arg *param_setup_arg)
+_params_setup(VALUE arg,
+              VALUE rb_param_setup_arg,
+              G_GNUC_UNUSED int argc,
+              G_GNUC_UNUSED const VALUE *argv,
+              G_GNUC_UNUSED VALUE block)
 {
+    struct param_setup_arg *param_setup_arg =
+        (struct param_setup_arg *)rb_param_setup_arg;
     guint index;
     VALUE name, val;
     GParamSpec* pspec;
