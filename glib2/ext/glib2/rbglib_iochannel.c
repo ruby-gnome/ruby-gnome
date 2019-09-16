@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -503,17 +503,20 @@ rg_close(gint argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_create_watch(VALUE self, VALUE condition)
+rg_create_watch(int argc, VALUE *argv, VALUE self)
 {
+    VALUE rb_condition;
+    VALUE rb_block;
     VALUE rb_source;
 
-    rb_source = BOXED2RVAL(g_io_create_watch(_SELF(self), NUM2INT(condition)),
+    rb_scan_args(argc, argv, "1&", &rb_condition, &rb_block);
+    rb_source = BOXED2RVAL(g_io_create_watch(_SELF(self), NUM2INT(rb_condition)),
                            G_TYPE_SOURCE);
     rb_extend_object(rb_source, rb_mIOChannelSource);
-    if (rb_block_given_p()) {
+    if (!NIL_P(rb_block)) {
         ID id_set_callback;
         CONST_ID(id_set_callback, "set_callback");
-        rb_funcall(rb_source, id_set_callback, 0);
+        rb_funcall_with_block(rb_source, id_set_callback, 0, NULL, rb_block);
     }
     return rb_source;
 }
@@ -545,15 +548,15 @@ guint       g_io_add_watch_full             (GIOChannel *channel,
 */
 
 static VALUE
-rg_io_channel_source_set_callback(VALUE self)
+rg_io_channel_source_set_callback(int argc, VALUE *argv, VALUE self)
 {
-    VALUE callback;
+    VALUE rb_callback;
 
-    callback = rb_block_proc();
-    G_RELATIVE(self, callback);
+    rb_scan_args(argc, argv, "&", &rb_callback);
+    G_RELATIVE(self, rb_callback);
     g_source_set_callback(RVAL2BOXED(self, G_TYPE_SOURCE),
                           (GSourceFunc)io_func,
-                          (gpointer)callback,
+                          (gpointer)rb_callback,
                           (GDestroyNotify)NULL);
     return self;
 }
@@ -810,7 +813,7 @@ Init_glib_io_channel(void)
     RG_DEF_METHOD(seek, -1);
     RG_DEF_METHOD(set_pos, 1);
     RG_DEF_METHOD(close, -1);
-    RG_DEF_METHOD(create_watch, 1);
+    RG_DEF_METHOD(create_watch, -1);
     RG_DEF_METHOD(add_watch, 1);
     RG_DEF_METHOD(buffer_size, 0);
     RG_DEF_METHOD(set_buffer_size, 1);
@@ -852,5 +855,5 @@ Init_glib_io_channel(void)
     rb_define_method(rb_mIOChannelSource,
                      "set_callback",
                      rg_io_channel_source_set_callback,
-                     0);
+                     -1);
 }
