@@ -75,7 +75,11 @@ include_paths = PKGConfig.cflags_only_I(package_id)
 headers = include_paths.split.inject(headers) do |result, path|
   result + Dir.glob(File.join(path.sub(/^-I/, ""), "gobject", "gsignal.h"))
 end
-glib_mkenums(enum_types_prefix, headers, "G_TYPE_", ["glib-object.h"])
+glib_mkenums(enum_types_prefix,
+             headers,
+             "G_TYPE_",
+             [],
+             preamble: "#include \"rbgprivate.h\"")
 
 $defs << "-DRUBY_GLIB2_COMPILATION"
 

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2007-2019  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2007-2019  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -23,7 +23,6 @@
 /*
  * CentOS 6: GLib 2.28
  * CentOS 7: GLib 2.50
- * Ubuntu 14.04: GLib 2.40
  * Ubuntu 16.04: GLib 2.48
  * Ubuntu 18.04: GLib 2.54
  */
