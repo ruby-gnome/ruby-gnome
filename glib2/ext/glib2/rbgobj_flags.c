@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2004-2019  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2004-2019  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -369,7 +369,8 @@ flags_compare_get_flags_body(VALUE user_data)
 }
 
 static VALUE
-flags_compare_get_flags_rescue(VALUE user_data)
+flags_compare_get_flags_rescue(VALUE user_data,
+                               G_GNUC_UNUSED VALUE error)
 {
     compare_data *data = (compare_data *)user_data;
 

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -340,11 +340,11 @@ rbg_rval2strv_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-rbg_rval2strv_rescue(VALUE value)
+rbg_rval2strv_rescue(VALUE value, VALUE error)
 {
     g_free(((struct rval2strv_args *)value)->result);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 const gchar **
@@ -397,11 +397,11 @@ rbg_rval2strv_dup_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-rbg_rval2strv_dup_rescue(VALUE value)
+rbg_rval2strv_dup_rescue(VALUE value, VALUE error)
 {
     g_free(((struct rval2strv_dup_args *)value)->result);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 gchar **
@@ -490,11 +490,11 @@ rbg_rval2gbooleans_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-rbg_rval2gbooleans_rescue(VALUE value)
+rbg_rval2gbooleans_rescue(VALUE value, VALUE error)
 {
     g_free(((struct rbg_rval2gbooleans_args *)value)->result);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 gboolean *
@@ -533,11 +533,11 @@ rbg_rval2gints_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-rbg_rval2gints_rescue(VALUE value)
+rbg_rval2gints_rescue(VALUE value, VALUE error)
 {
     g_free(((struct rbg_rval2gints_args *)value)->result);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 gint *
@@ -576,11 +576,11 @@ rbg_rval2gint8s_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-rbg_rval2gint8s_rescue(VALUE value)
+rbg_rval2gint8s_rescue(VALUE value, VALUE error)
 {
     g_free(((struct rbg_rval2gint8s_args *)value)->result);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 gint8 *
@@ -619,11 +619,11 @@ rbg_rval2guint8s_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-rbg_rval2guint8s_rescue(VALUE value)
+rbg_rval2guint8s_rescue(VALUE value, VALUE error)
 {
     g_free(((struct rbg_rval2guint8s_args *)value)->result);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 guint8 *
@@ -662,11 +662,11 @@ rbg_rval2guint16s_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-rbg_rval2guint16s_rescue(VALUE value)
+rbg_rval2guint16s_rescue(VALUE value, VALUE error)
 {
     g_free(((struct rbg_rval2guint16s_args *)value)->result);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 guint16 *
@@ -705,11 +705,11 @@ rbg_rval2guint32s_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-rbg_rval2guint32s_rescue(VALUE value)
+rbg_rval2guint32s_rescue(VALUE value, VALUE error)
 {
     g_free(((struct rbg_rval2guint32s_args *)value)->result);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 guint32 *
@@ -748,11 +748,11 @@ rbg_rval2gdoubles_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-rbg_rval2gdoubles_rescue(VALUE value)
+rbg_rval2gdoubles_rescue(VALUE value, VALUE error)
 {
     g_free(((struct rbg_rval2gdoubles_args *)value)->result);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 gdouble *

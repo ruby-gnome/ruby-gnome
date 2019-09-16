@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2004  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -158,11 +158,11 @@ rbg_rval2gtypes_body(VALUE value)
 }
 
 static G_GNUC_NORETURN VALUE
-rbg_rval2gtypes_rescue(VALUE value)
+rbg_rval2gtypes_rescue(VALUE value, VALUE error)
 {
     g_free(((struct rval2gtypes_args *)value)->result);
 
-    rb_exc_raise(rb_errinfo());
+    rb_exc_raise(error);
 }
 
 static GType *
