@@ -35,7 +35,6 @@
 #define SELF(self) RVAL2GI_FUNCTION_INFO(self)
 
 static VALUE RG_TARGET_NAMESPACE;
-static VALUE rb_cGLibError;
 
 GType
 gi_function_info_get_type(void)
@@ -240,8 +239,6 @@ rg_invoke(VALUE self, VALUE rb_arguments)
 void
 rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
-    rb_cGLibError = rb_const_get(mGLib, rb_intern("Error"));
-
     RG_TARGET_NAMESPACE =
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rb_mGI,
 				rb_cGICallableInfo);
