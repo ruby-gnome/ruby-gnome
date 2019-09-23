@@ -42,12 +42,6 @@
 #define RVAL2GI_VALUE_ARGUMENT(argument, type_info, rb_argument, self)  \
     (rb_gi_value_argument_from_ruby((argument), (type_info),            \
                                     (rb_argument), (self)))
-#define RVAL2GI_IN_ARRAY_ARGUMENT(array_argument, length_argument,      \
-                                  array_arg_info, length_arg_info,      \
-                                  rb_argument)                          \
-    (rb_gi_in_array_argument_from_ruby((array_argument), (length_argument), \
-                                       (array_arg_info), (length_arg_info), \
-                                       (rb_argument)))
 
 
 #define RVAL2GI_REGISTERED_TYPE_INFO(rb_object)			\
@@ -111,17 +105,6 @@ GIArgument *rb_gi_value_argument_from_ruby    (GIArgument     *argument,
                                                GITypeInfo     *type_info,
                                                VALUE           rb_argument,
                                                VALUE           self);
-GIArgument *rb_gi_in_argument_from_ruby       (GICallableInfo *callable_info,
-                                               GIArgument     *argument,
-                                               GIArgInfo      *arg_info,
-                                               guint           nth_rb_argument,
-                                               VALUE           rb_argument,
-                                               VALUE           self);
-GIArgument *rb_gi_in_array_argument_from_ruby (GIArgument     *array_argument,
-                                               GIArgument     *length_argument,
-                                               GIArgInfo      *array_arg_info,
-                                               GIArgInfo      *length_arg_info,
-                                               VALUE           rb_argument);
 void        rb_gi_value_argument_free         (VALUE           rb_argument,
                                                GIArgument     *argument,
                                                GITypeInfo     *type_info);

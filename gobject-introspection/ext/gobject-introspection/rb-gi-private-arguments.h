@@ -22,6 +22,7 @@
 
 typedef struct {
     GICallableInfo *info;
+    const gchar *name;
     VALUE rb_receiver;
     gpointer receiver_type_class;
     VALUE rb_args;
@@ -47,6 +48,7 @@ struct RBGIArgMetadata_ {
     gboolean array_p;
     gboolean array_length_p;
     gboolean interface_p;
+    gboolean may_be_null_p;
     gboolean pointer_p;
     gboolean caller_allocates_p;
     gboolean zero_terminated_p;

@@ -20,6 +20,38 @@
 
 #include "rb-gi-private.h"
 
+static gboolean
+rb_gi_arg_info_may_be_null(GIArgInfo *arg_info)
+{
+#if GI_CHECK_VERSION(1, 42, 0)
+    return g_arg_info_may_be_null(arg_info);
+#else
+    /*
+      GObject Introspection < 1.42 doesn't support "(nullable)" yet.
+      So, we assume that all argument may be NULL. It's danger but
+      convenient.
+    */
+    return TRUE;
+#endif
+}
+
+static gboolean
+rb_gi_is_registered_type(GIInfoType type)
+{
+    switch (type) {
+      case GI_INFO_TYPE_STRUCT:
+      case GI_INFO_TYPE_BOXED:
+      case GI_INFO_TYPE_ENUM:
+      case GI_INFO_TYPE_FLAGS:
+      case GI_INFO_TYPE_OBJECT:
+      case GI_INFO_TYPE_INTERFACE:
+      case GI_INFO_TYPE_UNION:
+        return TRUE;
+      default:
+        return FALSE;
+    }
+}
+
 static RBGIArgMetadata *
 rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
 {
@@ -52,6 +84,7 @@ rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
     metadata->interface_p = (metadata->type_tag == GI_TYPE_TAG_INTERFACE);
     metadata->array_p = (metadata->type_tag == GI_TYPE_TAG_ARRAY);
     metadata->array_length_p = FALSE;
+    metadata->may_be_null_p = rb_gi_arg_info_may_be_null(arg_info);
     metadata->pointer_p = g_type_info_is_pointer(type_info);
     metadata->caller_allocates_p = g_arg_info_is_caller_allocates(arg_info);
     metadata->zero_terminated_p = FALSE;
@@ -77,8 +110,10 @@ rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
                 g_type_info_get_interface(metadata->element_type_info);
             metadata->element_interface_type =
                 g_base_info_get_type(metadata->element_interface_info);
-            metadata->element_interface_gtype =
-                g_registered_type_info_get_g_type(metadata->element_interface_info);
+            if (rb_gi_is_registered_type(metadata->element_interface_type)) {
+                metadata->element_interface_gtype =
+                    g_registered_type_info_get_g_type(metadata->element_interface_info);
+            }
         }
     }
 
@@ -86,8 +121,10 @@ rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
         metadata->interface_info = g_type_info_get_interface(type_info);
         metadata->interface_type =
             g_base_info_get_type(metadata->interface_info);
-        metadata->interface_gtype =
-            g_registered_type_info_get_g_type(metadata->interface_info);
+        if (rb_gi_is_registered_type(metadata->interface_type)) {
+            metadata->interface_gtype =
+                g_registered_type_info_get_g_type(metadata->interface_info);
+        }
     }
 
     return metadata;
@@ -339,6 +376,7 @@ rb_gi_arguments_init(RBGIArguments *args,
                      void **raw_args)
 {
     args->info = info;
+    args->name = g_base_info_get_name(info);
     args->rb_receiver = rb_receiver;
     args->receiver_type_class = NULL;
     args->rb_args = rb_args;

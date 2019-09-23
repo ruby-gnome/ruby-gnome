@@ -142,8 +142,10 @@ module GObjectIntrospection
         case get_element_type_info(type_info).tag
         when INT8, UINT8
           case value
-          when String, GLib::Bytes
+          when String
             return value
+          when GLib::Bytes
+            return value.to_s
           end
         end
         super
