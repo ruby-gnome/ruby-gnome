@@ -100,7 +100,7 @@ end
 bin.play
 
 # run event loop listening for bus messages until EOS or ERROR
-event_loop(bus, bin)
+event_loop(bin.bus, bin)
 
 # stop the bin
 bin.stop
