@@ -26,6 +26,7 @@ module GObjectIntrospection
       sig = "#{name}:"
       sig << " (optional)" if optional?
       sig << " (may be null)" if may_be_null?
+      sig << " (caller allocates)" if caller_allocates?
       sig << " #{type.description}"
       sig
     end
@@ -35,6 +36,7 @@ module GObjectIntrospection
         " name=#{name.inspect}" +
           " optional?=#{optional?.inspect}" +
           " may_be_null?=#{may_be_null?.inspect}" +
+          " caller_allocates?=#{caller_allocates?.inspect}" +
           " type=#{type.inspect}>"
       end
     end
