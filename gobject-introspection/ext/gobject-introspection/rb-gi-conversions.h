@@ -35,10 +35,6 @@
                          in_args, out_args, args_metadata)              \
     (rb_gi_argument_to_ruby((argument), (duplicate), (type_info),       \
                             (in_args), (out_args), (args_metadata)))
-#define GI_OUT_ARGUMENT2RVAL(argument, arg_info,                        \
-                             in_args, out_args, args_metadata)          \
-    (rb_gi_out_argument_to_ruby((argument), (arg_info),                 \
-                                (in_args), (out_args), (args_metadata)))
 #define GI_RETURN_ARGUMENT2RVAL(callable_info, argument,                \
                                 in_args, out_args, args_metadata)       \
     (rb_gi_return_argument_to_ruby((callable_info), (argument),         \
@@ -103,11 +99,6 @@ GIBaseInfo *rb_gi_base_info_from_ruby         (VALUE rb_info);
 VALUE       rb_gi_argument_to_ruby            (GIArgument     *argument,
                                                gboolean        duplicate,
                                                GITypeInfo     *type_info,
-                                               GArray         *in_args,
-                                               GArray         *out_args,
-                                               GPtrArray      *args_metadata);
-VALUE       rb_gi_out_argument_to_ruby        (GIArgument     *argument,
-                                               GIArgInfo      *arg_info,
                                                GArray         *in_args,
                                                GArray         *out_args,
                                                GPtrArray      *args_metadata);

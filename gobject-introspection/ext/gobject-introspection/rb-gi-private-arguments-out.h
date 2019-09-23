@@ -24,3 +24,5 @@ G_GNUC_INTERNAL void
 rb_gi_arguments_out_init(RBGIArguments *args);
 G_GNUC_INTERNAL void
 rb_gi_arguments_out_clear(RBGIArguments *args);
+G_GNUC_INTERNAL VALUE
+rb_gi_arguments_out_to_ruby(RBGIArguments *args);

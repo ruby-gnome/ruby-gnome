@@ -744,3 +744,142 @@ rb_gi_arguments_out_clear(RBGIArguments *args)
         rb_gi_arguments_out_clear_arg(args, metadata);
     }
 }
+
+static VALUE
+rb_gi_arguments_out_to_ruby_arg(RBGIArguments *args,
+                                RBGIArgMetadata *metadata,
+                                GIArgument *argument)
+{
+    GIArgument normalized_argument;
+    gboolean duplicate = FALSE;
+
+    memset(&normalized_argument, 0, sizeof(GIArgument));
+    switch (metadata->type_tag) {
+      case GI_TYPE_TAG_VOID:
+        if (metadata->pointer_p) {
+            normalized_argument.v_pointer = *((gpointer *)(argument->v_pointer));
+        }
+        break;
+      case GI_TYPE_TAG_BOOLEAN:
+        normalized_argument.v_boolean = *((gboolean *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_INT8:
+        normalized_argument.v_int8 = *((gint8 *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_UINT8:
+        normalized_argument.v_uint8 = *((guint8 *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_INT16:
+        normalized_argument.v_int16 = *((gint16 *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_UINT16:
+        normalized_argument.v_uint16 = *((guint16 *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_INT32:
+        normalized_argument.v_int32 = *((gint32 *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_UINT32:
+        normalized_argument.v_uint32 = *((guint32 *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_INT64:
+        normalized_argument.v_int64 = *((gint64 *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_UINT64:
+        normalized_argument.v_uint64 = *((guint64 *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_FLOAT:
+        normalized_argument.v_float = *((gfloat *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_DOUBLE:
+        normalized_argument.v_double = *((gdouble *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_GTYPE:
+        normalized_argument.v_size = *((GType *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+        normalized_argument.v_string = *((gchar **)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+        if (metadata->caller_allocates_p) {
+            duplicate = TRUE;
+            normalized_argument.v_pointer = argument->v_pointer;
+        } else {
+            normalized_argument.v_pointer = *((gpointer *)(argument->v_pointer));
+        }
+        break;
+      case GI_TYPE_TAG_ERROR:
+        normalized_argument.v_pointer = *((GError **)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_UNICHAR:
+        normalized_argument.v_uint32 = *((guint32 *)(argument->v_pointer));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    return rb_gi_argument_to_ruby(&normalized_argument,
+                                  duplicate,
+                                  &(metadata->type_info),
+                                  args->in_args,
+                                  args->out_args,
+                                  args->metadata);
+}
+
+VALUE
+rb_gi_arguments_out_to_ruby(RBGIArguments *args)
+{
+    gint i, n_args;
+    VALUE rb_out_args;
+
+    rb_out_args = rb_ary_new();
+    n_args = g_callable_info_get_n_args(args->info);
+    for (i = 0; i < n_args; i++) {
+        RBGIArgMetadata *metadata;
+        GIArgument *argument = NULL;
+        VALUE rb_argument;
+
+        metadata = g_ptr_array_index(args->metadata, i);
+        if (metadata->array_length_p) {
+            continue;
+        }
+
+        switch (metadata->direction) {
+          case GI_DIRECTION_IN:
+            break;
+          case GI_DIRECTION_OUT:
+            argument = &g_array_index(args->out_args,
+                                      GIArgument,
+                                      metadata->out_arg_index);
+            break;
+          case GI_DIRECTION_INOUT:
+            argument = &g_array_index(args->in_args,
+                                      GIArgument,
+                                      metadata->in_arg_index);
+            break;
+          default:
+            g_assert_not_reached();
+            break;
+        }
+
+        if (!argument) {
+            continue;
+        }
+
+        rb_argument = rb_gi_arguments_out_to_ruby_arg(args,
+                                                      metadata,
+                                                      argument);
+        rb_ary_push(rb_out_args, rb_argument);
+    }
+
+    if (RARRAY_LEN(rb_out_args) == 0) {
+        return Qnil;
+    } else {
+        return rb_out_args;
+    }
+}

@@ -819,56 +819,7 @@ rb_gi_arguments_get_rb_return_value(RBGIArguments *args,
 VALUE
 rb_gi_arguments_get_rb_out_args(RBGIArguments *args)
 {
-    gint i, n_args;
-    VALUE rb_out_args;
-
-    rb_out_args = rb_ary_new();
-    n_args = g_callable_info_get_n_args(args->info);
-    for (i = 0; i < n_args; i++) {
-        RBGIArgMetadata *metadata;
-        GIArgument *argument = NULL;
-        VALUE rb_argument;
-
-        metadata = g_ptr_array_index(args->metadata, i);
-        if (metadata->array_length_p) {
-            continue;
-        }
-
-        switch (metadata->direction) {
-          case GI_DIRECTION_IN:
-            break;
-          case GI_DIRECTION_OUT:
-            argument = &g_array_index(args->out_args,
-                                      GIArgument,
-                                      metadata->out_arg_index);
-            break;
-          case GI_DIRECTION_INOUT:
-            argument = &g_array_index(args->in_args,
-                                      GIArgument,
-                                      metadata->in_arg_index);
-            break;
-          default:
-            g_assert_not_reached();
-            break;
-        }
-
-        if (!argument) {
-            continue;
-        }
-
-        rb_argument = GI_OUT_ARGUMENT2RVAL(argument,
-                                           &(metadata->arg_info),
-                                           args->in_args,
-                                           args->out_args,
-                                           args->metadata);
-        rb_ary_push(rb_out_args, rb_argument);
-    }
-
-    if (RARRAY_LEN(rb_out_args) == 0) {
-        return Qnil;
-    } else {
-        return rb_out_args;
-    }
+    return rb_gi_arguments_out_to_ruby(args);
 }
 
 static void
