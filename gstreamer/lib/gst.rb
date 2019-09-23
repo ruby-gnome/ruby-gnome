@@ -121,6 +121,7 @@ module Gst
       require "gst/plugin-feature"
       require "gst/registry"
       require "gst/structure"
+      require "gst/tag-list"
       require "gst/type-find-factory"
       require "gst/version"
     end

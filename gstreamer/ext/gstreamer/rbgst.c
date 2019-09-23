@@ -20,59 +20,6 @@
 
 #include "rbgst.h"
 
-static gboolean
-name_equal(GIArgInfo *info, const gchar *target_name)
-{
-    GITypeInfo type_info;
-    GIBaseInfo *interface_info;
-    const gchar *namespace;
-    const gchar *name;
-    gboolean equal_name_p = FALSE;
-
-    g_arg_info_load_type(info, &type_info);
-    interface_info = g_type_info_get_interface(&type_info);
-    namespace = g_base_info_get_namespace(interface_info);
-    name = g_base_info_get_name(interface_info);
-    if (strcmp(namespace, "Gst") == 0 && strcmp(name, target_name) == 0) {
-        equal_name_p = TRUE;
-    }
-    g_base_info_unref(interface_info);
-
-    return equal_name_p;
-}
-
-static void
-rg_gst_tag_foreach_func_callback(const GstTagList *list, const gchar *tag,
-                                 gpointer user_data)
-{
-    RBGICallbackData *callback_data = user_data;
-    ID id_call;
-
-    CONST_ID(id_call, "call");
-    rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
-               id_call, 2,
-               /*
-                * XXX: Use gst_tag_list_copy() instead if we don't trust
-                * users. Users should not use destructive methods such as
-                * #insert. If many users use these methods, we shuold use
-                * gst_tag_list_copy().
-                */
-               BOXED2RVAL((GstTagList *)list, GST_MINI_OBJECT_TYPE(list)),
-               CSTR2RVAL(tag));
-    if (rb_gi_callback_data_get_metadata(callback_data)->scope_type == GI_SCOPE_TYPE_ASYNC) {
-        rb_gi_callback_data_free(callback_data);
-    }
-}
-
-static gpointer
-rg_gst_tag_foreach_func_callback_finder(GIArgInfo *info)
-{
-    if (!name_equal(info, "TagForeachFunc")) {
-        return NULL;
-    }
-    return rg_gst_tag_foreach_func_callback;
-}
-
 static void
 rg_gst_value_list_r2g(VALUE from, GValue *to)
 {
@@ -120,8 +67,6 @@ rg_gst_value_list_g2r(const GValue *from)
 void
 Init_gstreamer (void)
 {
-    rb_gi_callback_register_finder(rg_gst_tag_foreach_func_callback_finder);
-
     rbgobj_register_r2g_func(GST_TYPE_LIST, rg_gst_value_list_r2g);
     rbgobj_register_g2r_func(GST_TYPE_LIST, rg_gst_value_list_g2r);
 
