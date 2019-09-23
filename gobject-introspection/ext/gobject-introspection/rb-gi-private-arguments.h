@@ -90,6 +90,3 @@ G_GNUC_INTERNAL void
 rb_gi_arguments_fill_raw_results(RBGIArguments *args,
                                  VALUE rb_results,
                                  gpointer raw_return_value);
-
-G_GNUC_INTERNAL VALUE
-rb_gi_arguments_get_rb_in_args(RBGIArguments *args);

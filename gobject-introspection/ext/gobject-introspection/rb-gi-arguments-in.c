@@ -34,12 +34,51 @@ typedef struct {
 } RBGICallbackInvokeData;
 
 static VALUE
+rb_gi_arguments_in_to_ruby(RBGIArguments *args)
+{
+    VALUE rb_in_args;
+    guint i;
+
+    rb_in_args = rb_ary_new_capa(args->metadata->len);
+    for (i = 0; i < args->metadata->len; i++) {
+        RBGIArgMetadata *metadata;
+        GIArgument *argument;
+        GITypeInfo *type_info;
+        VALUE rb_arg;
+
+        metadata = g_ptr_array_index(args->metadata, i);
+
+        if (metadata->direction == GI_DIRECTION_OUT) {
+            continue;
+        }
+        if (metadata->closure_p) {
+            continue;
+        }
+
+        argument = &g_array_index(args->in_args,
+                                  GIArgument,
+                                  metadata->in_arg_index);
+        type_info = g_arg_info_get_type(&(metadata->arg_info));
+        /* TODO */
+        rb_arg = GI_ARGUMENT2RVAL(argument,
+                                  FALSE,
+                                  type_info,
+                                  args->in_args,
+                                  args->out_args,
+                                  args->metadata);
+        rb_ary_push(rb_in_args, rb_arg);
+    }
+
+    return rb_in_args;
+}
+
+static VALUE
 rb_gi_callback_invoke(VALUE user_data)
 {
     RBGICallbackInvokeData *data = (RBGICallbackInvokeData *)user_data;
     ID id_call;
     VALUE rb_callback = rb_gi_callback_data_get_rb_callback(data->callback_data);
-    VALUE rb_args = rb_gi_arguments_get_rb_in_args(data->args);
+    VALUE rb_args = rb_gi_arguments_in_to_ruby(data->args);
 
     CONST_ID(id_call, "call");
     return rb_funcallv(rb_callback,
