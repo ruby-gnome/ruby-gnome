@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2019  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -51,12 +51,14 @@ typedef struct
 
 typedef struct RBGICallbackData_ RBGICallbackData;
 
-void rb_gi_callback_register_finder (RBGICallbackFinderFunc  finder);
 void rb_gi_callback_data_free       (RBGICallbackData       *callback_data);
 RBGIArgMetadata *
 rb_gi_callback_data_get_metadata(RBGICallbackData *callback_data);
 VALUE
 rb_gi_callback_data_get_rb_callback(RBGICallbackData *callback_data);
+
+void
+rb_gi_callback_register_finder(RBGICallbackFinderFunc finder);
 
 VALUE rb_gi_struct_new_raw(VALUE klass,
                            gpointer instance,
