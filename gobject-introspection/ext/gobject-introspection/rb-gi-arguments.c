@@ -215,6 +215,27 @@ rb_gi_callback_data_destroy_notify(gpointer data)
     rb_gi_callback_data_free(callback_data);
 }
 
+typedef struct {
+    RBGIArguments *args;
+    RBGICallback *callback;
+    RBGICallbackData *callback_data;
+} RBGICallbackInvokeData;
+
+static VALUE
+rb_gi_callback_invoke(VALUE user_data)
+{
+    RBGICallbackInvokeData *data = (RBGICallbackInvokeData *)user_data;
+    ID id_call;
+    VALUE rb_callback = rb_gi_callback_data_get_rb_callback(data->callback_data);
+    VALUE rb_args = rb_gi_arguments_get_rb_in_args(data->args);
+
+    CONST_ID(id_call, "call");
+    return rb_funcallv(rb_callback,
+                       id_call,
+                       RARRAY_LENINT(rb_args),
+                       RARRAY_CONST_PTR(rb_args));
+}
+
 static void
 ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
                      void *return_value,
@@ -271,15 +292,12 @@ ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
     }
 
     {
-        ID id_call;
-        VALUE rb_callback = rb_gi_callback_data_get_rb_callback(callback_data);
-        VALUE rb_args = rb_gi_arguments_get_rb_in_args(&args);
-        CONST_ID(id_call, "call");
-        /* TODO: use rb_protect() */
-        rb_results = rb_funcallv(rb_callback,
-                                 id_call,
-                                 RARRAY_LENINT(rb_args),
-                                 RARRAY_CONST_PTR(rb_args));
+        RBGICallbackInvokeData data;
+        data.args = &args;
+        data.callback = callback;
+        data.callback_data = callback_data;
+        rb_results = rbgutil_invoke_callback(rb_gi_callback_invoke,
+                                             (VALUE)&data);
     }
     rb_gi_arguments_fill_raw_results(&args, rb_results, return_value);
     rb_gi_arguments_clear(&args);
