@@ -1,12 +1,11 @@
 #
 # mkmf-gnome2.rb
 #
-# Extended mkmf for Ruby-GNOME2 and Ruby/GLib based libraries.
+# Extended mkmf for Ruby-GNOME and Ruby/GLib based libraries.
 #
-# Copyright(C) 2003-2015 Ruby-GNOME2 Project.
+# Copyright(C) 2003-2019 Ruby-GNOME Project Team
 #
-# This program is licenced under the same
-# license of Ruby-GNOME2.
+# This program is licenced under the same license of Ruby-GNOME.
 #
 
 require 'English'
@@ -232,7 +231,7 @@ def create_pkg_config_file(package_name, c_package,
   add_distcleanfile(pc_file_name)
 end
 
-def ruby_gnome2_version(glib_source_directory=nil)
+def ruby_gnome_version(glib_source_directory=nil)
   glib_source_directory ||= File.join(File.dirname(__FILE__), "..",
                                       "ext", "glib2")
   rbglib_h = File.join(glib_source_directory, "rbglib.h")
@@ -255,6 +254,7 @@ def ruby_gnome2_version(glib_source_directory=nil)
 
   version
 end
+singleton_class.alias_method :ruby_gnome2_version, :ruby_gnome_version
 
 def ensure_objs
   return unless $objs.nil?
