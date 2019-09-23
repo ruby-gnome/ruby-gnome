@@ -674,6 +674,7 @@ rb_gi_arguments_init(RBGIArguments *args,
     args->out_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
     args->metadata =
         g_ptr_array_new_with_free_func(rb_gi_arguments_metadata_free);
+    args->rb_mode_p = !(NIL_P(rb_args));
 
     if (!NIL_P(rb_receiver)) {
         GIArgument receiver;
@@ -697,7 +698,7 @@ rb_gi_arguments_init(RBGIArguments *args,
 
     rb_gi_arguments_allocate(args);
     rb_gi_arguments_fill_metadata(args);
-    if (!NIL_P(rb_args)) {
+    if (args->rb_mode_p) {
         rb_gi_arguments_fill_rb_args(args);
     } else {
         rb_gi_arguments_fill_raw_args(args);
@@ -717,7 +718,7 @@ rb_gi_arguments_clear(RBGIArguments *args)
         if (metadata->direction == GI_DIRECTION_IN ||
             metadata->direction == GI_DIRECTION_INOUT) {
             in_arg_index = metadata->in_arg_index;
-            if (in_arg_index != -1) {
+            if (in_arg_index != -1 && args->rb_mode_p) {
                 gint rb_arg_index;
                 VALUE rb_argument = Qnil;
                 GIArgument *argument;

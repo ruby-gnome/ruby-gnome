@@ -27,6 +27,7 @@ typedef struct
     gpointer receiver_type_class;
     VALUE rb_args;
     void **raw_args;
+    gboolean rb_mode_p;
     GArray *in_args;
     GArray *out_args;
     GPtrArray *metadata;
