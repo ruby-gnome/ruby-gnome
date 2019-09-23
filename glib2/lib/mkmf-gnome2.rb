@@ -252,7 +252,9 @@ def ruby_gnome_version(glib_source_directory=nil)
 
   version
 end
-singleton_class.alias_method :ruby_gnome2_version, :ruby_gnome_version
+singleton_class.__send__(:alias_method,
+                         :ruby_gnome2_version,
+                         :ruby_gnome_version)
 
 def ensure_objs
   return unless $objs.nil?
