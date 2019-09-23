@@ -90,8 +90,6 @@ try_compiler_option '-Wpointer-arith'
 # try_compiler_option '-Wredundant-decls'
 # NOTE: Complains about index, for example.
 # try_compiler_option '-Wshadow'
-try_compiler_option '-Wswitch-default'
-try_compiler_option '-Wswitch-enum'
 try_compiler_option '-Wundef'
 # NOTE: Incredible amounts of false positives.
 #try_compiler_option '-Wunreachable-code'
