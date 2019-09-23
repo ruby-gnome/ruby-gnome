@@ -344,7 +344,9 @@ param_is_flag(G_PARAM_LAX_VALIDATION)
 param_is_flag(G_PARAM_STATIC_NAME)
 param_is_flag(G_PARAM_STATIC_NICK)
 param_is_flag(G_PARAM_STATIC_BLURB)
+#if GLIB_CHECK_VERSION(2, 42, 0)
 param_is_flag(G_PARAM_EXPLICIT_NOTIFY)
+#endif
 param_is_flag(G_PARAM_DEPRECATED)
 
 /**********************************************************************/
@@ -374,8 +376,10 @@ Init_gobject_gparam(void)
                     INT2FIX(G_PARAM_STATIC_NICK));
     rb_define_const(RG_TARGET_NAMESPACE, "STATIC_BLURB",
                     INT2FIX(G_PARAM_STATIC_BLURB));
+#if GLIB_CHECK_VERSION(2, 42, 0)
     rb_define_const(RG_TARGET_NAMESPACE, "EXPLICIT_NOTIFY",
                     INT2FIX(G_PARAM_EXPLICIT_NOTIFY));
+#endif
     rb_define_const(RG_TARGET_NAMESPACE, "DEPRECATED",
                     INT2FIX(G_PARAM_DEPRECATED));
     rb_define_const(RG_TARGET_NAMESPACE, "MASK",
@@ -428,8 +432,10 @@ Init_gobject_gparam(void)
                       param_is_G_PARAM_STATIC_NICK, 0);
     rbg_define_method(RG_TARGET_NAMESPACE, "static_blurb?",
                       param_is_G_PARAM_STATIC_BLURB, 0);
+#if GLIB_CHECK_VERSION(2, 42, 0)
     rbg_define_method(RG_TARGET_NAMESPACE, "explicit_notify?",
                       param_is_G_PARAM_EXPLICIT_NOTIFY, 0);
+#endif
     rbg_define_method(RG_TARGET_NAMESPACE, "deprecated?",
                       param_is_G_PARAM_DEPRECATED, 0);
 }
