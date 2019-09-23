@@ -587,7 +587,7 @@ rb_gi_arguments_out_clear_arg_interface(RBGIArguments *args,
         break;
       case GI_INFO_TYPE_STRUCT:
         /* Should we care gtype?
-           Related: rb_gi_out_argument_init_interface() */
+           Related: rb_gi_arguments_out_init_arg_interface() */
         xfree(argument->v_pointer);
         break;
       case GI_INFO_TYPE_BOXED:
