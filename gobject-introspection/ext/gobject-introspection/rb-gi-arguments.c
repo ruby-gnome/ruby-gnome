@@ -540,13 +540,13 @@ rb_gi_arguments_fill_raw_args(RBGIArguments *args)
                                       GIArgument,
                                       metadata->in_arg_index);
             argument->v_pointer = *((gpointer *)(args->raw_args[i]));
-            return;
+            continue;
         } else if (metadata->direction == GI_DIRECTION_OUT) {
             argument = &g_array_index(args->out_args,
                                       GIArgument,
                                       metadata->out_arg_index);
             argument->v_pointer = *((gpointer *)(args->raw_args[i]));
-            return;
+            continue;
         }
 
         argument = &g_array_index(args->in_args,
