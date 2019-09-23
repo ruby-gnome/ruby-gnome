@@ -41,35 +41,6 @@ name_equal(GIArgInfo *info, const gchar *target_name)
     return equal_name_p;
 }
 
-static gboolean
-rg_gst_bus_sync_handler_callback(GstBus *bus, GstMessage *message,
-                                 gpointer user_data)
-{
-    RBGICallbackData *callback_data = user_data;
-    VALUE rb_bus_sync_reply;
-    ID id_call;
-
-    CONST_ID(id_call, "call");
-    rb_bus_sync_reply =
-        rb_funcall(rb_gi_callback_data_get_rb_callback(callback_data),
-                   id_call, 2,
-                   GOBJ2RVAL(bus),
-                   BOXED2RVAL(message, GST_MINI_OBJECT_TYPE(message)));
-    if (rb_gi_callback_data_get_metadata(callback_data)->scope_type == GI_SCOPE_TYPE_ASYNC) {
-        rb_gi_callback_data_free(callback_data);
-    }
-    return RVAL2GENUM(rb_bus_sync_reply, GST_TYPE_BUS_SYNC_REPLY);
-}
-
-static gpointer
-rg_gst_bus_sync_handler_callback_finder(GIArgInfo *info)
-{
-    if (!name_equal(info, "BusSyncHandler")) {
-        return NULL;
-    }
-    return rg_gst_bus_sync_handler_callback;
-}
-
 static void
 rg_gst_tag_foreach_func_callback(const GstTagList *list, const gchar *tag,
                                  gpointer user_data)
@@ -149,7 +120,6 @@ rg_gst_value_list_g2r(const GValue *from)
 void
 Init_gstreamer (void)
 {
-    rb_gi_callback_register_finder(rg_gst_bus_sync_handler_callback_finder);
     rb_gi_callback_register_finder(rg_gst_tag_foreach_func_callback_finder);
 
     rbgobj_register_r2g_func(GST_TYPE_LIST, rg_gst_value_list_r2g);
