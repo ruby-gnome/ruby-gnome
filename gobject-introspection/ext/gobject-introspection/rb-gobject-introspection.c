@@ -52,6 +52,7 @@ Init_gobject_introspection(void)
 
     rb_gi_argument_init();
 
+    rb_gi_array_type_init(RG_TARGET_NAMESPACE);
     rb_gi_type_tag_init(RG_TARGET_NAMESPACE);
     rb_gi_base_info_init(RG_TARGET_NAMESPACE);
     rb_gi_repository_init(RG_TARGET_NAMESPACE);

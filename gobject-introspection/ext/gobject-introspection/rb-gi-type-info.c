@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2019  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -33,16 +33,6 @@ gi_type_info_get_type(void)
                                             (GBoxedFreeFunc)g_base_info_unref);
     }
     return type;
-}
-
-VALUE
-rb_gi_array_type_to_ruby(GIArrayType type)
-{
-    if (type == (GIArrayType)-1) {
-        return Qnil;
-    } else {
-        return GENUM2RVAL(type, G_TYPE_I_ARRAY_TYPE);
-    }
 }
 
 static VALUE
@@ -138,6 +128,4 @@ rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(array_type, 0);
 
     rb_undef_method(RG_TARGET_NAMESPACE, "name");
-
-    G_DEF_CLASS(G_TYPE_I_ARRAY_TYPE, "ArrayType", rb_mGI);
 }
