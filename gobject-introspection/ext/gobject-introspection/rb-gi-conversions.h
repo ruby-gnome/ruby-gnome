@@ -106,15 +106,11 @@ VALUE       rb_gi_argument_to_ruby            (GIArgument     *argument,
                                                GArray         *in_args,
                                                GArray         *out_args,
                                                GPtrArray      *args_metadata);
-void        rb_gi_out_argument_init           (GIArgument     *argument,
-                                               GIArgInfo      *arg_info);
 VALUE       rb_gi_out_argument_to_ruby        (GIArgument     *argument,
                                                GIArgInfo      *arg_info,
                                                GArray         *in_args,
                                                GArray         *out_args,
                                                GPtrArray      *args_metadata);
-void        rb_gi_out_argument_fin            (GIArgument     *argument,
-                                               GIArgInfo      *arg_info);
 VALUE       rb_gi_return_argument_to_ruby     (GICallableInfo *callable_info,
                                                GIArgument     *argument,
                                                GArray         *in_args,
