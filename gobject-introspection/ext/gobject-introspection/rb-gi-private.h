@@ -37,6 +37,7 @@
 #include "rb-gobject-introspection.h"
 
 #include "rb-gi-private-arguments.h"
+#include "rb-gi-private-arguments-in.h"
 #include "rb-gi-private-arguments-out.h"
 #include "rb-gi-private-callback.h"
 #include "rb-gi-private-transfer.h"

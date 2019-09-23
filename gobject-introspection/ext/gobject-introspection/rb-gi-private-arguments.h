@@ -59,6 +59,7 @@ struct RBGIArgMetadata_ {
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
     GType interface_gtype;
+    gint index;
     gint in_arg_index;
     gint closure_in_arg_index;
     gint destroy_in_arg_index;
