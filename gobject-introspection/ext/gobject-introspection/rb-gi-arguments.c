@@ -20,6 +20,93 @@
 
 #include "rb-gi-private.h"
 
+static RBGIArgMetadata *
+rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
+{
+    RBGIArgMetadata *metadata;
+    GIArgInfo *arg_info;
+    GITypeInfo *type_info;
+
+    metadata = ALLOC(RBGIArgMetadata);
+    metadata->callable_info = callable_info;
+    arg_info = &(metadata->arg_info);
+    g_callable_info_load_arg(callable_info, i, arg_info);
+    metadata->name = g_base_info_get_name(arg_info);
+    type_info = &(metadata->type_info);
+    g_arg_info_load_type(arg_info, type_info);
+    metadata->type_tag = g_type_info_get_tag(type_info);
+    metadata->scope_type = g_arg_info_get_scope(arg_info);
+    metadata->direction = g_arg_info_get_direction(arg_info);
+    metadata->transfer = g_arg_info_get_ownership_transfer(arg_info);
+    metadata->array_type = GI_ARRAY_TYPE_C;
+    metadata->element_type_info = NULL;
+    metadata->element_type_tag = GI_TYPE_TAG_VOID;
+    metadata->element_interface_info = NULL;
+    metadata->element_interface_type = GI_INFO_TYPE_INVALID;
+    metadata->element_interface_gtype = G_TYPE_NONE;
+    metadata->interface_info = NULL;
+    metadata->interface_type = GI_INFO_TYPE_INVALID;
+    metadata->callback_p = (metadata->scope_type != GI_SCOPE_TYPE_INVALID);
+    metadata->closure_p = FALSE;
+    metadata->destroy_p = FALSE;
+    metadata->interface_p = (metadata->type_tag == GI_TYPE_TAG_INTERFACE);
+    metadata->array_p = (metadata->type_tag == GI_TYPE_TAG_ARRAY);
+    metadata->array_length_p = FALSE;
+    metadata->pointer_p = g_type_info_is_pointer(type_info);
+    metadata->caller_allocates_p = g_arg_info_is_caller_allocates(arg_info);
+    metadata->zero_terminated_p = FALSE;
+    metadata->in_arg_index = -1;
+    metadata->closure_in_arg_index = -1;
+    metadata->destroy_in_arg_index = -1;
+    metadata->array_in_arg_index = -1;
+    metadata->array_length_in_arg_index = -1;
+    metadata->array_length_arg_index = -1;
+    metadata->rb_arg_index = -1;
+    metadata->out_arg_index = -1;
+
+    if (metadata->array_p) {
+        metadata->zero_terminated_p =
+            g_type_info_is_zero_terminated(type_info);
+        metadata->array_type = g_type_info_get_array_type(type_info);
+        metadata->element_type_info = g_type_info_get_param_type(type_info, 0);
+        metadata->element_type_tag =
+            g_type_info_get_tag(metadata->element_type_info);
+        if (metadata->element_type_tag == GI_TYPE_TAG_INTERFACE) {
+            metadata->element_interface_info =
+                g_type_info_get_interface(metadata->element_type_info);
+            metadata->element_interface_type =
+                g_base_info_get_type(metadata->element_interface_info);
+            metadata->element_interface_gtype =
+                g_registered_type_info_get_g_type(metadata->element_interface_info);
+        }
+    }
+
+    if (metadata->interface_p) {
+        metadata->interface_info = g_type_info_get_interface(type_info);
+        metadata->interface_type =
+            g_base_info_get_type(metadata->interface_info);
+        metadata->interface_gtype =
+            g_registered_type_info_get_g_type(metadata->interface_info);
+    }
+
+    return metadata;
+}
+
+static void
+rb_gi_arg_metadata_free(RBGIArgMetadata *metadata)
+{
+    if (metadata->element_interface_info) {
+        g_base_info_unref(metadata->element_interface_info);
+    }
+    if (metadata->element_type_info) {
+        g_base_info_unref(metadata->element_type_info);
+    }
+    if (metadata->interface_info) {
+        g_base_info_unref(metadata->interface_info);
+    }
+    xfree(metadata);
+}
+
 static void
 rb_gi_arguments_allocate(RBGIArguments *args)
 {
@@ -29,28 +116,9 @@ rb_gi_arguments_allocate(RBGIArguments *args)
     for (i = 0; i < n_args; i++) {
         GIArgument argument = {0};
         RBGIArgMetadata *metadata;
-        GIArgInfo *arg_info;
         GIDirection direction;
 
-        metadata = ALLOC(RBGIArgMetadata);
-        metadata->callable_info = args->info;
-        arg_info = &(metadata->arg_info);
-        g_callable_info_load_arg(args->info, i, arg_info);
-        metadata->scope_type = g_arg_info_get_scope(arg_info);
-        metadata->direction = g_arg_info_get_direction(arg_info);
-        metadata->callback_p = (metadata->scope_type != GI_SCOPE_TYPE_INVALID);
-        metadata->closure_p = FALSE;
-        metadata->destroy_p = FALSE;
-        metadata->array_p = FALSE;
-        metadata->array_length_p = FALSE;
-        metadata->in_arg_index = -1;
-        metadata->closure_in_arg_index = -1;
-        metadata->destroy_in_arg_index = -1;
-        metadata->array_in_arg_index = -1;
-        metadata->array_length_in_arg_index = -1;
-        metadata->array_length_arg_index = -1;
-        metadata->rb_arg_index = -1;
-        metadata->out_arg_index = -1;
+        metadata = rb_gi_arg_metadata_new(args->info, i);
 
         direction = metadata->direction;
         if (direction == GI_DIRECTION_IN || direction == GI_DIRECTION_INOUT) {
@@ -110,20 +178,16 @@ rb_gi_arguments_fill_metadata_array(RBGIArguments *args)
     for (i = 0; i < metadata->len; i++) {
         RBGIArgMetadata *array_metadata;
         RBGIArgMetadata *array_length_metadata;
-        GIArgInfo *arg_info;
-        GITypeInfo type_info;
+        GITypeInfo *type_info;
         gint array_length_index = -1;
 
         array_metadata = g_ptr_array_index(metadata, i);
-        arg_info = &(array_metadata->arg_info);
-
-        g_arg_info_load_type(arg_info, &type_info);
-        if (g_type_info_get_tag(&type_info) != GI_TYPE_TAG_ARRAY) {
+        type_info = &(array_metadata->type_info);
+        if (!array_metadata->array_p) {
             continue;
         }
-        array_metadata->array_p = TRUE;
 
-        array_length_index = g_type_info_get_array_length(&type_info);
+        array_length_index = g_type_info_get_array_length(type_info);
         if (array_length_index == -1) {
             continue;
         }
@@ -269,23 +333,12 @@ ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
 
         if (!callback_data && args.metadata->len > 0) {
             RBGIArgMetadata *metadata;
-            GIArgInfo *arg_info;
-            GITypeInfo *type_info;
-            GITypeTag type_tag;
-            gboolean is_pointer;
-            const gchar *arg_name;
 
             i = args.metadata->len - 1;
             metadata = g_ptr_array_index(args.metadata, i);
-            arg_info = &(metadata->arg_info);
-            type_info = g_arg_info_get_type(arg_info);
-            type_tag = g_type_info_get_tag(type_info);
-            is_pointer = g_type_info_is_pointer(type_info);
-            g_base_info_unref(type_info);
-            arg_name = g_base_info_get_name(arg_info);
-            if (type_tag == GI_TYPE_TAG_VOID &&
-                is_pointer &&
-                strcmp(arg_name, "data") == 0) {
+            if (metadata->type_tag == GI_TYPE_TAG_VOID &&
+                metadata->pointer_p &&
+                strcmp(metadata->name, "data") == 0) {
                 callback_data = *((RBGICallbackData **)(raw_args[i]));
             }
         }
@@ -436,18 +489,6 @@ rb_gi_arguments_fill_input_rb_args(RBGIArguments *args,
 }
 
 static void
-rb_gi_arguments_fill_output_rb_args(RBGIArguments *args,
-                                    RBGIArgMetadata *metadata)
-{
-    GIArgument *argument;
-
-    argument = &(g_array_index(args->out_args,
-                               GIArgument,
-                               metadata->out_arg_index));
-    rb_gi_out_argument_init(argument, &(metadata->arg_info));
-}
-
-static void
 rb_gi_arguments_fill_rb_args(RBGIArguments *args)
 {
     gint i, n_args;
@@ -459,10 +500,10 @@ rb_gi_arguments_fill_rb_args(RBGIArguments *args)
         metadata = g_ptr_array_index(args->metadata, i);
         if (metadata->in_arg_index != -1) {
             rb_gi_arguments_fill_input_rb_args(args, metadata);
-        } else {
-            rb_gi_arguments_fill_output_rb_args(args, metadata);
         }
     }
+
+    rb_gi_arguments_out_init(args);
 }
 
 static void
@@ -560,10 +601,6 @@ rb_gi_arguments_fill_raw_args(RBGIArguments *args)
             argument->v_pointer = *((gpointer *)(args->raw_args[i]));
             continue;
         } else if (metadata->direction == GI_DIRECTION_OUT) {
-            argument = &g_array_index(args->out_args,
-                                      GIArgument,
-                                      metadata->out_arg_index);
-            argument->v_pointer = *((gpointer *)(args->raw_args[i]));
             continue;
         }
 
@@ -644,6 +681,8 @@ rb_gi_arguments_fill_raw_args(RBGIArguments *args)
 
         g_base_info_unref(type_info);
     }
+
+    rb_gi_arguments_out_init(args);
 }
 
 static void
@@ -654,7 +693,7 @@ rb_gi_arguments_metadata_free(gpointer data)
         metadata->scope_type == GI_SCOPE_TYPE_NOTIFIED) {
         return;
     }
-    xfree(metadata);
+    rb_gi_arg_metadata_free(metadata);
 }
 
 static gboolean
@@ -752,14 +791,9 @@ rb_gi_arguments_clear(RBGIArguments *args)
                                        argument,
                                        &(metadata->arg_info));
             }
-        } else {
-            GIArgument *argument;
-            argument = &(g_array_index(args->out_args,
-                                       GIArgument,
-                                       metadata->out_arg_index));
-            rb_gi_out_argument_fin(argument, &(metadata->arg_info));
         }
     }
+    rb_gi_arguments_out_clear(args);
 
     if (args->receiver_type_class) {
         g_type_class_unref(args->receiver_type_class);

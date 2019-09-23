@@ -28,28 +28,8 @@
 
 typedef gpointer (*RBGICallbackFinderFunc)(GIArgInfo *info);
 
-typedef struct
-{
-    GICallableInfo *callable_info;
-    GIArgInfo arg_info;
-    GIScopeType scope_type;
-    GIDirection direction;
-    gboolean callback_p;
-    gboolean closure_p;
-    gboolean destroy_p;
-    gboolean array_p;
-    gboolean array_length_p;
-    gint in_arg_index;
-    gint closure_in_arg_index;
-    gint destroy_in_arg_index;
-    gint array_in_arg_index;
-    gint array_length_in_arg_index;
-    gint array_length_arg_index;
-    gint rb_arg_index;
-    gint out_arg_index;
-} RBGIArgMetadata;
-
 typedef struct RBGICallbackData_ RBGICallbackData;
+typedef struct RBGIArgMetadata_ RBGIArgMetadata;
 
 void rb_gi_callback_data_free       (RBGICallbackData       *callback_data);
 RBGIArgMetadata *

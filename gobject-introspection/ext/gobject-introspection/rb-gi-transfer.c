@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2017-2019  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -18,24 +18,19 @@
  *  MA  02110-1301  USA
  */
 
-#pragma once
+#include "rb-gi-private.h"
 
-typedef struct RBGICallback_ {
-    GIArgInfo *arg_info;
-    GITypeInfo *type_info;
-    GICallbackInfo *callback_info;
-    ffi_cif cif;
-    ffi_closure *closure;
-} RBGICallback;
-
-G_GNUC_INTERNAL void
-rb_gi_callback_init(VALUE rb_mGI);
-
-G_GNUC_INTERNAL gpointer
-rb_gi_callback_find(GIArgInfo *info);
-
-G_GNUC_INTERNAL RBGICallbackData *
-rb_gi_callback_data_new(RBGIArguments *args,
-                        RBGICallback *callback,
-                        RBGIArgMetadata *metadata);
-
+const gchar *
+rb_gi_transfer_to_string(GITransfer transfer)
+{
+    switch(transfer) {
+      case GI_TRANSFER_NOTHING:
+        return "nothing";
+      case GI_TRANSFER_CONTAINER:
+        return "container";
+      case GI_TRANSFER_EVERYTHING:
+        return "everything";
+      default:
+        return "unknown";
+    }
+}

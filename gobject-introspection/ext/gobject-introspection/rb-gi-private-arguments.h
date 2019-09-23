@@ -20,8 +20,7 @@
 
 #pragma once
 
-typedef struct
-{
+typedef struct {
     GICallableInfo *info;
     VALUE rb_receiver;
     gpointer receiver_type_class;
@@ -32,6 +31,43 @@ typedef struct
     GArray *out_args;
     GPtrArray *metadata;
 } RBGIArguments;
+
+struct RBGIArgMetadata_ {
+    GICallableInfo *callable_info;
+    GIArgInfo arg_info;
+    const gchar *name;
+    GITypeInfo type_info;
+    GITypeTag type_tag;
+    GIScopeType scope_type;
+    GIDirection direction;
+    GITransfer transfer;
+    gboolean callback_p;
+    gboolean closure_p;
+    gboolean destroy_p;
+    gboolean array_p;
+    gboolean array_length_p;
+    gboolean interface_p;
+    gboolean pointer_p;
+    gboolean caller_allocates_p;
+    gboolean zero_terminated_p;
+    GIArrayType array_type;
+    GITypeInfo *element_type_info;
+    GITypeTag element_type_tag;
+    GIBaseInfo *element_interface_info;
+    GIInfoType element_interface_type;
+    GType element_interface_gtype;
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    GType interface_gtype;
+    gint in_arg_index;
+    gint closure_in_arg_index;
+    gint destroy_in_arg_index;
+    gint array_in_arg_index;
+    gint array_length_in_arg_index;
+    gint array_length_arg_index;
+    gint rb_arg_index;
+    gint out_arg_index;
+};
 
 G_GNUC_INTERNAL void
 rb_gi_arguments_init(RBGIArguments *args,

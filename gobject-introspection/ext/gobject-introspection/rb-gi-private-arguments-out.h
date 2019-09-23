@@ -20,22 +20,7 @@
 
 #pragma once
 
-typedef struct RBGICallback_ {
-    GIArgInfo *arg_info;
-    GITypeInfo *type_info;
-    GICallbackInfo *callback_info;
-    ffi_cif cif;
-    ffi_closure *closure;
-} RBGICallback;
-
 G_GNUC_INTERNAL void
-rb_gi_callback_init(VALUE rb_mGI);
-
-G_GNUC_INTERNAL gpointer
-rb_gi_callback_find(GIArgInfo *info);
-
-G_GNUC_INTERNAL RBGICallbackData *
-rb_gi_callback_data_new(RBGIArguments *args,
-                        RBGICallback *callback,
-                        RBGIArgMetadata *metadata);
-
+rb_gi_arguments_out_init(RBGIArguments *args);
+G_GNUC_INTERNAL void
+rb_gi_arguments_out_clear(RBGIArguments *args);

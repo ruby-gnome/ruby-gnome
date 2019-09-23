@@ -37,7 +37,9 @@
 #include "rb-gobject-introspection.h"
 
 #include "rb-gi-private-arguments.h"
+#include "rb-gi-private-arguments-out.h"
 #include "rb-gi-private-callback.h"
+#include "rb-gi-private-transfer.h"
 
 #ifndef RB_TYPE_P
 #  define RB_TYPE_P(object, type) (TYPE(object) == type)
