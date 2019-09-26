@@ -429,6 +429,30 @@ rbgobj_gtype_to_ruby_class(GType gtype)
     return cinfo ? cinfo->klass : Qnil;
 }
 
+GType
+rbgobj_gtype_from_ruby(VALUE rb_gtype)
+{
+    ID id_gtype;
+
+    if (RB_TYPE_P(rb_gtype, RUBY_T_STRING)) {
+        GType gtype;
+        gtype = g_type_from_name(RVAL2CSTR(rb_gtype));
+        if (gtype == G_TYPE_INVALID) {
+            rb_raise(rb_eArgError,
+                     "unknown GType name: <%s>",
+                     RVAL2CSTR(rb_gtype));
+        }
+        return gtype;
+    }
+
+    CONST_ID(id_gtype, "gtype");
+    if (rb_respond_to(rb_gtype, id_gtype)) {
+        rb_gtype = rb_funcall(rb_gtype, id_gtype, 0);
+    }
+
+    return NUM2ULONG(rb_gtype);
+}
+
 VALUE
 rbgobj_define_class(GType gtype, const gchar *name, VALUE module,
                     RGMarkFunc mark, RGFreeFunc free, VALUE parent)

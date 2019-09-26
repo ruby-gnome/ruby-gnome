@@ -192,6 +192,7 @@ extern const RGObjClassInfo *rbgobj_lookup_class_by_gtype_full(GType gtype,
 							       VALUE parent,
 							       gboolean create_object);
 extern VALUE rbgobj_gtype_to_ruby_class(GType gtype);
+extern GType rbgobj_gtype_from_ruby(VALUE rb_gtype);
 extern VALUE rbgobj_define_class(GType gtype, const gchar* name, VALUE module,
                                  RGMarkFunc mark, RGFreeFunc free, VALUE parent); 
 extern VALUE rbgobj_define_class_dynamic(const gchar* gtype_name, 
