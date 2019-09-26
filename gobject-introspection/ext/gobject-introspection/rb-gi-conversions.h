@@ -105,12 +105,6 @@ GIArgument *rb_gi_value_argument_from_ruby    (GIArgument     *argument,
                                                GITypeInfo     *type_info,
                                                VALUE           rb_argument,
                                                VALUE           self);
-void        rb_gi_value_argument_free         (VALUE           rb_argument,
-                                               GIArgument     *argument,
-                                               GITypeInfo     *type_info);
-void        rb_gi_in_argument_free            (VALUE           rb_argument,
-                                               GIArgument     *argument,
-                                               GIArgInfo      *arg_info);
 
 VALUE       rb_gi_array_type_to_ruby          (GIArrayType type);
 
