@@ -248,99 +248,190 @@ void
 rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
                                VALUE rb_field_value)
 {
-    GIArgument field_value;
+    gint offset;
     GITypeInfo *type_info;
     GITypeTag type_tag;
-    gboolean succeeded;
+    gboolean succeeded = TRUE;
 
+    offset = g_field_info_get_offset(info);
     type_info = g_field_info_get_type(info);
     type_tag = g_type_info_get_tag(type_info);
-    RVAL2GI_VALUE_ARGUMENT(&field_value, type_info, rb_field_value, Qnil);
 
-    succeeded = g_field_info_set_field(info, memory, &field_value);
-    if (!succeeded) {
-        switch (type_tag) {
-          case GI_TYPE_TAG_VOID:
-          case GI_TYPE_TAG_BOOLEAN:
-          case GI_TYPE_TAG_INT8:
-          case GI_TYPE_TAG_UINT8:
-          case GI_TYPE_TAG_INT16:
-          case GI_TYPE_TAG_UINT16:
-          case GI_TYPE_TAG_INT32:
-          case GI_TYPE_TAG_UINT32:
-          case GI_TYPE_TAG_INT64:
-          case GI_TYPE_TAG_UINT64:
-          case GI_TYPE_TAG_FLOAT:
-          case GI_TYPE_TAG_DOUBLE:
-          case GI_TYPE_TAG_GTYPE:
-            break;
-          case GI_TYPE_TAG_UTF8:
-            {
-                int offset;
-                offset = g_field_info_get_offset(info);
-                G_STRUCT_MEMBER(gchar *, memory, offset) = field_value.v_string;
-                succeeded = TRUE;
-            }
-            break;
-          case GI_TYPE_TAG_FILENAME:
-          case GI_TYPE_TAG_ARRAY:
-            break;
-          case GI_TYPE_TAG_INTERFACE:
-            {
-                GIBaseInfo *interface_info;
-                GIInfoType interface_type;
-
-                interface_info = g_type_info_get_interface(type_info);
-                interface_type = g_base_info_get_type(interface_info);
-                switch (interface_type) {
-                  case GI_INFO_TYPE_INVALID:
-                  case GI_INFO_TYPE_FUNCTION:
-                  case GI_INFO_TYPE_CALLBACK:
-                    break;
-                  case GI_INFO_TYPE_STRUCT:
-                  case GI_INFO_TYPE_BOXED:
-                  case GI_INFO_TYPE_UNION:
-                    {
-                        int offset;
-
-                        offset = g_field_info_get_offset(info);
-                        G_STRUCT_MEMBER(gpointer, memory, offset) =
-                            field_value.v_pointer;
-                        succeeded = TRUE;
-                    }
-                    break;
-                  case GI_INFO_TYPE_ENUM:
-                  case GI_INFO_TYPE_FLAGS:
-                  case GI_INFO_TYPE_OBJECT:
-                  case GI_INFO_TYPE_INTERFACE:
-                  case GI_INFO_TYPE_CONSTANT:
-                  case GI_INFO_TYPE_INVALID_0:
-                  case GI_INFO_TYPE_VALUE:
-                  case GI_INFO_TYPE_SIGNAL:
-                  case GI_INFO_TYPE_VFUNC:
-                  case GI_INFO_TYPE_PROPERTY:
-                  case GI_INFO_TYPE_FIELD:
-                  case GI_INFO_TYPE_ARG:
-                  case GI_INFO_TYPE_TYPE:
-                  case GI_INFO_TYPE_UNRESOLVED:
-                    break;
-                  default:
-                    break;
-                }
-                g_base_info_unref(interface_info);
-            }
-            break;
-          case GI_TYPE_TAG_GLIST:
-          case GI_TYPE_TAG_GSLIST:
-          case GI_TYPE_TAG_GHASH:
-          case GI_TYPE_TAG_ERROR:
-          case GI_TYPE_TAG_UNICHAR:
-            break;
-          default:
-            break;
-        }
+    if ((g_field_info_get_flags(info) & GI_FIELD_IS_WRITABLE) == 0) {
+        g_base_info_unref(type_info);
+        rb_raise(rb_eArgError,
+                 "failed to set field value: not writable: %s[%s]",
+                 g_base_info_get_name(info),
+                 g_type_tag_to_string(type_tag));
     }
-    rb_gi_value_argument_free(rb_field_value, &field_value, type_info);
+
+    /* TODO: Use g_field_info_set_field() again? */
+    switch (type_tag) {
+      case GI_TYPE_TAG_VOID:
+        succeeded = FALSE;
+        break;
+      case GI_TYPE_TAG_BOOLEAN:
+        G_STRUCT_MEMBER(gboolean, memory, offset) = RVAL2CBOOL(rb_field_value);
+        break;
+      case GI_TYPE_TAG_INT8:
+        G_STRUCT_MEMBER(gint8, memory, offset) = NUM2CHR(rb_field_value);
+        break;
+      case GI_TYPE_TAG_UINT8:
+        G_STRUCT_MEMBER(guint8, memory, offset) =
+            (guint8)NUM2CHR(rb_field_value);
+        break;
+      case GI_TYPE_TAG_INT16:
+        G_STRUCT_MEMBER(gint16, memory, offset) = NUM2SHORT(rb_field_value);
+        break;
+      case GI_TYPE_TAG_UINT16:
+        G_STRUCT_MEMBER(guint16, memory, offset) = NUM2USHORT(rb_field_value);
+        break;
+      case GI_TYPE_TAG_INT32:
+        G_STRUCT_MEMBER(gint32, memory, offset) = NUM2INT(rb_field_value);
+        break;
+      case GI_TYPE_TAG_UINT32:
+        G_STRUCT_MEMBER(guint32, memory, offset) = NUM2UINT(rb_field_value);
+        break;
+      case GI_TYPE_TAG_INT64:
+        G_STRUCT_MEMBER(gint64, memory, offset) = NUM2LL(rb_field_value);
+        break;
+      case GI_TYPE_TAG_UINT64:
+        G_STRUCT_MEMBER(guint64, memory, offset) = NUM2ULL(rb_field_value);
+        break;
+      case GI_TYPE_TAG_FLOAT:
+        G_STRUCT_MEMBER(gfloat, memory, offset) = NUM2DBL(rb_field_value);
+        break;
+      case GI_TYPE_TAG_DOUBLE:
+        G_STRUCT_MEMBER(gdouble, memory, offset) = NUM2DBL(rb_field_value);
+        break;
+      case GI_TYPE_TAG_GTYPE:
+        G_STRUCT_MEMBER(GType, memory, offset) =
+            rbgobj_gtype_from_ruby(rb_field_value);
+        break;
+      case GI_TYPE_TAG_UTF8:
+        G_STRUCT_MEMBER(const gchar *, memory, offset) =
+            RVAL2CSTR_ACCEPT_SYMBOL(rb_field_value);
+        break;
+      case GI_TYPE_TAG_FILENAME:
+        /* TODO: How to free? */
+        /* G_STRUCT_MEMBER(gchar *, memory, offset) = */
+        /*     rbg_filename_from_ruby(rb_field_value); */
+        succeeded = FALSE;
+        break;
+      case GI_TYPE_TAG_ARRAY:
+        succeeded = FALSE;
+        break;
+      case GI_TYPE_TAG_INTERFACE:
+        {
+            GIBaseInfo *interface_info;
+            GIInfoType interface_type;
+
+            interface_info = g_type_info_get_interface(type_info);
+            interface_type = g_base_info_get_type(interface_info);
+            switch (interface_type) {
+              case GI_INFO_TYPE_INVALID:
+              case GI_INFO_TYPE_FUNCTION:
+              case GI_INFO_TYPE_CALLBACK:
+                succeeded = FALSE;
+                break;
+              case GI_INFO_TYPE_STRUCT:
+                {
+                    GType gtype =
+                        g_registered_type_info_get_g_type(interface_info);
+                    G_STRUCT_MEMBER(gpointer, memory, offset) =
+                        rb_gi_struct_get_raw(rb_field_value, gtype);
+                }
+                break;
+              case GI_INFO_TYPE_BOXED:
+              case GI_INFO_TYPE_UNION:
+                {
+                    GType gtype =
+                        g_registered_type_info_get_g_type(interface_info);
+                    if (gtype == G_TYPE_NONE) {
+                        succeeded = FALSE;
+                    } else {
+                        G_STRUCT_MEMBER(gpointer, memory, offset) =
+                            RVAL2BOXED(rb_field_value, gtype);
+                    }
+                }
+                break;
+              case GI_INFO_TYPE_ENUM:
+              case GI_INFO_TYPE_FLAGS:
+                {
+                    GType gtype =
+                        g_registered_type_info_get_g_type(interface_info);
+                    GITypeTag storage_type =
+                        g_enum_info_get_storage_type(interface_info);
+                    gint value;
+                    if (gtype == G_TYPE_NONE) {
+                        value = NUM2INT(rb_field_value);
+                    } else {
+                        if (interface_type == GI_INFO_TYPE_ENUM) {
+                            value = RVAL2GENUM(rb_field_value, gtype);
+                        } else {
+                            value = RVAL2GFLAGS(rb_field_value, gtype);
+                        }
+                    }
+                    switch (storage_type) {
+                      case GI_TYPE_TAG_INT8:
+                      case GI_TYPE_TAG_UINT8:
+                        G_STRUCT_MEMBER(guint8, memory, offset) =
+                            (guint8)value;
+                        break;
+                      case GI_TYPE_TAG_INT16:
+                      case GI_TYPE_TAG_UINT16:
+                        G_STRUCT_MEMBER(guint16, memory, offset) =
+                            (guint16)value;
+                        break;
+                      case GI_TYPE_TAG_INT32:
+                      case GI_TYPE_TAG_UINT32:
+                        G_STRUCT_MEMBER(guint32, memory, offset) =
+                            (guint32)value;
+                        break;
+                      case GI_TYPE_TAG_INT64:
+                      case GI_TYPE_TAG_UINT64:
+                        G_STRUCT_MEMBER(guint64, memory, offset) =
+                            (guint64)value;
+                        break;
+                      default:
+                        succeeded = FALSE;
+                        break;
+                    }
+                }
+                break;
+              case GI_INFO_TYPE_OBJECT:
+                G_STRUCT_MEMBER(gpointer, memory, offset) =
+                    RVAL2GOBJ(rb_field_value);
+                break;
+              case GI_INFO_TYPE_INTERFACE:
+              case GI_INFO_TYPE_CONSTANT:
+              case GI_INFO_TYPE_INVALID_0:
+              case GI_INFO_TYPE_VALUE:
+              case GI_INFO_TYPE_SIGNAL:
+              case GI_INFO_TYPE_VFUNC:
+              case GI_INFO_TYPE_PROPERTY:
+              case GI_INFO_TYPE_FIELD:
+              case GI_INFO_TYPE_ARG:
+              case GI_INFO_TYPE_TYPE:
+              case GI_INFO_TYPE_UNRESOLVED:
+                succeeded = FALSE;
+                break;
+              default:
+                break;
+            }
+            g_base_info_unref(interface_info);
+        }
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        succeeded = FALSE;
+        break;
+      default:
+        break;
+    }
     g_base_info_unref(type_info);
 
     if (!succeeded) {
