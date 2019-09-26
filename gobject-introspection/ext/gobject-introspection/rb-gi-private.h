@@ -41,6 +41,7 @@
 #include "rb-gi-private-arguments-in.h"
 #include "rb-gi-private-arguments-out.h"
 #include "rb-gi-private-callback.h"
+#include "rb-gi-private-direction.h"
 #include "rb-gi-private-transfer.h"
 
 #ifndef RB_TYPE_P
