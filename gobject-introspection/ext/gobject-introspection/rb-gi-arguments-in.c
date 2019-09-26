@@ -1535,8 +1535,6 @@ rb_gi_arguments_in_clear_arg_interface(RBGIArguments *args,
             g_bytes_unref(bytes);
         } else if (metadata->interface_gtype == G_TYPE_CLOSURE) {
             /* Do nothing. GRClousre is managed by referenced object. */
-        } else if (metadata->interface_gtype == G_TYPE_RESOURCE) {
-            /* Do nothing. GRClousre is managed by referenced object. */
         } else {
             /*
             rb_raise(rb_eNotImpError,
