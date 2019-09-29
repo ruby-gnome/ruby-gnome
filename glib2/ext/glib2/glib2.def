@@ -169,6 +169,7 @@ EXPORTS
 	rbg_variant_from_ruby
 	rbg_variant_type_from_ruby
 
+	rbglib_is_bytes
 	rbgobj_is_object
 	rbgobj_is_value
 

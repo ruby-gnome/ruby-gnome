@@ -27,12 +27,9 @@
 #include "rbglibdeprecated.h"
 #include "rbglib2conversions.h"
 
-#ifndef __RBGLIB_H__
-#define __RBGLIB_H__
+#pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+G_BEGIN_DECLS
 
 #define RBGLIB_MAJOR_VERSION 3
 #define RBGLIB_MINOR_VERSION 3
@@ -234,12 +231,10 @@ extern GVariant *rbg_variant_from_ruby(VALUE rb_variant);
 
 extern GVariantType *rbg_variant_type_from_ruby(VALUE rb_variant_type);
 
-
 extern void rbg_gc_guard(gpointer key, VALUE rb_object);
 extern void rbg_gc_unguard(gpointer key);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
 
-#endif /* __RBGLIB_H__ */
+extern gboolean rbglib_is_bytes(VALUE object);
+
+G_END_DECLS

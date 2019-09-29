@@ -20,9 +20,17 @@
 
 #include "rbgprivate.h"
 
-#define RG_TARGET_NAMESPACE cBytes
+static VALUE rb_cGLibBytes;
+
+#define RG_TARGET_NAMESPACE rb_cGLibBytes
 
 #define _SELF(s) (RVAL2BOXED(s, G_TYPE_BYTES))
+
+gboolean
+rbglib_is_value(VALUE object)
+{
+    return RVAL2CBOOL(rb_obj_is_kind_of(object, RG_TARGET_NAMESPACE));
+}
 
 #if GLIB_CHECK_VERSION(2, 32, 0)
 static VALUE RG_TARGET_NAMESPACE;
