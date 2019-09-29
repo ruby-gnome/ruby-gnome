@@ -399,7 +399,7 @@ rbg_rval2strv_dup_body(VALUE value)
 static G_GNUC_NORETURN VALUE
 rbg_rval2strv_dup_rescue(VALUE value, VALUE error)
 {
-    g_free(((struct rval2strv_dup_args *)value)->result);
+    g_strfreev(((struct rval2strv_dup_args *)value)->result);
 
     rb_exc_raise(error);
 }
@@ -411,7 +411,7 @@ rbg_rval2strv_dup(volatile VALUE *value, long *n)
 
     args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
     args.n = RARRAY_LEN(args.ary);
-    args.result = g_new(gchar *, args.n + 1);
+    args.result = g_new0(gchar *, args.n + 1);
 
     rb_rescue(rbg_rval2strv_dup_body, (VALUE)&args,
               rbg_rval2strv_dup_rescue, (VALUE)&args);
