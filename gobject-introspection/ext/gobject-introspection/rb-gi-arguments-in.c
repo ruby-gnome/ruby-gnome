@@ -286,7 +286,35 @@ rb_gi_arguments_in_free_array_c_strv(RBGIArguments *args,
         g_free(target);
         break;
       case GI_TRANSFER_CONTAINER:
-        g_free(target);
+      case GI_TRANSFER_EVERYTHING:
+        break;
+    }
+}
+
+static void
+rb_gi_arguments_in_free_array_c_filename(RBGIArguments *args,
+                                         RBGIArgMetadata *metadata,
+                                         gpointer user_data)
+{
+    gchar **target;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        target = *((gchar ***)(metadata->in_arg->v_pointer));
+        xfree(metadata->in_arg->v_pointer);
+    } else {
+        target = metadata->in_arg->v_pointer;
+    }
+
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        g_strfreev(target);
+        break;
+      case GI_TRANSFER_CONTAINER:
+        {
+            gsize i;
+            for (i = 0; target[i]; i++) {
+                g_free(target[i]);
+            }
+        }
         break;
       case GI_TRANSFER_EVERYTHING:
         break;
@@ -983,6 +1011,24 @@ rb_gi_arguments_in_init_arg_ruby_array_c(RBGIArguments *args,
         }
         break;
       case GI_TYPE_TAG_FILENAME:
+        {
+            GIArgument *array_argument = metadata->in_arg;
+            gchar **raw_array;
+            long length;
+            rb_arg = rbg_to_array(rb_arg);
+            raw_array = rbg_rval2filenamev(&rb_arg, &length);
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                array_argument->v_pointer = ALLOC(gpointer);
+                *((gpointer *)(array_argument->v_pointer)) = raw_array;
+            } else {
+                array_argument->v_pointer = raw_array;
+            }
+            rb_gi_arguments_in_init_arg_ruby_array_set_length(args,
+                                                              metadata,
+                                                              length);
+            metadata->free_func = rb_gi_arguments_in_free_array_c_filename;
+        }
+        break;
       case GI_TYPE_TAG_ARRAY:
         rb_raise(rb_eNotImpError,
                  "TODO: [%s::%s](%s) %s Ruby -> GIArgument(array/%s)[%s]",
