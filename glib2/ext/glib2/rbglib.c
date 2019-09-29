@@ -347,7 +347,7 @@ rbg_rval2strv_rescue(VALUE value, VALUE error)
     rb_exc_raise(error);
 }
 
-const gchar **
+gchar **
 rbg_rval2strv(volatile VALUE *value, long *n)
 {
     struct rval2strv_args args;
@@ -365,7 +365,7 @@ rbg_rval2strv(volatile VALUE *value, long *n)
     return args.result;
 }
 
-const gchar **
+gchar **
 rbg_rval2strv_accept_nil(volatile VALUE *value, long *n)
 {
     if (!NIL_P(*value))

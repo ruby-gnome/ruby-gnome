@@ -192,8 +192,8 @@ VALUE rbg_filename_to_ruby(const gchar *filename);
 extern VALUE rbg_filename_to_ruby_free(gchar *filename);
 extern gchar *rbg_filename_from_ruby(VALUE filename);
 
-const gchar **rbg_rval2strv(volatile VALUE *value, long *n);
-const gchar **rbg_rval2strv_accept_nil(volatile VALUE *value, long *n);
+gchar **rbg_rval2strv(volatile VALUE *value, long *n);
+gchar **rbg_rval2strv_accept_nil(volatile VALUE *value, long *n);
 gchar **rbg_rval2strv_dup(volatile VALUE *value, long *n);
 gchar **rbg_rval2strv_dup_accept_nil(volatile VALUE *value, long *n);
 VALUE rbg_strv2rval(const gchar **strings);
