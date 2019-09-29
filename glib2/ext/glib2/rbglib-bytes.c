@@ -27,7 +27,7 @@ static VALUE rb_cGLibBytes;
 #define _SELF(s) (RVAL2BOXED(s, G_TYPE_BYTES))
 
 gboolean
-rbglib_is_value(VALUE object)
+rbg_is_bytes(VALUE object)
 {
     return RVAL2CBOOL(rb_obj_is_kind_of(object, RG_TARGET_NAMESPACE));
 }

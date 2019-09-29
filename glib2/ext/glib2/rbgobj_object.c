@@ -32,7 +32,7 @@ static VALUE eNoPropertyError;
 static GQuark RUBY_GOBJECT_OBJ_KEY;
 
 gboolean
-rbgobj_is_object(VALUE object)
+rbg_is_object(VALUE object)
 {
     return RVAL2CBOOL(rb_obj_is_kind_of(object, RG_TARGET_NAMESPACE));
 }

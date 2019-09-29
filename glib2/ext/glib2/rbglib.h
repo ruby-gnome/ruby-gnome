@@ -235,6 +235,9 @@ extern void rbg_gc_guard(gpointer key, VALUE rb_object);
 extern void rbg_gc_unguard(gpointer key);
 
 
-extern gboolean rbglib_is_bytes(VALUE object);
+/* predicates */
+extern gboolean rbg_is_bytes(VALUE object);
+extern gboolean rbg_is_object(VALUE object);
+extern gboolean rbg_is_value(VALUE object);
 
 G_END_DECLS

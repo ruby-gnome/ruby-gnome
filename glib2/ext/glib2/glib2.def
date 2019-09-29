@@ -169,12 +169,12 @@ EXPORTS
 	rbg_variant_from_ruby
 	rbg_variant_type_from_ruby
 
-	rbglib_is_bytes
-	rbgobj_is_object
-	rbgobj_is_value
-
 	rbg_gc_guard
 	rbg_gc_unguard
+
+	rbg_is_bytes
+	rbg_is_object
+	rbg_is_value
 
 	g_source_get_type
 	g_connect_flags_get_type

@@ -32,7 +32,7 @@ static GQuark qRValueToGValueFunc;
 static GQuark qGValueToRValueFunc;
 
 gboolean
-rbgobj_is_value(VALUE object)
+rbg_is_value(VALUE object)
 {
     return RVAL2CBOOL(rb_obj_is_kind_of(object, RG_TARGET_NAMESPACE));
 }
