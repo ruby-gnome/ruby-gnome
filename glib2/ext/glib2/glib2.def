@@ -170,6 +170,7 @@ EXPORTS
 	rbg_variant_type_from_ruby
 
 	rbgobj_is_object
+	rbgobj_is_value
 
 	rbg_gc_guard
 	rbg_gc_unguard

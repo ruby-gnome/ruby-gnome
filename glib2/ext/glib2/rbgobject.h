@@ -335,6 +335,7 @@ extern void rbgobj_convert_define(const RGConvertTable *table);
 
 
 extern gboolean rbgobj_is_object(VALUE object);
+extern gboolean rbgobj_is_value(VALUE object);
 
 G_END_DECLS
 

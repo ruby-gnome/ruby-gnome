@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -28,6 +28,12 @@
 static ID id_to_s;
 static GQuark qRValueToGValueFunc;
 static GQuark qGValueToRValueFunc;
+
+gboolean
+rbgobj_is_value(VALUE object)
+{
+    return RVAL2CBOOL(rb_obj_is_kind_of(object, RG_TARGET_NAMESPACE));
+}
 
 void
 rbgobj_register_r2g_func(GType gtype, RValueToGValueFunc func)
