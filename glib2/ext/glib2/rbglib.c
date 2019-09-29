@@ -434,6 +434,63 @@ rbg_rval2strv_dup_accept_nil(volatile VALUE *value, long *n)
     return NULL;
 }
 
+struct rval2filenamev_args {
+    VALUE ary;
+    long n;
+    gchar **result;
+};
+
+static VALUE
+rbg_rval2filenamev_body(VALUE value)
+{
+    long i;
+    struct rval2filenamev_args *args = (struct rval2filenamev_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result[i] = RVAL2CSTRFILENAME(RARRAY_PTR(args->ary)[i]);
+    args->result[args->n] = NULL;
+
+    return Qnil;
+}
+
+static G_GNUC_NORETURN VALUE
+rbg_rval2filenamev_rescue(VALUE value, VALUE error)
+{
+    g_strfreev(((struct rval2filenamev_args *)value)->result);
+
+    rb_exc_raise(error);
+}
+
+gchar **
+rbg_rval2filenamev(volatile VALUE *value, long *n)
+{
+    struct rval2filenamev_args args;
+
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new0(gchar *, args.n + 1);
+
+    rb_rescue(rbg_rval2filenamev_body, (VALUE)&args,
+              rbg_rval2filenamev_rescue, (VALUE)&args);
+
+    if (n != NULL)
+        *n = args.n;
+
+    return args.result;
+}
+
+gchar **
+rbg_rval2filenamev_accept_nil(volatile VALUE *value, long *n)
+{
+    if (!NIL_P(*value))
+        return rbg_rval2filenamev(value, n);
+
+    if (n != NULL)
+        *n = 0;
+
+    return NULL;
+}
+
 VALUE
 rbg_strv2rval(const gchar **strings)
 {

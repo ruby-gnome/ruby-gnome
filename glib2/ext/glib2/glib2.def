@@ -107,6 +107,8 @@ EXPORTS
         rbg_rval2strv_accept_nil
         rbg_rval2strv_dup
         rbg_rval2strv_dup_accept_nil
+        rbg_rval2filenamev
+        rbg_rval2filenamev_accept_nil
         rbg_strv2rval
         rbg_strv2rval_free
         rbg_rval2gbooleans
