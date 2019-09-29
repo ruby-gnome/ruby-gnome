@@ -169,6 +169,8 @@ EXPORTS
 	rbg_variant_from_ruby
 	rbg_variant_type_from_ruby
 
+	rbgobj_is_object
+
 	rbg_gc_guard
 	rbg_gc_unguard
 

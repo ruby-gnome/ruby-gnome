@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
- *  Copyright (C) 2003,2006  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2003,2006  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -332,6 +332,9 @@ typedef struct {
 } RGConvertTable;
 
 extern void rbgobj_convert_define(const RGConvertTable *table);
+
+
+extern gboolean rbgobj_is_object(VALUE object);
 
 G_END_DECLS
 
