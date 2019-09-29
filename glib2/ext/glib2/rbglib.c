@@ -323,7 +323,7 @@ rbg_filename_from_ruby(VALUE filename)
 struct rval2strv_args {
     VALUE ary;
     long n;
-    const gchar **result;
+    gchar **result;
 };
 
 static VALUE
@@ -333,7 +333,7 @@ rbg_rval2strv_body(VALUE value)
     struct rval2strv_args *args = (struct rval2strv_args *)value;
 
     for (i = 0; i < args->n; i++)
-        args->result[i] = RVAL2CSTR(RARRAY_PTR(args->ary)[i]);
+        args->result[i] = (gchar *)RVAL2CSTR(RARRAY_PTR(args->ary)[i]);
     args->result[args->n] = NULL;
 
     return Qnil;
@@ -354,7 +354,7 @@ rbg_rval2strv(volatile VALUE *value, long *n)
 
     args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
     args.n = RARRAY_LEN(args.ary);
-    args.result = g_new(const gchar *, args.n + 1);
+    args.result = g_new(gchar *, args.n + 1);
 
     rb_rescue(rbg_rval2strv_body, (VALUE)&args,
               rbg_rval2strv_rescue, (VALUE)&args);
