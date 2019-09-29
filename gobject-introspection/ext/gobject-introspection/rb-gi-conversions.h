@@ -39,9 +39,6 @@
                                 in_args, out_args, args_metadata)       \
     (rb_gi_return_argument_to_ruby((callable_info), (argument),         \
                                    (in_args), (out_args), (args_metadata)))
-#define RVAL2GI_VALUE_ARGUMENT(argument, type_info, rb_argument, self)  \
-    (rb_gi_value_argument_from_ruby((argument), (type_info),            \
-                                    (rb_argument), (self)))
 
 
 #define RVAL2GI_REGISTERED_TYPE_INFO(rb_object)			\
@@ -101,10 +98,6 @@ VALUE       rb_gi_return_argument_to_ruby     (GICallableInfo *callable_info,
                                                GArray         *in_args,
                                                GArray         *out_args,
                                                GPtrArray      *args_metadata);
-GIArgument *rb_gi_value_argument_from_ruby    (GIArgument     *argument,
-                                               GITypeInfo     *type_info,
-                                               VALUE           rb_argument,
-                                               VALUE           self);
 
 VALUE       rb_gi_array_type_to_ruby          (GIArrayType type);
 

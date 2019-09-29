@@ -22,6 +22,7 @@
 
 typedef struct {
     GICallableInfo *info;
+    const gchar *namespace;
     const gchar *name;
     VALUE rb_receiver;
     gpointer receiver_type_class;
@@ -33,12 +34,26 @@ typedef struct {
     GPtrArray *metadata;
 } RBGIArguments;
 
+typedef void (*RBGIArgFreeFunc)(RBGIArguments *args,
+                                RBGIArgMetadata *metadata,
+                                gpointer user_data);
+
+typedef struct {
+    GITypeInfo *info;
+    GITypeTag tag;
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    GType interface_gtype;
+} RBGIArgMetadataType;
+
 struct RBGIArgMetadata_ {
     GICallableInfo *callable_info;
     GIArgInfo arg_info;
     const gchar *name;
-    GITypeInfo type_info;
-    GITypeTag type_tag;
+    RBGIArgMetadataType type;
+    RBGIArgMetadataType element_type;
+    RBGIArgMetadataType key_type;
+    RBGIArgMetadataType value_type;
     GIScopeType scope_type;
     GIDirection direction;
     GITransfer transfer;
@@ -53,14 +68,6 @@ struct RBGIArgMetadata_ {
     gboolean caller_allocates_p;
     gboolean zero_terminated_p;
     GIArrayType array_type;
-    GITypeInfo *element_type_info;
-    GITypeTag element_type_tag;
-    GIBaseInfo *element_interface_info;
-    GIInfoType element_interface_type;
-    GType element_interface_gtype;
-    GIBaseInfo *interface_info;
-    GIInfoType interface_type;
-    GType interface_gtype;
     gint index;
     gint in_arg_index;
     gint closure_in_arg_index;
@@ -70,6 +77,11 @@ struct RBGIArgMetadata_ {
     gint array_length_arg_index;
     gint rb_arg_index;
     gint out_arg_index;
+    GIArgument *in_arg;
+    GIArgument *out_arg;
+    VALUE rb_arg;
+    RBGIArgFreeFunc free_func;
+    gpointer free_func_data;
 };
 
 G_GNUC_INTERNAL void

@@ -42,7 +42,6 @@ rb_gi_arguments_in_to_ruby(RBGIArguments *args)
     rb_in_args = rb_ary_new_capa(args->metadata->len);
     for (i = 0; i < args->metadata->len; i++) {
         RBGIArgMetadata *metadata;
-        GIArgument *argument;
         GITypeInfo *type_info;
         VALUE rb_arg;
 
@@ -55,12 +54,9 @@ rb_gi_arguments_in_to_ruby(RBGIArguments *args)
             continue;
         }
 
-        argument = &g_array_index(args->in_args,
-                                  GIArgument,
-                                  metadata->in_arg_index);
         type_info = g_arg_info_get_type(&(metadata->arg_info));
         /* TODO */
-        rb_arg = GI_ARGUMENT2RVAL(argument,
+        rb_arg = GI_ARGUMENT2RVAL(metadata->in_arg,
                                   FALSE,
                                   type_info,
                                   args->in_args,
@@ -123,7 +119,7 @@ rb_gi_ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
 
             i = args.metadata->len - 1;
             metadata = g_ptr_array_index(args.metadata, i);
-            if (metadata->type_tag == GI_TYPE_TAG_VOID &&
+            if (metadata->type.tag == GI_TYPE_TAG_VOID &&
                 metadata->pointer_p &&
                 strcmp(metadata->name, "data") == 0) {
                 callback_data = *((RBGICallbackData **)(raw_args[i]));
@@ -162,11 +158,9 @@ rb_gi_arguments_in_init_arg_ruby_callback(RBGIArguments *args,
     GIArgument *destroy_argument = NULL;
     RBGICallback *callback = NULL;
 
+    /* TODO: metadata->free_func = ...; */
     arg_info = &(metadata->arg_info);
-
-    callback_argument = &(g_array_index(args->in_args,
-                                        GIArgument,
-                                        metadata->in_arg_index));
+    callback_argument = metadata->in_arg;
     if (metadata->closure_in_arg_index != -1) {
         closure_argument = &(g_array_index(args->in_args,
                                            GIArgument,
@@ -216,126 +210,85 @@ rb_gi_arguments_in_init_arg_ruby_callback(RBGIArguments *args,
 }
 
 static void
-rb_gi_arguments_in_init_arg_ruby_transfer_interface(RBGIArguments *args,
-                                                    RBGIArgMetadata *metadata,
-                                                    VALUE rb_argument)
+rb_gi_arguments_in_init_arg_ruby_void(RBGIArguments *args,
+                                      RBGIArgMetadata *metadata)
 {
-    GIArgument *argument;
-    argument = &(g_array_index(args->in_args,
-                               GIArgument,
-                               metadata->in_arg_index));
-    switch (metadata->interface_type) {
-      case GI_INFO_TYPE_INVALID:
-      case GI_INFO_TYPE_FUNCTION:
-      case GI_INFO_TYPE_CALLBACK:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s transfer (interface)[%s][%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_info_type_to_string(metadata->interface_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
+    gpointer *target;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        target = ALLOC(gpointer);
+        metadata->in_arg->v_pointer = target;
+    } else {
+        target = &(metadata->in_arg->v_pointer);
+    }
+
+    if (!g_type_info_is_pointer(metadata->type.info)) {
+        *target = NULL;
+        return;
+    }
+
+    if (RB_TYPE_P(metadata->rb_arg, RUBY_T_STRING)) {
+        *target = RSTRING_PTR(metadata->rb_arg);
+    } else if (rbg_is_object(metadata->rb_arg)) {
+        *target = RVAL2GOBJ(metadata->rb_arg);
+    } else {
+        *target = GUINT_TO_POINTER(NUM2ULONG(metadata->rb_arg));
+    }
+}
+
+static void
+rb_gi_arguments_in_free_array_c_value(RBGIArguments *args,
+                                      RBGIArgMetadata *metadata,
+                                      gpointer user_data)
+{
+    gpointer target;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        target = *((gpointer *)(metadata->in_arg->v_pointer));
+        xfree(metadata->in_arg->v_pointer);
+    } else {
+        target = metadata->in_arg->v_pointer;
+    }
+
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        xfree(target);
         break;
-      case GI_INFO_TYPE_STRUCT:
-        rbgobj_boxed_unown(rb_argument);
-        break;
-      case GI_INFO_TYPE_BOXED:
-      case GI_INFO_TYPE_ENUM:
-      case GI_INFO_TYPE_FLAGS:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s transfer (interface)[%s][%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_info_type_to_string(metadata->interface_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_INFO_TYPE_OBJECT:
-        g_object_unref(argument->v_pointer);
-        break;
-      case GI_INFO_TYPE_INTERFACE:
-      case GI_INFO_TYPE_CONSTANT:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s transfer (interface)[%s][%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_info_type_to_string(metadata->interface_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_INFO_TYPE_INVALID_0:
-        g_assert_not_reached();
-        break;
-      case GI_INFO_TYPE_UNION:
-      case GI_INFO_TYPE_VALUE:
-      case GI_INFO_TYPE_SIGNAL:
-      case GI_INFO_TYPE_VFUNC:
-      case GI_INFO_TYPE_PROPERTY:
-      case GI_INFO_TYPE_FIELD:
-      case GI_INFO_TYPE_ARG:
-      case GI_INFO_TYPE_TYPE:
-      case GI_INFO_TYPE_UNRESOLVED:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s transfer (interface)[%s][%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_info_type_to_string(metadata->interface_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      default:
-        g_assert_not_reached();
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
         break;
     }
 }
 
 static void
-rb_gi_arguments_in_init_arg_ruby_transfer(RBGIArguments *args,
-                                          RBGIArgMetadata *metadata,
-                                          VALUE rb_argument)
+rb_gi_arguments_in_free_array_c_string(RBGIArguments *args,
+                                       RBGIArgMetadata *metadata,
+                                       gpointer user_data)
 {
-    if (metadata->transfer == GI_TRANSFER_NOTHING) {
-        return;
-    }
-
-    /* TODO */
     if (metadata->direction == GI_DIRECTION_INOUT) {
-        return;
+        xfree(metadata->in_arg->v_pointer);
+    }
+}
+
+static void
+rb_gi_arguments_in_free_array_c_strv(RBGIArguments *args,
+                                     RBGIArgMetadata *metadata,
+                                     gpointer user_data)
+{
+    gpointer target;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        target = *((gpointer *)(metadata->in_arg->v_pointer));
+        xfree(metadata->in_arg->v_pointer);
+    } else {
+        target = metadata->in_arg->v_pointer;
     }
 
-    switch (metadata->type_tag) {
-      case GI_TYPE_TAG_VOID:
-      case GI_TYPE_TAG_BOOLEAN:
-      case GI_TYPE_TAG_INT8:
-      case GI_TYPE_TAG_UINT8:
-      case GI_TYPE_TAG_INT16:
-      case GI_TYPE_TAG_UINT16:
-      case GI_TYPE_TAG_INT32:
-      case GI_TYPE_TAG_UINT32:
-      case GI_TYPE_TAG_INT64:
-      case GI_TYPE_TAG_UINT64:
-      case GI_TYPE_TAG_FLOAT:
-      case GI_TYPE_TAG_DOUBLE:
-      case GI_TYPE_TAG_GTYPE:
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        g_free(target);
         break;
-      case GI_TYPE_TAG_UTF8:
-      case GI_TYPE_TAG_FILENAME:
-      case GI_TYPE_TAG_ARRAY:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s transfer (%s)[%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_type_tag_to_string(metadata->type_tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
+      case GI_TRANSFER_CONTAINER:
+        g_free(target);
         break;
-      case GI_TYPE_TAG_INTERFACE:
-        rb_gi_arguments_in_init_arg_ruby_transfer_interface(args,
-                                                            metadata,
-                                                            rb_argument);
-        break;
-      case GI_TYPE_TAG_GLIST:
-      case GI_TYPE_TAG_GSLIST:
-      case GI_TYPE_TAG_GHASH:
-      case GI_TYPE_TAG_ERROR:
-      case GI_TYPE_TAG_UNICHAR:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s transfer (%s)[%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_type_tag_to_string(metadata->type_tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-      default:
-        g_assert_not_reached();
+      case GI_TRANSFER_EVERYTHING:
         break;
     }
 }
@@ -359,12 +312,12 @@ rb_gi_arguments_in_init_arg_ruby_array_set_length(RBGIArguments *args,
         g_ptr_array_index(args->metadata,
                           metadata->array_length_arg_index);
 
-    switch (length_metadata->type_tag) {
+    switch (length_metadata->type.tag) {
       case GI_TYPE_TAG_VOID:
       case GI_TYPE_TAG_BOOLEAN:
         rb_raise(rb_eNotImpError,
                  "TODO: invalid argument?: length[%s]",
-                 g_type_tag_to_string(length_metadata->type_tag));
+                 g_type_tag_to_string(length_metadata->type.tag));
         break;
       case GI_TYPE_TAG_INT8:
         if (metadata->direction == GI_DIRECTION_INOUT) {
@@ -444,7 +397,7 @@ rb_gi_arguments_in_init_arg_ruby_array_set_length(RBGIArguments *args,
       case GI_TYPE_TAG_UNICHAR:
         rb_raise(rb_eNotImpError,
                  "TODO: invalid argument?: length[%s]",
-                 g_type_tag_to_string(length_metadata->type_tag));
+                 g_type_tag_to_string(length_metadata->type.tag));
         break;
       default:
         g_assert_not_reached();
@@ -719,12 +672,35 @@ rb_gi_arguments_in_init_arg_ruby_array_c_gtype(RBGIArguments *args,
 }
 
 static void
+rb_gi_arguments_in_free_array_c_interface_struct(RBGIArguments *args,
+                                                 RBGIArgMetadata *metadata,
+                                                 gpointer user_data)
+{
+    gpointer target;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        target = *((gpointer *)(metadata->in_arg->v_pointer));
+        xfree(metadata->in_arg->v_pointer);
+    } else {
+        target = metadata->in_arg->v_pointer;
+    }
+
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        xfree(target);
+        break;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
+        break;
+    }
+}
+
+static void
 rb_gi_arguments_in_init_arg_ruby_array_c_interface_struct(RBGIArguments *args,
                                                           RBGIArgMetadata *metadata,
                                                           VALUE rb_array)
 {
     GIStructInfo *struct_info =
-        (GIStructInfo *)(metadata->element_interface_info);
+        (GIStructInfo *)(metadata->element_type.interface_info);
     guint8 *raw_array;
     gsize struct_size;
     long i, n_elements;
@@ -745,6 +721,38 @@ rb_gi_arguments_in_init_arg_ruby_array_c_interface_struct(RBGIArguments *args,
                                                      metadata,
                                                      rb_array,
                                                      raw_array);
+    metadata->free_func = rb_gi_arguments_in_free_array_c_interface_struct;
+}
+
+static void
+rb_gi_arguments_in_free_array_c_interface_object(RBGIArguments *args,
+                                                 RBGIArgMetadata *metadata,
+                                                 gpointer user_data)
+{
+    gpointer target;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        target = *((gpointer *)(metadata->in_arg->v_pointer));
+        xfree(metadata->in_arg->v_pointer);
+    } else {
+        target = metadata->in_arg->v_pointer;
+    }
+
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        xfree(target);
+        break;
+      case GI_TRANSFER_CONTAINER:
+        /* raw_array.each(&:unref)? */
+        rb_raise(rb_eNotImpError,
+                 "TODO: %s Ruby -> GIArgument(array/%s)[interface(%s)](%s)",
+                 rb_gi_direction_to_string(metadata->direction),
+                 rb_gi_array_type_to_string(metadata->array_type),
+                 g_info_type_to_string(metadata->element_type.interface_type),
+                 g_type_name(metadata->element_type.interface_gtype));
+        break;
+      case GI_TRANSFER_EVERYTHING:
+        break;
+    }
 }
 
 static void
@@ -773,6 +781,7 @@ rb_gi_arguments_in_init_arg_ruby_array_c_interface_object(RBGIArguments *args,
                                                      metadata,
                                                      rb_array,
                                                      raw_array);
+    metadata->free_func = rb_gi_arguments_in_free_array_c_interface_object;
 }
 
 static void
@@ -780,7 +789,7 @@ rb_gi_arguments_in_init_arg_ruby_array_c_interface(RBGIArguments *args,
                                                    RBGIArgMetadata *metadata,
                                                    VALUE rb_array)
 {
-    switch (metadata->element_interface_type) {
+    switch (metadata->element_type.interface_type) {
       case GI_INFO_TYPE_INVALID:
       case GI_INFO_TYPE_FUNCTION:
       case GI_INFO_TYPE_CALLBACK:
@@ -788,8 +797,8 @@ rb_gi_arguments_in_init_arg_ruby_array_c_interface(RBGIArguments *args,
                  "TODO: %s Ruby -> GIArgument(array/%s)[interface(%s)](%s)",
                  rb_gi_direction_to_string(metadata->direction),
                  rb_gi_array_type_to_string(metadata->array_type),
-                 g_info_type_to_string(metadata->element_interface_type),
-                 g_type_name(metadata->element_interface_gtype));
+                 g_info_type_to_string(metadata->element_type.interface_type),
+                 g_type_name(metadata->element_type.interface_gtype));
         break;
       case GI_INFO_TYPE_STRUCT:
         rb_gi_arguments_in_init_arg_ruby_array_c_interface_struct(args,
@@ -803,8 +812,8 @@ rb_gi_arguments_in_init_arg_ruby_array_c_interface(RBGIArguments *args,
                  "TODO: %s Ruby -> GIArgument(array/%s)[interface(%s)](%s)",
                  rb_gi_direction_to_string(metadata->direction),
                  rb_gi_array_type_to_string(metadata->array_type),
-                 g_info_type_to_string(metadata->element_interface_type),
-                 g_type_name(metadata->element_interface_gtype));
+                 g_info_type_to_string(metadata->element_type.interface_type),
+                 g_type_name(metadata->element_type.interface_gtype));
         break;
       case GI_INFO_TYPE_OBJECT:
         rb_gi_arguments_in_init_arg_ruby_array_c_interface_object(args,
@@ -827,8 +836,8 @@ rb_gi_arguments_in_init_arg_ruby_array_c_interface(RBGIArguments *args,
                  "TODO: %s Ruby -> GIArgument(array/%s)[interface(%s)](%s)",
                  rb_gi_direction_to_string(metadata->direction),
                  rb_gi_array_type_to_string(metadata->array_type),
-                 g_info_type_to_string(metadata->element_interface_type),
-                 g_type_name(metadata->element_interface_gtype));
+                 g_info_type_to_string(metadata->element_type.interface_type),
+                 g_type_name(metadata->element_type.interface_gtype));
         break;
       default:
         g_assert_not_reached();
@@ -838,117 +847,129 @@ rb_gi_arguments_in_init_arg_ruby_array_c_interface(RBGIArguments *args,
 
 static void
 rb_gi_arguments_in_init_arg_ruby_array_c(RBGIArguments *args,
-                                         RBGIArgMetadata *metadata,
-                                         VALUE rb_argument)
+                                         RBGIArgMetadata *metadata)
 {
-    GIArgument *array_argument;
-    array_argument = &(g_array_index(args->in_args,
-                                     GIArgument,
-                                     metadata->in_arg_index));
-    switch (metadata->element_type_tag) {
+    VALUE rb_arg = metadata->rb_arg;
+
+    metadata->free_func = rb_gi_arguments_in_free_array_c_value;
+    switch (metadata->element_type.tag) {
       case GI_TYPE_TAG_VOID:
         rb_raise(rb_eNotImpError,
-                 "TODO: %s Ruby -> GIArgument(array/%s)[%s][%s]",
+                 "TODO: [%s] %s Ruby -> GIArgument(array/%s)[%s][%s]",
+                 metadata->name,
                  rb_gi_direction_to_string(metadata->direction),
                  rb_gi_array_type_to_string(metadata->array_type),
-                 g_type_tag_to_string(metadata->element_type_tag),
+                 g_type_tag_to_string(metadata->element_type.tag),
                  rb_gi_transfer_to_string(metadata->transfer));
         break;
       case GI_TYPE_TAG_BOOLEAN:
-        rb_argument = rbg_to_array(rb_argument);
+        rb_arg = rbg_to_array(rb_arg);
         rb_gi_arguments_in_init_arg_ruby_array_c_boolean(args,
                                                          metadata,
-                                                         rb_argument);
+                                                         rb_arg);
         break;
       case GI_TYPE_TAG_INT8:
       case GI_TYPE_TAG_UINT8:
-        if (RB_TYPE_P(rb_argument, RUBY_T_STRING)) {
-            gchar *raw_array = RSTRING_PTR(rb_argument);
-            gsize length = RSTRING_LEN(rb_argument);
+        if (RB_TYPE_P(rb_arg, RUBY_T_STRING)) {
+            gchar *raw_array = RSTRING_PTR(rb_arg);
+            gsize length = RSTRING_LEN(rb_arg);
+            if (metadata->transfer != GI_TRANSFER_NOTHING) {
+                rb_raise(rb_eNotImpError,
+                         "TODO: [%s] %s Ruby -> GIArgument(array/%s)[%s][%s]",
+                         metadata->name,
+                         rb_gi_direction_to_string(metadata->direction),
+                         rb_gi_array_type_to_string(metadata->array_type),
+                         g_type_tag_to_string(metadata->element_type.tag),
+                         rb_gi_transfer_to_string(metadata->transfer));
+            }
             if (metadata->direction == GI_DIRECTION_INOUT) {
-                array_argument->v_pointer = ALLOC(gpointer);
-                *((gpointer *)(array_argument->v_pointer)) = raw_array;
+                metadata->in_arg->v_pointer = ALLOC(gpointer);
+                *((gpointer *)(metadata->in_arg->v_pointer)) = raw_array;
             } else {
-                array_argument->v_pointer = raw_array;
+                metadata->in_arg->v_pointer = raw_array;
             }
             rb_gi_arguments_in_init_arg_ruby_array_set_length(args,
                                                               metadata,
                                                               length);
+            metadata->free_func = rb_gi_arguments_in_free_array_c_string;
         } else {
-            rb_argument = rbg_to_array(rb_argument);
-            if (metadata->element_type_tag == GI_TYPE_TAG_INT8) {
+            rb_arg = rbg_to_array(rb_arg);
+            if (metadata->element_type.tag == GI_TYPE_TAG_INT8) {
                 rb_gi_arguments_in_init_arg_ruby_array_c_int8(args,
                                                               metadata,
-                                                              rb_argument);
+                                                              rb_arg);
             } else {
                 rb_gi_arguments_in_init_arg_ruby_array_c_uint8(args,
                                                                metadata,
-                                                               rb_argument);
+                                                               rb_arg);
             }
         }
         break;
       case GI_TYPE_TAG_INT16:
-        rb_argument = rbg_to_array(rb_argument);
+        rb_arg = rbg_to_array(rb_arg);
         rb_gi_arguments_in_init_arg_ruby_array_c_int16(args,
                                                        metadata,
-                                                       rb_argument);
+                                                       rb_arg);
         break;
       case GI_TYPE_TAG_UINT16:
-        rb_argument = rbg_to_array(rb_argument);
+        rb_arg = rbg_to_array(rb_arg);
         rb_gi_arguments_in_init_arg_ruby_array_c_uint16(args,
                                                         metadata,
-                                                        rb_argument);
+                                                        rb_arg);
         break;
       case GI_TYPE_TAG_INT32:
-        rb_argument = rbg_to_array(rb_argument);
+        rb_arg = rbg_to_array(rb_arg);
         rb_gi_arguments_in_init_arg_ruby_array_c_int32(args,
                                                        metadata,
-                                                       rb_argument);
+                                                       rb_arg);
         break;
       case GI_TYPE_TAG_UINT32:
-        rb_argument = rbg_to_array(rb_argument);
+        rb_arg = rbg_to_array(rb_arg);
         rb_gi_arguments_in_init_arg_ruby_array_c_uint32(args,
                                                         metadata,
-                                                        rb_argument);
+                                                        rb_arg);
         break;
       case GI_TYPE_TAG_INT64:
-        rb_argument = rbg_to_array(rb_argument);
+        rb_arg = rbg_to_array(rb_arg);
         rb_gi_arguments_in_init_arg_ruby_array_c_int64(args,
                                                        metadata,
-                                                       rb_argument);
+                                                       rb_arg);
         break;
       case GI_TYPE_TAG_UINT64:
-        rb_argument = rbg_to_array(rb_argument);
+        rb_arg = rbg_to_array(rb_arg);
         rb_gi_arguments_in_init_arg_ruby_array_c_uint64(args,
                                                         metadata,
-                                                        rb_argument);
+                                                        rb_arg);
         break;
       case GI_TYPE_TAG_FLOAT:
-        rb_argument = rbg_to_array(rb_argument);
+        rb_arg = rbg_to_array(rb_arg);
         rb_gi_arguments_in_init_arg_ruby_array_c_float(args,
                                                        metadata,
-                                                       rb_argument);
+                                                       rb_arg);
         break;
       case GI_TYPE_TAG_DOUBLE:
-        rb_argument = rbg_to_array(rb_argument);
+        rb_arg = rbg_to_array(rb_arg);
         rb_gi_arguments_in_init_arg_ruby_array_c_double(args,
                                                         metadata,
-                                                        rb_argument);
+                                                        rb_arg);
         break;
       case GI_TYPE_TAG_GTYPE:
-        rb_argument = rbg_to_array(rb_argument);
+        rb_arg = rbg_to_array(rb_arg);
         rb_gi_arguments_in_init_arg_ruby_array_c_gtype(args,
                                                        metadata,
-                                                       rb_argument);
+                                                       rb_arg);
         break;
       case GI_TYPE_TAG_UTF8:
-      case GI_TYPE_TAG_FILENAME:
         {
-            const gchar **raw_array;
-            gsize length;
-            rb_argument = rbg_to_array(rb_argument);
-            raw_array = RVAL2STRV(rb_argument);
-            length = RARRAY_LEN(rb_argument);
+            GIArgument *array_argument = metadata->in_arg;
+            gchar **raw_array;
+            long length;
+            rb_arg = rbg_to_array(rb_arg);
+            if (metadata->transfer == GI_TRANSFER_EVERYTHING) {
+                raw_array = rbg_rval2strv_dup(&rb_arg, &length);
+            } else {
+                raw_array = rbg_rval2strv(&rb_arg, &length);
+            }
             if (metadata->direction == GI_DIRECTION_INOUT) {
                 array_argument->v_pointer = ALLOC(gpointer);
                 *((gpointer *)(array_argument->v_pointer)) = raw_array;
@@ -958,20 +979,25 @@ rb_gi_arguments_in_init_arg_ruby_array_c(RBGIArguments *args,
             rb_gi_arguments_in_init_arg_ruby_array_set_length(args,
                                                               metadata,
                                                               length);
+            metadata->free_func = rb_gi_arguments_in_free_array_c_strv;
         }
         break;
+      case GI_TYPE_TAG_FILENAME:
       case GI_TYPE_TAG_ARRAY:
         rb_raise(rb_eNotImpError,
-                 "TODO: %s Ruby -> GIArgument(array/%s)[%s]",
+                 "TODO: [%s::%s](%s) %s Ruby -> GIArgument(array/%s)[%s]",
+                 args->namespace,
+                 args->name,
+                 metadata->name,
                  rb_gi_direction_to_string(metadata->direction),
                  rb_gi_array_type_to_string(metadata->array_type),
-                 g_type_tag_to_string(metadata->element_type_tag));
+                 g_type_tag_to_string(metadata->element_type.tag));
         break;
       case GI_TYPE_TAG_INTERFACE:
-        rb_argument = rbg_to_array(rb_argument);
+        rb_arg = rbg_to_array(rb_arg);
         rb_gi_arguments_in_init_arg_ruby_array_c_interface(args,
                                                            metadata,
-                                                           rb_argument);
+                                                           rb_arg);
         break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
@@ -982,7 +1008,7 @@ rb_gi_arguments_in_init_arg_ruby_array_c(RBGIArguments *args,
                  "TODO: %s Ruby -> GIArgument(array/%s)[%s][%s]",
                  rb_gi_direction_to_string(metadata->direction),
                  rb_gi_array_type_to_string(metadata->array_type),
-                 g_type_tag_to_string(metadata->element_type_tag),
+                 g_type_tag_to_string(metadata->element_type.tag),
                  rb_gi_transfer_to_string(metadata->transfer));
         break;
       default:
@@ -995,16 +1021,8 @@ static void
 rb_gi_arguments_in_init_arg_ruby_array(RBGIArguments *args,
                                        RBGIArgMetadata *metadata)
 {
-    VALUE rb_argument = Qnil;
-
-    if (RARRAY_LEN(args->rb_args) > metadata->rb_arg_index) {
-        rb_argument = RARRAY_AREF(args->rb_args, metadata->rb_arg_index);
-    }
-    if (NIL_P(rb_argument) && metadata->may_be_null_p) {
-        GIArgument *array_argument = &(g_array_index(args->in_args,
-                                                     GIArgument,
-                                                     metadata->in_arg_index));
-        memset(array_argument, 0, sizeof(GIArgument));
+    if (NIL_P(metadata->rb_arg) && metadata->may_be_null_p) {
+        memset(metadata->in_arg, 0, sizeof(GIArgument));
         if (metadata->array_length_in_arg_index != -1) {
             GIArgument *length_argument =
                 &(g_array_index(args->in_args,
@@ -1017,7 +1035,7 @@ rb_gi_arguments_in_init_arg_ruby_array(RBGIArguments *args,
 
     switch (metadata->array_type) {
       case GI_ARRAY_TYPE_C:
-        rb_gi_arguments_in_init_arg_ruby_array_c(args, metadata, rb_argument);
+        rb_gi_arguments_in_init_arg_ruby_array_c(args, metadata);
         break;
       case GI_ARRAY_TYPE_ARRAY:
       case GI_ARRAY_TYPE_PTR_ARRAY:
@@ -1026,175 +1044,707 @@ rb_gi_arguments_in_init_arg_ruby_array(RBGIArguments *args,
                  "TODO: %s Ruby -> GIArgument(array/%s)[%s][%s]",
                  rb_gi_direction_to_string(metadata->direction),
                  rb_gi_array_type_to_string(metadata->array_type),
-                 g_type_tag_to_string(metadata->element_type_tag),
+                 g_type_tag_to_string(metadata->element_type.tag),
                  rb_gi_transfer_to_string(metadata->transfer));
         break;
       default:
         g_assert_not_reached();
         break;
     }
-    rb_gi_arguments_in_init_arg_ruby_transfer(args,
-                                              metadata,
-                                              rb_argument);
 }
 
 static void
-rb_gi_arguments_in_init_arg_ruby_scalar_inout(RBGIArguments *args,
-                                              RBGIArgMetadata *metadata,
-                                              VALUE rb_argument)
+rb_gi_arguments_in_free_default(RBGIArguments *args,
+                                RBGIArgMetadata *metadata,
+                                gpointer user_data)
 {
-    GIArgument *argument;
-    GIArgument in_argument;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        xfree(metadata->in_arg->v_pointer);
+    }
+}
 
-    argument = &(g_array_index(args->in_args,
-                               GIArgument,
-                               metadata->in_arg_index));
-    rb_gi_value_argument_from_ruby(&in_argument,
-                                   &(metadata->type_info),
-                                   rb_argument,
-                                   args->rb_receiver);
+static void
+rb_gi_arguments_in_free_filename(RBGIArguments *args,
+                                 RBGIArgMetadata *metadata,
+                                 gpointer user_data)
+{
+    gchar *target;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        target = *((gchar **)(metadata->in_arg->v_pointer));
+        xfree(metadata->in_arg->v_pointer);
+    } else {
+        target = metadata->in_arg->v_string;
+    }
 
-    switch (metadata->type_tag) {
-    case GI_TYPE_TAG_VOID:
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        g_free(target);
         break;
-    case GI_TYPE_TAG_BOOLEAN:
-        argument->v_pointer = ALLOC(gboolean);
-        *((gboolean *)argument->v_pointer) = in_argument.v_boolean;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
         break;
-    case GI_TYPE_TAG_INT8:
-        argument->v_pointer = ALLOC(gint8);
-        *((gint8 *)argument->v_pointer) = in_argument.v_int8;
+    }
+}
+
+static void
+rb_gi_arguments_in_free_interface_struct(RBGIArguments *args,
+                                         RBGIArgMetadata *metadata,
+                                         gpointer user_data)
+{
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        xfree(metadata->in_arg->v_pointer);
+    }
+
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
         break;
-    case GI_TYPE_TAG_UINT8:
-        argument->v_pointer = ALLOC(guint8);
-        *((guint8 *)argument->v_pointer) = in_argument.v_uint8;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
+        if (metadata->type.interface_gtype == G_TYPE_NONE) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: [%s] free %s "
+                     "Ruby -> GIArgument(interface)[%s][%s][%s]",
+                     metadata->name,
+                     rb_gi_direction_to_string(metadata->direction),
+                     g_info_type_to_string(metadata->type.interface_type),
+                     g_type_name(metadata->type.interface_gtype),
+                     rb_gi_transfer_to_string(metadata->transfer));
+        }
+        rbgobj_boxed_unown(metadata->rb_arg);
         break;
-    case GI_TYPE_TAG_INT16:
-        argument->v_pointer = ALLOC(gint16);
-        *((gint16 *)argument->v_pointer) = in_argument.v_int16;
+    }
+}
+
+static void
+rb_gi_arguments_in_free_interface_struct_gvalue(RBGIArguments *args,
+                                                RBGIArgMetadata *metadata,
+                                                gpointer user_data)
+{
+    GValue *target;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        target = *((GValue **)(metadata->in_arg->v_pointer));
+        xfree(metadata->in_arg->v_pointer);
+    } else {
+        target = metadata->in_arg->v_pointer;
+    }
+
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        g_value_unset(target);
+        xfree(target);
         break;
-    case GI_TYPE_TAG_UINT16:
-        argument->v_pointer = ALLOC(guint16);
-        *((guint16 *)argument->v_pointer) = in_argument.v_uint16;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
         break;
-    case GI_TYPE_TAG_INT32:
-        argument->v_pointer = ALLOC(gint32);
-        *((gint32 *)argument->v_pointer) = in_argument.v_int32;
+    }
+}
+
+static void
+rb_gi_arguments_in_free_interface_struct_gbytes(RBGIArguments *args,
+                                                RBGIArgMetadata *metadata,
+                                                gpointer user_data)
+{
+    GBytes *target;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        target = *((GBytes **)(metadata->in_arg->v_pointer));
+        xfree(metadata->in_arg->v_pointer);
+    } else {
+        target = metadata->in_arg->v_pointer;
+    }
+
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        g_bytes_unref(target);
         break;
-    case GI_TYPE_TAG_UINT32:
-        argument->v_pointer = ALLOC(guint32);
-        *((guint32 *)argument->v_pointer) = in_argument.v_uint32;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
         break;
-    case GI_TYPE_TAG_INT64:
-        argument->v_pointer = ALLOC(gint64);
-        *((gint64 *)argument->v_pointer) = in_argument.v_int64;
+    }
+}
+
+static void
+rb_gi_arguments_in_free_interface_object(RBGIArguments *args,
+                                         RBGIArgMetadata *metadata,
+                                         gpointer user_data)
+{
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        xfree(metadata->in_arg->v_pointer);
+    }
+
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
         break;
-    case GI_TYPE_TAG_UINT64:
-        argument->v_pointer = ALLOC(guint64);
-        *((guint64 *)argument->v_pointer) = in_argument.v_uint64;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
         break;
-    case GI_TYPE_TAG_FLOAT:
-        argument->v_pointer = ALLOC(gfloat);
-        *((gfloat *)argument->v_pointer) = in_argument.v_float;
-        break;
-    case GI_TYPE_TAG_DOUBLE:
-        argument->v_pointer = ALLOC(gdouble);
-        *((gdouble *)argument->v_pointer) = in_argument.v_double;
-        break;
-    case GI_TYPE_TAG_GTYPE:
-        argument->v_pointer = ALLOC(gsize);
-        *((gsize *)argument->v_pointer) = in_argument.v_size;
-        break;
-    case GI_TYPE_TAG_UTF8:
-    case GI_TYPE_TAG_FILENAME:
-        argument->v_pointer = ALLOC(gchar *);
-        *((gchar **)argument->v_pointer) = in_argument.v_string;
-        break;
-    case GI_TYPE_TAG_ARRAY:
+    }
+}
+
+static void
+rb_gi_arguments_in_init_arg_ruby_interface(RBGIArguments *args,
+                                           RBGIArgMetadata *metadata)
+{
+    switch (metadata->type.interface_type) {
+      case GI_INFO_TYPE_INVALID:
+      case GI_INFO_TYPE_FUNCTION:
+      case GI_INFO_TYPE_CALLBACK:
         rb_raise(rb_eNotImpError,
-                 "should not be reached: Ruby -> GIArgument(%s)[%s]",
-                 g_type_tag_to_string(metadata->type_tag),
+                 "TODO: [%s] %s Ruby -> GIArgument(interface)[%s][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_info_type_to_string(metadata->type.interface_type),
                  rb_gi_transfer_to_string(metadata->transfer));
         break;
-    case GI_TYPE_TAG_INTERFACE:
-    case GI_TYPE_TAG_GLIST:
-    case GI_TYPE_TAG_GSLIST:
-    case GI_TYPE_TAG_GHASH:
-        argument->v_pointer = ALLOC(gpointer);
-        *((gpointer *)argument->v_pointer) = in_argument.v_pointer;
+      case GI_INFO_TYPE_STRUCT:
+        if (metadata->transfer != GI_TRANSFER_NOTHING) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: [%s] %s Ruby -> GIArgument(interface)[%s][%s][%s]",
+                     metadata->name,
+                     rb_gi_direction_to_string(metadata->direction),
+                     g_info_type_to_string(metadata->type.interface_type),
+                     g_type_name(metadata->type.interface_gtype),
+                     rb_gi_transfer_to_string(metadata->transfer));
+        }
+        metadata->free_func = rb_gi_arguments_in_free_interface_struct;
+        if (metadata->type.interface_gtype == G_TYPE_VALUE) {
+            GValue *gvalue;
+            if (rbg_is_value(metadata->rb_arg)) {
+                gvalue = RVAL2BOXED(metadata->rb_arg, G_TYPE_VALUE);
+            } else {
+                gvalue = ALLOC(GValue);
+                memset(gvalue, 0, sizeof(GValue));
+                rbgobj_initialize_gvalue(gvalue, metadata->rb_arg);
+                metadata->free_func =
+                    rb_gi_arguments_in_free_interface_struct_gvalue;
+            }
+            metadata->in_arg->v_pointer = gvalue;
+        } else if (metadata->type.interface_gtype == G_TYPE_BYTES) {
+            if (rbg_is_bytes(metadata->rb_arg)) {
+                metadata->in_arg->v_pointer =
+                    RVAL2BOXED(metadata->rb_arg, G_TYPE_BYTES);
+            } else {
+                VALUE rb_string;
+                GBytes *gbytes;
+
+                rb_string = StringValue(metadata->rb_arg);
+                gbytes = g_bytes_new(RSTRING_PTR(rb_string),
+                                     RSTRING_LEN(rb_string));
+                metadata->in_arg->v_pointer = gbytes;
+                metadata->free_func =
+                    rb_gi_arguments_in_free_interface_struct_gbytes;
+            }
+        } else if (metadata->type.interface_gtype == G_TYPE_CLOSURE) {
+            GClosure *rclosure = NULL;
+
+            rclosure = g_rclosure_new(metadata->rb_arg, Qnil, NULL);
+            g_rclosure_attach(rclosure, args->rb_receiver);
+            metadata->in_arg->v_pointer = rclosure;
+        } else {
+            metadata->in_arg->v_pointer =
+                rb_gi_struct_get_raw(metadata->rb_arg,
+                                     metadata->type.interface_gtype);
+        }
         break;
-    case GI_TYPE_TAG_ERROR:
-        argument->v_pointer = ALLOC(GError *);
-        *((GError **)argument->v_pointer) = in_argument.v_pointer;
+      case GI_INFO_TYPE_BOXED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s Ruby -> GIArgument(interface)[%s][%s][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_info_type_to_string(metadata->type.interface_type),
+                 g_type_name(metadata->type.interface_gtype),
+                 rb_gi_transfer_to_string(metadata->transfer));
         break;
-    case GI_TYPE_TAG_UNICHAR:
-        argument->v_pointer = ALLOC(gunichar);
-        *((gunichar *)argument->v_pointer) = in_argument.v_uint32;
+      case GI_INFO_TYPE_ENUM:
+        if (metadata->type.interface_gtype == G_TYPE_NONE) {
+            metadata->in_arg->v_int32 = NUM2INT(metadata->rb_arg);
+        } else {
+            metadata->in_arg->v_int32 =
+                RVAL2GENUM(metadata->rb_arg, metadata->type.interface_gtype);
+        }
         break;
-    default:
+      case GI_INFO_TYPE_FLAGS:
+        if (metadata->type.interface_gtype == G_TYPE_NONE) {
+            metadata->in_arg->v_int32 = NUM2INT(metadata->rb_arg);
+        } else {
+            metadata->in_arg->v_int32 =
+                RVAL2GFLAGS(metadata->rb_arg, metadata->type.interface_gtype);
+        }
+        break;
+      case GI_INFO_TYPE_OBJECT:
+      case GI_INFO_TYPE_INTERFACE:
+        metadata->in_arg->v_pointer = RVAL2GOBJ(metadata->rb_arg);
+        if (metadata->in_arg->v_pointer &&
+            metadata->type.interface_gtype != G_TYPE_NONE &&
+            !G_TYPE_CHECK_INSTANCE_TYPE(metadata->in_arg->v_pointer,
+                                        metadata->type.interface_gtype)) {
+            rb_raise(rb_eArgError,
+                     "must be <%s> object: <%" PRIsVALUE ">",
+                     g_type_name(metadata->type.interface_gtype),
+                     metadata->rb_arg);
+        }
+        if (metadata->in_arg->v_pointer &&
+            metadata->transfer != GI_TRANSFER_NOTHING) {
+            g_object_ref(metadata->in_arg->v_pointer);
+        }
+        metadata->free_func = rb_gi_arguments_in_free_interface_object;
+        break;
+      case GI_INFO_TYPE_CONSTANT:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s][%s](%s) %s "
+                 "Ruby -> GIArgument(interface)[%s][%s][%s]",
+                 args->namespace,
+                 args->name,
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_info_type_to_string(metadata->type.interface_type),
+                 g_type_name(metadata->type.interface_gtype),
+                 rb_gi_transfer_to_string(metadata->transfer));
+        break;
+      case GI_INFO_TYPE_INVALID_0:
         g_assert_not_reached();
         break;
-    }
-}
-
-static void
-rb_gi_arguments_in_init_arg_ruby_scalar(RBGIArguments *args,
-                                        RBGIArgMetadata *metadata)
-{
-    GIArgument *argument;
-    VALUE rb_argument = Qnil;
-
-    argument = &(g_array_index(args->in_args,
-                               GIArgument,
-                               metadata->in_arg_index));
-    if (RARRAY_LEN(args->rb_args) > metadata->rb_arg_index) {
-        rb_argument = RARRAY_AREF(args->rb_args, metadata->rb_arg_index);
-    }
-
-    if (NIL_P(rb_argument)) {
-        if (metadata->may_be_null_p) {
-            memset(argument, 0, sizeof(GIArgument));
-            return;
-        } else {
-            GIBaseInfo *klass;
-            const char *suffix;
-
-            klass = g_base_info_get_container(args->info);
-            if (metadata->rb_arg_index == 1) {
-                suffix = "st";
-            } else if (metadata->rb_arg_index == 2) {
-                suffix = "nd";
-            } else if (metadata->rb_arg_index == 3) {
-                suffix = "rd";
-            } else {
-                suffix = "th";
-            }
-            rb_raise(rb_eArgError,
-                     "<%s%s%s%s%s>: the %u%s argument must not nil: <%s>",
-                     g_base_info_get_namespace(args->info),
-                     klass ? "::" : "",
-                     klass ? g_base_info_get_name(klass) : "",
-                     klass ? "#" : ".",
-                     g_base_info_get_name(args->info),
-                     metadata->rb_arg_index,
-                     suffix,
-                     metadata->name);
+      case GI_INFO_TYPE_UNION:
+        if (metadata->transfer != GI_TRANSFER_NOTHING) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: [%s] %s Ruby -> GIArgument(interface)[%s][%s][%s]",
+                     metadata->name,
+                     rb_gi_direction_to_string(metadata->direction),
+                     g_info_type_to_string(metadata->type.interface_type),
+                     g_type_name(metadata->type.interface_gtype),
+                     rb_gi_transfer_to_string(metadata->transfer));
         }
+        if (metadata->type.interface_gtype == G_TYPE_NONE) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: [%s] %s Ruby -> GIArgument(interface)[%s][%s][%s]",
+                     metadata->name,
+                     rb_gi_direction_to_string(metadata->direction),
+                     g_info_type_to_string(metadata->type.interface_type),
+                     g_type_name(metadata->type.interface_gtype),
+                     rb_gi_transfer_to_string(metadata->transfer));
+        } else {
+            metadata->in_arg->v_pointer =
+                RVAL2BOXED(metadata->rb_arg, metadata->type.interface_gtype);
+        }
+        break;
+      case GI_INFO_TYPE_VALUE:
+      case GI_INFO_TYPE_SIGNAL:
+      case GI_INFO_TYPE_VFUNC:
+      case GI_INFO_TYPE_PROPERTY:
+      case GI_INFO_TYPE_FIELD:
+      case GI_INFO_TYPE_ARG:
+      case GI_INFO_TYPE_TYPE:
+      case GI_INFO_TYPE_UNRESOLVED:
+      default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s Ruby -> GIArgument(interface)[%s][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_info_type_to_string(metadata->type.interface_type),
+                 rb_gi_transfer_to_string(metadata->transfer));
+        break;
     }
 
     if (metadata->direction == GI_DIRECTION_INOUT) {
-        rb_gi_arguments_in_init_arg_ruby_scalar_inout(args,
-                                                      metadata,
-                                                      rb_argument);
-    } else {
-        rb_gi_value_argument_from_ruby(argument,
-                                       &(metadata->type_info),
-                                       rb_argument,
-                                       args->rb_receiver);
-        rb_gi_arguments_in_init_arg_ruby_transfer(args,
-                                                  metadata,
-                                                  rb_argument);
+        gpointer target = metadata->in_arg->v_pointer;
+        metadata->in_arg->v_pointer = ALLOC(gpointer);
+        *((gpointer *)(metadata->in_arg->v_pointer)) = target;
     }
+}
+
+static void
+rb_gi_arguments_in_free_list(RBGIArguments *args,
+                             RBGIArgMetadata *metadata,
+                             gpointer user_data)
+{
+    gpointer target;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        target = *((gpointer *)(metadata->in_arg->v_pointer));
+        xfree(metadata->in_arg->v_pointer);
+    } else {
+        target = metadata->in_arg->v_pointer;
+    }
+
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        if (metadata->type.tag == GI_TYPE_TAG_GLIST) {
+            g_list_free(target);
+        } else {
+            g_slist_free(target);
+        }
+        break;
+      case GI_TRANSFER_CONTAINER:
+        break;
+      default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] free %s "
+                 "Ruby -> GIArgument(%s)[%s][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 g_type_tag_to_string(metadata->element_type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+        break;
+    }
+}
+
+static void
+rb_gi_arguments_in_init_arg_ruby_list(RBGIArguments *args,
+                                      RBGIArgMetadata *metadata)
+{
+    GType gtype = metadata->element_type.interface_gtype;
+
+    metadata->free_func = rb_gi_arguments_in_free_list;
+    switch (metadata->element_type.tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s Ruby -> GIArgument(%s)[%s][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 g_type_tag_to_string(metadata->element_type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+        break;
+      case GI_TYPE_TAG_INTERFACE:
+        if (metadata->type.tag == GI_TYPE_TAG_GLIST) {
+            metadata->in_arg->v_pointer = RVAL2GOBJGLIST(metadata->rb_arg);
+        } else {
+            metadata->in_arg->v_pointer = RVAL2GOBJGSLIST(metadata->rb_arg);
+        }
+        if (gtype != G_TYPE_NONE) {
+            if (metadata->type.tag == GI_TYPE_TAG_GLIST) {
+                GList *node;
+                for (node = metadata->in_arg->v_pointer;
+                     node;
+                     node = g_list_next(node)) {
+                    GObject *object = node->data;
+                    if (!G_TYPE_CHECK_INSTANCE_TYPE(object, gtype)) {
+                        g_list_free(metadata->in_arg->v_pointer);
+                        rb_raise(rb_eArgError,
+                                 "must be <%s> objects: <%" PRIsVALUE ">",
+                                 g_type_name(gtype),
+                                 metadata->rb_arg);
+                    }
+                }
+            } else {
+                GSList *node;
+                for (node = metadata->in_arg->v_pointer;
+                     node;
+                     node = g_slist_next(node)) {
+                    GObject *object = node->data;
+                    if (!G_TYPE_CHECK_INSTANCE_TYPE(object, gtype)) {
+                        g_slist_free(metadata->in_arg->v_pointer);
+                        rb_raise(rb_eArgError,
+                                 "must be <%s> objects: <%" PRIsVALUE ">",
+                                 g_type_name(gtype),
+                                 metadata->rb_arg);
+                    }
+                }
+            }
+        }
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s Ruby -> GIArgument(%s)[%s][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 g_type_tag_to_string(metadata->element_type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        gpointer target = metadata->in_arg->v_pointer;
+        metadata->in_arg->v_pointer = ALLOC(gpointer);
+        *((gpointer *)(metadata->in_arg->v_pointer)) = target;
+    }
+}
+
+typedef struct {
+    VALUE rb_value;
+    RBGIArgMetadataType *type;
+    const gchar *context;
+} RubyToCData;
+
+typedef gpointer (*RubyToCFunc)(RubyToCData *data);
+
+static gpointer
+ruby_to_c_utf8(RubyToCData *data)
+{
+    return g_strdup(RVAL2CSTR(data->rb_value));
+}
+
+static gpointer
+ruby_to_c_interface_enum(RubyToCData *data)
+{
+    gint32 value;
+    if (data->type->interface_gtype == G_TYPE_NONE) {
+        value = NUM2INT(data->rb_value);
+    } else {
+        value = RVAL2GENUM(data->rb_value, data->type->interface_gtype);
+    }
+    return GINT_TO_POINTER(value);
+}
+
+typedef struct {
+    GIArgument *argument;
+    GITypeInfo *type_info;
+    VALUE rb_argument;
+    VALUE self;
+} ArgumentFromRubyData;
+
+typedef struct {
+    GHashTable *hash_table;
+    RubyToCFunc key_ruby_to_c_func;
+    RubyToCData *key_ruby_to_c_data;
+    RubyToCFunc value_ruby_to_c_func;
+    RubyToCData *value_ruby_to_c_data;
+} ArgumentFromRubyGHashData;
+
+static int
+rb_gi_arguments_in_init_arg_ruby_ghash_convert(VALUE rb_key,
+                                               VALUE rb_value,
+                                               VALUE user_data)
+{
+    ArgumentFromRubyGHashData *data = (ArgumentFromRubyGHashData *)user_data;
+    gpointer key;
+    gpointer value;
+    data->key_ruby_to_c_data->rb_value = rb_key;
+    key = data->key_ruby_to_c_func(data->key_ruby_to_c_data);
+    data->value_ruby_to_c_data->rb_value = rb_value;
+    value = data->key_ruby_to_c_func(data->value_ruby_to_c_data);
+    g_hash_table_insert(data->hash_table, key, value);
+    return ST_CONTINUE;
+}
+
+static VALUE
+rb_gi_arguments_in_init_arg_ruby_ghash_body(VALUE value_data)
+{
+    RBGIArgMetadata *metadata = (RBGIArgMetadata *)value_data;
+    GHashFunc hash_func = NULL;
+    GEqualFunc equal_func = NULL;
+    GDestroyNotify key_destroy_func = NULL;
+    GDestroyNotify value_destroy_func = NULL;
+    RubyToCFunc key_ruby_to_c_func = NULL;
+    RubyToCData key_ruby_to_c_data;
+    RubyToCFunc value_ruby_to_c_func = NULL;
+    RubyToCData value_ruby_to_c_data;
+    ArgumentFromRubyGHashData convert_data;
+
+    key_ruby_to_c_data.type = &(metadata->key_type);
+    switch (metadata->key_type.tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(GHash)[key][%s]",
+                 g_type_tag_to_string(metadata->key_type.tag));
+        break;
+      case GI_TYPE_TAG_UTF8:
+        hash_func = g_str_hash;
+        equal_func = g_str_equal;
+        key_destroy_func = g_free;
+        key_ruby_to_c_func = ruby_to_c_utf8;
+        key_ruby_to_c_data.context = "Ruby -> GIArgument(GHash)[key][utf8]";
+        break;
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(GHash)[key][%s]",
+                 g_type_tag_to_string(metadata->key_type.tag));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    value_ruby_to_c_data.type = &(metadata->value_type);
+    switch (metadata->value_type.tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(GHash)[value][%s]",
+                 g_type_tag_to_string(metadata->value_type.tag));
+        break;
+      case GI_TYPE_TAG_INTERFACE:
+        switch (metadata->value_type.interface_type) {
+          case GI_INFO_TYPE_INVALID:
+          case GI_INFO_TYPE_FUNCTION:
+          case GI_INFO_TYPE_CALLBACK:
+          case GI_INFO_TYPE_STRUCT:
+          case GI_INFO_TYPE_BOXED:
+            rb_raise(rb_eNotImpError,
+                     "TODO: Ruby -> GIArgument(GHash)[value][%s][%s]",
+                     g_type_tag_to_string(metadata->value_type.tag),
+                     g_info_type_to_string(metadata->value_type.interface_type));
+            break;
+          case GI_INFO_TYPE_ENUM:
+            value_destroy_func = NULL;
+            value_ruby_to_c_func = ruby_to_c_interface_enum;
+            value_ruby_to_c_data.context =
+                "Ruby -> GIArgument(GHash)[value][interface]";
+            break;
+          case GI_INFO_TYPE_FLAGS:
+          case GI_INFO_TYPE_OBJECT:
+          case GI_INFO_TYPE_INTERFACE:
+          case GI_INFO_TYPE_CONSTANT:
+          case GI_INFO_TYPE_INVALID_0:
+          case GI_INFO_TYPE_UNION:
+          case GI_INFO_TYPE_VALUE:
+          case GI_INFO_TYPE_SIGNAL:
+          case GI_INFO_TYPE_VFUNC:
+          case GI_INFO_TYPE_PROPERTY:
+          case GI_INFO_TYPE_FIELD:
+          case GI_INFO_TYPE_ARG:
+          case GI_INFO_TYPE_TYPE:
+          case GI_INFO_TYPE_UNRESOLVED:
+            rb_raise(rb_eNotImpError,
+                     "TODO: Ruby -> GIArgument(GHash)[value][%s][%s]",
+                     g_type_tag_to_string(metadata->value_type.tag),
+                     g_info_type_to_string(metadata->value_type.interface_type));
+            break;
+          default:
+            g_assert_not_reached();
+            break;
+        }
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(GHash)[value][%s]",
+                 g_type_tag_to_string(metadata->value_type.tag));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    metadata->in_arg->v_pointer = g_hash_table_new_full(hash_func,
+                                                        equal_func,
+                                                        key_destroy_func,
+                                                        value_destroy_func);
+    convert_data.hash_table = metadata->in_arg->v_pointer;
+    convert_data.key_ruby_to_c_func = key_ruby_to_c_func;
+    convert_data.key_ruby_to_c_data = &key_ruby_to_c_data;
+    convert_data.value_ruby_to_c_func = value_ruby_to_c_func;
+    convert_data.value_ruby_to_c_data = &value_ruby_to_c_data;
+    rb_hash_foreach(metadata->rb_arg,
+                    rb_gi_arguments_in_init_arg_ruby_ghash_convert,
+                    (VALUE)&convert_data);
+
+    return Qnil;
+}
+
+static VALUE
+rb_gi_arguments_in_init_arg_ruby_ghash_rescue(VALUE value_data,
+                                              VALUE exception)
+{
+    RBGIArgMetadata *metadata = (RBGIArgMetadata *)value_data;
+
+    if (metadata->in_arg->v_pointer) {
+        g_hash_table_unref(metadata->in_arg->v_pointer);
+        metadata->in_arg->v_pointer = NULL;
+    }
+
+    rb_exc_raise(exception);
+
+    return Qnil;
+}
+
+static void
+rb_gi_arguments_in_free_ghash(RBGIArguments *args,
+                              RBGIArgMetadata *metadata,
+                              gpointer user_data)
+{
+    GHashTable *target;
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        target = *((GHashTable **)(metadata->in_arg->v_pointer));
+        xfree(metadata->in_arg->v_pointer);
+    } else {
+        target = metadata->in_arg->v_pointer;
+    }
+    g_hash_table_unref(target);
+}
+
+static void
+rb_gi_arguments_in_init_arg_ruby_ghash(RBGIArguments *args,
+                                       RBGIArgMetadata *metadata)
+{
+    if (metadata->transfer != GI_TRANSFER_NOTHING) {
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] free %s "
+                 "Ruby -> GIArgument(%s){%s,%s}[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 g_type_tag_to_string(metadata->key_type.tag),
+                 g_type_tag_to_string(metadata->value_type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+    }
+    metadata->in_arg->v_pointer = NULL;
+    rb_rescue(rb_gi_arguments_in_init_arg_ruby_ghash_body, (VALUE)metadata,
+              rb_gi_arguments_in_init_arg_ruby_ghash_rescue, (VALUE)metadata);
+    if (metadata->direction == GI_DIRECTION_INOUT) {
+        GHashTable *target = metadata->in_arg->v_pointer;
+        metadata->in_arg->v_pointer = ALLOC(GHashTable *);
+        *((GHashTable **)(metadata->in_arg->v_pointer)) = target;
+    }
+    metadata->free_func = rb_gi_arguments_in_free_ghash;
 }
 
 static void
@@ -1212,8 +1762,251 @@ rb_gi_arguments_in_init_arg_ruby(RBGIArguments *args,
 
     if (metadata->array_p) {
         rb_gi_arguments_in_init_arg_ruby_array(args, metadata);
-    } else {
-        rb_gi_arguments_in_init_arg_ruby_scalar(args, metadata);
+        return;
+    }
+
+    if (NIL_P(metadata->rb_arg)) {
+        GIBaseInfo *klass;
+        const char *suffix;
+
+        if (metadata->may_be_null_p) {
+            memset(metadata->in_arg, 0, sizeof(GIArgument));
+            return;
+        }
+
+        klass = g_base_info_get_container(args->info);
+        if (metadata->rb_arg_index == 1) {
+            suffix = "st";
+        } else if (metadata->rb_arg_index == 2) {
+            suffix = "nd";
+        } else if (metadata->rb_arg_index == 3) {
+            suffix = "rd";
+        } else {
+            suffix = "th";
+        }
+        rb_raise(rb_eArgError,
+                 "<%s%s%s%s%s>: the %u%s argument must not nil: <%s>",
+                 g_base_info_get_namespace(args->info),
+                 klass ? "::" : "",
+                 klass ? g_base_info_get_name(klass) : "",
+                 klass ? "#" : ".",
+                 g_base_info_get_name(args->info),
+                 metadata->rb_arg_index,
+                 suffix,
+                 metadata->name);
+    }
+
+    metadata->free_func = rb_gi_arguments_in_free_default;
+    switch (metadata->type.tag) {
+      case GI_TYPE_TAG_VOID:
+        rb_gi_arguments_in_init_arg_ruby_void(args, metadata);
+        break;
+      case GI_TYPE_TAG_BOOLEAN:
+        {
+            gboolean *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(gboolean);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_boolean);
+            }
+            *target = RVAL2CBOOL(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_INT8:
+        {
+            gint8 *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(gint8);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_int8);
+            }
+            *target = NUM2CHR(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_UINT8:
+        {
+            guint8 *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(guint8);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_uint8);
+            }
+            *target = (guint8)NUM2CHR(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_INT16:
+        {
+            gint16 *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(gint16);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_int16);
+            }
+            *target = NUM2SHORT(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_UINT16:
+        {
+            guint16 *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(guint16);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_uint16);
+            }
+            *target = NUM2USHORT(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_INT32:
+        {
+            gint32 *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(gint32);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_int32);
+            }
+            *target = NUM2INT(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_UINT32:
+        {
+            guint32 *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(guint32);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_uint32);
+            }
+            *target = NUM2UINT(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_INT64:
+        {
+            gint64 *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(gint64);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_int64);
+            }
+            *target = NUM2LL(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_UINT64:
+        {
+            guint64 *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(guint64);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_uint64);
+            }
+            *target = NUM2ULL(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_FLOAT:
+        {
+            gfloat *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(gfloat);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_float);
+            }
+            *target = NUM2DBL(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_DOUBLE:
+        {
+            gdouble *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(gdouble);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_double);
+            }
+            *target = NUM2DBL(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_GTYPE:
+        {
+            GType *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(GType);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_size);
+            }
+            *target = rbgobj_gtype_from_ruby(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_UTF8:
+        {
+            gchar **target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(gchar *);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_string);
+            }
+            *target = (gchar *)RVAL2CSTR_ACCEPT_SYMBOL(metadata->rb_arg);
+        }
+        break;
+      case GI_TYPE_TAG_FILENAME:
+        {
+            gchar **target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(gchar *);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_string);
+            }
+            *target = rbg_filename_from_ruby(metadata->rb_arg);
+            metadata->free_func = rb_gi_arguments_in_free_filename;
+        }
+        break;
+      case GI_TYPE_TAG_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "should not be reached: Ruby -> GIArgument(%s)",
+                 g_type_tag_to_string(metadata->type.tag));
+        break;
+      case GI_TYPE_TAG_INTERFACE:
+        rb_gi_arguments_in_init_arg_ruby_interface(args, metadata);
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+        rb_gi_arguments_in_init_arg_ruby_list(args, metadata);
+        break;
+      case GI_TYPE_TAG_GHASH:
+        rb_gi_arguments_in_init_arg_ruby_ghash(args, metadata);
+        break;
+      case GI_TYPE_TAG_ERROR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s Ruby -> GIArgument(%s)",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag));
+        break;
+      case GI_TYPE_TAG_UNICHAR:
+        {
+            gunichar *target;
+            if (metadata->direction == GI_DIRECTION_INOUT) {
+                target = ALLOC(gunichar);
+                metadata->in_arg->v_pointer = target;
+            } else {
+                target = &(metadata->in_arg->v_uint32);
+            }
+            *target = NUM2UINT(metadata->rb_arg);
+        }
+        break;
+      default:
+        g_assert_not_reached();
+        break;
     }
 }
 
@@ -1221,10 +2014,7 @@ static void
 rb_gi_arguments_in_init_arg_raw_interface(RBGIArguments *args,
                                           RBGIArgMetadata *metadata)
 {
-    GIArgument *argument = &(g_array_index(args->in_args,
-                                           GIArgument,
-                                           metadata->in_arg_index));
-    switch (metadata->interface_type) {
+    switch (metadata->type.interface_type) {
     case GI_INFO_TYPE_INVALID:
     case GI_INFO_TYPE_FUNCTION:
     case GI_INFO_TYPE_CALLBACK:
@@ -1232,11 +2022,11 @@ rb_gi_arguments_in_init_arg_raw_interface(RBGIArguments *args,
                  "TODO: %s::%s: raw argument -> GIArgument(interface)[%s]: <%s>",
                  g_base_info_get_namespace(args->info),
                  g_base_info_get_name(args->info),
-                 g_info_type_to_string(metadata->interface_type),
-                 g_base_info_get_name(metadata->interface_info));
+                 g_info_type_to_string(metadata->type.interface_type),
+                 g_base_info_get_name(metadata->type.interface_info));
         break;
     case GI_INFO_TYPE_STRUCT:
-      argument->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
+      metadata->in_arg->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
       break;
     case GI_INFO_TYPE_BOXED:
     case GI_INFO_TYPE_ENUM:
@@ -1244,23 +2034,23 @@ rb_gi_arguments_in_init_arg_raw_interface(RBGIArguments *args,
                  "TODO: %s::%s: raw argument -> GIArgument(interface)[%s]: <%s>",
                  g_base_info_get_namespace(args->info),
                  g_base_info_get_name(args->info),
-                 g_info_type_to_string(metadata->interface_type),
-                 g_base_info_get_name(metadata->interface_info));
+                 g_info_type_to_string(metadata->type.interface_type),
+                 g_base_info_get_name(metadata->type.interface_info));
         break;
     case GI_INFO_TYPE_FLAGS:
-      argument->v_int32= *((gint32 *)(args->raw_args[metadata->index]));
+      metadata->in_arg->v_int32= *((gint32 *)(args->raw_args[metadata->index]));
       break;
     case GI_INFO_TYPE_OBJECT:
     case GI_INFO_TYPE_INTERFACE:
-      argument->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
+      metadata->in_arg->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
       break;
     case GI_INFO_TYPE_CONSTANT:
         rb_raise(rb_eNotImpError,
                  "TODO: %s::%s: raw argument -> GIArgument(interface)[%s]: <%s>",
                  g_base_info_get_namespace(args->info),
                  g_base_info_get_name(args->info),
-                 g_info_type_to_string(metadata->interface_type),
-                 g_base_info_get_name(metadata->interface_info));
+                 g_info_type_to_string(metadata->type.interface_type),
+                 g_base_info_get_name(metadata->type.interface_info));
         break;
     case GI_INFO_TYPE_INVALID_0:
         g_assert_not_reached();
@@ -1279,8 +2069,8 @@ rb_gi_arguments_in_init_arg_raw_interface(RBGIArguments *args,
                  "TODO: %s::%s: raw argument -> GIArgument(interface)[%s]: <%s>",
                  g_base_info_get_namespace(args->info),
                  g_base_info_get_name(args->info),
-                 g_info_type_to_string(metadata->interface_type),
-                 g_base_info_get_name(metadata->interface_info));
+                 g_info_type_to_string(metadata->type.interface_type),
+                 g_base_info_get_name(metadata->type.interface_info));
         break;
     }
 }
@@ -1289,55 +2079,52 @@ static void
 rb_gi_arguments_in_init_arg_raw(RBGIArguments *args,
                                 RBGIArgMetadata *metadata)
 {
-    GIArgument *argument = &(g_array_index(args->in_args,
-                                           GIArgument,
-                                           metadata->in_arg_index));
-    switch (metadata->type_tag) {
+    switch (metadata->type.tag) {
       case GI_TYPE_TAG_VOID:
-        argument->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_BOOLEAN:
-        argument->v_boolean = *((gboolean *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_boolean = *((gboolean *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_INT8:
-        argument->v_int8 = *((gint8 *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_int8 = *((gint8 *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_UINT8:
-        argument->v_uint8 = *((guint8 *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_uint8 = *((guint8 *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_INT16:
-        argument->v_int16 = *((gint16 *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_int16 = *((gint16 *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_UINT16:
-        argument->v_uint16 = *((guint16 *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_uint16 = *((guint16 *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_INT32:
-        argument->v_int32 = *((gint32 *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_int32 = *((gint32 *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_UINT32:
-        argument->v_uint32 = *((guint32 *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_uint32 = *((guint32 *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_INT64:
-        argument->v_int64 = *((gint64 *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_int64 = *((gint64 *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_UINT64:
-        argument->v_uint64 = *((guint64 *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_uint64 = *((guint64 *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_FLOAT:
-        argument->v_float = *((gfloat *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_float = *((gfloat *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_DOUBLE:
-        argument->v_double = *((gdouble *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_double = *((gdouble *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_GTYPE:
-        argument->v_size = *((gsize *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_size = *((gsize *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_UTF8:
       case GI_TYPE_TAG_FILENAME:
-        argument->v_string = *((gchar **)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_string = *((gchar **)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_ARRAY:
-        argument->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_INTERFACE:
         rb_gi_arguments_in_init_arg_raw_interface(args, metadata);
@@ -1345,13 +2132,13 @@ rb_gi_arguments_in_init_arg_raw(RBGIArguments *args,
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
-        argument->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_ERROR:
-        argument->v_pointer = *((GError **)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_pointer = *((GError **)(args->raw_args[metadata->index]));
         break;
       case GI_TYPE_TAG_UNICHAR:
-        argument->v_uint32 = *((gunichar *)(args->raw_args[metadata->index]));
+        metadata->in_arg->v_uint32 = *((gunichar *)(args->raw_args[metadata->index]));
         break;
       default:
         g_assert_not_reached();
@@ -1380,281 +2167,6 @@ rb_gi_arguments_in_init(RBGIArguments *args)
     }
 }
 
-static void
-rb_gi_arguments_in_clear_arg_array_c(RBGIArguments *args,
-                                     RBGIArgMetadata *metadata,
-                                     VALUE rb_argument)
-{
-    GIArgument *argument;
-    gpointer raw_array;
-    argument = &(g_array_index(args->in_args,
-                               GIArgument,
-                               metadata->in_arg_index));
-    if (metadata->direction == GI_DIRECTION_INOUT) {
-        raw_array = *((gpointer *)(argument->v_pointer));
-    } else {
-        raw_array = argument->v_pointer;
-    }
-
-    switch (metadata->element_type_tag) {
-      case GI_TYPE_TAG_VOID:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s clear GIArgument(array/%s)[%s][%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 rb_gi_array_type_to_string(metadata->array_type),
-                 g_type_tag_to_string(metadata->element_type_tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_TYPE_TAG_BOOLEAN:
-        xfree(raw_array);
-        break;
-      case GI_TYPE_TAG_INT8:
-      case GI_TYPE_TAG_UINT8:
-        if (RB_TYPE_P(rb_argument, RUBY_T_STRING)) {
-            /* Do nothing */
-        } else {
-            xfree(raw_array);
-        }
-        break;
-      case GI_TYPE_TAG_INT16:
-      case GI_TYPE_TAG_UINT16:
-      case GI_TYPE_TAG_INT32:
-      case GI_TYPE_TAG_UINT32:
-      case GI_TYPE_TAG_INT64:
-      case GI_TYPE_TAG_UINT64:
-      case GI_TYPE_TAG_FLOAT:
-      case GI_TYPE_TAG_DOUBLE:
-      case GI_TYPE_TAG_GTYPE:
-        xfree(raw_array);
-        break;
-      case GI_TYPE_TAG_UTF8:
-      case GI_TYPE_TAG_FILENAME:
-        g_free(raw_array);
-        break;
-      case GI_TYPE_TAG_ARRAY:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s clear GIArgument(array/%s)[%s][%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 rb_gi_array_type_to_string(metadata->array_type),
-                 g_type_tag_to_string(metadata->element_type_tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_TYPE_TAG_INTERFACE:
-        xfree(raw_array);
-        break;
-      case GI_TYPE_TAG_GLIST:
-      case GI_TYPE_TAG_GSLIST:
-      case GI_TYPE_TAG_GHASH:
-      case GI_TYPE_TAG_ERROR:
-      case GI_TYPE_TAG_UNICHAR:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s clear GIArgument(array/%s)[%s][%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 rb_gi_array_type_to_string(metadata->array_type),
-                 g_type_tag_to_string(metadata->element_type_tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      default:
-        g_assert_not_reached();
-        break;
-    }
-}
-
-static void
-rb_gi_arguments_in_clear_arg_array(RBGIArguments *args,
-                                   RBGIArgMetadata *metadata,
-                                   VALUE rb_argument)
-{
-    switch (metadata->array_type) {
-      case GI_ARRAY_TYPE_C:
-        rb_gi_arguments_in_clear_arg_array_c(args, metadata, rb_argument);
-        break;
-      case GI_ARRAY_TYPE_ARRAY:
-      case GI_ARRAY_TYPE_PTR_ARRAY:
-      case GI_ARRAY_TYPE_BYTE_ARRAY:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s clear GIArgument(array/%s)[%s][%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 rb_gi_array_type_to_string(metadata->array_type),
-                 g_type_tag_to_string(metadata->element_type_tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      default:
-        g_assert_not_reached();
-        break;
-    }
-}
-
-static void
-rb_gi_arguments_in_clear_arg_interface(RBGIArguments *args,
-                                       RBGIArgMetadata *metadata,
-                                       VALUE rb_argument)
-{
-    GIArgument *argument;
-    gpointer value;
-    argument = &(g_array_index(args->in_args,
-                               GIArgument,
-                               metadata->in_arg_index));
-    if (metadata->direction == GI_DIRECTION_INOUT) {
-        value = *((gpointer *)(argument->v_pointer));
-    } else {
-        value = argument->v_pointer;
-    }
-
-    switch (metadata->interface_type) {
-      case GI_INFO_TYPE_INVALID:
-      case GI_INFO_TYPE_FUNCTION:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s clear GIArgument(interface)[%s][%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_info_type_to_string(metadata->interface_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_INFO_TYPE_CALLBACK:
-        if (metadata->callback_p) {
-            /* Do nothing. */
-            /* TODO: Should we check metadata->scope_type? */
-        } else {
-            rb_raise(rb_eNotImpError,
-                     "TODO: %s clear GIArgument(interface)[%s][%s]",
-                     rb_gi_direction_to_string(metadata->direction),
-                     g_info_type_to_string(metadata->interface_type),
-                     rb_gi_transfer_to_string(metadata->transfer));
-        }
-        break;
-      case GI_INFO_TYPE_STRUCT:
-        if (metadata->interface_gtype == G_TYPE_VALUE) {
-            VALUE rb_cGLibValue = rb_const_get(mGLib, rb_intern("Value"));
-            if (!RVAL2CBOOL(rb_obj_is_kind_of(rb_argument, rb_cGLibValue))) {
-                GValue *gvalue = value;
-                g_value_unset(gvalue);
-                xfree(gvalue);
-            }
-        } else if (metadata->interface_gtype == G_TYPE_BYTES) {
-            GBytes *bytes = value;
-            g_bytes_unref(bytes);
-        } else if (metadata->interface_gtype == G_TYPE_CLOSURE) {
-            /* Do nothing. GRClousre is managed by referenced object. */
-        } else {
-            /*
-            rb_raise(rb_eNotImpError,
-                     "TODO: [%s] %s clear GIArgument(interface)[%s][%s][%s]",
-                     metadata->name,
-                     rb_gi_direction_to_string(metadata->direction),
-                     g_info_type_to_string(metadata->interface_type),
-                     g_type_name(metadata->interface_gtype),
-                     rb_gi_transfer_to_string(metadata->transfer));
-            */
-        }
-        break;
-      case GI_INFO_TYPE_BOXED:
-        rb_raise(rb_eNotImpError,
-                 "TODO: [%s] %s clear GIArgument(interface)[%s][%s]",
-                 metadata->name,
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_info_type_to_string(metadata->interface_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_INFO_TYPE_ENUM:
-      case GI_INFO_TYPE_FLAGS:
-      case GI_INFO_TYPE_OBJECT:
-      case GI_INFO_TYPE_INTERFACE:
-        break;
-      case GI_INFO_TYPE_CONSTANT:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s clear GIArgument(interface)[%s][%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_info_type_to_string(metadata->interface_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_INFO_TYPE_INVALID_0:
-        g_assert_not_reached();
-        break;
-      case GI_INFO_TYPE_UNION:
-        break;
-      case GI_INFO_TYPE_VALUE:
-      case GI_INFO_TYPE_SIGNAL:
-      case GI_INFO_TYPE_VFUNC:
-      case GI_INFO_TYPE_PROPERTY:
-      case GI_INFO_TYPE_FIELD:
-      case GI_INFO_TYPE_ARG:
-      case GI_INFO_TYPE_TYPE:
-      case GI_INFO_TYPE_UNRESOLVED:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s clear GIArgument(interface)[%s][%s]",
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_info_type_to_string(metadata->interface_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      default:
-        g_assert_not_reached();
-        break;
-    }
-}
-
-static void
-rb_gi_arguments_in_clear_arg(RBGIArguments *args,
-                             RBGIArgMetadata *metadata,
-                             VALUE rb_argument)
-{
-    GIArgument *argument;
-    argument = &(g_array_index(args->in_args,
-                               GIArgument,
-                               metadata->in_arg_index));
-
-    switch (metadata->type_tag) {
-      case GI_TYPE_TAG_VOID:
-      case GI_TYPE_TAG_BOOLEAN:
-      case GI_TYPE_TAG_INT8:
-      case GI_TYPE_TAG_UINT8:
-      case GI_TYPE_TAG_INT16:
-      case GI_TYPE_TAG_UINT16:
-      case GI_TYPE_TAG_INT32:
-      case GI_TYPE_TAG_UINT32:
-      case GI_TYPE_TAG_INT64:
-      case GI_TYPE_TAG_UINT64:
-      case GI_TYPE_TAG_FLOAT:
-      case GI_TYPE_TAG_DOUBLE:
-      case GI_TYPE_TAG_GTYPE:
-      case GI_TYPE_TAG_UTF8:
-      case GI_TYPE_TAG_FILENAME:
-        break;
-      case GI_TYPE_TAG_ARRAY:
-        rb_gi_arguments_in_clear_arg_array(args, metadata, rb_argument);
-        break;
-      case GI_TYPE_TAG_INTERFACE:
-        rb_gi_arguments_in_clear_arg_interface(args, metadata, rb_argument);
-        break;
-      case GI_TYPE_TAG_GLIST:
-        /* TODO */
-        break;
-      case GI_TYPE_TAG_GSLIST:
-        /* TODO */
-        break;
-      case GI_TYPE_TAG_GHASH:
-      case GI_TYPE_TAG_ERROR:
-        rb_raise(rb_eNotImpError,
-                 "TODO: [%s] %s clear GIArgument(%s)[%s]",
-                 metadata->name,
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_type_tag_to_string(metadata->type_tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_TYPE_TAG_UNICHAR:
-        if (metadata->direction == GI_DIRECTION_INOUT) {
-            xfree(argument->v_pointer);
-        }
-        break;
-      default:
-        g_assert_not_reached();
-        break;
-    }
-
-    if (metadata->direction == GI_DIRECTION_INOUT) {
-        xfree(argument->v_pointer);
-    }
-}
-
 void
 rb_gi_arguments_in_clear(RBGIArguments *args)
 {
@@ -1666,7 +2178,6 @@ rb_gi_arguments_in_clear(RBGIArguments *args)
 
     for (i = 0; i < args->metadata->len; i++) {
         RBGIArgMetadata *metadata;
-        VALUE rb_argument = Qnil;
 
         metadata = g_ptr_array_index(args->metadata, i);
         if (metadata->direction == GI_DIRECTION_OUT) {
@@ -1677,9 +2188,8 @@ rb_gi_arguments_in_clear(RBGIArguments *args)
             continue;
         }
 
-        if (RARRAY_LEN(args->rb_args) > metadata->rb_arg_index) {
-            rb_argument = RARRAY_AREF(args->rb_args, metadata->rb_arg_index);
+        if (metadata->free_func) {
+            metadata->free_func(args, metadata, metadata->free_func_data);
         }
-        rb_gi_arguments_in_clear_arg(args, metadata, rb_argument);
     }
 }

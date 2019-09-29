@@ -94,6 +94,8 @@ rb_gi_struct_get_raw(VALUE rb_struct, GType gtype)
                              &rb_gi_struct_type,
                              data);
         raw_struct = data->instance;
+    } else if (gtype == G_TYPE_VARIANT) {
+        raw_struct = rbg_variant_from_ruby(rb_struct);
     } else {
         raw_struct = RVAL2BOXED(rb_struct, gtype);
     }

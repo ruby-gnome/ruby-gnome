@@ -52,6 +52,40 @@ rb_gi_is_registered_type(GIInfoType type)
     }
 }
 
+static void
+rb_gi_arg_metadata_type_init(RBGIArgMetadataType *type,
+                             GITypeInfo *type_info)
+{
+    type->info = type_info;
+    type->tag = GI_TYPE_TAG_VOID;
+    type->interface_info = NULL;
+    type->interface_type = GI_INFO_TYPE_INVALID;
+    type->interface_gtype = G_TYPE_INVALID;
+
+    if (type->info) {
+        type->tag = g_type_info_get_tag(type->info);
+    }
+    if (type->tag == GI_TYPE_TAG_INTERFACE) {
+        type->interface_info = g_type_info_get_interface(type_info);
+        type->interface_type = g_base_info_get_type(type->interface_info);
+        if (rb_gi_is_registered_type(type->interface_type)) {
+            type->interface_gtype =
+                g_registered_type_info_get_g_type(type->interface_info);
+        }
+    }
+}
+
+static void
+rb_gi_arg_metadata_type_clear(RBGIArgMetadataType *type)
+{
+    if (type->interface_info) {
+        g_base_info_unref(type->interface_info);
+    }
+    if (type->info) {
+        g_base_info_unref(type->info);
+    }
+}
+
 static RBGIArgMetadata *
 rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
 {
@@ -64,25 +98,20 @@ rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
     arg_info = &(metadata->arg_info);
     g_callable_info_load_arg(callable_info, i, arg_info);
     metadata->name = g_base_info_get_name(arg_info);
-    type_info = &(metadata->type_info);
-    g_arg_info_load_type(arg_info, type_info);
-    metadata->type_tag = g_type_info_get_tag(type_info);
+    type_info = g_arg_info_get_type(arg_info);
+    rb_gi_arg_metadata_type_init(&(metadata->type), type_info);
+    rb_gi_arg_metadata_type_init(&(metadata->element_type), NULL);
+    rb_gi_arg_metadata_type_init(&(metadata->key_type), NULL);
+    rb_gi_arg_metadata_type_init(&(metadata->value_type), NULL);
     metadata->scope_type = g_arg_info_get_scope(arg_info);
     metadata->direction = g_arg_info_get_direction(arg_info);
     metadata->transfer = g_arg_info_get_ownership_transfer(arg_info);
     metadata->array_type = GI_ARRAY_TYPE_C;
-    metadata->element_type_info = NULL;
-    metadata->element_type_tag = GI_TYPE_TAG_VOID;
-    metadata->element_interface_info = NULL;
-    metadata->element_interface_type = GI_INFO_TYPE_INVALID;
-    metadata->element_interface_gtype = G_TYPE_NONE;
-    metadata->interface_info = NULL;
-    metadata->interface_type = GI_INFO_TYPE_INVALID;
     metadata->callback_p = (metadata->scope_type != GI_SCOPE_TYPE_INVALID);
     metadata->closure_p = FALSE;
     metadata->destroy_p = FALSE;
-    metadata->interface_p = (metadata->type_tag == GI_TYPE_TAG_INTERFACE);
-    metadata->array_p = (metadata->type_tag == GI_TYPE_TAG_ARRAY);
+    metadata->interface_p = (metadata->type.tag == GI_TYPE_TAG_INTERFACE);
+    metadata->array_p = (metadata->type.tag == GI_TYPE_TAG_ARRAY);
     metadata->array_length_p = FALSE;
     metadata->may_be_null_p = rb_gi_arg_info_may_be_null(arg_info);
     metadata->pointer_p = g_type_info_is_pointer(type_info);
@@ -97,34 +126,33 @@ rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
     metadata->array_length_arg_index = -1;
     metadata->rb_arg_index = -1;
     metadata->out_arg_index = -1;
+    metadata->in_arg = NULL;
+    metadata->out_arg = NULL;
+    metadata->rb_arg = Qnil;
+    metadata->free_func = NULL;
+    metadata->free_func_data = NULL;
 
-    if (metadata->array_p) {
+    switch (metadata->type.tag) {
+      case GI_TYPE_TAG_ARRAY:
         metadata->zero_terminated_p =
             g_type_info_is_zero_terminated(type_info);
         metadata->array_type = g_type_info_get_array_type(type_info);
-        metadata->element_type_info = g_type_info_get_param_type(type_info, 0);
-        metadata->element_type_tag =
-            g_type_info_get_tag(metadata->element_type_info);
-        if (metadata->element_type_tag == GI_TYPE_TAG_INTERFACE) {
-            metadata->element_interface_info =
-                g_type_info_get_interface(metadata->element_type_info);
-            metadata->element_interface_type =
-                g_base_info_get_type(metadata->element_interface_info);
-            if (rb_gi_is_registered_type(metadata->element_interface_type)) {
-                metadata->element_interface_gtype =
-                    g_registered_type_info_get_g_type(metadata->element_interface_info);
-            }
-        }
-    }
-
-    if (metadata->interface_p) {
-        metadata->interface_info = g_type_info_get_interface(type_info);
-        metadata->interface_type =
-            g_base_info_get_type(metadata->interface_info);
-        if (rb_gi_is_registered_type(metadata->interface_type)) {
-            metadata->interface_gtype =
-                g_registered_type_info_get_g_type(metadata->interface_info);
-        }
+        rb_gi_arg_metadata_type_init(&(metadata->element_type),
+                                     g_type_info_get_param_type(type_info, 0));
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+        rb_gi_arg_metadata_type_init(&(metadata->element_type),
+                                     g_type_info_get_param_type(type_info, 0));
+        break;
+      case GI_TYPE_TAG_GHASH:
+        rb_gi_arg_metadata_type_init(&(metadata->key_type),
+                                     g_type_info_get_param_type(type_info, 0));
+        rb_gi_arg_metadata_type_init(&(metadata->value_type),
+                                     g_type_info_get_param_type(type_info, 1));
+        break;
+      default:
+        break;
     }
 
     return metadata;
@@ -133,15 +161,10 @@ rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
 static void
 rb_gi_arg_metadata_free(RBGIArgMetadata *metadata)
 {
-    if (metadata->element_interface_info) {
-        g_base_info_unref(metadata->element_interface_info);
-    }
-    if (metadata->element_type_info) {
-        g_base_info_unref(metadata->element_type_info);
-    }
-    if (metadata->interface_info) {
-        g_base_info_unref(metadata->interface_info);
-    }
+    rb_gi_arg_metadata_type_clear(&(metadata->value_type));
+    rb_gi_arg_metadata_type_clear(&(metadata->key_type));
+    rb_gi_arg_metadata_type_clear(&(metadata->element_type));
+    rb_gi_arg_metadata_type_clear(&(metadata->type));
     xfree(metadata);
 }
 
@@ -169,6 +192,24 @@ rb_gi_arguments_allocate(RBGIArguments *args)
         }
 
         g_ptr_array_add(args->metadata, metadata);
+    }
+
+    for (i = 0; i < n_args; i++) {
+        RBGIArgMetadata *metadata;
+        GIDirection direction;
+
+        metadata = g_ptr_array_index(args->metadata, i);
+        direction = metadata->direction;
+        if (direction == GI_DIRECTION_IN || direction == GI_DIRECTION_INOUT) {
+            metadata->in_arg = &g_array_index(args->in_args,
+                                              GIArgument,
+                                              metadata->in_arg_index);
+        }
+        if (direction == GI_DIRECTION_OUT || direction == GI_DIRECTION_INOUT) {
+            metadata->out_arg = &g_array_index(args->out_args,
+                                               GIArgument,
+                                               metadata->out_arg_index);
+        }
     }
 }
 
@@ -220,7 +261,7 @@ rb_gi_arguments_fill_metadata_array(RBGIArguments *args)
         gint array_length_index = -1;
 
         array_metadata = g_ptr_array_index(metadata, i);
-        type_info = &(array_metadata->type_info);
+        type_info = array_metadata->type.info;
         if (!array_metadata->array_p) {
             continue;
         }
@@ -297,6 +338,10 @@ rb_gi_arguments_fill_metadata_rb_arg_index(RBGIArguments *args)
         }
 
         metadata->rb_arg_index = rb_arg_index;
+        if (RARRAY_LEN(args->rb_args) > metadata->rb_arg_index) {
+            metadata->rb_arg =
+                RARRAY_AREF(args->rb_args, metadata->rb_arg_index);
+        }
         rb_arg_index++;
     }
 }
@@ -307,7 +352,9 @@ rb_gi_arguments_fill_metadata(RBGIArguments *args)
     rb_gi_arguments_fill_metadata_callback(args);
     rb_gi_arguments_fill_metadata_array(args);
     rb_gi_arguments_fill_metadata_array_from_callable_info(args);
-    rb_gi_arguments_fill_metadata_rb_arg_index(args);
+    if (args->rb_mode_p) {
+        rb_gi_arguments_fill_metadata_rb_arg_index(args);
+    }
 }
 
 static void
@@ -376,7 +423,12 @@ rb_gi_arguments_init(RBGIArguments *args,
                      void **raw_args)
 {
     args->info = info;
-    args->name = g_base_info_get_name(info);
+    args->namespace = g_base_info_get_namespace(info);
+    if (GI_IS_FUNCTION_INFO(info)) {
+        args->name = g_function_info_get_symbol((GIFunctionInfo *)info);
+    } else {
+        args->name = g_base_info_get_name(info);
+    }
     args->rb_receiver = rb_receiver;
     args->receiver_type_class = NULL;
     args->rb_args = rb_args;
@@ -451,7 +503,7 @@ rb_gi_arguments_get_rb_out_args(RBGIArguments *args)
 
 static void
 rb_gi_arguments_fill_raw_result_interface(RBGIArguments *args,
-                                          GIArgument *argument,
+                                          VALUE rb_result,
                                           gpointer raw_result,
                                           GITypeInfo *type_info,
                                           G_GNUC_UNUSED GITransfer transfer /* TODO */,
@@ -472,16 +524,25 @@ rb_gi_arguments_fill_raw_result_interface(RBGIArguments *args,
     case GI_INFO_TYPE_BOXED:
         rb_raise(rb_eNotImpError,
                  "TODO: %s::%s: out raw result(interface)[%s]: <%s>",
-                 g_base_info_get_namespace(args->info),
-                 g_base_info_get_name(args->info),
+                 args->namespace,
+                 args->name,
                  g_info_type_to_string(interface_type),
                  g_base_info_get_name(interface_info));
         break;
     case GI_INFO_TYPE_ENUM:
-      if (is_return_value) {
-          ffi_return_value->v_ulong = argument->v_int;
-      } else {
-          *((gint *)raw_result) = argument->v_int;
+      {
+          gint32 value;
+          GType gtype = g_registered_type_info_get_g_type(interface_info);
+          if (gtype == G_TYPE_NONE) {
+              value = NUM2INT(rb_result);
+          } else {
+              value = RVAL2GENUM(rb_result, gtype);
+          }
+          if (is_return_value) {
+              ffi_return_value->v_ulong = value;
+          } else {
+              *((gint *)raw_result) = value;
+          }
       }
       break;
     case GI_INFO_TYPE_FLAGS:
@@ -561,14 +622,9 @@ rb_gi_arguments_fill_raw_result(RBGIArguments *args,
                                 GITransfer transfer,
                                 gboolean is_return_value)
 {
-    GIArgument argument;
-    GITypeTag type_tag;
     GIFFIReturnValue *ffi_return_value = raw_result;
+    GITypeTag type_tag;
 
-    rb_gi_value_argument_from_ruby(&argument,
-                                   type_info,
-                                   rb_result,
-                                   rb_result);
     type_tag = g_type_info_get_tag(type_info);
     switch (type_tag) {
       case GI_TYPE_TAG_VOID:
@@ -576,90 +632,111 @@ rb_gi_arguments_fill_raw_result(RBGIArguments *args,
         break;
       case GI_TYPE_TAG_BOOLEAN:
         if (is_return_value) {
-            ffi_return_value->v_ulong = argument.v_boolean;
+            ffi_return_value->v_ulong = RVAL2CBOOL(rb_result);
         } else {
-            *((gboolean *)raw_result) = argument.v_boolean;
+            *((gboolean *)raw_result) = RVAL2CBOOL(rb_result);
         }
         break;
       case GI_TYPE_TAG_INT8:
         if (is_return_value) {
-            ffi_return_value->v_long = argument.v_int8;
+            ffi_return_value->v_long = NUM2CHR(rb_result);
         } else {
-            *((gint8 *)raw_result) = argument.v_int8;
+            *((gint8 *)raw_result) = NUM2CHR(rb_result);
         }
         break;
       case GI_TYPE_TAG_UINT8:
         if (is_return_value) {
-            ffi_return_value->v_ulong = argument.v_uint8;
+            ffi_return_value->v_ulong = (guint8)NUM2CHR(rb_result);
         } else {
-            *((guint8 *)raw_result) = argument.v_uint8;
+            *((guint8 *)raw_result) = (guint8)NUM2CHR(rb_result);
         }
         break;
       case GI_TYPE_TAG_INT16:
         if (is_return_value) {
-            ffi_return_value->v_long = argument.v_int16;
+            ffi_return_value->v_long = NUM2SHORT(rb_result);
         } else {
-            *((gint16 *)raw_result) = argument.v_int16;
+            *((gint16 *)raw_result) = NUM2SHORT(rb_result);
         }
         break;
       case GI_TYPE_TAG_UINT16:
         if (is_return_value) {
-            ffi_return_value->v_ulong = argument.v_uint16;
+            ffi_return_value->v_ulong = NUM2USHORT(rb_result);
         } else {
-            *((guint16 *)raw_result) = argument.v_uint16;
+            *((guint16 *)raw_result) = NUM2USHORT(rb_result);
         }
         break;
       case GI_TYPE_TAG_INT32:
         if (is_return_value) {
-            ffi_return_value->v_long = argument.v_int32;
+            ffi_return_value->v_long = NUM2INT(rb_result);
         } else {
-            *((gint32 *)raw_result) = argument.v_int32;
+            *((gint32 *)raw_result) = NUM2INT(rb_result);
         }
         break;
       case GI_TYPE_TAG_UINT32:
         if (is_return_value) {
-            ffi_return_value->v_ulong = argument.v_uint32;
+            ffi_return_value->v_ulong = NUM2UINT(rb_result);
         } else {
-            *((guint32 *)raw_result) = argument.v_uint32;
+            *((guint32 *)raw_result) = NUM2UINT(rb_result);
         }
         break;
       case GI_TYPE_TAG_INT64:
-        *((gint64 *)raw_result) = argument.v_int64;
+        *((gint64 *)raw_result) = NUM2LL(rb_result);
         break;
       case GI_TYPE_TAG_UINT64:
-        *((guint64 *)raw_result) = argument.v_uint64;
+        *((guint64 *)raw_result) = NUM2ULL(rb_result);
         break;
       case GI_TYPE_TAG_FLOAT:
-        *((gfloat *)raw_result) = argument.v_float;
+        *((gfloat *)raw_result) = NUM2DBL(rb_result);
         break;
       case GI_TYPE_TAG_DOUBLE:
-        *((gdouble *)raw_result) = argument.v_double;
+        *((gdouble *)raw_result) = NUM2DBL(rb_result);
         break;
       case GI_TYPE_TAG_GTYPE:
         if (is_return_value) {
-            ffi_return_value->v_ulong = argument.v_size;
+            ffi_return_value->v_ulong = rbgobj_gtype_from_ruby(rb_result);
         } else {
-            *((gsize *)raw_result) = argument.v_size;
+            *((gsize *)raw_result) = rbgobj_gtype_from_ruby(rb_result);
         }
         break;
       case GI_TYPE_TAG_UTF8:
-      case GI_TYPE_TAG_FILENAME:
         if (is_return_value) {
-            ffi_return_value->v_ulong = (gulong)(argument.v_string);
+            ffi_return_value->v_ulong =
+                (gulong)RVAL2CSTR_ACCEPT_SYMBOL(rb_result);
         } else {
-            *((gchar **)raw_result) = argument.v_string;
+            *((gchar **)raw_result) =
+                (gchar *)RVAL2CSTR_ACCEPT_SYMBOL(rb_result);
         }
         break;
+      case GI_TYPE_TAG_FILENAME:
+        rb_raise(rb_eNotImpError,
+                 "TODO: %s::%s: out raw result(%s)",
+                 args->namespace,
+                 args->name,
+                 g_type_tag_to_string(type_tag));
+        /* if (is_return_value) { */
+        /*     ffi_return_value->v_ulong = */
+        /*         (gulong)rbg_filename_from_ruby(rb_result); */
+        /* } else { */
+        /*     *((gchar **)raw_result) = */
+        /*         (gchar *)rbg_filename_from_ruby(rb_result); */
+        /* } */
+        /* free */
+        break;
       case GI_TYPE_TAG_ARRAY:
-        if (is_return_value) {
-            ffi_return_value->v_ulong = (gulong)(argument.v_pointer);
-        } else {
-            *((gpointer *)raw_result) = argument.v_pointer;
-        }
+        rb_raise(rb_eNotImpError,
+                 "TODO: %s::%s: out raw result(%s)",
+                 args->namespace,
+                 args->name,
+                 g_type_tag_to_string(type_tag));
+        /* if (is_return_value) { */
+        /*     ffi_return_value->v_ulong = (gulong)(argument.v_pointer); */
+        /* } else { */
+        /*     *((gpointer *)raw_result) = argument.v_pointer; */
+        /* } */
         break;
       case GI_TYPE_TAG_INTERFACE:
         rb_gi_arguments_fill_raw_result_interface(args,
-                                                  &argument,
+                                                  rb_result,
                                                   raw_result,
                                                   type_info,
                                                   transfer,
@@ -668,24 +745,34 @@ rb_gi_arguments_fill_raw_result(RBGIArguments *args,
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
-        if (is_return_value) {
-            ffi_return_value->v_ulong = (gulong)(argument.v_pointer);
-        } else {
-            *((gpointer *)raw_result) = argument.v_pointer;
-        }
+        rb_raise(rb_eNotImpError,
+                 "TODO: %s::%s: out raw result(%s)",
+                 args->namespace,
+                 args->name,
+                 g_type_tag_to_string(type_tag));
+        /* if (is_return_value) { */
+        /*     ffi_return_value->v_ulong = (gulong)(argument.v_pointer); */
+        /* } else { */
+        /*     *((gpointer *)raw_result) = argument.v_pointer; */
+        /* } */
         break;
       case GI_TYPE_TAG_ERROR:
-        if (is_return_value) {
-            ffi_return_value->v_ulong = (gulong)(argument.v_pointer);
-        } else {
-            *((GError **)raw_result) = argument.v_pointer;
-        }
+        rb_raise(rb_eNotImpError,
+                 "TODO: %s::%s: out raw result(%s)",
+                 args->namespace,
+                 args->name,
+                 g_type_tag_to_string(type_tag));
+        /* if (is_return_value) { */
+        /*     ffi_return_value->v_ulong = (gulong)(argument.v_pointer); */
+        /* } else { */
+        /*     *((GError **)raw_result) = argument.v_pointer; */
+        /* } */
         break;
       case GI_TYPE_TAG_UNICHAR:
         if (is_return_value) {
-            ffi_return_value->v_ulong = argument.v_uint32;
+            ffi_return_value->v_ulong = NUM2UINT(rb_result);
         } else {
-            *((gunichar *)raw_result) = argument.v_uint32;
+            *((gunichar *)raw_result) = NUM2UINT(rb_result);
         }
         break;
       default:
