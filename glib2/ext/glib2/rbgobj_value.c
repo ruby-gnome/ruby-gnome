@@ -22,7 +22,9 @@
 #include "rbgprivate.h"
 
 /**********************************************************************/
-#define RG_TARGET_NAMESPACE rbgobj_cValue
+static VALUE rb_cGLibValue;
+
+#define RG_TARGET_NAMESPACE rb_cGLibValue
 #define _SELF(self) RVAL2GVALUE(self)
 
 static ID id_to_s;
@@ -401,8 +403,6 @@ rg_to_s(VALUE self)
 void
 Init_gobject_gvalue(void)
 {
-    VALUE RG_TARGET_NAMESPACE;
-
     id_to_s = rb_intern("to_s");
     qRValueToGValueFunc = g_quark_from_static_string("__ruby_r2g_func__");
     qGValueToRValueFunc = g_quark_from_static_string("__ruby_g2r_func__");
