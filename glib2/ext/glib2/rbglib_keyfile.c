@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
  *  Copyright (C) 2006  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -148,7 +148,7 @@ rg_load_from_dirs(int argc, VALUE *argv, VALUE self)
     GError* error = NULL;
     gboolean success;
     const gchar *file;
-    const gchar **search_dirs;
+    gchar **search_dirs;
     gchar* full_path;
     GKeyFileFlags flags;
 
@@ -162,7 +162,7 @@ rg_load_from_dirs(int argc, VALUE *argv, VALUE self)
 
     if (search_dirs != NULL)
         success = g_key_file_load_from_dirs(_SELF(self), file,
-                                            search_dirs,
+                                            (const gchar **)search_dirs,
                                             &full_path, flags, &error);
     else
         success = g_key_file_load_from_data_dirs(_SELF(self), file,
@@ -516,9 +516,13 @@ rg_set_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
     const gchar *group_name = RVAL2CSTR(rbgroup_name);
     const gchar *key = RVAL2CSTR(rbkey);
     long n;
-    const gchar **list = RVAL2STRS(rblist, n);
+    gchar **list = RVAL2STRS(rblist, n);
 
-    g_key_file_set_string_list(key_file, group_name, key, list, n);
+    g_key_file_set_string_list(key_file,
+                               group_name,
+                               key,
+                               (const gchar * const *)list,
+                               n);
 
     g_free(list);
 
@@ -533,9 +537,14 @@ rg_set_locale_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rbl
     const gchar *key = RVAL2CSTR(rbkey);
     const gchar *locale = RVAL2CSTR(rblocale);
     long n;
-    const gchar **list = RVAL2STRS(rblist, n);
+    gchar **list = RVAL2STRS(rblist, n);
 
-    g_key_file_set_locale_string_list(key_file, group_name, key, locale, list, n);
+    g_key_file_set_locale_string_list(key_file,
+                                      group_name,
+                                      key,
+                                      locale,
+                                      (const gchar * const *)list,
+                                      n);
 
     g_free(list);
 
