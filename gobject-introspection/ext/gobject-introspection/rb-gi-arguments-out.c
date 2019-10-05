@@ -21,6 +21,225 @@
 #include "rb-gi-private.h"
 
 static void
+rb_gi_arguments_out_free_immediate_value(RBGIArguments *args,
+                                         RBGIArgMetadata *metadata,
+                                         gpointer user_data)
+{
+    xfree(metadata->out_arg->v_pointer);
+}
+
+static void
+rb_gi_arguments_out_free_string(RBGIArguments *args,
+                                RBGIArgMetadata *metadata,
+                                gpointer user_data)
+{
+    gchar **target = metadata->out_arg->v_pointer;
+    if (metadata->transfer != GI_TRANSFER_NOTHING) {
+        g_free(*target);
+    }
+    xfree(target);
+}
+
+static void
+rb_gi_arguments_out_free_array_c_uint8(RBGIArguments *args,
+                                       RBGIArgMetadata *metadata,
+                                       gpointer user_data)
+{
+    guint8 **target = metadata->out_arg->v_pointer;
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        break;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
+        g_free(*target);
+        break;
+      default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+    }
+    xfree(target);
+}
+
+static void
+rb_gi_arguments_out_free_array_c_string(RBGIArguments *args,
+                                        RBGIArgMetadata *metadata,
+                                        gpointer user_data)
+{
+    gchar ***target = metadata->out_arg->v_pointer;
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        break;
+      case GI_TRANSFER_CONTAINER:
+        g_free(*target);
+        break;
+      case GI_TRANSFER_EVERYTHING:
+        g_strfreev(*target);
+        break;
+      default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+    }
+    xfree(target);
+}
+
+static void
+rb_gi_arguments_out_free_array_c_interface(RBGIArguments *args,
+                                           RBGIArgMetadata *metadata,
+                                           gpointer user_data)
+{
+    gpointer **target = metadata->out_arg->v_pointer;
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        break;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
+      default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+    }
+    xfree(target);
+}
+
+static void
+rb_gi_arguments_out_free_array_array_interface_struct(RBGIArguments *args,
+                                                      RBGIArgMetadata *metadata,
+                                                      gpointer user_data)
+{
+    GArray *target = metadata->out_arg->v_pointer;
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        break;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
+      default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+    }
+    g_array_free(target, TRUE);
+}
+
+static void
+rb_gi_arguments_out_free_interface_struct(RBGIArguments *args,
+                                          RBGIArgMetadata *metadata,
+                                          gpointer user_data)
+{
+    GHashTable *target = metadata->out_arg->v_pointer;
+    if (metadata->transfer != GI_TRANSFER_NOTHING) {
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+    }
+    xfree(target);
+}
+
+static void
+rb_gi_arguments_out_free_interface_object(RBGIArguments *args,
+                                          RBGIArgMetadata *metadata,
+                                          gpointer user_data)
+{
+    GObject **target = metadata->out_arg->v_pointer;
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        break;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
+        if (*target) {
+            g_object_unref(*target);
+        }
+        break;
+      default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+    }
+    xfree(target);
+}
+
+static void
+rb_gi_arguments_out_free_list(RBGIArguments *args,
+                              RBGIArgMetadata *metadata,
+                              gpointer user_data)
+{
+    gpointer *target = metadata->out_arg->v_pointer;
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        break;
+      case GI_TRANSFER_CONTAINER:
+        if (metadata->type.tag == GI_TYPE_TAG_GLIST) {
+            g_list_free(*((GList **)target));
+        } else {
+            g_slist_free(*((GSList **)target));
+        }
+        break;
+      default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+        break;
+    }
+    xfree(target);
+}
+
+static void
+rb_gi_arguments_out_free_hash(RBGIArguments *args,
+                              RBGIArgMetadata *metadata,
+                              gpointer user_data)
+{
+    GHashTable *target = metadata->out_arg->v_pointer;
+    if (metadata->transfer != GI_TRANSFER_NOTHING) {
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+    }
+    xfree(target);
+}
+
+static void
+rb_gi_arguments_out_free_error(RBGIArguments *args,
+                               RBGIArgMetadata *metadata,
+                               gpointer user_data)
+{
+    GError **target = metadata->out_arg->v_pointer;
+    if (metadata->transfer != GI_TRANSFER_NOTHING) {
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+    }
+    xfree(target);
+}
+
+static void
 rb_gi_arguments_out_init_arg_array_c(RBGIArguments *args,
                                      RBGIArgMetadata *metadata)
 {
@@ -32,11 +251,14 @@ rb_gi_arguments_out_init_arg_array_c(RBGIArguments *args,
       case GI_TYPE_TAG_BOOLEAN:
       case GI_TYPE_TAG_INT8:
         rb_raise(rb_eNotImpError,
-                 "TODO: allocates GIArgument(array)[c][%s] for output",
+                 "TODO: [%s] %s allocates GIArgument(array)[c][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
                  g_type_tag_to_string(metadata->element_type.tag));
         break;
       case GI_TYPE_TAG_UINT8:
-        argument->v_pointer = xmalloc(sizeof(guint8 *));
+        argument->v_pointer = ALLOC(guint8 *);
+        metadata->free_func = rb_gi_arguments_out_free_array_c_uint8;
         break;
       case GI_TYPE_TAG_INT16:
       case GI_TYPE_TAG_UINT16:
@@ -48,20 +270,26 @@ rb_gi_arguments_out_init_arg_array_c(RBGIArguments *args,
       case GI_TYPE_TAG_DOUBLE:
       case GI_TYPE_TAG_GTYPE:
         rb_raise(rb_eNotImpError,
-                 "TODO: allocates GIArgument(array)[c][%s] for output",
+                 "TODO: [%s] %s allocates GIArgument(array)[c][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
                  g_type_tag_to_string(metadata->element_type.tag));
         break;
       case GI_TYPE_TAG_UTF8:
-        argument->v_pointer = xmalloc(sizeof(gchar **));
+        argument->v_pointer = ALLOC(gchar **);
+        metadata->free_func = rb_gi_arguments_out_free_array_c_string;
         break;
       case GI_TYPE_TAG_FILENAME:
       case GI_TYPE_TAG_ARRAY:
         rb_raise(rb_eNotImpError,
-                 "TODO: allocates GIArgument(array)[c][%s] for output",
+                 "TODO: [%s] %s allocates GIArgument(array)[c][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
                  g_type_tag_to_string(metadata->element_type.tag));
         break;
       case GI_TYPE_TAG_INTERFACE:
-        argument->v_pointer = xmalloc(sizeof(gpointer *));
+        argument->v_pointer = ALLOC(gpointer *);
+        metadata->free_func = rb_gi_arguments_out_free_array_c_interface;
         break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
@@ -69,7 +297,9 @@ rb_gi_arguments_out_init_arg_array_c(RBGIArguments *args,
       case GI_TYPE_TAG_ERROR:
       case GI_TYPE_TAG_UNICHAR:
         rb_raise(rb_eNotImpError,
-                 "TODO: allocates GIArgument(array)[c][%s] for output",
+                 "TODO: [%s] %s allocates GIArgument(array)[c][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
                  g_type_tag_to_string(metadata->element_type.tag));
         break;
       default:
@@ -90,7 +320,10 @@ rb_gi_arguments_out_init_arg_array_array_interface(RBGIArguments *args,
       case GI_INFO_TYPE_FUNCTION:
       case GI_INFO_TYPE_CALLBACK:
         rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[array][interface(%s)](%s) -> Ruby",
+                 "TODO: [%s] %s allocates "
+                 "GIArgument(array)[array][interface(%s)](%s)",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
                  g_info_type_to_string(metadata->element_type.interface_type),
                  g_type_name(metadata->element_type.interface_gtype));
         break;
@@ -105,8 +338,10 @@ rb_gi_arguments_out_init_arg_array_array_interface(RBGIArguments *args,
             argument->v_pointer = g_array_new(metadata->zero_terminated_p,
                                               TRUE,
                                               struct_size);
-            break;
+            metadata->free_func =
+                rb_gi_arguments_out_free_array_array_interface_struct;
         }
+        break;
       case GI_INFO_TYPE_BOXED:
       case GI_INFO_TYPE_ENUM:
       case GI_INFO_TYPE_FLAGS:
@@ -124,7 +359,10 @@ rb_gi_arguments_out_init_arg_array_array_interface(RBGIArguments *args,
       case GI_INFO_TYPE_TYPE:
       case GI_INFO_TYPE_UNRESOLVED:
         rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[array][interface(%s)](%s) -> Ruby",
+                 "TODO: [%s] %s allocates "
+                 "GIArgument(array)[array][interface(%s)](%s)",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
                  g_info_type_to_string(metadata->element_type.interface_type),
                  g_type_name(metadata->element_type.interface_gtype));
         break;
@@ -156,7 +394,9 @@ rb_gi_arguments_out_init_arg_array_array(RBGIArguments *args,
       case GI_TYPE_TAG_FILENAME:
       case GI_TYPE_TAG_ARRAY:
         rb_raise(rb_eNotImpError,
-                 "TODO: allocates GIArgument(array)[array][%s] for output",
+                 "TODO: [%s] %s allocates GIArgument(array)[array][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
                  g_type_tag_to_string(metadata->element_type.tag));
         break;
       case GI_TYPE_TAG_INTERFACE:
@@ -168,7 +408,9 @@ rb_gi_arguments_out_init_arg_array_array(RBGIArguments *args,
       case GI_TYPE_TAG_ERROR:
       case GI_TYPE_TAG_UNICHAR:
         rb_raise(rb_eNotImpError,
-                 "TODO: allocates GIArgument(array)[array][%s] for output",
+                 "TODO: [%s] %s allocates GIArgument(array)[array][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
                  g_type_tag_to_string(metadata->element_type.tag));
         break;
       default:
@@ -190,12 +432,16 @@ rb_gi_arguments_out_init_arg_array(RBGIArguments *args,
         break;
       case GI_ARRAY_TYPE_PTR_ARRAY:
         rb_raise(rb_eNotImpError,
-                 "TODO: allocates GIArgument(array)[ptr-array][%s] for output",
+                 "TODO: [%s] %s allocates GIArgument(array)[ptr-array][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
                  g_type_tag_to_string(metadata->element_type.tag));
         break;
       case GI_ARRAY_TYPE_BYTE_ARRAY:
         rb_raise(rb_eNotImpError,
-                 "TODO: allocates GIArgument(array)[byte-array][%s] for output",
+                 "TODO: [%s] %s allocates GIArgument(array)[byte-array][%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
                  g_type_tag_to_string(metadata->element_type.tag));
         break;
       default:
@@ -236,6 +482,7 @@ rb_gi_arguments_out_init_arg_interface(RBGIArguments *args,
             struct_size = g_struct_info_get_size(metadata->type.interface_info);
             argument->v_pointer = xmalloc(struct_size);
             memset(argument->v_pointer, 0, struct_size);
+            metadata->free_func = rb_gi_arguments_out_free_interface_struct;
         }
         break;
       case GI_INFO_TYPE_BOXED:
@@ -248,6 +495,7 @@ rb_gi_arguments_out_init_arg_interface(RBGIArguments *args,
             gint *pointer = ALLOC(gint);
             *pointer = 0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_INFO_TYPE_FLAGS:
@@ -255,6 +503,7 @@ rb_gi_arguments_out_init_arg_interface(RBGIArguments *args,
             guint *pointer = ALLOC(guint);
             *pointer = 0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_INFO_TYPE_OBJECT:
@@ -263,6 +512,7 @@ rb_gi_arguments_out_init_arg_interface(RBGIArguments *args,
             gpointer *pointer = ALLOC(gpointer);
             *pointer = NULL;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_interface_object;
         }
         break;
       case GI_INFO_TYPE_CONSTANT:
@@ -300,6 +550,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             gpointer *pointer = ALLOC(gpointer);
             *pointer = NULL;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_BOOLEAN:
@@ -307,6 +558,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             gboolean *pointer = ALLOC(gboolean);
             *pointer = FALSE;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_INT8:
@@ -314,6 +566,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             gint8 *pointer = ALLOC(gint8);
             *pointer = 0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_UINT8:
@@ -321,6 +574,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             guint8 *pointer = ALLOC(guint8);
             *pointer = 0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_INT16:
@@ -328,6 +582,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             gint16 *pointer = ALLOC(gint16);
             *pointer = 0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_UINT16:
@@ -335,6 +590,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             guint16 *pointer = ALLOC(guint16);
             *pointer = 0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_INT32:
@@ -342,6 +598,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             gint32 *pointer = ALLOC(gint32);
             *pointer = 0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_UINT32:
@@ -349,6 +606,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             guint32 *pointer = ALLOC(guint32);
             *pointer = 0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_INT64:
@@ -356,6 +614,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             gint64 *pointer = ALLOC(gint64);
             *pointer = 0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_UINT64:
@@ -363,6 +622,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             guint64 *pointer = ALLOC(guint64);
             *pointer = 0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_FLOAT:
@@ -370,6 +630,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             gfloat *pointer = ALLOC(gfloat);
             *pointer = 0.0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_DOUBLE:
@@ -377,6 +638,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             gdouble *pointer = ALLOC(gdouble);
             *pointer = 0.0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_GTYPE:
@@ -384,6 +646,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             GType *pointer = ALLOC(GType);
             *pointer = G_TYPE_INVALID;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       case GI_TYPE_TAG_UTF8:
@@ -392,6 +655,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             gchar **pointer = ALLOC(gchar *);
             *pointer = NULL;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_string;
         }
         break;
       case GI_TYPE_TAG_ARRAY:
@@ -402,11 +666,19 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
         break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
+        {
+            gpointer *pointer = ALLOC(gpointer);
+            *pointer = NULL;
+            argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_list;
+        }
+        break;
       case GI_TYPE_TAG_GHASH:
         {
             gpointer *pointer = ALLOC(gpointer);
             *pointer = NULL;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_hash;
         }
         break;
       case GI_TYPE_TAG_ERROR:
@@ -414,6 +686,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             GError **pointer = ALLOC(GError *);
             *pointer = NULL;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_error;
         }
         break;
       case GI_TYPE_TAG_UNICHAR:
@@ -421,6 +694,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
             gunichar *pointer = ALLOC(gunichar);
             *pointer = 0;
             argument->v_pointer = pointer;
+            metadata->free_func = rb_gi_arguments_out_free_immediate_value;
         }
         break;
       default:
@@ -453,277 +727,6 @@ rb_gi_arguments_out_init(RBGIArguments *args)
     }
 }
 
-static void
-rb_gi_arguments_out_clear_arg_array_c(RBGIArguments *args,
-                                      RBGIArgMetadata *metadata)
-{
-    GIArgument *argument = &(g_array_index(args->out_args,
-                                           GIArgument,
-                                           metadata->out_arg_index));
-    switch (metadata->element_type.tag) {
-      case GI_TYPE_TAG_VOID:
-      case GI_TYPE_TAG_BOOLEAN:
-      case GI_TYPE_TAG_INT8:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free out GIArgument(array)[c][%s][%s]",
-                 g_type_tag_to_string(metadata->element_type.tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_TYPE_TAG_UINT8:
-        if (metadata->transfer == GI_TRANSFER_EVERYTHING) {
-            g_free(*((guint8 **)(argument->v_pointer)));
-        }
-        xfree(argument->v_pointer);
-        break;
-      case GI_TYPE_TAG_INT16:
-      case GI_TYPE_TAG_UINT16:
-      case GI_TYPE_TAG_INT32:
-      case GI_TYPE_TAG_UINT32:
-      case GI_TYPE_TAG_INT64:
-      case GI_TYPE_TAG_UINT64:
-      case GI_TYPE_TAG_FLOAT:
-      case GI_TYPE_TAG_DOUBLE:
-      case GI_TYPE_TAG_GTYPE:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free out GIArgument(array)[c][%s][%s]",
-                 g_type_tag_to_string(metadata->element_type.tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_TYPE_TAG_UTF8:
-        if (metadata->transfer != GI_TRANSFER_NOTHING) {
-            g_free(*((gchar **)argument->v_pointer));
-        }
-        xfree(argument->v_pointer);
-        break;
-      case GI_TYPE_TAG_FILENAME:
-      case GI_TYPE_TAG_ARRAY:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free out GIArgument(array)[c][%s][%s]",
-                 g_type_tag_to_string(metadata->element_type.tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_TYPE_TAG_INTERFACE:
-        if (metadata->transfer == GI_TRANSFER_EVERYTHING) {
-            rb_raise(rb_eNotImpError,
-                     "TODO: free out transfer GIArgument(array)[c][%s][%s]",
-                     g_type_tag_to_string(metadata->element_type.tag),
-                     rb_gi_transfer_to_string(metadata->transfer));
-        }
-        if (metadata->transfer != GI_TRANSFER_NOTHING) {
-            g_free(*((gpointer *)argument->v_pointer));
-        }
-        xfree(argument->v_pointer);
-        break;
-      case GI_TYPE_TAG_GLIST:
-      case GI_TYPE_TAG_GSLIST:
-      case GI_TYPE_TAG_GHASH:
-      case GI_TYPE_TAG_ERROR:
-      case GI_TYPE_TAG_UNICHAR:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free out GIArgument(array)[c][%s][%s]",
-                 g_type_tag_to_string(metadata->element_type.tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      default:
-        g_assert_not_reached();
-        break;
-    }
-}
-
-static void
-rb_gi_arguments_out_clear_arg_array(RBGIArguments *args,
-                                    RBGIArgMetadata *metadata)
-{
-    GIArgument *argument = &(g_array_index(args->out_args,
-                                           GIArgument,
-                                           metadata->out_arg_index));
-    switch (metadata->array_type) {
-      case GI_ARRAY_TYPE_C:
-        rb_gi_arguments_out_clear_arg_array_c(args, metadata);
-        break;
-      case GI_ARRAY_TYPE_ARRAY:
-        if (metadata->transfer != GI_TRANSFER_NOTHING) {
-            rb_raise(rb_eNotImpError,
-                     "TODO: "
-                     "free out transfer GIArgument(array)[ptr-array][%s][%s]",
-                     g_type_tag_to_string(metadata->element_type.tag),
-                     rb_gi_transfer_to_string(metadata->transfer));
-        }
-        g_array_free(argument->v_pointer, TRUE);
-        break;
-      case GI_ARRAY_TYPE_PTR_ARRAY:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free out GIArgument(array)[ptr-array][%s][%s]",
-                 g_type_tag_to_string(metadata->element_type.tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_ARRAY_TYPE_BYTE_ARRAY:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free out GIArgument(array)[byte-array][%s][%s]",
-                 g_type_tag_to_string(metadata->element_type.tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      default:
-        g_assert_not_reached();
-        break;
-    }
-}
-
-static void
-rb_gi_arguments_out_clear_arg_interface(RBGIArguments *args,
-                                        RBGIArgMetadata *metadata)
-{
-    GIArgument *argument = &(g_array_index(args->out_args,
-                                           GIArgument,
-                                           metadata->out_arg_index));
-    switch (metadata->type.interface_type) {
-      case GI_INFO_TYPE_INVALID:
-      case GI_INFO_TYPE_FUNCTION:
-      case GI_INFO_TYPE_CALLBACK:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free out transfer GIArgument(interface)[%s][%s]",
-                 g_info_type_to_string(metadata->type.interface_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_INFO_TYPE_STRUCT:
-        /* Should we care gtype?
-           Related: rb_gi_arguments_out_init_arg_interface() */
-        xfree(argument->v_pointer);
-        break;
-      case GI_INFO_TYPE_BOXED:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free out transfer GIArgument(interface)[%s][%s]",
-                 g_info_type_to_string(metadata->type.interface_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      case GI_INFO_TYPE_ENUM:
-      case GI_INFO_TYPE_FLAGS:
-        break;
-      case GI_INFO_TYPE_OBJECT:
-        switch (metadata->transfer) {
-          case GI_TRANSFER_NOTHING:
-            break;
-          case GI_TRANSFER_CONTAINER:
-          case GI_TRANSFER_EVERYTHING:
-            {
-                GObject *object = *((GObject **)argument->v_pointer);
-                if (object) {
-                    g_object_unref(object);
-                }
-            }
-            break;
-          default:
-            rb_raise(rb_eNotImpError,
-                     "TODO: free out transfer GIArgument(interface)[%s][%s]",
-                     g_info_type_to_string(metadata->type.interface_type),
-                     rb_gi_transfer_to_string(metadata->transfer));
-            break;
-        }
-        xfree(argument->v_pointer);
-        break;
-      case GI_INFO_TYPE_INTERFACE:
-        if (metadata->transfer != GI_TRANSFER_NOTHING) {
-            rb_raise(rb_eNotImpError,
-                     "TODO: free out transfer GIArgument(interface)[%s][%s]",
-                     g_info_type_to_string(metadata->type.interface_type),
-                     rb_gi_transfer_to_string(metadata->transfer));
-        }
-        xfree(argument->v_pointer);
-        break;
-      case GI_INFO_TYPE_CONSTANT:
-      case GI_INFO_TYPE_INVALID_0:
-      case GI_INFO_TYPE_UNION:
-      case GI_INFO_TYPE_VALUE:
-      case GI_INFO_TYPE_SIGNAL:
-      case GI_INFO_TYPE_VFUNC:
-      case GI_INFO_TYPE_PROPERTY:
-      case GI_INFO_TYPE_FIELD:
-      case GI_INFO_TYPE_ARG:
-      case GI_INFO_TYPE_TYPE:
-      case GI_INFO_TYPE_UNRESOLVED:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free out transfer GIArgument(interface)[%s][%s]",
-                 g_info_type_to_string(metadata->type.interface_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
-        break;
-      default:
-        g_assert_not_reached();
-        break;
-    }
-}
-
-static void
-rb_gi_arguments_out_clear_arg(RBGIArguments *args,
-                              RBGIArgMetadata *metadata)
-{
-    GIArgument *argument = &(g_array_index(args->out_args,
-                                           GIArgument,
-                                           metadata->out_arg_index));
-    switch (metadata->type.tag) {
-      case GI_TYPE_TAG_VOID:
-      case GI_TYPE_TAG_BOOLEAN:
-      case GI_TYPE_TAG_INT8:
-      case GI_TYPE_TAG_UINT8:
-      case GI_TYPE_TAG_INT16:
-      case GI_TYPE_TAG_UINT16:
-      case GI_TYPE_TAG_INT32:
-      case GI_TYPE_TAG_UINT32:
-      case GI_TYPE_TAG_INT64:
-      case GI_TYPE_TAG_UINT64:
-      case GI_TYPE_TAG_FLOAT:
-      case GI_TYPE_TAG_DOUBLE:
-      case GI_TYPE_TAG_GTYPE:
-        xfree(argument->v_pointer);
-        break;
-      case GI_TYPE_TAG_UTF8:
-        if (metadata->transfer != GI_TRANSFER_NOTHING) {
-            g_free(*((gchar **)argument->v_pointer));
-        }
-        xfree(argument->v_pointer);
-        break;
-      case GI_TYPE_TAG_FILENAME:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free out GIArgument(%s)",
-                 g_type_tag_to_string(metadata->type.tag));
-        break;
-      case GI_TYPE_TAG_ARRAY:
-        rb_gi_arguments_out_clear_arg_array(args, metadata);
-        break;
-      case GI_TYPE_TAG_INTERFACE:
-        rb_gi_arguments_out_clear_arg_interface(args, metadata);
-        break;
-      case GI_TYPE_TAG_GLIST:
-        if (metadata->transfer == GI_TRANSFER_EVERYTHING) {
-            rb_raise(rb_eNotImpError,
-                     "TODO: free out transfer GIArgument(%s)[%s]",
-                     g_type_tag_to_string(metadata->type.tag),
-                     rb_gi_transfer_to_string(metadata->transfer));
-        }
-        if (metadata->transfer != GI_TRANSFER_NOTHING) {
-            g_list_free(*((GList **)argument->v_pointer));
-        }
-        xfree(argument->v_pointer);
-        break;
-      case GI_TYPE_TAG_GSLIST:
-      case GI_TYPE_TAG_GHASH:
-      case GI_TYPE_TAG_ERROR:
-        if (metadata->transfer != GI_TRANSFER_NOTHING) {
-            rb_raise(rb_eNotImpError,
-                     "TODO: free out transfer GIArgument(%s)[%s]",
-                     g_type_tag_to_string(metadata->type.tag),
-                     rb_gi_transfer_to_string(metadata->transfer));
-        }
-        xfree(argument->v_pointer);
-        break;
-      case GI_TYPE_TAG_UNICHAR:
-        xfree(argument->v_pointer);
-        break;
-      default:
-        g_assert_not_reached();
-        break;
-    }
-}
-
 void
 rb_gi_arguments_out_clear(RBGIArguments *args)
 {
@@ -737,11 +740,9 @@ rb_gi_arguments_out_clear(RBGIArguments *args)
             continue;
         }
 
-        if (!args->rb_mode_p) {
-            continue;
+        if (metadata->free_func) {
+            metadata->free_func(args, metadata, metadata->free_func_data);
         }
-
-        rb_gi_arguments_out_clear_arg(args, metadata);
     }
 }
 
