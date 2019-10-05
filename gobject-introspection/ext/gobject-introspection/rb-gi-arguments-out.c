@@ -142,25 +142,29 @@ rb_gi_arguments_out_free_interface_struct(RBGIArguments *args,
                                           gpointer user_data)
 {
     gpointer *target = metadata->out_arg->v_pointer;
-    if (*target) {
-        switch (metadata->transfer) {
-          case GI_TRANSFER_NOTHING:
+    GType gtype = metadata->type.interface_gtype;
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        break;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
+        if (gtype == G_TYPE_VALUE) {
+            g_value_unset(target);
             break;
-          case GI_TRANSFER_CONTAINER:
-          case GI_TRANSFER_EVERYTHING:
-            if (metadata->type.interface_gtype != G_TYPE_INVALID) {
-                g_boxed_free(metadata->type.interface_gtype, *target);
-                break;
+        } else if (G_TYPE_IS_BOXED(gtype)) {
+            if (*target) {
+                g_boxed_free(gtype, *target);
             }
-          default:
-            rb_raise(rb_eNotImpError,
-                     "TODO: [%s] %s free GIArgument(%s)[%s]",
-                     metadata->name,
-                     rb_gi_direction_to_string(metadata->direction),
-                     g_type_tag_to_string(metadata->type.tag),
-                     rb_gi_transfer_to_string(metadata->transfer));
             break;
         }
+      default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
+                 g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_transfer_to_string(metadata->transfer));
+        break;
     }
     xfree(target);
 }
