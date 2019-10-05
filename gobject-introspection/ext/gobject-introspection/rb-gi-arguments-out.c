@@ -243,9 +243,7 @@ static void
 rb_gi_arguments_out_init_arg_array_c(RBGIArguments *args,
                                      RBGIArgMetadata *metadata)
 {
-    GIArgument *argument = &(g_array_index(args->out_args,
-                                           GIArgument,
-                                           metadata->out_arg_index));
+    GIArgument *argument = metadata->out_arg;
     switch (metadata->element_type.tag) {
       case GI_TYPE_TAG_VOID:
       case GI_TYPE_TAG_BOOLEAN:
@@ -312,9 +310,7 @@ static void
 rb_gi_arguments_out_init_arg_array_array_interface(RBGIArguments *args,
                                                    RBGIArgMetadata *metadata)
 {
-    GIArgument *argument = &(g_array_index(args->out_args,
-                                           GIArgument,
-                                           metadata->out_arg_index));
+    GIArgument *argument = metadata->out_arg;
     switch (metadata->element_type.interface_type) {
       case GI_INFO_TYPE_INVALID:
       case GI_INFO_TYPE_FUNCTION:
@@ -454,17 +450,7 @@ static void
 rb_gi_arguments_out_init_arg_interface(RBGIArguments *args,
                                        RBGIArgMetadata *metadata)
 {
-    GIArgument *argument = &(g_array_index(args->out_args,
-                                           GIArgument,
-                                           metadata->out_arg_index));
-    /* TODO: Can we use the following code? */
-    /*
-    if (!metadata->caller_allocates_p) {
-        argument->v_pointer = ALLOC(gpointer);
-        return;
-    }
-    */
-
+    GIArgument *argument = metadata->out_arg;
     switch (metadata->type.interface_type) {
       case GI_INFO_TYPE_INVALID:
       case GI_INFO_TYPE_FUNCTION:
@@ -540,9 +526,7 @@ static void
 rb_gi_arguments_out_init_arg(RBGIArguments *args,
                              RBGIArgMetadata *metadata)
 {
-    GIArgument *argument = &(g_array_index(args->out_args,
-                                           GIArgument,
-                                           metadata->out_arg_index));
+    GIArgument *argument = metadata->out_arg;
     memset(argument, 0, sizeof(GIArgument));
     switch (metadata->type.tag) {
       case GI_TYPE_TAG_VOID:
