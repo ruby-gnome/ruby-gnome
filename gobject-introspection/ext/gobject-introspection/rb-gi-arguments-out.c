@@ -100,6 +100,8 @@ rb_gi_arguments_out_free_array_c_interface(RBGIArguments *args,
       case GI_TRANSFER_NOTHING:
         break;
       case GI_TRANSFER_CONTAINER:
+        g_free(*target);
+        break;
       case GI_TRANSFER_EVERYTHING:
       default:
         rb_raise(rb_eNotImpError,
