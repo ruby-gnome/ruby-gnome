@@ -149,7 +149,7 @@ rb_gi_arguments_out_free_interface_struct(RBGIArguments *args,
       case GI_TRANSFER_CONTAINER:
       case GI_TRANSFER_EVERYTHING:
         if (gtype == G_TYPE_VALUE) {
-            g_value_unset(target);
+            g_value_unset((GValue *)target);
             break;
         } else if (G_TYPE_IS_BOXED(gtype)) {
             if (*target) {
