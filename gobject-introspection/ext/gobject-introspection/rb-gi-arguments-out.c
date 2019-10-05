@@ -141,14 +141,24 @@ rb_gi_arguments_out_free_interface_struct(RBGIArguments *args,
                                           RBGIArgMetadata *metadata,
                                           gpointer user_data)
 {
-    GHashTable *target = metadata->out_arg->v_pointer;
-    if (metadata->transfer != GI_TRANSFER_NOTHING) {
+    gpointer *target = metadata->out_arg->v_pointer;
+    switch (metadata->transfer) {
+      case GI_TRANSFER_NOTHING:
+        break;
+      case GI_TRANSFER_CONTAINER:
+      case GI_TRANSFER_EVERYTHING:
+        if (metadata->type.interface_gtype != G_TYPE_INVALID) {
+            g_boxed_free(metadata->type.interface_gtype, *target);
+            break;
+        }
+      default:
         rb_raise(rb_eNotImpError,
                  "TODO: [%s] %s free GIArgument(%s)[%s]",
                  metadata->name,
                  rb_gi_direction_to_string(metadata->direction),
                  g_type_tag_to_string(metadata->type.tag),
                  rb_gi_transfer_to_string(metadata->transfer));
+        break;
     }
     xfree(target);
 }
