@@ -25,6 +25,7 @@ class TestGtkIconTheme < Test::Unit::TestCase
     end
 
     def test_context
+      pp @theme.icons("Actions").sort
       assert_operator(@theme.icons("Actions"), :include?, "edit-find")
     end
   end
