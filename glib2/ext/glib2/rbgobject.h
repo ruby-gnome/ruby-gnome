@@ -306,8 +306,10 @@ extern VALUE rbgobj_flags_alloc_func(VALUE klass);
   extern GType g_source_get_type(void);
 #endif
 
-#define G_TYPE_POLL_FD (g_poll_fd_get_type())
-extern GType g_poll_fd_get_type(void);
+#if !GLIB_CHECK_VERSION(2, 36, 0)
+  #define G_TYPE_POLLFD (g_pollfd_get_type())
+  extern GType g_pollfd_get_type(void);
+#endif
 
 /* rbglib_keyfile.c */
 #if !GLIB_CHECK_VERSION(2,31,2)

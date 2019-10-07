@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -21,7 +21,7 @@
 
 #include "rbgprivate.h"
 
-/*****************************************/
+#if !GLIB_CHECK_VERSION(2, 36, 0)
 static GPollFD*
 pollfd_copy(const GPollFD* pollfd)
 {
@@ -34,7 +34,7 @@ pollfd_copy(const GPollFD* pollfd)
 }
 
 GType
-g_poll_fd_get_type(void)
+g_pollfd_get_type(void)
 {
   static GType our_type = 0;
   if (our_type == 0)
@@ -43,10 +43,10 @@ g_poll_fd_get_type(void)
                     (GBoxedFreeFunc)g_free);
   return our_type;
 }
-/*****************************************/
+#endif
 
 #define RG_TARGET_NAMESPACE cPollFD
-#define _SELF(s) ((GPollFD*)RVAL2BOXED(s, G_TYPE_POLL_FD))
+#define _SELF(s) ((GPollFD*)RVAL2BOXED(s, G_TYPE_POLLFD))
 
 static VALUE
 rg_initialize(VALUE self, VALUE fd, VALUE events, VALUE revents)
@@ -56,7 +56,7 @@ rg_initialize(VALUE self, VALUE fd, VALUE events, VALUE revents)
     gfd.events = NUM2INT(events);
     gfd.revents = NUM2INT(revents);
 
-    G_INITIALIZE(self, g_boxed_copy(G_TYPE_POLL_FD, &gfd));
+    G_INITIALIZE(self, g_boxed_copy(G_TYPE_POLLFD, &gfd));
     return Qnil;
 }
 
@@ -99,7 +99,7 @@ rg_revents(VALUE self)
 void
 Init_glib_poll_fd(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_POLL_FD, "PollFD", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_POLLFD, "PollFD", mGLib);
 
     RG_DEF_METHOD(initialize, 3);
 
