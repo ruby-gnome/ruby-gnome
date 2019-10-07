@@ -269,7 +269,7 @@ mc_query_body(VALUE value)
     VALUE ary = rb_ary_new();
 
     for (i = 0; i < args->n_fds; i++)
-        rb_ary_push(ary, BOXED2RVAL(&args->fds[i], G_TYPE_POLL_FD));
+        rb_ary_push(ary, GPOLLFD2RVAL(&args->fds[i]));
 
     return rb_assoc_new(INT2NUM(args->timeout_), ary);
 }
@@ -332,7 +332,7 @@ rg_check(VALUE self, VALUE max_priority)
     printf("ret = %d\n", ret);
     ary = rb_ary_new();
     for (i = 0; i < ret; i++)
-        rb_ary_push(ary, BOXED2RVAL(&fds[i], G_TYPE_POLL_FD));
+        rb_ary_push(ary, GPOLLFD2RVAL(&fds[i]));
 
     g_free(fds);    
     return ary;
@@ -353,7 +353,7 @@ poll_func(GPollFD *ufds, guint nfsd, gint timeout_)
     VALUE func = rb_ivar_get(self, id_poll_func);
     if (NIL_P(func)) return -1;
 
-    return INT2NUM(rb_funcall(func, 3, BOXED2RVAL(ufds, G_TYPE_POLL_FD),
+    return INT2NUM(rb_funcall(func, 3, GPOLLFD2RVAL(ufds),
                               UINT2NUM(nfsd), INT2NUM(timeout_)));
 }
 
@@ -374,7 +374,7 @@ GPollFunc   g_main_context_get_poll_func    (GMainContext *context);
 static VALUE
 rg_add_poll(VALUE self, VALUE fd, VALUE priority)
 {
-    g_main_context_add_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD),
+    g_main_context_add_poll(_SELF(self), RVAL2GPOLLFD(fd),
                             NUM2INT(priority));
     return self;
 }
@@ -382,7 +382,7 @@ rg_add_poll(VALUE self, VALUE fd, VALUE priority)
 static VALUE
 rg_remove_poll(VALUE self, VALUE fd)
 {
-    g_main_context_remove_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD));
+    g_main_context_remove_poll(_SELF(self), RVAL2GPOLLFD(fd));
     return self;
 }
 

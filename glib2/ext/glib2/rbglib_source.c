@@ -178,14 +178,14 @@ rg_set_ready_time(VALUE self, VALUE ready_time)
 static VALUE
 rg_add_poll(VALUE self, VALUE fd)
 {
-    g_source_add_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD));
+    g_source_add_poll(_SELF(self), RVAL2GPOLLFD(fd));
     return self;
 }
 
 static VALUE
 rg_remove_poll(VALUE self, VALUE fd)
 {
-    g_source_remove_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD));
+    g_source_remove_poll(_SELF(self), RVAL2GPOLLFD(fd));
     return self;
 }
 
