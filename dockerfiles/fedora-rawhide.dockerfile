@@ -2,6 +2,7 @@ FROM fedora:rawhide
 
 RUN \
   dnf install -y \
+    adwaita-gtk2-theme \
     dbus-daemon \
     gcc \
     gcc-c++ \
