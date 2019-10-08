@@ -16,11 +16,11 @@
 **/pkg/
 .*
 dist/
+dockerfiles/
 misc/release.rb
 Gemfile.lock
 Gemfile.local
 build/.vagrant/
-travis/
 
 /glib2/ext/glib2/glib-enum-types.c
 /glib2/ext/glib2/glib-enum-types.h

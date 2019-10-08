@@ -39,7 +39,7 @@ matrix:
 install:
   - docker build
       -t ruby-gnome/ruby-gnome-${TYPE}
-      -f travis/Dockerfile.${TYPE}
+      -f dockerfiles/${TYPE}.dockerfile
       .
 
 script:
