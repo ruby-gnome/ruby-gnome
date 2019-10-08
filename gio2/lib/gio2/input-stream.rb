@@ -60,14 +60,12 @@ module Gio
     private
     def read_raw_compatible(buffer)
       if (GLib::VERSION <=> [2, 62, 0]) >= 0
-        _success, _buffer, read_bytes = read_all_raw(buffer)
+        read_bytes, _buffer = read_raw(buffer)
         read_bytes
       elsif (GLib::VERSION <=> [2, 36, 0]) >= 0
-        _success, read_bytes = read_raw(buffer)
-        read_bytes
+        read_raw(buffer)
       else
-        _success, read_bytes = read_raw(buffer, buffer.bytesize)
-        read_bytes
+        read_bytes = read_raw(buffer, buffer.bytesize)
       end
     end
 
