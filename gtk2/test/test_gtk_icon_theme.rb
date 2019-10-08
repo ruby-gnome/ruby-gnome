@@ -28,6 +28,7 @@ class TestGtkIconTheme < Test::Unit::TestCase
   class TestIcons < self
     def test_no_argument
       assert do
+        pp @theme.icons.sort
         @theme.icons.include?("face-cool")
       end
     end
