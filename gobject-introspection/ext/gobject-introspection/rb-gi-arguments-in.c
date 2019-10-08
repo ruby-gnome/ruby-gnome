@@ -326,20 +326,12 @@ rb_gi_arguments_in_init_arg_ruby_array_set_length(RBGIArguments *args,
                                                   RBGIArgMetadata *metadata,
                                                   gint64 length)
 {
-    GIArgument *length_argument;
-    RBGIArgMetadata *length_metadata;
-
-    if (metadata->array_length_in_arg_index == -1) {
+    GIArgument *length_argument = metadata->array_length_arg;
+    if (!length_argument) {
         return;
     }
 
-    length_argument = &(g_array_index(args->in_args,
-                                      GIArgument,
-                                      metadata->array_length_in_arg_index));
-    length_metadata =
-        g_ptr_array_index(args->metadata,
-                          metadata->array_length_arg_index);
-
+    RBGIArgMetadata *length_metadata = metadata->array_length_metadata;
     switch (length_metadata->type.tag) {
       case GI_TYPE_TAG_VOID:
       case GI_TYPE_TAG_BOOLEAN:
@@ -1069,12 +1061,8 @@ rb_gi_arguments_in_init_arg_ruby_array(RBGIArguments *args,
 {
     if (NIL_P(metadata->rb_arg) && metadata->may_be_null_p) {
         memset(metadata->in_arg, 0, sizeof(GIArgument));
-        if (metadata->array_length_in_arg_index != -1) {
-            GIArgument *length_argument =
-                &(g_array_index(args->in_args,
-                                GIArgument,
-                                metadata->array_length_in_arg_index));
-            memset(length_argument, 0, sizeof(GIArgument));
+        if (metadata->array_length_arg) {
+            memset(metadata->array_length_arg, 0, sizeof(GIArgument));
         }
         return;
     }

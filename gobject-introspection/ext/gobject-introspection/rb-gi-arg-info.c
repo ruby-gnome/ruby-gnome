@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2019  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,29 @@
 
 #define RG_TARGET_NAMESPACE rb_cGIArgInfo
 #define SELF(self) (RVAL2GI_ARG_INFO(self))
+
+gboolean
+rb_gi_arg_info_is_output_buffer(GIArgInfo *info)
+{
+    if (g_arg_info_get_direction(info) != GI_DIRECTION_OUT) {
+        return FALSE;
+    }
+
+    if (!g_arg_info_is_caller_allocates(info)) {
+        return FALSE;
+    }
+
+    GITypeInfo type_info;
+    g_arg_info_load_type(info, &type_info);
+    if (g_type_info_get_tag(&type_info) != GI_TYPE_TAG_ARRAY) {
+        return FALSE;
+    }
+
+    GITypeInfo *element_type_info = g_type_info_get_param_type(&type_info, 0);
+    GITypeTag element_type_tag = g_type_info_get_tag(element_type_info);
+    g_base_info_unref(element_type_info);
+    return element_type_tag == GI_TYPE_TAG_UINT8;
+}
 
 GType
 gi_arg_info_get_type(void)
@@ -125,6 +148,13 @@ rg_type(VALUE self)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_arg_info_get_type(info));
 }
 
+static VALUE
+rg_output_buffer_p(VALUE self)
+{
+    GIArgInfo *info = SELF(self);
+    return CBOOL2RVAL(rb_gi_arg_info_is_output_buffer(info));
+}
+
 void
 rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -144,6 +174,8 @@ rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(closure, 0);
     RG_DEF_METHOD(destroy, 0);
     RG_DEF_METHOD(type, 0);
+
+    RG_DEF_METHOD_P(output_buffer, 0);
 
     G_DEF_CLASS(G_TYPE_I_DIRECTION, "Direction", rb_mGI);
     G_DEF_CLASS(G_TYPE_I_SCOPE_TYPE, "ScopeType", rb_mGI);

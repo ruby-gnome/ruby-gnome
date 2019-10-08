@@ -120,7 +120,7 @@ module GObjectIntrospection
             true
           end
         else
-          false
+          arg.output_buffer?
         end
       end
     end

@@ -273,8 +273,35 @@ rb_gi_arguments_out_init_arg_array_c(RBGIArguments *args,
                  g_type_tag_to_string(metadata->element_type.tag));
         break;
       case GI_TYPE_TAG_UINT8:
-        argument->v_pointer = ALLOC(guint8 *);
-        metadata->free_func = rb_gi_arguments_out_free_array_c_uint8;
+        if (metadata->output_buffer_p) {
+            if (!rb_type_p(metadata->rb_arg, RUBY_T_STRING)) {
+                rb_raise(rb_eNotImpError,
+                         "[%s::%s] %s allocates GIArgument(%s)[%s]: "
+                         "output buffer isn't String: <%" PRIsVALUE ">",
+                         args->name,
+                         metadata->name,
+                         rb_gi_direction_to_string(metadata->direction),
+                         g_type_tag_to_string(metadata->type.tag),
+                         rb_gi_transfer_to_string(metadata->transfer),
+                         metadata->rb_arg);
+            }
+            RBGIArgMetadata *length_metadata = metadata->array_length_metadata;
+            if (!length_metadata) {
+                rb_raise(rb_eNotImpError,
+                         "TODO: [%s::%s] %s allocates GIArgument(%s)[%s]: "
+                         "output buffer without length",
+                         args->name,
+                         metadata->name,
+                         rb_gi_direction_to_string(metadata->direction),
+                         g_type_tag_to_string(metadata->type.tag),
+                         rb_gi_transfer_to_string(metadata->transfer));
+            }
+            argument->v_pointer = RSTRING_PTR(metadata->rb_arg);
+            length_metadata->out_arg->v_size = RSTRING_LEN(metadata->rb_arg);
+        } else {
+            argument->v_pointer = ALLOC(guint8 *);
+            metadata->free_func = rb_gi_arguments_out_free_array_c_uint8;
+        }
         break;
       case GI_TYPE_TAG_INT16:
       case GI_TYPE_TAG_UINT16:
@@ -531,7 +558,9 @@ rb_gi_arguments_out_init_arg_interface(RBGIArguments *args,
       case GI_INFO_TYPE_TYPE:
       case GI_INFO_TYPE_UNRESOLVED:
         rb_raise(rb_eNotImpError,
-                 "TODO: allocates GIArgument(interface)[%s] for output",
+                 "TODO: [%s] %s allocates GIArgument(interface)[%s]",
+                 metadata->name,
+                 rb_gi_direction_to_string(metadata->direction),
                  g_info_type_to_string(metadata->type.interface_type));
         break;
       default:
@@ -545,6 +574,13 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
                              RBGIArgMetadata *metadata)
 {
     GIArgument *argument = metadata->out_arg;
+
+    if (metadata->array_length_p &&
+        metadata->array_metadata &&
+        metadata->array_metadata->output_buffer_p) {
+        return;
+    }
+
     memset(argument, 0, sizeof(GIArgument));
     switch (metadata->type.tag) {
       case GI_TYPE_TAG_VOID:
@@ -753,6 +789,11 @@ rb_gi_arguments_out_to_ruby_arg(RBGIArguments *args,
                                 RBGIArgMetadata *metadata,
                                 GIArgument *argument)
 {
+    /* TODO */
+    if (metadata->output_buffer_p) {
+        return metadata->rb_arg;
+    }
+
     GIArgument normalized_argument;
     gboolean duplicate = FALSE;
 

@@ -117,18 +117,19 @@ rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
     metadata->pointer_p = g_type_info_is_pointer(type_info);
     metadata->caller_allocates_p = g_arg_info_is_caller_allocates(arg_info);
     metadata->zero_terminated_p = FALSE;
+    metadata->output_buffer_p = rb_gi_arg_info_is_output_buffer(arg_info);
     metadata->index = i;
     metadata->in_arg_index = -1;
     metadata->closure_in_arg_index = -1;
     metadata->destroy_in_arg_index = -1;
-    metadata->array_in_arg_index = -1;
-    metadata->array_length_in_arg_index = -1;
-    metadata->array_length_arg_index = -1;
     metadata->rb_arg_index = -1;
     metadata->out_arg_index = -1;
     metadata->in_arg = NULL;
     metadata->out_arg = NULL;
     metadata->rb_arg = Qnil;
+    metadata->array_metadata = NULL;
+    metadata->array_length_metadata = NULL;
+    metadata->array_length_arg = NULL;
     metadata->free_func = NULL;
     metadata->free_func_data = NULL;
 
@@ -274,11 +275,13 @@ rb_gi_arguments_fill_metadata_array(RBGIArguments *args)
         array_length_metadata = g_ptr_array_index(metadata, array_length_index);
         array_length_metadata->array_length_p = TRUE;
         array_length_metadata->rb_arg_index = -1;
-        array_length_metadata->array_in_arg_index =
-            array_metadata->in_arg_index;
-        array_metadata->array_length_in_arg_index =
-            array_length_metadata->in_arg_index;
-        array_metadata->array_length_arg_index = array_length_index;
+        array_length_metadata->array_metadata = array_metadata;
+        array_metadata->array_length_metadata = array_length_metadata;
+        if (array_length_metadata->in_arg) {
+            array_metadata->array_length_arg = array_length_metadata->in_arg;
+        } else {
+            array_metadata->array_length_arg = array_length_metadata->out_arg;
+        }
     }
 }
 
@@ -333,7 +336,8 @@ rb_gi_arguments_fill_metadata_rb_arg_index(RBGIArguments *args)
             continue;
         }
 
-        if (metadata->in_arg_index == -1) {
+        if (metadata->in_arg_index == -1 &&
+            !metadata->output_buffer_p) {
             continue;
         }
 

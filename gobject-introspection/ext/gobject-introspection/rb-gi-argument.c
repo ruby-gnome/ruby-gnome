@@ -692,17 +692,14 @@ rb_gi_argument_to_ruby_interface(GIArgument *argument,
 static void
 normalize_out_array_length(GIArgument *normalized_argument,
                            GIArgument *argument,
-                           GITypeInfo *type_info)
+                           RBGIArgMetadata *metadata)
 {
-    GITypeTag type_tag;
-
-    type_tag = g_type_info_get_tag(type_info);
-    switch (type_tag) {
+    switch (metadata->type.tag) {
     case GI_TYPE_TAG_VOID:
     case GI_TYPE_TAG_BOOLEAN:
         rb_raise(rb_eNotImpError,
                  "TODO: invalid out array length argument?: <%s>",
-                 g_type_tag_to_string(type_tag));
+                 g_type_tag_to_string(metadata->type.tag));
         break;
     case GI_TYPE_TAG_INT8:
         normalized_argument->v_int8 = *((gint8 *)argument->v_pointer);
@@ -742,7 +739,7 @@ normalize_out_array_length(GIArgument *normalized_argument,
     case GI_TYPE_TAG_UNICHAR:
         rb_raise(rb_eNotImpError,
                  "TODO: invalid out array length argument?: <%s>",
-                 g_type_tag_to_string(type_tag));
+                 g_type_tag_to_string(metadata->type.tag));
         break;
     default:
         g_assert_not_reached();
@@ -761,21 +758,15 @@ rb_gi_argument_to_ruby_array(GIArgument *array_argument,
     gint length_index;
     GIArgument *length_argument = NULL;
     GIArgument normalized_length_argument;
-    GITypeInfo raw_length_type_info;
     GITypeInfo *length_type_info = NULL;
 
     length_index = g_type_info_get_array_length(array_type_info);
     if (length_index != -1) {
         RBGIArgMetadata *length_metadata;
-        GIArgInfo *length_arg_info = NULL;
         GIArgument *raw_length_argument = NULL;
 
         length_metadata = g_ptr_array_index(args_metadata, length_index);
-        length_arg_info = &(length_metadata->arg_info);
-
-        g_arg_info_load_type(length_arg_info, &raw_length_type_info);
-        length_type_info = &raw_length_type_info;
-
+        length_type_info = length_metadata->type.info;
         if (length_metadata->direction == GI_DIRECTION_OUT) {
             raw_length_argument = &g_array_index(out_args, GIArgument,
                                                  length_metadata->out_arg_index);
@@ -785,10 +776,15 @@ rb_gi_argument_to_ruby_array(GIArgument *array_argument,
         }
 
         if (raw_length_argument) {
-            normalize_out_array_length(&normalized_length_argument,
-                                       raw_length_argument,
-                                       length_type_info);
-            length_argument = &normalized_length_argument;
+            if (length_metadata->array_metadata &&
+                length_metadata->array_metadata->output_buffer_p) {
+                length_argument = raw_length_argument;
+            } else {
+                normalize_out_array_length(&normalized_length_argument,
+                                           raw_length_argument,
+                                           length_metadata);
+                length_argument = &normalized_length_argument;
+            }
         } else {
             length_argument = &g_array_index(in_args, GIArgument,
                                              length_metadata->in_arg_index);
