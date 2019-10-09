@@ -18,10 +18,11 @@ class TestSecretSchema < Test::Unit::TestCase
   test ".new" do
     schema = Secret::Schema.new("jp.osdn.ruby-gnome2.test",
                                 :none,
-                                {}) # TODO
+                                {})
     assert_equal([
                    "jp.osdn.ruby-gnome2.test",
                    Secret::SchemaFlags::NONE,
+                   # {}, # TODO
                  ],
                  [
                    schema.name,

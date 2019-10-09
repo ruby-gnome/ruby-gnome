@@ -155,6 +155,23 @@ module GObjectIntrospection
     GLIST.extend(ArrayTypeTag)
     GSLIST.extend(ArrayTypeTag)
 
+    class << GHASH
+      def try_convert(type_info, value)
+        case value
+        when Hash
+          value
+        else
+          nil
+        end
+      end
+
+      def description(type_info)
+        key_type = type_info.get_param_type(0)
+        value_type = type_info.get_param_type(1)
+        "#{super}(#{key_type.description}->#{value_type.description})"
+      end
+    end
+
     class << INTERFACE
       def try_convert(type_info, value)
         type_info.interface.try_convert(value)
