@@ -1,0 +1,56 @@
+name: Linux
+on:
+  - push
+  - pull_request
+jobs:
+  test:
+    name: Test
+    strategy:
+      matrix:
+        label:
+          - Ruby 2.4
+          - Ruby 2.5
+          - Ruby 2.6
+          - Ubuntu 16.04
+          - Ubuntu 18.04
+          - CentOS 6
+          - CentOS 7
+          - Fedora Rawhide
+          - Arch Linux
+          - Apache Arrow
+        include:
+          - label: Ruby 2.4
+            type: ruby-2.4
+          - label: Ruby 2.5
+            type: ruby-2.5
+          - label: Ruby 2.6
+            type: ruby-2.6
+          - label: Ubuntu 16.04
+            type: ubuntu-16.04
+          - label: Ubuntu 18.04
+            type: ubuntu-18.04
+          - label: CentOS 6
+            type: centos-6
+          - label: CentOS 7
+            type: centos-7
+          - label: Fedora Rawhide
+            type: fedora-rawhide
+          - label: Arch Linux
+            type: arch-linux
+          - label: Apache Arrow
+            type: apache-arrow
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Build Docker image
+        run: |
+          docker build
+            -t ruby-gnome/ruby-gnome-${{ matrix.type }}
+            -f dockerfiles/${{ matrix.type }}.dockerfile
+            .
+      - name: Run
+        run: |
+          docker run
+            --interactive
+            --tty
+            ruby-gnome/ruby-gnome-${{ matrix.type }}

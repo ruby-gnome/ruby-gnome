@@ -1,0 +1,21 @@
+name: macOS
+on:
+  - push
+  - pull_request
+jobs:
+  test:
+    name: Test
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-ruby@master
+      - name: Install dependencies
+        run: |
+          bundle install
+      - name: Build
+        run: |
+          bundle exec rake build
+      # TODO
+      # - name: Test
+      #   run: |
+      #     bundle exec rake
