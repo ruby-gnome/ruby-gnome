@@ -22,9 +22,12 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
           architecture: ${{ matrix.architecture }}
-      - name: Install
+      - name: Update MSYS2
         run: |
           ridk exec pacman -Syu --noconfirm
+      - name: Install dependencies
+        run: |
+          gem install bundler
           gem install cairo
           bundle install
       - name: Build
