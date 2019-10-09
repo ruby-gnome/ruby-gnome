@@ -39,6 +39,7 @@ jobs:
             type: arch-linux
           - label: Apache Arrow
             type: apache-arrow
+      - fail-fast: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
