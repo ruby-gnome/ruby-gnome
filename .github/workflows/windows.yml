@@ -25,10 +25,11 @@ jobs:
       - name: Update MSYS2
         run: |
           ridk exec pacman -Syu --noconfirm
-      - name: Install dependencies
+      - name: Install Bundler
         run: |
           gem install bundler
-          gem install cairo
+      - name: Install dependencies
+        run: |
           bundle install
       - name: Build
         run: |
