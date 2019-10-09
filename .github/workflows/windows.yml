@@ -1,0 +1,35 @@
+name: Windows
+on:
+  - push
+  - pull_request
+jobs:
+  test:
+    name: Test
+    strategy:
+      matrix:
+        ruby-version:
+          - "2.4"
+          - "2.5"
+          - "2.6"
+        architecture:
+          - x86
+          - x64
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-ruby@master
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          architecture: ${{ matrix.architecture }}
+      - name: Install
+        run: |
+          ridk exec pacman -Syu --noconfirm
+          gem install cairo
+          bundle install
+      - name: Build
+        run: |
+          bundle exec ruby -rdevkit -S rake build
+      # TODO
+      # - name: Test
+      #   run: |
+      #     bundle exec ruby -rdevkit -S rake test
