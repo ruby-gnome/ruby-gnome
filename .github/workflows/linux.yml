@@ -44,13 +44,13 @@ jobs:
       - uses: actions/checkout@master
       - name: Build Docker image
         run: |
-          docker build
-            -t ruby-gnome/ruby-gnome-${{ matrix.type }}
+          docker build \
+            -t ruby-gnome/ruby-gnome-${{ matrix.type }} \
             -f dockerfiles/${{ matrix.type }}.dockerfile
             .
       - name: Run
         run: |
-          docker run
-            --interactive
-            --tty
+          docker run \
+            --interactive \
+            --tty \
             ruby-gnome/ruby-gnome-${{ matrix.type }}
