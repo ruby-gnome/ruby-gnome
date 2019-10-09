@@ -46,7 +46,7 @@ jobs:
         run: |
           docker build \
             -t ruby-gnome/ruby-gnome-${{ matrix.type }} \
-            -f dockerfiles/${{ matrix.type }}.dockerfile
+            -f dockerfiles/${{ matrix.type }}.dockerfile \
             .
       - name: Run
         run: |
