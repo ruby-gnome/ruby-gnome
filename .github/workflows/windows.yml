@@ -6,6 +6,7 @@ jobs:
   test:
     name: Test
     strategy:
+      fail-fast: false
       matrix:
         ruby-version:
           - "2.4"
@@ -14,7 +15,6 @@ jobs:
         architecture:
           - x86
           - x64
-      - fail-fast: false
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@master
