@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -29,9 +29,10 @@ end
 namespace :dependency do
   desc "Check dependency"
   task :check do
-    unless PKGConfig.check_version?("libgsf-1")
+    package_id = "libgsf-1"
+    unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:debian => "libgsf-1-dev",
-                                            :redhat => "pkgconfig(libgsf-1)",
+                                            :redhat => "pkgconfig(#{package_id})",
                                             :homebrew => "libgsf",
                                             :msys2 => "libgsf")
         exit(false)

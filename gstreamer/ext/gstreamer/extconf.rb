@@ -52,7 +52,7 @@ end
 unless required_pkg_config_package(package_id,
                                    :alt_linux => "gstreamer1.0-devel",
                                    :debian => "libgstreamer1.0-dev",
-                                   :redhat => "gstreamer1-devel",
+                                   :redhat => "pkgconfig(#{package_id})",
                                    :arch_linux => "gstreamer",
                                    :homebrew => "gstreamer",
                                    :macports => "gstreamer",

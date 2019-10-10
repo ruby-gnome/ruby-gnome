@@ -41,7 +41,7 @@ require "mkmf-gnome"
 unless required_pkg_config_package(package_id,
                                    :alt_linux => "libvte-devel",
                                    :debian => "libvte-dev",
-                                   :redhat => "vte-devel",
+                                   :redhat => "pkgconfig(#{package_id})",
                                    :homebrew => "vte",
                                    :macports => "vte")
   exit(false)

@@ -56,7 +56,7 @@ end
 unless required_pkg_config_package([package_id, 1, 14, 0],
                                    :alt_linux => "libpango-devel",
                                    :debian => "libpango1.0-dev",
-                                   :redhat => "pango-devel",
+                                   :redhat => "pkgconfig(#{package_id})",
                                    :arch_linux => "pango",
                                    :homebrew => "pango",
                                    :macports => "pango",

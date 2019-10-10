@@ -51,7 +51,7 @@ end
 unless required_pkg_config_package(package_id,
                                    :alt_linux => "gobject-introspection-devel",
                                    :debian => "libgirepository1.0-dev",
-                                   :redhat => "gobject-introspection-devel",
+                                   :redhat => "pkgconfig(gobject-introspection-1.0)",
                                    :homebrew => "gobject-introspection",
                                    :arch_linux => "gobject-introspection",
                                    :macports => "gobject-introspection",

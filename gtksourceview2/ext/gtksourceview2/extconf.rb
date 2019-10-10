@@ -63,7 +63,7 @@ unless required_pkg_config_package(package_id,
                                    :homebrew => "gtksourceview",
                                    :macports => "gtksourceview2",
                                    :msys2 => "gtksourceview2",
-                                   :redhat => "gtksourceview2-devel")
+                                   :redhat => "pkgconfig(#{package_id})")
   exit(false)
 end
 

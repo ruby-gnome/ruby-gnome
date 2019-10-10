@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2019 Ruby-GNOME Project Team
+# Copyright (C) 2002-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -29,7 +29,7 @@ require "mkmf-gnome"
 unless required_pkg_config_package([package_id, 2, 12, 0],
                                    :alt_linux => "glib2-devel",
                                    :debian => "libglib2.0-dev",
-                                   :redhat => "glib2-devel",
+                                   :redhat => "pkgconfig(#{package_id})",
                                    :arch_linux => "glib2",
                                    :homebrew => "glib",
                                    :macports => "glib2",

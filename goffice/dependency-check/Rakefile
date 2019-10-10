@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -45,17 +45,19 @@ end
 namespace :dependency do
   desc "Check dependency"
   task :check do
-    unless PKGConfig.check_version?("libgoffice-0.10")
+    package_id = "libgoffice-0.10"
+    unless PKGConfig.check_version?(package_id)
       goffice010_spec = {
         :debian => "libgoffice-0.10-dev",
-        :redhat => "pkgconfig(libgoffice-0.10)",
+        :redhat => "pkgconfig(#{package_id})",
         :homebrew => "goffice",
       }
       unless NativePackageInstaller.install(goffice010_spec)
-        unless PKGConfig.check_version?("libgoffice-0.8")
+        package_id = "libgoffice-0.8"
+        unless PKGConfig.check_version?(package_id)
           goffice08_spec = {
             :debian => "libgoffice-0.8-dev",
-            :redhat => "pkgconfig(libgoffice-0.8)",
+            :redhat => "pkgconfig(#{package_id})",
             :homebrew => "goffice",
           }
           unless NativePackageInstaller.install(goffice08_spec)

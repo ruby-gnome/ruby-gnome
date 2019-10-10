@@ -51,7 +51,7 @@ end
 unless required_pkg_config_package(package_id,
                                    :alt_linux => "libcairo-devel",
                                    :debian => "libcairo2-dev",
-                                   :redhat => "cairo-gobject-devel",
+                                   :redhat => "pkgconfig(#{package_id})",
                                    :arch_linux => "cairo",
                                    :homebrew => "cairo")
   exit(false)

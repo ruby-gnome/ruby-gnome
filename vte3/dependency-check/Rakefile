@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -30,10 +30,11 @@ end
 namespace :dependency do
   desc "Check dependency"
   task :check do
-    unless PKGConfig.check_version?("vte-2.91")
+    package_id = "vte-2.91"
+    unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:altlinux => "libvte3-devel",
                                             :debian => "libvte-2.91-dev",
-                                            :redhat => "pkgconfig(vte-2.91)",
+                                            :redhat => "pkgconfig(#{package_id})",
                                             :homebrew => "vte3")
         exit(false)
       end

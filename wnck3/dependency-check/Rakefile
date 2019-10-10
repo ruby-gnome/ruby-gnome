@@ -1,4 +1,4 @@
-# Copyright (C) 2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -29,9 +29,10 @@ end
 namespace :dependency do
   desc "Check dependency"
   task :check do
-    unless PKGConfig.check_version?("libwnck-3.0")
+    package_id = "libwnck-3.0"
+    unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:debian => "libwnck-3-dev",
-                                            :redhat => "pkgconfig(libwnck-3.0)",
+                                            :redhat => "pkgconfig(#{package_id})",
                                             :arch => "libwnck3")
         exit(false)
       end

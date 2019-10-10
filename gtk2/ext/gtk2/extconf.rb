@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2010-2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2010-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -61,7 +61,7 @@ end
 unless required_pkg_config_package([package_id, 2, 10, 0],
                                    :alt_linux => "libgtk+2-devel",
                                    :debian => "libgtk2.0-dev",
-                                   :redhat => "gtk2-devel",
+                                   :redhat => "pkgconfig(#{package_id})",
                                    :arch_linux => "gtk2",
                                    :homebrew => "gtk+",
                                    :macports => "gtk2",
