@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -37,7 +37,7 @@ $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 module_name = "gobject_introspection"
 package_id = "gobject-introspection-1.0"
 
-require "mkmf-gnome2"
+require "mkmf-gnome"
 
 ["glib2"].each do |package|
   directory = "#{package}#{version_suffix}"
@@ -73,7 +73,7 @@ end
 glib_mkenums(enum_type_prefix, headers, "G_TYPE_", ["girepository.h"])
 
 create_pkg_config_file("Ruby/GObjectIntrospection",
-                       package_id, ruby_gnome2_version,
+                       package_id, ruby_gnome_version,
                        "ruby-gobject-introspection.pc")
 
 ensure_objs

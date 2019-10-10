@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,7 @@ $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 module_name = "gtk3"
 package_id = "gtk+-3.0"
 
-require "mkmf-gnome2"
+require "mkmf-gnome"
 
 depended_packages = [
   "glib2",

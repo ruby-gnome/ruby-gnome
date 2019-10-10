@@ -118,7 +118,7 @@ if target != "win32" and PKGConfig.have_package('gtk+-unix-print-2.0')
   $defs.push("-DHAVE_GTK_UNIX_PRINT")
 end
 
-create_pkg_config_file("Ruby/GTK2", package_id, ruby_gnome2_version)
+create_pkg_config_file("Ruby/GTK2", package_id, ruby_gnome_version)
 
 rbgdkkeysyms_h_path = Pathname("rbgdkkeysyms.h")
 gdkkeysyms_h_paths = []

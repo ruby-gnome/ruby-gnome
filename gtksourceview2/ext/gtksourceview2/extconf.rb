@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2004-2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2004-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,7 @@ $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 module_name = "gtksourceview2"
 package_id = "gtksourceview-2.0"
 
-require "mkmf-gnome2"
+require "mkmf-gnome"
 
 [
   "glib2",
