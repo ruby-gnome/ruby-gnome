@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,6 +15,18 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGdkRGBA < Test::Unit::TestCase
+  sub_test_case ".try_convert" do
+    test("String") do
+      assert_equal(Gdk::RGBA.parse("gray"),
+                   Gdk::RGBA.try_convert("gray"))
+    end
+
+    test("Symbol") do
+      assert_equal(Gdk::RGBA.parse("gray"),
+                   Gdk::RGBA.try_convert(:gray))
+    end
+  end
+
   def test_to_s
     rgba = Gdk::RGBA.new(0.2, 0.4, 0.6, 0.5)
     assert_equal("rgba(51,102,153,0.5)", rgba.to_s)
