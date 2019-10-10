@@ -16,6 +16,7 @@ jobs:
           - Ubuntu 18.04
           - CentOS 6
           - CentOS 7
+          - CentOS 8
           - Fedora Rawhide
           - Arch Linux
           - Apache Arrow
@@ -34,6 +35,8 @@ jobs:
             type: centos-6
           - label: CentOS 7
             type: centos-7
+          - label: CentOS 8
+            type: centos-8
           - label: Fedora Rawhide
             type: fedora-rawhide
           - label: Arch Linux

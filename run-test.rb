@@ -22,8 +22,14 @@ base_dir = Pathname(File.dirname(__FILE__))
 Pathname.glob((base_dir + "*").to_s) do |dir|
   next unless dir.directory?
   dir = dir.expand_path
+  lib_dir = dir + "lib"
   ext_dir = dir + "ext" + dir.basename
-  includes.concat(["-I", (dir + "lib").to_s, "-I", ext_dir.to_s])
+  if ext_dir.exist?
+    next unless (dir + "Makefile").exist?
+    includes.concat(["-I", lib_dir.to_s, "-I", ext_dir.to_s])
+  else
+    includes.concat(["-I", lib_dir.to_s])
+  end
   next unless (dir + "test").directory?
   targets << dir
 end

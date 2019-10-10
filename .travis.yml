@@ -21,6 +21,8 @@ matrix:
       env: TYPE=centos-6
     - name: CentOS 7
       env: TYPE=centos-7
+    - name: CentOS 8
+      env: TYPE=centos-8
     - name: Fedora Rawhide
       env: TYPE=fedora-rawhide
     - name: Arch Linux
