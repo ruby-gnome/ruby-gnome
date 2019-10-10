@@ -23,7 +23,7 @@ namespace :dependency do
   desc "Check dependency"
   task :check do
     package_id = "atk"
-    unless PKGConfig.check_version?(atk)
+    unless PKGConfig.check_version?("atk")
       unless NativePackageInstaller.install(:altlinux => "libatk-devel",
                                             :debian => "libatk1.0-dev",
                                             :redhat => "pkgconfig(#{package_id})",
