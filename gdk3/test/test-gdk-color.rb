@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -39,6 +37,18 @@ class TestGdkColor < Test::Unit::TestCase
     def test_valid
       color = Gdk::Color.parse("#abc")
       assert_equal("#aaaabbbbcccc", color.to_s)
+    end
+  end
+
+  sub_test_case ".try_convert" do
+    test("String") do
+      assert_equal(Gdk::Color.parse("gray"),
+                   Gdk::Color.try_convert("gray"))
+    end
+
+    test("Symbol") do
+      assert_equal(Gdk::Color.parse("gray"),
+                   Gdk::Color.try_convert(:gray))
     end
   end
 
