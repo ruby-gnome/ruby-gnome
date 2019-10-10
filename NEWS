@@ -2,6 +2,104 @@
 
 = NEWS
 
+== Ruby-GNOME 3.3.9: 2019-10-10
+
+This is a full GLib 2.62.0 support release.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * Deprecated (({GLib::Param::PRIVATE})). Use
+      (({GLib::Param::STATIC_NAME})) instead.
+
+    * Deprecated (({GLib::Param#private?})). Use
+      (({GLib::Param#static_name?})) instead.
+
+    * Added new flags:
+
+      * (({GLib::Param::STATIC_NICK}))
+
+      * (({GLib::Param::STATIC_BLURB}))
+
+      * (({GLib::Param::EXPLICIT_NOTIFY}))
+
+      * (({GLib::Param::DEPRECATED}))
+
+    * Added new predicates:
+
+      * (({GLib::Param#static_nick?}))
+
+      * (({GLib::Param#static_blurb?}))
+
+      * (({GLib::Param#explicit_notify?}))
+
+      * (({GLib::Param#deprecated?}))
+
+    * Deprecated (({ruby_gnome2_version})) in `mkmf-gnome`. Use
+      (({ruby_gnome_version})) instead.
+
+    * Added (({rbgobj_gtype_from_ruby()})).
+
+    * Added (({rbg_is_object()})).
+
+    * Added (({rbg_is_value()})).
+
+    * Added (({rbg_is_bytes()})).
+
+    * Removed needless const from the return value of
+      (({rbg_rval2strv()})).
+
+    * Removed needless const from the return value of
+      (({rbg_rval2strv_accept_nil()})).
+
+    * Added (({rbg_rval2filenamev()})).
+
+    * Added (({rbg_rval2filenamev_accept_nil()})).
+
+    * Stopped to define (({GType})) for (({GPollFD})).
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for conversion from (({GLib::Bytes})) to
+      (({[gint8]})) and (({[guint8]})).
+
+    * Added more information to inspected result.
+
+==== Ruby/GIO2
+
+  * Improvements
+
+    * Added support for GLib 2.62.0 or later.
+      [GitHub#1296][Reported by Mamoru TASAKA]
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * Added (({Gtk::TreeModelSort.new})).
+      [GitHub#1298][Reported by LutzLue]
+      (({[gint8]})) and (({[guint8]})).
+
+==== Ruby/GStreamer
+
+  * Improvements
+
+    * Removed all custom callbacks.
+
+    * (({Gst::TagList#each})): Changed to yield tag name and tag
+      values.
+
+=== Thanks
+
+  * LutzLue
+
+  * Mamoru TASAKA
+
 == Ruby-GNOME 3.3.8: 2019-09-10
 
 This is a partially GLib 2.62.0 support release.
