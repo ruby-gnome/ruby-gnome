@@ -2,6 +2,23 @@
 
 = NEWS
 
+== Ruby-GNOME 3.4.0: 2019-10-10
+
+This is a bug fix release of 3.3.9.
+
+=== Changes
+
+==== Ruby/ATK
+
+  * Fixes
+
+    * Fixed a typo.
+      [GitHub#1302][Reported by kojix2]
+
+=== Thanks
+
+  * kojix2
+
 == Ruby-GNOME 3.3.9: 2019-10-10
 
 This is a full GLib 2.62.0 support release.
