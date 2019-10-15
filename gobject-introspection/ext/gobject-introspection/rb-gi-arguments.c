@@ -57,12 +57,14 @@ rb_gi_arg_metadata_type_init(RBGIArgMetadataType *type,
                              GITypeInfo *type_info)
 {
     type->info = type_info;
+    type->pointer_p = FALSE;
     type->tag = GI_TYPE_TAG_VOID;
     type->interface_info = NULL;
     type->interface_type = GI_INFO_TYPE_INVALID;
     type->interface_gtype = G_TYPE_INVALID;
 
     if (type->info) {
+        type->pointer_p = g_type_info_is_pointer(type->info);
         type->tag = g_type_info_get_tag(type->info);
     }
     if (type->tag == GI_TYPE_TAG_INTERFACE) {

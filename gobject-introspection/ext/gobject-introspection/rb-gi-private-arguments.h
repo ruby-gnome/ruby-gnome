@@ -40,6 +40,7 @@ typedef void (*RBGIArgFreeFunc)(RBGIArguments *args,
 
 typedef struct {
     GITypeInfo *info;
+    gboolean pointer_p;
     GITypeTag tag;
     GIBaseInfo *interface_info;
     GIInfoType interface_type;

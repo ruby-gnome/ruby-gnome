@@ -721,26 +721,38 @@ rb_gi_arguments_in_init_arg_ruby_array_c_interface_struct(RBGIArguments *args,
 {
     GIStructInfo *struct_info =
         (GIStructInfo *)(metadata->element_type.interface_info);
-    guint8 *raw_array;
-    gsize struct_size;
     long i, n_elements;
 
     n_elements = RARRAY_LEN(rb_array);
-    struct_size = g_struct_info_get_size(struct_info);
-    raw_array = ALLOC_N(guint8, struct_size * n_elements);
-    for (i = 0; i < n_elements; i++) {
-        VALUE rb_element = RARRAY_AREF(rb_array, i);
-        gpointer element;
-        element = rb_gi_struct_info_from_ruby(struct_info, rb_element);
-        memcpy(raw_array + (struct_size * i),
-               element,
-               struct_size);
+    if (metadata->element_type.pointer_p) {
+        gpointer *raw_array = ALLOC_N(gpointer, n_elements);
+        for (i = 0; i < n_elements; i++) {
+            VALUE rb_element = RARRAY_AREF(rb_array, i);
+            gpointer element;
+            element = rb_gi_struct_info_from_ruby(struct_info, rb_element);
+            raw_array[i] = element;
+        }
+        rb_gi_arguments_in_init_arg_ruby_array_c_generic(args,
+                                                         metadata,
+                                                         rb_array,
+                                                         raw_array);
+    } else {
+        gsize struct_size = g_struct_info_get_size(struct_info);
+        guint8 *raw_array = ALLOC_N(guint8, struct_size * n_elements);
+        for (i = 0; i < n_elements; i++) {
+            VALUE rb_element = RARRAY_AREF(rb_array, i);
+            gpointer element;
+            element = rb_gi_struct_info_from_ruby(struct_info, rb_element);
+            memcpy(raw_array + (struct_size * i),
+                   element,
+                   struct_size);
+        }
+        rb_gi_arguments_in_init_arg_ruby_array_c_generic(args,
+                                                         metadata,
+                                                         rb_array,
+                                                         raw_array);
     }
 
-    rb_gi_arguments_in_init_arg_ruby_array_c_generic(args,
-                                                     metadata,
-                                                     rb_array,
-                                                     raw_array);
     metadata->free_func = rb_gi_arguments_in_free_array_c_interface_struct;
 }
 
