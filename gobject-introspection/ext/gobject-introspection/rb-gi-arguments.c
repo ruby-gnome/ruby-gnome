@@ -116,7 +116,6 @@ rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
     metadata->array_p = (metadata->type.tag == GI_TYPE_TAG_ARRAY);
     metadata->array_length_p = FALSE;
     metadata->may_be_null_p = rb_gi_arg_info_may_be_null(arg_info);
-    metadata->pointer_p = g_type_info_is_pointer(type_info);
     metadata->caller_allocates_p = g_arg_info_is_caller_allocates(arg_info);
     metadata->zero_terminated_p = FALSE;
     metadata->output_buffer_p = rb_gi_arg_info_is_output_buffer(arg_info);

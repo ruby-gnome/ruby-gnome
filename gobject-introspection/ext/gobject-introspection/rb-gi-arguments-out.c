@@ -584,7 +584,7 @@ rb_gi_arguments_out_init_arg(RBGIArguments *args,
     memset(argument, 0, sizeof(GIArgument));
     switch (metadata->type.tag) {
       case GI_TYPE_TAG_VOID:
-        if (metadata->pointer_p) {
+        if (metadata->type.pointer_p) {
             gpointer *pointer = ALLOC(gpointer);
             *pointer = NULL;
             argument->v_pointer = pointer;
@@ -800,7 +800,7 @@ rb_gi_arguments_out_to_ruby_arg(RBGIArguments *args,
     memset(&normalized_argument, 0, sizeof(GIArgument));
     switch (metadata->type.tag) {
       case GI_TYPE_TAG_VOID:
-        if (metadata->pointer_p) {
+        if (metadata->type.pointer_p) {
             normalized_argument.v_pointer = *((gpointer *)(argument->v_pointer));
         }
         break;

@@ -120,7 +120,7 @@ rb_gi_ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
             i = args.metadata->len - 1;
             metadata = g_ptr_array_index(args.metadata, i);
             if (metadata->type.tag == GI_TYPE_TAG_VOID &&
-                metadata->pointer_p &&
+                metadata->type.pointer_p &&
                 strcmp(metadata->name, "data") == 0) {
                 callback_data = *((RBGICallbackData **)(raw_args[i]));
             }

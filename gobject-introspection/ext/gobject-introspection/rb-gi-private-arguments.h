@@ -65,7 +65,6 @@ struct RBGIArgMetadata_ {
     gboolean array_length_p;
     gboolean interface_p;
     gboolean may_be_null_p;
-    gboolean pointer_p;
     gboolean caller_allocates_p;
     gboolean zero_terminated_p;
     gboolean output_buffer_p;
