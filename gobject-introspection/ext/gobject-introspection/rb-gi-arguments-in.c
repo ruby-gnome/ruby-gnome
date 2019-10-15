@@ -725,6 +725,18 @@ rb_gi_arguments_in_init_arg_ruby_array_c_interface_struct(RBGIArguments *args,
 
     n_elements = RARRAY_LEN(rb_array);
     if (metadata->element_type.pointer_p) {
+        if (metadata->transfer != GI_TRANSFER_NOTHING) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: [%s::%s] %s "
+                     "Ruby -> GIArgument(array/%s)[interface(%s)](%s)[%s]",
+                     args->name,
+                     metadata->name,
+                     rb_gi_direction_to_string(metadata->direction),
+                     rb_gi_array_type_to_string(metadata->array_type),
+                     g_info_type_to_string(metadata->element_type.interface_type),
+                     g_type_name(metadata->element_type.interface_gtype),
+                     rb_gi_transfer_to_string(metadata->transfer));
+        }
         gpointer *raw_array = ALLOC_N(gpointer, n_elements);
         for (i = 0; i < n_elements; i++) {
             VALUE rb_element = RARRAY_AREF(rb_array, i);
