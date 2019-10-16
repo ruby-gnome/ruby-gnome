@@ -2,6 +2,31 @@
 
 = NEWS
 
+== Ruby-GNOME 3.4.1: 2019-10-16
+
+This is a follow-up release of 3.4.0.
+
+=== Changes
+
+==== Ruby/GDK3
+
+  * Improvements
+
+    * Added support for (({String})) and (({Symbol})) as (({Gdk::Color})).
+      [GitHub#1286][Reported by rubyFeedback]
+
+    * Added support for (({String})) and (({Symbol})) as (({Gdk::RGBA})).
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for (({GBytes **})).
+
+=== Thanks
+
+  * rubyFeedback
+
 == Ruby-GNOME 3.4.0: 2019-10-10
 
 This is a bug fix release of 3.3.9.
