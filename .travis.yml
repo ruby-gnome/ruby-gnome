@@ -27,8 +27,9 @@ matrix:
       env: TYPE=fedora-rawhide
     - name: Arch Linux
       env: TYPE=arch-linux
-    - name: macOS
+    - name: macOS 10.14
       os: osx
+      osx_image: xcode11.2
       rvm: 2.6
       install:
         - bundle install
