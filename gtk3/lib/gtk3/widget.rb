@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -97,6 +97,9 @@ module Gtk
     alias_method :style_get_property_raw, :style_get_property
     def style_get_property(name)
       property = self.class.find_style_property(name)
+      if property.nil?
+        raise ArgumentError, "unknown style: #{name.inspect}"
+      end
       value = GLib::Value.new(property.value_type)
       style_get_property_raw(name, value)
       value.value

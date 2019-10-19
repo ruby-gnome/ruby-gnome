@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2008-2019  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -130,10 +130,20 @@ class TestGtkWidget < Test::Unit::TestCase
     end
   end
 
-  test "#style_get_property" do
-    entry = Gtk::Entry.new
-    assert do
-      entry.style_get_property("focus-padding").is_a?(Integer)
+  sub_test_case "#style_get_property" do
+    test("existent") do
+      entry = Gtk::Entry.new
+      assert do
+        entry.style_get_property("focus-padding").is_a?(Integer)
+      end
+    end
+
+    test("nonexistent") do
+      entry = Gtk::Entry.new
+      name = "nonexistent"
+      assert_raise(ArgumentError.new("unknown style: #{name.inspect}")) do
+        entry.style_get_property(name)
+      end
     end
   end
 
