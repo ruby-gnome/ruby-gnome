@@ -29,6 +29,8 @@ module GObjectIntrospection
         case value
         when true, false
           value
+        when nil
+          false
         else
           nil
         end

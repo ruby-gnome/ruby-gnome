@@ -681,10 +681,10 @@ module GObjectIntrospection
       def normalize_arguments!(arguments, abort_tag)
         arguments.size.times do |i|
           argument = arguments[i]
-          next if argument.nil?
           type = @in_arg_types[i]
           converted_argument = type.try_convert(argument)
           if converted_argument.nil?
+            next if argument.nil?
             if abort_tag
               throw(abort_tag)
             elsif @on_invalid == :fallback
