@@ -24,11 +24,7 @@ class TestGdkColor < Test::Unit::TestCase
       message << "\"\#rrggbb\", "
       message << "\"\#rrggbb\", "
       message << "\"\#rrrgggbbb\", "
-      message << "\"\#rrrrggggbbbb\", "
-      message << "\"\#fff\", "
-      message << "\"\#ffffff\", "
-      message << "\"\#fffffffff\", "
-      message << "\"\#fffffffffffff\""
+      message << "\"\#rrrrggggbbbb\""
       assert_raise(ArgumentError.new(message)) do
         Gdk::Color.parse(spec)
       end
