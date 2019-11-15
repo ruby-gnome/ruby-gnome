@@ -27,11 +27,7 @@ module Gdk
           message << "\"\#rrggbb\", "
           message << "\"\#rrggbb\", "
           message << "\"\#rrrgggbbb\", "
-          message << "\"\#rrrrggggbbbb\", "
-          message << "\"\#fff\", "
-          message << "\"\#ffffff\", "
-          message << "\"\#fffffffff\", "
-          message << "\"\#fffffffffffff\""
+          message << "\"\#rrrrggggbbbb\""
           raise ArgumentError, message
         end
         color
