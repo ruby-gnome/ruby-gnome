@@ -25,6 +25,7 @@ RUN \
     libre2-dev \
     libsnappy-dev \
     libssl-dev \
+    libthrift-dev \
     libzstd-dev \
     ninja-build \
     python3-pip \
@@ -75,6 +76,7 @@ RUN \
     -DCMAKE_BUILD_TYPE=Debug \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DProtobuf_SOURCE=BUNDLED \
     -S cpp \
     -B build/cpp && \
   ninja -C build/cpp && \
