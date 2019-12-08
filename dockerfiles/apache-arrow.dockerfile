@@ -61,7 +61,14 @@ RUN \
   mkdir -p build/cpp && \
   cmake \
     -G Ninja \
+    -DARROW_COMPUTE=ON \
+    -DARROW_CSV=ON \
+    -DARROW_DATASET=ON \
+    -DARROW_FILESYSTEM=ON \
+    -DARROW_FLIGHT=ON \
     -DARROW_GANDIVA=ON \
+    -DARROW_HDFS=ON \
+    -DARROW_JSON=ON \
     -DARROW_ORC=ON \
     -DARROW_PARQUET=ON \
     -DARROW_PLASMA=ON \
