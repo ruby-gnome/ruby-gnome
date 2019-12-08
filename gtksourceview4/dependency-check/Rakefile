@@ -33,11 +33,11 @@ namespace :dependency do
     unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:altlinux => "libgtksourceview4-devel",
                                             :debian => "libgtksourceview-4.0-dev",
-                                            :ubuntu => "libgtksourceview-4-dev",
-                                            :redhat => "pkgconfig(#{package_id})",
                                             :homebrew => "gtksourceview4",
                                             :macports => "gtksourceview4",
-                                            :msys2 => "gtksourceview4")
+                                            :redhat => "pkgconfig(#{package_id})",
+                                            :msys2 => "gtksourceview4",
+                                            :ubuntu => "libgtksourceview-4-dev")
         exit(false)
       end
     end
