@@ -12,16 +12,12 @@ jobs:
           - "2.4"
           - "2.5"
           - "2.6"
-        architecture:
-          - x86
-          - x64
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-ruby@master
         with:
           ruby-version: ${{ matrix.ruby-version }}
-          architecture: ${{ matrix.architecture }}
       - name: Update MSYS2
         run: |
           ridk exec pacman -Syu --noconfirm
