@@ -505,16 +505,18 @@ rb_gi_arguments_out_init_arg_interface(RBGIArguments *args,
                  g_info_type_to_string(metadata->type.interface_type));
         break;
       case GI_INFO_TYPE_STRUCT:
-        {
-            gsize struct_size;
-
-            /* Should we care gtype?
-               Related: rb_gi_arguments_out_arg_clear_interface() */
-            struct_size = g_struct_info_get_size(metadata->type.interface_info);
+        /* Should we care gtype? */
+        if (metadata->type.pointer_p) {
+            gpointer *struct_location = RB_ALLOC(gpointer);
+            *struct_location = NULL;
+            argument->v_pointer = struct_location;
+        } else {
+            gsize struct_size =
+                g_struct_info_get_size(metadata->type.interface_info);
             argument->v_pointer = xmalloc(struct_size);
             memset(argument->v_pointer, 0, struct_size);
-            metadata->free_func = rb_gi_arguments_out_free_interface_struct;
         }
+        metadata->free_func = rb_gi_arguments_out_free_interface_struct;
         break;
       case GI_INFO_TYPE_BOXED:
         rb_raise(rb_eNotImpError,
