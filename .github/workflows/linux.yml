@@ -12,6 +12,7 @@ jobs:
           - Ruby 2.4
           - Ruby 2.5
           - Ruby 2.6
+          - Ruby 2.7
           - Ubuntu 16.04
           - Ubuntu 18.04
           - CentOS 6
@@ -27,6 +28,8 @@ jobs:
             type: ruby-2.5
           - label: Ruby 2.6
             type: ruby-2.6
+          - label: Ruby 2.7
+            type: ruby-2.7
           - label: Ubuntu 16.04
             type: ubuntu-16.04
           - label: Ubuntu 18.04
