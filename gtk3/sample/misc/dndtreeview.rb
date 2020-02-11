@@ -2,8 +2,8 @@
   dndtreeview.rb - Drag and Drop sample script.
 
   Copyright (C) 2003-2015 Masao Mutoh
-  Copyright (c) 2003-2015 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  Copyright (c) 2003-2020 Ruby-GNOME Project Team
+  This program is licenced under the same licence as Ruby-GNOME.
 =end
 
 require "gtk3"
@@ -27,8 +27,8 @@ class TestWindow < Gtk::Window
     model = Gtk::ListStore.new(String, String)
     view = Gtk::TreeView.new(model)
     renderer = Gtk::CellRendererText.new
-    col1 = Gtk::TreeViewColumn.new("Data", renderer, { :text => 0 })
-    col2 = Gtk::TreeViewColumn.new("Data", renderer, { :text => 1 })
+    col1 = Gtk::TreeViewColumn.new("English", renderer, { :text => 0 })
+    col2 = Gtk::TreeViewColumn.new("Japanese", renderer, { :text => 1 })
     view.append_column(col1)
     view.append_column(col2)
 
