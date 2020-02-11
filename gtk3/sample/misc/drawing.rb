@@ -1,8 +1,8 @@
 =begin
   drawing.rb - Ruby/GTK version of gtk+/examples/drawing.c.
   https://git.gnome.org/browse/gtk+/tree/examples/drawing.c?h=gtk-3-16
-  Copyright (c) 2015 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  Copyright (c) 2015-2020 Ruby-GNOME Project Team
+  This program is licenced under the same licence as Ruby-GNOME.
 =end
 
 require "gtk3"
@@ -24,7 +24,7 @@ def draw_brush(widget, surface, x, y)
   widget.queue_draw_area(x - 3, y - 3, 6, 6)
 end
 
-myapp = Gtk::Application.new "org.gtk.example", :flags_none 
+myapp = Gtk::Application.new "org.gtk.example", :flags_none
 
 myapp.signal_connect "activate" do |app|
   win = Gtk::ApplicationWindow.new app
@@ -69,7 +69,7 @@ myapp.signal_connect "activate" do |app|
   drawing_area.signal_connect "motion-notify-event" do |da, ev|
     return false unless surface
 
-    if ((ev.state & Gdk::EventMask::BUTTON_PRESS_MASK.to_i) != 0)
+    if (ev.state & Gdk::EventMask::BUTTON_PRESS_MASK.to_i) != 0
       draw_brush(da, surface, ev.x, ev.y)
     end
   end
@@ -77,9 +77,10 @@ myapp.signal_connect "activate" do |app|
   drawing_area.signal_connect "button-press-event" do |da, ev|
     return false unless surface
 
-    if (ev.button == Gdk::BUTTON_PRIMARY)
+    case ev.button
+    when Gdk::BUTTON_PRIMARY
       draw_brush(da, surface, ev.x, ev.y)
-    elsif (ev.button == Gdk::BUTTON_SECONDARY)
+    when Gdk::BUTTON_SECONDARY
       clear_surface(surface)
       da.queue_draw
     end
