@@ -1,7 +1,7 @@
 =begin
   cairo_cursor.rb Ruby/GTK3 script
   Adapted from https://developer.gnome.org/gtk3/stable/ch25s02.html#id-1.6.3.4.5
-  Copyright (c) 2015 Ruby-GNOME2 Project Team
+  Copyright (c) 2015-2020 Ruby-GNOME Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
 
@@ -20,7 +20,7 @@ cr.arc(3, 3, 3, 0, 2 * Math::PI)
 cr.fill
 cr.destroy
 
-pixbuf = surface.to_pixbuf(0, 0, 6, 6)
+pixbuf = surface.to_pixbuf(src_x: 0, src_y: 0, width: 6, heihgt: 6)
 cursor = Gdk::Cursor.new(pixbuf, 0, 0)
 
 # generate the underlaying GDK resource associated with the window widget.
