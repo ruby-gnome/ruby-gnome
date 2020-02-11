@@ -42,11 +42,11 @@ event_box.add(image)
 event_box.signal_connect "button-press-event" do |_widget, event|
   if event.y >= 10 && event.y <= 85
     if event.x >= 10 && event.x <= 85
-      puts "red x = #{event.x} y = #{event.y}"
+      puts "red   x = #{event.x} \t y = #{event.y}"
     elsif event.x >= 95 && event.x <= 180
-      puts "green x = #{event.x} y = #{event.y}"
+      puts "green x = #{event.x} \t y = #{event.y}"
     elsif event.x >= 190 && event.x <= 255
-      puts "blue x = #{event.x} y = #{event.y}"
+      puts "blue  x = #{event.x} \t y = #{event.y}"
     end
   end
 end
