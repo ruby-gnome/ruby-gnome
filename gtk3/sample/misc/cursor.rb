@@ -2,8 +2,8 @@
   cursor.rb - Gdk::Cursor sample script.
 
   Copyright (C) 2001-2006 Masao Mutoh
-  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  Copyright (c) 2002-2020 Ruby-GNOME Project Team
+  This program is licenced under the same licence as Ruby-GNOME.
 =end
 
 require "gtk3"
@@ -21,7 +21,7 @@ cursors -= [Gdk::CursorType::LAST_CURSOR]
 cnt = 0
 button.signal_connect('clicked') do
   cursor = cursors[cnt]
-p cursor.inspect
+  p cursor
   button.set_label(cursor.inspect)
   window.window.set_cursor(Gdk::Cursor.new(cursor))
   cnt += 1
