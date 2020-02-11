@@ -1,7 +1,7 @@
 =begin
   calendar.rb - Gtk::Calendar sample script.
 
-  Copyright (c) 2002-2018 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2020 Ruby-GNOME Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
 
@@ -21,11 +21,7 @@ date = Time.new
 cal.select_month(date.month, date.year)
 cal.select_day(date.day)
 cal.mark_day(date.day)
-#cal.clear_marks
-
-#
-# Gtk::CalendarDisplayOptions::WEEK_START_MONDAY does not exist anymore
-#
+# cal.clear_marks
 
 cal.set_display_options(Gtk::CalendarDisplayOptions::SHOW_HEADING |
                         Gtk::CalendarDisplayOptions::SHOW_DAY_NAMES |
