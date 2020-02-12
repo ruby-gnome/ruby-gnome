@@ -44,7 +44,7 @@ class FlowBoxWindow < Gtk::Window
     set_titlebar(header)
 
     scrolled = Gtk::ScrolledWindow.new
-    scrolled.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC)
+    scrolled.set_policy(:never, :automatic)
 
     flowbox = Gtk::FlowBox.new
     flowbox.valign = :start
