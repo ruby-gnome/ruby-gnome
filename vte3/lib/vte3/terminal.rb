@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2020  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,7 @@ module Vte
         pty_object
       end
     else
-      def spawn(options)
+      def spawn(options={})
         pty_flags = options[:pty_flags] || PtyFlags::DEFAULT
         working_directory = options[:working_directory]
         argv = options[:argv] || [ENV["SHELL"] || "/bin/sh"]
