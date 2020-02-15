@@ -2,8 +2,8 @@
 =begin
   linkbutton.rb - Gtk::LinkButton sample.
 
-  Copyright (c) 2006-2015 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  Copyright (c) 2006-2020 Ruby-GNOME Project Team
+  This program is licenced under the same licence as Ruby-GNOME.
 =end
 
 require "gtk3"
@@ -22,7 +22,7 @@ vbox.pack_start(button1)
 
 # URI with a label
 button2 = Gtk::LinkButton.new("https://ruby-gnome2.osdn.jp/",
-			      "Ruby-GNOME2 Website")
+                              "Ruby-GNOME Website")
 button2.signal_connect("clicked") do
   puts button2.uri
 end
