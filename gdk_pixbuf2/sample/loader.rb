@@ -2,12 +2,13 @@
 =begin
   loader.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2003-2016: Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  Copyright (c) 2003-2020: Ruby-GNOME Project Team
+  This program is licenced under the same licence as Ruby-GNOME.
 
   $Id: loader.rb,v 1.3 2006/06/17 14:38:08 mutoh Exp $
 =end
-require 'gtk2'
+
+require 'gtk3'
 
 loader = GdkPixbuf::PixbufLoader.new
 File.open(File.join(__dir__, "gnome-foot.png"), "rb") { |f|
@@ -15,6 +16,9 @@ File.open(File.join(__dir__, "gnome-foot.png"), "rb") { |f|
 }
 pixbuf = loader.pixbuf
 
-Gtk::Window.new.add(Gtk::Image.new(pixbuf)).show_all
+window = Gtk::Window.new
+window.signal_connect('delete-event') { Gtk.main_quit }
+window.add(Gtk::Image.new(pixbuf: pixbuf))
+window.show_all
 
 Gtk.main
