@@ -2,13 +2,13 @@
 =begin
   composite.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002-2016 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  Copyright (c) 2002-2020 Ruby-GNOME Project Team
+  This program is licenced under the same licence as Ruby-GNOME.
 
   $Id: composite.rb,v 1.6 2006/06/17 14:38:08 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 filename = ARGV[0]
 unless filename
@@ -18,7 +18,7 @@ end
 
 src =  GdkPixbuf::Pixbuf.new(:file => filename)
 
-vbox = Gtk::VBox.new
+vbox = Gtk::Box.new(:vertical)
 
 dst = src.composite(:dest_width  => 100,
                     :dest_height => 100,
@@ -27,7 +27,7 @@ dst = src.composite(:dest_width  => 100,
                     :check_size => 32,
                     :color1 => 0xFF0000,
                     :color2 => 0x00FF00)
-vbox.pack_start(Gtk::Image.new(dst))
+vbox.pack_start(Gtk::Image.new(:pixbuf => dst))
 
 dst = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
                             :has_alpha => true,
@@ -41,7 +41,7 @@ dst.composite!(src,
                :scale_y => 1.8,
                :interp_type => :hyper,
                :overall_alpha => 200)
-vbox.pack_start(Gtk::Image.new(dst))
+vbox.pack_start(Gtk::Image.new(:pixbuf => dst))
 
 dst = GdkPixbuf::Pixbuf.new(:colorspace => :rgb,
                             :has_alpha => true,
@@ -63,7 +63,7 @@ dst.composite!(src,
                :check_size => 16,
                :color1 => 0x999999,
                :color2 => 0xdddddd)
-vbox.pack_start(Gtk::Image.new(dst))
+vbox.pack_start(Gtk::Image.new(:pixbuf => dst))
 
 window = Gtk::Window.new.add(vbox)
 window.signal_connect('delete-event') do
