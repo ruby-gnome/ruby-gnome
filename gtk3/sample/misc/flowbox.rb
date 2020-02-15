@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #
 # Copyright (c)  2014  Gian Mario Tagliaretti
-# Copyright (c)  2015-2018  Ruby-GNOME2 Project Team
+# Copyright (c)  2015-2020  Ruby-GNOME Project Team
 #
 # Permission is granted to copy, distribute and/or modify this document
 # under the terms of the GNU Free Documentation License, Version 1.3
@@ -44,7 +44,7 @@ class FlowBoxWindow < Gtk::Window
     set_titlebar(header)
 
     scrolled = Gtk::ScrolledWindow.new
-    scrolled.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC)
+    scrolled.set_policy(:never, :automatic)
 
     flowbox = Gtk::FlowBox.new
     flowbox.valign = :start
@@ -73,7 +73,7 @@ class FlowBoxWindow < Gtk::Window
     area.signal_connect("draw") do |_, context|
       context.set_source_rgba(color)
       context.paint
-    end 
+    end
 
     button.add(area)
   end
