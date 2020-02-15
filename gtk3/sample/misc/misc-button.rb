@@ -2,8 +2,8 @@
 =begin
   misc_button.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2004-2015 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  Copyright (c) 2004-2020 Ruby-GNOME Project Team
+  This program is licenced under the same licence as Ruby-GNOME.
 =end
 
 require "gtk3"
@@ -25,8 +25,7 @@ end
 box.add(fontbutton)
 
 # Gtk::FileChooserButton
-filebutton = Gtk::FileChooserButton.new("Gtk::FileChooserButton",
-                                    Gtk::FileChooserAction::OPEN)
+filebutton = Gtk::FileChooserButton.new("Gtk::FileChooserButton", :open)
 filebutton.filename = GLib.home_dir
 filebutton.signal_connect("current-folder-changed") do |w, e|
   p filebutton.filename
