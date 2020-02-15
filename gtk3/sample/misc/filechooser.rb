@@ -2,16 +2,16 @@
 =begin
   filechooser.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2004-2015 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  Copyright (c) 2004-2020 Ruby-GNOME Project Team
+  This program is licenced under the same licence as Ruby-GNOME.
 =end
 
 require "gtk3"
 
-dialog =  Gtk::FileChooserDialog.new(:title => "Gtk::FileChooser sample", 
-				     :action => Gtk::FileChooserAction::OPEN,                                 
-				     :buttons => [[Gtk::Stock::OPEN, Gtk::ResponseType::ACCEPT],
-				     [Gtk::Stock::CANCEL, Gtk::ResponseType::CANCEL]])
+dialog = Gtk::FileChooserDialog.new(:title => "Gtk::FileChooser sample",
+                                    :action => :open,
+                                    :buttons => [[Gtk::Stock::OPEN, :accept],
+                                                 [Gtk::Stock::CANCEL, :cancel]])
 
 extra_button = Gtk::Button.new(:label => "Extra button")
 extra_button.signal_connect("clicked") do
