@@ -2,7 +2,7 @@
   calendar.rb - Gtk::Calendar sample script.
 
   Copyright (c) 2002-2020 Ruby-GNOME Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  This program is licenced under the same licence as Ruby-GNOME.
 =end
 
 require "gtk3"
