@@ -2,29 +2,30 @@
 =begin
   xpm.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002-2016 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  Copyright (c) 2002-2020 Ruby-GNOME Project Team
+  This program is licenced under the same licence as Ruby-GNOME.
 
   $Id: xpm.rb,v 1.5 2006/06/17 14:38:08 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 r_xpm = [
-      "10 10 3 1",
-      "   c None",
-      ".  c #FE0B0B",
-      "+  c #FFFFFF",
-      "+.......++",
-      "+..    ..+",
-      "+..    ..+",
-      "+..   ...+",
-      "+.......++",
-      "+.....++++",
-      "+..++..+++",
-      "+..++...++",
-      "+..+++...+",
-      "+..++++..+"]
+  '10 10 3 1',
+  '   c None',
+  '.  c #FE0B0B',
+  '+  c #FFFFFF',
+  '+.......++',
+  '+..    ..+',
+  '+..    ..+',
+  '+..   ...+',
+  '+.......++',
+  '+.....++++',
+  '+..++..+++',
+  '+..++...++',
+  '+..+++...+',
+  '+..++++..+'
+]
 
 w = Gtk::Window.new
 w.signal_connect('delete-event') do
