@@ -8,8 +8,7 @@
   $Id: flip.rb,v 1.3 2006/06/17 14:38:08 mutoh Exp $
 =end
 
-require 'gtk2'
-
+require 'gtk3'
 
 filename = ARGV[0]
 unless filename
