@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019  Ruby-GNOME Project Team
+# Copyright (C) 2018-2020  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -29,8 +29,8 @@ end
 namespace :dependency do
   desc "Check dependency"
   task :check do
-    pacakge_id = "gegl-0.4"
-    unless PKGConfig.check_version?(pacakge_id)
+    package_id = "gegl-0.4"
+    unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:altlinux => "gegl-devel",
                                             :debian => "libgegl-dev",
                                             :redhat => "pkgconfig(#{pacakge_id})",
