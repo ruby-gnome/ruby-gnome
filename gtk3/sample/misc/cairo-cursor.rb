@@ -2,7 +2,7 @@
   cairo_cursor.rb Ruby/GTK3 script
   Adapted from https://developer.gnome.org/gtk3/stable/ch25s02.html#id-1.6.3.4.5
   Copyright (c) 2015-2020 Ruby-GNOME Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  This program is licenced under the same licence as Ruby-GNOME.
 =end
 
 require "gtk3"
