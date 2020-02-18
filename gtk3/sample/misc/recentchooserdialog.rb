@@ -2,15 +2,15 @@
 =begin
   recentchooserdialog.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2006-2015 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  Copyright (c) 2006-2020 Ruby-GNOME Project Team
+  This program is licenced under the same licence as Ruby-GNOME.
 =end
 
 require "gtk3"
 
 dialog = Gtk::RecentChooserDialog.new(:title => "Recent Chooser Dialog Sample",
-                                      :buttons => [["_Cancel", Gtk::ResponseType::CANCEL],
-                                                   ["_Accept", Gtk::ResponseType::ACCEPT]])
+                                      :buttons => [["_Cancel", :cancel],
+                                                   ["_Accept", :accept]])
 
 dialog.signal_connect("response") do |_widget, response|
   case response
@@ -40,7 +40,7 @@ dialog.signal_connect("response") do |_widget, response|
       puts info.exist?
     end
   else
-    p "Close"
+    puts "Close"
     dialog.destroy
     Gtk.main_quit
   end
