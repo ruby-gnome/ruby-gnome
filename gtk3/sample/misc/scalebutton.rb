@@ -2,8 +2,8 @@
 =begin
   scalebutton.rb - Very simple Gtk::ScaleButton example.
 
-  Copyright (c) 2007-2015 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+  Copyright (c) 2007-2020 Ruby-GNOME Project Team
+  This program is licenced under the same licence as Ruby-GNOME.
 =end
 
 require "gtk3"
@@ -12,8 +12,8 @@ window = Gtk::Window.new
 window.set_size_request(300, 300)
 scale = Gtk::ScaleButton.new
 scale.set_value(30)
-scale.set_valign(Gtk::Align::END)
-scale.set_halign(Gtk::Align::END)
+scale.set_valign(:end)
+scale.set_halign(:end)
 box = Gtk::Box.new(:vertical)
 box.add(scale)
 box.vexpand = true
