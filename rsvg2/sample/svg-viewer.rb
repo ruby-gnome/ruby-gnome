@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'gtk2'
+require 'gtk3'
 require 'rsvg2'
 
 if ARGV.size != 1
@@ -15,13 +15,10 @@ width, height = handle.dimensions.to_a
 
 window = Gtk::Window.new
 window.set_default_size(width, height)
+window.signal_connect(:destroy) { Gtk.main_quit }
+
 area = Gtk::DrawingArea.new
-
-window.signal_connect(:destroy) do
-  Gtk.main_quit
-end
-
-area.signal_connect(:expose_event) do |widget, event|
+area.signal_connect(:draw) do |widget, _event|
   context = widget.window.create_cairo_context
   window_width, window_height = widget.window.size
   context.scale(window_width.to_f / width, window_height.to_f / height)
