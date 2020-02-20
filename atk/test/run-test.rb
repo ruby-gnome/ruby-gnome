@@ -16,12 +16,12 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
+ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
+ruby_gnome_base = File.expand_path(ruby_gnome_base)
 
-glib_base = File.join(ruby_gnome2_base, "glib2")
-gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
-atk_base = File.join(ruby_gnome2_base, "atk")
+glib_base = File.join(ruby_gnome_base, "glib2")
+gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
+atk_base = File.join(ruby_gnome_base, "atk")
 
 modules = [
   [glib_base, "glib2"],
