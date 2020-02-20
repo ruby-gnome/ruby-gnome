@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018  Ruby-GNOME Project Team
+# Copyright (C) 2018-2020 Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,8 +20,8 @@ require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
   s.name          = "atk"
-  s.summary = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
-  s.description = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
+  s.summary       = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
+  s.description   = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
   s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome2.osdn.jp/"
