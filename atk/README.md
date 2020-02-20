@@ -13,12 +13,12 @@ Ruby/ATK is a Ruby binding of ATK-1.12.x or later based on GObject-Introspection
 
 ## License
 
-Copyright (c) 2017 Ruby-GNOME2 Project Team
+Copyright (c) 2017-2020 Ruby-GNOME2 Project Team
 
 This program is free software. You can distribute/modify this program
 under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 ## Project Websites
 
-*   https://ruby-gnome2.osdn.jp/
 *   https://github.com/ruby-gnome/ruby-gnome
+*   https://ruby-gnome2.osdn.jp/
