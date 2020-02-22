@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2020  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,17 +18,17 @@
 
 have_make = system("which make > /dev/null")
 
-ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
+ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
+ruby_gnome_base = File.expand_path(ruby_gnome_base)
 
-glib_base = File.join(ruby_gnome2_base, "glib2")
-cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
-gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
-pango_base = File.join(ruby_gnome2_base, "pango")
-gdk_pixbuf2_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
-clutter_base = File.join(ruby_gnome2_base, "clutter")
-gstreamer_base = File.join(ruby_gnome2_base, "gstreamer")
-clutter_gstreamer_base = File.join(ruby_gnome2_base, "clutter-gstreamer")
+glib_base = File.join(ruby_gnome_base, "glib2")
+cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
+gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
+pango_base = File.join(ruby_gnome_base, "pango")
+gdk_pixbuf2_base = File.join(ruby_gnome_base, "gdk_pixbuf2")
+clutter_base = File.join(ruby_gnome_base, "clutter")
+gstreamer_base = File.join(ruby_gnome_base, "gstreamer")
+clutter_gstreamer_base = File.join(ruby_gnome_base, "clutter-gstreamer")
 
 modules = [
   [glib_base, "glib2"],
