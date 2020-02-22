@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2018-2020  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,13 +16,13 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
+ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
+ruby_gnome_base = File.expand_path(ruby_gnome_base)
 
-glib_base = File.join(ruby_gnome2_base, "glib2")
-gio2_base = File.join(ruby_gnome2_base, "gio2")
-gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
-gegl_base = File.join(ruby_gnome2_base, "gegl")
+glib_base = File.join(ruby_gnome_base, "glib2")
+gio2_base = File.join(ruby_gnome_base, "gio2")
+gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
+gegl_base = File.join(ruby_gnome_base, "gegl")
 
 modules = [
   [glib_base, "glib2"],
