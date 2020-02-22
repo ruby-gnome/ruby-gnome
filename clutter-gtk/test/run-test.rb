@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2020  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,21 +18,21 @@
 
 have_make = system("which make > /dev/null")
 
-ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
+ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
+ruby_gnome_base = File.expand_path(ruby_gnome_base)
 
-glib_base = File.join(ruby_gnome2_base, "glib2")
-atk_base = File.join(ruby_gnome2_base, "atk")
-pango_base = File.join(ruby_gnome2_base, "pango")
-gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
-cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
-gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
-gio_base = File.join(ruby_gnome2_base, "gio2")
-clutter_base = File.join(ruby_gnome2_base, "clutter")
-gdk3_base = File.join(ruby_gnome2_base, "gdk3")
-gtk3_base = File.join(ruby_gnome2_base, "gtk3")
-clutter_gdk_base = File.join(ruby_gnome2_base, "clutter-gdk")
-clutter_gtk_base = File.join(ruby_gnome2_base, "clutter-gtk")
+glib_base = File.join(ruby_gnome_base, "glib2")
+atk_base = File.join(ruby_gnome_base, "atk")
+pango_base = File.join(ruby_gnome_base, "pango")
+gdk_pixbuf_base = File.join(ruby_gnome_base, "gdk_pixbuf2")
+cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
+gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
+gio_base = File.join(ruby_gnome_base, "gio2")
+clutter_base = File.join(ruby_gnome_base, "clutter")
+gdk3_base = File.join(ruby_gnome_base, "gdk3")
+gtk3_base = File.join(ruby_gnome_base, "gtk3")
+clutter_gdk_base = File.join(ruby_gnome_base, "clutter-gdk")
+clutter_gtk_base = File.join(ruby_gnome_base, "clutter-gtk")
 
 modules = [
   [glib_base, "glib2"],
