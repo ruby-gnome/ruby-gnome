@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2020  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,13 +18,13 @@
 
 $VERBOSE = true
 
-ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
+ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
+ruby_gnome_base = File.expand_path(ruby_gnome_base)
 
-glib_base = File.join(ruby_gnome2_base, "glib2")
-gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
-cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
-pango_base = File.join(ruby_gnome2_base, "pango")
+glib_base = File.join(ruby_gnome_base, "glib2")
+gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
+cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
+pango_base = File.join(ruby_gnome_base, "pango")
 
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 
