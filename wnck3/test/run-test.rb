@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2019-2020  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,19 +16,19 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
+ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
+ruby_gnome_base = File.expand_path(ruby_gnome_base)
 
-glib_base = File.join(ruby_gnome2_base, "glib2")
-gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
-gio_base = File.join(ruby_gnome2_base, "gio2")
-atk_base = File.join(ruby_gnome2_base, "atk")
-cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
-pango_base = File.join(ruby_gnome2_base, "pango")
-gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
-gdk_base = File.join(ruby_gnome2_base, "gdk3")
-gtk_base = File.join(ruby_gnome2_base, "gtk3")
-wnck_base = File.join(ruby_gnome2_base, "wnck3")
+glib_base = File.join(ruby_gnome_base, "glib2")
+gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
+gio_base = File.join(ruby_gnome_base, "gio2")
+atk_base = File.join(ruby_gnome_base, "atk")
+cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
+pango_base = File.join(ruby_gnome_base, "pango")
+gdk_pixbuf_base = File.join(ruby_gnome_base, "gdk_pixbuf2")
+gdk_base = File.join(ruby_gnome_base, "gdk3")
+gtk_base = File.join(ruby_gnome_base, "gtk3")
+wnck_base = File.join(ruby_gnome_base, "wnck3")
 
 modules = [
   [glib_base, "glib2"],
