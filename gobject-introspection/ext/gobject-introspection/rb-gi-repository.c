@@ -228,7 +228,7 @@ rg_find(int argc, VALUE *argv, VALUE self)
         VALUE rb_gtype;
         GType gtype;
         rb_gtype = argv[0];
-        gtype = NUM2UINT(rb_gtype);
+        gtype = NUM2ULONG(rb_gtype);
         info = g_irepository_find_by_gtype(SELF(self), gtype);
     } else {
         VALUE rb_namespace, rb_name;

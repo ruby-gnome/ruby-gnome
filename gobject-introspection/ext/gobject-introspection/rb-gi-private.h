@@ -22,6 +22,7 @@
 
 #include <ruby.h>
 #include <rbgobject.h>
+#include <rbglib2conversions.h>
 #include <glib-enum-types.h>
 
 #include <girffi.h>
