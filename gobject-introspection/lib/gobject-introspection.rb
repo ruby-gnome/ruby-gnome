@@ -61,5 +61,7 @@ require "gobject-introspection/type-info"
 require "gobject-introspection/type-tag"
 require "gobject-introspection/union-info"
 
+require "gobject-introspection/glib2-hook-up-vfunc"
+
 require "gobject-introspection/version"
 require "gobject-introspection/loader"
