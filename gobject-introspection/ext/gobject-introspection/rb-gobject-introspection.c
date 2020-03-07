@@ -182,7 +182,7 @@ ffi_callback(G_GNUC_UNUSED ffi_cif *cif,
             if (type_tag == GI_TYPE_TAG_VOID || direction == GI_DIRECTION_IN)
                 continue;
 
-            rval2garg(rb_ret, type_tag, args[i]);
+            rval2garg(rb_ret, type_tag, *(GIArgument **) args[i]);
             break;
         }
     } else {
@@ -199,7 +199,7 @@ ffi_callback(G_GNUC_UNUSED ffi_cif *cif,
             if (type_tag == GI_TYPE_TAG_VOID || direction == GI_DIRECTION_IN)
                 continue;
 
-            rval2garg(rb_ary_entry(rb_ret, j), type_tag, args[i]);
+            rval2garg(rb_ary_entry(rb_ret, j), type_tag, *(GIArgument **) args[i]);
             j++;
         }
     }
