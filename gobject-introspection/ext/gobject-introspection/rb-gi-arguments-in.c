@@ -1669,7 +1669,15 @@ rb_gi_arguments_in_init_arg_ruby_ghash_body(VALUE value_data)
       case GI_TYPE_TAG_FLOAT:
       case GI_TYPE_TAG_DOUBLE:
       case GI_TYPE_TAG_GTYPE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(GHash)[value][%s]",
+                 g_type_tag_to_string(metadata->value_type.tag));
+        break;
       case GI_TYPE_TAG_UTF8:
+        value_destroy_func = g_free;
+        value_ruby_to_c_func = ruby_to_c_utf8;
+        value_ruby_to_c_data.context = "Ruby -> GIArgument(GHash)[value][utf8]";
+        break;
       case GI_TYPE_TAG_FILENAME:
       case GI_TYPE_TAG_ARRAY:
         rb_raise(rb_eNotImpError,
