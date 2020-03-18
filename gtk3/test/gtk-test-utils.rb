@@ -52,6 +52,6 @@ module GtkTestUtils
   end
 
   def fixture_path(*components)
-    File.join(File.dirname(__FILE__), "fixture", *components)
+    File.join("test", "fixture", *components)
   end
 end

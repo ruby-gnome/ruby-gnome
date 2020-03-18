@@ -16,7 +16,11 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
+require "fileutils"
+
+build_dir = File.expand_path(".")
+
+ruby_gnome_base = File.join(__dir__, "..", "..")
 ruby_gnome_base = File.expand_path(ruby_gnome_base)
 
 glib_base = File.join(ruby_gnome_base, "glib2")
@@ -49,8 +53,15 @@ gtk3_base = File.join(ruby_gnome_base, "gtk3")
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
-Dir.chdir(File.join(gtk3_base, "test", "fixture")) do
-  system("rake") or exit(false)
+source_fixture_dir = File.join(gtk3_base, "test", "fixture")
+build_fixture_dir = File.join(build_dir, "test", "fixture")
+unless source_fixture_dir == build_fixture_dir
+  FileUtils.rm_rf(build_fixture_dir)
+  FileUtils.mkdir_p(File.dirname(build_fixture_dir))
+  FileUtils.cp_r(source_fixture_dir, build_fixture_dir)
+end
+Dir.chdir(build_fixture_dir) do
+  system("rake",) or exit(false)
 end
 
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
