@@ -61,7 +61,7 @@ unless source_fixture_dir == build_fixture_dir
   FileUtils.cp_r(source_fixture_dir, build_fixture_dir)
 end
 Dir.chdir(build_fixture_dir) do
-  system("rake",) or exit(false)
+  system("rake") or exit(false)
 end
 
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
