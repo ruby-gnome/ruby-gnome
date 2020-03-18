@@ -15,7 +15,8 @@ RUN \
     ruby-devel \
     sudo \
     which \
-    xorg-x11-server-Xvfb
+    xorg-x11-server-Xvfb && \
+  dnf clean all
 
 RUN \
   gem install bundler
@@ -27,15 +28,8 @@ RUN \
   echo "ruby-gnome ALL=(ALL:ALL) NOPASSWD:ALL" | \
     EDITOR=tee visudo -f /etc/sudoers.d/ruby-gnome
 
-COPY . /home/ruby-gnome/ruby-gnome
-RUN chown -R ruby-gnome: /home/ruby-gnome/ruby-gnome
-
 USER ruby-gnome
-WORKDIR /home/ruby-gnome/ruby-gnome
+WORKDIR /home/ruby-gnome
 
-RUN bundle install --path vendor/bundle
-
-CMD \
-  dbus-run-session \
-    xvfb-run --server-args "-screen 0 640x480x24" \
-    bundle exec rake
+COPY Gemfile .
+RUN bundle install

@@ -11,7 +11,8 @@ RUN \
     make \
     openssl-devel \
     readline-devel \
-    zlib-devel
+    zlib-devel && \
+  yum clean all
 
 RUN \
   useradd --user-group --create-home ruby-gnome
@@ -35,11 +36,9 @@ RUN \
 RUN \
   rbenv global ${RUBY_VERSION}
 
-COPY . /home/ruby-gnome/ruby-gnome
-RUN sudo chown -R ruby-gnome:ruby-gnome ~/ruby-gnome
-WORKDIR /home/ruby-gnome/ruby-gnome
+WORKDIR /home/ruby-gnome
 
 RUN gem install bundler
-RUN bundle install
 
-CMD cd glib2 && ruby extconf.rb && test/run-test.rb -v
+COPY Gemfile .
+RUN bundle install

@@ -1,6 +1,10 @@
 FROM ruby:2.6
 
 RUN \
+  echo "debconf debconf/frontend select Noninteractive" | \
+    debconf-set-selections
+
+RUN \
   apt update && \
   apt install -y \
     bison \
@@ -39,27 +43,8 @@ RUN \
   pip3 install --upgrade meson
 
 RUN \
-  useradd --user-group --create-home ruby-gnome
-
-RUN \
-  echo "ruby-gnome ALL=(ALL:ALL) NOPASSWD:ALL" | \
-    EDITOR=tee visudo -f /etc/sudoers.d/ruby-gnome
-
-COPY . /home/ruby-gnome/ruby-gnome
-RUN chown -R ruby-gnome:ruby-gnome /home/ruby-gnome/ruby-gnome
-
-USER ruby-gnome
-WORKDIR /home/ruby-gnome/ruby-gnome
-
-RUN bundle install
-RUN \
-  (cd glib2 && rake gem && gem install --local pkg/*.gem) && \
-  (cd gobject-introspection && rake gem && gem install --local pkg/*.gem)
-
-RUN git clone --depth 1 https://github.com/apache/arrow.git ~/arrow
-WORKDIR /home/ruby-gnome/arrow
-RUN \
-  mkdir -p build/cpp && \
+  git clone --depth 1 https://github.com/apache/arrow.git /arrow && \
+  mkdir -p /arrow.build && \
   cmake \
     -G Ninja \
     -DARROW_COMPUTE=ON \
@@ -77,18 +62,21 @@ RUN \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DProtobuf_SOURCE=BUNDLED \
-    -S cpp \
-    -B build/cpp && \
-  ninja -C build/cpp && \
-  sudo ninja -C build/cpp install
-RUN \
-  meson \
-    --prefix=/usr \
-    --libdir=lib \
-    --buildtype=debug \
-    build/c_glib \
-    c_glib && \
-  ninja -C build/c_glib && \
-  sudo ninja -C build/c_glib install
+    -S /arrow/cpp \
+    -B /arrow.build/cpp && \
+  ninja -C /arrow.build/cpp && \
+  ninja -C /arrow.build/cpp install && \
+  rm -rf /arrow.build
 
-CMD (cd build/c_glib && ../../c_glib/test/run-test.sh)
+RUN \
+  useradd --user-group --create-home ruby-gnome
+
+RUN \
+  echo "ruby-gnome ALL=(ALL:ALL) NOPASSWD:ALL" | \
+    EDITOR=tee visudo -f /etc/sudoers.d/ruby-gnome
+
+USER ruby-gnome
+WORKDIR /home/ruby-gnome
+
+COPY Gemfile .
+RUN bundle install

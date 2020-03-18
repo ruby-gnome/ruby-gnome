@@ -1,6 +1,10 @@
 FROM ubuntu:16.04
 
 RUN \
+  echo "debconf debconf/frontend select Noninteractive" | \
+    debconf-set-selections
+
+RUN \
   apt update && \
   apt install -y \
     dbus \
@@ -24,15 +28,8 @@ RUN \
   echo "ruby-gnome ALL=(ALL:ALL) NOPASSWD:ALL" | \
     EDITOR=tee visudo -f /etc/sudoers.d/ruby-gnome
 
-COPY . /home/ruby-gnome/ruby-gnome
-RUN chown -R ruby-gnome:ruby-gnome /home/ruby-gnome/ruby-gnome
-
 USER ruby-gnome
-WORKDIR /home/ruby-gnome/ruby-gnome
+WORKDIR /home/ruby-gnome
 
-RUN bundle install --path vendor/bundle
-
-CMD \
-  dbus-run-session \
-    xvfb-run --server-args "-screen 0 640x480x24" \
-    bundle exec rake
+COPY Gemfile .
+RUN bundle install

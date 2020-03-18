@@ -1,8 +1,7 @@
 FROM centos:7
 
 RUN \
-  yum install -y epel-release
-RUN \
+  yum install -y epel-release && \
   yum install -y \
     adwaita-gtk2-theme \
     bzip2 \
@@ -24,7 +23,8 @@ RUN \
     webkitgtk3 \
     which \
     xorg-x11-server-Xvfb \
-    zlib-devel
+    zlib-devel && \
+  yum clean all
 
 RUN \
   systemd-machine-id-setup
@@ -51,14 +51,9 @@ RUN \
 RUN \
   rbenv global ${RUBY_VERSION}
 
-COPY . /home/ruby-gnome/ruby-gnome
-RUN sudo chown -R ruby-gnome:ruby-gnome ~/ruby-gnome
-WORKDIR /home/ruby-gnome/ruby-gnome
+WORKDIR /home/ruby-gnome
 
 RUN gem install bundler
-RUN bundle install
 
-CMD \
-  dbus-run-session \
-    xvfb-run --server-args "-screen 0 640x480x24" \
-    bundle exec rake
+COPY Gemfile .
+RUN bundle install
