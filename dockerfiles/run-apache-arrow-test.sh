@@ -28,7 +28,8 @@ for package in glib2 gobject-introspection; do
   cp -a /ruby-gnome/${package} ./
   pushd ${package}
   rake gem
-  gme install pkg/*.gem
+  gem install pkg/*.gem
+  popd
 done
 
 meson \
