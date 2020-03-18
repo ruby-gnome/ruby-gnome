@@ -19,10 +19,6 @@ module PopplerTestUtils
     File.join(fixtures_dir, *components)
   end
 
-  def tmp_dir
-    ensure_dir(File.join(test_dir, "tmp"))
-  end
-
   def form_pdf
     fixture_path("form.pdf")
   end
