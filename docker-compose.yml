@@ -26,7 +26,7 @@ services:
     volumes:
       - .:/ruby-gnome:delegated
     command:
-      ./run-test.sh glib2
+      /ruby-gnome/dockerfiles/run-test.sh glib2
 
   centos-7:
     build:
@@ -35,7 +35,7 @@ services:
     volumes:
       - .:/ruby-gnome:delegated
     command:
-      ./run-test.sh
+      /ruby-gnome/dockerfiles/run-test.sh
 
   centos-8:
     build:
@@ -44,7 +44,7 @@ services:
     volumes:
       - .:/ruby-gnome:delegated
     command:
-      ./run-test.sh
+      /ruby-gnome/dockerfiles/run-test.sh
 
   fedora-rawhide:
     build:
