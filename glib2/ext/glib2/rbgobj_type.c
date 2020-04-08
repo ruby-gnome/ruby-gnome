@@ -110,7 +110,7 @@ rbgobj_class_info_create_data_type(VALUE klass)
     if (RB_TYPE_P(klass, RUBY_T_CLASS) && klass != rb_cObject) {
         VALUE p = RCLASS_SUPER(klass);
         while (p != rb_cObject) {
-            if (RTYPEDDATA_P(p)) {
+            if (RB_TYPE_P(p, RUBY_T_DATA) && RTYPEDDATA_P(p)) {
                 data_type->parent = RTYPEDDATA_TYPE(p);
                 break;
             }
