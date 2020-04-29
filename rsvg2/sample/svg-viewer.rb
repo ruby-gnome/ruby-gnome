@@ -20,7 +20,7 @@ window.signal_connect(:destroy) { Gtk.main_quit }
 area = Gtk::DrawingArea.new
 area.signal_connect(:draw) do |widget, _event|
   context = widget.window.create_cairo_context
-  window_width, window_height = widget.window.size
+  window_width, window_height = widget.window.width,widget.window.height
   context.scale(window_width.to_f / width, window_height.to_f / height)
   context.render_rsvg_handle(handle)
 end
