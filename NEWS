@@ -2,6 +2,111 @@
 
 = NEWS
 
+== Ruby-GNOME 3.4.2: 2020-05-02
+
+This is a follow-up release of 3.4.0.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * Add support for Ruby 2.8.
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * (({Gtk::Widget#style_get_property})): Added a validation.
+
+    * Updated examples.
+      [GitHub#1318][GitHub#1319][GitHub#1320][GitHub#1321][GitHub#1322]
+      [GitHub#1323][GitHub#1324][GitHub#1325][GitHub#1326][GitHub#1327]
+      [GitHub#1328][GitHub#1329][GitHub#1330][GitHub#1331][GitHub#1332]
+      [GitHub#1353][GitHub#1354][GitHub#1355][GitHub#1391]
+      [Patch by kojix2]
+
+  * Fixes
+
+    * Fixed a typo.
+      [GitHub#1307][Patch by İsmail Arılık]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Changed to accept (({nil})) as a false value for boolean.
+      [GitHub#1305][Reported by Matijs van Zuijlen]
+
+    * Added support for UTF-8 (({GHashTable})) value.
+
+    * Added workaround for (({rsvg_handle_set_stylesheet()})).
+
+  * Fixes
+
+    * Fixed a bug that pointer struct isn't allocated correctly.
+      [GitHub#1315][Reported by Konrad Narewski]
+
+==== Ruby/GtkSourceView4
+
+  * Improvements
+
+    * Added support for auto native package install on Ubuntu.
+      [GitHub#1309][Patch by İsmail Arılık]
+
+    * Added support for auto native package install on Debian GNU/Linux.
+
+==== Ruby/VTE3
+
+  * Improvements
+
+    * (({Vte::Terminal#spawn})): Made options optional.
+      [GitHub#1333][Patch by kojix2]
+
+    * Updated README.
+      [GitHub#1335][Patch by kojix2]
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements
+
+    * Updated examples.
+      [GitHub#1336][GitHub#1337][GitHub#1338][GitHub#1339][GitHub#1340]
+      [GitHub#1341][GitHub#1342][GitHub#1343][GitHub#1344][GitHub#1347]
+      [GitHub#1348][GitHub#1349]
+      [Patch by kojix2]
+
+    * Updated README.
+      [GitHub#1346][Patch by kojix2]
+
+==== Ruby/WebKit2GTK
+
+  * Fixes
+
+    * Fixed dependency check.
+      [GitHub#1351][Patch by kojix2]
+
+==== Ruby/RSVG2
+
+  * Improvements
+
+    * Updated examples.
+      [GitHub#1357][Patch by kojix2]
+      [GitHub#1393][Patch by Jean-Christophe Le Lann]
+
+=== Thanks
+
+  * Matijs van Zuijlen
+
+  * İsmail Arılık
+
+  * Konrad Narewski
+
+  * kojix2
+
+  * Jean-Christophe Le Lann
+
 == Ruby-GNOME 3.4.1: 2019-10-16
 
 This is a follow-up release of 3.4.0.
