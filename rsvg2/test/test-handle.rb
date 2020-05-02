@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2020  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -84,5 +84,18 @@ class TestHandle < Test::Unit::TestCase
         assert_equal(uri_string, handle.base_uri)
       end
     end
+  end
+
+  test "#stylesheet=" do
+    only_rsvg_version(2, 48)
+    svg = <<-SVG
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect id="rectangle" x="0" y="10" width="100" height="100"/>
+</svg>
+    SVG
+    handle = Rsvg::Handle.new(data: svg)
+    handle.stylesheet = "rect {fill: red;}"
+    # TODO: Assert rendered color
   end
 end

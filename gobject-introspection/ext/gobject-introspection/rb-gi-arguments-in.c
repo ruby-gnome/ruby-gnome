@@ -1004,7 +1004,15 @@ rb_gi_arguments_in_init_arg_ruby_array_c(RBGIArguments *args,
                                                        rb_arg);
         break;
       case GI_TYPE_TAG_UTF8:
-        {
+        /* Workaround for rsvg_handle_set_stylesheet():
+           https://gitlab.gnome.org/GNOME/librsvg/-/issues/596 */
+        if (strcmp(metadata->name, "css") == 0) {
+            metadata->in_arg->v_pointer = RVAL2CSTR(rb_arg);
+            rb_gi_arguments_in_init_arg_ruby_array_set_length(args,
+                                                              metadata,
+                                                              RSTRING_LEN(rb_arg));
+            metadata->free_func = NULL;
+        } else {
             GIArgument *array_argument = metadata->in_arg;
             gchar **raw_array;
             long length;
