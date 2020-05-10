@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2020  Ruby-GNOME Project Team
  *  Copyright (C) 2006  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -383,7 +383,7 @@ rg_set_groups(VALUE self, VALUE rburi, VALUE rbgroups)
     GBookmarkFile *bookmark = _SELF(self);
     const gchar *uri = RVAL2CSTR(rburi);
     long n;
-    const gchar **groups = RVAL2STRS(rbgroups, n);
+    gchar **groups = RVAL2STRS(rbgroups, n);
 
     g_bookmark_file_set_groups(bookmark, uri, groups, n);
 
