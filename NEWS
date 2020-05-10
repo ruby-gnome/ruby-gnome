@@ -2,6 +2,18 @@
 
 = NEWS
 
+== Ruby-GNOME 3.4.3: 2020-05-11
+
+This is a follow-up release of 3.4.2.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Fixes
+
+    * Windows: Fixed a link errors.
+
 == Ruby-GNOME 3.4.2: 2020-05-02
 
 This is a follow-up release of 3.4.1.
@@ -12,7 +24,7 @@ This is a follow-up release of 3.4.1.
 
   * Improvements
 
-    * Add support for Ruby 2.8.
+    * Added support for Ruby 2.8.
 
 ==== Ruby/GTK3
 
