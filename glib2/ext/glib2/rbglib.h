@@ -154,7 +154,7 @@ G_BEGIN_DECLS
 
 #ifdef G_PLATFORM_WIN32
 #  ifdef RUBY_GLIB2_COMPILATION
-#    define RUBY_GLIB2_VAR __declspec(dllexport)
+#    define RUBY_GLIB2_VAR extern __declspec(dllexport)
 #  else
 #    define RUBY_GLIB2_VAR extern __declspec(dllimport)
 #  endif
