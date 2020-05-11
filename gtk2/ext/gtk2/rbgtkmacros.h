@@ -28,7 +28,7 @@
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_GTK2_STATIC_COMPILATION)
 #  ifdef RUBY_GTK2_COMPILATION
-#    define RUBY_GTK2_VAR __declspec(dllexport)
+#    define RUBY_GTK2_VAR extern __declspec(dllexport)
 #  else
 #    define RUBY_GTK2_VAR extern __declspec(dllimport)
 #  endif
