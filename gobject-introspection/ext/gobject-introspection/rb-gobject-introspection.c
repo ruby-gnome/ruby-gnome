@@ -258,6 +258,30 @@ rb_gi_hook_up_vfunc(G_GNUC_UNUSED VALUE self,
 }
 
 void
+interface_init(gpointer g_iface,
+               gpointer iface_data) {}
+
+void
+rb_gi_add_interface(G_GNUC_UNUSED VALUE self,
+                    VALUE rb_gtype_klass,
+                    VALUE rb_gtype_mod,
+                    VALUE rb_interface_info)
+{
+    GType gtype_klass = 0;
+    GType gtype_mod = 0;
+    GInterfaceInfo *info = NULL;
+
+    gtype_klass = NUM2LONG(rb_gtype_klass);
+    g_assert(G_TYPE_IS_CLASSED(gtype_klass));
+    gtype_mod = NUM2LONG(rb_gtype_mod);
+
+    info = g_new0 (GInterfaceInfo, 1);
+    info->interface_init = interface_init;
+
+    g_type_add_interface_static (gtype_klass, gtype_mod, info);
+}
+
+void
 Init_gobject_introspection(void)
 {
     VALUE RG_TARGET_NAMESPACE;
@@ -290,4 +314,5 @@ Init_gobject_introspection(void)
     rb_gi_callback_init(RG_TARGET_NAMESPACE);
 
     rb_define_module_function(RG_TARGET_NAMESPACE, "hook_up_vfunc", rb_gi_hook_up_vfunc, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "add_interface", rb_gi_add_interface, 3);
 }
