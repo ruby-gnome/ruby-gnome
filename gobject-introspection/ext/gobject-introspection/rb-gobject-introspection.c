@@ -52,7 +52,17 @@ find_vfunc_info (GIBaseInfo *vfunc_info,
     ancestor_info = g_base_info_get_container(vfunc_info);
     // ancestor_gtype = g_registered_type_info_get_g_type (
     //                       (GIRegisteredTypeInfo *) ancestor_info);
-    struct_info = g_object_info_get_class_struct((GIObjectInfo*) ancestor_info);
+    switch (g_base_info_get_type(ancestor_info)) {
+    case GI_INFO_TYPE_OBJECT:
+        struct_info = g_object_info_get_class_struct((GIObjectInfo*) ancestor_info);
+        break;
+    case GI_INFO_TYPE_INTERFACE:
+        struct_info = g_interface_info_get_iface_struct(ancestor_info);
+        break;
+    default:
+        g_assert_not_reached();
+        break;
+    }
     *implementor_vtable_ret = g_type_class_ref(implementor_gtype);
 
     field_info = g_struct_info_find_field(
