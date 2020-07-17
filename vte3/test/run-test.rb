@@ -19,45 +19,50 @@
 ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
 ruby_gnome_base = File.expand_path(ruby_gnome_base)
 
-glib_base = File.join(ruby_gnome_base, "glib2")
-atk_base = File.join(ruby_gnome_base, "atk")
-pango_base = File.join(ruby_gnome_base, "pango")
-gdk_pixbuf_base = File.join(ruby_gnome_base, "gdk_pixbuf2")
-cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-gio2_base = File.join(ruby_gnome_base, "gio2")
-gdk3_base = File.join(ruby_gnome_base, "gdk3")
-gtk3_base = File.join(ruby_gnome_base, "gtk3")
-vte3_base = File.join(ruby_gnome_base, "vte3")
+ruby_gnome_build_base = ENV["RUBY_GNOME_BUILD_DIR"] || ruby_gnome_base
+
+glib_dir = "glib2"
+atk_dir = "atk"
+pango_dir = "pango"
+gdk_pixbuf_dir = "gdk_pixbuf2"
+cairo_gobject_dir = "cairo-gobject"
+gobject_introspection_dir = "gobject-introspection"
+gio2_dir = "gio2"
+gdk3_dir = "gdk3"
+gtk3_dir = "gtk3"
+vte3_dir = "vte3"
 
 modules = [
-  [glib_base, "glib2"],
-  [atk_base, "atk"],
-  [pango_base, "pango"],
-  [cairo_gobject_base, "cairo-gobject"],
-  [gdk_pixbuf_base, "gdk_pixbuf2"],
-  [gobject_introspection_base, "gobject-introspection"],
-  [gio2_base, "gio2"],
-  [gdk3_base, "gdk3"],
-  [gtk3_base, "gtk3"],
-  [vte3_base, "vte3"],
+  [glib_dir, "glib2"],
+  [atk_dir, "atk"],
+  [pango_dir, "pango"],
+  [cairo_gobject_dir, "cairo-gobject"],
+  [gdk_pixbuf_dir, "gdk_pixbuf2"],
+  [gobject_introspection_dir, "gobject-introspection"],
+  [gio2_dir, "gio2"],
+  [gdk3_dir, "gdk3"],
+  [gtk3_dir, "gtk3"],
+  [vte3_dir, "vte3"],
 ]
 
-modules.each do |target, module_name|
-  makefile = File.join(target, "Makefile")
+modules.each do |dir, module_name|
+  source_dir = File.join(ruby_gnome_base, dir)
+  build_dir = File.join(ruby_gnome_build_base, dir)
+  makefile = File.join(build_dir, "Makefile")
   if File.exist?(makefile) and system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(false)
+    `make -C #{build_dir.dump} > /dev/null` or exit(false)
+    $LOAD_PATH.unshift(File.join(build_dir, "ext", module_name))
   end
-  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
-  $LOAD_PATH.unshift(File.join(target, "lib"))
+  $LOAD_PATH.unshift(File.join(source_dir, "lib"))
 end
 
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
+$LOAD_PATH.unshift(File.join(ruby_gnome_base, glib_dir, "test"))
 require "glib-test-init"
 
-$LOAD_PATH.unshift(File.join(vte3_base, "test"))
+$LOAD_PATH.unshift(File.join(ruby_gnome_base, vte3_dir, "test"))
 require "vte3-test-utils"
 
 require "vte3"
 
-exit Test::Unit::AutoRunner.run(true, File.join(vte3_base, "test"))
+test_dir = File.join(ruby_gnome_base, vte3_dir, "test")
+exit(Test::Unit::AutoRunner.run(true, test_dir))
