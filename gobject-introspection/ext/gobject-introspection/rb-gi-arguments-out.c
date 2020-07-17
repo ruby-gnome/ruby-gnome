@@ -105,10 +105,11 @@ rb_gi_arguments_out_free_array_c_interface(RBGIArguments *args,
       case GI_TRANSFER_EVERYTHING:
       default:
         rb_raise(rb_eNotImpError,
-                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 "TODO: [%s] %s free GIArgument(%s/%s)[%s]",
                  metadata->name,
                  rb_gi_direction_to_string(metadata->direction),
                  g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_array_type_to_string(metadata->array_type),
                  rb_gi_transfer_to_string(metadata->transfer));
     }
     xfree(target);
@@ -127,10 +128,13 @@ rb_gi_arguments_out_free_array_array_interface_struct(RBGIArguments *args,
       case GI_TRANSFER_EVERYTHING:
       default:
         rb_raise(rb_eNotImpError,
-                 "TODO: [%s] %s free GIArgument(%s)[%s]",
+                 "TODO: [%s] %s free GIArgument(%s/%s)[interface(%s)](%s)[%s]",
                  metadata->name,
                  rb_gi_direction_to_string(metadata->direction),
                  g_type_tag_to_string(metadata->type.tag),
+                 rb_gi_array_type_to_string(metadata->array_type),
+                 g_info_type_to_string(metadata->element_type.interface_type),
+                 g_type_name(metadata->element_type.interface_gtype),
                  rb_gi_transfer_to_string(metadata->transfer));
     }
     g_array_free(target, TRUE);
