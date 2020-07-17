@@ -62,4 +62,16 @@ class TestTerminal < Test::Unit::TestCase
       end
     end
   end
+
+  def test_get_text_range
+    text, attributes = @terminal.get_text_range(0, 0, 1, 1)
+    assert_equal([
+                   "\n",
+                   [[0, 80]],
+                 ],
+                 [
+                   text,
+                   attributes.collect {|a| [a.row, a.column]},
+                 ])
+  end
 end

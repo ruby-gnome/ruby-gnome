@@ -121,11 +121,25 @@ rb_gi_arguments_out_free_array_array_interface_struct(RBGIArguments *args,
                                                       gpointer user_data)
 {
     GArray *target = metadata->out_arg->v_pointer;
+    GType gtype = metadata->element_type.interface_gtype;
     switch (metadata->transfer) {
       case GI_TRANSFER_NOTHING:
         break;
       case GI_TRANSFER_CONTAINER:
+        break;
       case GI_TRANSFER_EVERYTHING:
+        if (gtype == G_TYPE_NONE) {
+            /* If the target struct is raw (not GType-ed) struct, we
+             * can't know how to free fields in the target struct. We
+             * assume that the target struct doesn't allocate nothing
+             * for its fields.
+             *
+             * e.g.: The attributes out argument in
+             * vte_terminal_get_text_range():
+             * https://developer.gnome.org/vte/unstable/VteTerminal.html#vte-terminal-get-text-range
+             */
+            break;
+        }
       default:
         rb_raise(rb_eNotImpError,
                  "TODO: [%s] %s free GIArgument(%s/%s)[interface(%s)](%s)[%s]",
