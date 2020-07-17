@@ -1262,15 +1262,6 @@ rb_gi_arguments_in_init_arg_ruby_interface(RBGIArguments *args,
                  rb_gi_transfer_to_string(metadata->transfer));
         break;
       case GI_INFO_TYPE_STRUCT:
-        if (metadata->transfer != GI_TRANSFER_NOTHING) {
-            rb_raise(rb_eNotImpError,
-                     "TODO: [%s] %s Ruby -> GIArgument(interface)[%s][%s][%s]",
-                     metadata->name,
-                     rb_gi_direction_to_string(metadata->direction),
-                     g_info_type_to_string(metadata->type.interface_type),
-                     g_type_name(metadata->type.interface_gtype),
-                     rb_gi_transfer_to_string(metadata->transfer));
-        }
         metadata->free_func = rb_gi_arguments_in_free_interface_struct;
         if (metadata->type.interface_gtype == G_TYPE_VALUE) {
             GValue *gvalue;
