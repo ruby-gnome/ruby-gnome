@@ -103,4 +103,10 @@ module Pango
     define_deprecated_method :lbearing, :left_bearing
     define_deprecated_method :rbearing, :right_bearing
   end
+
+  class Renderer
+    extend GLib::Deprecatable
+
+    define_deprecated_enums :RenderPart, "PART"
+  end
 end
