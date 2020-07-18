@@ -24,4 +24,3 @@
 
 extern void Init_gstreamer (void);
 G_GNUC_INTERNAL extern void rb_gst_init_child_proxy (void);
-G_GNUC_INTERNAL extern void rb_gst_init_element_factory (void);
