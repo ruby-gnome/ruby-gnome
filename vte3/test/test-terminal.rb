@@ -64,6 +64,7 @@ class TestTerminal < Test::Unit::TestCase
   end
 
   def test_get_text_range
+    only_vte_version(0, 52)
     text, attributes = @terminal.get_text_range(0, 0, 1, 1)
     assert_equal([
                    "\n",
