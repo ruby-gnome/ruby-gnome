@@ -31,6 +31,7 @@ jobs:
       - name: Update MSYS2
         run: |
           ridk exec pacman -Syu --noconfirm
+          taskkill /F /FI "MODULES eq msys-2.0.dll"
       - name: Install Bundler
         run: |
           gem install bundler
