@@ -198,7 +198,7 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
     $INCFLAGS = "-I#{target_build_dir} #{$INCFLAGS}"
   end
 
-  library_base_name = target_name.gsub(/-/, "_")
+  library_base_name = File.basename(target_source_dir).gsub(/-/, "_")
   case RUBY_PLATFORM
   when /cygwin|mingw/
     $libs << " " << File.join(target_build_dir, "#{library_base_name}.so")
