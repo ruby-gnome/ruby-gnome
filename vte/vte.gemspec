@@ -20,8 +20,8 @@ require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
   s.name          = "vte"
-  s.summary       = "Ruby/VTE is a Ruby binding of VTE."
-  s.description   = "Ruby/VTE is a Ruby binding of VTE."
+  s.summary       = "Ruby/VTE is a Ruby binding of VTE for GTK+ 2"
+  s.description   = "Ruby/VTE is a Ruby binding of VTE for GTK+ 2"
   s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome2.osdn.jp/"
