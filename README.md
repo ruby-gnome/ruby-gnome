@@ -65,8 +65,8 @@ Install these gems by Bundler:
 * ruby-gtk2 + ruby-gtk3
 * Ruby/RSVG2:            librsvg 2.8.0 or later
 * Ruby/Poppler:         poppler-glib 0.8.0 or later
-* Ruby/VTE:             VTE 0.12.1 or later
-* Ruby/VTE3:            VTE 0.37.0 or later
+* Ruby/VTE:             VTE 0.12.1 or later (for GTK+ 2)
+* Ruby/VTE3:            VTE 0.37.0 or later (for GTK+ 3)
 * Ruby/GStreamer:       GStreamer 1.0.0 or later
 * Ruby/GtkSourceView2:  GtkSourceView 2.0.0 or later
 * Ruby/GtkSourceView3:  GtkSourceView 3.4.2 or later
