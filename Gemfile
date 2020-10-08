@@ -23,6 +23,6 @@ gem "cairo"
 gem "test-unit"
 
 local_gemfile = File.join(File.dirname(__FILE__), "Gemfile.local")
-if File.exists?(local_gemfile)
+if File.exist?(local_gemfile)
   instance_eval File.read(local_gemfile)
 end
