@@ -16,6 +16,7 @@ This document describes how to install rsvg2 on heroku (cedar-16)
       gir1.2-glib-2.0
       libgirepository-1.0-1
       libgirepository1.0-dev
+      libcairo-gobject2
       ```
   4. In your gemfile add
       ```
