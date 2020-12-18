@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/ruby-gnome/ruby-gnome.svg?branch=master)](https://travis-ci.org/ruby-gnome/ruby-gnome)
-[![Gem Version](https://badge.fury.io/rb/gtk3.svg)](https://badge.fury.io/rb/gtk3)
 # Ruby-GNOME
+
+[![Gem Version](https://badge.fury.io/rb/gtk3.svg)](https://badge.fury.io/rb/gtk3)
+
 ![Ruby-GNOME Logo](https://avatars1.githubusercontent.com/u/416159?v=3&s=200)
 Ruby bindings for GNOME
-
 
 This is a set of bindings for the GNOME 2.x and 3.x libraries to use
 from Ruby 2.4, 2.5 and 2.6.
