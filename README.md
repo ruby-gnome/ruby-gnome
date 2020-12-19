@@ -86,9 +86,11 @@ Install these gems by Bundler:
 
 ### Experimental / Incomplete:
 
-* Ruby/GSF:             GSF 1.14.0 or later
-* Ruby/GOffice:         GOffice 0.10 or later
-* Ruby/Gnumeric:        Gnumeric 1.12 or later
+| Ruby Package Name         | Gnome Component       | Supported Version |
+|---------------------------|-----------------------|-------------------|
+| Ruby/GSF                  | GSF                   | 1.14.0 or later   |
+| Ruby/GOffice              | GOffice               | 0.10 or later     |
+| Ruby/Gnumeric             | Gnumeric              | 1.12 or later     |
 
 ## Advanced Installation
 
