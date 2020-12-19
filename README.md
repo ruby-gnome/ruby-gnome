@@ -41,7 +41,7 @@ Install these gems by Bundler:
 
 ### ruby-gtk2
 
-| Ruby Package Name         | Gnome Component       | Supported Version |
+| Ruby Package Name         | GNOME Component       | Supported Version |
 |---------------------------|-----------------------|-------------------|
 | Ruby/GLib2                | GLib                  | 2.12.x or later   |
 | Ruby/ATK                  | ATK                   | 1.12.x or later   |
