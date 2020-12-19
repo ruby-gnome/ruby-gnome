@@ -6,7 +6,7 @@
 Ruby bindings for GNOME
 
 This is a set of bindings for the GNOME 2.x and 3.x libraries to use
-from Ruby 2.5, 2.6, 2.7
+from Ruby 2.5, 2.6 and 2.7.
 
 ## Installation
 
