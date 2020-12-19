@@ -52,7 +52,7 @@ Install these gems by Bundler:
 
 ### ruby-gtk3
 
-| Ruby Package Name         | Gnome Component       | Supported Version |
+| Ruby Package Name         | GNOME Component       | Supported Version |
 |---------------------------|-----------------------|-------------------|
 | Ruby/GLib2                | GLib                  | 2.12.x or later   |
 | Ruby/GIO2                 | GIO                   | 2.16.x or later   |
