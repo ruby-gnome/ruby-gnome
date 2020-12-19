@@ -6,7 +6,7 @@
 Ruby bindings for GNOME
 
 This is a set of bindings for the GNOME 2.x and 3.x libraries to use
-from Ruby 2.4, 2.5 and 2.6.
+from Ruby 2.5, 2.6 and 2.7.
 
 ## Installation
 
@@ -41,48 +41,56 @@ Install these gems by Bundler:
 
 ### ruby-gtk2
 
-* Ruby/GLib2:           GLib 2.12.x or later
-* Ruby/ATK:             ATK 1.12.x or later
-* Ruby/Pango:           Pango 1.14.x or later
-* Ruby/GdkPixbuf2:      GTK+ 2.0.x or later
-* Ruby/GTK2:            GTK+ 2.10.x or later
-* Ruby/GObjectIntrospection: GObject Introspection 1.32.1 or later
+| Ruby Package Name         | GNOME Component       | Supported Version |
+|---------------------------|-----------------------|-------------------|
+| Ruby/GLib2                | GLib                  | 2.12.x or later   |
+| Ruby/ATK                  | ATK                   | 1.12.x or later   |
+| Ruby/Pango                | Pango                 | 1.14.x or later   |
+| Ruby/GdkPixbuf2           | GTK+                  | 2.0.x or later    |
+| Ruby/GTK2                 | GTK+                  | 2.10.x or later   |
+| Ruby/GObjectIntrospection | GObject Introspection | 1.32.1 or later   |
 
 ### ruby-gtk3
 
-* Ruby/GLib2:           GLib 2.12.x or later
-* Ruby/GIO2:            GIO 2.16.x or later
-* Ruby/ATK:             ATK 1.12.x or later
-* Ruby/Pango:           Pango 1.14.x or later
-* Ruby/GdkPixbuf2:      GTK+ 2.0.x or later
-* Ruby/GObjectIntrospection: GObject Introspection 1.32.1 or later
-* Ruby/CairoGObject:    cairo-gobject 1.12.10 or later
-* Ruby/GDK3:            GTK+ 3.4.2 or later
-* Ruby/GTK3:            GTK+ 3.4.2 or later
+| Ruby Package Name         | GNOME Component       | Supported Version |
+|---------------------------|-----------------------|-------------------|
+| Ruby/GLib2                | GLib                  | 2.12.x or later   |
+| Ruby/GIO2                 | GIO                   | 2.16.x or later   |
+| Ruby/ATK                  | ATK                   | 1.12.x or later   |
+| Ruby/Pango                | Pango                 | 1.14.x or later   |
+| Ruby/GdkPixbuf2           | GTK+                  | 2.0.x or later    |
+| Ruby/GObjectIntrospection | GObject Introspection | 1.32.1 or later   |
+| Ruby/CairoGObject         | cairo-gobject         | 1.12.10 or later  |
+| Ruby/GDK3                 | GTK+                  | 3.4.2 or later    |
+| Ruby/GTK3                 | GTK+                  | 3.4.2 or later    |
 
 ### ruby-gnome-all
 
-* ruby-gtk2 + ruby-gtk3
-* Ruby/RSVG2:            librsvg 2.8.0 or later
-* Ruby/Poppler:         poppler-glib 0.8.0 or later
-* Ruby/VTE:             VTE 0.12.1 or later (for GTK+ 2)
-* Ruby/VTE3:            VTE 0.37.0 or later (for GTK+ 3)
-* Ruby/GStreamer:       GStreamer 1.0.0 or later
-* Ruby/GtkSourceView2:  GtkSourceView 2.0.0 or later
-* Ruby/GtkSourceView3:  GtkSourceView 3.4.2 or later
-* Ruby/GtkSourceView4:  GtkSourceView 4.0.0 or later
-* Ruby/Clutter:         Clutter 1.12.0 or later
-* Ruby/ClutterGTK:      Clutter-GTK 1.2.0 or later
-* Ruby/ClutterGStreamer:Clutter-GStreamer 2.0.0 or later
-* Ruby/WebKitGTK:       WebKitGTK+ 1.8.1 or later (for GTK+ 3)
-* Ruby/WebKitGTK2:      WebKitGTK+ 1.8.1 or later (for GTK+ 2)
-* Ruby/WebKit2GTK:      WebKitGTK+ 2.0.0 or later (for GTK+ 3)
+| Ruby Package Name         | GNOME Component       | Supported Version |            |
+|---------------------------|-----------------------|-------------------|------------|
+| ruby-gtk2 + ruby-gtk3     |                       |                   |            |
+| Ruby/RSVG2                | librsvg               | 2.8.0 or later    |            |
+| Ruby/Poppler              | poppler-glib          | 0.8.0 or later    |            |
+| Ruby/VTE                  | VTE                   | 0.12.1 or later   | for GTK+ 2 |
+| Ruby/VTE3                 | VTE                   | 0.37.0 or later   | for GTK+ 3 |
+| Ruby/GStreamer            | GStreamer             | 1.0.0 or later    |            |
+| Ruby/GtkSourceView2       | GtkSourceView         | 2.0.0 or later    |            |
+| Ruby/GtkSourceView3       | GtkSourceView         | 3.4.2 or later    |            |
+| Ruby/GtkSourceView4       | GtkSourceView         | 4.0.0 or later    |            |
+| Ruby/Clutter              | Clutter               | 1.12.0 or later   |            |
+| Ruby/ClutterGTK           | Clutter-GTK           | 1.2.0 or later    |            |
+| Ruby/ClutterGStreamer     | Clutter-GStreamer     | 2.0.0 or later    |            |
+| Ruby/WebKitGTK            | WebKitGTK+            | 1.8.1 or later    |            |
+| Ruby/WebKitGTK2           | WebKitGTK+            | 1.8.1 or later    | for GTK+ 2 |
+| Ruby/WebKit2GTK           | WebKitGTK+            | 2.0.0 or later    | for GTK+ 3 |
 
 ### Experimental / Incomplete:
 
-* Ruby/GSF:             GSF 1.14.0 or later
-* Ruby/GOffice:         GOffice 0.10 or later
-* Ruby/Gnumeric:        Gnumeric 1.12 or later
+| Ruby Package Name         | GNOME Component       | Supported Version |
+|---------------------------|-----------------------|-------------------|
+| Ruby/GSF                  | GSF                   | 1.14.0 or later   |
+| Ruby/GOffice              | GOffice               | 0.10 or later     |
+| Ruby/Gnumeric             | Gnumeric              | 1.12 or later     |
 
 ## Advanced Installation
 
@@ -129,7 +137,7 @@ or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
 
 ## Copying
 
-Copyright (c) 2002-2019 Ruby-GNOME Project Team
+Copyright (c) 2002-2020 Ruby-GNOME Project Team
 
 This program is free software.
 You can distribute/modify this program under the terms of
