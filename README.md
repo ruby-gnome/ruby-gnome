@@ -41,42 +41,48 @@ Install these gems by Bundler:
 
 ### ruby-gtk2
 
-* Ruby/GLib2:           GLib 2.12.x or later
-* Ruby/ATK:             ATK 1.12.x or later
-* Ruby/Pango:           Pango 1.14.x or later
-* Ruby/GdkPixbuf2:      GTK+ 2.0.x or later
-* Ruby/GTK2:            GTK+ 2.10.x or later
-* Ruby/GObjectIntrospection: GObject Introspection 1.32.1 or later
+| Ruby Package Name         | Gnome Component       | Supported Version |
+|---------------------------|-----------------------|-------------------|
+| Ruby/GLib2                | GLib                  | 2.12.x or later   |
+| Ruby/ATK                  | ATK                   | 1.12.x or later   |
+| Ruby/Pango                | Pango                 | 1.14.x or later   |
+| Ruby/GdkPixbuf2           | GTK+                  | 2.0.x or later    |
+| Ruby/GTK2                 | GTK+                  | 2.10.x or later   |
+| Ruby/GObjectIntrospection | GObject Introspection | 1.32.1 or later   |
 
 ### ruby-gtk3
 
-* Ruby/GLib2:           GLib 2.12.x or later
-* Ruby/GIO2:            GIO 2.16.x or later
-* Ruby/ATK:             ATK 1.12.x or later
-* Ruby/Pango:           Pango 1.14.x or later
-* Ruby/GdkPixbuf2:      GTK+ 2.0.x or later
-* Ruby/GObjectIntrospection: GObject Introspection 1.32.1 or later
-* Ruby/CairoGObject:    cairo-gobject 1.12.10 or later
-* Ruby/GDK3:            GTK+ 3.4.2 or later
-* Ruby/GTK3:            GTK+ 3.4.2 or later
+| Ruby Package Name         | Gnome Component       | Supported Version |
+|---------------------------|-----------------------|-------------------|
+| Ruby/GLib2                | GLib                  | 2.12.x or later   |
+| Ruby/GIO2                 | GIO                   | 2.16.x or later   |
+| Ruby/ATK                  | ATK                   | 1.12.x or later   |
+| Ruby/Pango                | Pango                 | 1.14.x or later   |
+| Ruby/GdkPixbuf2           | GTK+                  | 2.0.x or later    |
+| Ruby/GObjectIntrospection | GObject Introspection | 1.32.1 or later   |
+| Ruby/CairoGObject         | cairo-gobject         | 1.12.10 or later  |
+| Ruby/GDK3                 | GTK+                  | 3.4.2 or later    |
+| Ruby/GTK3                 | GTK+                  | 3.4.2 or later    |
 
 ### ruby-gnome-all
 
-* ruby-gtk2 + ruby-gtk3
-* Ruby/RSVG2:            librsvg 2.8.0 or later
-* Ruby/Poppler:         poppler-glib 0.8.0 or later
-* Ruby/VTE:             VTE 0.12.1 or later (for GTK+ 2)
-* Ruby/VTE3:            VTE 0.37.0 or later (for GTK+ 3)
-* Ruby/GStreamer:       GStreamer 1.0.0 or later
-* Ruby/GtkSourceView2:  GtkSourceView 2.0.0 or later
-* Ruby/GtkSourceView3:  GtkSourceView 3.4.2 or later
-* Ruby/GtkSourceView4:  GtkSourceView 4.0.0 or later
-* Ruby/Clutter:         Clutter 1.12.0 or later
-* Ruby/ClutterGTK:      Clutter-GTK 1.2.0 or later
-* Ruby/ClutterGStreamer:Clutter-GStreamer 2.0.0 or later
-* Ruby/WebKitGTK:       WebKitGTK+ 1.8.1 or later (for GTK+ 3)
-* Ruby/WebKitGTK2:      WebKitGTK+ 1.8.1 or later (for GTK+ 2)
-* Ruby/WebKit2GTK:      WebKitGTK+ 2.0.0 or later (for GTK+ 3)
+| Ruby Package Name         | Gnome Component       | Supported Version |            |
+|---------------------------|-----------------------|-------------------|------------|
+| ruby-gtk2 + ruby-gtk3     |                       |                   |            |
+| Ruby/RSVG2                | librsvg               | 2.8.0 or later    |            |
+| Ruby/Poppler              | poppler-glib          | 0.8.0 or later    |            |
+| Ruby/VTE                  | VTE                   | 0.12.1 or later   | for GTK+ 2 |
+| Ruby/VTE3                 | VTE                   | 0.37.0 or later   | for GTK+ 3 |
+| Ruby/GStreamer            | GStreamer             | 1.0.0 or later    |            |
+| Ruby/GtkSourceView2       | GtkSourceView         | 2.0.0 or later    |            |
+| Ruby/GtkSourceView3       | GtkSourceView         | 3.4.2 or later    |            |
+| Ruby/GtkSourceView4       | GtkSourceView         | 4.0.0 or later    |            |
+| Ruby/Clutter              | Clutter               | 1.12.0 or later   |            |
+| Ruby/ClutterGTK           | Clutter-GTK           | 1.2.0 or later    |            |
+| Ruby/ClutterGStreamer     | Clutter-GStreamer     | 2.0.0 or later    |            |
+| Ruby/WebKitGTK            | WebKitGTK+            | 1.8.1 or later    |            |
+| Ruby/WebKitGTK2           | WebKitGTK+            | 1.8.1 or later    | for GTK+ 2 |
+| Ruby/WebKit2GTK           | WebKitGTK+            | 2.0.0 or later    | for GTK+ 3 |
 
 ### Experimental / Incomplete:
 
