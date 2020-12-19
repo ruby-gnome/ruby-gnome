@@ -66,7 +66,7 @@ Install these gems by Bundler:
 
 ### ruby-gnome-all
 
-| Ruby Package Name         | Gnome Component       | Supported Version |            |
+| Ruby Package Name         | GNOME Component       | Supported Version |            |
 |---------------------------|-----------------------|-------------------|------------|
 | ruby-gtk2 + ruby-gtk3     |                       |                   |            |
 | Ruby/RSVG2                | librsvg               | 2.8.0 or later    |            |
