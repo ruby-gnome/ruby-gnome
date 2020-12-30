@@ -19,15 +19,6 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
-  centos-6:
-    build:
-      context: .
-      dockerfile: dockerfiles/centos-6.dockerfile
-    volumes:
-      - .:/ruby-gnome:delegated
-    command:
-      /ruby-gnome/dockerfiles/run-test.sh glib2
-
   centos-7:
     build:
       context: .
