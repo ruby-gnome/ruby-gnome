@@ -385,7 +385,7 @@ rg_set_groups(VALUE self, VALUE rburi, VALUE rbgroups)
     long n;
     gchar **groups = RVAL2STRS(rbgroups, n);
 
-    g_bookmark_file_set_groups(bookmark, uri, groups, n);
+    g_bookmark_file_set_groups(bookmark, uri, (const gchar **)groups, n);
 
     g_free(groups);
 
