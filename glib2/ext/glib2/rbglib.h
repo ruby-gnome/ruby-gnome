@@ -139,6 +139,9 @@ G_BEGIN_DECLS
 #define RVAL2GUINT32S(ary, n) rbg_rval2guint32s(&(ary), &(n))
 #define RVAL2GDOUBLES(ary, n) rbg_rval2gdoubles(&(ary), &(n))
 
+#define RVAL2POINTER(value) ((gpointer)(value))
+#define POINTER2RVAL(pointer) ((VALUE)(pointer))
+
 #define GINTS2RVAL(ary, n) rbg_gints2rval(ary, n)
 #define GINTS2RVAL_FREE(ary, n) rbg_gints2rval(ary, n)
 
