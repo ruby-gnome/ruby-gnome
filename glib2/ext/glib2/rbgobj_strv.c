@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2020  Ruby-GNOME Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -30,7 +30,7 @@ strv_to_ruby(const GValue *from)
 static void
 strv_from_ruby(VALUE from, GValue *to)
 {
-    const gchar **strings = RVAL2STRV(from);
+    gchar **strings = RVAL2STRV(from);
     g_value_set_boxed(to, strings);
     g_free(strings);
 }
