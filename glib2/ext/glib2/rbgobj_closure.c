@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2006  Ruby-GNOME2 Project
+ *  Copyright (C) 2002-2020  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -201,8 +200,10 @@ rclosure_invalidate(G_GNUC_UNUSED gpointer data, GClosure *closure)
 }
 
 static void
-gr_closure_holder_mark(GRClosure *rclosure)
+gr_closure_holder_mark(void *data)
 {
+    GRClosure *rclosure = data;
+
     if (!rclosure)
         return;
 
@@ -211,8 +212,10 @@ gr_closure_holder_mark(GRClosure *rclosure)
 }
 
 static void
-gr_closure_holder_free(GRClosure *rclosure)
+gr_closure_holder_free(void *data)
 {
+    GRClosure *rclosure = data;
+
     if (!rclosure)
         return;
 
@@ -224,6 +227,17 @@ gr_closure_holder_free(GRClosure *rclosure)
         rclosure_unref(rclosure);
     }
 }
+
+static const rb_data_type_t rbg_closure_holder_type = {
+    "GLib::ClosureHolder",
+    {
+        gr_closure_holder_mark,
+        gr_closure_holder_free,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
 
 static GClosure *
 g_rclosure_new_raw(VALUE callback_proc,
@@ -241,10 +255,9 @@ g_rclosure_new_raw(VALUE callback_proc,
     closure->objects    = NULL;
     closure->callback   = callback_proc;
     closure->extra_args = extra_args;
-    closure->rb_holder  = Data_Wrap_Struct(rb_cData,
-                                           gr_closure_holder_mark,
-                                           gr_closure_holder_free,
-                                           closure);
+    closure->rb_holder  = TypedData_Wrap_Struct(rb_cObject,
+                                                &rbg_closure_holder_type,
+                                                closure);
     closure->tag[0]     = '\0';
 
     g_closure_set_marshal((GClosure*)closure, &rclosure_marshal);
