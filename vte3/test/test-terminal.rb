@@ -56,7 +56,12 @@ class TestTerminal < Test::Unit::TestCase
     end
 
     test "failure" do
-      assert_raise(GLib::SpawnError) do
+      if Vte::Version.or_later?(0, 62)
+        error_class = Gio::IOError::NotFound
+      else
+        error_class = GLib::SpawnError
+      end
+      assert_raise(error_class) do
         @terminal.spawn(:argv => ["nonexistent"])
         @wait_child_exited = true
       end
