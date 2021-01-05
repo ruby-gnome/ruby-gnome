@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2020  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -65,63 +65,23 @@ Init_gtype_pointer(void)
 
 /**********************************************************************/
 
-static GHashTable* boxed_ruby_value_table;
-static VALUE boxed_ruby_value_table_wrapper;
-
-typedef struct {
-    VALUE obj;
-    guint ref_count;
-} boxed_ruby_value_counter;
-
-static void
-boxed_ruby_value_counter_mark(G_GNUC_UNUSED gpointer key,
-                              gpointer value,
-                              G_GNUC_UNUSED gpointer user_data)
+static gpointer
+boxed_ruby_value_ref(gpointer boxed)
 {
-    boxed_ruby_value_counter* counter = value;
-    if (counter->ref_count)
-        rb_gc_mark(counter->obj);
-}
-
-static void
-boxed_ruby_value_table_mark(GHashTable* table)
-{
-    g_hash_table_foreach(table, boxed_ruby_value_counter_mark, NULL);
-}
-
-static VALUE
-boxed_ruby_value_ref(VALUE val)
-{
-    if (!SPECIAL_CONST_P(val)){
-        boxed_ruby_value_counter* counter;
-
-        counter = g_hash_table_lookup(boxed_ruby_value_table, (gpointer)val);
-
-        if (!counter){
-            counter = g_new(boxed_ruby_value_counter, 1);
-            counter->obj       = val;
-            counter->ref_count = 1;
-            g_hash_table_insert(boxed_ruby_value_table, (gpointer)val,
-                                counter);
-        } else {
-            counter->ref_count += 1;
-        }
+    VALUE value = POINTER2RVAL(boxed);
+    if (!SPECIAL_CONST_P(value)) {
+        rbg_gc_guard(boxed, value);
     }
-    return val;
+    return boxed;
 }
 
 static void
-boxed_ruby_value_unref(VALUE val)
+boxed_ruby_value_unref(gpointer boxed)
 {
-    if (!SPECIAL_CONST_P(val)){
-        boxed_ruby_value_counter* counter;
-
-        counter = g_hash_table_lookup(boxed_ruby_value_table, (gpointer)val);
-        counter->ref_count -= 1;
-
-        if (!counter->ref_count)
-            g_hash_table_remove(boxed_ruby_value_table, (gpointer)val);
-    }
+    VALUE value = POINTER2RVAL(boxed);
+    if (SPECIAL_CONST_P(value))
+        return;
+    rbg_gc_unguard(boxed);
 }
 
 struct transform_arg {
@@ -203,13 +163,13 @@ rbgobj_ruby_value_get_type(void)
 VALUE
 g_value_get_ruby_value(const GValue* value)
 {
-    return (VALUE)g_value_get_boxed(value);
+    return POINTER2RVAL(g_value_get_boxed(value));
 }
 
 void
 g_value_set_ruby_value(GValue* value, VALUE ruby)
 {
-    g_value_set_boxed(value, (gconstpointer)ruby);
+    g_value_set_boxed(value, RVAL2POINTER(ruby));
 }
 
 static void
@@ -221,14 +181,6 @@ ruby_value_r2g(VALUE from, GValue* to)
 static void
 Init_boxed_ruby_value(void)
 {
-    boxed_ruby_value_table = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
-
-    boxed_ruby_value_table_wrapper =
-      Data_Wrap_Struct(rb_cData,
-                       boxed_ruby_value_table_mark, NULL,
-                       boxed_ruby_value_table);
-    rb_global_variable(&boxed_ruby_value_table_wrapper);
-
     rbgobj_register_g2r_func(RBGOBJ_TYPE_RUBY_VALUE, g_value_get_ruby_value);
     rbgobj_register_r2g_func(RBGOBJ_TYPE_RUBY_VALUE, ruby_value_r2g);
 }
