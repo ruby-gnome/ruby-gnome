@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2020  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -133,7 +133,7 @@ rbgobj_class_info_register_without_lock(GType gtype, VALUE klass)
     VALUE c;
 
     data_type = rbgobj_class_info_create_data_type(klass);
-    c = TypedData_Make_Struct(rb_cData, RGObjClassInfo, data_type, cinfo);
+    c = TypedData_Make_Struct(rb_cObject, RGObjClassInfo, data_type, cinfo);
     cinfo->klass = klass;
     cinfo->gtype = gtype;
     cinfo->mark  = NULL;
@@ -238,9 +238,7 @@ get_superclass(GType gtype, VALUE module)
       case G_TYPE_OBJECT:
         return cInstantiatable;
       case G_TYPE_BOXED:
-        return rb_cObject;
       case G_TYPE_POINTER:
-        return rb_cData;
       case G_TYPE_ENUM:
       case G_TYPE_FLAGS:
         return rb_cObject;
@@ -532,7 +530,7 @@ rbgobj_register_class(VALUE klass,
 
     if (klass2gtype) {
         data_type = rbgobj_class_info_create_data_type(klass);
-        c = TypedData_Make_Struct(rb_cData, RGObjClassInfo, data_type, cinfo);
+        c = TypedData_Make_Struct(rb_cObject, RGObjClassInfo, data_type, cinfo);
     }
     if (gtype2klass && !cinfo)
         cinfo = g_new(RGObjClassInfo, 1);
