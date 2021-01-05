@@ -496,140 +496,146 @@ gobj_s_properties(int argc, VALUE* argv, VALUE self)
     return ary;
 }
 
-static VALUE type_to_prop_setter_table;
-static VALUE type_to_prop_getter_table;
+static GHashTable *rbg_type_to_prop_setter_tables;
+static GMutex rbg_type_to_prop_setter_tables_mutex;
+static GHashTable *rbg_type_to_prop_getter_tables;
+static GMutex rbg_type_to_prop_getter_tables_mutex;
 
-void
-rbgobj_register_property_setter(GType gtype, const char *name, RValueToGValueFunc func)
+static void
+rbg_register_property_accessor(GHashTable *tables,
+                               GMutex *mutex,
+                               GType gtype,
+                               const char *name,
+                               gpointer accessor)
 {
-    GObjectClass* oclass;
-    GParamSpec* pspec;
+    g_mutex_lock(mutex);
 
-    VALUE table = rb_hash_aref(type_to_prop_setter_table, INT2FIX(gtype));
-    if (NIL_P(table)){
-        table = rb_hash_new();
-        rb_hash_aset(type_to_prop_setter_table, INT2FIX(gtype), table);
+    GHashTable *table = g_hash_table_lookup(tables, GUINT_TO_POINTER(gtype));
+    if (!table) {
+        table = g_hash_table_new(g_str_hash, g_str_equal);
+        g_hash_table_insert(tables, GUINT_TO_POINTER(gtype), table);
     }
 
-    oclass = g_type_class_ref(gtype);
-    pspec = g_object_class_find_property(oclass, name);
+    GObjectClass *gclass = g_type_class_ref(gtype);
+    GParamSpec *pspec = g_object_class_find_property(gclass, name);
+    g_hash_table_insert(table,
+                        (gchar *)g_param_spec_get_name(pspec),
+                        accessor);
+    g_type_class_unref(gclass);
 
-    rb_hash_aset(table, CSTR2RVAL(g_param_spec_get_name(pspec)),
-                 Data_Wrap_Struct(rb_cData, NULL, NULL, func));
+    g_mutex_unlock(mutex);
+}
 
-    g_type_class_unref(oclass);
+static gpointer
+rbg_get_property_accessor(GHashTable *tables,
+                          GMutex *mutex,
+                          GType gtype,
+                          const char *name)
+{
+    g_mutex_lock(mutex);
+
+    gpointer accessor = NULL;
+    GHashTable *table = g_hash_table_lookup(tables, GUINT_TO_POINTER(gtype));
+    if (table) {
+        GObjectClass *gclass = g_type_class_ref(gtype);
+        GParamSpec *pspec = g_object_class_find_property(gclass, name);
+        accessor = g_hash_table_lookup(table, g_param_spec_get_name(pspec));
+        g_type_class_unref(gclass);
+    }
+
+    g_mutex_unlock(mutex);
+
+    return accessor;
+}
+
+void
+rbgobj_register_property_setter(GType gtype,
+                                const char *name,
+                                RValueToGValueFunc func)
+{
+    rbg_register_property_accessor(rbg_type_to_prop_setter_tables,
+                                   &rbg_type_to_prop_setter_tables_mutex,
+                                   gtype,
+                                   name,
+                                   func);
 }
 
 void
 rbgobj_register_property_getter(GType gtype, const char *name, GValueToRValueFunc func)
 {
-    GObjectClass* oclass;
-    GParamSpec* pspec;
-
-    VALUE table = rb_hash_aref(type_to_prop_getter_table, INT2FIX(gtype));
-    if (NIL_P(table)){
-        table = rb_hash_new();
-        rb_hash_aset(type_to_prop_getter_table, INT2FIX(gtype), table);
-    }
-
-    oclass = g_type_class_ref(gtype);
-    pspec = g_object_class_find_property(oclass, name);
-
-    rb_hash_aset(table, CSTR2RVAL(g_param_spec_get_name(pspec)),
-                 Data_Wrap_Struct(rb_cData, NULL, NULL, func));
-
-    g_type_class_unref(oclass);
+    rbg_register_property_accessor(rbg_type_to_prop_getter_tables,
+                                   &rbg_type_to_prop_getter_tables_mutex,
+                                   gtype,
+                                   name,
+                                   func);
 }
 
 static VALUE
 rg_set_property(VALUE self, VALUE prop_name, VALUE val)
 {
-    GParamSpec* pspec;
     const char* name;
-
     if (SYMBOL_P(prop_name))
         name = rb_id2name(SYM2ID(prop_name));
     else
         name = StringValuePtr(prop_name);
 
-    pspec = g_object_class_find_property(G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
-                                         name);
-
+    GParamSpec* pspec =
+        g_object_class_find_property(G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
+                                     name);
     if (!pspec)
         rb_raise(eNoPropertyError, "No such property: %s", name);
-    else {
-        // FIXME: use rb_ensure to call g_value_unset()
-        RValueToGValueFunc setter = NULL;
-        GValue gval = G_VALUE_INIT;
 
-        g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
-
-        {
-            VALUE table = rb_hash_aref(type_to_prop_setter_table,
-                                       INT2FIX(pspec->owner_type));
-            if (!NIL_P(table)){
-                VALUE obj = rb_hash_aref(table, CSTR2RVAL(g_param_spec_get_name(pspec)));
-                if (!NIL_P(obj))
-                    Data_Get_Struct(obj, void, setter);
-            }
-        }
-        if (setter) {
-            setter(val, &gval);
-        } else {
-            rbgobj_rvalue_to_gvalue(val, &gval);
-        }
-
-        g_object_set_property(RVAL2GOBJ(self), name, &gval);
-        g_value_unset(&gval);
-
-        G_CHILD_SET(self, rb_intern(name), val);
-
-        return self;
+    RValueToGValueFunc setter =
+        rbg_get_property_accessor(rbg_type_to_prop_setter_tables,
+                                  &rbg_type_to_prop_setter_tables_mutex,
+                                  pspec->owner_type,
+                                  name);
+    // FIXME: use rb_ensure to call g_value_unset()
+    GValue gval = G_VALUE_INIT;
+    g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
+    if (setter) {
+        setter(val, &gval);
+    } else {
+        rbgobj_rvalue_to_gvalue(val, &gval);
     }
+    g_object_set_property(RVAL2GOBJ(self), name, &gval);
+    g_value_unset(&gval);
+
+    G_CHILD_SET(self, rb_intern(name), val);
+
+    return self;
 }
 
 static VALUE
 rg_get_property(VALUE self, VALUE prop_name)
 {
-    GParamSpec* pspec;
     const char* name;
-
     if (SYMBOL_P(prop_name))
         name = rb_id2name(SYM2ID(prop_name));
     else
         name = StringValuePtr(prop_name);
 
-    pspec = g_object_class_find_property(G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
-                                         name);
-
+    GParamSpec *pspec =
+        g_object_class_find_property(G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
+                                     name);
     if (!pspec)
         rb_raise(eNoPropertyError, "No such property: %s", name);
-    else {
-        // FIXME: use rb_ensure to call g_value_unset()
-        GValueToRValueFunc getter = NULL;
-        GValue gval = G_VALUE_INIT;
-        VALUE ret;
 
-        {
-            VALUE table = rb_hash_aref(type_to_prop_getter_table,
-                                       INT2FIX(pspec->owner_type));
-            if (!NIL_P(table)){
-                VALUE obj = rb_hash_aref(table, CSTR2RVAL(g_param_spec_get_name(pspec)));
-                if (!NIL_P(obj))
-                    Data_Get_Struct(obj, void, getter);
-            }
-        }
+    GValueToRValueFunc getter =
+        rbg_get_property_accessor(rbg_type_to_prop_getter_tables,
+                                  &rbg_type_to_prop_getter_tables_mutex,
+                                  pspec->owner_type,
+                                  name);
+    // FIXME: use rb_ensure to call g_value_unset()
+    GValue gval = G_VALUE_INIT;
+    g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
+    g_object_get_property(RVAL2GOBJ(self), name, &gval);
+    VALUE ret = getter ? getter(&gval) : GVAL2RVAL(&gval);
+    g_value_unset(&gval);
 
-        g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
-        g_object_get_property(RVAL2GOBJ(self), name, &gval);
+    G_CHILD_SET(self, rb_intern(name), ret);
 
-        ret = getter ? getter(&gval) : GVAL2RVAL(&gval);
-        g_value_unset(&gval);
-
-        G_CHILD_SET(self, rb_intern(name), ret);
-
-        return ret;
-    }
+    return ret;
 }
 
 static VALUE rg_thaw_notify(VALUE self);
@@ -1098,10 +1104,18 @@ Init_gobject_gobject(void)
     eNoPropertyError = rb_define_class_under(mGLib, "NoPropertyError",
                                              rb_eNameError);
 
-    rb_global_variable(&type_to_prop_setter_table);
-    rb_global_variable(&type_to_prop_getter_table);
-    type_to_prop_setter_table = rb_hash_new();
-    type_to_prop_getter_table = rb_hash_new();
+    rbg_type_to_prop_setter_tables =
+        g_hash_table_new_full(g_direct_hash,
+                              g_direct_equal,
+                              NULL,
+                              (GDestroyNotify)g_hash_table_unref);
+    g_mutex_init(&rbg_type_to_prop_setter_tables_mutex);
+    rbg_type_to_prop_getter_tables =
+        g_hash_table_new_full(g_direct_hash,
+                              g_direct_equal,
+                              NULL,
+                              (GDestroyNotify)g_hash_table_unref);
+    g_mutex_init(&rbg_type_to_prop_getter_tables_mutex);
 
     /* subclass */
     RG_DEF_SMETHOD(type_register, -1);
