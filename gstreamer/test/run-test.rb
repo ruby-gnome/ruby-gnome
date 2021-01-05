@@ -16,32 +16,39 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome_base = File.expand_path(ruby_gnome_base)
+build_dir = File.expand_path(".")
+ruby_gnome_build_base = File.join(build_dir, "..")
+ruby_gnome_build_base = File.expand_path(ruby_gnome_build_base)
 
-glib_base = File.join(ruby_gnome_base, "glib2")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-gstreamer_base = File.join(ruby_gnome_base, "gstreamer")
+ruby_gnome_source_base = File.join(__dir__, "..", "..")
+ruby_gnome_source_base = File.expand_path(ruby_gnome_source_base)
+
+glib_source_base = File.join(ruby_gnome_source_base, "glib2")
+gstreamer_source_base = File.join(ruby_gnome_source_base, "gstreamer")
 
 modules = [
-  [glib_base, "glib2"],
-  [gobject_introspection_base, "gobject-introspection"],
-  [gstreamer_base, "gstreamer"],
+  "glib2",
+  "gobject-introspection",
+  "gstreamer",
 ]
-
-modules.each do |target, module_name|
-  makefile = File.join(target, "Makefile")
+modules.each do |module_name|
+  makefile = File.join(ruby_gnome_build_base, module_name, "Makefile")
   if File.exist?(makefile) and system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(false)
+    `make -C #{File.dirname(makefile)} > /dev/null` or exit(false)
   end
-  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
-  $LOAD_PATH.unshift(File.join(target, "lib"))
+  $LOAD_PATH.unshift(File.join(ruby_gnome_build_base,
+                               module_name,
+                               "ext",
+                               module_name))
+  $LOAD_PATH.unshift(File.join(ruby_gnome_source_base,
+                               module_name,
+                               "lib"))
 end
 
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
+$LOAD_PATH.unshift(File.join(glib_source_base, "test"))
 require "glib-test-init"
 
-$LOAD_PATH.unshift(File.join(gstreamer_base, "test"))
+$LOAD_PATH.unshift(File.join(gstreamer_source_base, "test"))
 require "gstreamer-test-utils"
 
 require "gst"
@@ -56,4 +63,4 @@ end
 
 Gst.init
 
-exit Test::Unit::AutoRunner.run(true, File.join(gstreamer_base, "test"))
+exit(Test::Unit::AutoRunner.run(true, File.join(gstreamer_source_base, "test")))
