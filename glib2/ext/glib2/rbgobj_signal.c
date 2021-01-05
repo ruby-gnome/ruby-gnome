@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
- *  Copyright (C) 2002-2004  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2020  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -64,45 +63,57 @@ rbgobj_signal_get_raw(VALUE rb_signal)
     return query;
 }
 
-static VALUE signal_func_table;
+static GHashTable *rbg_signal_func_table;
+static GMutex rbg_signal_func_table_mutex;
 
 void
-rbgobj_set_signal_func(VALUE klass, const gchar *sig_name, GValToRValSignalFunc func)
+rbgobj_set_signal_func(VALUE klass,
+                       const gchar *signal_name,
+                       GValToRValSignalFunc func)
 {
-    VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
-    guint signal_id = g_signal_lookup(sig_name, CLASS2GTYPE(klass));
-    rb_hash_aset(signal_func_table, UINT2NUM(signal_id), obj);
+    guint signal_id = g_signal_lookup(signal_name, CLASS2GTYPE(klass));
+    g_mutex_lock(&rbg_signal_func_table_mutex);
+    g_hash_table_insert(rbg_signal_func_table,
+                        GUINT_TO_POINTER(signal_id),
+                        func);
+    g_mutex_unlock(&rbg_signal_func_table_mutex);
 }
 
 GValToRValSignalFunc
 rbgobj_get_signal_func(guint signal_id)
 {
-    GValToRValSignalFunc func = NULL;
-    VALUE func_obj = rb_hash_aref(signal_func_table, UINT2NUM(signal_id));
-    if (!NIL_P(func_obj))
-        Data_Get_Struct(func_obj, void, func);
+    g_mutex_lock(&rbg_signal_func_table_mutex);
+    GValToRValSignalFunc func =
+        g_hash_table_lookup(rbg_signal_func_table,
+                            GUINT_TO_POINTER(signal_id));
+    g_mutex_unlock(&rbg_signal_func_table_mutex);
     return func;
 }
 
-static VALUE signal_call_func_table;
+static GHashTable *rbg_signal_call_func_table;
+static GMutex rbg_signal_call_func_table_mutex;
 
 void
 rbgobj_set_signal_call_func(VALUE klass,
                             const gchar *signal_name,
                             RGClosureCallFunc func)
 {
-    VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
     guint signal_id = g_signal_lookup(signal_name, CLASS2GTYPE(klass));
-    rb_hash_aset(signal_call_func_table, UINT2NUM(signal_id), obj);
+    g_mutex_lock(&rbg_signal_call_func_table_mutex);
+    g_hash_table_insert(rbg_signal_call_func_table,
+                        GUINT_TO_POINTER(signal_id),
+                        func);
+    g_mutex_unlock(&rbg_signal_call_func_table_mutex);
 }
 
 RGClosureCallFunc
 rbgobj_get_signal_call_func(guint signal_id)
 {
-    RGClosureCallFunc func = NULL;
-    VALUE func_obj = rb_hash_aref(signal_call_func_table, UINT2NUM(signal_id));
-    if (!NIL_P(func_obj))
-        Data_Get_Struct(func_obj, void, func);
+    g_mutex_lock(&rbg_signal_call_func_table_mutex);
+    RGClosureCallFunc func =
+        g_hash_table_lookup(rbg_signal_call_func_table,
+                            GUINT_TO_POINTER(signal_id));
+    g_mutex_unlock(&rbg_signal_call_func_table_mutex);
     return func;
 }
 
@@ -947,7 +958,7 @@ Init_gobject_gsignal(void)
 {
     VALUE cSignalFlags, cSignalMatchType;
 
-    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Signal", rb_cData);
+    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Signal", rb_cObject);
 
     RG_DEF_METHOD(id, 0);
     RG_DEF_METHOD(name, 0);
@@ -990,11 +1001,11 @@ Init_gobject_gsignal(void)
 
     eNoSignalError = rb_define_class_under(mGLib, "NoSignalError", rb_eNameError);
 
-    signal_func_table = rb_hash_new();
-    rb_global_variable(&signal_func_table);
+    rbg_signal_func_table = g_hash_table_new(g_direct_hash, g_direct_equal);
+    g_mutex_init(&rbg_signal_func_table_mutex);
 
-    signal_call_func_table = rb_hash_new();
-    rb_global_variable(&signal_call_func_table);
+    rbg_signal_call_func_table = g_hash_table_new(g_direct_hash, g_direct_equal);
+    g_mutex_init(&rbg_signal_call_func_table_mutex);
 
     rbg_define_method(mMetaInterface, "define_signal", gobj_s_define_signal, -1);
     rb_define_alias(mMetaInterface, "signal_new", "define_signal");
