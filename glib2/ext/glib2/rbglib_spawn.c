@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2020  Ruby-GNOME Project Team
  *  Copyright (C) 2004  Masao Mutoh
  *  Copyright (C) 2004  Kazuhiro NISHIYAMA
  *
@@ -29,10 +29,11 @@ static ID id_call;
 static ID id_new;
 
 static void
-child_setup(gpointer func)
+child_setup(gpointer data)
 {
-    if (! NIL_P(func)){
-        rb_funcall((VALUE)func, id_call, 0);
+    VALUE func = GPOINTER2RVAL(data);
+    if (!NIL_P(func)) {
+        rb_funcall(func, id_call, 0);
     }
 }
 
