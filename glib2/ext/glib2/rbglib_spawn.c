@@ -31,7 +31,7 @@ static ID id_new;
 static void
 child_setup(gpointer data)
 {
-    VALUE func = GPOINTER2RVAL(data);
+    VALUE func = POINTER2RVAL(data);
     if (!NIL_P(func)) {
         rb_funcall(func, id_call, 0);
     }
