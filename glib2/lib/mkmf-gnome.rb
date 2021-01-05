@@ -37,7 +37,7 @@ end
 def enable_debug_build_flag(flags)
   if gcc?
     expanded_flags = RbConfig.expand(flags.dup)
-    debug_option_pattern = /(^|\s)-g(?gdb)?\d?(\s|$)/
+    debug_option_pattern = /(^|\s)-g(?:gdb)?\d?(\s|$)/
     if debug_option_pattern =~ expanded_flags
       expanded_flags.gsub(debug_option_pattern, '\\1-ggdb3\\2')
     else
