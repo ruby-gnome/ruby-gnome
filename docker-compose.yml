@@ -46,17 +46,6 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
-  ruby-2.4:
-    build:
-      context: .
-      dockerfile: dockerfiles/ruby.dockerfile
-      args:
-        RUBY_VERSION: "2.4"
-    volumes:
-      - .:/ruby-gnome:delegated
-    command:
-      /ruby-gnome/dockerfiles/run-test.sh
-
   ruby-2.5:
     build:
       context: .
