@@ -70,7 +70,6 @@ packages = [
   "vte",
   "vte3",
   "webkit-gtk",
-  "webkit-gtk2",
   "webkit2-gtk",
   "wnck3",
 ]
