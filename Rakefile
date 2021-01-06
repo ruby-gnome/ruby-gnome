@@ -67,7 +67,6 @@ packages = [
   "pango",
   "poppler",
   "rsvg2",
-  "vte",
   "vte3",
   "webkit-gtk",
   "webkit2-gtk",
