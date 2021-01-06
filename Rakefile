@@ -61,7 +61,6 @@ packages = [
   "gsf",
   "gstreamer",
   "gtk3",
-  "gtksourceview2",
   "gtksourceview3",
   "gtksourceview4",
   "libsecret",
