@@ -19,7 +19,6 @@ priorlibs = [
   "gdk_pixbuf2",
   "pango",
   "atk",
-  "gtk2",
   "gdk3",
   "gtk3",
 ]
