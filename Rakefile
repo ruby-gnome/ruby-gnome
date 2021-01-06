@@ -60,7 +60,6 @@ packages = [
   "goffice",
   "gsf",
   "gstreamer",
-  "gtk2",
   "gtk3",
   "gtksourceview2",
   "gtksourceview3",
