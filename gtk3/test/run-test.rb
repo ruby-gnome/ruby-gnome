@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2020  Ruby-GNOME Project Team
+# Copyright (C) 2013-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -23,38 +23,41 @@ build_dir = File.expand_path(".")
 ruby_gnome_base = File.join(__dir__, "..", "..")
 ruby_gnome_base = File.expand_path(ruby_gnome_base)
 
-glib_base = File.join(ruby_gnome_base, "glib2")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-atk_base = File.join(ruby_gnome_base, "atk")
-cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
-pango_base = File.join(ruby_gnome_base, "pango")
-gdk_pixbuf_base = File.join(ruby_gnome_base, "gdk_pixbuf2")
-gio2_base = File.join(ruby_gnome_base, "gio2")
-gdk3_base = File.join(ruby_gnome_base, "gdk3")
-gtk3_base = File.join(ruby_gnome_base, "gtk3")
+ruby_gnome_build_base = ENV["RUBY_GNOME_BUILD_DIR"] || ruby_gnome_base
+
+glib2_dir = "glib2"
+gobject_introspection_dir = "gobject-introspection"
+atk_dir = "atk"
+cairo_gobject_dir = "cairo-gobject"
+pango_dir = "pango"
+gdk_pixbuf_dir = "gdk_pixbuf2"
+gio2_dir = "gio2"
+gdk3_dir = "gdk3"
+gtk3_dir = "gtk3"
 
 [
-  [glib_base, "glib2"],
-  [gobject_introspection_base, "gobject-introspection"],
-  [atk_base, "atk"],
-  [cairo_gobject_base, "cairo-gobject"],
-  [pango_base, "pango"],
-  [gdk_pixbuf_base, "gdk_pixbuf2"],
-  [gio2_base, "gio2"],
-  [gdk3_base, "gdk3"],
-  [gtk3_base, "gtk3"]
-].each do |target, module_name|
-  if File.exist?(File.join(target, "Makefile"))
-    if system("which make > /dev/null")
-      `make -C #{target.dump} > /dev/null` or exit(false)
-    end
-    $LOAD_PATH.unshift(File.join(target, "ext", module_name))
+  glib2_dir,
+  gobject_introspection_dir,
+  atk_dir,
+  cairo_gobject_dir,
+  pango_dir,
+  gdk_pixbuf_dir,
+  gio2_dir,
+  gdk3_dir,
+  gtk3_dir,
+].each do |module_dir|
+  source_dir = File.join(ruby_gnome_base, module_dir)
+  build_dir = File.join(ruby_gnome_build_base, module_dir)
+  makefile = File.join(build_dir, "Makefile")
+  if File.exist?(makefile)
+    `make -C #{build_dir.dump} > /dev/null` or exit(false)
+    $LOAD_PATH.unshift(File.join(build_dir, "ext", module_dir))
   end
-  $LOAD_PATH.unshift(File.join(target, "lib"))
+  $LOAD_PATH.unshift(File.join(source_dir, "lib"))
 end
 
-source_fixture_dir = File.join(gtk3_base, "test", "fixture")
-build_fixture_dir = File.join(build_dir, "test", "fixture")
+source_fixture_dir = File.join(ruby_gnome_base, gtk3_dir, "test", "fixture")
+build_fixture_dir = File.join(ruby_gnome_build_base, gtk3_dir, "test", "fixture")
 unless source_fixture_dir == build_fixture_dir
   FileUtils.rm_rf(build_fixture_dir)
   FileUtils.mkdir_p(File.dirname(build_fixture_dir))
@@ -64,14 +67,15 @@ Dir.chdir(build_fixture_dir) do
   system("rake") or exit(false)
 end
 
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
+$LOAD_PATH.unshift(File.join(ruby_gnome_base, glib2_dir, "test"))
 require 'glib-test-init'
 
-$LOAD_PATH.unshift(File.join(gtk3_base, "test"))
+$LOAD_PATH.unshift(File.join(ruby_gnome_base, gtk3_dir, "test"))
 require 'gtk-test-utils'
 
 require 'gtk3'
 
 Gtk.init
 
-exit Test::Unit::AutoRunner.run(true, File.join(gtk3_base, "test"))
+exit Test::Unit::AutoRunner.run(true,
+                                File.join(ruby_gnome_base, gtk3_dir, "test"))
