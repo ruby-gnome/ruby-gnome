@@ -182,7 +182,6 @@ G_GNUC_INTERNAL void Init_gobject_gvalue(void);
 G_GNUC_INTERNAL void Init_gobject_gvaluetypes(void);
 G_GNUC_INTERNAL void Init_gobject_gboxed(void);
 G_GNUC_INTERNAL void Init_gobject_gstrv(void);
-G_GNUC_INTERNAL void Init_gobject_value_array(void);
 G_GNUC_INTERNAL void Init_gobject_genumflags(void);
 G_GNUC_INTERNAL void Init_gobject_genums(void);
 G_GNUC_INTERNAL void Init_gobject_gflags(void);

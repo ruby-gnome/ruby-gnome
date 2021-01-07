@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2004  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2004-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -200,20 +199,6 @@ pointer_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb, VALUE flags)
 }
 
 static VALUE
-value_array_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
-                       VALUE element_spec, VALUE flags)
-{
-    GParamSpec* pspec;
-    pspec = g_param_spec_value_array(StringValuePtr(name),
-                                     StringValuePtr(nick),
-                                     StringValuePtr(blurb),
-                                     RVAL2GOBJ(element_spec),
-                                     NUM2UINT(flags));
-    rbgobj_param_spec_initialize(self, pspec);
-    return Qnil;
-}
-
-static VALUE
 object_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
                   VALUE object_type, VALUE flags)
 {
@@ -302,9 +287,6 @@ Init_gobject_gparamspecs(void)
 
     c = G_DEF_CLASS(G_TYPE_PARAM_POINTER, "Pointer", cParamSpec);
     rbg_define_method(c, "initialize", pointer_initialize, 4);
-
-    c = G_DEF_CLASS(G_TYPE_PARAM_VALUE_ARRAY, "ValueArray", cParamSpec);
-    rbg_define_method(c, "initialize", value_array_initialize, 5);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_OBJECT, "Object", cParamSpec);
     rbg_define_method(c, "initialize", object_initialize, 5);

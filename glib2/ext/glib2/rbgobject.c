@@ -1,11 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
- *  Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2003-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
- *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
- *                          Daisuke Kanda,
- *                          Hiroshi Igarashi
+ *  Copyright (C) 1998-2000  Yukihiro Matsumoto,
+ *                           Daisuke Kanda,
+ *                           Hiroshi Igarashi
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -405,7 +404,6 @@ Init_gobject(void)
     Init_gobject_gvaluetypes();
     Init_gobject_gboxed();
     Init_gobject_gstrv();
-    Init_gobject_value_array();
     Init_gobject_genumflags();
     Init_gobject_gparam();
     Init_gobject_gparamspecs();

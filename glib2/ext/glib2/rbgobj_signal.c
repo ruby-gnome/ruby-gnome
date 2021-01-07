@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2020  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -451,30 +451,33 @@ struct emit_arg {
 
     GSignalQuery query;
     GQuark detail;
-    GValueArray* instance_and_params;
+    GArray *instance_and_params;
 };
 
 static VALUE
 emit_body(VALUE rb_arg)
 {
     struct emit_arg *arg = (struct emit_arg *)rb_arg;
-    GValue param = G_VALUE_INIT;
 
-    g_value_init(&param, G_TYPE_FROM_INSTANCE(RVAL2GOBJ(arg->self)));
-    rbgobj_rvalue_to_gvalue(arg->self, &param);
-    g_value_array_append(arg->instance_and_params, &param);
-    g_value_unset(&param);
+    gsize value_index = 0;
+    GValue *gself = &g_array_index(arg->instance_and_params,
+                                   GValue,
+                                   value_index);
+    g_value_init(gself, G_TYPE_FROM_INSTANCE(RVAL2GOBJ(arg->self)));
+    rbgobj_rvalue_to_gvalue(arg->self, gself);
+    value_index++;
 
     {
         guint i;
         for (i = 0; i < arg->query.n_params; i++){
             GType gtype = arg->query.param_types[i] & ~G_SIGNAL_TYPE_STATIC_SCOPE;
 
-            g_value_init(&param,  gtype);
-
-            rbgobj_rvalue_to_gvalue(rb_ary_entry(arg->args, i), &param);
-            g_value_array_append(arg->instance_and_params, &param);
-            g_value_unset(&param);
+            GValue *gparam = &g_array_index(arg->instance_and_params,
+                                            GValue,
+                                            value_index);
+            g_value_init(gparam,  gtype);
+            rbgobj_rvalue_to_gvalue(rb_ary_entry(arg->args, i), gparam);
+            value_index++;
         }
     }
 
@@ -486,7 +489,7 @@ emit_body(VALUE rb_arg)
             g_value_init(&return_value,
                          arg->query.return_type & ~G_SIGNAL_TYPE_STATIC_SCOPE);
 
-        g_signal_emitv(arg->instance_and_params->values,
+        g_signal_emitv((GValue *)(arg->instance_and_params->data),
                        arg->query.signal_id, arg->detail,
                        (use_ret) ? &return_value : NULL);
 
@@ -504,7 +507,7 @@ static VALUE
 emit_ensure(VALUE rb_arg)
 {
     struct emit_arg *arg = (struct emit_arg *)rb_arg;
-    g_value_array_free(arg->instance_and_params);
+    g_array_unref(arg->instance_and_params);
     return Qnil;
 }
 
@@ -536,7 +539,12 @@ gobj_sig_emit(int argc, VALUE *argv, VALUE self)
                  arg.query.n_params + 1);
 
     arg.self = self;
-    arg.instance_and_params = g_value_array_new(1 + arg.query.n_params);
+    arg.instance_and_params = g_array_sized_new(FALSE,
+                                                TRUE,
+                                                sizeof(GValue),
+                                                1 + arg.query.n_params);
+    g_array_set_clear_func(arg.instance_and_params,
+                           (GDestroyNotify)g_value_unset);
 
     return rb_ensure(emit_body, (VALUE)&arg, emit_ensure, (VALUE)&arg);
 }
@@ -639,17 +647,24 @@ static VALUE
 chain_from_overridden_body(VALUE rb_arg)
 {
     struct emit_arg *arg = (struct emit_arg *)rb_arg;
-    g_value_init(arg->instance_and_params->values,
-                 G_TYPE_FROM_INSTANCE(RVAL2GOBJ(arg->self)));
-    rbgobj_rvalue_to_gvalue(arg->self, arg->instance_and_params->values);
+    gsize value_index = 0;
+    GValue *gself = &g_array_index(arg->instance_and_params,
+                                   GValue,
+                                   value_index);
+    g_value_init(gself, G_TYPE_FROM_INSTANCE(RVAL2GOBJ(arg->self)));
+    rbgobj_rvalue_to_gvalue(arg->self, gself);
+    value_index++;
 
     {
-        GValue* params = arg->instance_and_params->values + 1;
         guint i;
         for (i = 0; i < arg->query.n_params; i++) {
             GType gtype = arg->query.param_types[i] & ~G_SIGNAL_TYPE_STATIC_SCOPE;
-            g_value_init(params + i, gtype);
-            rbgobj_rvalue_to_gvalue(rb_ary_entry(arg->args, i), params + i);
+            GValue *gparam = &g_array_index(arg->instance_and_params,
+                                            GValue,
+                                            value_index);
+            g_value_init(gparam, gtype);
+            rbgobj_rvalue_to_gvalue(rb_ary_entry(arg->args, i), gparam);
+            value_index++;
         }
     }
 
@@ -661,7 +676,7 @@ chain_from_overridden_body(VALUE rb_arg)
             g_value_init(&return_value,
                          arg->query.return_type & ~G_SIGNAL_TYPE_STATIC_SCOPE);
 
-        g_signal_chain_from_overridden(arg->instance_and_params->values,
+        g_signal_chain_from_overridden((GValue *)(arg->instance_and_params->data),
                                        (use_ret) ? &return_value : NULL);
 
         if (use_ret) {
@@ -693,7 +708,12 @@ gobj_sig_chain_from_overridden(int argc, VALUE *argv, VALUE self)
 
     arg.self = self;
     arg.args = rb_ary_new4(argc, argv);
-    arg.instance_and_params = g_value_array_new(1 + argc);
+    arg.instance_and_params = g_array_sized_new(FALSE,
+                                                TRUE,
+                                                sizeof(GValue),
+                                                1 + argc);
+    g_array_set_clear_func(arg.instance_and_params,
+                           (GDestroyNotify)g_value_unset);
 
     return rb_ensure(chain_from_overridden_body, (VALUE)&arg,
                      emit_ensure, (VALUE)&arg);
@@ -710,7 +730,7 @@ gobj_s_method_added(VALUE klass, VALUE id)
     if (cinfo->klass != klass) return Qnil;
     if (strncmp(default_handler_method_prefix, name, prefix_len)) return Qnil;
 
-    signal_id = g_signal_lookup(name + prefix_len, cinfo->gtype);    
+    signal_id = g_signal_lookup(name + prefix_len, cinfo->gtype);
     if (!signal_id) return Qnil;
 
     {
