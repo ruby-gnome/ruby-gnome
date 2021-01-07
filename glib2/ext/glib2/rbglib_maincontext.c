@@ -25,7 +25,7 @@
 #  include <ruby/thread.h>
 #endif
 
-GStaticPrivate rg_polling_key = G_STATIC_PRIVATE_INIT;
+GPrivate rg_polling_key = G_PRIVATE_INIT(NULL);
 
 /*
 static ID id_poll_func;
@@ -87,7 +87,7 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
     info.timeout = timeout;
     info.result = 0;
 
-    g_static_private_set(&rg_polling_key, GINT_TO_POINTER(TRUE), NULL);
+    g_private_set(&rg_polling_key, GINT_TO_POINTER(TRUE));
     if (g_thread_self() == main_thread) {
 #ifdef HAVE_RB_THREAD_CALL_WITHOUT_GVL
         rb_thread_call_without_gvl(rg_poll_in_blocking, &info,
@@ -99,7 +99,7 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
     } else {
         rg_poll_in_blocking_raw(&info);
     }
-    g_static_private_set(&rg_polling_key, GINT_TO_POINTER(FALSE), NULL);
+    g_private_set(&rg_polling_key, GINT_TO_POINTER(FALSE));
 
     return info.result;
 }
@@ -506,7 +506,7 @@ Init_glib_main_context(void)
 
     id_call = rb_intern("call");
 
-    g_static_private_set(&rg_polling_key, GINT_TO_POINTER(FALSE), NULL);
+    g_private_set(&rg_polling_key, GINT_TO_POINTER(FALSE));
 
     main_thread = g_thread_self();
 
