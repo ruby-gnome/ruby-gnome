@@ -69,7 +69,7 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
       case G_TYPE_NONE:
         return Qnil;
       case G_TYPE_CHAR:
-        return CHR2FIX(g_value_get_char(value));
+        return CHR2FIX(g_value_get_schar(value));
       case G_TYPE_UCHAR:
         return INT2FIX(g_value_get_uchar(value));
       case G_TYPE_BOOLEAN:
@@ -246,7 +246,7 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
       case G_TYPE_NONE:
         return;
       case G_TYPE_CHAR:
-        g_value_set_char(result, NUM2INT(val));
+        g_value_set_schar(result, NUM2INT(val));
         return;
       case G_TYPE_UCHAR:
         g_value_set_uchar(result, NUM2UINT(val));
