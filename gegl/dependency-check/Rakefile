@@ -33,7 +33,7 @@ namespace :dependency do
     unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:altlinux => "gegl-devel",
                                             :debian => "libgegl-dev",
-                                            :redhat => "pkgconfig(#{pacakge_id})",
+                                            :redhat => "pkgconfig(#{package_id})",
                                             :arch => "gegl",
                                             :homebrew => "gegl",
                                             :macports => "gegl",
