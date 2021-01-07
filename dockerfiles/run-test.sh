@@ -25,7 +25,9 @@ cp /ruby-gnome/Gemfile ./
 bundle install
 
 ruby /ruby-gnome/extconf.rb --enable-debug-build "$@"
-make
+make -j$(nproc)
+
+export RUBY_GNOME_BUILD_DIR="${PWD}"
 
 if type dbus-run-session > /dev/null 2>&1; then
   dbus-run-session \
