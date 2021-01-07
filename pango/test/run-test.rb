@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2017-2020  Ruby-GNOME Project Team
+# Copyright (C) 2017-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -31,18 +31,18 @@ pango_dir = "pango"
 $LOAD_PATH.unshift(File.join(ruby_gnome_base, glib_dir, "test"))
 
 modules = [
-  [glib_dir, "glib2"],
-  [gobject_introspection_dir, "gobject-introspection"],
-  [cairo_gobject_dir, "cairo-gobject"],
-  [pango_dir, "pango"],
+  glib_dir,
+  gobject_introspection_dir,
+  cairo_gobject_dir,
+  pango_dir,
 ]
-modules.each do |dir, module_name|
-  source_dir = File.join(ruby_gnome_base, dir)
-  build_dir = File.join(ruby_gnome_build_base, dir)
+modules.each do |module_dir|
+  source_dir = File.join(ruby_gnome_base, module_dir)
+  build_dir = File.join(ruby_gnome_build_base, module_dir)
   makefile = File.join(build_dir, "Makefile")
   if File.exist?(makefile) and system("which make > /dev/null")
     `make -C #{build_dir.dump} > /dev/null` or exit(false)
-     $LOAD_PATH.unshift(File.join(build_dir, "ext", module_name))
+     $LOAD_PATH.unshift(File.join(build_dir, "ext", module_dir))
   end
   $LOAD_PATH.unshift(File.join(source_dir, "lib"))
 end
