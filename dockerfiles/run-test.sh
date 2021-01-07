@@ -25,7 +25,7 @@ cp /ruby-gnome/Gemfile ./
 bundle install
 
 ruby /ruby-gnome/extconf.rb --enable-debug-build "$@"
-make
+make -j$(nproc)
 
 export RUBY_GNOME_BUILD_DIR="${PWD}"
 
