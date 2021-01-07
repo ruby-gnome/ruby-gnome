@@ -175,17 +175,28 @@ class TestGLibUnicode < Test::Unit::TestCase
                  GLib::Unicode.canonical_ordering(utf8_to_utf32(original)))
   end
 
-  def test_unicode_canonical_decomposition
+  def test_unichar_compose
+    a_with_acute = 0x00E1
+    assert_equal(a_with_acute,
+                 GLib::UniChar.compose(unichar("a"), 0x0301))
+
+    hiragana_ga = 0x304C
+    hiragana_ka = 0x304B
+    assert_equal(hiragana_ga,
+                 GLib::UniChar.compose(hiragana_ka, 0x3099))
+  end
+
+  def test_unichar_decompose
     a_with_acute = 0x00E1
     expected = [unichar("a"), 0x0301].pack("U*")
     assert_equal(utf8_to_utf32(expected),
-                 GLib::Unicode.canonical_decomposition(a_with_acute))
+                 GLib::UniChar.decompose(a_with_acute))
 
     hiragana_ga = 0x304C
     hiragana_ka = 0x304B
     expected = [hiragana_ka, 0x3099].pack("U*")
     assert_equal(utf8_to_utf32(expected),
-                 GLib::Unicode.canonical_decomposition(hiragana_ga))
+                 GLib::UniChar.decompose(hiragana_ga))
   end
 
   def test_unichar_get_mirror_char

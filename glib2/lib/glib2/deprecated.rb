@@ -31,4 +31,13 @@ module GLib
     extend GLib::Deprecatable
     define_deprecated_const(:E2BIG, :TOO_BIG)
   end
+
+  module Unicode
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method(
+      :canonical_decomposition,
+      warn: "Use 'GLib::UniChar.decompose(char)'.") do |_, char|
+      UniChar.decompose(char)
+    end
+  end
 end

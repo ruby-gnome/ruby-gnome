@@ -140,6 +140,48 @@ rg_s_to_utf8(G_GNUC_UNUSED VALUE self, VALUE unichar)
     return CSTR2RVAL_LEN(utf8, len);
 }
 
+static VALUE
+rg_s_compose(G_GNUC_UNUSED VALUE self, VALUE unichar1, VALUE unichar2)
+{
+    gunichar composed_char;
+    if (g_unichar_compose(NUM2UINT(unichar1),
+                          NUM2UINT(unichar2),
+                          &composed_char)) {
+        return UINT2NUM(composed_char);
+    } else {
+        return Qnil;
+    }
+}
+
+static VALUE
+rg_s_decompose(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+{
+    VALUE unichar;
+    VALUE options = Qnil;
+    gboolean compat = FALSE;
+
+    rb_scan_args(argc, argv, "1:", &unichar, &options);
+    if (!NIL_P(options)) {
+        ID keywords[1];
+        VALUE values[1];
+        keywords[0] = rb_intern("compat");
+        rb_get_kwargs(options, keywords, 0, 1, values);
+        if (values[0] != Qundef) {
+            compat = CBOOL2RVAL(values[0]);
+        }
+    }
+
+    /* 18 is enough. See g_unichar_fully_decompose() document. */
+    gunichar result[G_UNICHAR_MAX_DECOMPOSITION_LENGTH];
+    gsize result_len =
+        g_unichar_fully_decompose(NUM2UINT(unichar),
+                                  compat,
+                                  result,
+                                  G_UNICHAR_MAX_DECOMPOSITION_LENGTH);
+    return CSTR2RVAL_LEN_UCS4((const char *)result,
+                              result_len * sizeof(gunichar));
+}
+
 void
 Init_glib_unichar(void)
 {
@@ -194,4 +236,7 @@ Init_glib_unichar(void)
     RG_DEF_SMETHOD_P(zero_width, 1);
 
     RG_DEF_SMETHOD(to_utf8, 1);
+
+    RG_DEF_SMETHOD(compose, 2);
+    RG_DEF_SMETHOD(decompose, -1);
 }
