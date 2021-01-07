@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019  Ruby-GNOME Project Team
+# Copyright (C) 2018-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -25,5 +25,10 @@ module GLib
     extend GLib::Deprecatable
     define_deprecated_const(:PRIVATE, :STATIC_NAME)
     define_deprecated_method(:private?, :static_name?)
+  end
+
+  class SpawnError
+    extend GLib::Deprecatable
+    define_deprecated_const(:E2BIG, :TOO_BIG)
   end
 end

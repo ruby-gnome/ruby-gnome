@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2004  Masao Mutoh
  *  Copyright (C) 2004  Kazuhiro NISHIYAMA
  *
@@ -35,7 +35,7 @@ Init_glib_spawnerror(void)
     rb_define_const(RG_TARGET_NAMESPACE, "CHDIR", INT2NUM(G_SPAWN_ERROR_CHDIR));
     rb_define_const(RG_TARGET_NAMESPACE, "EACCES", INT2NUM(G_SPAWN_ERROR_ACCES));
     rb_define_const(RG_TARGET_NAMESPACE, "EPERM", INT2NUM(G_SPAWN_ERROR_PERM));
-    rb_define_const(RG_TARGET_NAMESPACE, "E2BIG", INT2NUM(G_SPAWN_ERROR_2BIG));
+    rb_define_const(RG_TARGET_NAMESPACE, "TOO_BIG", INT2NUM(G_SPAWN_ERROR_TOO_BIG));
     rb_define_const(RG_TARGET_NAMESPACE, "ENOEXEC", INT2NUM(G_SPAWN_ERROR_NOEXEC));
     rb_define_const(RG_TARGET_NAMESPACE, "ENAMETOOLONG", INT2NUM(G_SPAWN_ERROR_NAMETOOLONG));
     rb_define_const(RG_TARGET_NAMESPACE, "ENOENT", INT2NUM(G_SPAWN_ERROR_NOENT));
