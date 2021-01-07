@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,10 +16,6 @@
 
 class TestMatchInfo < Test::Unit::TestCase
   include GLibTestUtils
-
-  setup do
-    only_glib_version(2, 30, 0)
-  end
 
   def test_string
     regex = GLib::Regex.new("[A-Z]+")

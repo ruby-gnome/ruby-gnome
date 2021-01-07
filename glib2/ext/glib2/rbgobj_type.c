@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2020  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -987,10 +987,6 @@ _def_fundamental_type(VALUE ary, GType gtype, const char* name)
 void
 Init_gobject_gtype(void)
 {
-#if !GLIB_CHECK_VERSION(2, 35, 1)
-    g_type_init();
-#endif
-
     init_typemap();
 
     /* type */

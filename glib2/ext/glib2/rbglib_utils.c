@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
- *  Copyright (C) 2004  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2004-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2004  Pascal Terjan
  *
  *  This library is free software; you can redistribute it and/or
@@ -71,7 +70,6 @@ rg_s_unsetenv(VALUE self, VALUE variable)
     return self;
 }
 
-#ifdef HAVE_G_LISTENV
 static VALUE
 rg_s_listenv(G_GNUC_UNUSED VALUE self)
 {
@@ -86,7 +84,6 @@ rg_s_listenv(G_GNUC_UNUSED VALUE self)
     g_strfreev(c_list);
     return r_list;
 }
-#endif
 
 static VALUE
 rg_s_host_name(G_GNUC_UNUSED VALUE self)
@@ -136,14 +133,12 @@ rg_s_system_config_dirs(G_GNUC_UNUSED VALUE self)
     return STRV2RVAL((const gchar **)g_get_system_config_dirs());
 }
 
-#if GLIB_CHECK_VERSION(2, 14, 0)
 static VALUE
 rg_s_get_user_special_dir(G_GNUC_UNUSED VALUE self, VALUE directory)
 {
     return CSTR2RVAL(g_get_user_special_dir(RVAL2GENUM(directory,
                                            G_TYPE_USER_DIRECTORY)));
 }
-#endif
 
 static VALUE
 rg_s_home_dir(G_GNUC_UNUSED VALUE self)
@@ -288,15 +283,11 @@ void
 Init_glib_utils(void)
 {
     /* glib/gutils.h */
-#if GLIB_CHECK_VERSION(2, 14, 0)
     G_DEF_CLASS(G_TYPE_USER_DIRECTORY, "UserDirectory", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_USER_DIRECTORY, "G_");
-#endif
 
-#if GLIB_CHECK_VERSION(2, 30, 0)
     G_DEF_CLASS(G_TYPE_FORMAT_SIZE_FLAGS,
                 "FormatSizeFlags", RG_TARGET_NAMESPACE);
-#endif
 
     RG_DEF_SMETHOD(application_name, 0);
     RG_DEF_SMETHOD(set_application_name, 1);
@@ -305,9 +296,7 @@ Init_glib_utils(void)
     RG_DEF_SMETHOD(getenv, 1);
     RG_DEF_SMETHOD(setenv, 2);
     RG_DEF_SMETHOD(unsetenv, 1);
-#ifdef HAVE_G_LISTENV
     RG_DEF_SMETHOD(listenv, 0);
-#endif
     RG_DEF_SMETHOD(host_name, 0);
     RG_DEF_SMETHOD(user_name, 0);
     RG_DEF_SMETHOD(real_name, 0);
@@ -317,9 +306,7 @@ Init_glib_utils(void)
     RG_DEF_SMETHOD(user_config_dir, 0);
     RG_DEF_SMETHOD(system_data_dirs, 0);
     RG_DEF_SMETHOD(system_config_dirs, 0);
-#if GLIB_CHECK_VERSION(2, 14, 0)
     RG_DEF_SMETHOD(get_user_special_dir, 1);
-#endif
     RG_DEF_SMETHOD(home_dir, 0);
     RG_DEF_SMETHOD(tmp_dir, 0);
     RG_DEF_SMETHOD(current_dir, 0);

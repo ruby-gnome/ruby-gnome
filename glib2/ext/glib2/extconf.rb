@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2019  Ruby-GNOME Project Team
+# Copyright (C) 2002-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -42,10 +42,6 @@ have_header("unistd.h")
 have_header("io.h")
 
 glib_header = "glib.h"
-have_func("g_spawn_close_pid", glib_header)
-have_func("g_thread_init", glib_header)
-have_func("g_main_depth", glib_header)
-have_func("g_listenv", glib_header)
 
 ruby_header = "ruby.h"
 have_func("rb_check_array_type", ruby_header)

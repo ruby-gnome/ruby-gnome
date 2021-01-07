@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- 
+
 class TestGLibTimeout < Test::Unit::TestCase
   include GLibTestUtils
 
@@ -33,7 +33,6 @@ class TestGLibTimeout < Test::Unit::TestCase
   end
 
   def test_timeout_add_seconds_priority
-    only_glib_version(2, 14, 0)
     priority = GLib::PRIORITY_HIGH
     @id = GLib::Timeout.add_seconds(10, priority)
     source = GLib::MainContext.default.find_source(@id)

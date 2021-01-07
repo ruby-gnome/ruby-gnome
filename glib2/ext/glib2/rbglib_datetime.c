@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2016  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2016-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -69,10 +69,8 @@ rg_s_now(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         date = g_date_time_new_now_local();
     } else if (is_utc_timezone(rb_timezone)) {
         date = g_date_time_new_now_utc();
-#if GLIB_CHECK_VERSION(2, 34, 0)
     } else if (is_timezone(rb_timezone)) {
         date = g_date_time_new_now(RVAL2GTIMEZONE(rb_timezone));
-#endif
     } else {
         rb_raise(rb_eArgError,
                  "timezone must be nil, :local, :utc or GLib::TimeZone: "
@@ -160,7 +158,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                            hour,
                                            minute,
                                            second);
-#if GLIB_CHECK_VERSION(2, 34, 0)
         } else if (is_timezone(rb_timezone)) {
             GTimeZone *timezone = NULL;
 
@@ -172,7 +169,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                        hour,
                                        minute,
                                        second);
-#endif
         } else {
             rb_raise(rb_eArgError,
                      ":timezone must be nil, :local, :utc or GLib::TimeZone: "

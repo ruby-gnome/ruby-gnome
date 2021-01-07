@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -28,26 +28,13 @@ static VALUE RG_TARGET_NAMESPACE;
 static VALUE
 rg_s_init(VALUE self)
 {
-#ifdef HAVE_G_THREAD_INIT
-#if defined(G_THREADS_ENABLED) && !GLIB_CHECK_VERSION(2, 32, 0)
-    g_thread_init(NULL);
-#endif
-#endif
     return self;
 }
 
 static VALUE
 rg_s_supported_p(G_GNUC_UNUSED VALUE self)
 {
-#ifdef HAVE_G_THREAD_INIT
-#ifdef G_THREADS_ENABLED
-    return CBOOL2RVAL(g_thread_supported());
-#else
-    return Qfalse;
-#endif
-#else
-    return Qfalse;
-#endif
+    return Qtrue;
 
 }
 

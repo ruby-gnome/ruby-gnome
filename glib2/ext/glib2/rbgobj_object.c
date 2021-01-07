@@ -1,11 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
- *  Copyright (C) 2002-2004  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2002-2003  Masahiro Sakai
- *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
- *                          Daisuke Kanda,
- *                          Hiroshi Igarashi
+ *  Copyright (C) 1998-2000  Yukihiro Matsumoto,
+ *                           Daisuke Kanda,
+ *                           Hiroshi Igarashi
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -720,7 +719,6 @@ rg_type_name(VALUE self)
     return CSTR2RVAL(G_OBJECT_TYPE_NAME(RVAL2GOBJ(self)));
 }
 
-#if GLIB_CHECK_VERSION(2, 26, 0)
 typedef struct {
     VALUE transform_from_callback;
     VALUE transform_to_callback;
@@ -849,7 +847,6 @@ rg_bind_property(gint argc, VALUE *argv, VALUE self)
 
     return rb_binding;
 }
-#endif
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -1096,10 +1093,8 @@ Init_gobject_gobject(void)
     RG_DEF_METHOD(inspect, 0);
     RG_DEF_METHOD(type_name, 0);
 
-#if GLIB_CHECK_VERSION(2, 26, 0)
     RG_DEF_METHOD(bind_property, -1);
     G_DEF_CLASS(G_TYPE_BINDING_FLAGS, "BindingFlags", mGLib);
-#endif
 
     eNoPropertyError = rb_define_class_under(mGLib, "NoPropertyError",
                                              rb_eNameError);

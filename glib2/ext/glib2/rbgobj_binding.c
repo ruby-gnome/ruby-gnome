@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2015-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -24,7 +24,6 @@
 
 #define _SELF(object) G_BINDING(RVAL2GOBJ(self))
 
-#if GLIB_CHECK_VERSION(2, 38, 0)
 static VALUE
 rg_unbind(VALUE self)
 {
@@ -39,18 +38,13 @@ rg_unbind(VALUE self)
 
     return self;
 }
-#endif
 
 void
 Init_gobject_gbinding(void)
 {
-#if GLIB_CHECK_VERSION(2, 26, 0)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BINDING, "Binding", mGLib);
-#endif
 
-#if GLIB_CHECK_VERSION(2, 38, 0)
     RG_DEF_METHOD(unbind, 0);
-#endif
 }

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2004  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -49,15 +49,6 @@ void        g_dir_rewind                    (GDir *dir);
 void        g_dir_close                     (GDir *dir);
 */
 
-#if GLIB_CHECK_VERSION(2, 16, 0)
-static VALUE
-rbglib_m_format_size_for_display(G_GNUC_UNUSED VALUE self, VALUE size)
-{
-    return CSTR2RVAL_FREE(g_format_size_for_display(NUM2OFFT(size)));
-}
-#endif
-
-#if GLIB_CHECK_VERSION(2, 30, 0)
 static VALUE
 rbglib_m_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -76,7 +67,6 @@ rbglib_m_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                                RVAL2GFORMATSIZEFLAGS(rb_flags)));
     }
 }
-#endif
 
 void
 Init_glib_fileutils(void)
@@ -108,12 +98,6 @@ Init_glib_fileutils(void)
     rb_define_const(RG_TARGET_NAMESPACE, "PERM", INT2NUM(G_FILE_ERROR_PERM));
     rb_define_const(RG_TARGET_NAMESPACE, "FAILED", INT2NUM(G_FILE_ERROR_FAILED));
 
-#if GLIB_CHECK_VERSION(2, 16, 0)
-    rbg_define_singleton_method(mGLib, "format_size_for_display",
-			      rbglib_m_format_size_for_display, 1);
-#endif
-#if GLIB_CHECK_VERSION(2, 30, 0)
     rbg_define_singleton_method(mGLib, "format_size",
                                 rbglib_m_format_size, -1);
-#endif
 }

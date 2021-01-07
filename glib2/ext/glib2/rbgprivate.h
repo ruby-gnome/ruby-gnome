@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2007-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2007-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -21,12 +21,13 @@
 #pragma once
 
 /*
- * CentOS 6: GLib 2.28
  * CentOS 7: GLib 2.50
+ * CentOS 8: GLib 2.56
  * Ubuntu 16.04: GLib 2.48
- * Ubuntu 18.04: GLib 2.54
+ * Ubuntu 18.04: GLib 2.56
+ * Ubuntu 20.04: GLib 2.64
  */
-#define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_28
+#define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_48
 
 #include "rbgobject.h"
 
@@ -58,7 +59,7 @@ typedef struct {
     GType type;
 } boxed_holder;
 
-G_GNUC_INTERNAL extern GStaticPrivate rg_polling_key;
+G_GNUC_INTERNAL extern GPrivate rg_polling_key;
 G_GNUC_INTERNAL extern rb_encoding *rbg_filename_encoding;
 
 extern VALUE rbgobj_cEnum;

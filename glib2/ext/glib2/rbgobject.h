@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
- *  Copyright (C) 2003,2006  Ruby-GNOME Project Team
+ *  Copyright (C) 2003-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -291,31 +290,6 @@ extern void rbgobj_define_const(VALUE mod, const char *name, VALUE value);
 extern VALUE rbgobj_enum_alloc_func(VALUE klass);
 extern VALUE rbgobj_flags_alloc_func(VALUE klass);
 
-
-/* rbglib_mainloop.c */
-#if !GLIB_CHECK_VERSION(2,30,0)
-  #define G_TYPE_MAIN_LOOP (g_main_loop_get_type())
-  extern GType g_main_loop_get_type(void);
-#endif
-
-/* rbglib_maincontext.c */
-#if !GLIB_CHECK_VERSION(2,30,0)
-  #define G_TYPE_MAIN_CONTEXT (g_main_context_get_type())
-  #define G_TYPE_SOURCE (g_source_get_type())
-  extern GType g_main_context_get_type(void);
-  extern GType g_source_get_type(void);
-#endif
-
-#if !GLIB_CHECK_VERSION(2, 36, 0)
-  #define G_TYPE_POLLFD (g_pollfd_get_type())
-  extern GType g_pollfd_get_type(void);
-#endif
-
-/* rbglib_keyfile.c */
-#if !GLIB_CHECK_VERSION(2,31,2)
-  #define G_TYPE_KEY_FILE (g_key_file_get_type())
-  extern GType g_key_file_get_type(void);
-#endif
 
 /* rbgobj_convert.c */
 typedef struct {

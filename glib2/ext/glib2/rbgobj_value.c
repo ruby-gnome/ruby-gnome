@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -130,14 +130,12 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
                 return func(value);
             }
         }
-#if GLIB_CHECK_VERSION(2, 26, 0)
       case G_TYPE_VARIANT:
         {
             GVariant *variant = g_value_peek_pointer(value);
             rvalue = rbg_variant_to_ruby(variant);
             return rvalue;
         }
-#endif
       default:
         if (!rbgobj_convert_gvalue2rvalue(fundamental_type, value, &rvalue)) {
             GValueToRValueFunc func;
@@ -318,11 +316,9 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
                 return;
             }
         }
-#if GLIB_CHECK_VERSION(2, 26, 0)
       case G_TYPE_VARIANT:
         g_value_set_variant(result, rbg_variant_from_ruby(val));
         break;
-#endif
       default:
         if (!rbgobj_convert_rvalue2gvalue(fundamental_type, val, result)) {
             RValueToGValueFunc func =

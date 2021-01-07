@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2006  Kouhei Sutou
  *
  *  This library is free software; you can redistribute it and/or
@@ -105,7 +105,6 @@ rg_s_get_mirror_char(G_GNUC_UNUSED VALUE self, VALUE unichar)
     }
 }
 
-#if GLIB_CHECK_VERSION(2,14,0)
 static VALUE
 rg_s_combining_class(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
@@ -130,7 +129,6 @@ rg_s_zero_width_p(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return CBOOL2RVAL(g_unichar_iszerowidth(NUM2UINT(unichar)));
 }
-#endif
 
 static VALUE
 rg_s_to_utf8(G_GNUC_UNUSED VALUE self, VALUE unichar)
@@ -190,12 +188,10 @@ Init_glib_unichar(void)
 
     RG_DEF_SMETHOD(get_mirror_char, 1);
 
-#if GLIB_CHECK_VERSION(2,14,0)
     RG_DEF_SMETHOD(combining_class, 1);
     RG_DEF_SMETHOD(get_script, 1);
     RG_DEF_SMETHOD_P(mark, 1);
     RG_DEF_SMETHOD_P(zero_width, 1);
-#endif
 
     RG_DEF_SMETHOD(to_utf8, 1);
 }

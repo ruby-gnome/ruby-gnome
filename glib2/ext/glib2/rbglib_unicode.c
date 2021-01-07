@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2006  Kouhei Sutou
  *
  *  This library is free software; you can redistribute it and/or
@@ -75,11 +75,9 @@ Init_glib_unicode(void)
     G_DEF_CLASS(G_TYPE_UNICODE_BREAK_TYPE, "BreakType", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_UNICODE_BREAK_TYPE, "G_UNICODE_");
 
-#if GLIB_CHECK_VERSION(2,14,0)
     /* GUnicodeScript */
     G_DEF_CLASS(G_TYPE_UNICODE_SCRIPT, "Script", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_UNICODE_SCRIPT, "G_UNICODE_");
-#endif
 
     G_DEF_CLASS(G_TYPE_NORMALIZE_MODE, "NormalizeMode", mGLib);
 

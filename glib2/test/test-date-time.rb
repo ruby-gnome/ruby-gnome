@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -76,7 +76,6 @@ class TestDateTime < Test::Unit::TestCase
     end
 
     test "timezone: local time zone" do
-      only_glib_version(2, 34, 0)
       time = Time.now
       tz = GLib::TimeZone.local
       datetime = GLib::DateTime.new(:timezone => tz,
@@ -95,7 +94,6 @@ class TestDateTime < Test::Unit::TestCase
     end
 
     test "timezone: UTC time zone" do
-      only_glib_version(2, 34, 0)
       time = Time.now.utc
       tz = GLib::TimeZone.utc
       datetime = GLib::DateTime.new(:timezone => tz,

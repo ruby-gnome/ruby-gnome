@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -111,7 +111,6 @@ class TestGLibVariantType < Test::Unit::TestCase
     end
 
     test "OBJECT_PATH_ARRAY" do
-      only_glib_version(2, 30, 0)
       assert_equal("ao", GLib::VariantType::OBJECT_PATH_ARRAY.to_s)
     end
 
@@ -124,7 +123,6 @@ class TestGLibVariantType < Test::Unit::TestCase
     end
 
     test "VARDICT" do
-      only_glib_version(2, 30, 0)
       assert_equal("a{sv}", GLib::VariantType::VARDICT.to_s)
     end
   end

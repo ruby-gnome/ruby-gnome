@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2020  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2004  Masao Mutoh
  *  Copyright (C) 2004  Kazuhiro NISHIYAMA
  *
@@ -205,8 +205,6 @@ rg_s_command_line_async(G_GNUC_UNUSED VALUE self, VALUE str)
     return ret;
 }
 
-#ifdef HAVE_G_SPAWN_CLOSE_PID
-
 #define RVAL2GPID(value) ((GPid)NUM2INT(pid))
 
 static VALUE
@@ -215,8 +213,6 @@ rg_s_close_pid(G_GNUC_UNUSED VALUE self, VALUE pid)
     g_spawn_close_pid(RVAL2GPID(pid));
     return Qnil;
 }
-
-#endif
 
 void
 Init_glib_spawn(void)
@@ -232,9 +228,7 @@ Init_glib_spawn(void)
     RG_DEF_SMETHOD(sync, 4);
     RG_DEF_SMETHOD(command_line_sync, 1);
     RG_DEF_SMETHOD(command_line_async, 1);
-#ifdef HAVE_G_SPAWN_CLOSE_PID
     RG_DEF_SMETHOD(close_pid, 1);
-#endif
 
     rb_define_const(RG_TARGET_NAMESPACE, "LEAVE_DESCRIPTORS_OPEN", INT2NUM(G_SPAWN_LEAVE_DESCRIPTORS_OPEN));
     rb_define_const(RG_TARGET_NAMESPACE, "DO_NOT_REAP_CHILD", INT2NUM(G_SPAWN_DO_NOT_REAP_CHILD));

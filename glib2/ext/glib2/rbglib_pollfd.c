@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -20,30 +20,6 @@
  */
 
 #include "rbgprivate.h"
-
-#if !GLIB_CHECK_VERSION(2, 36, 0)
-static GPollFD*
-pollfd_copy(const GPollFD* pollfd)
-{
-  GPollFD* new_pollfd;
-  g_return_val_if_fail (pollfd != NULL, NULL);
-
-  new_pollfd = g_new(GPollFD, 1);
-  *new_pollfd = *pollfd;
-  return new_pollfd;
-}
-
-GType
-g_pollfd_get_type(void)
-{
-  static GType our_type = 0;
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static ("GPollFD",
-                    (GBoxedCopyFunc)pollfd_copy,
-                    (GBoxedFreeFunc)g_free);
-  return our_type;
-}
-#endif
 
 #define RG_TARGET_NAMESPACE cPollFD
 #define _SELF(s) ((GPollFD*)RVAL2BOXED(s, G_TYPE_POLLFD))

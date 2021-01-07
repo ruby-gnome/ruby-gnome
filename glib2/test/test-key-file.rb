@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,8 +20,6 @@ class TestGLibKeyFile < Test::Unit::TestCase
   include GLibTestUtils
 
   def test_load_from_dirs
-    only_glib_version(2, 14, 0)
-
     key_file = GLib::KeyFile.new
     assert_raise(GLib::KeyFileError::NotFound) do
       key_file.load_from_dirs("non-existent")
@@ -53,7 +51,6 @@ EOK
   end
 
   def test_desktop_constants
-    only_glib_version(2, 14, 0)
     assert_equal("Desktop Entry", GLib::KeyFile::DESKTOP_GROUP)
     assert_equal("URL", GLib::KeyFile::DESKTOP_KEY_URL)
   end

@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
- *  Copyright (C) 2005,2006 Masao Mutoh
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2005,2006  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -20,21 +20,6 @@
  */
 
 #include "rbgprivate.h"
-
-/*****************************************/
-#if !GLIB_CHECK_VERSION(2,30,0)
-GType
-g_main_loop_get_type(void)
-{
-  static GType our_type = 0;
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static ("GMainLoop",
-                    (GBoxedCopyFunc)g_main_loop_ref,
-                    (GBoxedFreeFunc)g_main_loop_unref);
-  return our_type;
-}
-#endif
-/*****************************************/
 
 #define RG_TARGET_NAMESPACE cMainLoop
 #define _SELF(s) ((GMainLoop*)RVAL2BOXED(s, G_TYPE_MAIN_LOOP))

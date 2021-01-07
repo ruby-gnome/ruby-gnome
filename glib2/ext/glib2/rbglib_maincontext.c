@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -147,21 +147,6 @@ source_destroy_notify(gpointer data)
 
     xfree(info);
 }
-
-/*****************************************/
-#if !GLIB_CHECK_VERSION(2,30,0)
-GType
-g_main_context_get_type(void)
-{
-  static GType our_type = 0;
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static ("GMainContext",
-                    (GBoxedCopyFunc)g_main_context_ref,
-                    (GBoxedFreeFunc)g_main_context_unref);
-  return our_type;
-}
-#endif
-/*****************************************/
 
 #define RG_TARGET_NAMESPACE cMainContext
 #define _SELF(s) ((GMainContext*)RVAL2BOXED(s, G_TYPE_MAIN_CONTEXT))
@@ -386,26 +371,23 @@ rg_remove_poll(VALUE self, VALUE fd)
     return self;
 }
 
-#ifdef HAVE_G_MAIN_DEPTH
 static VALUE
 rg_s_depth(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(g_main_depth());
 }
-#endif
 
 static VALUE
 timeout_source_new(G_GNUC_UNUSED VALUE self, VALUE interval)
 {
     return BOXED2RVAL(g_timeout_source_new(NUM2UINT(interval)), G_TYPE_SOURCE);
 }
-#if GLIB_CHECK_VERSION(2,14,0)
+
 static VALUE
 timeout_source_new_seconds(G_GNUC_UNUSED VALUE self, VALUE interval)
 {
     return BOXED2RVAL(g_timeout_source_new_seconds(NUM2UINT(interval)), G_TYPE_SOURCE);
 }
-#endif
 
 static VALUE
 timeout_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
@@ -431,7 +413,6 @@ timeout_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     return rb_id;
 }
 
-#if GLIB_CHECK_VERSION(2,14,0)
 static VALUE
 timeout_add_seconds(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -455,7 +436,6 @@ timeout_add_seconds(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     rbgobj_add_relative(mGLibSource, func);
     return rb_id;
 }
-#endif
 
 static VALUE
 idle_source_new(G_GNUC_UNUSED VALUE self)
@@ -559,17 +539,11 @@ Init_glib_main_context(void)
 */
     RG_DEF_METHOD(add_poll, 2);
     RG_DEF_METHOD(remove_poll, 1);
-#ifdef HAVE_G_MAIN_DEPTH
     RG_DEF_SMETHOD(depth, 0);
-#endif
     rbg_define_singleton_method(timeout, "source_new", timeout_source_new, 1);
-#if GLIB_CHECK_VERSION(2,14,0)
     rbg_define_singleton_method(timeout, "source_new_seconds", timeout_source_new_seconds, 1);
-#endif
     rbg_define_singleton_method(timeout, "add", timeout_add, -1);
-#if GLIB_CHECK_VERSION(2,14,0)
     rbg_define_singleton_method(timeout, "add_seconds", timeout_add_seconds, -1);
-#endif
     rbg_define_singleton_method(idle, "source_new", idle_source_new, 0);
     rbg_define_singleton_method(idle, "add", idle_add, -1);
 

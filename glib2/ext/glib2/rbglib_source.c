@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -22,32 +22,6 @@
 #include "rbgprivate.h"
 
 static ID id_call;
-
-/*****************************************/
-#if !GLIB_CHECK_VERSION(2,30,0)
-static void
-source_free(GSource *source)
-{
-    if (g_source_is_destroyed(source)) {
-        return;
-    }
-
-    g_source_unref(source);
-    g_source_destroy(source);
-}
-
-GType
-g_source_get_type(void)
-{
-  static GType our_type = 0;
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static ("GSource",
-                    (GBoxedCopyFunc)g_source_ref,
-                    (GBoxedFreeFunc)source_free);
-  return our_type;
-}
-#endif
-/*****************************************/
 
 #define RG_TARGET_NAMESPACE cSource
 #define _SELF(s) ((GSource*)RVAL2BOXED(s, G_TYPE_SOURCE))
@@ -112,7 +86,6 @@ rg_id(VALUE self)
     return UINT2NUM(g_source_get_id(_SELF(self)));
 }
 
-#if GLIB_CHECK_VERSION(2, 26, 0)
 static VALUE
 rg_name(VALUE self)
 {
@@ -125,7 +98,6 @@ rg_set_name(VALUE self, VALUE name)
     g_source_set_name(_SELF(self), RVAL2CSTR(name));
     return self;
 }
-#endif
 
 static VALUE
 rg_context(VALUE self)
@@ -158,7 +130,6 @@ void        g_source_set_callback_indirect  (GSource *source,
                                              GSourceCallbackFuncs *callback_funcs);
 */
 
-#if GLIB_CHECK_VERSION(2, 36, 0)
 static VALUE
 rg_ready_time(VALUE self)
 {
@@ -173,7 +144,6 @@ rg_set_ready_time(VALUE self, VALUE ready_time)
     g_source_set_ready_time(_SELF(self), NUM2LL(ready_time));
     return self;
 }
-#endif
 
 static VALUE
 rg_add_poll(VALUE self, VALUE fd)
@@ -189,7 +159,6 @@ rg_remove_poll(VALUE self, VALUE fd)
     return self;
 }
 
-#if GLIB_CHECK_VERSION(2, 28, 0)
 static VALUE
 rg_time(VALUE self)
 {
@@ -197,7 +166,6 @@ rg_time(VALUE self)
     time = g_source_get_time(_SELF(self));
     return LL2NUM(time);
 }
-#endif
 
 /* How can I implement them ?
 gboolean    g_source_remove_by_funcs_user_data
@@ -226,21 +194,15 @@ Init_glib_source(void)
     RG_DEF_METHOD(set_can_recurse, 1);
     RG_DEF_METHOD_P(can_recurse, 0);
     RG_DEF_METHOD(id, 0);
-#if GLIB_CHECK_VERSION(2, 26, 0)
     RG_DEF_METHOD(name, 0);
     RG_REPLACE_SET_PROPERTY(name, 1);
-#endif
     RG_DEF_METHOD(context, 0);
     RG_DEF_METHOD(set_callback, 0);
-#if GLIB_CHECK_VERSION(2, 36, 0)
     RG_DEF_METHOD(ready_time, 0);
     RG_REPLACE_SET_PROPERTY(ready_time, 1);
-#endif
     RG_DEF_METHOD(add_poll, 1);
     RG_DEF_METHOD(remove_poll, 1);
-#if GLIB_CHECK_VERSION(2, 28, 0)
     RG_DEF_METHOD(time, 0);
-#endif
 
     /* GLib::Source.remove is moved to rbglib_maincontext.c */
 }

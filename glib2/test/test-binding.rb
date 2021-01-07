@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -56,10 +56,6 @@ class TestGLibBinding < Test::Unit::TestCase
     end
 
     setup do
-      only_glib_version(2, 26, 0)
-    end
-
-    setup do
       @source = DataObjectDefault.new
       @target = DataObjectDefault.new
       @binding = @source.bind_property("source", @target, "target", :default)
@@ -86,7 +82,6 @@ class TestGLibBinding < Test::Unit::TestCase
     end
 
     test "#unbind" do
-      only_glib_version(2, 38, 0)
       assert_equal(0, @target.target)
       @source.source = 10
       assert_equal(10, @target.target)
@@ -133,10 +128,6 @@ class TestGLibBinding < Test::Unit::TestCase
     end
 
     setup do
-      only_glib_version(2, 26, 0)
-    end
-
-    setup do
       @source = DataObjectBidir.new
       @target = DataObjectBidir.new
       transform_to_callback = proc do |source_value|
@@ -174,7 +165,6 @@ class TestGLibBinding < Test::Unit::TestCase
     end
 
     test "#unbind" do
-      only_glib_version(2, 38, 0)
       assert_equal("nan", @target.target)
       @source.source = 10
       assert_equal("10", @target.target)
