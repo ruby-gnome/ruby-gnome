@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,7 +14,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "test-unit"
+require "clutter"
 
 module ClutterTestUtils
   private

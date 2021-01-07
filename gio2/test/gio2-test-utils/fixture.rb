@@ -17,7 +17,8 @@
 module GioTestUtils
   module Fixture
     def fixture_path(*components)
-      File.expand_path(File.join("test", "fixture", *components))
+      File.expand_path(File.join(*components),
+                       ENV["GIO2_FIXTURE_DIR"] || File.join("test", "fixture"))
     end
   end
 end

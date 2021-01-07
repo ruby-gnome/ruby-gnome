@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2020  Ruby-GNOME Project Team
+# Copyright (C) 2013-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,50 +16,24 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "fileutils"
+require_relative "../../glib2/test/run-test"
 
-build_dir = File.expand_path(".")
-
-ruby_gnome_base = File.join(__dir__, "..", "..")
-ruby_gnome_base = File.expand_path(ruby_gnome_base)
-
-glib_base = File.join(ruby_gnome_base, "glib2")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-gio2_base = File.join(ruby_gnome_base, "gio2")
-
-modules = [
-  [glib_base, "glib2"],
-  [gobject_introspection_base, "gobject-introspection"],
-  [gio2_base, "gio2"],
-]
-
-modules.each do |target, module_name|
-  makefile = File.join(target, "Makefile")
-  if File.exist?(makefile) and system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(false)
+run_test(__dir__,
+         [
+           "glib2",
+           "gobject-introspection",
+           "gio2",
+         ]) do |context|
+  ENV["GSETTINGS_SCHEMA_DIR"] = File.join(context[:build_fixture_dir],
+                                          "schema",
+                                          "default")
+  ENV["GIO2_FIXTURE_DIR"] = context[:build_fixture_dir]
+  begin
+    require "gio2"
+  rescue GObjectIntrospection::RepositoryError
+    puts("Omit because typelib file doesn't exist: #{$!.message}")
+    exit(true)
   end
-  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
-  $LOAD_PATH.unshift(File.join(target, "lib"))
+
+  require_relative "gio2-test-utils"
 end
-
-source_fixture_dir = File.join(gio2_base, "test", "fixture")
-build_fixture_dir = File.join(build_dir, "test", "fixture")
-unless source_fixture_dir == build_fixture_dir
-  FileUtils.rm_rf(build_fixture_dir)
-  FileUtils.mkdir_p(File.dirname(build_fixture_dir))
-  FileUtils.cp_r(source_fixture_dir, build_fixture_dir)
-end
-Dir.chdir(build_fixture_dir) do
-  system("rake") or exit(false)
-end
-ENV["GSETTINGS_SCHEMA_DIR"] = File.join(build_fixture_dir, "schema", "default")
-
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
-require "glib-test-init"
-
-$LOAD_PATH.unshift(File.join(gio2_base, "test"))
-require "gio2-test-utils"
-
-require "gio2"
-
-exit Test::Unit::AutoRunner.run(true, File.join(gio2_base, "test"))

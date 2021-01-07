@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2020  Ruby-GNOME Project Team
+# Copyright (C) 2013-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,51 +16,27 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome_base = File.expand_path(ruby_gnome_base)
+require_relative "../../glib2/test/run-test"
 
-glib_base = File.join(ruby_gnome_base, "glib2")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-atk_base = File.join(ruby_gnome_base, "atk")
-cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
-pango_base = File.join(ruby_gnome_base, "pango")
-gdk_pixbuf_base = File.join(ruby_gnome_base, "gdk_pixbuf2")
-gio2_base = File.join(ruby_gnome_base, "gio2")
-gdk4_base = File.join(ruby_gnome_base, "gdk4")
-gtk4_base = File.join(ruby_gnome_base, "gtk4")
-
-[
-  [glib_base, "glib2"],
-  [gobject_introspection_base, "gobject-introspection"],
-  [atk_base, "atk"],
-  [cairo_gobject_base, "cairo-gobject"],
-  [pango_base, "pango"],
-  [gdk_pixbuf_base, "gdk_pixbuf2"],
-  [gio2_base, "gio2"],
-  [gdk4_base, "gdk4"],
-  [gtk4_base, "gtk4"]
-].each do |target, module_name|
-  if File.exist?(File.join(target, "Makefile"))
-    if system("which make > /dev/null")
-      `make -C #{target.dump} > /dev/null` or exit(false)
-    end
-    $LOAD_PATH.unshift(File.join(target, "ext", module_name))
+run_test(__dir__,
+         [
+           "glib2",
+           "gobject-introspection",
+           "atk",
+           "cairo-gobject",
+           "gdk_pixbuf2",
+           "gio2",
+           "gdk4",
+           "gtk4",
+         ]) do
+  begin
+    require "gtk4"
+  rescue GObjectIntrospection::RepositoryError
+    puts("Omit because typelib file doesn't exist: #{$!.message}")
+    exit(true)
   end
-  $LOAD_PATH.unshift(File.join(target, "lib"))
+
+  Gtk.init
+
+  require_relative "gtk-test-utils"
 end
-
-# Dir.chdir(File.join(gtk4_base, "test", "fixture")) do
-#   system("rake") or exit(false)
-# end
-
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
-require 'glib-test-init'
-
-$LOAD_PATH.unshift(File.join(gtk4_base, "test"))
-require 'gtk-test-utils'
-
-require 'gtk4'
-
-Gtk.init
-
-exit Test::Unit::AutoRunner.run(true, File.join(gtk4_base, "test"))

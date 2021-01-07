@@ -16,44 +16,13 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-$VERBOSE = true
+require_relative "../../glib2/test/run-test"
 
-ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome_base = File.expand_path(ruby_gnome_base)
-
-ruby_gnome_build_base = ENV["RUBY_GNOME_BUILD_DIR"] || ruby_gnome_base
-
-glib_dir = "glib2"
-gobject_introspection_dir = "gobject-introspection"
-cairo_gobject_dir = "cairo-gobject"
-pango_dir = "pango"
-
-$LOAD_PATH.unshift(File.join(ruby_gnome_base, glib_dir, "test"))
-
-modules = [
-  glib_dir,
-  gobject_introspection_dir,
-  cairo_gobject_dir,
-  pango_dir,
-]
-modules.each do |module_dir|
-  source_dir = File.join(ruby_gnome_base, module_dir)
-  build_dir = File.join(ruby_gnome_build_base, module_dir)
-  makefile = File.join(build_dir, "Makefile")
-  if File.exist?(makefile) and system("which make > /dev/null")
-    `make -C #{build_dir.dump} > /dev/null` or exit(false)
-     $LOAD_PATH.unshift(File.join(build_dir, "ext", module_dir))
-  end
-  $LOAD_PATH.unshift(File.join(source_dir, "lib"))
+run_test(__dir__,
+         [
+           "glib2",
+           "gobject-introspection",
+           "cairo-gobject",
+         ]) do
+  require_relative "pango-test-utils"
 end
-
-$LOAD_PATH.unshift(File.join(ruby_gnome_base, glib_dir, "test"))
-require "glib-test-init"
-
-$LOAD_PATH.unshift(File.join(ruby_gnome_base, pango_dir, "test"))
-require "pango-test-utils"
-
-require "pango"
-
-test_dir = File.join(ruby_gnome_base, pango_dir, "test")
-exit(Test::Unit::AutoRunner.run(true, test_dir))

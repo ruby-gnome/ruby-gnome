@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2018-2020  Ruby-GNOME Project Team
+# Copyright (C) 2018-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,43 +16,21 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome_base = File.expand_path(ruby_gnome_base)
+require_relative "../../glib2/test/run-test"
 
-glib_base = File.join(ruby_gnome_base, "glib2")
-gio2_base = File.join(ruby_gnome_base, "gio2")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-gegl_base = File.join(ruby_gnome_base, "gegl")
-
-modules = [
-  [glib_base, "glib2"],
-  [gio2_base, "gio2"],
-  [gobject_introspection_base, "gobject-introspection"],
-  [gegl_base, "gegl"],
-]
-
-modules.each do |target, module_name|
-  makefile = File.join(target, "Makefile")
-  if File.exist?(makefile) and system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(false)
+run_test(__dir__,
+         [
+           "glib2",
+           "gobject-introspection",
+           "gio2",
+           "gegl",
+         ]) do
+  begin
+    require "gegl"
+  rescue GObjectIntrospection::RepositoryError
+    puts("Omit because typelib file doesn't exist: #{$!.message}")
+    exit(true)
   end
-  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
-  $LOAD_PATH.unshift(File.join(target, "lib"))
+
+  require_relative "helper"
 end
-
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
-require "glib-test-init"
-
-$LOAD_PATH.unshift(File.join(gegl_base, "test"))
-require_relative "helper"
-
-$VERBOSE = true
-
-begin
-  require "gegl"
-rescue GObjectIntrospection::RepositoryError
-  puts("Omit because typelib file doesn't exist: #{$!.message}")
-  exit(true)
-end
-
-exit(Test::Unit::AutoRunner.run(true, File.join(gegl_base, "test")))

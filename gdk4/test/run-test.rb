@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2020  Ruby-GNOME Project Team
+# Copyright (C) 2013-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,53 +16,27 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome_base = File.expand_path(ruby_gnome_base)
+require_relative "../../glib2/test/run-test"
 
-glib_base = File.join(ruby_gnome_base, "glib2")
-gio2_base = File.join(ruby_gnome_base, "gio2")
-atk_base = File.join(ruby_gnome_base, "atk")
-cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
-pango_base = File.join(ruby_gnome_base, "pango")
-gdk_pixbuf_base = File.join(ruby_gnome_base, "gdk_pixbuf2")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-gdk4_base = File.join(ruby_gnome_base, "gdk4")
-
-[
-  [glib_base, "glib2"],
-  [gio2_base, "gio2"],
-  [atk_base, "atk"],
-  [cairo_gobject_base, "cairo-gobject"],
-  [pango_base, "pango"],
-  [gdk_pixbuf_base, "gdk_pixbuf2"],
-  [gobject_introspection_base, "gobject-introspection"]
-].each do |target, module_name|
-  if File.exist?(File.join(target, "Makefile")) and
-      system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(false)
+run_test(__dir__,
+         [
+           "glib2",
+           "gobject-introspection",
+           "atk",
+           "cairo-gobject",
+           "gdk_pixbuf2",
+           "gio2",
+           "gdk4",
+         ]) do
+  begin
+    require "gdk4"
+  rescue GObjectIntrospection::RepositoryError
+    puts("Omit because typelib file doesn't exist: #{$!.message}")
+    exit(true)
   end
-  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
-  $LOAD_PATH.unshift(File.join(target, "lib"))
+
+  Gdk.init
+  Gdk.init_check([$0])
+
+  require_relative "gdk-test-utils"
 end
-
-$LOAD_PATH.unshift(File.join(gdk4_base, "lib"))
-
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
-require "glib-test-init"
-
-$LOAD_PATH.unshift(File.join(gdk4_base, "test"))
-require "gdk-test-utils"
-
-require "gdk4"
-
-# TODO
-# require "gtk4"
-module Gtk
-  loader = GObjectIntrospection::Loader.new(self)
-  loader.version = "4.0"
-  loader.load("Gtk")
-
-  init_check
-end
-
-exit Test::Unit::AutoRunner.run(true, File.join(gdk4_base, "test"))

@@ -17,6 +17,9 @@
 require "tempfile"
 require "fileutils"
 
+require "gtk3"
+Gtk.init
+
 module GtkTestUtils
   private
   def only_gtk_version(major, minor, micro=nil)

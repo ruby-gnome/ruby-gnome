@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2007-2019  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2007-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -61,11 +61,11 @@ typedef struct _CallbackRequest {
     VALUE (*function)(VALUE);
     VALUE argument;
     VALUE result;
-    GMutex *done_mutex;
-    GCond *done_cond;
+    GMutex done_mutex;
+    GCond done_cond;
 } CallbackRequest;
 
-static GMutex *callback_dispatch_thread_mutex = NULL;
+static GMutex callback_dispatch_thread_mutex;
 static GAsyncQueue *callback_request_queue = NULL;
 static ID id_callback_dispatch_thread;
 static gint callback_pipe_fds[2] = {-1, -1};
@@ -84,10 +84,10 @@ static VALUE
 process_request(void *user_data)
 {
     CallbackRequest *request = user_data;
-    g_mutex_lock(request->done_mutex);
+    g_mutex_lock(&(request->done_mutex));
     request->result = rbgutil_protect(exec_callback, (VALUE)request);
-    g_cond_signal(request->done_cond);
-    g_mutex_unlock(request->done_mutex);
+    g_cond_signal(&(request->done_cond));
+    g_mutex_unlock(&(request->done_mutex));
 
     return Qnil;
 }
@@ -146,30 +146,30 @@ invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
 {
     CallbackRequest request;
 
-    g_mutex_lock(callback_dispatch_thread_mutex);
+    g_mutex_lock(&callback_dispatch_thread_mutex);
     if (callback_pipe_fds[0] == -1) {
         g_error("Please call rbgutil_start_callback_dispatch_thread() "
                 "to dispatch a callback from non-ruby thread before "
                 "callbacks are requested from non-ruby thread.");
-        g_mutex_unlock(callback_dispatch_thread_mutex);
+        g_mutex_unlock(&callback_dispatch_thread_mutex);
         return Qnil;
     }
 
     request.function = func;
     request.argument = arg;
     request.result = Qnil;
-    request.done_mutex = g_mutex_new();
-    request.done_cond = g_cond_new();
+    g_mutex_init(&(request.done_mutex));
+    g_cond_init(&(request.done_cond));
 
-    g_mutex_lock(request.done_mutex);
+    g_mutex_lock(&(request.done_mutex));
     queue_callback_request(&request);
-    g_mutex_unlock(callback_dispatch_thread_mutex);
+    g_mutex_unlock(&callback_dispatch_thread_mutex);
 
-    g_cond_wait(request.done_cond, request.done_mutex);
-    g_mutex_unlock(request.done_mutex);
+    g_cond_wait(&(request.done_cond), &(request.done_mutex));
+    g_mutex_unlock(&(request.done_mutex));
 
-    g_cond_free(request.done_cond);
-    g_mutex_free(request.done_mutex);
+    g_cond_clear(&(request.done_cond));
+    g_mutex_clear(&(request.done_mutex));
 
 
     return request.result;
@@ -221,7 +221,7 @@ rbgutil_start_callback_dispatch_thread(void)
 #ifdef HAVE_NATIVETHREAD
     VALUE callback_dispatch_thread;
 
-    g_mutex_lock(callback_dispatch_thread_mutex);
+    g_mutex_lock(&callback_dispatch_thread_mutex);
     callback_dispatch_thread = rb_ivar_get(mGLib, id_callback_dispatch_thread);
     if (NIL_P(callback_dispatch_thread)) {
         if (pipe(callback_pipe_fds) == -1)
@@ -231,7 +231,7 @@ rbgutil_start_callback_dispatch_thread(void)
         rb_ivar_set(mGLib, id_callback_dispatch_thread,
                     callback_dispatch_thread);
     }
-    g_mutex_unlock(callback_dispatch_thread_mutex);
+    g_mutex_unlock(&callback_dispatch_thread_mutex);
 #endif
 }
 
@@ -241,13 +241,13 @@ rbgutil_stop_callback_dispatch_thread(void)
 #ifdef HAVE_NATIVETHREAD
     VALUE callback_dispatch_thread;
 
-    g_mutex_lock(callback_dispatch_thread_mutex);
+    g_mutex_lock(&callback_dispatch_thread_mutex);
     callback_dispatch_thread = rb_ivar_get(mGLib, id_callback_dispatch_thread);
     if (!NIL_P(callback_dispatch_thread)) {
         queue_callback_request(NULL);
         rb_ivar_set(mGLib, id_callback_dispatch_thread, Qnil);
     }
-    g_mutex_unlock(callback_dispatch_thread_mutex);
+    g_mutex_unlock(&callback_dispatch_thread_mutex);
 #endif
 }
 
@@ -260,13 +260,10 @@ Init_gutil_callback(void)
                               rb_eRuntimeError);
 
 #ifdef HAVE_NATIVETHREAD
-    if (!g_thread_supported())
-        g_thread_init(NULL);
-
     id_callback_dispatch_thread = rb_intern("callback_dispatch_thread");
     rb_ivar_set(mGLib, id_callback_dispatch_thread, Qnil);
 
     callback_request_queue = g_async_queue_new();
-    callback_dispatch_thread_mutex = g_mutex_new();
+    g_mutex_init(&callback_dispatch_thread_mutex);
 #endif
 }

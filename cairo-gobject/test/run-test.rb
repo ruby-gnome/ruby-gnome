@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2020  Ruby-GNOME Project Team
+# Copyright (C) 2013-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,35 +16,14 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome_base = File.expand_path(ruby_gnome_base)
+require_relative "../../glib2/test/run-test"
 
-glib_base = File.join(ruby_gnome_base, "glib2")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
-
-modules = [
-  [glib_base, "glib2"],
-  [gobject_introspection_base, "gobject-introspection"],
-  [cairo_gobject_base, "cairo-gobject"],
-]
-modules.each do |target, module_name|
-  if File.exist?("#{target}/Makefile") and system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(false)
-  end
-  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
-  $LOAD_PATH.unshift(File.join(target, "lib"))
+run_test(__dir__,
+         [
+           "glib2",
+           "gobject-introspection",
+           "cairo-gobject",
+         ]) do
+  require_relative "../../gobject-introspection/test/gobject-introspection-test-utils"
+  require_relative "cairo-gobject-test-utils"
 end
-
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
-require "glib-test-init"
-
-$LOAD_PATH.unshift(File.join(gobject_introspection_base, "test"))
-require "gobject-introspection-test-utils"
-
-$LOAD_PATH.unshift(File.join(cairo_gobject_base, "test"))
-require "cairo-gobject-test-utils"
-
-require "cairo-gobject"
-
-exit Test::Unit::AutoRunner.run(true, File.join(cairo_gobject_base, "test"))

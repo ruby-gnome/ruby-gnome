@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2020  Ruby-GNOME Project Team
+# Copyright (C) 2013-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,55 +16,27 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome_base = File.expand_path(ruby_gnome_base)
+require_relative "../../glib2/test/run-test"
 
-glib_base = File.join(ruby_gnome_base, "glib2")
-gio_base = File.join(ruby_gnome_base, "gio2")
-atk_base = File.join(ruby_gnome_base, "atk")
-pango_base = File.join(ruby_gnome_base, "pango")
-gdk_pixbuf_base = File.join(ruby_gnome_base, "gdk_pixbuf2")
-gdk3_base = File.join(ruby_gnome_base, "gdk3")
-gtk3_base = File.join(ruby_gnome_base, "gtk3")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
-webkit_gtk_base = File.join(ruby_gnome_base, "webkit-gtk")
+run_test(__dir__,
+         [
+           "glib2",
+           "gobject-introspection",
+           "gio2",
+           "gdk_pixbuf2",
+           "atk",
+           "cairo-gobject",
+           "gdk3",
+           "gtk3",
+           "webkit-gtk",
+         ]) do
+  require_relative "../../gobject-introspection/test/gobject-introspection-test-utils"
+  require_relative "webkit-gtk-test-utils"
 
-modules = [
-  [glib_base, "glib2"],
-  [gio_base, "gio2"],
-  [atk_base, "atk"],
-  [pango_base, "pango"],
-  [gdk_pixbuf_base, "gdk_pixbuf2"],
-  [gdk3_base, "gdk3"],
-  [gtk3_base, "gtk3"],
-  [gobject_introspection_base, "gobject-introspection"],
-  [cairo_gobject_base, "cairo-gobject"],
-  [webkit_gtk_base, "webkit-gtk"],
-]
-modules.each do |target, module_name|
-  if File.exist?("Makefile") and system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(false)
+  begin
+    WebKitGtk.init
+  rescue GObjectIntrospection::RepositoryError
+    puts("Omit because typelib file doesn't exist: #{$!.message}")
+    exit(true)
   end
-  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
-  $LOAD_PATH.unshift(File.join(target, "lib"))
 end
-
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
-require "glib-test-init"
-
-$LOAD_PATH.unshift(File.join(gobject_introspection_base, "test"))
-require "gobject-introspection-test-utils"
-
-$LOAD_PATH.unshift(File.join(webkit_gtk_base, "test"))
-require "webkit-gtk-test-utils"
-
-require "webkit-gtk"
-begin
-  WebKitGtk.init
-rescue GObjectIntrospection::RepositoryError
-  puts("Omit because typelib file doesn't exist: #{$!.message}")
-  exit(true)
-end
-
-exit Test::Unit::AutoRunner.run(true, File.join(webkit_gtk_base, "test"))

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2016-2020  Ruby-GNOME Project Team
+# Copyright (C) 2016-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,53 +16,28 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome_base = File.expand_path(ruby_gnome_base)
+require_relative "../../glib2/test/run-test"
 
-glib_base = File.join(ruby_gnome_base, "glib2")
-atk_base = File.join(ruby_gnome_base, "atk")
-pango_base = File.join(ruby_gnome_base, "pango")
-gdk_pixbuf_base = File.join(ruby_gnome_base, "gdk_pixbuf2")
-cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-gio2_base = File.join(ruby_gnome_base, "gio2")
-gdk3_base = File.join(ruby_gnome_base, "gdk3")
-gsf_base = File.join(ruby_gnome_base, "gsf")
-gtk3_base = File.join(ruby_gnome_base, "gtk3")
-goffice_base = File.join(ruby_gnome_base, "goffice")
+run_test(__dir__,
+         [
+           "glib2",
+           "gobject-introspection",
+           "atk",
+           "cairo-gobject",
+           "pango",
+           "gio2",
+           "gdk_pixbuf2",
+           "gdk3",
+           "gtk3",
+           "gsf",
+           "goffice",
+         ]) do |context|
+  require_relative "goffice-test-utils"
 
-modules = [
-  [glib_base, "glib2"],
-  [atk_base, "atk"],
-  [pango_base, "pango"],
-  [cairo_gobject_base, "cairo-gobject"],
-  [gdk_pixbuf_base, "gdk_pixbuf2"],
-  [gobject_introspection_base, "gobject-introspection"],
-  [gio2_base, "gio2"],
-  [gdk3_base, "gdk3"],
-  [gtk3_base, "gtk3"],
-  [gsf_base, "gsf"],
-  [goffice_base, "goffice"]
-]
-
-modules.each do |target, module_name|
-  makefile = File.join(target, "Makefile")
-  if File.exist?(makefile) and system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(false)
+  begin
+    GOffice.init
+  rescue GObjectIntrospection::RepositoryError
+    puts("Omit because typelib file doesn't exist: #{$!.message}")
+    exit(true)
   end
-  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
-  $LOAD_PATH.unshift(File.join(target, "lib"))
 end
-
-$LOAD_PATH.unshift(File.join(goffice_base, "test"))
-require "goffice-test-utils"
-
-require "goffice"
-begin
-  GOffice.init
-rescue GObjectIntrospection::RepositoryError
-  puts("Omit because typelib file doesn't exist: #{$!.message}")
-  exit(true)
-end
-
-exit Test::Unit::AutoRunner.run(true, File.join(goffice_base, "test"))

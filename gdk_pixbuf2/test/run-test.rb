@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2016-2020  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,35 +16,14 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome_base = File.expand_path(ruby_gnome_base)
+require_relative "../../glib2/test/run-test"
 
-glib_base = File.join(ruby_gnome_base, "glib2")
-gio2_base = File.join(ruby_gnome_base, "gio2")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-gdk_pixbuf2_base = File.join(ruby_gnome_base, "gdk_pixbuf2")
-
-modules = [
-  [glib_base, "glib2"],
-  [gio2_base, "gio2"],
-  [gobject_introspection_base, "gobject-introspection"],
-  [gdk_pixbuf2_base, "gdk_pixbuf2"],
-]
-modules.each do |target, module_name|
-  makefile = File.join(target, "Makefile")
-  if File.exist?(makefile) and system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(false)
-  end
-  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
-  $LOAD_PATH.unshift(File.join(target, "lib"))
+run_test(__dir__,
+         [
+           "glib2",
+           "gobject-introspection",
+           "gio2",
+           "gdk_pixbuf2",
+         ]) do
+  require_relative "gdk_pixbuf2-test-utils"
 end
-
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
-require "glib-test-init"
-
-$LOAD_PATH.unshift(File.join(gdk_pixbuf2_base, "test"))
-require "gdk_pixbuf2-test-utils"
-
-require "gdk_pixbuf2"
-
-exit Test::Unit::AutoRunner.run(true, File.join(gdk_pixbuf2_base, "test"))

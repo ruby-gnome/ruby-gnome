@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012-2020  Ruby-GNOME Project Team
+# Copyright (C) 2012-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,55 +16,31 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-ruby_gnome_base = File.join(File.dirname(__FILE__), "..", "..")
-ruby_gnome_base = File.expand_path(ruby_gnome_base)
+require_relative "../../glib2/test/run-test"
 
-glib_base = File.join(ruby_gnome_base, "glib2")
-cairo_gobject_base = File.join(ruby_gnome_base, "cairo-gobject")
-gobject_introspection_base = File.join(ruby_gnome_base, "gobject-introspection")
-pango_base = File.join(ruby_gnome_base, "pango")
-clutter_base = File.join(ruby_gnome_base, "clutter")
+run_test(__dir__,
+         [
+           "glib2",
+           "gobject-introspection",
+           "cairo-gobject",
+           "pango",
+           "clutter",
+         ]) do
+  require_relative "../../gobject-introspection/test/gobject-introspection-test-utils"
+  require_relative "clutter-test-utils"
 
-modules = [
-  [glib_base, "glib2"],
-  [cairo_gobject_base, "cairo-gobject"],
-  [gobject_introspection_base, "gobject-introspection"],
-  [pango_base, "pango"],
-  [clutter_base, "clutter"],
-]
-modules.each do |target, module_name|
-  makefile = File.join(target, "Makefile")
-  if File.exist?(makefile) and system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(false)
+  repository = GObjectIntrospection::Repository.default
+  begin
+    repository.require(Clutter::Loader::NAMESPACE)
+  rescue GObjectIntrospection::RepositoryError
+    puts("Omit because typelib file doesn't exist: #{$!.message}")
+    exit(true)
   end
-  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
-  $LOAD_PATH.unshift(File.join(target, "lib"))
+
+  begin
+    Clutter.init
+  rescue Clutter::InitError
+    puts("Omit because initialization is failed: #{$!.message}")
+    exit(true)
+  end
 end
-
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
-require "glib-test-init"
-
-$LOAD_PATH.unshift(File.join(gobject_introspection_base, "test"))
-require "gobject-introspection-test-utils"
-
-$LOAD_PATH.unshift(File.join(clutter_base, "test"))
-require "clutter-test-utils"
-
-require "clutter"
-
-repository = GObjectIntrospection::Repository.default
-begin
-  repository.require(Clutter::Loader::NAMESPACE)
-rescue GObjectIntrospection::RepositoryError
-  puts("Omit because typelib file doesn't exist: #{$!.message}")
-  exit(true)
-end
-
-begin
-  Clutter.init
-rescue Clutter::InitError
-  puts("Omit because initialization is failed: #{$!.message}")
-  exit(true)
-end
-
-exit Test::Unit::AutoRunner.run(true, File.join(clutter_base, "test"))

@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,6 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestIndexIter < Test::Unit::TestCase
+  include PopplerTestUtils
+
   def test_title
     document = Poppler::Document.new(outline_pdf)
     assert_equal([

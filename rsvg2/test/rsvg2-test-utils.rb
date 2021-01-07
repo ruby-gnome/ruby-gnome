@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,9 +14,9 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "test-unit"
-
 require "fileutils"
+
+require "rsvg2"
 
 module Rsvg2TestUtils
   def only_rsvg_version(major, minor, micro=nil)

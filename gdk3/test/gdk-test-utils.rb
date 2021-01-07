@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2019  Ruby-GNOME Project Team
+# Copyright (C) 2013-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,8 @@
 
 require "pkg-config"
 require "test-unit"
+
+require "gdk3"
 
 module GdkTestUtils
   private

@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,11 +14,9 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "test-unit"
-
 require "pathname"
 require "tempfile"
 
-require "gio2-test-utils/fixture"
-require "gio2-test-utils/omissions"
-require "gio2-test-utils/socket-client"
+require_relative "gio2-test-utils/fixture"
+require_relative "gio2-test-utils/omissions"
+require_relative "gio2-test-utils/socket-client"
