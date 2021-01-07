@@ -23,6 +23,7 @@ run_test(__dir__,
            "glib2",
            "gobject-introspection",
            "cairo-gobject",
+           "pango",
          ]) do
   require_relative "pango-test-utils"
 end
