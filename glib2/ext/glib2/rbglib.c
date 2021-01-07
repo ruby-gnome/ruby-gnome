@@ -1072,6 +1072,10 @@ extern void Init_glib2(void);
 void
 Init_glib2(void)
 {
+#ifdef HAVE_RB_EXT_RACTOR_SAFE
+    rb_ext_ractor_safe(true);
+#endif
+
     const gchar **filename_charsets;
 
     id_inspect = rb_intern("inspect");
