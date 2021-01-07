@@ -545,6 +545,7 @@ gobj_sig_emit(int argc, VALUE *argv, VALUE self)
                                                 1 + arg.query.n_params);
     g_array_set_clear_func(arg.instance_and_params,
                            (GDestroyNotify)g_value_unset);
+    g_array_set_size(arg.instance_and_params, 1 + arg.query.n_params);
 
     return rb_ensure(emit_body, (VALUE)&arg, emit_ensure, (VALUE)&arg);
 }
@@ -714,6 +715,7 @@ gobj_sig_chain_from_overridden(int argc, VALUE *argv, VALUE self)
                                                 1 + argc);
     g_array_set_clear_func(arg.instance_and_params,
                            (GDestroyNotify)g_value_unset);
+    g_array_set_size(arg.instance_and_params, 1 + argc);
 
     return rb_ensure(chain_from_overridden_body, (VALUE)&arg,
                      emit_ensure, (VALUE)&arg);
