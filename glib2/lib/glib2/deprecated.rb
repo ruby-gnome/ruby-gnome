@@ -40,4 +40,11 @@ module GLib
       UniChar.decompose(char)
     end
   end
+
+  extend GLib::Deprecatable
+  define_deprecated_singleton_method(
+    :format_size_for_display,
+    warn: "Use 'GLib.format_size(size, flags: :iec_units)'.") do |_, size|
+    format_size(size, flags: :iec_units)
+  end
 end
