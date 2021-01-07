@@ -55,6 +55,7 @@ module GtkTestUtils
   end
 
   def fixture_path(*components)
-    File.join("test", "fixture", *components)
+    File.expand_path(File.join(*components),
+                     ENV["GTK3_FIXTURE_DIR"] || File.join("test", "fixture"))
   end
 end

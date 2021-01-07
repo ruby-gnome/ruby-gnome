@@ -29,6 +29,7 @@ run_test(__dir__,
            "pango",
            "gdk3",
            "gtk3",
-         ]) do
+         ]) do |context|
+  ENV["GTK3_FIXTURE_DIR"] = context[:build_fixture_dir]
   require_relative "gtk-test-utils"
 end
