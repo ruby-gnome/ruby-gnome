@@ -32,7 +32,7 @@ export RUBY_GNOME_BUILD_DIR="${PWD}"
 if type dbus-run-session > /dev/null 2>&1; then
   dbus-run-session \
     xvfb-run --server-args "-screen 0 640x480x24" \
-    /ruby-gnome/run-test.rb
+    /ruby-gnome/run-test.rb "$@"
 else
   /ruby-gnome/run-test.rb "$@"
 fi
