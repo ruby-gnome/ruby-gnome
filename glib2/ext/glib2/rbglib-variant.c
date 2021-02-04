@@ -22,7 +22,7 @@
 
 #define RG_TARGET_NAMESPACE cVariant
 
-#define _SELF(s) (DATA_PTR(s))
+#define _SELF(s) (RTYPEDDATA_DATA(s))
 
 static VALUE RG_TARGET_NAMESPACE;
 
@@ -257,7 +257,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &rb_value, &rb_variant_type);
     variant = rg_ruby_to_variant(rb_value, rb_variant_type);
     g_variant_ref_sink(variant);
-    DATA_PTR(self) = variant;
+    RTYPEDDATA_DATA(self) = variant;
 
     return Qnil;
 }

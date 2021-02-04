@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2020  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -172,7 +172,7 @@ rclosure_unref(GRClosure *rclosure)
         g_list_free(rclosure->objects);
         rclosure->objects = NULL;
         if (!NIL_P(rclosure->rb_holder)) {
-            DATA_PTR(rclosure->rb_holder) = NULL;
+            RTYPEDDATA_DATA(rclosure->rb_holder) = NULL;
             rclosure->rb_holder = Qnil;
         }
     }
