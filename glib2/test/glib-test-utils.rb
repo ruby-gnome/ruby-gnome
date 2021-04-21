@@ -14,6 +14,8 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
+require "pathname"
+
 require "test-unit"
 
 require "glib2"
@@ -32,5 +34,10 @@ module GLibTestUtils
 
   def only_not_windows
     omit("Not for for Windows platform") if GLib.os_win32?
+  end
+
+  def normalize_path(path)
+    return path unless File::ALT_SEPARATOR
+    path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
   end
 end

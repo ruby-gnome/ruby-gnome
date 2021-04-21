@@ -19,11 +19,6 @@ require 'tempfile'
 class TestGLibKeyFile < Test::Unit::TestCase
   include GLibTestUtils
 
-  def normalize_path(path)
-    return path unless File::ALT_SEPARATOR
-    path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
-  end
-
   def test_load_from_dirs
     key_file = GLib::KeyFile.new
     assert_raise(GLib::KeyFileError::NotFound) do
