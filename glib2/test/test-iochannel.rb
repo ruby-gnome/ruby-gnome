@@ -32,7 +32,7 @@ class TestGIOChannel < Test::Unit::TestCase
 
     @sjis_file = Tempfile.new("glib2-sjis-content")
     @sjis_file.open
-    @file.binmode
+    @sjis_file.binmode
     @sjis_file.print(@sjis_content)
     @sjis_file.close
   end
