@@ -29,4 +29,8 @@ module GLibTestUtils
   def only_windows
     omit("Only for Windows platform") unless GLib.os_win32?
   end
+
+  def only_not_windows
+    omit("Not for for Windows platform") if GLib.os_win32?
+  end
 end
