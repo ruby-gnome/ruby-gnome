@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -84,7 +84,7 @@ rg_initialize(gint argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ioc_close(VALUE self)
+ioc_shutdown(VALUE self)
 {
     GError* err = NULL;
     GIOStatus status = g_io_channel_shutdown(_SELF(self), TRUE, &err);
@@ -114,7 +114,7 @@ rg_s_open(gint argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 #endif
     } else {
         GError* err = NULL;
-        io = g_io_channel_new_file(RVAL2CSTR(arg1), 
+        io = g_io_channel_new_file(RVAL2CSTR(arg1),
                                    NIL_P(arg2) ? "r" : RVAL2CSTR(arg2), &err);
 
         if (err != NULL) RAISE_GERROR(err);
@@ -123,7 +123,7 @@ rg_s_open(gint argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     rio = BOXED2RVAL(io, G_TYPE_IO_CHANNEL);
 
     if (rb_block_given_p()) {
-        return rb_ensure(rb_yield, rio, ioc_close, rio);
+        return rb_ensure(rb_yield, rio, ioc_shutdown, rio);
     }
     return rio;
 }
