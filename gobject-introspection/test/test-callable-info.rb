@@ -32,7 +32,15 @@ class TestCallableInfo < Test::Unit::TestCase
   end
 
   def test_may_return_null?
-    assert_false(@info.may_return_null?)
+    if GLib.check_version?(2, 67, 2)
+      assert do
+        @info.may_return_null?
+      end
+    else
+      assert do
+        not @info.may_return_null?
+      end
+    end
   end
 
   def test_n_args
