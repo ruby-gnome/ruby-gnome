@@ -18,16 +18,6 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
-      - name: Update MSYS2 keyring
-        run: |
-          # https://www.msys2.org/news/#2020-06-29-new-packagers
-          Invoke-WebRequest `
-            -Uri https://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz `
-            -OutFile msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
-          ridk exec pacman `
-            --noconfirm `
-            --upgrade `
-            msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
       - name: Update MSYS2
         run: |
           ridk exec pacman -Syu --noconfirm
