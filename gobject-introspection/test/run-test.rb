@@ -23,12 +23,13 @@ run_test(__dir__,
            "glib2",
            "gobject-introspection",
          ]) do |context|
+  require_relative "gobject-introspection-test-utils"
+
   begin
-    require "gio2"
+    repository = GObjectIntrospection::Repository.default
+    repository.require("Gio")
   rescue GObjectIntrospection::RepositoryError
     puts("Omit because typelib file doesn't exist: #{$!.message}")
     exit(true)
   end
-
-  require_relative "gobject-introspection-test-utils"
 end
