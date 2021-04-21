@@ -32,7 +32,7 @@ class TestGLibKeyFile < Test::Unit::TestCase
       key_file.load_from_dirs("non-existent", search_dirs)
     end
     if GLib.check_version?(2, 31, 2)
-      loaded_path = key_file.load_from_dirs(base_name, search_dirs))
+      loaded_path = key_file.load_from_dirs(base_name, search_dirs)
       assert_equal(temp.path, normalize_path(loaded_path))
     elsif GLib.check_version?(2, 30, 0)
       assert_raise(GLib::KeyFileError::NotFound) do
