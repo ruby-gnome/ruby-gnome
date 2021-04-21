@@ -68,10 +68,6 @@ class TestGIOChannel < Test::Unit::TestCase
       end
     end
 
-    assert_raises(GLib::IOChannelError) do
-      io.close
-    end
-
     assert_raises(GLib::FileError) do
       GLib::IOChannel.new("foo")
     end
