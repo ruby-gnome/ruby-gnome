@@ -79,15 +79,6 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
-  ubuntu-16.04:
-    build:
-      context: .
-      dockerfile: dockerfiles/ubuntu-16.04.dockerfile
-    volumes:
-      - .:/ruby-gnome:delegated
-    command:
-      /ruby-gnome/dockerfiles/run-test.sh
-
   ubuntu-18.04:
     build:
       context: .
