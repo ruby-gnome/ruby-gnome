@@ -1,7 +1,7 @@
 FROM archlinux/base
 
 RUN \
-  pacman --sync --noconfirm --refresh && \
+  pacman --sync --noconfirm --refresh --sysupgrade && \
   pacman --sync --noconfirm \
     awk \
     dbus \
