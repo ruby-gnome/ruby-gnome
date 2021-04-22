@@ -32,7 +32,7 @@ class TestCallableInfo < Test::Unit::TestCase
   end
 
   def test_may_return_null?
-    if GLib.check_version?(2, 67, 2)
+    if GObjectIntrospection::Version.or_later?(1, 67, 0)
       assert do
         @info.may_return_null?
       end
