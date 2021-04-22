@@ -228,7 +228,7 @@ rg_find(int argc, VALUE *argv, VALUE self)
         VALUE rb_gtype;
         GType gtype;
         rb_gtype = argv[0];
-        gtype = NUM2ULONG(rb_gtype);
+        gtype = rbgobj_gtype_from_ruby(rb_gtype);
         info = g_irepository_find_by_gtype(SELF(self), gtype);
     } else {
         VALUE rb_namespace, rb_name;
