@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -23,16 +23,7 @@
 static gboolean
 rb_gi_arg_info_may_be_null(GIArgInfo *arg_info)
 {
-#if GI_CHECK_VERSION(1, 42, 0)
     return g_arg_info_may_be_null(arg_info);
-#else
-    /*
-      GObject Introspection < 1.42 doesn't support "(nullable)" yet.
-      So, we assume that all argument may be NULL. It's danger but
-      convenient.
-    */
-    return TRUE;
-#endif
 }
 
 static gboolean

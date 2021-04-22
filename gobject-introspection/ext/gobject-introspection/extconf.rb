@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012-2019  Ruby-GNOME Project Team
+# Copyright (C) 2012-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -61,9 +61,6 @@ end
 
 # TODO: Remove this when we dropped support for GObject Introspection < 1.60
 make_version_header("GI", package_id, ".")
-
-gi_headers = ["girepository.h"]
-have_func("g_interface_info_find_signal", gi_headers)
 
 enum_type_prefix = "gobject-introspection-enum-types"
 include_paths = PKGConfig.cflags_only_I(package_id)

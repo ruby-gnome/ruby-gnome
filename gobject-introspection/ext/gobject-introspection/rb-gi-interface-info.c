@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -125,15 +125,9 @@ rg_get_signal(VALUE self, VALUE rb_n_or_name)
         n = NUM2INT(rb_n_or_name);
         signal_info = g_interface_info_get_signal(info, n);
     } else {
-#ifdef HAVE_G_INTERFACE_INFO_FIND_SIGNAL
         const char *name;
         name = RVAL2CSTR(rb_n_or_name);
         signal_info = g_interface_info_find_signal(info, name);
-#else
-        rb_raise(rb_eArgError,
-                 "g_interface_info_find_signal() is defined "
-                 "since GObjectIntrospection 1.34");
-#endif
     }
 
     return GI_BASE_INFO2RVAL_WITH_UNREF(signal_info);
