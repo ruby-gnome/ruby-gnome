@@ -276,7 +276,7 @@ rg_value_convert(int argc, VALUE* argv, VALUE self)
     rb_scan_args(argc, argv, "21", &src, &src_type, &strict_validation);
 
     /* FIXME: use rb_ensure to ensure following g_value_unset() call*/
-    g_value_init(&src_value, rbgobj_gtype_get(src_type));
+    g_value_init(&src_value, rbgobj_gtype_from_ruby(src_type));
     g_value_init(&dest_value, G_PARAM_SPEC_VALUE_TYPE(pspec));
 
     rbgobj_rvalue_to_gvalue(src, &src_value);

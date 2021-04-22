@@ -115,7 +115,7 @@ enum_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
                 VALUE enum_type, VALUE default_value, VALUE flags)
 {
     GParamSpec* pspec;
-    GType gtype = rbgobj_gtype_get(enum_type);
+    GType gtype = rbgobj_gtype_from_ruby(enum_type);
 
     pspec = g_param_spec_enum(StringValuePtr(name),
                               StringValuePtr(nick),
@@ -132,7 +132,7 @@ flags_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
                  VALUE flags_type, VALUE default_value, VALUE flags)
 {
     GParamSpec* pspec;
-    GType gtype = rbgobj_gtype_get(flags_type);
+    GType gtype = rbgobj_gtype_from_ruby(flags_type);
 
     pspec = g_param_spec_flags(StringValuePtr(name),
                               StringValuePtr(nick),
@@ -166,7 +166,7 @@ param_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
     pspec = g_param_spec_param(StringValuePtr(name),
                                StringValuePtr(nick),
                                StringValuePtr(blurb),
-                               rbgobj_gtype_get(param_type),
+                               rbgobj_gtype_from_ruby(param_type),
                                NUM2UINT(flags));
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;
@@ -180,7 +180,7 @@ boxed_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
     pspec = g_param_spec_boxed(StringValuePtr(name),
                                StringValuePtr(nick),
                                StringValuePtr(blurb),
-                               rbgobj_gtype_get(boxed_type),
+                               rbgobj_gtype_from_ruby(boxed_type),
                                NUM2UINT(flags));
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;
@@ -206,7 +206,7 @@ object_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
     pspec = g_param_spec_object(StringValuePtr(name),
                                 StringValuePtr(nick),
                                 StringValuePtr(blurb),
-                                rbgobj_gtype_get(object_type),
+                                rbgobj_gtype_from_ruby(object_type),
                                 NUM2UINT(flags));
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;

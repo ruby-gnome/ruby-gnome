@@ -31,9 +31,10 @@ static VALUE rb_cMutex;
 #endif
 static VALUE lookup_class_mutex;
 
+static ID id_gtype;
+static ID id_lock;
 static ID id_new;
 static ID id_superclass;
-static ID id_lock;
 static ID id_unlock;
 static GHashTable *gtype_to_cinfo;
 static VALUE klass_to_cinfo;
@@ -430,9 +431,9 @@ rbgobj_gtype_to_ruby_class(GType gtype)
 GType
 rbgobj_gtype_from_ruby(VALUE rb_gtype)
 {
-    ID id_gtype;
-
-    if (RB_TYPE_P(rb_gtype, RUBY_T_STRING)) {
+    if (NIL_P(rb_gtype)) {
+        return G_TYPE_NONE;
+    } else if (RB_TYPE_P(rb_gtype, RUBY_T_STRING)) {
         GType gtype;
         gtype = g_type_from_name(RVAL2CSTR(rb_gtype));
         if (gtype == G_TYPE_INVALID) {
@@ -441,14 +442,13 @@ rbgobj_gtype_from_ruby(VALUE rb_gtype)
                      RVAL2CSTR(rb_gtype));
         }
         return gtype;
+    } else if (RVAL2CBOOL(rb_obj_is_kind_of(rb_gtype, RG_TARGET_NAMESPACE))) {
+        return NUM2SIZET(rb_ivar_get(rb_gtype, id_gtype));
+    } else if (RVAL2CBOOL(rb_obj_is_kind_of(rb_gtype, rb_cClass))) {
+        return CLASS2GTYPE(rb_gtype);
+    } else {
+        return NUM2SIZET(rb_to_int(rb_gtype));
     }
-
-    CONST_ID(id_gtype, "gtype");
-    if (rb_respond_to(rb_gtype, id_gtype)) {
-        rb_gtype = rb_funcall(rb_gtype, id_gtype, 0);
-    }
-
-    return NUM2ULONG(rb_gtype);
 }
 
 VALUE
@@ -605,26 +605,21 @@ init_typemap(void)
 /* GLib::Type */
 
 VALUE RG_TARGET_NAMESPACE;
-static ID id_gtype;
 
 VALUE
 rbgobj_gtype_new(GType gtype)
 {
     VALUE result = rb_obj_alloc(RG_TARGET_NAMESPACE);
-    VALUE arg = ULONG2NUM(gtype);
+    VALUE arg = SIZET2NUM(gtype);
     rb_obj_call_init(result, 1, &arg);
     return result;
 }
 
+/* Deprecated. Use rbgobj_gtype_from_ruby() instead. */
 GType
-rbgobj_gtype_get(VALUE self)
+rbgobj_gtype_get(VALUE rb_gtype)
 {
-    if (RVAL2CBOOL(rb_obj_is_kind_of(self, RG_TARGET_NAMESPACE))) {
-        return NUM2ULONG(rb_ivar_get(self, id_gtype));
-    } else {
-        return CLASS2GTYPE(self);
-    }
-    rb_raise(rb_eTypeError, "Not a GLib::Type");
+    return rbgobj_gtype_from_ruby(rb_gtype);
 }
 
 static VALUE
@@ -688,7 +683,7 @@ rg_initialize(VALUE self, VALUE type)
     GType gtype;
 
     if (RVAL2CBOOL(rb_obj_is_kind_of(type, rb_cInteger))) {
-        gtype = NUM2ULONG(type);
+        gtype = NUM2SIZET(type);
         if (!g_type_name(gtype))
             gtype = G_TYPE_INVALID;
     } else {
@@ -698,7 +693,7 @@ rg_initialize(VALUE self, VALUE type)
     if (G_TYPE_INVALID == gtype)
         rb_raise(rb_eArgError, "invalid GType");
 
-    rb_ivar_set(self, id_gtype, ULONG2NUM(gtype));
+    rb_ivar_set(self, id_gtype, SIZET2NUM(gtype));
 
     return Qnil;
 }
@@ -706,7 +701,7 @@ rg_initialize(VALUE self, VALUE type)
 static VALUE
 rg_inspect(VALUE self)
 {
-    GType gtype = rbgobj_gtype_get(self);
+    GType gtype = rbgobj_gtype_from_ruby(self);
     gchar* str;
     VALUE result;
 
@@ -723,8 +718,8 @@ rg_operator_type_compare(VALUE self, VALUE other)
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
     else {
-        GType a = rbgobj_gtype_get(self);
-        GType b = rbgobj_gtype_get(other);
+        GType a = rbgobj_gtype_from_ruby(self);
+        GType b = rbgobj_gtype_from_ruby(other);
 
         if (a==b)
             return INT2FIX(0);
@@ -743,8 +738,8 @@ rg_operator_type_eq(VALUE self, VALUE other)
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
     else {
-        GType a = rbgobj_gtype_get(self);
-        GType b = rbgobj_gtype_get(other);
+        GType a = rbgobj_gtype_from_ruby(self);
+        GType b = rbgobj_gtype_from_ruby(other);
         return CBOOL2RVAL(a == b);
     }
 }
@@ -755,8 +750,8 @@ rg_operator_type_lt_eq(VALUE self, VALUE other)
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
     else {
-        GType a = rbgobj_gtype_get(self);
-        GType b = rbgobj_gtype_get(other);
+        GType a = rbgobj_gtype_from_ruby(self);
+        GType b = rbgobj_gtype_from_ruby(other);
         return CBOOL2RVAL(g_type_is_a(a, b));
     }
 }
@@ -767,8 +762,8 @@ rg_operator_type_gt_eq(VALUE self, VALUE other)
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
     else {
-        GType a = rbgobj_gtype_get(self);
-        GType b = rbgobj_gtype_get(other);
+        GType a = rbgobj_gtype_from_ruby(self);
+        GType b = rbgobj_gtype_from_ruby(other);
         return CBOOL2RVAL(g_type_is_a(b, a));
     }
 }
@@ -779,8 +774,8 @@ rg_operator_type_lt(VALUE self, VALUE other)
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
     else {
-        GType a = rbgobj_gtype_get(self);
-        GType b = rbgobj_gtype_get(other);
+        GType a = rbgobj_gtype_from_ruby(self);
+        GType b = rbgobj_gtype_from_ruby(other);
         return CBOOL2RVAL(g_type_is_a(a, b) && a != b);
     }
 }
@@ -791,8 +786,8 @@ rg_operator_type_gt(VALUE self, VALUE other)
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
     else {
-        GType a = rbgobj_gtype_get(self);
-        GType b = rbgobj_gtype_get(other);
+        GType a = rbgobj_gtype_from_ruby(self);
+        GType b = rbgobj_gtype_from_ruby(other);
         return CBOOL2RVAL(g_type_is_a(b, a) && a != b);
     }
 }
@@ -806,112 +801,113 @@ rg_hash(VALUE self)
 static VALUE
 rg_to_class(VALUE self)
 {
-    return GTYPE2CLASS(rbgobj_gtype_get(self));
+    return GTYPE2CLASS(rbgobj_gtype_from_ruby(self));
 }
 
 static VALUE
 rg_fundamental(VALUE self)
 {
-    return rbgobj_gtype_new(G_TYPE_FUNDAMENTAL(rbgobj_gtype_get(self)));
+    return rbgobj_gtype_new(G_TYPE_FUNDAMENTAL(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_fundamental_p(VALUE self)
 {
-    return CBOOL2RVAL(G_TYPE_IS_FUNDAMENTAL(rbgobj_gtype_get(self)));
+    return CBOOL2RVAL(G_TYPE_IS_FUNDAMENTAL(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_derived_p(VALUE self)
 {
-    return CBOOL2RVAL(G_TYPE_IS_DERIVED(rbgobj_gtype_get(self)));
+    return CBOOL2RVAL(G_TYPE_IS_DERIVED(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_interface_p(VALUE self)
 {
-    return CBOOL2RVAL(G_TYPE_IS_INTERFACE(rbgobj_gtype_get(self)));
+    return CBOOL2RVAL(G_TYPE_IS_INTERFACE(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_classed_p(VALUE self)
 {
-    return CBOOL2RVAL(G_TYPE_IS_CLASSED(rbgobj_gtype_get(self)));
+    return CBOOL2RVAL(G_TYPE_IS_CLASSED(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_instantiatable_p(VALUE self)
 {
-    return CBOOL2RVAL(G_TYPE_IS_INSTANTIATABLE(rbgobj_gtype_get(self)));
+    return CBOOL2RVAL(G_TYPE_IS_INSTANTIATABLE(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_derivable_p(VALUE self)
 {
-    return CBOOL2RVAL(G_TYPE_IS_DERIVABLE(rbgobj_gtype_get(self)));
+    return CBOOL2RVAL(G_TYPE_IS_DERIVABLE(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_deep_derivable_p(VALUE self)
 {
-    return CBOOL2RVAL(G_TYPE_IS_DEEP_DERIVABLE(rbgobj_gtype_get(self)));
+    return CBOOL2RVAL(G_TYPE_IS_DEEP_DERIVABLE(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_abstract_p(VALUE self)
 {
-    return CBOOL2RVAL(G_TYPE_IS_ABSTRACT(rbgobj_gtype_get(self)));
+    return CBOOL2RVAL(G_TYPE_IS_ABSTRACT(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_value_abstract_p(VALUE self)
 {
-    return CBOOL2RVAL(G_TYPE_IS_VALUE_ABSTRACT(rbgobj_gtype_get(self)));
+    return CBOOL2RVAL(G_TYPE_IS_VALUE_ABSTRACT(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_value_type_p(VALUE self)
 {
-    return CBOOL2RVAL(G_TYPE_IS_VALUE_TYPE(rbgobj_gtype_get(self)));
+    return CBOOL2RVAL(G_TYPE_IS_VALUE_TYPE(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_has_value_table(VALUE self)
 {
-    return CBOOL2RVAL(G_TYPE_HAS_VALUE_TABLE(rbgobj_gtype_get(self)));
+    return CBOOL2RVAL(G_TYPE_HAS_VALUE_TABLE(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_name(VALUE self)
 {
-    return rb_str_new2(g_type_name(rbgobj_gtype_get(self)));
+    return rb_str_new2(g_type_name(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_parent(VALUE self)
 {
-    GType parent = g_type_parent(rbgobj_gtype_get(self));
+    GType parent = g_type_parent(rbgobj_gtype_from_ruby(self));
     return parent ? rbgobj_gtype_new(parent) : Qnil;
 }
 
 static VALUE
 rg_depth(VALUE self)
 {
-    return UINT2NUM(g_type_depth(rbgobj_gtype_get(self)));
+    return UINT2NUM(g_type_depth(rbgobj_gtype_from_ruby(self)));
 }
 
 static VALUE
 rg_next_base(VALUE leaf_type, VALUE root_type)
 {
-    GType ret = g_type_next_base(rbgobj_gtype_get(leaf_type),
-                                 rbgobj_gtype_get(root_type));
+    GType ret = g_type_next_base(rbgobj_gtype_from_ruby(leaf_type),
+                                 rbgobj_gtype_from_ruby(root_type));
     return ret ? rbgobj_gtype_new(ret) : Qnil;
 }
 
 static VALUE
 rg_type_is_a_p(VALUE self, VALUE is_a_type)
 {
-    return CBOOL2RVAL(g_type_is_a(rbgobj_gtype_get(self), rbgobj_gtype_get(is_a_type)));
+    return CBOOL2RVAL(g_type_is_a(rbgobj_gtype_from_ruby(self),
+                                  rbgobj_gtype_from_ruby(is_a_type)));
 }
 
 #if 0
@@ -932,7 +928,7 @@ rg_children(VALUE self)
     VALUE result;
     guint i;
 
-    types = g_type_children(rbgobj_gtype_get(self), &n_children);
+    types = g_type_children(rbgobj_gtype_from_ruby(self), &n_children);
     result = rb_ary_new2(n_children);
     for (i = 0; i < n_children; i++)
         rb_ary_store(result, i, rbgobj_gtype_new(types[i]));
@@ -949,7 +945,7 @@ rg_interfaces(VALUE self)
     VALUE result;
     guint i;
 
-    types = g_type_interfaces(rbgobj_gtype_get(self), &n_interfaces);
+    types = g_type_interfaces(rbgobj_gtype_from_ruby(self), &n_interfaces);
     result = rb_ary_new2(n_interfaces);
     for (i = 0; i < n_interfaces; i++)
         rb_ary_store(result, i, rbgobj_gtype_new(types[i]));
@@ -962,7 +958,7 @@ static VALUE
 rg_class_size(VALUE self)
 {
     GTypeQuery query;
-    g_type_query(rbgobj_gtype_get(self), &query);
+    g_type_query(rbgobj_gtype_from_ruby(self), &query);
     return UINT2NUM(query.class_size);
 }
 
@@ -970,7 +966,7 @@ static VALUE
 rg_instance_size(VALUE self)
 {
     GTypeQuery query;
-    g_type_query(rbgobj_gtype_get(self), &query);
+    g_type_query(rbgobj_gtype_from_ruby(self), &query);
     return UINT2NUM(query.instance_size);
 }
 

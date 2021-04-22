@@ -39,7 +39,7 @@ rg_s_define_class(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
                      "size", &rb_size,
                      NULL);
 
-    gtype = NUM2ULONG(rb_to_int(rb_gtype));
+    gtype = rbgobj_gtype_from_ruby(rb_gtype);
     rb_class = G_DEF_CLASS_WITH_PARENT(gtype, RVAL2CSTR(rb_name),
                                        rb_module, rb_parent);
     if (!NIL_P(rb_size)) {
@@ -54,7 +54,7 @@ rg_s_define_interface(G_GNUC_UNUSED VALUE klass,
 {
     GType gtype;
 
-    gtype = rbgobj_gtype_get(rb_gtype);
+    gtype = rbgobj_gtype_from_ruby(rb_gtype);
     return G_DEF_INTERFACE(gtype, RVAL2CSTR(rb_name), rb_module);
 }
 
@@ -133,7 +133,7 @@ rg_s_define_error(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
     }
 
     if (!NIL_P(rb_gtype)) {
-        gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
+        gtype = rbgobj_gtype_from_ruby(rb_gtype);
     }
 
     return G_DEF_ERROR(domain, name, rb_module, rb_parent, gtype);
@@ -173,12 +173,10 @@ rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
 {
     RGConvertTable table;
     BoxedInstance2RObjData *data;
-    ID id_to_i;
     VALUE boxed_class_converters;
 
     memset(&table, 0, sizeof(RGConvertTable));
-    CONST_ID(id_to_i, "to_i");
-    table.type = NUM2ULONG(rb_funcall(rb_gtype, id_to_i, 0));
+    table.type = rbgobj_gtype_from_ruby(rb_gtype);
     table.klass = Qnil;
     table.instance2robj = boxed_instance2robj;
 
@@ -243,12 +241,10 @@ rg_s_register_object_class_converter(VALUE klass, VALUE rb_gtype)
 {
     RGConvertTable table;
     ObjectInstance2RObjData *data;
-    ID id_to_i;
     VALUE object_class_converters;
 
     memset(&table, 0, sizeof(RGConvertTable));
-    CONST_ID(id_to_i, "to_i");
-    table.type = NUM2ULONG(rb_funcall(rb_gtype, id_to_i, 0));
+    table.type = rbgobj_gtype_from_ruby(rb_gtype);
     table.klass = Qnil;
     table.instance2robj = object_instance2robj;
 

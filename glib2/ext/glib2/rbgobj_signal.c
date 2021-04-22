@@ -161,7 +161,7 @@ rbg_rval2gtypes_body(VALUE value)
     struct rval2gtypes_args *args = (struct rval2gtypes_args *)value;
 
     for (i = 0; i < args->n; i++)
-        args->result[i] = rbgobj_gtype_get(RARRAY_PTR(args->ary)[i]);
+        args->result[i] = rbgobj_gtype_from_ruby(RARRAY_PTR(args->ary)[i]);
 
     return Qnil;
 }
@@ -251,7 +251,7 @@ gobj_s_define_signal(int argc, VALUE* argv, VALUE self)
         g_rclosure_set_tag(class_closure, RVAL2CSTR(rb_method_name));
     }
 
-    return_type = rbgobj_gtype_get(rbreturn_type);
+    return_type = rbgobj_gtype_from_ruby(rbreturn_type);
     param_types = RVAL2GTYPES_ACCEPT_NIL(params, n_params);
 
     signal = g_signal_newv(signal_name,

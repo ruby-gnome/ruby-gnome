@@ -682,7 +682,7 @@ rb_gi_arguments_in_init_arg_ruby_array_c_gtype(RBGIArguments *args,
     raw_array = ALLOC_N(GType, n_elements);
     for (i = 0; i < n_elements; i++) {
         VALUE rb_type = RARRAY_AREF(rb_array, i);
-        raw_array[i] = rbgobj_gtype_get(rb_type);
+        raw_array[i] = rbgobj_gtype_from_ruby(rb_type);
     }
 
     rb_gi_arguments_in_init_arg_ruby_array_c_generic(args,

@@ -84,7 +84,7 @@ rb_gi_struct_get_raw(VALUE rb_struct, GType gtype)
         if (rb_respond_to(rb_struct_class, rb_intern("gtype"))) {
             VALUE rb_gtype;
             rb_gtype = rb_funcall(rb_struct_class, rb_intern("gtype"), 0);
-            gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
+            gtype = rbgobj_gtype_from_ruby(rb_gtype);
         }
     }
     if (gtype == G_TYPE_NONE) {
@@ -146,7 +146,7 @@ rb_gi_struct_info_to_ruby(GIStructInfo *info,
         GType gtype;
 
         rb_gtype = rb_funcall(rb_class, rb_intern("gtype"), 0);
-        gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
+        gtype = rbgobj_gtype_from_ruby(rb_gtype);
         return BOXED2RVAL(object, gtype);
     }
 

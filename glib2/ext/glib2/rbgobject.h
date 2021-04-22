@@ -205,6 +205,7 @@ extern void rbgobj_register_mark_func(GType gtype, RGMarkFunc mark);
 extern void rbgobj_register_free_func(GType gtype, RGFreeFunc free);
 extern VALUE rbgobj_cType;
 extern VALUE rbgobj_gtype_new(GType gtype);
+/* Deprecated. Use rbgobj_gtype_from_ruby() instead. */
 extern GType rbgobj_gtype_get(VALUE obj);
 
 /* rbgobj_signal.c */
