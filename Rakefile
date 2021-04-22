@@ -86,17 +86,7 @@ end
 
 desc "build all packages"
 task :build => ["Makefile"] do
-  case RUBY_PLATFORM
-  when /linux/
-    n_cpus = `nproc`.chomp
-  when /darwin/
-    n_cpus = `sysctl -n hw.ncpu`.chomp
-  when /mingw/
-    n_cpus = ENV["NUMBER_OF_PROCESSORS"] || "1"
-  else
-    n_cpus = "1"
-  end
-  sh("make", "-j#{n_cpus}")
+  sh("make")
 end
 
 desc "clean all packages"
