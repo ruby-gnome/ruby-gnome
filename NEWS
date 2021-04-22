@@ -2,6 +2,156 @@
 
 = NEWS
 
+== Ruby-GNOME 3.4.4: 2021-04-22
+
+This is a bug fix release for Windows.
+
+=== Changes
+
+==== All
+
+  * Dropped support for CentOS 6.
+
+  * Dropped support for Ubuntu 16.04.
+
+  * Dropped support for Ruby 2.4.
+
+  * Dropped support for Ruby 2.5.
+
+  * Added support for Ruby 3.0.
+
+==== Document
+
+  * Improvements
+
+    * Improved how to use on Heroku.
+      [GitHub#1414][Patch by Juan D Lopez]
+
+    * Improved README.
+      [Patch by kojix2]
+
+==== Ruby/GLib
+
+  * Improvements
+
+    * Added (({RVAL2POINTER()})).
+
+    * Added (({POINTER2RVAL()})).
+
+    * Changed to use (({rb_cObject})) instead of (({rb_cData})) as a
+      parent class of typed data.
+
+    * Changed to use typed data instead of data for all data types.
+
+    * Added support for Ractor partially.
+
+    * Required GLib 2.48 or later.
+
+    * (({GLib::UniChar.compose})): Added.
+
+    * (({GLib::UniChar.decompose})): Added.
+
+    * (({GLib::UniChar.canonical_decomposition})): Deprecated. Use
+      (({GLib::UniChar.decompose})) instead.
+
+    * (({GLib.format_size_for_display})): Deprecated. Use
+      (({GLib.format_size})) instead.
+
+  * Fixes
+
+    * Fixed wrong conversions between (({VALUE})) and (({GType})).
+      [GitHub#1386][Patch by Yuto Tokunaga]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Removed needless transfer check for struct.
+      [GitHub#1396][Reported by Konrad Narewski]
+
+    * Added support freeing (({GArray})) of raw struct out parameter.
+      [GitHub#1356][Reported by aycabta]
+
+==== Ruby/Pango
+
+  * Improvements
+
+    * Added (({Pango::Render::PART_*})) to keep backward compatibility.
+      [GitHub#1311][Reported by rubyFeedback]
+
+==== Ruby/GStreamer
+
+  * Improvements
+
+    * Removed needless workaround for
+      (({Gst::ElementFactory#static_pad_templates})).
+      [GitHub#1400][Reported by Justin Weiss]
+
+==== Ruby/Gnumeric
+
+  * Improvements
+
+    * Added support for the latest Gnumeric.
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * (({Gtk::Widget#set_size_request})): Added support for
+      (({width:})) and (({height:})).
+      [GitHub#1406][Reported by rubyFeedback]
+
+    * (({Gtk::Dialog#set_default_response})): Added support for
+      (({Symbol})).
+      [GitHub#1418][Reported by rubyFeedback]
+
+==== Ruby/GDK4
+
+  * Added.
+
+==== Ruby/GTK4
+
+  * Added.
+
+==== Ruby/VTE3
+
+  * Improvements
+
+    * Improved description.
+      [GitHub#1406][Reported by rubyFeedback]
+
+==== Ruby/GTK2
+
+  * Removed.
+
+==== Ruby/GtkSourceView2
+
+  * Removed.
+
+==== Ruby/WebKitGtk2
+
+  * Removed.
+
+==== Ruby/VTE
+
+  * Removed.
+
+=== Thanks
+
+  * Konrad Narewski
+
+  * aycabta
+
+  * rubyFeedback
+
+  * Justin Weiss
+
+  * Yuto Tokunaga
+
+  * Juan D Lopez
+
+  * kojix2
+
 == Ruby-GNOME 3.4.3: 2020-05-11
 
 This is a follow-up release of 3.4.2.
