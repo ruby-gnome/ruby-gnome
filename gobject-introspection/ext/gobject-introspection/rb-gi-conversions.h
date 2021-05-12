@@ -64,6 +64,8 @@
     ((GIFieldInfo *)RVAL2GI_BASE_INFO(rb_object))
 #define RVAL2GI_TYPE_INFO(rb_object)			\
     ((GITypeInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_CALLABLE_INFO(rb_object)                \
+    ((GICallableInfo *)RVAL2GI_BASE_INFO(rb_object))
 #define RVAL2GI_VFUNC_INFO(rb_object)			\
     ((GIVFuncInfo *)RVAL2GI_BASE_INFO(rb_object))
 
