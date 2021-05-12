@@ -62,7 +62,7 @@ class TestTerminal < Test::Unit::TestCase
         error_class = GLib::SpawnError
       end
       assert_raise(error_class) do
-        @terminal.spawn(:argv => ["nonexistent"])
+        @terminal.spawn(:argv => ["/bin/nonexistent"])
         @wait_child_exited = true
       end
     end
