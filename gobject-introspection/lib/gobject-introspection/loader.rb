@@ -561,6 +561,7 @@ module GObjectIntrospection
         self.class.define_interface(info.gtype,
                                     rubyish_class_name(info),
                                     @base_module)
+      load_virtual_functions(info, interface_module)
       load_methods(info, interface_module)
     end
 
@@ -725,53 +726,47 @@ module GObjectIntrospection
     end
 
     class VirtualFunctionImplementor
-      IMPLEMENTATION_PREFIX = "virtual_do_"
-
       def initialize(loader_class, gtype_prefix, infos)
         @loader_class = loader_class
         @gtype_prefix = gtype_prefix
         @infos = {}
+        prefix = GLib::VIRTUAL_FUNCTION_IMPLEMENTATION_PREFIX
         infos.each do |info|
           name = info.name
-          @infos[:"#{IMPLEMENTATION_PREFIX}#{name}"] = info
-          @infos[:"#{IMPLEMENTATION_PREFIX}#{gtype_prefix}_#{name}"] = info
+          @infos[:"#{prefix}#{name}"] = info
+          @infos[:"#{prefix}#{gtype_prefix}_#{name}"] = info
         end
       end
 
       def implement(implementor_gtype, name)
         info = @infos[name]
         return false if info.nil?
-        field = info.container.class_struct.find_field(info.name)
+        container = info.container
+        if container.respond_to?(:class_struct)
+          struct = container.class_struct
+        else
+          struct = container.iface_struct
+        end
+        field = struct.find_field(info.name)
         @loader_class.implement_virtual_function(field,
                                                  implementor_gtype,
+                                                 container.gtype,
                                                  name.to_s)
         true
       end
     end
 
     module VirtualFunctionImplementable
-      def method_added(name)
-        super
-
-        prefix = VirtualFunctionImplementor::IMPLEMENTATION_PREFIX
-        return unless name.to_s.start_with?(prefix)
-        ancestors.each do |klass|
-          next unless klass.respond_to?(:implement_virtual_function)
-          return if klass.implement_virtual_function(name)
-        end
-      end
-
-      # TODO: Add support for method_deleted(name)
-
       def initialize_virtual_function_implementable(implementor)
         @virtual_function_implementor = implementor
       end
 
-      def implement_virtual_function(name)
+      def implement_virtual_function(implementor_class, name)
         unless instance_variable_defined?(:@virtual_function_implementor)
           return false
         end
-        @virtual_function_implementor.implement(gtype, name)
+        @virtual_function_implementor.implement(implementor_class.gtype,
+                                                name)
         true
       end
     end

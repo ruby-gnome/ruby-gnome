@@ -53,5 +53,24 @@ class TestLoaderInfo < Test::Unit::TestCase
         active_vfs.active?
       end
     end
+
+    def test_interface
+      resettable_converter_class = Class.new(GLib::Object) do
+        include Gio::Converter
+
+        type_register("ResettableConverter")
+
+        attr_reader :resetted
+
+        def virtual_do_reset
+          @resetted = true
+        end
+      end
+      resettable_converter = resettable_converter_class.new
+      resettable_converter.reset
+      assert do
+        resettable_converter.resetted
+      end
+    end
   end
 end

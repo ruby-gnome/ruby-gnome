@@ -956,6 +956,12 @@ rbgobj_class_init_func(gpointer g_class, G_GNUC_UNUSED gpointer class_data)
     g_object_class->get_property = get_prop_func;
 }
 
+static void
+interface_init(G_GNUC_UNUSED gpointer g_iface,
+               G_GNUC_UNUSED gpointer iface_data)
+{
+}
+
 void
 rbgobj_register_type(VALUE klass, VALUE type_name, GClassInitFunc class_init)
 {
@@ -1039,6 +1045,34 @@ rbgobj_register_type(VALUE klass, VALUE type_name, GClassInitFunc class_init)
             }
 
             rb_include_module(klass, initialize_module);
+        }
+
+        {
+            ID id_ancestors;
+            VALUE rb_ancestors;
+            long i;
+            long n;
+            CONST_ID(id_ancestors, "ancestors");
+            rb_ancestors = rb_funcall(klass, id_ancestors, 0);
+            n = RARRAY_LEN(rb_ancestors);
+            for (i = 0; i < n; i++) {
+                const GInterfaceInfo interface_info = {
+                    interface_init, NULL, NULL
+                };
+                VALUE rb_ancestor = RARRAY_CONST_PTR(rb_ancestors)[i];
+                const RGObjClassInfo *cinfo;
+                if (rb_ancestor == rbgobj_mInterface) {
+                    break;
+                }
+                if (!RVAL2CBOOL(rb_obj_is_kind_of(rb_ancestor,
+                                                  rbgobj_mInterface))) {
+                    continue;
+                }
+                cinfo = rbgobj_lookup_class(rb_ancestor);
+                g_type_add_interface_static(type,
+                                            cinfo->gtype,
+                                            &interface_info);
+            }
         }
     }
 }

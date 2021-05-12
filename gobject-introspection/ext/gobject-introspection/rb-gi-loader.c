@@ -143,15 +143,18 @@ static VALUE
 rg_s_implement_virtual_function(G_GNUC_UNUSED VALUE klass,
                                 VALUE rb_field_info,
                                 VALUE rb_implementor_gtype,
+                                VALUE rb_vtable_gtype,
                                 VALUE rb_method_name)
 {
     GIFieldInfo *field_info;
     GType implementor_gtype;
+    GType vtable_gtype;
     const gchar *method_name;
     RBGICallback *callback;
 
     field_info = RVAL2GI_FIELD_INFO(rb_field_info);
     implementor_gtype = rbgobj_gtype_from_ruby(rb_implementor_gtype);
+    vtable_gtype = rbgobj_gtype_from_ruby(rb_vtable_gtype);
     method_name = RVAL2CSTR(rb_method_name);
 
     {
@@ -166,13 +169,20 @@ rg_s_implement_virtual_function(G_GNUC_UNUSED VALUE klass,
     }
 
     {
-        gpointer *implementor_struct;
+        gpointer implementor_struct;
+        gpointer vtable_struct;
         gint offset;
         gpointer *method_address;
 
         implementor_struct = g_type_class_ref(implementor_gtype);
+        if (G_TYPE_IS_INTERFACE(vtable_gtype)) {
+            vtable_struct = g_type_interface_peek(implementor_struct,
+                                                  vtable_gtype);
+        } else {
+            vtable_struct = implementor_struct;
+        }
         offset = g_field_info_get_offset(field_info);
-        method_address = G_STRUCT_MEMBER_P(implementor_struct, offset);
+        method_address = G_STRUCT_MEMBER_P(vtable_struct, offset);
         *method_address = callback->closure;
         g_type_class_unref(implementor_struct);
     }
@@ -374,7 +384,7 @@ rb_gi_loader_init(VALUE rb_mGI)
     RG_DEF_SMETHOD(define_interface, 3);
     RG_DEF_SMETHOD(define_struct, -1);
     RG_DEF_SMETHOD(define_error, -1);
-    RG_DEF_SMETHOD(implement_virtual_function, 3);
+    RG_DEF_SMETHOD(implement_virtual_function, 4);
     RG_DEF_SMETHOD(register_boxed_class_converter, 1);
     RG_DEF_SMETHOD(register_object_class_converter, 1);
     RG_DEF_SMETHOD(register_constant_rename_map, 2);

@@ -1,4 +1,4 @@
-# Copyright (C) 2005-2019  Ruby-GNOME Project Team
+# Copyright (C) 2005-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -117,17 +117,47 @@ end
 require "glib2.so"
 
 module GLib
+  SIGNAL_HANDLER_PREFIX = "signal_do_"
+  VIRTUAL_FUNCTION_IMPLEMENTATION_PREFIX = "virtual_do_"
+
   module MetaInterface
     class << self
-      def signal_callback(klass, id)
+      def signal_callback(klass, name)
         lambda do |instance, *args|
-          klass.instance_method(id).bind(instance).call(*args)
+          method_name = "#{SIGNAL_HANDLER_PREFIX}#{name}"
+          klass.instance_method(method_name).bind(instance).call(*args)
         end
       end
     end
   end
 
   class Instantiatable
+    class << self
+      def method_added(name)
+        super
+
+        case name.to_s
+        when /\A#{Regexp.escape(SIGNAL_HANDLER_PREFIX)}/o
+          signal_name = $POSTMATCH
+          begin
+            signal_ = signal(signal_name)
+          rescue NoSignalError
+            return
+          end
+          return unless signal_.class != self
+          signal_handler_attach(signal, name.to_s) do |instance, *args|
+            instance.__send__(signal_name, *args)
+          end
+        when /\A#{Regexp.escape(VIRTUAL_FUNCTION_IMPLEMENTATION_PREFIX)}/o
+          function_name = $POSTMATCH
+          ancestors.each do |klass|
+            next unless klass.respond_to?(:implement_virtual_function)
+            return if klass.implement_virtual_function(self, name)
+          end
+        end
+      end
+    end
+
     private
     def create_signal_handler(signal_name, callback)
       callback

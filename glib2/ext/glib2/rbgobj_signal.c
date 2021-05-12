@@ -26,8 +26,6 @@
 static VALUE RG_TARGET_NAMESPACE;
 VALUE rbgobj_signal_wrap(guint sig_id);
 
-#define default_handler_method_prefix "signal_do_"
-
 /**********************************************************************/
 
 static const rb_data_type_t rg_glib_signal_type = {
@@ -235,20 +233,13 @@ gobj_s_define_signal(int argc, VALUE* argv, VALUE self)
     signal_flags = RVAL2GFLAGS(rbsignal_flags, G_TYPE_SIGNAL_FLAGS);
 
     {
-        VALUE rb_method_name;
-        VALUE proc;
-        ID method_id;
-
-        rb_method_name =
-            rb_str_concat(rb_str_new_cstr(default_handler_method_prefix),
-                          rbsignal_name);
-        method_id = rb_to_id(rb_method_name);
-
-        proc = rb_funcall(mMetaInterface, rb_intern("signal_callback"), 2,
-                          self, ID2SYM(method_id));
-
+        VALUE proc = rb_funcall(mMetaInterface,
+                                rb_intern("signal_callback"),
+                                2,
+                                self,
+                                rbsignal_name);
         class_closure = g_rclosure_new(proc, Qnil, NULL);
-        g_rclosure_set_tag(class_closure, RVAL2CSTR(rb_method_name));
+        g_rclosure_set_tag(class_closure, RVAL2CSTR(rbsignal_name));
     }
 
     return_type = rbgobj_gtype_from_ruby(rbreturn_type);
@@ -722,39 +713,25 @@ gobj_sig_chain_from_overridden(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gobj_s_method_added(VALUE klass, VALUE id)
+gobj_s_signal_handler_attach(VALUE klass,
+                             VALUE rb_signal,
+                             VALUE rb_handler_name)
 {
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
-    const char* name = rb_id2name(SYM2ID(id));
-    const int prefix_len = strlen(default_handler_method_prefix);
-    guint signal_id;
-
-    if (cinfo->klass != klass) return Qnil;
-    if (strncmp(default_handler_method_prefix, name, prefix_len)) return Qnil;
-
-    signal_id = g_signal_lookup(name + prefix_len, cinfo->gtype);
-    if (!signal_id) return Qnil;
-
-    {
-        GSignalQuery query;
-        g_signal_query(signal_id, &query);
-        if (query.itype == cinfo->gtype)
-            return Qnil;
-    }
-
-    {
-        VALUE proc = rb_funcall(mMetaInterface, rb_intern("signal_callback"), 2,
-                                klass, id);
-        GClosure* rclosure = g_rclosure_new(proc, Qnil,
-                                            rbgobj_get_signal_func(signal_id));
-        g_rclosure_attach((GClosure *)rclosure, klass);
-        g_signal_override_class_closure(signal_id, cinfo->gtype, rclosure);
-    }
+    const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
+    guint signal_id = rbgobj_signal_get_raw(rb_signal)->signal_id;
+    VALUE handler_name = RVAL2CSTR(rb_handler_name);
+    VALUE proc = rb_block_proc();
+    GClosure* rclosure = g_rclosure_new(proc,
+                                        Qnil,
+                                        rbgobj_get_signal_func(signal_id));
+    g_rclosure_set_tag(rclosure, handler_name);
+    g_rclosure_attach((GClosure *)rclosure, klass);
+    g_signal_override_class_closure(signal_id, cinfo->gtype, rclosure);
 
     {
         VALUE mod = rb_define_module_under(klass, RubyGObjectHookModule);
         rb_include_module(klass, mod);
-        rbg_define_method(mod, name, gobj_sig_chain_from_overridden, -1);
+        rbg_define_method(mod, handler_name, gobj_sig_chain_from_overridden, -1);
     }
 
     return Qnil;
@@ -1059,6 +1036,8 @@ Init_gobject_gsignal(void)
     rbg_define_method(cInstantiatable, "signal_handler_is_connected?",
                      gobj_sig_handler_is_connected, 1);
 
-    rbg_define_singleton_method(cInstantiatable, "method_added",
-                               gobj_s_method_added, 1);
+    rbg_define_singleton_method(cInstantiatable,
+                                "signal_handler_attach",
+                                gobj_s_signal_handler_attach,
+                                2);
 }
