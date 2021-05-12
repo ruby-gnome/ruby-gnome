@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -18,8 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef RB_GI_CONVERSIONS_H
-#define RB_GI_CONVERSIONS_H
+#pragma once
 
 #define RVAL2GI_REPOSITORY(rb_object) (G_IREPOSITORY(RVAL2GOBJ(rb_object)))
 #define RVAL2GI_REPOSITORY_LOAD_FLAGS(rb_flags) \
@@ -65,6 +64,8 @@
     ((GIFieldInfo *)RVAL2GI_BASE_INFO(rb_object))
 #define RVAL2GI_TYPE_INFO(rb_object)			\
     ((GITypeInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_VFUNC_INFO(rb_object)			\
+    ((GIVFuncInfo *)RVAL2GI_BASE_INFO(rb_object))
 
 #define GI_INFO_TYPE2RVAL(type)      (GENUM2RVAL(type, G_TYPE_I_INFO_TYPE))
 #define GI_TRANSFER2RVAL(transfer)   (GENUM2RVAL(transfer, G_TYPE_I_TRANSFER))
@@ -100,6 +101,3 @@ VALUE       rb_gi_return_argument_to_ruby     (GICallableInfo *callable_info,
                                                GPtrArray      *args_metadata);
 
 VALUE       rb_gi_array_type_to_ruby          (GIArrayType type);
-
-#endif
-
