@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,11 @@ class TestStructInfo < Test::Unit::TestCase
   def test_get_field
     assert_kind_of(GObjectIntrospection::FieldInfo,
                    @info.get_field(0))
+  end
+
+  def test_find_field
+    assert_equal("g_type",
+                 @info.find_field("g_type").name)
   end
 
   def test_n_methods

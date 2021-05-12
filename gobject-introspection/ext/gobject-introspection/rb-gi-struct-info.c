@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -195,6 +195,17 @@ rg_get_field(VALUE self, VALUE rb_n)
 }
 
 static VALUE
+rg_find_field(VALUE self, VALUE rb_name)
+{
+    GIStructInfo *info;
+    const gchar *name;
+
+    info = SELF(self);
+    name = RVAL2CSTR(rb_name);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_struct_info_find_field(info, name));
+}
+
+static VALUE
 rg_get_field_value(VALUE self, VALUE rb_struct, VALUE rb_n)
 {
     GIStructInfo *info;
@@ -308,6 +319,7 @@ rb_gi_struct_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 
     RG_DEF_METHOD(n_fields, 0);
     RG_DEF_METHOD(get_field, 1);
+    RG_DEF_METHOD(find_field, 1);
     RG_DEF_METHOD(get_field_value, 2);
     RG_DEF_METHOD(set_field_value, 3);
     RG_DEF_METHOD(n_methods, 0);
