@@ -695,12 +695,16 @@ rb_gi_arguments_fill_raw_result(RBGIArguments *args,
         }
         break;
       case GI_TYPE_TAG_UTF8:
-        if (is_return_value) {
-            ffi_return_value->v_ulong =
-                (gulong)RVAL2CSTR_ACCEPT_SYMBOL(rb_result);
-        } else {
-            *((gchar **)raw_result) =
-                (gchar *)RVAL2CSTR_ACCEPT_SYMBOL(rb_result);
+        {
+            gchar *result = (gchar *)RVAL2CSTR_ACCEPT_SYMBOL(rb_result);
+            if (transfer == GI_TRANSFER_EVERYTHING) {
+                result = g_strdup(result);
+            }
+            if (is_return_value) {
+                ffi_return_value->v_ulong = (gulong)result;
+            } else {
+                *((gchar **)raw_result) = (gchar *)result;
+            }
         }
         break;
       case GI_TYPE_TAG_FILENAME:
