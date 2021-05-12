@@ -833,7 +833,7 @@ rb_gi_arguments_fill_raw_results(RBGIArguments *args,
         rb_gi_arguments_fill_raw_result(args,
                                         RARRAY_AREF(rb_results, i_rb_result),
                                         argument->v_pointer,
-                                        return_type_info,
+                                        type_info,
                                         transfer,
                                         FALSE);
         i_rb_result++;
