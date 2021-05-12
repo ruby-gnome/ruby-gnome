@@ -149,7 +149,6 @@ module GLib
             instance.__send__(name, *args)
           end
         when /\A#{Regexp.escape(VIRTUAL_FUNCTION_IMPLEMENTATION_PREFIX)}/o
-          function_name = $POSTMATCH
           ancestors.each do |klass|
             next unless klass.respond_to?(:implement_virtual_function)
             return if klass.implement_virtual_function(self, name)
