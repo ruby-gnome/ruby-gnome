@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -111,6 +111,10 @@ class TestObjectInfo < Test::Unit::TestCase
 
   def test_n_constants
     assert_equal(0, @info.n_constants)
+  end
+
+  def test_class_struct
+    assert_equal("FileOutputStreamClass", @info.class_struct.name)
   end
 
   def test_unref_function

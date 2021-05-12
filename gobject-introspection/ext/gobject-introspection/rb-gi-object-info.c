@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -273,6 +273,15 @@ rg_get_constant(VALUE self, VALUE rb_n)
 }
 
 static VALUE
+rg_class_struct(VALUE self)
+{
+    GIObjectInfo *info;
+
+    info = SELF(self);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_object_info_get_class_struct(info));
+}
+
+static VALUE
 rg_unref_function(VALUE self)
 {
     GIObjectInfo *info;
@@ -338,6 +347,7 @@ rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD(get_vfunc, 1);
     RG_DEF_METHOD(n_constants, 0);
     RG_DEF_METHOD(get_constant, 1);
+    RG_DEF_METHOD(class_struct, 0);
     RG_DEF_METHOD(unref_function, 0);
     RG_DEF_METHOD(ref_function, 0);
     RG_DEF_METHOD(set_value_function, 0);
