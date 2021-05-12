@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,14 +17,41 @@
 class TestLoaderInfo < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
-    @repository.require("Gio")
-    @info = @repository.find("Gio", "Application")
-    @sandbox = Module.new
   end
 
   def test_define_class
-    gtype = @info.gtype
-    GObjectIntrospection::Loader.define_class(gtype, "Application", @sandbox)
-    assert_equal(gtype, @sandbox::Application.gtype)
+    info = @repository.find("Gio", "Application")
+    gtype = info.gtype
+    assert_equal(gtype, Gio::Application.gtype)
+  end
+
+  sub_test_case("virtual function") do
+    def test_without_prefix
+      active_vfs_class = Class.new(Gio::Vfs) do
+        type_register("ActiveVfsWithoutPrefix")
+
+        def virtual_do_is_active
+          true
+        end
+      end
+      active_vfs = active_vfs_class.new
+      assert do
+        active_vfs.active?
+      end
+    end
+
+    def test_with_prefix
+      active_vfs_class = Class.new(Gio::Vfs) do
+        type_register("ActiveVfsWithPrefix")
+
+        def virtual_do_gvfs_is_active
+          true
+        end
+      end
+      active_vfs = active_vfs_class.new
+      assert do
+        active_vfs.active?
+      end
+    end
   end
 end

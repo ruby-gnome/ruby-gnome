@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -28,17 +28,130 @@ struct RBGICallbackData_ {
     VALUE rb_owner;
 };
 
+typedef struct {
+    RBGIArguments *args;
+    RBGICallback *callback;
+    RBGICallbackData *callback_data;
+} RBGICallbackInvokeData;
+
 static GPtrArray *callback_finders;
 static VALUE mGLibObject = Qnil;
 static VALUE mGI = Qnil;
+
+static VALUE
+rb_gi_callback_invoke(VALUE user_data)
+{
+    RBGICallbackInvokeData *data = (RBGICallbackInvokeData *)user_data;
+    VALUE rb_args = rb_gi_arguments_in_to_ruby(data->args);
+
+    if (data->callback->method_name) {
+        ID id___send__;
+        VALUE rb_receiver = rb_ary_shift(rb_args);
+        CONST_ID(id___send__, "__send__");
+        rb_ary_unshift(rb_args, rb_str_new_cstr(data->callback->method_name));
+        return rb_funcallv(rb_receiver,
+                           id___send__,
+                           RARRAY_LENINT(rb_args),
+                           RARRAY_CONST_PTR(rb_args));
+    } else {
+        ID id_call;
+        CONST_ID(id_call, "call");
+        VALUE rb_callback =
+            rb_gi_callback_data_get_rb_callback(data->callback_data);
+        return rb_funcallv(rb_callback,
+                           id_call,
+                           RARRAY_LENINT(rb_args),
+                           RARRAY_CONST_PTR(rb_args));
+    }
+}
+
+static void
+rb_gi_ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
+                           void *return_value,
+                           void **raw_args,
+                           void *data)
+{
+    RBGICallback *callback = data;
+    RBGICallbackData *callback_data = NULL;
+    RBGIArguments args;
+    VALUE rb_results;
+
+    rb_gi_arguments_init(&args,
+                         callback->callback_info,
+                         Qnil,
+                         Qnil,
+                         raw_args);
+    {
+        guint i;
+
+        for (i = 0; i < args.metadata->len; i++) {
+            RBGIArgMetadata *metadata;
+
+            metadata = g_ptr_array_index(args.metadata, i);
+            if (!metadata->closure_p) {
+                continue;
+            }
+
+            callback_data = *((RBGICallbackData **)(raw_args[i]));
+            break;
+        }
+
+        if (!callback_data && args.metadata->len > 0) {
+            RBGIArgMetadata *metadata;
+
+            i = args.metadata->len - 1;
+            metadata = g_ptr_array_index(args.metadata, i);
+            if (metadata->type.tag == GI_TYPE_TAG_VOID &&
+                metadata->type.pointer_p &&
+                strcmp(metadata->name, "data") == 0) {
+                callback_data = *((RBGICallbackData **)(raw_args[i]));
+            }
+        }
+    }
+
+    {
+        RBGICallbackInvokeData data;
+        data.args = &args;
+        data.callback = callback;
+        data.callback_data = callback_data;
+        rb_results = rbgutil_invoke_callback(rb_gi_callback_invoke,
+                                             (VALUE)&data);
+    }
+    rb_gi_arguments_fill_raw_results(&args, rb_results, return_value);
+    rb_gi_arguments_clear(&args);
+
+    if (callback_data) {
+        RBGIArgMetadata *callback_metadata =
+            rb_gi_callback_data_get_metadata(callback_data);
+        if (callback_metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
+            rb_gi_callback_data_free(callback_data);
+        }
+    }
+}
+
+RBGICallback *
+rb_gi_callback_new(GICallbackInfo *callback_info,
+                   const gchar *method_name)
+{
+    RBGICallback *callback = RB_ZALLOC(RBGICallback);
+    callback->callback_info = callback_info;
+    g_base_info_ref(callback->callback_info);
+    callback->method_name = g_strdup(method_name);
+    callback->closure =
+        g_callable_info_prepare_closure(callback->callback_info,
+                                        &(callback->cif),
+                                        rb_gi_ffi_closure_callback,
+                                        callback);
+    return callback;
+}
 
 static void
 rb_gi_callback_free(RBGICallback *callback)
 {
     g_callable_info_free_closure(callback->callback_info,
                                  callback->closure);
+    g_free(callback->method_name);
     g_base_info_unref(callback->callback_info);
-    g_base_info_unref(callback->type_info);
     xfree(callback);
 }
 

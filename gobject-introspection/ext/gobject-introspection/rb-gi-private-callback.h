@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2019-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -22,8 +22,8 @@
 
 typedef struct RBGICallback_ {
     GIArgInfo *arg_info;
-    GITypeInfo *type_info;
     GICallbackInfo *callback_info;
+    gchar *method_name;
     ffi_cif cif;
     ffi_closure *closure;
 } RBGICallback;
@@ -34,8 +34,11 @@ rb_gi_callback_init(VALUE rb_mGI);
 G_GNUC_INTERNAL gpointer
 rb_gi_callback_find(GIArgInfo *info);
 
+G_GNUC_INTERNAL RBGICallback *
+rb_gi_callback_new(GICallbackInfo *callback_info,
+                   const gchar *method_name);
+
 G_GNUC_INTERNAL RBGICallbackData *
 rb_gi_callback_data_new(RBGIArguments *args,
                         RBGICallback *callback,
                         RBGIArgMetadata *metadata);
-

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -137,6 +137,47 @@ rg_s_define_error(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
     }
 
     return G_DEF_ERROR(domain, name, rb_module, rb_parent, gtype);
+}
+
+static VALUE
+rg_s_implement_virtual_function(G_GNUC_UNUSED VALUE klass,
+                                VALUE rb_field_info,
+                                VALUE rb_implementor_gtype,
+                                VALUE rb_method_name)
+{
+    GIFieldInfo *field_info;
+    GType implementor_gtype;
+    const gchar *method_name;
+    RBGICallback *callback;
+
+    field_info = RVAL2GI_FIELD_INFO(rb_field_info);
+    implementor_gtype = rbgobj_gtype_from_ruby(rb_implementor_gtype);
+    method_name = RVAL2CSTR(rb_method_name);
+
+    {
+        GITypeInfo *type_info;
+        GICallbackInfo *callback_info;
+
+        type_info = g_field_info_get_type(field_info);
+        callback_info = g_type_info_get_interface(type_info);
+        callback = rb_gi_callback_new(callback_info, method_name);
+        g_base_info_unref(callback_info);
+        g_base_info_unref(type_info);
+    }
+
+    {
+        gpointer *implementor_struct;
+        gint offset;
+        gpointer *method_address;
+
+        implementor_struct = g_type_class_ref(implementor_gtype);
+        offset = g_field_info_get_offset(field_info);
+        method_address = G_STRUCT_MEMBER_P(implementor_struct, offset);
+        *method_address = callback->closure;
+        g_type_class_unref(implementor_struct);
+    }
+
+    return Qnil;
 }
 
 typedef struct {
@@ -333,6 +374,7 @@ rb_gi_loader_init(VALUE rb_mGI)
     RG_DEF_SMETHOD(define_interface, 3);
     RG_DEF_SMETHOD(define_struct, -1);
     RG_DEF_SMETHOD(define_error, -1);
+    RG_DEF_SMETHOD(implement_virtual_function, 3);
     RG_DEF_SMETHOD(register_boxed_class_converter, 1);
     RG_DEF_SMETHOD(register_object_class_converter, 1);
     RG_DEF_SMETHOD(register_constant_rename_map, 2);

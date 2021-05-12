@@ -32,4 +32,8 @@ run_test(__dir__,
     puts("Omit because typelib file doesn't exist: #{$!.message}")
     exit(true)
   end
+
+  module Gio
+    GObjectIntrospection::Loader.load("Gio", self)
+  end
 end

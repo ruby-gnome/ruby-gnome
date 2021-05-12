@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2019-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -20,6 +20,8 @@
 
 #pragma once
 
+G_GNUC_INTERNAL VALUE
+rb_gi_arguments_in_to_ruby(RBGIArguments *args);
 G_GNUC_INTERNAL void
 rb_gi_arguments_in_init(RBGIArguments *args);
 G_GNUC_INTERNAL void
