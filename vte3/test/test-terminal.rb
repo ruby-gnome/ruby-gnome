@@ -56,7 +56,16 @@ class TestTerminal < Test::Unit::TestCase
     end
 
     test "failure" do
-      if Vte::Version.or_later?(0, 62)
+      if Vte::Version.or_later?(0, 64)
+        # Fedora Rawhide test in Docker reports:
+        #   Failed to fdwalk: Operation not permitted
+        # not NotFound.
+        #
+        # The following discussions may be related:
+        #   https://github.com/mviereck/x11docker/issues/346
+        #   https://github.com/containers/podman/issues/10130
+        error_class = Gio::IOError::PermissionDenied
+      elsif Vte::Version.or_later?(0, 62)
         error_class = Gio::IOError::NotFound
       else
         error_class = GLib::SpawnError
