@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,5 +27,9 @@ class TestBaseInfo < Test::Unit::TestCase
 
   def test_namespace
     assert_equal("GObject", @info.namespace)
+  end
+
+  def test_container
+    assert_equal("Object", @info.vfuncs.first.container.name)
   end
 end

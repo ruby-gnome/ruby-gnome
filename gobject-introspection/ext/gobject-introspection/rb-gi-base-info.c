@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -161,6 +161,15 @@ rg_namespace(VALUE self)
 }
 
 static VALUE
+rg_container(VALUE self)
+{
+    GIBaseInfo *info;
+
+    info = SELF(self);
+    return rb_gi_base_info_to_ruby(g_base_info_get_container(info));
+}
+
+static VALUE
 rg_operator_aref(VALUE self, VALUE name)
 {
     GIBaseInfo *info;
@@ -201,6 +210,7 @@ rb_gi_base_info_init(VALUE rb_mGI)
     RG_DEF_METHOD(type, 0);
     RG_DEF_METHOD(name, 0);
     RG_DEF_METHOD(namespace, 0);
+    RG_DEF_METHOD(container, 0);
     RG_DEF_METHOD_OPERATOR("[]", aref, 1);
     RG_DEF_METHOD(each, 0);
 
