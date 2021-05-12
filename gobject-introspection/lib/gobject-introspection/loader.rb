@@ -756,7 +756,7 @@ module GObjectIntrospection
         super
 
         prefix = VirtualFunctionImplementor::IMPLEMENTATION_PREFIX
-        return unless name.start_with?(prefix)
+        return unless name.to_s.start_with?(prefix)
         ancestors.each do |klass|
           next unless klass.respond_to?(:implement_virtual_function)
           return if klass.implement_virtual_function(name)
