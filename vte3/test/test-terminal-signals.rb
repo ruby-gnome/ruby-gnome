@@ -16,6 +16,34 @@
 
 class TestTerminalSignals < Test::Unit::TestCase
   def setup
+    if Vte::Version.or_later?(0, 64)
+      omit("VTE 0.64 or later doesn't work in Docker by default")
+      # /usr/include/c++/11/bits/shared_ptr_base.h:976: std::__shared_ptr_access<
+      #  _Tp,
+      #  _Lp,
+      #  <anonymous>,
+      #  <anonymous>
+      # >::element_type&
+      # std::__shared_ptr_access<
+      #  _Tp,
+      #  _Lp,
+      #  <anonymous>,
+      #  <anonymous>
+      # >::operator*() const [
+      # with
+      #  _Tp = vte::platform::Clipboard;
+      # __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_atomic;
+      #  bool <anonymous> = false;
+      # bool <anonymous> = false;
+      # std::__shared_ptr_access<
+      #  _Tp,
+      #  _Lp,
+      #  <anonymous>,
+      #  <anonymous>
+      # >::element_type = vte::platform::Clipboard
+      #]: Assertion '_M_get() != nullptr' failed.
+    end
+
     @terminal = Vte::Terminal.new
   end
 
