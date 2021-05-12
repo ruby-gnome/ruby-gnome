@@ -146,7 +146,7 @@ module GLib
           end
           return unless signal_.class != self
           signal_handler_attach(signal_, name.to_s) do |instance, *args|
-            instance.__send__(signal_name, *args)
+            instance.__send__(name, *args)
           end
         when /\A#{Regexp.escape(VIRTUAL_FUNCTION_IMPLEMENTATION_PREFIX)}/o
           function_name = $POSTMATCH
