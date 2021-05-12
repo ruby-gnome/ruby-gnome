@@ -343,7 +343,6 @@ module GObjectIntrospection
       klass.extend(VirtualFunctionImplementable)
       gtype_prefix = rubyish_gtype_name(klass.gtype.name)
       implementor = VirtualFunctionImplementor.new(self.class,
-                                                   klass,
                                                    gtype_prefix,
                                                    info.vfuncs)
       klass.__send__(:initialize_virtual_function_implementable,
@@ -728,9 +727,8 @@ module GObjectIntrospection
     class VirtualFunctionImplementor
       IMPLEMENTATION_PREFIX = "virtual_do_"
 
-      def initialize(loader_class, klass, gtype_prefix, infos)
+      def initialize(loader_class, gtype_prefix, infos)
         @loader_class = loader_class
-        @klass = klass
         @gtype_prefix = gtype_prefix
         @infos = {}
         infos.each do |info|
