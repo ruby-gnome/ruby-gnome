@@ -56,9 +56,9 @@ class TestLoaderInfo < Test::Unit::TestCase
 
     def test_interface
       resettable_converter_class = Class.new(GLib::Object) do
-        include Gio::Converter
-
         type_register("ResettableConverter")
+
+        include Gio::Converter
 
         attr_reader :resetted
 

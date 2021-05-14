@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011,2017  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011,2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2006  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -33,6 +33,41 @@ rg_append_features(G_GNUC_UNUSED VALUE self, VALUE klass)
     if (!RVAL2CBOOL(rb_class_inherited_p(klass, cInstantiatable)))
         rb_raise(rb_eTypeError, "Not a subclass of GLib::Instantiatable");
     return rb_call_super(1, &klass);
+}
+
+static void
+interface_init(G_GNUC_UNUSED gpointer g_iface,
+               G_GNUC_UNUSED gpointer iface_data)
+{
+}
+
+static VALUE
+rg_included(VALUE self, VALUE class_or_module)
+{
+    const GInterfaceInfo interface_info = {
+        interface_init, NULL, NULL
+    };
+    const RGObjClassInfo *interface_cinfo;
+    const RGObjClassInfo *class_cinfo;
+    if (RVAL2CBOOL(rb_obj_is_instance_of(class_or_module, rb_cModule))) {
+        rb_raise(rb_eTypeError,
+                 "GLib::Interface based module (%" PRIsVALUE ") "
+                 "must be included into a class directly: %" PRIsVALUE,
+                 self,
+                 class_or_module);
+    }
+    interface_cinfo = rbgobj_lookup_class(self);
+    class_cinfo = rbgobj_lookup_class(class_or_module);
+    if (class_cinfo->klass != class_or_module) {
+        return Qnil;
+    }
+    if (g_type_is_a(class_cinfo->gtype, interface_cinfo->gtype)) {
+        return Qnil;
+    }
+    g_type_add_interface_static(class_cinfo->gtype,
+                                interface_cinfo->gtype,
+                                &interface_info);
+    return Qnil;
 }
 
 static VALUE
@@ -141,6 +176,7 @@ Init_gobject_typeinterface(void)
     RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "MetaInterface");
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     RG_DEF_METHOD(append_features, 1);
+    RG_DEF_METHOD(included, 1);
     RG_DEF_METHOD(install_property, 1);
     RG_DEF_METHOD(property, 1);
     RG_DEF_METHOD(properties, -1);
