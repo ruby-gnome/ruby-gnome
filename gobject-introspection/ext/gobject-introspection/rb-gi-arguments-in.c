@@ -1972,13 +1972,30 @@ rb_gi_arguments_in_init_arg_ruby(RBGIArguments *args,
       case GI_TYPE_TAG_UNICHAR:
         {
             gunichar *target;
+            VALUE rb_unichar;
             if (metadata->direction == GI_DIRECTION_INOUT) {
                 target = ALLOC(gunichar);
                 metadata->in_arg->v_pointer = target;
             } else {
                 target = &(metadata->in_arg->v_uint32);
             }
-            *target = NUM2UINT(metadata->rb_arg);
+            if (RB_TYPE_P(metadata->rb_arg, RUBY_T_STRING)) {
+                VALUE rb_codepoints;
+                if (rb_str_strlen(metadata->rb_arg) != 1) {
+                    rb_raise(rb_eArgError,
+                             "[%s][%s] must be one character: %+" PRIsVALUE,
+                             metadata->name,
+                             g_type_tag_to_string(metadata->type.tag),
+                             metadata->rb_arg);
+                }
+                rb_codepoints = rb_funcall(metadata->rb_arg,
+                                           rb_intern("codepoints"),
+                                           0);
+                rb_unichar = RARRAY_PTR(rb_codepoints)[0];
+            } else {
+                rb_unichar = metadata->rb_arg;
+            }
+            *target = NUM2UINT(rb_unichar);
         }
         break;
       default:

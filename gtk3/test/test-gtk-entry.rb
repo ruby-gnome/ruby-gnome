@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -47,6 +45,26 @@ class TestGtkEntry < Test::Unit::TestCase
     def test_input_hints_enum
       only_gtk_version(3, 6, 0)
       assert_const_defined(Gtk::InputHints, :SPELLCHECK)
+    end
+  end
+
+  class TestInvisibleChar < self
+    def test_character
+      @entry.invisible_char = "*"
+      assert_equal("*", @entry.invisible_char)
+    end
+
+    def test_string
+      string = "**"
+      message = "[ch][gunichar] must be one character: #{string.inspect}"
+      assert_raise(ArgumentError.new(message)) do
+        @entry.invisible_char = string
+      end
+    end
+
+    def test_codepoint
+      @entry.invisible_char = "*".codepoints[0]
+      assert_equal("*", @entry.invisible_char)
     end
   end
 end
