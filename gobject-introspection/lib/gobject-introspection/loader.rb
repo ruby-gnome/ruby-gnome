@@ -742,15 +742,17 @@ module GObjectIntrospection
         info = @infos[name]
         return false if info.nil?
         container = info.container
+        vtable_gtype = container.gtype
         if container.respond_to?(:class_struct)
           struct = container.class_struct
         else
+          return false unless implementor_gtype.type_is_a?(vtable_gtype)
           struct = container.iface_struct
         end
         field = struct.find_field(info.name)
         @loader_class.implement_virtual_function(field,
                                                  implementor_gtype,
-                                                 container.gtype,
+                                                 vtable_gtype,
                                                  name.to_s)
         true
       end
