@@ -21,7 +21,7 @@ require_relative "../glib2/version"
 Gem::Specification.new do |s|
   s.name          = "pango"
   s.summary       = "Ruby/Pango is a Ruby binding of pango-1.x."
-  s.description   = "Ruby/Pango is a Ruby binding of pango-1.x."
+  s.description   = "Ruby/Pango is a Ruby binding of pango-1.x based on GObject-Introspection."
   s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome2.osdn.jp/"
@@ -44,5 +44,12 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("cairo-gobject", "= #{s.version}")
   s.add_runtime_dependency("gobject-introspection", "= #{s.version}")
 
-  s.metadata["msys2_mingw_dependencies"] = "pango"
+  s.metadata = {
+    "bug_tracker_uri" => "https://github.com/ruby-gnome/ruby-gnome/issues",
+    "changelog_uri" => "https://github.com/ruby-gnome/ruby-gnome/blob/master/NEWS",
+    "documentation_uri" => "https://ruby-gnome2.osdn.jp/hiki.cgi?Ruby%2FPango",
+    "mailing_list_uri" => "https://sourceforge.net/p/ruby-gnome2/mailman/ruby-gnome2-devel-en",
+    "source_code_uri" => "https://github.com/ruby-gnome/ruby-gnome/tree/master/pango",
+    "msys2_mingw_dependencies" => "pango"
+  }
 end
