@@ -34,7 +34,10 @@ module Pango
   cairo_loader.load("PangoCairo")
 
   fc_loader = FcLoader.new(self)
-  fc_loader.load("PangoFc")
+  begin
+    fc_loader.load("PangoFc")
+  rescue GObjectIntrospection::RepositoryError::TypelibNotFound
+  end
 
   ft2_loader = FT2Loader.new(self)
   ft2_loader.load("PangoFT2")
