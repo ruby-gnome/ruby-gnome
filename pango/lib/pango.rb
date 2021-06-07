@@ -44,5 +44,8 @@ module Pango
   ft2_loader.load("PangoFT2")
 
   ot_loader = OTLoader.new(self)
-  ot_loader.load("PangoOT")
+  begin
+    ot_loader.load("PangoOT")
+  rescue GObjectIntrospection::RepositoryError::TypelibNotFound
+  end
 end
