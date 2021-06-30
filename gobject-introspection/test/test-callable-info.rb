@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,6 +19,12 @@ class TestCallableInfo < Test::Unit::TestCase
     @repository = GObjectIntrospection::Repository.default
     @repository.require("GObject")
     @info = @repository.find("GObject", "signal_name")
+  end
+
+  def test_can_throw_gerror
+    assert do
+      not @info.can_throw_gerror?
+    end
   end
 
   def test_return_type

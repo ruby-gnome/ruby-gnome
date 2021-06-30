@@ -36,6 +36,13 @@ gi_callable_info_get_type(void)
 }
 
 static VALUE
+rg_can_throw_gerror_p(VALUE self)
+{
+    GICallableInfo *info = SELF(self);
+    return CBOOL2RVAL(g_callable_info_can_throw_gerror(info));
+}
+
+static VALUE
 rg_return_type(VALUE self)
 {
     GICallableInfo *info;
@@ -91,6 +98,7 @@ rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
         G_DEF_CLASS_WITH_PARENT(GI_TYPE_CALLABLE_INFO, "CallableInfo", rb_mGI,
                                 rb_cGIBaseInfo);
 
+    RG_DEF_METHOD_P(can_throw_gerror, 0);
     RG_DEF_METHOD(return_type, 0);
     RG_DEF_METHOD(caller_owns, 0);
     RG_DEF_METHOD_P(may_return_null, 0);
