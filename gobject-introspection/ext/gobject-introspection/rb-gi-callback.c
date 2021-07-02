@@ -32,6 +32,7 @@ typedef struct {
     RBGIArguments *args;
     RBGICallback *callback;
     RBGICallbackData *callback_data;
+    void *return_value;
 } RBGICallbackInvokeData;
 
 static GPtrArray *callback_finders;
@@ -39,7 +40,7 @@ static VALUE mGLibObject = Qnil;
 static VALUE mGI = Qnil;
 
 static VALUE
-rb_gi_callback_invoke(VALUE user_data)
+rb_gi_callback_invoke_without_protect(VALUE user_data)
 {
     RBGICallbackInvokeData *data = (RBGICallbackInvokeData *)user_data;
     VALUE rb_args = rb_gi_arguments_in_to_ruby(data->args);
@@ -65,6 +66,29 @@ rb_gi_callback_invoke(VALUE user_data)
     }
 }
 
+static VALUE
+rb_gi_callback_invoke(VALUE user_data)
+{
+    RBGICallbackInvokeData *data = (RBGICallbackInvokeData *)user_data;
+    int state = 0;
+    VALUE rb_return_value =
+        rb_protect(rb_gi_callback_invoke_without_protect,
+                   user_data,
+                   &state);
+    if (state) {
+        VALUE error = rb_errinfo();
+        rb_gi_arguments_fill_raw_out_gerror(data->args, error);
+        rb_gi_arguments_fill_raw_results(data->args,
+                                         Qnil,
+                                         data->return_value);
+    } else {
+        rb_gi_arguments_fill_raw_results(data->args,
+                                         rb_return_value,
+                                         data->return_value);
+    }
+    return Qnil;
+}
+
 static void
 rb_gi_ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
                            void *return_value,
@@ -74,7 +98,6 @@ rb_gi_ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
     RBGICallback *callback = data;
     RBGICallbackData *callback_data = NULL;
     RBGIArguments args;
-    VALUE rb_results;
 
     rb_gi_arguments_init(&args,
                          callback->callback_info,
@@ -114,10 +137,9 @@ rb_gi_ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
         data.args = &args;
         data.callback = callback;
         data.callback_data = callback_data;
-        rb_results = rbgutil_invoke_callback(rb_gi_callback_invoke,
-                                             (VALUE)&data);
+        data.return_value = return_value;
+        rbgutil_invoke_callback(rb_gi_callback_invoke, (VALUE)&data);
     }
-    rb_gi_arguments_fill_raw_results(&args, rb_results, return_value);
     rb_gi_arguments_clear(&args);
 
     if (callback_data) {

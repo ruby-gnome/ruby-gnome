@@ -497,6 +497,48 @@ rb_gi_arguments_get_rb_out_args(RBGIArguments *args)
     return rb_gi_arguments_out_to_ruby(args);
 }
 
+void
+rb_gi_arguments_fill_raw_out_gerror(RBGIArguments *args,
+                                    VALUE rb_error)
+{
+    if (!g_callable_info_can_throw_gerror(args->info)) {
+        return;
+    }
+
+    gint n_args = g_callable_info_get_n_args(args->info);
+    /* GError ** isn't listed in args. */
+    GError **gerror = *((gpointer *)(args->raw_args[n_args]));
+    VALUE cGLibError = rb_const_get(mGLib, rb_intern("Error"));
+    if (NIL_P(rb_error)) {
+        g_set_error(gerror,
+                    RBG_RUBY_ERROR,
+                    RBG_RUBY_ERROR_UNKNOWN,
+                    "Unknown error");
+    } else {
+        VALUE message = rb_funcall(rb_error, rb_intern("message"), 0);
+        VALUE backtrace = rb_funcall(rb_error, rb_intern("backtrace"), 0);
+        VALUE formatted_backtrace =
+            rb_ary_join(backtrace, rb_str_new_cstr("  \n"));
+        if (CBOOL2RVAL(rb_obj_is_kind_of(rb_error, cGLibError))) {
+            VALUE domain = rb_funcall(rb_error, rb_intern("domain"), 0);
+            VALUE code = rb_funcall(rb_error, rb_intern("code"), 0);
+            g_set_error(gerror,
+                        g_quark_from_string(RVAL2CSTR(domain)),
+                        NUM2INT(code),
+                        "%s\n  %s\n",
+                        RVAL2CSTR(message),
+                        RVAL2CSTR(formatted_backtrace));
+        } else {
+            g_set_error(gerror,
+                        RBG_RUBY_ERROR,
+                        RBG_RUBY_ERROR_UNKNOWN,
+                        "%s\n  %s\n",
+                        RVAL2CSTR(message),
+                        RVAL2CSTR(formatted_backtrace));
+        }
+    }
+}
+
 static void
 rb_gi_arguments_fill_raw_result_interface(RBGIArguments *args,
                                           VALUE rb_result,

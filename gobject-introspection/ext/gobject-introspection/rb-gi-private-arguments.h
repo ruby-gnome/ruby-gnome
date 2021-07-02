@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2019-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -100,6 +100,10 @@ rb_gi_arguments_get_rb_out_args(RBGIArguments *args);
 G_GNUC_INTERNAL VALUE
 rb_gi_arguments_get_rb_return_value(RBGIArguments *args,
                                     GIArgument *return_value);
+
+G_GNUC_INTERNAL void
+rb_gi_arguments_fill_raw_out_gerror(RBGIArguments *args,
+                                    VALUE rb_error);
 
 G_GNUC_INTERNAL void
 rb_gi_arguments_fill_raw_results(RBGIArguments *args,
