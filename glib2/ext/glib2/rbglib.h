@@ -222,6 +222,13 @@ extern VALUE rbg_check_hash_type(VALUE object);
 extern void rbg_scan_options(VALUE options, ...);
 
 /* rbgerror.h */
+typedef enum {
+  RBG_RUBY_ERROR_UNKNOWN,
+} RBGRubyError;
+
+#define RBG_RUBY_ERROR rbgerr_ruby_error_quark()
+extern GQuark rbgerr_ruby_error_quark(void);
+
 extern VALUE rbgerr_gerror2exception(GError *error);
 extern VALUE rbgerr_define_gerror(GQuark domain, const gchar* name, VALUE module, VALUE parent, GType gtype);
 

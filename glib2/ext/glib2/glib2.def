@@ -158,6 +158,7 @@ EXPORTS
 	rbgutil_stop_callback_dispatch_thread
 	rbgutil_string_set_utf8_encoding
 	rbgutil_key_equal
+	rbgerr_ruby_error_quark
 	rbgerr_define_gerror
 	rbgerr_gerror2exception
 	rbgobj_convert_define

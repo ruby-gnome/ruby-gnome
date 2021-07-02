@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2004  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -28,6 +28,8 @@ static ID id_code_classes;
 static VALUE gerror_table;
 static VALUE generic_error;
 static VALUE error_info;
+
+G_DEFINE_QUARK(ruby-error-quark, rbgerr_ruby_error)
 
 VALUE
 rbgerr_gerror2exception(GError *error)
