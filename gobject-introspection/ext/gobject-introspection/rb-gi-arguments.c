@@ -704,6 +704,7 @@ rb_gi_arguments_fill_raw_result_glist(RBGIArguments *args,
                                       GITransfer transfer,
                                       gboolean is_return_value)
 {
+    GIFFIReturnValue *ffi_return_value = raw_result;
     GITypeInfo *element_type_info;
     GITypeTag element_type_tag;
 
@@ -711,7 +712,7 @@ rb_gi_arguments_fill_raw_result_glist(RBGIArguments *args,
     element_type_tag = g_type_info_get_tag(element_type_info);
 
     if (is_return_value) {
-        ffi_return_value->v_ulong = NULL;
+        ffi_return_value->v_ulong = (gulong)NULL;
     } else {
         *((gpointer *)raw_result) = NULL;
     }
