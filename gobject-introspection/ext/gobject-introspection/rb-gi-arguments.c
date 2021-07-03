@@ -660,6 +660,9 @@ rb_gi_arguments_fill_raw_result_glist_interface(
       break;
     case GI_INFO_TYPE_OBJECT:
       list = RVAL2GOBJGLIST(rb_result);
+      if (transfer == GI_TRANSFER_EVERYTHING) {
+          g_list_foreach(list, (GFunc)g_object_ref, NULL);
+      }
       break;
     case GI_INFO_TYPE_INTERFACE:
     case GI_INFO_TYPE_CONSTANT:
