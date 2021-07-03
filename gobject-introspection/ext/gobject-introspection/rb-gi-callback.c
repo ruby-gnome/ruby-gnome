@@ -33,6 +33,7 @@ typedef struct {
     RBGICallback *callback;
     RBGICallbackData *callback_data;
     void *return_value;
+    VALUE rb_return_value;
 } RBGICallbackInvokeData;
 
 static GPtrArray *callback_finders;
@@ -50,20 +51,34 @@ rb_gi_callback_invoke_without_protect(VALUE user_data)
         VALUE rb_receiver = rb_ary_shift(rb_args);
         CONST_ID(id___send__, "__send__");
         rb_ary_unshift(rb_args, rb_str_new_cstr(data->callback->method_name));
-        return rb_funcallv(rb_receiver,
-                           id___send__,
-                           RARRAY_LENINT(rb_args),
-                           RARRAY_CONST_PTR(rb_args));
+        data->rb_return_value =
+            rb_funcallv(rb_receiver,
+                        id___send__,
+                        RARRAY_LENINT(rb_args),
+                        RARRAY_CONST_PTR(rb_args));
     } else {
         ID id_call;
         CONST_ID(id_call, "call");
         VALUE rb_callback =
             rb_gi_callback_data_get_rb_callback(data->callback_data);
-        return rb_funcallv(rb_callback,
-                           id_call,
-                           RARRAY_LENINT(rb_args),
-                           RARRAY_CONST_PTR(rb_args));
+        data->rb_return_value =
+            rb_funcallv(rb_callback,
+                        id_call,
+                        RARRAY_LENINT(rb_args),
+                        RARRAY_CONST_PTR(rb_args));
     }
+
+    return Qnil;
+}
+
+static VALUE
+rb_gi_callback_invoke_fill_raw_results(VALUE user_data)
+{
+    RBGICallbackInvokeData *data = (RBGICallbackInvokeData *)user_data;
+    rb_gi_arguments_fill_raw_results(data->args,
+                                     data->rb_return_value,
+                                     data->return_value);
+    return Qnil;
 }
 
 static VALUE
@@ -71,20 +86,23 @@ rb_gi_callback_invoke(VALUE user_data)
 {
     RBGICallbackInvokeData *data = (RBGICallbackInvokeData *)user_data;
     int state = 0;
-    VALUE rb_return_value =
-        rb_protect(rb_gi_callback_invoke_without_protect,
-                   user_data,
-                   &state);
-    if (state) {
+    rb_protect(rb_gi_callback_invoke_without_protect,
+               user_data,
+               &state);
+    if (state != 0) {
         VALUE error = rb_errinfo();
         rb_gi_arguments_fill_raw_out_gerror(data->args, error);
-        rb_gi_arguments_fill_raw_results(data->args,
-                                         Qnil,
-                                         data->return_value);
+        rb_protect(rb_gi_callback_invoke_fill_raw_results,
+                   user_data,
+                   &state);
     } else {
-        rb_gi_arguments_fill_raw_results(data->args,
-                                         rb_return_value,
-                                         data->return_value);
+        rb_protect(rb_gi_callback_invoke_fill_raw_results,
+                   user_data,
+                   &state);
+        if (state != 0) {
+            VALUE error = rb_errinfo();
+            rb_gi_arguments_fill_raw_out_gerror(data->args, error);
+        }
     }
     return Qnil;
 }
@@ -138,6 +156,7 @@ rb_gi_ffi_closure_callback(G_GNUC_UNUSED ffi_cif *cif,
         data.callback = callback;
         data.callback_data = callback_data;
         data.return_value = return_value;
+        data.rb_return_value = Qnil;
         rbgutil_invoke_callback(rb_gi_callback_invoke, (VALUE)&data);
     }
     rb_gi_arguments_clear(&args);
