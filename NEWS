@@ -2,6 +2,84 @@
 
 = NEWS
 
+== Ruby-GNOME 3.4.5: 2021-07-07
+
+This is a release that supports implementing virtual functions in
+Ruby.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * Added (({GError})) domain and code for Ruby.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * (({GObjectIntrospection::BaseInfo#container})): Added.
+
+    * (({GObjectIntrospection::ObjectInfo#class_struct})): Added.
+
+    * (({GObjectIntrospection::StructInfo#find_field})): Added.
+
+    * (({RVAL2GI_VFUNC_INFO()})): Added.
+
+    * Added support for implementing virtual functions in Ruby.
+      [GitHub#1386][Based on patch by Yuto Tokunaga]
+
+      You need to define (({virtual_do_#{virtual_function_name}}))
+      method in (({type_register}))-ed class.
+
+    * Added support for implementing virtual functions of interface in
+      Ruby.
+      [GitHub#985][Reported by Matijs van Zuijlen]
+      [GitHub#1938][Reported by Yuto Tokunaga]
+
+    * Added support for "transfer everything" UTF-8 return/output
+      value.
+
+    * Changed to accepted one character for (({gunichar})).
+      [GitHub#1426][Reported by rubyFeedback]
+
+    * (({GObjectIntrospection::CallableInfo#can_throw_gerror?})): Added.
+
+    * Added support for (({GError **})) in callback.
+
+    * Added support for returning (({GList<GObject *>})) from callback.
+
+    * Changed to return (({[]})) for (({NULL})) list.
+
+  * Fixes
+
+    * Fixed a bug that wrong type information is used for output
+      arguments.
+
+==== Ruby/Pango
+
+  * Added support for (({PangoFT2})).
+
+  * Added support for (({PangoFc})).
+
+  * Added support for (({PangoOT})).
+
+  * Added support for (({PangoCairoFontMaps})).
+
+  * Updated gem metadata.
+    [GitHub#1428][Patch by Gabriel Mazetto]
+
+=== Thanks
+
+  * Yuto Tokunaga
+
+  * Matijs van Zuijlen
+
+  * rubyFeedback
+
+  * Gabriel Mazetto
+
 == Ruby-GNOME 3.4.4: 2021-04-22
 
 This is a bug fix release for Windows.
