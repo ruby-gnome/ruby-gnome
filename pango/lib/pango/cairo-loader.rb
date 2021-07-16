@@ -22,13 +22,13 @@ module Pango
     end
 
     def post_load(repository, namespace)
-      font_map = @base_module.const_get("CairoFontMap")
+      font_map_class = @base_module.const_get("CairoFontMap")
       font_types = []
       font_types << :quartz if Cairo::FontFace.quartz_supported?
       font_types << :win32 if Cairo::Surface.quartz_supported?
       font_types << :ft if Cairo::FontFace.freetype_supported?
       font_types.each do |font_type|
-        font_map = font_map.new_for_font_type(font_type)
+        font_map = font_map_class.new_for_font_type(font_type)
         next if font_map.nil?
         @base_module.const_set(font_map.class.gtype.name.gsub(/\APango/, ""),
                                font_map.class)
