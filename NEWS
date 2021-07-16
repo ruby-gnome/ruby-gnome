@@ -2,6 +2,24 @@
 
 = NEWS
 
+== Ruby-GNOME 3.4.6: 2021-07-17
+
+This is a bug fix release for macOS.
+
+=== Changes
+
+==== Ruby/Pango
+
+  * Fixes
+
+    * Fixed a bug that (({require "pango"})) is failed on environment
+      that has multiple font types.
+      [GitHub#1429][Reported by Cameron Gose]
+
+=== Thanks
+
+  * Cameron Gose
+
 == Ruby-GNOME 3.4.5: 2021-07-07
 
 This is a release that supports implementing virtual functions in
