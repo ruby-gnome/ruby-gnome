@@ -70,11 +70,10 @@ rbglib_log_handler(const gchar *log_domain, GLogLevelFlags log_level, const gcha
         if (rb_during_gc()) {
             g_printerr("\tfrom %s:%d\n", rb_sourcefile(), rb_sourceline());
         } else {
-            VALUE backtrace;
-
-            backtrace = rb_funcall(rb_mKernel, rb_intern("caller"), 0);
-            rb_iterate(rb_each, backtrace,
-                       rbg_printerr, Qnil);
+            VALUE backtrace = rb_funcall(rb_mKernel, rb_intern("caller"), 0);
+            ID id_each;
+            CONST_ID(id_each, "each");
+            rb_block_call(backtrace, id_each, 0, NULL, rbg_printerr, Qnil);
         }
     } else {
         g_log_default_handler(log_domain, log_level, message, user_data);

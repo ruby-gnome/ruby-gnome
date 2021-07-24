@@ -364,7 +364,9 @@ static VALUE
 gobj_new_body(VALUE rb_arg)
 {
     struct param_setup_arg *arg = (struct param_setup_arg *)rb_arg;
-    rb_iterate(rb_each, (VALUE)arg->params_hash, _params_setup, (VALUE)arg);
+    ID id_each;
+    CONST_ID(id_each, "each");
+    rb_block_call(arg->params_hash, id_each, 0, NULL, _params_setup, (VALUE)arg);
     return (VALUE)g_object_newv(G_TYPE_FROM_CLASS(arg->gclass),
                                 arg->param_size, arg->params);
 }
