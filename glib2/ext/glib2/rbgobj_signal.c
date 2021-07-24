@@ -719,7 +719,7 @@ gobj_s_signal_handler_attach(VALUE klass,
 {
     const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
     guint signal_id = rbgobj_signal_get_raw(rb_signal)->signal_id;
-    VALUE handler_name = RVAL2CSTR(rb_handler_name);
+    const gchar *handler_name = RVAL2CSTR(rb_handler_name);
     VALUE proc = rb_block_proc();
     GClosure* rclosure = g_rclosure_new(proc,
                                         Qnil,
