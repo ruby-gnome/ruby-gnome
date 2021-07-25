@@ -1,12 +1,16 @@
-FROM ruby:2.6
+FROM ruby:2.7
 
 RUN \
   echo "debconf debconf/frontend select Noninteractive" | \
     debconf-set-selections
 
 RUN \
+  echo "deb http://deb.debian.org/debian buster-backports main" > \
+    /etc/apt/sources.list.d/backports.list
+
+RUN \
   apt update && \
-  apt install -y \
+  apt install -y -V \
     bison \
     build-essential \
     clang-7 \
@@ -37,7 +41,10 @@ RUN \
     protobuf-compiler \
     protobuf-compiler-grpc \
     rapidjson-dev \
-    sudo
+    sudo && \
+  # zstd 1.4 or later is needed
+  apt install -y -V -t buster-backports \
+    libzstd-dev
 
 RUN \
   pip3 install --upgrade meson
