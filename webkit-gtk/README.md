@@ -6,7 +6,7 @@ Ruby/WebKitGTK is a Ruby binding of WebKitGTK+.
 
 * Ruby/GObjectIntrospection and Ruby/GTK3 in
   [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
-* [WebKitGTK+](http://webkitgtk.org/)
+* [WebKitGTK+](http://webkitgtk.org/) 2.4.11 or later.
 
 ## Install
 
