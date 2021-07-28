@@ -544,7 +544,7 @@ rb_gi_arguments_fill_raw_result_interface(RBGIArguments *args,
                                           VALUE rb_result,
                                           gpointer raw_result,
                                           GITypeInfo *type_info,
-                                          G_GNUC_UNUSED GITransfer transfer /* TODO */,
+                                          GITransfer transfer,
                                           gboolean is_return_value)
 {
     GIBaseInfo *interface_info;
@@ -584,8 +584,37 @@ rb_gi_arguments_fill_raw_result_interface(RBGIArguments *args,
       }
       break;
     case GI_INFO_TYPE_FLAGS:
+        rb_raise(rb_eNotImpError,
+                 "TODO: %s::%s: out raw result(interface)[%s]: <%s>",
+                 g_base_info_get_namespace(args->info),
+                 g_base_info_get_name(args->info),
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
+        break;
     case GI_INFO_TYPE_OBJECT:
     case GI_INFO_TYPE_INTERFACE:
+      {
+          GObject *value = RVAL2GOBJ(rb_result);
+          GType gtype = g_registered_type_info_get_g_type(interface_info);
+          if (gtype != G_TYPE_NONE &&
+              !G_TYPE_CHECK_INSTANCE_TYPE(value, gtype)) {
+              rb_raise(rb_eArgError,
+                       "%s::%s: must return <%s> object: <%" PRIsVALUE ">",
+                       g_base_info_get_namespace(args->info),
+                       g_base_info_get_name(args->info),
+                       g_type_name(gtype),
+                       rb_result);
+          }
+          if (transfer == GI_TRANSFER_EVERYTHING) {
+              g_object_ref(value);
+          }
+          if (is_return_value) {
+              ffi_return_value->v_pointer = value;
+          } else {
+              *((gpointer *)raw_result) = value;
+          }
+      }
+      break;
     case GI_INFO_TYPE_CONSTANT:
         rb_raise(rb_eNotImpError,
                  "TODO: %s::%s: out raw result(interface)[%s]: <%s>",
