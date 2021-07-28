@@ -508,7 +508,7 @@ rb_gi_arguments_fill_raw_out_gerror(RBGIArguments *args,
     gint n_args = g_callable_info_get_n_args(args->info);
     /* GError ** isn't listed in args. */
     GError **gerror = *((gpointer *)(args->raw_args[n_args]));
-    VALUE cGLibError = rb_const_get(mGLib, rb_intern("Error"));
+    VALUE cGLibErrorInfo = rb_const_get(mGLib, rb_intern("ErrorInfo"));
     if (NIL_P(rb_error)) {
         g_set_error(gerror,
                     RBG_RUBY_ERROR,
@@ -519,23 +519,22 @@ rb_gi_arguments_fill_raw_out_gerror(RBGIArguments *args,
         VALUE backtrace = rb_funcall(rb_error, rb_intern("backtrace"), 0);
         VALUE formatted_backtrace =
             rb_ary_join(backtrace, rb_str_new_cstr("  \n"));
-        if (CBOOL2RVAL(rb_obj_is_kind_of(rb_error, cGLibError))) {
+        GQuark gdomain = RBG_RUBY_ERROR;
+        gint gcode = RBG_RUBY_ERROR_UNKNOWN;
+        if (RVAL2CBOOL(rb_obj_is_kind_of(rb_error, cGLibErrorInfo))) {
             VALUE domain = rb_funcall(rb_error, rb_intern("domain"), 0);
             VALUE code = rb_funcall(rb_error, rb_intern("code"), 0);
-            g_set_error(gerror,
-                        g_quark_from_string(RVAL2CSTR(domain)),
-                        NUM2INT(code),
-                        "%s\n  %s\n",
-                        RVAL2CSTR(message),
-                        RVAL2CSTR(formatted_backtrace));
-        } else {
-            g_set_error(gerror,
-                        RBG_RUBY_ERROR,
-                        RBG_RUBY_ERROR_UNKNOWN,
-                        "%s\n  %s\n",
-                        RVAL2CSTR(message),
-                        RVAL2CSTR(formatted_backtrace));
+            if (!NIL_P(domain) && !NIL_P(code)) {
+                gdomain = g_quark_from_string(RVAL2CSTR(domain));
+                gcode = NUM2INT(code);
+            }
         }
+        g_set_error(gerror,
+                    gdomain,
+                    gcode,
+                    "%s\n  %s\n",
+                    RVAL2CSTR(message),
+                    RVAL2CSTR(formatted_backtrace));
     }
 }
 
