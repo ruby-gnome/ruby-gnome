@@ -2,6 +2,29 @@
 
 = NEWS
 
+== Ruby-GNOME 3.4.7: 2021-07-30
+
+This is a release that improves virtual function support.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * (({GLib::Error})): Added support for setting (({code})) and
+      (({domain})) automatically.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for returning object from callback.
+
+  * Fixes
+
+    * Fixed a bug that (({GError})) detection doesn't work.
+
 == Ruby-GNOME 3.4.6: 2021-07-17
 
 This is a bug fix release for macOS.
