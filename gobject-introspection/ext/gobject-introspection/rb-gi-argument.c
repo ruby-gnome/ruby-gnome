@@ -1296,7 +1296,7 @@ rb_gi_argument_to_ruby(GIArgument *argument,
     switch (type_tag) {
     case GI_TYPE_TAG_VOID:
         if (g_type_info_is_pointer(type_info)) {
-            rb_argument = ULONG2NUM(GPOINTER_TO_UINT(argument->v_pointer));
+            rb_argument = ULL2NUM((guint64)(argument->v_pointer));
         } else {
             rb_argument = Qnil;
         }
