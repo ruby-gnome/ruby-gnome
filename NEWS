@@ -2,6 +2,19 @@
 
 = NEWS
 
+== Ruby-GNOME 3.4.8: 2021-08-09
+
+This is a bug fix release of 3.4.7.
+
+=== Changes
+
+==== Ruby/GObjectIntrospection
+
+  * Fixes
+
+    * Fixed a bug that (({gpointer})) to Ruby conversion breaks a
+      value when pointer value is (({2 ** 32})) or later.
+
 == Ruby-GNOME 3.4.7: 2021-07-30
 
 This is a release that improves virtual function support.
