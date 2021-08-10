@@ -143,7 +143,7 @@ rb_gi_arguments_in_init_arg_ruby_void(RBGIArguments *args,
     } else if (rbg_is_object(metadata->rb_arg)) {
         *target = RVAL2GOBJ(metadata->rb_arg);
     } else {
-        *target = GUINT_TO_POINTER(NUM2ULONG(metadata->rb_arg));
+        *target = (gpointer)(NUM2ULL(metadata->rb_arg));
     }
 }
 

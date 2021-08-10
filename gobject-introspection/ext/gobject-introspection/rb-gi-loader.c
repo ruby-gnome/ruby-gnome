@@ -365,7 +365,7 @@ rg_s_instantiate_gobject_pointer(G_GNUC_UNUSED VALUE klass,
 {
     GObject *gobject;
 
-    gobject = GUINT_TO_POINTER(NUM2ULONG(rb_gobject_pointer));
+    gobject = (gpointer)(NUM2ULL(rb_gobject_pointer));
 
     return GOBJ2RVAL(gobject);
 }
