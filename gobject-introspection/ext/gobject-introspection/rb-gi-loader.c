@@ -70,7 +70,7 @@ struct_alloc(VALUE klass)
         is_owned = FALSE;
     } else {
         size_t size;
-        size = NUM2ULONG(rb_size);
+        size = NUM2ULL(rb_size);
         instance = xcalloc(1, size);
         is_owned = TRUE;
     }
