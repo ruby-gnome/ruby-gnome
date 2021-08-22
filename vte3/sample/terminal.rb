@@ -14,6 +14,7 @@ window = Gtk::Window.new("Terminal sample")
 window.signal_connect("destroy"){ Gtk.main_quit }
 
 terminal = Vte::Terminal.new
+terminal.enable_sixel = true if terminal.respond_to?(:enable_sixel=)
 terminal.signal_connect("child-exited") do |_widget|
   Gtk.main_quit
 end
