@@ -43,6 +43,10 @@
 #  define G_VALUE_INIT { 0, { { 0 } } }
 #endif
 
+#ifndef RUBY_TYPED_FROZEN_SHAREABLE
+#  define RUBY_TYPED_FROZEN_SHAREABLE 0
+#endif
+
 G_BEGIN_DECLS
 
 typedef struct {

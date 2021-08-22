@@ -61,7 +61,7 @@ static const rb_data_type_t rg_glib_param_type = {
     },
     NULL,
     NULL,
-    RUBY_TYPED_FREE_IMMEDIATELY,
+    RUBY_TYPED_FREE_IMMEDIATELY | RUBY_TYPED_FROZEN_SHAREABLE,
 };
 
 static pspec_holder *
