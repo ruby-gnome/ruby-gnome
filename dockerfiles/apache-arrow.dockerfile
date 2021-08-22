@@ -5,17 +5,12 @@ RUN \
     debconf-set-selections
 
 RUN \
-  echo "deb http://deb.debian.org/debian buster-backports main" > \
-    /etc/apt/sources.list.d/backports.list
-
-RUN \
   apt update && \
   apt install -y -V \
-    bison \
     build-essential \
-    clang-7 \
+    ccache \
+    clang \
     cmake \
-    flex \
     g++ \
     gcc \
     git \
@@ -23,7 +18,9 @@ RUN \
     libboost-regex-dev \
     libboost-system-dev \
     libbrotli-dev \
+    libbz2-dev \
     libc-ares-dev \
+    libcurl4-openssl-dev \
     libdouble-conversion-dev \
     libgoogle-glog-dev \
     libgrpc++-dev \
@@ -34,17 +31,16 @@ RUN \
     libsnappy-dev \
     libssl-dev \
     libthrift-dev \
+    libutf8proc-dev \
     libzstd-dev \
+    llvm-dev \
     ninja-build \
     python3-pip \
     pkg-config \
-    protobuf-compiler \
     protobuf-compiler-grpc \
     rapidjson-dev \
-    sudo && \
-  # zstd 1.4 or later is needed
-  apt install -y -V -t buster-backports \
-    libzstd-dev
+    sudo \
+    zlib1g-dev
 
 RUN \
   pip3 install --upgrade meson
