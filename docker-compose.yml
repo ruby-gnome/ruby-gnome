@@ -45,6 +45,8 @@ services:
       - .:/ruby-gnome:delegated
     command:
       /ruby-gnome/dockerfiles/run-test.sh
+    cap_add:
+      - SYS_ADMIN
 
   ruby-2.7:
     build:
