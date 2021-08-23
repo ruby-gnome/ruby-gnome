@@ -13,7 +13,7 @@ jobs:
           - arch-linux
           - centos-7
           - centos-8
-          - fedora-rawhide
+          # - fedora-rawhide
           - ruby-2.7
           - ruby-3.0
           - ubuntu-18.04
