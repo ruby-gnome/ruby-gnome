@@ -23,8 +23,13 @@
 #include <ctype.h>
 
 static ID id_code;
+static ID id_CODE;
+static const char *name_CODE = "CODE";
 static ID id_domain;
-static ID id_code_classes;
+static ID id_DOMAIN;
+static const char *name_DOMAIN = "DOMAIN";
+static ID id_CODE_CLASSES;
+static const char *name_CODE_CLASSES = "CODE_CLASSES";
 static VALUE gerror_table;
 static VALUE generic_error;
 static VALUE error_info;
@@ -44,13 +49,9 @@ rbgerr_gerror2exception(GError *error)
     exception_klass = rb_hash_aref(gerror_table, UINT2NUM(error->domain));
     if (NIL_P(exception_klass)) {
         exception_klass = generic_error;
-    } else {
-        VALUE code_class = Qnil;
-        VALUE code_classes;
-        code_classes = rb_ivar_get(exception_klass, id_code_classes);
-        if (!NIL_P(code_classes)) {
-            code_class = rb_hash_aref(code_classes, INT2NUM(error->code));
-        }
+    } else if (rb_const_defined_at(exception_klass, id_CODE_CLASSES)) {
+        VALUE code_classes = rb_const_get(exception_klass, id_CODE_CLASSES);
+        VALUE code_class = rb_hash_aref(code_classes, INT2NUM(error->code));
         if (!NIL_P(code_class)) {
             exception_klass = code_class;
         }
@@ -111,16 +112,17 @@ rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE paren
     VALUE code_classes;
     VALUE rb_domain = rb_str_new_cstr(g_quark_to_string(domain));
     rbgutil_string_set_utf8_encoding(rb_domain);
+    rb_obj_freeze(rb_domain);
 
     error_class = rb_define_class_under(module, name, parent);
-    rb_ivar_set(error_class, id_code, Qnil);
-    rb_ivar_set(error_class, id_domain, rb_domain);
+    rb_define_const(error_class, name_CODE, Qnil);
+    rb_define_const(error_class, name_DOMAIN, rb_domain);
     rb_prepend_module(error_class, error_info);
 
     rb_hash_aset(gerror_table, UINT2NUM(domain), error_class);
 
     code_classes = rb_hash_new();
-    rb_ivar_set(error_class, id_code_classes, code_classes);
+    rb_define_const(error_class, name_CODE_CLASSES, code_classes);
 
     if (gtype != G_TYPE_INVALID) {
         GEnumClass* gclass = g_type_class_ref(gtype);
@@ -146,13 +148,15 @@ rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE paren
                                                code_class_name,
                                                error_class);
             g_free(code_class_name);
-            rb_ivar_set(code_class, id_code, INT2NUM(entry->value));
-            rb_ivar_set(code_class, id_domain, rb_domain);
+            rb_define_const(code_class, name_CODE, INT2NUM(entry->value));
+            rb_define_const(code_class, name_DOMAIN, rb_domain);
             rb_hash_aset(code_classes, INT2NUM(entry->value), code_class);
         }
 
         g_type_class_unref(gclass);
     }
+
+    rb_obj_freeze(code_classes);
 
     return error_class;
 }
@@ -161,8 +165,8 @@ static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE klass = rb_obj_class(self);
-    rb_ivar_set(self, id_code, rb_ivar_get(klass, id_code));
-    rb_ivar_set(self, id_domain, rb_ivar_get(klass, id_domain));
+    rb_ivar_set(self, id_code, rb_const_get(klass, id_CODE));
+    rb_ivar_set(self, id_domain, rb_const_get(klass, id_DOMAIN));
     return rb_call_super(argc, argv);
 }
 
@@ -178,8 +182,10 @@ void
 Init_glib_error(void)
 {
     id_code = rb_intern("@code");
+    id_CODE = rb_intern(name_CODE);
     id_domain = rb_intern("@domain");
-    id_code_classes = rb_intern("@code_classes");
+    id_DOMAIN = rb_intern(name_DOMAIN);
+    id_CODE_CLASSES = rb_intern(name_CODE_CLASSES);
     gerror_table = rb_hash_new();
     rb_global_variable(&gerror_table);
 
@@ -190,6 +196,8 @@ Init_glib_error(void)
     RG_DEF_METHOD(initialize, -1);
 
     generic_error = rb_define_class_under(mGLib, "Error", rb_eRuntimeError);
+    rb_define_const(generic_error, name_CODE, Qnil);
+    rb_define_const(generic_error, name_DOMAIN, Qnil);
     rb_include_module(generic_error, error_info);
 }
 
