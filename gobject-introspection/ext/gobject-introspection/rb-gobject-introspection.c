@@ -260,7 +260,9 @@ rb_gi_hook_up_vfunc(G_GNUC_UNUSED VALUE self,
 void
 Init_gobject_introspection(void)
 {
-    VALUE RG_TARGET_NAMESPACE;
+#ifdef HAVE_RB_EXT_RACTOR_SAFE
+    rb_ext_ractor_safe(true);
+#endif
 
     id_send = rb_intern("__send__");
 
@@ -271,7 +273,7 @@ Init_gobject_introspection(void)
         }
     }
 
-    RG_TARGET_NAMESPACE = rb_define_module("GObjectIntrospection");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module("GObjectIntrospection");
 
     rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
                     rb_ary_new3(3,
