@@ -12,7 +12,7 @@ jobs:
           - "2.7"
           - "3.0"
     runs-on: windows-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
