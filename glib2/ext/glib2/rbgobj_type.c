@@ -974,6 +974,7 @@ static inline void
 _def_fundamental_type(VALUE ary, GType gtype, const char* name)
 {
     VALUE c = rbgobj_gtype_new(gtype);
+    rb_obj_freeze(c);
     rb_define_const(RG_TARGET_NAMESPACE, name, c);
     rb_ary_push(ary, c);
 }

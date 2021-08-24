@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
  *  Copyright (C) 2004-2006  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -191,6 +191,7 @@ rbgobj_init_enum_class(VALUE klass)
 
         rb_raw_enum_value = INT2NUM(entry->value);
         value = rb_funcall(klass, id_new, 1, rb_raw_enum_value);
+        rb_obj_freeze(value);
         rb_hash_aset(values, rb_raw_enum_value, value);
         const_nick_name = nick_to_const_name(entry->value_nick);
         if (const_nick_name) {
