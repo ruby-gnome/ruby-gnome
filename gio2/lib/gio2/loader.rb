@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2019  Ruby-GNOME Project Team
+# Copyright (C) 2013-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -39,6 +39,18 @@ module Gio
       end
       require_extension
       require_libraries
+
+      if defined?(Ractor)
+        [
+          @content_type_class,
+          @mime_type_class,
+          @dbus_module,
+          @resources_module,
+        ].each do |klass|
+          Ractor.make_shareable(klass::INVOKERS)
+          Ractor.make_shareable(klass.singleton_class::INVOKERS)
+        end
+      end
     end
 
     def require_extension
@@ -67,6 +79,9 @@ module Gio
 
     def define_content_type_class
       @content_type_class = Class.new do
+        const_set(:INVOKERS, {})
+        singleton_class.const_set(:INVOKERS, {})
+
         def initialize(type)
           @type = type
         end
@@ -80,6 +95,9 @@ module Gio
 
     def define_mime_type_class
       @mime_type_class = Class.new do
+        const_set(:INVOKERS, {})
+        singleton_class.const_set(:INVOKERS, {})
+
         def initialize(type)
           @type = type
         end
@@ -92,12 +110,18 @@ module Gio
     end
 
     def define_dbus_module
-      @dbus_module = Module.new
+      @dbus_module = Module.new do
+        const_set(:INVOKERS, {})
+        singleton_class.const_set(:INVOKERS, {})
+      end
       @base_module.const_set("DBus", @dbus_module)
     end
 
     def define_resources_module
-      @resources_module = Module.new
+      @resources_module = Module.new do
+        const_set(:INVOKERS, {})
+        singleton_class.const_set(:INVOKERS, {})
+      end
       @base_module.const_set("Resources", @resources_module)
     end
 

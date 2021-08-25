@@ -38,6 +38,8 @@ module GObjectIntrospection
     def load(namespace)
       repository = Repository.default
       repository.require(namespace, @version)
+      @base_module.const_set(:INVOKERS, {})
+      @base_module.singleton_class.const_set(:INVOKERS, {})
       pre_load(repository, namespace)
       repository.each(namespace) do |info|
         load_info(info) if info.is_a?(InterfaceInfo)
@@ -46,6 +48,10 @@ module GObjectIntrospection
         load_info(info) unless info.is_a?(InterfaceInfo)
       end
       post_load(repository, namespace)
+      if defined?(Ractor)
+        Ractor.make_shareable(@base_module::INVOKERS)
+        Ractor.make_shareable(@base_module.singleton_class::INVOKERS)
+      end
     end
 
     private
@@ -124,8 +130,14 @@ module GObjectIntrospection
                                         :parent => options[:parent],
                                         :size   => size)
       end
+      klass.const_set(:INVOKERS, {})
+      klass.singleton_class.const_set(:INVOKERS, {})
       load_fields(info, klass)
       load_methods(info, klass)
+      if defined?(Ractor)
+        Ractor.make_shareable(klass::INVOKERS)
+        Ractor.make_shareable(klass.singleton_class::INVOKERS)
+      end
     end
 
     def load_struct_info(info)
@@ -590,8 +602,13 @@ module GObjectIntrospection
                                     rubyish_class_name(info),
                                     @base_module)
       interface_module.const_set(:INVOKERS, {})
+      interface_module.singleton_class.const_set(:INVOKERS, {})
       load_virtual_functions(info, interface_module)
       load_methods(info, interface_module)
+      if defined?(Ractor)
+        Ractor.make_shareable(interface_module::INVOKERS)
+        Ractor.make_shareable(interface_module.singleton_class::INVOKERS)
+      end
     end
 
     def load_constant_info(info)
