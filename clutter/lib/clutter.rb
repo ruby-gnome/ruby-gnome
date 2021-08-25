@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -24,7 +24,7 @@ module Clutter
 
   class << self
     def const_missing(name)
-      init()
+      init
       if const_defined?(name)
         const_get(name)
       else
@@ -93,17 +93,17 @@ module Clutter
       if error.to_i <= 0
         raise InitError, "failed to initialize Clutter: #{error.name}"
       end
-      @keys_module = Module.new
-      @base_module.const_set("Keys", @keys_module)
-      @threads_module = Module.new
-      @base_module.const_set("Threads", @threads_module)
-      @feature_module = Module.new
-      @base_module.const_set("Feature", @feature_module)
-      @version_module = Module.new
-      @base_module.const_set("Version", @version_module)
+      @keys_module = define_methods_module(:Keys)
+      @threads_module = define_methods_module(:Threads)
+      @feature_module = define_methods_module(:Feature)
+      @version_module = define_methods_module(:Version)
     end
 
     def post_load(repository, namespace)
+      post_methods_module(@keys_module)
+      post_methods_module(@threads_module)
+      post_methods_module(@feature_module)
+      post_methods_module(@version_module)
       @other_constant_infos.each do |constant_info|
         name = constant_info.name
         next if @key_constants.has_key?("KEY_#{name}")
