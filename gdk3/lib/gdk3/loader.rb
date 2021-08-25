@@ -26,39 +26,101 @@ module Gdk
       @event_class ||= @base_module.const_get(:Event)
     end
 
-    def event_motion_class
-      @event_motion_class ||= @base_module.const_get(:EventMotion)
-    end
-
     def pre_load(repository, namespace)
       setup_pending_constants
       setup_pending_rectangle_functions
       define_keyval_module
       define_selection_module
+      define_event_singleton_methods_module
+      define_event_motion_methods_module
       define_window_methods_module
+      define_cairo_context_methods_module
+      define_cairo_surface_methods_module
       require_pre_libraries
     end
 
     def define_keyval_module
       @keyval_module = Module.new
-      @base_module.const_set("Keyval", @keyval_module)
+      @base_module.const_set(:Keyval, @keyval_module)
+      @keyval_module.const_set(:INVOKERS, {})
+    end
+
+    def post_keyval_module
+      Ractor.make_shareable(@keyval_module::INVOKERS) if defined?(Ractor)
     end
 
     def define_selection_module
       @selection_module = Module.new
-      @base_module.const_set("Selection", @selection_module)
+      @base_module.const_set(:Selection, @selection_module)
+    end
+
+    def define_event_singleton_methods_module
+      @event_singleton_methods_module = Module.new
+      @base_module.const_set(:EventSingletonMethods,
+                             @event_singleton_methods_module)
+      @event_singleton_methods_module.const_set(:INVOKERS, {})
+    end
+
+    def apply_event_singleton_methods
+      event_class = @base_module.const_get(:Event)
+      event_class.extend(@event_singleton_methods_module)
+      if defined?(Ractor)
+        Ractor.make_shareable(@event_singleton_methods_module::INVOKERS)
+      end
+    end
+
+    def define_event_motion_methods_module
+      @event_motion_methods_module = Module.new
+      @base_module.const_set(:EventMotionMethods, @event_motion_methods_module)
+      @event_motion_methods_module.const_set(:INVOKERS, {})
+    end
+
+    def apply_event_motion_methods
+      event_motion_class = @base_module.const_get(:EventMotion)
+      event_motion_class.include(@event_motion_methods_module)
+      if defined?(Ractor)
+        Ractor.make_shareable(@event_motion_methods_module::INVOKERS)
+      end
     end
 
     def define_window_methods_module
       @window_methods_module = Module.new
-      @base_module.const_set("WindowMethods", @window_methods_module)
+      @base_module.const_set(:WindowMethods, @window_methods_module)
       @window_methods_module.const_set(:INVOKERS, {})
     end
 
     def apply_window_methods
       window_class = @base_module.const_get(:Window)
       window_class.include(@window_methods_module)
-      Ractor.make_shareable(@window_methods_module) if defined?(Ractor)
+      if defined?(Ractor)
+        Ractor.make_shareable(@window_methods_module::INVOKERS)
+      end
+    end
+
+    def define_cairo_context_methods_module
+      @cairo_context_methods_module = Module.new
+      @base_module.const_set(:CairoContextMethods, @cairo_context_methods_module)
+      @cairo_context_methods_module.const_set(:INVOKERS, {})
+    end
+
+    def apply_cairo_context_methods
+      Cairo::Context.include(@cairo_context_methods_module)
+      if defined?(Ractor)
+        Ractor.make_shareable(@cairo_context_methods_module::INVOKERS)
+      end
+    end
+
+    def define_cairo_surface_methods_module
+      @cairo_surface_methods_module = Module.new
+      @base_module.const_set(:CairoSurfaceMethods, @cairo_surface_methods_module)
+      @cairo_surface_methods_module.const_set(:INVOKERS, {})
+    end
+
+    def apply_cairo_surface_methods
+      Cairo::Surface.include(@cairo_surface_methods_module)
+      if defined?(Ractor)
+        Ractor.make_shareable(@cairo_surface_methods_module::INVOKERS)
+      end
     end
 
     def require_pre_libraries
@@ -68,7 +130,12 @@ module Gdk
     def post_load(repository, namespace)
       apply_pending_constants
       apply_pending_rectangle_functions
+      post_keyval_module
+      apply_event_singleton_methods
+      apply_event_motion_methods
       apply_window_methods
+      apply_cairo_context_methods
+      apply_cairo_surface_methods
       require_post_libraries
       convert_event_classes
       define_selection_constants
@@ -229,7 +296,7 @@ module Gdk
         when "get_from_window"
           target_class = @window_methods_module
         when "get_from_surface"
-          target_class = Cairo::Surface
+          target_class = @cairo_surface_methods_module
         end
         if target_class
           define_method(info, target_class, "to_pixbuf")
@@ -240,30 +307,38 @@ module Gdk
         name = $POSTMATCH
         case name
         when "request_motions"
-          define_method(info, event_motion_class, "request")
+          define_method(info, @event_motion_methods_module, "request")
         else
           # ignore because moved to Gdk::Event
         end
       when /\Aevents_/
         method_name = rubyish_method_name(info, :prefix => "events_")
-        define_singleton_method(event_class, method_name, info)
+        define_module_function(@event_singleton_methods_module,
+                               method_name,
+                               info)
       when /\Acairo_/
         name = $POSTMATCH
         case name
         when "create"
           define_method(info, @window_methods_module, "create_cairo_context")
         when "set_source_color"
-          define_method(info, Cairo::Context, "set_source_gdk_color")
+          define_method(info,
+                        @cairo_context_methods_module,
+                        "set_source_gdk_color")
         when "set_source_rgba"
-          define_method(info, Cairo::Context, "set_source_gdk_rgba")
+          define_method(info,
+                        @cairo_context_methods_module,
+                        "set_source_gdk_rgba")
         when "rectangle"
-          define_method(info, Cairo::Context, "gdk_rectangle")
+          define_method(info,
+                        @cairo_context_methods_module,
+                        "gdk_rectangle")
         when "region_create_from_surface"
           # TODO
         when "surface_create_from_pixbuf"
           # TODO
         else
-          define_method(info, Cairo::Context, name)
+          define_method(info, @cairo_context_methods_module, name)
         end
       when /\Akeyval_/
         name = rubyish_method_name(info, :prefix => "keyval_")

@@ -48,7 +48,7 @@ module Gdk
       end
       loader = Loader.new(self)
       loader.load
-      x11_loader = X11Loader.new(self)
+      x11_loader = GdkX11::Loader.new(GdkX11)
       x11_loader.load
       if Object.const_defined?(:Gtk) and Gtk.respond_to?(:init)
         Gtk.init

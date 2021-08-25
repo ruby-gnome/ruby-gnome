@@ -14,14 +14,28 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Gdk
-  class X11Loader < GObjectIntrospection::Loader
+module GdkX11
+  class Loader < GObjectIntrospection::Loader
     def load
       begin
         self.version = "3.0"
         super("GdkX11")
       rescue GObjectIntrospection::RepositoryError::TypelibNotFound
         # Ignore. Some environments such as Windows don't have it.
+      end
+    end
+
+    private
+    def post_load(repository, namespace)
+      @base_module.constants.each do |constant|
+        case constant
+        when :INVOKERS,
+             :Loader
+          next
+        else
+          value = @base_module.const_get(constant)
+          Gdk.const_set(constant, value)
+        end
       end
     end
   end
