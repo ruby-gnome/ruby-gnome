@@ -622,8 +622,14 @@ module GObjectIntrospection
     def load_union_info(info)
       return if info.gtype == GLib::Type::NONE
       klass = self.class.define_class(info.gtype, info.name, @base_module)
+      klass.const_set(:INVOKERS, {})
+      klass.singleton_class.const_set(:INVOKERS, {})
       load_fields(info, klass)
       load_methods(info, klass)
+      if defined?(Ractor)
+        Ractor.make_shareable(klass::INVOKERS)
+        Ractor.make_shareable(klass.singleton_class::INVOKERS)
+      end
     end
 
     class Invoker
