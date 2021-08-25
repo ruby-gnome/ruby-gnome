@@ -55,34 +55,42 @@ module Gtk
       @base_module.const_set("Version", @version_module)
     end
 
+    def define_methods_module(name)
+      mod = Module.new
+      @base_module.const_set(name, mod)
+      mod.const_set(:INVOKERS, {})
+      mod
+    end
+
     def define_methods_modules
-      @stock_singleton_methods_module = Module.new
-      @base_module.const_set("StockSingletonMethods",
-                             @stock_singleton_methods_module)
-      @widget_methods_module = Module.new
-      @base_module.const_set("WidgetMethods", @widget_methods_module)
-      @drag_context_methods_module = Module.new
-      @base_module.const_set("DragContextMethods", @drag_context_methods_module)
-      @icon_size_class_methods_module = Module.new
-      @base_module.const_set("IconSizeClassMethods",
-                             @icon_size_class_methods_module)
-      @accel_group_class_methods_module = Module.new
-      @base_module.const_set("AccelGroupClassMethods",
-                             @accel_group_class_methods_module)
+      @stock_singleton_methods_module =
+        define_methods_module(:StockSingletonMethods)
+      @widget_methods_module =
+        define_methods_module(:WidgetMethods)
+      @gdk_drag_context_methods_module =
+        define_methods_module(:GdkDragContextMethods)
+      @icon_size_class_methods_module =
+        define_methods_module(:IconSizeClassMethods)
+      @accel_group_class_methods_module =
+        define_methods_module(:AccelGroupClassMethods)
+      @gdk_event_methods_module =
+        define_methods_module(:GdkEventMethods)
     end
 
     def apply_methods_modules
       @base_module::Stock.extend(@stock_singleton_methods_module)
       @base_module::Widget.include(@widget_methods_module)
-      Gdk::DragContext.include(@drag_context_methods_module)
+      Gdk::DragContext.include(@gdk_drag_context_methods_module)
       @base_module::IconSize.extend(@icon_size_class_methods_module)
       @base_module::AccelGroup.extend(@accel_group_class_methods_module)
+      Gdk::Event.include(@gdk_event_methods_module)
       if defined?(Ractor)
-        Ractor.make_shareable(@stock_singleton_methods_module)
-        Ractor.make_shareable(@widget_methods_module)
-        Ractor.make_shareable(@drag_context_methods_module)
-        Ractor.make_shareable(@icon_size_class_methods_module)
-        Ractor.make_shareable(@accel_group_class_methods_module)
+        Ractor.make_shareable(@stock_singleton_methods_module::INVOKERS)
+        Ractor.make_shareable(@widget_methods_module::INVOKERS)
+        Ractor.make_shareable(@gdk_drag_context_methods_module::INVOKERS)
+        Ractor.make_shareable(@icon_size_class_methods_module::INVOKERS)
+        Ractor.make_shareable(@accel_group_class_methods_module::INVOKERS)
+        Ractor.make_shareable(@gdk_event_methods_module::INVOKERS)
       end
     end
 
@@ -215,7 +223,7 @@ module Gtk
         method_name = rubyish_method_name(info,
                                           :prefix => "drag_",
                                           :n_in_args_offset => -1)
-        define_method(info, @drag_context_methods_module, method_name)
+        define_method(info, @gdk_drag_context_methods_module, method_name)
       when /\Abinding_/
         # Ignore because singleton methods are defined.
       when /\Aicon_size_/
@@ -241,7 +249,7 @@ module Gtk
       when "Gtk"
         case name
         when "get_event_widget"
-          define_gdk_event_widget(info)
+          define_method(info, @gdk_event_methods_module, "widget")
           return
         when "events_pending"
           name = "events_pending?"
@@ -255,10 +263,6 @@ module Gtk
       end
 
       super(klass, name, info)
-    end
-
-    def define_gdk_event_widget(info)
-      define_method(info, Gdk::Event, "widget")
     end
 
     def define_enum(info)
