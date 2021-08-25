@@ -631,6 +631,7 @@ module GObjectIntrospection
         @info = info
         @method_name = method_name
         @full_method_name = full_method_name
+        @prepared = false
         ensure_prepared if defined?(Ractor)
       end
 
