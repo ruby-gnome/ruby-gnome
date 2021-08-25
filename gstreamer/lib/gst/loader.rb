@@ -41,19 +41,14 @@ module Gst
       raise error unless succeeded
     end
 
-    def define_module(name)
-      mod = Module.new
-      @base_module.const_set(name, mod)
-      mod.const_set(:INVOKERS, {})
-      mod
-    end
-
     def define_value_modules
-      @value_functions_module = define_module(:ValueFunctions)
-      @value_methods_module   = define_module(:ValueMethods)
+      @value_functions_module = define_methods_module(:ValueFunctions)
+      @value_methods_module   = define_methods_module(:ValueMethods)
     end
 
     def post_load(repository, namespace)
+      post_methods_module(@value_functions_module)
+      post_methods_module(@value_methods_module)
       require_extension
       require_libraries
       self.class.start_callback_dispatch_thread

@@ -55,13 +55,6 @@ module Gtk
       @base_module.const_set("Version", @version_module)
     end
 
-    def define_methods_module(name)
-      mod = Module.new
-      @base_module.const_set(name, mod)
-      mod.const_set(:INVOKERS, {})
-      mod
-    end
-
     def define_methods_modules
       @stock_singleton_methods_module =
         define_methods_module(:StockSingletonMethods)
@@ -78,20 +71,18 @@ module Gtk
     end
 
     def apply_methods_modules
-      @base_module::Stock.extend(@stock_singleton_methods_module)
-      @base_module::Widget.include(@widget_methods_module)
-      Gdk::DragContext.include(@gdk_drag_context_methods_module)
-      @base_module::IconSize.extend(@icon_size_class_methods_module)
-      @base_module::AccelGroup.extend(@accel_group_class_methods_module)
-      Gdk::Event.include(@gdk_event_methods_module)
-      if defined?(Ractor)
-        Ractor.make_shareable(@stock_singleton_methods_module::INVOKERS)
-        Ractor.make_shareable(@widget_methods_module::INVOKERS)
-        Ractor.make_shareable(@gdk_drag_context_methods_module::INVOKERS)
-        Ractor.make_shareable(@icon_size_class_methods_module::INVOKERS)
-        Ractor.make_shareable(@accel_group_class_methods_module::INVOKERS)
-        Ractor.make_shareable(@gdk_event_methods_module::INVOKERS)
-      end
+      apply_methods_module(@stock_singleton_methods_module,
+                           @base_module::Stock.singleton_class)
+      apply_methods_module(@widget_methods_module,
+                           @base_module::Widget)
+      apply_methods_module(@gdk_drag_context_methods_module,
+                           Gdk::DragContext)
+      apply_methods_module(@icon_size_class_methods_module,
+                           @base_module::IconSize.singleton_class)
+      apply_methods_module(@accel_group_class_methods_module,
+                           @base_module::AccelGroup.singleton_class)
+      apply_methods_module(@gdk_event_methods_module,
+                           Gdk::Event)
     end
 
     def level_bar_class

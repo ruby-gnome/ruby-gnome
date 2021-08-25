@@ -40,13 +40,11 @@ module Gdk
     end
 
     def define_keyval_module
-      @keyval_module = Module.new
-      @base_module.const_set(:Keyval, @keyval_module)
-      @keyval_module.const_set(:INVOKERS, {})
+      @keyval_module = define_methods_module(:Keyval)
     end
 
     def post_keyval_module
-      Ractor.make_shareable(@keyval_module::INVOKERS) if defined?(Ractor)
+      post_methods_module(@keyval_module)
     end
 
     def define_selection_module
@@ -55,72 +53,52 @@ module Gdk
     end
 
     def define_event_singleton_methods_module
-      @event_singleton_methods_module = Module.new
-      @base_module.const_set(:EventSingletonMethods,
-                             @event_singleton_methods_module)
-      @event_singleton_methods_module.const_set(:INVOKERS, {})
+      @event_singleton_methods_module =
+        define_methods_module(:EventSingletonMethods)
     end
 
     def apply_event_singleton_methods
       event_class = @base_module.const_get(:Event)
-      event_class.extend(@event_singleton_methods_module)
-      if defined?(Ractor)
-        Ractor.make_shareable(@event_singleton_methods_module::INVOKERS)
-      end
+      apply_methods_module(@event_singleton_methods_module,
+                           event_class.singleton_class)
     end
 
     def define_event_motion_methods_module
-      @event_motion_methods_module = Module.new
-      @base_module.const_set(:EventMotionMethods, @event_motion_methods_module)
-      @event_motion_methods_module.const_set(:INVOKERS, {})
+      @event_motion_methods_module =
+        define_methods_module(:EventMotionMethods)
     end
 
     def apply_event_motion_methods
       event_motion_class = @base_module.const_get(:EventMotion)
-      event_motion_class.include(@event_motion_methods_module)
-      if defined?(Ractor)
-        Ractor.make_shareable(@event_motion_methods_module::INVOKERS)
-      end
+      apply_methods_module(@event_motion_methods_module,
+                           event_motion_class)
     end
 
     def define_window_methods_module
-      @window_methods_module = Module.new
-      @base_module.const_set(:WindowMethods, @window_methods_module)
-      @window_methods_module.const_set(:INVOKERS, {})
+      @window_methods_module = define_methods_module(:WindowMethods)
     end
 
     def apply_window_methods
       window_class = @base_module.const_get(:Window)
-      window_class.include(@window_methods_module)
-      if defined?(Ractor)
-        Ractor.make_shareable(@window_methods_module::INVOKERS)
-      end
+      apply_methods_module(@window_methods_module, window_class)
     end
 
     def define_cairo_context_methods_module
-      @cairo_context_methods_module = Module.new
-      @base_module.const_set(:CairoContextMethods, @cairo_context_methods_module)
-      @cairo_context_methods_module.const_set(:INVOKERS, {})
+      @cairo_context_methods_module =
+        define_methods_module(:CairoContextMethods)
     end
 
     def apply_cairo_context_methods
-      Cairo::Context.include(@cairo_context_methods_module)
-      if defined?(Ractor)
-        Ractor.make_shareable(@cairo_context_methods_module::INVOKERS)
-      end
+      apply_methods_module(@cairo_context_methods_module, Cairo::Context)
     end
 
     def define_cairo_surface_methods_module
-      @cairo_surface_methods_module = Module.new
-      @base_module.const_set(:CairoSurfaceMethods, @cairo_surface_methods_module)
-      @cairo_surface_methods_module.const_set(:INVOKERS, {})
+      @cairo_surface_methods_module =
+        define_methods_module(:CairoSurfaceMethods)
     end
 
     def apply_cairo_surface_methods
-      Cairo::Surface.include(@cairo_surface_methods_module)
-      if defined?(Ractor)
-        Ractor.make_shareable(@cairo_surface_methods_module::INVOKERS)
-      end
+      apply_methods_module(@cairo_surface_methods_module, Cairo::Surface)
     end
 
     def require_pre_libraries

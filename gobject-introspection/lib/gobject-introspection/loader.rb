@@ -38,19 +38,15 @@ module GObjectIntrospection
     def load(namespace)
       repository = Repository.default
       repository.require(namespace, @version)
-      @base_module.const_set(:INVOKERS, {})
-      @base_module.singleton_class.const_set(:INVOKERS, {})
-      pre_load(repository, namespace)
-      repository.each(namespace) do |info|
-        load_info(info) if info.is_a?(InterfaceInfo)
-      end
-      repository.each(namespace) do |info|
-        load_info(info) unless info.is_a?(InterfaceInfo)
-      end
-      post_load(repository, namespace)
-      if defined?(Ractor)
-        Ractor.make_shareable(@base_module::INVOKERS)
-        Ractor.make_shareable(@base_module.singleton_class::INVOKERS)
+      prepare_class(@base_module) do
+        pre_load(repository, namespace)
+        repository.each(namespace) do |info|
+          load_info(info) if info.is_a?(InterfaceInfo)
+        end
+        repository.each(namespace) do |info|
+          load_info(info) unless info.is_a?(InterfaceInfo)
+        end
+        post_load(repository, namespace)
       end
     end
 
@@ -130,13 +126,9 @@ module GObjectIntrospection
                                         :parent => options[:parent],
                                         :size   => size)
       end
-      klass.const_set(:INVOKERS, {})
-      klass.singleton_class.const_set(:INVOKERS, {})
-      load_fields(info, klass)
-      load_methods(info, klass)
-      if defined?(Ractor)
-        Ractor.make_shareable(klass::INVOKERS)
-        Ractor.make_shareable(klass.singleton_class::INVOKERS)
+      prepare_class(klass) do
+        load_fields(info, klass)
+        load_methods(info, klass)
       end
     end
 
@@ -243,14 +235,10 @@ module GObjectIntrospection
       klass = self.class.define_class(info.gtype,
                                       rubyish_class_name(info),
                                       @base_module)
-      klass.const_set(:INVOKERS, {})
-      klass.singleton_class.const_set(:INVOKERS, {})
-      load_virtual_functions(info, klass)
-      load_fields(info, klass)
-      load_methods(info, klass)
-      if defined?(Ractor)
-        Ractor.make_shareable(klass::INVOKERS)
-        Ractor.make_shareable(klass.singleton_class::INVOKERS)
+      prepare_class(klass) do
+        load_virtual_functions(info, klass)
+        load_fields(info, klass)
+        load_methods(info, klass)
       end
     end
 
@@ -601,13 +589,9 @@ module GObjectIntrospection
         self.class.define_interface(info.gtype,
                                     rubyish_class_name(info),
                                     @base_module)
-      interface_module.const_set(:INVOKERS, {})
-      interface_module.singleton_class.const_set(:INVOKERS, {})
-      load_virtual_functions(info, interface_module)
-      load_methods(info, interface_module)
-      if defined?(Ractor)
-        Ractor.make_shareable(interface_module::INVOKERS)
-        Ractor.make_shareable(interface_module.singleton_class::INVOKERS)
+      prepare_class(interface_module) do
+        load_virtual_functions(info, interface_module)
+        load_methods(info, interface_module)
       end
     end
 
@@ -622,14 +606,44 @@ module GObjectIntrospection
     def load_union_info(info)
       return if info.gtype == GLib::Type::NONE
       klass = self.class.define_class(info.gtype, info.name, @base_module)
+      prepare_class(klass) do
+        load_fields(info, klass)
+        load_methods(info, klass)
+      end
+    end
+
+    def prepare_class(klass)
+      pre_prepare_class(klass)
+      yield
+      post_prepare_class(klass)
+    end
+
+    def pre_prepare_class(klass)
       klass.const_set(:INVOKERS, {})
       klass.singleton_class.const_set(:INVOKERS, {})
-      load_fields(info, klass)
-      load_methods(info, klass)
-      if defined?(Ractor)
-        Ractor.make_shareable(klass::INVOKERS)
-        Ractor.make_shareable(klass.singleton_class::INVOKERS)
-      end
+    end
+
+    def post_prepare_class(klass)
+      return unless defined?(Ractor)
+      Ractor.make_shareable(klass::INVOKERS)
+      Ractor.make_shareable(klass.singleton_class::INVOKERS)
+    end
+
+    def define_methods_module(name)
+      mod = Module.new
+      @base_module.const_set(name, mod)
+      mod.const_set(:INVOKERS, {})
+      mod
+    end
+
+    def apply_methods_module(mod, target)
+      target.include(mod)
+      post_methods_module(mod)
+    end
+
+    def post_methods_module(mod)
+      return unless defined?(Ractor)
+      Ractor.make_shareable(mod::INVOKERS)
     end
 
     class Invoker
