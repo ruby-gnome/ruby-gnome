@@ -543,6 +543,7 @@ module GObjectIntrospection
     end
 
     def define_method(info, klass, method_name)
+      return if method_name.empty?
       info.unlock_gvl = should_unlock_gvl?(info, klass)
       remove_existing_method(klass, method_name)
       invoker = Invoker.new(info, method_name, "#{klass}\##{method_name}")
