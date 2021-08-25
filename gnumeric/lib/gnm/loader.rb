@@ -1,4 +1,4 @@
-# Copyright (C) 2016 Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -52,6 +52,16 @@ module Gnm
         return
       end
       super
+    end
+
+    def rubyish_method_name(function_info, options={})
+      name = super
+      case name
+      when /\A\d/
+        "_#{$POSTMATCH}"
+      else
+        name
+      end
     end
   end
 end

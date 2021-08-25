@@ -66,7 +66,7 @@ module GOffice
     def rubyish_method_name(function_info, options={})
       name = super
       case name
-      when /\A[23][dD]/
+      when /\A\d/
         "_#{$POSTMATCH}"
       else
         name
