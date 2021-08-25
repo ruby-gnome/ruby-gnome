@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2020  Ruby-GNOME Project Team
+# Copyright (C) 2014-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -31,6 +31,7 @@ module Gtk
       call_init_function(repository, namespace)
       define_stock_module
       define_version_module
+      define_methods_modules
       setup_pending_constants
     end
 
@@ -54,6 +55,37 @@ module Gtk
       @base_module.const_set("Version", @version_module)
     end
 
+    def define_methods_modules
+      @stock_singleton_methods_module = Module.new
+      @base_module.const_set("StockSingletonMethods",
+                             @stock_singleton_methods_module)
+      @widget_methods_module = Module.new
+      @base_module.const_set("WidgetMethods", @widget_methods_module)
+      @drag_context_methods_module = Module.new
+      @base_module.const_set("DragContextMethods", @drag_context_methods_module)
+      @icon_size_class_methods_module = Module.new
+      @base_module.const_set("IconSizeClassMethods",
+                             @icon_size_class_methods_module)
+      @accel_group_class_methods_module = Module.new
+      @base_module.const_set("AccelGroupClassMethods",
+                             @accel_group_class_methods_module)
+    end
+
+    def apply_methods_modules
+      @base_module::Stock.extend(@stock_singleton_methods_module)
+      @base_module::Widget.include(@widget_methods_module)
+      Gdk::DragContext.include(@drag_context_methods_module)
+      @base_module::IconSize.extend(@icon_size_class_methods_module)
+      @base_module::AccelGroup.extend(@accel_group_class_methods_module)
+      if defined?(Ractor)
+        Ractor.make_shareable(@stock_singleton_methods_module)
+        Ractor.make_shareable(@widget_methods_module)
+        Ractor.make_shareable(@drag_context_methods_module)
+        Ractor.make_shareable(@icon_size_class_methods_module)
+        Ractor.make_shareable(@accel_group_class_methods_module)
+      end
+    end
+
     def level_bar_class
       @level_bar_class ||= @base_module.const_get(:LevelBar)
     end
@@ -64,6 +96,7 @@ module Gtk
 
     def post_load(repository, namespace)
       apply_pending_constants
+      apply_methods_modules
       require_extension
       require_libraries
     end
@@ -170,32 +203,34 @@ module Gtk
       when "init", /_get_type\z/
         # ignore
       when /\Astock_/
-        stock_module = @base_module.const_get(:Stock)
         method_name = rubyish_method_name(info, :prefix => "stock_")
-        define_singleton_method(stock_module, method_name, info)
+        define_module_function(@stock_singleton_methods_module,
+                               method_name,
+                               info)
       when /\Adrag_(?:source_|dest_|get_data\z|(?:un)highlight\z|begin|check_threshold\z)/
         # For OS X. It may be broken. It's not tested.
-        widget_class = @base_module.const_get(:Widget)
         method_name = rubyish_method_name(info)
-        define_method(info, widget_class, method_name)
+        define_method(info, @widget_methods_module, method_name)
       when /\Adrag_/
         method_name = rubyish_method_name(info,
                                           :prefix => "drag_",
                                           :n_in_args_offset => -1)
-        define_method(info, Gdk::DragContext, method_name)
+        define_method(info, @drag_context_methods_module, method_name)
       when /\Abinding_/
         # Ignore because singleton methods are defined.
       when /\Aicon_size_/
-        icon_size_class = @base_module.const_get(:IconSize)
         method_name = rubyish_method_name(info, :prefix => "icon_size_")
-        define_singleton_method(icon_size_class, method_name, info)
+        define_module_function(@icon_size_class_methods_module,
+                               method_name,
+                               info)
       when /\Atest_widget_/
         name = $POSTMATCH
-        define_method(info, Gtk::Widget, name)
+        define_method(info, @widget_methods_module, name)
       when /\Aaccel_groups_/
-        accel_group_class = @base_module.const_get(:AccelGroup)
         method_name = rubyish_method_name(info, :prefix => "accel_groups_")
-        define_singleton_method(accel_group_class, method_name, info)
+        define_module_function(@accel_group_class_methods_module,
+                               method_name,
+                               info)
       else
         super
       end

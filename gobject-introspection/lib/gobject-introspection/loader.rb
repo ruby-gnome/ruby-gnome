@@ -24,6 +24,9 @@ module GObjectIntrospection
         loader.version = options[:version]
         loader.load(namespace)
       end
+
+      def initialize_instance_post(object)
+      end
     end
 
     attr_accessor :version
@@ -88,20 +91,25 @@ module GObjectIntrospection
       function_info.unlock_gvl = should_unlock_gvl?(function_info, target_module)
       full_method_name = "#{target_module}\#.#{name}"
       invoker = Invoker.new(function_info, name, full_method_name)
-      target_module.module_eval do
-        define_method(name) do |*arguments, &block|
-          invoker.invoke(nil, arguments, block)
+      target_module::INVOKERS[name] = invoker
+      target_module.module_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ + 1)
+        def #{name}(*arguments, &block)
+          INVOKERS["#{name}"].invoke(nil, arguments, block)
         end
-        module_function(name)
-      end
+        module_function(:#{name})
+      DEFINE_METHOD
     end
 
     def define_singleton_method(klass, name, info)
       info.unlock_gvl = should_unlock_gvl?(info, klass)
       invoker = Invoker.new(info, name, "#{klass}.#{name}")
-      klass.singleton_class.__send__(:define_method, name) do |*arguments, &block|
-        invoker.invoke(nil, arguments, block)
-      end
+      singleton_class = klass.singleton_class
+      singleton_class::INVOKERS[name] = invoker
+      singleton_class.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ + 1)
+        def #{name}(*arguments, &block)
+          INVOKERS["#{name}"].invoke(nil, arguments, block)
+        end
+      DEFINE_METHOD
     end
 
     def define_struct(info, options={})
@@ -129,7 +137,12 @@ module GObjectIntrospection
         end
         unless method_infos.empty?
           base_class = @base_module.const_get(base_class_name)
-          load_methods_method(method_infos, base_class.singleton_class)
+          singleton_class = base_class.singleton_class
+          invokers = singleton_class::INVOKERS.dup
+          singleton_class.__send__(:remove_const, :INVOKERS)
+          singleton_class.const_set(:INVOKERS, invokers)
+          load_methods_method(method_infos, singleton_class)
+          Ractor.make_shareable(singleton_class::INVOKERS) if defined?(Ractor)
         end
       else
         return if info.gtype_struct?
@@ -152,7 +165,9 @@ module GObjectIntrospection
     end
 
     def load_enum_value(value_info, enum_module)
-      enum_module.const_set(value_info.name.upcase, value_info.value)
+      value = value_info.value
+      Ractor.make_shareable(value) if defined?(Ractor)
+      enum_module.const_set(value_info.name.upcase, value)
     end
 
     def define_enum(info)
@@ -216,9 +231,15 @@ module GObjectIntrospection
       klass = self.class.define_class(info.gtype,
                                       rubyish_class_name(info),
                                       @base_module)
+      klass.const_set(:INVOKERS, {})
+      klass.singleton_class.const_set(:INVOKERS, {})
       load_virtual_functions(info, klass)
       load_fields(info, klass)
       load_methods(info, klass)
+      if defined?(Ractor)
+        Ractor.make_shareable(klass::INVOKERS)
+        Ractor.make_shareable(klass.singleton_class::INVOKERS)
+      end
     end
 
     def load_fields(info, klass)
@@ -300,43 +321,46 @@ module GObjectIntrospection
     def load_methods_constructor(infos, klass)
       return if infos.empty?
 
-      call_initialize_post = lambda do |object|
-        initialize_post(object)
-      end
-      invokers = []
+      klass.const_set(:LOADER_CLASS, self.class)
+      invokers = {}
+      klass.const_set(:INITIALIZE_INVOKERS, invokers)
       infos.each do |info|
         name = "initialize_#{info.name}"
         info.unlock_gvl = should_unlock_gvl?(info, klass)
         invoker = Invoker.new(info, name, "#{klass}\##{name}")
-        invokers << invoker
-        klass.__send__(:define_method, name) do |*arguments, &block|
-          invoker.invoke(self, arguments, block)
-          call_initialize_post.call(self)
-        end
-        klass.__send__(:private, name)
+        invokers[name] = invoker
+        klass.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ + 1)
+          def #{name}(*arguments, &block)
+            invoker = INITIALIZE_INVOKERS["#{name}"]
+            invoker.invoke(self, arguments, block)
+            LOADER_CLASS.initialize_instance_post(self)
+          end
+          private :#{name}
+        DEFINE_METHOD
       end
 
-      initialize = lambda do |receiver, arguments, block|
-        invokers.each do |invoker|
-          catch do |tag|
-            invoker.invoke(receiver, arguments.dup, block, tag)
-            call_initialize_post.call(receiver)
-            return
+      klass.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ + 1)
+        def initialize(*arguments, &block)
+          invokers = INITIALIZE_INVOKERS
+          invokers.values.each do |invoker|
+            catch do |tag|
+              invoker.invoke(self, arguments.dup, block, tag)
+              LOADER_CLASS.initialize_instance_post(self)
+              return
+            end
           end
+          message = "wrong arguments: "
+          message << "\#{self.class.name}#initialize("
+          message << arguments.collect(&:inspect).join(", ")
+          message << "): "
+          message << "available signatures"
+          invokers.each do |invoker|
+            message << ": \#{invoker.signature}"
+          end
+          raise ArgumentError, message
         end
-        message = "wrong arguments: "
-        message << "#{klass.name}#initialize("
-        message << arguments.collect(&:inspect).join(", ")
-        message << "): "
-        message << "available signatures"
-        invokers.each do |invoker|
-          message << ": #{invoker.signature}"
-        end
-        raise ArgumentError, message
-      end
-      klass.__send__(:define_method, "initialize") do |*arguments, &block|
-        initialize.call(self, arguments, block)
-      end
+      DEFINE_METHOD
+      Ractor.make_shareable(klass::INITIALIZE_INVOKERS) if defined?(Ractor)
     end
 
     def load_virtual_functions(info, klass)
@@ -351,9 +375,6 @@ module GObjectIntrospection
 
     def rubyish_gtype_name(name)
       name.scan(/[A-Z]+[a-z\d]+/).collect(&:downcase).join("_")
-    end
-
-    def initialize_post(object)
     end
 
     def rubyish_method_name(function_info, options={})
@@ -525,9 +546,14 @@ module GObjectIntrospection
       info.unlock_gvl = should_unlock_gvl?(info, klass)
       remove_existing_method(klass, method_name)
       invoker = Invoker.new(info, method_name, "#{klass}\##{method_name}")
-      klass.__send__(:define_method, method_name) do |*arguments, &block|
-        invoker.invoke(self, arguments, block)
-      end
+      invokers = klass::INVOKERS
+      invokers[method_name] = invoker
+      klass.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ + 1)
+        def #{method_name}(*arguments, &block)
+          invoker = INVOKERS["#{method_name}"]
+          invoker.invoke(self, arguments, block)
+        end
+      DEFINE_METHOD
     end
 
     def define_equal_style_setter(info, klass, method_name)
@@ -540,9 +566,11 @@ module GObjectIntrospection
 
     def define_inspect(info, klass, method_name)
       if method_name == "to_s" and info.n_args.zero?
-        klass.__send__(:define_method, "inspect") do ||
-          super().gsub(/\>\z/) {" #{to_s}>"}
-        end
+        klass.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ _ 1)
+          def inspect
+            super.gsub(/>\z/) {" \#{to_s}>"}
+          end
+        DEFINE_METHOD
       end
     end
 
@@ -561,6 +589,7 @@ module GObjectIntrospection
         self.class.define_interface(info.gtype,
                                     rubyish_class_name(info),
                                     @base_module)
+      interface_module.const_set(:INVOKERS, {})
       load_virtual_functions(info, interface_module)
       load_methods(info, interface_module)
     end
@@ -585,7 +614,7 @@ module GObjectIntrospection
         @info = info
         @method_name = method_name
         @full_method_name = full_method_name
-        @prepared = false
+        ensure_prepared if defined?(Ractor)
       end
 
       def invoke(receiver, arguments, block, abort_tag=nil)

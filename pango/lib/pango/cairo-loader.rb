@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2017-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,6 +19,9 @@ module Pango
     private
     def pre_load(repository, namespace)
       @context_class = @base_module.const_get(:Context)
+      @context_methods_module = Module.new
+      @base_module.const_set(:CairoContextMethods, @context_methods_module)
+      @context_methods_module.const_set(:INVOKERS, {})
     end
 
     def post_load(repository, namespace)
@@ -33,6 +36,10 @@ module Pango
         @base_module.const_set(font_map.class.gtype.name.gsub(/\APango/, ""),
                                font_map.class)
       end
+      @context_class.include(@context_methods_module)
+      if defined?(Ractor)
+        Ractor.make_shareable(@context_methods_module::INVOKERS)
+      end
     end
 
     def rubyish_class_name(info)
@@ -43,21 +50,16 @@ module Pango
       case info.name
       when /\Acontext_get_(.+)\z/
         method_name = $1
-        define_method(info, @context_class, method_name)
+        define_method(info, @context_methods_module, method_name)
       when /\Acontext_set_(.+)\z/
         method_base_name = $1
         setter_method_name = "set_#{method_base_name}"
-        if @context_class.method_defined?(setter_method_name)
-          # ignore
-          return
-        end
-        define_method(info, @context_class, setter_method_name)
+        define_method(info, @context_methods_module, setter_method_name)
         if info.n_args == 2
           equal_method_name = "#{method_base_name}="
-          remove_existing_method(@context_class, equal_method_name)
-          @context_class.__send__(:alias_method,
-                                  equal_method_name,
-                                  setter_method_name)
+          @context_methods_module.__send__(:alias_method,
+                                           equal_method_name,
+                                           setter_method_name)
         end
       when /\Afont_map_/
         # ignore

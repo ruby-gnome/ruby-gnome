@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,10 +22,6 @@ module Gdk
     end
 
     private
-    def window_class
-      @window_class ||= @base_module.const_get(:Window)
-    end
-
     def event_class
       @event_class ||= @base_module.const_get(:Event)
     end
@@ -39,6 +35,7 @@ module Gdk
       setup_pending_rectangle_functions
       define_keyval_module
       define_selection_module
+      define_window_methods_module
       require_pre_libraries
     end
 
@@ -52,6 +49,18 @@ module Gdk
       @base_module.const_set("Selection", @selection_module)
     end
 
+    def define_window_methods_module
+      @window_methods_module = Module.new
+      @base_module.const_set("WindowMethods", @window_methods_module)
+      @window_methods_module.const_set(:INVOKERS, {})
+    end
+
+    def apply_window_methods
+      window_class = @base_module.const_get(:Window)
+      window_class.include(@window_methods_module)
+      Ractor.make_shareable(@window_methods_module) if defined?(Ractor)
+    end
+
     def require_pre_libraries
       require "gdk3/event-readers"
     end
@@ -59,6 +68,7 @@ module Gdk
     def post_load(repository, namespace)
       apply_pending_constants
       apply_pending_rectangle_functions
+      apply_window_methods
       require_post_libraries
       convert_event_classes
       define_selection_constants
@@ -217,7 +227,7 @@ module Gdk
         target_class = nil
         case $POSTMATCH
         when "get_from_window"
-          target_class = window_class
+          target_class = @window_methods_module
         when "get_from_surface"
           target_class = Cairo::Surface
         end
@@ -241,7 +251,7 @@ module Gdk
         name = $POSTMATCH
         case name
         when "create"
-          define_method(info, window_class, "create_cairo_context")
+          define_method(info, @window_methods_module, "create_cairo_context")
         when "set_source_color"
           define_method(info, Cairo::Context, "set_source_gdk_color")
         when "set_source_rgba"
