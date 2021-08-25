@@ -14,11 +14,24 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Pango
-  class FT2Loader < GObjectIntrospection::Loader
-    private
-    def rubyish_class_name(info)
-      "FT2#{super}"
+module PangoFT2
+  class Loader < GObjectIntrospection::Loader
+    def post_load(repository, namespace)
+      @base_module.constants.each do |constant|
+        case constant
+        when :INVOKERS,
+             :Loader
+          next
+        else
+          if constant.to_s.upcase == constant.to_s
+            name = "FT2_#{constant}"
+          else
+            name = "FT2#{constant}"
+          end
+          value = @base_module.const_get(constant)
+          Pango.const_set(name, value)
+        end
+      end
     end
   end
 end

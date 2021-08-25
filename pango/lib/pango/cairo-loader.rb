@@ -14,18 +14,21 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Pango
-  class CairoLoader < GObjectIntrospection::Loader
+module PangoCairo
+  class Loader < GObjectIntrospection::Loader
     private
     def pre_load(repository, namespace)
-      @context_class = @base_module.const_get(:Context)
-      @context_methods_module = Module.new
-      @base_module.const_set(:CairoContextMethods, @context_methods_module)
-      @context_methods_module.const_set(:INVOKERS, {})
+      @context_cairo_methods_module = Module.new
+      @base_module.const_set(:ContextCairoMethods, @context_cairo_methods_module)
+      @context_cairo_methods_module.const_set(:INVOKERS, {})
+
+      @cairo_context_methods_module = Module.new
+      @base_module.const_set(:CairoContextMethods, @cairo_context_methods_module)
+      @cairo_context_methods_module.const_set(:INVOKERS, {})
     end
 
     def post_load(repository, namespace)
-      font_map_class = @base_module.const_get("CairoFontMap")
+      font_map_class = @base_module::FontMap
       font_types = []
       font_types << :quartz if Cairo::FontFace.quartz_supported?
       font_types << :win32 if Cairo::Surface.quartz_supported?
@@ -33,44 +36,55 @@ module Pango
       font_types.each do |font_type|
         font_map = font_map_class.new_for_font_type(font_type)
         next if font_map.nil?
-        @base_module.const_set(font_map.class.gtype.name.gsub(/\APango/, ""),
-                               font_map.class)
+        name = font_map.class.gtype.name.gsub(/\APangoCairo/, "")
+        @base_module.const_set(name, font_map.class)
       end
-      @context_class.include(@context_methods_module)
+      Pango::Context.include(@context_cairo_methods_module)
+      Cairo::Context.include(@cairo_context_methods_module)
       if defined?(Ractor)
-        Ractor.make_shareable(@context_methods_module::INVOKERS)
+        Ractor.make_shareable(@context_cairo_methods_module::INVOKERS)
+        Ractor.make_shareable(@cairo_context_methods_module::INVOKERS)
       end
-    end
 
-    def rubyish_class_name(info)
-      "Cairo#{super}"
+      @base_module.constants.each do |constant|
+        case constant
+        when :INVOKERS,
+             :Loader
+          next
+        else
+          value = @base_module.const_get(constant)
+          next if value == @context_cairo_methods_module
+          next if value == @cairo_context_methods_module
+          Pango.const_set("Cairo#{constant}", value)
+        end
+      end
     end
 
     def load_function_info(info)
       case info.name
       when /\Acontext_get_(.+)\z/
         method_name = $1
-        define_method(info, @context_methods_module, method_name)
+        define_method(info, @context_cairo_methods_module, method_name)
       when /\Acontext_set_(.+)\z/
         method_base_name = $1
         setter_method_name = "set_#{method_base_name}"
-        define_method(info, @context_methods_module, setter_method_name)
+        define_method(info, @context_cairo_methods_module, setter_method_name)
         if info.n_args == 2
           equal_method_name = "#{method_base_name}="
-          @context_methods_module.__send__(:alias_method,
-                                           equal_method_name,
-                                           setter_method_name)
+          @context_cairo_methods_module.__send__(:alias_method,
+                                                 equal_method_name,
+                                                 setter_method_name)
         end
       when /\Afont_map_/
         # ignore
       when /\Acreate_(.+)\z/
-        define_method(info, Cairo::Context, "create_pango_#{$1}")
+        define_method(info, @cairo_context_methods_module, "create_pango_#{$1}")
       when /\A(.+_path)\z/
-        define_method(info, Cairo::Context, "pango_#{$1}")
+        define_method(info, @cairo_context_methods_module, "pango_#{$1}")
       when /\Ashow_(.+)\z/
-        define_method(info, Cairo::Context, "show_pango_#{$1}")
+        define_method(info, @cairo_context_methods_module, "show_pango_#{$1}")
       when /\Aupdate_(.+)\z/
-        define_method(info, Cairo::Context, "update_pango_#{$1}")
+        define_method(info, @cairo_context_methods_module, "update_pango_#{$1}")
       else
         warn("Unsupported PangoCairo function: #{info.name}")
       end

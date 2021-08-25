@@ -30,22 +30,30 @@ module Pango
 
   loader = Loader.new(self)
   loader.load("Pango")
+end
 
-  cairo_loader = CairoLoader.new(self)
-  cairo_loader.load("PangoCairo")
+module PangoCairo
+  loader = Loader.new(self)
+  loader.load("PangoCairo")
+end
 
-  fc_loader = FcLoader.new(self)
+module PangoFc
+  loader = Loader.new(self)
   begin
-    fc_loader.load("PangoFc")
+    loader.load("PangoFc")
   rescue GObjectIntrospection::RepositoryError::TypelibNotFound
   end
+end
 
-  ft2_loader = FT2Loader.new(self)
-  ft2_loader.load("PangoFT2")
+module PangoFT2
+  loader = Loader.new(self)
+  loader.load("PangoFT2")
+end
 
-  ot_loader = OTLoader.new(self)
+module PangoOT
+  loader = Loader.new(self)
   begin
-    ot_loader.load("PangoOT")
+    loader.load("PangoOT")
   rescue GObjectIntrospection::RepositoryError::TypelibNotFound
   end
 end

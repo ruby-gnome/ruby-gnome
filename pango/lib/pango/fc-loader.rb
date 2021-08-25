@@ -14,11 +14,24 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Pango
-  class FcLoader < GObjectIntrospection::Loader
-    private
-    def rubyish_class_name(info)
-      "Fc#{super}"
+module PangoFc
+  class Loader < GObjectIntrospection::Loader
+    def post_load(repository, namespace)
+      @base_module.constants.each do |constant|
+        case constant
+        when :INVOKERS,
+             :Loader
+          next
+        else
+          if constant.to_s.upcase == constant.to_s
+            name = "FC_#{constant}"
+          else
+            name = "Fc#{constant}"
+          end
+          value = @base_module.const_get(constant)
+          Pango.const_set(name, value)
+        end
+      end
     end
   end
 end
