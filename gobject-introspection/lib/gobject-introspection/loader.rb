@@ -566,7 +566,7 @@ module GObjectIntrospection
 
     def define_inspect(info, klass, method_name)
       if method_name == "to_s" and info.n_args.zero?
-        klass.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ _ 1)
+        klass.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ + 1)
           def inspect
             super.gsub(/>\z/) {" \#{to_s}>"}
           end
