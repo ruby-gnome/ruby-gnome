@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -63,8 +63,18 @@ module GOffice
       end
     end
 
+    def rubyish_method_name(function_info, options={})
+      name = super
+      case name
+      when /\A[23][dD]/
+        "_#{$POSTMATCH}"
+      else
+        name
+      end
+    end
+
     def rubyish_class_name(info)
-      name = info.name.gsub(/Class\z/, "")
+      name = super
       case name
       when /\A3DRotationSel\z/
         "Rotation3DSel"
