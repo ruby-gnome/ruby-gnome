@@ -26,13 +26,9 @@ module Pango
       @pending_attribute_infos.each do |info|
         name = rubyish_class_name(info)
         klass = @base_module.const_get(name)
-        klass.const_set(:INVOKERS, {})
-        klass.singleton_class.const_set(:INVOKERS, {})
-        load_fields(info, klass)
-        load_methods(info, klass)
-        if defined?(Ractor)
-          Ractor.make_shareable(klass::INVOKERS)
-          Ractor.make_shareable(klass.singleton_class::INVOKERS)
+        prepare_class(klass) do
+          load_fields(info, klass)
+          load_methods(info, klass)
         end
       end
       require_libraries

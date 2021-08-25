@@ -18,13 +18,10 @@ module PangoCairo
   class Loader < GObjectIntrospection::Loader
     private
     def pre_load(repository, namespace)
-      @context_cairo_methods_module = Module.new
-      @base_module.const_set(:ContextCairoMethods, @context_cairo_methods_module)
-      @context_cairo_methods_module.const_set(:INVOKERS, {})
-
-      @cairo_context_methods_module = Module.new
-      @base_module.const_set(:CairoContextMethods, @cairo_context_methods_module)
-      @cairo_context_methods_module.const_set(:INVOKERS, {})
+      @context_cairo_methods_module =
+        define_methods_module(:ContextCairoMethods)
+      @cairo_context_methods_module =
+        define_methods_module(:CairoContextMethods)
     end
 
     def post_load(repository, namespace)
@@ -37,14 +34,11 @@ module PangoCairo
         font_map = font_map_class.new_for_font_type(font_type)
         next if font_map.nil?
         name = font_map.class.gtype.name.gsub(/\APangoCairo/, "")
+        next if @base_module.const_defined?(name)
         @base_module.const_set(name, font_map.class)
       end
-      Pango::Context.include(@context_cairo_methods_module)
-      Cairo::Context.include(@cairo_context_methods_module)
-      if defined?(Ractor)
-        Ractor.make_shareable(@context_cairo_methods_module::INVOKERS)
-        Ractor.make_shareable(@cairo_context_methods_module::INVOKERS)
-      end
+      apply_methods_module(@context_cairo_methods_module, Pango::Context)
+      apply_methods_module(@cairo_context_methods_module, Cairo::Context)
 
       @base_module.constants.each do |constant|
         case constant
