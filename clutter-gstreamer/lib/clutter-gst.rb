@@ -54,15 +54,13 @@ module ClutterGst
   end
 
   class Loader < GObjectIntrospection::Loader
-    NAMESPACE = "ClutterGst"
-
     def initialize(base_module, init_arguments)
       super(base_module)
       @init_arguments = init_arguments
     end
 
     def load
-      super(NAMESPACE)
+      super("ClutterGst")
     end
 
     private

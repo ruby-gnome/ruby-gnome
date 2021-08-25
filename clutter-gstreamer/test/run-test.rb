@@ -34,9 +34,8 @@ run_test(__dir__,
   require_relative "../../clutter/test/clutter-test-utils"
   require_relative "clutter-gstreamer-test-utils"
 
-  repository = GObjectIntrospection::Repository.default
   begin
-    repository.require(ClutterGst::Loader::NAMESPACE)
+    require "clutter-gst"
   rescue GObjectIntrospection::RepositoryError
     puts("Omit because typelib file doesn't exist: #{$!.message}")
     exit(true)
