@@ -22,6 +22,7 @@ run_test(__dir__,
          [
            "glib2",
            "gobject-introspection",
+           "gio2",
            "cairo-gobject",
            "pango",
            "gdk_pixbuf2",
