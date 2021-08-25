@@ -26,13 +26,10 @@ run_test(__dir__,
          ]) do
   require_relative "gstreamer-test-utils"
 
-  repository = GObjectIntrospection::Repository.default
   begin
-    repository.require(Gst::Loader::NAMESPACE)
+    Gst.init
   rescue GObjectIntrospection::RepositoryError
     puts("Omit because typelib file doesn't exist: #{$!.message}")
     exit(true)
   end
-
-  Gst.init
 end
