@@ -72,5 +72,19 @@ class TestLoaderInfo < Test::Unit::TestCase
         resettable_converter.resetted
       end
     end
+
+    def test_ancestor
+      immutable_menu_class = Class.new(Gio::Menu) do
+        type_register("ImmutableMenu")
+
+        def virtual_do_is_mutable
+          false
+        end
+      end
+      immutable_menu = immutable_menu_class.new
+      assert do
+        not immutable_menu.mutable?
+      end
+    end
   end
 end
