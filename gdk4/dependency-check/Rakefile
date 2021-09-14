@@ -29,7 +29,7 @@ end
 namespace :dependency do
   desc "Check dependency"
   task :check do
-    package_id = "gdk-4.0"
+    package_id = "gtk4"
     unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:altlinux => "libgtk+4-devel",
                                             :debian => "libgtk-4-dev",
