@@ -265,12 +265,7 @@ rb_gi_arguments_out_free_error(RBGIArguments *args,
 {
     GError **target = metadata->out_arg->v_pointer;
     if (metadata->transfer != GI_TRANSFER_NOTHING) {
-        rb_raise(rb_eNotImpError,
-                 "TODO: [%s] %s free GIArgument(%s)[%s]",
-                 metadata->name,
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_type_tag_to_string(metadata->type.tag),
-                 rb_gi_transfer_to_string(metadata->transfer));
+        g_error_free(*target);
     }
     xfree(target);
 }
