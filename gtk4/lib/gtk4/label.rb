@@ -39,7 +39,7 @@ module Gtk
       if options == true or options == false or options.nil?
         mnemonic = options
         warn "Gtk::Label#set_markup(text, mnemonic) style has been deprecated. " +
-             "Use Gtk::Label#set_marup(text, {:use_underline => #{mnemonic}}) style instead."
+             "Use Gtk::Label#set_markup(text, {:use_underline => #{mnemonic}}) style instead."
         options = {
           :use_underline => mnemonic,
         }
