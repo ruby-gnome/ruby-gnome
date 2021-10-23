@@ -19,10 +19,6 @@ require "atk"
 require "gdk4"
 require "gio2"
 
-if /cygwin|mingw|mswin/ === RUBY_PLATFORM
-  require "rsvg2"
-end
-
 require "gtk4/loader"
 
 module Gtk
