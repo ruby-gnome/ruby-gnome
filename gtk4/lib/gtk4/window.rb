@@ -26,7 +26,6 @@ module Gtk
       end
     end
 
-    alias_method :set_icon_raw, :set_icon
     def set_icon(icon_or_file_name)
       case icon_or_file_name
       when String
@@ -35,8 +34,9 @@ module Gtk
         set_icon_raw(icon_or_file_name)
       end
     end
+    alias_method :set_icon_raw, :set_icon
 
-    remove_method :icon=
+    remove_method :icon=  if method_defined? :icon=
     alias_method :icon=, :set_icon
   end
 end

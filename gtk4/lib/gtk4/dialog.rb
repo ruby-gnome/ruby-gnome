@@ -38,7 +38,6 @@ module Gtk
       add_buttons(*buttons) if buttons
     end
 
-    alias_method :run_raw, :run
     def run
       response_id = run_raw
       if response_id < 0
@@ -47,6 +46,7 @@ module Gtk
         response_id
       end
     end
+    alias_method :run_raw, :run
 
     def add_buttons(*buttons)
       buttons.each do |text, response_id|
