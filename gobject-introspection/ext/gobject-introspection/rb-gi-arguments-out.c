@@ -264,9 +264,6 @@ rb_gi_arguments_out_free_error(RBGIArguments *args,
                                gpointer user_data)
 {
     GError **target = metadata->out_arg->v_pointer;
-    if (metadata->transfer != GI_TRANSFER_NOTHING) {
-        g_error_free(*target);
-    }
     xfree(target);
 }
 
