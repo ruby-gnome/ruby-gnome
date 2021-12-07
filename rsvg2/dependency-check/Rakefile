@@ -34,7 +34,7 @@ namespace :dependency do
       unless NativePackageInstaller.install(:alt_linux => "librsvg-devel",
                                             :debian => "librsvg2-dev",
                                             :redhat => "pkgconfig(#{package_id})",
-                                            :arch => "librsvg",
+                                            :arch_linux => "librsvg",
                                             :homebrew => "librsvg",
                                             :macports => "librsvg",
                                             :msys2 => "librsvg")

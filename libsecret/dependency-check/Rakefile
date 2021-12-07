@@ -34,7 +34,7 @@ namespace :dependency do
       unless NativePackageInstaller.install(:alt_linux => "libsecret",
                                             :debian => "libsecret-1-dev",
                                             :redhat => "pkgconfig(#{package_id})",
-                                            :arch => "libsecret",
+                                            :arch_linux => "libsecret",
                                             :homebrew => "libsecret",
                                             :macports => "libsecret",
                                             :msys2 => "libsecret")

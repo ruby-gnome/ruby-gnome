@@ -34,7 +34,7 @@ namespace :dependency do
       unless NativePackageInstaller.install(:alt_linux => "gegl-devel",
                                             :debian => "libgegl-dev",
                                             :redhat => "pkgconfig(#{package_id})",
-                                            :arch => "gegl",
+                                            :arch_linux => "gegl",
                                             :homebrew => "gegl",
                                             :macports => "gegl",
                                             :msys2 => "gegl")

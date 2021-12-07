@@ -27,7 +27,7 @@ namespace :dependency do
       unless NativePackageInstaller.install(:alt_linux => "libatk-devel",
                                             :debian => "libatk1.0-dev",
                                             :redhat => "pkgconfig(#{package_id})",
-                                            :arch => "atk",
+                                            :arch_linux => "atk",
                                             :homebrew => "atk",
                                             :macports => "atk",
                                             :msys2 => "atk")

@@ -34,7 +34,7 @@ namespace :dependency do
       unless NativePackageInstaller.install(:alt_linux => "gdk-pixbuf-devel",
                                             :debian => "libgdk-pixbuf2.0-dev",
                                             :redhat => "pkgconfig(#{package_id})",
-                                            :arch => "gdk-pixbuf2",
+                                            :arch_linux => "gdk-pixbuf2",
                                             :homebrew => "gdk-pixbuf",
                                             :macports => "gdk-pixbuf2",
                                             :msys2 => "gdk-pixbuf2")

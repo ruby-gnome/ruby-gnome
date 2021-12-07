@@ -33,7 +33,7 @@ namespace :dependency do
     unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:debian => "libwnck-3-dev",
                                             :redhat => "pkgconfig(#{package_id})",
-                                            :arch => "libwnck3")
+                                            :arch_linux => "libwnck3")
         exit(false)
       end
     end
