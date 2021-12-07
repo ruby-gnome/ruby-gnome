@@ -31,7 +31,7 @@ namespace :dependency do
   task :check do
     package_id = "gegl-0.4"
     unless PKGConfig.check_version?(package_id)
-      unless NativePackageInstaller.install(:altlinux => "gegl-devel",
+      unless NativePackageInstaller.install(:alt_linux => "gegl-devel",
                                             :debian => "libgegl-dev",
                                             :redhat => "pkgconfig(#{package_id})",
                                             :arch => "gegl",
