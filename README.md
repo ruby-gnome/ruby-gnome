@@ -82,7 +82,7 @@ or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
 
 ## Copying
 
-Copyright (c) 2002-2020 Ruby-GNOME Project Team
+Copyright (c) 2002-2021 Ruby-GNOME Project Team
 
 This program is free software.
 You can distribute/modify this program under the terms of
@@ -98,7 +98,7 @@ Because they are based on scripts in
 [PyGObject-Tutorial](https://github.com/sebp/PyGObject-Tutorial).
 [PyGObject-Tutorial is licensed under GFDL 1.3](https://github.com/sebp/PyGObject-Tutorial/blob/master/COPYING).
 
-See gtk3/examples/ directory for details.
+See [gtk3/sample/](/gtk3/sample) directory for details.
 
 ## Project Website
 

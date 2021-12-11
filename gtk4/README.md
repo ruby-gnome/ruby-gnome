@@ -16,8 +16,7 @@ Ruby/GTK4 is a Ruby binding of GTK+ 4.
 
 ## Tutorials, examples:
 
-* gtk4/sample/misc: a lot of simple examples.
-* gtk4/sample/gtk-demo: the ruby version of `gtk-demo`.
+* [sample](/gtk4/sample): a lot of simple examples.
 
 ## License
 
