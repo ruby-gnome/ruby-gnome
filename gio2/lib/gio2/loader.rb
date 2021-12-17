@@ -220,17 +220,14 @@ module Gio
       Error
     end
 
-    def should_unlock_gvl?(function_info, klass)
+    def prepare_function_info_lock_gvl(function_info, klass)
+      super
       case klass.name
       when "Gio::InputStream"
         case function_info.name
         when "read", "read_all"
-          true
-        else
-          false
+          function_info.lock_gvl_default = false
         end
-      else
-        false
       end
     end
   end

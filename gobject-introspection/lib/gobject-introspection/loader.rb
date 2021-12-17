@@ -90,7 +90,7 @@ module GObjectIntrospection
     end
 
     def define_module_function(target_module, name, function_info)
-      function_info.unlock_gvl = should_unlock_gvl?(function_info, target_module)
+      prepare_function_info_lock_gvl(function_info, target_module)
       full_method_name = "#{target_module}\#.#{name}"
       invoker = Invoker.new(function_info, name, full_method_name)
       target_module::INVOKERS[name] = invoker
@@ -103,7 +103,7 @@ module GObjectIntrospection
     end
 
     def define_singleton_method(klass, name, info)
-      info.unlock_gvl = should_unlock_gvl?(info, klass)
+      prepare_function_info_lock_gvl(info, klass)
       invoker = Invoker.new(info, name, "#{klass}.#{name}")
       singleton_class = klass.singleton_class
       singleton_class::INVOKERS[name] = invoker
@@ -326,7 +326,7 @@ module GObjectIntrospection
       klass.const_set(:INITIALIZE_INVOKERS, invokers)
       infos.each do |info|
         name = "initialize_#{info.name}"
-        info.unlock_gvl = should_unlock_gvl?(info, klass)
+        prepare_function_info_lock_gvl(info, klass)
         invoker = Invoker.new(info, name, "#{klass}\##{name}")
         invokers[name] = invoker
         klass.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ + 1)
@@ -519,8 +519,7 @@ module GObjectIntrospection
       end
     end
 
-    def should_unlock_gvl?(function_info, klass)
-      false
+    def prepare_function_info_lock_gvl(function_info, target_module)
     end
 
     def load_methods_method(infos, klass)
@@ -544,7 +543,7 @@ module GObjectIntrospection
 
     def define_method(info, klass, method_name)
       return if method_name.empty?
-      info.unlock_gvl = should_unlock_gvl?(info, klass)
+      prepare_function_info_lock_gvl(info, klass)
       remove_existing_method(klass, method_name)
       invoker = Invoker.new(info, method_name, "#{klass}\##{method_name}")
       invokers = klass::INVOKERS

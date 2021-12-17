@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -49,18 +49,55 @@ gi_function_info_get_type(void)
 }
 
 static VALUE
-rg_set_unlock_gvl(VALUE self, VALUE rb_boolean)
+rg_set_lock_gvl_default(VALUE self, VALUE rb_boolean)
 {
-    return rb_iv_set(self, "unlock_gvl", rb_boolean);
+    return rb_iv_set(self, "lock_gvl_default", rb_boolean);
 }
 
 static VALUE
-rg_unlock_gvl_p(VALUE self)
+rg_add_lock_gvl_predicate(VALUE self)
 {
-    if (!RVAL2CBOOL(rb_ivar_defined(self, rb_intern("unlock_gvl")))) {
-        rb_iv_set(self, "unlock_gvl", Qfalse);
+    VALUE rb_predicates;
+    if (!RVAL2CBOOL(rb_ivar_defined(self, rb_intern("lock_gvl_predicates")))) {
+        rb_predicates = rb_ary_new();
+        rb_iv_set(self, "lock_gvl_predicates", rb_predicates);
+    } else {
+        rb_predicates = rb_iv_get(self, "lock_gvl_predicates");
     }
-    return rb_iv_get(self, "unlock_gvl");
+    rb_ary_push(rb_predicates, rb_block_lambda());
+    return Qnil;
+}
+
+static VALUE
+rg_lock_gvl_p(int argc, VALUE *argv, VALUE self)
+{
+    VALUE rb_receiver;
+    VALUE rb_lock_gvl_default = Qtrue;
+    rb_scan_args(argc, argv, "01", &rb_receiver);
+    if (RVAL2CBOOL(rb_ivar_defined(self, rb_intern("lock_gvl_default")))) {
+        rb_lock_gvl_default = rb_iv_get(self, "lock_gvl_default");
+    }
+    if (NIL_P(rb_receiver)) {
+        return rb_lock_gvl_default;
+    }
+    if (!RVAL2CBOOL(rb_ivar_defined(self, rb_intern("lock_gvl_predicates")))) {
+        return rb_lock_gvl_default;
+    }
+    VALUE rb_predicates = rb_iv_get(self, "lock_gvl_predicates");
+    long n = RARRAY_LEN(rb_predicates);
+    long i;
+    VALUE rb_args = rb_ary_new_from_args(2,
+                                         self,
+                                         rb_receiver);
+    for (i = 0; i < n; i++) {
+        VALUE rb_predicate = RARRAY_PTR(rb_predicates)[n - i - 1];
+        VALUE rb_result = rb_proc_call(rb_predicate, rb_args);
+        if (NIL_P(rb_result)) {
+            continue;
+        }
+        return rb_result;
+    }
+    return rb_lock_gvl_default;
 }
 
 static VALUE
@@ -144,9 +181,12 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info,
     VALUE rb_out_args = Qnil;
     gboolean succeeded;
     GError *error = NULL;
-    gboolean unlock_gvl = FALSE;
+    gboolean lock_gvl = FALSE;
 
-    unlock_gvl = RVAL2CBOOL(rb_funcall(rb_info, rb_intern("unlock_gvl?"), 0));
+    lock_gvl = RVAL2CBOOL(rb_funcall(rb_info,
+                                     rb_intern("lock_gvl?"),
+                                     1,
+                                     rb_receiver));
     rb_arguments = rbg_to_array(rb_arguments);
 
     callable_info = (GICallableInfo *)info;
@@ -161,12 +201,12 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info,
         data.in_args = args.in_args;
         data.out_args = args.out_args;
         data.error = &error;
-        if (unlock_gvl) {
+        if (lock_gvl) {
+            rb_gi_function_info_invoke_raw_call(&data);
+        } else {
             rb_thread_call_without_gvl(
                 rb_gi_function_info_invoke_raw_call_without_gvl_body, &data,
                 NULL, NULL);
-        } else {
-            rb_gi_function_info_invoke_raw_call(&data);
         }
         succeeded = data.succeeded;
 
@@ -243,8 +283,9 @@ rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rb_mGI,
 				rb_cGICallableInfo);
 
-    RG_DEF_METHOD(set_unlock_gvl, 1);
-    RG_DEF_METHOD_P(unlock_gvl, 0);
+    RG_DEF_METHOD(set_lock_gvl_default, 1);
+    RG_DEF_METHOD(add_lock_gvl_predicate, 0);
+    RG_DEF_METHOD_P(lock_gvl, -1);
 
     RG_DEF_METHOD(symbol, 0);
     RG_DEF_METHOD(flags, 0);

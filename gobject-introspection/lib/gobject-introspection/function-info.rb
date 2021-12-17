@@ -1,4 +1,4 @@
-# Copyright (C) 2019  Ruby-GNOME Project Team
+# Copyright (C) 2019-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,7 +18,7 @@ module GObjectIntrospection
   class FunctionInfo
     def inspect
       super.gsub(/>\z/) do
-        " unlock_gvl?=#{unlock_gvl?.inspect}>"
+        " lock_gvl_default=#{lock_gvl?.inspect}>"
       end
     end
   end
