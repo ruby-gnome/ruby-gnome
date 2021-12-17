@@ -38,4 +38,37 @@ class TestRubyInputStream < Test::Unit::TestCase
     assert_equal(1, @stream.skip(1))
     assert_equal("ell", @stream.read(3))
   end
+
+  def test_tell
+    assert_equal(0, @stream.tell)
+    assert_equal(1, @stream.skip(1))
+    assert_equal(1, @stream.tell)
+  end
+
+  def test_can_seek?
+    assert do
+      @stream.can_seek?
+    end
+  end
+
+  def test_seek
+    assert do
+      @stream.seek(-1, GLib::IOChannel::SEEK_END)
+    end
+    assert_equal(@base_stream.string.bytesize - 1,
+                 @stream.tell)
+  end
+
+  def test_can_truncate?
+    assert do
+      @stream.can_truncate?
+    end
+  end
+
+  def test_truncate
+    assert do
+      @stream.truncate(2)
+    end
+    assert_equal("He", @stream.read)
+  end
 end
