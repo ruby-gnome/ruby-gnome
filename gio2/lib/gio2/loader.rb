@@ -226,8 +226,11 @@ module Gio
       case klass.name
       when "Gio::InputStream"
         case function_info.name
-        when "read", "read_all"
+        when "read", "read_all", "skip", "close"
           function_info.lock_gvl_default = false
+          function_info.add_lock_gvl_predicate do |_, receiver|
+            receiver.is_a?(RubyInputStream)
+          end
         end
       end
     end
