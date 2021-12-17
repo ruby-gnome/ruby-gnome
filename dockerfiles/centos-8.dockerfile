@@ -1,6 +1,8 @@
 FROM centos:8
 
 RUN \
+  dnf module disable -y ruby && \
+  dnf module enable -y ruby:2.6 && \
   dnf install -y \
     epel-release && \
   dnf install -y \
