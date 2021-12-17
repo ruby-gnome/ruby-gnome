@@ -15,9 +15,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestBufferedInputStream < Test::Unit::TestCase
-  def test_buffered_input_stream
-    assert_nothing_raised do
-      Gio::BufferedInputStream.new(Gio::FileInputStream.new)
+  def setup
+    @base_stream = StringIO.new("Hello!")
+    Gio::BufferedInputStream.open(@base_stream) do |stream|
+      @stream = stream
+      yield
     end
+  end
+
+  def test_fill
+    assert_equal(2, @stream.fill(2))
+    assert_equal("He", @stream.read(2))
   end
 end

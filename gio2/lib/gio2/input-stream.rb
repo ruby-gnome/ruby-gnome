@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2019  Ruby-GNOME Project Team
+# Copyright (C) 2014-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -25,6 +25,14 @@ module Gio
           yield(input_stream)
         ensure
           input_stream.close unless input_stream.closed?
+        end
+      end
+
+      def try_convert(value)
+        if value.respond_to?(:read)
+          RubyInputStream.new(value)
+        else
+          nil
         end
       end
     end
