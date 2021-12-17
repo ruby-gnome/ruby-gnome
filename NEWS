@@ -2,6 +2,102 @@
 
 = NEWS
 
+== Ruby-GNOME 3.5.0: 2021-12-18
+
+This is a release that adds support for Ractor.
+
+Ruby/GObjectIntrospection has some backward incompatibilities for
+Ractor support. If you have any problem, please report it to
+https://github.com/ruby-gnome/ruby-gnome/issues .
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+
+    * Added support for Ractor.
+
+==== Ruby/GIO2
+
+  * Improvements
+
+    * Added support for GIO 2.70.
+
+    * Added `Gio::RubyInputStream` to use Ruby objects as
+      `Gio::InputStream`.
+
+    * Added support for accepting `#read`-able Ruby object as
+      an argument as `Gio::InputStream`.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for Ractor. This introduced some backward
+      incompatiblities.
+
+    * Added support for "transfer full" for out `GError`.
+      [GitHub#1437][Reported by mcclumpherty]
+
+    * Added support for changing whether GVL is unlocked per object by
+      the following APIs.
+
+      * `GObjectIntrospection::FunctionInfo#set_lock_gvl_default`
+
+      * `GObjectIntrospection::FunctionInfo#add_lock_gvl_predicate`
+
+      * `GObjectIntrospection::Loader#prepare_function_info_lock_gvl`
+
+    * Added support for converting from raw argument to enum.
+
+* Fixes
+
+    * Fixed a bug that virtual functions of grandparent class can't be
+      implemented.
+      [GitHub#1433][Patch by shibafu]
+
+==== Ruby/GTK3
+
+  * Improvements
+
+    * Improved documentation.
+      [GitHub#1454][Patch by Andy Maleh]
+
+==== Ruby/GDK4
+
+  * Improvements
+
+    * Updated pkg-config ID.
+      [GitHub#1435][Patch by Sasi Olin]
+
+==== Ruby/GTK4
+
+  * Improvements
+
+    * Removed needless rsvg2 dependency on Windows.
+      [GitHub#1440][Reported by HuBandiT]
+
+  * Fixes
+
+    * Fixed typos in warning messages.
+      [GitHub#1442][Patch by HuBandiT]
+      [GitHub#1415][Reported by rubyFeedback]
+
+=== Thanks
+
+  * shibafu
+
+  * Sasi Olin
+
+  * mcclumpherty
+
+  * HuBandiT
+
+  * rubyFeedback
+
+  * Andy Maleh
+
 == Ruby-GNOME 3.4.9: 2021-08-10
 
 This is a bug fix release of 3.4.8.
