@@ -45,7 +45,7 @@ RUN \
     ~/.rbenv/plugins/ruby-build
 
 ENV PATH=/home/ruby-gnome/.rbenv/shims:/home/ruby-gnome/.rbenv/bin:$PATH
-ENV RUBY_VERSION=2.4.1
+ENV RUBY_VERSION=2.6.9
 RUN \
   rbenv install ${RUBY_VERSION}
 RUN \
