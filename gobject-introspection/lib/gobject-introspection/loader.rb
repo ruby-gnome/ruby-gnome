@@ -520,6 +520,11 @@ module GObjectIntrospection
     end
 
     def prepare_function_info_lock_gvl(function_info, target_module)
+      # For backward compatiblity
+      if respond_to?(:should_unlock_gvl?)
+        function_info.lock_gvl_default =
+          not should_unlock_gvl?(function_info, target_module)
+      end
     end
 
     def load_methods_method(infos, klass)
