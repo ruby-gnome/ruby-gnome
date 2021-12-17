@@ -31,7 +31,7 @@ services:
   centos-8:
     build:
       context: .
-      dockerfile: dockerfiles/centos-7.dockerfile
+      dockerfile: dockerfiles/centos-8.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
     command:
