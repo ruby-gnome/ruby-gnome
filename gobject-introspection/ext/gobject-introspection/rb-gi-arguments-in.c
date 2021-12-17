@@ -2023,14 +2023,16 @@ rb_gi_arguments_in_init_arg_raw_interface(RBGIArguments *args,
       metadata->in_arg->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
       break;
     case GI_INFO_TYPE_BOXED:
+      rb_raise(rb_eNotImpError,
+               "TODO: %s::%s: raw argument -> GIArgument(interface)[%s]: <%s>",
+               g_base_info_get_namespace(args->info),
+               g_base_info_get_name(args->info),
+               g_info_type_to_string(metadata->type.interface_type),
+               g_base_info_get_name(metadata->type.interface_info));
+      break;
     case GI_INFO_TYPE_ENUM:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s::%s: raw argument -> GIArgument(interface)[%s]: <%s>",
-                 g_base_info_get_namespace(args->info),
-                 g_base_info_get_name(args->info),
-                 g_info_type_to_string(metadata->type.interface_type),
-                 g_base_info_get_name(metadata->type.interface_info));
-        break;
+      metadata->in_arg->v_int32 = *((gint32 *)(args->raw_args[metadata->index]));
+      break;
     case GI_INFO_TYPE_FLAGS:
       metadata->in_arg->v_int32 = *((gint32 *)(args->raw_args[metadata->index]));
       break;
