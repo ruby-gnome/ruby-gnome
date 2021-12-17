@@ -2032,7 +2032,7 @@ rb_gi_arguments_in_init_arg_raw_interface(RBGIArguments *args,
                  g_base_info_get_name(metadata->type.interface_info));
         break;
     case GI_INFO_TYPE_FLAGS:
-      metadata->in_arg->v_int32= *((gint32 *)(args->raw_args[metadata->index]));
+      metadata->in_arg->v_int32 = *((gint32 *)(args->raw_args[metadata->index]));
       break;
     case GI_INFO_TYPE_OBJECT:
     case GI_INFO_TYPE_INTERFACE:
