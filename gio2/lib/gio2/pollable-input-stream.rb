@@ -51,7 +51,8 @@ module Gio
     private
     def read_nonblocking_raw_compatible(buffer)
       if (GLib::VERSION <=> [2, 42, 0]) >= 0
-        read_nonblocking_raw(buffer)
+        n_bytes, = read_nonblocking_raw(buffer)
+        n_bytes
       else
         read_nonblocking_raw(buffer, buffer.bytesize)
       end
