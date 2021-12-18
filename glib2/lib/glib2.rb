@@ -134,8 +134,29 @@ module GLib
   class Instantiatable
     class << self
       def method_added(name)
-        super
+        result = super
+        check_new_method(name)
+        result
+      end
 
+      def include(*modules, &block)
+        result = super
+        modules.each do |mod|
+          mod.public_instance_methods(false).each do |name|
+            check_new_method(name)
+          end
+          mod.protected_instance_methods(false).each do |name|
+            check_new_method(name)
+          end
+          mod.private_instance_methods(false).each do |name|
+            check_new_method(name)
+          end
+        end
+        result
+      end
+
+      private
+      def check_new_method(name)
         case name.to_s
         when /\A#{Regexp.escape(SIGNAL_HANDLER_PREFIX)}/o
           signal_name = $POSTMATCH
