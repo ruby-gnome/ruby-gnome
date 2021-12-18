@@ -142,6 +142,7 @@ module GLib
       def include(*modules, &block)
         result = super
         modules.each do |mod|
+          next if mod.is_a?(Interface)
           mod.public_instance_methods(false).each do |name|
             check_new_method(name)
           end
