@@ -558,7 +558,7 @@ rb_gi_array_argument_to_ruby(GIArgument *array_argument,
     if (n_elements == -1) {
         rb_array = rb_ary_new();
     } else {
-        rb_array = rb_ary_new2(n_elements);
+        rb_array = rb_ary_new_capa(n_elements);
     }
     switch (array_type) {
     case GI_ARRAY_TYPE_C:
