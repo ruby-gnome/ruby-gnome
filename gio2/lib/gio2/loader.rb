@@ -224,6 +224,11 @@ module Gio
     def prepare_function_info_lock_gvl(function_info, klass)
       super
       case klass.name
+      when "Gio::Seekable"
+        function_info.lock_gvl_default = false
+        function_info.add_lock_gvl_predicate do |_, receiver|
+          receiver.is_a?(RubySeekable)
+        end
       when "Gio::InputStream"
         case function_info.name
         when "read", "read_all", "skip", "close"

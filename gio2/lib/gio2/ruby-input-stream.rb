@@ -16,11 +16,14 @@
 
 require "fiddle"
 
+require_relative "ruby-seekable"
+
 module Gio
   class RubyInputStream < InputStream
     type_register("RubyInputStream")
 
     include Seekable
+    include RubySeekable
 
     def initialize(ruby_input)
       @ruby_input = ruby_input
@@ -29,7 +32,10 @@ module Gio
     end
 
     private
-    # GInputStream methods
+    def ruby_io
+      @ruby_input
+    end
+
     def virtual_do_read_fn(buffer_address, count, cancellable)
       buffer = Fiddle::Pointer.new(buffer_address)
       if @ruby_input.read(count, @buffer)
@@ -58,36 +64,6 @@ module Gio
 
     def virtual_do_close_fn(cancellable)
       @ruby_input.close
-    end
-
-    # GSeekable methods
-    def virtual_do_tell
-      @ruby_input.tell
-    end
-
-    def virtual_do_can_seek
-      @ruby_input.respond_to?(:seek)
-    end
-
-    def virtual_do_seek(offset, type, cancellable)
-      case type
-      when GLib::IOChannel::SEEK_CUR
-        ruby_type = IO::SEEK_CUR
-      when GLib::IOChannel::SEEK_SET
-        ruby_type = IO::SEEK_SET
-      when GLib::IOChannel::SEEK_END
-        ruby_type = IO::SEEK_END
-      end
-      @ruby_input.seek(offset, ruby_type).zero?
-    end
-
-    def virtual_do_can_truncate
-      @ruby_input.respond_to?(:truncate)
-    end
-
-    def virtual_do_truncate_fn(offset, cancellable)
-      @ruby_input.truncate(offset)
-      true
     end
   end
 end
