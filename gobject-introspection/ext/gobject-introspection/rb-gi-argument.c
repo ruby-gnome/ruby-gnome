@@ -321,7 +321,7 @@ array_c_to_ruby(GIArgument *array, GITypeInfo *type_info, gint64 n_elements)
 
     elements = array->v_pointer;
     if (!elements) {
-        return Qnil;
+        return rb_ary_new();
     }
 
     fixed_size = g_type_info_get_array_fixed_size(type_info);
