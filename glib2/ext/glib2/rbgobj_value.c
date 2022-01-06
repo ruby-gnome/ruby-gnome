@@ -293,7 +293,24 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         }
       case G_TYPE_OBJECT:
       case G_TYPE_INTERFACE:
-        g_value_set_object(result, NIL_P(val) ? NULL : RVAL2GOBJ(val));
+        if (NIL_P(val)) {
+            g_value_set_object(result, NULL);
+        } else {
+            VALUE value_class = GTYPE2CLASS(type);
+            ID id_try_convert;
+            CONST_ID(id_try_convert, "try_convert");
+            if (!NIL_P(value_class) &&
+                rb_respond_to(value_class, id_try_convert)) {
+                VALUE converted_value = rb_funcall(value_class,
+                                                   id_try_convert,
+                                                   1,
+                                                   val);
+                if (!NIL_P(converted_value)) {
+                    val = converted_value;
+                }
+            }
+            g_value_set_object(result, RVAL2GOBJ(val));
+        }
         return;
       case G_TYPE_PARAM:
         g_value_set_param(result, NIL_P(val) ? NULL : RVAL2GOBJ(val));
@@ -330,6 +347,7 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
                 func(val, result);
             }
         }
+        break;
     }
 }
 
