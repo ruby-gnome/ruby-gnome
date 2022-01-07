@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2007-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2007-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -49,8 +49,14 @@ rbgutil_protect(VALUE (*func) (VALUE), VALUE data)
     VALUE ret = rb_protect(func, data, &state);
     VALUE e = rb_errinfo();
     if (state && !NIL_P(e))
-        rb_funcall(mGLib, id_exit_application, 2, e, INT2NUM(EXIT_FAILURE));
+        rbgutil_on_callback_error(e);
     return ret;
+}
+
+void
+rbgutil_on_callback_error(VALUE error)
+{
+    rb_funcall(mGLib, id_exit_application, 2, error, INT2NUM(EXIT_FAILURE));
 }
 
 /**********************************************************************/

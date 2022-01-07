@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -91,6 +91,9 @@ rb_gi_callback_invoke(VALUE user_data)
                &state);
     if (state != 0) {
         VALUE error = rb_errinfo();
+        if (!g_callable_info_can_throw_gerror(data->args->info)) {
+            rbgutil_on_callback_error(error);
+        }
         rb_gi_arguments_fill_raw_out_gerror(data->args, error);
         rb_protect(rb_gi_callback_invoke_fill_raw_results,
                    user_data,
@@ -101,6 +104,9 @@ rb_gi_callback_invoke(VALUE user_data)
                    &state);
         if (state != 0) {
             VALUE error = rb_errinfo();
+            if (!g_callable_info_can_throw_gerror(data->args->info)) {
+                rbgutil_on_callback_error(error);
+            }
             rb_gi_arguments_fill_raw_out_gerror(data->args, error);
         }
     }
