@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -859,6 +859,12 @@ rb_gi_argument_to_ruby_glist_interface(GIArgument *argument,
                                                       node->data,
                                                       TRUE));
             }
+        } else if (gtype == G_TYPE_VARIANT) {
+            GList *node;
+            rb_argument = rb_ary_new();
+            for (node = argument->v_pointer; node; node = g_list_next(node)) {
+                rb_ary_push(rb_argument, rbg_variant_to_ruby(node->data));
+            }
         } else {
             rb_argument = BOXEDGLIST2RVAL(argument->v_pointer, gtype);
         }
@@ -1712,6 +1718,9 @@ rb_gi_return_argument_free_everything_glist_interface(GIArgument *argument,
                      "TODO: free GIArgument(GList)[interface(%s)](%s) everything",
                      interface_name,
                      g_type_name(gtype));
+        } else if (gtype == G_TYPE_VARIANT) {
+            g_list_free_full(argument->v_pointer,
+                             (GDestroyNotify)g_variant_unref);
         } else {
             g_list_foreach(argument->v_pointer,
                            rb_gi_boxed_free_callback,
