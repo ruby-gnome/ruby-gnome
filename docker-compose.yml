@@ -1,6 +1,15 @@
 version: "3.5"
 
 services:
+  almalinux-8:
+    build:
+      context: .
+      dockerfile: dockerfiles/almalinux-8.dockerfile
+    volumes:
+      - .:/ruby-gnome:delegated
+    command:
+      /ruby-gnome/dockerfiles/run-test.sh
+
   apache-arrow:
     build:
       context: .
@@ -23,15 +32,6 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/centos-7.dockerfile
-    volumes:
-      - .:/ruby-gnome:delegated
-    command:
-      /ruby-gnome/dockerfiles/run-test.sh
-
-  centos-8:
-    build:
-      context: .
-      dockerfile: dockerfiles/centos-8.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
     command:

@@ -9,10 +9,10 @@ jobs:
       fail-fast: false
       matrix:
         service:
+          - almalinux-8
           - apache-arrow
           - arch-linux
           - centos-7
-          - centos-8
           # - fedora-rawhide
           - ruby-2.7
           - ruby-3.0
