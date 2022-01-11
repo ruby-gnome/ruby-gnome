@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2022  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 
 #define RBGLIB_MAJOR_VERSION 3
 #define RBGLIB_MINOR_VERSION 5
-#define RBGLIB_MICRO_VERSION 0
+#define RBGLIB_MICRO_VERSION 2
 
 #ifndef RB_ZALLOC
 #  ifdef ZALLOC
