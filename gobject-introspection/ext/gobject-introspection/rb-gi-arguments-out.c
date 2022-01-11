@@ -140,6 +140,7 @@ rb_gi_arguments_out_free_array_array_interface_struct(RBGIArguments *args,
              */
             break;
         }
+        G_GNUC_FALLTHROUGH;
       default:
         rb_raise(rb_eNotImpError,
                  "TODO: [%s] %s free GIArgument(%s/%s)[interface(%s)](%s)[%s]",
