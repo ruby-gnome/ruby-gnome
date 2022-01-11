@@ -44,7 +44,7 @@ static VALUE
 rb_gi_callback_invoke_without_protect(VALUE user_data)
 {
     RBGICallbackInvokeData *data = (RBGICallbackInvokeData *)user_data;
-    VALUE rb_args = rb_gi_arguments_in_to_ruby(data->args);
+    VALUE rb_args = rb_gi_arguments_get_rb_in_args(data->args);
 
     if (data->callback->method_name) {
         ID id___send__;

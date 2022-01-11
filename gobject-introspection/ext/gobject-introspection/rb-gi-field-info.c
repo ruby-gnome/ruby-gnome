@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -71,66 +71,58 @@ rg_type(VALUE self)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_field_info_get_type(info));
 }
 
-static VALUE
-rb_gi_field_info_get_field_raw_interface(GIFieldInfo *info,
-                                         gpointer memory,
-                                         GITypeInfo *type_info)
-{
-    VALUE rb_field_value = Qnil;
-    GIBaseInfo *interface_info;
-    GIInfoType interface_type;
-    GType gtype;
-    gint offset;
+typedef struct {
+    RBGIArguments args;
+    GIArgument value;
+    RBGIArgMetadata metadata;
+    GIFieldInfo *info;
+    gpointer memory;
+} FieldToRubyData;
 
-    interface_info = g_type_info_get_interface(type_info);
-    interface_type = g_base_info_get_type(interface_info);
-    gtype = g_registered_type_info_get_g_type(interface_info);
-    offset = g_field_info_get_offset(info);
-    switch (interface_type) {
+static VALUE
+rb_gi_field_info_get_field_raw_body_interface(FieldToRubyData *data)
+{
+    GIInfoType type = data->metadata.type.interface_type;
+    GType gtype = data->metadata.type.interface_gtype;
+    gint offset = g_field_info_get_offset(data->info);
+    switch (type) {
       case GI_INFO_TYPE_INVALID:
       case GI_INFO_TYPE_FUNCTION:
       case GI_INFO_TYPE_CALLBACK:
         rb_raise(rb_eNotImpError,
                  "TODO: GIField(interface)[%s](%s)",
-                 g_info_type_to_string(interface_type),
+                 g_info_type_to_string(type),
                  g_type_name(gtype));
-        break;
+        return Qnil;
       case GI_INFO_TYPE_STRUCT:
         {
-            GIStructInfo *struct_info = (GIStructInfo *)interface_info;
-            gboolean is_pointer;
-            gpointer target;
-
-            is_pointer = g_type_info_is_pointer(type_info);
-            target = (gpointer)((guint8 *)memory + offset);
+            GIStructInfo *struct_info =
+                (GIStructInfo *)(data->metadata.type.interface_info);
+            gboolean is_pointer =
+                g_type_info_is_pointer(data->metadata.type.info);
+            gpointer target = (gpointer)((guint8 *)(data->memory) + offset);
             if (is_pointer) {
                 target = *((gpointer *)target);
             }
-            rb_field_value = rb_gi_struct_info_to_ruby(struct_info,
-                                                       target,
-                                                       is_pointer);
-            break;
+            return rb_gi_struct_info_to_ruby(struct_info, target, is_pointer);
         }
       case GI_INFO_TYPE_BOXED:
       case GI_INFO_TYPE_UNION:
       case GI_INFO_TYPE_OBJECT:
-        {
-            GIArgument argument;
-
-            argument.v_pointer = G_STRUCT_MEMBER(gpointer, memory, offset);
-            rb_field_value = GI_ARGUMENT2RVAL(&argument, FALSE, type_info,
-                                              NULL, NULL, NULL);
-        }
-        break;
+        data->value.v_pointer = G_STRUCT_MEMBER(gpointer, data->memory, offset);
+        return rb_gi_arguments_convert_arg(&(data->args),
+                                           &(data->value),
+                                           &(data->metadata),
+                                           FALSE);
       case GI_INFO_TYPE_ENUM:
         {
             gint32 raw_value;
 
-            raw_value = G_STRUCT_MEMBER(gint32, memory, offset);
+            raw_value = G_STRUCT_MEMBER(gint32, data->memory, offset);
             if (gtype == G_TYPE_NONE) {
-                rb_field_value = INT2NUM(raw_value);
+                return INT2NUM(raw_value);
             } else {
-                rb_field_value = GENUM2RVAL(raw_value, gtype);
+                return GENUM2RVAL(raw_value, gtype);
             }
         }
         break;
@@ -138,11 +130,11 @@ rb_gi_field_info_get_field_raw_interface(GIFieldInfo *info,
         {
             gint32 raw_value;
 
-            raw_value = G_STRUCT_MEMBER(gint32, memory, offset);
+            raw_value = G_STRUCT_MEMBER(gint32, data->memory, offset);
             if (gtype == G_TYPE_NONE) {
-                rb_field_value = INT2NUM(raw_value);
+                return INT2NUM(raw_value);
             } else {
-                rb_field_value = GFLAGS2RVAL(raw_value, gtype);
+                return GFLAGS2RVAL(raw_value, gtype);
             }
         }
         break;
@@ -157,32 +149,21 @@ rb_gi_field_info_get_field_raw_interface(GIFieldInfo *info,
       case GI_INFO_TYPE_ARG:
       case GI_INFO_TYPE_TYPE:
       case GI_INFO_TYPE_UNRESOLVED:
+      default:
         rb_raise(rb_eNotImpError,
                  "TODO: GIField(interface)[%s](%s)",
-                 g_info_type_to_string(interface_type),
+                 g_info_type_to_string(type),
                  g_type_name(gtype));
-        break;
-      default:
-        break;
+        return Qnil;
     }
-    g_base_info_unref(interface_info);
-
-    return rb_field_value;
 }
 
-VALUE
-rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
+static VALUE
+rb_gi_field_info_get_field_raw_body(VALUE user_data)
 {
-    GIArgument argument;
+    FieldToRubyData *data = (FieldToRubyData *)user_data;
     gboolean processed = FALSE;
-    GITypeInfo *type_info;
-    GITypeTag type_tag;
-    VALUE rb_field_value = Qnil;
-
-    type_info = g_field_info_get_type(info);
-    type_tag = g_type_info_get_tag(type_info);
-
-    switch (type_tag) {
+    switch (data->metadata.type.tag) {
       case GI_TYPE_TAG_VOID:
       case GI_TYPE_TAG_BOOLEAN:
       case GI_TYPE_TAG_INT8:
@@ -200,8 +181,9 @@ rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
       case GI_TYPE_TAG_UTF8:
         {
             int offset;
-            offset = g_field_info_get_offset(info);
-            argument.v_string = G_STRUCT_MEMBER(gchar *, memory, offset);
+            offset = g_field_info_get_offset(data->info);
+            data->value.v_string =
+                G_STRUCT_MEMBER(gchar *, data->memory, offset);
             processed = TRUE;
         }
         break;
@@ -209,13 +191,11 @@ rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
       case GI_TYPE_TAG_ARRAY:
         break;
       case GI_TYPE_TAG_INTERFACE:
-        rb_field_value =
-            rb_gi_field_info_get_field_raw_interface(info,
-                                                     memory,
-                                                     type_info);
-        if (!NIL_P(rb_field_value)) {
-            g_base_info_unref(type_info);
-            return rb_field_value;
+        {
+            VALUE rb_value = rb_gi_field_info_get_field_raw_body_interface(data);
+            if (!NIL_P(rb_value)) {
+                return rb_value;
+            }
         }
         break;
       case GI_TYPE_TAG_GLIST:
@@ -229,19 +209,40 @@ rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
     }
 
     if (!processed) {
-        if (!g_field_info_get_field(info, memory, &argument)) {
-            g_base_info_unref(type_info);
+        if (!g_field_info_get_field(data->info, data->memory, &(data->value))) {
             rb_raise(rb_eArgError, "failed to get field value: %s[%s]",
-                     g_base_info_get_name(info),
-                     g_type_tag_to_string(type_tag));
+                     g_base_info_get_name(data->info),
+                     g_type_tag_to_string(data->metadata.type.tag));
         }
     }
 
-    rb_field_value = GI_ARGUMENT2RVAL(&argument, FALSE, type_info,
-                                      NULL, NULL, NULL);
-    g_base_info_unref(type_info);
+    return rb_gi_arguments_convert_arg(&(data->args),
+                                       &(data->value),
+                                       &(data->metadata),
+                                       FALSE);
+}
 
-    return rb_field_value;
+static VALUE
+rb_gi_field_info_get_field_raw_ensure(VALUE user_data)
+{
+    FieldToRubyData *data = (FieldToRubyData *)user_data;
+    rb_gi_arguments_clear(&(data->args));
+    rb_gi_arg_metadata_clear(&(data->metadata));
+    return Qnil;
+}
+
+VALUE
+rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
+{
+    FieldToRubyData data;
+    rb_gi_arguments_init(&(data.args), NULL, Qnil, Qnil, NULL);
+    GITypeInfo *type_info = g_field_info_get_type(info);
+    rb_gi_arg_metadata_init_type_info(&(data.metadata), type_info);
+    data.info = info;
+    data.memory = memory;
+
+    return rb_ensure(rb_gi_field_info_get_field_raw_body, (VALUE)&data,
+                     rb_gi_field_info_get_field_raw_ensure, (VALUE)&data);
 }
 
 void

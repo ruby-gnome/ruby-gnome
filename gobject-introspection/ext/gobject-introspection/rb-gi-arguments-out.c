@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -785,8 +785,11 @@ rb_gi_arguments_out_init(RBGIArguments *args)
 void
 rb_gi_arguments_out_clear(RBGIArguments *args)
 {
-    guint i;
+    if (!args->metadata) {
+        return;
+    }
 
+    guint i;
     for (i = 0; i < args->metadata->len; i++) {
         RBGIArgMetadata *metadata;
 
@@ -884,12 +887,10 @@ rb_gi_arguments_out_to_ruby_arg(RBGIArguments *args,
         break;
     }
 
-    return rb_gi_argument_to_ruby(&normalized_argument,
-                                  duplicate,
-                                  metadata->type.info,
-                                  args->in_args,
-                                  args->out_args,
-                                  args->metadata);
+    return rb_gi_arguments_convert_arg(args,
+                                       &normalized_argument,
+                                       metadata,
+                                       duplicate);
 }
 
 VALUE
