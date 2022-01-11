@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2022  Ruby-GNOME Project Team
+# Copyright (C) 2014-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,18 +14,19 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestBufferedInputStream < Test::Unit::TestCase
-  def setup
-    Gio::RubyInputStream.open(StringIO.new("Hello!")) do |base_stream|
-      Gio::BufferedInputStream.open(base_stream) do |stream|
-        @stream = stream
-        yield
+module Gio
+  class OutputStream
+    class << self
+      def open(*arguments)
+        output_stream = new(*arguments)
+        return output_stream unless block_given?
+
+        begin
+          yield(output_stream)
+        ensure
+          output_stream.close unless output_stream.closed?
+        end
       end
     end
-  end
-
-  def test_fill
-    assert_equal(2, @stream.fill(2))
-    assert_equal("He", @stream.read(2))
   end
 end

@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2022  Ruby-GNOME Project Team
+# Copyright (C) 2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,18 +14,35 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestBufferedInputStream < Test::Unit::TestCase
-  def setup
-    Gio::RubyInputStream.open(StringIO.new("Hello!")) do |base_stream|
-      Gio::BufferedInputStream.open(base_stream) do |stream|
-        @stream = stream
-        yield
-      end
-    end
-  end
+require_relative "ruby-seekable"
 
-  def test_fill
-    assert_equal(2, @stream.fill(2))
-    assert_equal("He", @stream.read(2))
+module Gio
+  class RubyOutputStream < OutputStream
+    type_register("RubyOutputStream")
+
+    include Seekable
+    include RubySeekable
+
+    def initialize(ruby_output)
+      @ruby_output = ruby_output
+      super()
+    end
+
+    private
+    def ruby_io
+      @ruby_output
+    end
+
+    def virtual_do_write_fn(buffer, cancellable)
+      @ruby_output.write(buffer)
+    end
+
+    def virtual_do_flush(cancellable)
+      @ruby_output.flush
+    end
+
+    def virtual_do_close_fn(cancellable)
+      @ruby_output.close
+    end
   end
 end

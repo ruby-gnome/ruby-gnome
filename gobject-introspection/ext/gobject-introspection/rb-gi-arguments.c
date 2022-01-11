@@ -95,6 +95,7 @@ rb_gi_arg_metadata_init_type_info(RBGIArgMetadata *metadata,
     metadata->may_be_null_p = FALSE;
     metadata->caller_allocates_p = FALSE;
     metadata->zero_terminated_p = FALSE;
+    metadata->input_buffer_p = FALSE;
     metadata->output_buffer_p = FALSE;
     metadata->in_arg_index = -1;
     metadata->closure_in_arg_index = -1;
@@ -154,6 +155,7 @@ rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
     metadata->callback_p = (metadata->scope_type != GI_SCOPE_TYPE_INVALID);
     metadata->may_be_null_p = g_arg_info_may_be_null(arg_info);
     metadata->caller_allocates_p = g_arg_info_is_caller_allocates(arg_info);
+    metadata->input_buffer_p = rb_gi_arg_info_is_input_buffer(arg_info);
     metadata->output_buffer_p = rb_gi_arg_info_is_output_buffer(arg_info);
 
     return metadata;
@@ -768,7 +770,11 @@ rb_gi_arguments_convert_arg_array_body_c_sized(ArrayLikeToRubyData *data,
             return rb_arg;
         }
       case GI_TYPE_TAG_UINT8:
-        {
+        if (data->arg_metadata->input_buffer_p) {
+            VALUE rb_arg = rb_str_new_static(elements, length);
+            rb_str_freeze(rb_arg);
+            return rb_arg;
+        } else {
             const guint8 *numbers = (const guint8 *)elements;
             VALUE rb_arg = rb_ary_new_capa(length);
             gint64 i;

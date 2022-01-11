@@ -68,6 +68,7 @@ struct RBGIArgMetadata_ {
     gboolean may_be_null_p;
     gboolean caller_allocates_p;
     gboolean zero_terminated_p;
+    gboolean input_buffer_p;
     gboolean output_buffer_p;
     GIArrayType array_type;
     gint index;
