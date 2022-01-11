@@ -129,6 +129,7 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
                     continue;
                 return func(value);
             }
+            return BOXED2RVAL(g_value_get_boxed(value), type);
         }
       case G_TYPE_VARIANT:
         {
