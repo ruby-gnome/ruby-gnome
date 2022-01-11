@@ -154,7 +154,6 @@ rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
     metadata->callback_p = (metadata->scope_type != GI_SCOPE_TYPE_INVALID);
     metadata->may_be_null_p = g_arg_info_may_be_null(arg_info);
     metadata->caller_allocates_p = g_arg_info_is_caller_allocates(arg_info);
-    metadata->input_buffer_p = rb_gi_arg_info_is_input_buffer(arg_info);
     metadata->output_buffer_p = rb_gi_arg_info_is_output_buffer(arg_info);
 
     return metadata;
