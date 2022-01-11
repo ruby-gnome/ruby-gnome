@@ -44,17 +44,17 @@ https://github.com/ruby-gnome/ruby-gnome/issues .
     * Added support for Ractor. This introduced some backward
       incompatiblities.
 
-    * Added support for "transfer full" for out `GError`.
+    * Added support for "transfer full" for out (({GError})).
       [GitHub#1437][Reported by mcclumpherty]
 
     * Added support for changing whether GVL is unlocked per object by
       the following APIs.
 
-      * `GObjectIntrospection::FunctionInfo#set_lock_gvl_default`
+      * (({GObjectIntrospection::FunctionInfo#set_lock_gvl_default}))
 
-      * `GObjectIntrospection::FunctionInfo#add_lock_gvl_predicate`
+      * (({GObjectIntrospection::FunctionInfo#add_lock_gvl_predicate}))
 
-      * `GObjectIntrospection::Loader#prepare_function_info_lock_gvl`
+      * (({GObjectIntrospection::Loader#prepare_function_info_lock_gvl}))
 
     * Added support for converting from raw argument to enum.
 
