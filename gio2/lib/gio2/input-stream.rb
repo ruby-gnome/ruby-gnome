@@ -27,14 +27,6 @@ module Gio
           input_stream.close unless input_stream.closed?
         end
       end
-
-      def try_convert(value)
-        if value.respond_to?(:read)
-          RubyInputStream.new(value)
-        else
-          nil
-        end
-      end
     end
 
     alias_method :read_raw, :read
