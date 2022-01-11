@@ -70,6 +70,17 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
+  ruby-3.1:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        RUBY_VERSION: "3.1"
+    volumes:
+      - .:/ruby-gnome:delegated
+    command:
+      /ruby-gnome/dockerfiles/run-test.sh
+
   ubuntu-18.04:
     build:
       context: .
