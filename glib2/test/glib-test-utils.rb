@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2021  Ruby-GNOME Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -33,7 +33,11 @@ module GLibTestUtils
   end
 
   def only_not_windows
-    omit("Not for for Windows platform") if GLib.os_win32?
+    omit("Not for Windows platform") if GLib.os_win32?
+  end
+
+  def only_not_scl
+    omit("Not for SCL environment") if ENV["SCL"]
   end
 
   def normalize_path(path)

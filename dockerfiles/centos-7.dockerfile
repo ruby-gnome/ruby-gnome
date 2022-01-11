@@ -1,29 +1,30 @@
 FROM centos:7
 
+ENV SCL=rh-ruby30
+
 RUN \
-  yum install -y epel-release && \
+  yum install -y \
+    centos-release-scl-rh \
+    epel-release && \
   yum install -y \
     adwaita-gtk2-theme \
-    bzip2 \
     clutter-gtk \
     dbus-daemon \
     dejavu-sans-fonts \
     gcc \
     gcc-c++ \
-    git \
     gnome-icon-theme \
     gtksourceview3 \
     libwebkit2-gtk \
     make \
-    openssl-devel \
-    readline-devel \
+    ${SCL}-ruby-devel \
+    ${SCL}-ruby-rubygem-bundler \
     sudo \
     vte3 \
     webkitgtk \
     webkitgtk3 \
     which \
-    xorg-x11-server-Xvfb \
-    zlib-devel && \
+    xorg-x11-server-Xvfb && \
   yum clean all
 
 RUN \
@@ -37,23 +38,4 @@ RUN \
     EDITOR=tee visudo -f /etc/sudoers.d/ruby-gnome
 
 USER ruby-gnome
-
-RUN \
-  git clone --depth 1 https://github.com/rbenv/rbenv.git ~/.rbenv
-RUN \
-  git clone --depth 1 https://github.com/rbenv/ruby-build.git \
-    ~/.rbenv/plugins/ruby-build
-
-ENV PATH=/home/ruby-gnome/.rbenv/shims:/home/ruby-gnome/.rbenv/bin:$PATH
-ENV RUBY_VERSION=2.6.9
-RUN \
-  rbenv install ${RUBY_VERSION}
-RUN \
-  rbenv global ${RUBY_VERSION}
-
 WORKDIR /home/ruby-gnome
-
-RUN gem install bundler
-
-COPY Gemfile .
-RUN bundle install

@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2021  Ruby-GNOME Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -35,6 +35,8 @@ class TestGLibSpawn < Test::Unit::TestCase
 
   def test_async_clear_environment
     only_not_windows
+    only_not_scl
+
     if RbConfig.respond_to?(:ruby)
       ruby = RbConfig.ruby
     else

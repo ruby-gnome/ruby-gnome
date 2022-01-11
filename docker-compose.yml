@@ -35,7 +35,7 @@ services:
     volumes:
       - .:/ruby-gnome:delegated
     command:
-      /ruby-gnome/dockerfiles/run-test.sh
+      /ruby-gnome/dockerfiles/run-test-scl.sh
 
   fedora-rawhide:
     build:
