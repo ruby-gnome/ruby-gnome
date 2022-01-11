@@ -150,6 +150,7 @@ rb_gi_arguments_out_free_array_array_interface_struct(RBGIArguments *args,
                  g_info_type_to_string(metadata->element_type.interface_type),
                  g_type_name(metadata->element_type.interface_gtype),
                  rb_gi_transfer_to_string(metadata->transfer));
+        break;
     }
     g_array_free(target, TRUE);
 }
