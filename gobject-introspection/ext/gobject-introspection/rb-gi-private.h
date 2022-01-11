@@ -50,6 +50,11 @@
 #  define RB_TYPE_P(object, type) (TYPE(object) == type)
 #endif
 
+/* GLib 2.60 or later defines this. */
+#ifndef G_GNUC_FALLTHROUGH
+#  define G_GNUC_FALLTHROUGH
+#endif
+
 extern void Init_gobject_introspection(void);
 
 gboolean rb_gi_is_debug_mode(void);
