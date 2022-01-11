@@ -2,7 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME 3.5.0: 2021-12-18
+== Ruby-GNOME 3.5.0: 2021-01-11
 
 This is a release that adds support for Ractor.
 
@@ -18,17 +18,24 @@ https://github.com/ruby-gnome/ruby-gnome/issues .
 
     * Added support for Ractor.
 
+    * Added support for signal handlers and virtual methods in
+      included module.
+
+    * Added support for (({try_convert})) protocol for property setter.
+
+    * Added support for converting tuple (({GVariant})) to Ruby.
+
 ==== Ruby/GIO2
 
   * Improvements
 
     * Added support for GIO 2.70.
 
-    * Added `Gio::RubyInputStream` to use Ruby objects as
-      `Gio::InputStream`.
+    * Added (({Gio::RubyInputStream})) to use Ruby objects as
+      (({Gio::InputStream})).
 
-    * Added support for accepting `#read`-able Ruby object as
-      an argument as `Gio::InputStream`.
+    * Added (({Gio::RubyOutputStream})) to use Ruby objects as
+      (({Gio::OutputStream})).
 
 ==== Ruby/GObjectIntrospection
 
@@ -51,11 +58,21 @@ https://github.com/ruby-gnome/ruby-gnome/issues .
 
     * Added support for converting from raw argument to enum.
 
-* Fixes
+    * Added support for (({GList<GVariant>})) return value.
+
+    * Added support for reporting an error in callback.
+
+  * Fixes
 
     * Fixed a bug that virtual functions of grandparent class can't be
       implemented.
       [GitHub#1433][Patch by shibafu]
+
+==== Ruby/Pango
+
+  * Improvements
+
+    * Added support for Ruby 3.2.
 
 ==== Ruby/GTK3
 
@@ -63,6 +80,8 @@ https://github.com/ruby-gnome/ruby-gnome/issues .
 
     * Improved documentation.
       [GitHub#1454][Patch by Andy Maleh]
+
+    * Added support for Ruby 3.2.
 
 ==== Ruby/GDK4
 
