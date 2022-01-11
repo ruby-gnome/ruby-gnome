@@ -1332,7 +1332,7 @@ rb_gi_arguments_convert_arg_glist(RBGIArguments *args,
     ArrayLikeToRubyData data;
     data.args = args;
     data.arg = arg;
-    data.arg_metadata;
+    data.arg_metadata = arg_metadata;
     data.element_type_info =
         g_type_info_get_param_type(arg_metadata->type_info, 0);
     data.element_type_tag = g_type_info_get_tag(data.element_type_info);
@@ -1466,7 +1466,7 @@ rb_gi_arguments_convert_arg_gslist(RBGIArguments *args,
     ArrayLikeToRubyData data;
     data.args = args;
     data.arg = arg;
-    data.arg_metadata;
+    data.arg_metadata = arg_metadata;
     data.element_type_info =
         g_type_info_get_param_type(arg_metadata->type_info, 0);
     data.element_type_tag = g_type_info_get_tag(data.element_type_info);
