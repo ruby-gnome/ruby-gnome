@@ -64,6 +64,7 @@ module Gio
 
     def virtual_do_close_fn(cancellable)
       @ruby_input.close
+      true
     end
   end
 end

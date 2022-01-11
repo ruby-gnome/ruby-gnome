@@ -39,10 +39,12 @@ module Gio
 
     def virtual_do_flush(cancellable)
       @ruby_output.flush
+      true
     end
 
     def virtual_do_close_fn(cancellable)
       @ruby_output.close
+      true
     end
   end
 end
