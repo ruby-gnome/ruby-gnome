@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2017-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -46,11 +46,6 @@ static const rb_data_type_t toplevel_window_marker_type = {
     {
         toplevel_window_marker_mark,
         toplevel_window_marker_free,
-        NULL,
-        {
-            NULL,
-            NULL,
-        },
     },
     NULL,
     NULL,
@@ -61,16 +56,9 @@ static const rb_data_type_t toplevel_window_marker_type = {
 void
 rbgtk3_window_init(void)
 {
-    VALUE mGtk;
-    VALUE toplevel_window_marker_class;
-    VALUE toplevel_window_marker;
     ToplevelWindowMarkerData *data;
-
-    mGtk = rb_const_get(rb_cObject, rb_intern("Gtk"));
-    toplevel_window_marker_class =
-        rb_define_class_under(mGtk, "ToplevelWindowMarker", rb_cData);
-    toplevel_window_marker =
-        TypedData_Make_Struct(toplevel_window_marker_class,
+    VALUE toplevel_window_marker =
+        TypedData_Make_Struct(rb_cObject,
                               ToplevelWindowMarkerData,
                               &toplevel_window_marker_type,
                               data);
