@@ -354,7 +354,7 @@ module GObjectIntrospection
           message << arguments.collect(&:inspect).join(", ")
           message << "): "
           message << "available signatures"
-          invokers.each do |invoker|
+          invokers.each_value do |invoker|
             message << ": \#{invoker.signature}"
           end
           raise ArgumentError, message
