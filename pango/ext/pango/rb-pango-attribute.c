@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2017-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2017-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -19,14 +19,6 @@
  */
 
 #include "rb-pango-private.h"
-
-#ifndef PANGO_CHECK_VERSION
-#  define PANGO_CHECK_VERSION(major, minor, micro)                      \
-    (PANGO_VERSION_MAJOR > (major) ||                                   \
-     (PANGO_VERSION_MAJOR == (major) && PANGO_VERSION_MINOR > (minor)) || \
-     (PANGO_VERSION_MAJOR == (major) && PANGO_VERSION_MINOR == (minor) && \
-      PANGO_VERSION_MICRO >= (micro)))
-#endif
 
 #if !PANGO_CHECK_VERSION(1, 44, 0)
 static GType

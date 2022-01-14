@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2017  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2017-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -23,10 +23,12 @@
 #define RG_TARGET_NAMESPACE cAttrIterator
 #define _SELF(self) (RVAL2PANGOATTRITERATOR(self))
 
-G_DEFINE_BOXED_TYPE(PangoAttrIterator,
-                    pango_attr_iterator,
-                    pango_attr_iterator_copy,
-                    pango_attr_iterator_destroy);
+#if !PANGO_CHECK_VERSION(1, 44, 0)
+  G_DEFINE_BOXED_TYPE(PangoAttrIterator,
+                      pango_attr_iterator,
+                      pango_attr_iterator_copy,
+                      pango_attr_iterator_destroy);
+#endif
 
 static VALUE
 rg_attrs(VALUE self)
