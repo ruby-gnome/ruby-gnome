@@ -52,7 +52,7 @@ jobs:
           bundle install
       - name: Build
         run: |
-          bundle exec rake install
+          bundle exec rake gem:install
       - uses: actions/checkout@v2
         with:
           repository: apache/arrow
