@@ -18,10 +18,9 @@ jobs:
       - name: Build
         run: |
           bundle exec rake build
-      # TODO
-      # - name: Test
-      #   run: |
-      #     bundle exec rake
+      - name: Test
+        run: |
+          bundle exec rake
 
   # Licensed to the Apache Software Foundation (ASF) under one
   # or more contributor license agreements.  See the NOTICE file
