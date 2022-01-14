@@ -47,12 +47,14 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.0"
-      - name: Install dependencies
-        run: |
-          bundle install
       - name: Build
         run: |
-          bundle exec rake gem:install
+          for package in glib2 gobject-introspection gio2; do
+            pushd ${package}
+            rake gem
+            gem install pkg/*.gem
+            popd
+          done
       - uses: actions/checkout@v2
         with:
           repository: apache/arrow
