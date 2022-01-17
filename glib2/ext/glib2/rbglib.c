@@ -1067,69 +1067,6 @@ rg_s_os_unix_p(G_GNUC_UNUSED VALUE self)
 #endif
 }
 
-#ifdef _WIN32
-/* Workaround: I don't know why but DllMain() is required with
- * mingw-w64-x86_64-gettext-0.21-1 or later. We don't need DllMain()
- * with mingw-w64-x86_64-gettext-0.19.8.1-10 or earlier.
- *
- * If we don't define DllMain() with mingw-w64-x86_64-gettext-0.21-1
- * or later, we got "The specified procedure could not be found" error
- * when "require 'glib2'" is evaluated.
- *
- * Notes:
- *
- *   * This isn't happen when we build glib2 gem (gem install glib2)
- *     with mingw-w64-x86_64-gettext-0.19.8.1-10 or earlier and update
- *     mingw-w64-x86_64-gettext to 0.21-1 or later. (DllMain() isn't
- *     required.) It seems that this is a link time
- *     problem. msys64\mingw64\lib\libintl.dll.a may be related. It
- *     may require DllMain() with mingw-w64-x86_64-gettext-0.21-1 or
- *     later.
- *
- *   * libintl.dll is linked with empty source and
- *     mingw-w64-x86_64-gettext-0.21-1 or later:
- *
- *       void hello(void) {}
- *
- *       cc -shared empty.c -o empty.dll -lintl
- *
- *     libintl.dll is NOT linked with empty source and
- *     mingw-w64-x86_64-gettext-0.19.8-1-10 or earlier.
- *
- *   * This isn't happen without Ruby. (At least I couldn't reproduce
- *     this without Ruby.)
- *
- *     The following program isn't failed:
- *
- *       #include <stdio.h>
- *       #include <windows.h>
- *
- *       int
- *       main(void) {
- *         HMODULE b = LoadLibrary("empty.dll");
- *         if (b) {
- *           printf("loaded\n");
- *           FreeLibrary(b);
- *         } else {
- *           printf("failed to load: %d\n", GetLastError());
- *         }
- *         return 0;
- *       }
- */
-BOOL WINAPI
-DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
-        G_GNUC_UNUSED DWORD fdwReason,
-        G_GNUC_UNUSED LPVOID lpvReserved);
-
-BOOL WINAPI
-DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
-        G_GNUC_UNUSED DWORD fdwReason,
-        G_GNUC_UNUSED LPVOID lpvReserved)
-{
-  return TRUE;
-}
-#endif
-
 extern void Init_glib2(void);
 
 void

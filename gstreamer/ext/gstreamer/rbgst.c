@@ -64,21 +64,6 @@ rg_gst_value_list_g2r(const GValue *from)
     return rb_values;
 }
 
-#ifdef _WIN32
-/* Workaround: See glib2/ext/glib2/rbglib.c for details. */
-BOOL WINAPI
-DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
-        G_GNUC_UNUSED DWORD fdwReason,
-        G_GNUC_UNUSED LPVOID lpvReserved);
-BOOL WINAPI
-DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
-        G_GNUC_UNUSED DWORD fdwReason,
-        G_GNUC_UNUSED LPVOID lpvReserved)
-{
-  return TRUE;
-}
-#endif
-
 void
 Init_gstreamer (void)
 {

@@ -593,21 +593,6 @@ rbgtk3_initialize(VALUE self)
     rb_funcall(self, rb_intern("initialize_post"), 0);
 }
 
-#ifdef _WIN32
-/* Workaround: See glib2/ext/glib2/rbglib.c for details. */
-BOOL WINAPI
-DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
-        G_GNUC_UNUSED DWORD fdwReason,
-        G_GNUC_UNUSED LPVOID lpvReserved);
-BOOL WINAPI
-DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
-        G_GNUC_UNUSED DWORD fdwReason,
-        G_GNUC_UNUSED LPVOID lpvReserved)
-{
-  return TRUE;
-}
-#endif
-
 void
 Init_gtk3(void)
 {
