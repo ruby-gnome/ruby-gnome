@@ -28,6 +28,7 @@ rg_s_pixels(G_GNUC_UNUSED VALUE self, VALUE pixels)
     return rb_float_new(PANGO_PIXELS(NUM2DBL(pixels)));
 }
 
+#ifdef _WIN32
 /* Workaround: See glib2/ext/glib2/rbglib.c for details. */
 BOOL WINAPI
 DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
@@ -40,6 +41,7 @@ DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
 {
   return TRUE;
 }
+#endif
 
 void
 Init_pango(void)

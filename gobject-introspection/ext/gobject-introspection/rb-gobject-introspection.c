@@ -39,6 +39,7 @@ rb_gi_is_debug_mode(void)
     return is_debug_mode;
 }
 
+#ifdef _WIN32
 /* Workaround: See glib2/ext/glib2/rbglib.c for details. */
 BOOL WINAPI
 DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
@@ -51,6 +52,7 @@ DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
 {
   return TRUE;
 }
+#endif
 
 void
 Init_gobject_introspection(void)
