@@ -1119,6 +1119,11 @@ rg_s_os_unix_p(G_GNUC_UNUSED VALUE self)
 BOOL WINAPI
 DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
         G_GNUC_UNUSED DWORD fdwReason,
+        G_GNUC_UNUSED LPVOID lpvReserved);
+
+BOOL WINAPI
+DllMain(G_GNUC_UNUSED HINSTANCE hinstDLL,
+        G_GNUC_UNUSED DWORD fdwReason,
         G_GNUC_UNUSED LPVOID lpvReserved)
 {
   return TRUE;

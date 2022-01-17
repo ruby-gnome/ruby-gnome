@@ -39,3 +39,7 @@ jobs:
         run: |
           cd gobject-introspection
           bundle exec ruby -rdevkit test/run-test.rb
+      - name: "Test: gio2"
+        run: |
+          cd gio2
+          bundle exec ruby -rdevkit test/run-test.rb
