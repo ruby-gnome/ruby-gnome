@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: |
           bundle install
-          ridk exec pacman -S --noconfirm \
+          ridk exec pacman -S --noconfirm `
             mingw-w64-ucrt-x86_64-gobject-introspection
       - name: Build
         run: |
