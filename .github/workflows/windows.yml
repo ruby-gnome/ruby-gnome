@@ -9,8 +9,8 @@ jobs:
       fail-fast: false
       matrix:
         ruby-version:
-          - "2.7"
-          - "3.0"
+          # - "2.7"
+          # - "3.0"
           - "3.1"
     runs-on: windows-latest
     timeout-minutes: 45
@@ -29,6 +29,8 @@ jobs:
       - name: Install dependencies
         run: |
           bundle install
+          ridk exec pacman -S --noconfirm \
+            mingw-w64-ucrt-x86_64-gobject-introspection
       - name: Build
         run: |
           bundle exec ruby -rdevkit -S rake build
