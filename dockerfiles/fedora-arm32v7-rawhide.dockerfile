@@ -1,4 +1,4 @@
-FROM fedora:rawhide
+FROM arm32v7/fedora:rawhide
 
 RUN \
   dnf install -y \

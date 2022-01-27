@@ -142,6 +142,14 @@ G_BEGIN_DECLS
 #define RVAL2POINTER(value) ((gpointer)(value))
 #define POINTER2RVAL(pointer) ((VALUE)(pointer))
 
+#if SIZEOF_VOIDP == SIZEOF_LONG
+#  define NUM2POINTER(number) NUM2ULONG(number)
+#  define POINTER2NUM(pointer) ULONG2NUM((unsigned long)pointer)
+#else
+#  define NUM2POINTER(number) NUM2ULL(number)
+#  define POINTER2NUM(pointer) ULL2NUM((unsigned LONG_LONG)pointer)
+#endif
+
 #define GINTS2RVAL(ary, n) rbg_gints2rval(ary, n)
 #define GINTS2RVAL_FREE(ary, n) rbg_gints2rval(ary, n)
 

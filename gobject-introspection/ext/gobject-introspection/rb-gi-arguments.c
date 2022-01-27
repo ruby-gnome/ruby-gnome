@@ -1684,7 +1684,7 @@ rb_gi_arguments_convert_arg(RBGIArguments *args,
     switch (type_tag) {
       case GI_TYPE_TAG_VOID:
         if (g_type_info_is_pointer(arg_metadata->type_info)) {
-            return ULL2NUM((guint64)(arg->v_pointer));
+            return POINTER2NUM(arg->v_pointer);
         } else {
             return Qnil;
         }

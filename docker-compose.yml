@@ -37,6 +37,17 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test-scl.sh
 
+  fedora-arm32v7-rawhide:
+    build:
+      context: .
+      dockerfile: dockerfiles/fedora-arm32v7-rawhide.dockerfile
+    volumes:
+      - .:/ruby-gnome:delegated
+    command:
+      /ruby-gnome/dockerfiles/run-test.sh
+    cap_add:
+      - SYS_ADMIN
+
   fedora-rawhide:
     build:
       context: .

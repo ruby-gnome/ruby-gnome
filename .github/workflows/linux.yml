@@ -13,6 +13,7 @@ jobs:
           - apache-arrow
           - arch-linux
           - centos-7
+          # - fedora-arm32v7-rawhide
           # - fedora-rawhide
           - ruby-2.7
           - ruby-3.0
