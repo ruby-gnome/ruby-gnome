@@ -17,6 +17,7 @@ jobs:
       - name: Generate document
         run: |
           git clone https://github.com/ruby-gnome2/yard-gobject-introspection
+          apt install -yq libgtk-3-dev
           gem install -N yard gobject-introspection gtk3
           yard doc --load yard-gobject-introspection/lib/yard-gobject-introspection.rb gtk3/lib/gtk3.rb
       - name: Publish Documentation on GitHub Pages
