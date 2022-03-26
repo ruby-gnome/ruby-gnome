@@ -18,7 +18,8 @@ jobs:
         run: |
           git clone https://github.com/ruby-gnome2/yard-gobject-introspection
           sudo apt update -y
-          gem install -N yard gobject-introspection gtk3
+          rake install
+          gem install -N yard gobject-introspection
           yard doc --load yard-gobject-introspection/lib/yard-gobject-introspection.rb gtk3/lib/gtk3.rb
       - name: Publish Documentation on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
