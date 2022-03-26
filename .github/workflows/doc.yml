@@ -17,7 +17,7 @@ jobs:
       - name: Generate document
         run: |
           git clone https://github.com/ruby-gnome2/yard-gobject-introspection
-          gem install -N yard
+          gem install -N yard gobject-introspection
           yard doc --load yard-gobject-introspection/lib/yard-gobject-introspection.rb gtk3/lib/gtk3.rb
       - name: Publish Documentation on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
