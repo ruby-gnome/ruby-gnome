@@ -14,11 +14,16 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1
+      - name: Install requirements
+        run: |
+          sudo apt update -y
+          bundle
+          ruby extconf.rb
+          make -j2
+          make install
       - name: Generate document
         run: |
           git clone https://github.com/ruby-gnome2/yard-gobject-introspection
-          sudo apt update -y
-          rake gem:install
           gem install -N yard gobject-introspection
           yard doc --load yard-gobject-introspection/lib/yard-gobject-introspection.rb gtk3/lib/gtk3.rb
       - name: Publish Documentation on GitHub Pages
