@@ -23,11 +23,22 @@ jobs:
           make install
       - name: Generate document
         run: |
-          git clone https://github.com/ruby-gnome2/yard-gobject-introspection
           gem install -N yard gobject-introspection
-          yard doc --load yard-gobject-introspection/lib/yard-gobject-introspection.rb gtk3/lib/gtk3.rb
+          git clone https://github.com/ruby-gnome2/yard-gobject-introspection
+          yard doc \
+            --load yard-gobject-introspection/lib/yard-gobject-introspection.rb \
+            -o yard_docs \
+            glib2/lib/glib2.rb
+            cairo-gobject/lib/cairo-gobject.rb
+            gobject-introspection/lib/gobject-introspection.rb
+            gio2/lib/gio2.rb
+            gdk_pixbuf2/lib/gdk_pixbuf2.rb
+            pango/lib/pango.rb
+            atk/lib/atk.rb
+            gdk3/lib/gdk3.rb
+            gtk3/lib/gtk3.rb
       - name: Publish Documentation on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./doc
+          publish_dir: ./yard_docs
