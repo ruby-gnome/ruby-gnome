@@ -28,12 +28,11 @@ jobs:
           yard doc \
             --load yard-gobject-introspection/lib/yard-gobject-introspection.rb \
             -o yard_docs \
-            cairo-gobject/lib/cairo-gobject.rb
-            gio2/lib/gio2.rb
-            gdk_pixbuf2/lib/gdk_pixbuf2.rb
-            pango/lib/pango.rb
-            atk/lib/atk.rb
-            gdk3/lib/gdk3.rb
+            gio2/lib/gio2.rb \
+            gdk_pixbuf2/lib/gdk_pixbuf2.rb \
+            pango/lib/pango.rb \
+            atk/lib/atk.rb \
+            gdk3/lib/gdk3.rb \
             gtk3/lib/gtk3.rb
       - name: Publish Documentation on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
