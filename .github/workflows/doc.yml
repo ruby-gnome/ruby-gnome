@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - mater
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -34,9 +36,25 @@ jobs:
             gdk3/lib/gdk3.rb \
             gtk3/lib/gtk3.rb
           mkdir -p public/
-          mv yard_docs public/doc/dev
+          case ${GITHUB_REF} in
+            refs/tags/*)
+              version=${GITHUB_REF##refs/tags}
+              ;;
+            *)
+              version=dev
+              ;;
+          esac
+          mv yard_docs public/doc/${version}
+          if [ "${version}" != "dev" ]; then
+            cp -a public/doc/${version} public/doc/latest
+          fi
       - name: Publish Documentation on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          keep_files: true
+          # We can use this with v4
+          # force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
