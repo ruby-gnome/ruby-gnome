@@ -33,8 +33,10 @@ jobs:
             atk/lib/atk.rb \
             gdk3/lib/gdk3.rb \
             gtk3/lib/gtk3.rb
+          mkdir -p public/
+          mv yard_docs public/doc/dev
       - name: Publish Documentation on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./yard_docs
+          publish_dir: ./public
