@@ -1,16 +1,15 @@
-name: doc
-
+name: Document
 on:
   push:
     branches:
       - master
     tags:
       - '*'
-
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
-
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
       - name: Update APT repositories
