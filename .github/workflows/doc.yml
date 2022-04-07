@@ -3,7 +3,7 @@ name: doc
 on:
   push:
     branches:
-      - kojix2-doc-challenge
+      - mater
 
 jobs:
   build:
