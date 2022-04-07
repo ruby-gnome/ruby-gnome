@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::SocketAddressEnumerator
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::SocketAddressEnumerator";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">SocketAddressEnumerator</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::SocketAddressEnumerator
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::SocketAddressEnumerator</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Class structure for GSocket::AddressEnumerator.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>(cancellable)  &#x21d2; Gio::SocketAddress </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the next GSocket::Address from <strong>enumerator</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#next_async-instance_method" title="#next_async (instance method)">#<strong>next_async</strong>(cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Asynchronously retrieves the next GSocket::Address from <strong>enumerator</strong> and then calls <strong>callback</strong>, which must call g_socket_address_enumerator_next_finish() to get the result.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#next_finish-instance_method" title="#next_finish (instance method)">#<strong>next_finish</strong>(result)  &#x21d2; Gio::SocketAddress </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the result of a completed call to g_socket_address_enumerator_next_async().</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="next-instance_method">
+  
+    #<strong>next</strong>(cancellable)  &#x21d2; <tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the next GSocket::Address from <strong>enumerator</strong>. Note that this may block for some amount of time. (Eg, a GNetwork::Address may need to do a DNS lookup before it can return an address.) Use g_socket_address_enumerator_next_async() if you need to avoid blocking.</p>
+
+<p>If <strong>enumerator</strong> is expected to yield addresses, but for some reason is unable to (eg, because of a DNS error), then the first call to g_socket_address_enumerator_next() will return an appropriate error in *<strong>error</strong>. However, if the first call to g_socket_address_enumerator_next() succeeds, then any further internal errors (other than <strong>cancellable</strong> being triggered) will be ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>optional #GCancellable object, nil to ignore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Address (owned by the caller), or nil on error (in which case *<strong>error</strong> will be set) or if there are no more addresses.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="next_async-instance_method">
+  
+    #<strong>next_async</strong>(cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Asynchronously retrieves the next GSocket::Address from <strong>enumerator</strong> and then calls <strong>callback</strong>, which must call g_socket_address_enumerator_next_finish() to get the result.</p>
+
+<p>It is an error to call this multiple times before the previous callback has finished.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>optional #GCancellable object, nil to ignore.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::ReadyCallback to call when the request is satisfied</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the data to pass to callback function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="next_finish-instance_method">
+  
+    #<strong>next_finish</strong>(result)  &#x21d2; <tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the result of a completed call to g_socket_address_enumerator_next_async(). See g_socket_address_enumerator_next() for more information about error handling.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Address (owned by the caller), or nil on error (in which case *<strong>error</strong> will be set) or if there are no more addresses.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:08 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

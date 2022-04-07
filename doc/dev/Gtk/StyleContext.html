@@ -1,0 +1,4877 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::StyleContext
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::StyleContext";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">StyleContext</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::StyleContext
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::StyleContext</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_class-instance_method" title="#add_class (instance method)">#<strong>add_class</strong>(class_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a style class to <strong>context</strong>, so posterior calls to gtk_style_context_get() or any of the gtk_render_*() functions will make use of this new class for styling.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_provider-instance_method" title="#add_provider (instance method)">#<strong>add_provider</strong>(provider, priority)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a style provider to <strong>context</strong>, to be used in style construction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_region-instance_method" title="#add_region (instance method)">#<strong>add_region</strong>(region_name, flags)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a region to <strong>context</strong>, so posterior calls to gtk_style_context_get() or any of the gtk_render_*() functions will make use of this new region for styling.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#background=-instance_method" title="#background= (instance method)">#<strong>background=</strong>(window)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the background of <strong>window</strong> to the background pattern or color specified in <strong>context</strong> for its current state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cancel_animations-instance_method" title="#cancel_animations (instance method)">#<strong>cancel_animations</strong>(region_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Stops all running animations for <strong>region_id</strong> and all animatable regions underneath.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#direction-instance_method" title="#direction (instance method)">#<strong>direction</strong>  &#x21d2; Gtk::TextDirection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Direction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#direction=-instance_method" title="#direction= (instance method)">#<strong>direction=</strong>(direction)  &#x21d2; Gtk::TextDirection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#frame_clock-instance_method" title="#frame_clock (instance method)">#<strong>frame_clock</strong>  &#x21d2; Gdk::FrameClock </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the Gdk::FrameClock to which <strong>context</strong> is attached.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#frame_clock=-instance_method" title="#frame_clock= (instance method)">#<strong>frame_clock=</strong>(frame_clock)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Attaches <strong>context</strong> to the given frame clock.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get-instance_method" title="#get (instance method)">#<strong>get</strong>(state, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves several style property values from <strong>context</strong> for a given state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_background_color-instance_method" title="#get_background_color (instance method)">#<strong>get_background_color</strong>(state, color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the background color for a given state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_border-instance_method" title="#get_border (instance method)">#<strong>get_border</strong>(state, border)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the border for a given state as a Gtk::Border.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_border_color-instance_method" title="#get_border_color (instance method)">#<strong>get_border_color</strong>(state, color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the border color for a given state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_color-instance_method" title="#get_color (instance method)">#<strong>get_color</strong>(state, color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the foreground color for a given state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_font-instance_method" title="#get_font (instance method)">#<strong>get_font</strong>(state)  &#x21d2; Pango::FontDescription </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the font description for a given state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_margin-instance_method" title="#get_margin (instance method)">#<strong>get_margin</strong>(state, margin)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the margin for a given state as a Gtk::Border.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_padding-instance_method" title="#get_padding (instance method)">#<strong>get_padding</strong>(state, padding)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the padding for a given state as a Gtk::Border.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_property-instance_method" title="#get_property (instance method)">#<strong>get_property</strong>(property, state, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets a style property from <strong>context</strong> for the given state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_section-instance_method" title="#get_section (instance method)">#<strong>get_section</strong>(property)  &#x21d2; Gtk::CssSection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries the location in the CSS where <strong>property</strong> was defined for the current <strong>context</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_style-instance_method" title="#get_style (instance method)">#<strong>get_style</strong>(array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves several widget style properties from <strong>context</strong> according to the current style.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_style_property-instance_method" title="#get_style_property (instance method)">#<strong>get_style_property</strong>(property_name, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the value for a widget style property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_style_valist-instance_method" title="#get_style_valist (instance method)">#<strong>get_style_valist</strong>(args)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves several widget style properties from <strong>context</strong> according to the current style.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_valist-instance_method" title="#get_valist (instance method)">#<strong>get_valist</strong>(state, args)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves several style property values from <strong>context</strong> for a given state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_class-instance_method" title="#has_class (instance method)">#<strong>has_class</strong>(class_name)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if <strong>context</strong> currently has defined the given class name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_region-instance_method" title="#has_region (instance method)">#<strong>has_region</strong>(region_name, flags_return)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if <strong>context</strong> has the region defined.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#invalidate-instance_method" title="#invalidate (instance method)">#<strong>invalidate</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Invalidates <strong>context</strong> style information, so it will be reconstructed again.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#junction_sides-instance_method" title="#junction_sides (instance method)">#<strong>junction_sides</strong>  &#x21d2; Gtk::JunctionSides </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the sides where rendered elements connect visually with others.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#junction_sides=-instance_method" title="#junction_sides= (instance method)">#<strong>junction_sides=</strong>(sides)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the sides where rendered elements (mostly through gtk_render_frame()) will visually connect with other visual elements.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_classes-instance_method" title="#list_classes (instance method)">#<strong>list_classes</strong>  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the list of classes currently defined in <strong>context</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_regions-instance_method" title="#list_regions (instance method)">#<strong>list_regions</strong>  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the list of regions currently defined in <strong>context</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_color-instance_method" title="#lookup_color (instance method)">#<strong>lookup_color</strong>(color_name, color)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Looks up and resolves a color name in the <strong>context</strong> color map.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_icon_set-instance_method" title="#lookup_icon_set (instance method)">#<strong>lookup_icon_set</strong>(stock_id)  &#x21d2; Gtk::IconSet </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Looks up <strong>stock_id</strong> in the icon factories associated to <strong>context</strong> and the default icon factory, returning an icon set if found, otherwise nil.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>  &#x21d2; Gtk::StyleContext </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a standalone Gtk::StyleContext, this style context won’t be attached to any widget, so you may want to call gtk_style_context_set_path() yourself.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#notify_state_change-instance_method" title="#notify_state_change (instance method)">#<strong>notify_state_change</strong>(window, region_id, state, state_value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Notifies a state change on <strong>context</strong>, so if the current style makes use of transition animations, one will be started so all rendered elements under <strong>region_id</strong> are animated for state <strong>state</strong> being set to value <strong>state_value</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#paint_clock-instance_method" title="#paint_clock (instance method)">#<strong>paint_clock</strong>  &#x21d2; Gdk::FrameClock </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Paint-clock.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#paint_clock=-instance_method" title="#paint_clock= (instance method)">#<strong>paint_clock=</strong>(paint_clock)  &#x21d2; Gdk::FrameClock </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parent-instance_method" title="#parent (instance method)">#<strong>parent</strong>  &#x21d2; Gtk::StyleContext </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets or gets the style context’s parent.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parent=-instance_method" title="#parent= (instance method)">#<strong>parent=</strong>(parent)  &#x21d2; Gtk::StyleContext </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets or gets the style context’s parent.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#path-instance_method" title="#path (instance method)">#<strong>path</strong>  &#x21d2; Gtk::WidgetPath </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the widget path used for style matching.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#path=-instance_method" title="#path= (instance method)">#<strong>path=</strong>(path)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the Gtk::WidgetPath used for style matching.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pop_animatable_region-instance_method" title="#pop_animatable_region (instance method)">#<strong>pop_animatable_region</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Pops an animatable region from <strong>context</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_animatable_region-instance_method" title="#push_animatable_region (instance method)">#<strong>push_animatable_region</strong>(region_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Pushes an animatable region, so all further gtk_render_*() calls between this call and the following gtk_style_context_pop_animatable_region() will potentially show transition animations for this region if gtk_style_context_notify_state_change() is called for a given state, and the current theme/style defines transition animations for state changes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_class-instance_method" title="#remove_class (instance method)">#<strong>remove_class</strong>(class_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes <strong>class_name</strong> from <strong>context</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_provider-instance_method" title="#remove_provider (instance method)">#<strong>remove_provider</strong>(provider)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes <strong>provider</strong> from the style providers list in <strong>context</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_region-instance_method" title="#remove_region (instance method)">#<strong>remove_region</strong>(region_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes a region from <strong>context</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#restore-instance_method" title="#restore (instance method)">#<strong>restore</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Restores <strong>context</strong> state to a previous stage.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save-instance_method" title="#save (instance method)">#<strong>save</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Saves the <strong>context</strong> state, so temporary modifications done through gtk_style_context_add_class(), gtk_style_context_remove_class(), gtk_style_context_set_state(), etc.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scale-instance_method" title="#scale (instance method)">#<strong>scale</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the scale used for assets.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scale=-instance_method" title="#scale= (instance method)">#<strong>scale=</strong>(scale)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the scale to use when getting image assets for the style.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#screen-instance_method" title="#screen (instance method)">#<strong>screen</strong>  &#x21d2; Gdk::Screen </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Screen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#screen=-instance_method" title="#screen= (instance method)">#<strong>screen=</strong>(screen)  &#x21d2; Gdk::Screen </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scroll_animations-instance_method" title="#scroll_animations (instance method)">#<strong>scroll_animations</strong>(window, dx, dy)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function is analogous to gdk_window_scroll(), and should be called together with it so the invalidation areas for any ongoing animation are scrolled together with it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state-instance_method" title="#state (instance method)">#<strong>state</strong>  &#x21d2; Gtk::StateFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the state used for style matching.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state=-instance_method" title="#state= (instance method)">#<strong>state=</strong>(flags)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the state to be used for style matching.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state_is_running-instance_method" title="#state_is_running (instance method)">#<strong>state_is_running</strong>(state, progress)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if there is a transition animation running for the current region (see gtk_style_context_push_animatable_region()).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_string-instance_method" title="#to_string (instance method)">#<strong>to_string</strong>(flags)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts the style context into a string representation.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_class-instance_method">
+  
+    #<strong>add_class</strong>(class_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a style class to <strong>context</strong>, so posterior calls to gtk_style_context_get() or any of the gtk_render_*() functions will make use of this new class for styling.</p>
+
+<p>In the CSS file format, a Gtk::Entry defining a “search” class, would be matched by:</p>
+
+<p>|[ &lt;!– language=“CSS” –&gt; entry.search { … } ]|</p>
+
+<p>While any widget defining a “search” class would be matched by: |[ &lt;!– language=“CSS” –&gt; .search { … } ]|</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>class_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>class name to use in styling</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_provider-instance_method">
+  
+    #<strong>add_provider</strong>(provider, priority)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a style provider to <strong>context</strong>, to be used in style construction. Note that a style provider added by this function only affects the style of the widget to which <strong>context</strong> belongs. If you want to affect the style of all widgets, use gtk_style_context_add_provider_for_screen().</p>
+
+<p>Note: If both priorities are the same, a Gtk::StyleProvider added through this function takes precedence over another added through gtk_style_context_add_provider_for_screen().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>provider</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleProvider.html" title="Gtk::StyleProvider (module)">Gtk::StyleProvider</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::StyleProvider</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the priority of the style provider. The lower it is, the earlier it will be used in the style construction. Typically this will be in the range between %GTK_STYLE_PROVIDER_PRIORITY_FALLBACK and %GTK_STYLE_PROVIDER_PRIORITY_USER</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_region-instance_method">
+  
+    #<strong>add_region</strong>(region_name, flags)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a region to <strong>context</strong>, so posterior calls to gtk_style_context_get() or any of the gtk_render_*() functions will make use of this new region for styling.</p>
+
+<p>In the CSS file format, a Gtk::TreeView defining a “row” region, would be matched by:</p>
+
+<p>|[ &lt;!– language=“CSS” –&gt; treeview row { … } ]|</p>
+
+<p>Pseudo-classes are used for matching <strong>flags</strong>, so the two following rules: |[ &lt;!– language=“CSS” –&gt; treeview row:nth-child(even) { … } treeview row:nth-child(odd) { … } ]|</p>
+
+<p>would apply to even and odd rows, respectively.</p>
+
+<p>Region names must only contain lowercase letters and “-”, starting always with a lowercase letter.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>region_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>region name to use in styling</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="RegionFlags.html" title="Gtk::RegionFlags (module)">Gtk::RegionFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags that apply to the region</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="background=-instance_method">
+  
+    #<strong>background=</strong>(window)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the background of <strong>window</strong> to the background pattern or color specified in <strong>context</strong> for its current state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>window</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cancel_animations-instance_method">
+  
+    #<strong>cancel_animations</strong>(region_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Stops all running animations for <strong>region_id</strong> and all animatable regions underneath.</p>
+
+<p>A nil <strong>region_id</strong> will stop all ongoing animations in <strong>context</strong>, when dealing with a Gtk::StyleContext obtained through gtk_widget_get_style_context(), this is normally done for you in all circumstances you would expect all widget to be stopped, so this should be only used in complex widgets with different animatable regions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>region_id</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>animatable region to stop, or nil. See gtk_style_context_push_animatable_region()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="direction-instance_method">
+  
+    #<strong>direction</strong>  &#x21d2; <tt><span class='object_link'><a href="TextDirection.html" title="Gtk::TextDirection (module)">Gtk::TextDirection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns direction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextDirection.html" title="Gtk::TextDirection (module)">Gtk::TextDirection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>direction</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="direction=-instance_method">
+  
+    #<strong>direction=</strong>(direction)  &#x21d2; <tt><span class='object_link'><a href="TextDirection.html" title="Gtk::TextDirection (module)">Gtk::TextDirection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>direction</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextDirection.html" title="Gtk::TextDirection (module)">Gtk::TextDirection</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextDirection.html" title="Gtk::TextDirection (module)">Gtk::TextDirection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>direction</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextDirection.html" title="Gtk::TextDirection (module)">Gtk::TextDirection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>direction</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="frame_clock-instance_method">
+  
+    #<strong>frame_clock</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/FrameClock.html" title="Gdk::FrameClock (class)">Gdk::FrameClock</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the Gdk::FrameClock to which <strong>context</strong> is attached.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/FrameClock.html" title="Gdk::FrameClock (class)">Gdk::FrameClock</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::FrameClock, or nil if <strong>context</strong> does not have an attached frame clock.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="frame_clock=-instance_method">
+  
+    #<strong>frame_clock=</strong>(frame_clock)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Attaches <strong>context</strong> to the given frame clock.</p>
+
+<p>The frame clock is used for the timing of animations.</p>
+
+<p>If you are using a Gtk::StyleContext returned from gtk_widget_get_style_context(), you do not need to call this yourself.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>frame_clock</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/FrameClock.html" title="Gdk::FrameClock (class)">Gdk::FrameClock</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::FrameClock</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get-instance_method">
+  
+    #<strong>get</strong>(state, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves several style property values from <strong>context</strong> for a given state.</p>
+
+<p>See gtk_style_context_get_property() for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to retrieve the property values for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>property name /return value pairs, followed by nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_background_color-instance_method">
+  
+    #<strong>get_background_color</strong>(state, color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the background color for a given state.</p>
+
+<p>This function is far less useful than it seems, and it should not be used in newly written code. CSS has no concept of “background color”, as a background can be an image, or a gradient, or any other pattern including solid colors.</p>
+
+<p>The only reason why you would call gtk_style_context_get_background_color() is to use the returned value to draw the background with it; the correct way to achieve this result is to use gtk_render_background() instead, along with CSS style classes to modify the color to be rendered.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to retrieve the color for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return value for the background color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_border-instance_method">
+  
+    #<strong>get_border</strong>(state, border)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the border for a given state as a Gtk::Border.</p>
+
+<p>See gtk_style_context_get_property() and #GTK_STYLE_PROPERTY_BORDER_WIDTH for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to retrieve the border for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>border</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Border</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return value for the border settings</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_border_color-instance_method">
+  
+    #<strong>get_border_color</strong>(state, color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the border color for a given state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to retrieve the color for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return value for the border color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_color-instance_method">
+  
+    #<strong>get_color</strong>(state, color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the foreground color for a given state.</p>
+
+<p>See gtk_style_context_get_property() and #GTK_STYLE_PROPERTY_COLOR for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to retrieve the color for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return value for the foreground color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_font-instance_method">
+  
+    #<strong>get_font</strong>(state)  &#x21d2; <tt>Pango::FontDescription</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the font description for a given state. The returned object is const and will remain valid until the Gtk::StyleContext::changed signal happens.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to retrieve the font for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::FontDescription</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Pango::FontDescription for the given state.  This object is owned by GTK+ and should not be freed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_margin-instance_method">
+  
+    #<strong>get_margin</strong>(state, margin)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the margin for a given state as a Gtk::Border. See gtk_style_property_get() and #GTK_STYLE_PROPERTY_MARGIN for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to retrieve the border for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>margin</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Border</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return value for the margin settings</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_padding-instance_method">
+  
+    #<strong>get_padding</strong>(state, padding)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the padding for a given state as a Gtk::Border. See gtk_style_context_get() and #GTK_STYLE_PROPERTY_PADDING for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to retrieve the padding for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>padding</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Border</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return value for the padding settings</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_property-instance_method">
+  
+    #<strong>get_property</strong>(property, state, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets a style property from <strong>context</strong> for the given state.</p>
+
+<p>Note that not all CSS properties that are supported by GTK+ can be retrieved in this way, since they may not be representable as #GValue. GTK+ defines macros for a number of properties that can be used with this function.</p>
+
+<p>Note that passing a state other than the current state of <strong>context</strong> is not recommended unless the style context has been saved with gtk_style_context_save().</p>
+
+<p>When <strong>value</strong> is no longer needed, g_value_unset() must be called to free any allocated memory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>style property name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to retrieve the property value for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the style property value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_section-instance_method">
+  
+    #<strong>get_section</strong>(property)  &#x21d2; <tt>Gtk::CssSection</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries the location in the CSS where <strong>property</strong> was defined for the current <strong>context</strong>. Note that the state to be queried is taken from gtk_style_context_get_state().</p>
+
+<p>If the location is not available, nil will be returned. The location might not be available for various reasons, such as the property being overridden, <strong>property</strong> not naming a supported CSS property or tracking of definitions being disabled for performance reasons.</p>
+
+<p>Shorthand CSS properties cannot be queried for a location and will always return nil. for <strong>property</strong> was defined</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>style property name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::CssSection</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil or the section where a value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_style-instance_method">
+  
+    #<strong>get_style</strong>(array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves several widget style properties from <strong>context</strong> according to the current style.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>property name /return value pairs, followed by nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_style_property-instance_method">
+  
+    #<strong>get_style_property</strong>(property_name, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the value for a widget style property.</p>
+
+<p>When <strong>value</strong> is no longer needed, g_value_unset() must be called to free any allocated memory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the widget style property</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Return location for the property value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_style_valist-instance_method">
+  
+    #<strong>get_style_valist</strong>(args)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves several widget style properties from <strong>context</strong> according to the current style.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Gtk::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>va_list of property name/return location pairs, followed by nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_valist-instance_method">
+  
+    #<strong>get_valist</strong>(state, args)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves several style property values from <strong>context</strong> for a given state.</p>
+
+<p>See gtk_style_context_get_property() for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to retrieve the property values for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Gtk::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>va_list of property name/return location pairs, followed by nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_class-instance_method">
+  
+    #<strong>has_class</strong>(class_name)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if <strong>context</strong> currently has defined the given class name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>class_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a class name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>context</strong> has <strong>class_name</strong> defined</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_region-instance_method">
+  
+    #<strong>has_region</strong>(region_name, flags_return)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if <strong>context</strong> has the region defined. If <strong>flags_return</strong> is not nil, it is set to the flags affecting the region.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>region_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a region name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags_return</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="RegionFlags.html" title="Gtk::RegionFlags (module)">Gtk::RegionFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for region flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if region is defined</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="invalidate-instance_method">
+  
+    #<strong>invalidate</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Invalidates <strong>context</strong> style information, so it will be reconstructed again. It is useful if you modify the <strong>context</strong> and need the new information immediately.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="junction_sides-instance_method">
+  
+    #<strong>junction_sides</strong>  &#x21d2; <tt><span class='object_link'><a href="JunctionSides.html" title="Gtk::JunctionSides (module)">Gtk::JunctionSides</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the sides where rendered elements connect visually with others.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="JunctionSides.html" title="Gtk::JunctionSides (module)">Gtk::JunctionSides</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the junction sides</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="junction_sides=-instance_method">
+  
+    #<strong>junction_sides=</strong>(sides)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the sides where rendered elements (mostly through gtk_render_frame()) will visually connect with other visual elements.</p>
+
+<p>This is merely a hint that may or may not be honored by themes.</p>
+
+<p>Container widgets are expected to set junction hints as appropriate for their children, so it should not normally be necessary to call this function manually.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sides</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="JunctionSides.html" title="Gtk::JunctionSides (module)">Gtk::JunctionSides</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>sides where rendered elements are visually connected to other elements</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_classes-instance_method">
+  
+    #<strong>list_classes</strong>  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the list of classes currently defined in <strong>context</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GList of strings with the currently defined classes. The contents of the list are owned by GTK+, but you must free the list itself with g_list_free() when you are done with it.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_regions-instance_method">
+  
+    #<strong>list_regions</strong>  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the list of regions currently defined in <strong>context</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GList of strings with the currently defined regions. The contents of the list are owned by GTK+, but you must free the list itself with g_list_free() when you are done with it.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_color-instance_method">
+  
+    #<strong>lookup_color</strong>(color_name, color)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Looks up and resolves a color name in the <strong>context</strong> color map.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>color name to lookup</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Return location for the looked up color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>color_name</strong> was found and resolved, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_icon_set-instance_method">
+  
+    #<strong>lookup_icon_set</strong>(stock_id)  &#x21d2; <tt>Gtk::IconSet</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Looks up <strong>stock_id</strong> in the icon factories associated to <strong>context</strong> and the default icon factory, returning an icon set if found, otherwise nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>stock_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an icon name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::IconSet</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The looked up %GtkIconSet, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a standalone Gtk::StyleContext, this style context won’t be attached to any widget, so you may want to call gtk_style_context_set_path() yourself.</p>
+
+<p>This function is only useful when using the theming layer separated from GTK+, if you are using Gtk::StyleContext to theme Gtk::Widgets, use gtk_widget_get_style_context() in order to get a style context ready to theme the widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A newly created Gtk::StyleContext.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="notify_state_change-instance_method">
+  
+    #<strong>notify_state_change</strong>(window, region_id, state, state_value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Notifies a state change on <strong>context</strong>, so if the current style makes use of transition animations, one will be started so all rendered elements under <strong>region_id</strong> are animated for state <strong>state</strong> being set to value <strong>state_value</strong>.</p>
+
+<p>The <strong>window</strong> parameter is used in order to invalidate the rendered area as the animation runs, so make sure it is the same window that is being rendered on by the gtk_render_*() functions.</p>
+
+<p>If <strong>region_id</strong> is nil, all rendered elements using <strong>context</strong> will be affected by this state transition.</p>
+
+<p>As a practical example, a Gtk::Button notifying a state transition on the prelight state: |[ &lt;!– language=“C” –&gt; gtk_style_context_notify_state_change (context,</p>
+
+<pre class="code ruby"><code class="ruby">gtk_widget_get_window (widget),
+NULL,
+GTK_STATE_PRELIGHT,
+button-&gt;in_button);
+</code></pre>
+
+<p>]|</p>
+
+<p>Can be handled in the CSS file like this: |[ &lt;!– language=“CSS” –&gt; button 
+<pre class="code ruby"><code class="ruby">background-color: #f00
+</code></pre>
+
+<p></p>
+
+<p>button:hover 
+<pre class="code ruby"><code class="ruby">background-color: #fff;
+transition: 200ms linear
+</code></pre>
+
+<p> ]|</p>
+
+<p>This combination will animate the button background from red to white if a pointer enters the button, and back to red if the pointer leaves the button.</p>
+
+<p>Note that <strong>state</strong> is used when finding the transition parameters, which is why the style places the transition under the :hover pseudo-class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>window</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Window</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>region_id</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>animatable region to notify on, or nil. See gtk_style_context_push_animatable_region()</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateType.html" title="Gtk::StateType (module)">Gtk::StateType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to trigger transition for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state_value</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>state</strong> is the state we are changing to, false if we are changing away from it</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="paint_clock-instance_method">
+  
+    #<strong>paint_clock</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/FrameClock.html" title="Gdk::FrameClock (class)">Gdk::FrameClock</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns paint-clock.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/FrameClock.html" title="Gdk::FrameClock (class)">Gdk::FrameClock</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>paint-clock</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="paint_clock=-instance_method">
+  
+    #<strong>paint_clock=</strong>(paint_clock)  &#x21d2; <tt><span class='object_link'><a href="../Gdk/FrameClock.html" title="Gdk::FrameClock (class)">Gdk::FrameClock</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>paint_clock</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/FrameClock.html" title="Gdk::FrameClock (class)">Gdk::FrameClock</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/FrameClock.html" title="Gdk::FrameClock (class)">Gdk::FrameClock</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>paint-clock</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/FrameClock.html" title="Gdk::FrameClock (class)">Gdk::FrameClock</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>paint-clock</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parent-instance_method">
+  
+    #<strong>parent</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets or gets the style context’s parent. See gtk_style_context_set_parent() for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>parent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parent=-instance_method">
+  
+    #<strong>parent=</strong>(parent)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets or gets the style context’s parent. See gtk_style_context_set_parent() for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>parent</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>parent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="path-instance_method">
+  
+    #<strong>path</strong>  &#x21d2; <tt>Gtk::WidgetPath</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the widget path used for style matching.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::WidgetPath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A Gtk::WidgetPath</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="path=-instance_method">
+  
+    #<strong>path=</strong>(path)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the Gtk::WidgetPath used for style matching. As a consequence, the style will be regenerated to match the new given path.</p>
+
+<p>If you are using a Gtk::StyleContext returned from gtk_widget_get_style_context(), you do not need to call this yourself.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gtk::WidgetPath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::WidgetPath</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pop_animatable_region-instance_method">
+  
+    #<strong>pop_animatable_region</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Pops an animatable region from <strong>context</strong>. See gtk_style_context_push_animatable_region().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_animatable_region-instance_method">
+  
+    #<strong>push_animatable_region</strong>(region_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Pushes an animatable region, so all further gtk_render_*() calls between this call and the following gtk_style_context_pop_animatable_region() will potentially show transition animations for this region if gtk_style_context_notify_state_change() is called for a given state, and the current theme/style defines transition animations for state changes.</p>
+
+<p>The <strong>region_id</strong> used must be unique in <strong>context</strong> so the themes can uniquely identify rendered elements subject to a state transition.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>region_id</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>unique identifier for the animatable region</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_class-instance_method">
+  
+    #<strong>remove_class</strong>(class_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes <strong>class_name</strong> from <strong>context</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>class_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>class name to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_provider-instance_method">
+  
+    #<strong>remove_provider</strong>(provider)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes <strong>provider</strong> from the style providers list in <strong>context</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>provider</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleProvider.html" title="Gtk::StyleProvider (module)">Gtk::StyleProvider</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::StyleProvider</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_region-instance_method">
+  
+    #<strong>remove_region</strong>(region_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes a region from <strong>context</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>region_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>region name to unset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="restore-instance_method">
+  
+    #<strong>restore</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Restores <strong>context</strong> state to a previous stage. See gtk_style_context_save().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save-instance_method">
+  
+    #<strong>save</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Saves the <strong>context</strong> state, so temporary modifications done through gtk_style_context_add_class(), gtk_style_context_remove_class(), gtk_style_context_set_state(), etc. can quickly be reverted in one go through gtk_style_context_restore().</p>
+
+<p>The matching call to gtk_style_context_restore() must be done before GTK returns to the main loop.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scale-instance_method">
+  
+    #<strong>scale</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the scale used for assets.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the scale</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scale=-instance_method">
+  
+    #<strong>scale=</strong>(scale)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the scale to use when getting image assets for the style.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scale</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>scale</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="screen-instance_method">
+  
+    #<strong>screen</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns screen.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>screen</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="screen=-instance_method">
+  
+    #<strong>screen=</strong>(screen)  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>screen</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>screen</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>screen</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scroll_animations-instance_method">
+  
+    #<strong>scroll_animations</strong>(window, dx, dy)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function is analogous to gdk_window_scroll(), and should be called together with it so the invalidation areas for any ongoing animation are scrolled together with it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>window</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Window used previously in gtk_style_context_notify_state_change()</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dx</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Amount to scroll in the X axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dy</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Amount to scroll in the Y axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="state-instance_method">
+  
+    #<strong>state</strong>  &#x21d2; <tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the state used for style matching.</p>
+
+<p>This method should only be used to retrieve the Gtk::StateFlags to pass to Gtk::StyleContext methods, like gtk_style_context_get_padding(). If you need to retrieve the current state of a Gtk::Widget, use gtk_widget_get_state_flags().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the state flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="state=-instance_method">
+  
+    #<strong>state=</strong>(flags)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the state to be used for style matching.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>state to represent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="state_is_running-instance_method">
+  
+    #<strong>state_is_running</strong>(state, progress)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if there is a transition animation running for the current region (see gtk_style_context_push_animatable_region()).</p>
+
+<p>If <strong>progress</strong> is not nil, the animation progress will be returned there, 0.0 means the state is closest to being unset, while 1.0 means it’s closest to being set. This means transition animation will run from 0 to 1 when <strong>state</strong> is being set and from 1 to 0 when it’s being unset.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateType.html" title="Gtk::StateType (module)">Gtk::StateType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a widget state</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>progress</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the transition progress</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if there is a running transition animation for <strong>state</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_string-instance_method">
+  
+    #<strong>to_string</strong>(flags)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts the style context into a string representation.</p>
+
+<p>The string representation always includes information about the name, state, id, visibility and style classes of the CSS node that is backing <strong>context</strong>. Depending on the flags, more information may be included.</p>
+
+<p>This function is intended for testing and debugging of the CSS implementation in GTK+. There are no guarantees about the format of the returned string, it may change.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleContextPrintFlags.html" title="Gtk::StyleContextPrintFlags (module)">Gtk::StyleContextPrintFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Flags that determine what to print</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated string representing <strong>context</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:30 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

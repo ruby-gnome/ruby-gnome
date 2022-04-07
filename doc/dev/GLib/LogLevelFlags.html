@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: GLib::LogLevelFlags
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GLib::LogLevelFlags";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GLib.html" title="GLib (module)">GLib</a></span></span>
+     &raquo; 
+    <span class="title">LogLevelFlags</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: GLib::LogLevelFlags
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="FLAG_RECURSION-constant" class="">FLAG_RECURSION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>internal flag</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:flag_recursion</span></pre></dd>
+      
+        <dt id="FLAG_FATAL-constant" class="">FLAG_FATAL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>internal flag</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:flag_fatal</span></pre></dd>
+      
+        <dt id="LEVEL_ERROR-constant" class="">LEVEL_ERROR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>log level for errors, see g_error().</p>
+
+<pre class="code ruby"><code class="ruby">This level is also used for messages produced by g_assert().
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:level_error</span></pre></dd>
+      
+        <dt id="LEVEL_CRITICAL-constant" class="">LEVEL_CRITICAL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>log level for critical warning messages, see</p>
+
+<pre class="code ruby"><code class="ruby">g_critical().
+This level is also used for messages produced by g_return_if_fail()
+and g_return_val_if_fail().
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:level_critical</span></pre></dd>
+      
+        <dt id="LEVEL_WARNING-constant" class="">LEVEL_WARNING =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>log level for warnings, see g_warning()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:level_warning</span></pre></dd>
+      
+        <dt id="LEVEL_MESSAGE-constant" class="">LEVEL_MESSAGE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>log level for messages, see g_message()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>32</span> <span class='kw'>or</span> <span class='symbol'>:level_message</span></pre></dd>
+      
+        <dt id="LEVEL_INFO-constant" class="">LEVEL_INFO =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>log level for informational messages, see g_info()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>64</span> <span class='kw'>or</span> <span class='symbol'>:level_info</span></pre></dd>
+      
+        <dt id="LEVEL_DEBUG-constant" class="">LEVEL_DEBUG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>log level for debug messages, see g_debug()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>128</span> <span class='kw'>or</span> <span class='symbol'>:level_debug</span></pre></dd>
+      
+        <dt id="LEVEL_MASK-constant" class="">LEVEL_MASK =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a mask including all log levels</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='op'>-</span><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:level_mask</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:46 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

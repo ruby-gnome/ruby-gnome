@@ -83,6 +83,146 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Version:</p>
+<ul class="version">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>1.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="PangoFc/Decoder.html" title="PangoFc::Decoder (class)">Decoder</a></span>, <span class='object_link'><a href="PangoFc/Font.html" title="PangoFc::Font (class)">Font</a></span>, <span class='object_link'><a href="PangoFc/FontMap.html" title="PangoFc::FontMap (class)">FontMap</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="FONT_FEATURES-constant" class="">FONT_FEATURES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>String representing a fontconfig property name that Pango reads from font patterns to populate list of OpenType features to be enabled for the font by default.</p>
+
+<p>The property will have a number of string elements, each of which is the OpenType feature tag of one feature to enable.</p>
+
+<p>This is equivalent to FC_FONT_FEATURES in versions of fontconfig that have that.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_fontfeatures'>fontfeatures</span></pre></dd>
+      
+        <dt id="FONT_VARIATIONS-constant" class="">FONT_VARIATIONS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>String representing a fontconfig property name that Pango reads from font patterns to populate list of OpenType font variations to be used for a font.</p>
+
+<p>The property will have a string elements, each of which a comma-separated list of OpenType axis setting of the form AXIS=VALUE.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_fontvariations'>fontvariations</span></pre></dd>
+      
+        <dt id="GRAVITY-constant" class="">GRAVITY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>String representing a fontconfig property name that Pango sets on any fontconfig pattern it passes to fontconfig if a Pango::Gravity other than %PANGO_GRAVITY_SOUTH is desired.</p>
+
+<p>The property will have a Pango::Gravity value as a string, like “east”. This can be used to write fontconfig configuration rules to choose different fonts for horizontal and vertical writing directions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_pangogravity'>pangogravity</span></pre></dd>
+      
+        <dt id="PRGNAME-constant" class="">PRGNAME =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>String representing a fontconfig property name that Pango sets on any fontconfig pattern it passes to fontconfig.</p>
+
+<p>The property will have a string equal to what g_get_prgname() returns. This can be used to write fontconfig configuration rules that only affect certain applications.</p>
+
+<p>This is equivalent to FC_PRGNAME in versions of fontconfig that have that.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_prgname'>prgname</span></pre></dd>
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>String representing a fontconfig property name that Pango sets on any fontconfig pattern it passes to fontconfig.</p>
+
+<p>The property will have an integer value equal to what pango_version() returns. This can be used to write fontconfig configuration rules that only affect certain pango versions (or only pango-using applications, or only non-pango-using applications).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_pangoversion'>pangoversion</span></pre></dd>
+      
+    </dl>
+  
 
 
 
@@ -95,7 +235,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Apr  7 02:32:09 2022 by
+  Generated on Thu Apr  7 02:45:53 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.1).
 </div>

@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Atk::Value
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Atk::Value";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Atk.html" title="Atk (module)">Atk</a></span></span>
+     &raquo; 
+    <span class="title">Value</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Atk::Value
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Atk::Value should be implemented for components which either display a value from a bounded range, or which allow the user to specify a value from a bounded range, or both. For instance, most sliders and range controls, as well as dials, should have Atk::Object representations which implement Atk::Value on the component’s behalf. At::KValues may be read-only, in which case attempts to alter the value return would fail.</p>
+
+<p>&lt;refsect1 id=“current-value-text”&gt; &lt;title&gt;On the subject of current value text&lt;/title&gt; &lt;para&gt; In addition to providing the current value, implementors can optionally provide an end-user-consumable textual description associated with this value. This description should be included when the numeric value fails to convey the full, on-screen representation seen by users. &lt;/para&gt;</p>
+
+<p>&lt;example&gt; &lt;title&gt;Password strength&lt;/title&gt; A password strength meter whose value changes as the user types their new password. Red is used for values less than 4.0, yellow for values between 4.0 and 7.0, and green for values greater than 7.0. In this instance, value text should be provided by the implementor. Appropriate value text would be “weak”, “acceptable,” and “strong” respectively. &lt;/example&gt;</p>
+
+<p>A level bar whose value changes to reflect the battery charge. The color remains the same regardless of the charge and there is no on-screen text reflecting the fullness of the battery. In this case, because the position within the bar is the only indication the user has of the current charge, value text should not be provided by the implementor.</p>
+
+<p>&lt;refsect2 id=“implementor-notes”&gt; &lt;title&gt;Implementor Notes&lt;/title&gt; &lt;para&gt; Implementors should bear in mind that assistive technologies will likely prefer the value text provided over the numeric value when presenting a widget’s value. As a result, strings not intended for end users should not be exposed in the value text, and strings which are exposed should be localized. In the case of widgets which display value text on screen, for instance through a separate label in close proximity to the value-displaying widget, it is still expected that implementors will expose the value text using the above API. &lt;/para&gt;</p>
+
+<p>&lt;para&gt; Atk::Value should NOT be implemented for widgets whose displayed value is not reflective of a meaningful amount. For instance, a progress pulse indicator whose value alternates between 0.0 and 1.0 to indicate that some process is still taking place should not implement Atk::Value because the current value does not reflect progress towards completion. &lt;/para&gt; &lt;/refsect2&gt; &lt;/refsect1&gt;</p>
+
+<p>&lt;refsect1 id=“ranges”&gt; &lt;title&gt;On the subject of ranges&lt;/title&gt; &lt;para&gt; In addition to providing the minimum and maximum values, implementors can optionally provide details about subranges associated with the widget. These details should be provided by the implementor when both of the following are communicated visually to the end user: &lt;/para&gt; &lt;itemizedlist&gt;</p>
+
+<pre class="code ruby"><code class="ruby">&lt;listitem&gt;The existence of distinct ranges such as &quot;weak&quot;,
+&quot;acceptable&quot;, and &quot;strong&quot; indicated by color, bar tick marks,
+and/or on-screen text.&lt;/listitem&gt;
+&lt;listitem&gt;Where the current value stands within a given subrange,
+for instance illustrating progression from very &quot;weak&quot; towards
+nearly &quot;acceptable&quot; through changes in shade and/or position on
+the bar within the &quot;weak&quot; subrange.&lt;/listitem&gt;
+</code></pre>
+
+<p>&lt;/itemizedlist&gt; &lt;para&gt; If both of the above do not apply to the widget, it should be sufficient to expose the numeric value, along with the value text if appropriate, to make the widget accessible. &lt;/para&gt;</p>
+
+<p>&lt;refsect2 id=“ranges-implementor-notes”&gt; &lt;title&gt;Implementor Notes&lt;/title&gt; &lt;para&gt; If providing subrange details is deemed necessary, all possible values of the widget are expected to fall within one of the subranges defined by the implementor. &lt;/para&gt; &lt;/refsect2&gt; &lt;/refsect1&gt;</p>
+
+<p>&lt;refsect1 id=“localization”&gt; &lt;title&gt;On the subject of localization of end-user-consumable text values&lt;/title&gt; &lt;para&gt; Because value text and subrange descriptors are human-consumable, implementors are expected to provide localized strings which can be directly presented to end users via their assistive technology. In order to simplify this for implementors, implementors can use atk_value_type_get_localized_name() with the following already-localized constants for commonly-needed values can be used: &lt;/para&gt;</p>
+
+<p>&lt;itemizedlist&gt;</p>
+
+<pre class="code ruby"><code class="ruby">&lt;listitem&gt;ATK_VALUE_VERY_WEAK&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_WEAK&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_ACCEPTABLE&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_STRONG&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_VERY_STRONG&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_VERY_LOW&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_LOW&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_MEDIUM&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_HIGH&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_VERY_HIGH&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_VERY_BAD&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_BAD&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_GOOD&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_VERY_GOOD&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_BEST&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_SUBSUBOPTIMAL&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_SUBOPTIMAL&lt;/listitem&gt;
+&lt;listitem&gt;ATK_VALUE_OPTIMAL&lt;/listitem&gt;
+</code></pre>
+
+<p>&lt;/itemizedlist&gt; &lt;para&gt; Proposals for additional constants, along with their use cases, should be submitted to the GNOME Accessibility Team. &lt;/para&gt; &lt;/refsect1&gt;</p>
+
+<p>&lt;refsect1 id=“changes”&gt; &lt;title&gt;On the subject of changes&lt;/title&gt; &lt;para&gt; Note that if there is a textual description associated with the new numeric value, that description should be included regardless of whether or not it has also changed. &lt;/para&gt; &lt;/refsect1&gt;</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_value=-instance_method" title="#current_value= (instance method)">#<strong>current_value=</strong>(value)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the value of this object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_current_value-instance_method" title="#get_current_value (instance method)">#<strong>get_current_value</strong>(obj, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_increment-instance_method" title="#get_increment (instance method)">#<strong>get_increment</strong>(obj)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>object may be changed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_maximum_value-instance_method" title="#get_maximum_value (instance method)">#<strong>get_maximum_value</strong>(obj, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_minimum_increment-instance_method" title="#get_minimum_increment (instance method)">#<strong>get_minimum_increment</strong>(obj, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_minimum_value-instance_method" title="#get_minimum_value (instance method)">#<strong>get_minimum_value</strong>(obj, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_range-instance_method" title="#get_range (instance method)">#<strong>get_range</strong>(obj)  &#x21d2; Atk::Range </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>that represents the minimum, maximum and descriptor (if available) of <strong>obj</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_sub_ranges-instance_method" title="#get_sub_ranges (instance method)">#<strong>get_sub_ranges</strong>(obj)  &#x21d2; GLib::SList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Atk::Range which each of the subranges defined for this object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_value_and_text-instance_method" title="#get_value_and_text (instance method)">#<strong>get_value_and_text</strong>(obj, value, text)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>readable text alternative for <strong>value</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#increment-instance_method" title="#increment (instance method)">#<strong>increment</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the minimum increment by which the value of this object may be changed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#range-instance_method" title="#range (instance method)">#<strong>range</strong>  &#x21d2; Atk::Range </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the range of this object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_current_value-instance_method" title="#set_current_value (instance method)">#<strong>set_current_value</strong>(obj, value)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True if new value is successfully set, false otherwise.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_value-instance_method" title="#set_value (instance method)">#<strong>set_value</strong>(obj, new_value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sub_ranges-instance_method" title="#sub_ranges (instance method)">#<strong>sub_ranges</strong>  &#x21d2; GLib::SList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the list of subranges defined for this object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value=-instance_method" title="#value= (instance method)">#<strong>value=</strong>(new_value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the value of this object.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="current_value=-instance_method">
+  
+    #<strong>current_value=</strong>(value)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the value of this object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GValue which is the desired new accessible value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if new value is successfully set, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_current_value-instance_method">
+  
+    #<strong>get_current_value</strong>(obj, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Value (module)">Atk::Value</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GObject instance that implements AtkValueIface</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GValue representing the current accessible value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_increment-instance_method">
+  
+    #<strong>get_increment</strong>(obj)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>object may be changed. zero if undefined.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Value (module)">Atk::Value</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GObject instance that implements AtkValueIface</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the minimum increment by which the value of this</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_maximum_value-instance_method">
+  
+    #<strong>get_maximum_value</strong>(obj, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Value (module)">Atk::Value</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GObject instance that implements AtkValueIface</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GValue representing the maximum accessible value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_minimum_increment-instance_method">
+  
+    #<strong>get_minimum_increment</strong>(obj, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Value (module)">Atk::Value</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GObject instance that implements AtkValueIface</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GValue representing the minimum increment by which the accessible value may be changed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_minimum_value-instance_method">
+  
+    #<strong>get_minimum_value</strong>(obj, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Value (module)">Atk::Value</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GObject instance that implements AtkValueIface</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GValue representing the minimum accessible value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_range-instance_method">
+  
+    #<strong>get_range</strong>(obj)  &#x21d2; <tt>Atk::Range</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>that represents the minimum, maximum and descriptor (if available) of <strong>obj</strong>. NULL if that range is not defined.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Value (module)">Atk::Value</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GObject instance that implements AtkValueIface</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Atk::Range</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated Atk::Range</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_sub_ranges-instance_method">
+  
+    #<strong>get_sub_ranges</strong>(obj)  &#x21d2; <tt>GLib::SList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Atk::Range which each of the subranges defined for this object. Free the returns list with g_slist_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Value (module)">Atk::Value</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GObject instance that implements AtkValueIface</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an #GSList of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_value_and_text-instance_method">
+  
+    #<strong>get_value_and_text</strong>(obj, value, text)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>readable text alternative for <strong>value</strong></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Value (module)">Atk::Value</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GObject instance that implements AtkValueIface</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>address of #gdouble to put the current value of <strong>obj</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>address of #gchar to put the human</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="increment-instance_method">
+  
+    #<strong>increment</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the minimum increment by which the value of this object may be changed.  If zero, the minimum increment is undefined, which may mean that it is limited only by the floating point precision of the platform. object may be changed. zero if undefined.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the minimum increment by which the value of this</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="range-instance_method">
+  
+    #<strong>range</strong>  &#x21d2; <tt>Atk::Range</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the range of this object. that represents the minimum, maximum and descriptor (if available) of <strong>obj</strong>. NULL if that range is not defined.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Atk::Range</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated Atk::Range</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_current_value-instance_method">
+  
+    #<strong>set_current_value</strong>(obj, value)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if new value is successfully set, false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Value (module)">Atk::Value</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GObject instance that implements AtkValueIface</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GValue which is the desired new accessible value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if new value is successfully set, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_value-instance_method">
+  
+    #<strong>set_value</strong>(obj, new_value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Value (module)">Atk::Value</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GObject instance that implements AtkValueIface</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>new_value</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a double which is the desired new accessible value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sub_ranges-instance_method">
+  
+    #<strong>sub_ranges</strong>  &#x21d2; <tt>GLib::SList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the list of subranges defined for this object. See Atk::Value introduction for examples of subranges and when to expose them. Atk::Range which each of the subranges defined for this object. Free the returns list with g_slist_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an #GSList of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="value=-instance_method">
+  
+    #<strong>value=</strong>(new_value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the value of this object.</p>
+
+<p>This method is intended to provide a way to change the value of the object. In any case, it is possible that the value can’t be modified (ie: a read-only component). If the value changes due this call, it is possible that the text could change, and will trigger an Atk::Value::value-changed signal emission.</p>
+
+<p>Note for implementors: the deprecated atk_value_set_current_value() method returned TRUE or FALSE depending if the value was assigned or not. In the practice several implementors were not able to decide it, and returned TRUE in any case. For that reason it is not required anymore to return if the value was properly assigned or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_value</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a double which is the desired new accessible value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:54 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

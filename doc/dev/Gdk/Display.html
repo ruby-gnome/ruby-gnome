@@ -1,0 +1,3543 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gdk::Display
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::Display";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">Display</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gdk::Display
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gdk::Display</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Gdk::Display objects purpose are two fold:</p>
+<ul><li>
+<p>To manage and provide information about input devices (pointers and keyboards)</p>
+</li><li>
+<p>To manage and provide information about the available Gdk::Screens</p>
+</li></ul>
+
+<p>GdkDisplay objects are the GDK representation of an X Display, which can be described as a workstation consisting of a keyboard, a pointing device (such as a mouse) and one or more screens. It is used to open and keep track of various GdkScreen objects currently instantiated by the application. It is also used to access the keyboard(s) and mouse pointer(s) of the display.</p>
+
+<p>Most of the input device handling has been factored out into the separate Gdk::DeviceManager object. Every display has a device manager, which you can obtain using gdk_display_get_device_manager().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#app_launch_context-instance_method" title="#app_launch_context (instance method)">#<strong>app_launch_context</strong>  &#x21d2; Gdk::AppLaunchContext </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a Gdk::AppLaunchContext suitable for launching applications on the given display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#beep-instance_method" title="#beep (instance method)">#<strong>beep</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Emits a short beep on <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">#<strong>close</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Closes the connection to the windowing system for the given display, and cleans up associated resources.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_cursor_size-instance_method" title="#default_cursor_size (instance method)">#<strong>default_cursor_size</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the default size to use for cursors on <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_group-instance_method" title="#default_group (instance method)">#<strong>default_group</strong>  &#x21d2; Gdk::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the default group leader window for all toplevel windows on <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_screen-instance_method" title="#default_screen (instance method)">#<strong>default_screen</strong>  &#x21d2; Gdk::Screen </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the default Gdk::Screen for <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_seat-instance_method" title="#default_seat (instance method)">#<strong>default_seat</strong>  &#x21d2; Gdk::Seat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the default Gdk::Seat for this display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_is_grabbed-instance_method" title="#device_is_grabbed (instance method)">#<strong>device_is_grabbed</strong>(device)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if there is an ongoing grab on <strong>device</strong> for <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_manager-instance_method" title="#device_manager (instance method)">#<strong>device_manager</strong>  &#x21d2; Gdk::DeviceManager </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the Gdk::DeviceManager associated to <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#double_click_distance=-instance_method" title="#double_click_distance= (instance method)">#<strong>double_click_distance=</strong>(distance)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the double click distance (two clicks within this distance count as a double click and result in a #GDK_2BUTTON_PRESS event).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#double_click_time=-instance_method" title="#double_click_time= (instance method)">#<strong>double_click_time=</strong>(msec)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the double click time (two clicks within this time interval count as a double click and result in a #GDK_2BUTTON_PRESS event).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#event-instance_method" title="#event (instance method)">#<strong>event</strong>  &#x21d2; Gdk::Event </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the next Gdk::Event to be processed for <strong>display</strong>, fetching events from the windowing system if necessary.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flush-instance_method" title="#flush (instance method)">#<strong>flush</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Flushes any requests queued for the windowing system; this happens automatically when the main loop blocks waiting for new events, but if your application is drawing without returning control to the main loop, you may need to call this function explicitly.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_maximal_cursor_size-instance_method" title="#get_maximal_cursor_size (instance method)">#<strong>get_maximal_cursor_size</strong>(width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the maximal size to use for cursors on <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor-instance_method" title="#get_monitor (instance method)">#<strong>get_monitor</strong>(monitor_num)  &#x21d2; Gdk::Monitor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets a monitor associated with this display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_at_point-instance_method" title="#get_monitor_at_point (instance method)">#<strong>get_monitor_at_point</strong>(x, y)  &#x21d2; Gdk::Monitor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the monitor in which the point (<strong>x</strong>, <strong>y</strong>) is located, or a nearby monitor if the point is not in any monitor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_at_window-instance_method" title="#get_monitor_at_window (instance method)">#<strong>get_monitor_at_window</strong>(window)  &#x21d2; Gdk::Monitor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the monitor in which the largest area of <strong>window</strong> resides, or a monitor close to <strong>window</strong> if it is outside of all monitors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_pointer-instance_method" title="#get_pointer (instance method)">#<strong>get_pointer</strong>(screen, x, y, mask)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the current location of the pointer and the current modifier mask for a given display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_screen-instance_method" title="#get_screen (instance method)">#<strong>get_screen</strong>(screen_num)  &#x21d2; Gdk::Screen </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a screen object for one of the screens of the display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_window_at_pointer-instance_method" title="#get_window_at_pointer (instance method)">#<strong>get_window_at_pointer</strong>(win_x, win_y)  &#x21d2; Gdk::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the window underneath the mouse pointer, returning the location of the pointer in that window in <strong>win_x</strong>, <strong>win_y</strong> for <strong>screen</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_pending-instance_method" title="#has_pending (instance method)">#<strong>has_pending</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns whether the display has events that are waiting to be processed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_closed-instance_method" title="#is_closed (instance method)">#<strong>is_closed</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finds out if the display has been closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keyboard_ungrab-instance_method" title="#keyboard_ungrab (instance method)">#<strong>keyboard_ungrab</strong>(time_)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Release any keyboard grab.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_devices-instance_method" title="#list_devices (instance method)">#<strong>list_devices</strong>  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the list of available input devices attached to <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_seats-instance_method" title="#list_seats (instance method)">#<strong>list_seats</strong>  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the list of seats known to <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_monitors-instance_method" title="#n_monitors (instance method)">#<strong>n_monitors</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the number of monitors that belong to <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_screens-instance_method" title="#n_screens (instance method)">#<strong>n_screens</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the number of screen managed by the <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the name of the display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#notify_startup_complete-instance_method" title="#notify_startup_complete (instance method)">#<strong>notify_startup_complete</strong>(startup_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Indicates to the GUI environment that the application has finished loading, using a given identifier.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peek_event-instance_method" title="#peek_event (instance method)">#<strong>peek_event</strong>  &#x21d2; Gdk::Event </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets a copy of the first Gdk::Event in the <strong>display</strong>’s event queue, without removing the event from the queue.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pointer_is_grabbed-instance_method" title="#pointer_is_grabbed (instance method)">#<strong>pointer_is_grabbed</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Test if the pointer is grabbed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pointer_ungrab-instance_method" title="#pointer_ungrab (instance method)">#<strong>pointer_ungrab</strong>(time_)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Release any pointer grab.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#primary_monitor-instance_method" title="#primary_monitor (instance method)">#<strong>primary_monitor</strong>  &#x21d2; Gdk::Monitor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the primary monitor for the display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#put_event-instance_method" title="#put_event (instance method)">#<strong>put_event</strong>(event)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Appends a copy of the given event onto the front of the event queue for <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_selection_notification-instance_method" title="#request_selection_notification (instance method)">#<strong>request_selection_notification</strong>(selection)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Request Gdk::EventOwnerChange events for ownership changes of the selection named by the given atom.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#store_clipboard-instance_method" title="#store_clipboard (instance method)">#<strong>store_clipboard</strong>(clipboard_window, time_, targets, n_targets)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Issues a request to the clipboard manager to store the clipboard data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports_clipboard_persistence-instance_method" title="#supports_clipboard_persistence (instance method)">#<strong>supports_clipboard_persistence</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns whether the speicifed display supports clipboard persistance; i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports_composite-instance_method" title="#supports_composite (instance method)">#<strong>supports_composite</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if gdk_window_set_composited() can be used to redirect drawing on the window using compositing.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports_cursor_alpha-instance_method" title="#supports_cursor_alpha (instance method)">#<strong>supports_cursor_alpha</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if cursors can use an 8bit alpha channel on <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports_cursor_color-instance_method" title="#supports_cursor_color (instance method)">#<strong>supports_cursor_color</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if multicolored cursors are supported on <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports_input_shapes-instance_method" title="#supports_input_shapes (instance method)">#<strong>supports_input_shapes</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if gdk_window_input_shape_combine_mask() can be used to modify the input shape of windows on <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports_selection_notification-instance_method" title="#supports_selection_notification (instance method)">#<strong>supports_selection_notification</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns whether Gdk::EventOwnerChange events will be sent when the owner of a selection changes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports_shapes-instance_method" title="#supports_shapes (instance method)">#<strong>supports_shapes</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if gdk_window_shape_combine_mask() can be used to create shaped windows on <strong>display</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sync-instance_method" title="#sync (instance method)">#<strong>sync</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Flushes any requests queued for the windowing system and waits until all requests have been handled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#warp_pointer-instance_method" title="#warp_pointer (instance method)">#<strong>warp_pointer</strong>(screen, x, y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Warps the pointer of <strong>display</strong> to the point <strong>x</strong>,<strong>y</strong> on the screen <strong>screen</strong>, unless the pointer is confined to a window by a grab, in which case it will be moved as far as allowed by the grab.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="app_launch_context-instance_method">
+  
+    #<strong>app_launch_context</strong>  &#x21d2; <tt><span class='object_link'><a href="AppLaunchContext.html" title="Gdk::AppLaunchContext (class)">Gdk::AppLaunchContext</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a Gdk::AppLaunchContext suitable for launching applications on the given display.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AppLaunchContext.html" title="Gdk::AppLaunchContext (class)">Gdk::AppLaunchContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new Gdk::AppLaunchContext for <strong>display</strong>. Free with g_object_unref() when done</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="beep-instance_method">
+  
+    #<strong>beep</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Emits a short beep on <strong>display</strong></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close-instance_method">
+  
+    #<strong>close</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Closes the connection to the windowing system for the given display, and cleans up associated resources.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_cursor_size-instance_method">
+  
+    #<strong>default_cursor_size</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the default size to use for cursors on <strong>display</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the default cursor size.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_group-instance_method">
+  
+    #<strong>default_group</strong>  &#x21d2; <tt><span class='object_link'><a href="Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the default group leader window for all toplevel windows on <strong>display</strong>. This window is implicitly created by GDK. See gdk_window_set_group(). for <strong>display</strong></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The default group leader window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_screen-instance_method">
+  
+    #<strong>default_screen</strong>  &#x21d2; <tt><span class='object_link'><a href="Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the default Gdk::Screen for <strong>display</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the default Gdk::Screen object for <strong>display</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_seat-instance_method">
+  
+    #<strong>default_seat</strong>  &#x21d2; <tt><span class='object_link'><a href="Seat.html" title="Gdk::Seat (class)">Gdk::Seat</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the default Gdk::Seat for this display.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Seat.html" title="Gdk::Seat (class)">Gdk::Seat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the default seat.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_is_grabbed-instance_method">
+  
+    #<strong>device_is_grabbed</strong>(device)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if there is an ongoing grab on <strong>device</strong> for <strong>display</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>device</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Device.html" title="Gdk::Device (class)">Gdk::Device</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Device</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if there is a grab in effect for <strong>device</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_manager-instance_method">
+  
+    #<strong>device_manager</strong>  &#x21d2; <tt><span class='object_link'><a href="DeviceManager.html" title="Gdk::DeviceManager (class)">Gdk::DeviceManager</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the Gdk::DeviceManager associated to <strong>display</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DeviceManager.html" title="Gdk::DeviceManager (class)">Gdk::DeviceManager</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A Gdk::DeviceManager, or nil. This memory is owned by GDK and must not be freed or unreferenced.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="double_click_distance=-instance_method">
+  
+    #<strong>double_click_distance=</strong>(distance)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the double click distance (two clicks within this distance count as a double click and result in a #GDK_2BUTTON_PRESS event). See also gdk_display_set_double_click_time(). Applications should not set this, it is a global user-configured setting.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>distance</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>distance in pixels</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="double_click_time=-instance_method">
+  
+    #<strong>double_click_time=</strong>(msec)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the double click time (two clicks within this time interval count as a double click and result in a #GDK_2BUTTON_PRESS event). Applications should not set this, it is a global user-configured setting.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>double click time in milliseconds (thousandths of a second)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="event-instance_method">
+  
+    #<strong>event</strong>  &#x21d2; <tt>Gdk::Event</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the next Gdk::Event to be processed for <strong>display</strong>, fetching events from the windowing system if necessary. if no events are pending. The returned Gdk::Event should be freed with gdk_event_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the next Gdk::Event to be processed, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flush-instance_method">
+  
+    #<strong>flush</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Flushes any requests queued for the windowing system; this happens automatically when the main loop blocks waiting for new events, but if your application is drawing without returning control to the main loop, you may need to call this function explicitly. A common case where this function needs to be called is when an application is executing drawing commands from a thread other than the thread where the main loop is running.</p>
+
+<p>This is most useful for X11. On windowing systems where requests are handled synchronously, this function will do nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_maximal_cursor_size-instance_method">
+  
+    #<strong>get_maximal_cursor_size</strong>(width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the maximal size to use for cursors on <strong>display</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the return location for the maximal cursor width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the return location for the maximal cursor height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor-instance_method">
+  
+    #<strong>get_monitor</strong>(monitor_num)  &#x21d2; <tt><span class='object_link'><a href="Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets a monitor associated with this display.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monitor_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of the monitor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Monitor, or nil if <strong>monitor_num</strong> is not a valid monitor number</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_at_point-instance_method">
+  
+    #<strong>get_monitor_at_point</strong>(x, y)  &#x21d2; <tt><span class='object_link'><a href="Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the monitor in which the point (<strong>x</strong>, <strong>y</strong>) is located, or a nearby monitor if the point is not in any monitor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the x coordinate of the point</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the y coordinate of the point</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the monitor containing the point</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_at_window-instance_method">
+  
+    #<strong>get_monitor_at_window</strong>(window)  &#x21d2; <tt><span class='object_link'><a href="Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the monitor in which the largest area of <strong>window</strong> resides, or a monitor close to <strong>window</strong> if it is outside of all monitors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>window</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the monitor with the largest overlap with <strong>window</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_pointer-instance_method">
+  
+    #<strong>get_pointer</strong>(screen, x, y, mask)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the current location of the pointer and the current modifier mask for a given display.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>screen</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the screen that the cursor is on, or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store root window X coordinate of pointer, or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store root window Y coordinate of pointer, or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mask</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Gdk::ModifierType (module)">Gdk::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store current modifier mask, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_screen-instance_method">
+  
+    #<strong>get_screen</strong>(screen_num)  &#x21d2; <tt><span class='object_link'><a href="Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a screen object for one of the screens of the display.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>screen_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the screen number</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Screen object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_window_at_pointer-instance_method">
+  
+    #<strong>get_window_at_pointer</strong>(win_x, win_y)  &#x21d2; <tt><span class='object_link'><a href="Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the window underneath the mouse pointer, returning the location of the pointer in that window in <strong>win_x</strong>, <strong>win_y</strong> for <strong>screen</strong>. Returns nil if the window under the mouse pointer is not known to GDK (for example, belongs to another application).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>win_x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for x coordinate of the pointer location relative to the window origin, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>win_y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for y coordinate of the pointer location relative &amp;    to the window origin, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the window under the mouse pointer, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_pending-instance_method">
+  
+    #<strong>has_pending</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether the display has events that are waiting to be processed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if there are events ready to be processed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_closed-instance_method">
+  
+    #<strong>is_closed</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finds out if the display has been closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the display is closed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="keyboard_ungrab-instance_method">
+  
+    #<strong>keyboard_ungrab</strong>(time_)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Release any keyboard grab</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>time_</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a timestap (e.g #GDK_CURRENT_TIME).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_devices-instance_method">
+  
+    #<strong>list_devices</strong>  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the list of available input devices attached to <strong>display</strong>. The list is statically allocated and should not be freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a list of Gdk::Device</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_seats-instance_method">
+  
+    #<strong>list_seats</strong>  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the list of seats known to <strong>display</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the list of seats known to the Gdk::Display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_monitors-instance_method">
+  
+    #<strong>n_monitors</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the number of monitors that belong to <strong>display</strong>.</p>
+
+<p>The returned number is valid until the next emission of the Gdk::Display::monitor-added or #GdkDisplay::monitor-removed signal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of monitors</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_screens-instance_method">
+  
+    #<strong>n_screens</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the number of screen managed by the <strong>display</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of screens.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the name of the display. by GDK and should not be modified or freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a string representing the display name. This string is owned</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="notify_startup_complete-instance_method">
+  
+    #<strong>notify_startup_complete</strong>(startup_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates to the GUI environment that the application has finished loading, using a given identifier.</p>
+
+<p>GTK+ will call this function automatically for Gtk::Window with custom startup-notification identifier unless gtk_window_set_auto_startup_notification() is called to disable that feature.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>startup_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a startup-notification identifier, for which notification process should be completed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peek_event-instance_method">
+  
+    #<strong>peek_event</strong>  &#x21d2; <tt>Gdk::Event</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets a copy of the first Gdk::Event in the <strong>display</strong>’s event queue, without removing the event from the queue.  (Note that this function will not get more events from the windowing system.  It only checks the events that have already been moved to the GDK event queue.) queue, or nil if no events are in the queue. The returned Gdk::Event should be freed with gdk_event_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a copy of the first Gdk::Event on the event</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pointer_is_grabbed-instance_method">
+  
+    #<strong>pointer_is_grabbed</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Test if the pointer is grabbed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if an active X pointer grab is in effect</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pointer_ungrab-instance_method">
+  
+    #<strong>pointer_ungrab</strong>(time_)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Release any pointer grab.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>time_</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a timestap (e.g. %GDK_CURRENT_TIME).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="primary_monitor-instance_method">
+  
+    #<strong>primary_monitor</strong>  &#x21d2; <tt><span class='object_link'><a href="Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the primary monitor for the display.</p>
+
+<p>The primary monitor is considered the monitor where the “main desktop” lives. While normal application windows typically allow the window manager to place the windows, specialized desktop applications such as panels should place themselves on the primary monitor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the primary monitor, or nil if no primary monitor is configured by the user</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="put_event-instance_method">
+  
+    #<strong>put_event</strong>(event)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Appends a copy of the given event onto the front of the event queue for <strong>display</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Event.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_selection_notification-instance_method">
+  
+    #<strong>request_selection_notification</strong>(selection)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Request Gdk::EventOwnerChange events for ownership changes of the selection named by the given atom.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>selection</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Atom naming the selection for which ownership change notification is requested</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether Gdk::EventOwnerChange events will be sent.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="store_clipboard-instance_method">
+  
+    #<strong>store_clipboard</strong>(clipboard_window, time_, targets, n_targets)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Issues a request to the clipboard manager to store the clipboard data. On X11, this is a special program that works according to the [FreeDesktop Clipboard Specification](<a href="http://www.freedesktop.org/Standards/clipboard-manager-spec">www.freedesktop.org/Standards/clipboard-manager-spec</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>clipboard_window</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Window belonging to the clipboard owner</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>time_</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a timestamp</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>targets</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gdk::Atom&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of targets that should be saved, or nil if all available targets should be saved.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_targets</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of the <strong>targets</strong> array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="supports_clipboard_persistence-instance_method">
+  
+    #<strong>supports_clipboard_persistence</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether the speicifed display supports clipboard persistance; i.e. if it’s possible to store the clipboard data after an application has quit. On X11 this checks if a clipboard daemon is running.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the display supports clipboard persistance.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="supports_composite-instance_method">
+  
+    #<strong>supports_composite</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if gdk_window_set_composited() can be used to redirect drawing on the window using compositing.</p>
+
+<p>Currently this only works on X11 with XComposite and XDamage extensions available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if windows may be composited.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="supports_cursor_alpha-instance_method">
+  
+    #<strong>supports_cursor_alpha</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if cursors can use an 8bit alpha channel on <strong>display</strong>. Otherwise, cursors are restricted to bilevel alpha (i.e. a mask).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether cursors can have alpha channels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="supports_cursor_color-instance_method">
+  
+    #<strong>supports_cursor_color</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if multicolored cursors are supported on <strong>display</strong>. Otherwise, cursors have only a forground and a background color.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether cursors can have multiple colors.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="supports_input_shapes-instance_method">
+  
+    #<strong>supports_input_shapes</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if gdk_window_input_shape_combine_mask() can be used to modify the input shape of windows on <strong>display</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if windows with modified input shape are supported</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="supports_selection_notification-instance_method">
+  
+    #<strong>supports_selection_notification</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether Gdk::EventOwnerChange events will be sent when the owner of a selection changes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether Gdk::EventOwnerChange events will be sent.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="supports_shapes-instance_method">
+  
+    #<strong>supports_shapes</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if gdk_window_shape_combine_mask() can be used to create shaped windows on <strong>display</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if shaped windows are supported</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sync-instance_method">
+  
+    #<strong>sync</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Flushes any requests queued for the windowing system and waits until all requests have been handled. This is often used for making sure that the display is synchronized with the current state of the program. Calling gdk_display_sync() before gdk_error_trap_pop() makes sure that any errors generated from earlier requests are handled before the error trap is removed.</p>
+
+<p>This is most useful for X11. On windowing systems where requests are handled synchronously, this function will do nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="warp_pointer-instance_method">
+  
+    #<strong>warp_pointer</strong>(screen, x, y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Warps the pointer of <strong>display</strong> to the point <strong>x</strong>,<strong>y</strong> on the screen <strong>screen</strong>, unless the pointer is confined to a window by a grab, in which case it will be moved as far as allowed by the grab. Warping the pointer creates events as if the user had moved the mouse instantaneously to the destination.</p>
+
+<p>Note that the pointer should normally be under the control of the user. This function was added to cover some rare use cases like keyboard navigation support for the color picker in the Gtk::ColorSelectionDialog.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>screen</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the screen of <strong>display</strong> to warp the pointer to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the x coordinate of the destination</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the y coordinate of the destination</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:13 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

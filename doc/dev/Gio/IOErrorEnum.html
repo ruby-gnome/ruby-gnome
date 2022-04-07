@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gio::IOErrorEnum
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::IOErrorEnum";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (I)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">IOErrorEnum</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gio::IOErrorEnum
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="FAILED-constant" class="">FAILED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Generic error condition for when an operation fails</p>
+
+<pre class="code ruby"><code class="ruby">and no more specific GIOError::Enum value is defined.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:failed</span></pre></dd>
+      
+        <dt id="NOT_FOUND-constant" class="">NOT_FOUND =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File not found.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:not_found</span></pre></dd>
+      
+        <dt id="EXISTS-constant" class="">EXISTS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File already exists.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:exists</span></pre></dd>
+      
+        <dt id="IS_DIRECTORY-constant" class="">IS_DIRECTORY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File is a directory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:is_directory</span></pre></dd>
+      
+        <dt id="NOT_DIRECTORY-constant" class="">NOT_DIRECTORY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File is not a directory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:not_directory</span></pre></dd>
+      
+        <dt id="NOT_EMPTY-constant" class="">NOT_EMPTY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File is a directory that isn’t empty.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:not_empty</span></pre></dd>
+      
+        <dt id="NOT_REGULAR_FILE-constant" class="">NOT_REGULAR_FILE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File is not a regular file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:not_regular_file</span></pre></dd>
+      
+        <dt id="NOT_SYMBOLIC_LINK-constant" class="">NOT_SYMBOLIC_LINK =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File is not a symbolic link.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:not_symbolic_link</span></pre></dd>
+      
+        <dt id="NOT_MOUNTABLE_FILE-constant" class="">NOT_MOUNTABLE_FILE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File cannot be mounted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:not_mountable_file</span></pre></dd>
+      
+        <dt id="FILENAME_TOO_LONG-constant" class="">FILENAME_TOO_LONG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Filename is too many characters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:filename_too_long</span></pre></dd>
+      
+        <dt id="INVALID_FILENAME-constant" class="">INVALID_FILENAME =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Filename is invalid or contains invalid characters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:invalid_filename</span></pre></dd>
+      
+        <dt id="TOO_MANY_LINKS-constant" class="">TOO_MANY_LINKS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File contains too many symbolic links.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:too_many_links</span></pre></dd>
+      
+        <dt id="NO_SPACE-constant" class="">NO_SPACE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>No space left on drive.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:no_space</span></pre></dd>
+      
+        <dt id="INVALID_ARGUMENT-constant" class="">INVALID_ARGUMENT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Invalid argument.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:invalid_argument</span></pre></dd>
+      
+        <dt id="PERMISSION_DENIED-constant" class="">PERMISSION_DENIED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Permission denied.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:permission_denied</span></pre></dd>
+      
+        <dt id="NOT_SUPPORTED-constant" class="">NOT_SUPPORTED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Operation (or one of its parameters) not supported</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span> <span class='kw'>or</span> <span class='symbol'>:not_supported</span></pre></dd>
+      
+        <dt id="NOT_MOUNTED-constant" class="">NOT_MOUNTED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File isn’t mounted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:not_mounted</span></pre></dd>
+      
+        <dt id="ALREADY_MOUNTED-constant" class="">ALREADY_MOUNTED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File is already mounted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span> <span class='kw'>or</span> <span class='symbol'>:already_mounted</span></pre></dd>
+      
+        <dt id="CLOSED-constant" class="">CLOSED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File was closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:closed</span></pre></dd>
+      
+        <dt id="CANCELLED-constant" class="">CANCELLED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Operation was cancelled. See #GCancellable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span> <span class='kw'>or</span> <span class='symbol'>:cancelled</span></pre></dd>
+      
+        <dt id="PENDING-constant" class="">PENDING =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Operations are still pending.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span> <span class='kw'>or</span> <span class='symbol'>:pending</span></pre></dd>
+      
+        <dt id="READ_ONLY-constant" class="">READ_ONLY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File is read only.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>21</span> <span class='kw'>or</span> <span class='symbol'>:read_only</span></pre></dd>
+      
+        <dt id="CANT_CREATE_BACKUP-constant" class="">CANT_CREATE_BACKUP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Backup couldn’t be created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>22</span> <span class='kw'>or</span> <span class='symbol'>:cant_create_backup</span></pre></dd>
+      
+        <dt id="WRONG_ETAG-constant" class="">WRONG_ETAG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File’s Entity Tag was incorrect.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>23</span> <span class='kw'>or</span> <span class='symbol'>:wrong_etag</span></pre></dd>
+      
+        <dt id="TIMED_OUT-constant" class="">TIMED_OUT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Operation timed out.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>24</span> <span class='kw'>or</span> <span class='symbol'>:timed_out</span></pre></dd>
+      
+        <dt id="WOULD_RECURSE-constant" class="">WOULD_RECURSE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Operation would be recursive.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>25</span> <span class='kw'>or</span> <span class='symbol'>:would_recurse</span></pre></dd>
+      
+        <dt id="BUSY-constant" class="">BUSY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>File is busy.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>26</span> <span class='kw'>or</span> <span class='symbol'>:busy</span></pre></dd>
+      
+        <dt id="WOULD_BLOCK-constant" class="">WOULD_BLOCK =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Operation would block.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>27</span> <span class='kw'>or</span> <span class='symbol'>:would_block</span></pre></dd>
+      
+        <dt id="HOST_NOT_FOUND-constant" class="">HOST_NOT_FOUND =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Host couldn’t be found (remote operations).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>28</span> <span class='kw'>or</span> <span class='symbol'>:host_not_found</span></pre></dd>
+      
+        <dt id="WOULD_MERGE-constant" class="">WOULD_MERGE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Operation would merge files.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>29</span> <span class='kw'>or</span> <span class='symbol'>:would_merge</span></pre></dd>
+      
+        <dt id="FAILED_HANDLED-constant" class="">FAILED_HANDLED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Operation failed and a helper program has</p>
+
+<pre class="code ruby"><code class="ruby">already interacted with the user. Do not display any error dialog.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>30</span> <span class='kw'>or</span> <span class='symbol'>:failed_handled</span></pre></dd>
+      
+        <dt id="TOO_MANY_OPEN_FILES-constant" class="">TOO_MANY_OPEN_FILES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The current process has too many files</p>
+
+<pre class="code ruby"><code class="ruby">open and can&#39;t open any more. Duplicate descriptors do count toward
+this limit. Since 2.20
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>31</span> <span class='kw'>or</span> <span class='symbol'>:too_many_open_files</span></pre></dd>
+      
+        <dt id="NOT_INITIALIZED-constant" class="">NOT_INITIALIZED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The object has not been initialized. Since 2.22</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>32</span> <span class='kw'>or</span> <span class='symbol'>:not_initialized</span></pre></dd>
+      
+        <dt id="ADDRESS_IN_USE-constant" class="">ADDRESS_IN_USE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The requested address is already in use. Since 2.22</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>33</span> <span class='kw'>or</span> <span class='symbol'>:address_in_use</span></pre></dd>
+      
+        <dt id="PARTIAL_INPUT-constant" class="">PARTIAL_INPUT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Need more input to finish operation. Since 2.24</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>34</span> <span class='kw'>or</span> <span class='symbol'>:partial_input</span></pre></dd>
+      
+        <dt id="INVALID_DATA-constant" class="">INVALID_DATA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The input data was invalid. Since 2.24</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>35</span> <span class='kw'>or</span> <span class='symbol'>:invalid_data</span></pre></dd>
+      
+        <dt id="DBUS_ERROR-constant" class="">DBUS_ERROR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A remote object generated an error that</p>
+
+<pre class="code ruby"><code class="ruby">doesn&#39;t correspond to a locally registered #GError error
+domain. Use g_dbus_error_get_remote_error() to extract the D-Bus
+error name and g_dbus_error_strip_remote_error() to fix up the
+message so it matches what was received on the wire. Since 2.26.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>36</span> <span class='kw'>or</span> <span class='symbol'>:dbus_error</span></pre></dd>
+      
+        <dt id="HOST_UNREACHABLE-constant" class="">HOST_UNREACHABLE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Host unreachable. Since 2.26</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>37</span> <span class='kw'>or</span> <span class='symbol'>:host_unreachable</span></pre></dd>
+      
+        <dt id="NETWORK_UNREACHABLE-constant" class="">NETWORK_UNREACHABLE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Network unreachable. Since 2.26</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>38</span> <span class='kw'>or</span> <span class='symbol'>:network_unreachable</span></pre></dd>
+      
+        <dt id="CONNECTION_REFUSED-constant" class="">CONNECTION_REFUSED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Connection refused. Since 2.26</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>39</span> <span class='kw'>or</span> <span class='symbol'>:connection_refused</span></pre></dd>
+      
+        <dt id="PROXY_FAILED-constant" class="">PROXY_FAILED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Connection to proxy server failed. Since 2.26</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>40</span> <span class='kw'>or</span> <span class='symbol'>:proxy_failed</span></pre></dd>
+      
+        <dt id="PROXY_AUTH_FAILED-constant" class="">PROXY_AUTH_FAILED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Proxy authentication failed. Since 2.26</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>41</span> <span class='kw'>or</span> <span class='symbol'>:proxy_auth_failed</span></pre></dd>
+      
+        <dt id="PROXY_NEED_AUTH-constant" class="">PROXY_NEED_AUTH =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Proxy server needs authentication. Since 2.26</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>42</span> <span class='kw'>or</span> <span class='symbol'>:proxy_need_auth</span></pre></dd>
+      
+        <dt id="PROXY_NOT_ALLOWED-constant" class="">PROXY_NOT_ALLOWED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Proxy connection is not allowed by ruleset.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.26</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>43</span> <span class='kw'>or</span> <span class='symbol'>:proxy_not_allowed</span></pre></dd>
+      
+        <dt id="BROKEN_PIPE-constant" class="">BROKEN_PIPE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Broken pipe. Since 2.36</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>44</span> <span class='kw'>or</span> <span class='symbol'>:broken_pipe</span></pre></dd>
+      
+        <dt id="CONNECTION_CLOSED-constant" class="">CONNECTION_CLOSED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Connection closed by peer. Note that this</p>
+
+<pre class="code ruby"><code class="ruby">is the same code as %G_IO_ERROR_BROKEN_PIPE; before 2.44 some
+&quot;connection closed&quot; errors returned %G_IO_ERROR_BROKEN_PIPE, but others
+returned %G_IO_ERROR_FAILED. Now they should all return the same
+value, which has this more logical name. Since 2.44.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>44</span> <span class='kw'>or</span> <span class='symbol'>:connection_closed</span></pre></dd>
+      
+        <dt id="NOT_CONNECTED-constant" class="">NOT_CONNECTED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Transport endpoint is not connected. Since 2.44</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>45</span> <span class='kw'>or</span> <span class='symbol'>:not_connected</span></pre></dd>
+      
+        <dt id="MESSAGE_TOO_LARGE-constant" class="">MESSAGE_TOO_LARGE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Message too large. Since 2.48.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>46</span> <span class='kw'>or</span> <span class='symbol'>:message_too_large</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:50 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,2863 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::Task
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::Task";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">Task</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::Task
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::Task</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attach_source-instance_method" title="#attach_source (instance method)">#<strong>attach_source</strong>(source, callback)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A utility function for dealing with async operations where you need to wait for a #GSource to trigger.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cancellable-instance_method" title="#cancellable (instance method)">#<strong>cancellable</strong>  &#x21d2; Gio::Cancellable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>task</strong>’s #GCancellable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#check_cancellable-instance_method" title="#check_cancellable (instance method)">#<strong>check_cancellable</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>task</strong>’s check-cancellable flag.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#check_cancellable=-instance_method" title="#check_cancellable= (instance method)">#<strong>check_cancellable=</strong>(check_cancellable)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets or clears <strong>task</strong>’s check-cancellable flag.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#completed-instance_method" title="#completed (instance method)">#<strong>completed</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the value of #GTask:completed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#completed=-instance_method" title="#completed= (instance method)">#<strong>completed=</strong>(completed)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether the task has completed, meaning its callback (if set) has been invoked.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#completed%3F-instance_method" title="#completed? (instance method)">#<strong>completed?</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether the task has completed, meaning its callback (if set) has been invoked.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context-instance_method" title="#context (instance method)">#<strong>context</strong>  &#x21d2; GLib::MainContext </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the GMain::Context that <strong>task</strong> will return its result in (that is, the context that was the [thread-default main <a href="g-main-context-push-thread-default">context]</a> at the point when <strong>task</strong> was created).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#had_error-instance_method" title="#had_error (instance method)">#<strong>had_error</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Tests if <strong>task</strong> resulted in an error.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>task</strong>’s name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name=-instance_method" title="#name= (instance method)">#<strong>name=</strong>(name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>task</strong>’s name, used in debugging and profiling.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>(source_object, cancellable, callback, callback_data)  &#x21d2; Gio::Task </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a #GTask acting on <strong>source_object</strong>, which will eventually be used to invoke <strong>callback</strong> in the current [thread-default main <a href="g-main-context-push-thread-default">context]</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#priority-instance_method" title="#priority (instance method)">#<strong>priority</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>task</strong>’s priority.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#priority=-instance_method" title="#priority= (instance method)">#<strong>priority=</strong>(priority)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>task</strong>’s priority.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#propagate_boolean-instance_method" title="#propagate_boolean (instance method)">#<strong>propagate_boolean</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the result of <strong>task</strong> as a #gboolean.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#propagate_int-instance_method" title="#propagate_int (instance method)">#<strong>propagate_int</strong>  &#x21d2; Gio::gssize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the result of <strong>task</strong> as an integer (#gssize).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#propagate_pointer-instance_method" title="#propagate_pointer (instance method)">#<strong>propagate_pointer</strong>  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the result of <strong>task</strong> as a pointer, and transfers ownership of that value to the caller.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#propagate_value-instance_method" title="#propagate_value (instance method)">#<strong>propagate_value</strong>(value)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the result of <strong>task</strong> as a #GValue, and transfers ownership of that value to the caller.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#return_boolean-instance_method" title="#return_boolean (instance method)">#<strong>return_boolean</strong>(result)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>task</strong>’s result to <strong>result</strong> and completes the task (see g_task_return_pointer() for more discussion of exactly what this means).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#return_error-instance_method" title="#return_error (instance method)">#<strong>return_error</strong>(error)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>task</strong>’s result to <strong>error</strong> (which <strong>task</strong> assumes ownership of) and completes the task (see g_task_return_pointer() for more discussion of exactly what this means).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#return_error_if_cancelled-instance_method" title="#return_error_if_cancelled (instance method)">#<strong>return_error_if_cancelled</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks if <strong>task</strong>’s #GCancellable has been cancelled, and if so, sets <strong>task</strong>’s error accordingly and completes the task (see g_task_return_pointer() for more discussion of exactly what this means).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#return_int-instance_method" title="#return_int (instance method)">#<strong>return_int</strong>(result)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>task</strong>’s result to <strong>result</strong> and completes the task (see g_task_return_pointer() for more discussion of exactly what this means).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#return_new_error-instance_method" title="#return_new_error (instance method)">#<strong>return_new_error</strong>(domain, code, format, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>task</strong>’s result to a new #GError created from <strong>domain</strong>, <strong>code</strong>, <strong>format</strong>, and the remaining arguments, and completes the task (see g_task_return_pointer() for more discussion of exactly what this means).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#return_on_cancel-instance_method" title="#return_on_cancel (instance method)">#<strong>return_on_cancel</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>task</strong>’s return-on-cancel flag.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#return_on_cancel=-instance_method" title="#return_on_cancel= (instance method)">#<strong>return_on_cancel=</strong>(return_on_cancel)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets or clears <strong>task</strong>’s return-on-cancel flag.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#return_pointer-instance_method" title="#return_pointer (instance method)">#<strong>return_pointer</strong>(result, result_destroy)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>task</strong>’s result to <strong>result</strong> and completes the task.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#return_value-instance_method" title="#return_value (instance method)">#<strong>return_value</strong>(result)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>task</strong>’s result to <strong>result</strong> (by copying it) and completes the task.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run_in_thread-instance_method" title="#run_in_thread (instance method)">#<strong>run_in_thread</strong>(task_func)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Runs <strong>task_func</strong> in another thread.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run_in_thread_sync-instance_method" title="#run_in_thread_sync (instance method)">#<strong>run_in_thread_sync</strong>(task_func)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Runs <strong>task_func</strong> in another thread, and waits for it to return or be cancelled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_task_data-instance_method" title="#set_task_data (instance method)">#<strong>set_task_data</strong>(task_data, task_data_destroy)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>task</strong>’s task data (freeing the existing task data, if any).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_object-instance_method" title="#source_object (instance method)">#<strong>source_object</strong>  &#x21d2; GObject::Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the source object from <strong>task</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_tag-instance_method" title="#source_tag (instance method)">#<strong>source_tag</strong>  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>task</strong>’s source tag.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_tag=-instance_method" title="#source_tag= (instance method)">#<strong>source_tag=</strong>(source_tag)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>task</strong>’s source tag.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#task_data-instance_method" title="#task_data (instance method)">#<strong>task_data</strong>  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>task</strong>’s ‘task_data`.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="attach_source-instance_method">
+  
+    #<strong>attach_source</strong>(source, callback)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A utility function for dealing with async operations where you need to wait for a #GSource to trigger. Attaches <strong>source</strong> to <strong>task</strong>’s GMain::Context with <strong>task</strong>’s [<a href="io-priority">priority]</a>, and sets <strong>source</strong>’s callback to <strong>callback</strong>, with <strong>task</strong> as the callback’s ‘user_data`.</p>
+
+<p>It will set the <strong>source</strong>’s name to the task’s name (as set with g_task_set_name()), if one has been set.</p>
+
+<p>This takes a reference on <strong>task</strong> until <strong>source</strong> is destroyed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source</span>
+      
+      
+        <span class='type'>(<tt>GLib::Source</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the source to attach</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>GLib::SourceFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the callback to invoke when <strong>source</strong> triggers</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cancellable-instance_method">
+  
+    #<strong>cancellable</strong>  &#x21d2; <tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>task</strong>’s #GCancellable</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>task</strong>’s #GCancellable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="check_cancellable-instance_method">
+  
+    #<strong>check_cancellable</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>task</strong>’s check-cancellable flag. See g_task_set_check_cancellable() for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="check_cancellable=-instance_method">
+  
+    #<strong>check_cancellable=</strong>(check_cancellable)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets or clears <strong>task</strong>’s check-cancellable flag. If this is true (the default), then g_task_propagate_pointer(), etc, and g_task_had_error() will check the task’s #GCancellable first, and if it has been cancelled, then they will consider the task to have returned an “Operation was cancelled” error (%G_IO_ERROR_CANCELLED), regardless of any other error or return value the task may have had.</p>
+
+<p>If <strong>check_cancellable</strong> is false, then the #GTask will not check the cancellable itself, and it is up to <strong>task</strong>’s owner to do this (eg, via g_task_return_error_if_cancelled()).</p>
+
+<p>If you are using g_task_set_return_on_cancel() as well, then you must leave check-cancellable set true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>check_cancellable</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether #GTask will check the state of its #GCancellable for you.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="completed-instance_method">
+  
+    #<strong>completed</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the value of #GTask:completed. This changes from false to true after the task’s callback is invoked, and will return false if called from inside the callback.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the task has completed, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="completed=-instance_method">
+  
+    #<strong>completed=</strong>(completed)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Whether the task has completed, meaning its callback (if set) has been invoked. This can only happen after g_task_return_pointer(), g_task_return_error() or one of the other return functions have been called on the task.</p>
+
+<p>This property is guaranteed to change from false to true exactly once.</p>
+
+<p>The #GObject::notify signal for this change is emitted in the same main context as the task’s callback, immediately after that callback is invoked.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>completed</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>completed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>completed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="completed?-instance_method">
+  
+    #<strong>completed?</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Whether the task has completed, meaning its callback (if set) has been invoked. This can only happen after g_task_return_pointer(), g_task_return_error() or one of the other return functions have been called on the task.</p>
+
+<p>This property is guaranteed to change from false to true exactly once.</p>
+
+<p>The #GObject::notify signal for this change is emitted in the same main context as the task’s callback, immediately after that callback is invoked.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>completed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="context-instance_method">
+  
+    #<strong>context</strong>  &#x21d2; <tt>GLib::MainContext</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the GMain::Context that <strong>task</strong> will return its result in (that is, the context that was the</p>
+<dl class="rdoc-list label-list"><dt>thread-default main context][g-main-context-push-thread-default
+<dd>
+<p>at the point when <strong>task</strong> was created).</p>
+
+<p>This will always return a non-nil value, even if the task’s context is the default GMain::Context.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::MainContext</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>task</strong>’s GMain::Context</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="had_error-instance_method">
+  
+    #<strong>had_error</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Tests if <strong>task</strong> resulted in an error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the task resulted in an error, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>task</strong>’s name. See g_task_set_name().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>task</strong>’s name, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name=-instance_method">
+  
+    #<strong>name=</strong>(name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>task</strong>’s name, used in debugging and profiling. The name defaults to nil.</p>
+
+<p>The task name should describe in a human readable way what the task does. For example, ‘Open file’ or ‘Connect to network host’. It is used to set the name of the #GSource used for idle completion of the task.</p>
+
+<p>This function may only be called before the <strong>task</strong> is first used in a thread other than the one it was constructed in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a human readable name for the task, or nil to unset it</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>(source_object, cancellable, callback, callback_data)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::Task (class)">Gio::Task</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a #GTask acting on <strong>source_object</strong>, which will eventually be used to invoke <strong>callback</strong> in the current [thread-default main <a href="g-main-context-push-thread-default">context]</a>.</p>
+
+<p>Call this in the “start” method of your asynchronous method, and pass the #GTask around throughout the asynchronous operation. You can use g_task_set_task_data() to attach task-specific data to the object, which you can retrieve later via g_task_get_task_data().</p>
+
+<p>By default, if <strong>cancellable</strong> is cancelled, then the return value of the task will always be %G_IO_ERROR_CANCELLED, even if the task had already completed before the cancellation. This allows for simplified handling in cases where cancellation may imply that other objects that the task depends on have been destroyed. If you do not want this behavior, you can use g_task_set_check_cancellable() to change it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the #GObject that owns this task, or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>optional #GCancellable object, nil to ignore.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::ReadyCallback.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data passed to <strong>callback</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::Task (class)">Gio::Task</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GTask.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="priority-instance_method">
+  
+    #<strong>priority</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>task</strong>’s priority</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>task</strong>’s priority</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="priority=-instance_method">
+  
+    #<strong>priority=</strong>(priority)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>task</strong>’s priority. If you do not call this, it will default to %G_PRIORITY_DEFAULT.</p>
+
+<p>This will affect the priority of #GSources created with g_task_attach_source() and the scheduling of tasks run in threads, and can also be explicitly retrieved later via g_task_get_priority().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the [<a href="io-priority">priority]</a> of the request</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="propagate_boolean-instance_method">
+  
+    #<strong>propagate_boolean</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the result of <strong>task</strong> as a #gboolean.</p>
+
+<p>If the task resulted in an error, or was cancelled, then this will instead return false and set <strong>error</strong>.</p>
+
+<p>Since this method transfers ownership of the return value (or error) to the caller, you may only call it once.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the task result, or false on error</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="propagate_int-instance_method">
+  
+    #<strong>propagate_int</strong>  &#x21d2; <tt>Gio::gssize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the result of <strong>task</strong> as an integer (#gssize).</p>
+
+<p>If the task resulted in an error, or was cancelled, then this will instead return -1 and set <strong>error</strong>.</p>
+
+<p>Since this method transfers ownership of the return value (or error) to the caller, you may only call it once.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the task result, or -1 on error</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="propagate_pointer-instance_method">
+  
+    #<strong>propagate_pointer</strong>  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the result of <strong>task</strong> as a pointer, and transfers ownership of that value to the caller.</p>
+
+<p>If the task resulted in an error, or was cancelled, then this will instead return nil and set <strong>error</strong>.</p>
+
+<p>Since this method transfers ownership of the return value (or error) to the caller, you may only call it once.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the task result, or nil on error</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="propagate_value-instance_method">
+  
+    #<strong>propagate_value</strong>(value)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the result of <strong>task</strong> as a #GValue, and transfers ownership of that value to the caller. As with g_task_return_value(), this is a generic low-level method; g_task_propagate_pointer() and the like will usually be more useful for C code.</p>
+
+<p>If the task resulted in an error, or was cancelled, then this will instead set <strong>error</strong> and return false.</p>
+
+<p>Since this method transfers ownership of the return value (or error) to the caller, you may only call it once.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the #GValue</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>task</strong> succeeded, false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="return_boolean-instance_method">
+  
+    #<strong>return_boolean</strong>(result)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>task</strong>’s result to <strong>result</strong> and completes the task (see g_task_return_pointer() for more discussion of exactly what this means).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the #gboolean result of a task function.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="return_error-instance_method">
+  
+    #<strong>return_error</strong>(error)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>task</strong>’s result to <strong>error</strong> (which <strong>task</strong> assumes ownership of) and completes the task (see g_task_return_pointer() for more discussion of exactly what this means).</p>
+
+<p>Note that since the task takes ownership of <strong>error</strong>, and since the task may be completed before returning from g_task_return_error(), you cannot assume that <strong>error</strong> is still valid after calling this. Call g_error_copy() on the error if you need to keep a local copy as well.</p>
+
+<p>See also g_task_return_new_error().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>error</span>
+      
+      
+        <span class='type'>(<tt>GLib::Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the #GError result of a task function.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="return_error_if_cancelled-instance_method">
+  
+    #<strong>return_error_if_cancelled</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks if <strong>task</strong>’s #GCancellable has been cancelled, and if so, sets <strong>task</strong>’s error accordingly and completes the task (see g_task_return_pointer() for more discussion of exactly what this means).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>task</strong> has been cancelled, false if not</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="return_int-instance_method">
+  
+    #<strong>return_int</strong>(result)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>task</strong>’s result to <strong>result</strong> and completes the task (see g_task_return_pointer() for more discussion of exactly what this means).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt>Gio::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the integer (#gssize) result of a task function.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="return_new_error-instance_method">
+  
+    #<strong>return_new_error</strong>(domain, code, format, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>task</strong>’s result to a new #GError created from <strong>domain</strong>, <strong>code</strong>, <strong>format</strong>, and the remaining arguments, and completes the task (see g_task_return_pointer() for more discussion of exactly what this means).</p>
+
+<p>See also g_task_return_error().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>domain</span>
+      
+      
+        <span class='type'>(<tt>GLib::Quark</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GQuark.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>code</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an error code.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a string with format characters.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a list of values to insert into <strong>format</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="return_on_cancel-instance_method">
+  
+    #<strong>return_on_cancel</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>task</strong>’s return-on-cancel flag. See g_task_set_return_on_cancel() for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="return_on_cancel=-instance_method">
+  
+    #<strong>return_on_cancel=</strong>(return_on_cancel)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets or clears <strong>task</strong>’s return-on-cancel flag. This is only meaningful for tasks run via g_task_run_in_thread() or g_task_run_in_thread_sync().</p>
+
+<p>If <strong>return_on_cancel</strong> is true, then cancelling <strong>task</strong>’s #GCancellable will immediately cause it to return, as though the task’s GTask::ThreadFunc had called g_task_return_error_if_cancelled() and then returned.</p>
+
+<p>This allows you to create a cancellable wrapper around an uninterruptable function. The GTask::ThreadFunc just needs to be careful that it does not modify any externally-visible state after it has been cancelled. To do that, the thread should call g_task_set_return_on_cancel() again to (atomically) set return-on-cancel false before making externally-visible changes; if the task gets cancelled before the return-on-cancel flag could be changed, g_task_set_return_on_cancel() will indicate this by returning false.</p>
+
+<p>You can disable and re-enable this flag multiple times if you wish. If the task’s #GCancellable is cancelled while return-on-cancel is false, then calling g_task_set_return_on_cancel() to set it true again will cause the task to be cancelled at that point.</p>
+
+<p>If the task’s #GCancellable is already cancelled before you call g_task_run_in_thread()/g_task_run_in_thread_sync(), then the GTask::ThreadFunc will still be run (for consistency), but the task will also be completed right away.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>return_on_cancel</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the task returns automatically when it is cancelled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>task</strong>’s return-on-cancel flag was changed to match <strong>return_on_cancel</strong>. false if <strong>task</strong> has already been cancelled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="return_pointer-instance_method">
+  
+    #<strong>return_pointer</strong>(result, result_destroy)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>task</strong>’s result to <strong>result</strong> and completes the task. If <strong>result</strong> is not nil, then <strong>result_destroy</strong> will be used to free <strong>result</strong> if the caller does not take ownership of it with g_task_propagate_pointer().</p>
+
+<p>“Completes the task” means that for an ordinary asynchronous task it will either invoke the task’s callback, or else queue that callback to be invoked in the proper GMain::Context, or in the next iteration of the current GMain::Context. For a task run via g_task_run_in_thread() or g_task_run_in_thread_sync(), calling this method will save <strong>result</strong> to be returned to the caller later, but the task will not actually be completed until the GTask::ThreadFunc exits.</p>
+
+<p>Note that since the task may be completed before returning from g_task_return_pointer(), you cannot assume that <strong>result</strong> is still valid after calling this, unless you are still holding another reference on it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the pointer result of a task function</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>result_destroy</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDestroy::Notify function.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="return_value-instance_method">
+  
+    #<strong>return_value</strong>(result)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>task</strong>’s result to <strong>result</strong> (by copying it) and completes the task.</p>
+
+<p>If <strong>result</strong> is nil then a #GValue of type #G_TYPE_POINTER with a value of nil will be used for the result.</p>
+
+<p>This is a very generic low-level method intended primarily for use by language bindings; for C code, g_task_return_pointer() and the like will normally be much easier to use.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the #GValue result of a task function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="run_in_thread-instance_method">
+  
+    #<strong>run_in_thread</strong>(task_func)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Runs <strong>task_func</strong> in another thread. When <strong>task_func</strong> returns, <strong>task</strong>’s GAsync::ReadyCallback will be invoked in <strong>task</strong>’s #GMainContext.</p>
+
+<p>This takes a ref on <strong>task</strong> until the task completes.</p>
+
+<p>See GTask::ThreadFunc for more details about how <strong>task_func</strong> is handled.</p>
+
+<p>Although GLib currently rate-limits the tasks queued via g_task_run_in_thread(), you should not assume that it will always do this. If you have a very large number of tasks to run, but don’t want them to all run at once, you should only queue a limited number of them at a time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>task_func</span>
+      
+      
+        <span class='type'>(<tt>Gio::TaskThreadFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GTask::ThreadFunc</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="run_in_thread_sync-instance_method">
+  
+    #<strong>run_in_thread_sync</strong>(task_func)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Runs <strong>task_func</strong> in another thread, and waits for it to return or be cancelled. You can use g_task_propagate_pointer(), etc, afterward to get the result of <strong>task_func</strong>.</p>
+
+<p>See GTask::ThreadFunc for more details about how <strong>task_func</strong> is handled.</p>
+
+<p>Normally this is used with tasks created with a nil ‘callback`, but note that even if the task does have a callback, it will not be invoked when <strong>task_func</strong> returns. #GTask:completed will be set to true just before this function returns.</p>
+
+<p>Although GLib currently rate-limits the tasks queued via g_task_run_in_thread_sync(), you should not assume that it will always do this. If you have a very large number of tasks to run, but don’t want them to all run at once, you should only queue a limited number of them at a time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>task_func</span>
+      
+      
+        <span class='type'>(<tt>Gio::TaskThreadFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GTask::ThreadFunc</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_task_data-instance_method">
+  
+    #<strong>set_task_data</strong>(task_data, task_data_destroy)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>task</strong>’s task data (freeing the existing task data, if any).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>task_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>task-specific data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>task_data_destroy</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>GDestroy::Notify for <strong>task_data</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_object-instance_method">
+  
+    #<strong>source_object</strong>  &#x21d2; <tt>GObject::Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the source object from <strong>task</strong>. Like g_async_result_get_source_object(), but does not ref the object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>task</strong>’s source object, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_tag-instance_method">
+  
+    #<strong>source_tag</strong>  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>task</strong>’s source tag. See g_task_set_source_tag().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>task</strong>’s source tag</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_tag=-instance_method">
+  
+    #<strong>source_tag=</strong>(source_tag)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>task</strong>’s source tag. You can use this to tag a task return value with a particular pointer (usually a pointer to the function doing the tagging) and then later check it using g_task_get_source_tag() (or g_async_result_is_tagged()) in the task’s “finish” function, to figure out if the response came from a particular place.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_tag</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an opaque pointer indicating the source of this task</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="task_data-instance_method">
+  
+    #<strong>task_data</strong>  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>task</strong>’s ‘task_data`.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>task</strong>’s ‘task_data`.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:08 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::SocketListener
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::SocketListener";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">SocketListener</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::SocketListener
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::SocketListener</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Class structure for GSocket::Listener.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accept-instance_method" title="#accept (instance method)">#<strong>accept</strong>(source_object, cancellable)  &#x21d2; Gio::SocketConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Blocks waiting for a client to connect to any of the sockets added to the listener.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accept_async-instance_method" title="#accept_async (instance method)">#<strong>accept_async</strong>(cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is the asynchronous version of g_socket_listener_accept().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accept_finish-instance_method" title="#accept_finish (instance method)">#<strong>accept_finish</strong>(result, source_object)  &#x21d2; Gio::SocketConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes an async accept operation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accept_socket-instance_method" title="#accept_socket (instance method)">#<strong>accept_socket</strong>(source_object, cancellable)  &#x21d2; Gio::Socket </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Blocks waiting for a client to connect to any of the sockets added to the listener.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accept_socket_async-instance_method" title="#accept_socket_async (instance method)">#<strong>accept_socket_async</strong>(cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is the asynchronous version of g_socket_listener_accept_socket().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accept_socket_finish-instance_method" title="#accept_socket_finish (instance method)">#<strong>accept_socket_finish</strong>(result, source_object)  &#x21d2; Gio::Socket </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes an async accept operation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_address-instance_method" title="#add_address (instance method)">#<strong>add_address</strong>(address, type, protocol, source_object, effective_address)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a socket of type <strong>type</strong> and protocol <strong>protocol</strong>, binds it to <strong>address</strong> and adds it to the set of sockets we’re accepting sockets from.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_any_inet_port-instance_method" title="#add_any_inet_port (instance method)">#<strong>add_any_inet_port</strong>(source_object)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Listens for TCP connections on any available port number for both IPv6 and IPv4 (if each is available).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_inet_port-instance_method" title="#add_inet_port (instance method)">#<strong>add_inet_port</strong>(port, source_object)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Helper function for g_socket_listener_add_address() that creates a TCP/IP socket listening on IPv4 and IPv6 (if supported) on the specified port on all interfaces.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_socket-instance_method" title="#add_socket (instance method)">#<strong>add_socket</strong>(socket, source_object)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds <strong>socket</strong> to the set of sockets that we try to accept new clients from.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#backlog=-instance_method" title="#backlog= (instance method)">#<strong>backlog=</strong>(listen_backlog)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the listen backlog on the sockets in the listener.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">#<strong>close</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Closes all the sockets in the listener.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#listen_backlog-instance_method" title="#listen_backlog (instance method)">#<strong>listen_backlog</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Listen-backlog.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#listen_backlog=-instance_method" title="#listen_backlog= (instance method)">#<strong>listen_backlog=</strong>(listen_backlog)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>  &#x21d2; Gio::SocketListener </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new GSocket::Listener with no sockets to listen for.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="accept-instance_method">
+  
+    #<strong>accept</strong>(source_object, cancellable)  &#x21d2; <tt><span class='object_link'><a href="SocketConnection.html" title="Gio::SocketConnection (class)">Gio::SocketConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Blocks waiting for a client to connect to any of the sockets added to the listener. Returns a GSocket::Connection for the socket that was accepted.</p>
+
+<p>If <strong>source_object</strong> is not nil it will be filled out with the source object specified when the corresponding socket or address was added to the listener.</p>
+
+<p>If <strong>cancellable</strong> is not nil, then the operation can be cancelled by triggering the cancellable object from another thread. If the operation was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location where #GObject pointer will be stored, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>optional #GCancellable object, nil to ignore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketConnection.html" title="Gio::SocketConnection (class)">Gio::SocketConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Connection on success, nil on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="accept_async-instance_method">
+  
+    #<strong>accept_async</strong>(cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is the asynchronous version of g_socket_listener_accept().</p>
+
+<p>When the operation is finished <strong>callback</strong> will be called. You can then call g_socket_listener_accept_socket() to get the result of the operation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::ReadyCallback</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data for the callback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="accept_finish-instance_method">
+  
+    #<strong>accept_finish</strong>(result, source_object)  &#x21d2; <tt><span class='object_link'><a href="SocketConnection.html" title="Gio::SocketConnection (class)">Gio::SocketConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes an async accept operation. See g_socket_listener_accept_async()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>source_object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional #GObject identifying this source</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketConnection.html" title="Gio::SocketConnection (class)">Gio::SocketConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Connection on success, nil on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="accept_socket-instance_method">
+  
+    #<strong>accept_socket</strong>(source_object, cancellable)  &#x21d2; <tt><span class='object_link'><a href="Socket.html" title="Gio::Socket (class)">Gio::Socket</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Blocks waiting for a client to connect to any of the sockets added to the listener. Returns the #GSocket that was accepted.</p>
+
+<p>If you want to accept the high-level GSocket::Connection, not a #GSocket, which is often the case, then you should use g_socket_listener_accept() instead.</p>
+
+<p>If <strong>source_object</strong> is not nil it will be filled out with the source object specified when the corresponding socket or address was added to the listener.</p>
+
+<p>If <strong>cancellable</strong> is not nil, then the operation can be cancelled by triggering the cancellable object from another thread. If the operation was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location where #GObject pointer will be stored, or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>optional #GCancellable object, nil to ignore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Socket.html" title="Gio::Socket (class)">Gio::Socket</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GSocket on success, nil on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="accept_socket_async-instance_method">
+  
+    #<strong>accept_socket_async</strong>(cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is the asynchronous version of g_socket_listener_accept_socket().</p>
+
+<p>When the operation is finished <strong>callback</strong> will be called. You can then call g_socket_listener_accept_socket_finish() to get the result of the operation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::ReadyCallback</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data for the callback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="accept_socket_finish-instance_method">
+  
+    #<strong>accept_socket_finish</strong>(result, source_object)  &#x21d2; <tt><span class='object_link'><a href="Socket.html" title="Gio::Socket (class)">Gio::Socket</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes an async accept operation. See g_socket_listener_accept_socket_async()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>source_object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional #GObject identifying this source</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Socket.html" title="Gio::Socket (class)">Gio::Socket</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GSocket on success, nil on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_address-instance_method">
+  
+    #<strong>add_address</strong>(address, type, protocol, source_object, effective_address)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a socket of type <strong>type</strong> and protocol <strong>protocol</strong>, binds it to <strong>address</strong> and adds it to the set of sockets we’re accepting sockets from.</p>
+
+<p>Note that adding an IPv6 address, depending on the platform, may or may not result in a listener that also accepts IPv4 connections.  For more deterministic behavior, see g_socket_listener_add_inet_port().</p>
+
+<p><strong>source_object</strong> will be passed out in the various calls to accept to identify this particular source, which is useful if you’re listening on multiple addresses and do different things depending on what address is connected to.</p>
+
+<p>If successful and <strong>effective_address</strong> is non-nil then it will be set to the address that the binding actually occurred at.  This is helpful for determining the port number that was used for when requesting a binding to port 0 (ie: “any port”).  This address, if requested, belongs to the caller and must be freed.</p>
+
+<p>Call g_socket_listener_close() to stop listening on <strong>address</strong>; this will not be done automatically when you drop your final reference to <strong>listener</strong>, as references may be held internally.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Address</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Type</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>protocol</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketProtocol.html" title="Gio::SocketProtocol (module)">Gio::SocketProtocol</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Protocol</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>source_object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional #GObject identifying this source</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>effective_address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the address that was bound to, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_any_inet_port-instance_method">
+  
+    #<strong>add_any_inet_port</strong>(source_object)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Listens for TCP connections on any available port number for both IPv6 and IPv4 (if each is available).</p>
+
+<p>This is useful if you need to have a socket for incoming connections but don’t care about the specific port number.</p>
+
+<p><strong>source_object</strong> will be passed out in the various calls to accept to identify this particular source, which is useful if you’re listening on multiple addresses and do different things depending on what address is connected to.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional #GObject identifying this source</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the port number, or 0 in case of failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_inet_port-instance_method">
+  
+    #<strong>add_inet_port</strong>(port, source_object)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Helper function for g_socket_listener_add_address() that creates a TCP/IP socket listening on IPv4 and IPv6 (if supported) on the specified port on all interfaces.</p>
+
+<p><strong>source_object</strong> will be passed out in the various calls to accept to identify this particular source, which is useful if you’re listening on multiple addresses and do different things depending on what address is connected to.</p>
+
+<p>Call g_socket_listener_close() to stop listening on <strong>port</strong>; this will not be done automatically when you drop your final reference to <strong>listener</strong>, as references may be held internally.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an IP port number (non-zero)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>source_object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional #GObject identifying this source</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_socket-instance_method">
+  
+    #<strong>add_socket</strong>(socket, source_object)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds <strong>socket</strong> to the set of sockets that we try to accept new clients from. The socket must be bound to a local address and listened to.</p>
+
+<p><strong>source_object</strong> will be passed out in the various calls to accept to identify this particular source, which is useful if you’re listening on multiple addresses and do different things depending on what address is connected to.</p>
+
+<p>The <strong>socket</strong> will not be automatically closed when the <strong>listener</strong> is finalized unless the listener held the final reference to the socket. Before GLib 2.42, the <strong>socket</strong> was automatically closed on finalization of the <strong>listener</strong>, even if references to it were held elsewhere.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>socket</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Socket.html" title="Gio::Socket (class)">Gio::Socket</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a listening #GSocket</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>source_object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional #GObject identifying this source</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="backlog=-instance_method">
+  
+    #<strong>backlog=</strong>(listen_backlog)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the listen backlog on the sockets in the listener. This must be called before adding any sockets, addresses or ports to the GSocket::Listener (for example, by calling g_socket_listener_add_inet_port()) to be effective.</p>
+
+<p>See g_socket_set_listen_backlog() for details</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>listen_backlog</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an integer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close-instance_method">
+  
+    #<strong>close</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Closes all the sockets in the listener.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="listen_backlog-instance_method">
+  
+    #<strong>listen_backlog</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns listen-backlog.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>listen-backlog</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="listen_backlog=-instance_method">
+  
+    #<strong>listen_backlog=</strong>(listen_backlog)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>listen_backlog</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>listen-backlog</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>listen-backlog</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::SocketListener (class)">Gio::SocketListener</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new GSocket::Listener with no sockets to listen for. New listeners can be added with e.g. g_socket_listener_add_address() or g_socket_listener_add_inet_port().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::SocketListener (class)">Gio::SocketListener</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new GSocket::Listener.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:08 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

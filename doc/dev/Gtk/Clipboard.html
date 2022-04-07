@@ -1,0 +1,2537 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::Clipboard
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::Clipboard";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">Clipboard</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::Clipboard
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::Clipboard</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The Gtk::Clipboard object represents a clipboard of data shared between different processes or between different widgets in the same process. Each clipboard is identified by a name encoded as a Gdk::Atom. (Conversion to and from strings can be done with gdk_atom_intern() and gdk_atom_name().) The default clipboard corresponds to the “CLIPBOARD” atom; another commonly used clipboard is the “PRIMARY” clipboard, which, in X, traditionally contains the currently selected text.</p>
+
+<p>To support having a number of different formats on the clipboard at the same time, the clipboard mechanism allows providing callbacks instead of the actual data.  When you set the contents of the clipboard, you can either supply the data directly (via functions like gtk_clipboard_set_text()), or you can supply a callback to be called at a later time when the data is needed (via gtk_clipboard_set_with_data() or gtk_clipboard_set_with_owner().) Providing a callback also avoids having to make copies of the data when it is not needed.</p>
+
+<p>gtk_clipboard_set_with_data() and gtk_clipboard_set_with_owner() are quite similar; the choice between the two depends mostly on which is more convenient in a particular situation. The former is most useful when you want to have a blob of data with callbacks to convert it into the various data types that you advertise. When the <strong>clear_func</strong> you provided is called, you simply free the data blob. The latter is more useful when the contents of clipboard reflect the internal state of a #GObject (As an example, for the PRIMARY clipboard, when an entry widget provides the clipboard’s contents the contents are simply the text within the selected region.) If the contents change, the entry widget can call gtk_clipboard_set_with_owner() to update the timestamp for clipboard ownership, without having to worry about <strong>clear_func</strong> being called.</p>
+
+<p>Requesting the data from the clipboard is essentially asynchronous. If the contents of the clipboard are provided within the same process, then a direct function call will be made to retrieve the data, but if they are provided by another process, then the data needs to be retrieved from the other process, which may take some time. To avoid blocking the user interface, the call to request the selection, gtk_clipboard_request_contents() takes a callback that will be called when the contents are received (or when the request fails.) If you don’t want to deal with providing a separate callback, you can also use gtk_clipboard_wait_for_contents(). What this does is run the GLib main loop recursively waiting for the contents. This can simplify the code flow, but you still have to be aware that other callbacks in your program can be called while this recursive mainloop is running.</p>
+
+<p>Along with the functions to get the clipboard contents as an arbitrary data chunk, there are also functions to retrieve it as text, gtk_clipboard_request_text() and gtk_clipboard_wait_for_text(). These functions take care of determining which formats are advertised by the clipboard provider, asking for the clipboard in the best available format and converting the results into the UTF-8 encoding. (The standard form for representing strings in GTK+.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear-instance_method" title="#clear (instance method)">#<strong>clear</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Clears the contents of the clipboard.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display-instance_method" title="#display (instance method)">#<strong>display</strong>  &#x21d2; Gdk::Display </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the Gdk::Display associated with <strong>clipboard</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#image=-instance_method" title="#image= (instance method)">#<strong>image=</strong>(pixbuf)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the contents of the clipboard to the given Gdk::Pixbuf.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#owner-instance_method" title="#owner (instance method)">#<strong>owner</strong>  &#x21d2; GObject::Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If the clipboard contents callbacks were set with gtk_clipboard_set_with_owner(), and the gtk_clipboard_set_with_data() or gtk_clipboard_clear() has not subsequently called, returns the owner set by gtk_clipboard_set_with_owner().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_contents-instance_method" title="#request_contents (instance method)">#<strong>request_contents</strong>(target, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests the contents of clipboard as the given target.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_image-instance_method" title="#request_image (instance method)">#<strong>request_image</strong>(callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests the contents of the clipboard as image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_rich_text-instance_method" title="#request_rich_text (instance method)">#<strong>request_rich_text</strong>(buffer, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests the contents of the clipboard as rich text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_targets-instance_method" title="#request_targets (instance method)">#<strong>request_targets</strong>(callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests the contents of the clipboard as list of supported targets.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_text-instance_method" title="#request_text (instance method)">#<strong>request_text</strong>(callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests the contents of the clipboard as text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_uris-instance_method" title="#request_uris (instance method)">#<strong>request_uris</strong>(callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests the contents of the clipboard as URIs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selection-instance_method" title="#selection (instance method)">#<strong>selection</strong>  &#x21d2; Gdk::Atom </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the selection that this clipboard is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_can_store-instance_method" title="#set_can_store (instance method)">#<strong>set_can_store</strong>(targets, n_targets)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Hints that the clipboard data should be stored somewhere when the application exits or when gtk_clipboard_store () is called.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_text-instance_method" title="#set_text (instance method)">#<strong>set_text</strong>(text, len)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the contents of the clipboard to the given UTF-8 string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_with_data-instance_method" title="#set_with_data (instance method)">#<strong>set_with_data</strong>(targets, n_targets, get_func, clear_func, user_data)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Virtually sets the contents of the specified clipboard by providing a list of supported formats for the clipboard data and a function to call to get the actual data when it is requested.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_with_owner-instance_method" title="#set_with_owner (instance method)">#<strong>set_with_owner</strong>(targets, n_targets, get_func, clear_func, owner)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Virtually sets the contents of the specified clipboard by providing a list of supported formats for the clipboard data and a function to call to get the actual data when it is requested.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#store-instance_method" title="#store (instance method)">#<strong>store</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Stores the current clipboard data somewhere so that it will stay around after the application has quit.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_for_contents-instance_method" title="#wait_for_contents (instance method)">#<strong>wait_for_contents</strong>(target)  &#x21d2; Gtk::SelectionData </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests the contents of the clipboard using the given target.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_for_image-instance_method" title="#wait_for_image (instance method)">#<strong>wait_for_image</strong>  &#x21d2; GdkPixbuf::Pixbuf </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests the contents of the clipboard as image and converts the result to a Gdk::Pixbuf.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_for_rich_text-instance_method" title="#wait_for_rich_text (instance method)">#<strong>wait_for_rich_text</strong>(buffer, format, length)  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests the contents of the clipboard as rich text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_for_targets-instance_method" title="#wait_for_targets (instance method)">#<strong>wait_for_targets</strong>(targets, n_targets)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a list of targets that are present on the clipboard, or nil if there aren’t any targets available.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_for_text-instance_method" title="#wait_for_text (instance method)">#<strong>wait_for_text</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests the contents of the clipboard as text and converts the result to UTF-8 if necessary.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_for_uris-instance_method" title="#wait_for_uris (instance method)">#<strong>wait_for_uris</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests the contents of the clipboard as URIs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_is_image_available-instance_method" title="#wait_is_image_available (instance method)">#<strong>wait_is_image_available</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Test to see if there is an image available to be pasted This is done by requesting the TARGETS atom and checking if it contains any of the supported image targets.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_is_rich_text_available-instance_method" title="#wait_is_rich_text_available (instance method)">#<strong>wait_is_rich_text_available</strong>(buffer)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Test to see if there is rich text available to be pasted This is done by requesting the TARGETS atom and checking if it contains any of the supported rich text targets.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_is_target_available-instance_method" title="#wait_is_target_available (instance method)">#<strong>wait_is_target_available</strong>(target)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks if a clipboard supports pasting data of a given type.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_is_text_available-instance_method" title="#wait_is_text_available (instance method)">#<strong>wait_is_text_available</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Test to see if there is text available to be pasted This is done by requesting the TARGETS atom and checking if it contains any of the supported text targets.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_is_uris_available-instance_method" title="#wait_is_uris_available (instance method)">#<strong>wait_is_uris_available</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Test to see if there is a list of URIs available to be pasted This is done by requesting the TARGETS atom and checking if it contains the URI targets.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="clear-instance_method">
+  
+    #<strong>clear</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Clears the contents of the clipboard. Generally this should only be called between the time you call gtk_clipboard_set_with_owner() or gtk_clipboard_set_with_data(), and when the <strong>clear_func</strong> you supplied is called. Otherwise, the clipboard may be owned by someone else.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display-instance_method">
+  
+    #<strong>display</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the Gdk::Display associated with <strong>clipboard</strong></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Display associated with <strong>clipboard</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="image=-instance_method">
+  
+    #<strong>image=</strong>(pixbuf)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the contents of the clipboard to the given Gdk::Pixbuf. GTK+ will take responsibility for responding for requests for the image, and for converting the image into the requested format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pixbuf</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GdkPixbuf/Pixbuf.html" title="GdkPixbuf::Pixbuf (class)">GdkPixbuf::Pixbuf</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Pixbuf</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="owner-instance_method">
+  
+    #<strong>owner</strong>  &#x21d2; <tt>GObject::Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If the clipboard contents callbacks were set with gtk_clipboard_set_with_owner(), and the gtk_clipboard_set_with_data() or gtk_clipboard_clear() has not subsequently called, returns the owner set by gtk_clipboard_set_with_owner().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the owner of the clipboard, if any; otherwise nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_contents-instance_method">
+  
+    #<strong>request_contents</strong>(target, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests the contents of clipboard as the given target. When the results of the result are later received the supplied callback will be called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>target</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an atom representing the form into which the clipboard owner should convert the selection.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gtk::ClipboardReceivedFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A function to call when the results are received (or the retrieval fails). If the retrieval fails the length field of <strong>selection_data</strong> will be negative.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data to pass to <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_image-instance_method">
+  
+    #<strong>request_image</strong>(callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests the contents of the clipboard as image. When the image is later received, it will be converted to a Gdk::Pixbuf, and <strong>callback</strong> will be called.</p>
+
+<p>The <strong>pixbuf</strong> parameter to <strong>callback</strong> will contain the resulting Gdk::Pixbuf if the request succeeded, or nil if it failed. This could happen for various reasons, in particular if the clipboard was empty or if the contents of the clipboard could not be converted into an image.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gtk::ClipboardImageReceivedFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a function to call when the image is received, or the retrieval fails. (It will always be called one way or the other.)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data to pass to <strong>callback</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_rich_text-instance_method">
+  
+    #<strong>request_rich_text</strong>(buffer, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests the contents of the clipboard as rich text. When the rich text is later received, <strong>callback</strong> will be called.</p>
+
+<p>The <strong>text</strong> parameter to <strong>callback</strong> will contain the resulting rich text if the request succeeded, or nil if it failed. The <strong>length</strong> parameter will contain <strong>text</strong>’s length. This function can fail for various reasons, in particular if the clipboard was empty or if the contents of the clipboard could not be converted into rich text form.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextBuffer.html" title="Gtk::TextBuffer (class)">Gtk::TextBuffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TextBuffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gtk::ClipboardRichTextReceivedFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a function to call when the text is received, or the retrieval fails. (It will always be called one way or the other.)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data to pass to <strong>callback</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_targets-instance_method">
+  
+    #<strong>request_targets</strong>(callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests the contents of the clipboard as list of supported targets. When the list is later received, <strong>callback</strong> will be called.</p>
+
+<p>The <strong>targets</strong> parameter to <strong>callback</strong> will contain the resulting targets if the request succeeded, or nil if it failed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gtk::ClipboardTargetsReceivedFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a function to call when the targets are received, or the retrieval fails. (It will always be called one way or the other.)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data to pass to <strong>callback</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_text-instance_method">
+  
+    #<strong>request_text</strong>(callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests the contents of the clipboard as text. When the text is later received, it will be converted to UTF-8 if necessary, and <strong>callback</strong> will be called.</p>
+
+<p>The <strong>text</strong> parameter to <strong>callback</strong> will contain the resulting text if the request succeeded, or nil if it failed. This could happen for various reasons, in particular if the clipboard was empty or if the contents of the clipboard could not be converted into text form.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gtk::ClipboardTextReceivedFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a function to call when the text is received, or the retrieval fails. (It will always be called one way or the other.)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data to pass to <strong>callback</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_uris-instance_method">
+  
+    #<strong>request_uris</strong>(callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests the contents of the clipboard as URIs. When the URIs are later received <strong>callback</strong> will be called.</p>
+
+<p>The <strong>uris</strong> parameter to <strong>callback</strong> will contain the resulting array of URIs if the request succeeded, or nil if it failed. This could happen for various reasons, in particular if the clipboard was empty or if the contents of the clipboard could not be converted into URI form.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gtk::ClipboardURIReceivedFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a function to call when the URIs are received, or the retrieval fails. (It will always be called one way or the other.)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data to pass to <strong>callback</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selection-instance_method">
+  
+    #<strong>selection</strong>  &#x21d2; <tt>Gdk::Atom</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the selection that this clipboard is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the selection</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_can_store-instance_method">
+  
+    #<strong>set_can_store</strong>(targets, n_targets)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Hints that the clipboard data should be stored somewhere when the application exits or when gtk_clipboard_store () is called.</p>
+
+<p>This value is reset when the clipboard owner changes. Where the clipboard data is stored is platform dependent, see gdk_display_store_clipboard () for more information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>targets</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gtk::TargetEntry&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>array containing information about which forms should be stored or nil to indicate that all forms should be stored.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_targets</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of elements in <strong>targets</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_text-instance_method">
+  
+    #<strong>set_text</strong>(text, len)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the contents of the clipboard to the given UTF-8 string. GTK+ will make a copy of the text and take responsibility for responding for requests for the text, and for converting the text into the requested format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a UTF-8 string.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of <strong>text</strong>, in bytes, or -1, in which case the length will be determined with strlen().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_with_data-instance_method">
+  
+    #<strong>set_with_data</strong>(targets, n_targets, get_func, clear_func, user_data)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Virtually sets the contents of the specified clipboard by providing a list of supported formats for the clipboard data and a function to call to get the actual data when it is requested.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>targets</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gtk::TargetEntry&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>array containing information about the available forms for the clipboard data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_targets</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of elements in <strong>targets</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>get_func</span>
+      
+      
+        <span class='type'>(<tt>Gtk::ClipboardGetFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>function to call to get the actual clipboard data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>clear_func</span>
+      
+      
+        <span class='type'>(<tt>Gtk::ClipboardClearFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>when the clipboard contents are set again, this function will be called, and <strong>get_func</strong> will not be subsequently called.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data to pass to <strong>get_func</strong> and <strong>clear_func</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if setting the clipboard data succeeded. If setting the clipboard data failed the provided callback functions will be ignored.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_with_owner-instance_method">
+  
+    #<strong>set_with_owner</strong>(targets, n_targets, get_func, clear_func, owner)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Virtually sets the contents of the specified clipboard by providing a list of supported formats for the clipboard data and a function to call to get the actual data when it is requested.</p>
+
+<p>The difference between this function and gtk_clipboard_set_with_data() is that instead of an generic <strong>user_data</strong> pointer, a #GObject is passed in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>targets</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gtk::TargetEntry&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>array containing information about the available forms for the clipboard data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_targets</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of elements in <strong>targets</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>get_func</span>
+      
+      
+        <span class='type'>(<tt>Gtk::ClipboardGetFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>function to call to get the actual clipboard data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>clear_func</span>
+      
+      
+        <span class='type'>(<tt>Gtk::ClipboardClearFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>when the clipboard contents are set again, this function will be called, and <strong>get_func</strong> will not be subsequently called</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>owner</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an object that “owns” the data. This object will be passed to the callbacks when called</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if setting the clipboard data succeeded. If setting the clipboard data failed the provided callback functions will be ignored.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="store-instance_method">
+  
+    #<strong>store</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Stores the current clipboard data somewhere so that it will stay around after the application has quit.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_for_contents-instance_method">
+  
+    #<strong>wait_for_contents</strong>(target)  &#x21d2; <tt>Gtk::SelectionData</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests the contents of the clipboard using the given target. This function waits for the data to be received using the main loop, so events, timeouts, etc, may be dispatched during the wait.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>target</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an atom representing the form into which the clipboard owner should convert the selection.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::SelectionData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated Gtk::SelectionData object or nil if retrieving the given target failed. If non-nil, this value must be freed with gtk_selection_data_free() when you are finished with it.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_for_image-instance_method">
+  
+    #<strong>wait_for_image</strong>  &#x21d2; <tt><span class='object_link'><a href="../GdkPixbuf/Pixbuf.html" title="GdkPixbuf::Pixbuf (class)">GdkPixbuf::Pixbuf</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests the contents of the clipboard as image and converts the result to a Gdk::Pixbuf. This function waits for the data to be received using the main loop, so events, timeouts, etc, may be dispatched during the wait.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GdkPixbuf/Pixbuf.html" title="GdkPixbuf::Pixbuf (class)">GdkPixbuf::Pixbuf</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated Gdk::Pixbuf object which must be disposed with g_object_unref(), or nil if retrieving the selection data failed. (This could happen for various reasons, in particular if the clipboard was empty or if the contents of the clipboard could not be converted into an image.)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_for_rich_text-instance_method">
+  
+    #<strong>wait_for_rich_text</strong>(buffer, format, length)  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests the contents of the clipboard as rich text.  This function waits for the data to be received using the main loop, so events, timeouts, etc, may be dispatched during the wait.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextBuffer.html" title="Gtk::TextBuffer (class)">Gtk::TextBuffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TextBuffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the format of the returned data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the length of the returned data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated binary block of data which must be freed with g_free(), or nil if retrieving the selection data failed. (This could happen for various reasons, in particular if the clipboard was empty or if the contents of the clipboard could not be converted into text form.)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_for_targets-instance_method">
+  
+    #<strong>wait_for_targets</strong>(targets, n_targets)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a list of targets that are present on the clipboard, or nil if there aren’t any targets available. The returned list must be freed with g_free(). This function waits for the data to be received using the main loop, so events, timeouts, etc, may be dispatched during the wait.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>targets</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gdk::Atom&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store an array of targets. The result stored here must be freed with g_free().</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_targets</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store number of items in <strong>targets</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if any targets are present on the clipboard, otherwise false.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_for_text-instance_method">
+  
+    #<strong>wait_for_text</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests the contents of the clipboard as text and converts the result to UTF-8 if necessary. This function waits for the data to be received using the main loop, so events, timeouts, etc, may be dispatched during the wait.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated UTF-8 string which must be freed with g_free(), or nil if retrieving the selection data failed. (This could happen for various reasons, in particular if the clipboard was empty or if the contents of the clipboard could not be converted into text form.)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_for_uris-instance_method">
+  
+    #<strong>wait_for_uris</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests the contents of the clipboard as URIs. This function waits for the data to be received using the main loop, so events, timeouts, etc, may be dispatched during the wait.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated nil-terminated array of strings which must be freed with g_strfreev(), or nil if retrieving the selection data failed. (This could happen for various reasons, in particular if the clipboard was empty or if the contents of the clipboard could not be converted into URI form.)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_is_image_available-instance_method">
+  
+    #<strong>wait_is_image_available</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Test to see if there is an image available to be pasted This is done by requesting the TARGETS atom and checking if it contains any of the supported image targets. This function waits for the data to be received using the main loop, so events, timeouts, etc, may be dispatched during the wait.</p>
+
+<p>This function is a little faster than calling gtk_clipboard_wait_for_image() since it doesn’t need to retrieve the actual image data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true is there is an image available, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_is_rich_text_available-instance_method">
+  
+    #<strong>wait_is_rich_text_available</strong>(buffer)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Test to see if there is rich text available to be pasted This is done by requesting the TARGETS atom and checking if it contains any of the supported rich text targets. This function waits for the data to be received using the main loop, so events, timeouts, etc, may be dispatched during the wait.</p>
+
+<p>This function is a little faster than calling gtk_clipboard_wait_for_rich_text() since it doesn’t need to retrieve the actual text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextBuffer.html" title="Gtk::TextBuffer (class)">Gtk::TextBuffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TextBuffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true is there is rich text available, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_is_target_available-instance_method">
+  
+    #<strong>wait_is_target_available</strong>(target)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks if a clipboard supports pasting data of a given type. This function can be used to determine if a “Paste” menu item should be insensitive or not.</p>
+
+<p>If you want to see if there’s text available on the clipboard, use gtk_clipboard_wait_is_text_available () instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>target</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A Gdk::Atom indicating which target to look for.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the target is available, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_is_text_available-instance_method">
+  
+    #<strong>wait_is_text_available</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Test to see if there is text available to be pasted This is done by requesting the TARGETS atom and checking if it contains any of the supported text targets. This function waits for the data to be received using the main loop, so events, timeouts, etc, may be dispatched during the wait.</p>
+
+<p>This function is a little faster than calling gtk_clipboard_wait_for_text() since it doesn’t need to retrieve the actual text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true is there is text available, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_is_uris_available-instance_method">
+  
+    #<strong>wait_is_uris_available</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Test to see if there is a list of URIs available to be pasted This is done by requesting the TARGETS atom and checking if it contains the URI targets. This function waits for the data to be received using the main loop, so events, timeouts, etc, may be dispatched during the wait.</p>
+
+<p>This function is a little faster than calling gtk_clipboard_wait_for_uris() since it doesn’t need to retrieve the actual URI data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true is there is an URI list available, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:18 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

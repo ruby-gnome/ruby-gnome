@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Pango::Font
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Pango::Font";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Pango.html" title="Pango (module)">Pango</a></span></span>
+     &raquo; 
+    <span class="title">Font</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Pango::Font
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Pango::Font</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#describe-instance_method" title="#describe (instance method)">#<strong>describe</strong>  &#x21d2; Pango::FontDescription </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a description of the font, with font size set in points.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#describe_with_absolute_size-instance_method" title="#describe_with_absolute_size (instance method)">#<strong>describe_with_absolute_size</strong>  &#x21d2; Pango::FontDescription </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a description of the font, with absolute font size set (in device units).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_shaper-instance_method" title="#find_shaper (instance method)">#<strong>find_shaper</strong>(language, ch)  &#x21d2; Pango::EngineShape </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finds the best matching shaper for a font for a particular language tag and character point.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_map-instance_method" title="#font_map (instance method)">#<strong>font_map</strong>  &#x21d2; Pango::FontMap </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the font map for which the font was created.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_coverage-instance_method" title="#get_coverage (instance method)">#<strong>get_coverage</strong>(language)  &#x21d2; Pango::Coverage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Computes the coverage map for a given font and language tag.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_features-instance_method" title="#get_features (instance method)">#<strong>get_features</strong>(features, len, num_features)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtain the OpenType features that are provided by the font.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_glyph_extents-instance_method" title="#get_glyph_extents (instance method)">#<strong>get_glyph_extents</strong>(glyph, ink_rect, logical_rect)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the logical and ink extents of a glyph within a font.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_metrics-instance_method" title="#get_metrics (instance method)">#<strong>get_metrics</strong>(language)  &#x21d2; Pango::FontMetrics </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets overall metric information for a font.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_char-instance_method" title="#has_char (instance method)">#<strong>has_char</strong>(wc)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns whether the font provides a glyph for this character.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hb_font-instance_method" title="#hb_font (instance method)">#<strong>hb_font</strong>  &#x21d2; Pango:: </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get a hb_font_t object backing this font.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="describe-instance_method">
+  
+    #<strong>describe</strong>  &#x21d2; <tt>Pango::FontDescription</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a description of the font, with font size set in points. Use pango_font_describe_with_absolute_size() if you want the font size in device units.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::FontDescription</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated Pango::FontDescription object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="describe_with_absolute_size-instance_method">
+  
+    #<strong>describe_with_absolute_size</strong>  &#x21d2; <tt>Pango::FontDescription</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a description of the font, with absolute font size set (in device units). Use pango_font_describe() if you want the font size in points.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::FontDescription</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated Pango::FontDescription object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find_shaper-instance_method">
+  
+    #<strong>find_shaper</strong>(language, ch)  &#x21d2; <tt><span class='object_link'><a href="EngineShape.html" title="Pango::EngineShape (class)">Pango::EngineShape</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finds the best matching shaper for a font for a particular language tag and character point.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>language</span>
+      
+      
+        <span class='type'>(<tt>Pango::Language</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the language tag</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ch</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Unicode character.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="EngineShape.html" title="Pango::EngineShape (class)">Pango::EngineShape</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the best matching shaper.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_map-instance_method">
+  
+    #<strong>font_map</strong>  &#x21d2; <tt><span class='object_link'><a href="FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the font map for which the font was created.</p>
+
+<p>Note that the font maintains a &lt;firstterm&gt;weak&lt;/firstterm&gt; reference to the font map, so if all references to font map are dropped, the font map will be finalized even if there are fonts created with the font map that are still alive.  In that case this function will return nil. It is the responsibility of the user to ensure that the font map is kept alive.  In most uses this is not an issue as a Pango::Context holds a reference to the font map.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Pango::FontMap for the font, or nil if <strong>font</strong> is nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_coverage-instance_method">
+  
+    #<strong>get_coverage</strong>(language)  &#x21d2; <tt><span class='object_link'><a href="Coverage.html" title="Pango::Coverage (class)">Pango::Coverage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Computes the coverage map for a given font and language tag.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>language</span>
+      
+      
+        <span class='type'>(<tt>Pango::Language</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the language tag</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Coverage.html" title="Pango::Coverage (class)">Pango::Coverage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated Pango::Coverage object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_features-instance_method">
+  
+    #<strong>get_features</strong>(features, len, num_features)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtain the OpenType features that are provided by the font. These are passed to the rendering system, together with features that have been explicitly set via attributes.</p>
+
+<p>Note that this does not include OpenType features which the rendering system enables by default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>features</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../Pango.html" title="Pango (module)">Pango::</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Array to features in</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the length of <strong>features</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_features</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of used items in <strong>features</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_glyph_extents-instance_method">
+  
+    #<strong>get_glyph_extents</strong>(glyph, ink_rect, logical_rect)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the logical and ink extents of a glyph within a font. The coordinate system for each rectangle has its origin at the base line and horizontal origin of the character with increasing coordinates extending to the right and down. The macros PANGO_ASCENT(), PANGO_DESCENT(), PANGO_LBEARING(), and PANGO_RBEARING() can be used to convert from the extents rectangle to more traditional font metrics. The units of the rectangles are in 1/PANGO_SCALE of a device unit.</p>
+
+<p>If <strong>font</strong> is nil, this function gracefully sets some sane values in the output variables and returns.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>glyph</span>
+      
+      
+        <span class='type'>(<tt>Pango::Glyph</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the glyph index</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ink_rect</span>
+      
+      
+        <span class='type'>(<tt>Pango::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rectangle used to store the extents of the glyph as drawn or nil to indicate that the result is not needed.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>logical_rect</span>
+      
+      
+        <span class='type'>(<tt>Pango::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rectangle used to store the logical extents of the glyph or nil to indicate that the result is not needed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_metrics-instance_method">
+  
+    #<strong>get_metrics</strong>(language)  &#x21d2; <tt>Pango::FontMetrics</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets overall metric information for a font. Since the metrics may be substantially different for different scripts, a language tag can be provided to indicate that the metrics should be retrieved that correspond to the script(s) used by that language.</p>
+
+<p>If <strong>font</strong> is nil, this function gracefully sets some sane values in the output variables and returns.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>language</span>
+      
+      
+        <span class='type'>(<tt>Pango::Language</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>language tag used to determine which script to get the metrics for, or nil to indicate to get the metrics for the entire font.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::FontMetrics</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::FontMetrics object. The caller must call pango_font_metrics_unref() when finished using the object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_char-instance_method">
+  
+    #<strong>has_char</strong>(wc)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether the font provides a glyph for this character.</p>
+
+<p>Returns true if <strong>font</strong> can render <strong>wc</strong></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>wc</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Unicode character</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hb_font-instance_method">
+  
+    #<strong>hb_font</strong>  &#x21d2; <tt><span class='object_link'><a href="../Pango.html" title="Pango (module)">Pango::</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get a hb_font_t object backing this font.</p>
+
+<p>Note that the objects returned by this function are cached and immutable. If you need to make changes to the hb_font_t, use hb_font_create_sub_font().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Pango.html" title="Pango (module)">Pango::</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the hb_font_t object backing the font, or nil if the font does not have one</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:10 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

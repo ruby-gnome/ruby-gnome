@@ -1,0 +1,2427 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gdk::Screen
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::Screen";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">Screen</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gdk::Screen
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gdk::Screen</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Gdk::Screen objects are the GDK representation of the screen on which windows can be displayed and on which the pointer moves. X originally identified screens with physical screens, but nowadays it is more common to have a single Gdk::Screen which combines several physical monitors (see gdk_screen_get_n_monitors()).</p>
+
+<p>GdkScreen is used throughout GDK and GTK+ to specify which screen the top level windows are to be displayed on. it is also used to query the screen specification and default settings such as the default visual (gdk_screen_get_system_visual()), the dimensions of the physical monitors (gdk_screen_get_monitor_geometry()), etc.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#active_window-instance_method" title="#active_window (instance method)">#<strong>active_window</strong>  &#x21d2; Gdk::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the screen’s currently active window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display-instance_method" title="#display (instance method)">#<strong>display</strong>  &#x21d2; Gdk::Display </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the display to which the <strong>screen</strong> belongs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_options-instance_method" title="#font_options (instance method)">#<strong>font_options</strong>  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Font-options.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_options=-instance_method" title="#font_options= (instance method)">#<strong>font_options=</strong>(font_options)  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_at_point-instance_method" title="#get_monitor_at_point (instance method)">#<strong>get_monitor_at_point</strong>(x, y)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the monitor number in which the point (<strong>x</strong>,<strong>y</strong>) is located.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_at_window-instance_method" title="#get_monitor_at_window (instance method)">#<strong>get_monitor_at_window</strong>(window)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the number of the monitor in which the largest area of the bounding rectangle of <strong>window</strong> resides.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_geometry-instance_method" title="#get_monitor_geometry (instance method)">#<strong>get_monitor_geometry</strong>(monitor_num, dest)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the Gdk::Rectangle representing the size and position of the individual monitor within the entire screen area.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_height_mm-instance_method" title="#get_monitor_height_mm (instance method)">#<strong>get_monitor_height_mm</strong>(monitor_num)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the height in millimeters of the specified monitor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_plug_name-instance_method" title="#get_monitor_plug_name (instance method)">#<strong>get_monitor_plug_name</strong>(monitor_num)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the output name of the specified monitor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_scale_factor-instance_method" title="#get_monitor_scale_factor (instance method)">#<strong>get_monitor_scale_factor</strong>(monitor_num)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the internal scale factor that maps from monitor coordinates to the actual device pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_width_mm-instance_method" title="#get_monitor_width_mm (instance method)">#<strong>get_monitor_width_mm</strong>(monitor_num)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the width in millimeters of the specified monitor, if available.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_workarea-instance_method" title="#get_monitor_workarea (instance method)">#<strong>get_monitor_workarea</strong>(monitor_num, dest)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the Gdk::Rectangle representing the size and position of the “work area” on a monitor within the entire screen area.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_setting-instance_method" title="#get_setting (instance method)">#<strong>get_setting</strong>(name, value)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves a desktop-wide setting such as double-click time for the Gdk::Screen <strong>screen</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height-instance_method" title="#height (instance method)">#<strong>height</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the height of <strong>screen</strong> in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height_mm-instance_method" title="#height_mm (instance method)">#<strong>height_mm</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the height of <strong>screen</strong> in millimeters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_composited-instance_method" title="#is_composited (instance method)">#<strong>is_composited</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns whether windows with an RGBA visual can reasonably be expected to have their alpha channel drawn correctly on the screen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_visuals-instance_method" title="#list_visuals (instance method)">#<strong>list_visuals</strong>  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Lists the available visuals for the specified <strong>screen</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#make_display_name-instance_method" title="#make_display_name (instance method)">#<strong>make_display_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Determines the name to pass to gdk_display_open() to get a Gdk::Display with this screen as the default screen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_monitors-instance_method" title="#n_monitors (instance method)">#<strong>n_monitors</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the number of monitors which <strong>screen</strong> consists of.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#number-instance_method" title="#number (instance method)">#<strong>number</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the index of <strong>screen</strong> among the screens in the display to which it belongs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#primary_monitor-instance_method" title="#primary_monitor (instance method)">#<strong>primary_monitor</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the primary monitor for <strong>screen</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resolution-instance_method" title="#resolution (instance method)">#<strong>resolution</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Resolution.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resolution=-instance_method" title="#resolution= (instance method)">#<strong>resolution=</strong>(resolution)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rgba_visual-instance_method" title="#rgba_visual (instance method)">#<strong>rgba_visual</strong>  &#x21d2; Gdk::Visual </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets a visual to use for creating windows with an alpha channel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#root_window-instance_method" title="#root_window (instance method)">#<strong>root_window</strong>  &#x21d2; Gdk::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the root window of <strong>screen</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#system_visual-instance_method" title="#system_visual (instance method)">#<strong>system_visual</strong>  &#x21d2; Gdk::Visual </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the system’s default visual for <strong>screen</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#toplevel_windows-instance_method" title="#toplevel_windows (instance method)">#<strong>toplevel_windows</strong>  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains a list of all toplevel windows known to GDK on the screen <strong>screen</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width-instance_method" title="#width (instance method)">#<strong>width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the width of <strong>screen</strong> in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width_mm-instance_method" title="#width_mm (instance method)">#<strong>width_mm</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the width of <strong>screen</strong> in millimeters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#window_stack-instance_method" title="#window_stack (instance method)">#<strong>window_stack</strong>  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a #GList of Gdk::Windows representing the current window stack.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="active_window-instance_method">
+  
+    #<strong>active_window</strong>  &#x21d2; <tt><span class='object_link'><a href="Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the screen’s currently active window.</p>
+
+<p>On X11, this is done by inspecting the _NET_ACTIVE_WINDOW property on the root window, as described in the [Extended Window Manager Hints](<a href="http://www.freedesktop.org/Standards/wm-spec">www.freedesktop.org/Standards/wm-spec</a>). If there is no currently currently active window, or the window manager does not support the _NET_ACTIVE_WINDOW hint, this function returns nil.</p>
+
+<p>On other platforms, this function may return nil, depending on whether it is implementable on that platform.</p>
+
+<p>The returned window should be unrefed using g_object_unref() when no longer needed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the currently active window, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display-instance_method">
+  
+    #<strong>display</strong>  &#x21d2; <tt><span class='object_link'><a href="Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the display to which the <strong>screen</strong> belongs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the display to which <strong>screen</strong> belongs</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_options-instance_method">
+  
+    #<strong>font_options</strong>  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns font-options.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>font-options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_options=-instance_method">
+  
+    #<strong>font_options=</strong>(font_options)  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>font_options</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>font-options</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>font-options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_at_point-instance_method">
+  
+    #<strong>get_monitor_at_point</strong>(x, y)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the monitor number in which the point (<strong>x</strong>,<strong>y</strong>) is located.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the x coordinate in the virtual screen.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the y coordinate in the virtual screen.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the monitor number in which the point (<strong>x</strong>,<strong>y</strong>) lies, or a monitor close to (<strong>x</strong>,<strong>y</strong>) if the point is not in any monitor.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_at_window-instance_method">
+  
+    #<strong>get_monitor_at_window</strong>(window)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the number of the monitor in which the largest area of the bounding rectangle of <strong>window</strong> resides.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>window</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the monitor number in which most of <strong>window</strong> is located, or if <strong>window</strong> does not intersect any monitors, a monitor, close to <strong>window</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_geometry-instance_method">
+  
+    #<strong>get_monitor_geometry</strong>(monitor_num, dest)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the Gdk::Rectangle representing the size and position of the individual monitor within the entire screen area. The returned geometry is in ”application pixels”, not in ”device pixels” (see gdk_screen_get_monitor_scale_factor()).</p>
+
+<p>Monitor numbers start at 0. To obtain the number of monitors of <strong>screen</strong>, use gdk_screen_get_n_monitors().</p>
+
+<p>Note that the size of the entire screen area can be retrieved via gdk_screen_get_width() and gdk_screen_get_height().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monitor_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the monitor number</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Rectangle to be filled with the monitor geometry</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_height_mm-instance_method">
+  
+    #<strong>get_monitor_height_mm</strong>(monitor_num)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the height in millimeters of the specified monitor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monitor_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the height of the monitor, or -1 if not available</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_plug_name-instance_method">
+  
+    #<strong>get_monitor_plug_name</strong>(monitor_num)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the output name of the specified monitor. Usually something like VGA, DVI, or TV, not the actual product name of the display device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monitor_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated string containing the name of the monitor, or nil if the name cannot be determined</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_scale_factor-instance_method">
+  
+    #<strong>get_monitor_scale_factor</strong>(monitor_num)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the internal scale factor that maps from monitor coordinates to the actual device pixels. On traditional systems this is 1, but on very high density outputs this can be a higher value (often 2).</p>
+
+<p>This can be used if you want to create pixel based data for a particular monitor, but most of the time you’re drawing to a window where it is better to use gdk_window_get_scale_factor() instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monitor_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the scale factor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_width_mm-instance_method">
+  
+    #<strong>get_monitor_width_mm</strong>(monitor_num)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the width in millimeters of the specified monitor, if available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monitor_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the width of the monitor, or -1 if not available</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_workarea-instance_method">
+  
+    #<strong>get_monitor_workarea</strong>(monitor_num, dest)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the Gdk::Rectangle representing the size and position of the “work area” on a monitor within the entire screen area. The returned geometry is in ”application pixels”, not in ”device pixels” (see gdk_screen_get_monitor_scale_factor()).</p>
+
+<p>The work area should be considered when positioning menus and similar popups, to avoid placing them below panels, docks or other desktop components.</p>
+
+<p>Note that not all backends may have a concept of workarea. This function will return the monitor geometry if a workarea is not available, or does not apply.</p>
+
+<p>Monitor numbers start at 0. To obtain the number of monitors of <strong>screen</strong>, use gdk_screen_get_n_monitors().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monitor_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the monitor number</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Rectangle to be filled with the monitor workarea</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_setting-instance_method">
+  
+    #<strong>get_setting</strong>(name, value)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves a desktop-wide setting such as double-click time for the Gdk::Screen <strong>screen</strong>.</p>
+
+<p>FIXME needs a list of valid settings here, or a link to more information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the setting</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the value of the setting</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the setting existed and a value was stored in <strong>value</strong>, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="height-instance_method">
+  
+    #<strong>height</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the height of <strong>screen</strong> in pixels. The returned size is in ”application pixels”, not in ”device pixels” (see gdk_screen_get_monitor_scale_factor()).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the height of <strong>screen</strong> in pixels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="height_mm-instance_method">
+  
+    #<strong>height_mm</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the height of <strong>screen</strong> in millimeters.</p>
+
+<p>Note that this value is somewhat ill-defined when the screen has multiple monitors of different resolution. It is recommended to use the monitor dimensions instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the heigth of <strong>screen</strong> in millimeters.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_composited-instance_method">
+  
+    #<strong>is_composited</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether windows with an RGBA visual can reasonably be expected to have their alpha channel drawn correctly on the screen.</p>
+
+<p>On X11 this function returns whether a compositing manager is compositing <strong>screen</strong>. expected to have their alpha channels drawn correctly on the screen.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether windows with RGBA visuals can reasonably be</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_visuals-instance_method">
+  
+    #<strong>list_visuals</strong>  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Lists the available visuals for the specified <strong>screen</strong>. A visual describes a hardware image data format. For example, a visual might support 24-bit color, or 8-bit color, and might expect pixels to be in a certain format.</p>
+
+<p>Call g_list_free() on the return value when you’re finished with it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a list of visuals; the list must be freed, but not its contents</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="make_display_name-instance_method">
+  
+    #<strong>make_display_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determines the name to pass to gdk_display_open() to get a Gdk::Display with this screen as the default screen.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated string, free with g_free()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_monitors-instance_method">
+  
+    #<strong>n_monitors</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the number of monitors which <strong>screen</strong> consists of.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of monitors which <strong>screen</strong> consists of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="number-instance_method">
+  
+    #<strong>number</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the index of <strong>screen</strong> among the screens in the display to which it belongs. (See gdk_screen_get_display())</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the index</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="primary_monitor-instance_method">
+  
+    #<strong>primary_monitor</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the primary monitor for <strong>screen</strong>.  The primary monitor is considered the monitor where the “main desktop” lives. While normal application windows typically allow the window manager to place the windows, specialized desktop applications such as panels should place themselves on the primary monitor.</p>
+
+<p>If no primary monitor is configured by the user, the return value will be 0, defaulting to the first monitor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An integer index for the primary monitor, or 0 if none is configured.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resolution-instance_method">
+  
+    #<strong>resolution</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns resolution.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>resolution</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resolution=-instance_method">
+  
+    #<strong>resolution=</strong>(resolution)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>resolution</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>resolution</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>resolution</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rgba_visual-instance_method">
+  
+    #<strong>rgba_visual</strong>  &#x21d2; <tt><span class='object_link'><a href="Visual.html" title="Gdk::Visual (class)">Gdk::Visual</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets a visual to use for creating windows with an alpha channel. The windowing system on which GTK+ is running may not support this capability, in which case nil will be returned. Even if a non-nil value is returned, its possible that the window’s alpha channel won’t be honored when displaying the window on the screen: in particular, for X an appropriate windowing manager and compositing manager must be running to provide appropriate display.</p>
+
+<p>This functionality is not implemented in the Windows backend.</p>
+
+<p>For setting an overall opacity for a top-level window, see gdk_window_set_opacity().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Visual.html" title="Gdk::Visual (class)">Gdk::Visual</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a visual to use for windows with an alpha channel or nil if the capability is not available.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="root_window-instance_method">
+  
+    #<strong>root_window</strong>  &#x21d2; <tt><span class='object_link'><a href="Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the root window of <strong>screen</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the root window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="system_visual-instance_method">
+  
+    #<strong>system_visual</strong>  &#x21d2; <tt><span class='object_link'><a href="Visual.html" title="Gdk::Visual (class)">Gdk::Visual</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the system’s default visual for <strong>screen</strong>. This is the visual for the root window of the display. The return value should not be freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Visual.html" title="Gdk::Visual (class)">Gdk::Visual</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the system visual</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="toplevel_windows-instance_method">
+  
+    #<strong>toplevel_windows</strong>  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains a list of all toplevel windows known to GDK on the screen <strong>screen</strong>. A toplevel window is a child of the root window (see gdk_get_default_root_window()).</p>
+
+<p>The returned list should be freed with g_list_free(), but its elements need not be freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>list of toplevel windows, free with g_list_free()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="width-instance_method">
+  
+    #<strong>width</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the width of <strong>screen</strong> in pixels. The returned size is in ”application pixels”, not in ”device pixels” (see gdk_screen_get_monitor_scale_factor()).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the width of <strong>screen</strong> in pixels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="width_mm-instance_method">
+  
+    #<strong>width_mm</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the width of <strong>screen</strong> in millimeters.</p>
+
+<p>Note that this value is somewhat ill-defined when the screen has multiple monitors of different resolution. It is recommended to use the monitor dimensions instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the width of <strong>screen</strong> in millimeters.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="window_stack-instance_method">
+  
+    #<strong>window_stack</strong>  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a #GList of Gdk::Windows representing the current window stack.</p>
+
+<p>On X11, this is done by inspecting the _NET_CLIENT_LIST_STACKING property on the root window, as described in the [Extended Window Manager Hints](<a href="http://www.freedesktop.org/Standards/wm-spec">www.freedesktop.org/Standards/wm-spec</a>). If the window manager does not support the _NET_CLIENT_LIST_STACKING hint, this function returns nil.</p>
+
+<p>On other platforms, this function may return nil, depending on whether it is implementable on that platform.</p>
+
+<p>The returned list is newly allocated and owns references to the windows it contains, so it should be freed using g_list_free() and its windows unrefed using g_object_unref() when no longer needed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a list of Gdk::Windows for the current window stack, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:13 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

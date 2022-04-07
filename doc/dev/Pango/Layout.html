@@ -1,0 +1,4904 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Pango::Layout
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Pango::Layout";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Pango.html" title="Pango (module)">Pango</a></span></span>
+     &raquo; 
+    <span class="title">Layout</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Pango::Layout
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Pango::Layout</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alignment-instance_method" title="#alignment (instance method)">#<strong>alignment</strong>  &#x21d2; Pango::Alignment </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the alignment for the layout: how partial lines are positioned within the horizontal space available.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alignment=-instance_method" title="#alignment= (instance method)">#<strong>alignment=</strong>(alignment)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the alignment for the layout: how partial lines are positioned within the horizontal space available.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attributes-instance_method" title="#attributes (instance method)">#<strong>attributes</strong>  &#x21d2; Pango::AttrList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the attribute list for the layout, if any.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attributes=-instance_method" title="#attributes= (instance method)">#<strong>attributes=</strong>(attrs)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the text attributes for a layout object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#auto_dir-instance_method" title="#auto_dir (instance method)">#<strong>auto_dir</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets whether to calculate the bidirectional base direction for the layout according to the contents of the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#auto_dir=-instance_method" title="#auto_dir= (instance method)">#<strong>auto_dir=</strong>(auto_dir)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets whether to calculate the bidirectional base direction for the layout according to the contents of the layout; when this flag is on (the default), then paragraphs in    <strong>layout</strong> that begin with strong right-to-left characters (Arabic and Hebrew principally), will have right-to-left layout, paragraphs with letters from other scripts will have left-to-right layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#baseline-instance_method" title="#baseline (instance method)">#<strong>baseline</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the Y position of baseline of the first line in <strong>layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#character_count-instance_method" title="#character_count (instance method)">#<strong>character_count</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the number of Unicode characters in the the text of <strong>layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context-instance_method" title="#context (instance method)">#<strong>context</strong>  &#x21d2; Pango::Context </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the Pango::Context used for this layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context_changed-instance_method" title="#context_changed (instance method)">#<strong>context_changed</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Forces recomputation of any state in the Pango::Layout that might depend on the layout’s context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy-instance_method" title="#copy (instance method)">#<strong>copy</strong>  &#x21d2; Pango::Layout </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Does a deep copy-by-value of the <strong>src</strong> layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ellipsize-instance_method" title="#ellipsize (instance method)">#<strong>ellipsize</strong>  &#x21d2; Pango::EllipsizeMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the type of ellipsization being performed for <strong>layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ellipsize=-instance_method" title="#ellipsize= (instance method)">#<strong>ellipsize=</strong>(ellipsize)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the type of ellipsization being performed for <strong>layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_description-instance_method" title="#font_description (instance method)">#<strong>font_description</strong>  &#x21d2; Pango::FontDescription </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the font description for the layout, if any.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_description=-instance_method" title="#font_description= (instance method)">#<strong>font_description=</strong>(desc)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the default font description for the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_cursor_pos-instance_method" title="#get_cursor_pos (instance method)">#<strong>get_cursor_pos</strong>(index_, strong_pos, weak_pos)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Given an index within a layout, determines the positions that of the strong and weak cursors if the insertion point is at that index.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_extents-instance_method" title="#get_extents (instance method)">#<strong>get_extents</strong>(ink_rect, logical_rect)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Computes the logical and ink extents of <strong>layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_line-instance_method" title="#get_line (instance method)">#<strong>get_line</strong>(line)  &#x21d2; Pango::LayoutLine </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves a particular line from a Pango::Layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_line_readonly-instance_method" title="#get_line_readonly (instance method)">#<strong>get_line_readonly</strong>(line)  &#x21d2; Pango::LayoutLine </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves a particular line from a Pango::Layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_log_attrs-instance_method" title="#get_log_attrs (instance method)">#<strong>get_log_attrs</strong>(attrs, n_attrs)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves an array of logical attributes for each character in the <strong>layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_log_attrs_readonly-instance_method" title="#get_log_attrs_readonly (instance method)">#<strong>get_log_attrs_readonly</strong>(n_attrs)  &#x21d2; Array&lt;Pango::LogAttr&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves an array of logical attributes for each character in the <strong>layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_pixel_extents-instance_method" title="#get_pixel_extents (instance method)">#<strong>get_pixel_extents</strong>(ink_rect, logical_rect)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Computes the logical and ink extents of <strong>layout</strong> in device units.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_pixel_size-instance_method" title="#get_pixel_size (instance method)">#<strong>get_pixel_size</strong>(width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Determines the logical width and height of a Pango::Layout in device units.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_size-instance_method" title="#get_size (instance method)">#<strong>get_size</strong>(width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Determines the logical width and height of a Pango::Layout in Pango units (device units scaled by %PANGO_SCALE).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height-instance_method" title="#height (instance method)">#<strong>height</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the height of layout used for ellipsization.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height=-instance_method" title="#height= (instance method)">#<strong>height=</strong>(height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the height to which the Pango::Layout should be ellipsized at.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#indent-instance_method" title="#indent (instance method)">#<strong>indent</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the paragraph indent width in Pango units.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#indent=-instance_method" title="#indent= (instance method)">#<strong>indent=</strong>(indent)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the width in Pango units to indent each paragraph.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index_to_line_x-instance_method" title="#index_to_line_x (instance method)">#<strong>index_to_line_x</strong>(index_, trailing, line, x_pos)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts from byte <strong>index_</strong> within the <strong>layout</strong> to line and X position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index_to_pos-instance_method" title="#index_to_pos (instance method)">#<strong>index_to_pos</strong>(index_, pos)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts from an index within a Pango::Layout to the onscreen position corresponding to the grapheme at that index, which is represented as rectangle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_ellipsized-instance_method" title="#is_ellipsized (instance method)">#<strong>is_ellipsized</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries whether the layout had to ellipsize any paragraphs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_wrapped-instance_method" title="#is_wrapped (instance method)">#<strong>is_wrapped</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries whether the layout had to wrap any paragraphs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter-instance_method" title="#iter (instance method)">#<strong>iter</strong>  &#x21d2; Pango::LayoutIter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns an iterator to iterate over the visual extents of the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#justify-instance_method" title="#justify (instance method)">#<strong>justify</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets whether each complete line should be stretched to fill the entire width of the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#justify=-instance_method" title="#justify= (instance method)">#<strong>justify=</strong>(justify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets whether each complete line should be stretched to fill the entire width of the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_count-instance_method" title="#line_count (instance method)">#<strong>line_count</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the count of lines for the <strong>layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_spacing-instance_method" title="#line_spacing (instance method)">#<strong>line_spacing</strong>  &#x21d2; Pango::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the value that has been set with pango_layout_set_line_spacing().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_spacing=-instance_method" title="#line_spacing= (instance method)">#<strong>line_spacing=</strong>(factor)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets a factor for line spacing.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lines-instance_method" title="#lines (instance method)">#<strong>lines</strong>  &#x21d2; GLib::SList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the lines of the <strong>layout</strong> as a list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lines_readonly-instance_method" title="#lines_readonly (instance method)">#<strong>lines_readonly</strong>  &#x21d2; GLib::SList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the lines of the <strong>layout</strong> as a list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#move_cursor_visually-instance_method" title="#move_cursor_visually (instance method)">#<strong>move_cursor_visually</strong>(strong, old_index, old_trailing, direction, new_index, new_trailing)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Computes a new cursor position from an old position and a count of positions to move visually.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>(context)  &#x21d2; Pango::Layout </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new Pango::Layout object with attributes initialized to default values for a particular Pango::Context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#serial-instance_method" title="#serial (instance method)">#<strong>serial</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the current serial number of <strong>layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_markup-instance_method" title="#set_markup (instance method)">#<strong>set_markup</strong>(markup, length)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Same as pango_layout_set_markup_with_accel(), but the markup text isn’t scanned for accelerators.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_markup_with_accel-instance_method" title="#set_markup_with_accel (instance method)">#<strong>set_markup_with_accel</strong>(markup, length, accel_marker, accel_char)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the layout text and attribute list from marked-up text (see &lt;link linkend=“PangoMarkupFormat”&gt;markup format&lt;/link&gt;).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_text-instance_method" title="#set_text (instance method)">#<strong>set_text</strong>(text, length)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the text of the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#single_paragraph_mode-instance_method" title="#single_paragraph_mode (instance method)">#<strong>single_paragraph_mode</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the value set by pango_layout_set_single_paragraph_mode().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#single_paragraph_mode=-instance_method" title="#single_paragraph_mode= (instance method)">#<strong>single_paragraph_mode=</strong>(setting)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If <strong>setting</strong> is true, do not treat newlines and similar characters as paragraph separators; instead, keep all text in a single paragraph, and display a glyph for paragraph separator characters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spacing-instance_method" title="#spacing (instance method)">#<strong>spacing</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the amount of spacing between the lines of the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spacing=-instance_method" title="#spacing= (instance method)">#<strong>spacing=</strong>(spacing)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the amount of spacing in Pango unit between the lines of the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tabs-instance_method" title="#tabs (instance method)">#<strong>tabs</strong>  &#x21d2; Pango::TabArray </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the current Pango::TabArray used by this layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tabs=-instance_method" title="#tabs= (instance method)">#<strong>tabs=</strong>(tabs)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the tabs to use for <strong>layout</strong>, overriding the default tabs (by default, tabs are every 8 spaces).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text-instance_method" title="#text (instance method)">#<strong>text</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the text in the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unknown_glyphs_count-instance_method" title="#unknown_glyphs_count (instance method)">#<strong>unknown_glyphs_count</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Counts the number unknown glyphs in <strong>layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width-instance_method" title="#width (instance method)">#<strong>width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the width to which the lines of the Pango::Layout should wrap.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width=-instance_method" title="#width= (instance method)">#<strong>width=</strong>(width)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the width to which the lines of the Pango::Layout should wrap or ellipsized.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wrap-instance_method" title="#wrap (instance method)">#<strong>wrap</strong>  &#x21d2; Pango::WrapMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the wrap mode for the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wrap=-instance_method" title="#wrap= (instance method)">#<strong>wrap=</strong>(wrap)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the wrap mode; the wrap mode only has effect if a width is set on the layout with pango_layout_set_width().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xy_to_index-instance_method" title="#xy_to_index (instance method)">#<strong>xy_to_index</strong>(x, y, index_, trailing)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts from X and Y position within a layout to the byte index to the character at that logical position.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="alignment-instance_method">
+  
+    #<strong>alignment</strong>  &#x21d2; <tt><span class='object_link'><a href="Alignment.html" title="Pango::Alignment (module)">Pango::Alignment</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the alignment for the layout: how partial lines are positioned within the horizontal space available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Alignment.html" title="Pango::Alignment (module)">Pango::Alignment</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the alignment.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="alignment=-instance_method">
+  
+    #<strong>alignment=</strong>(alignment)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the alignment for the layout: how partial lines are positioned within the horizontal space available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>alignment</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Alignment.html" title="Pango::Alignment (module)">Pango::Alignment</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the alignment</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attributes-instance_method">
+  
+    #<strong>attributes</strong>  &#x21d2; <tt>Pango::AttrList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the attribute list for the layout, if any.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::AttrList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::AttrList.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attributes=-instance_method">
+  
+    #<strong>attributes=</strong>(attrs)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the text attributes for a layout object. References <strong>attrs</strong>, so the caller can unref its reference.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attrs</span>
+      
+      
+        <span class='type'>(<tt>Pango::AttrList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::AttrList, can be nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="auto_dir-instance_method">
+  
+    #<strong>auto_dir</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets whether to calculate the bidirectional base direction for the layout according to the contents of the layout. See pango_layout_set_auto_dir().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the bidirectional base direction is computed from the layout’s contents, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="auto_dir=-instance_method">
+  
+    #<strong>auto_dir=</strong>(auto_dir)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets whether to calculate the bidirectional base direction for the layout according to the contents of the layout; when this flag is on (the default), then paragraphs in</p>
+
+<pre class="code ruby"><code class="ruby">&lt;b&gt;layout&lt;/b&gt; that begin with strong right-to-left characters
+</code></pre>
+
+<p>(Arabic and Hebrew principally), will have right-to-left layout, paragraphs with letters from other scripts will have left-to-right layout. Paragraphs with only neutral characters get their direction from the surrounding paragraphs.</p>
+
+<p>When false, the choice between left-to-right and right-to-left layout is done according to the base direction of the layout’s Pango::Context. (See pango_context_set_base_dir()).</p>
+
+<p>When the auto-computed direction of a paragraph differs from the base direction of the context, the interpretation of %PANGO_ALIGN_LEFT and %PANGO_ALIGN_RIGHT are swapped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>auto_dir</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>if true, compute the bidirectional base direction from the layout’s contents.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="baseline-instance_method">
+  
+    #<strong>baseline</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the Y position of baseline of the first line in <strong>layout</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>baseline of first line, from top of <strong>layout</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="character_count-instance_method">
+  
+    #<strong>character_count</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the number of Unicode characters in the the text of <strong>layout</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of Unicode characters in the text of <strong>layout</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="context-instance_method">
+  
+    #<strong>context</strong>  &#x21d2; <tt><span class='object_link'><a href="Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the Pango::Context used for this layout. This does not have an additional refcount added, so if you want to keep a copy of this around, you must reference it yourself.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Pango::Context for the layout.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="context_changed-instance_method">
+  
+    #<strong>context_changed</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Forces recomputation of any state in the Pango::Layout that might depend on the layout’s context. This function should be called if you make changes to the context subsequent to creating the layout.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="copy-instance_method">
+  
+    #<strong>copy</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Pango::Layout (class)">Pango::Layout</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Does a deep copy-by-value of the <strong>src</strong> layout. The attribute list, tab array, and text from the original layout are all copied by value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Pango::Layout (class)">Pango::Layout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the newly allocated Pango::Layout, with a reference count of one, which should be freed with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ellipsize-instance_method">
+  
+    #<strong>ellipsize</strong>  &#x21d2; <tt><span class='object_link'><a href="EllipsizeMode.html" title="Pango::EllipsizeMode (module)">Pango::EllipsizeMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the type of ellipsization being performed for <strong>layout</strong>. See pango_layout_set_ellipsize() Use pango_layout_is_ellipsized() to query whether any paragraphs were actually ellipsized.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="EllipsizeMode.html" title="Pango::EllipsizeMode (module)">Pango::EllipsizeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current ellipsization mode for <strong>layout</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ellipsize=-instance_method">
+  
+    #<strong>ellipsize=</strong>(ellipsize)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the type of ellipsization being performed for <strong>layout</strong>. Depending on the ellipsization mode <strong>ellipsize</strong> text is removed from the start, middle, or end of text so they fit within the width and height of layout set with pango_layout_set_width() and pango_layout_set_height().</p>
+
+<p>If the layout contains characters such as newlines that force it to be layed out in multiple paragraphs, then whether each paragraph is ellipsized separately or the entire layout is ellipsized as a whole depends on the set height of the layout. See pango_layout_set_height() for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ellipsize</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="EllipsizeMode.html" title="Pango::EllipsizeMode (module)">Pango::EllipsizeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new ellipsization mode for <strong>layout</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_description-instance_method">
+  
+    #<strong>font_description</strong>  &#x21d2; <tt>Pango::FontDescription</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the font description for the layout, if any.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::FontDescription</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a pointer to the layout’s font description, or nil if the font description from the layout’s context is inherited. This value is owned by the layout and must not be modified or freed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_description=-instance_method">
+  
+    #<strong>font_description=</strong>(desc)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the default font description for the layout. If no font description is set on the layout, the font description from the layout’s context is used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>desc</span>
+      
+      
+        <span class='type'>(<tt>Pango::FontDescription</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new Pango::FontDescription, or nil to unset the current font description</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_cursor_pos-instance_method">
+  
+    #<strong>get_cursor_pos</strong>(index_, strong_pos, weak_pos)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Given an index within a layout, determines the positions that of the strong and weak cursors if the insertion point is at that index. The position of each cursor is stored as a zero-width rectangle. The strong cursor location is the location where characters of the directionality equal to the base direction of the layout are inserted.  The weak cursor location is the location where characters of the directionality opposite to the base direction of the layout are inserted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the byte index of the cursor</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>strong_pos</span>
+      
+      
+        <span class='type'>(<tt>Pango::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the strong cursor position (may be nil)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>weak_pos</span>
+      
+      
+        <span class='type'>(<tt>Pango::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the weak cursor position (may be nil)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_extents-instance_method">
+  
+    #<strong>get_extents</strong>(ink_rect, logical_rect)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Computes the logical and ink extents of <strong>layout</strong>. Logical extents are usually what you want for positioning things.  Note that both extents may have non-zero x and y.  You may want to use those to offset where you render the layout.  Not doing that is a very typical bug that shows up as right-to-left layouts not being correctly positioned in a layout with a set width.</p>
+
+<p>The extents are given in layout coordinates and in Pango units; layout coordinates begin at the top left corner of the layout.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ink_rect</span>
+      
+      
+        <span class='type'>(<tt>Pango::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rectangle used to store the extents of the layout as drawn or nil to indicate that the result is not needed.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>logical_rect</span>
+      
+      
+        <span class='type'>(<tt>Pango::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rectangle used to store the logical extents of the layout or nil to indicate that the result is not needed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_line-instance_method">
+  
+    #<strong>get_line</strong>(line)  &#x21d2; <tt>Pango::LayoutLine</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves a particular line from a Pango::Layout.</p>
+
+<p>Use the faster pango_layout_get_line_readonly() if you do not plan to modify the contents of the line (glyphs, glyph widths, etc.).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>line</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the index of a line, which must be between 0 and &lt;literal&gt;pango_layout_get_line_count(layout) - 1&lt;/literal&gt;, inclusive.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::LayoutLine</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the requested Pango::LayoutLine, or nil if the index is out of range. This layout line can be ref’ed and retained, but will become invalid if changes are made to the Pango::Layout.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_line_readonly-instance_method">
+  
+    #<strong>get_line_readonly</strong>(line)  &#x21d2; <tt>Pango::LayoutLine</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves a particular line from a Pango::Layout.</p>
+
+<p>This is a faster alternative to pango_layout_get_line(), but the user is not expected to modify the contents of the line (glyphs, glyph widths, etc.).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>line</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the index of a line, which must be between 0 and &lt;literal&gt;pango_layout_get_line_count(layout) - 1&lt;/literal&gt;, inclusive.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::LayoutLine</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the requested Pango::LayoutLine, or nil if the index is out of range. This layout line can be ref’ed and retained, but will become invalid if changes are made to the Pango::Layout.  No changes should be made to the line.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_log_attrs-instance_method">
+  
+    #<strong>get_log_attrs</strong>(attrs, n_attrs)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves an array of logical attributes for each character in the <strong>layout</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attrs</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Pango::LogAttr&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store a pointer to an array of logical attributes This value must be freed with g_free().</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_attrs</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the number of the attributes in the array. (The stored value will be one more than the total number of characters in the layout, since there need to be attributes corresponding to both the position before the first character and the position after the last character.)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_log_attrs_readonly-instance_method">
+  
+    #<strong>get_log_attrs_readonly</strong>(n_attrs)  &#x21d2; <tt>Array&lt;Pango::LogAttr&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves an array of logical attributes for each character in the <strong>layout</strong>.</p>
+
+<p>This is a faster alternative to pango_layout_get_log_attrs(). The returned array is part of <strong>layout</strong> and must not be modified. Modifying the layout will invalidate the returned array.</p>
+
+<p>The number of attributes returned in <strong>n_attrs</strong> will be one more than the total number of characters in the layout, since there need to be attributes corresponding to both the position before the first character and the position after the last character.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_attrs</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the number of the attributes in the array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Pango::LogAttr&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of logical attributes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_pixel_extents-instance_method">
+  
+    #<strong>get_pixel_extents</strong>(ink_rect, logical_rect)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Computes the logical and ink extents of <strong>layout</strong> in device units. This function just calls pango_layout_get_extents() followed by two pango_extents_to_pixels() calls, rounding <strong>ink_rect</strong> and <strong>logical_rect</strong> such that the rounded rectangles fully contain the unrounded one (that is, passes them as first argument to pango_extents_to_pixels()).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ink_rect</span>
+      
+      
+        <span class='type'>(<tt>Pango::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rectangle used to store the extents of the layout as drawn or nil to indicate that the result is not needed.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>logical_rect</span>
+      
+      
+        <span class='type'>(<tt>Pango::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rectangle used to store the logical extents of the layout or nil to indicate that the result is not needed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_pixel_size-instance_method">
+  
+    #<strong>get_pixel_size</strong>(width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determines the logical width and height of a Pango::Layout in device units. (pango_layout_get_size() returns the width and height scaled by %PANGO_SCALE.) This is simply a convenience function around pango_layout_get_pixel_extents().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the logical width, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the logical height, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_size-instance_method">
+  
+    #<strong>get_size</strong>(width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determines the logical width and height of a Pango::Layout in Pango units (device units scaled by %PANGO_SCALE). This is simply a convenience function around pango_layout_get_extents().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the logical width, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the logical height, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="height-instance_method">
+  
+    #<strong>height</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the height of layout used for ellipsization.  See pango_layout_set_height() for details. number of lines if negative.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the height, in Pango units if positive, or</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="height=-instance_method">
+  
+    #<strong>height=</strong>(height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the height to which the Pango::Layout should be ellipsized at.  There are two different behaviors, based on whether <strong>height</strong> is positive or negative.</p>
+
+<p>If <strong>height</strong> is positive, it will be the maximum height of the layout.  Only lines would be shown that would fit, and if there is any text omitted, an ellipsis added.  At least one line is included in each paragraph regardless of how small the height value is.  A value of zero will render exactly one line for the entire layout.</p>
+
+<p>If <strong>height</strong> is negative, it will be the (negative of) maximum number of lines per paragraph.  That is, the total number of lines shown may well be more than this value if the layout contains multiple paragraphs of text. The default value of -1 means that first line of each paragraph is ellipsized. This behvaior may be changed in the future to act per layout instead of per paragraph.  File a bug against pango at &lt;ulink url=“<a href="http://bugzilla.gnome.org/">http://bugzilla.gnome.org/</ulink">bugzilla.gnome.org/”>http://bugzilla.gnome.org/</ulink</a>&gt; if your code relies on this behavior.</p>
+
+<p>Height setting only has effect if a positive width is set on <strong>layout</strong> and ellipsization mode of <strong>layout</strong> is not %PANGO_ELLIPSIZE_NONE. The behavior is undefined if a height other than -1 is set and ellipsization mode is set to %PANGO_ELLIPSIZE_NONE, and may change in the future.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the desired height of the layout in Pango units if positive, or desired number of lines if negative.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="indent-instance_method">
+  
+    #<strong>indent</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the paragraph indent width in Pango units. A negative value indicates a hanging indentation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the indent in Pango units.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="indent=-instance_method">
+  
+    #<strong>indent=</strong>(indent)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the width in Pango units to indent each paragraph. A negative value of <strong>indent</strong> will produce a hanging indentation. That is, the first line will have the full width, and subsequent lines will be indented by the absolute value of <strong>indent</strong>.</p>
+
+<p>The indent setting is ignored if layout alignment is set to %PANGO_ALIGN_CENTER.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>indent</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the amount by which to indent.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="index_to_line_x-instance_method">
+  
+    #<strong>index_to_line_x</strong>(index_, trailing, line, x_pos)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts from byte <strong>index_</strong> within the <strong>layout</strong> to line and X position. (X position is measured from the left edge of the line)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the byte index of a grapheme within the layout.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>trailing</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an integer indicating the edge of the grapheme to retrieve the position of. If &gt; 0, the trailing edge of the grapheme, if 0, the leading of the grapheme.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>line</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store resulting line index. (which will between 0 and pango_layout_get_line_count(layout) - 1), or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store resulting position within line (%PANGO_SCALE units per device unit), or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="index_to_pos-instance_method">
+  
+    #<strong>index_to_pos</strong>(index_, pos)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts from an index within a Pango::Layout to the onscreen position corresponding to the grapheme at that index, which is represented as rectangle.  Note that &lt;literal&gt;pos-&gt;x&lt;/literal&gt; is always the leading edge of the grapheme and &lt;literal&gt;pos-&gt;x + pos-&gt;width&lt;/literal&gt; the trailing edge of the grapheme. If the directionality of the grapheme is right-to-left, then &lt;literal&gt;pos-&gt;width&lt;/literal&gt; will be negative.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>byte index within <strong>layout</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pos</span>
+      
+      
+        <span class='type'>(<tt>Pango::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rectangle in which to store the position of the grapheme</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_ellipsized-instance_method">
+  
+    #<strong>is_ellipsized</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries whether the layout had to ellipsize any paragraphs.</p>
+
+<p>This returns true if the ellipsization mode for <strong>layout</strong> is not %PANGO_ELLIPSIZE_NONE, a positive width is set on <strong>layout</strong>, and there are paragraphs exceeding that width that have to be ellipsized. otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if any paragraphs had to be ellipsized, false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_wrapped-instance_method">
+  
+    #<strong>is_wrapped</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries whether the layout had to wrap any paragraphs.</p>
+
+<p>This returns true if a positive width is set on <strong>layout</strong>, ellipsization mode of <strong>layout</strong> is set to %PANGO_ELLIPSIZE_NONE, and there are paragraphs exceeding the layout width that have to be wrapped. otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if any paragraphs had to be wrapped, false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter-instance_method">
+  
+    #<strong>iter</strong>  &#x21d2; <tt>Pango::LayoutIter</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns an iterator to iterate over the visual extents of the layout.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::LayoutIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new Pango::LayoutIter that should be freed using pango_layout_iter_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="justify-instance_method">
+  
+    #<strong>justify</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets whether each complete line should be stretched to fill the entire width of the layout.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the justify.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="justify=-instance_method">
+  
+    #<strong>justify=</strong>(justify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets whether each complete line should be stretched to fill the entire width of the layout. This stretching is typically done by adding whitespace, but for some scripts (such as Arabic), the justification may be done in more complex ways, like extending the characters.</p>
+
+<p>Note that this setting is not implemented and so is ignored in Pango older than 1.18.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>justify</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the lines in the layout should be justified.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_count-instance_method">
+  
+    #<strong>line_count</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the count of lines for the <strong>layout</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the line count.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_spacing-instance_method">
+  
+    #<strong>line_spacing</strong>  &#x21d2; <tt>Pango::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the value that has been set with pango_layout_set_line_spacing().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::gfloat</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_spacing=-instance_method">
+  
+    #<strong>line_spacing=</strong>(factor)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets a factor for line spacing. Typical values are: 0, 1, 1.5, 2. The default values is 0.</p>
+
+<p>If <strong>factor</strong> is non-zero, lines are placed so that</p>
+
+<p>baseline2 = baseline1 + factor * height2</p>
+
+<p>where height2 is the line height of the second line (as determined by the font(s)). In this case, the spacing set with pango_layout_set_spacing() is ignored.</p>
+
+<p>If <strong>factor</strong> is zero, spacing is applied as before.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>factor</span>
+      
+      
+        <span class='type'>(<tt>Pango::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new line spacing factor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lines-instance_method">
+  
+    #<strong>lines</strong>  &#x21d2; <tt>GLib::SList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the lines of the <strong>layout</strong> as a list.</p>
+
+<p>Use the faster pango_layout_get_lines_readonly() if you do not plan to modify the contents of the lines (glyphs, glyph widths, etc.). the lines in the layout. This points to internal data of the Pango::Layout and must be used with care. It will become invalid on any change to the layout’s text or properties.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GSList containing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lines_readonly-instance_method">
+  
+    #<strong>lines_readonly</strong>  &#x21d2; <tt>GLib::SList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the lines of the <strong>layout</strong> as a list.</p>
+
+<p>This is a faster alternative to pango_layout_get_lines(), but the user is not expected to modify the contents of the lines (glyphs, glyph widths, etc.). the lines in the layout. This points to internal data of the Pango::Layout and must be used with care. It will become invalid on any change to the layout’s text or properties.  No changes should be made to the lines.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GSList containing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="move_cursor_visually-instance_method">
+  
+    #<strong>move_cursor_visually</strong>(strong, old_index, old_trailing, direction, new_index, new_trailing)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Computes a new cursor position from an old position and a count of positions to move visually. If <strong>direction</strong> is positive, then the new strong cursor position will be one position to the right of the old cursor position. If <strong>direction</strong> is negative, then the new strong cursor position will be one position to the left of the old cursor position.</p>
+
+<p>In the presence of bidirectional text, the correspondence between logical and visual order will depend on the direction of the current run, and there may be jumps when the cursor is moved off of the end of a run.</p>
+
+<p>Motion here is in cursor positions, not in characters, so a single call to pango_layout_move_cursor_visually() may move the cursor over multiple characters when multiple characters combine to form a single grapheme.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>strong</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the moving cursor is the strong cursor or the weak cursor. The strong cursor is the cursor corresponding to text insertion in the base direction for the layout.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>old_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the byte index of the grapheme for the old index</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>old_trailing</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>if 0, the cursor was at the leading edge of the grapheme indicated by <strong>old_index</strong>, if &gt; 0, the cursor was at the trailing edge.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>direction</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>direction to move cursor. A negative value indicates motion to the left.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>new_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the new cursor byte index. A value of -1 indicates that the cursor has been moved off the beginning of the layout. A value of %G_MAXINT indicates that the cursor has been moved off the end of the layout.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>new_trailing</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of characters to move forward from the location returned for <strong>new_index</strong> to get the position where the cursor should be displayed. This allows distinguishing the position at the beginning of one line from the position at the end of the preceding line. <strong>new_index</strong> is always on the line where the cursor should be displayed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>(context)  &#x21d2; <tt><span class='object_link'><a href="" title="Pango::Layout (class)">Pango::Layout</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a new Pango::Layout object with attributes initialized to default values for a particular Pango::Context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::Context</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Pango::Layout (class)">Pango::Layout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the newly allocated Pango::Layout, with a reference count of one, which should be freed with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="serial-instance_method">
+  
+    #<strong>serial</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the current serial number of <strong>layout</strong>.  The serial number is initialized to an small number  larger than zero when a new layout is created and is increased whenever the layout is changed using any of the setter functions, or the Pango::Context it uses has changed. The serial may wrap, but will never have the value 0. Since it can wrap, never compare it with “less than”, always use “not equals”.</p>
+
+<p>This can be used to automatically detect changes to a Pango::Layout, and is useful for example to decide whether a layout needs redrawing. To force the serial to be increased, use pango_layout_context_changed().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The current serial number of <strong>layout</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_markup-instance_method">
+  
+    #<strong>set_markup</strong>(markup, length)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Same as pango_layout_set_markup_with_accel(), but the markup text isn’t scanned for accelerators.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>markup</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>marked-up text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of marked-up text in bytes, or -1 if <strong>markup</strong> is null-terminated</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_markup_with_accel-instance_method">
+  
+    #<strong>set_markup_with_accel</strong>(markup, length, accel_marker, accel_char)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the layout text and attribute list from marked-up text (see &lt;link linkend=“PangoMarkupFormat”&gt;markup format&lt;/link&gt;). Replaces the current text and attribute list.</p>
+
+<p>If <strong>accel_marker</strong> is nonzero, the given character will mark the character following it as an accelerator. For example, <strong>accel_marker</strong> might be an ampersand or underscore. All characters marked as an accelerator will receive a %PANGO_UNDERLINE_LOW attribute, and the first character so marked will be returned in <strong>accel_char</strong>. Two <strong>accel_marker</strong> characters following each other produce a single literal <strong>accel_marker</strong> character. (see &lt;link linkend=“PangoMarkupFormat”&gt;markup format&lt;/link&gt;)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>markup</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>marked-up text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of marked-up text in bytes, or -1 if <strong>markup</strong> is null-terminated</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>accel_marker</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>marker for accelerators in the text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>accel_char</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for first located accelerator, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_text-instance_method">
+  
+    #<strong>set_text</strong>(text, length)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the text of the layout.</p>
+
+<p>This function validates <strong>text</strong> and renders invalid UTF-8 with a placeholder glyph.</p>
+
+<p>Note that if you have used pango_layout_set_markup() or pango_layout_set_markup_with_accel() on <strong>layout</strong> before, you may want to call pango_layout_set_attributes() to clear the attributes set on the layout from the markup as this function does not clear attributes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>maximum length of <strong>text</strong>, in bytes. -1 indicates that the string is nul-terminated and the length should be calculated.  The text will also be truncated on encountering a nul-termination even when <strong>length</strong> is positive.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="single_paragraph_mode-instance_method">
+  
+    #<strong>single_paragraph_mode</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the value set by pango_layout_set_single_paragraph_mode(). paragraph separator characters, false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the layout does not break paragraphs at</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="single_paragraph_mode=-instance_method">
+  
+    #<strong>single_paragraph_mode=</strong>(setting)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If <strong>setting</strong> is true, do not treat newlines and similar characters as paragraph separators; instead, keep all text in a single paragraph, and display a glyph for paragraph separator characters. Used when you want to allow editing of newlines on a single text line.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>setting</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>new setting</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="spacing-instance_method">
+  
+    #<strong>spacing</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the amount of spacing between the lines of the layout.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the spacing in Pango units.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="spacing=-instance_method">
+  
+    #<strong>spacing=</strong>(spacing)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the amount of spacing in Pango unit between the lines of the layout. When placing lines with spacing, Pango arranges things so that</p>
+
+<p>line2.top = line1.bottom + spacing</p>
+
+<p>Note: Since 1.44, Pango defaults to using the line height (as determined by the font) for placing lines. The <strong>spacing</strong> set with this function is only taken into account when the line-height factor is set to zero with pango_layout_set_line_spacing().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>spacing</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the amount of spacing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tabs-instance_method">
+  
+    #<strong>tabs</strong>  &#x21d2; <tt>Pango::TabArray</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the current Pango::TabArray used by this layout. If no Pango::TabArray has been set, then the default tabs are in use and nil is returned. Default tabs are every 8 spaces. The return value should be freed with pango_tab_array_free(). nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::TabArray</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a copy of the tabs for this layout, or</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tabs=-instance_method">
+  
+    #<strong>tabs=</strong>(tabs)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the tabs to use for <strong>layout</strong>, overriding the default tabs (by default, tabs are every 8 spaces). If <strong>tabs</strong> is nil, the default tabs are reinstated. <strong>tabs</strong> is copied into the layout; you must free your copy of <strong>tabs</strong> yourself.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tabs</span>
+      
+      
+        <span class='type'>(<tt>Pango::TabArray</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::TabArray, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text-instance_method">
+  
+    #<strong>text</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the text in the layout. The returned text should not be freed or modified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the text in the <strong>layout</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unknown_glyphs_count-instance_method">
+  
+    #<strong>unknown_glyphs_count</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Counts the number unknown glyphs in <strong>layout</strong>.  That is, zero if glyphs for all characters in the layout text were found, or more than zero otherwise.</p>
+
+<p>This function can be used to determine if there are any fonts available to render all characters in a certain string, or when used in combination with %PANGO_ATTR_FALLBACK, to check if a certain font supports all the characters in the string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The number of unknown glyphs in <strong>layout</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="width-instance_method">
+  
+    #<strong>width</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the width to which the lines of the Pango::Layout should wrap.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the width in Pango units, or -1 if no width set.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="width=-instance_method">
+  
+    #<strong>width=</strong>(width)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the width to which the lines of the Pango::Layout should wrap or ellipsized.  The default value is -1: no width set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the desired width in Pango units, or -1 to indicate that no wrapping or ellipsization should be performed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wrap-instance_method">
+  
+    #<strong>wrap</strong>  &#x21d2; <tt><span class='object_link'><a href="WrapMode.html" title="Pango::WrapMode (module)">Pango::WrapMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the wrap mode for the layout.</p>
+
+<p>Use pango_layout_is_wrapped() to query whether any paragraphs were actually wrapped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="WrapMode.html" title="Pango::WrapMode (module)">Pango::WrapMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>active wrap mode.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wrap=-instance_method">
+  
+    #<strong>wrap=</strong>(wrap)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the wrap mode; the wrap mode only has effect if a width is set on the layout with pango_layout_set_width(). To turn off wrapping, set the width to -1.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>wrap</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="WrapMode.html" title="Pango::WrapMode (module)">Pango::WrapMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the wrap mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xy_to_index-instance_method">
+  
+    #<strong>xy_to_index</strong>(x, y, index_, trailing)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts from X and Y position within a layout to the byte index to the character at that logical position. If the Y position is not inside the layout, the closest position is chosen (the position will be clamped inside the layout). If the X position is not within the layout, then the start or the end of the line is chosen as described for pango_layout_line_x_to_index(). If either the X or Y positions were not inside the layout, then the function returns false; on an exact hit, it returns true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the X offset (in Pango units) from the left edge of the layout.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Y offset (in Pango units) from the top edge of the layout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>index_</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store calculated byte index</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>trailing</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store a integer indicating where in the grapheme the user clicked. It will either be zero, or the number of characters in the grapheme. 0 represents the leading edge of the grapheme.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the coordinates were inside text, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:11 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

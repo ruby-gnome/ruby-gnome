@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: PangoOT::Info
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "PangoOT::Info";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (I)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../PangoOT.html" title="PangoOT (module)">PangoOT</a></span></span>
+     &raquo; 
+    <span class="title">Info</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: PangoOT::Info
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">PangoOT::Info</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_feature-instance_method" title="#find_feature (instance method)">#<strong>find_feature</strong>(table_type, feature_tag, script_index, language_index, feature_index)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finds the index of a feature.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_language-instance_method" title="#find_language (instance method)">#<strong>find_language</strong>(table_type, script_index, language_tag, language_index, required_feature_index)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finds the index of a language and its required feature index.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_script-instance_method" title="#find_script (instance method)">#<strong>find_script</strong>(table_type, script_tag, script_index)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finds the index of a script.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_features-instance_method" title="#list_features (instance method)">#<strong>list_features</strong>(table_type, tag, script_index, language_index)  &#x21d2; PangoOT::Tag </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the list of features for the given language of the given script.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_languages-instance_method" title="#list_languages (instance method)">#<strong>list_languages</strong>(table_type, script_index, language_tag)  &#x21d2; PangoOT::Tag </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the list of available languages for a given script.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_scripts-instance_method" title="#list_scripts (instance method)">#<strong>list_scripts</strong>(table_type)  &#x21d2; PangoOT::Tag </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the list of available scripts.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="find_feature-instance_method">
+  
+    #<strong>find_feature</strong>(table_type, feature_tag, script_index, language_index, feature_index)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finds the index of a feature.  If the feature is not found, sets <strong>feature_index</strong> to PANGO_OT_NO_FEATURE, which is safe to pass to pango_ot_ruleset_add_feature() and similar functions.</p>
+
+<p>In the future, this may set <strong>feature_index</strong> to an special value that if used in pango_ot_ruleset_add_feature() will ask Pango to synthesize the requested feature based on Unicode properties and data.  However, this function will still return false in those cases.  So, users may want to ignore the return value of this function in certain cases.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>table_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TableType.html" title="PangoOT::TableType (module)">PangoOT::TableType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the table type to obtain information about.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>feature_tag</span>
+      
+      
+        <span class='type'>(<tt>PangoOT::Tag</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the tag of the feature to find.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>script_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the index of the script.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>language_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the index of the language whose features are searched, or %PANGO_OT_DEFAULT_LANGUAGE to use the default language of the script.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>feature_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the index of the feature, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the feature was found.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find_language-instance_method">
+  
+    #<strong>find_language</strong>(table_type, script_index, language_tag, language_index, required_feature_index)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finds the index of a language and its required feature index. If the language is not found, sets <strong>language_index</strong> to PANGO_OT_DEFAULT_LANGUAGE and the required feature of the default language system is returned in required_feature_index.  For best compatibility with some fonts, also searches the language system tag ‘dflt’ before falling back to the default language system, but that is transparent to the user. The user can simply ignore the return value of this function to automatically fall back to the default language system.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>table_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TableType.html" title="PangoOT::TableType (module)">PangoOT::TableType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the table type to obtain information about.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>script_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the index of the script whose languages are searched.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>language_tag</span>
+      
+      
+        <span class='type'>(<tt>PangoOT::Tag</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the tag of the language to find.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>language_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the index of the language, or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>required_feature_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the required feature index of the language, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the language was found.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find_script-instance_method">
+  
+    #<strong>find_script</strong>(table_type, script_tag, script_index)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finds the index of a script.  If not found, tries to find the ‘DFLT’ and then ‘dflt’ scripts and return the index of that in <strong>script_index</strong>. If none of those is found either, %PANGO_OT_NO_SCRIPT is placed in <strong>script_index</strong>.</p>
+
+<p>All other functions taking an input script_index parameter know how to handle %PANGO_OT_NO_SCRIPT, so one can ignore the return value of this function completely and proceed, to enjoy the automatic fallback to the ‘DFLT’/‘dflt’ script.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>table_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TableType.html" title="PangoOT::TableType (module)">PangoOT::TableType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the table type to obtain information about.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>script_tag</span>
+      
+      
+        <span class='type'>(<tt>PangoOT::Tag</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the tag of the script to find.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>script_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the index of the script, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the script was found.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_features-instance_method">
+  
+    #<strong>list_features</strong>(table_type, tag, script_index, language_index)  &#x21d2; <tt>PangoOT::Tag</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the list of features for the given language of the given script. available features.  Should be freed using g_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>table_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TableType.html" title="PangoOT::TableType (module)">PangoOT::TableType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the table type to obtain information about.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt>PangoOT::Tag</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>unused parameter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>script_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the index of the script to obtain information about.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>language_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the index of the language to list features for, or %PANGO_OT_DEFAULT_LANGUAGE, to list features for the default language of the script.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>PangoOT::Tag</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated zero-terminated array containing the tags of the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_languages-instance_method">
+  
+    #<strong>list_languages</strong>(table_type, script_index, language_tag)  &#x21d2; <tt>PangoOT::Tag</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the list of available languages for a given script.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>table_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TableType.html" title="PangoOT::TableType (module)">PangoOT::TableType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the table type to obtain information about.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>script_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the index of the script to list languages for.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>language_tag</span>
+      
+      
+        <span class='type'>(<tt>PangoOT::Tag</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>unused parameter.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>PangoOT::Tag</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated zero-terminated array containing the tags of the available languages.  Should be freed using g_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_scripts-instance_method">
+  
+    #<strong>list_scripts</strong>(table_type)  &#x21d2; <tt>PangoOT::Tag</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the list of available scripts.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>table_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TableType.html" title="PangoOT::TableType (module)">PangoOT::TableType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the table type to obtain information about.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>PangoOT::Tag</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated zero-terminated array containing the tags of the available scripts.  Should be freed using g_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:11 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

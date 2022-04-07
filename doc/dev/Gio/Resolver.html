@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::Resolver
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::Resolver";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">Resolver</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::Resolver
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::Resolver</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_by_address-instance_method" title="#lookup_by_address (instance method)">#<strong>lookup_by_address</strong>(address, cancellable)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Synchronously reverse-resolves <strong>address</strong> to determine its associated hostname.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_by_address_async-instance_method" title="#lookup_by_address_async (instance method)">#<strong>lookup_by_address_async</strong>(address, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Begins asynchronously reverse-resolving <strong>address</strong> to determine its associated hostname, and eventually calls <strong>callback</strong>, which must call g_resolver_lookup_by_address_finish() to get the final result.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_by_address_finish-instance_method" title="#lookup_by_address_finish (instance method)">#<strong>lookup_by_address_finish</strong>(result)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the result of a previous call to g_resolver_lookup_by_address_async().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_by_name-instance_method" title="#lookup_by_name (instance method)">#<strong>lookup_by_name</strong>(hostname, cancellable)  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Synchronously resolves <strong>hostname</strong> to determine its associated IP address(es).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_by_name_async-instance_method" title="#lookup_by_name_async (instance method)">#<strong>lookup_by_name_async</strong>(hostname, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Begins asynchronously resolving <strong>hostname</strong> to determine its associated IP address(es), and eventually calls <strong>callback</strong>, which must call g_resolver_lookup_by_name_finish() to get the result.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_by_name_finish-instance_method" title="#lookup_by_name_finish (instance method)">#<strong>lookup_by_name_finish</strong>(result)  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the result of a call to g_resolver_lookup_by_name_async().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_by_name_with_flags-instance_method" title="#lookup_by_name_with_flags (instance method)">#<strong>lookup_by_name_with_flags</strong>(hostname, flags, cancellable)  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This differs from g_resolver_lookup_by_name() in that you can modify the lookup behavior with <strong>flags</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_by_name_with_flags_async-instance_method" title="#lookup_by_name_with_flags_async (instance method)">#<strong>lookup_by_name_with_flags_async</strong>(hostname, flags, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Begins asynchronously resolving <strong>hostname</strong> to determine its associated IP address(es), and eventually calls <strong>callback</strong>, which must call g_resolver_lookup_by_name_with_flags_finish() to get the result.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_by_name_with_flags_finish-instance_method" title="#lookup_by_name_with_flags_finish (instance method)">#<strong>lookup_by_name_with_flags_finish</strong>(result)  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the result of a call to g_resolver_lookup_by_name_with_flags_async().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_records-instance_method" title="#lookup_records (instance method)">#<strong>lookup_records</strong>(rrname, record_type, cancellable)  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Synchronously performs a DNS record lookup for the given <strong>rrname</strong> and returns a list of records as #GVariant tuples.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_records_async-instance_method" title="#lookup_records_async (instance method)">#<strong>lookup_records_async</strong>(rrname, record_type, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Begins asynchronously performing a DNS lookup for the given <strong>rrname</strong>, and eventually calls <strong>callback</strong>, which must call g_resolver_lookup_records_finish() to get the final result.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_records_finish-instance_method" title="#lookup_records_finish (instance method)">#<strong>lookup_records_finish</strong>(result)  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the result of a previous call to g_resolver_lookup_records_async().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_service-instance_method" title="#lookup_service (instance method)">#<strong>lookup_service</strong>(service, protocol, domain, cancellable)  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Synchronously performs a DNS SRV lookup for the given <strong>service</strong> and <strong>protocol</strong> in the given <strong>domain</strong> and returns an array of GSrv::Target.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_service_async-instance_method" title="#lookup_service_async (instance method)">#<strong>lookup_service_async</strong>(service, protocol, domain, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Begins asynchronously performing a DNS SRV lookup for the given <strong>service</strong> and <strong>protocol</strong> in the given <strong>domain</strong>, and eventually calls <strong>callback</strong>, which must call g_resolver_lookup_service_finish() to get the final result.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_service_finish-instance_method" title="#lookup_service_finish (instance method)">#<strong>lookup_service_finish</strong>(result)  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the result of a previous call to g_resolver_lookup_service_async().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_default-instance_method" title="#set_default (instance method)">#<strong>set_default</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>resolver</strong> to be the application’s default resolver (reffing <strong>resolver</strong>, and unreffing the previous default resolver, if any).</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="lookup_by_address-instance_method">
+  
+    #<strong>lookup_by_address</strong>(address, cancellable)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Synchronously reverse-resolves <strong>address</strong> to determine its associated hostname.</p>
+
+<p>If the DNS resolution fails, <strong>error</strong> (if non-nil) will be set to a value from GResolver::Error.</p>
+
+<p>If <strong>cancellable</strong> is non-nil, it can be used to cancel the operation, in which case <strong>error</strong> (if non-nil) will be set to %G_IO_ERROR_CANCELLED.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InetAddress.html" title="Gio::InetAddress (class)">Gio::InetAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the address to reverse-resolve</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a hostname (either ASCII-only, or in ASCII-encoded form), or nil on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_by_address_async-instance_method">
+  
+    #<strong>lookup_by_address_async</strong>(address, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Begins asynchronously reverse-resolving <strong>address</strong> to determine its associated hostname, and eventually calls <strong>callback</strong>, which must call g_resolver_lookup_by_address_finish() to get the final result.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InetAddress.html" title="Gio::InetAddress (class)">Gio::InetAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the address to reverse-resolve</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>callback to call after resolution completes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>data for <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_by_address_finish-instance_method">
+  
+    #<strong>lookup_by_address_finish</strong>(result)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the result of a previous call to g_resolver_lookup_by_address_async().</p>
+
+<p>If the DNS resolution failed, <strong>error</strong> (if non-nil) will be set to a value from GResolver::Error. If the operation was cancelled, <strong>error</strong> will be set to %G_IO_ERROR_CANCELLED. form), or nil on error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the result passed to your GAsync::ReadyCallback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a hostname (either ASCII-only, or in ASCII-encoded</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_by_name-instance_method">
+  
+    #<strong>lookup_by_name</strong>(hostname, cancellable)  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Synchronously resolves <strong>hostname</strong> to determine its associated IP address(es). <strong>hostname</strong> may be an ASCII-only or UTF-8 hostname, or the textual form of an IP address (in which case this just becomes a wrapper around g_inet_address_new_from_string()).</p>
+
+<p>On success, g_resolver_lookup_by_name() will return a non-empty #GList of GInet::Address, sorted in order of preference and guaranteed to not contain duplicates. That is, if using the result to connect to <strong>hostname</strong>, you should attempt to connect to the first address first, then the second if the first fails, etc. If you are using the result to listen on a socket, it is appropriate to add each result using e.g. g_socket_listener_add_address().</p>
+
+<p>If the DNS resolution fails, <strong>error</strong> (if non-nil) will be set to a value from GResolver::Error and nil will be returned.</p>
+
+<p>If <strong>cancellable</strong> is non-nil, it can be used to cancel the operation, in which case <strong>error</strong> (if non-nil) will be set to %G_IO_ERROR_CANCELLED.</p>
+
+<p>If you are planning to connect to a socket on the resolved IP address, it may be easier to create a GNetwork::Address and use its GSocket::Connectable interface. of GInet::Address, or nil on error. You must unref each of the addresses and free the list when you are done with it. (You can use g_resolver_free_addresses() to do this.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hostname</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the hostname to look up</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a non-empty #GList</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_by_name_async-instance_method">
+  
+    #<strong>lookup_by_name_async</strong>(hostname, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Begins asynchronously resolving <strong>hostname</strong> to determine its associated IP address(es), and eventually calls <strong>callback</strong>, which must call g_resolver_lookup_by_name_finish() to get the result. See g_resolver_lookup_by_name() for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hostname</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the hostname to look up the address of</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>callback to call after resolution completes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>data for <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_by_name_finish-instance_method">
+  
+    #<strong>lookup_by_name_finish</strong>(result)  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the result of a call to g_resolver_lookup_by_name_async().</p>
+
+<p>If the DNS resolution failed, <strong>error</strong> (if non-nil) will be set to a value from GResolver::Error. If the operation was cancelled, <strong>error</strong> will be set to %G_IO_ERROR_CANCELLED. of GInet::Address, or nil on error. See g_resolver_lookup_by_name() for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the result passed to your GAsync::ReadyCallback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GList</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_by_name_with_flags-instance_method">
+  
+    #<strong>lookup_by_name_with_flags</strong>(hostname, flags, cancellable)  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This differs from g_resolver_lookup_by_name() in that you can modify the lookup behavior with <strong>flags</strong>. For example this can be used to limit results with #G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY. of GInet::Address, or nil on error. You must unref each of the addresses and free the list when you are done with it. (You can use g_resolver_free_addresses() to do this.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hostname</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the hostname to look up</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ResolverNameLookupFlags.html" title="Gio::ResolverNameLookupFlags (module)">Gio::ResolverNameLookupFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>extra GResolver::NameLookupFlags for the lookup</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a non-empty #GList</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_by_name_with_flags_async-instance_method">
+  
+    #<strong>lookup_by_name_with_flags_async</strong>(hostname, flags, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Begins asynchronously resolving <strong>hostname</strong> to determine its associated IP address(es), and eventually calls <strong>callback</strong>, which must call g_resolver_lookup_by_name_with_flags_finish() to get the result. See g_resolver_lookup_by_name() for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hostname</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the hostname to look up the address of</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ResolverNameLookupFlags.html" title="Gio::ResolverNameLookupFlags (module)">Gio::ResolverNameLookupFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>extra GResolver::NameLookupFlags for the lookup</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>callback to call after resolution completes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>data for <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_by_name_with_flags_finish-instance_method">
+  
+    #<strong>lookup_by_name_with_flags_finish</strong>(result)  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the result of a call to g_resolver_lookup_by_name_with_flags_async().</p>
+
+<p>If the DNS resolution failed, <strong>error</strong> (if non-nil) will be set to a value from GResolver::Error. If the operation was cancelled, <strong>error</strong> will be set to %G_IO_ERROR_CANCELLED. of GInet::Address, or nil on error. See g_resolver_lookup_by_name() for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the result passed to your GAsync::ReadyCallback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GList</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_records-instance_method">
+  
+    #<strong>lookup_records</strong>(rrname, record_type, cancellable)  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Synchronously performs a DNS record lookup for the given <strong>rrname</strong> and returns a list of records as #GVariant tuples. See GResolver::RecordType for information on what the records contain for each <strong>record_type</strong>.</p>
+
+<p>If the DNS resolution fails, <strong>error</strong> (if non-nil) will be set to a value from GResolver::Error and nil will be returned.</p>
+
+<p>If <strong>cancellable</strong> is non-nil, it can be used to cancel the operation, in which case <strong>error</strong> (if non-nil) will be set to %G_IO_ERROR_CANCELLED. #GVariant, or nil on error. You must free each of the records and the list when you are done with it. (You can use g_list_free_full() with g_variant_unref() to do this.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rrname</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the DNS name to look up the record for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>record_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ResolverRecordType.html" title="Gio::ResolverRecordType (module)">Gio::ResolverRecordType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the type of DNS record to look up</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a non-empty #GList of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_records_async-instance_method">
+  
+    #<strong>lookup_records_async</strong>(rrname, record_type, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Begins asynchronously performing a DNS lookup for the given <strong>rrname</strong>, and eventually calls <strong>callback</strong>, which must call g_resolver_lookup_records_finish() to get the final result. See g_resolver_lookup_records() for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rrname</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the DNS name to look up the record for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>record_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ResolverRecordType.html" title="Gio::ResolverRecordType (module)">Gio::ResolverRecordType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the type of DNS record to look up</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>callback to call after resolution completes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>data for <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_records_finish-instance_method">
+  
+    #<strong>lookup_records_finish</strong>(result)  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the result of a previous call to g_resolver_lookup_records_async(). Returns a non-empty list of records as #GVariant tuples. See GResolver::RecordType for information on what the records contain.</p>
+
+<p>If the DNS resolution failed, <strong>error</strong> (if non-nil) will be set to a value from GResolver::Error. If the operation was cancelled, <strong>error</strong> will be set to %G_IO_ERROR_CANCELLED. #GVariant, or nil on error. You must free each of the records and the list when you are done with it. (You can use g_list_free_full() with g_variant_unref() to do this.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the result passed to your GAsync::ReadyCallback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a non-empty #GList of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_service-instance_method">
+  
+    #<strong>lookup_service</strong>(service, protocol, domain, cancellable)  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Synchronously performs a DNS SRV lookup for the given <strong>service</strong> and <strong>protocol</strong> in the given <strong>domain</strong> and returns an array of GSrv::Target. <strong>domain</strong> may be an ASCII-only or UTF-8 hostname. Note also that the <strong>service</strong> and <strong>protocol</strong> arguments do not include the leading underscore that appears in the actual DNS entry.</p>
+
+<p>On success, g_resolver_lookup_service() will return a non-empty #GList of GSrv::Target, sorted in order of preference. (That is, you should attempt to connect to the first target first, then the second if the first fails, etc.)</p>
+
+<p>If the DNS resolution fails, <strong>error</strong> (if non-nil) will be set to a value from GResolver::Error and nil will be returned.</p>
+
+<p>If <strong>cancellable</strong> is non-nil, it can be used to cancel the operation, in which case <strong>error</strong> (if non-nil) will be set to %G_IO_ERROR_CANCELLED.</p>
+
+<p>If you are planning to connect to the service, it is usually easier to create a GNetwork::Service and use its #GSocketConnectable interface. GSrv::Target, or nil on error. You must free each of the targets and the list when you are done with it. (You can use g_resolver_free_targets() to do this.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>service</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the service type to look up (eg, “ldap”)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>protocol</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the networking protocol to use for <strong>service</strong> (eg, “tcp”)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>domain</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the DNS domain to look up the service in</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a non-empty #GList of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_service_async-instance_method">
+  
+    #<strong>lookup_service_async</strong>(service, protocol, domain, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Begins asynchronously performing a DNS SRV lookup for the given <strong>service</strong> and <strong>protocol</strong> in the given <strong>domain</strong>, and eventually calls <strong>callback</strong>, which must call g_resolver_lookup_service_finish() to get the final result. See g_resolver_lookup_service() for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>service</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the service type to look up (eg, “ldap”)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>protocol</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the networking protocol to use for <strong>service</strong> (eg, “tcp”)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>domain</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the DNS domain to look up the service in</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>callback to call after resolution completes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>data for <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_service_finish-instance_method">
+  
+    #<strong>lookup_service_finish</strong>(result)  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the result of a previous call to g_resolver_lookup_service_async().</p>
+
+<p>If the DNS resolution failed, <strong>error</strong> (if non-nil) will be set to a value from GResolver::Error. If the operation was cancelled, <strong>error</strong> will be set to %G_IO_ERROR_CANCELLED. GSrv::Target, or nil on error. See g_resolver_lookup_service() for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the result passed to your GAsync::ReadyCallback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a non-empty #GList of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_default-instance_method">
+  
+    #<strong>set_default</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>resolver</strong> to be the application’s default resolver (reffing <strong>resolver</strong>, and unreffing the previous default resolver, if any). Future calls to g_resolver_get_default() will return this resolver.</p>
+
+<p>This can be used if an application wants to perform any sort of DNS caching or “pinning”; it can implement its own #GResolver that calls the original default resolver for DNS operations, and implements its own cache policies on top of that, and then set itself as the default resolver for all later code to use.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:06 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

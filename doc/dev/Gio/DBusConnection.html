@@ -1,0 +1,6308 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::DBusConnection
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::DBusConnection";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">DBusConnection</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::DBusConnection
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::DBusConnection</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The GDBus::Connection type is used for D-Bus connections to remote peers such as a message buses. It is a low-level API that offers a lot of flexibility. For instance, it lets you establish a connection over any transport that can by represented as a #GIOStream.</p>
+
+<p>This class is rarely used directly in D-Bus clients. If you are writing a D-Bus client, it is often easier to use the g_bus_own_name(), g_bus_watch_name() or g_dbus_proxy_new_for_bus() APIs.</p>
+
+<p>As an exception to the usual GLib rule that a particular object must not be used by two threads at the same time, GDBus::Connection’s methods may be called from any thread. This is so that g_bus_get() and g_bus_get_sync() can safely return the same GDBus::Connection when called from any thread.</p>
+
+<p>Most of the ways to obtain a GDBus::Connection automatically initialize it (i.e. connect to D-Bus): for instance, g_dbus_connection_new() and g_bus_get(), and the synchronous versions of those methods, give you an initialized connection. Language bindings for GIO should use g_initable_new() or g_async_initable_new_async(), which also initialize the connection.</p>
+
+<p>If you construct an uninitialized GDBus::Connection, such as via g_object_new(), you must initialize it via g_initable_init() or g_async_initable_init_async() before using its methods or properties. Calling methods or accessing properties on a GDBus::Connection that has not completed initialization successfully is considered to be invalid, and leads to undefined behaviour. In particular, if initialization fails with a #GError, the only valid thing you can do with that GDBus::Connection is to free it with g_object_unref().</p>
+
+<p>## An example D-Bus server # #gdbus-server</p>
+
+<p>Here is an example for a D-Bus server: [gdbus-example-server.c](<a href="https://git.gnome.org/browse/glib/tree/gio/tests/gdbus-example-server.c">git.gnome.org/browse/glib/tree/gio/tests/gdbus-example-server.c</a>)</p>
+
+<p>## An example for exporting a subtree # #gdbus-subtree-server</p>
+
+<p>Here is an example for exporting a subtree: [gdbus-example-subtree.c](<a href="https://git.gnome.org/browse/glib/tree/gio/tests/gdbus-example-subtree.c">git.gnome.org/browse/glib/tree/gio/tests/gdbus-example-subtree.c</a>)</p>
+
+<p>## An example for file descriptor passing # #gdbus-unix-fd-client</p>
+
+<p>Here is an example for passing UNIX file descriptors: [gdbus-unix-fd-client.c](<a href="https://git.gnome.org/browse/glib/tree/gio/tests/gdbus-example-unix-fd-client.c">git.gnome.org/browse/glib/tree/gio/tests/gdbus-example-unix-fd-client.c</a>)</p>
+
+<p>## An example for exporting a GObject # #gdbus-export</p>
+
+<p>Here is an example for exporting a #GObject: [gdbus-example-export.c](<a href="https://git.gnome.org/browse/glib/tree/gio/tests/gdbus-example-export.c">git.gnome.org/browse/glib/tree/gio/tests/gdbus-example-export.c</a>)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_filter-instance_method" title="#add_filter (instance method)">#<strong>add_filter</strong>(filter_function, user_data, user_data_free_func)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a message filter.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#address=-instance_method" title="#address= (instance method)">#<strong>address=</strong>(address)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A D-Bus address specifying potential endpoints that can be used when establishing the connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#authentication_observer=-instance_method" title="#authentication_observer= (instance method)">#<strong>authentication_observer=</strong>(authentication_observer)  &#x21d2; Gio::DBusAuthObserver </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A GDBus::AuthObserver object to assist in the authentication process or nil.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>(bus_name, object_path, interface_name, method_name, parameters, reply_type, flags, timeout_msec, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Asynchronously invokes the <strong>method_name</strong> method on the <strong>interface_name</strong> D-Bus interface on the remote object at <strong>object_path</strong> owned by <strong>bus_name</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call_finish-instance_method" title="#call_finish (instance method)">#<strong>call_finish</strong>(res)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes an operation started with g_dbus_connection_call().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call_sync-instance_method" title="#call_sync (instance method)">#<strong>call_sync</strong>(bus_name, object_path, interface_name, method_name, parameters, reply_type, flags, timeout_msec, cancellable)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Synchronously invokes the <strong>method_name</strong> method on the <strong>interface_name</strong> D-Bus interface on the remote object at <strong>object_path</strong> owned by <strong>bus_name</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call_with_unix_fd_list-instance_method" title="#call_with_unix_fd_list (instance method)">#<strong>call_with_unix_fd_list</strong>(bus_name, object_path, interface_name, method_name, parameters, reply_type, flags, timeout_msec, fd_list, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Like g_dbus_connection_call() but also takes a GUnix::FDList object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call_with_unix_fd_list_finish-instance_method" title="#call_with_unix_fd_list_finish (instance method)">#<strong>call_with_unix_fd_list_finish</strong>(out_fd_list, res)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes an operation started with g_dbus_connection_call_with_unix_fd_list().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call_with_unix_fd_list_sync-instance_method" title="#call_with_unix_fd_list_sync (instance method)">#<strong>call_with_unix_fd_list_sync</strong>(bus_name, object_path, interface_name, method_name, parameters, reply_type, flags, timeout_msec, fd_list, out_fd_list, cancellable)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Like g_dbus_connection_call_sync() but also takes and returns GUnix::FDList objects.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#capabilities-instance_method" title="#capabilities (instance method)">#<strong>capabilities</strong>  &#x21d2; Gio::DBusCapabilityFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Flags from the GDBus::CapabilityFlags enumeration representing connection features negotiated with the other peer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#capabilities=-instance_method" title="#capabilities= (instance method)">#<strong>capabilities=</strong>(capabilities)  &#x21d2; Gio::DBusCapabilityFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Flags from the GDBus::CapabilityFlags enumeration representing connection features negotiated with the other peer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">#<strong>close</strong>(cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Closes <strong>connection</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_finish-instance_method" title="#close_finish (instance method)">#<strong>close_finish</strong>(res)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes an operation started with g_dbus_connection_close().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_sync-instance_method" title="#close_sync (instance method)">#<strong>close_sync</strong>(cancellable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Synchronously closes <strong>connection</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#closed=-instance_method" title="#closed= (instance method)">#<strong>closed=</strong>(closed)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A boolean specifying whether the connection has been closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#closed%3F-instance_method" title="#closed? (instance method)">#<strong>closed?</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A boolean specifying whether the connection has been closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#emit_signal-instance_method" title="#emit_signal (instance method)">#<strong>emit_signal</strong>(destination_bus_name, object_path, interface_name, signal_name, parameters)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Emits a signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exit_on_close-instance_method" title="#exit_on_close (instance method)">#<strong>exit_on_close</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets whether the process is terminated when <strong>connection</strong> is closed by the remote peer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exit_on_close=-instance_method" title="#exit_on_close= (instance method)">#<strong>exit_on_close=</strong>(exit_on_close)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A boolean specifying whether the process will be terminated (by calling ‘raise(SIGTERM)`) if the connection is closed by the remote peer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exit_on_close%3F-instance_method" title="#exit_on_close? (instance method)">#<strong>exit_on_close?</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A boolean specifying whether the process will be terminated (by calling ‘raise(SIGTERM)`) if the connection is closed by the remote peer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#export_action_group-instance_method" title="#export_action_group (instance method)">#<strong>export_action_group</strong>(object_path, action_group)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Exports <strong>action_group</strong> on <strong>connection</strong> at <strong>object_path</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#export_menu_model-instance_method" title="#export_menu_model (instance method)">#<strong>export_menu_model</strong>(object_path, menu)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Exports <strong>menu</strong> on <strong>connection</strong> at <strong>object_path</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flags-instance_method" title="#flags (instance method)">#<strong>flags</strong>  &#x21d2; Gio::DBusConnectionFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Flags from the GDBus::ConnectionFlags enumeration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flags=-instance_method" title="#flags= (instance method)">#<strong>flags=</strong>(flags)  &#x21d2; Gio::DBusConnectionFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Flags from the GDBus::ConnectionFlags enumeration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flush-instance_method" title="#flush (instance method)">#<strong>flush</strong>(cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Asynchronously flushes <strong>connection</strong>, that is, writes all queued outgoing message to the transport and then flushes the transport (using g_output_stream_flush_async()).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flush_finish-instance_method" title="#flush_finish (instance method)">#<strong>flush_finish</strong>(res)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes an operation started with g_dbus_connection_flush().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flush_sync-instance_method" title="#flush_sync (instance method)">#<strong>flush_sync</strong>(cancellable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Synchronously flushes <strong>connection</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#guid-instance_method" title="#guid (instance method)">#<strong>guid</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The GUID of the peer performing the role of server when authenticating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#guid=-instance_method" title="#guid= (instance method)">#<strong>guid=</strong>(guid)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The GUID of the peer performing the role of server when authenticating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_closed-instance_method" title="#is_closed (instance method)">#<strong>is_closed</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets whether <strong>connection</strong> is closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#last_serial-instance_method" title="#last_serial (instance method)">#<strong>last_serial</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the last serial number assigned to a GDBus::Message on the current thread.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_finish-instance_method" title="#new_finish (instance method)">#<strong>new_finish</strong>(res)  &#x21d2; Gio::DBusConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes an operation started with g_dbus_connection_new().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_for_address_finish-instance_method" title="#new_for_address_finish (instance method)">#<strong>new_for_address_finish</strong>(res)  &#x21d2; Gio::DBusConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes an operation started with g_dbus_connection_new_for_address().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_for_address_sync-instance_method" title="#new_for_address_sync (instance method)">#<strong>new_for_address_sync</strong>(address, flags, observer, cancellable)  &#x21d2; Gio::DBusConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Synchronously connects and sets up a D-Bus client connection for exchanging D-Bus messages with an endpoint specified by <strong>address</strong> which must be in the [D-Bus address format](<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#addresses">dbus.freedesktop.org/doc/dbus-specification.html#addresses</a>).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_sync-instance_method" title="#new_sync (instance method)">#<strong>new_sync</strong>(stream, guid, flags, observer, cancellable)  &#x21d2; Gio::DBusConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Synchronously sets up a D-Bus connection for exchanging D-Bus messages with the end represented by <strong>stream</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peer_credentials-instance_method" title="#peer_credentials (instance method)">#<strong>peer_credentials</strong>  &#x21d2; Gio::Credentials </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the credentials of the authenticated peer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_object-instance_method" title="#register_object (instance method)">#<strong>register_object</strong>(object_path, interface_info, vtable, user_data, user_data_free_func)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Registers callbacks for exported objects at <strong>object_path</strong> with the D-Bus interface that is described in <strong>interface_info</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_object_with_closures-instance_method" title="#register_object_with_closures (instance method)">#<strong>register_object_with_closures</strong>(object_path, interface_info, method_call_closure, get_property_closure, set_property_closure)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Version of g_dbus_connection_register_object() using closures instead of a GDBus::InterfaceVTable for easier binding in other languages.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_subtree-instance_method" title="#register_subtree (instance method)">#<strong>register_subtree</strong>(object_path, vtable, flags, user_data, user_data_free_func)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Registers a whole subtree of dynamic objects.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_filter-instance_method" title="#remove_filter (instance method)">#<strong>remove_filter</strong>(filter_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes a filter.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_message-instance_method" title="#send_message (instance method)">#<strong>send_message</strong>(message, flags, out_serial)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Asynchronously sends <strong>message</strong> to the peer represented by <strong>connection</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_message_with_reply-instance_method" title="#send_message_with_reply (instance method)">#<strong>send_message_with_reply</strong>(message, flags, timeout_msec, out_serial, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Asynchronously sends <strong>message</strong> to the peer represented by <strong>connection</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_message_with_reply_finish-instance_method" title="#send_message_with_reply_finish (instance method)">#<strong>send_message_with_reply_finish</strong>(res)  &#x21d2; Gio::DBusMessage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes an operation started with g_dbus_connection_send_message_with_reply().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_message_with_reply_sync-instance_method" title="#send_message_with_reply_sync (instance method)">#<strong>send_message_with_reply_sync</strong>(message, flags, timeout_msec, out_serial, cancellable)  &#x21d2; Gio::DBusMessage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Synchronously sends <strong>message</strong> to the peer represented by <strong>connection</strong> and blocks the calling thread until a reply is received or the timeout is reached.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#signal_subscribe-instance_method" title="#signal_subscribe (instance method)">#<strong>signal_subscribe</strong>(sender, interface_name, member, object_path, arg0, flags, callback, user_data, user_data_free_func)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Subscribes to signals on <strong>connection</strong> and invokes <strong>callback</strong> with a whenever the signal is received.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#signal_unsubscribe-instance_method" title="#signal_unsubscribe (instance method)">#<strong>signal_unsubscribe</strong>(subscription_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Unsubscribes from signals.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#start_message_processing-instance_method" title="#start_message_processing (instance method)">#<strong>start_message_processing</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If <strong>connection</strong> was created with %G_DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING, this method starts processing messages.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stream-instance_method" title="#stream (instance method)">#<strong>stream</strong>  &#x21d2; Gio::IOStream </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The underlying #GIOStream used for I/O.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stream=-instance_method" title="#stream= (instance method)">#<strong>stream=</strong>(stream)  &#x21d2; Gio::IOStream </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The underlying #GIOStream used for I/O.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unexport_action_group-instance_method" title="#unexport_action_group (instance method)">#<strong>unexport_action_group</strong>(export_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reverses the effect of a previous call to g_dbus_connection_export_action_group().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unexport_menu_model-instance_method" title="#unexport_menu_model (instance method)">#<strong>unexport_menu_model</strong>(export_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reverses the effect of a previous call to g_dbus_connection_export_menu_model().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unique_name-instance_method" title="#unique_name (instance method)">#<strong>unique_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The unique name as assigned by the message bus or nil if the connection is not open or not a message bus connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unique_name=-instance_method" title="#unique_name= (instance method)">#<strong>unique_name=</strong>(unique_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The unique name as assigned by the message bus or nil if the connection is not open or not a message bus connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unregister_object-instance_method" title="#unregister_object (instance method)">#<strong>unregister_object</strong>(registration_id)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Unregisters an object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unregister_subtree-instance_method" title="#unregister_subtree (instance method)">#<strong>unregister_subtree</strong>(registration_id)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Unregisters a subtree.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_filter-instance_method">
+  
+    #<strong>add_filter</strong>(filter_function, user_data, user_data_free_func)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a message filter. Filters are handlers that are run on all incoming and outgoing messages, prior to standard dispatch. Filters are run in the order that they were added.  The same handler can be added as a filter more than once, in which case it will be run more than once.  Filters added during a filter callback won’t be run on the message being processed. Filter functions are allowed to modify and even drop messages.</p>
+
+<p>Note that filters are run in a dedicated message handling thread so they can’t block and, generally, can’t do anything but signal a worker thread. Also note that filters are rarely needed - use API such as g_dbus_connection_send_message_with_reply(), g_dbus_connection_signal_subscribe() or g_dbus_connection_call() instead.</p>
+
+<p>If a filter consumes an incoming message the message is not dispatched anywhere else - not even the standard dispatch machinery (that API such as g_dbus_connection_signal_subscribe() and g_dbus_connection_send_message_with_reply() relies on) will see the message. Similarly, if a filter consumes an outgoing message, the message will not be sent to the other peer.</p>
+
+<p>If <strong>user_data_free_func</strong> is non-nil, it will be called (in the thread-default main context of the thread you are calling this method from) at some point after <strong>user_data</strong> is no longer needed. (It is not guaranteed to be called synchronously when the filter is removed, and may be called after <strong>connection</strong> has been destroyed.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filter_function</span>
+      
+      
+        <span class='type'>(<tt>Gio::DBusMessageFilterFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a filter function</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data to pass to <strong>filter_function</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data_free_func</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>function to free <strong>user_data</strong> with when filter is removed or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a filter identifier that can be used with g_dbus_connection_remove_filter()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="address=-instance_method">
+  
+    #<strong>address=</strong>(address)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A D-Bus address specifying potential endpoints that can be used when establishing the connection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>address</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="authentication_observer=-instance_method">
+  
+    #<strong>authentication_observer=</strong>(authentication_observer)  &#x21d2; <tt><span class='object_link'><a href="DBusAuthObserver.html" title="Gio::DBusAuthObserver (class)">Gio::DBusAuthObserver</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A GDBus::AuthObserver object to assist in the authentication process or nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>authentication_observer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusAuthObserver.html" title="Gio::DBusAuthObserver (class)">Gio::DBusAuthObserver</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusAuthObserver.html" title="Gio::DBusAuthObserver (class)">Gio::DBusAuthObserver</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>authentication-observer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call-instance_method">
+  
+    #<strong>call</strong>(bus_name, object_path, interface_name, method_name, parameters, reply_type, flags, timeout_msec, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Asynchronously invokes the <strong>method_name</strong> method on the <strong>interface_name</strong> D-Bus interface on the remote object at <strong>object_path</strong> owned by <strong>bus_name</strong>.</p>
+
+<p>If <strong>connection</strong> is closed then the operation will fail with %G_IO_ERROR_CLOSED. If <strong>cancellable</strong> is canceled, the operation will fail with %G_IO_ERROR_CANCELLED. If <strong>parameters</strong> contains a value not compatible with the D-Bus protocol, the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
+
+<p>If <strong>reply_type</strong> is non-nil then the reply will be checked for having this type and an error will be raised if it does not match.  Said another way, if you give a <strong>reply_type</strong> then any non-nil return value will be of this type. Unless it’s %G_VARIANT_TYPE_UNIT, the <strong>reply_type</strong> will be a tuple containing one or more values.</p>
+
+<p>If the <strong>parameters</strong> #GVariant is floating, it is consumed. This allows convenient ‘inline’ use of g_variant_new(), e.g.:</p>
+
+<pre class="code ruby"><code class="ruby">g_dbus_connection_call (connection,
+                        &quot;org.freedesktop.StringThings&quot;,
+                        &quot;/org/freedesktop/StringThings&quot;,
+                        &quot;org.freedesktop.StringThings&quot;,
+                        &quot;TwoStrings&quot;,
+                        g_variant_new (&quot;(ss)&quot;,
+                                       &quot;Thing One&quot;,
+                                       &quot;Thing Two&quot;),
+                        NULL,
+                        G_DBUS_CALL_FLAGS_NONE,
+                        -1,
+                        NULL,
+                        (GAsyncReadyCallback) two_strings_done,
+                        NULL);
+</code></pre>
+
+<p>This is an asynchronous method. When the operation is finished, <strong>callback</strong> will be invoked in the</p>
+<dl class="rdoc-list label-list"><dt>thread-default main context][g-main-context-push-thread-default
+<dd>
+<p>of the thread you are calling this method from. You can then call g_dbus_connection_call_finish() to get the result of the operation. See g_dbus_connection_call_sync() for the synchronous version of this function.</p>
+
+<p>If <strong>callback</strong> is nil then the D-Bus method call message will be sent with the %G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED flag set.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bus_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a unique or well-known bus name or nil if <strong>connection</strong> is not a message bus connection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>path of remote object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>D-Bus interface to invoke method on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the method to invoke</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parameters</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GVariant tuple with parameters for the method or nil if not passing parameters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>reply_type</span>
+      
+      
+        <span class='type'>(<tt>GLib::VariantType</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the expected type of the reply (which will be a tuple), or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCallFlags.html" title="Gio::DBusCallFlags (module)">Gio::DBusCallFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags from the GDBus::CallFlags enumeration</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the timeout in milliseconds, -1 to use the default timeout or %G_MAXINT for no timeout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::ReadyCallback to call when the request is satisfied or nil if you don’t care about the result of the method invocation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the data to pass to <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call_finish-instance_method">
+  
+    #<strong>call_finish</strong>(res)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes an operation started with g_dbus_connection_call().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result obtained from the #GAsyncReadyCallback passed to g_dbus_connection_call()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil if <strong>error</strong> is set. Otherwise a #GVariant tuple with return values. Free with g_variant_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call_sync-instance_method">
+  
+    #<strong>call_sync</strong>(bus_name, object_path, interface_name, method_name, parameters, reply_type, flags, timeout_msec, cancellable)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Synchronously invokes the <strong>method_name</strong> method on the <strong>interface_name</strong> D-Bus interface on the remote object at <strong>object_path</strong> owned by <strong>bus_name</strong>.</p>
+
+<p>If <strong>connection</strong> is closed then the operation will fail with %G_IO_ERROR_CLOSED. If <strong>cancellable</strong> is canceled, the operation will fail with %G_IO_ERROR_CANCELLED. If <strong>parameters</strong> contains a value not compatible with the D-Bus protocol, the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
+
+<p>If <strong>reply_type</strong> is non-nil then the reply will be checked for having this type and an error will be raised if it does not match.  Said another way, if you give a <strong>reply_type</strong> then any non-nil return value will be of this type.</p>
+
+<p>If the <strong>parameters</strong> #GVariant is floating, it is consumed. This allows convenient ‘inline’ use of g_variant_new(), e.g.:</p>
+
+<pre class="code ruby"><code class="ruby">g_dbus_connection_call_sync (connection,
+                             &quot;org.freedesktop.StringThings&quot;,
+                             &quot;/org/freedesktop/StringThings&quot;,
+                             &quot;org.freedesktop.StringThings&quot;,
+                             &quot;TwoStrings&quot;,
+                             g_variant_new (&quot;(ss)&quot;,
+                                            &quot;Thing One&quot;,
+                                            &quot;Thing Two&quot;),
+                             NULL,
+                             G_DBUS_CALL_FLAGS_NONE,
+                             -1,
+                             NULL,
+                             &amp;error);
+</code></pre>
+
+<p>The calling thread is blocked until a reply is received. See g_dbus_connection_call() for the asynchronous version of this method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bus_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a unique or well-known bus name or nil if <strong>connection</strong> is not a message bus connection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>path of remote object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>D-Bus interface to invoke method on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the method to invoke</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parameters</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GVariant tuple with parameters for the method or nil if not passing parameters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>reply_type</span>
+      
+      
+        <span class='type'>(<tt>GLib::VariantType</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the expected type of the reply, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCallFlags.html" title="Gio::DBusCallFlags (module)">Gio::DBusCallFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags from the GDBus::CallFlags enumeration</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the timeout in milliseconds, -1 to use the default timeout or %G_MAXINT for no timeout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil if <strong>error</strong> is set. Otherwise a #GVariant tuple with return values. Free with g_variant_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call_with_unix_fd_list-instance_method">
+  
+    #<strong>call_with_unix_fd_list</strong>(bus_name, object_path, interface_name, method_name, parameters, reply_type, flags, timeout_msec, fd_list, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Like g_dbus_connection_call() but also takes a GUnix::FDList object.</p>
+
+<p>This method is only available on UNIX.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bus_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a unique or well-known bus name or nil if <strong>connection</strong> is not a message bus connection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>path of remote object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>D-Bus interface to invoke method on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the method to invoke</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parameters</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GVariant tuple with parameters for the method or nil if not passing parameters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>reply_type</span>
+      
+      
+        <span class='type'>(<tt>GLib::VariantType</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the expected type of the reply, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCallFlags.html" title="Gio::DBusCallFlags (module)">Gio::DBusCallFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags from the GDBus::CallFlags enumeration</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the timeout in milliseconds, -1 to use the default timeout or %G_MAXINT for no timeout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fd_list</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="UnixFDList.html" title="Gio::UnixFDList (class)">Gio::UnixFDList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GUnix::FDList or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::ReadyCallback to call when the request is satisfied or nil if you don’t * care about the result of the method invocation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The data to pass to <strong>callback</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call_with_unix_fd_list_finish-instance_method">
+  
+    #<strong>call_with_unix_fd_list_finish</strong>(out_fd_list, res)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes an operation started with g_dbus_connection_call_with_unix_fd_list().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>out_fd_list</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="UnixFDList.html" title="Gio::UnixFDList (class)">Gio::UnixFDList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for a GUnix::FDList or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result obtained from the #GAsyncReadyCallback passed to g_dbus_connection_call_with_unix_fd_list()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil if <strong>error</strong> is set. Otherwise a #GVariant tuple with return values. Free with g_variant_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call_with_unix_fd_list_sync-instance_method">
+  
+    #<strong>call_with_unix_fd_list_sync</strong>(bus_name, object_path, interface_name, method_name, parameters, reply_type, flags, timeout_msec, fd_list, out_fd_list, cancellable)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Like g_dbus_connection_call_sync() but also takes and returns GUnix::FDList objects.</p>
+
+<p>This method is only available on UNIX.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bus_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a unique or well-known bus name or nil if <strong>connection</strong> is not a message bus connection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>path of remote object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>D-Bus interface to invoke method on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the method to invoke</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parameters</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GVariant tuple with parameters for the method or nil if not passing parameters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>reply_type</span>
+      
+      
+        <span class='type'>(<tt>GLib::VariantType</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the expected type of the reply, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCallFlags.html" title="Gio::DBusCallFlags (module)">Gio::DBusCallFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags from the GDBus::CallFlags enumeration</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the timeout in milliseconds, -1 to use the default timeout or %G_MAXINT for no timeout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fd_list</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="UnixFDList.html" title="Gio::UnixFDList (class)">Gio::UnixFDList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GUnix::FDList or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_fd_list</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="UnixFDList.html" title="Gio::UnixFDList (class)">Gio::UnixFDList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for a GUnix::FDList or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil if <strong>error</strong> is set. Otherwise a #GVariant tuple with return values. Free with g_variant_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="capabilities-instance_method">
+  
+    #<strong>capabilities</strong>  &#x21d2; <tt><span class='object_link'><a href="DBusCapabilityFlags.html" title="Gio::DBusCapabilityFlags (module)">Gio::DBusCapabilityFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Flags from the GDBus::CapabilityFlags enumeration representing connection features negotiated with the other peer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCapabilityFlags.html" title="Gio::DBusCapabilityFlags (module)">Gio::DBusCapabilityFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>capabilities</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="capabilities=-instance_method">
+  
+    #<strong>capabilities=</strong>(capabilities)  &#x21d2; <tt><span class='object_link'><a href="DBusCapabilityFlags.html" title="Gio::DBusCapabilityFlags (module)">Gio::DBusCapabilityFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Flags from the GDBus::CapabilityFlags enumeration representing connection features negotiated with the other peer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>capabilities</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCapabilityFlags.html" title="Gio::DBusCapabilityFlags (module)">Gio::DBusCapabilityFlags</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCapabilityFlags.html" title="Gio::DBusCapabilityFlags (module)">Gio::DBusCapabilityFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>capabilities</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCapabilityFlags.html" title="Gio::DBusCapabilityFlags (module)">Gio::DBusCapabilityFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>capabilities</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close-instance_method">
+  
+    #<strong>close</strong>(cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Closes <strong>connection</strong>. Note that this never causes the process to exit (this might only happen if the other end of a shared message bus connection disconnects, see GDBus::Connection:exit-on-close).</p>
+
+<p>Once the connection is closed, operations such as sending a message will return with the error %G_IO_ERROR_CLOSED. Closing a connection will not automatically flush the connection so queued messages may be lost. Use g_dbus_connection_flush() if you need such guarantees.</p>
+
+<p>If <strong>connection</strong> is already closed, this method fails with %G_IO_ERROR_CLOSED.</p>
+
+<p>When <strong>connection</strong> has been closed, the GDBus::Connection::closed signal is emitted in the</p>
+<dl class="rdoc-list label-list"><dt>thread-default main context][g-main-context-push-thread-default
+<dd>
+<p>of the thread that <strong>connection</strong> was constructed in.</p>
+
+<p>This is an asynchronous method. When the operation is finished, <strong>callback</strong> will be invoked in the</p>
+<dl class="rdoc-list label-list"><dt>thread-default main context][g-main-context-push-thread-default
+<dd>
+<p>of the thread you are calling this method from. You can then call g_dbus_connection_close_finish() to get the result of the operation. See g_dbus_connection_close_sync() for the synchronous version.</p>
+</dd></dl>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::ReadyCallback to call when the request is satisfied or nil if you don’t care about the result</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The data to pass to <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_finish-instance_method">
+  
+    #<strong>close_finish</strong>(res)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes an operation started with g_dbus_connection_close().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result obtained from the #GAsyncReadyCallback passed to g_dbus_connection_close()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the operation succeeded, false if <strong>error</strong> is set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_sync-instance_method">
+  
+    #<strong>close_sync</strong>(cancellable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Synchronously closes <strong>connection</strong>. The calling thread is blocked until this is done. See g_dbus_connection_close() for the asynchronous version of this method and more details about what it does.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the operation succeeded, false if <strong>error</strong> is set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="closed=-instance_method">
+  
+    #<strong>closed=</strong>(closed)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A boolean specifying whether the connection has been closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>closed</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>closed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>closed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="closed?-instance_method">
+  
+    #<strong>closed?</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A boolean specifying whether the connection has been closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>closed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="emit_signal-instance_method">
+  
+    #<strong>emit_signal</strong>(destination_bus_name, object_path, interface_name, signal_name, parameters)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Emits a signal.</p>
+
+<p>If the parameters GVariant is floating, it is consumed.</p>
+
+<p>This can only fail if <strong>parameters</strong> is not compatible with the D-Bus protocol (%G_IO_ERROR_INVALID_ARGUMENT), or if <strong>connection</strong> has been closed (%G_IO_ERROR_CLOSED).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>destination_bus_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the unique bus name for the destination for the signal or nil to emit to all listeners</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>path of remote object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>D-Bus interface to emit a signal on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>signal_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the signal to emit</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parameters</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GVariant tuple with parameters for the signal or nil if not passing parameters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true unless <strong>error</strong> is set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exit_on_close-instance_method">
+  
+    #<strong>exit_on_close</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets whether the process is terminated when <strong>connection</strong> is closed by the remote peer. See GDBus::Connection:exit-on-close for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the process is terminated when <strong>connection</strong> is closed by the remote peer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exit_on_close=-instance_method">
+  
+    #<strong>exit_on_close=</strong>(exit_on_close)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A boolean specifying whether the process will be terminated (by calling ‘raise(SIGTERM)`) if the connection is closed by the remote peer.</p>
+
+<p>Note that GDBus::Connection objects returned by g_bus_get_finish() and g_bus_get_sync() will (usually) have this property set to true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>exit_on_close</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>exit-on-close</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>exit-on-close</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exit_on_close?-instance_method">
+  
+    #<strong>exit_on_close?</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A boolean specifying whether the process will be terminated (by calling ‘raise(SIGTERM)`) if the connection is closed by the remote peer.</p>
+
+<p>Note that GDBus::Connection objects returned by g_bus_get_finish() and g_bus_get_sync() will (usually) have this property set to true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>exit-on-close</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="export_action_group-instance_method">
+  
+    #<strong>export_action_group</strong>(object_path, action_group)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Exports <strong>action_group</strong> on <strong>connection</strong> at <strong>object_path</strong>.</p>
+
+<p>The implemented D-Bus API should be considered private.  It is subject to change in the future.</p>
+
+<p>A given object path can only have one action group exported on it. If this constraint is violated, the export will fail and 0 will be returned (with <strong>error</strong> set accordingly).</p>
+
+<p>You can unexport the action group using g_dbus_connection_unexport_action_group() with the return value of this function.</p>
+
+<p>The thread default main context is taken at the time of this call. All incoming action activations and state change requests are reported from this context.  Any changes on the action group that cause it to emit signals must also come from this same context. Since incoming action activations and state change requests are rather likely to cause changes on the action group, this effectively limits a given action group to being exported from only one main context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a D-Bus object path</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>action_group</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ActionGroup.html" title="Gio::ActionGroup (module)">Gio::ActionGroup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAction::Group</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ID of the export (never zero), or 0 in case of failure</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="export_menu_model-instance_method">
+  
+    #<strong>export_menu_model</strong>(object_path, menu)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Exports <strong>menu</strong> on <strong>connection</strong> at <strong>object_path</strong>.</p>
+
+<p>The implemented D-Bus API should be considered private. It is subject to change in the future.</p>
+
+<p>An object path can only have one menu model exported on it. If this constraint is violated, the export will fail and 0 will be returned (with <strong>error</strong> set accordingly).</p>
+
+<p>You can unexport the menu model using g_dbus_connection_unexport_menu_model() with the return value of this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a D-Bus object path</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>menu</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MenuModel.html" title="Gio::MenuModel (class)">Gio::MenuModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GMenu::Model</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ID of the export (never zero), or 0 in case of failure</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flags-instance_method">
+  
+    #<strong>flags</strong>  &#x21d2; <tt><span class='object_link'><a href="DBusConnectionFlags.html" title="Gio::DBusConnectionFlags (module)">Gio::DBusConnectionFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Flags from the GDBus::ConnectionFlags enumeration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnectionFlags.html" title="Gio::DBusConnectionFlags (module)">Gio::DBusConnectionFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flags=-instance_method">
+  
+    #<strong>flags=</strong>(flags)  &#x21d2; <tt><span class='object_link'><a href="DBusConnectionFlags.html" title="Gio::DBusConnectionFlags (module)">Gio::DBusConnectionFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Flags from the GDBus::ConnectionFlags enumeration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnectionFlags.html" title="Gio::DBusConnectionFlags (module)">Gio::DBusConnectionFlags</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnectionFlags.html" title="Gio::DBusConnectionFlags (module)">Gio::DBusConnectionFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnectionFlags.html" title="Gio::DBusConnectionFlags (module)">Gio::DBusConnectionFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flush-instance_method">
+  
+    #<strong>flush</strong>(cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Asynchronously flushes <strong>connection</strong>, that is, writes all queued outgoing message to the transport and then flushes the transport (using g_output_stream_flush_async()). This is useful in programs that wants to emit a D-Bus signal and then exit immediately. Without flushing the connection, there is no guaranteed that the message has been sent to the networking buffers in the OS kernel.</p>
+
+<p>This is an asynchronous method. When the operation is finished, <strong>callback</strong> will be invoked in the</p>
+<dl class="rdoc-list label-list"><dt>thread-default main context][g-main-context-push-thread-default
+<dd>
+<p>of the thread you are calling this method from. You can then call g_dbus_connection_flush_finish() to get the result of the operation. See g_dbus_connection_flush_sync() for the synchronous version.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::ReadyCallback to call when the request is satisfied or nil if you don’t care about the result</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The data to pass to <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flush_finish-instance_method">
+  
+    #<strong>flush_finish</strong>(res)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes an operation started with g_dbus_connection_flush().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result obtained from the #GAsyncReadyCallback passed to g_dbus_connection_flush()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the operation succeeded, false if <strong>error</strong> is set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flush_sync-instance_method">
+  
+    #<strong>flush_sync</strong>(cancellable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Synchronously flushes <strong>connection</strong>. The calling thread is blocked until this is done. See g_dbus_connection_flush() for the asynchronous version of this method and more details about what it does.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the operation succeeded, false if <strong>error</strong> is set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="guid-instance_method">
+  
+    #<strong>guid</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The GUID of the peer performing the role of server when authenticating.</p>
+
+<p>If you are constructing a GDBus::Connection and pass %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER in the GDBus::Connection:flags property then you MUST also set this property to a valid guid.</p>
+
+<p>If you are constructing a GDBus::Connection and pass %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT in the GDBus::Connection:flags property you will be able to read the GUID of the other peer here after the connection has been successfully initialized.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>guid</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="guid=-instance_method">
+  
+    #<strong>guid=</strong>(guid)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The GUID of the peer performing the role of server when authenticating.</p>
+
+<p>If you are constructing a GDBus::Connection and pass %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER in the GDBus::Connection:flags property then you MUST also set this property to a valid guid.</p>
+
+<p>If you are constructing a GDBus::Connection and pass %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT in the GDBus::Connection:flags property you will be able to read the GUID of the other peer here after the connection has been successfully initialized.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>guid</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>guid</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>guid</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_closed-instance_method">
+  
+    #<strong>is_closed</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets whether <strong>connection</strong> is closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the connection is closed, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="last_serial-instance_method">
+  
+    #<strong>last_serial</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the last serial number assigned to a GDBus::Message on the current thread. This includes messages sent via both low-level API such as g_dbus_connection_send_message() as well as high-level API such as g_dbus_connection_emit_signal(), g_dbus_connection_call() or g_dbus_proxy_call().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the last used serial or zero when no message has been sent within the current thread</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_finish-instance_method">
+  
+    #<strong>new_finish</strong>(res)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes an operation started with g_dbus_connection_new().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result obtained from the #GAsyncReadyCallback passed to g_dbus_connection_new().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDBus::Connection or nil if <strong>error</strong> is set. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_for_address_finish-instance_method">
+  
+    #<strong>new_for_address_finish</strong>(res)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes an operation started with g_dbus_connection_new_for_address().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result obtained from the #GAsyncReadyCallback passed to g_dbus_connection_new()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDBus::Connection or nil if <strong>error</strong> is set. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_for_address_sync-instance_method">
+  
+    #<strong>new_for_address_sync</strong>(address, flags, observer, cancellable)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Synchronously connects and sets up a D-Bus client connection for exchanging D-Bus messages with an endpoint specified by <strong>address</strong> which must be in the [D-Bus address format](<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#addresses">dbus.freedesktop.org/doc/dbus-specification.html#addresses</a>).</p>
+
+<p>This constructor can only be used to initiate client-side connections - use g_dbus_connection_new_sync() if you need to act as the server. In particular, <strong>flags</strong> cannot contain the %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER or %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS flags.</p>
+
+<p>This is a synchronous failable constructor. See g_dbus_connection_new_for_address() for the asynchronous version.</p>
+
+<p>If <strong>observer</strong> is not nil it may be used to control the authentication process.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a D-Bus address</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnectionFlags.html" title="Gio::DBusConnectionFlags (module)">Gio::DBusConnectionFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags describing how to make the connection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>observer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusAuthObserver.html" title="Gio::DBusAuthObserver (class)">Gio::DBusAuthObserver</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDBus::AuthObserver or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDBus::Connection or nil if <strong>error</strong> is set. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_sync-instance_method">
+  
+    #<strong>new_sync</strong>(stream, guid, flags, observer, cancellable)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Synchronously sets up a D-Bus connection for exchanging D-Bus messages with the end represented by <strong>stream</strong>.</p>
+
+<p>If <strong>stream</strong> is a GSocket::Connection, then the corresponding #GSocket will be put into non-blocking mode.</p>
+
+<p>The D-Bus connection will interact with <strong>stream</strong> from a worker thread. As a result, the caller should not interact with <strong>stream</strong> after this method has been called, except by calling g_object_unref() on it.</p>
+
+<p>If <strong>observer</strong> is not nil it may be used to control the authentication process.</p>
+
+<p>This is a synchronous failable constructor. See g_dbus_connection_new() for the asynchronous version.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>stream</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="IOStream.html" title="Gio::IOStream (class)">Gio::IOStream</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GIOStream</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>guid</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the GUID to use if authenticating as a server or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnectionFlags.html" title="Gio::DBusConnectionFlags (module)">Gio::DBusConnectionFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags describing how to make the connection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>observer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusAuthObserver.html" title="Gio::DBusAuthObserver (class)">Gio::DBusAuthObserver</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDBus::AuthObserver or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDBus::Connection or nil if <strong>error</strong> is set. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peer_credentials-instance_method">
+  
+    #<strong>peer_credentials</strong>  &#x21d2; <tt><span class='object_link'><a href="Credentials.html" title="Gio::Credentials (class)">Gio::Credentials</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the credentials of the authenticated peer. This will always return nil unless <strong>connection</strong> acted as a server (e.g. %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER was passed) when set up and the client passed credentials as part of the authentication process.</p>
+
+<p>In a message bus setup, the message bus is always the server and each application is a client. So this method will always return nil for message bus clients.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Credentials.html" title="Gio::Credentials (class)">Gio::Credentials</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCredentials or nil if not available. Do not free this object, it is owned by <strong>connection</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_object-instance_method">
+  
+    #<strong>register_object</strong>(object_path, interface_info, vtable, user_data, user_data_free_func)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Registers callbacks for exported objects at <strong>object_path</strong> with the D-Bus interface that is described in <strong>interface_info</strong>.</p>
+
+<p>Calls to functions in <strong>vtable</strong> (and <strong>user_data_free_func</strong>) will happen in the</p>
+<dl class="rdoc-list label-list"><dt>thread-default main context][g-main-context-push-thread-default
+<dd>
+<p>of the thread you are calling this method from.</p>
+
+<p>Note that all #GVariant values passed to functions in <strong>vtable</strong> will match the signature given in <strong>interface_info</strong> - if a remote caller passes incorrect values, the ‘org.freedesktop.DBus.Error.InvalidArgs` is returned to the remote caller.</p>
+
+<p>Additionally, if the remote caller attempts to invoke methods or access properties not mentioned in <strong>interface_info</strong> the ‘org.freedesktop.DBus.Error.UnknownMethod` resp. `org.freedesktop.DBus.Error.InvalidArgs` errors are returned to the caller.</p>
+
+<p>It is considered a programming error if the GDBus::InterfaceGetPropertyFunc function in <strong>vtable</strong> returns a #GVariant of incorrect type.</p>
+
+<p>If an existing callback is already registered at <strong>object_path</strong> and <strong>interface_name</strong>, then <strong>error</strong> is set to #G_IO_ERROR_EXISTS.</p>
+
+<p>GDBus automatically implements the standard D-Bus interfaces org.freedesktop.DBus.Properties, org.freedesktop.DBus.Introspectable and org.freedesktop.Peer, so you don’t have to implement those for the objects you export. You can implement org.freedesktop.DBus.Properties yourself, e.g. to handle getting and setting of properties asynchronously.</p>
+
+<p>Note that the reference count on <strong>interface_info</strong> will be incremented by 1 (unless allocated statically, e.g. if the reference count is -1, see g_dbus_interface_info_ref()) for as long as the object is exported. Also note that <strong>vtable</strong> will be copied.</p>
+
+<p>See this [<a href="gdbus-server">server]</a> for an example of how to use this method.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the object path to register at</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_info</span>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>introspection data for the interface</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>vtable</span>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceVTable</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDBus::InterfaceVTable to call into or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>data to pass to functions in <strong>vtable</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data_free_func</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>function to call when the object path is unregistered</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>0 if <strong>error</strong> is set, otherwise a registration id (never 0) that can be used with g_dbus_connection_unregister_object()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_object_with_closures-instance_method">
+  
+    #<strong>register_object_with_closures</strong>(object_path, interface_info, method_call_closure, get_property_closure, set_property_closure)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Version of g_dbus_connection_register_object() using closures instead of a GDBus::InterfaceVTable for easier binding in other languages. that can be used with g_dbus_connection_unregister_object() .</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The object path to register at.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_info</span>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Introspection data for the interface.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>method_call_closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>#GClosure for handling incoming method calls.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>get_property_closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>#GClosure for getting a property.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>set_property_closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>#GClosure for setting a property.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>0 if <strong>error</strong> is set, otherwise a registration id (never 0)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_subtree-instance_method">
+  
+    #<strong>register_subtree</strong>(object_path, vtable, flags, user_data, user_data_free_func)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Registers a whole subtree of dynamic objects.</p>
+
+<p>The <strong>enumerate</strong> and <strong>introspection</strong> functions in <strong>vtable</strong> are used to convey, to remote callers, what nodes exist in the subtree rooted by <strong>object_path</strong>.</p>
+
+<p>When handling remote calls into any node in the subtree, first the <strong>enumerate</strong> function is used to check if the node exists. If the node exists or the #G_DBUS_SUBTREE_FLAGS_DISPATCH_TO_UNENUMERATED_NODES flag is set the <strong>introspection</strong> function is used to check if the node supports the requested method. If so, the <strong>dispatch</strong> function is used to determine where to dispatch the call. The collected GDBus::InterfaceVTable and #gpointer will be used to call into the interface vtable for processing the request.</p>
+
+<p>All calls into user-provided code will be invoked in the</p>
+<dl class="rdoc-list label-list"><dt>thread-default main context][g-main-context-push-thread-default
+<dd>
+<p>of the thread you are calling this method from.</p>
+
+<p>If an existing subtree is already registered at <strong>object_path</strong> or then <strong>error</strong> is set to #G_IO_ERROR_EXISTS.</p>
+
+<p>Note that it is valid to register regular objects (using g_dbus_connection_register_object()) in a subtree registered with g_dbus_connection_register_subtree() - if so, the subtree handler is tried as the last resort. One way to think about a subtree handler is to consider it a fallback handler for object paths not registered via g_dbus_connection_register_object() or other bindings.</p>
+
+<p>Note that <strong>vtable</strong> will be copied so you cannot change it after registration.</p>
+
+<p>See this [<a href="gdbus-subtree-server">server]</a> for an example of how to use this method. that can be used with g_dbus_connection_unregister_subtree() .</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the object path to register the subtree at</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>vtable</span>
+      
+      
+        <span class='type'>(<tt>Gio::DBusSubtreeVTable</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDBus::SubtreeVTable to enumerate, introspect and dispatch nodes in the subtree</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusSubtreeFlags.html" title="Gio::DBusSubtreeFlags (module)">Gio::DBusSubtreeFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags used to fine tune the behavior of the subtree</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>data to pass to functions in <strong>vtable</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data_free_func</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>function to call when the subtree is unregistered</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>0 if <strong>error</strong> is set, otherwise a subtree registration id (never 0)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_filter-instance_method">
+  
+    #<strong>remove_filter</strong>(filter_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes a filter.</p>
+
+<p>Note that since filters run in a different thread, there is a race condition where it is possible that the filter will be running even after calling g_dbus_connection_remove_filter(), so you cannot just free data that the filter might be using. Instead, you should pass a GDestroy::Notify to g_dbus_connection_add_filter(), which will be called when it is guaranteed that the data is no longer needed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filter_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an identifier obtained from g_dbus_connection_add_filter()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_message-instance_method">
+  
+    #<strong>send_message</strong>(message, flags, out_serial)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Asynchronously sends <strong>message</strong> to the peer represented by <strong>connection</strong>.</p>
+
+<p>Unless <strong>flags</strong> contain the %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number will be assigned by <strong>connection</strong> and set on <strong>message</strong> via g_dbus_message_set_serial(). If <strong>out_serial</strong> is not nil, then the serial number used will be written to this location prior to submitting the message to the underlying transport.</p>
+
+<p>If <strong>connection</strong> is closed then the operation will fail with %G_IO_ERROR_CLOSED. If <strong>message</strong> is not well-formed, the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
+
+<p>See this [<a href="gdbus-server">server]</a> and [<a href="gdbus-unix-fd-client">client]</a> for an example of how to use this low-level API to send and receive UNIX file descriptors.</p>
+
+<p>Note that <strong>message</strong> must be unlocked, unless <strong>flags</strong> contain the %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusMessage.html" title="Gio::DBusMessage (class)">Gio::DBusMessage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDBus::Message</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusSendMessageFlags.html" title="Gio::DBusSendMessageFlags (module)">Gio::DBusSendMessageFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags affecting how the message is sent</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_serial</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for serial number assigned to <strong>message</strong> when sending it or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the message was well-formed and queued for transmission, false if <strong>error</strong> is set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_message_with_reply-instance_method">
+  
+    #<strong>send_message_with_reply</strong>(message, flags, timeout_msec, out_serial, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Asynchronously sends <strong>message</strong> to the peer represented by <strong>connection</strong>.</p>
+
+<p>Unless <strong>flags</strong> contain the %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number will be assigned by <strong>connection</strong> and set on <strong>message</strong> via g_dbus_message_set_serial(). If <strong>out_serial</strong> is not nil, then the serial number used will be written to this location prior to submitting the message to the underlying transport.</p>
+
+<p>If <strong>connection</strong> is closed then the operation will fail with %G_IO_ERROR_CLOSED. If <strong>cancellable</strong> is canceled, the operation will fail with %G_IO_ERROR_CANCELLED. If <strong>message</strong> is not well-formed, the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
+
+<p>This is an asynchronous method. When the operation is finished, <strong>callback</strong> will be invoked in the</p>
+<dl class="rdoc-list label-list"><dt>thread-default main context][g-main-context-push-thread-default
+<dd>
+<p>of the thread you are calling this method from. You can then call g_dbus_connection_send_message_with_reply_finish() to get the result of the operation. See g_dbus_connection_send_message_with_reply_sync() for the synchronous version.</p>
+
+<p>Note that <strong>message</strong> must be unlocked, unless <strong>flags</strong> contain the %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.</p>
+
+<p>See this [<a href="gdbus-server">server]</a> and [<a href="gdbus-unix-fd-client">client]</a> for an example of how to use this low-level API to send and receive UNIX file descriptors.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusMessage.html" title="Gio::DBusMessage (class)">Gio::DBusMessage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDBus::Message</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusSendMessageFlags.html" title="Gio::DBusSendMessageFlags (module)">Gio::DBusSendMessageFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags affecting how the message is sent</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the timeout in milliseconds, -1 to use the default timeout or %G_MAXINT for no timeout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_serial</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for serial number assigned to <strong>message</strong> when sending it or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::ReadyCallback to call when the request is satisfied or nil if you don’t care about the result</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The data to pass to <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_message_with_reply_finish-instance_method">
+  
+    #<strong>send_message_with_reply_finish</strong>(res)  &#x21d2; <tt><span class='object_link'><a href="DBusMessage.html" title="Gio::DBusMessage (class)">Gio::DBusMessage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes an operation started with g_dbus_connection_send_message_with_reply().</p>
+
+<p>Note that <strong>error</strong> is only set if a local in-process error occurred. That is to say that the returned GDBus::Message object may be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use g_dbus_message_to_gerror() to transcode this to a #GError.</p>
+
+<p>See this [<a href="gdbus-server">server]</a> and [<a href="gdbus-unix-fd-client">client]</a> for an example of how to use this low-level API to send and receive UNIX file descriptors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result obtained from the #GAsyncReadyCallback passed to g_dbus_connection_send_message_with_reply()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusMessage.html" title="Gio::DBusMessage (class)">Gio::DBusMessage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a locked GDBus::Message or nil if <strong>error</strong> is set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_message_with_reply_sync-instance_method">
+  
+    #<strong>send_message_with_reply_sync</strong>(message, flags, timeout_msec, out_serial, cancellable)  &#x21d2; <tt><span class='object_link'><a href="DBusMessage.html" title="Gio::DBusMessage (class)">Gio::DBusMessage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Synchronously sends <strong>message</strong> to the peer represented by <strong>connection</strong> and blocks the calling thread until a reply is received or the timeout is reached. See g_dbus_connection_send_message_with_reply() for the asynchronous version of this method.</p>
+
+<p>Unless <strong>flags</strong> contain the %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number will be assigned by <strong>connection</strong> and set on <strong>message</strong> via g_dbus_message_set_serial(). If <strong>out_serial</strong> is not nil, then the serial number used will be written to this location prior to submitting the message to the underlying transport.</p>
+
+<p>If <strong>connection</strong> is closed then the operation will fail with %G_IO_ERROR_CLOSED. If <strong>cancellable</strong> is canceled, the operation will fail with %G_IO_ERROR_CANCELLED. If <strong>message</strong> is not well-formed, the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
+
+<p>Note that <strong>error</strong> is only set if a local in-process error occurred. That is to say that the returned GDBus::Message object may be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use g_dbus_message_to_gerror() to transcode this to a #GError.</p>
+
+<p>See this [<a href="gdbus-server">server]</a> and [<a href="gdbus-unix-fd-client">client]</a> for an example of how to use this low-level API to send and receive UNIX file descriptors.</p>
+
+<p>Note that <strong>message</strong> must be unlocked, unless <strong>flags</strong> contain the %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusMessage.html" title="Gio::DBusMessage (class)">Gio::DBusMessage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDBus::Message</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusSendMessageFlags.html" title="Gio::DBusSendMessageFlags (module)">Gio::DBusSendMessageFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags affecting how the message is sent.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the timeout in milliseconds, -1 to use the default timeout or %G_MAXINT for no timeout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_serial</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for serial number assigned to <strong>message</strong> when sending it or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusMessage.html" title="Gio::DBusMessage (class)">Gio::DBusMessage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a locked GDBus::Message that is the reply to <strong>message</strong> or nil if <strong>error</strong> is set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="signal_subscribe-instance_method">
+  
+    #<strong>signal_subscribe</strong>(sender, interface_name, member, object_path, arg0, flags, callback, user_data, user_data_free_func)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Subscribes to signals on <strong>connection</strong> and invokes <strong>callback</strong> with a whenever the signal is received. Note that <strong>callback</strong> will be invoked in the</p>
+<dl class="rdoc-list label-list"><dt>thread-default main context][g-main-context-push-thread-default
+<dd>
+<p>of the thread you are calling this method from.</p>
+
+<p>If <strong>connection</strong> is not a message bus connection, <strong>sender</strong> must be nil.</p>
+
+<p>If <strong>sender</strong> is a well-known name note that <strong>callback</strong> is invoked with the unique name for the owner of <strong>sender</strong>, not the well-known name as one would expect. This is because the message bus rewrites the name. As such, to avoid certain race conditions, users should be tracking the name owner of the well-known name and use that when processing the received signal.</p>
+
+<p>If one of %G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_NAMESPACE or %G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_PATH are given, <strong>arg0</strong> is interpreted as part of a namespace or path.  The first argument of a signal is matched against that part as specified by D-Bus.</p>
+
+<p>If <strong>user_data_free_func</strong> is non-nil, it will be called (in the thread-default main context of the thread you are calling this method from) at some point after <strong>user_data</strong> is no longer needed. (It is not guaranteed to be called synchronously when the signal is unsubscribed from, and may be called after <strong>connection</strong> has been destroyed.)</p>
+
+<p>As <strong>callback</strong> is potentially invoked in a different thread from where it’s emitted, it’s possible for this to happen after g_dbus_connection_signal_unsubscribe() has been called in another thread. Due to this, <strong>user_data</strong> should have a strong reference which is freed with <strong>user_data_free_func</strong>, rather than pointing to data whose lifecycle is tied to the signal subscription. For example, if a #GObject is used to store the subscription ID from g_dbus_connection_signal_subscribe(), a strong reference to that #GObject must be passed to <strong>user_data</strong>, and g_object_unref() passed to <strong>user_data_free_func</strong>. You are responsible for breaking the resulting reference count cycle by explicitly unsubscribing from the signal when dropping the last external reference to the #GObject. Alternatively, a weak reference may be used.</p>
+
+<p>It is guaranteed that if you unsubscribe from a signal using g_dbus_connection_signal_unsubscribe() from the same thread which made the corresponding g_dbus_connection_signal_subscribe() call, <strong>callback</strong> will not be invoked after g_dbus_connection_signal_unsubscribe() returns.</p>
+
+<p>The returned subscription identifier is an opaque value which is guaranteed to never be zero.</p>
+
+<p>This function can never fail.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sender</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>sender name to match on (unique or well-known name) or nil to listen from all senders</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>D-Bus interface name to match on or nil to match on all interfaces</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>member</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>D-Bus signal name to match on or nil to match on all signals</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>object path to match on or nil to match on all object paths</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>arg0</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>contents of first string argument to match on or nil to match on all kinds of arguments</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusSignalFlags.html" title="Gio::DBusSignalFlags (module)">Gio::DBusSignalFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>GDBus::SignalFlags describing how arg0 is used in subscribing to the signal</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::DBusSignalCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>callback to invoke when there is a signal matching the requested data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data to pass to <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data_free_func</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>function to free <strong>user_data</strong> with when subscription is removed or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a subscription identifier that can be used with g_dbus_connection_signal_unsubscribe()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="signal_unsubscribe-instance_method">
+  
+    #<strong>signal_unsubscribe</strong>(subscription_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Unsubscribes from signals.</p>
+
+<p>Note that there may still be D-Bus traffic to process (relating to this signal subscription) in the current thread-default GMain::Context after this function has returned. You should continue to iterate the GMain::Context until the GDestroy::Notify function passed to g_dbus_connection_signal_subscribe() is called, in order to avoid memory leaks through callbacks queued on the GMain::Context after it’s stopped being iterated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>subscription_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a subscription id obtained from g_dbus_connection_signal_subscribe()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="start_message_processing-instance_method">
+  
+    #<strong>start_message_processing</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If <strong>connection</strong> was created with %G_DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING, this method starts processing messages. Does nothing on if <strong>connection</strong> wasn’t created with this flag or if the method has already been called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stream-instance_method">
+  
+    #<strong>stream</strong>  &#x21d2; <tt><span class='object_link'><a href="IOStream.html" title="Gio::IOStream (class)">Gio::IOStream</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The underlying #GIOStream used for I/O.</p>
+
+<p>If this is passed on construction and is a GSocket::Connection, then the corresponding #GSocket will be put into non-blocking mode.</p>
+
+<p>While the GDBus::Connection is active, it will interact with this stream from a worker thread, so it is not safe to interact with the stream directly.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="IOStream.html" title="Gio::IOStream (class)">Gio::IOStream</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>stream</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stream=-instance_method">
+  
+    #<strong>stream=</strong>(stream)  &#x21d2; <tt><span class='object_link'><a href="IOStream.html" title="Gio::IOStream (class)">Gio::IOStream</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The underlying #GIOStream used for I/O.</p>
+
+<p>If this is passed on construction and is a GSocket::Connection, then the corresponding #GSocket will be put into non-blocking mode.</p>
+
+<p>While the GDBus::Connection is active, it will interact with this stream from a worker thread, so it is not safe to interact with the stream directly.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>stream</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="IOStream.html" title="Gio::IOStream (class)">Gio::IOStream</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="IOStream.html" title="Gio::IOStream (class)">Gio::IOStream</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>stream</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="IOStream.html" title="Gio::IOStream (class)">Gio::IOStream</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>stream</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unexport_action_group-instance_method">
+  
+    #<strong>unexport_action_group</strong>(export_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reverses the effect of a previous call to g_dbus_connection_export_action_group().</p>
+
+<p>It is an error to call this function with an ID that wasn’t returned from g_dbus_connection_export_action_group() or to call it with the same ID more than once.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>export_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ID from g_dbus_connection_export_action_group()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unexport_menu_model-instance_method">
+  
+    #<strong>unexport_menu_model</strong>(export_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reverses the effect of a previous call to g_dbus_connection_export_menu_model().</p>
+
+<p>It is an error to call this function with an ID that wasn’t returned from g_dbus_connection_export_menu_model() or to call it with the same ID more than once.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>export_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ID from g_dbus_connection_export_menu_model()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unique_name-instance_method">
+  
+    #<strong>unique_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The unique name as assigned by the message bus or nil if the connection is not open or not a message bus connection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>unique-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unique_name=-instance_method">
+  
+    #<strong>unique_name=</strong>(unique_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The unique name as assigned by the message bus or nil if the connection is not open or not a message bus connection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unique_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>unique-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>unique-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unregister_object-instance_method">
+  
+    #<strong>unregister_object</strong>(registration_id)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Unregisters an object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>registration_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a registration id obtained from g_dbus_connection_register_object()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the object was unregistered, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unregister_subtree-instance_method">
+  
+    #<strong>unregister_subtree</strong>(registration_id)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Unregisters a subtree.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>registration_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a subtree registration id obtained from g_dbus_connection_register_subtree()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the subtree was unregistered, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:02 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

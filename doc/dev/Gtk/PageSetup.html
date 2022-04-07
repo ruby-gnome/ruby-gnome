@@ -1,0 +1,2453 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::PageSetup
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::PageSetup";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">PageSetup</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::PageSetup
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::PageSetup</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A GtkPageSetup object stores the page size, orientation and margins. The idea is that you can get one of these from the page setup dialog and then pass it to the Gtk::PrintOperation when printing. The benefit of splitting this out of the Gtk::PrintSettings is that these affect the actual layout of the page, and thus need to be set long before user prints.</p>
+
+<p>## Margins ## #print-margins The margins specified in this object are the “print margins”, i.e. the parts of the page that the printer cannot print on. These are different from the layout margins that a word processor uses; they are typically used to determine the minimal size for the layout margins.</p>
+
+<p>To obtain a Gtk::PageSetup use gtk_page_setup_new() to get the defaults, or use gtk_print_run_page_setup_dialog() to show the page setup dialog and receive the resulting page setup.</p>
+
+<p>## A page setup dialog</p>
+
+<pre class="code ruby"><code class="ruby">static GtkPrintSettings *settings = NULL;
+static GtkPageSetup *page_setup = NULL;
+
+static void
+do_page_setup (void)
+{
+  GtkPageSetup *new_page_setup;
+
+  if (settings == NULL)
+    settings = gtk_print_settings_new ();
+
+  new_page_setup = gtk_print_run_page_setup_dialog (GTK_WINDOW (main_window),
+                                                    page_setup, settings);
+
+  if (page_setup)
+    g_object_unref (page_setup);
+
+  page_setup = new_page_setup;
+}
+</code></pre>
+
+<p>Printing support was added in GTK+ 2.10.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy-instance_method" title="#copy (instance method)">#<strong>copy</strong>  &#x21d2; Gtk::PageSetup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Copies a Gtk::PageSetup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_bottom_margin-instance_method" title="#get_bottom_margin (instance method)">#<strong>get_bottom_margin</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the bottom margin in units of <strong>unit</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_left_margin-instance_method" title="#get_left_margin (instance method)">#<strong>get_left_margin</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the left margin in units of <strong>unit</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_page_height-instance_method" title="#get_page_height (instance method)">#<strong>get_page_height</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the page height in units of <strong>unit</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_page_width-instance_method" title="#get_page_width (instance method)">#<strong>get_page_width</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the page width in units of <strong>unit</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_paper_height-instance_method" title="#get_paper_height (instance method)">#<strong>get_paper_height</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the paper height in units of <strong>unit</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_paper_width-instance_method" title="#get_paper_width (instance method)">#<strong>get_paper_width</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the paper width in units of <strong>unit</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_right_margin-instance_method" title="#get_right_margin (instance method)">#<strong>get_right_margin</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the right margin in units of <strong>unit</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_top_margin-instance_method" title="#get_top_margin (instance method)">#<strong>get_top_margin</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the top margin in units of <strong>unit</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_file-instance_method" title="#load_file (instance method)">#<strong>load_file</strong>(file_name)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reads the page setup from the file <strong>file_name</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_key_file-instance_method" title="#load_key_file (instance method)">#<strong>load_key_file</strong>(key_file, group_name)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reads the page setup from the group <strong>group_name</strong> in the key file <strong>key_file</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>  &#x21d2; Gtk::PageSetup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Gtk::PageSetup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_from_file-instance_method" title="#new_from_file (instance method)">#<strong>new_from_file</strong>(file_name)  &#x21d2; Gtk::PageSetup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reads the page setup from the file <strong>file_name</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_from_gvariant-instance_method" title="#new_from_gvariant (instance method)">#<strong>new_from_gvariant</strong>(variant)  &#x21d2; Gtk::PageSetup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Desrialize a page setup from an asv variant in the format produced by gtk_page_setup_to_gvariant().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_from_key_file-instance_method" title="#new_from_key_file (instance method)">#<strong>new_from_key_file</strong>(key_file, group_name)  &#x21d2; Gtk::PageSetup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reads the page setup from the group <strong>group_name</strong> in the key file <strong>key_file</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#orientation-instance_method" title="#orientation (instance method)">#<strong>orientation</strong>  &#x21d2; Gtk::PageOrientation </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the page orientation of the Gtk::PageSetup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#orientation=-instance_method" title="#orientation= (instance method)">#<strong>orientation=</strong>(orientation)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the page orientation of the Gtk::PageSetup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#paper_size-instance_method" title="#paper_size (instance method)">#<strong>paper_size</strong>  &#x21d2; Gtk::PaperSize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the paper size of the Gtk::PageSetup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#paper_size=-instance_method" title="#paper_size= (instance method)">#<strong>paper_size=</strong>(size)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the paper size of the Gtk::PageSetup without changing the margins.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#paper_size_and_default_margins=-instance_method" title="#paper_size_and_default_margins= (instance method)">#<strong>paper_size_and_default_margins=</strong>(size)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the paper size of the Gtk::PageSetup and modifies the margins according to the new paper size.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_bottom_margin-instance_method" title="#set_bottom_margin (instance method)">#<strong>set_bottom_margin</strong>(margin, unit)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the bottom margin of the Gtk::PageSetup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_left_margin-instance_method" title="#set_left_margin (instance method)">#<strong>set_left_margin</strong>(margin, unit)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the left margin of the Gtk::PageSetup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_right_margin-instance_method" title="#set_right_margin (instance method)">#<strong>set_right_margin</strong>(margin, unit)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the right margin of the Gtk::PageSetup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_top_margin-instance_method" title="#set_top_margin (instance method)">#<strong>set_top_margin</strong>(margin, unit)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the top margin of the Gtk::PageSetup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_file-instance_method" title="#to_file (instance method)">#<strong>to_file</strong>(file_name)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function saves the information from <strong>setup</strong> to <strong>file_name</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_gvariant-instance_method" title="#to_gvariant (instance method)">#<strong>to_gvariant</strong>  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Serialize page setup to an asv variant.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_key_file-instance_method" title="#to_key_file (instance method)">#<strong>to_key_file</strong>(key_file, group_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function adds the page setup from <strong>setup</strong> to <strong>key_file</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="copy-instance_method">
+  
+    #<strong>copy</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Copies a Gtk::PageSetup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a copy of <strong>other</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_bottom_margin-instance_method">
+  
+    #<strong>get_bottom_margin</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the bottom margin in units of <strong>unit</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the unit for the return value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the bottom margin</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_left_margin-instance_method">
+  
+    #<strong>get_left_margin</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the left margin in units of <strong>unit</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the unit for the return value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the left margin</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_page_height-instance_method">
+  
+    #<strong>get_page_height</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the page height in units of <strong>unit</strong>.</p>
+
+<p>Note that this function takes orientation and margins into consideration. See gtk_page_setup_get_paper_height().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the unit for the return value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the page height.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_page_width-instance_method">
+  
+    #<strong>get_page_width</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the page width in units of <strong>unit</strong>.</p>
+
+<p>Note that this function takes orientation and margins into consideration. See gtk_page_setup_get_paper_width().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the unit for the return value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the page width.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_paper_height-instance_method">
+  
+    #<strong>get_paper_height</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the paper height in units of <strong>unit</strong>.</p>
+
+<p>Note that this function takes orientation, but not margins into consideration. See gtk_page_setup_get_page_height().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the unit for the return value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the paper height.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_paper_width-instance_method">
+  
+    #<strong>get_paper_width</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the paper width in units of <strong>unit</strong>.</p>
+
+<p>Note that this function takes orientation, but not margins into consideration. See gtk_page_setup_get_page_width().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the unit for the return value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the paper width.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_right_margin-instance_method">
+  
+    #<strong>get_right_margin</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the right margin in units of <strong>unit</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the unit for the return value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the right margin</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_top_margin-instance_method">
+  
+    #<strong>get_top_margin</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the top margin in units of <strong>unit</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the unit for the return value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the top margin</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="load_file-instance_method">
+  
+    #<strong>load_file</strong>(file_name)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reads the page setup from the file <strong>file_name</strong>. See gtk_page_setup_to_file().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file_name</span>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the filename to read the page setup from</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="load_key_file-instance_method">
+  
+    #<strong>load_key_file</strong>(key_file, group_name)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reads the page setup from the group <strong>group_name</strong> in the key file <strong>key_file</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_file</span>
+      
+      
+        <span class='type'>(<tt>GLib::KeyFile</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the GKey::File to retrieve the page_setup from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>group_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the group in the key_file to read, or nil to use the default name “Page Setup”</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new Gtk::PageSetup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new Gtk::PageSetup.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_from_file-instance_method">
+  
+    #<strong>new_from_file</strong>(file_name)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reads the page setup from the file <strong>file_name</strong>. Returns a new Gtk::PageSetup object with the restored page setup, or nil if an error occurred. See gtk_page_setup_to_file().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file_name</span>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the filename to read the page setup from</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the restored Gtk::PageSetup</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_from_gvariant-instance_method">
+  
+    #<strong>new_from_gvariant</strong>(variant)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Desrialize a page setup from an asv variant in the format produced by gtk_page_setup_to_gvariant().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>variant</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an asv #GVariant</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new Gtk::PageSetup object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_from_key_file-instance_method">
+  
+    #<strong>new_from_key_file</strong>(key_file, group_name)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reads the page setup from the group <strong>group_name</strong> in the key file <strong>key_file</strong>. Returns a new Gtk::PageSetup object with the restored page setup, or nil if an error occurred.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_file</span>
+      
+      
+        <span class='type'>(<tt>GLib::KeyFile</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the GKey::File to retrieve the page_setup from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>group_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the group in the key_file to read, or nil to use the default name “Page Setup”</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the restored Gtk::PageSetup</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="orientation-instance_method">
+  
+    #<strong>orientation</strong>  &#x21d2; <tt><span class='object_link'><a href="PageOrientation.html" title="Gtk::PageOrientation (module)">Gtk::PageOrientation</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the page orientation of the Gtk::PageSetup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PageOrientation.html" title="Gtk::PageOrientation (module)">Gtk::PageOrientation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the page orientation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="orientation=-instance_method">
+  
+    #<strong>orientation=</strong>(orientation)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the page orientation of the Gtk::PageSetup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>orientation</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PageOrientation.html" title="Gtk::PageOrientation (module)">Gtk::PageOrientation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::PageOrientation value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="paper_size-instance_method">
+  
+    #<strong>paper_size</strong>  &#x21d2; <tt>Gtk::PaperSize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the paper size of the Gtk::PageSetup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::PaperSize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the paper size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="paper_size=-instance_method">
+  
+    #<strong>paper_size=</strong>(size)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the paper size of the Gtk::PageSetup without changing the margins. See gtk_page_setup_set_paper_size_and_default_margins().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Gtk::PaperSize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::PaperSize</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="paper_size_and_default_margins=-instance_method">
+  
+    #<strong>paper_size_and_default_margins=</strong>(size)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the paper size of the Gtk::PageSetup and modifies the margins according to the new paper size.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Gtk::PaperSize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::PaperSize</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_bottom_margin-instance_method">
+  
+    #<strong>set_bottom_margin</strong>(margin, unit)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the bottom margin of the Gtk::PageSetup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>margin</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new bottom margin in units of <strong>unit</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the units for <strong>margin</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_left_margin-instance_method">
+  
+    #<strong>set_left_margin</strong>(margin, unit)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the left margin of the Gtk::PageSetup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>margin</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new left margin in units of <strong>unit</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the units for <strong>margin</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_right_margin-instance_method">
+  
+    #<strong>set_right_margin</strong>(margin, unit)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the right margin of the Gtk::PageSetup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>margin</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new right margin in units of <strong>unit</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the units for <strong>margin</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_top_margin-instance_method">
+  
+    #<strong>set_top_margin</strong>(margin, unit)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the top margin of the Gtk::PageSetup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>margin</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new top margin in units of <strong>unit</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the units for <strong>margin</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_file-instance_method">
+  
+    #<strong>to_file</strong>(file_name)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function saves the information from <strong>setup</strong> to <strong>file_name</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file_name</span>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the file to save to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_gvariant-instance_method">
+  
+    #<strong>to_gvariant</strong>  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Serialize page setup to an asv variant.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new, floating, #GVariant</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_key_file-instance_method">
+  
+    #<strong>to_key_file</strong>(key_file, group_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function adds the page setup from <strong>setup</strong> to <strong>key_file</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_file</span>
+      
+      
+        <span class='type'>(<tt>GLib::KeyFile</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the GKey::File to save the page setup to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>group_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the group to add the settings to in <strong>key_file</strong>, or nil to use the default name “Page Setup”</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:26 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

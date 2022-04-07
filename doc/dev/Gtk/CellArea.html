@@ -1,0 +1,5356 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::CellArea
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::CellArea";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">CellArea</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::CellArea
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::CellArea</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activate-instance_method" title="#activate (instance method)">#<strong>activate</strong>(context, widget, cell_area, flags, edit_only)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Activates <strong>area</strong>, usually by activating the currently focused cell, however some subclasses which embed widgets in the area can also activate a widget if it currently has the focus.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activate_cell-instance_method" title="#activate_cell (instance method)">#<strong>activate_cell</strong>(widget, renderer, event, cell_area, flags)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is used by Gtk::CellArea subclasses when handling events to activate cells, the base Gtk::CellArea class activates cells for keyboard events for free in its own GtkCellArea-&gt;activate() implementation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add-instance_method" title="#add (instance method)">#<strong>add</strong>(renderer)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds <strong>renderer</strong> to <strong>area</strong> with the default child cell properties.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_focus_sibling-instance_method" title="#add_focus_sibling (instance method)">#<strong>add_focus_sibling</strong>(renderer, sibling)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds <strong>sibling</strong> to <strong>renderer</strong>’s focusable area, focus will be drawn around <strong>renderer</strong> and all of its siblings if <strong>renderer</strong> can focus for a given row.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_with_properties-instance_method" title="#add_with_properties (instance method)">#<strong>add_with_properties</strong>(renderer, first_prop_name, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds <strong>renderer</strong> to <strong>area</strong>, setting cell properties at the same time.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#apply_attributes-instance_method" title="#apply_attributes (instance method)">#<strong>apply_attributes</strong>(tree_model, iter, is_expander, is_expanded)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Applies any connected attributes to the renderers in <strong>area</strong> by pulling the values from <strong>tree_model</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attribute_connect-instance_method" title="#attribute_connect (instance method)">#<strong>attribute_connect</strong>(renderer, attribute, column)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Connects an <strong>attribute</strong> to apply values from <strong>column</strong> for the Gtk::TreeModel in use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attribute_disconnect-instance_method" title="#attribute_disconnect (instance method)">#<strong>attribute_disconnect</strong>(renderer, attribute)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Disconnects <strong>attribute</strong> for the <strong>renderer</strong> in <strong>area</strong> so that attribute will no longer be updated with values from the model.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attribute_get_column-instance_method" title="#attribute_get_column (instance method)">#<strong>attribute_get_column</strong>(renderer, attribute)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the model column that an attribute has been mapped to, or -1 if the attribute is not mapped.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cell_get-instance_method" title="#cell_get (instance method)">#<strong>cell_get</strong>(renderer, first_prop_name, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the values of one or more cell properties for <strong>renderer</strong> in <strong>area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cell_get_property-instance_method" title="#cell_get_property (instance method)">#<strong>cell_get_property</strong>(renderer, property_name, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the value of a cell property for <strong>renderer</strong> in <strong>area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cell_get_valist-instance_method" title="#cell_get_valist (instance method)">#<strong>cell_get_valist</strong>(renderer, first_property_name, var_args)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the values of one or more cell properties for <strong>renderer</strong> in <strong>area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cell_set-instance_method" title="#cell_set (instance method)">#<strong>cell_set</strong>(renderer, first_prop_name, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets one or more cell properties for <strong>cell</strong> in <strong>area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cell_set_property-instance_method" title="#cell_set_property (instance method)">#<strong>cell_set_property</strong>(renderer, property_name, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets a cell property for <strong>renderer</strong> in <strong>area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cell_set_valist-instance_method" title="#cell_set_valist (instance method)">#<strong>cell_set_valist</strong>(renderer, first_property_name, var_args)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets one or more cell properties for <strong>renderer</strong> in <strong>area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy_context-instance_method" title="#copy_context (instance method)">#<strong>copy_context</strong>(context)  &#x21d2; Gtk::CellAreaContext </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is sometimes needed for cases where rows need to share alignments in one orientation but may be separately grouped in the opposing orientation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_context-instance_method" title="#create_context (instance method)">#<strong>create_context</strong>  &#x21d2; Gtk::CellAreaContext </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a Gtk::CellAreaContext to be used with <strong>area</strong> for all purposes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_path_string-instance_method" title="#current_path_string (instance method)">#<strong>current_path_string</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the current Gtk::TreePath string for the currently applied Gtk::TreeIter, this is implicitly updated when gtk_cell_area_apply_attributes() is called and can be used to interact with renderers from Gtk::CellArea subclasses.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edit_widget-instance_method" title="#edit_widget (instance method)">#<strong>edit_widget</strong>  &#x21d2; Gtk::CellEditable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The widget currently editing the edited cell.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edit_widget=-instance_method" title="#edit_widget= (instance method)">#<strong>edit_widget=</strong>(edit_widget)  &#x21d2; Gtk::CellEditable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The widget currently editing the edited cell.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edited_cell-instance_method" title="#edited_cell (instance method)">#<strong>edited_cell</strong>  &#x21d2; Gtk::CellRenderer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The cell in the area that is currently edited.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edited_cell=-instance_method" title="#edited_cell= (instance method)">#<strong>edited_cell=</strong>(edited_cell)  &#x21d2; Gtk::CellRenderer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The cell in the area that is currently edited.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#event-instance_method" title="#event (instance method)">#<strong>event</strong>(context, widget, event, cell_area, flags)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Delegates event handling to a Gtk::CellArea.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_cell_property-instance_method" title="#find_cell_property (instance method)">#<strong>find_cell_property</strong>(property_name)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finds a cell property of a cell area class by name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#focus-instance_method" title="#focus (instance method)">#<strong>focus</strong>(direction)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This should be called by the <strong>area</strong>’s owning layout widget when focus is to be passed to <strong>area</strong>, or moved within <strong>area</strong> for a given <strong>direction</strong> and row data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#focus_cell-instance_method" title="#focus_cell (instance method)">#<strong>focus_cell</strong>  &#x21d2; Gtk::CellRenderer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The cell in the area that currently has focus.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#focus_cell=-instance_method" title="#focus_cell= (instance method)">#<strong>focus_cell=</strong>(focus_cell)  &#x21d2; Gtk::CellRenderer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The cell in the area that currently has focus.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#foreach-instance_method" title="#foreach (instance method)">#<strong>foreach</strong>(callback, callback_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calls <strong>callback</strong> for every Gtk::CellRenderer in <strong>area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#foreach_alloc-instance_method" title="#foreach_alloc (instance method)">#<strong>foreach_alloc</strong>(context, widget, cell_area, background_area, callback, callback_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calls <strong>callback</strong> for every Gtk::CellRenderer in <strong>area</strong> with the allocated rectangle inside <strong>cell_area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_cell_allocation-instance_method" title="#get_cell_allocation (instance method)">#<strong>get_cell_allocation</strong>(context, widget, renderer, cell_area, allocation)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Derives the allocation of <strong>renderer</strong> inside <strong>area</strong> if <strong>area</strong> were to be renderered in <strong>cell_area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_cell_at_position-instance_method" title="#get_cell_at_position (instance method)">#<strong>get_cell_at_position</strong>(context, widget, cell_area, x, y, alloc_area)  &#x21d2; Gtk::CellRenderer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the Gtk::CellRenderer at <strong>x</strong> and <strong>y</strong> coordinates inside <strong>area</strong> and optionally returns the full cell allocation for it inside <strong>cell_area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_focus_from_sibling-instance_method" title="#get_focus_from_sibling (instance method)">#<strong>get_focus_from_sibling</strong>(renderer)  &#x21d2; Gtk::CellRenderer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the Gtk::CellRenderer which is expected to be focusable for which <strong>renderer</strong> is, or may be a sibling.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_focus_siblings-instance_method" title="#get_focus_siblings (instance method)">#<strong>get_focus_siblings</strong>(renderer)  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the focus sibling cell renderers for <strong>renderer</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_preferred_height-instance_method" title="#get_preferred_height (instance method)">#<strong>get_preferred_height</strong>(context, widget, minimum_height, natural_height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves a cell area’s initial minimum and natural height.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_preferred_height_for_width-instance_method" title="#get_preferred_height_for_width (instance method)">#<strong>get_preferred_height_for_width</strong>(context, widget, width, minimum_height, natural_height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves a cell area’s minimum and natural height if it would be given the specified <strong>width</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_preferred_width-instance_method" title="#get_preferred_width (instance method)">#<strong>get_preferred_width</strong>(context, widget, minimum_width, natural_width)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves a cell area’s initial minimum and natural width.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_preferred_width_for_height-instance_method" title="#get_preferred_width_for_height (instance method)">#<strong>get_preferred_width_for_height</strong>(context, widget, height, minimum_width, natural_width)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves a cell area’s minimum and natural width if it would be given the specified <strong>height</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_renderer-instance_method" title="#has_renderer (instance method)">#<strong>has_renderer</strong>(renderer)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks if <strong>area</strong> contains <strong>renderer</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inner_cell_area-instance_method" title="#inner_cell_area (instance method)">#<strong>inner_cell_area</strong>(widget, cell_area, inner_area)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is a convenience function for Gtk::CellArea implementations to get the inner area where a given Gtk::CellRenderer will be rendered.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#install_cell_property-instance_method" title="#install_cell_property (instance method)">#<strong>install_cell_property</strong>(property_id, pspec)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Installs a cell property on a cell area class.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_activatable-instance_method" title="#is_activatable (instance method)">#<strong>is_activatable</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns whether the area can do anything when activated, after applying new attributes to <strong>area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_focus_sibling-instance_method" title="#is_focus_sibling (instance method)">#<strong>is_focus_sibling</strong>(renderer, sibling)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns whether <strong>sibling</strong> is one of <strong>renderer</strong>’s focus siblings (see gtk_cell_area_add_focus_sibling()).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_cell_properties-instance_method" title="#list_cell_properties (instance method)">#<strong>list_cell_properties</strong>(n_properties)  &#x21d2; Array&lt;GObject::ParamSpec&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns all cell properties of a cell area class.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove-instance_method" title="#remove (instance method)">#<strong>remove</strong>(renderer)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes <strong>renderer</strong> from <strong>area</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_focus_sibling-instance_method" title="#remove_focus_sibling (instance method)">#<strong>remove_focus_sibling</strong>(renderer, sibling)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes <strong>sibling</strong> from <strong>renderer</strong>’s focus sibling list (see gtk_cell_area_add_focus_sibling()).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render-instance_method" title="#render (instance method)">#<strong>render</strong>(context, widget, cr, background_area, cell_area, flags, paint_focus)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Renders <strong>area</strong>’s cells according to <strong>area</strong>’s layout onto <strong>widget</strong> at the given coordinates.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_mode-instance_method" title="#request_mode (instance method)">#<strong>request_mode</strong>  &#x21d2; Gtk::SizeRequestMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets whether the area prefers a height-for-width layout or a width-for-height layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_renderer-instance_method" title="#request_renderer (instance method)">#<strong>request_renderer</strong>(renderer, orientation, widget, for_size, minimum_size, natural_size)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is a convenience function for Gtk::CellArea implementations to request size for cell renderers.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop_editing-instance_method" title="#stop_editing (instance method)">#<strong>stop_editing</strong>(canceled)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Explicitly stops the editing of the currently edited cell.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="activate-instance_method">
+  
+    #<strong>activate</strong>(context, widget, cell_area, flags, edit_only)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Activates <strong>area</strong>, usually by activating the currently focused cell, however some subclasses which embed widgets in the area can also activate a widget if it currently has the focus.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAreaContext in context with the current row data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget that <strong>area</strong> is rendering on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the size and location of <strong>area</strong> relative to <strong>widget</strong>’s allocation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRendererState.html" title="Gtk::CellRendererState (module)">Gtk::CellRendererState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRendererState flags for <strong>area</strong> for this row of data.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>edit_only</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>if true then only cell renderers that are %GTK_CELL_RENDERER_MODE_EDITABLE will be activated.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether <strong>area</strong> was successfully activated.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="activate_cell-instance_method">
+  
+    #<strong>activate_cell</strong>(widget, renderer, event, cell_area, flags)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is used by Gtk::CellArea subclasses when handling events to activate cells, the base Gtk::CellArea class activates cells for keyboard events for free in its own GtkCellArea-&gt;activate() implementation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget that <strong>area</strong> is rendering onto</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer in <strong>area</strong> to activate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Event for which cell activation should occur</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Rectangle in <strong>widget</strong> relative coordinates of <strong>renderer</strong> for the current row.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRendererState.html" title="Gtk::CellRendererState (module)">Gtk::CellRendererState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRendererState for <strong>renderer</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether cell activation was successful</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add-instance_method">
+  
+    #<strong>add</strong>(renderer)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds <strong>renderer</strong> to <strong>area</strong> with the default child cell properties.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer to add to <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_focus_sibling-instance_method">
+  
+    #<strong>add_focus_sibling</strong>(renderer, sibling)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds <strong>sibling</strong> to <strong>renderer</strong>’s focusable area, focus will be drawn around <strong>renderer</strong> and all of its siblings if <strong>renderer</strong> can focus for a given row.</p>
+
+<p>Events handled by focus siblings can also activate the given focusable <strong>renderer</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer expected to have focus</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sibling</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer to add to <strong>renderer</strong>’s focus area</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_with_properties-instance_method">
+  
+    #<strong>add_with_properties</strong>(renderer, first_prop_name, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds <strong>renderer</strong> to <strong>area</strong>, setting cell properties at the same time. See gtk_cell_area_add() and gtk_cell_area_cell_set() for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer to be placed inside <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_prop_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the first cell property to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a nil-terminated list of property names and values, starting with <strong>first_prop_name</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="apply_attributes-instance_method">
+  
+    #<strong>apply_attributes</strong>(tree_model, iter, is_expander, is_expanded)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Applies any connected attributes to the renderers in <strong>area</strong> by pulling the values from <strong>tree_model</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeModel to pull values from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter in <strong>tree_model</strong> to apply values for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>is_expander</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether <strong>iter</strong> has children</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>is_expanded</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether <strong>iter</strong> is expanded in the view and children are visible</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attribute_connect-instance_method">
+  
+    #<strong>attribute_connect</strong>(renderer, attribute, column)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Connects an <strong>attribute</strong> to apply values from <strong>column</strong> for the Gtk::TreeModel in use.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer to connect an attribute for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>attribute</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the attribute name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>column</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeModel column to fetch attribute values from</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attribute_disconnect-instance_method">
+  
+    #<strong>attribute_disconnect</strong>(renderer, attribute)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Disconnects <strong>attribute</strong> for the <strong>renderer</strong> in <strong>area</strong> so that attribute will no longer be updated with values from the model.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer to disconnect an attribute for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>attribute</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the attribute name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attribute_get_column-instance_method">
+  
+    #<strong>attribute_get_column</strong>(renderer, attribute)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the model column that an attribute has been mapped to, or -1 if the attribute is not mapped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>attribute</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an attribute on the renderer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the model column, or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cell_get-instance_method">
+  
+    #<strong>cell_get</strong>(renderer, first_prop_name, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the values of one or more cell properties for <strong>renderer</strong> in <strong>area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer which is inside <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_prop_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the first cell property to get</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the first cell property, followed optionally by more name/return location pairs, followed by nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cell_get_property-instance_method">
+  
+    #<strong>cell_get_property</strong>(renderer, property_name, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the value of a cell property for <strong>renderer</strong> in <strong>area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer inside <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the property to get</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a location to return the value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cell_get_valist-instance_method">
+  
+    #<strong>cell_get_valist</strong>(renderer, first_property_name, var_args)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the values of one or more cell properties for <strong>renderer</strong> in <strong>area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer inside <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the first property to get</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>var_args</span>
+      
+      
+        <span class='type'>(<tt>Gtk::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the first property, followed optionally by more name/return location pairs, followed by nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cell_set-instance_method">
+  
+    #<strong>cell_set</strong>(renderer, first_prop_name, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets one or more cell properties for <strong>cell</strong> in <strong>area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer which is a cell inside <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_prop_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the first cell property to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a nil-terminated list of property names and values, starting with <strong>first_prop_name</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cell_set_property-instance_method">
+  
+    #<strong>cell_set_property</strong>(renderer, property_name, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets a cell property for <strong>renderer</strong> in <strong>area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer inside <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the cell property to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the value to set the cell property to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cell_set_valist-instance_method">
+  
+    #<strong>cell_set_valist</strong>(renderer, first_property_name, var_args)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets one or more cell properties for <strong>renderer</strong> in <strong>area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer which inside <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the first cell property to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>var_args</span>
+      
+      
+        <span class='type'>(<tt>Gtk::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a nil-terminated list of property names and values, starting with <strong>first_prop_name</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="copy_context-instance_method">
+  
+    #<strong>copy_context</strong>(context)  &#x21d2; <tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is sometimes needed for cases where rows need to share alignments in one orientation but may be separately grouped in the opposing orientation.</p>
+
+<p>For instance, Gtk::IconView creates all icons (rows) to have the same width and the cells theirin to have the same horizontal alignments. However each row of icons may have a separate collective height. Gtk::IconView uses this to request the heights of each row based on a context which was already used to request all the row widths that are to be displayed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAreaContext to copy</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly created Gtk::CellAreaContext copy of <strong>context</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_context-instance_method">
+  
+    #<strong>create_context</strong>  &#x21d2; <tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a Gtk::CellAreaContext to be used with <strong>area</strong> for all purposes. Gtk::CellAreaContext stores geometry information for rows for which it was operated on, it is important to use the same context for the same row of data at all times (i.e. one should render and handle events with the same Gtk::CellAreaContext which was used to request the size of those rows of data).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly created Gtk::CellAreaContext which can be used with <strong>area</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_path_string-instance_method">
+  
+    #<strong>current_path_string</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the current Gtk::TreePath string for the currently applied Gtk::TreeIter, this is implicitly updated when gtk_cell_area_apply_attributes() is called and can be used to interact with renderers from Gtk::CellArea subclasses. attributes applied to <strong>area</strong>. This string belongs to the area and should not be freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The current Gtk::TreePath string for the current</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="edit_widget-instance_method">
+  
+    #<strong>edit_widget</strong>  &#x21d2; <tt><span class='object_link'><a href="CellEditable.html" title="Gtk::CellEditable (module)">Gtk::CellEditable</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The widget currently editing the edited cell</p>
+
+<p>This property is read-only and only changes as a result of a call gtk_cell_area_activate_cell().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellEditable.html" title="Gtk::CellEditable (module)">Gtk::CellEditable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>edit-widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="edit_widget=-instance_method">
+  
+    #<strong>edit_widget=</strong>(edit_widget)  &#x21d2; <tt><span class='object_link'><a href="CellEditable.html" title="Gtk::CellEditable (module)">Gtk::CellEditable</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The widget currently editing the edited cell</p>
+
+<p>This property is read-only and only changes as a result of a call gtk_cell_area_activate_cell().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>edit_widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellEditable.html" title="Gtk::CellEditable (module)">Gtk::CellEditable</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellEditable.html" title="Gtk::CellEditable (module)">Gtk::CellEditable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>edit-widget</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellEditable.html" title="Gtk::CellEditable (module)">Gtk::CellEditable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>edit-widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="edited_cell-instance_method">
+  
+    #<strong>edited_cell</strong>  &#x21d2; <tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The cell in the area that is currently edited</p>
+
+<p>This property is read-only and only changes as a result of a call gtk_cell_area_activate_cell().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>edited-cell</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="edited_cell=-instance_method">
+  
+    #<strong>edited_cell=</strong>(edited_cell)  &#x21d2; <tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The cell in the area that is currently edited</p>
+
+<p>This property is read-only and only changes as a result of a call gtk_cell_area_activate_cell().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>edited_cell</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>edited-cell</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>edited-cell</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="event-instance_method">
+  
+    #<strong>event</strong>(context, widget, event, cell_area, flags)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Delegates event handling to a Gtk::CellArea.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAreaContext for this row of data.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget that <strong>area</strong> is rendering to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Event to handle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the <strong>widget</strong> relative coordinates for <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRendererState.html" title="Gtk::CellRendererState (module)">Gtk::CellRendererState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRendererState for <strong>area</strong> in this row.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the event was handled by <strong>area</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find_cell_property-instance_method">
+  
+    #<strong>find_cell_property</strong>(property_name)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finds a cell property of a cell area class by name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the child property to find</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the GParam::Spec of the child property or nil if <strong>aclass</strong> has no child property with that name.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="focus-instance_method">
+  
+    #<strong>focus</strong>(direction)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This should be called by the <strong>area</strong>’s owning layout widget when focus is to be passed to <strong>area</strong>, or moved within <strong>area</strong> for a given <strong>direction</strong> and row data.</p>
+
+<p>Implementing Gtk::CellArea classes should implement this method to receive and navigate focus in its own way particular to how it lays out cells.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>direction</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DirectionType.html" title="Gtk::DirectionType (module)">Gtk::DirectionType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::DirectionType</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if focus remains inside <strong>area</strong> as a result of this call.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="focus_cell-instance_method">
+  
+    #<strong>focus_cell</strong>  &#x21d2; <tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The cell in the area that currently has focus</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>focus-cell</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="focus_cell=-instance_method">
+  
+    #<strong>focus_cell=</strong>(focus_cell)  &#x21d2; <tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The cell in the area that currently has focus</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>focus_cell</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>focus-cell</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>focus-cell</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="foreach-instance_method">
+  
+    #<strong>foreach</strong>(callback, callback_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calls <strong>callback</strong> for every Gtk::CellRenderer in <strong>area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gtk::CellCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellCallback to call</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user provided data pointer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="foreach_alloc-instance_method">
+  
+    #<strong>foreach_alloc</strong>(context, widget, cell_area, background_area, callback, callback_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calls <strong>callback</strong> for every Gtk::CellRenderer in <strong>area</strong> with the allocated rectangle inside <strong>cell_area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAreaContext for this row of data.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget that <strong>area</strong> is rendering to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the <strong>widget</strong> relative coordinates and size for <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>background_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the <strong>widget</strong> relative coordinates of the background area</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gtk::CellAllocCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAllocCallback to call</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user provided data pointer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_cell_allocation-instance_method">
+  
+    #<strong>get_cell_allocation</strong>(context, widget, renderer, cell_area, allocation)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Derives the allocation of <strong>renderer</strong> inside <strong>area</strong> if <strong>area</strong> were to be renderered in <strong>cell_area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAreaContext used to hold sizes for <strong>area</strong>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget that <strong>area</strong> is rendering on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer to get the allocation for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the whole allocated area for <strong>area</strong> in <strong>widget</strong> for this row</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>allocation</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>where to store the allocation for <strong>renderer</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_cell_at_position-instance_method">
+  
+    #<strong>get_cell_at_position</strong>(context, widget, cell_area, x, y, alloc_area)  &#x21d2; <tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the Gtk::CellRenderer at <strong>x</strong> and <strong>y</strong> coordinates inside <strong>area</strong> and optionally returns the full cell allocation for it inside <strong>cell_area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAreaContext used to hold sizes for <strong>area</strong>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget that <strong>area</strong> is rendering on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the whole allocated area for <strong>area</strong> in <strong>widget</strong> for this row</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the x position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the y position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alloc_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>where to store the inner allocated area of the returned cell renderer, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer at <strong>x</strong> and <strong>y</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_focus_from_sibling-instance_method">
+  
+    #<strong>get_focus_from_sibling</strong>(renderer)  &#x21d2; <tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the Gtk::CellRenderer which is expected to be focusable for which <strong>renderer</strong> is, or may be a sibling.</p>
+
+<p>This is handy for Gtk::CellArea subclasses when handling events, after determining the renderer at the event location it can then chose to activate the focus cell for which the event cell may have been a sibling.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer for which <strong>renderer</strong> is a sibling, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_focus_siblings-instance_method">
+  
+    #<strong>get_focus_siblings</strong>(renderer)  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the focus sibling cell renderers for <strong>renderer</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer expected to have focus</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A #GList of Gtk::CellRenderers. The returned list is internal and should not be freed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_preferred_height-instance_method">
+  
+    #<strong>get_preferred_height</strong>(context, widget, minimum_height, natural_height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves a cell area’s initial minimum and natural height.</p>
+
+<p><strong>area</strong> will store some geometrical information in <strong>context</strong> along the way; when requesting sizes over an arbitrary number of rows, it’s not important to check the <strong>minimum_height</strong> and <strong>natural_height</strong> of this call but rather to consult gtk_cell_area_context_get_preferred_height() after a series of requests.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAreaContext to perform this request with</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget where <strong>area</strong> will be rendering</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>minimum_height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the minimum height, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>natural_height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the natural height, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_preferred_height_for_width-instance_method">
+  
+    #<strong>get_preferred_height_for_width</strong>(context, widget, width, minimum_height, natural_height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves a cell area’s minimum and natural height if it would be given the specified <strong>width</strong>.</p>
+
+<p><strong>area</strong> stores some geometrical information in <strong>context</strong> along the way while calling gtk_cell_area_get_preferred_width(). It’s important to perform a series of gtk_cell_area_get_preferred_width() requests with <strong>context</strong> first and then call gtk_cell_area_get_preferred_height_for_width() on each cell area individually to get the height for width of each fully requested row.</p>
+
+<p>If at some point, the width of a single row changes, it should be requested with gtk_cell_area_get_preferred_width() again and then the full width of the requested rows checked again with gtk_cell_area_context_get_preferred_width().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAreaContext which has already been requested for widths.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget where <strong>area</strong> will be rendering</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the width for which to check the height of this area</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>minimum_height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the minimum height, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>natural_height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the natural height, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_preferred_width-instance_method">
+  
+    #<strong>get_preferred_width</strong>(context, widget, minimum_width, natural_width)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves a cell area’s initial minimum and natural width.</p>
+
+<p><strong>area</strong> will store some geometrical information in <strong>context</strong> along the way; when requesting sizes over an arbitrary number of rows, it’s not important to check the <strong>minimum_width</strong> and <strong>natural_width</strong> of this call but rather to consult gtk_cell_area_context_get_preferred_width() after a series of requests.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAreaContext to perform this request with</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget where <strong>area</strong> will be rendering</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>minimum_width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the minimum width, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>natural_width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the natural width, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_preferred_width_for_height-instance_method">
+  
+    #<strong>get_preferred_width_for_height</strong>(context, widget, height, minimum_width, natural_width)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves a cell area’s minimum and natural width if it would be given the specified <strong>height</strong>.</p>
+
+<p><strong>area</strong> stores some geometrical information in <strong>context</strong> along the way while calling gtk_cell_area_get_preferred_height(). It’s important to perform a series of gtk_cell_area_get_preferred_height() requests with <strong>context</strong> first and then call gtk_cell_area_get_preferred_width_for_height() on each cell area individually to get the height for width of each fully requested row.</p>
+
+<p>If at some point, the height of a single row changes, it should be requested with gtk_cell_area_get_preferred_height() again and then the full height of the requested rows checked again with gtk_cell_area_context_get_preferred_height().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAreaContext which has already been requested for widths.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget where <strong>area</strong> will be rendering</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the height for which to check the width of this area</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>minimum_width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the minimum width, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>natural_width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the natural width, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_renderer-instance_method">
+  
+    #<strong>has_renderer</strong>(renderer)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks if <strong>area</strong> contains <strong>renderer</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer to check</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>renderer</strong> is in the <strong>area</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="inner_cell_area-instance_method">
+  
+    #<strong>inner_cell_area</strong>(widget, cell_area, inner_area)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is a convenience function for Gtk::CellArea implementations to get the inner area where a given Gtk::CellRenderer will be rendered. It removes any padding previously added by gtk_cell_area_request_renderer().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget that <strong>area</strong> is rendering onto</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the <strong>widget</strong> relative coordinates where one of <strong>area</strong>’s cells is to be placed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>inner_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the return location for the inner cell area</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="install_cell_property-instance_method">
+  
+    #<strong>install_cell_property</strong>(property_id, pspec)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Installs a cell property on a cell area class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the id for the property</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pspec</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the GParam::Spec for the property</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_activatable-instance_method">
+  
+    #<strong>is_activatable</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether the area can do anything when activated, after applying new attributes to <strong>area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether <strong>area</strong> can do anything when activated.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_focus_sibling-instance_method">
+  
+    #<strong>is_focus_sibling</strong>(renderer, sibling)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether <strong>sibling</strong> is one of <strong>renderer</strong>’s focus siblings (see gtk_cell_area_add_focus_sibling()).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer expected to have focus</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sibling</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer to check against <strong>renderer</strong>’s sibling list</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>sibling</strong> is a focus sibling of <strong>renderer</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_cell_properties-instance_method">
+  
+    #<strong>list_cell_properties</strong>(n_properties)  &#x21d2; <tt>Array&lt;GObject::ParamSpec&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns all cell properties of a cell area class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_properties</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to return the number of cell properties found</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;GObject::ParamSpec&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated nil-terminated array of GParam::Spec*.  The array must be freed with g_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove-instance_method">
+  
+    #<strong>remove</strong>(renderer)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes <strong>renderer</strong> from <strong>area</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer to remove from <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_focus_sibling-instance_method">
+  
+    #<strong>remove_focus_sibling</strong>(renderer, sibling)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes <strong>sibling</strong> from <strong>renderer</strong>’s focus sibling list (see gtk_cell_area_add_focus_sibling()).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer expected to have focus</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sibling</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer to remove from <strong>renderer</strong>’s focus area</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render-instance_method">
+  
+    #<strong>render</strong>(context, widget, cr, background_area, cell_area, flags, paint_focus)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Renders <strong>area</strong>’s cells according to <strong>area</strong>’s layout onto <strong>widget</strong> at the given coordinates.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellAreaContext.html" title="Gtk::CellAreaContext (class)">Gtk::CellAreaContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellAreaContext for this row of data.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget that <strong>area</strong> is rendering to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the #cairo_t to render with</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>background_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the <strong>widget</strong> relative coordinates for <strong>area</strong>’s background</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell_area</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the <strong>widget</strong> relative coordinates for <strong>area</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRendererState.html" title="Gtk::CellRendererState (module)">Gtk::CellRendererState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRendererState for <strong>area</strong> in this row.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>paint_focus</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether <strong>area</strong> should paint focus on focused cells for focused rows or not.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_mode-instance_method">
+  
+    #<strong>request_mode</strong>  &#x21d2; <tt><span class='object_link'><a href="SizeRequestMode.html" title="Gtk::SizeRequestMode (module)">Gtk::SizeRequestMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets whether the area prefers a height-for-width layout or a width-for-height layout.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SizeRequestMode.html" title="Gtk::SizeRequestMode (module)">Gtk::SizeRequestMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The Gtk::SizeRequestMode preferred by <strong>area</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_renderer-instance_method">
+  
+    #<strong>request_renderer</strong>(renderer, orientation, widget, for_size, minimum_size, natural_size)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is a convenience function for Gtk::CellArea implementations to request size for cell renderers. It’s important to use this function to request size and then use gtk_cell_area_inner_cell_area() at render and event time since this function will add padding around the cell for focus painting. the base request for the orientation is to be returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellRenderer to request size for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>orientation</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Orientation.html" title="Gtk::Orientation (module)">Gtk::Orientation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Orientation in which to request size</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget that <strong>area</strong> is rendering onto</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>for_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the allocation contextual size to request for, or -1 if</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>minimum_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the minimum size, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>natural_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the natural size, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop_editing-instance_method">
+  
+    #<strong>stop_editing</strong>(canceled)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Explicitly stops the editing of the currently edited cell.</p>
+
+<p>If <strong>canceled</strong> is true, the currently edited cell renderer will emit the ::editing-canceled signal, otherwise the the ::editing-done signal will be emitted on the current edit widget.</p>
+
+<p>See gtk_cell_area_get_edited_cell() and gtk_cell_area_get_edit_widget().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>canceled</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether editing was canceled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:17 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

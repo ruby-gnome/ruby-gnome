@@ -83,6 +83,41 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Version:</p>
+<ul class="version">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>1.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="PangoCairo/Font.html" title="PangoCairo::Font (module)">Font</a></span>, <span class='object_link'><a href="PangoCairo/FontMap.html" title="PangoCairo::FontMap (module)">FontMap</a></span>
+    
+  
+    
+  
+</p>
 
 
 
@@ -90,12 +125,2227 @@
 
 
 
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
 
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context_get_font_options-instance_method" title="#context_get_font_options (instance method)">#<strong>context_get_font_options</strong>(context)  &#x21d2; cairo::FontOptions </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves any font rendering options previously set with pango_cairo_context_set_font_options().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context_get_resolution-instance_method" title="#context_get_resolution (instance method)">#<strong>context_get_resolution</strong>(context)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the resolution for the context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context_get_shape_renderer-instance_method" title="#context_get_shape_renderer (instance method)">#<strong>context_get_shape_renderer</strong>(context, data)  &#x21d2; PangoCairo::ShapeRendererFunc </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets callback function for context to use for rendering attributes of type %PANGO_ATTR_SHAPE.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context_set_font_options-instance_method" title="#context_set_font_options (instance method)">#<strong>context_set_font_options</strong>(context, options)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the font options used when rendering text with this context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context_set_resolution-instance_method" title="#context_set_resolution (instance method)">#<strong>context_set_resolution</strong>(context, dpi)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the resolution for the context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context_set_shape_renderer-instance_method" title="#context_set_shape_renderer (instance method)">#<strong>context_set_shape_renderer</strong>(context, func, data, dnotify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets callback function for context to use for rendering attributes of type %PANGO_ATTR_SHAPE.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_context-instance_method" title="#create_context (instance method)">#<strong>create_context</strong>(cr)  &#x21d2; Pango::Context </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a context object set up to match the current transformation and target surface of the Cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_layout-instance_method" title="#create_layout (instance method)">#<strong>create_layout</strong>(cr)  &#x21d2; Pango::Layout </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a layout object set up to match the current transformation and target surface of the Cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error_underline_path-instance_method" title="#error_underline_path (instance method)">#<strong>error_underline_path</strong>(cr, x, y, width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add a squiggly line to the current path in the specified cairo context that approximately covers the given rectangle in the style of an underline used to indicate a spelling error.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_map_get_default-instance_method" title="#font_map_get_default (instance method)">#<strong>font_map_get_default</strong>  &#x21d2; Pango::FontMap </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets a default Pango::CairoFontMap to use with Cairo.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_map_new-instance_method" title="#font_map_new (instance method)">#<strong>font_map_new</strong>  &#x21d2; Pango::FontMap </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Pango::CairoFontMap object; a fontmap is used to cache information about available fonts, and holds certain global parameters such as the resolution.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_map_new_for_font_type-instance_method" title="#font_map_new_for_font_type (instance method)">#<strong>font_map_new_for_font_type</strong>(fonttype)  &#x21d2; Pango::FontMap </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Pango::CairoFontMap object of the type suitable to be used with cairo font backend of type <strong>fonttype</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#glyph_string_path-instance_method" title="#glyph_string_path (instance method)">#<strong>glyph_string_path</strong>(cr, font, glyphs)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds the glyphs in <strong>glyphs</strong> to the current path in the specified cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#layout_line_path-instance_method" title="#layout_line_path (instance method)">#<strong>layout_line_path</strong>(cr, line)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds the text in Pango::LayoutLine to the current path in the specified cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#layout_path-instance_method" title="#layout_path (instance method)">#<strong>layout_path</strong>(cr, layout)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds the text in a Pango::Layout to the current path in the specified cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_error_underline-instance_method" title="#show_error_underline (instance method)">#<strong>show_error_underline</strong>(cr, x, y, width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Draw a squiggly line in the specified cairo context that approximately covers the given rectangle in the style of an underline used to indicate a spelling error.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_glyph_item-instance_method" title="#show_glyph_item (instance method)">#<strong>show_glyph_item</strong>(cr, text, glyph_item)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Draws the glyphs in <strong>glyph_item</strong> in the specified cairo context, embedding the text associated with the glyphs in the output if the output format supports it (PDF for example), otherwise it acts similar to pango_cairo_show_glyph_string().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_glyph_string-instance_method" title="#show_glyph_string (instance method)">#<strong>show_glyph_string</strong>(cr, font, glyphs)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Draws the glyphs in <strong>glyphs</strong> in the specified cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_layout-instance_method" title="#show_layout (instance method)">#<strong>show_layout</strong>(cr, layout)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Draws a Pango::Layout in the specified cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_layout_line-instance_method" title="#show_layout_line (instance method)">#<strong>show_layout_line</strong>(cr, line)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Draws a Pango::LayoutLine in the specified cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_context-instance_method" title="#update_context (instance method)">#<strong>update_context</strong>(cr, context)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Updates a Pango::Context previously created for use with Cairo to match the current transformation and target surface of a Cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_layout-instance_method" title="#update_layout (instance method)">#<strong>update_layout</strong>(cr, layout)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Updates the private Pango::Context of a #PangoLayout created with pango_cairo_create_layout() to match the current transformation and target surface of a Cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="context_get_font_options-instance_method">
+  
+    #<strong>context_get_font_options</strong>(context)  &#x21d2; <tt>cairo::FontOptions</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves any font rendering options previously set with pango_cairo_context_set_font_options(). This function does not report options that are derived from the target surface by pango_cairo_update_context()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::Context, from a pangocairo font map</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>cairo::FontOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the font options previously set on the context, or nil if no options have been set. This value is owned by the context and must not be modified or freed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="context_get_resolution-instance_method">
+  
+    #<strong>context_get_resolution</strong>(context)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the resolution for the context. See pango_cairo_context_set_resolution()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::Context, from a pangocairo font map</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the resolution in “dots per inch”. A negative value will be returned if no resolution has previously been set.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="context_get_shape_renderer-instance_method">
+  
+    #<strong>context_get_shape_renderer</strong>(context, data)  &#x21d2; <tt>PangoCairo::ShapeRendererFunc</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets callback function for context to use for rendering attributes of type %PANGO_ATTR_SHAPE.  See Pango::CairoShapeRendererFunc for details.</p>
+
+<p>Retrieves callback function and associated user data for rendering attributes of type %PANGO_ATTR_SHAPE as set by pango_cairo_context_set_shape_renderer(), if any.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::Context, from a pangocairo font map</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Pointer to #gpointer to return user data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>PangoCairo::ShapeRendererFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the shape rendering callback previously set on the context, or nil if no shape rendering callback have been set.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="context_set_font_options-instance_method">
+  
+    #<strong>context_set_font_options</strong>(context, options)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the font options used when rendering text with this context. These options override any options that pango_cairo_update_context() derives from the target surface.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::Context, from a pangocairo font map</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>cairo::FontOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #cairo_font_options_t, or nil to unset any previously set options. A copy is made.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="context_set_resolution-instance_method">
+  
+    #<strong>context_set_resolution</strong>(context, dpi)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the resolution for the context. This is a scale factor between points specified in a Pango::FontDescription and Cairo units. The default value is 96, meaning that a 10 point font will be 13 units high. (10 * 96. / 72. = 13.3).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::Context, from a pangocairo font map</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dpi</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the resolution in “dots per inch”. (Physical inches aren’t actually involved; the terminology is conventional.) A 0 or negative value means to use the resolution from the font map.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="context_set_shape_renderer-instance_method">
+  
+    #<strong>context_set_shape_renderer</strong>(context, func, data, dnotify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets callback function for context to use for rendering attributes of type %PANGO_ATTR_SHAPE.  See Pango::CairoShapeRendererFunc for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::Context, from a pangocairo font map</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>PangoCairo::ShapeRendererFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Callback function for rendering attributes of type %PANGO_ATTR_SHAPE, or nil to disable shape rendering.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>User data that will be passed to <strong>func</strong>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dnotify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Callback that will be called when the context is freed to release <strong>data</strong>, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_context-instance_method">
+  
+    #<strong>create_context</strong>(cr)  &#x21d2; <tt><span class='object_link'><a href="Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a context object set up to match the current transformation and target surface of the Cairo context.  This context can then be used to create a layout using pango_layout_new().</p>
+
+<p>This function is a convenience function that creates a context using the default font map, then updates it to <strong>cr</strong>.  If you just need to create a layout for use with <strong>cr</strong> and do not need to access Pango::Context directly, you can use pango_cairo_create_layout() instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the newly created Pango::Context. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_layout-instance_method">
+  
+    #<strong>create_layout</strong>(cr)  &#x21d2; <tt><span class='object_link'><a href="Pango/Layout.html" title="Pango::Layout (class)">Pango::Layout</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a layout object set up to match the current transformation and target surface of the Cairo context.  This layout can then be used for text measurement with functions like pango_layout_get_size() or drawing with functions like pango_cairo_show_layout(). If you change the transformation or target surface for <strong>cr</strong>, you need to call pango_cairo_update_layout()</p>
+
+<p>This function is the most convenient way to use Cairo with Pango, however it is slightly inefficient since it creates a separate Pango::Context object for each layout. This might matter in an application that was laying out large amounts of text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Layout.html" title="Pango::Layout (class)">Pango::Layout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the newly created Pango::Layout. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="error_underline_path-instance_method">
+  
+    #<strong>error_underline_path</strong>(cr, x, y, width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a squiggly line to the current path in the specified cairo context that approximately covers the given rectangle in the style of an underline used to indicate a spelling error.  (The width of the underline is rounded to an integer number of up/down segments and the resulting rectangle is centered in the original rectangle)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The X coordinate of one corner of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The Y coordinate of one corner of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Non-negative width of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Non-negative height of the rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_map_get_default-instance_method">
+  
+    #<strong>font_map_get_default</strong>  &#x21d2; <tt><span class='object_link'><a href="Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets a default Pango::CairoFontMap to use with Cairo.</p>
+
+<p>Note that the type of the returned object will depend on the particular font backend Cairo was compiled to use; You generally should only use the Pango::FontMap and Pango::CairoFontMap interfaces on the returned object.</p>
+
+<p>The default Cairo fontmap can be changed by using pango_cairo_font_map_set_default().  This can be used to change the Cairo font backend that the default fontmap uses for example.</p>
+
+<p>Note that since Pango 1.32.6, the default fontmap is per-thread. Each thread gets its own default fontmap.  In this way, PangoCairo can be used safely from multiple threads.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the default PangoCairo fontmap for the current thread. This object is owned by Pango and must not be freed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_map_new-instance_method">
+  
+    #<strong>font_map_new</strong>  &#x21d2; <tt><span class='object_link'><a href="Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new Pango::CairoFontMap object; a fontmap is used to cache information about available fonts, and holds certain global parameters such as the resolution. In most cases, you can use pango_cairo_font_map_get_default() instead.</p>
+
+<p>Note that the type of the returned object will depend on the particular font backend Cairo was compiled to use; You generally should only use the Pango::FontMap and Pango::CairoFontMap interfaces on the returned object.</p>
+
+<p>You can override the type of backend returned by using an environment variable %PANGOCAIRO_BACKEND.  Supported types, based on your build, are fc (fontconfig), win32, and coretext. If requested type is not available, NULL is returned. Ie. this is only useful for testing, when at least two backends are compiled in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the newly allocated Pango::FontMap, which should be freed with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_map_new_for_font_type-instance_method">
+  
+    #<strong>font_map_new_for_font_type</strong>(fonttype)  &#x21d2; <tt><span class='object_link'><a href="Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new Pango::CairoFontMap object of the type suitable to be used with cairo font backend of type <strong>fonttype</strong>.</p>
+
+<p>In most cases one should simply use <strong>pango_cairo_font_map_new</strong>(), or in fact in most of those cases, just use <strong>pango_cairo_font_map_get_default</strong>().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fonttype</span>
+      
+      
+        <span class='type'>(<tt>cairo::FontType</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>desired #cairo_font_type_t</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the newly allocated Pango::FontMap of suitable type which should be freed with g_object_unref(), or nil if the requested cairo font backend is not supported / compiled in.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="glyph_string_path-instance_method">
+  
+    #<strong>glyph_string_path</strong>(cr, font, glyphs)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds the glyphs in <strong>glyphs</strong> to the current path in the specified cairo context. The origin of the glyphs (the left edge of the baseline) will be at the current point of the cairo context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>font</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Font.html" title="Pango::Font (class)">Pango::Font</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::Font from a #PangoCairoFontMap</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>glyphs</span>
+      
+      
+        <span class='type'>(<tt>Pango::GlyphString</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::GlyphString</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="layout_line_path-instance_method">
+  
+    #<strong>layout_line_path</strong>(cr, line)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds the text in Pango::LayoutLine to the current path in the specified cairo context.  The origin of the glyphs (the left edge of the line) will be at the current point of the cairo context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>line</span>
+      
+      
+        <span class='type'>(<tt>Pango::LayoutLine</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::LayoutLine</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="layout_path-instance_method">
+  
+    #<strong>layout_path</strong>(cr, layout)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds the text in a Pango::Layout to the current path in the specified cairo context.  The top-left corner of the Pango::Layout will be at the current point of the cairo context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Layout.html" title="Pango::Layout (class)">Pango::Layout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango layout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="show_error_underline-instance_method">
+  
+    #<strong>show_error_underline</strong>(cr, x, y, width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Draw a squiggly line in the specified cairo context that approximately covers the given rectangle in the style of an underline used to indicate a spelling error.  (The width of the underline is rounded to an integer number of up/down segments and the resulting rectangle is centered in the original rectangle)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The X coordinate of one corner of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The Y coordinate of one corner of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Non-negative width of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Non-negative height of the rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="show_glyph_item-instance_method">
+  
+    #<strong>show_glyph_item</strong>(cr, text, glyph_item)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Draws the glyphs in <strong>glyph_item</strong> in the specified cairo context, embedding the text associated with the glyphs in the output if the output format supports it (PDF for example), otherwise it acts similar to pango_cairo_show_glyph_string().</p>
+
+<p>The origin of the glyphs (the left edge of the baseline) will be drawn at the current point of the cairo context.</p>
+
+<p>Note that <strong>text</strong> is the start of the text for layout, which is then indexed by &lt;literal&gt;<strong>glyph_item</strong>-&gt;item-&gt;offset&lt;/literal&gt;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the UTF-8 text that <strong>glyph_item</strong> refers to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>glyph_item</span>
+      
+      
+        <span class='type'>(<tt>Pango::GlyphItem</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::GlyphItem</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="show_glyph_string-instance_method">
+  
+    #<strong>show_glyph_string</strong>(cr, font, glyphs)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Draws the glyphs in <strong>glyphs</strong> in the specified cairo context. The origin of the glyphs (the left edge of the baseline) will be drawn at the current point of the cairo context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>font</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Font.html" title="Pango::Font (class)">Pango::Font</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::Font from a #PangoCairoFontMap</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>glyphs</span>
+      
+      
+        <span class='type'>(<tt>Pango::GlyphString</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::GlyphString</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="show_layout-instance_method">
+  
+    #<strong>show_layout</strong>(cr, layout)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Draws a Pango::Layout in the specified cairo context. The top-left corner of the Pango::Layout will be drawn at the current point of the cairo context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Layout.html" title="Pango::Layout (class)">Pango::Layout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango layout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="show_layout_line-instance_method">
+  
+    #<strong>show_layout_line</strong>(cr, line)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Draws a Pango::LayoutLine in the specified cairo context. The origin of the glyphs (the left edge of the line) will be drawn at the current point of the cairo context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>line</span>
+      
+      
+        <span class='type'>(<tt>Pango::LayoutLine</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::LayoutLine</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_context-instance_method">
+  
+    #<strong>update_context</strong>(cr, context)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Updates a Pango::Context previously created for use with Cairo to match the current transformation and target surface of a Cairo context. If any layouts have been created for the context, it’s necessary to call pango_layout_context_changed() on those layouts.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::Context, from a pangocairo font map</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_layout-instance_method">
+  
+    #<strong>update_layout</strong>(cr, layout)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Updates the private Pango::Context of a #PangoLayout created with pango_cairo_create_layout() to match the current transformation and target surface of a Cairo context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pango/Layout.html" title="Pango::Layout (class)">Pango::Layout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Pango::Layout, from pango_cairo_create_layout()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Thu Apr  7 02:32:09 2022 by
+  Generated on Thu Apr  7 02:45:53 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.1).
 </div>

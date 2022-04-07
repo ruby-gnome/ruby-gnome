@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::Gesture
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::Gesture";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (G)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">Gesture</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::Gesture
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::Gesture</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device-instance_method" title="#device (instance method)">#<strong>device</strong>  &#x21d2; Gdk::Device </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the master Gdk::Device that is currently operating on <strong>gesture</strong>, or nil if the gesture is not being interacted.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_bounding_box-instance_method" title="#get_bounding_box (instance method)">#<strong>get_bounding_box</strong>(rect)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If there are touch sequences being currently handled by <strong>gesture</strong>, this function returns true and fills in <strong>rect</strong> with the bounding box containing all active touches.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_bounding_box_center-instance_method" title="#get_bounding_box_center (instance method)">#<strong>get_bounding_box_center</strong>(x, y)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If there are touch sequences being currently handled by <strong>gesture</strong>, this function returns true and fills in <strong>x</strong> and <strong>y</strong> with the center of the bounding box containing all active touches.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_last_event-instance_method" title="#get_last_event (instance method)">#<strong>get_last_event</strong>(sequence)  &#x21d2; Gdk::Event </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the last event that was processed for <strong>sequence</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_point-instance_method" title="#get_point (instance method)">#<strong>get_point</strong>(sequence, x, y)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If <strong>sequence</strong> is currently being interpreted by <strong>gesture</strong>, this function returns true and fills in <strong>x</strong> and <strong>y</strong> with the last coordinates stored for that event sequence.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_sequence_state-instance_method" title="#get_sequence_state (instance method)">#<strong>get_sequence_state</strong>(sequence)  &#x21d2; Gtk::EventSequenceState </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the <strong>sequence</strong> state, as seen by <strong>gesture</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#group-instance_method" title="#group (instance method)">#<strong>group</strong>(gesture)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds <strong>gesture</strong> to the same group than <strong>group_gesture</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#handles_sequence-instance_method" title="#handles_sequence (instance method)">#<strong>handles_sequence</strong>(sequence)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if <strong>gesture</strong> is currently handling events corresponding to <strong>sequence</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_active-instance_method" title="#is_active (instance method)">#<strong>is_active</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if the gesture is currently active.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_grouped_with-instance_method" title="#is_grouped_with (instance method)">#<strong>is_grouped_with</strong>(other)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if both gestures pertain to the same group.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_recognized-instance_method" title="#is_recognized (instance method)">#<strong>is_recognized</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if the gesture is currently recognized.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#last_updated_sequence-instance_method" title="#last_updated_sequence (instance method)">#<strong>last_updated_sequence</strong>  &#x21d2; Gdk::EventSequence </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the Gdk::EventSequence that was last updated on <strong>gesture</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_points-instance_method" title="#n_points (instance method)">#<strong>n_points</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The number of touch points that trigger recognition on this gesture,.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_points=-instance_method" title="#n_points= (instance method)">#<strong>n_points=</strong>(n_points)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The number of touch points that trigger recognition on this gesture,.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sequences-instance_method" title="#sequences (instance method)">#<strong>sequences</strong>  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the list of Gdk::EventSequences currently being interpreted by <strong>gesture</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_sequence_state-instance_method" title="#set_sequence_state (instance method)">#<strong>set_sequence_state</strong>(sequence, state)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the state of <strong>sequence</strong> in <strong>gesture</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state=-instance_method" title="#state= (instance method)">#<strong>state=</strong>(state)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the state of all sequences that <strong>gesture</strong> is currently interacting with.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ungroup-instance_method" title="#ungroup (instance method)">#<strong>ungroup</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Separates <strong>gesture</strong> into an isolated group.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#window-instance_method" title="#window (instance method)">#<strong>window</strong>  &#x21d2; Gdk::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If non-nil, the gesture will only listen for events that happen on this Gdk::Window, or a child of it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#window=-instance_method" title="#window= (instance method)">#<strong>window=</strong>(window)  &#x21d2; Gdk::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If non-nil, the gesture will only listen for events that happen on this Gdk::Window, or a child of it.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="device-instance_method">
+  
+    #<strong>device</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Device.html" title="Gdk::Device (class)">Gdk::Device</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the master Gdk::Device that is currently operating on <strong>gesture</strong>, or nil if the gesture is not being interacted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Device.html" title="Gdk::Device (class)">Gdk::Device</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Device, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_bounding_box-instance_method">
+  
+    #<strong>get_bounding_box</strong>(rect)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If there are touch sequences being currently handled by <strong>gesture</strong>, this function returns true and fills in <strong>rect</strong> with the bounding box containing all active touches. Otherwise, false will be returned.</p>
+
+<p>Note: This function will yield unexpected results on touchpad gestures. Since there is no correlation between physical and pixel distances, these will look as if constrained in an infinitely small area, <strong>rect</strong> width and height will thus be 0 regardless of the number of touchpoints.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>bounding box containing all active touches.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if there are active touches, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_bounding_box_center-instance_method">
+  
+    #<strong>get_bounding_box_center</strong>(x, y)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If there are touch sequences being currently handled by <strong>gesture</strong>, this function returns true and fills in <strong>x</strong> and <strong>y</strong> with the center of the bounding box containing all active touches. Otherwise, false will be returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>X coordinate for the bounding box center</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Y coordinate for the bounding box center</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>false if no active touches are present, true otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_last_event-instance_method">
+  
+    #<strong>get_last_event</strong>(sequence)  &#x21d2; <tt>Gdk::Event</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the last event that was processed for <strong>sequence</strong>.</p>
+
+<p>Note that the returned pointer is only valid as long as the <strong>sequence</strong> is still interpreted by the <strong>gesture</strong>. If in doubt, you should make a copy of the event.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sequence</span>
+      
+      
+        <span class='type'>(<tt>Gdk::EventSequence</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::EventSequence</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The last event from <strong>sequence</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_point-instance_method">
+  
+    #<strong>get_point</strong>(sequence, x, y)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If <strong>sequence</strong> is currently being interpreted by <strong>gesture</strong>, this function returns true and fills in <strong>x</strong> and <strong>y</strong> with the last coordinates stored for that event sequence. The coordinates are always relative to the widget allocation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sequence</span>
+      
+      
+        <span class='type'>(<tt>Gdk::EventSequence</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::EventSequence, or nil for pointer events</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for X axis of the sequence coordinates</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for Y axis of the sequence coordinates</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>sequence</strong> is currently interpreted</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_sequence_state-instance_method">
+  
+    #<strong>get_sequence_state</strong>(sequence)  &#x21d2; <tt><span class='object_link'><a href="EventSequenceState.html" title="Gtk::EventSequenceState (module)">Gtk::EventSequenceState</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the <strong>sequence</strong> state, as seen by <strong>gesture</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sequence</span>
+      
+      
+        <span class='type'>(<tt>Gdk::EventSequence</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::EventSequence</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="EventSequenceState.html" title="Gtk::EventSequenceState (module)">Gtk::EventSequenceState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The sequence state in <strong>gesture</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="group-instance_method">
+  
+    #<strong>group</strong>(gesture)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds <strong>gesture</strong> to the same group than <strong>group_gesture</strong>. Gestures are by default isolated in their own groups.</p>
+
+<p>When gestures are grouped, the state of Gdk::EventSequences is kept in sync for all of those, so calling gtk_gesture_set_sequence_state(), on one will transfer the same value to the others.</p>
+
+<p>Groups also perform an “implicit grabbing” of sequences, if a Gdk::EventSequence state is set to #GTK_EVENT_SEQUENCE_CLAIMED on one group, every other gesture group attached to the same Gtk::Widget will switch the state for that sequence to #GTK_EVENT_SEQUENCE_DENIED.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gesture</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Gesture (class)">Gtk::Gesture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::Gesture</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="handles_sequence-instance_method">
+  
+    #<strong>handles_sequence</strong>(sequence)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if <strong>gesture</strong> is currently handling events corresponding to <strong>sequence</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sequence</span>
+      
+      
+        <span class='type'>(<tt>Gdk::EventSequence</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::EventSequence or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>gesture</strong> is handling <strong>sequence</strong>, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_active-instance_method">
+  
+    #<strong>is_active</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if the gesture is currently active. A gesture is active meanwhile there are touch sequences interacting with it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if gesture is active</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_grouped_with-instance_method">
+  
+    #<strong>is_grouped_with</strong>(other)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if both gestures pertain to the same group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>other</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Gesture (class)">Gtk::Gesture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>another Gtk::Gesture</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the gestures are grouped</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_recognized-instance_method">
+  
+    #<strong>is_recognized</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if the gesture is currently recognized. A gesture is recognized if there are as many interacting touch sequences as required by <strong>gesture</strong>, and Gtk::Gesture::check returned true for the sequences being currently interpreted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if gesture is recognized</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="last_updated_sequence-instance_method">
+  
+    #<strong>last_updated_sequence</strong>  &#x21d2; <tt>Gdk::EventSequence</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the Gdk::EventSequence that was last updated on <strong>gesture</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::EventSequence</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The last updated sequence</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_points-instance_method">
+  
+    #<strong>n_points</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The number of touch points that trigger recognition on this gesture,</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>n-points</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_points=-instance_method">
+  
+    #<strong>n_points=</strong>(n_points)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The number of touch points that trigger recognition on this gesture,</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_points</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>n-points</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>n-points</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sequences-instance_method">
+  
+    #<strong>sequences</strong>  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the list of Gdk::EventSequences currently being interpreted by <strong>gesture</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A list of Gdk::EventSequences, the list elements are owned by GTK+ and must not be freed or modified, the list itself must be deleted through g_list_free()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_sequence_state-instance_method">
+  
+    #<strong>set_sequence_state</strong>(sequence, state)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the state of <strong>sequence</strong> in <strong>gesture</strong>. Sequences start in state #GTK_EVENT_SEQUENCE_NONE, and whenever they change state, they can never go back to that state. Likewise, sequences in state #GTK_EVENT_SEQUENCE_DENIED cannot turn back to a not denied state. With these rules, the lifetime of an event sequence is constrained to the next four:</p>
+<ul><li>
+<p>None</p>
+</li><li>
+<p>None → Denied</p>
+</li><li>
+<p>None → Claimed</p>
+</li><li>
+<p>None → Claimed → Denied</p>
+</li></ul>
+
+<p>Note: Due to event handling ordering, it may be unsafe to set the state on another gesture within a Gtk::Gesture::begin signal handler, as the callback might be executed before the other gesture knows about the sequence. A safe way to perform this could be:</p>
+
+<p>|[ static void first_gesture_begin_cb (GtkGesture       *first_gesture,</p>
+
+<pre class="code ruby"><code class="ruby">GdkEventSequence *sequence,
+gpointer          user_data)
+</code></pre>
+
+<p>
+<pre class="code ruby"><code class="ruby">gtk_gesture_set_sequence_state (first_gesture, sequence, GTK_EVENT_SEQUENCE_CLAIMED);
+gtk_gesture_set_sequence_state (second_gesture, sequence, GTK_EVENT_SEQUENCE_DENIED);
+</code></pre>
+
+<p></p>
+
+<p>static void second_gesture_begin_cb (GtkGesture       *second_gesture,</p>
+
+<pre class="code ruby"><code class="ruby">GdkEventSequence *sequence,
+gpointer          user_data)
+</code></pre>
+
+<p>
+<pre class="code ruby"><code class="ruby">if (gtk_gesture_get_sequence_state (first_gesture, sequence) == GTK_EVENT_SEQUENCE_CLAIMED)
+  gtk_gesture_set_sequence_state (second_gesture, sequence, GTK_EVENT_SEQUENCE_DENIED);
+</code></pre>
+
+<p> ]|</p>
+
+<p>If both gestures are in the same group, just set the state on the gesture emitting the event, the sequence will be already be initialized to the group’s global state when the second gesture processes the event.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sequence</span>
+      
+      
+        <span class='type'>(<tt>Gdk::EventSequence</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::EventSequence</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="EventSequenceState.html" title="Gtk::EventSequenceState (module)">Gtk::EventSequenceState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the sequence state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>sequence</strong> is handled by <strong>gesture</strong>, and the state is changed successfully</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="state=-instance_method">
+  
+    #<strong>state=</strong>(state)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the state of all sequences that <strong>gesture</strong> is currently interacting with. See gtk_gesture_set_sequence_state() for more details on sequence states.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="EventSequenceState.html" title="Gtk::EventSequenceState (module)">Gtk::EventSequenceState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the sequence state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the state of at least one sequence was changed successfully</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ungroup-instance_method">
+  
+    #<strong>ungroup</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Separates <strong>gesture</strong> into an isolated group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="window-instance_method">
+  
+    #<strong>window</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If non-nil, the gesture will only listen for events that happen on this Gdk::Window, or a child of it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="window=-instance_method">
+  
+    #<strong>window=</strong>(window)  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If non-nil, the gesture will only listen for events that happen on this Gdk::Window, or a child of it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>window</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>window</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:21 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

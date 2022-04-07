@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gio::TlsClientConnection
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::TlsClientConnection";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">TlsClientConnection</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gio::TlsClientConnection
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>GTls::ClientConnection is the client-side subclass of GTls::Connection, representing a client-side TLS connection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accepted_cas-instance_method" title="#accepted_cas (instance method)">#<strong>accepted_cas</strong>  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the list of distinguished names of the Certificate Authorities that the server will accept certificates from.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy_session_state-instance_method" title="#copy_session_state (instance method)">#<strong>copy_session_state</strong>(source)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Possibly copies session state from one connection to another, for use in TLS session resumption.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#server_identity-instance_method" title="#server_identity (instance method)">#<strong>server_identity</strong>  &#x21d2; Gio::SocketConnectable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>conn</strong>’s expected server identity expected server identity, or nil if the expected identity is not known.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#server_identity=-instance_method" title="#server_identity= (instance method)">#<strong>server_identity=</strong>(identity)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>conn</strong>’s expected server identity, which is used both to tell servers on virtual hosts which certificate to present, and also to let <strong>conn</strong> know what name to look for in the certificate when performing %G_TLS_CERTIFICATE_BAD_IDENTITY validation, if enabled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_ssl3-instance_method" title="#use_ssl3 (instance method)">#<strong>use_ssl3</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>SSL 3.0 is no longer supported.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_ssl3=-instance_method" title="#use_ssl3= (instance method)">#<strong>use_ssl3=</strong>(use_ssl3)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Since GLib 2.42.1, SSL 3.0 is no longer supported.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#validation_flags-instance_method" title="#validation_flags (instance method)">#<strong>validation_flags</strong>  &#x21d2; Gio::TlsCertificateFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>conn</strong>’s validation flags.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#validation_flags=-instance_method" title="#validation_flags= (instance method)">#<strong>validation_flags=</strong>(flags)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>conn</strong>’s validation flags, to override the default set of checks performed when validating a server certificate.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="accepted_cas-instance_method">
+  
+    #<strong>accepted_cas</strong>  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the list of distinguished names of the Certificate Authorities that the server will accept certificates from. This will be set during the TLS handshake if the server requests a certificate. Otherwise, it will be nil.</p>
+
+<p>Each item in the list is a GByte::Array which contains the complete subject DN of the certificate authority. CA DNs. You should unref each element with g_byte_array_unref() and then the free the list with g_list_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the list of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="copy_session_state-instance_method">
+  
+    #<strong>copy_session_state</strong>(source)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Possibly copies session state from one connection to another, for use in TLS session resumption. This is not normally needed, but may be used when the same session needs to be used between different endpoints, as is required by some protocols, such as FTP over TLS. <strong>source</strong> should have already completed a handshake and, since TLS 1.3, it should have been used to read data at least once. <strong>conn</strong> should not have completed a handshake.</p>
+
+<p>It is not possible to know whether a call to this function will actually do anything. Because session resumption is normally used only for performance benefit, the TLS backend might not implement this function. Even if implemented, it may not actually succeed in allowing <strong>conn</strong> to resume <strong>source</strong>’s TLS session, because the server may not have sent a session resumption token to <strong>source</strong>, or it may refuse to accept the token from <strong>conn</strong>. There is no way to know whether a call to this function is actually successful.</p>
+
+<p>Using this function is not required to benefit from session resumption. If the TLS backend supports session resumption, the session will be resumed automatically if it is possible to do so without weakening the privacy guarantees normally provided by TLS, without need to call this function. For example, with TLS 1.3, a session ticket will be automatically copied from any GTls::ClientConnection that has previously received session tickets from the server, provided a ticket is available that has not previously been used for session resumption, since session ticket reuse would be a privacy weakness. Using this function causes the ticket to be copied without regard for privacy considerations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::TlsClientConnection (module)">Gio::TlsClientConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GTls::ClientConnection</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="server_identity-instance_method">
+  
+    #<strong>server_identity</strong>  &#x21d2; <tt><span class='object_link'><a href="SocketConnectable.html" title="Gio::SocketConnectable (module)">Gio::SocketConnectable</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>conn</strong>’s expected server identity expected server identity, or nil if the expected identity is not known.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketConnectable.html" title="Gio::SocketConnectable (module)">Gio::SocketConnectable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Connectable describing the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="server_identity=-instance_method">
+  
+    #<strong>server_identity=</strong>(identity)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>conn</strong>’s expected server identity, which is used both to tell servers on virtual hosts which certificate to present, and also to let <strong>conn</strong> know what name to look for in the certificate when performing %G_TLS_CERTIFICATE_BAD_IDENTITY validation, if enabled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>identity</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketConnectable.html" title="Gio::SocketConnectable (module)">Gio::SocketConnectable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Connectable describing the expected server identity</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_ssl3-instance_method">
+  
+    #<strong>use_ssl3</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>SSL 3.0 is no longer supported. See g_tls_client_connection_set_use_ssl3() for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_ssl3=-instance_method">
+  
+    #<strong>use_ssl3=</strong>(use_ssl3)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Since GLib 2.42.1, SSL 3.0 is no longer supported.</p>
+
+<p>From GLib 2.42.1 through GLib 2.62, this function could be used to force use of TLS 1.0, the lowest-supported TLS protocol version at the time. In the past, this was needed to connect to broken TLS servers that exhibited protocol version intolerance. Such servers are no longer common, and using TLS 1.0 is no longer considered acceptable.</p>
+
+<p>Since GLib 2.64, this function does nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>use_ssl3</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #gboolean, ignored</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="validation_flags-instance_method">
+  
+    #<strong>validation_flags</strong>  &#x21d2; <tt><span class='object_link'><a href="TlsCertificateFlags.html" title="Gio::TlsCertificateFlags (module)">Gio::TlsCertificateFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>conn</strong>’s validation flags</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsCertificateFlags.html" title="Gio::TlsCertificateFlags (module)">Gio::TlsCertificateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the validation flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="validation_flags=-instance_method">
+  
+    #<strong>validation_flags=</strong>(flags)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>conn</strong>’s validation flags, to override the default set of checks performed when validating a server certificate. By default, %G_TLS_CERTIFICATE_VALIDATE_ALL is used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsCertificateFlags.html" title="Gio::TlsCertificateFlags (module)">Gio::TlsCertificateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the GTls::CertificateFlags to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:51 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

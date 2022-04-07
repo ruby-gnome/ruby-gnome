@@ -1,0 +1,3231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::TreeModel
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::TreeModel";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">TreeModel</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::TreeModel
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The Gtk::TreeModel interface defines a generic tree interface for use by the Gtk::TreeView widget. It is an abstract interface, and is designed to be usable with any appropriate data structure. The programmer just has to implement this interface on their own data type for it to be viewable by a Gtk::TreeView widget.</p>
+
+<p>The model is represented as a hierarchical tree of strongly-typed, columned data. In other words, the model can be seen as a tree where every node has different values depending on which column is being queried. The type of data found in a column is determined by using the GType system (ie. #G_TYPE_INT, #GTK_TYPE_BUTTON, #G_TYPE_POINTER, etc). The types are homogeneous per column across all nodes. It is important to note that this interface only provides a way of examining a model and observing changes. The implementation of each individual model decides how and if changes are made.</p>
+
+<p>In order to make life simpler for programmers who do not need to write their own specialized model, two generic models are provided — the Gtk::TreeStore and the #GtkListStore. To use these, the developer simply pushes data into these models as necessary. These models provide the data structure as well as all appropriate tree interfaces. As a result, implementing drag and drop, sorting, and storing data is trivial. For the vast majority of trees and lists, these two models are sufficient.</p>
+
+<p>Models are accessed on a node/column level of granularity. One can query for the value of a model at a certain node and a certain column on that node. There are two structures used to reference a particular node in a model. They are the Gtk::TreePath-struct and the Gtk::TreeIter-struct (“iter” is short for iterator). Most of the interface consists of operations on a Gtk::TreeIter-struct.</p>
+
+<p>A path is essentially a potential node. It is a location on a model that may or may not actually correspond to a node on a specific model. The Gtk::TreePath-struct can be converted into either an array of unsigned integers or a string. The string form is a list of numbers separated by a colon. Each number refers to the offset at that level. Thus, the path ‘0` refers to the root node and the path `2:4` refers to the fifth child of the third node.</p>
+
+<p>By contrast, a Gtk::TreeIter-struct is a reference to a specific node on a specific model. It is a generic struct with an integer and three generic pointers. These are filled in by the model in a model-specific way. One can convert a path to an iterator by calling gtk_tree_model_get_iter(). These iterators are the primary way of accessing a model and are similar to the iterators used by Gtk::TextBuffer. They are generally statically allocated on the stack and only used for a short time. The model interface defines a set of operations using them for navigating the model.</p>
+
+<p>It is expected that models fill in the iterator with private data. For example, the Gtk::ListStore model, which is internally a simple linked list, stores a list node in one of the pointers. The Gtk::TreeModelSort stores an array and an offset in two of the pointers. Additionally, there is an integer field. This field is generally filled with a unique stamp per model. This stamp is for catching errors resulting from using invalid iterators with a model.</p>
+
+<p>The lifecycle of an iterator can be a little confusing at first. Iterators are expected to always be valid for as long as the model is unchanged (and doesn’t emit a signal). The model is considered to own all outstanding iterators and nothing needs to be done to free them from the user’s point of view. Additionally, some models guarantee that an iterator is valid for as long as the node it refers to is valid (most notably the Gtk::TreeStore and #GtkListStore). Although generally uninteresting, as one always has to allow for the case where iterators do not persist beyond a signal, some very important performance enhancements were made in the sort model. As a result, the #GTK_TREE_MODEL_ITERS_PERSIST flag was added to indicate this behavior.</p>
+
+<p>To help show some common operation of a model, some examples are provided. The first example shows three ways of getting the iter at the location ‘3:2:5`. While the first method shown is easier, the second is much more common, as you often get paths from callbacks.</p>
+
+<p>## Acquiring a Gtk::TreeIter-struct</p>
+
+<pre class="code ruby"><code class="ruby">enum
+{
+  STRING_COLUMN,
+  INT_COLUMN,
+  N_COLUMNS
+};
+
+...
+
+GtkTreeModel *list_store;
+GtkTreeIter iter;
+gboolean valid;
+gint row_count = 0;
+
+// make a new list_store
+list_store = gtk_list_store_new (N_COLUMNS,
+                                 G_TYPE_STRING,
+                                 G_TYPE_INT);
+
+// Fill the list store with data
+populate_model (list_store);
+
+// Get the first iter in the list, check it is valid and walk
+// through the list, reading each row.
+
+valid = gtk_tree_model_get_iter_first (list_store,
+                                       &amp;iter);
+while (valid)
+ {
+   gchar *str_data;
+   gint   int_data;
+
+   // Make sure you terminate calls to gtk_tree_model_get() with a “-1” value
+   gtk_tree_model_get (list_store, &amp;iter,
+                       STRING_COLUMN, &amp;str_data,
+                       INT_COLUMN, &amp;int_data,
+                       -1);
+
+   // Do something with the data
+   g_print (&quot;Row %d: (%s,%d)\n&quot;,
+            row_count, str_data, int_data);
+   g_free (str_data);
+
+   valid = gtk_tree_model_iter_next (list_store,
+                                     &amp;iter);
+   row_count++;
+ }
+</code></pre>
+
+<p>The Gtk::TreeModel interface contains two methods for reference counting: gtk_tree_model_ref_node() and gtk_tree_model_unref_node(). These two methods are optional to implement. The reference counting is meant as a way for views to let models know when nodes are being displayed. Gtk::TreeView will take a reference on a node when it is visible, which means the node is either in the toplevel or expanded. Being displayed does not mean that the node is currently directly visible to the user in the viewport. Based on this reference counting scheme a caching model, for example, can decide whether or not to cache a node based on the reference count. A file-system based model would not want to keep the entire file hierarchy in memory, but just the folders that are currently expanded in every current view.</p>
+
+<p>When working with reference counting, the following rules must be taken into account:</p>
+<ul><li>
+<p>Never take a reference on a node without owning a reference on its parent. This means that all parent nodes of a referenced node must be referenced as well.</p>
+</li><li>
+<p>Outstanding references on a deleted node are not released. This is not possible because the node has already been deleted by the time the row-deleted signal is received.</p>
+</li><li>
+<p>Models are not obligated to emit a signal on rows of which none of its siblings are referenced. To phrase this differently, signals are only required for levels in which nodes are referenced. For the root level however, signals must be emitted at all times (however the root level is always referenced when any view is attached).</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filter_new-instance_method" title="#filter_new (instance method)">#<strong>filter_new</strong>(root)  &#x21d2; Gtk::TreeModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Gtk::TreeModel, with <strong>child_model</strong> as the child_model and <strong>root</strong> as the virtual root.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flags-instance_method" title="#flags (instance method)">#<strong>flags</strong>  &#x21d2; Gtk::TreeModelFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a set of flags supported by this interface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#foreach-instance_method" title="#foreach (instance method)">#<strong>foreach</strong>(func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calls func on each node in model in a depth-first fashion.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get-instance_method" title="#get (instance method)">#<strong>get</strong>(iter, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the value of one or more cells in the row referenced by <strong>iter</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_column_type-instance_method" title="#get_column_type (instance method)">#<strong>get_column_type</strong>(tree_model, index_)  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The type of the column.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_flags-instance_method" title="#get_flags (instance method)">#<strong>get_flags</strong>(tree_model)  &#x21d2; Gtk::TreeModelFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The flags supported by this interface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_iter-instance_method" title="#get_iter (instance method)">#<strong>get_iter</strong>(tree_model, iter, path)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True, if <strong>iter</strong> was set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_iter_first-instance_method" title="#get_iter_first (instance method)">#<strong>get_iter_first</strong>(iter)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Initializes <strong>iter</strong> with the first iterator in the tree (the one at the path “0”) and returns true.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_iter_from_string-instance_method" title="#get_iter_from_string (instance method)">#<strong>get_iter_from_string</strong>(iter, path_string)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>iter</strong> to a valid iterator pointing to <strong>path_string</strong>, if it exists.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_n_columns-instance_method" title="#get_n_columns (instance method)">#<strong>get_n_columns</strong>(tree_model)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The number of columns.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_path-instance_method" title="#get_path (instance method)">#<strong>get_path</strong>(tree_model, iter)  &#x21d2; Gtk::TreePath </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A newly-created Gtk::TreePath-struct.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_string_from_iter-instance_method" title="#get_string_from_iter (instance method)">#<strong>get_string_from_iter</strong>(iter)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Generates a string representation of the iter.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_valist-instance_method" title="#get_valist (instance method)">#<strong>get_valist</strong>(iter, var_args)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>See gtk_tree_model_get(), this version takes a va_list for language bindings to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_value-instance_method" title="#get_value (instance method)">#<strong>get_value</strong>(tree_model, iter, column, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_children-instance_method" title="#iter_children (instance method)">#<strong>iter_children</strong>(tree_model, iter, parent)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True, if <strong>iter</strong> has been set to the first child.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_has_child-instance_method" title="#iter_has_child (instance method)">#<strong>iter_has_child</strong>(tree_model, iter)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True if <strong>iter</strong> has children.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_n_children-instance_method" title="#iter_n_children (instance method)">#<strong>iter_n_children</strong>(tree_model, iter)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The number of children of <strong>iter</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_next-instance_method" title="#iter_next (instance method)">#<strong>iter_next</strong>(tree_model, iter)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True if <strong>iter</strong> has been changed to the next node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_nth_child-instance_method" title="#iter_nth_child (instance method)">#<strong>iter_nth_child</strong>(tree_model, iter, parent, n)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True, if <strong>parent</strong> has an <strong>n</strong>-th child.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_parent-instance_method" title="#iter_parent (instance method)">#<strong>iter_parent</strong>(tree_model, iter, child)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True, if <strong>iter</strong> is set to the parent of <strong>child</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_previous-instance_method" title="#iter_previous (instance method)">#<strong>iter_previous</strong>(tree_model, iter)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True if <strong>iter</strong> has been changed to the previous node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_columns-instance_method" title="#n_columns (instance method)">#<strong>n_columns</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the number of columns supported by <strong>tree_model</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ref_node-instance_method" title="#ref_node (instance method)">#<strong>ref_node</strong>(tree_model, iter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_changed-instance_method" title="#row_changed (instance method)">#<strong>row_changed</strong>(tree_model, path, iter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_deleted-instance_method" title="#row_deleted (instance method)">#<strong>row_deleted</strong>(tree_model, path)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_has_child_toggled-instance_method" title="#row_has_child_toggled (instance method)">#<strong>row_has_child_toggled</strong>(tree_model, path, iter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_inserted-instance_method" title="#row_inserted (instance method)">#<strong>row_inserted</strong>(tree_model, path, iter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rows_reordered-instance_method" title="#rows_reordered (instance method)">#<strong>rows_reordered</strong>(tree_model, path, iter, new_order)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rows_reordered_with_length-instance_method" title="#rows_reordered_with_length (instance method)">#<strong>rows_reordered_with_length</strong>(path, iter, new_order, length)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Emits the Gtk::TreeModel::rows-reordered signal on <strong>tree_model</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unref_node-instance_method" title="#unref_node (instance method)">#<strong>unref_node</strong>(tree_model, iter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="filter_new-instance_method">
+  
+    #<strong>filter_new</strong>(root)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new Gtk::TreeModel, with <strong>child_model</strong> as the child_model and <strong>root</strong> as the virtual root.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>root</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A Gtk::TreePath or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A new Gtk::TreeModel.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flags-instance_method">
+  
+    #<strong>flags</strong>  &#x21d2; <tt><span class='object_link'><a href="TreeModelFlags.html" title="Gtk::TreeModelFlags (module)">Gtk::TreeModelFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a set of flags supported by this interface.</p>
+
+<p>The flags are a bitwise combination of Gtk::TreeModelFlags. The flags supported should not change during the lifetime of the <strong>tree_model</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModelFlags.html" title="Gtk::TreeModelFlags (module)">Gtk::TreeModelFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the flags supported by this interface</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="foreach-instance_method">
+  
+    #<strong>foreach</strong>(func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calls func on each node in model in a depth-first fashion.</p>
+
+<p>If <strong>func</strong> returns true, then the tree ceases to be walked, and gtk_tree_model_foreach() returns.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeModelForeachFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a function to be called on each row</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data to passed to <strong>func</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get-instance_method">
+  
+    #<strong>get</strong>(iter, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the value of one or more cells in the row referenced by <strong>iter</strong>. The variable argument list should contain integer column numbers, each column number followed by a place to store the value being retrieved.  The list is terminated by a -1. For example, to get a value from column 0 with type %G_TYPE_STRING, you would write: ‘gtk_tree_model_get (model, iter, 0, &amp;place_string_here, -1)`, where `place_string_here` is a #gchararray to be filled with the string.</p>
+
+<p>Returned values with type %G_TYPE_OBJECT have to be unreferenced, values with type %G_TYPE_STRING or %G_TYPE_BOXED have to be freed. Other values are passed by value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a row in <strong>tree_model</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>pairs of column number and value return locations, terminated by -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_column_type-instance_method">
+  
+    #<strong>get_column_type</strong>(tree_model, index_)  &#x21d2; <tt><span class='object_link'><a href="../GLib/Type.html" title="GLib::Type (class)">GLib::Type</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the type of the column.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>index_</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the column index</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/Type.html" title="GLib::Type (class)">GLib::Type</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the type of the column</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_flags-instance_method">
+  
+    #<strong>get_flags</strong>(tree_model)  &#x21d2; <tt><span class='object_link'><a href="TreeModelFlags.html" title="Gtk::TreeModelFlags (module)">Gtk::TreeModelFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the flags supported by this interface.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModelFlags.html" title="Gtk::TreeModelFlags (module)">Gtk::TreeModelFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the flags supported by this interface</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_iter-instance_method">
+  
+    #<strong>get_iter</strong>(tree_model, iter, path)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true, if <strong>iter</strong> was set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the uninitialized Gtk::TreeIter-struct</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreePath-struct</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true, if <strong>iter</strong> was set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_iter_first-instance_method">
+  
+    #<strong>get_iter_first</strong>(iter)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Initializes <strong>iter</strong> with the first iterator in the tree (the one at the path “0”) and returns true. Returns false if the tree is empty.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the uninitialized Gtk::TreeIter-struct</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true, if <strong>iter</strong> was set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_iter_from_string-instance_method">
+  
+    #<strong>get_iter_from_string</strong>(iter, path_string)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>iter</strong> to a valid iterator pointing to <strong>path_string</strong>, if it exists. Otherwise, <strong>iter</strong> is left invalid and false is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an uninitialized Gtk::TreeIter-struct</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path_string</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a string representation of a Gtk::TreePath-struct</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true, if <strong>iter</strong> was set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_n_columns-instance_method">
+  
+    #<strong>get_n_columns</strong>(tree_model)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the number of columns.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of columns</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_path-instance_method">
+  
+    #<strong>get_path</strong>(tree_model, iter)  &#x21d2; <tt>Gtk::TreePath</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a newly-created Gtk::TreePath-struct.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-created Gtk::TreePath-struct</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_string_from_iter-instance_method">
+  
+    #<strong>get_string_from_iter</strong>(iter)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Generates a string representation of the iter.</p>
+
+<p>This string is a “:” separated list of numbers. For example, “4:10:0:3” would be an acceptable return value for this string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeIter-struct</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly-allocated string. Must be freed with g_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_valist-instance_method">
+  
+    #<strong>get_valist</strong>(iter, var_args)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>See gtk_tree_model_get(), this version takes a va_list for language bindings to use.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a row in <strong>tree_model</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>var_args</span>
+      
+      
+        <span class='type'>(<tt>Gtk::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>va_list of column/return location pairs</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_value-instance_method">
+  
+    #<strong>get_value</strong>(tree_model, iter, column, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>column</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the column to lookup the value at</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an empty #GValue to set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_children-instance_method">
+  
+    #<strong>iter_children</strong>(tree_model, iter, parent)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true, if <strong>iter</strong> has been set to the first child.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new Gtk::TreeIter-struct to be set to the child</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true, if <strong>iter</strong> has been set to the first child</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_has_child-instance_method">
+  
+    #<strong>iter_has_child</strong>(tree_model, iter)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if <strong>iter</strong> has children.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct to test for children</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>iter</strong> has children</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_n_children-instance_method">
+  
+    #<strong>iter_n_children</strong>(tree_model, iter)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the number of children of <strong>iter</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of children of <strong>iter</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_next-instance_method">
+  
+    #<strong>iter_next</strong>(tree_model, iter)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if <strong>iter</strong> has been changed to the next node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>iter</strong> has been changed to the next node</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_nth_child-instance_method">
+  
+    #<strong>iter_nth_child</strong>(tree_model, iter, parent, n)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true, if <strong>parent</strong> has an <strong>n</strong>-th child.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct to set to the nth child</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct to get the child from, or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the index of the desired child</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true, if <strong>parent</strong> has an <strong>n</strong>-th child</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_parent-instance_method">
+  
+    #<strong>iter_parent</strong>(tree_model, iter, child)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true, if <strong>iter</strong> is set to the parent of <strong>child</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new Gtk::TreeIter-struct to set to the parent</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true, if <strong>iter</strong> is set to the parent of <strong>child</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_previous-instance_method">
+  
+    #<strong>iter_previous</strong>(tree_model, iter)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if <strong>iter</strong> has been changed to the previous node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>iter</strong> has been changed to the previous node</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_columns-instance_method">
+  
+    #<strong>n_columns</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the number of columns supported by <strong>tree_model</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of columns</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ref_node-instance_method">
+  
+    #<strong>ref_node</strong>(tree_model, iter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="row_changed-instance_method">
+  
+    #<strong>row_changed</strong>(tree_model, path, iter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreePath-struct pointing to the changed row</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a valid Gtk::TreeIter-struct pointing to the changed row</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="row_deleted-instance_method">
+  
+    #<strong>row_deleted</strong>(tree_model, path)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreePath-struct pointing to the previous location of the deleted row</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="row_has_child_toggled-instance_method">
+  
+    #<strong>row_has_child_toggled</strong>(tree_model, path, iter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreePath-struct pointing to the changed row</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a valid Gtk::TreeIter-struct pointing to the changed row</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="row_inserted-instance_method">
+  
+    #<strong>row_inserted</strong>(tree_model, path, iter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreePath-struct pointing to the inserted row</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a valid Gtk::TreeIter-struct pointing to the inserted row</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rows_reordered-instance_method">
+  
+    #<strong>rows_reordered</strong>(tree_model, path, iter, new_order)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreePath-struct pointing to the tree node whose children have been reordered</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a valid Gtk::TreeIter-struct pointing to the node whose children have been reordered, or nil if the depth of <strong>path</strong> is 0</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>new_order</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of integers mapping the current position of each child to its old position before the re-ordering, i.e. <strong>new_order</strong><a href="newpos">`</a> = oldpos`</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rows_reordered_with_length-instance_method">
+  
+    #<strong>rows_reordered_with_length</strong>(path, iter, new_order, length)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Emits the Gtk::TreeModel::rows-reordered signal on <strong>tree_model</strong>.</p>
+
+<p>This should be called by models when their rows have been reordered.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreePath-struct pointing to the tree node whose children have been reordered</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a valid Gtk::TreeIter-struct pointing to the node whose children have been reordered, or nil if the depth of <strong>path</strong> is 0</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>new_order</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of integers mapping the current position of each child to its old position before the re-ordering, i.e. <strong>new_order</strong><a href="newpos">`</a> = oldpos`</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of <strong>new_order</strong> array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unref_node-instance_method">
+  
+    #<strong>unref_node</strong>(tree_model, iter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tree_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TreeIter-struct</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:01 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

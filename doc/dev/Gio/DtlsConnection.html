@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gio::DtlsConnection
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::DtlsConnection";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">DtlsConnection</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gio::DtlsConnection
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>GDtls::Connection is the base DTLS connection class type, which wraps a GDatagram::Based and provides DTLS encryption on top of it. Its subclasses, GDtls::ClientConnection and #GDtlsServerConnection, implement client-side and server-side DTLS, respectively.</p>
+
+<p>For TLS support, see GTls::Connection.</p>
+
+<p>As DTLS is datagram based, GDtls::Connection implements #GDatagramBased, presenting a datagram-socket-like API for the encrypted connection. This operates over a base datagram connection, which is also a GDatagram::Based (GDtls::Connection:base-socket).</p>
+
+<p>To close a DTLS connection, use g_dtls_connection_close().</p>
+
+<p>Neither GDtls::ServerConnection or #GDtlsClientConnection set the peer address on their base GDatagram::Based if it is a #GSocket — it is up to the caller to do that if they wish. If they do not, and g_socket_close() is called on the base socket, the GDtls::Connection will not raise a %G_IO_ERROR_NOT_CONNECTED error on further I/O.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accept_certificate-instance_method" title="#accept_certificate (instance method)">#<strong>accept_certificate</strong>(peer_cert, errors)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#advertised_protocols=-instance_method" title="#advertised_protocols= (instance method)">#<strong>advertised_protocols=</strong>(protocols)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the list of application-layer protocols to advertise that the caller is willing to speak on this connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#certificate-instance_method" title="#certificate (instance method)">#<strong>certificate</strong>  &#x21d2; Gio::TlsCertificate </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>conn</strong>’s certificate, as set by g_dtls_connection_set_certificate().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#certificate=-instance_method" title="#certificate= (instance method)">#<strong>certificate=</strong>(certificate)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This sets the certificate that <strong>conn</strong> will present to its peer during the TLS handshake.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">#<strong>close</strong>(cancellable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Close the DTLS connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_async-instance_method" title="#close_async (instance method)">#<strong>close_async</strong>(io_priority, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Asynchronously close the DTLS connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_finish-instance_method" title="#close_finish (instance method)">#<strong>close_finish</strong>(result)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finish an asynchronous TLS close operation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#database-instance_method" title="#database (instance method)">#<strong>database</strong>  &#x21d2; Gio::TlsDatabase </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the certificate database that <strong>conn</strong> uses to verify peer certificates.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#database=-instance_method" title="#database= (instance method)">#<strong>database=</strong>(database)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the certificate database that is used to verify peer certificates.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#emit_accept_certificate-instance_method" title="#emit_accept_certificate (instance method)">#<strong>emit_accept_certificate</strong>(peer_cert, errors)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Used by GDtls::Connection implementations to emit the GDtls::Connection::accept-certificate signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#handshake-instance_method" title="#handshake (instance method)">#<strong>handshake</strong>(cancellable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Attempts a TLS handshake on <strong>conn</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#handshake_async-instance_method" title="#handshake_async (instance method)">#<strong>handshake_async</strong>(io_priority, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Asynchronously performs a TLS handshake on <strong>conn</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#handshake_finish-instance_method" title="#handshake_finish (instance method)">#<strong>handshake_finish</strong>(result)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finish an asynchronous TLS handshake operation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#interaction-instance_method" title="#interaction (instance method)">#<strong>interaction</strong>  &#x21d2; Gio::TlsInteraction </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the object that will be used to interact with the user.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#interaction=-instance_method" title="#interaction= (instance method)">#<strong>interaction=</strong>(interaction)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the object that will be used to interact with the user.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#negotiated_protocol-instance_method" title="#negotiated_protocol (instance method)">#<strong>negotiated_protocol</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the name of the application-layer protocol negotiated during the handshake.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peer_certificate-instance_method" title="#peer_certificate (instance method)">#<strong>peer_certificate</strong>  &#x21d2; Gio::TlsCertificate </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>conn</strong>’s peer’s certificate after the handshake has completed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peer_certificate_errors-instance_method" title="#peer_certificate_errors (instance method)">#<strong>peer_certificate_errors</strong>  &#x21d2; Gio::TlsCertificateFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the errors associated with validating <strong>conn</strong>’s peer’s certificate, after the handshake has completed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rehandshake_mode-instance_method" title="#rehandshake_mode (instance method)">#<strong>rehandshake_mode</strong>  &#x21d2; Gio::TlsRehandshakeMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets <strong>conn</strong> rehandshaking mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rehandshake_mode=-instance_method" title="#rehandshake_mode= (instance method)">#<strong>rehandshake_mode=</strong>(mode)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Since GLib 2.64, changing the rehandshake mode is no longer supported and will have no effect.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#require_close_notify-instance_method" title="#require_close_notify (instance method)">#<strong>require_close_notify</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Tests whether or not <strong>conn</strong> expects a proper TLS close notification when the connection is closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#require_close_notify=-instance_method" title="#require_close_notify= (instance method)">#<strong>require_close_notify=</strong>(require_close_notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets whether or not <strong>conn</strong> expects a proper TLS close notification before the connection is closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shutdown-instance_method" title="#shutdown (instance method)">#<strong>shutdown</strong>(shutdown_read, shutdown_write, cancellable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Shut down part or all of a DTLS connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shutdown_async-instance_method" title="#shutdown_async (instance method)">#<strong>shutdown_async</strong>(shutdown_read, shutdown_write, io_priority, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Asynchronously shut down part or all of the DTLS connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shutdown_finish-instance_method" title="#shutdown_finish (instance method)">#<strong>shutdown_finish</strong>(result)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finish an asynchronous TLS shutdown operation.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="accept_certificate-instance_method">
+  
+    #<strong>accept_certificate</strong>(peer_cert, errors)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>peer_cert</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsCertificate.html" title="Gio::TlsCertificate (class)">Gio::TlsCertificate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>errors</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsCertificateFlags.html" title="Gio::TlsCertificateFlags (module)">Gio::TlsCertificateFlags</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="advertised_protocols=-instance_method">
+  
+    #<strong>advertised_protocols=</strong>(protocols)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the list of application-layer protocols to advertise that the caller is willing to speak on this connection. The Application-Layer Protocol Negotiation (ALPN) extension will be used to negotiate a compatible protocol with the peer; use g_dtls_connection_get_negotiated_protocol() to find the negotiated protocol after the handshake.  Specifying nil for the the value of <strong>protocols</strong> will disable ALPN negotiation.</p>
+
+<p>See [IANA TLS ALPN Protocol IDs](<a href="https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids">www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids</a>) for a list of registered protocol IDs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>protocols</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a nil-terminated array of ALPN protocol names (eg, “http/1.1”, “h2”), or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="certificate-instance_method">
+  
+    #<strong>certificate</strong>  &#x21d2; <tt><span class='object_link'><a href="TlsCertificate.html" title="Gio::TlsCertificate (class)">Gio::TlsCertificate</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>conn</strong>’s certificate, as set by g_dtls_connection_set_certificate().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsCertificate.html" title="Gio::TlsCertificate (class)">Gio::TlsCertificate</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>conn</strong>’s certificate, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="certificate=-instance_method">
+  
+    #<strong>certificate=</strong>(certificate)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This sets the certificate that <strong>conn</strong> will present to its peer during the TLS handshake. For a GDtls::ServerConnection, it is mandatory to set this, and that will normally be done at construct time.</p>
+
+<p>For a GDtls::ClientConnection, this is optional. If a handshake fails with %G_TLS_ERROR_CERTIFICATE_REQUIRED, that means that the server requires a certificate, and if you try connecting again, you should call this method first. You can call g_dtls_client_connection_get_accepted_cas() on the failed connection to get a list of Certificate Authorities that the server will accept certificates from.</p>
+
+<p>(It is also possible that a server will allow the connection with or without a certificate; in that case, if you don’t provide a certificate, you can tell that the server requested one by the fact that g_dtls_client_connection_get_accepted_cas() will return non-nil.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>certificate</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsCertificate.html" title="Gio::TlsCertificate (class)">Gio::TlsCertificate</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the certificate to use for <strong>conn</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close-instance_method">
+  
+    #<strong>close</strong>(cancellable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Close the DTLS connection. This is equivalent to calling g_dtls_connection_shutdown() to shut down both sides of the connection.</p>
+
+<p>Closing a GDtls::Connection waits for all buffered but untransmitted data to be sent before it completes. It then sends a ‘close_notify` DTLS alert to the peer and may wait for a `close_notify` to be received from the peer. It does not close the underlying GDtls::Connection:base-socket; that must be closed separately.</p>
+
+<p>Once <strong>conn</strong> is closed, all other operations will return %G_IO_ERROR_CLOSED. Closing a GDtls::Connection multiple times will not return an error.</p>
+
+<p>GDtls::Connections will be automatically closed when the last reference is dropped, but you might want to call this function to make sure resources are released as early as possible.</p>
+
+<p>If <strong>cancellable</strong> is cancelled, the GDtls::Connection may be left partially-closed and any pending untransmitted data may be lost. Call g_dtls_connection_close() again to complete closing the GDtls::Connection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_async-instance_method">
+  
+    #<strong>close_async</strong>(io_priority, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Asynchronously close the DTLS connection. See g_dtls_connection_close() for more information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>io_priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the [I/O <a href="io-priority">priority]</a> of the request</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>callback to call when the close operation is complete</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the data to pass to the callback function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_finish-instance_method">
+  
+    #<strong>close_finish</strong>(result)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finish an asynchronous TLS close operation. See g_dtls_connection_close() for more information. case <strong>error</strong> will be set</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on failure, in which</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="database-instance_method">
+  
+    #<strong>database</strong>  &#x21d2; <tt><span class='object_link'><a href="TlsDatabase.html" title="Gio::TlsDatabase (class)">Gio::TlsDatabase</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the certificate database that <strong>conn</strong> uses to verify peer certificates. See g_dtls_connection_set_database().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsDatabase.html" title="Gio::TlsDatabase (class)">Gio::TlsDatabase</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the certificate database that <strong>conn</strong> uses or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="database=-instance_method">
+  
+    #<strong>database=</strong>(database)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the certificate database that is used to verify peer certificates. This is set to the default database by default. See g_tls_backend_get_default_database(). If set to nil, then peer certificate validation will always set the %G_TLS_CERTIFICATE_UNKNOWN_CA error (meaning GDtls::Connection::accept-certificate will always be emitted on client-side connections, unless that bit is not set in GDtls::ClientConnection:validation-flags).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>database</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsDatabase.html" title="Gio::TlsDatabase (class)">Gio::TlsDatabase</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GTls::Database</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="emit_accept_certificate-instance_method">
+  
+    #<strong>emit_accept_certificate</strong>(peer_cert, errors)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Used by GDtls::Connection implementations to emit the GDtls::Connection::accept-certificate signal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>peer_cert</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsCertificate.html" title="Gio::TlsCertificate (class)">Gio::TlsCertificate</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the peer’s GTls::Certificate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>errors</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsCertificateFlags.html" title="Gio::TlsCertificateFlags (module)">Gio::TlsCertificateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the problems with <strong>peer_cert</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if one of the signal handlers has returned true to accept <strong>peer_cert</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="handshake-instance_method">
+  
+    #<strong>handshake</strong>(cancellable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Attempts a TLS handshake on <strong>conn</strong>.</p>
+
+<p>On the client side, it is never necessary to call this method; although the connection needs to perform a handshake after connecting, GDtls::Connection will handle this for you automatically when you try to send or receive data on the connection. You can call g_dtls_connection_handshake() manually if you want to know whether the initial handshake succeeded or failed (as opposed to just immediately trying to use <strong>conn</strong> to read or write, in which case, if it fails, it may not be possible to tell if it failed before or after completing the handshake), but beware that servers may reject client authentication after the handshake has completed, so a successful handshake does not indicate the connection will be usable.</p>
+
+<p>Likewise, on the server side, although a handshake is necessary at the beginning of the communication, you do not need to call this function explicitly unless you want clearer error reporting.</p>
+
+<p>Previously, calling g_dtls_connection_handshake() after the initial handshake would trigger a rehandshake; however, this usage was deprecated in GLib 2.60 because rehandshaking was removed from the TLS protocol in TLS 1.3. Since GLib 2.64, calling this function after the initial handshake will no longer do anything.</p>
+
+<p>GDtls::Connection::accept_certificate may be emitted during the handshake.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>success or failure</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="handshake_async-instance_method">
+  
+    #<strong>handshake_async</strong>(io_priority, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Asynchronously performs a TLS handshake on <strong>conn</strong>. See g_dtls_connection_handshake() for more information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>io_priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the [I/O <a href="io-priority">priority]</a> of the request</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>callback to call when the handshake is complete</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the data to pass to the callback function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="handshake_finish-instance_method">
+  
+    #<strong>handshake_finish</strong>(result)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finish an asynchronous TLS handshake operation. See g_dtls_connection_handshake() for more information. case <strong>error</strong> will be set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on failure, in which</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="interaction-instance_method">
+  
+    #<strong>interaction</strong>  &#x21d2; <tt><span class='object_link'><a href="TlsInteraction.html" title="Gio::TlsInteraction (class)">Gio::TlsInteraction</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the object that will be used to interact with the user. It will be used for things like prompting the user for passwords. If nil is returned, then no user interaction will occur for this connection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsInteraction.html" title="Gio::TlsInteraction (class)">Gio::TlsInteraction</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The interaction object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="interaction=-instance_method">
+  
+    #<strong>interaction=</strong>(interaction)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Set the object that will be used to interact with the user. It will be used for things like prompting the user for passwords.</p>
+
+<p>The <strong>interaction</strong> argument will normally be a derived subclass of GTls::Interaction. nil can also be provided if no user interaction should occur for this connection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>interaction</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsInteraction.html" title="Gio::TlsInteraction (class)">Gio::TlsInteraction</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an interaction object, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="negotiated_protocol-instance_method">
+  
+    #<strong>negotiated_protocol</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the name of the application-layer protocol negotiated during the handshake.</p>
+
+<p>If the peer did not use the ALPN extension, or did not advertise a protocol that matched one of <strong>conn</strong>’s protocols, or the TLS backend does not support ALPN, then this will be nil. See g_dtls_connection_set_advertised_protocols().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the negotiated protocol, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peer_certificate-instance_method">
+  
+    #<strong>peer_certificate</strong>  &#x21d2; <tt><span class='object_link'><a href="TlsCertificate.html" title="Gio::TlsCertificate (class)">Gio::TlsCertificate</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>conn</strong>’s peer’s certificate after the handshake has completed. (It is not set during the emission of GDtls::Connection::accept-certificate.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsCertificate.html" title="Gio::TlsCertificate (class)">Gio::TlsCertificate</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>conn</strong>’s peer’s certificate, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peer_certificate_errors-instance_method">
+  
+    #<strong>peer_certificate_errors</strong>  &#x21d2; <tt><span class='object_link'><a href="TlsCertificateFlags.html" title="Gio::TlsCertificateFlags (module)">Gio::TlsCertificateFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the errors associated with validating <strong>conn</strong>’s peer’s certificate, after the handshake has completed. (It is not set during the emission of GDtls::Connection::accept-certificate.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsCertificateFlags.html" title="Gio::TlsCertificateFlags (module)">Gio::TlsCertificateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>conn</strong>’s peer’s certificate errors</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rehandshake_mode-instance_method">
+  
+    #<strong>rehandshake_mode</strong>  &#x21d2; <tt><span class='object_link'><a href="TlsRehandshakeMode.html" title="Gio::TlsRehandshakeMode (module)">Gio::TlsRehandshakeMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets <strong>conn</strong> rehandshaking mode. See g_dtls_connection_set_rehandshake_mode() for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsRehandshakeMode.html" title="Gio::TlsRehandshakeMode (module)">Gio::TlsRehandshakeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>%G_TLS_REHANDSHAKE_SAFELY</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rehandshake_mode=-instance_method">
+  
+    #<strong>rehandshake_mode=</strong>(mode)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Since GLib 2.64, changing the rehandshake mode is no longer supported and will have no effect. With TLS 1.3, rehandshaking has been removed from the TLS protocol, replaced by separate post-handshake authentication and rekey operations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TlsRehandshakeMode.html" title="Gio::TlsRehandshakeMode (module)">Gio::TlsRehandshakeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the rehandshaking mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="require_close_notify-instance_method">
+  
+    #<strong>require_close_notify</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Tests whether or not <strong>conn</strong> expects a proper TLS close notification when the connection is closed. See g_dtls_connection_set_require_close_notify() for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>conn</strong> requires a proper TLS close notification.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="require_close_notify=-instance_method">
+  
+    #<strong>require_close_notify=</strong>(require_close_notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets whether or not <strong>conn</strong> expects a proper TLS close notification before the connection is closed. If this is true (the default), then <strong>conn</strong> will expect to receive a TLS close notification from its peer before the connection is closed, and will return a %G_TLS_ERROR_EOF error if the connection is closed without proper notification (since this may indicate a network error, or man-in-the-middle attack).</p>
+
+<p>In some protocols, the application will know whether or not the connection was closed cleanly based on application-level data (because the application-level data includes a length field, or is somehow self-delimiting); in this case, the close notify is redundant and may be omitted. You can use g_dtls_connection_set_require_close_notify() to tell <strong>conn</strong> to allow an “unannounced” connection close, in which case the close will show up as a 0-length read, as in a non-TLS GDatagram::Based, and it is up to the application to check that the data has been fully received.</p>
+
+<p>Note that this only affects the behavior when the peer closes the connection; when the application calls g_dtls_connection_close_async() on <strong>conn</strong> itself, this will send a close notification regardless of the setting of this property. If you explicitly want to do an unclean close, you can close <strong>conn</strong>’s GDtls::Connection:base-socket rather than closing <strong>conn</strong> itself.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>require_close_notify</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether or not to require close notification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shutdown-instance_method">
+  
+    #<strong>shutdown</strong>(shutdown_read, shutdown_write, cancellable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Shut down part or all of a DTLS connection.</p>
+
+<p>If <strong>shutdown_read</strong> is true then the receiving side of the connection is shut down, and further reading is disallowed. Subsequent calls to g_datagram_based_receive_messages() will return %G_IO_ERROR_CLOSED.</p>
+
+<p>If <strong>shutdown_write</strong> is true then the sending side of the connection is shut down, and further writing is disallowed. Subsequent calls to g_datagram_based_send_messages() will return %G_IO_ERROR_CLOSED.</p>
+
+<p>It is allowed for both <strong>shutdown_read</strong> and <strong>shutdown_write</strong> to be TRUE — this is equivalent to calling g_dtls_connection_close().</p>
+
+<p>If <strong>cancellable</strong> is cancelled, the GDtls::Connection may be left partially-closed and any pending untransmitted data may be lost. Call g_dtls_connection_shutdown() again to complete closing the GDtls::Connection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>shutdown_read</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true to stop reception of incoming datagrams</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>shutdown_write</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true to stop sending outgoing datagrams</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shutdown_async-instance_method">
+  
+    #<strong>shutdown_async</strong>(shutdown_read, shutdown_write, io_priority, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Asynchronously shut down part or all of the DTLS connection. See g_dtls_connection_shutdown() for more information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>shutdown_read</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true to stop reception of incoming datagrams</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>shutdown_write</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true to stop sending outgoing datagrams</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>io_priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the [I/O <a href="io-priority">priority]</a> of the request</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>callback to call when the shutdown operation is complete</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the data to pass to the callback function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shutdown_finish-instance_method">
+  
+    #<strong>shutdown_finish</strong>(result)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finish an asynchronous TLS shutdown operation. See g_dtls_connection_shutdown() for more information. case <strong>error</strong> will be set</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on failure, in which</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:49 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

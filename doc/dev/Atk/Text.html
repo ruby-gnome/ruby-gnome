@@ -1,0 +1,3564 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Atk::Text
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Atk::Text";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Atk.html" title="Atk (module)">Atk</a></span></span>
+     &raquo; 
+    <span class="title">Text</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Atk::Text
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Atk::Text should be implemented by #AtkObjects on behalf of widgets that have text content which is either attributed or otherwise non-trivial.  Atk::Objects whose text content is simple, unattributed, and very brief may expose that content via #atk_object_get_name instead; however if the text is editable, multi-line, typically longer than three or four words, attributed, selectable, or if the object already uses the ‘name’ ATK property for other information, the Atk::Text interface should be used to expose the text content.  In the case of editable text content, Atk::EditableText (a subtype of the #AtkText interface) should be implemented instead.</p>
+
+<pre class="code ruby"><code class="ruby">Atk::Text provides not only traversal facilities and change
+</code></pre>
+
+<p>notification for text content, but also caret tracking and glyph bounding box calculations.  Note that the text strings are exposed as UTF-8, and are therefore potentially multi-byte, and caret-to-byte offset mapping makes no assumptions about the character length; also bounding box glyph-to-offset mapping may be complex for languages which use ligatures.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_selection-instance_method" title="#add_selection (instance method)">#<strong>add_selection</strong>(text, start_offset, end_offset)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True if successful, false otherwise.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#caret_offset-instance_method" title="#caret_offset (instance method)">#<strong>caret_offset</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the offset of the position of the caret (cursor).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#caret_offset=-instance_method" title="#caret_offset= (instance method)">#<strong>caret_offset=</strong>(offset)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the caret (cursor) position to the specified <strong>offset</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#character_count-instance_method" title="#character_count (instance method)">#<strong>character_count</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the character count.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_attributes-instance_method" title="#default_attributes (instance method)">#<strong>default_attributes</strong>  &#x21d2; Atk::AttributeSet </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates an Atk::AttributeSet which consists of the default values of attributes for the text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_bounded_ranges-instance_method" title="#get_bounded_ranges (instance method)">#<strong>get_bounded_ranges</strong>(text, rect, coord_type, x_clip_type, y_clip_type)  &#x21d2; Array&lt;Atk::TextRange&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Array of AtkTextRange.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_caret_offset-instance_method" title="#get_caret_offset (instance method)">#<strong>get_caret_offset</strong>(text)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The character offset of the position of the caret or -1 if the caret is not located inside the element or in the case of any other failure.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_character_at_offset-instance_method" title="#get_character_at_offset (instance method)">#<strong>get_character_at_offset</strong>(text, offset)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The character at <strong>offset</strong> or 0 in the case of failure.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_character_count-instance_method" title="#get_character_count (instance method)">#<strong>get_character_count</strong>(text)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The number of characters or -1 in case of failure.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_character_extents-instance_method" title="#get_character_extents (instance method)">#<strong>get_character_extents</strong>(text, offset, x, y, width, height, coords)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_default_attributes-instance_method" title="#get_default_attributes (instance method)">#<strong>get_default_attributes</strong>(text)  &#x21d2; Atk::AttributeSet </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An Atk::AttributeSet which contains the default text attributes for this Atk::Text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_n_selections-instance_method" title="#get_n_selections (instance method)">#<strong>get_n_selections</strong>(text)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The number of selected regions, or -1 in the case of failure.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_offset_at_point-instance_method" title="#get_offset_at_point (instance method)">#<strong>get_offset_at_point</strong>(text, x, y, coords)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>widget window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_range_extents-instance_method" title="#get_range_extents (instance method)">#<strong>get_range_extents</strong>(text, start_offset, end_offset, coord_type, rect)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_run_attributes-instance_method" title="#get_run_attributes (instance method)">#<strong>get_run_attributes</strong>(text, offset, start_offset, end_offset)  &#x21d2; Atk::AttributeSet </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>the character to be inserted at the caret location.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_selection-instance_method" title="#get_selection (instance method)">#<strong>get_selection</strong>(text, selection_num, start_offset, end_offset)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>assigned numbers that correspond to how far the region is from the start of the text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_string_at_offset-instance_method" title="#get_string_at_offset (instance method)">#<strong>get_string_at_offset</strong>(text, offset, granularity, start_offset, end_offset)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A newly allocated string containing the text at the <strong>offset</strong> bounded by the specified <strong>granularity</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_text-instance_method" title="#get_text (instance method)">#<strong>get_text</strong>(text, start_offset, end_offset)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A newly allocated string containing the text from <strong>start_offset</strong> up to, but not including <strong>end_offset</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_text_after_offset-instance_method" title="#get_text_after_offset (instance method)">#<strong>get_text_after_offset</strong>(text, offset, boundary_type, start_offset, end_offset)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A newly allocated string containing the text after <strong>offset</strong> bounded by the specified <strong>boundary_type</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_text_at_offset-instance_method" title="#get_text_at_offset (instance method)">#<strong>get_text_at_offset</strong>(text, offset, boundary_type, start_offset, end_offset)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A newly allocated string containing the text at <strong>offset</strong> bounded by the specified <strong>boundary_type</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_text_before_offset-instance_method" title="#get_text_before_offset (instance method)">#<strong>get_text_before_offset</strong>(text, offset, boundary_type, start_offset, end_offset)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A newly allocated string containing the text before <strong>offset</strong> bounded by the specified <strong>boundary_type</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_selections-instance_method" title="#n_selections (instance method)">#<strong>n_selections</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the number of selected regions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_selection-instance_method" title="#remove_selection (instance method)">#<strong>remove_selection</strong>(text, selection_num)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>assigned numbers that correspond to how far the region is from the start of the text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scroll_substring_to-instance_method" title="#scroll_substring_to (instance method)">#<strong>scroll_substring_to</strong>(text, start_offset, end_offset, type)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether scrolling was successful.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scroll_substring_to_point-instance_method" title="#scroll_substring_to_point (instance method)">#<strong>scroll_substring_to_point</strong>(text, start_offset, end_offset, coords, x, y)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>parent object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_caret_offset-instance_method" title="#set_caret_offset (instance method)">#<strong>set_caret_offset</strong>(text, offset)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True if successful, false otherwise.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_selection-instance_method" title="#set_selection (instance method)">#<strong>set_selection</strong>(text, selection_num, start_offset, end_offset)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>assigned numbers that correspond to how far the region is from the start of the text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_attributes_changed-instance_method" title="#text_attributes_changed (instance method)">#<strong>text_attributes_changed</strong>(text)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_caret_moved-instance_method" title="#text_caret_moved (instance method)">#<strong>text_caret_moved</strong>(text, location)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_changed-instance_method" title="#text_changed (instance method)">#<strong>text_changed</strong>(text, position, length)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_selection_changed-instance_method" title="#text_selection_changed (instance method)">#<strong>text_selection_changed</strong>(text)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_selection-instance_method">
+  
+    #<strong>add_selection</strong>(text, start_offset, end_offset)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if successful, false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the starting character offset of the selected region</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the offset of the first character after the selected region.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if successful, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="caret_offset-instance_method">
+  
+    #<strong>caret_offset</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the offset of the position of the caret (cursor).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the character offset of the position of the caret or -1 if the caret is not located inside the element or in the case of any other failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="caret_offset=-instance_method">
+  
+    #<strong>caret_offset=</strong>(offset)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the caret (cursor) position to the specified <strong>offset</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the character offset of the new caret position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if successful, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="character_count-instance_method">
+  
+    #<strong>character_count</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the character count.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of characters or -1 in case of failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_attributes-instance_method">
+  
+    #<strong>default_attributes</strong>  &#x21d2; <tt>Atk::AttributeSet</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates an Atk::AttributeSet which consists of the default values of attributes for the text. See the enum AtkTextAttribute for types of text attributes that can be returned. Note that other attributes may also be returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Atk::AttributeSet</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::AttributeSet which contains the default text attributes for this Atk::Text. This #AtkAttributeSet should be freed by a call to atk_attribute_set_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_bounded_ranges-instance_method">
+  
+    #<strong>get_bounded_ranges</strong>(text, rect, coord_type, x_clip_type, y_clip_type)  &#x21d2; <tt>Array&lt;Atk::TextRange&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Array of AtkTextRange. The last element of the array returned by this function will be NULL.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextRectangle.html" title="Atk::TextRectangle (class)">Atk::TextRectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An AtkTextRectangle giving the dimensions of the bounding box.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>coord_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CoordType.html" title="Atk::CoordType (module)">Atk::CoordType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Specify whether coordinates are relative to the screen or widget window.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x_clip_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextClipType.html" title="Atk::TextClipType (module)">Atk::TextClipType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Specify the horizontal clip type.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y_clip_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextClipType.html" title="Atk::TextClipType (module)">Atk::TextClipType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Specify the vertical clip type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Atk::TextRange&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Array of AtkTextRange. The last element of the array returned by this function will be NULL.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_caret_offset-instance_method">
+  
+    #<strong>get_caret_offset</strong>(text)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the character offset of the position of the caret or -1 if the caret is not located inside the element or in the case of any other failure.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the character offset of the position of the caret or -1 if the caret is not located inside the element or in the case of any other failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_character_at_offset-instance_method">
+  
+    #<strong>get_character_at_offset</strong>(text, offset)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the character at <strong>offset</strong> or 0 in the case of failure.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a character offset within <strong>text</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the character at <strong>offset</strong> or 0 in the case of failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_character_count-instance_method">
+  
+    #<strong>get_character_count</strong>(text)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the number of characters or -1 in case of failure.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of characters or -1 in case of failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_character_extents-instance_method">
+  
+    #<strong>get_character_extents</strong>(text, offset, x, y, width, height, coords)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The offset of the text character for which bounding information is required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Pointer for the x coordinate of the bounding box</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Pointer for the y coordinate of the bounding box</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Pointer for the width of the bounding box</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Pointer for the height of the bounding box</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>coords</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CoordType.html" title="Atk::CoordType (module)">Atk::CoordType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>specify whether coordinates are relative to the screen or widget window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_default_attributes-instance_method">
+  
+    #<strong>get_default_attributes</strong>(text)  &#x21d2; <tt>Atk::AttributeSet</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns an Atk::AttributeSet which contains the default text attributes for this Atk::Text. This #AtkAttributeSet should be freed by a call to atk_attribute_set_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Atk::AttributeSet</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::AttributeSet which contains the default text attributes for this Atk::Text. This #AtkAttributeSet should be freed by a call to atk_attribute_set_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_n_selections-instance_method">
+  
+    #<strong>get_n_selections</strong>(text)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The number of selected regions, or -1 in the case of failure.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The number of selected regions, or -1 in the case of failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_offset_at_point-instance_method">
+  
+    #<strong>get_offset_at_point</strong>(text, x, y, coords)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>widget window</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>screen x-position of character</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>screen y-position of character</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>coords</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CoordType.html" title="Atk::CoordType (module)">Atk::CoordType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>specify whether coordinates are relative to the screen or</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the offset to the character which is located at  the specified <strong>x</strong> and <strong>y</strong> coordinates of -1 in case of failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_range_extents-instance_method">
+  
+    #<strong>get_range_extents</strong>(text, start_offset, end_offset, coord_type, rect)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The offset of the first text character for which boundary information is required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The offset of the text character after the last character for which boundary information is required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>coord_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CoordType.html" title="Atk::CoordType (module)">Atk::CoordType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Specify whether coordinates are relative to the screen or widget window.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextRectangle.html" title="Atk::TextRectangle (class)">Atk::TextRectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A pointer to a AtkTextRectangle which is filled in by this function.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_run_attributes-instance_method">
+  
+    #<strong>get_run_attributes</strong>(text, offset, start_offset, end_offset)  &#x21d2; <tt>Atk::AttributeSet</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>the character to be inserted at the caret location.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the character offset at which to get the attributes, -1 means the offset of</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the address to put the start offset of the range</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the address to put the end offset of the range</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Atk::AttributeSet</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::AttributeSet which contains the attributes explicitly set at <strong>offset</strong>. This Atk::AttributeSet should be freed by a call to atk_attribute_set_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_selection-instance_method">
+  
+    #<strong>get_selection</strong>(text, selection_num, start_offset, end_offset)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>assigned numbers that correspond to how far the region is from the start of the text.  The selected region closest to the beginning of the text region is assigned the number 0, etc.  Note that adding, moving or deleting a selected region can change the numbering. of the selected region</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>selection_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The selection number.  The selected regions are</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>passes back the starting character offset of the selected region</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>passes back the ending character offset (offset immediately past)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated string containing the selected text. Use g_free() to free the returned string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_string_at_offset-instance_method">
+  
+    #<strong>get_string_at_offset</strong>(text, offset, granularity, start_offset, end_offset)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a newly allocated string containing the text at the <strong>offset</strong> bounded by the specified <strong>granularity</strong>. Use g_free() to free the returned string.  Returns nil if the offset is invalid or no implementation is available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>granularity</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextGranularity.html" title="Atk::TextGranularity (module)">Atk::TextGranularity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An Atk::TextGranularity</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the starting character offset of the returned string, or -1 in the case of error (e.g. invalid offset, not implemented)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the offset of the first character after the returned string, or -1 in the case of error (e.g. invalid offset, not implemented)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated string containing the text at the <strong>offset</strong> bounded by the specified <strong>granularity</strong>. Use g_free() to free the returned string.  Returns nil if the offset is invalid or no implementation is available.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_text-instance_method">
+  
+    #<strong>get_text</strong>(text, start_offset, end_offset)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a newly allocated string containing the text from <strong>start_offset</strong> up to, but not including <strong>end_offset</strong>. Use g_free() to free the returned string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a starting character offset within <strong>text</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an ending character offset within <strong>text</strong>, or -1 for the end of the string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated string containing the text from <strong>start_offset</strong> up to, but not including <strong>end_offset</strong>. Use g_free() to free the returned string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_text_after_offset-instance_method">
+  
+    #<strong>get_text_after_offset</strong>(text, offset, boundary_type, start_offset, end_offset)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a newly allocated string containing the text after <strong>offset</strong> bounded by the specified <strong>boundary_type</strong>. Use g_free() to free the returned string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>boundary_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextBoundary.html" title="Atk::TextBoundary (module)">Atk::TextBoundary</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An Atk::TextBoundary</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the starting character offset of the returned string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the offset of the first character after the returned substring</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated string containing the text after <strong>offset</strong> bounded by the specified <strong>boundary_type</strong>. Use g_free() to free the returned string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_text_at_offset-instance_method">
+  
+    #<strong>get_text_at_offset</strong>(text, offset, boundary_type, start_offset, end_offset)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a newly allocated string containing the text at <strong>offset</strong> bounded by the specified <strong>boundary_type</strong>. Use g_free() to free the returned string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>boundary_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextBoundary.html" title="Atk::TextBoundary (module)">Atk::TextBoundary</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An Atk::TextBoundary</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the starting character offset of the returned string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the offset of the first character after the returned substring</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated string containing the text at <strong>offset</strong> bounded by the specified <strong>boundary_type</strong>. Use g_free() to free the returned string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_text_before_offset-instance_method">
+  
+    #<strong>get_text_before_offset</strong>(text, offset, boundary_type, start_offset, end_offset)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a newly allocated string containing the text before <strong>offset</strong> bounded by the specified <strong>boundary_type</strong>. Use g_free() to free the returned string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>boundary_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextBoundary.html" title="Atk::TextBoundary (module)">Atk::TextBoundary</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An Atk::TextBoundary</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the starting character offset of the returned string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the offset of the first character after the returned substring</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated string containing the text before <strong>offset</strong> bounded by the specified <strong>boundary_type</strong>. Use g_free() to free the returned string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_selections-instance_method">
+  
+    #<strong>n_selections</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the number of selected regions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The number of selected regions, or -1 in the case of failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_selection-instance_method">
+  
+    #<strong>remove_selection</strong>(text, selection_num)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>assigned numbers that correspond to how far the region is from the start of the text.  The selected region closest to the beginning of the text region is assigned the number 0, etc.  Note that adding, moving or deleting a selected region can change the numbering.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>selection_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The selection number.  The selected regions are</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if successful, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scroll_substring_to-instance_method">
+  
+    #<strong>scroll_substring_to</strong>(text, start_offset, end_offset, type)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether scrolling was successful.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>start offset in the <strong>text</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>end offset in the <strong>text</strong>, or -1 for the end of the text.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ScrollType.html" title="Atk::ScrollType (module)">Atk::ScrollType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>specify where the object should be made visible.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether scrolling was successful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scroll_substring_to_point-instance_method">
+  
+    #<strong>scroll_substring_to_point</strong>(text, start_offset, end_offset, coords, x, y)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>parent object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>start offset in the <strong>text</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>end offset in the <strong>text</strong>, or -1 for the end of the text.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>coords</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CoordType.html" title="Atk::CoordType (module)">Atk::CoordType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>specify whether coordinates are relative to the screen or to the</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>x-position where to scroll to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>y-position where to scroll to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether scrolling was successful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_caret_offset-instance_method">
+  
+    #<strong>set_caret_offset</strong>(text, offset)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if successful, false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the character offset of the new caret position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if successful, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_selection-instance_method">
+  
+    #<strong>set_selection</strong>(text, selection_num, start_offset, end_offset)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>assigned numbers that correspond to how far the region is from the start of the text.  The selected region closest to the beginning of the text region is assigned the number 0, etc.  Note that adding, moving or deleting a selected region can change the numbering. the selection</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an Atk::Text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>selection_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The selection number.  The selected regions are</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new starting character offset of the selection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new end position of (e.g. offset immediately past)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if successful, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text_attributes_changed-instance_method">
+  
+    #<strong>text_attributes_changed</strong>(text)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text_caret_moved-instance_method">
+  
+    #<strong>text_caret_moved</strong>(text, location)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>location</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text_changed-instance_method">
+  
+    #<strong>text_changed</strong>(text, position, length)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text_selection_changed-instance_method">
+  
+    #<strong>text_selection_changed</strong>(text)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Atk::Text (module)">Atk::Text</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:54 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

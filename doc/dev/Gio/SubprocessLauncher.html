@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::SubprocessLauncher
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::SubprocessLauncher";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">SubprocessLauncher</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::SubprocessLauncher
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::SubprocessLauncher</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This class contains a set of options for launching child processes, such as where its standard input and output will be directed, the argument list, the environment, and more.</p>
+
+<p>While the #GSubprocess class has high level functions covering popular cases, use of this class allows access to more advanced options.  It can also be used to launch multiple subprocesses with a similar configuration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cwd=-instance_method" title="#cwd= (instance method)">#<strong>cwd=</strong>(cwd)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the current working directory that processes will be launched with.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#environ=-instance_method" title="#environ= (instance method)">#<strong>environ=</strong>(env)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Replace the entire environment of processes launched from this launcher with the given ‘environ’ variable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flags=-instance_method" title="#flags= (instance method)">#<strong>flags=</strong>(flags)  &#x21d2; Gio::SubprocessFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Flags.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getenv-instance_method" title="#getenv (instance method)">#<strong>getenv</strong>(variable)  &#x21d2; Gio::filename </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of the environment variable <strong>variable</strong> in the environment of processes launched from this launcher.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>(flags)  &#x21d2; Gio::SubprocessLauncher </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new GSubprocess::Launcher.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_child_setup-instance_method" title="#set_child_setup (instance method)">#<strong>set_child_setup</strong>(child_setup, user_data, destroy_notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets up a child setup function.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#setenv-instance_method" title="#setenv (instance method)">#<strong>setenv</strong>(variable, value, overwrite)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the environment variable <strong>variable</strong> in the environment of processes launched from this launcher.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spawn-instance_method" title="#spawn (instance method)">#<strong>spawn</strong>(error, argv0, array)  &#x21d2; Gio::Subprocess </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a #GSubprocess given a provided varargs list of arguments.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spawnv-instance_method" title="#spawnv (instance method)">#<strong>spawnv</strong>(argv)  &#x21d2; Gio::Subprocess </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a #GSubprocess given a provided array of arguments.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stderr_file_path=-instance_method" title="#stderr_file_path= (instance method)">#<strong>stderr_file_path=</strong>(path)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the file path to use as the stderr for spawned processes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stdin_file_path=-instance_method" title="#stdin_file_path= (instance method)">#<strong>stdin_file_path=</strong>(path)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the file path to use as the stdin for spawned processes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stdout_file_path=-instance_method" title="#stdout_file_path= (instance method)">#<strong>stdout_file_path=</strong>(path)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the file path to use as the stdout for spawned processes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#take_fd-instance_method" title="#take_fd (instance method)">#<strong>take_fd</strong>(source_fd, target_fd)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Transfer an arbitrary file descriptor from parent process to the child.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#take_stderr_fd-instance_method" title="#take_stderr_fd (instance method)">#<strong>take_stderr_fd</strong>(fd)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the file descriptor to use as the stderr for spawned processes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#take_stdin_fd-instance_method" title="#take_stdin_fd (instance method)">#<strong>take_stdin_fd</strong>(fd)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the file descriptor to use as the stdin for spawned processes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#take_stdout_fd-instance_method" title="#take_stdout_fd (instance method)">#<strong>take_stdout_fd</strong>(fd)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the file descriptor to use as the stdout for spawned processes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unsetenv-instance_method" title="#unsetenv (instance method)">#<strong>unsetenv</strong>(variable)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes the environment variable <strong>variable</strong> from the environment of processes launched from this launcher.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="cwd=-instance_method">
+  
+    #<strong>cwd=</strong>(cwd)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the current working directory that processes will be launched with.</p>
+
+<p>By default processes are launched with the current working directory of the launching process at the time of launch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cwd</span>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the cwd for launched processes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="environ=-instance_method">
+  
+    #<strong>environ=</strong>(env)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Replace the entire environment of processes launched from this launcher with the given ‘environ’ variable.</p>
+
+<p>Typically you will build this variable by using g_listenv() to copy the process ‘environ’ and using the functions g_environ_setenv(), g_environ_unsetenv(), etc.</p>
+
+<p>As an alternative, you can use g_subprocess_launcher_setenv(), g_subprocess_launcher_unsetenv(), etc.</p>
+
+<p>Pass an empty array to set an empty environment. Pass nil to inherit the parent process’ environment. As of GLib 2.54, the parent process’ environment will be copied when g_subprocess_launcher_set_environ() is called. Previously, it was copied when the subprocess was executed. This means the copied environment may now be modified (using g_subprocess_launcher_setenv(), etc.) before launching the subprocess.</p>
+
+<p>On UNIX, all strings in this array can be arbitrary byte strings. On Windows, they should be in UTF-8.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>env</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::filename&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the replacement environment</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flags=-instance_method">
+  
+    #<strong>flags=</strong>(flags)  &#x21d2; <tt><span class='object_link'><a href="SubprocessFlags.html" title="Gio::SubprocessFlags (module)">Gio::SubprocessFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns flags.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SubprocessFlags.html" title="Gio::SubprocessFlags (module)">Gio::SubprocessFlags</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SubprocessFlags.html" title="Gio::SubprocessFlags (module)">Gio::SubprocessFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="getenv-instance_method">
+  
+    #<strong>getenv</strong>(variable)  &#x21d2; <tt>Gio::filename</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of the environment variable <strong>variable</strong> in the environment of processes launched from this launcher.</p>
+
+<p>On UNIX, the returned string can be an arbitrary byte string. On Windows, it will be UTF-8.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>variable</span>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the environment variable to get</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the value of the environment variable, nil if unset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>(flags)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::SubprocessLauncher (class)">Gio::SubprocessLauncher</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new GSubprocess::Launcher.</p>
+
+<p>The launcher is created with the default options.  A copy of the environment of the calling process is made at the time of this call and will be used as the environment that the process is launched in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SubprocessFlags.html" title="Gio::SubprocessFlags (module)">Gio::SubprocessFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>GSubprocess::Flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::SubprocessLauncher (class)">Gio::SubprocessLauncher</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_child_setup-instance_method">
+  
+    #<strong>set_child_setup</strong>(child_setup, user_data, destroy_notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets up a child setup function.</p>
+
+<p>The child setup function will be called after fork() but before exec() on the child’s side.</p>
+
+<p><strong>destroy_notify</strong> will not be automatically called on the child’s side of the fork().  It will only be called when the last reference on the GSubprocess::Launcher is dropped or when a new child setup function is given.</p>
+
+<p>nil can be given as <strong>child_setup</strong> to disable the functionality.</p>
+
+<p>Child setup functions are only available on UNIX.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child_setup</span>
+      
+      
+        <span class='type'>(<tt>GLib::SpawnChildSetupFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSpawn::ChildSetupFunc to use as the child setup function</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data for <strong>child_setup</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>destroy_notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GDestroy::Notify for <strong>user_data</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="setenv-instance_method">
+  
+    #<strong>setenv</strong>(variable, value, overwrite)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the environment variable <strong>variable</strong> in the environment of processes launched from this launcher.</p>
+
+<p>On UNIX, both the variable’s name and value can be arbitrary byte strings, except that the variable’s name cannot contain ‘=’. On Windows, they should be in UTF-8.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>variable</span>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the environment variable to set, must not contain ‘=’</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new value for the variable</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>overwrite</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether to change the variable if it already exists</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="spawn-instance_method">
+  
+    #<strong>spawn</strong>(error, argv0, array)  &#x21d2; <tt><span class='object_link'><a href="Subprocess.html" title="Gio::Subprocess (class)">Gio::Subprocess</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a #GSubprocess given a provided varargs list of arguments.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>error</span>
+      
+      
+        <span class='type'>(<tt>GLib::Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Error</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>argv0</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Command line arguments</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Continued arguments, nil terminated</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Subprocess.html" title="Gio::Subprocess (class)">Gio::Subprocess</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A new #GSubprocess, or nil on error (and <strong>error</strong> will be set)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="spawnv-instance_method">
+  
+    #<strong>spawnv</strong>(argv)  &#x21d2; <tt><span class='object_link'><a href="Subprocess.html" title="Gio::Subprocess (class)">Gio::Subprocess</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a #GSubprocess given a provided array of arguments.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>argv</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::filename&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Command line arguments</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Subprocess.html" title="Gio::Subprocess (class)">Gio::Subprocess</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A new #GSubprocess, or nil on error (and <strong>error</strong> will be set)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stderr_file_path=-instance_method">
+  
+    #<strong>stderr_file_path=</strong>(path)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the file path to use as the stderr for spawned processes.</p>
+
+<p>If <strong>path</strong> is nil then any previously given path is unset.</p>
+
+<p>The file will be created or truncated when the process is spawned, as would be the case if using ‘2&gt;’ at the shell.</p>
+
+<p>If you want to send both stdout and stderr to the same file then use %G_SUBPROCESS_FLAGS_STDERR_MERGE.</p>
+
+<p>You may not set a stderr file path if a stderr fd is already set or if the launcher flags contain any flags directing stderr elsewhere.</p>
+
+<p>This feature is only available on UNIX.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a filename or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stdin_file_path=-instance_method">
+  
+    #<strong>stdin_file_path=</strong>(path)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the file path to use as the stdin for spawned processes.</p>
+
+<p>If <strong>path</strong> is nil then any previously given path is unset.</p>
+
+<p>The file must exist or spawning the process will fail.</p>
+
+<p>You may not set a stdin file path if a stdin fd is already set or if the launcher flags contain any flags directing stdin elsewhere.</p>
+
+<p>This feature is only available on UNIX.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stdout_file_path=-instance_method">
+  
+    #<strong>stdout_file_path=</strong>(path)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the file path to use as the stdout for spawned processes.</p>
+
+<p>If <strong>path</strong> is nil then any previously given path is unset.</p>
+
+<p>The file will be created or truncated when the process is spawned, as would be the case if using ‘&gt;’ at the shell.</p>
+
+<p>You may not set a stdout file path if a stdout fd is already set or if the launcher flags contain any flags directing stdout elsewhere.</p>
+
+<p>This feature is only available on UNIX.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a filename or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="take_fd-instance_method">
+  
+    #<strong>take_fd</strong>(source_fd, target_fd)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Transfer an arbitrary file descriptor from parent process to the child.  This function takes “ownership” of the fd; it will be closed in the parent when <strong>self</strong> is freed.</p>
+
+<p>By default, all file descriptors from the parent will be closed. This function allows you to create (for example) a custom pipe() or socketpair() before launching the process, and choose the target descriptor in the child.</p>
+
+<p>An example use case is GNUPG, which has a command line argument –passphrase-fd providing a file descriptor number where it expects the passphrase to be written.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_fd</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>File descriptor in parent process</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_fd</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Target descriptor for child process</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="take_stderr_fd-instance_method">
+  
+    #<strong>take_stderr_fd</strong>(fd)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the file descriptor to use as the stderr for spawned processes.</p>
+
+<p>If <strong>fd</strong> is -1 then any previously given fd is unset.</p>
+
+<p>Note that the default behaviour is to pass stderr through to the stderr of the parent process.</p>
+
+<p>The passed <strong>fd</strong> belongs to the GSubprocess::Launcher.  It will be automatically closed when the launcher is finalized.  The file descriptor will also be closed on the child side when executing the spawned process.</p>
+
+<p>You may not set a stderr fd if a stderr file path is already set or if the launcher flags contain any flags directing stderr elsewhere.</p>
+
+<p>This feature is only available on UNIX.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fd</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a file descriptor, or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="take_stdin_fd-instance_method">
+  
+    #<strong>take_stdin_fd</strong>(fd)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the file descriptor to use as the stdin for spawned processes.</p>
+
+<p>If <strong>fd</strong> is -1 then any previously given fd is unset.</p>
+
+<p>Note that if your intention is to have the stdin of the calling process inherited by the child then %G_SUBPROCESS_FLAGS_STDIN_INHERIT is a better way to go about doing that.</p>
+
+<p>The passed <strong>fd</strong> is noted but will not be touched in the current process.  It is therefore necessary that it be kept open by the caller until the subprocess is spawned.  The file descriptor will also not be explicitly closed on the child side, so it must be marked O_CLOEXEC if that’s what you want.</p>
+
+<p>You may not set a stdin fd if a stdin file path is already set or if the launcher flags contain any flags directing stdin elsewhere.</p>
+
+<p>This feature is only available on UNIX.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fd</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a file descriptor, or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="take_stdout_fd-instance_method">
+  
+    #<strong>take_stdout_fd</strong>(fd)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the file descriptor to use as the stdout for spawned processes.</p>
+
+<p>If <strong>fd</strong> is -1 then any previously given fd is unset.</p>
+
+<p>Note that the default behaviour is to pass stdout through to the stdout of the parent process.</p>
+
+<p>The passed <strong>fd</strong> is noted but will not be touched in the current process.  It is therefore necessary that it be kept open by the caller until the subprocess is spawned.  The file descriptor will also not be explicitly closed on the child side, so it must be marked O_CLOEXEC if that’s what you want.</p>
+
+<p>You may not set a stdout fd if a stdout file path is already set or if the launcher flags contain any flags directing stdout elsewhere.</p>
+
+<p>This feature is only available on UNIX.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fd</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a file descriptor, or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unsetenv-instance_method">
+  
+    #<strong>unsetenv</strong>(variable)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes the environment variable <strong>variable</strong> from the environment of processes launched from this launcher.</p>
+
+<p>On UNIX, the variable’s name can be an arbitrary byte string not containing ‘=’. On Windows, it should be in UTF-8.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>variable</span>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the environment variable to unset, must not contain ‘=’</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:08 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::TestDBus
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::TestDBus";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">TestDBus</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::TestDBus
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::TestDBus</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A helper class for testing code which uses D-Bus without touching the user’s session bus.</p>
+
+<p>Note that GTest::DBus modifies the user’s environment, calling setenv(). This is not thread-safe, so all GTest::DBus calls should be completed before threads are spawned, or should have appropriate locking to ensure no access conflicts to environment variables shared between GTest::DBus and other threads.</p>
+
+<p>## Creating unit tests using GTestDBus</p>
+
+<p>Testing of D-Bus services can be tricky because normally we only ever run D-Bus services over an existing instance of the D-Bus daemon thus we usually don’t activate D-Bus services that are not yet installed into the target system. The GTest::DBus object makes this easier for us by taking care of the lower level tasks such as running a private D-Bus daemon and looking up uninstalled services in customizable locations, typically in your source code tree.</p>
+
+<p>The first thing you will need is a separate service description file for the D-Bus daemon. Typically a ‘services` subdirectory of your `tests` directory is a good place to put this file.</p>
+
+<p>The service file should list your service along with an absolute path to the uninstalled service executable in your source tree. Using autotools we would achieve this by adding a file such as ‘my-server.service.in` in the services directory and have it processed by configure. |[</p>
+
+<pre class="code ruby"><code class="ruby">[D-BUS Service]
+Name=org.gtk.GDBus.Examples.ObjectManager
+Exec=&lt;b&gt;abs_top_builddir&lt;/b&gt;@/gio/tests/gdbus-example-objectmanager-server
+</code></pre>
+
+<p>]| You will also need to indicate this service directory in your test fixtures, so you will need to pass the path while compiling your test cases. Typically this is done with autotools with an added preprocessor flag specified to compile your tests such as: |[</p>
+
+<pre class="code ruby"><code class="ruby">-DTEST_SERVICES=\&quot;&quot;$(abs_top_builddir)/tests/services&quot;\&quot;
+</code></pre>
+
+<p>]|</p>
+
+<pre class="code ruby"><code class="ruby">Once you have a service definition file which is local to your source tree,
+</code></pre>
+
+<p>you can proceed to set up a GTest fixture using the GTest::DBus scaffolding.</p>
+
+<p>An example of a test fixture for D-Bus services can be found here: [gdbus-test-fixture.c](<a href="https://git.gnome.org/browse/glib/tree/gio/tests/gdbus-test-fixture.c">git.gnome.org/browse/glib/tree/gio/tests/gdbus-test-fixture.c</a>)</p>
+
+<p>Note that these examples only deal with isolating the D-Bus aspect of your service. To successfully run isolated unit tests on your service you may need some additional modifications to your test case fixture. For example; if your service uses GSettings and installs a schema then it is important that your test service not load the schema in the ordinary installed location (chances are that your service and schema files are not yet installed, or worse; there is an older version of the schema file sitting in the install location).</p>
+
+<p>Most of the time we can work around these obstacles using the environment. Since the environment is inherited by the D-Bus daemon created by GTest::DBus and then in turn inherited by any services the D-Bus daemon activates, using the setup routine for your fixture is a practical place to help sandbox your runtime environment. For the rather typical GSettings case we can work around this by setting ‘GSETTINGS_SCHEMA_DIR` to the in tree directory holding your schemas in the above fixture_setup() routine.</p>
+
+<p>The GSettings schemas need to be locally pre-compiled for this to work. This can be achieved by compiling the schemas locally as a step before running test cases, an autotools setup might do the following in the directory holding schemas: |[</p>
+
+<pre class="code ruby"><code class="ruby">all-am:
+        $(GLIB_COMPILE_SCHEMAS) .
+
+CLEANFILES += gschemas.compiled
+</code></pre>
+
+<p>]|</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_service_dir-instance_method" title="#add_service_dir (instance method)">#<strong>add_service_dir</strong>(path)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add a path where dbus-daemon will look up .service files.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bus_address-instance_method" title="#bus_address (instance method)">#<strong>bus_address</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the address on which dbus-daemon is running.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#down-instance_method" title="#down (instance method)">#<strong>down</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Stop the session bus started by g_test_dbus_up().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flags-instance_method" title="#flags (instance method)">#<strong>flags</strong>  &#x21d2; Gio::TestDBusFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>GTest::DBusFlags specifying the behaviour of the D-Bus session.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flags=-instance_method" title="#flags= (instance method)">#<strong>flags=</strong>(flags)  &#x21d2; Gio::TestDBusFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>GTest::DBusFlags specifying the behaviour of the D-Bus session.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>(flags)  &#x21d2; Gio::TestDBus </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new GTest::DBus object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop-instance_method" title="#stop (instance method)">#<strong>stop</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Stop the session bus started by g_test_dbus_up().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#up-instance_method" title="#up (instance method)">#<strong>up</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Start a dbus-daemon instance and set DBUS_SESSION_BUS_ADDRESS.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_service_dir-instance_method">
+  
+    #<strong>add_service_dir</strong>(path)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a path where dbus-daemon will look up .service files. This can’t be called after g_test_dbus_up().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>path to a directory containing .service files</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bus_address-instance_method">
+  
+    #<strong>bus_address</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the address on which dbus-daemon is running. If g_test_dbus_up() has not been called yet, nil is returned. This can be used with g_dbus_connection_new_for_address().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the address of the bus, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="down-instance_method">
+  
+    #<strong>down</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Stop the session bus started by g_test_dbus_up().</p>
+
+<p>This will wait for the singleton returned by g_bus_get() or g_bus_get_sync() to be destroyed. This is done to ensure that the next unit test won’t get a leaked singleton from this test.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flags-instance_method">
+  
+    #<strong>flags</strong>  &#x21d2; <tt><span class='object_link'><a href="TestDBusFlags.html" title="Gio::TestDBusFlags (module)">Gio::TestDBusFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>GTest::DBusFlags specifying the behaviour of the D-Bus session.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TestDBusFlags.html" title="Gio::TestDBusFlags (module)">Gio::TestDBusFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flags=-instance_method">
+  
+    #<strong>flags=</strong>(flags)  &#x21d2; <tt><span class='object_link'><a href="TestDBusFlags.html" title="Gio::TestDBusFlags (module)">Gio::TestDBusFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>GTest::DBusFlags specifying the behaviour of the D-Bus session.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TestDBusFlags.html" title="Gio::TestDBusFlags (module)">Gio::TestDBusFlags</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TestDBusFlags.html" title="Gio::TestDBusFlags (module)">Gio::TestDBusFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TestDBusFlags.html" title="Gio::TestDBusFlags (module)">Gio::TestDBusFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>(flags)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::TestDBus (class)">Gio::TestDBus</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a new GTest::DBus object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TestDBusFlags.html" title="Gio::TestDBusFlags (module)">Gio::TestDBusFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GTest::DBusFlags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::TestDBus (class)">Gio::TestDBus</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new GTest::DBus.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop-instance_method">
+  
+    #<strong>stop</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Stop the session bus started by g_test_dbus_up().</p>
+
+<p>Unlike g_test_dbus_down(), this won’t verify the GDBus::Connection singleton returned by g_bus_get() or g_bus_get_sync() is destroyed. Unit tests wanting to verify behaviour after the session bus has been stopped can use this function but should still call g_test_dbus_down() when done.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="up-instance_method">
+  
+    #<strong>up</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Start a dbus-daemon instance and set DBUS_SESSION_BUS_ADDRESS. After this call, it is safe for unit tests to start sending messages on the session bus.</p>
+
+<p>If this function is called from setup callback of g_test_add(), g_test_dbus_down() must be called in its teardown callback.</p>
+
+<p>If this function is called from unit test’s main(), then g_test_dbus_down() must be called after g_test_run().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:09 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

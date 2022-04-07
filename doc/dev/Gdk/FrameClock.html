@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gdk::FrameClock
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::FrameClock";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">FrameClock</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gdk::FrameClock
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gdk::FrameClock</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#begin_updating-instance_method" title="#begin_updating (instance method)">#<strong>begin_updating</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Starts updates for an animation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_timings-instance_method" title="#current_timings (instance method)">#<strong>current_timings</strong>  &#x21d2; Gdk::FrameTimings </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the frame timings for the current frame.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#end_updating-instance_method" title="#end_updating (instance method)">#<strong>end_updating</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Stops updates for an animation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#frame_counter-instance_method" title="#frame_counter (instance method)">#<strong>frame_counter</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A Gdk::FrameClock maintains a 64-bit counter that increments for each frame drawn.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#frame_time-instance_method" title="#frame_time (instance method)">#<strong>frame_time</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the time that should currently be used for animations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_refresh_info-instance_method" title="#get_refresh_info (instance method)">#<strong>get_refresh_info</strong>(base_time, refresh_interval_return, presentation_time_return)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Using the frame history stored in the frame clock, finds the last known presentation time and refresh interval, and assuming that presentation times are separated by the refresh interval, predicts a presentation time that is a multiple of the refresh interval after the last presentation time, and later than <strong>base_time</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_timings-instance_method" title="#get_timings (instance method)">#<strong>get_timings</strong>(frame_counter)  &#x21d2; Gdk::FrameTimings </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves a Gdk::FrameTimings object holding timing information for the current frame or a recent frame.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#history_start-instance_method" title="#history_start (instance method)">#<strong>history_start</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gdk::FrameClock internally keeps a history of #GdkFrameTimings objects for recent frames that can be retrieved with gdk_frame_clock_get_timings().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_phase-instance_method" title="#request_phase (instance method)">#<strong>request_phase</strong>(phase)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Asks the frame clock to run a particular phase.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="begin_updating-instance_method">
+  
+    #<strong>begin_updating</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Starts updates for an animation. Until a matching call to gdk_frame_clock_end_updating() is made, the frame clock will continually request a new frame with the %GDK_FRAME_CLOCK_PHASE_UPDATE phase. This function may be called multiple times and frames will be requested until gdk_frame_clock_end_updating() is called the same number of times.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_timings-instance_method">
+  
+    #<strong>current_timings</strong>  &#x21d2; <tt>Gdk::FrameTimings</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the frame timings for the current frame.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::FrameTimings</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::FrameTimings for the frame currently being processed, or even no frame is being processed, for the previous frame. Before any frames have been processed, returns nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="end_updating-instance_method">
+  
+    #<strong>end_updating</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Stops updates for an animation. See the documentation for gdk_frame_clock_begin_updating().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="frame_counter-instance_method">
+  
+    #<strong>frame_counter</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A Gdk::FrameClock maintains a 64-bit counter that increments for each frame drawn.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>inside frame processing, the value of the frame counter for the current frame. Outside of frame processing, the frame</p>
+
+<pre class="code ruby"><code class="ruby">counter for the last frame.
+</code></pre>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="frame_time-instance_method">
+  
+    #<strong>frame_time</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the time that should currently be used for animations.  Inside the processing of a frame, it’s the time used to compute the animation position of everything in a frame. Outside of a frame, it’s the time of the conceptual “previous frame,” which may be either the actual previous frame time, or if that’s too old, an updated time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a timestamp in microseconds, in the timescale of of g_get_monotonic_time().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_refresh_info-instance_method">
+  
+    #<strong>get_refresh_info</strong>(base_time, refresh_interval_return, presentation_time_return)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Using the frame history stored in the frame clock, finds the last known presentation time and refresh interval, and assuming that presentation times are separated by the refresh interval, predicts a presentation time that is a multiple of the refresh interval after the last presentation time, and later than <strong>base_time</strong>. determined refresh interval, or nil. A default refresh interval of 1/60th of a second will be stored if no history is present.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>base_time</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>base time for determining a presentaton time</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>refresh_interval_return</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a location to store the</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>presentation_time_return</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a location to store the next candidate presentation time after the given base time. 0 will be will be stored if no history is present.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_timings-instance_method">
+  
+    #<strong>get_timings</strong>(frame_counter)  &#x21d2; <tt>Gdk::FrameTimings</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves a Gdk::FrameTimings object holding timing information for the current frame or a recent frame. The Gdk::FrameTimings object may not yet be complete: see gdk_frame_timings_get_complete().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>frame_counter</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the frame counter value identifying the frame to be received.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::FrameTimings</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::FrameTimings object for the specified frame, or nil if it is not available. See gdk_frame_clock_get_history_start().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="history_start-instance_method">
+  
+    #<strong>history_start</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gdk::FrameClock internally keeps a history of #GdkFrameTimings objects for recent frames that can be retrieved with gdk_frame_clock_get_timings(). The set of stored frames is the set from the counter values given by gdk_frame_clock_get_history_start() and gdk_frame_clock_get_frame_counter(), inclusive.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the frame counter value for the oldest frame that is available in the internal frame history of the Gdk::FrameClock.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_phase-instance_method">
+  
+    #<strong>request_phase</strong>(phase)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Asks the frame clock to run a particular phase. The signal corresponding the requested phase will be emitted the next time the frame clock processes. Multiple calls to gdk_frame_clock_request_phase() will be combined together and only one frame processed. If you are displaying animated content and want to continually request the %GDK_FRAME_CLOCK_PHASE_UPDATE phase for a period of time, you should use gdk_frame_clock_begin_updating() instead, since this allows GTK+ to adjust system parameters to get maximally smooth animations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>phase</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FrameClockPhase.html" title="Gdk::FrameClockPhase (module)">Gdk::FrameClockPhase</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the phase that is requested</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:13 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

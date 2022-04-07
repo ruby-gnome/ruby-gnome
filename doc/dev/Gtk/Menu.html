@@ -1,0 +1,3933 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::Menu
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::Menu";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (M)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">Menu</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::Menu
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::Menu</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accel_group-instance_method" title="#accel_group (instance method)">#<strong>accel_group</strong>  &#x21d2; Gtk::AccelGroup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The accel group holding accelerators for the menu.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accel_group=-instance_method" title="#accel_group= (instance method)">#<strong>accel_group=</strong>(accel_group)  &#x21d2; Gtk::AccelGroup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The accel group holding accelerators for the menu.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accel_path-instance_method" title="#accel_path (instance method)">#<strong>accel_path</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An accel path used to conveniently construct accel paths of child items.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accel_path=-instance_method" title="#accel_path= (instance method)">#<strong>accel_path=</strong>(accel_path)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An accel path used to conveniently construct accel paths of child items.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#active-instance_method" title="#active (instance method)">#<strong>active</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The index of the currently selected menu item, or -1 if no menu item is selected.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#active=-instance_method" title="#active= (instance method)">#<strong>active=</strong>(active)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The index of the currently selected menu item, or -1 if no menu item is selected.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#anchor_hints-instance_method" title="#anchor_hints (instance method)">#<strong>anchor_hints</strong>  &#x21d2; Gdk::AnchorHints </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Positioning hints for aligning the menu relative to a rectangle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#anchor_hints=-instance_method" title="#anchor_hints= (instance method)">#<strong>anchor_hints=</strong>(anchor_hints)  &#x21d2; Gdk::AnchorHints </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Positioning hints for aligning the menu relative to a rectangle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attach-instance_method" title="#attach (instance method)">#<strong>attach</strong>(child, left_attach, right_attach, top_attach, bottom_attach)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a new Gtk::MenuItem to a (table) menu.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attach_to_widget-instance_method" title="#attach_to_widget (instance method)">#<strong>attach_to_widget</strong>(attach_widget, detacher)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Attaches the menu to the widget and provides a callback function that will be invoked when the menu calls gtk_menu_detach() during its destruction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attach_widget-instance_method" title="#attach_widget (instance method)">#<strong>attach_widget</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The widget the menu is attached to.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attach_widget=-instance_method" title="#attach_widget= (instance method)">#<strong>attach_widget=</strong>(attach_widget)  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The widget the menu is attached to.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#detach-instance_method" title="#detach (instance method)">#<strong>detach</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Detaches the menu from the widget to which it had been attached.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#menu_type_hint-instance_method" title="#menu_type_hint (instance method)">#<strong>menu_type_hint</strong>  &#x21d2; Gdk::WindowTypeHint </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The Gdk::WindowTypeHint to use for the menu’s #GdkWindow.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#menu_type_hint=-instance_method" title="#menu_type_hint= (instance method)">#<strong>menu_type_hint=</strong>(menu_type_hint)  &#x21d2; Gdk::WindowTypeHint </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The Gdk::WindowTypeHint to use for the menu’s #GdkWindow.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#monitor-instance_method" title="#monitor (instance method)">#<strong>monitor</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The monitor the menu will be popped up on.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#monitor=-instance_method" title="#monitor= (instance method)">#<strong>monitor=</strong>(monitor)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The monitor the menu will be popped up on.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Gtk::Menu.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_from_model-instance_method" title="#new_from_model (instance method)">#<strong>new_from_model</strong>(model)  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a Gtk::Menu and populates it with menu items and submenus according to <strong>model</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#place_on_monitor-instance_method" title="#place_on_monitor (instance method)">#<strong>place_on_monitor</strong>(monitor)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Places <strong>menu</strong> on the given monitor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#popdown-instance_method" title="#popdown (instance method)">#<strong>popdown</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes the menu from the screen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#popup-instance_method" title="#popup (instance method)">#<strong>popup</strong>(parent_menu_shell, parent_menu_item, func, data, button, activate_time)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Displays a menu and makes it available for selection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#popup_at_pointer-instance_method" title="#popup_at_pointer (instance method)">#<strong>popup_at_pointer</strong>(trigger_event)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Displays <strong>menu</strong> and makes it available for selection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#popup_at_rect-instance_method" title="#popup_at_rect (instance method)">#<strong>popup_at_rect</strong>(rect_window, rect, rect_anchor, menu_anchor, trigger_event)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Displays <strong>menu</strong> and makes it available for selection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#popup_at_widget-instance_method" title="#popup_at_widget (instance method)">#<strong>popup_at_widget</strong>(widget, widget_anchor, menu_anchor, trigger_event)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Displays <strong>menu</strong> and makes it available for selection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#popup_for_device-instance_method" title="#popup_for_device (instance method)">#<strong>popup_for_device</strong>(device, parent_menu_shell, parent_menu_item, func, data, destroy, button, activate_time)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Displays a menu and makes it available for selection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect_anchor_dx-instance_method" title="#rect_anchor_dx (instance method)">#<strong>rect_anchor_dx</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Horizontal offset to apply to the menu, i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect_anchor_dx=-instance_method" title="#rect_anchor_dx= (instance method)">#<strong>rect_anchor_dx=</strong>(rect_anchor_dx)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Horizontal offset to apply to the menu, i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect_anchor_dy-instance_method" title="#rect_anchor_dy (instance method)">#<strong>rect_anchor_dy</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Vertical offset to apply to the menu, i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect_anchor_dy=-instance_method" title="#rect_anchor_dy= (instance method)">#<strong>rect_anchor_dy=</strong>(rect_anchor_dy)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Vertical offset to apply to the menu, i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reorder_child-instance_method" title="#reorder_child (instance method)">#<strong>reorder_child</strong>(child, position)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Moves <strong>child</strong> to a new <strong>position</strong> in the list of <strong>menu</strong> children.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reposition-instance_method" title="#reposition (instance method)">#<strong>reposition</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Repositions the menu according to its position function.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reserve_toggle_size-instance_method" title="#reserve_toggle_size (instance method)">#<strong>reserve_toggle_size</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns whether the menu reserves space for toggles and icons, regardless of their actual presence.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reserve_toggle_size=-instance_method" title="#reserve_toggle_size= (instance method)">#<strong>reserve_toggle_size=</strong>(reserve_toggle_size)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A boolean that indicates whether the menu reserves space for toggles and icons, regardless of their actual presence.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reserve_toggle_size%3F-instance_method" title="#reserve_toggle_size? (instance method)">#<strong>reserve_toggle_size?</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A boolean that indicates whether the menu reserves space for toggles and icons, regardless of their actual presence.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#screen=-instance_method" title="#screen= (instance method)">#<strong>screen=</strong>(screen)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the Gdk::Screen on which the menu will be displayed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tearoff_state-instance_method" title="#tearoff_state (instance method)">#<strong>tearoff_state</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns whether the menu is torn off.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tearoff_state=-instance_method" title="#tearoff_state= (instance method)">#<strong>tearoff_state=</strong>(tearoff_state)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A boolean that indicates whether the menu is torn-off.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tearoff_state%3F-instance_method" title="#tearoff_state? (instance method)">#<strong>tearoff_state?</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A boolean that indicates whether the menu is torn-off.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tearoff_title-instance_method" title="#tearoff_title (instance method)">#<strong>tearoff_title</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A title that may be displayed by the window manager when this menu is torn-off.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tearoff_title=-instance_method" title="#tearoff_title= (instance method)">#<strong>tearoff_title=</strong>(tearoff_title)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A title that may be displayed by the window manager when this menu is torn-off.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#title-instance_method" title="#title (instance method)">#<strong>title</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the title of the menu.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#title=-instance_method" title="#title= (instance method)">#<strong>title=</strong>(title)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the title string for the menu.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="accel_group-instance_method">
+  
+    #<strong>accel_group</strong>  &#x21d2; <tt><span class='object_link'><a href="AccelGroup.html" title="Gtk::AccelGroup (class)">Gtk::AccelGroup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The accel group holding accelerators for the menu.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccelGroup.html" title="Gtk::AccelGroup (class)">Gtk::AccelGroup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>accel-group</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="accel_group=-instance_method">
+  
+    #<strong>accel_group=</strong>(accel_group)  &#x21d2; <tt><span class='object_link'><a href="AccelGroup.html" title="Gtk::AccelGroup (class)">Gtk::AccelGroup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The accel group holding accelerators for the menu.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>accel_group</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccelGroup.html" title="Gtk::AccelGroup (class)">Gtk::AccelGroup</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccelGroup.html" title="Gtk::AccelGroup (class)">Gtk::AccelGroup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>accel-group</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccelGroup.html" title="Gtk::AccelGroup (class)">Gtk::AccelGroup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>accel-group</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="accel_path-instance_method">
+  
+    #<strong>accel_path</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>An accel path used to conveniently construct accel paths of child items.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>accel-path</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="accel_path=-instance_method">
+  
+    #<strong>accel_path=</strong>(accel_path)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>An accel path used to conveniently construct accel paths of child items.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>accel_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>accel-path</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>accel-path</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="active-instance_method">
+  
+    #<strong>active</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The index of the currently selected menu item, or -1 if no menu item is selected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>active</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="active=-instance_method">
+  
+    #<strong>active=</strong>(active)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The index of the currently selected menu item, or -1 if no menu item is selected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>active</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>active</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="anchor_hints-instance_method">
+  
+    #<strong>anchor_hints</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/AnchorHints.html" title="Gdk::AnchorHints (module)">Gdk::AnchorHints</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Positioning hints for aligning the menu relative to a rectangle.</p>
+
+<p>These hints determine how the menu should be positioned in the case that the menu would fall off-screen if placed in its ideal position.</p>
+
+<p>![](popup-flip.png)</p>
+
+<p>For example, %GDK_ANCHOR_FLIP_Y will replace %GDK_GRAVITY_NORTH_WEST with %GDK_GRAVITY_SOUTH_WEST and vice versa if the menu extends beyond the bottom edge of the monitor.</p>
+
+<p>See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), gtk_menu_popup_at_pointer (), Gtk::Menu:rect-anchor-dx, Gtk::Menu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/AnchorHints.html" title="Gdk::AnchorHints (module)">Gdk::AnchorHints</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>anchor-hints</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="anchor_hints=-instance_method">
+  
+    #<strong>anchor_hints=</strong>(anchor_hints)  &#x21d2; <tt><span class='object_link'><a href="../Gdk/AnchorHints.html" title="Gdk::AnchorHints (module)">Gdk::AnchorHints</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Positioning hints for aligning the menu relative to a rectangle.</p>
+
+<p>These hints determine how the menu should be positioned in the case that the menu would fall off-screen if placed in its ideal position.</p>
+
+<p>![](popup-flip.png)</p>
+
+<p>For example, %GDK_ANCHOR_FLIP_Y will replace %GDK_GRAVITY_NORTH_WEST with %GDK_GRAVITY_SOUTH_WEST and vice versa if the menu extends beyond the bottom edge of the monitor.</p>
+
+<p>See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), gtk_menu_popup_at_pointer (), Gtk::Menu:rect-anchor-dx, Gtk::Menu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>anchor_hints</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/AnchorHints.html" title="Gdk::AnchorHints (module)">Gdk::AnchorHints</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/AnchorHints.html" title="Gdk::AnchorHints (module)">Gdk::AnchorHints</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>anchor-hints</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/AnchorHints.html" title="Gdk::AnchorHints (module)">Gdk::AnchorHints</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>anchor-hints</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attach-instance_method">
+  
+    #<strong>attach</strong>(child, left_attach, right_attach, top_attach, bottom_attach)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a new Gtk::MenuItem to a (table) menu. The number of “cells” that an item will occupy is specified by <strong>left_attach</strong>, <strong>right_attach</strong>, <strong>top_attach</strong> and <strong>bottom_attach</strong>. These each represent the leftmost, rightmost, uppermost and lower column and row numbers of the table. (Columns and rows are indexed from zero).</p>
+
+<p>Note that this function is not related to gtk_menu_detach().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::MenuItem</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>left_attach</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The column number to attach the left side of the item to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>right_attach</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The column number to attach the right side of the item to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>top_attach</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The row number to attach the top of the item to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bottom_attach</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The row number to attach the bottom of the item to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attach_to_widget-instance_method">
+  
+    #<strong>attach_to_widget</strong>(attach_widget, detacher)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Attaches the menu to the widget and provides a callback function that will be invoked when the menu calls gtk_menu_detach() during its destruction.</p>
+
+<p>If the menu is attached to the widget then it will be destroyed when the widget is destroyed, as if it was a child widget. An attached menu will also move between screens correctly if the widgets moves between screens.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attach_widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget that the menu will be attached to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>detacher</span>
+      
+      
+        <span class='type'>(<tt>Gtk::MenuDetachFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the user supplied callback function that will be called when the menu calls gtk_menu_detach()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attach_widget-instance_method">
+  
+    #<strong>attach_widget</strong>  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The widget the menu is attached to. Setting this property attaches the menu without a Gtk::MenuDetachFunc. If you need to use a detacher, use gtk_menu_attach_to_widget() directly.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>attach-widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attach_widget=-instance_method">
+  
+    #<strong>attach_widget=</strong>(attach_widget)  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The widget the menu is attached to. Setting this property attaches the menu without a Gtk::MenuDetachFunc. If you need to use a detacher, use gtk_menu_attach_to_widget() directly.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attach_widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>attach-widget</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>attach-widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="detach-instance_method">
+  
+    #<strong>detach</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Detaches the menu from the widget to which it had been attached. This function will call the callback function, <strong>detacher</strong>, provided when the gtk_menu_attach_to_widget() function was called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="menu_type_hint-instance_method">
+  
+    #<strong>menu_type_hint</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/WindowTypeHint.html" title="Gdk::WindowTypeHint (module)">Gdk::WindowTypeHint</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The Gdk::WindowTypeHint to use for the menu’s #GdkWindow.</p>
+
+<p>See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), gtk_menu_popup_at_pointer (), Gtk::Menu:anchor-hints, Gtk::Menu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/WindowTypeHint.html" title="Gdk::WindowTypeHint (module)">Gdk::WindowTypeHint</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>menu-type-hint</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="menu_type_hint=-instance_method">
+  
+    #<strong>menu_type_hint=</strong>(menu_type_hint)  &#x21d2; <tt><span class='object_link'><a href="../Gdk/WindowTypeHint.html" title="Gdk::WindowTypeHint (module)">Gdk::WindowTypeHint</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The Gdk::WindowTypeHint to use for the menu’s #GdkWindow.</p>
+
+<p>See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), gtk_menu_popup_at_pointer (), Gtk::Menu:anchor-hints, Gtk::Menu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>menu_type_hint</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/WindowTypeHint.html" title="Gdk::WindowTypeHint (module)">Gdk::WindowTypeHint</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/WindowTypeHint.html" title="Gdk::WindowTypeHint (module)">Gdk::WindowTypeHint</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>menu-type-hint</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/WindowTypeHint.html" title="Gdk::WindowTypeHint (module)">Gdk::WindowTypeHint</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>menu-type-hint</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="monitor-instance_method">
+  
+    #<strong>monitor</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The monitor the menu will be popped up on.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>monitor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="monitor=-instance_method">
+  
+    #<strong>monitor=</strong>(monitor)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The monitor the menu will be popped up on.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monitor</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>monitor</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>monitor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new Gtk::Menu</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new Gtk::Menu</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_from_model-instance_method">
+  
+    #<strong>new_from_model</strong>(model)  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a Gtk::Menu and populates it with menu items and submenus according to <strong>model</strong>.</p>
+
+<p>The created menu items are connected to actions found in the Gtk::ApplicationWindow to which the menu belongs - typically by means of being attached to a widget (see gtk_menu_attach_to_widget()) that is contained within the Gtk::ApplicationWindows widget hierarchy.</p>
+
+<p>Actions can also be added using gtk_widget_insert_action_group() on the menu’s attach widget or on any of its parent widgets.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio/MenuModel.html" title="Gio::MenuModel (class)">Gio::MenuModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GMenu::Model</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new Gtk::Menu</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="place_on_monitor-instance_method">
+  
+    #<strong>place_on_monitor</strong>(monitor)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Places <strong>menu</strong> on the given monitor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monitor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the monitor to place the menu on</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="popdown-instance_method">
+  
+    #<strong>popdown</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes the menu from the screen.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="popup-instance_method">
+  
+    #<strong>popup</strong>(parent_menu_shell, parent_menu_item, func, data, button, activate_time)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Displays a menu and makes it available for selection.</p>
+
+<p>Applications can use this function to display context-sensitive menus, and will typically supply nil for the <strong>parent_menu_shell</strong>, <strong>parent_menu_item</strong>, <strong>func</strong> and <strong>data</strong> parameters. The default menu positioning function will position the menu at the current mouse cursor position.</p>
+
+<p>The <strong>button</strong> parameter should be the mouse button pressed to initiate the menu popup. If the menu popup was initiated by something other than a mouse button press, such as a mouse button release or a keypress, <strong>button</strong> should be 0.</p>
+
+<p>The <strong>activate_time</strong> parameter is used to conflict-resolve initiation of concurrent requests for mouse/keyboard grab requests. To function properly, this needs to be the timestamp of the user event (such as a mouse click or key press) that caused the initiation of the popup. Only if no such event is available, gtk_get_current_event_time() can be used instead.</p>
+
+<p>Note that this function does not work very well on GDK backends that do not have global coordinates, such as Wayland or Mir. You should probably use one of the gtk_menu_popup_at_ variants, which do not have this problem.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent_menu_shell</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the menu shell containing the triggering menu item, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent_menu_item</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the menu item whose activation triggered the popup, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gtk::MenuPositionFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a user supplied function used to position the menu, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user supplied data to be passed to <strong>func</strong>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>button</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the mouse button which was pressed to initiate the event.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>activate_time</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the time at which the activation event occurred.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="popup_at_pointer-instance_method">
+  
+    #<strong>popup_at_pointer</strong>(trigger_event)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Displays <strong>menu</strong> and makes it available for selection.</p>
+
+<p>See gtk_menu_popup_at_widget () to pop up a menu at a widget. gtk_menu_popup_at_rect () also allows you to position a menu at an arbitrary rectangle.</p>
+
+<p><strong>menu</strong> will be positioned at the pointer associated with <strong>trigger_event</strong>.</p>
+
+<p>Properties that influence the behaviour of this function are Gtk::Menu:anchor-hints, #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and Gtk::Menu:menu-type-hint. Connect to the #GtkMenu::popped-up signal to find out how it was actually positioned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>trigger_event</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Event that initiated this request or nil if it’s the current event</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="popup_at_rect-instance_method">
+  
+    #<strong>popup_at_rect</strong>(rect_window, rect, rect_anchor, menu_anchor, trigger_event)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Displays <strong>menu</strong> and makes it available for selection.</p>
+
+<p>See gtk_menu_popup_at_widget () and gtk_menu_popup_at_pointer (), which handle more common cases for popping up menus.</p>
+
+<p><strong>menu</strong> will be positioned at <strong>rect</strong>, aligning their anchor points. <strong>rect</strong> is relative to the top-left corner of <strong>rect_window</strong>. <strong>rect_anchor</strong> and <strong>menu_anchor</strong> determine anchor points on <strong>rect</strong> and <strong>menu</strong> to pin together. <strong>menu</strong> can optionally be offset by Gtk::Menu:rect-anchor-dx and Gtk::Menu:rect-anchor-dy.</p>
+
+<p>Anchors should be specified under the assumption that the text direction is left-to-right; they will be flipped horizontally automatically if the text direction is right-to-left.</p>
+
+<p>Other properties that influence the behaviour of this function are Gtk::Menu:anchor-hints and #GtkMenu:menu-type-hint. Connect to the Gtk::Menu::popped-up signal to find out how it was actually positioned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect_window</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Window.html" title="Gdk::Window (class)">Gdk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Window <strong>rect</strong> is relative to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Rectangle to align <strong>menu</strong> with</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rect_anchor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Gravity.html" title="Gdk::Gravity (module)">Gdk::Gravity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the point on <strong>rect</strong> to align with <strong>menu</strong>’s anchor point</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>menu_anchor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Gravity.html" title="Gdk::Gravity (module)">Gdk::Gravity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the point on <strong>menu</strong> to align with <strong>rect</strong>’s anchor point</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>trigger_event</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Event that initiated this request or nil if it’s the current event</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="popup_at_widget-instance_method">
+  
+    #<strong>popup_at_widget</strong>(widget, widget_anchor, menu_anchor, trigger_event)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Displays <strong>menu</strong> and makes it available for selection.</p>
+
+<p>See gtk_menu_popup_at_pointer () to pop up a menu at the master pointer. gtk_menu_popup_at_rect () also allows you to position a menu at an arbitrary rectangle.</p>
+
+<p>![](popup-anchors.png)</p>
+
+<p><strong>menu</strong> will be positioned at <strong>widget</strong>, aligning their anchor points. <strong>widget_anchor</strong> and <strong>menu_anchor</strong> determine anchor points on <strong>widget</strong> and <strong>menu</strong> to pin together. <strong>menu</strong> can optionally be offset by Gtk::Menu:rect-anchor-dx and Gtk::Menu:rect-anchor-dy.</p>
+
+<p>Anchors should be specified under the assumption that the text direction is left-to-right; they will be flipped horizontally automatically if the text direction is right-to-left.</p>
+
+<p>Other properties that influence the behaviour of this function are Gtk::Menu:anchor-hints and #GtkMenu:menu-type-hint. Connect to the Gtk::Menu::popped-up signal to find out how it was actually positioned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Widget to align <strong>menu</strong> with</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widget_anchor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Gravity.html" title="Gdk::Gravity (module)">Gdk::Gravity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the point on <strong>widget</strong> to align with <strong>menu</strong>’s anchor point</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>menu_anchor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Gravity.html" title="Gdk::Gravity (module)">Gdk::Gravity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the point on <strong>menu</strong> to align with <strong>widget</strong>’s anchor point</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>trigger_event</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Event that initiated this request or nil if it’s the current event</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="popup_for_device-instance_method">
+  
+    #<strong>popup_for_device</strong>(device, parent_menu_shell, parent_menu_item, func, data, destroy, button, activate_time)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Displays a menu and makes it available for selection.</p>
+
+<p>Applications can use this function to display context-sensitive menus, and will typically supply nil for the <strong>parent_menu_shell</strong>, <strong>parent_menu_item</strong>, <strong>func</strong>, <strong>data</strong> and <strong>destroy</strong> parameters. The default menu positioning function will position the menu at the current position of <strong>device</strong> (or its corresponding pointer).</p>
+
+<p>The <strong>button</strong> parameter should be the mouse button pressed to initiate the menu popup. If the menu popup was initiated by something other than a mouse button press, such as a mouse button release or a keypress, <strong>button</strong> should be 0.</p>
+
+<p>The <strong>activate_time</strong> parameter is used to conflict-resolve initiation of concurrent requests for mouse/keyboard grab requests. To function properly, this needs to be the time stamp of the user event (such as a mouse click or key press) that caused the initiation of the popup. Only if no such event is available, gtk_get_current_event_time() can be used instead.</p>
+
+<p>Note that this function does not work very well on GDK backends that do not have global coordinates, such as Wayland or Mir. You should probably use one of the gtk_menu_popup_at_ variants, which do not have this problem.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>device</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Device.html" title="Gdk::Device (class)">Gdk::Device</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Device</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent_menu_shell</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the menu shell containing the triggering menu item, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent_menu_item</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the menu item whose activation triggered the popup, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gtk::MenuPositionFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a user supplied function used to position the menu, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user supplied data to be passed to <strong>func</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>destroy</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>destroy notify for <strong>data</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>button</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the mouse button which was pressed to initiate the event</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>activate_time</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the time at which the activation event occurred</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect_anchor_dx-instance_method">
+  
+    #<strong>rect_anchor_dx</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Horizontal offset to apply to the menu, i.e. the rectangle or widget anchor.</p>
+
+<p>See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), gtk_menu_popup_at_pointer (), Gtk::Menu:anchor-hints, Gtk::Menu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rect-anchor-dx</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect_anchor_dx=-instance_method">
+  
+    #<strong>rect_anchor_dx=</strong>(rect_anchor_dx)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Horizontal offset to apply to the menu, i.e. the rectangle or widget anchor.</p>
+
+<p>See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), gtk_menu_popup_at_pointer (), Gtk::Menu:anchor-hints, Gtk::Menu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect_anchor_dx</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rect-anchor-dx</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rect-anchor-dx</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect_anchor_dy-instance_method">
+  
+    #<strong>rect_anchor_dy</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Vertical offset to apply to the menu, i.e. the rectangle or widget anchor.</p>
+
+<p>See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), gtk_menu_popup_at_pointer (), Gtk::Menu:anchor-hints, Gtk::Menu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rect-anchor-dy</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect_anchor_dy=-instance_method">
+  
+    #<strong>rect_anchor_dy=</strong>(rect_anchor_dy)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Vertical offset to apply to the menu, i.e. the rectangle or widget anchor.</p>
+
+<p>See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), gtk_menu_popup_at_pointer (), Gtk::Menu:anchor-hints, Gtk::Menu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect_anchor_dy</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rect-anchor-dy</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rect-anchor-dy</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reorder_child-instance_method">
+  
+    #<strong>reorder_child</strong>(child, position)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Moves <strong>child</strong> to a new <strong>position</strong> in the list of <strong>menu</strong> children.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::MenuItem to move</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new position to place <strong>child</strong>. Positions are numbered from 0 to n - 1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reposition-instance_method">
+  
+    #<strong>reposition</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Repositions the menu according to its position function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reserve_toggle_size-instance_method">
+  
+    #<strong>reserve_toggle_size</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether the menu reserves space for toggles and icons, regardless of their actual presence.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether the menu reserves toggle space</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reserve_toggle_size=-instance_method">
+  
+    #<strong>reserve_toggle_size=</strong>(reserve_toggle_size)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A boolean that indicates whether the menu reserves space for toggles and icons, regardless of their actual presence.</p>
+
+<p>This property should only be changed from its default value for special-purposes such as tabular menus. Regular menus that are connected to a menu bar or context menus should reserve toggle space for consistency.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>reserve_toggle_size</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>reserve-toggle-size</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>reserve-toggle-size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reserve_toggle_size?-instance_method">
+  
+    #<strong>reserve_toggle_size?</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A boolean that indicates whether the menu reserves space for toggles and icons, regardless of their actual presence.</p>
+
+<p>This property should only be changed from its default value for special-purposes such as tabular menus. Regular menus that are connected to a menu bar or context menus should reserve toggle space for consistency.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>reserve-toggle-size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="screen=-instance_method">
+  
+    #<strong>screen=</strong>(screen)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the Gdk::Screen on which the menu will be displayed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>screen</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Screen.html" title="Gdk::Screen (class)">Gdk::Screen</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Screen, or nil if the screen should be determined by the widget the menu is attached to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tearoff_state-instance_method">
+  
+    #<strong>tearoff_state</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether the menu is torn off. See gtk_menu_set_tearoff_state().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the menu is currently torn off.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tearoff_state=-instance_method">
+  
+    #<strong>tearoff_state=</strong>(tearoff_state)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A boolean that indicates whether the menu is torn-off.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tearoff_state</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>tearoff-state</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>tearoff-state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tearoff_state?-instance_method">
+  
+    #<strong>tearoff_state?</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A boolean that indicates whether the menu is torn-off.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>tearoff-state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tearoff_title-instance_method">
+  
+    #<strong>tearoff_title</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A title that may be displayed by the window manager when this menu is torn-off.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>tearoff-title</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tearoff_title=-instance_method">
+  
+    #<strong>tearoff_title=</strong>(tearoff_title)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A title that may be displayed by the window manager when this menu is torn-off.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tearoff_title</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>tearoff-title</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>tearoff-title</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="title-instance_method">
+  
+    #<strong>title</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the title of the menu. See gtk_menu_set_title().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the title of the menu, or nil if the menu has no title set on it. This string is owned by GTK+ and should not be modified or freed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="title=-instance_method">
+  
+    #<strong>title=</strong>(title)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the title string for the menu.</p>
+
+<p>The title is displayed when the menu is shown as a tearoff menu. If <strong>title</strong> is nil, the menu will see if it is attached to a parent menu item, and if so it will try to use the same text as that menu item’s label.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>title</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a string containing the title for the menu, or nil to inherit the title of the parent menu item, if any</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:24 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

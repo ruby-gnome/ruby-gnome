@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gdk::EventType
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::EventType";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (E)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">EventType</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gdk::EventType
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="NOTHING-constant" class="">NOTHING =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a special code to indicate a null event.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='op'>-</span><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:nothing</span></pre></dd>
+      
+        <dt id="DELETE-constant" class="">DELETE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the window manager has requested that the toplevel window be</p>
+
+<pre class="code ruby"><code class="ruby">hidden or destroyed, usually when the user clicks on a special icon in the
+title bar.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:delete</span></pre></dd>
+      
+        <dt id="DESTROY-constant" class="">DESTROY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the window has been destroyed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:destroy</span></pre></dd>
+      
+        <dt id="EXPOSE-constant" class="">EXPOSE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>all or part of the window has become visible and needs to be</p>
+
+<pre class="code ruby"><code class="ruby">redrawn.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:expose</span></pre></dd>
+      
+        <dt id="MOTION_NOTIFY-constant" class="">MOTION_NOTIFY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the pointer (usually a mouse) has moved.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:motion_notify</span></pre></dd>
+      
+        <dt id="BUTTON_PRESS-constant" class="">BUTTON_PRESS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a mouse button has been pressed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:button_press</span></pre></dd>
+      
+        <dt id="2BUTTON_PRESS-constant" class="">2BUTTON_PRESS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a mouse button has been double-clicked (clicked twice</p>
+
+<pre class="code ruby"><code class="ruby">within a short period of time). Note that each click also generates a
+%GDK_BUTTON_PRESS event.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code">5 or :2button_press</pre></dd>
+      
+        <dt id="DOUBLE_BUTTON_PRESS-constant" class="">DOUBLE_BUTTON_PRESS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>alias for %GDK_2BUTTON_PRESS, added in 3.6.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:double_button_press</span></pre></dd>
+      
+        <dt id="3BUTTON_PRESS-constant" class="">3BUTTON_PRESS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a mouse button has been clicked 3 times in a short period</p>
+
+<pre class="code ruby"><code class="ruby">of time. Note that each click also generates a %GDK_BUTTON_PRESS event.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code">6 or :3button_press</pre></dd>
+      
+        <dt id="TRIPLE_BUTTON_PRESS-constant" class="">TRIPLE_BUTTON_PRESS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>alias for %GDK_3BUTTON_PRESS, added in 3.6.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:triple_button_press</span></pre></dd>
+      
+        <dt id="BUTTON_RELEASE-constant" class="">BUTTON_RELEASE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a mouse button has been released.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:button_release</span></pre></dd>
+      
+        <dt id="KEY_PRESS-constant" class="">KEY_PRESS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a key has been pressed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:key_press</span></pre></dd>
+      
+        <dt id="KEY_RELEASE-constant" class="">KEY_RELEASE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a key has been released.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:key_release</span></pre></dd>
+      
+        <dt id="ENTER_NOTIFY-constant" class="">ENTER_NOTIFY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the pointer has entered the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:enter_notify</span></pre></dd>
+      
+        <dt id="LEAVE_NOTIFY-constant" class="">LEAVE_NOTIFY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the pointer has left the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:leave_notify</span></pre></dd>
+      
+        <dt id="FOCUS_CHANGE-constant" class="">FOCUS_CHANGE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the keyboard focus has entered or left the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:focus_change</span></pre></dd>
+      
+        <dt id="CONFIGURE-constant" class="">CONFIGURE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the size, position or stacking order of the window has changed.</p>
+
+<pre class="code ruby"><code class="ruby">Note that GTK+ discards these events for %GDK_WINDOW_CHILD windows.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:configure</span></pre></dd>
+      
+        <dt id="MAP-constant" class="">MAP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the window has been mapped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:map</span></pre></dd>
+      
+        <dt id="UNMAP-constant" class="">UNMAP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the window has been unmapped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span> <span class='kw'>or</span> <span class='symbol'>:unmap</span></pre></dd>
+      
+        <dt id="PROPERTY_NOTIFY-constant" class="">PROPERTY_NOTIFY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a property on the window has been changed or deleted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:property_notify</span></pre></dd>
+      
+        <dt id="SELECTION_CLEAR-constant" class="">SELECTION_CLEAR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the application has lost ownership of a selection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span> <span class='kw'>or</span> <span class='symbol'>:selection_clear</span></pre></dd>
+      
+        <dt id="SELECTION_REQUEST-constant" class="">SELECTION_REQUEST =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>another application has requested a selection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:selection_request</span></pre></dd>
+      
+        <dt id="SELECTION_NOTIFY-constant" class="">SELECTION_NOTIFY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a selection has been received.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span> <span class='kw'>or</span> <span class='symbol'>:selection_notify</span></pre></dd>
+      
+        <dt id="PROXIMITY_IN-constant" class="">PROXIMITY_IN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>an input device has moved into contact with a sensing</p>
+
+<pre class="code ruby"><code class="ruby">surface (e.g. a touchscreen or graphics tablet).
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span> <span class='kw'>or</span> <span class='symbol'>:proximity_in</span></pre></dd>
+      
+        <dt id="PROXIMITY_OUT-constant" class="">PROXIMITY_OUT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>an input device has moved out of contact with a sensing</p>
+
+<pre class="code ruby"><code class="ruby">surface.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>21</span> <span class='kw'>or</span> <span class='symbol'>:proximity_out</span></pre></dd>
+      
+        <dt id="DRAG_ENTER-constant" class="">DRAG_ENTER =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the mouse has entered the window while a drag is in progress.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>22</span> <span class='kw'>or</span> <span class='symbol'>:drag_enter</span></pre></dd>
+      
+        <dt id="DRAG_LEAVE-constant" class="">DRAG_LEAVE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the mouse has left the window while a drag is in progress.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>23</span> <span class='kw'>or</span> <span class='symbol'>:drag_leave</span></pre></dd>
+      
+        <dt id="DRAG_MOTION-constant" class="">DRAG_MOTION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the mouse has moved in the window while a drag is in</p>
+
+<pre class="code ruby"><code class="ruby">progress.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>24</span> <span class='kw'>or</span> <span class='symbol'>:drag_motion</span></pre></dd>
+      
+        <dt id="DRAG_STATUS-constant" class="">DRAG_STATUS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the status of the drag operation initiated by the window</p>
+
+<pre class="code ruby"><code class="ruby">has changed.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>25</span> <span class='kw'>or</span> <span class='symbol'>:drag_status</span></pre></dd>
+      
+        <dt id="DROP_START-constant" class="">DROP_START =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a drop operation onto the window has started.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>26</span> <span class='kw'>or</span> <span class='symbol'>:drop_start</span></pre></dd>
+      
+        <dt id="DROP_FINISHED-constant" class="">DROP_FINISHED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the drop operation initiated by the window has completed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>27</span> <span class='kw'>or</span> <span class='symbol'>:drop_finished</span></pre></dd>
+      
+        <dt id="CLIENT_EVENT-constant" class="">CLIENT_EVENT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a message has been received from another application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>28</span> <span class='kw'>or</span> <span class='symbol'>:client_event</span></pre></dd>
+      
+        <dt id="VISIBILITY_NOTIFY-constant" class="">VISIBILITY_NOTIFY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the window visibility status has changed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>29</span> <span class='kw'>or</span> <span class='symbol'>:visibility_notify</span></pre></dd>
+      
+        <dt id="SCROLL-constant" class="">SCROLL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the scroll wheel was turned</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>31</span> <span class='kw'>or</span> <span class='symbol'>:scroll</span></pre></dd>
+      
+        <dt id="WINDOW_STATE-constant" class="">WINDOW_STATE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the state of a window has changed. See Gdk::WindowState</p>
+
+<pre class="code ruby"><code class="ruby">for the possible window states
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>32</span> <span class='kw'>or</span> <span class='symbol'>:window_state</span></pre></dd>
+      
+        <dt id="SETTING-constant" class="">SETTING =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a setting has been modified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>33</span> <span class='kw'>or</span> <span class='symbol'>:setting</span></pre></dd>
+      
+        <dt id="OWNER_CHANGE-constant" class="">OWNER_CHANGE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the owner of a selection has changed. This event type</p>
+
+<pre class="code ruby"><code class="ruby">was added in 2.6
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>34</span> <span class='kw'>or</span> <span class='symbol'>:owner_change</span></pre></dd>
+      
+        <dt id="GRAB_BROKEN-constant" class="">GRAB_BROKEN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a pointer or keyboard grab was broken. This event type</p>
+
+<pre class="code ruby"><code class="ruby">was added in 2.8.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>35</span> <span class='kw'>or</span> <span class='symbol'>:grab_broken</span></pre></dd>
+      
+        <dt id="DAMAGE-constant" class="">DAMAGE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the content of the window has been changed. This event type</p>
+
+<pre class="code ruby"><code class="ruby">was added in 2.14.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>36</span> <span class='kw'>or</span> <span class='symbol'>:damage</span></pre></dd>
+      
+        <dt id="TOUCH_BEGIN-constant" class="">TOUCH_BEGIN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A new touch event sequence has just started. This event</p>
+
+<pre class="code ruby"><code class="ruby">type was added in 3.4.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>37</span> <span class='kw'>or</span> <span class='symbol'>:touch_begin</span></pre></dd>
+      
+        <dt id="TOUCH_UPDATE-constant" class="">TOUCH_UPDATE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A touch event sequence has been updated. This event type</p>
+
+<pre class="code ruby"><code class="ruby">was added in 3.4.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>38</span> <span class='kw'>or</span> <span class='symbol'>:touch_update</span></pre></dd>
+      
+        <dt id="TOUCH_END-constant" class="">TOUCH_END =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A touch event sequence has finished. This event type</p>
+
+<pre class="code ruby"><code class="ruby">was added in 3.4.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>39</span> <span class='kw'>or</span> <span class='symbol'>:touch_end</span></pre></dd>
+      
+        <dt id="TOUCH_CANCEL-constant" class="">TOUCH_CANCEL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A touch event sequence has been canceled. This event type</p>
+
+<pre class="code ruby"><code class="ruby">was added in 3.4.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>40</span> <span class='kw'>or</span> <span class='symbol'>:touch_cancel</span></pre></dd>
+      
+        <dt id="TOUCHPAD_SWIPE-constant" class="">TOUCHPAD_SWIPE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A touchpad swipe gesture event, the current state</p>
+
+<pre class="code ruby"><code class="ruby">is determined by its phase field. This event type was added in 3.18.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>41</span> <span class='kw'>or</span> <span class='symbol'>:touchpad_swipe</span></pre></dd>
+      
+        <dt id="TOUCHPAD_PINCH-constant" class="">TOUCHPAD_PINCH =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A touchpad pinch gesture event, the current state</p>
+
+<pre class="code ruby"><code class="ruby">is determined by its phase field. This event type was added in 3.18.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>42</span> <span class='kw'>or</span> <span class='symbol'>:touchpad_pinch</span></pre></dd>
+      
+        <dt id="PAD_BUTTON_PRESS-constant" class="">PAD_BUTTON_PRESS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A tablet pad button press event. This event type</p>
+
+<pre class="code ruby"><code class="ruby">was added in 3.22.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>43</span> <span class='kw'>or</span> <span class='symbol'>:pad_button_press</span></pre></dd>
+      
+        <dt id="PAD_BUTTON_RELEASE-constant" class="">PAD_BUTTON_RELEASE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A tablet pad button release event. This event type</p>
+
+<pre class="code ruby"><code class="ruby">was added in 3.22.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>44</span> <span class='kw'>or</span> <span class='symbol'>:pad_button_release</span></pre></dd>
+      
+        <dt id="PAD_RING-constant" class="">PAD_RING =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A tablet pad axis event from a “ring”. This event type was</p>
+
+<pre class="code ruby"><code class="ruby">added in 3.22.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>45</span> <span class='kw'>or</span> <span class='symbol'>:pad_ring</span></pre></dd>
+      
+        <dt id="PAD_STRIP-constant" class="">PAD_STRIP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A tablet pad axis event from a “strip”. This event type was</p>
+
+<pre class="code ruby"><code class="ruby">added in 3.22.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>46</span> <span class='kw'>or</span> <span class='symbol'>:pad_strip</span></pre></dd>
+      
+        <dt id="PAD_GROUP_MODE-constant" class="">PAD_GROUP_MODE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A tablet pad group mode change. This event type was</p>
+
+<pre class="code ruby"><code class="ruby">added in 3.22.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>47</span> <span class='kw'>or</span> <span class='symbol'>:pad_group_mode</span></pre></dd>
+      
+        <dt id="EVENT_LAST-constant" class="">EVENT_LAST =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>marks the end of the GdkEventType enumeration. Added in 2.18</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>48</span> <span class='kw'>or</span> <span class='symbol'>:event_last</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:56 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

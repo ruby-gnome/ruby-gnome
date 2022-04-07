@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gio::ListModel
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::ListModel";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">ListModel</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gio::ListModel
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>GList::Model is an interface that represents a mutable list of #GObjects. Its main intention is as a model for various widgets in user interfaces, such as list views, but it can also be used as a convenient method of returning lists of data, with support for updates.</p>
+
+<p>Each object in the list may also report changes in itself via some mechanism (normally the #GObject::notify signal).  Taken together with the GList::Model::items-changed signal, this provides for a list that can change its membership, and in which the members can change their individual properties.</p>
+
+<p>A good example would be the list of visible wireless network access points, where each access point can report dynamic properties such as signal strength.</p>
+
+<p>It is important to note that the GList::Model itself does not report changes to the individual items.  It only reports changes to the list membership.  If you want to observe changes to the objects themselves then you need to connect signals to the objects that you are interested in.</p>
+
+<p>All items in a GList::Model are of (or derived from) the same type. g_list_model_get_item_type() returns that type.  The type may be an interface, in which case all objects in the list must implement it.</p>
+
+<p>The semantics are close to that of an array: g_list_model_get_n_items() returns the number of items in the list and g_list_model_get_item() returns an item at a (0-based) position. In order to allow implementations to calculate the list length lazily, you can also iterate over items: starting from 0, repeatedly call g_list_model_get_item() until it returns nil.</p>
+
+<p>An implementation may create objects lazily, but must take care to return the same object for a given position until all references to it are gone.</p>
+
+<p>On the other side, a consumer is expected only to hold references on objects that are currently “user visible”, in order to faciliate the maximum level of laziness in the implementation of the list and to reduce the required number of signal connections at a given time.</p>
+
+<p>This interface is intended only to be used from a single thread.  The thread in which it is appropriate to use it depends on the particular implementation, but typically it will be from the thread that owns the [thread-default main <a href="g-main-context-push-thread-default">context]</a> in effect at the time that the model was created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_item-instance_method" title="#get_item (instance method)">#<strong>get_item</strong>(position)  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the item at <strong>position</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_object-instance_method" title="#get_object (instance method)">#<strong>get_object</strong>(position)  &#x21d2; GObject::Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the item at <strong>position</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#item_type-instance_method" title="#item_type (instance method)">#<strong>item_type</strong>  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the type of the items in <strong>list</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#items_changed-instance_method" title="#items_changed (instance method)">#<strong>items_changed</strong>(position, removed, added)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Emits the GList::Model::items-changed signal on <strong>list</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_items-instance_method" title="#n_items (instance method)">#<strong>n_items</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the number of items in <strong>list</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="get_item-instance_method">
+  
+    #<strong>get_item</strong>(position)  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the item at <strong>position</strong>. If <strong>position</strong> is greater than the number of items in <strong>list</strong>, nil is returned.</p>
+
+<p>nil is never returned for an index that is smaller than the length of the list.  See g_list_model_get_n_items().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the position of the item to fetch</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the item at <strong>position</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_object-instance_method">
+  
+    #<strong>get_object</strong>(position)  &#x21d2; <tt>GObject::Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the item at <strong>position</strong>. If <strong>position</strong> is greater than the number of items in <strong>list</strong>, nil is returned.</p>
+
+<p>nil is never returned for an index that is smaller than the length of the list.  See g_list_model_get_n_items().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the position of the item to fetch</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the object at <strong>position</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="item_type-instance_method">
+  
+    #<strong>item_type</strong>  &#x21d2; <tt><span class='object_link'><a href="../GLib/Type.html" title="GLib::Type (class)">GLib::Type</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the type of the items in <strong>list</strong>. All items returned from g_list_model_get_type() are of that type or a subtype, or are an implementation of that interface.</p>
+
+<p>The item type of a GList::Model can not change during the life of the model.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/Type.html" title="GLib::Type (class)">GLib::Type</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the #GType of the items contained in <strong>list</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="items_changed-instance_method">
+  
+    #<strong>items_changed</strong>(position, removed, added)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Emits the GList::Model::items-changed signal on <strong>list</strong>.</p>
+
+<p>This function should only be called by classes implementing GList::Model. It has to be called after the internal representation of <strong>list</strong> has been updated, because handlers connected to this signal might query the new state of the list.</p>
+
+<p>Implementations must only make changes to the model (as visible to its consumer) in places that will not cause problems for that consumer.  For models that are driven directly by a write API (such as GList::Store), changes can be reported in response to uses of that API.  For models that represent remote data, changes should only be made from a fresh mainloop dispatch.  It is particularly not permitted to make changes in response to a call to the GList::Model consumer API.</p>
+
+<p>Stated another way: in general, it is assumed that code making a series of accesses to the model via the API, without returning to the mainloop, and without calling other code, will continue to view the same contents of the model.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the position at which <strong>list</strong> changed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>removed</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of items removed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>added</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of items added</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_items-instance_method">
+  
+    #<strong>n_items</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the number of items in <strong>list</strong>.</p>
+
+<p>Depending on the model implementation, calling this function may be less efficient than iterating the list with increasing values for <strong>position</strong> until g_list_model_get_item() returns nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of items in <strong>list</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:51 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

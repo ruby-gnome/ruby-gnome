@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::CellLayout
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::CellLayout";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">CellLayout</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::CellLayout
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Gtk::CellLayout is an interface to be implemented by all objects which want to provide a Gtk::TreeViewColumn like API for packing cells, setting attributes and data funcs.</p>
+
+<p>One of the notable features provided by implementations of GtkCellLayout are attributes. Attributes let you set the properties in flexible ways. They can just be set to constant values like regular properties. But they can also be mapped to a column of the underlying tree model with gtk_cell_layout_set_attributes(), which means that the value of the attribute can change from cell to cell as they are rendered by the cell renderer. Finally, it is possible to specify a function with gtk_cell_layout_set_cell_data_func() that is called to determine the value of the attribute for each cell that is rendered.</p>
+
+<p># GtkCellLayouts as GtkBuildable</p>
+
+<p>Implementations of GtkCellLayout which also implement the GtkBuildable interface (Gtk::CellView, #GtkIconView, #GtkComboBox, Gtk::EntryCompletion, #GtkTreeViewColumn) accept GtkCellRenderer objects as &lt;child&gt; elements in UI definitions. They support a custom &lt;attributes&gt; element for their children, which can contain multiple &lt;attribute&gt; elements. Each &lt;attribute&gt; element has a name attribute which specifies a property of the cell renderer; the content of the element is the attribute value.</p>
+
+<p>This is an example of a UI definition fragment specifying attributes: |[ &lt;object class=“GtkCellView”&gt;</p>
+
+<pre class="code ruby"><code class="ruby">&lt;child&gt;
+  &lt;object class=&quot;GtkCellRendererText&quot;/&gt;
+  &lt;attributes&gt;
+    &lt;attribute name=&quot;text&quot;&gt;0&lt;/attribute&gt;
+  &lt;/attributes&gt;
+&lt;/child&gt;&quot;
+</code></pre>
+
+<p>&lt;/object&gt; ]|</p>
+
+<p>Furthermore for implementations of GtkCellLayout that use a Gtk::CellArea to lay out cells (all GtkCellLayouts in GTK+ use a GtkCellArea)</p>
+<dl class="rdoc-list label-list"><dt>cell properties][cell-properties
+<dd>
+<p>can also be defined in the format by</p>
+</dd></dl>
+
+<p>specifying the custom &lt;cell-packing&gt; attribute which can contain multiple &lt;property&gt; elements defined in the normal way.</p>
+
+<p>Here is a UI definition fragment specifying cell properties:</p>
+
+<p>|[ &lt;object class=“GtkTreeViewColumn”&gt;</p>
+
+<pre class="code ruby"><code class="ruby">&lt;child&gt;
+  &lt;object class=&quot;GtkCellRendererText&quot;/&gt;
+  &lt;cell-packing&gt;
+    &lt;property name=&quot;align&quot;&gt;True&lt;/property&gt;
+    &lt;property name=&quot;expand&quot;&gt;False&lt;/property&gt;
+  &lt;/cell-packing&gt;
+&lt;/child&gt;&quot;
+</code></pre>
+
+<p>&lt;/object&gt; ]|</p>
+
+<p># Subclassing GtkCellLayout implementations</p>
+
+<p>When subclassing a widget that implements Gtk::CellLayout like Gtk::IconView or #GtkComboBox, there are some considerations related to the fact that these widgets internally use a Gtk::CellArea. The cell area is exposed as a construct-only property by these widgets. This means that it is possible to e.g. do</p>
+
+<pre class="code ruby"><code class="ruby">static void
+my_combo_box_init (MyComboBox *b)
+{
+  GtkCellRenderer *cell;
+
+  cell = gtk_cell_renderer_pixbuf_new ();
+  // The following call causes the default cell area for combo boxes,
+  // a GtkCellAreaBox, to be instantiated
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (b), cell, FALSE);
+  ...
+}
+
+GtkWidget *
+my_combo_box_new (GtkCellArea *area)
+{
+  // This call is going to cause a warning about area being ignored
+  return g_object_new (MY_TYPE_COMBO_BOX, &quot;cell-area&quot;, area, NULL);
+}
+</code></pre>
+
+<p>If supporting alternative cell areas with your derived widget is not important, then this does not have to concern you. If you want to support alternative cell areas, you can do so by moving the problematic calls out of init() and into a constructor() for your class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_attribute-instance_method" title="#add_attribute (instance method)">#<strong>add_attribute</strong>(cell_layout, cell, attribute, column)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#area-instance_method" title="#area (instance method)">#<strong>area</strong>  &#x21d2; Gtk::CellArea </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the underlying Gtk::CellArea which might be <strong>cell_layout</strong> if called on a Gtk::CellArea or might be nil if no #GtkCellArea is used by <strong>cell_layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cells-instance_method" title="#cells (instance method)">#<strong>cells</strong>  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the cell renderers which have been added to <strong>cell_layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear-instance_method" title="#clear (instance method)">#<strong>clear</strong>(cell_layout)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear_attributes-instance_method" title="#clear_attributes (instance method)">#<strong>clear_attributes</strong>(cell_layout, cell)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_area-instance_method" title="#get_area (instance method)">#<strong>get_area</strong>(cell_layout)  &#x21d2; Gtk::CellArea </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>or nil in case no cell area is used.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_cells-instance_method" title="#get_cells (instance method)">#<strong>get_cells</strong>(cell_layout)  &#x21d2; GLib::List </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A list of cell renderers.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pack_end-instance_method" title="#pack_end (instance method)">#<strong>pack_end</strong>(cell_layout, cell, expand)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pack_start-instance_method" title="#pack_start (instance method)">#<strong>pack_start</strong>(cell_layout, cell, expand)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reorder-instance_method" title="#reorder (instance method)">#<strong>reorder</strong>(cell_layout, cell, position)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_attributes-instance_method" title="#set_attributes (instance method)">#<strong>set_attributes</strong>(cell, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the attributes in list as the attributes of <strong>cell_layout</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_cell_data_func-instance_method" title="#set_cell_data_func (instance method)">#<strong>set_cell_data_func</strong>(cell_layout, cell, func, func_data, destroy)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_attribute-instance_method">
+  
+    #<strong>add_attribute</strong>(cell_layout, cell, attribute, column)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cell_layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::CellLayout (module)">Gtk::CellLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellLayout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>attribute</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an attribute on the renderer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>column</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the column position on the model to get the attribute from</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="area-instance_method">
+  
+    #<strong>area</strong>  &#x21d2; <tt><span class='object_link'><a href="CellArea.html" title="Gtk::CellArea (class)">Gtk::CellArea</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the underlying Gtk::CellArea which might be <strong>cell_layout</strong> if called on a Gtk::CellArea or might be nil if no #GtkCellArea is used by <strong>cell_layout</strong>. or nil in case no cell area is used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellArea.html" title="Gtk::CellArea (class)">Gtk::CellArea</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the cell area used by <strong>cell_layout</strong>,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cells-instance_method">
+  
+    #<strong>cells</strong>  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the cell renderers which have been added to <strong>cell_layout</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a list of cell renderers. The list, but not the renderers has been newly allocated and should be freed with g_list_free() when no longer needed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clear-instance_method">
+  
+    #<strong>clear</strong>(cell_layout)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cell_layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::CellLayout (module)">Gtk::CellLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellLayout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clear_attributes-instance_method">
+  
+    #<strong>clear_attributes</strong>(cell_layout, cell)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cell_layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::CellLayout (module)">Gtk::CellLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellLayout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer to clear the attribute mapping on</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_area-instance_method">
+  
+    #<strong>get_area</strong>(cell_layout)  &#x21d2; <tt><span class='object_link'><a href="CellArea.html" title="Gtk::CellArea (class)">Gtk::CellArea</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>or nil in case no cell area is used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cell_layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::CellLayout (module)">Gtk::CellLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellLayout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellArea.html" title="Gtk::CellArea (class)">Gtk::CellArea</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the cell area used by <strong>cell_layout</strong>,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_cells-instance_method">
+  
+    #<strong>get_cells</strong>(cell_layout)  &#x21d2; <tt>GLib::List</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a list of cell renderers. The list, but not the renderers has been newly allocated and should be freed with g_list_free() when no longer needed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cell_layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::CellLayout (module)">Gtk::CellLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellLayout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a list of cell renderers. The list, but not the renderers has been newly allocated and should be freed with g_list_free() when no longer needed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pack_end-instance_method">
+  
+    #<strong>pack_end</strong>(cell_layout, cell, expand)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cell_layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::CellLayout (module)">Gtk::CellLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellLayout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>expand</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>cell</strong> is to be given extra space allocated to <strong>cell_layout</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pack_start-instance_method">
+  
+    #<strong>pack_start</strong>(cell_layout, cell, expand)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cell_layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::CellLayout (module)">Gtk::CellLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellLayout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>expand</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>cell</strong> is to be given extra space allocated to <strong>cell_layout</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reorder-instance_method">
+  
+    #<strong>reorder</strong>(cell_layout, cell, position)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cell_layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::CellLayout (module)">Gtk::CellLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellLayout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer to reorder</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>new position to insert <strong>cell</strong> at</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_attributes-instance_method">
+  
+    #<strong>set_attributes</strong>(cell, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the attributes in list as the attributes of <strong>cell_layout</strong>.</p>
+
+<p>The attributes should be in attribute/column order, as in gtk_cell_layout_add_attribute(). All existing attributes are removed, and replaced with the new attributes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cell</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a nil-terminated list of attributes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_cell_data_func-instance_method">
+  
+    #<strong>set_cell_data_func</strong>(cell_layout, cell, func, func_data, destroy)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cell_layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::CellLayout (module)">Gtk::CellLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellLayout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cell</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::CellRenderer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gtk::CellLayoutDataFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::CellLayoutDataFunc to use, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user data for <strong>func</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>destroy</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>destroy notify for <strong>func_data</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:59 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

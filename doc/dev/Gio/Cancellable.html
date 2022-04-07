@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::Cancellable
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::Cancellable";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">Cancellable</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::Cancellable
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::Cancellable</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cancel-instance_method" title="#cancel (instance method)">#<strong>cancel</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Will set <strong>cancellable</strong> to cancelled, and will emit the #GCancellable::cancelled signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connect-instance_method" title="#connect (instance method)">#<strong>connect</strong>(callback, data, data_destroy_func)  &#x21d2; Gio::gulong </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Convenience function to connect to the #GCancellable::cancelled signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#disconnect-instance_method" title="#disconnect (instance method)">#<strong>disconnect</strong>(handler_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Disconnects a handler from a cancellable instance similar to g_signal_handler_disconnect().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fd-instance_method" title="#fd (instance method)">#<strong>fd</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the file descriptor for a cancellable job.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_cancelled-instance_method" title="#is_cancelled (instance method)">#<strong>is_cancelled</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks if a cancellable job has been cancelled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#make_pollfd-instance_method" title="#make_pollfd (instance method)">#<strong>make_pollfd</strong>(pollfd)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a GPoll::FD corresponding to <strong>cancellable</strong>; this can be passed to g_poll() and used to poll for cancellation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>  &#x21d2; Gio::Cancellable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new #GCancellable object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pop_current-instance_method" title="#pop_current (instance method)">#<strong>pop_current</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Pops <strong>cancellable</strong> off the cancellable stack (verifying that <strong>cancellable</strong> is on the top of the stack).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_current-instance_method" title="#push_current (instance method)">#<strong>push_current</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Pushes <strong>cancellable</strong> onto the cancellable stack.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#release_fd-instance_method" title="#release_fd (instance method)">#<strong>release_fd</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Releases a resources previously allocated by g_cancellable_get_fd() or g_cancellable_make_pollfd().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset-instance_method" title="#reset (instance method)">#<strong>reset</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Resets <strong>cancellable</strong> to its uncancelled state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_error_if_cancelled-instance_method" title="#set_error_if_cancelled (instance method)">#<strong>set_error_if_cancelled</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If the <strong>cancellable</strong> is cancelled, sets the error to notify that the operation was cancelled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_new-instance_method" title="#source_new (instance method)">#<strong>source_new</strong>  &#x21d2; GLib::Source </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a source that triggers if <strong>cancellable</strong> is cancelled and calls its callback of type GCancellable::SourceFunc.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="cancel-instance_method">
+  
+    #<strong>cancel</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Will set <strong>cancellable</strong> to cancelled, and will emit the #GCancellable::cancelled signal. (However, see the warning about race conditions in the documentation for that signal if you are planning to connect to it.)</p>
+
+<p>This function is thread-safe. In other words, you can safely call it from a thread other than the one running the operation that was passed the <strong>cancellable</strong>.</p>
+
+<p>If <strong>cancellable</strong> is nil, this function returns immediately for convenience.</p>
+
+<p>The convention within GIO is that cancelling an asynchronous operation causes it to complete asynchronously. That is, if you cancel the operation from the same thread in which it is running, then the operation’s GAsync::ReadyCallback will not be invoked until the application returns to the main loop.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="connect-instance_method">
+  
+    #<strong>connect</strong>(callback, data, data_destroy_func)  &#x21d2; <tt>Gio::gulong</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Convenience function to connect to the #GCancellable::cancelled signal. Also handles the race condition that may happen if the cancellable is cancelled right before connecting.</p>
+
+<p><strong>callback</strong> is called at most once, either directly at the time of the connect if <strong>cancellable</strong> is already cancelled, or when <strong>cancellable</strong> is cancelled in some thread.</p>
+
+<p><strong>data_destroy_func</strong> will be called when the handler is disconnected, or immediately if the cancellable is already cancelled.</p>
+
+<p>See #GCancellable::cancelled for details on how to use this.</p>
+
+<p>Since GLib 2.40, the lock protecting <strong>cancellable</strong> is not held when <strong>callback</strong> is invoked.  This lifts a restriction in place for earlier GLib versions which now makes it easier to write cleanup code that unconditionally invokes e.g. g_cancellable_cancel().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>GObject::Callback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The #GCallback to connect.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Data to pass to <strong>callback</strong>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data_destroy_func</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Free function for <strong>data</strong> or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::gulong</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The id of the signal handler or 0 if <strong>cancellable</strong> has already been cancelled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="disconnect-instance_method">
+  
+    #<strong>disconnect</strong>(handler_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Disconnects a handler from a cancellable instance similar to g_signal_handler_disconnect().  Additionally, in the event that a signal handler is currently running, this call will block until the handler has finished.  Calling this function from a #GCancellable::cancelled signal handler will therefore result in a deadlock.</p>
+
+<p>This avoids a race condition where a thread cancels at the same time as the cancellable operation is finished and the signal handler is removed. See #GCancellable::cancelled for details on how to use this.</p>
+
+<p>If <strong>cancellable</strong> is nil or <strong>handler_id</strong> is ‘0` this function does nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>handler_id</span>
+      
+      
+        <span class='type'>(<tt>Gio::gulong</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Handler id of the handler to be disconnected, or ‘0`.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fd-instance_method">
+  
+    #<strong>fd</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the file descriptor for a cancellable job. This can be used to implement cancellable operations on Unix systems. The returned fd will turn readable when <strong>cancellable</strong> is cancelled.</p>
+
+<p>You are not supposed to read from the fd yourself, just check for readable status. Reading to unset the readable status is done with g_cancellable_reset().</p>
+
+<p>After a successful return from this function, you should use g_cancellable_release_fd() to free up resources allocated for the returned file descriptor.</p>
+
+<p>See also g_cancellable_make_pollfd(). is not supported, or on errors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A valid file descriptor. ‘-1` if the file descriptor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_cancelled-instance_method">
+  
+    #<strong>is_cancelled</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks if a cancellable job has been cancelled. FALSE if called with nil or if item is not cancelled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>cancellable</strong> is cancelled,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="make_pollfd-instance_method">
+  
+    #<strong>make_pollfd</strong>(pollfd)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a GPoll::FD corresponding to <strong>cancellable</strong>; this can be passed to g_poll() and used to poll for cancellation. This is useful both for unix systems without a native poll and for portability to windows.</p>
+
+<p>When this function returns true, you should use g_cancellable_release_fd() to free up resources allocated for the <strong>pollfd</strong>. After a false return, do not call g_cancellable_release_fd().</p>
+
+<p>If this function returns false, either no <strong>cancellable</strong> was given or resource limits prevent this function from allocating the necessary structures for polling. (On Linux, you will likely have reached the maximum number of file descriptors.) The suggested way to handle these cases is to ignore the <strong>cancellable</strong>.</p>
+
+<p>You are not supposed to read from the fd yourself, just check for readable status. Reading to unset the readable status is done with g_cancellable_reset().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pollfd</span>
+      
+      
+        <span class='type'>(<tt>GLib::PollFD</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a pointer to a GPoll::FD</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>pollfd</strong> was successfully initialized, false on failure to prepare the cancellable.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new #GCancellable object.</p>
+
+<p>Applications that want to start one or more operations that should be cancellable should create a #GCancellable and pass it to the operations.</p>
+
+<p>One #GCancellable can be used in multiple consecutive operations or in multiple concurrent operations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pop_current-instance_method">
+  
+    #<strong>pop_current</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Pops <strong>cancellable</strong> off the cancellable stack (verifying that <strong>cancellable</strong> is on the top of the stack).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_current-instance_method">
+  
+    #<strong>push_current</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Pushes <strong>cancellable</strong> onto the cancellable stack. The current cancellable can then be received using g_cancellable_get_current().</p>
+
+<p>This is useful when implementing cancellable operations in code that does not allow you to pass down the cancellable object.</p>
+
+<p>This is typically called automatically by e.g. #GFile operations, so you rarely have to call this yourself.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="release_fd-instance_method">
+  
+    #<strong>release_fd</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Releases a resources previously allocated by g_cancellable_get_fd() or g_cancellable_make_pollfd().</p>
+
+<p>For compatibility reasons with older releases, calling this function is not strictly required, the resources will be automatically freed when the <strong>cancellable</strong> is finalized. However, the <strong>cancellable</strong> will block scarce file descriptors until it is finalized if this function is not called. This can cause the application to run out of file descriptors when many #GCancellables are used at the same time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset-instance_method">
+  
+    #<strong>reset</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Resets <strong>cancellable</strong> to its uncancelled state.</p>
+
+<p>If cancellable is currently in use by any cancellable operation then the behavior of this function is undefined.</p>
+
+<p>Note that it is generally not a good idea to reuse an existing cancellable for more operations after it has been cancelled once, as this function might tempt you to do. The recommended practice is to drop the reference to a cancellable after cancelling it, and let it die with the outstanding async operations. You should create a fresh cancellable for further async operations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_error_if_cancelled-instance_method">
+  
+    #<strong>set_error_if_cancelled</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If the <strong>cancellable</strong> is cancelled, sets the error to notify that the operation was cancelled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if <strong>cancellable</strong> was cancelled, false if it was not</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_new-instance_method">
+  
+    #<strong>source_new</strong>  &#x21d2; <tt>GLib::Source</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a source that triggers if <strong>cancellable</strong> is cancelled and calls its callback of type GCancellable::SourceFunc. This is primarily useful for attaching to another (non-cancellable) source with g_source_add_child_source() to add cancellability to it.</p>
+
+<p>For convenience, you can call this with a nil #GCancellable, in which case the source will never trigger.</p>
+
+<p>The new #GSource will hold a reference to the #GCancellable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Source</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new #GSource.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:02 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

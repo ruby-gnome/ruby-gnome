@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::ApplicationCommandLine
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::ApplicationCommandLine";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">ApplicationCommandLine</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::ApplicationCommandLine
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::ApplicationCommandLine</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The GApplication::CommandLineClass-struct contains private data only.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#arguments=-instance_method" title="#arguments= (instance method)">#<strong>arguments=</strong>(arguments)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Arguments.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_file_for_arg-instance_method" title="#create_file_for_arg (instance method)">#<strong>create_file_for_arg</strong>(arg)  &#x21d2; Gio::File </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a #GFile corresponding to a filename that was given as part of the invocation of <strong>cmdline</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cwd-instance_method" title="#cwd (instance method)">#<strong>cwd</strong>  &#x21d2; Gio::filename </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the working directory of the command line invocation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#environ-instance_method" title="#environ (instance method)">#<strong>environ</strong>  &#x21d2; Array&lt;Gio::filename&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the contents of the ‘environ’ variable of the command line invocation, as would be returned by g_get_environ(), ie as a nil-terminated list of strings in the form ‘NAME=VALUE’.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exit_status-instance_method" title="#exit_status (instance method)">#<strong>exit_status</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the exit status of <strong>cmdline</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exit_status=-instance_method" title="#exit_status= (instance method)">#<strong>exit_status=</strong>(exit_status)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the exit status that will be used when the invoking process exits.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_arguments-instance_method" title="#get_arguments (instance method)">#<strong>get_arguments</strong>(argc)  &#x21d2; Array&lt;Gio::filename&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the list of arguments that was passed on the command line.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getenv-instance_method" title="#getenv (instance method)">#<strong>getenv</strong>(name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the value of a particular environment variable of the command line invocation, as would be returned by g_getenv().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_remote-instance_method" title="#is_remote (instance method)">#<strong>is_remote</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Determines if <strong>cmdline</strong> represents a remote invocation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_remote=-instance_method" title="#is_remote= (instance method)">#<strong>is_remote=</strong>(is_remote)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_remote%3F-instance_method" title="#is_remote? (instance method)">#<strong>is_remote?</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Is-remote.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#options=-instance_method" title="#options= (instance method)">#<strong>options=</strong>(options)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Options.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#options_dict-instance_method" title="#options_dict (instance method)">#<strong>options_dict</strong>  &#x21d2; GLib::VariantDict </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the options there were passed to g_application_command_line().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#platform_data-instance_method" title="#platform_data (instance method)">#<strong>platform_data</strong>  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the platform data associated with the invocation of <strong>cmdline</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#platform_data=-instance_method" title="#platform_data= (instance method)">#<strong>platform_data=</strong>(platform_data)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Platform-data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print-instance_method" title="#print (instance method)">#<strong>print</strong>(format, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Formats a message and prints it using the stdout print handler in the invoking process.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#printerr-instance_method" title="#printerr (instance method)">#<strong>printerr</strong>(format, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Formats a message and prints it using the stderr print handler in the invoking process.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stdin-instance_method" title="#stdin (instance method)">#<strong>stdin</strong>  &#x21d2; Gio::InputStream </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the stdin of the invoking process.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="arguments=-instance_method">
+  
+    #<strong>arguments=</strong>(arguments)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns arguments.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>arguments</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>arguments</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_file_for_arg-instance_method">
+  
+    #<strong>create_file_for_arg</strong>(arg)  &#x21d2; <tt><span class='object_link'><a href="File.html" title="Gio::File (module)">Gio::File</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a #GFile corresponding to a filename that was given as part of the invocation of <strong>cmdline</strong>.</p>
+
+<p>This differs from g_file_new_for_commandline_arg() in that it resolves relative pathnames using the current working directory of the invoking process rather than the local process.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>arg</span>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an argument from <strong>cmdline</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="File.html" title="Gio::File (module)">Gio::File</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new #GFile</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cwd-instance_method">
+  
+    #<strong>cwd</strong>  &#x21d2; <tt>Gio::filename</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the working directory of the command line invocation. The string may contain non-utf8 data.</p>
+
+<p>It is possible that the remote application did not send a working directory, so this may be nil.</p>
+
+<p>The return value should not be modified or freed and is valid for as long as <strong>cmdline</strong> exists.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current directory, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="environ-instance_method">
+  
+    #<strong>environ</strong>  &#x21d2; <tt>Array&lt;Gio::filename&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the contents of the ‘environ’ variable of the command line invocation, as would be returned by g_get_environ(), ie as a nil-terminated list of strings in the form ‘NAME=VALUE’. The strings may contain non-utf8 data.</p>
+
+<p>The remote application usually does not send an environment.  Use %G_APPLICATION_SEND_ENVIRONMENT to affect that.  Even with this flag set it is possible that the environment is still not available (due to invocation messages from other applications).</p>
+
+<p>The return value should not be modified or freed and is valid for as long as <strong>cmdline</strong> exists.</p>
+
+<p>See g_application_command_line_getenv() if you are only interested in the value of a single environment variable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::filename&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the environment strings, or nil if they were not sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exit_status-instance_method">
+  
+    #<strong>exit_status</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the exit status of <strong>cmdline</strong>.  See g_application_command_line_set_exit_status() for more information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the exit status</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exit_status=-instance_method">
+  
+    #<strong>exit_status=</strong>(exit_status)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the exit status that will be used when the invoking process exits.</p>
+
+<p>The return value of the #GApplication::command-line signal is passed to this function when the handler returns.  This is the usual way of setting the exit status.</p>
+
+<p>In the event that you want the remote invocation to continue running and want to decide on the exit status in the future, you can use this call.  For the case of a remote invocation, the remote process will typically exit when the last reference is dropped on <strong>cmdline</strong>.  The exit status of the remote process will be equal to the last value that was set with this function.</p>
+
+<p>In the case that the commandline invocation is local, the situation is slightly more complicated.  If the commandline invocation results in the mainloop running (ie: because the use-count of the application increased to a non-zero value) then the application is considered to have been ‘successful’ in a certain sense, and the exit status is always zero.  If the application use count is zero, though, the exit status of the local GApplication::CommandLine is used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>exit_status</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the exit status</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_arguments-instance_method">
+  
+    #<strong>get_arguments</strong>(argc)  &#x21d2; <tt>Array&lt;Gio::filename&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the list of arguments that was passed on the command line.</p>
+
+<p>The strings in the array may contain non-UTF-8 data on UNIX (such as filenames or arguments given in the system locale) but are always in UTF-8 on Windows.</p>
+
+<p>If you wish to use the return value with GOption::Context, you must use g_option_context_parse_strv().</p>
+
+<p>The return value is nil-terminated and should be freed using g_strfreev().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>argc</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the length of the arguments array, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::filename&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the string array containing the arguments (the argv)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="getenv-instance_method">
+  
+    #<strong>getenv</strong>(name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the value of a particular environment variable of the command line invocation, as would be returned by g_getenv().  The strings may contain non-utf8 data.</p>
+
+<p>The remote application usually does not send an environment.  Use %G_APPLICATION_SEND_ENVIRONMENT to affect that.  Even with this flag set it is possible that the environment is still not available (due to invocation messages from other applications).</p>
+
+<p>The return value should not be modified or freed and is valid for as long as <strong>cmdline</strong> exists.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the environment variable to get</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the value of the variable, or nil if unset or unsent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_remote-instance_method">
+  
+    #<strong>is_remote</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determines if <strong>cmdline</strong> represents a remote invocation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the invocation was remote</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_remote=-instance_method">
+  
+    #<strong>is_remote=</strong>(is_remote)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>is_remote</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>is-remote</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>is-remote</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_remote?-instance_method">
+  
+    #<strong>is_remote?</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns is-remote.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>is-remote</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="options=-instance_method">
+  
+    #<strong>options=</strong>(options)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns options.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="options_dict-instance_method">
+  
+    #<strong>options_dict</strong>  &#x21d2; <tt>GLib::VariantDict</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the options there were passed to g_application_command_line().</p>
+
+<p>If you did not override local_command_line() then these are the same options that were parsed according to the GOption::Entrys added to the application with g_application_add_main_option_entries() and possibly modified from your GApplication::handle-local-options handler.</p>
+
+<p>If no options were sent then an empty dictionary is returned so that you don’t need to check for nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::VariantDict</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GVariant::Dict with the options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="platform_data-instance_method">
+  
+    #<strong>platform_data</strong>  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the platform data associated with the invocation of <strong>cmdline</strong>.</p>
+
+<p>This is a #GVariant dictionary containing information about the context in which the invocation occurred.  It typically contains information like the current working directory and the startup notification ID.</p>
+
+<p>For local invocation, it will be nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the platform data, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="platform_data=-instance_method">
+  
+    #<strong>platform_data=</strong>(platform_data)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns platform-data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>platform_data</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>platform-data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="print-instance_method">
+  
+    #<strong>print</strong>(format, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Formats a message and prints it using the stdout print handler in the invoking process.</p>
+
+<p>If <strong>cmdline</strong> is a local invocation then this is exactly equivalent to g_print().  If <strong>cmdline</strong> is remote then this is equivalent to calling g_print() in the invoking process.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a printf-style format string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>arguments, as per <strong>format</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="printerr-instance_method">
+  
+    #<strong>printerr</strong>(format, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Formats a message and prints it using the stderr print handler in the invoking process.</p>
+
+<p>If <strong>cmdline</strong> is a local invocation then this is exactly equivalent to g_printerr().  If <strong>cmdline</strong> is remote then this is equivalent to calling g_printerr() in the invoking process.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a printf-style format string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>arguments, as per <strong>format</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stdin-instance_method">
+  
+    #<strong>stdin</strong>  &#x21d2; <tt><span class='object_link'><a href="InputStream.html" title="Gio::InputStream (class)">Gio::InputStream</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the stdin of the invoking process.</p>
+
+<p>The GInput::Stream can be used to read data passed to the standard input of the invoking process. This doesn’t work on all platforms.  Presently, it is only available on UNIX when using a DBus daemon capable of passing file descriptors. If stdin is not available then nil will be returned.  In the future, support may be expanded to other platforms.</p>
+
+<p>You must only call this function once per commandline invocation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputStream.html" title="Gio::InputStream (class)">Gio::InputStream</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GInput::Stream for stdin</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:01 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

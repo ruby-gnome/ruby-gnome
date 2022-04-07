@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::MenuItem
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::MenuItem";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (M)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">MenuItem</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::MenuItem
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::MenuItem</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>GMenu::Item is an opaque structure type.  You must access it using the functions below.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#detailed_action=-instance_method" title="#detailed_action= (instance method)">#<strong>detailed_action=</strong>(detailed_action)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the “action” and possibly the “target” attribute of <strong>menu_item</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_attribute-instance_method" title="#get_attribute (instance method)">#<strong>get_attribute</strong>(attribute, format_string, array)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries the named <strong>attribute</strong> on <strong>menu_item</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_attribute_value-instance_method" title="#get_attribute_value (instance method)">#<strong>get_attribute_value</strong>(attribute, expected_type)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries the named <strong>attribute</strong> on <strong>menu_item</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_link-instance_method" title="#get_link (instance method)">#<strong>get_link</strong>(link)  &#x21d2; Gio::MenuModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries the named <strong>link</strong> on <strong>menu_item</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#icon=-instance_method" title="#icon= (instance method)">#<strong>icon=</strong>(icon)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets (or unsets) the icon on <strong>menu_item</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#label=-instance_method" title="#label= (instance method)">#<strong>label=</strong>(label)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets or unsets the “label” attribute of <strong>menu_item</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>(label, detailed_action)  &#x21d2; Gio::MenuItem </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new GMenu::Item.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_from_model-instance_method" title="#new_from_model (instance method)">#<strong>new_from_model</strong>(model, item_index)  &#x21d2; Gio::MenuItem </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a GMenu::Item as an exact copy of an existing menu item in a GMenu::Model.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_section-instance_method" title="#new_section (instance method)">#<strong>new_section</strong>(label, section)  &#x21d2; Gio::MenuItem </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new GMenu::Item representing a section.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_submenu-instance_method" title="#new_submenu (instance method)">#<strong>new_submenu</strong>(label, submenu)  &#x21d2; Gio::MenuItem </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new GMenu::Item representing a submenu.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#section=-instance_method" title="#section= (instance method)">#<strong>section=</strong>(section)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets or unsets the “section” link of <strong>menu_item</strong> to <strong>section</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_action_and_target-instance_method" title="#set_action_and_target (instance method)">#<strong>set_action_and_target</strong>(action, format_string, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets or unsets the “action” and “target” attributes of <strong>menu_item</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_action_and_target_value-instance_method" title="#set_action_and_target_value (instance method)">#<strong>set_action_and_target_value</strong>(action, target_value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets or unsets the “action” and “target” attributes of <strong>menu_item</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_attribute-instance_method" title="#set_attribute (instance method)">#<strong>set_attribute</strong>(attribute, format_string, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets or unsets an attribute on <strong>menu_item</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_attribute_value-instance_method" title="#set_attribute_value (instance method)">#<strong>set_attribute_value</strong>(attribute, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets or unsets an attribute on <strong>menu_item</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_link-instance_method" title="#set_link (instance method)">#<strong>set_link</strong>(link, model)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a link from <strong>menu_item</strong> to <strong>model</strong> if non-nil, or unsets it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#submenu=-instance_method" title="#submenu= (instance method)">#<strong>submenu=</strong>(submenu)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets or unsets the “submenu” link of <strong>menu_item</strong> to <strong>submenu</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="detailed_action=-instance_method">
+  
+    #<strong>detailed_action=</strong>(detailed_action)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the “action” and possibly the “target” attribute of <strong>menu_item</strong>.</p>
+
+<p>The format of <strong>detailed_action</strong> is the same format parsed by g_action_parse_detailed_name().</p>
+
+<p>See g_menu_item_set_action_and_target() or g_menu_item_set_action_and_target_value() for more flexible (but slightly less convenient) alternatives.</p>
+
+<p>See also g_menu_item_set_action_and_target_value() for a description of the semantics of the action and target attributes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>detailed_action</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the “detailed” action string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_attribute-instance_method">
+  
+    #<strong>get_attribute</strong>(attribute, format_string, array)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries the named <strong>attribute</strong> on <strong>menu_item</strong>.</p>
+
+<p>If the attribute exists and matches the GVariant::Type corresponding to <strong>format_string</strong> then <strong>format_string</strong> is used to deconstruct the value into the positional parameters and true is returned.</p>
+
+<p>If the attribute does not exist, or it does exist but has the wrong type, then the positional parameters are ignored and false is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attribute</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the attribute name to query</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format_string</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GVariant format string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>positional parameters, as per <strong>format_string</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the named attribute was found with the expected type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_attribute_value-instance_method">
+  
+    #<strong>get_attribute_value</strong>(attribute, expected_type)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries the named <strong>attribute</strong> on <strong>menu_item</strong>.</p>
+
+<p>If <strong>expected_type</strong> is specified and the attribute does not have this type, nil is returned.  nil is also returned if the attribute simply does not exist.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attribute</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the attribute name to query</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>expected_type</span>
+      
+      
+        <span class='type'>(<tt>GLib::VariantType</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the expected type of the attribute</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the attribute value, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_link-instance_method">
+  
+    #<strong>get_link</strong>(link)  &#x21d2; <tt><span class='object_link'><a href="MenuModel.html" title="Gio::MenuModel (class)">Gio::MenuModel</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries the named <strong>link</strong> on <strong>menu_item</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>link</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the link name to query</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MenuModel.html" title="Gio::MenuModel (class)">Gio::MenuModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the link, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="icon=-instance_method">
+  
+    #<strong>icon=</strong>(icon)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets (or unsets) the icon on <strong>menu_item</strong>.</p>
+
+<p>This call is the same as calling g_icon_serialize() and using the result as the value to g_menu_item_set_attribute_value() for %G_MENU_ATTRIBUTE_ICON.</p>
+
+<p>This API is only intended for use with “noun” menu items; things like bookmarks or applications in an “Open With” menu.  Don’t use it on menu items corresponding to verbs (eg: stock icons for ‘Save’ or ‘Quit’).</p>
+
+<p>If <strong>icon</strong> is nil then the icon is unset.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>icon</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Icon.html" title="Gio::Icon (module)">Gio::Icon</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GIcon, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="label=-instance_method">
+  
+    #<strong>label=</strong>(label)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets or unsets the “label” attribute of <strong>menu_item</strong>.</p>
+
+<p>If <strong>label</strong> is non-nil it is used as the label for the menu item.  If it is nil then the label attribute is unset.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>label</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the label to set, or nil to unset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>(label, detailed_action)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::MenuItem (class)">Gio::MenuItem</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new GMenu::Item.</p>
+
+<p>If <strong>label</strong> is non-nil it is used to set the “label” attribute of the new item.</p>
+
+<p>If <strong>detailed_action</strong> is non-nil it is used to set the “action” and possibly the “target” attribute of the new item.  See g_menu_item_set_detailed_action() for more information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>label</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the section label, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>detailed_action</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the detailed action string, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::MenuItem (class)">Gio::MenuItem</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new GMenu::Item</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_from_model-instance_method">
+  
+    #<strong>new_from_model</strong>(model, item_index)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::MenuItem (class)">Gio::MenuItem</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a GMenu::Item as an exact copy of an existing menu item in a GMenu::Model.</p>
+
+<p><strong>item_index</strong> must be valid (ie: be sure to call g_menu_model_get_n_items() first).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MenuModel.html" title="Gio::MenuModel (class)">Gio::MenuModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GMenu::Model</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>item_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the index of an item in <strong>model</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::MenuItem (class)">Gio::MenuItem</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new GMenu::Item.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_section-instance_method">
+  
+    #<strong>new_section</strong>(label, section)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::MenuItem (class)">Gio::MenuItem</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new GMenu::Item representing a section.</p>
+
+<p>This is a convenience API around g_menu_item_new() and g_menu_item_set_section().</p>
+
+<p>The effect of having one menu appear as a section of another is exactly as it sounds: the items from <strong>section</strong> become a direct part of the menu that <strong>menu_item</strong> is added to.</p>
+
+<p>Visual separation is typically displayed between two non-empty sections.  If <strong>label</strong> is non-nil then it will be encorporated into this visual indication.  This allows for labeled subsections of a menu.</p>
+
+<p>As a simple example, consider a typical “Edit” menu from a simple program.  It probably contains an “Undo” and “Redo” item, followed by a separator, followed by “Cut”, “Copy” and “Paste”.</p>
+
+<p>This would be accomplished by creating three #GMenu instances.  The first would be populated with the “Undo” and “Redo” items, and the second with the “Cut”, “Copy” and “Paste” items.  The first and second menus would then be added as submenus of the third.  In XML format, this would look something like the following: |[ &lt;menu id=‘edit-menu’&gt;</p>
+
+<pre class="code ruby"><code class="ruby">&lt;section&gt;
+  &lt;item label=&#39;Undo&#39;/&gt;
+  &lt;item label=&#39;Redo&#39;/&gt;
+&lt;/section&gt;
+&lt;section&gt;
+  &lt;item label=&#39;Cut&#39;/&gt;
+  &lt;item label=&#39;Copy&#39;/&gt;
+  &lt;item label=&#39;Paste&#39;/&gt;
+&lt;/section&gt;
+</code></pre>
+
+<p>&lt;/menu&gt; ]|</p>
+
+<p>The following example is exactly equivalent.  It is more illustrative of the exact relationship between the menus and items (keeping in mind that the ‘link’ element defines a new menu that is linked to the containing one).  The style of the second example is more verbose and difficult to read (and therefore not recommended except for the purpose of understanding what is really going on). |[ &lt;menu id=‘edit-menu’&gt;</p>
+
+<pre class="code ruby"><code class="ruby">&lt;item&gt;
+  &lt;link name=&#39;section&#39;&gt;
+    &lt;item label=&#39;Undo&#39;/&gt;
+    &lt;item label=&#39;Redo&#39;/&gt;
+  &lt;/link&gt;
+&lt;/item&gt;
+&lt;item&gt;
+  &lt;link name=&#39;section&#39;&gt;
+    &lt;item label=&#39;Cut&#39;/&gt;
+    &lt;item label=&#39;Copy&#39;/&gt;
+    &lt;item label=&#39;Paste&#39;/&gt;
+  &lt;/link&gt;
+&lt;/item&gt;
+</code></pre>
+
+<p>&lt;/menu&gt; ]|</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>label</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the section label, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>section</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MenuModel.html" title="Gio::MenuModel (class)">Gio::MenuModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GMenu::Model with the items of the section</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::MenuItem (class)">Gio::MenuItem</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new GMenu::Item</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_submenu-instance_method">
+  
+    #<strong>new_submenu</strong>(label, submenu)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::MenuItem (class)">Gio::MenuItem</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new GMenu::Item representing a submenu.</p>
+
+<p>This is a convenience API around g_menu_item_new() and g_menu_item_set_submenu().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>label</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the section label, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>submenu</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MenuModel.html" title="Gio::MenuModel (class)">Gio::MenuModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GMenu::Model with the items of the submenu</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::MenuItem (class)">Gio::MenuItem</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new GMenu::Item</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="section=-instance_method">
+  
+    #<strong>section=</strong>(section)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets or unsets the “section” link of <strong>menu_item</strong> to <strong>section</strong>.</p>
+
+<p>The effect of having one menu appear as a section of another is exactly as it sounds: the items from <strong>section</strong> become a direct part of the menu that <strong>menu_item</strong> is added to.  See g_menu_item_new_section() for more information about what it means for a menu item to be a section.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>section</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MenuModel.html" title="Gio::MenuModel (class)">Gio::MenuModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GMenu::Model, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_action_and_target-instance_method">
+  
+    #<strong>set_action_and_target</strong>(action, format_string, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets or unsets the “action” and “target” attributes of <strong>menu_item</strong>.</p>
+
+<p>If <strong>action</strong> is nil then both the “action” and “target” attributes are unset (and <strong>format_string</strong> is ignored along with the positional parameters).</p>
+
+<p>If <strong>action</strong> is non-nil then the “action” attribute is set. <strong>format_string</strong> is then inspected.  If it is non-nil then the proper position parameters are collected to create a #GVariant instance to use as the target value.  If it is nil then the positional parameters are ignored and the “target” attribute is unset.</p>
+
+<p>See also g_menu_item_set_action_and_target_value() for an equivalent call that directly accepts a #GVariant.  See g_menu_item_set_detailed_action() for a more convenient version that works with string-typed targets.</p>
+
+<p>See also g_menu_item_set_action_and_target_value() for a description of the semantics of the action and target attributes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action for this item</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format_string</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GVariant format string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>positional parameters, as per <strong>format_string</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_action_and_target_value-instance_method">
+  
+    #<strong>set_action_and_target_value</strong>(action, target_value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets or unsets the “action” and “target” attributes of <strong>menu_item</strong>.</p>
+
+<p>If <strong>action</strong> is nil then both the “action” and “target” attributes are unset (and <strong>target_value</strong> is ignored).</p>
+
+<p>If <strong>action</strong> is non-nil then the “action” attribute is set.  The “target” attribute is then set to the value of <strong>target_value</strong> if it is non-nil or unset otherwise.</p>
+
+<p>Normal menu items (ie: not submenu, section or other custom item types) are expected to have the “action” attribute set to identify the action that they are associated with.  The state type of the action help to determine the disposition of the menu item.  See #GAction and GAction::Group for an overview of actions.</p>
+
+<p>In general, clicking on the menu item will result in activation of the named action with the “target” attribute given as the parameter to the action invocation.  If the “target” attribute is not set then the action is invoked with no parameter.</p>
+
+<p>If the action has no state then the menu item is usually drawn as a plain menu item (ie: with no additional decoration).</p>
+
+<p>If the action has a boolean state then the menu item is usually drawn as a toggle menu item (ie: with a checkmark or equivalent indication).  The item should be marked as ‘toggled’ or ‘checked’ when the boolean state is true.</p>
+
+<p>If the action has a string state then the menu item is usually drawn as a radio menu item (ie: with a radio bullet or equivalent indication).  The item should be marked as ‘selected’ when the string state is equal to the value of the <strong>target</strong> property.</p>
+
+<p>See g_menu_item_set_action_and_target() or g_menu_item_set_detailed_action() for two equivalent calls that are probably more convenient for most uses.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action for this item</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_value</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GVariant to use as the action target</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_attribute-instance_method">
+  
+    #<strong>set_attribute</strong>(attribute, format_string, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets or unsets an attribute on <strong>menu_item</strong>.</p>
+
+<p>The attribute to set or unset is specified by <strong>attribute</strong>. This can be one of the standard attribute names %G_MENU_ATTRIBUTE_LABEL, %G_MENU_ATTRIBUTE_ACTION, %G_MENU_ATTRIBUTE_TARGET, or a custom attribute name. Attribute names are restricted to lowercase characters, numbers and ‘-’. Furthermore, the names must begin with a lowercase character, must not end with a ‘-’, and must not contain consecutive dashes.</p>
+
+<p>If <strong>format_string</strong> is non-nil then the proper position parameters are collected to create a #GVariant instance to use as the attribute value.  If it is nil then the positional parameterrs are ignored and the named attribute is unset.</p>
+
+<p>See also g_menu_item_set_attribute_value() for an equivalent call that directly accepts a #GVariant.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attribute</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the attribute to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format_string</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GVariant format string, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>positional parameters, as per <strong>format_string</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_attribute_value-instance_method">
+  
+    #<strong>set_attribute_value</strong>(attribute, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets or unsets an attribute on <strong>menu_item</strong>.</p>
+
+<p>The attribute to set or unset is specified by <strong>attribute</strong>. This can be one of the standard attribute names %G_MENU_ATTRIBUTE_LABEL, %G_MENU_ATTRIBUTE_ACTION, %G_MENU_ATTRIBUTE_TARGET, or a custom attribute name. Attribute names are restricted to lowercase characters, numbers and ‘-’. Furthermore, the names must begin with a lowercase character, must not end with a ‘-’, and must not contain consecutive dashes.</p>
+
+<p>must consist only of lowercase ASCII characters, digits and ‘-’.</p>
+
+<p>If <strong>value</strong> is non-nil then it is used as the new value for the attribute.  If <strong>value</strong> is nil then the attribute is unset. If the <strong>value</strong> #GVariant is floating, it is consumed.</p>
+
+<p>See also g_menu_item_set_attribute() for a more convenient way to do the same.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attribute</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the attribute to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GVariant to use as the value, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_link-instance_method">
+  
+    #<strong>set_link</strong>(link, model)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a link from <strong>menu_item</strong> to <strong>model</strong> if non-nil, or unsets it.</p>
+
+<p>Links are used to establish a relationship between a particular menu item and another menu.  For example, %G_MENU_LINK_SUBMENU is used to associate a submenu with a particular menu item, and %G_MENU_LINK_SECTION is used to create a section. Other types of link can be used, but there is no guarantee that clients will be able to make sense of them. Link types are restricted to lowercase characters, numbers and ‘-’. Furthermore, the names must begin with a lowercase character, must not end with a ‘-’, and must not contain consecutive dashes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>link</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>type of link to establish or unset</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MenuModel.html" title="Gio::MenuModel (class)">Gio::MenuModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the GMenu::Model to link to (or nil to unset)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="submenu=-instance_method">
+  
+    #<strong>submenu=</strong>(submenu)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets or unsets the “submenu” link of <strong>menu_item</strong> to <strong>submenu</strong>.</p>
+
+<p>If <strong>submenu</strong> is non-nil, it is linked to.  If it is nil then the link is unset.</p>
+
+<p>The effect of having one menu appear as a submenu of another is exactly as it sounds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>submenu</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MenuModel.html" title="Gio::MenuModel (class)">Gio::MenuModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GMenu::Model, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:05 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

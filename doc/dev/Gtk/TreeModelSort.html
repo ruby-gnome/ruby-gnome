@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::TreeModelSort
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::TreeModelSort";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">TreeModelSort</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::TreeModelSort
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::TreeModelSort</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear_cache-instance_method" title="#clear_cache (instance method)">#<strong>clear_cache</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function should almost never be called.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#convert_child_iter_to_iter-instance_method" title="#convert_child_iter_to_iter (instance method)">#<strong>convert_child_iter_to_iter</strong>(sort_iter, child_iter)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>sort_iter</strong> to point to the row in <strong>tree_model_sort</strong> that corresponds to the row pointed at by <strong>child_iter</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#convert_child_path_to_path-instance_method" title="#convert_child_path_to_path (instance method)">#<strong>convert_child_path_to_path</strong>(child_path)  &#x21d2; Gtk::TreePath </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts <strong>child_path</strong> to a path relative to <strong>tree_model_sort</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#convert_iter_to_child_iter-instance_method" title="#convert_iter_to_child_iter (instance method)">#<strong>convert_iter_to_child_iter</strong>(child_iter, sorted_iter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>child_iter</strong> to point to the row pointed to by <strong>sorted_iter</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#convert_path_to_child_path-instance_method" title="#convert_path_to_child_path (instance method)">#<strong>convert_path_to_child_path</strong>(sorted_path)  &#x21d2; Gtk::TreePath </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts <strong>sorted_path</strong> to a path on the child model of <strong>tree_model_sort</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_is_valid-instance_method" title="#iter_is_valid (instance method)">#<strong>iter_is_valid</strong>(iter)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>&gt; This function is slow.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#model-instance_method" title="#model (instance method)">#<strong>model</strong>  &#x21d2; Gtk::TreeModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Model.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#model=-instance_method" title="#model= (instance method)">#<strong>model=</strong>(model)  &#x21d2; Gtk::TreeModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_with_model-instance_method" title="#new_with_model (instance method)">#<strong>new_with_model</strong>(child_model)  &#x21d2; Gtk::TreeModelSort </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Gtk::TreeModelSort, with <strong>child_model</strong> as the child model.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_default_sort_func-instance_method" title="#reset_default_sort_func (instance method)">#<strong>reset_default_sort_func</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This resets the default sort function to be in the “unsorted” state.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="clear_cache-instance_method">
+  
+    #<strong>clear_cache</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function should almost never be called.  It clears the <strong>tree_model_sort</strong> of any cached iterators that haven’t been reffed with gtk_tree_model_ref_node().  This might be useful if the child model being sorted is static (and doesn’t change often) and there has been a lot of unreffed access to nodes.  As a side effect of this function, all unreffed iters will be invalid.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="convert_child_iter_to_iter-instance_method">
+  
+    #<strong>convert_child_iter_to_iter</strong>(sort_iter, child_iter)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>sort_iter</strong> to point to the row in <strong>tree_model_sort</strong> that corresponds to the row pointed at by <strong>child_iter</strong>.  If <strong>sort_iter</strong> was not set, false is returned.  Note: a boolean is only returned since 2.14. valid iterator pointer to a visible row in the child model.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sort_iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An uninitialized Gtk::TreeIter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>child_iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A valid Gtk::TreeIter pointing to a row on the child model</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true, if <strong>sort_iter</strong> was set, i.e. if <strong>sort_iter</strong> is a</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="convert_child_path_to_path-instance_method">
+  
+    #<strong>convert_child_path_to_path</strong>(child_path)  &#x21d2; <tt>Gtk::TreePath</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts <strong>child_path</strong> to a path relative to <strong>tree_model_sort</strong>.  That is, <strong>child_path</strong> points to a path in the child model.  The returned path will point to the same row in the sorted model.  If <strong>child_path</strong> isn’t a valid path on the child model, then nil is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child_path</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A Gtk::TreePath to convert</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A newly allocated Gtk::TreePath, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="convert_iter_to_child_iter-instance_method">
+  
+    #<strong>convert_iter_to_child_iter</strong>(child_iter, sorted_iter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>child_iter</strong> to point to the row pointed to by <strong>sorted_iter</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child_iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An uninitialized Gtk::TreeIter</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sorted_iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A valid Gtk::TreeIter pointing to a row on <strong>tree_model_sort</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="convert_path_to_child_path-instance_method">
+  
+    #<strong>convert_path_to_child_path</strong>(sorted_path)  &#x21d2; <tt>Gtk::TreePath</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts <strong>sorted_path</strong> to a path on the child model of <strong>tree_model_sort</strong>. That is, <strong>sorted_path</strong> points to a location in <strong>tree_model_sort</strong>.  The returned path will point to the same location in the model not being sorted.  If <strong>sorted_path</strong> does not point to a location in the child model, nil is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sorted_path</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A Gtk::TreePath to convert</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::TreePath</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A newly allocated Gtk::TreePath, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_is_valid-instance_method">
+  
+    #<strong>iter_is_valid</strong>(iter)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>&gt; This function is slow. Only use it for debugging and/or testing &gt; purposes.</p>
+
+<p>Checks if the given iter is a valid iter for this Gtk::TreeModelSort.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TreeIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A Gtk::TreeIter.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the iter is valid, false if the iter is invalid.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="model-instance_method">
+  
+    #<strong>model</strong>  &#x21d2; <tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns model.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>model</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="model=-instance_method">
+  
+    #<strong>model=</strong>(model)  &#x21d2; <tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>model</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>model</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_with_model-instance_method">
+  
+    #<strong>new_with_model</strong>(child_model)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::TreeModelSort (class)">Gtk::TreeModelSort</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new Gtk::TreeModelSort, with <strong>child_model</strong> as the child model.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A Gtk::TreeModel</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TreeModelSort (class)">Gtk::TreeModelSort</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A new Gtk::TreeModelSort.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset_default_sort_func-instance_method">
+  
+    #<strong>reset_default_sort_func</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This resets the default sort function to be in the “unsorted” state.  That is, it is in the same order as the child model. It will re-sort the model to be in the same order as the child model only if the Gtk::TreeModelSort is in “unsorted” state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:33 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

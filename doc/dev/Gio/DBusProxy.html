@@ -1,0 +1,3957 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::DBusProxy
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::DBusProxy";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">DBusProxy</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::DBusProxy
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::DBusProxy</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Class structure for GDBus::Proxy.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cached_property_names-instance_method" title="#cached_property_names (instance method)">#<strong>cached_property_names</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the names of all cached properties on <strong>proxy</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>(method_name, parameters, flags, timeout_msec, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Asynchronously invokes the <strong>method_name</strong> method on <strong>proxy</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call_finish-instance_method" title="#call_finish (instance method)">#<strong>call_finish</strong>(res)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes an operation started with g_dbus_proxy_call().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call_sync-instance_method" title="#call_sync (instance method)">#<strong>call_sync</strong>(method_name, parameters, flags, timeout_msec, cancellable)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Synchronously invokes the <strong>method_name</strong> method on <strong>proxy</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call_with_unix_fd_list-instance_method" title="#call_with_unix_fd_list (instance method)">#<strong>call_with_unix_fd_list</strong>(method_name, parameters, flags, timeout_msec, fd_list, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Like g_dbus_proxy_call() but also takes a GUnix::FDList object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call_with_unix_fd_list_finish-instance_method" title="#call_with_unix_fd_list_finish (instance method)">#<strong>call_with_unix_fd_list_finish</strong>(out_fd_list, res)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes an operation started with g_dbus_proxy_call_with_unix_fd_list().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call_with_unix_fd_list_sync-instance_method" title="#call_with_unix_fd_list_sync (instance method)">#<strong>call_with_unix_fd_list_sync</strong>(method_name, parameters, flags, timeout_msec, fd_list, out_fd_list, cancellable)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Like g_dbus_proxy_call_sync() but also takes and returns GUnix::FDList objects.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connection-instance_method" title="#connection (instance method)">#<strong>connection</strong>  &#x21d2; Gio::DBusConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the connection <strong>proxy</strong> is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_timeout-instance_method" title="#default_timeout (instance method)">#<strong>default_timeout</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the timeout to use if -1 (specifying default timeout) is passed as <strong>timeout_msec</strong> in the g_dbus_proxy_call() and g_dbus_proxy_call_sync() functions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_timeout=-instance_method" title="#default_timeout= (instance method)">#<strong>default_timeout=</strong>(timeout_msec)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the timeout to use if -1 (specifying default timeout) is passed as <strong>timeout_msec</strong> in the g_dbus_proxy_call() and g_dbus_proxy_call_sync() functions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flags-instance_method" title="#flags (instance method)">#<strong>flags</strong>  &#x21d2; Gio::DBusProxyFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the flags that <strong>proxy</strong> was constructed with.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_bus_type=-instance_method" title="#g_bus_type= (instance method)">#<strong>g_bus_type=</strong>(g_bus_type)  &#x21d2; Gio::BusType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If this property is not %G_BUS_TYPE_NONE, then GDBus::Proxy:g-connection must be nil and will be set to the GDBus::Connection obtained by calling g_bus_get() with the value of this property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_connection-instance_method" title="#g_connection (instance method)">#<strong>g_connection</strong>  &#x21d2; Gio::DBusConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The GDBus::Connection the proxy is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_connection=-instance_method" title="#g_connection= (instance method)">#<strong>g_connection=</strong>(g_connection)  &#x21d2; Gio::DBusConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The GDBus::Connection the proxy is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_default_timeout-instance_method" title="#g_default_timeout (instance method)">#<strong>g_default_timeout</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The timeout to use if -1 (specifying default timeout) is passed as <strong>timeout_msec</strong> in the g_dbus_proxy_call() and g_dbus_proxy_call_sync() functions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_default_timeout=-instance_method" title="#g_default_timeout= (instance method)">#<strong>g_default_timeout=</strong>(g_default_timeout)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The timeout to use if -1 (specifying default timeout) is passed as <strong>timeout_msec</strong> in the g_dbus_proxy_call() and g_dbus_proxy_call_sync() functions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_flags-instance_method" title="#g_flags (instance method)">#<strong>g_flags</strong>  &#x21d2; Gio::DBusProxyFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Flags from the GDBus::ProxyFlags enumeration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_flags=-instance_method" title="#g_flags= (instance method)">#<strong>g_flags=</strong>(g_flags)  &#x21d2; Gio::DBusProxyFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Flags from the GDBus::ProxyFlags enumeration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_interface_info-instance_method" title="#g_interface_info (instance method)">#<strong>g_interface_info</strong>  &#x21d2; Gio::DBusInterfaceInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Ensure that interactions with this proxy conform to the given interface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_interface_info=-instance_method" title="#g_interface_info= (instance method)">#<strong>g_interface_info=</strong>(g_interface_info)  &#x21d2; Gio::DBusInterfaceInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Ensure that interactions with this proxy conform to the given interface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_interface_name-instance_method" title="#g_interface_name (instance method)">#<strong>g_interface_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The D-Bus interface name the proxy is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_interface_name=-instance_method" title="#g_interface_name= (instance method)">#<strong>g_interface_name=</strong>(g_interface_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The D-Bus interface name the proxy is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_name-instance_method" title="#g_name (instance method)">#<strong>g_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The well-known or unique name that the proxy is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_name=-instance_method" title="#g_name= (instance method)">#<strong>g_name=</strong>(g_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The well-known or unique name that the proxy is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_name_owner-instance_method" title="#g_name_owner (instance method)">#<strong>g_name_owner</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The unique name that owns GDBus::Proxy:g-name or nil if no-one currently owns that name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_name_owner=-instance_method" title="#g_name_owner= (instance method)">#<strong>g_name_owner=</strong>(g_name_owner)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The unique name that owns GDBus::Proxy:g-name or nil if no-one currently owns that name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_object_path-instance_method" title="#g_object_path (instance method)">#<strong>g_object_path</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The object path the proxy is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g_object_path=-instance_method" title="#g_object_path= (instance method)">#<strong>g_object_path=</strong>(g_object_path)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The object path the proxy is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_cached_property-instance_method" title="#get_cached_property (instance method)">#<strong>get_cached_property</strong>(property_name)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Looks up the value for a property from the cache.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#interface_info-instance_method" title="#interface_info (instance method)">#<strong>interface_info</strong>  &#x21d2; Gio::DBusInterfaceInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the GDBus::InterfaceInfo, if any, specifying the interface that <strong>proxy</strong> conforms to.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#interface_info=-instance_method" title="#interface_info= (instance method)">#<strong>interface_info=</strong>(info)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Ensure that interactions with <strong>proxy</strong> conform to the given interface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#interface_name-instance_method" title="#interface_name (instance method)">#<strong>interface_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the D-Bus interface name <strong>proxy</strong> is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the name that <strong>proxy</strong> was constructed for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name_owner-instance_method" title="#name_owner (instance method)">#<strong>name_owner</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The unique name that owns the name that <strong>proxy</strong> is for or nil if no-one currently owns that name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_finish-instance_method" title="#new_finish (instance method)">#<strong>new_finish</strong>(res)  &#x21d2; Gio::DBusProxy </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes creating a GDBus::Proxy.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_for_bus_finish-instance_method" title="#new_for_bus_finish (instance method)">#<strong>new_for_bus_finish</strong>(res)  &#x21d2; Gio::DBusProxy </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes creating a GDBus::Proxy.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_for_bus_sync-instance_method" title="#new_for_bus_sync (instance method)">#<strong>new_for_bus_sync</strong>(bus_type, flags, info, name, object_path, interface_name, cancellable)  &#x21d2; Gio::DBusProxy </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Like g_dbus_proxy_new_sync() but takes a GBus::Type instead of a #GDBusConnection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_sync-instance_method" title="#new_sync (instance method)">#<strong>new_sync</strong>(connection, flags, info, name, object_path, interface_name, cancellable)  &#x21d2; Gio::DBusProxy </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a proxy for accessing <strong>interface_name</strong> on the remote object at <strong>object_path</strong> owned by <strong>name</strong> at <strong>connection</strong> and synchronously loads D-Bus properties unless the %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES flag is used.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#object_path-instance_method" title="#object_path (instance method)">#<strong>object_path</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the object path <strong>proxy</strong> is for.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_cached_property-instance_method" title="#set_cached_property (instance method)">#<strong>set_cached_property</strong>(property_name, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If <strong>value</strong> is not nil, sets the cached value for the property with name <strong>property_name</strong> to the value in <strong>value</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="cached_property_names-instance_method">
+  
+    #<strong>cached_property_names</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the names of all cached properties on <strong>proxy</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A nil-terminated array of strings or nil if <strong>proxy</strong> has no cached properties. Free the returned array with g_strfreev().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call-instance_method">
+  
+    #<strong>call</strong>(method_name, parameters, flags, timeout_msec, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Asynchronously invokes the <strong>method_name</strong> method on <strong>proxy</strong>.</p>
+
+<p>If <strong>method_name</strong> contains any dots, then <strong>name</strong> is split into interface and method name parts. This allows using <strong>proxy</strong> for invoking methods on other interfaces.</p>
+
+<p>If the GDBus::Connection associated with <strong>proxy</strong> is closed then the operation will fail with %G_IO_ERROR_CLOSED. If <strong>cancellable</strong> is canceled, the operation will fail with %G_IO_ERROR_CANCELLED. If <strong>parameters</strong> contains a value not compatible with the D-Bus protocol, the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
+
+<p>If the <strong>parameters</strong> #GVariant is floating, it is consumed. This allows convenient ‘inline’ use of g_variant_new(), e.g.:</p>
+
+<pre class="code ruby"><code class="ruby">g_dbus_proxy_call (proxy,
+                   &quot;TwoStrings&quot;,
+                   g_variant_new (&quot;(ss)&quot;,
+                                  &quot;Thing One&quot;,
+                                  &quot;Thing Two&quot;),
+                   G_DBUS_CALL_FLAGS_NONE,
+                   -1,
+                   NULL,
+                   (GAsyncReadyCallback) two_strings_done,
+                   &amp;data);
+</code></pre>
+
+<p>If <strong>proxy</strong> has an expected interface (see GDBus::Proxy:g-interface-info) and <strong>method_name</strong> is referenced by it, then the return value is checked against the return type.</p>
+
+<p>This is an asynchronous method. When the operation is finished, <strong>callback</strong> will be invoked in the</p>
+<dl class="rdoc-list label-list"><dt>thread-default main context][g-main-context-push-thread-default
+<dd>
+<p>of the thread you are calling this method from. You can then call g_dbus_proxy_call_finish() to get the result of the operation. See g_dbus_proxy_call_sync() for the synchronous version of this method.</p>
+
+<p>If <strong>callback</strong> is nil then the D-Bus method call message will be sent with the %G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED flag set. care about the result of the method invocation.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Name of method to invoke.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parameters</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A #GVariant tuple with parameters for the signal or nil if not passing parameters.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCallFlags.html" title="Gio::DBusCallFlags (module)">Gio::DBusCallFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Flags from the GDBus::CallFlags enumeration.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The timeout in milliseconds (with %G_MAXINT meaning “infinite”) or -1 to use the proxy default timeout.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A #GCancellable or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GAsync::ReadyCallback to call when the request is satisfied or nil if you don’t</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The data to pass to <strong>callback</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call_finish-instance_method">
+  
+    #<strong>call_finish</strong>(res)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes an operation started with g_dbus_proxy_call(). return values. Free with g_variant_unref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GAsync::Result obtained from the #GAsyncReadyCallback passed to g_dbus_proxy_call().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil if <strong>error</strong> is set. Otherwise a #GVariant tuple with</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call_sync-instance_method">
+  
+    #<strong>call_sync</strong>(method_name, parameters, flags, timeout_msec, cancellable)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Synchronously invokes the <strong>method_name</strong> method on <strong>proxy</strong>.</p>
+
+<p>If <strong>method_name</strong> contains any dots, then <strong>name</strong> is split into interface and method name parts. This allows using <strong>proxy</strong> for invoking methods on other interfaces.</p>
+
+<p>If the GDBus::Connection associated with <strong>proxy</strong> is disconnected then the operation will fail with %G_IO_ERROR_CLOSED. If <strong>cancellable</strong> is canceled, the operation will fail with %G_IO_ERROR_CANCELLED. If <strong>parameters</strong> contains a value not compatible with the D-Bus protocol, the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
+
+<p>If the <strong>parameters</strong> #GVariant is floating, it is consumed. This allows convenient ‘inline’ use of g_variant_new(), e.g.:</p>
+
+<pre class="code ruby"><code class="ruby">g_dbus_proxy_call_sync (proxy,
+                        &quot;TwoStrings&quot;,
+                        g_variant_new (&quot;(ss)&quot;,
+                                       &quot;Thing One&quot;,
+                                       &quot;Thing Two&quot;),
+                        G_DBUS_CALL_FLAGS_NONE,
+                        -1,
+                        NULL,
+                        &amp;error);
+</code></pre>
+
+<p>The calling thread is blocked until a reply is received. See g_dbus_proxy_call() for the asynchronous version of this method.</p>
+
+<p>If <strong>proxy</strong> has an expected interface (see GDBus::Proxy:g-interface-info) and <strong>method_name</strong> is referenced by it, then the return value is checked against the return type. return values. Free with g_variant_unref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Name of method to invoke.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parameters</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A #GVariant tuple with parameters for the signal or nil if not passing parameters.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCallFlags.html" title="Gio::DBusCallFlags (module)">Gio::DBusCallFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Flags from the GDBus::CallFlags enumeration.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The timeout in milliseconds (with %G_MAXINT meaning “infinite”) or -1 to use the proxy default timeout.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A #GCancellable or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil if <strong>error</strong> is set. Otherwise a #GVariant tuple with</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call_with_unix_fd_list-instance_method">
+  
+    #<strong>call_with_unix_fd_list</strong>(method_name, parameters, flags, timeout_msec, fd_list, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Like g_dbus_proxy_call() but also takes a GUnix::FDList object.</p>
+
+<p>This method is only available on UNIX. care about the result of the method invocation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Name of method to invoke.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parameters</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A #GVariant tuple with parameters for the signal or nil if not passing parameters.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCallFlags.html" title="Gio::DBusCallFlags (module)">Gio::DBusCallFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Flags from the GDBus::CallFlags enumeration.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The timeout in milliseconds (with %G_MAXINT meaning “infinite”) or -1 to use the proxy default timeout.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fd_list</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="UnixFDList.html" title="Gio::UnixFDList (class)">Gio::UnixFDList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GUnix::FDList or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A #GCancellable or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GAsync::ReadyCallback to call when the request is satisfied or nil if you don’t</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The data to pass to <strong>callback</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call_with_unix_fd_list_finish-instance_method">
+  
+    #<strong>call_with_unix_fd_list_finish</strong>(out_fd_list, res)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes an operation started with g_dbus_proxy_call_with_unix_fd_list(). return values. Free with g_variant_unref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>out_fd_list</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="UnixFDList.html" title="Gio::UnixFDList (class)">Gio::UnixFDList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Return location for a GUnix::FDList or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GAsync::Result obtained from the #GAsyncReadyCallback passed to g_dbus_proxy_call_with_unix_fd_list().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil if <strong>error</strong> is set. Otherwise a #GVariant tuple with</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call_with_unix_fd_list_sync-instance_method">
+  
+    #<strong>call_with_unix_fd_list_sync</strong>(method_name, parameters, flags, timeout_msec, fd_list, out_fd_list, cancellable)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Like g_dbus_proxy_call_sync() but also takes and returns GUnix::FDList objects.</p>
+
+<p>This method is only available on UNIX. return values. Free with g_variant_unref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Name of method to invoke.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parameters</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A #GVariant tuple with parameters for the signal or nil if not passing parameters.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusCallFlags.html" title="Gio::DBusCallFlags (module)">Gio::DBusCallFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Flags from the GDBus::CallFlags enumeration.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The timeout in milliseconds (with %G_MAXINT meaning “infinite”) or -1 to use the proxy default timeout.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fd_list</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="UnixFDList.html" title="Gio::UnixFDList (class)">Gio::UnixFDList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GUnix::FDList or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_fd_list</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="UnixFDList.html" title="Gio::UnixFDList (class)">Gio::UnixFDList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Return location for a GUnix::FDList or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A #GCancellable or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil if <strong>error</strong> is set. Otherwise a #GVariant tuple with</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="connection-instance_method">
+  
+    #<strong>connection</strong>  &#x21d2; <tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the connection <strong>proxy</strong> is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GDBus::Connection owned by <strong>proxy</strong>. Do not free.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_timeout-instance_method">
+  
+    #<strong>default_timeout</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the timeout to use if -1 (specifying default timeout) is passed as <strong>timeout_msec</strong> in the g_dbus_proxy_call() and g_dbus_proxy_call_sync() functions.</p>
+
+<p>See the GDBus::Proxy:g-default-timeout property for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Timeout to use for <strong>proxy</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_timeout=-instance_method">
+  
+    #<strong>default_timeout=</strong>(timeout_msec)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the timeout to use if -1 (specifying default timeout) is passed as <strong>timeout_msec</strong> in the g_dbus_proxy_call() and g_dbus_proxy_call_sync() functions.</p>
+
+<p>See the GDBus::Proxy:g-default-timeout property for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timeout_msec</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Timeout in milliseconds.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flags-instance_method">
+  
+    #<strong>flags</strong>  &#x21d2; <tt><span class='object_link'><a href="DBusProxyFlags.html" title="Gio::DBusProxyFlags (module)">Gio::DBusProxyFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the flags that <strong>proxy</strong> was constructed with.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusProxyFlags.html" title="Gio::DBusProxyFlags (module)">Gio::DBusProxyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Flags from the GDBus::ProxyFlags enumeration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_bus_type=-instance_method">
+  
+    #<strong>g_bus_type=</strong>(g_bus_type)  &#x21d2; <tt><span class='object_link'><a href="BusType.html" title="Gio::BusType (module)">Gio::BusType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If this property is not %G_BUS_TYPE_NONE, then GDBus::Proxy:g-connection must be nil and will be set to the GDBus::Connection obtained by calling g_bus_get() with the value of this property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>g_bus_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BusType.html" title="Gio::BusType (module)">Gio::BusType</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BusType.html" title="Gio::BusType (module)">Gio::BusType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-bus-type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_connection-instance_method">
+  
+    #<strong>g_connection</strong>  &#x21d2; <tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The GDBus::Connection the proxy is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-connection</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_connection=-instance_method">
+  
+    #<strong>g_connection=</strong>(g_connection)  &#x21d2; <tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The GDBus::Connection the proxy is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>g_connection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-connection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-connection</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_default_timeout-instance_method">
+  
+    #<strong>g_default_timeout</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The timeout to use if -1 (specifying default timeout) is passed as <strong>timeout_msec</strong> in the g_dbus_proxy_call() and g_dbus_proxy_call_sync() functions.</p>
+
+<p>This allows applications to set a proxy-wide timeout for all remote method invocations on the proxy. If this property is -1, the default timeout (typically 25 seconds) is used. If set to %G_MAXINT, then no timeout is used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-default-timeout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_default_timeout=-instance_method">
+  
+    #<strong>g_default_timeout=</strong>(g_default_timeout)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The timeout to use if -1 (specifying default timeout) is passed as <strong>timeout_msec</strong> in the g_dbus_proxy_call() and g_dbus_proxy_call_sync() functions.</p>
+
+<p>This allows applications to set a proxy-wide timeout for all remote method invocations on the proxy. If this property is -1, the default timeout (typically 25 seconds) is used. If set to %G_MAXINT, then no timeout is used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>g_default_timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-default-timeout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-default-timeout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_flags-instance_method">
+  
+    #<strong>g_flags</strong>  &#x21d2; <tt><span class='object_link'><a href="DBusProxyFlags.html" title="Gio::DBusProxyFlags (module)">Gio::DBusProxyFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Flags from the GDBus::ProxyFlags enumeration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusProxyFlags.html" title="Gio::DBusProxyFlags (module)">Gio::DBusProxyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_flags=-instance_method">
+  
+    #<strong>g_flags=</strong>(g_flags)  &#x21d2; <tt><span class='object_link'><a href="DBusProxyFlags.html" title="Gio::DBusProxyFlags (module)">Gio::DBusProxyFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Flags from the GDBus::ProxyFlags enumeration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>g_flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusProxyFlags.html" title="Gio::DBusProxyFlags (module)">Gio::DBusProxyFlags</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusProxyFlags.html" title="Gio::DBusProxyFlags (module)">Gio::DBusProxyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-flags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusProxyFlags.html" title="Gio::DBusProxyFlags (module)">Gio::DBusProxyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_interface_info-instance_method">
+  
+    #<strong>g_interface_info</strong>  &#x21d2; <tt>Gio::DBusInterfaceInfo</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Ensure that interactions with this proxy conform to the given interface. This is mainly to ensure that malformed data received from the other peer is ignored. The given GDBus::InterfaceInfo is said to be the “expected interface”.</p>
+
+<p>The checks performed are:</p>
+<ul><li>
+<p>When completing a method call, if the type signature of the reply message isn’t what’s expected, the reply is discarded and the #GError is set to %G_IO_ERROR_INVALID_ARGUMENT.</p>
+</li><li>
+<p>Received signals that have a type signature mismatch are dropped and a warning is logged via g_warning().</p>
+</li><li>
+<p>Properties received via the initial ‘GetAll()` call or via the `::PropertiesChanged` signal (on the [org.freedesktop.DBus.Properties](<a href="http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties">dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties</a>) interface) or set using g_dbus_proxy_set_cached_property() with a type signature mismatch are ignored and a warning is logged via g_warning().</p>
+</li></ul>
+
+<p>Note that these checks are never done on methods, signals and properties that are not referenced in the given GDBus::InterfaceInfo, since extending a D-Bus interface on the service-side is not considered an ABI break.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-interface-info</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_interface_info=-instance_method">
+  
+    #<strong>g_interface_info=</strong>(g_interface_info)  &#x21d2; <tt>Gio::DBusInterfaceInfo</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Ensure that interactions with this proxy conform to the given interface. This is mainly to ensure that malformed data received from the other peer is ignored. The given GDBus::InterfaceInfo is said to be the “expected interface”.</p>
+
+<p>The checks performed are:</p>
+<ul><li>
+<p>When completing a method call, if the type signature of the reply message isn’t what’s expected, the reply is discarded and the #GError is set to %G_IO_ERROR_INVALID_ARGUMENT.</p>
+</li><li>
+<p>Received signals that have a type signature mismatch are dropped and a warning is logged via g_warning().</p>
+</li><li>
+<p>Properties received via the initial ‘GetAll()` call or via the `::PropertiesChanged` signal (on the [org.freedesktop.DBus.Properties](<a href="http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties">dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties</a>) interface) or set using g_dbus_proxy_set_cached_property() with a type signature mismatch are ignored and a warning is logged via g_warning().</p>
+</li></ul>
+
+<p>Note that these checks are never done on methods, signals and properties that are not referenced in the given GDBus::InterfaceInfo, since extending a D-Bus interface on the service-side is not considered an ABI break.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>g_interface_info</span>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceInfo</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-interface-info</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-interface-info</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_interface_name-instance_method">
+  
+    #<strong>g_interface_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The D-Bus interface name the proxy is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-interface-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_interface_name=-instance_method">
+  
+    #<strong>g_interface_name=</strong>(g_interface_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The D-Bus interface name the proxy is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>g_interface_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-interface-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-interface-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_name-instance_method">
+  
+    #<strong>g_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The well-known or unique name that the proxy is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_name=-instance_method">
+  
+    #<strong>g_name=</strong>(g_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The well-known or unique name that the proxy is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>g_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_name_owner-instance_method">
+  
+    #<strong>g_name_owner</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The unique name that owns GDBus::Proxy:g-name or nil if no-one currently owns that name. You may connect to #GObject::notify signal to track changes to this property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-name-owner</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_name_owner=-instance_method">
+  
+    #<strong>g_name_owner=</strong>(g_name_owner)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The unique name that owns GDBus::Proxy:g-name or nil if no-one currently owns that name. You may connect to #GObject::notify signal to track changes to this property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>g_name_owner</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-name-owner</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-name-owner</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_object_path-instance_method">
+  
+    #<strong>g_object_path</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The object path the proxy is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-object-path</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="g_object_path=-instance_method">
+  
+    #<strong>g_object_path=</strong>(g_object_path)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The object path the proxy is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>g_object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-object-path</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>g-object-path</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_cached_property-instance_method">
+  
+    #<strong>get_cached_property</strong>(property_name)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Looks up the value for a property from the cache. This call does no blocking IO.</p>
+
+<p>If <strong>proxy</strong> has an expected interface (see GDBus::Proxy:g-interface-info) and <strong>property_name</strong> is referenced by it, then <strong>value</strong> is checked against the type of the property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Property name.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A reference to the #GVariant instance that holds the value for <strong>property_name</strong> or nil if the value is not in the cache. The returned reference must be freed with g_variant_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="interface_info-instance_method">
+  
+    #<strong>interface_info</strong>  &#x21d2; <tt>Gio::DBusInterfaceInfo</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the GDBus::InterfaceInfo, if any, specifying the interface that <strong>proxy</strong> conforms to. See the GDBus::Proxy:g-interface-info property for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GDBus::InterfaceInfo or nil. Do not unref the returned object, it is owned by <strong>proxy</strong>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="interface_info=-instance_method">
+  
+    #<strong>interface_info=</strong>(info)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Ensure that interactions with <strong>proxy</strong> conform to the given interface. See the GDBus::Proxy:g-interface-info property for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Minimum interface this proxy conforms to or nil to unset.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="interface_name-instance_method">
+  
+    #<strong>interface_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the D-Bus interface name <strong>proxy</strong> is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A string owned by <strong>proxy</strong>. Do not free.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the name that <strong>proxy</strong> was constructed for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A string owned by <strong>proxy</strong>. Do not free.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name_owner-instance_method">
+  
+    #<strong>name_owner</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The unique name that owns the name that <strong>proxy</strong> is for or nil if no-one currently owns that name. You may connect to the #GObject::notify signal to track changes to the GDBus::Proxy:g-name-owner property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name owner or nil if no name owner exists. Free with g_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_finish-instance_method">
+  
+    #<strong>new_finish</strong>(res)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DBusProxy (class)">Gio::DBusProxy</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes creating a GDBus::Proxy.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GAsync::Result obtained from the #GAsyncReadyCallback function passed to g_dbus_proxy_new().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::DBusProxy (class)">Gio::DBusProxy</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GDBus::Proxy or nil if <strong>error</strong> is set. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_for_bus_finish-instance_method">
+  
+    #<strong>new_for_bus_finish</strong>(res)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DBusProxy (class)">Gio::DBusProxy</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes creating a GDBus::Proxy.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GAsync::Result obtained from the #GAsyncReadyCallback function passed to g_dbus_proxy_new_for_bus().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::DBusProxy (class)">Gio::DBusProxy</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GDBus::Proxy or nil if <strong>error</strong> is set. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_for_bus_sync-instance_method">
+  
+    #<strong>new_for_bus_sync</strong>(bus_type, flags, info, name, object_path, interface_name, cancellable)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DBusProxy (class)">Gio::DBusProxy</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Like g_dbus_proxy_new_sync() but takes a GBus::Type instead of a #GDBusConnection.</p>
+
+<p>GDBus::Proxy is used in this [<a href="gdbus-wellknown-proxy">example]</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bus_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BusType.html" title="Gio::BusType (module)">Gio::BusType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GBus::Type.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusProxyFlags.html" title="Gio::DBusProxyFlags (module)">Gio::DBusProxyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Flags used when constructing the proxy.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GDBus::InterfaceInfo specifying the minimal interface that <strong>proxy</strong> conforms to or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A bus name (well-known or unique).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An object path.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A D-Bus interface name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A #GCancellable or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::DBusProxy (class)">Gio::DBusProxy</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GDBus::Proxy or nil if error is set. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_sync-instance_method">
+  
+    #<strong>new_sync</strong>(connection, flags, info, name, object_path, interface_name, cancellable)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DBusProxy (class)">Gio::DBusProxy</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a proxy for accessing <strong>interface_name</strong> on the remote object at <strong>object_path</strong> owned by <strong>name</strong> at <strong>connection</strong> and synchronously loads D-Bus properties unless the %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES flag is used.</p>
+
+<p>If the %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS flag is not set, also sets up match rules for signals. Connect to the GDBus::Proxy::g-signal signal to handle signals from the remote object.</p>
+
+<p>If both %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES and %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS are set, this constructor is guaranteed to return immediately without blocking.</p>
+
+<p>If <strong>name</strong> is a well-known name and the %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START and %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION flags aren’t set and no name owner currently exists, the message bus will be requested to launch a name owner for the name.</p>
+
+<p>This is a synchronous failable constructor. See g_dbus_proxy_new() and g_dbus_proxy_new_finish() for the asynchronous version.</p>
+
+<p>GDBus::Proxy is used in this [<a href="gdbus-wellknown-proxy">example]</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>connection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GDBus::Connection.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusProxyFlags.html" title="Gio::DBusProxyFlags (module)">Gio::DBusProxyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Flags used when constructing the proxy.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GDBus::InterfaceInfo specifying the minimal interface that <strong>proxy</strong> conforms to or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A bus name (well-known or unique) or nil if <strong>connection</strong> is not a message bus connection.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An object path.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A D-Bus interface name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A #GCancellable or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::DBusProxy (class)">Gio::DBusProxy</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A GDBus::Proxy or nil if error is set. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="object_path-instance_method">
+  
+    #<strong>object_path</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the object path <strong>proxy</strong> is for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A string owned by <strong>proxy</strong>. Do not free.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_cached_property-instance_method">
+  
+    #<strong>set_cached_property</strong>(property_name, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If <strong>value</strong> is not nil, sets the cached value for the property with name <strong>property_name</strong> to the value in <strong>value</strong>.</p>
+
+<p>If <strong>value</strong> is nil, then the cached value is removed from the property cache.</p>
+
+<p>If <strong>proxy</strong> has an expected interface (see GDBus::Proxy:g-interface-info) and <strong>property_name</strong> is referenced by it, then <strong>value</strong> is checked against the type of the property.</p>
+
+<p>If the <strong>value</strong> #GVariant is floating, it is consumed. This allows convenient ‘inline’ use of g_variant_new(), e.g.</p>
+
+<pre class="code ruby"><code class="ruby">g_dbus_proxy_set_cached_property (proxy,
+                                  &quot;SomeProperty&quot;,
+                                  g_variant_new (&quot;(si)&quot;,
+                                                &quot;A String&quot;,
+                                                42));
+</code></pre>
+
+<p>Normally you will not need to use this method since <strong>proxy</strong> is tracking changes using the ‘org.freedesktop.DBus.Properties.PropertiesChanged` D-Bus signal. However, for performance reasons an object may decide to not use this signal for some properties and instead use a proprietary out-of-band mechanism to transmit changes.</p>
+
+<p>As a concrete example, consider an object with a property ‘ChatroomParticipants` which is an array of strings. Instead of transmitting the same (long) array every time the property changes, it is more efficient to only transmit the delta using e.g. signals `ChatroomParticipantJoined(String name)` and `ChatroomParticipantParted(String name)`.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Property name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Value for the property or nil to remove it from the cache.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:03 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

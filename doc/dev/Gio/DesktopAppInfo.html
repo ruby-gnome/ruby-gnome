@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::DesktopAppInfo
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::DesktopAppInfo";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">DesktopAppInfo</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::DesktopAppInfo
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::DesktopAppInfo</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#categories-instance_method" title="#categories (instance method)">#<strong>categories</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the categories from the desktop file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filename-instance_method" title="#filename (instance method)">#<strong>filename</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The origin filename of this GDesktop::AppInfo.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filename=-instance_method" title="#filename= (instance method)">#<strong>filename=</strong>(filename)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The origin filename of this GDesktop::AppInfo.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#generic_name-instance_method" title="#generic_name (instance method)">#<strong>generic_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the generic name from the destkop file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_action_name-instance_method" title="#get_action_name (instance method)">#<strong>get_action_name</strong>(action_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the user-visible display name of the “additional application action” specified by <strong>action_name</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_boolean-instance_method" title="#get_boolean (instance method)">#<strong>get_boolean</strong>(key)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Looks up a boolean value in the keyfile backing <strong>info</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_locale_string-instance_method" title="#get_locale_string (instance method)">#<strong>get_locale_string</strong>(key)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Looks up a localized string value in the keyfile backing <strong>info</strong> translated to the current locale.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_show_in-instance_method" title="#get_show_in (instance method)">#<strong>get_show_in</strong>(desktop_env)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks if the application info should be shown in menus that list available applications for a specific name of the desktop, based on the ‘OnlyShowIn` and `NotShowIn` keys.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_string-instance_method" title="#get_string (instance method)">#<strong>get_string</strong>(key)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Looks up a string value in the keyfile backing <strong>info</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_string_list-instance_method" title="#get_string_list (instance method)">#<strong>get_string_list</strong>(key, length)  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Looks up a string list value in the keyfile backing <strong>info</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_key-instance_method" title="#has_key (instance method)">#<strong>has_key</strong>(key)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns whether <strong>key</strong> exists in the “Desktop Entry” group of the keyfile backing <strong>info</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_hidden-instance_method" title="#is_hidden (instance method)">#<strong>is_hidden</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A desktop file is hidden if the Hidden key in it is set to True.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keywords-instance_method" title="#keywords (instance method)">#<strong>keywords</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the keywords from the desktop file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#launch_action-instance_method" title="#launch_action (instance method)">#<strong>launch_action</strong>(action_name, launch_context)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Activates the named application action.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#launch_uris_as_manager-instance_method" title="#launch_uris_as_manager (instance method)">#<strong>launch_uris_as_manager</strong>(uris, launch_context, spawn_flags, user_setup, user_setup_data, pid_callback, pid_callback_data)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function performs the equivalent of g_app_info_launch_uris(), but is intended primarily for operating system components that launch applications.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#launch_uris_as_manager_with_fds-instance_method" title="#launch_uris_as_manager_with_fds (instance method)">#<strong>launch_uris_as_manager_with_fds</strong>(uris, launch_context, spawn_flags, user_setup, user_setup_data, pid_callback, pid_callback_data, stdin_fd, stdout_fd, stderr_fd)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Equivalent to g_desktop_app_info_launch_uris_as_manager() but allows you to pass in file descriptors for the stdin, stdout and stderr streams of the launched process.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_actions-instance_method" title="#list_actions (instance method)">#<strong>list_actions</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the list of “additional application actions” supported on the desktop file, as per the desktop file specification.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>(desktop_id)  &#x21d2; Gio::DesktopAppInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new GDesktop::AppInfo based on a desktop file id.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_from_filename-instance_method" title="#new_from_filename (instance method)">#<strong>new_from_filename</strong>(filename)  &#x21d2; Gio::DesktopAppInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new GDesktop::AppInfo.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_from_keyfile-instance_method" title="#new_from_keyfile (instance method)">#<strong>new_from_keyfile</strong>(key_file)  &#x21d2; Gio::DesktopAppInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new GDesktop::AppInfo.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nodisplay-instance_method" title="#nodisplay (instance method)">#<strong>nodisplay</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the value of the NoDisplay key, which helps determine if the application info should be shown in menus.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#startup_wm_class-instance_method" title="#startup_wm_class (instance method)">#<strong>startup_wm_class</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the StartupWMClass field from <strong>info</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="categories-instance_method">
+  
+    #<strong>categories</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the categories from the desktop file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The unparsed Categories key from the desktop file; i.e. no attempt is made to split it by ‘;’ or validate it.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="filename-instance_method">
+  
+    #<strong>filename</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The origin filename of this GDesktop::AppInfo</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>filename</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="filename=-instance_method">
+  
+    #<strong>filename=</strong>(filename)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The origin filename of this GDesktop::AppInfo</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filename</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>filename</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>filename</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="generic_name-instance_method">
+  
+    #<strong>generic_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the generic name from the destkop file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The value of the GenericName key</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_action_name-instance_method">
+  
+    #<strong>get_action_name</strong>(action_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the user-visible display name of the “additional application action” specified by <strong>action_name</strong>.</p>
+
+<p>This corresponds to the “Name” key within the keyfile group for the action.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action as from g_desktop_app_info_list_actions()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the locale-specific action name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_boolean-instance_method">
+  
+    #<strong>get_boolean</strong>(key)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Looks up a boolean value in the keyfile backing <strong>info</strong>.</p>
+
+<p>The <strong>key</strong> is looked up in the “Desktop Entry” group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the key to look up</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the boolean value, or false if the key is not found</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_locale_string-instance_method">
+  
+    #<strong>get_locale_string</strong>(key)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Looks up a localized string value in the keyfile backing <strong>info</strong> translated to the current locale.</p>
+
+<p>The <strong>key</strong> is looked up in the “Desktop Entry” group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the key to look up</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated string, or nil if the key is not found</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_show_in-instance_method">
+  
+    #<strong>get_show_in</strong>(desktop_env)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks if the application info should be shown in menus that list available applications for a specific name of the desktop, based on the ‘OnlyShowIn` and `NotShowIn` keys.</p>
+
+<p><strong>desktop_env</strong> should typically be given as nil, in which case the ‘XDG_CURRENT_DESKTOP` environment variable is consulted.  If you want to override the default mechanism then you may specify <strong>desktop_env</strong>, but this is not recommended.</p>
+
+<p>Note that g_app_info_should_show() for <strong>info</strong> will include this check (with nil for <strong>desktop_env</strong>) as well as additional checks. ‘OnlyShowIn` and `NotShowIn` keys, false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>desktop_env</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a string specifying a desktop name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the <strong>info</strong> should be shown in <strong>desktop_env</strong> according to the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_string-instance_method">
+  
+    #<strong>get_string</strong>(key)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Looks up a string value in the keyfile backing <strong>info</strong>.</p>
+
+<p>The <strong>key</strong> is looked up in the “Desktop Entry” group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the key to look up</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated string, or nil if the key is not found</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_string_list-instance_method">
+  
+    #<strong>get_string_list</strong>(key, length)  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Looks up a string list value in the keyfile backing <strong>info</strong>.</p>
+
+<p>The <strong>key</strong> is looked up in the “Desktop Entry” group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the key to look up</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the number of returned strings, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a nil-terminated string array or nil if the specified key cannot be found. The array should be freed with g_strfreev().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_key-instance_method">
+  
+    #<strong>has_key</strong>(key)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns whether <strong>key</strong> exists in the “Desktop Entry” group of the keyfile backing <strong>info</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the key to look up</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the <strong>key</strong> exists</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_hidden-instance_method">
+  
+    #<strong>is_hidden</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A desktop file is hidden if the Hidden key in it is set to True.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if hidden, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="keywords-instance_method">
+  
+    #<strong>keywords</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the keywords from the desktop file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The value of the Keywords key</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="launch_action-instance_method">
+  
+    #<strong>launch_action</strong>(action_name, launch_context)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Activates the named application action.</p>
+
+<p>You may only call this function on action names that were returned from g_desktop_app_info_list_actions().</p>
+
+<p>Note that if the main entry of the desktop file indicates that the application supports startup notification, and <strong>launch_context</strong> is non-nil, then startup notification will be used when activating the action (and as such, invocation of the action on the receiving side must signal the end of startup notification when it is completed). This is the expected behaviour of applications declaring additional actions, as per the desktop file specification.</p>
+
+<p>As with g_app_info_launch() there is no way to detect failures that occur while using this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action as from g_desktop_app_info_list_actions()</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>launch_context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AppLaunchContext.html" title="Gio::AppLaunchContext (class)">Gio::AppLaunchContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GApp::LaunchContext</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="launch_uris_as_manager-instance_method">
+  
+    #<strong>launch_uris_as_manager</strong>(uris, launch_context, spawn_flags, user_setup, user_setup_data, pid_callback, pid_callback_data)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function performs the equivalent of g_app_info_launch_uris(), but is intended primarily for operating system components that launch applications.  Ordinary applications should use g_app_info_launch_uris().</p>
+
+<p>If the application is launched via GSpawn, then <strong>spawn_flags</strong>, <strong>user_setup</strong> and <strong>user_setup_data</strong> are used for the call to g_spawn_async(). Additionally, <strong>pid_callback</strong> (with <strong>pid_callback_data</strong>) will be called to inform about the PID of the created process. See g_spawn_async_with_pipes() for information on certain parameter conditions that can enable an optimized posix_spawn() codepath to be used.</p>
+
+<p>If application launching occurs via some other mechanism (eg: D-Bus activation) then <strong>spawn_flags</strong>, <strong>user_setup</strong>, <strong>user_setup_data</strong>, <strong>pid_callback</strong> and <strong>pid_callback_data</strong> are ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uris</span>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>List of URIs</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>launch_context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AppLaunchContext.html" title="Gio::AppLaunchContext (class)">Gio::AppLaunchContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GApp::LaunchContext</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>spawn_flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/SpawnFlags.html" title="GLib::SpawnFlags (module)">GLib::SpawnFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>GSpawn::Flags, used for each process</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_setup</span>
+      
+      
+        <span class='type'>(<tt>GLib::SpawnChildSetupFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSpawn::ChildSetupFunc, used once for each process.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_setup_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>User data for <strong>user_setup</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pid_callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::DesktopAppLaunchCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Callback for child processes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pid_callback_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>User data for <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on successful launch, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="launch_uris_as_manager_with_fds-instance_method">
+  
+    #<strong>launch_uris_as_manager_with_fds</strong>(uris, launch_context, spawn_flags, user_setup, user_setup_data, pid_callback, pid_callback_data, stdin_fd, stdout_fd, stderr_fd)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Equivalent to g_desktop_app_info_launch_uris_as_manager() but allows you to pass in file descriptors for the stdin, stdout and stderr streams of the launched process.</p>
+
+<p>If application launching occurs via some non-spawn mechanism (e.g. D-Bus activation) then <strong>stdin_fd</strong>, <strong>stdout_fd</strong> and <strong>stderr_fd</strong> are ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uris</span>
+      
+      
+        <span class='type'>(<tt>GLib::List</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>List of URIs</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>launch_context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AppLaunchContext.html" title="Gio::AppLaunchContext (class)">Gio::AppLaunchContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GApp::LaunchContext</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>spawn_flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/SpawnFlags.html" title="GLib::SpawnFlags (module)">GLib::SpawnFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>GSpawn::Flags, used for each process</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_setup</span>
+      
+      
+        <span class='type'>(<tt>GLib::SpawnChildSetupFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSpawn::ChildSetupFunc, used once for each process.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_setup_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>User data for <strong>user_setup</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pid_callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::DesktopAppLaunchCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Callback for child processes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pid_callback_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>User data for <strong>callback</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stdin_fd</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>file descriptor to use for child’s stdin, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stdout_fd</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>file descriptor to use for child’s stdout, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stderr_fd</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>file descriptor to use for child’s stderr, or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on successful launch, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_actions-instance_method">
+  
+    #<strong>list_actions</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the list of “additional application actions” supported on the desktop file, as per the desktop file specification.</p>
+
+<p>As per the specification, this is the list of actions that are explicitly listed in the “Actions” key of the [Desktop Entry] group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a list of strings, always non-nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>(desktop_id)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DesktopAppInfo (class)">Gio::DesktopAppInfo</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new GDesktop::AppInfo based on a desktop file id.</p>
+
+<p>A desktop file id is the basename of the desktop file, including the .desktop extension. GIO is looking for a desktop file with this name in the ‘applications` subdirectories of the XDG data directories (i.e. the directories specified in the `XDG_DATA_HOME` and `XDG_DATA_DIRS` environment variables). GIO also supports the prefix-to-subdirectory mapping that is described in the [Menu Spec](<a href="http://standards.freedesktop.org/menu-spec/latest">standards.freedesktop.org/menu-spec/latest</a>/) (i.e. a desktop id of kde-foo.desktop will match `/usr/share/applications/kde/foo.desktop`).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>desktop_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the desktop file id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::DesktopAppInfo (class)">Gio::DesktopAppInfo</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new GDesktop::AppInfo, or nil if no desktop file with that id exists.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_from_filename-instance_method">
+  
+    #<strong>new_from_filename</strong>(filename)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DesktopAppInfo (class)">Gio::DesktopAppInfo</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new GDesktop::AppInfo.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filename</span>
+      
+      
+        <span class='type'>(<tt>Gio::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the path of a desktop file, in the GLib filename encoding</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::DesktopAppInfo (class)">Gio::DesktopAppInfo</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new GDesktop::AppInfo or nil on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_from_keyfile-instance_method">
+  
+    #<strong>new_from_keyfile</strong>(key_file)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DesktopAppInfo (class)">Gio::DesktopAppInfo</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new GDesktop::AppInfo.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_file</span>
+      
+      
+        <span class='type'>(<tt>GLib::KeyFile</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an opened GKey::File</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::DesktopAppInfo (class)">Gio::DesktopAppInfo</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new GDesktop::AppInfo or nil on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="nodisplay-instance_method">
+  
+    #<strong>nodisplay</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the value of the NoDisplay key, which helps determine if the application info should be shown in menus. See #G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY and g_app_info_should_show().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The value of the NoDisplay key</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="startup_wm_class-instance_method">
+  
+    #<strong>startup_wm_class</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the StartupWMClass field from <strong>info</strong>. This represents the WM_CLASS property of the main window of the application, if launched through <strong>info</strong>. in the desktop file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the startup WM class, or nil if none is set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:04 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

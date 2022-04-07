@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gio::ApplicationFlags
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::ApplicationFlags";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">ApplicationFlags</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gio::ApplicationFlags
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="FLAGS_NONE-constant" class="">FLAGS_NONE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Default</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:flags_none</span></pre></dd>
+      
+        <dt id="IS_SERVICE-constant" class="">IS_SERVICE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Run as a service. In this mode, registration</p>
+
+<pre class="code ruby"><code class="ruby">fails if the service is already running, and the application
+will initially wait up to 10 seconds for an initial activation
+message to arrive.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:is_service</span></pre></dd>
+      
+        <dt id="IS_LAUNCHER-constant" class="">IS_LAUNCHER =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Don’t try to become the primary instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:is_launcher</span></pre></dd>
+      
+        <dt id="HANDLES_OPEN-constant" class="">HANDLES_OPEN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>This application handles opening files (in</p>
+
+<pre class="code ruby"><code class="ruby">the primary instance). Note that this flag only affects the default
+implementation of local_command_line(), and has no effect if
+%G_APPLICATION_HANDLES_COMMAND_LINE is given.
+See g_application_run() for details.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:handles_open</span></pre></dd>
+      
+        <dt id="HANDLES_COMMAND_LINE-constant" class="">HANDLES_COMMAND_LINE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>This application handles command line</p>
+
+<pre class="code ruby"><code class="ruby">arguments (in the primary instance). Note that this flag only affect
+the default implementation of local_command_line().
+See g_application_run() for details.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:handles_command_line</span></pre></dd>
+      
+        <dt id="SEND_ENVIRONMENT-constant" class="">SEND_ENVIRONMENT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Send the environment of the</p>
+
+<pre class="code ruby"><code class="ruby">launching process to the primary instance. Set this flag if your
+application is expected to behave differently depending on certain
+environment variables. For instance, an editor might be expected
+to use the `GIT_COMMITTER_NAME` environment variable
+when editing a git commit message. The environment is available
+to the #GApplication::command-line signal handler, via
+g_application_command_line_getenv().
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:send_environment</span></pre></dd>
+      
+        <dt id="NON_UNIQUE-constant" class="">NON_UNIQUE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Make no attempts to do any of the typical</p>
+
+<pre class="code ruby"><code class="ruby">single-instance application negotiation, even if the application
+ID is given.  The application neither attempts to become the
+owner of the application ID nor does it check if an existing
+owner already exists.  Everything occurs in the local process.
+Since: 2.30.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>32</span> <span class='kw'>or</span> <span class='symbol'>:non_unique</span></pre></dd>
+      
+        <dt id="CAN_OVERRIDE_APP_ID-constant" class="">CAN_OVERRIDE_APP_ID =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Allow users to override the</p>
+
+<pre class="code ruby"><code class="ruby">application ID from the command line with `--gapplication-app-id`.
+Since: 2.48
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>64</span> <span class='kw'>or</span> <span class='symbol'>:can_override_app_id</span></pre></dd>
+      
+        <dt id="ALLOW_REPLACEMENT-constant" class="">ALLOW_REPLACEMENT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Allow another instance to take over</p>
+
+<pre class="code ruby"><code class="ruby">the bus name. Since: 2.60
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>128</span> <span class='kw'>or</span> <span class='symbol'>:allow_replacement</span></pre></dd>
+      
+        <dt id="REPLACE-constant" class="">REPLACE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Take over from another instance. This flag is</p>
+
+<pre class="code ruby"><code class="ruby">usually set by passing `--gapplication-replace` on the commandline.
+Since: 2.60
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>256</span> <span class='kw'>or</span> <span class='symbol'>:replace</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:48 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

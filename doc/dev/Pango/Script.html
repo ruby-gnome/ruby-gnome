@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Pango::Script
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Pango::Script";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Pango.html" title="Pango (module)">Pango</a></span></span>
+     &raquo; 
+    <span class="title">Script</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Pango::Script
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="INVALID_CODE-constant" class="">INVALID_CODE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a value never returned from pango_script_for_unichar()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='op'>-</span><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:invalid_code</span></pre></dd>
+      
+        <dt id="COMMON-constant" class="">COMMON =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a character used by multiple different scripts</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:common</span></pre></dd>
+      
+        <dt id="INHERITED-constant" class="">INHERITED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a mark glyph that takes its script from the base glyph to which it is attached</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:inherited</span></pre></dd>
+      
+        <dt id="ARABIC-constant" class="">ARABIC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Arabic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:arabic</span></pre></dd>
+      
+        <dt id="ARMENIAN-constant" class="">ARMENIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Armenian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:armenian</span></pre></dd>
+      
+        <dt id="BENGALI-constant" class="">BENGALI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Bengali</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:bengali</span></pre></dd>
+      
+        <dt id="BOPOMOFO-constant" class="">BOPOMOFO =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Bopomofo</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:bopomofo</span></pre></dd>
+      
+        <dt id="CHEROKEE-constant" class="">CHEROKEE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Cherokee</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:cherokee</span></pre></dd>
+      
+        <dt id="COPTIC-constant" class="">COPTIC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Coptic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:coptic</span></pre></dd>
+      
+        <dt id="CYRILLIC-constant" class="">CYRILLIC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Cyrillic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:cyrillic</span></pre></dd>
+      
+        <dt id="DESERET-constant" class="">DESERET =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Deseret</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:deseret</span></pre></dd>
+      
+        <dt id="DEVANAGARI-constant" class="">DEVANAGARI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Devanagari</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:devanagari</span></pre></dd>
+      
+        <dt id="ETHIOPIC-constant" class="">ETHIOPIC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Ethiopic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:ethiopic</span></pre></dd>
+      
+        <dt id="GEORGIAN-constant" class="">GEORGIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Georgian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:georgian</span></pre></dd>
+      
+        <dt id="GOTHIC-constant" class="">GOTHIC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Gothic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:gothic</span></pre></dd>
+      
+        <dt id="GREEK-constant" class="">GREEK =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Greek</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:greek</span></pre></dd>
+      
+        <dt id="GUJARATI-constant" class="">GUJARATI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Gujarati</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span> <span class='kw'>or</span> <span class='symbol'>:gujarati</span></pre></dd>
+      
+        <dt id="GURMUKHI-constant" class="">GURMUKHI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Gurmukhi</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:gurmukhi</span></pre></dd>
+      
+        <dt id="HAN-constant" class="">HAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Han</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span> <span class='kw'>or</span> <span class='symbol'>:han</span></pre></dd>
+      
+        <dt id="HANGUL-constant" class="">HANGUL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Hangul</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:hangul</span></pre></dd>
+      
+        <dt id="HEBREW-constant" class="">HEBREW =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Hebrew</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span> <span class='kw'>or</span> <span class='symbol'>:hebrew</span></pre></dd>
+      
+        <dt id="HIRAGANA-constant" class="">HIRAGANA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Hiragana</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span> <span class='kw'>or</span> <span class='symbol'>:hiragana</span></pre></dd>
+      
+        <dt id="KANNADA-constant" class="">KANNADA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Kannada</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>21</span> <span class='kw'>or</span> <span class='symbol'>:kannada</span></pre></dd>
+      
+        <dt id="KATAKANA-constant" class="">KATAKANA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Katakana</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>22</span> <span class='kw'>or</span> <span class='symbol'>:katakana</span></pre></dd>
+      
+        <dt id="KHMER-constant" class="">KHMER =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Khmer</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>23</span> <span class='kw'>or</span> <span class='symbol'>:khmer</span></pre></dd>
+      
+        <dt id="LAO-constant" class="">LAO =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Lao</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>24</span> <span class='kw'>or</span> <span class='symbol'>:lao</span></pre></dd>
+      
+        <dt id="LATIN-constant" class="">LATIN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Latin</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>25</span> <span class='kw'>or</span> <span class='symbol'>:latin</span></pre></dd>
+      
+        <dt id="MALAYALAM-constant" class="">MALAYALAM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Malayalam</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>26</span> <span class='kw'>or</span> <span class='symbol'>:malayalam</span></pre></dd>
+      
+        <dt id="MONGOLIAN-constant" class="">MONGOLIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Mongolian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>27</span> <span class='kw'>or</span> <span class='symbol'>:mongolian</span></pre></dd>
+      
+        <dt id="MYANMAR-constant" class="">MYANMAR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Myanmar</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>28</span> <span class='kw'>or</span> <span class='symbol'>:myanmar</span></pre></dd>
+      
+        <dt id="OGHAM-constant" class="">OGHAM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Ogham</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>29</span> <span class='kw'>or</span> <span class='symbol'>:ogham</span></pre></dd>
+      
+        <dt id="OLD_ITALIC-constant" class="">OLD_ITALIC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Old Italic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>30</span> <span class='kw'>or</span> <span class='symbol'>:old_italic</span></pre></dd>
+      
+        <dt id="ORIYA-constant" class="">ORIYA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Oriya</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>31</span> <span class='kw'>or</span> <span class='symbol'>:oriya</span></pre></dd>
+      
+        <dt id="RUNIC-constant" class="">RUNIC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Runic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>32</span> <span class='kw'>or</span> <span class='symbol'>:runic</span></pre></dd>
+      
+        <dt id="SINHALA-constant" class="">SINHALA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Sinhala</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>33</span> <span class='kw'>or</span> <span class='symbol'>:sinhala</span></pre></dd>
+      
+        <dt id="SYRIAC-constant" class="">SYRIAC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Syriac</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>34</span> <span class='kw'>or</span> <span class='symbol'>:syriac</span></pre></dd>
+      
+        <dt id="TAMIL-constant" class="">TAMIL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Tamil</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>35</span> <span class='kw'>or</span> <span class='symbol'>:tamil</span></pre></dd>
+      
+        <dt id="TELUGU-constant" class="">TELUGU =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Telugu</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>36</span> <span class='kw'>or</span> <span class='symbol'>:telugu</span></pre></dd>
+      
+        <dt id="THAANA-constant" class="">THAANA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Thaana</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>37</span> <span class='kw'>or</span> <span class='symbol'>:thaana</span></pre></dd>
+      
+        <dt id="THAI-constant" class="">THAI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Thai</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>38</span> <span class='kw'>or</span> <span class='symbol'>:thai</span></pre></dd>
+      
+        <dt id="TIBETAN-constant" class="">TIBETAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Tibetan</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>39</span> <span class='kw'>or</span> <span class='symbol'>:tibetan</span></pre></dd>
+      
+        <dt id="CANADIAN_ABORIGINAL-constant" class="">CANADIAN_ABORIGINAL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Canadian Aboriginal</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>40</span> <span class='kw'>or</span> <span class='symbol'>:canadian_aboriginal</span></pre></dd>
+      
+        <dt id="YI-constant" class="">YI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Yi</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>41</span> <span class='kw'>or</span> <span class='symbol'>:yi</span></pre></dd>
+      
+        <dt id="TAGALOG-constant" class="">TAGALOG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Tagalog</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>42</span> <span class='kw'>or</span> <span class='symbol'>:tagalog</span></pre></dd>
+      
+        <dt id="HANUNOO-constant" class="">HANUNOO =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Hanunoo</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>43</span> <span class='kw'>or</span> <span class='symbol'>:hanunoo</span></pre></dd>
+      
+        <dt id="BUHID-constant" class="">BUHID =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Buhid</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>44</span> <span class='kw'>or</span> <span class='symbol'>:buhid</span></pre></dd>
+      
+        <dt id="TAGBANWA-constant" class="">TAGBANWA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Tagbanwa</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>45</span> <span class='kw'>or</span> <span class='symbol'>:tagbanwa</span></pre></dd>
+      
+        <dt id="BRAILLE-constant" class="">BRAILLE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Braille</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>46</span> <span class='kw'>or</span> <span class='symbol'>:braille</span></pre></dd>
+      
+        <dt id="CYPRIOT-constant" class="">CYPRIOT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Cypriot</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>47</span> <span class='kw'>or</span> <span class='symbol'>:cypriot</span></pre></dd>
+      
+        <dt id="LIMBU-constant" class="">LIMBU =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Limbu</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>48</span> <span class='kw'>or</span> <span class='symbol'>:limbu</span></pre></dd>
+      
+        <dt id="OSMANYA-constant" class="">OSMANYA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Osmanya</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>49</span> <span class='kw'>or</span> <span class='symbol'>:osmanya</span></pre></dd>
+      
+        <dt id="SHAVIAN-constant" class="">SHAVIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Shavian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>50</span> <span class='kw'>or</span> <span class='symbol'>:shavian</span></pre></dd>
+      
+        <dt id="LINEAR_B-constant" class="">LINEAR_B =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Linear B</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>51</span> <span class='kw'>or</span> <span class='symbol'>:linear_b</span></pre></dd>
+      
+        <dt id="TAI_LE-constant" class="">TAI_LE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Tai Le</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>52</span> <span class='kw'>or</span> <span class='symbol'>:tai_le</span></pre></dd>
+      
+        <dt id="UGARITIC-constant" class="">UGARITIC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Ugaritic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>53</span> <span class='kw'>or</span> <span class='symbol'>:ugaritic</span></pre></dd>
+      
+        <dt id="NEW_TAI_LUE-constant" class="">NEW_TAI_LUE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>New Tai Lue. Since 1.10</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>54</span> <span class='kw'>or</span> <span class='symbol'>:new_tai_lue</span></pre></dd>
+      
+        <dt id="BUGINESE-constant" class="">BUGINESE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Buginese. Since 1.10</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>55</span> <span class='kw'>or</span> <span class='symbol'>:buginese</span></pre></dd>
+      
+        <dt id="GLAGOLITIC-constant" class="">GLAGOLITIC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Glagolitic. Since 1.10</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>56</span> <span class='kw'>or</span> <span class='symbol'>:glagolitic</span></pre></dd>
+      
+        <dt id="TIFINAGH-constant" class="">TIFINAGH =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Tifinagh. Since 1.10</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>57</span> <span class='kw'>or</span> <span class='symbol'>:tifinagh</span></pre></dd>
+      
+        <dt id="SYLOTI_NAGRI-constant" class="">SYLOTI_NAGRI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Syloti Nagri. Since 1.10</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>58</span> <span class='kw'>or</span> <span class='symbol'>:syloti_nagri</span></pre></dd>
+      
+        <dt id="OLD_PERSIAN-constant" class="">OLD_PERSIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Old Persian. Since 1.10</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>59</span> <span class='kw'>or</span> <span class='symbol'>:old_persian</span></pre></dd>
+      
+        <dt id="KHAROSHTHI-constant" class="">KHAROSHTHI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Kharoshthi. Since 1.10</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>60</span> <span class='kw'>or</span> <span class='symbol'>:kharoshthi</span></pre></dd>
+      
+        <dt id="UNKNOWN-constant" class="">UNKNOWN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>an unassigned code point. Since 1.14</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>61</span> <span class='kw'>or</span> <span class='symbol'>:unknown</span></pre></dd>
+      
+        <dt id="BALINESE-constant" class="">BALINESE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Balinese. Since 1.14</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>62</span> <span class='kw'>or</span> <span class='symbol'>:balinese</span></pre></dd>
+      
+        <dt id="CUNEIFORM-constant" class="">CUNEIFORM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Cuneiform. Since 1.14</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>63</span> <span class='kw'>or</span> <span class='symbol'>:cuneiform</span></pre></dd>
+      
+        <dt id="PHOENICIAN-constant" class="">PHOENICIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Phoenician. Since 1.14</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>64</span> <span class='kw'>or</span> <span class='symbol'>:phoenician</span></pre></dd>
+      
+        <dt id="PHAGS_PA-constant" class="">PHAGS_PA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Phags-pa. Since 1.14</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>65</span> <span class='kw'>or</span> <span class='symbol'>:phags_pa</span></pre></dd>
+      
+        <dt id="NKO-constant" class="">NKO =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>N’Ko. Since 1.14</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>66</span> <span class='kw'>or</span> <span class='symbol'>:nko</span></pre></dd>
+      
+        <dt id="KAYAH_LI-constant" class="">KAYAH_LI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Kayah Li. Since 1.20.1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>67</span> <span class='kw'>or</span> <span class='symbol'>:kayah_li</span></pre></dd>
+      
+        <dt id="LEPCHA-constant" class="">LEPCHA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Lepcha. Since 1.20.1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>68</span> <span class='kw'>or</span> <span class='symbol'>:lepcha</span></pre></dd>
+      
+        <dt id="REJANG-constant" class="">REJANG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Rejang. Since 1.20.1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>69</span> <span class='kw'>or</span> <span class='symbol'>:rejang</span></pre></dd>
+      
+        <dt id="SUNDANESE-constant" class="">SUNDANESE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Sundanese. Since 1.20.1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>70</span> <span class='kw'>or</span> <span class='symbol'>:sundanese</span></pre></dd>
+      
+        <dt id="SAURASHTRA-constant" class="">SAURASHTRA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Saurashtra. Since 1.20.1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>71</span> <span class='kw'>or</span> <span class='symbol'>:saurashtra</span></pre></dd>
+      
+        <dt id="CHAM-constant" class="">CHAM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Cham. Since 1.20.1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>72</span> <span class='kw'>or</span> <span class='symbol'>:cham</span></pre></dd>
+      
+        <dt id="OL_CHIKI-constant" class="">OL_CHIKI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Ol Chiki. Since 1.20.1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>73</span> <span class='kw'>or</span> <span class='symbol'>:ol_chiki</span></pre></dd>
+      
+        <dt id="VAI-constant" class="">VAI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Vai. Since 1.20.1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>74</span> <span class='kw'>or</span> <span class='symbol'>:vai</span></pre></dd>
+      
+        <dt id="CARIAN-constant" class="">CARIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Carian. Since 1.20.1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>75</span> <span class='kw'>or</span> <span class='symbol'>:carian</span></pre></dd>
+      
+        <dt id="LYCIAN-constant" class="">LYCIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Lycian. Since 1.20.1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>76</span> <span class='kw'>or</span> <span class='symbol'>:lycian</span></pre></dd>
+      
+        <dt id="LYDIAN-constant" class="">LYDIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Lydian. Since 1.20.1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>77</span> <span class='kw'>or</span> <span class='symbol'>:lydian</span></pre></dd>
+      
+        <dt id="BATAK-constant" class="">BATAK =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Batak. Since 1.32</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>78</span> <span class='kw'>or</span> <span class='symbol'>:batak</span></pre></dd>
+      
+        <dt id="BRAHMI-constant" class="">BRAHMI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Brahmi. Since 1.32</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>79</span> <span class='kw'>or</span> <span class='symbol'>:brahmi</span></pre></dd>
+      
+        <dt id="MANDAIC-constant" class="">MANDAIC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Mandaic. Since 1.32</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>80</span> <span class='kw'>or</span> <span class='symbol'>:mandaic</span></pre></dd>
+      
+        <dt id="CHAKMA-constant" class="">CHAKMA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Chakma. Since: 1.32</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>81</span> <span class='kw'>or</span> <span class='symbol'>:chakma</span></pre></dd>
+      
+        <dt id="MEROITIC_CURSIVE-constant" class="">MEROITIC_CURSIVE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Meroitic Cursive. Since: 1.32</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>82</span> <span class='kw'>or</span> <span class='symbol'>:meroitic_cursive</span></pre></dd>
+      
+        <dt id="MEROITIC_HIEROGLYPHS-constant" class="">MEROITIC_HIEROGLYPHS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Meroitic Hieroglyphs. Since: 1.32</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>83</span> <span class='kw'>or</span> <span class='symbol'>:meroitic_hieroglyphs</span></pre></dd>
+      
+        <dt id="MIAO-constant" class="">MIAO =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Miao. Since: 1.32</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>84</span> <span class='kw'>or</span> <span class='symbol'>:miao</span></pre></dd>
+      
+        <dt id="SHARADA-constant" class="">SHARADA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Sharada. Since: 1.32</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>85</span> <span class='kw'>or</span> <span class='symbol'>:sharada</span></pre></dd>
+      
+        <dt id="SORA_SOMPENG-constant" class="">SORA_SOMPENG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Sora Sompeng. Since: 1.32</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>86</span> <span class='kw'>or</span> <span class='symbol'>:sora_sompeng</span></pre></dd>
+      
+        <dt id="TAKRI-constant" class="">TAKRI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Takri. Since: 1.32</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>87</span> <span class='kw'>or</span> <span class='symbol'>:takri</span></pre></dd>
+      
+        <dt id="BASSA_VAH-constant" class="">BASSA_VAH =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Bassa. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>88</span> <span class='kw'>or</span> <span class='symbol'>:bassa_vah</span></pre></dd>
+      
+        <dt id="CAUCASIAN_ALBANIAN-constant" class="">CAUCASIAN_ALBANIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Caucasian Albanian. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>89</span> <span class='kw'>or</span> <span class='symbol'>:caucasian_albanian</span></pre></dd>
+      
+        <dt id="DUPLOYAN-constant" class="">DUPLOYAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Duployan. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>90</span> <span class='kw'>or</span> <span class='symbol'>:duployan</span></pre></dd>
+      
+        <dt id="ELBASAN-constant" class="">ELBASAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Elbasan. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>91</span> <span class='kw'>or</span> <span class='symbol'>:elbasan</span></pre></dd>
+      
+        <dt id="GRANTHA-constant" class="">GRANTHA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Grantha. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>92</span> <span class='kw'>or</span> <span class='symbol'>:grantha</span></pre></dd>
+      
+        <dt id="KHOJKI-constant" class="">KHOJKI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Kjohki. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>93</span> <span class='kw'>or</span> <span class='symbol'>:khojki</span></pre></dd>
+      
+        <dt id="KHUDAWADI-constant" class="">KHUDAWADI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Khudawadi, Sindhi. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>94</span> <span class='kw'>or</span> <span class='symbol'>:khudawadi</span></pre></dd>
+      
+        <dt id="LINEAR_A-constant" class="">LINEAR_A =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Linear A. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>95</span> <span class='kw'>or</span> <span class='symbol'>:linear_a</span></pre></dd>
+      
+        <dt id="MAHAJANI-constant" class="">MAHAJANI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Mahajani. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>96</span> <span class='kw'>or</span> <span class='symbol'>:mahajani</span></pre></dd>
+      
+        <dt id="MANICHAEAN-constant" class="">MANICHAEAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Manichaean. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>97</span> <span class='kw'>or</span> <span class='symbol'>:manichaean</span></pre></dd>
+      
+        <dt id="MENDE_KIKAKUI-constant" class="">MENDE_KIKAKUI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Mende Kikakui. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>98</span> <span class='kw'>or</span> <span class='symbol'>:mende_kikakui</span></pre></dd>
+      
+        <dt id="MODI-constant" class="">MODI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Modi. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>99</span> <span class='kw'>or</span> <span class='symbol'>:modi</span></pre></dd>
+      
+        <dt id="MRO-constant" class="">MRO =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Mro. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>100</span> <span class='kw'>or</span> <span class='symbol'>:mro</span></pre></dd>
+      
+        <dt id="NABATAEAN-constant" class="">NABATAEAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Nabataean. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>101</span> <span class='kw'>or</span> <span class='symbol'>:nabataean</span></pre></dd>
+      
+        <dt id="OLD_NORTH_ARABIAN-constant" class="">OLD_NORTH_ARABIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Old North Arabian. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>102</span> <span class='kw'>or</span> <span class='symbol'>:old_north_arabian</span></pre></dd>
+      
+        <dt id="OLD_PERMIC-constant" class="">OLD_PERMIC =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Old Permic. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>103</span> <span class='kw'>or</span> <span class='symbol'>:old_permic</span></pre></dd>
+      
+        <dt id="PAHAWH_HMONG-constant" class="">PAHAWH_HMONG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Pahawh Hmong. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>104</span> <span class='kw'>or</span> <span class='symbol'>:pahawh_hmong</span></pre></dd>
+      
+        <dt id="PALMYRENE-constant" class="">PALMYRENE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Palmyrene. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>105</span> <span class='kw'>or</span> <span class='symbol'>:palmyrene</span></pre></dd>
+      
+        <dt id="PAU_CIN_HAU-constant" class="">PAU_CIN_HAU =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Pau Cin Hau. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>106</span> <span class='kw'>or</span> <span class='symbol'>:pau_cin_hau</span></pre></dd>
+      
+        <dt id="PSALTER_PAHLAVI-constant" class="">PSALTER_PAHLAVI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Psalter Pahlavi. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>107</span> <span class='kw'>or</span> <span class='symbol'>:psalter_pahlavi</span></pre></dd>
+      
+        <dt id="SIDDHAM-constant" class="">SIDDHAM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Siddham. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>108</span> <span class='kw'>or</span> <span class='symbol'>:siddham</span></pre></dd>
+      
+        <dt id="TIRHUTA-constant" class="">TIRHUTA =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Tirhuta. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>109</span> <span class='kw'>or</span> <span class='symbol'>:tirhuta</span></pre></dd>
+      
+        <dt id="WARANG_CITI-constant" class="">WARANG_CITI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Warang Citi. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>110</span> <span class='kw'>or</span> <span class='symbol'>:warang_citi</span></pre></dd>
+      
+        <dt id="AHOM-constant" class="">AHOM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Ahom. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>111</span> <span class='kw'>or</span> <span class='symbol'>:ahom</span></pre></dd>
+      
+        <dt id="ANATOLIAN_HIEROGLYPHS-constant" class="">ANATOLIAN_HIEROGLYPHS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Anatolian Hieroglyphs. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>112</span> <span class='kw'>or</span> <span class='symbol'>:anatolian_hieroglyphs</span></pre></dd>
+      
+        <dt id="HATRAN-constant" class="">HATRAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Hatran. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>113</span> <span class='kw'>or</span> <span class='symbol'>:hatran</span></pre></dd>
+      
+        <dt id="MULTANI-constant" class="">MULTANI =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Multani. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>114</span> <span class='kw'>or</span> <span class='symbol'>:multani</span></pre></dd>
+      
+        <dt id="OLD_HUNGARIAN-constant" class="">OLD_HUNGARIAN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Old Hungarian. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>115</span> <span class='kw'>or</span> <span class='symbol'>:old_hungarian</span></pre></dd>
+      
+        <dt id="SIGNWRITING-constant" class="">SIGNWRITING =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Signwriting. Since: 1.40</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>116</span> <span class='kw'>or</span> <span class='symbol'>:signwriting</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:52 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

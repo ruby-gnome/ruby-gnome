@@ -1,0 +1,4996 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::FileChooser
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::FileChooser";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">FileChooser</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::FileChooser
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Gtk::FileChooser is an interface that can be implemented by file selection widgets.  In GTK+, the main objects that implement this interface are Gtk::FileChooserWidget, #GtkFileChooserDialog, and Gtk::FileChooserButton.  You do not need to write an object that implements the Gtk::FileChooser interface unless you are trying to adapt an existing file selector to expose a standard programming interface.</p>
+
+<p>Gtk::FileChooser allows for shortcuts to various places in the filesystem. In the default implementation these are displayed in the left pane. It may be a bit confusing at first that these shortcuts come from various sources and in various flavours, so lets explain the terminology here:</p>
+<ul><li>
+<p>Bookmarks: are created by the user, by dragging folders from the right pane to the left pane, or by using the “Add”. Bookmarks can be renamed and deleted by the user.</p>
+</li><li>
+<p>Shortcuts: can be provided by the application. For example, a Paint program may want to add a shortcut for a Clipart folder. Shortcuts cannot be modified by the user.</p>
+</li><li>
+<p>Volumes: are provided by the underlying filesystem abstraction. They are the “roots” of the filesystem.</p>
+</li></ul>
+
+<p># File Names and Encodings</p>
+
+<p>When the user is finished selecting files in a Gtk::FileChooser, your program can get the selected names either as filenames or as URIs.  For URIs, the normal escaping rules are applied if the URI contains non-ASCII characters. However, filenames are always returned in the character set specified by the ‘G_FILENAME_ENCODING` environment variable. Please see the GLib documentation for more details about this variable.</p>
+
+<p>This means that while you can pass the result of gtk_file_chooser_get_filename() to open() or fopen(), you may not be able to directly set it as the text of a Gtk::Label widget unless you convert it first to UTF-8, which all GTK+ widgets expect. You should use g_filename_to_utf8() to convert filenames into strings that can be passed to GTK+ widgets.</p>
+
+<p># Adding a Preview Widget</p>
+
+<p>You can add a custom preview widget to a file chooser and then get notification about when the preview needs to be updated. To install a preview widget, use gtk_file_chooser_set_preview_widget().  Then, connect to the Gtk::FileChooser::update-preview signal to get notified when you need to update the contents of the preview.</p>
+
+<p>Your callback should use gtk_file_chooser_get_preview_filename() to see what needs previewing.  Once you have generated the preview for the corresponding file, you must call gtk_file_chooser_set_preview_widget_active() with a boolean flag that indicates whether your callback could successfully generate a preview.</p>
+
+<p>## Example: Using a Preview Widget ## #gtkfilechooser-preview</p>
+
+<pre class="code ruby"><code class="ruby">  GtkWidget *toggle;
+
+  ...
+
+  toggle = gtk_check_button_new_with_label (&quot;Open file read-only&quot;);
+  gtk_widget_show (toggle);
+  gtk_file_chooser_set_extra_widget (my_file_chooser, toggle);
+}
+</code></pre>
+
+<p>If you want to set more than one extra widget in the file chooser, you can a container such as a Gtk::Box or a #GtkGrid and include your widgets in it.  Then, set the container as the whole extra widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action-instance_method" title="#action (instance method)">#<strong>action</strong>  &#x21d2; Gtk::FileChooserAction </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the type of operation that the file chooser is performing; see gtk_file_chooser_set_action().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action=-instance_method" title="#action= (instance method)">#<strong>action=</strong>(action)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the type of operation that the chooser is performing; the user interface is adapted to suit the selected action.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_choice-instance_method" title="#add_choice (instance method)">#<strong>add_choice</strong>(id, label, options, option_labels)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a ‘choice’ to the file chooser.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_filter-instance_method" title="#add_filter (instance method)">#<strong>add_filter</strong>(filter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds <strong>filter</strong> to the list of filters that the user can select between.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_shortcut_folder-instance_method" title="#add_shortcut_folder (instance method)">#<strong>add_shortcut_folder</strong>(folder)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a folder to be displayed with the shortcut folders in a file chooser.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_shortcut_folder_uri-instance_method" title="#add_shortcut_folder_uri (instance method)">#<strong>add_shortcut_folder_uri</strong>(uri)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a folder URI to be displayed with the shortcut folders in a file chooser.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_folders-instance_method" title="#create_folders (instance method)">#<strong>create_folders</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets whether file choser will offer to create new folders.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_folders=-instance_method" title="#create_folders= (instance method)">#<strong>create_folders=</strong>(create_folders)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets whether file choser will offer to create new folders.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_folder-instance_method" title="#current_folder (instance method)">#<strong>current_folder</strong>  &#x21d2; Gtk::filename </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the current folder of <strong>chooser</strong> as a local filename.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_folder=-instance_method" title="#current_folder= (instance method)">#<strong>current_folder=</strong>(filename)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the current folder for <strong>chooser</strong> from a local filename.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_folder_file-instance_method" title="#current_folder_file (instance method)">#<strong>current_folder_file</strong>  &#x21d2; Gio::File </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the current folder of <strong>chooser</strong> as #GFile.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_folder_file=-instance_method" title="#current_folder_file= (instance method)">#<strong>current_folder_file=</strong>(file)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the current folder for <strong>chooser</strong> from a #GFile.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_folder_uri-instance_method" title="#current_folder_uri (instance method)">#<strong>current_folder_uri</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the current folder of <strong>chooser</strong> as an URI.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_folder_uri=-instance_method" title="#current_folder_uri= (instance method)">#<strong>current_folder_uri=</strong>(uri)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the current folder for <strong>chooser</strong> from an URI.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_name-instance_method" title="#current_name (instance method)">#<strong>current_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the current name in the file selector, as entered by the user in the text entry for “Name”.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_name=-instance_method" title="#current_name= (instance method)">#<strong>current_name=</strong>(name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the current name in the file selector, as if entered by the user.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#do_overwrite_confirmation-instance_method" title="#do_overwrite_confirmation (instance method)">#<strong>do_overwrite_confirmation</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries whether a file chooser is set to confirm for overwriting when the user types a file name that already exists.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#do_overwrite_confirmation=-instance_method" title="#do_overwrite_confirmation= (instance method)">#<strong>do_overwrite_confirmation=</strong>(do_overwrite_confirmation)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets whether a file chooser in %GTK_FILE_CHOOSER_ACTION_SAVE mode will present a confirmation dialog if the user types a file name that already exists.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#extra_widget-instance_method" title="#extra_widget (instance method)">#<strong>extra_widget</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the current extra widget; see gtk_file_chooser_set_extra_widget().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#extra_widget=-instance_method" title="#extra_widget= (instance method)">#<strong>extra_widget=</strong>(extra_widget)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets an application-supplied widget to provide extra options to the user.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#file-instance_method" title="#file (instance method)">#<strong>file</strong>  &#x21d2; Gio::File </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the #GFile for the currently selected file in the file selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#file=-instance_method" title="#file= (instance method)">#<strong>file=</strong>(file)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>file</strong> as the current filename for the file chooser, by changing to the file’s parent folder and actually selecting the file in list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filename-instance_method" title="#filename (instance method)">#<strong>filename</strong>  &#x21d2; Gtk::filename </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the filename for the currently selected file in the file selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filename=-instance_method" title="#filename= (instance method)">#<strong>filename=</strong>(filename)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets <strong>filename</strong> as the current filename for the file chooser, by changing to the file’s parent folder and actually selecting the file in list; all other files will be unselected.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filenames-instance_method" title="#filenames (instance method)">#<strong>filenames</strong>  &#x21d2; GLib::SList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Lists all the selected files and subfolders in the current folder of <strong>chooser</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#files-instance_method" title="#files (instance method)">#<strong>files</strong>  &#x21d2; GLib::SList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Lists all the selected files and subfolders in the current folder of <strong>chooser</strong> as #GFile.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filter-instance_method" title="#filter (instance method)">#<strong>filter</strong>  &#x21d2; Gtk::FileFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the current filter; see gtk_file_chooser_set_filter().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filter=-instance_method" title="#filter= (instance method)">#<strong>filter=</strong>(filter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the current filter; only the files that pass the filter will be displayed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_choice-instance_method" title="#get_choice (instance method)">#<strong>get_choice</strong>(id)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the currently selected option in the ‘choice’ with the given ID.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_filters-instance_method" title="#list_filters (instance method)">#<strong>list_filters</strong>  &#x21d2; GLib::SList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Lists the current set of user-selectable filters; see gtk_file_chooser_add_filter(), gtk_file_chooser_remove_filter().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_shortcut_folder_uris-instance_method" title="#list_shortcut_folder_uris (instance method)">#<strong>list_shortcut_folder_uris</strong>  &#x21d2; GLib::SList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries the list of shortcut folders in the file chooser, as set by gtk_file_chooser_add_shortcut_folder_uri().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_shortcut_folders-instance_method" title="#list_shortcut_folders (instance method)">#<strong>list_shortcut_folders</strong>  &#x21d2; GLib::SList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries the list of shortcut folders in the file chooser, as set by gtk_file_chooser_add_shortcut_folder().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#local_only-instance_method" title="#local_only (instance method)">#<strong>local_only</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets whether only local files can be selected in the file selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#local_only=-instance_method" title="#local_only= (instance method)">#<strong>local_only=</strong>(local_only)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets whether only local files can be selected in the file selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#preview_file-instance_method" title="#preview_file (instance method)">#<strong>preview_file</strong>  &#x21d2; Gio::File </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the #GFile that should be previewed in a custom preview Internal function, see gtk_file_chooser_get_preview_uri().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#preview_filename-instance_method" title="#preview_filename (instance method)">#<strong>preview_filename</strong>  &#x21d2; Gtk::filename </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the filename that should be previewed in a custom preview widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#preview_uri-instance_method" title="#preview_uri (instance method)">#<strong>preview_uri</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the URI that should be previewed in a custom preview widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#preview_widget-instance_method" title="#preview_widget (instance method)">#<strong>preview_widget</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the current preview widget; see gtk_file_chooser_set_preview_widget().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#preview_widget=-instance_method" title="#preview_widget= (instance method)">#<strong>preview_widget=</strong>(preview_widget)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets an application-supplied widget to use to display a custom preview of the currently selected file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#preview_widget_active-instance_method" title="#preview_widget_active (instance method)">#<strong>preview_widget_active</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets whether the preview widget set by gtk_file_chooser_set_preview_widget() should be shown for the current filename.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#preview_widget_active=-instance_method" title="#preview_widget_active= (instance method)">#<strong>preview_widget_active=</strong>(active)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets whether the preview widget set by gtk_file_chooser_set_preview_widget() should be shown for the current filename.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_choice-instance_method" title="#remove_choice (instance method)">#<strong>remove_choice</strong>(id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes a ‘choice’ that has been added with gtk_file_chooser_add_choice().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_filter-instance_method" title="#remove_filter (instance method)">#<strong>remove_filter</strong>(filter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes <strong>filter</strong> from the list of filters that the user can select between.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_shortcut_folder-instance_method" title="#remove_shortcut_folder (instance method)">#<strong>remove_shortcut_folder</strong>(folder)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes a folder from a file chooser’s list of shortcut folders.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_shortcut_folder_uri-instance_method" title="#remove_shortcut_folder_uri (instance method)">#<strong>remove_shortcut_folder_uri</strong>(uri)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes a folder URI from a file chooser’s list of shortcut folders.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_all-instance_method" title="#select_all (instance method)">#<strong>select_all</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Selects all the files in the current folder of a file chooser.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_file-instance_method" title="#select_file (instance method)">#<strong>select_file</strong>(file)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Selects the file referred to by <strong>file</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_filename-instance_method" title="#select_filename (instance method)">#<strong>select_filename</strong>(filename)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Selects a filename.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_multiple-instance_method" title="#select_multiple (instance method)">#<strong>select_multiple</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets whether multiple files can be selected in the file selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_multiple=-instance_method" title="#select_multiple= (instance method)">#<strong>select_multiple=</strong>(select_multiple)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets whether multiple files can be selected in the file selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_uri-instance_method" title="#select_uri (instance method)">#<strong>select_uri</strong>(uri)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Selects the file to by <strong>uri</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_choice-instance_method" title="#set_choice (instance method)">#<strong>set_choice</strong>(id, option)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Selects an option in a ‘choice’ that has been added with gtk_file_chooser_add_choice().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_hidden-instance_method" title="#show_hidden (instance method)">#<strong>show_hidden</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets whether hidden files and folders are displayed in the file selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_hidden=-instance_method" title="#show_hidden= (instance method)">#<strong>show_hidden=</strong>(show_hidden)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets whether hidden files and folders are displayed in the file selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unselect_all-instance_method" title="#unselect_all (instance method)">#<strong>unselect_all</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Unselects all the files in the current folder of a file chooser.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unselect_file-instance_method" title="#unselect_file (instance method)">#<strong>unselect_file</strong>(file)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Unselects the file referred to by <strong>file</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unselect_filename-instance_method" title="#unselect_filename (instance method)">#<strong>unselect_filename</strong>(filename)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Unselects a currently selected filename.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unselect_uri-instance_method" title="#unselect_uri (instance method)">#<strong>unselect_uri</strong>(uri)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Unselects the file referred to by <strong>uri</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#uri-instance_method" title="#uri (instance method)">#<strong>uri</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the URI for the currently selected file in the file selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#uri=-instance_method" title="#uri= (instance method)">#<strong>uri=</strong>(uri)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the file referred to by <strong>uri</strong> as the current file for the file chooser, by changing to the URI’s parent folder and actually selecting the URI in the list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#uris-instance_method" title="#uris (instance method)">#<strong>uris</strong>  &#x21d2; GLib::SList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Lists all the selected files and subfolders in the current folder of <strong>chooser</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_preview_label-instance_method" title="#use_preview_label (instance method)">#<strong>use_preview_label</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets whether a stock label should be drawn with the name of the previewed file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_preview_label=-instance_method" title="#use_preview_label= (instance method)">#<strong>use_preview_label=</strong>(use_label)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets whether the file chooser should display a stock label with the name of the file that is being previewed; the default is true.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="action-instance_method">
+  
+    #<strong>action</strong>  &#x21d2; <tt><span class='object_link'><a href="FileChooserAction.html" title="Gtk::FileChooserAction (module)">Gtk::FileChooserAction</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the type of operation that the file chooser is performing; see gtk_file_chooser_set_action().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FileChooserAction.html" title="Gtk::FileChooserAction (module)">Gtk::FileChooserAction</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the action that the file selector is performing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="action=-instance_method">
+  
+    #<strong>action=</strong>(action)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the type of operation that the chooser is performing; the user interface is adapted to suit the selected action. For example, an option to create a new folder might be shown if the action is %GTK_FILE_CHOOSER_ACTION_SAVE but not if the action is %GTK_FILE_CHOOSER_ACTION_OPEN.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FileChooserAction.html" title="Gtk::FileChooserAction (module)">Gtk::FileChooserAction</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the action that the file selector is performing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_choice-instance_method">
+  
+    #<strong>add_choice</strong>(id, label, options, option_labels)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a ‘choice’ to the file chooser. This is typically implemented as a combobox or, for boolean choices, as a checkbutton. You can select a value using gtk_file_chooser_set_choice() before the dialog is shown, and you can obtain the user-selected value in the ::response signal handler using gtk_file_chooser_get_choice().</p>
+
+<p>Compare gtk_file_chooser_set_extra_widget().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>id for the added choice</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>label</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user-visible label for the added choice</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>ids for the options of the choice, or nil for a boolean choice</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>option_labels</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user-visible labels for the options, must be the same length as <strong>options</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_filter-instance_method">
+  
+    #<strong>add_filter</strong>(filter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds <strong>filter</strong> to the list of filters that the user can select between. When a filter is selected, only files that are passed by that filter are displayed.</p>
+
+<p>Note that the <strong>chooser</strong> takes ownership of the filter, so you have to ref and sink it if you want to keep a reference.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filter</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FileFilter.html" title="Gtk::FileFilter (class)">Gtk::FileFilter</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::FileFilter</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_shortcut_folder-instance_method">
+  
+    #<strong>add_shortcut_folder</strong>(folder)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a folder to be displayed with the shortcut folders in a file chooser. Note that shortcut folders do not get saved, as they are provided by the application.  For example, you can use this to add a “/usr/share/mydrawprogram/Clipart” folder to the volume list. otherwise.  In the latter case, the <strong>error</strong> will be set as appropriate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>folder</span>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>filename of the folder to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the folder could be added successfully, false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_shortcut_folder_uri-instance_method">
+  
+    #<strong>add_shortcut_folder_uri</strong>(uri)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a folder URI to be displayed with the shortcut folders in a file chooser.  Note that shortcut folders do not get saved, as they are provided by the application.  For example, you can use this to add a “file:///usr/share/mydrawprogram/Clipart” folder to the volume list. otherwise.  In the latter case, the <strong>error</strong> will be set as appropriate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>URI of the folder to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the folder could be added successfully, false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_folders-instance_method">
+  
+    #<strong>create_folders</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets whether file choser will offer to create new folders. See gtk_file_chooser_set_create_folders().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the Create Folder button should be displayed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_folders=-instance_method">
+  
+    #<strong>create_folders=</strong>(create_folders)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets whether file choser will offer to create new folders. This is only relevant if the action is not set to be %GTK_FILE_CHOOSER_ACTION_OPEN.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>create_folders</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the Create Folder button should be displayed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_folder-instance_method">
+  
+    #<strong>current_folder</strong>  &#x21d2; <tt>Gtk::filename</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the current folder of <strong>chooser</strong> as a local filename. See gtk_file_chooser_set_current_folder().</p>
+
+<p>Note that this is the folder that the file chooser is currently displaying (e.g. “/home/username/Documents”), which is not the same as the currently-selected folder if the chooser is in %GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER mode (e.g. “/home/username/Documents/selected-folder/”.  To get the currently-selected folder in that mode, use gtk_file_chooser_get_uri() as the usual way to get the selection. folder, or nil if the current path cannot be represented as a local filename.  Free with g_free().  This function will also return nil if the file chooser was unable to load the last folder that was requested from it; for example, as would be for calling gtk_file_chooser_set_current_folder() on a nonexistent folder.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the full path of the current</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_folder=-instance_method">
+  
+    #<strong>current_folder=</strong>(filename)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the current folder for <strong>chooser</strong> from a local filename. The user will be shown the full contents of the current folder, plus user interface elements for navigating to other folders.</p>
+
+<p>In general, you should not use this function.  See the</p>
+<dl class="rdoc-list label-list"><dt>section on setting up a file chooser dialog][gtkfilechooserdialog-setting-up
+<dd>
+<p>for the rationale behind this.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filename</span>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the full path of the new current folder</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Not useful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_folder_file-instance_method">
+  
+    #<strong>current_folder_file</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gio/File.html" title="Gio::File (module)">Gio::File</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the current folder of <strong>chooser</strong> as #GFile. See gtk_file_chooser_get_current_folder_uri().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio/File.html" title="Gio::File (module)">Gio::File</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the #GFile for the current folder.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_folder_file=-instance_method">
+  
+    #<strong>current_folder_file=</strong>(file)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the current folder for <strong>chooser</strong> from a #GFile. Internal function, see gtk_file_chooser_set_current_folder_uri(). otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio/File.html" title="Gio::File (module)">Gio::File</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the #GFile for the new folder</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the folder could be changed successfully, false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_folder_uri-instance_method">
+  
+    #<strong>current_folder_uri</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the current folder of <strong>chooser</strong> as an URI. See gtk_file_chooser_set_current_folder_uri().</p>
+
+<p>Note that this is the folder that the file chooser is currently displaying (e.g. “file:///home/username/Documents”), which is not the same as the currently-selected folder if the chooser is in %GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER mode (e.g. “file:///home/username/Documents/selected-folder/”.  To get the currently-selected folder in that mode, use gtk_file_chooser_get_uri() as the usual way to get the selection. Free with g_free().  This function will also return nil if the file chooser was unable to load the last folder that was requested from it; for example, as would be for calling gtk_file_chooser_set_current_folder_uri() on a nonexistent folder.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the URI for the current folder.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_folder_uri=-instance_method">
+  
+    #<strong>current_folder_uri=</strong>(uri)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the current folder for <strong>chooser</strong> from an URI. The user will be shown the full contents of the current folder, plus user interface elements for navigating to other folders.</p>
+
+<p>In general, you should not use this function.  See the</p>
+<dl class="rdoc-list label-list"><dt>section on setting up a file chooser dialog][gtkfilechooserdialog-setting-up
+<dd>
+<p>for the rationale behind this. otherwise.</p>
+</dd></dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the URI for the new current folder</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the folder could be changed successfully, false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_name-instance_method">
+  
+    #<strong>current_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the current name in the file selector, as entered by the user in the text entry for “Name”.</p>
+
+<p>This is meant to be used in save dialogs, to get the currently typed filename when the file itself does not exist yet.  For example, an application that adds a custom extra widget to the file chooser for “file format” may want to change the extension of the typed filename based on the chosen format, say, from “.jpg” to “.png”. g_free().  Note that this string is not a full pathname or URI; it is whatever the contents of the entry are.  Note also that this string is in UTF-8 encoding, which is not necessarily the system’s encoding for filenames.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The raw text from the file chooser’s “Name” entry.  Free this with</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_name=-instance_method">
+  
+    #<strong>current_name=</strong>(name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the current name in the file selector, as if entered by the user. Note that the name passed in here is a UTF-8 string rather than a filename. This function is meant for such uses as a suggested name in a “Save As…” dialog.  You can pass “Untitled.doc” or a similarly suitable suggestion for the <strong>name</strong>.</p>
+
+<p>If you want to preselect a particular existing file, you should use gtk_file_chooser_set_filename() or gtk_file_chooser_set_uri() instead. Please see the documentation for those functions for an example of using gtk_file_chooser_set_current_name() as well.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the filename to use, as a UTF-8 string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="do_overwrite_confirmation-instance_method">
+  
+    #<strong>do_overwrite_confirmation</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries whether a file chooser is set to confirm for overwriting when the user types a file name that already exists. false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the file chooser will present a confirmation dialog;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="do_overwrite_confirmation=-instance_method">
+  
+    #<strong>do_overwrite_confirmation=</strong>(do_overwrite_confirmation)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets whether a file chooser in %GTK_FILE_CHOOSER_ACTION_SAVE mode will present a confirmation dialog if the user types a file name that already exists.  This is false by default.</p>
+
+<p>If set to true, the <strong>chooser</strong> will emit the Gtk::FileChooser::confirm-overwrite signal when appropriate.</p>
+
+<p>If all you need is the stock confirmation dialog, set this property to true. You can override the way confirmation is done by actually handling the Gtk::FileChooser::confirm-overwrite signal; please refer to its documentation for the details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>do_overwrite_confirmation</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether to confirm overwriting in save mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="extra_widget-instance_method">
+  
+    #<strong>extra_widget</strong>  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the current extra widget; see gtk_file_chooser_set_extra_widget().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current extra widget, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="extra_widget=-instance_method">
+  
+    #<strong>extra_widget=</strong>(extra_widget)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets an application-supplied widget to provide extra options to the user.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>extra_widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>widget for extra options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="file-instance_method">
+  
+    #<strong>file</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gio/File.html" title="Gio::File (module)">Gio::File</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the #GFile for the currently selected file in the file selector. If multiple files are selected, one of the files will be returned at random.</p>
+
+<p>If the file chooser is in folder mode, this function returns the selected folder.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio/File.html" title="Gio::File (module)">Gio::File</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a selected #GFile. You own the returned file; use g_object_unref() to release it.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="file=-instance_method">
+  
+    #<strong>file=</strong>(file)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>file</strong> as the current filename for the file chooser, by changing to the file’s parent folder and actually selecting the file in list.  If the <strong>chooser</strong> is in %GTK_FILE_CHOOSER_ACTION_SAVE mode, the file’s base name will also appear in the dialog’s file name entry.</p>
+
+<p>If the file name isn’t in the current folder of <strong>chooser</strong>, then the current folder of <strong>chooser</strong> will be changed to the folder containing <strong>filename</strong>. This is equivalent to a sequence of gtk_file_chooser_unselect_all() followed by gtk_file_chooser_select_filename().</p>
+
+<p>Note that the file must exist, or nothing will be done except for the directory change.</p>
+
+<p>If you are implementing a save dialog, you should use this function if you already have a file name to which the user may save; for example, when the user opens an existing file and then does Save As…  If you don’t have a file name already — for example, if the user just created a new file and is saving it for the first time, do not call this function. Instead, use something similar to this:</p>
+
+<pre class="code ruby"><code class="ruby">if (document_is_new)
+  {
+    // the user just created a new document
+    gtk_file_chooser_set_current_folder_file (chooser, default_file_for_saving);
+    gtk_file_chooser_set_current_name (chooser, &quot;Untitled document&quot;);
+  }
+else
+  {
+    // the user edited an existing document
+    gtk_file_chooser_set_file (chooser, existing_file);
+  }
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio/File.html" title="Gio::File (module)">Gio::File</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the #GFile to set as current</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Not useful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="filename-instance_method">
+  
+    #<strong>filename</strong>  &#x21d2; <tt>Gtk::filename</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the filename for the currently selected file in the file selector. The filename is returned as an absolute path. If multiple files are selected, one of the filenames will be returned at random.</p>
+
+<p>If the file chooser is in folder mode, this function returns the selected folder.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The currently selected filename, or nil if no file is selected, or the selected file can’t be represented with a local filename. Free with g_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="filename=-instance_method">
+  
+    #<strong>filename=</strong>(filename)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets <strong>filename</strong> as the current filename for the file chooser, by changing to the file’s parent folder and actually selecting the file in list; all other files will be unselected.  If the <strong>chooser</strong> is in %GTK_FILE_CHOOSER_ACTION_SAVE mode, the file’s base name will also appear in the dialog’s file name entry.</p>
+
+<p>Note that the file must exist, or nothing will be done except for the directory change.</p>
+
+<p>You should use this function only when implementing a save dialog for which you already have a file name to which the user may save.  For example, when the user opens an existing file and then does Save As… to save a copy or a modified version.  If you don’t have a file name already — for example, if the user just created a new file and is saving it for the first time, do not call this function.  Instead, use something similar to this:</p>
+
+<pre class="code ruby"><code class="ruby">if (document_is_new)
+  {
+    // the user just created a new document
+    gtk_file_chooser_set_current_name (chooser, &quot;Untitled document&quot;);
+  }
+else
+  {
+    // the user edited an existing document
+    gtk_file_chooser_set_filename (chooser, existing_filename);
+  }
+</code></pre>
+
+<p>In the first case, the file chooser will present the user with useful suggestions as to where to save his new file.  In the second case, the file’s existing location is already known, so the file chooser will use it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filename</span>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the filename to set as current</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Not useful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="filenames-instance_method">
+  
+    #<strong>filenames</strong>  &#x21d2; <tt>GLib::SList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Lists all the selected files and subfolders in the current folder of <strong>chooser</strong>. The returned names are full absolute paths. If files in the current folder cannot be represented as local filenames they will be ignored. (See gtk_file_chooser_get_uris())</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GSList containing the filenames of all selected files and subfolders in the current folder. Free the returned list with g_slist_free(), and the filenames with g_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="files-instance_method">
+  
+    #<strong>files</strong>  &#x21d2; <tt>GLib::SList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Lists all the selected files and subfolders in the current folder of <strong>chooser</strong> as #GFile. An internal function, see gtk_file_chooser_get_uris().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GSList containing a #GFile for each selected file and subfolder in the current folder.  Free the returned list with g_slist_free(), and the files with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="filter-instance_method">
+  
+    #<strong>filter</strong>  &#x21d2; <tt><span class='object_link'><a href="FileFilter.html" title="Gtk::FileFilter (class)">Gtk::FileFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the current filter; see gtk_file_chooser_set_filter().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FileFilter.html" title="Gtk::FileFilter (class)">Gtk::FileFilter</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current filter, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="filter=-instance_method">
+  
+    #<strong>filter=</strong>(filter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the current filter; only the files that pass the filter will be displayed. If the user-selectable list of filters is non-empty, then the filter should be one of the filters in that list. Setting the current filter when the list of filters is empty is useful if you want to restrict the displayed set of files without letting the user change it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filter</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FileFilter.html" title="Gtk::FileFilter (class)">Gtk::FileFilter</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::FileFilter</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_choice-instance_method">
+  
+    #<strong>get_choice</strong>(id)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the currently selected option in the ‘choice’ with the given ID.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ID of the choice to get</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ID of the currenly selected option</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_filters-instance_method">
+  
+    #<strong>list_filters</strong>  &#x21d2; <tt>GLib::SList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Lists the current set of user-selectable filters; see gtk_file_chooser_add_filter(), gtk_file_chooser_remove_filter().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GSList containing the current set of user selectable filters. The contents of the list are owned by GTK+, but you must free the list itself with g_slist_free() when you are done with it.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_shortcut_folder_uris-instance_method">
+  
+    #<strong>list_shortcut_folder_uris</strong>  &#x21d2; <tt>GLib::SList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries the list of shortcut folders in the file chooser, as set by gtk_file_chooser_add_shortcut_folder_uri(). folder URIs, or nil if there are no shortcut folders.  Free the returned list with g_slist_free(), and the URIs with g_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A list of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_shortcut_folders-instance_method">
+  
+    #<strong>list_shortcut_folders</strong>  &#x21d2; <tt>GLib::SList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries the list of shortcut folders in the file chooser, as set by gtk_file_chooser_add_shortcut_folder(). of folder filenames, or nil if there are no shortcut folders. Free the returned list with g_slist_free(), and the filenames with g_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A list</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="local_only-instance_method">
+  
+    #<strong>local_only</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets whether only local files can be selected in the file selector. See gtk_file_chooser_set_local_only()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if only local files can be selected.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="local_only=-instance_method">
+  
+    #<strong>local_only=</strong>(local_only)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets whether only local files can be selected in the file selector. If <strong>local_only</strong> is true (the default), then the selected file or files are guaranteed to be accessible through the operating systems native file system and therefore the application only needs to worry about the filename functions in Gtk::FileChooser, like gtk_file_chooser_get_filename(), rather than the URI functions like gtk_file_chooser_get_uri(),</p>
+
+<p>On some systems non-native files may still be available using the native filesystem via a userspace filesystem (FUSE).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>local_only</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if only local files can be selected</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="preview_file-instance_method">
+  
+    #<strong>preview_file</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gio/File.html" title="Gio::File (module)">Gio::File</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the #GFile that should be previewed in a custom preview Internal function, see gtk_file_chooser_get_preview_uri().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio/File.html" title="Gio::File (module)">Gio::File</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the #GFile for the file to preview, or nil if no file is selected. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="preview_filename-instance_method">
+  
+    #<strong>preview_filename</strong>  &#x21d2; <tt>Gtk::filename</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the filename that should be previewed in a custom preview widget. See gtk_file_chooser_set_preview_widget().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the filename to preview, or nil if no file is selected, or if the selected file cannot be represented as a local filename. Free with g_free()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="preview_uri-instance_method">
+  
+    #<strong>preview_uri</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the URI that should be previewed in a custom preview widget. See gtk_file_chooser_set_preview_widget().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the URI for the file to preview, or nil if no file is selected. Free with g_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="preview_widget-instance_method">
+  
+    #<strong>preview_widget</strong>  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the current preview widget; see gtk_file_chooser_set_preview_widget().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current preview widget, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="preview_widget=-instance_method">
+  
+    #<strong>preview_widget=</strong>(preview_widget)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets an application-supplied widget to use to display a custom preview of the currently selected file. To implement a preview, after setting the preview widget, you connect to the Gtk::FileChooser::update-preview signal, and call gtk_file_chooser_get_preview_filename() or gtk_file_chooser_get_preview_uri() on each change. If you can display a preview of the new file, update your widget and set the preview active using gtk_file_chooser_set_preview_widget_active(). Otherwise, set the preview inactive.</p>
+
+<p>When there is no application-supplied preview widget, or the application-supplied preview widget is not active, the file chooser will display no preview at all.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>preview_widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>widget for displaying preview.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="preview_widget_active-instance_method">
+  
+    #<strong>preview_widget_active</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets whether the preview widget set by gtk_file_chooser_set_preview_widget() should be shown for the current filename. See gtk_file_chooser_set_preview_widget_active().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the preview widget is active for the current filename.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="preview_widget_active=-instance_method">
+  
+    #<strong>preview_widget_active=</strong>(active)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets whether the preview widget set by gtk_file_chooser_set_preview_widget() should be shown for the current filename. When <strong>active</strong> is set to false, the file chooser may display an internally generated preview of the current file or it may display no preview at all. See gtk_file_chooser_set_preview_widget() for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether to display the user-specified preview widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_choice-instance_method">
+  
+    #<strong>remove_choice</strong>(id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes a ‘choice’ that has been added with gtk_file_chooser_add_choice().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ID of the choice to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_filter-instance_method">
+  
+    #<strong>remove_filter</strong>(filter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes <strong>filter</strong> from the list of filters that the user can select between.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filter</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FileFilter.html" title="Gtk::FileFilter (class)">Gtk::FileFilter</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::FileFilter</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_shortcut_folder-instance_method">
+  
+    #<strong>remove_shortcut_folder</strong>(folder)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes a folder from a file chooser’s list of shortcut folders. In the latter case, the <strong>error</strong> will be set as appropriate.</p>
+
+<p>See also: gtk_file_chooser_add_shortcut_folder()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>folder</span>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>filename of the folder to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the operation succeeds, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_shortcut_folder_uri-instance_method">
+  
+    #<strong>remove_shortcut_folder_uri</strong>(uri)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes a folder URI from a file chooser’s list of shortcut folders. In the latter case, the <strong>error</strong> will be set as appropriate.</p>
+
+<p>See also: gtk_file_chooser_add_shortcut_folder_uri()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>URI of the folder to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the operation succeeds, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_all-instance_method">
+  
+    #<strong>select_all</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Selects all the files in the current folder of a file chooser.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_file-instance_method">
+  
+    #<strong>select_file</strong>(file)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Selects the file referred to by <strong>file</strong>. An internal function. See _gtk_file_chooser_select_uri().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio/File.html" title="Gio::File (module)">Gio::File</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the file to select</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Not useful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_filename-instance_method">
+  
+    #<strong>select_filename</strong>(filename)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Selects a filename. If the file name isn’t in the current folder of <strong>chooser</strong>, then the current folder of <strong>chooser</strong> will be changed to the folder containing <strong>filename</strong>. See also: gtk_file_chooser_set_filename()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filename</span>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the filename to select</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Not useful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_multiple-instance_method">
+  
+    #<strong>select_multiple</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets whether multiple files can be selected in the file selector. See gtk_file_chooser_set_select_multiple().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if multiple files can be selected.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_multiple=-instance_method">
+  
+    #<strong>select_multiple=</strong>(select_multiple)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets whether multiple files can be selected in the file selector.  This is only relevant if the action is set to be %GTK_FILE_CHOOSER_ACTION_OPEN or %GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>select_multiple</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if multiple files can be selected.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_uri-instance_method">
+  
+    #<strong>select_uri</strong>(uri)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Selects the file to by <strong>uri</strong>. If the URI doesn’t refer to a file in the current folder of <strong>chooser</strong>, then the current folder of <strong>chooser</strong> will be changed to the folder containing <strong>filename</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the URI to select</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Not useful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_choice-instance_method">
+  
+    #<strong>set_choice</strong>(id, option)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Selects an option in a ‘choice’ that has been added with gtk_file_chooser_add_choice(). For a boolean choice, the possible options are “true” and “false”.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ID of the choice to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>option</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ID of the option to select</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="show_hidden-instance_method">
+  
+    #<strong>show_hidden</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets whether hidden files and folders are displayed in the file selector. See gtk_file_chooser_set_show_hidden().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if hidden files and folders are displayed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="show_hidden=-instance_method">
+  
+    #<strong>show_hidden=</strong>(show_hidden)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets whether hidden files and folders are displayed in the file selector.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>show_hidden</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if hidden files and folders should be displayed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unselect_all-instance_method">
+  
+    #<strong>unselect_all</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Unselects all the files in the current folder of a file chooser.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unselect_file-instance_method">
+  
+    #<strong>unselect_file</strong>(file)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Unselects the file referred to by <strong>file</strong>. If the file is not in the current directory, does not exist, or is otherwise not currently selected, does nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio/File.html" title="Gio::File (module)">Gio::File</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GFile</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unselect_filename-instance_method">
+  
+    #<strong>unselect_filename</strong>(filename)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Unselects a currently selected filename. If the filename is not in the current directory, does not exist, or is otherwise not currently selected, does nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filename</span>
+      
+      
+        <span class='type'>(<tt>Gtk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the filename to unselect</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unselect_uri-instance_method">
+  
+    #<strong>unselect_uri</strong>(uri)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Unselects the file referred to by <strong>uri</strong>. If the file is not in the current directory, does not exist, or is otherwise not currently selected, does nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the URI to unselect</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="uri-instance_method">
+  
+    #<strong>uri</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the URI for the currently selected file in the file selector. If multiple files are selected, one of the filenames will be returned at random.</p>
+
+<p>If the file chooser is in folder mode, this function returns the selected folder.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The currently selected URI, or nil if no file is selected. If gtk_file_chooser_set_local_only() is set to true (the default) a local URI will be returned for any FUSE locations. Free with g_free()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="uri=-instance_method">
+  
+    #<strong>uri=</strong>(uri)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the file referred to by <strong>uri</strong> as the current file for the file chooser, by changing to the URI’s parent folder and actually selecting the URI in the list.  If the <strong>chooser</strong> is %GTK_FILE_CHOOSER_ACTION_SAVE mode, the URI’s base name will also appear in the dialog’s file name entry.</p>
+
+<p>Note that the URI must exist, or nothing will be done except for the directory change.</p>
+
+<p>You should use this function only when implementing a save dialog for which you already have a file name to which the user may save.  For example, when the user opens an existing file and then does Save As… to save a copy or a modified version.  If you don’t have a file name already — for example, if the user just created a new file and is saving it for the first time, do not call this function.  Instead, use something similar to this:</p>
+
+<pre class="code ruby"><code class="ruby">if (document_is_new)
+  {
+    // the user just created a new document
+    gtk_file_chooser_set_current_name (chooser, &quot;Untitled document&quot;);
+  }
+else
+  {
+    // the user edited an existing document
+    gtk_file_chooser_set_uri (chooser, existing_uri);
+  }
+</code></pre>
+
+<p>In the first case, the file chooser will present the user with useful suggestions as to where to save his new file.  In the second case, the file’s existing location is already known, so the file chooser will use it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the URI to set as current</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Not useful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="uris-instance_method">
+  
+    #<strong>uris</strong>  &#x21d2; <tt>GLib::SList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Lists all the selected files and subfolders in the current folder of <strong>chooser</strong>. The returned names are full absolute URIs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GSList containing the URIs of all selected files and subfolders in the current folder. Free the returned list with g_slist_free(), and the filenames with g_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_preview_label-instance_method">
+  
+    #<strong>use_preview_label</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets whether a stock label should be drawn with the name of the previewed file.  See gtk_file_chooser_set_use_preview_label(). name of the previewed file, false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the file chooser is set to display a label with the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_preview_label=-instance_method">
+  
+    #<strong>use_preview_label=</strong>(use_label)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets whether the file chooser should display a stock label with the name of the file that is being previewed; the default is true.  Applications that want to draw the whole preview area themselves should set this to false and display the name themselves in their preview widget.</p>
+
+<p>See also: gtk_file_chooser_set_preview_widget()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>use_label</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether to display a stock label with the name of the previewed file</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:59 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

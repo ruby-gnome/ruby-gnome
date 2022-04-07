@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::Dialog
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::Dialog";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">Dialog</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::Dialog
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::Dialog</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action_area-instance_method" title="#action_area (instance method)">#<strong>action_area</strong>  &#x21d2; Gtk::Box </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the action area of <strong>dialog</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_action_widget-instance_method" title="#add_action_widget (instance method)">#<strong>add_action_widget</strong>(child, response_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds an activatable widget to the action area of a Gtk::Dialog, connecting a signal handler that will emit the Gtk::Dialog::response signal on the dialog when the widget is activated.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_button-instance_method" title="#add_button (instance method)">#<strong>add_button</strong>(button_text, response_id)  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a button with the given text and sets things up so that clicking the button will emit the Gtk::Dialog::response signal with the given <strong>response_id</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_buttons-instance_method" title="#add_buttons (instance method)">#<strong>add_buttons</strong>(first_button_text, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds more buttons, same as calling gtk_dialog_add_button() repeatedly.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#content_area-instance_method" title="#content_area (instance method)">#<strong>content_area</strong>  &#x21d2; Gtk::Box </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the content area of <strong>dialog</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_response=-instance_method" title="#default_response= (instance method)">#<strong>default_response=</strong>(response_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the last widget in the dialog’s action area with the given <strong>response_id</strong> as the default widget for the dialog.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_response_for_widget-instance_method" title="#get_response_for_widget (instance method)">#<strong>get_response_for_widget</strong>(widget)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the response id of a widget in the action area of a dialog.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_widget_for_response-instance_method" title="#get_widget_for_response (instance method)">#<strong>get_widget_for_response</strong>(response_id)  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the widget button that uses the given response ID in the action area of a dialog.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#header_bar-instance_method" title="#header_bar (instance method)">#<strong>header_bar</strong>  &#x21d2; Gtk::HeaderBar </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the header bar of <strong>dialog</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new dialog box.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_with_buttons-instance_method" title="#new_with_buttons (instance method)">#<strong>new_with_buttons</strong>(title, parent, flags, first_button_text, array)  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Gtk::Dialog with title <strong>title</strong> (or nil for the default title; see gtk_window_set_title()) and transient parent <strong>parent</strong> (or nil for none; see gtk_window_set_transient_for()).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#response-instance_method" title="#response (instance method)">#<strong>response</strong>(response_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Emits the Gtk::Dialog::response signal with the given response ID.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run-instance_method" title="#run (instance method)">#<strong>run</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Blocks in a recursive main loop until the <strong>dialog</strong> either emits the Gtk::Dialog::response signal, or is destroyed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_alternative_button_order-instance_method" title="#set_alternative_button_order (instance method)">#<strong>set_alternative_button_order</strong>(first_response_id, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets an alternative button order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_alternative_button_order_from_array-instance_method" title="#set_alternative_button_order_from_array (instance method)">#<strong>set_alternative_button_order_from_array</strong>(n_params, new_order)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets an alternative button order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_response_sensitive-instance_method" title="#set_response_sensitive (instance method)">#<strong>set_response_sensitive</strong>(response_id, setting)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calls ‘gtk_widget_set_sensitive (widget, <strong>setting</strong>)` for each widget in the dialog’s action area with the given <strong>response_id</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_header_bar-instance_method" title="#use_header_bar (instance method)">#<strong>use_header_bar</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>true if the dialog uses a Gtk::HeaderBar for action buttons instead of the action-area.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_header_bar=-instance_method" title="#use_header_bar= (instance method)">#<strong>use_header_bar=</strong>(use_header_bar)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>true if the dialog uses a Gtk::HeaderBar for action buttons instead of the action-area.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="action_area-instance_method">
+  
+    #<strong>action_area</strong>  &#x21d2; <tt><span class='object_link'><a href="Box.html" title="Gtk::Box (class)">Gtk::Box</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the action area of <strong>dialog</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Box.html" title="Gtk::Box (class)">Gtk::Box</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the action area</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_action_widget-instance_method">
+  
+    #<strong>add_action_widget</strong>(child, response_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds an activatable widget to the action area of a Gtk::Dialog, connecting a signal handler that will emit the Gtk::Dialog::response signal on the dialog when the widget is activated. The widget is appended to the end of the dialog’s action area. If you want to add a non-activatable widget, simply pack it into the <strong>action_area</strong> field of the Gtk::Dialog struct.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an activatable widget</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>response_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response ID for <strong>child</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_button-instance_method">
+  
+    #<strong>add_button</strong>(button_text, response_id)  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a button with the given text and sets things up so that clicking the button will emit the Gtk::Dialog::response signal with the given <strong>response_id</strong>. The button is appended to the end of the dialog’s action area. The button widget is returned, but usually you don’t need it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>button_text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>text of button</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>response_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response ID for the button</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Button widget that was added</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_buttons-instance_method">
+  
+    #<strong>add_buttons</strong>(first_button_text, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds more buttons, same as calling gtk_dialog_add_button() repeatedly.  The variable argument list should be nil-terminated as with gtk_dialog_new_with_buttons(). Each button must have both text and response ID.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>first_button_text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>button text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response ID for first button, then more text-response_id pairs</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="content_area-instance_method">
+  
+    #<strong>content_area</strong>  &#x21d2; <tt><span class='object_link'><a href="Box.html" title="Gtk::Box (class)">Gtk::Box</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the content area of <strong>dialog</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Box.html" title="Gtk::Box (class)">Gtk::Box</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the content area Gtk::Box.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_response=-instance_method">
+  
+    #<strong>default_response=</strong>(response_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the last widget in the dialog’s action area with the given <strong>response_id</strong> as the default widget for the dialog. Pressing “Enter” normally activates the default widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>response_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a response ID</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_response_for_widget-instance_method">
+  
+    #<strong>get_response_for_widget</strong>(widget)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the response id of a widget in the action area of a dialog.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a widget in the action area of <strong>dialog</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the response id of <strong>widget</strong>, or %GTK_RESPONSE_NONE if <strong>widget</strong> doesn’t have a response id set.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_widget_for_response-instance_method">
+  
+    #<strong>get_widget_for_response</strong>(response_id)  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the widget button that uses the given response ID in the action area of a dialog.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>response_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the response ID used by the <strong>dialog</strong> widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the <strong>widget</strong> button that uses the given <strong>response_id</strong>, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="header_bar-instance_method">
+  
+    #<strong>header_bar</strong>  &#x21d2; <tt><span class='object_link'><a href="HeaderBar.html" title="Gtk::HeaderBar (class)">Gtk::HeaderBar</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the header bar of <strong>dialog</strong>. Note that the headerbar is only used by the dialog if the Gtk::Dialog:use-header-bar property is true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HeaderBar.html" title="Gtk::HeaderBar (class)">Gtk::HeaderBar</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the header bar</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new dialog box.</p>
+
+<p>Widgets should not be packed into this Gtk::Window directly, but into the <strong>vbox</strong> and <strong>action_area</strong>, as described above.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new dialog as a Gtk::Widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_with_buttons-instance_method">
+  
+    #<strong>new_with_buttons</strong>(title, parent, flags, first_button_text, array)  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new Gtk::Dialog with title <strong>title</strong> (or nil for the default title; see gtk_window_set_title()) and transient parent <strong>parent</strong> (or nil for none; see gtk_window_set_transient_for()). The <strong>flags</strong> argument can be used to make the dialog modal (#GTK_DIALOG_MODAL) and/or to have it destroyed along with its transient parent (#GTK_DIALOG_DESTROY_WITH_PARENT). After <strong>flags</strong>, button text/response ID pairs should be listed, with a nil pointer ending the list. Button text can be arbitrary text. A response ID can be any positive number, or one of the values in the Gtk::ResponseType enumeration. If the user clicks one of these dialog buttons, Gtk::Dialog will emit the #GtkDialog::response signal with the corresponding response ID. If a Gtk::Dialog receives the #GtkWidget::delete-event signal, it will emit ::response with a response ID of #GTK_RESPONSE_DELETE_EVENT. However, destroying a dialog does not emit the ::response signal; so be careful relying on ::response when using the #GTK_DIALOG_DESTROY_WITH_PARENT flag. Buttons are from left to right, so the first button in the list will be the leftmost button in the dialog.</p>
+
+<p>Here’s a simple example:</p>
+
+<pre class="code ruby"><code class="ruby">GtkWidget *main_app_window; // Window the dialog should show up on
+GtkWidget *dialog;
+GtkDialogFlags flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
+dialog = gtk_dialog_new_with_buttons (&quot;My dialog&quot;,
+                                      main_app_window,
+                                      flags,
+                                      _(&quot;_OK&quot;),
+                                      GTK_RESPONSE_ACCEPT,
+                                      _(&quot;_Cancel&quot;),
+                                      GTK_RESPONSE_REJECT,
+                                      NULL);
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>title</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Title of the dialog, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gtk::Window (class)">Gtk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Transient parent of the dialog, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DialogFlags.html" title="Gtk::DialogFlags (module)">Gtk::DialogFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>from Gtk::DialogFlags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_button_text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>text to go in first button, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response ID for first button, then additional buttons, ending with nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new Gtk::Dialog</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="response-instance_method">
+  
+    #<strong>response</strong>(response_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Emits the Gtk::Dialog::response signal with the given response ID. Used to indicate that the user has responded to the dialog in some way; typically either you or gtk_dialog_run() will be monitoring the ::response signal and take appropriate action.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>response_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response ID</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="run-instance_method">
+  
+    #<strong>run</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Blocks in a recursive main loop until the <strong>dialog</strong> either emits the Gtk::Dialog::response signal, or is destroyed. If the dialog is destroyed during the call to gtk_dialog_run(), gtk_dialog_run() returns #GTK_RESPONSE_NONE. Otherwise, it returns the response ID from the ::response signal emission.</p>
+
+<p>Before entering the recursive main loop, gtk_dialog_run() calls gtk_widget_show() on the dialog for you. Note that you still need to show any children of the dialog yourself.</p>
+
+<p>During gtk_dialog_run(), the default behavior of Gtk::Widget::delete-event is disabled; if the dialog receives ::delete_event, it will not be destroyed as windows usually are, and gtk_dialog_run() will return #GTK_RESPONSE_DELETE_EVENT. Also, during gtk_dialog_run() the dialog will be modal. You can force gtk_dialog_run() to return at any time by calling gtk_dialog_response() to emit the ::response signal. Destroying the dialog during gtk_dialog_run() is a very bad idea, because your post-run code won’t know whether the dialog was destroyed or not.</p>
+
+<p>After gtk_dialog_run() returns, you are responsible for hiding or destroying the dialog if you wish to do so.</p>
+
+<p>Typical usage of this function might be:</p>
+
+<pre class="code ruby"><code class="ruby">GtkWidget *dialog = gtk_dialog_new ();
+// Set up dialog...
+
+int result = gtk_dialog_run (GTK_DIALOG (dialog));
+switch (result)
+  {
+    case GTK_RESPONSE_ACCEPT:
+       // do_application_specific_something ();
+       break;
+    default:
+       // do_nothing_since_dialog_was_cancelled ();
+       break;
+  }
+gtk_widget_destroy (dialog);
+</code></pre>
+
+<p>Note that even though the recursive main loop gives the effect of a modal dialog (it prevents the user from interacting with other windows in the same window group while the dialog is run), callbacks such as timeouts, IO channel watches, DND drops, etc, will be triggered during a gtk_dialog_run() call.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response ID</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_alternative_button_order-instance_method">
+  
+    #<strong>set_alternative_button_order</strong>(first_response_id, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets an alternative button order. If the Gtk::Settings:gtk-alternative-button-order setting is set to true, the dialog buttons are reordered according to the order of the response ids passed to this function.</p>
+
+<p>By default, GTK+ dialogs use the button order advocated by the [GNOME Human Interface Guidelines](<a href="http://library.gnome.org/devel/hig-book/stable">library.gnome.org/devel/hig-book/stable</a>/) with the affirmative button at the far right, and the cancel button left of it. But the builtin GTK+ dialogs and Gtk::MessageDialogs do provide an alternative button order, which is more suitable on some platforms, e.g. Windows.</p>
+
+<p>Use this function after adding all the buttons to your dialog, as the following example shows:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_cancel_button'>cancel_button</span> <span class='op'>=</span> <span class='id identifier rubyid_gtk_dialog_add_button'>gtk_dialog_add_button</span> <span class='lparen'>(</span><span class='const'>GTK_DIALOG</span> <span class='lparen'>(</span><span class='id identifier rubyid_dialog'>dialog</span><span class='rparen'>)</span><span class='comma'>,</span>
+                                       <span class='id identifier rubyid__'>_</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_Cancel</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+                                       <span class='const'>GTK_RESPONSE_CANCEL</span><span class='rparen'>)</span><span class='semicolon'>;</span>
+
+<span class='id identifier rubyid_ok_button'>ok_button</span> <span class='op'>=</span> <span class='id identifier rubyid_gtk_dialog_add_button'>gtk_dialog_add_button</span> <span class='lparen'>(</span><span class='const'>GTK_DIALOG</span> <span class='lparen'>(</span><span class='id identifier rubyid_dialog'>dialog</span><span class='rparen'>)</span><span class='comma'>,</span>
+                                   <span class='id identifier rubyid__'>_</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_OK</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+                                   <span class='const'>GTK_RESPONSE_OK</span><span class='rparen'>)</span><span class='semicolon'>;</span>
+
+<span class='id identifier rubyid_gtk_widget_grab_default'>gtk_widget_grab_default</span> <span class='lparen'>(</span><span class='id identifier rubyid_ok_button'>ok_button</span><span class='rparen'>)</span><span class='semicolon'>;</span>
+
+<span class='id identifier rubyid_help_button'>help_button</span> <span class='op'>=</span> <span class='id identifier rubyid_gtk_dialog_add_button'>gtk_dialog_add_button</span> <span class='lparen'>(</span><span class='const'>GTK_DIALOG</span> <span class='lparen'>(</span><span class='id identifier rubyid_dialog'>dialog</span><span class='rparen'>)</span><span class='comma'>,</span>
+                                     <span class='id identifier rubyid__'>_</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_Help</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+                                     <span class='const'>GTK_RESPONSE_HELP</span><span class='rparen'>)</span><span class='semicolon'>;</span>
+
+<span class='id identifier rubyid_gtk_dialog_set_alternative_button_order'>gtk_dialog_set_alternative_button_order</span> <span class='lparen'>(</span><span class='const'>GTK_DIALOG</span> <span class='lparen'>(</span><span class='id identifier rubyid_dialog'>dialog</span><span class='rparen'>)</span><span class='comma'>,</span>
+                                         <span class='const'>GTK_RESPONSE_OK</span><span class='comma'>,</span>
+                                         <span class='const'>GTK_RESPONSE_CANCEL</span><span class='comma'>,</span>
+                                         <span class='const'>GTK_RESPONSE_HELP</span><span class='comma'>,</span>
+                                         <span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span><span class='semicolon'>;</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>first_response_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a response id used by one <strong>dialog</strong>’s buttons</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a list of more response ids of <strong>dialog</strong>’s buttons, terminated by -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_alternative_button_order_from_array-instance_method">
+  
+    #<strong>set_alternative_button_order_from_array</strong>(n_params, new_order)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets an alternative button order. If the Gtk::Settings:gtk-alternative-button-order setting is set to true, the dialog buttons are reordered according to the order of the response ids in <strong>new_order</strong>.</p>
+
+<p>See gtk_dialog_set_alternative_button_order() for more information.</p>
+
+<p>This function is for use by language bindings.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_params</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of response ids in <strong>new_order</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>new_order</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of response ids of <strong>dialog</strong>’s buttons</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_response_sensitive-instance_method">
+  
+    #<strong>set_response_sensitive</strong>(response_id, setting)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calls ‘gtk_widget_set_sensitive (widget, <strong>setting</strong>)` for each widget in the dialog’s action area with the given <strong>response_id</strong>. A convenient way to sensitize/desensitize dialog buttons.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>response_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a response ID</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>setting</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true for sensitive</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_header_bar-instance_method">
+  
+    #<strong>use_header_bar</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>true if the dialog uses a Gtk::HeaderBar for action buttons instead of the action-area.</p>
+
+<p>For technical reasons, this property is declared as an integer property, but you should only set it to true or false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>use-header-bar</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_header_bar=-instance_method">
+  
+    #<strong>use_header_bar=</strong>(use_header_bar)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>true if the dialog uses a Gtk::HeaderBar for action buttons instead of the action-area.</p>
+
+<p>For technical reasons, this property is declared as an integer property, but you should only set it to true or false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>use_header_bar</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>use-header-bar</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>use-header-bar</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:19 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

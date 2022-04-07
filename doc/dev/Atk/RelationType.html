@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Atk::RelationType
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Atk::RelationType";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Atk.html" title="Atk (module)">Atk</a></span></span>
+     &raquo; 
+    <span class="title">RelationType</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Atk::RelationType
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="NULL-constant" class="">NULL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Not used, represens “no relationship” or an error condition.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:null</span></pre></dd>
+      
+        <dt id="CONTROLLED_BY-constant" class="">CONTROLLED_BY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates an object controlled by one or more target objects.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:controlled_by</span></pre></dd>
+      
+        <dt id="CONTROLLER_FOR-constant" class="">CONTROLLER_FOR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates an object is an controller for one or more target objects.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:controller_for</span></pre></dd>
+      
+        <dt id="LABEL_FOR-constant" class="">LABEL_FOR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates an object is a label for one or more target objects.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:label_for</span></pre></dd>
+      
+        <dt id="LABELLED_BY-constant" class="">LABELLED_BY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates an object is labelled by one or more target objects.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:labelled_by</span></pre></dd>
+      
+        <dt id="MEMBER_OF-constant" class="">MEMBER_OF =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates an object is a member of a group of one or more target objects.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:member_of</span></pre></dd>
+      
+        <dt id="NODE_CHILD_OF-constant" class="">NODE_CHILD_OF =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates an object is a cell in a treetable which is displayed because a cell in the same column is expanded and identifies that cell.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:node_child_of</span></pre></dd>
+      
+        <dt id="FLOWS_TO-constant" class="">FLOWS_TO =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the object has content that flows logically to another</p>
+
+<pre class="code ruby"><code class="ruby">AtkObject in a sequential way, (for instance text-flow).
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:flows_to</span></pre></dd>
+      
+        <dt id="FLOWS_FROM-constant" class="">FLOWS_FROM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the object has content that flows logically from</p>
+
+<pre class="code ruby"><code class="ruby">another AtkObject in a sequential way, (for instance text-flow).
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:flows_from</span></pre></dd>
+      
+        <dt id="SUBWINDOW_OF-constant" class="">SUBWINDOW_OF =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates a subwindow attached to a component but otherwise has no connection in  the UI heirarchy to that component.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:subwindow_of</span></pre></dd>
+      
+        <dt id="EMBEDS-constant" class="">EMBEDS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the object visually embeds</p>
+
+<pre class="code ruby"><code class="ruby">another object&#39;s content, i.e. this object&#39;s content flows around
+another&#39;s content.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:embeds</span></pre></dd>
+      
+        <dt id="EMBEDDED_BY-constant" class="">EMBEDDED_BY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Reciprocal of %ATK_RELATION_EMBEDS, indicates that</p>
+
+<pre class="code ruby"><code class="ruby">this object&#39;s content is visualy embedded in another object.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:embedded_by</span></pre></dd>
+      
+        <dt id="POPUP_FOR-constant" class="">POPUP_FOR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that an object is a popup for another object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:popup_for</span></pre></dd>
+      
+        <dt id="PARENT_WINDOW_OF-constant" class="">PARENT_WINDOW_OF =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that an object is a parent window of another object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:parent_window_of</span></pre></dd>
+      
+        <dt id="DESCRIBED_BY-constant" class="">DESCRIBED_BY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Reciprocal of %ATK_RELATION_DESCRIPTION_FOR. Indicates that one or more target objects provide descriptive information about this object. This relation type is most appropriate for information that is not essential as its presentation may be user-configurable and/or limited to an on-demand mechanism such as an assistive technology command. For brief, essential information such as can be found in a widget’s on-screen label, use %ATK_RELATION_LABELLED_BY. For an on-screen error message, use %ATK_RELATION_ERROR_MESSAGE. For lengthy extended descriptive information contained in an on-screen object, consider using %ATK_RELATION_DETAILS as assistive technologies may provide a means for the user to navigate to objects containing detailed descriptions so that their content can be more closely reviewed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:described_by</span></pre></dd>
+      
+        <dt id="DESCRIPTION_FOR-constant" class="">DESCRIPTION_FOR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Reciprocal of %ATK_RELATION_DESCRIBED_BY. Indicates that this object provides descriptive information about the target object(s). See also %ATK_RELATION_DETAILS_FOR and %ATK_RELATION_ERROR_FOR.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span> <span class='kw'>or</span> <span class='symbol'>:description_for</span></pre></dd>
+      
+        <dt id="NODE_PARENT_OF-constant" class="">NODE_PARENT_OF =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates an object is a cell in a treetable and is expanded to display other cells in the same column.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:node_parent_of</span></pre></dd>
+      
+        <dt id="DETAILS-constant" class="">DETAILS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Reciprocal of %ATK_RELATION_DETAILS_FOR. Indicates that this object has a detailed or extended description, the contents of which can be found in the target object(s). This relation type is most appropriate for information that is sufficiently lengthy as to make navigation to the container of that information desirable. For less verbose information suitable for announcement only, see %ATK_RELATION_DESCRIBED_BY. If the detailed information describes an error condition, %ATK_RELATION_ERROR_FOR should be used instead. <strong>Since</strong>: ATK-2.26.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span> <span class='kw'>or</span> <span class='symbol'>:details</span></pre></dd>
+      
+        <dt id="DETAILS_FOR-constant" class="">DETAILS_FOR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Reciprocal of %ATK_RELATION_DETAILS. Indicates that this object provides a detailed or extended description about the target object(s). See also %ATK_RELATION_DESCRIPTION_FOR and %ATK_RELATION_ERROR_FOR. <strong>Since</strong>: ATK-2.26.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:details_for</span></pre></dd>
+      
+        <dt id="ERROR_MESSAGE-constant" class="">ERROR_MESSAGE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Reciprocal of %ATK_RELATION_ERROR_FOR. Indicates that this object has one or more errors, the nature of which is described in the contents of the target object(s). Objects that have this relation type should also contain %ATK_STATE_INVALID_ENTRY in their Atk::StateSet. <strong>Since</strong>: ATK-2.26.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span> <span class='kw'>or</span> <span class='symbol'>:error_message</span></pre></dd>
+      
+        <dt id="ERROR_FOR-constant" class="">ERROR_FOR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Reciprocal of %ATK_RELATION_ERROR_MESSAGE. Indicates that this object contains an error message describing an invalid condition in the target object(s). <strong>Since</strong>: ATK_2.26.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span> <span class='kw'>or</span> <span class='symbol'>:error_for</span></pre></dd>
+      
+        <dt id="LAST_DEFINED-constant" class="">LAST_DEFINED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Not used, this value indicates the end of the enumeration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>21</span> <span class='kw'>or</span> <span class='symbol'>:last_defined</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:53 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

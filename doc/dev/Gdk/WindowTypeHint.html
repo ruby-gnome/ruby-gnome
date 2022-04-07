@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gdk::WindowTypeHint
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::WindowTypeHint";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (W)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">WindowTypeHint</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gdk::WindowTypeHint
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="NORMAL-constant" class="">NORMAL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Normal toplevel window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:normal</span></pre></dd>
+      
+        <dt id="DIALOG-constant" class="">DIALOG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Dialog window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:dialog</span></pre></dd>
+      
+        <dt id="MENU-constant" class="">MENU =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Window used to implement a menu; GTK+ uses</p>
+
+<pre class="code ruby"><code class="ruby">this hint only for torn-off menus, see Gtk::TearoffMenuItem.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:menu</span></pre></dd>
+      
+        <dt id="TOOLBAR-constant" class="">TOOLBAR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Window used to implement toolbars.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:toolbar</span></pre></dd>
+      
+        <dt id="SPLASHSCREEN-constant" class="">SPLASHSCREEN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Window used to display a splash</p>
+
+<pre class="code ruby"><code class="ruby">screen during application startup.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:splashscreen</span></pre></dd>
+      
+        <dt id="UTILITY-constant" class="">UTILITY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Utility windows which are not detached</p>
+
+<pre class="code ruby"><code class="ruby">toolbars or dialogs.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:utility</span></pre></dd>
+      
+        <dt id="DOCK-constant" class="">DOCK =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Used for creating dock or panel windows.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:dock</span></pre></dd>
+      
+        <dt id="DESKTOP-constant" class="">DESKTOP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Used for creating the desktop background</p>
+
+<pre class="code ruby"><code class="ruby">window.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:desktop</span></pre></dd>
+      
+        <dt id="DROPDOWN_MENU-constant" class="">DROPDOWN_MENU =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A menu that belongs to a menubar.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:dropdown_menu</span></pre></dd>
+      
+        <dt id="POPUP_MENU-constant" class="">POPUP_MENU =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A menu that does not belong to a menubar,</p>
+
+<pre class="code ruby"><code class="ruby">e.g. a context menu.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:popup_menu</span></pre></dd>
+      
+        <dt id="TOOLTIP-constant" class="">TOOLTIP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A tooltip.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:tooltip</span></pre></dd>
+      
+        <dt id="NOTIFICATION-constant" class="">NOTIFICATION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A notification - typically a “bubble”</p>
+
+<pre class="code ruby"><code class="ruby">that belongs to a status icon.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:notification</span></pre></dd>
+      
+        <dt id="COMBO-constant" class="">COMBO =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A popup from a combo box.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:combo</span></pre></dd>
+      
+        <dt id="DND-constant" class="">DND =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A window that is used to implement a DND cursor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:dnd</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:57 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

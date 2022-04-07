@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Atk::StateType
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Atk::StateType";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Atk.html" title="Atk (module)">Atk</a></span></span>
+     &raquo; 
+    <span class="title">StateType</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Atk::StateType
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="INVALID-constant" class="">INVALID =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates an invalid state - probably an error condition.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:invalid</span></pre></dd>
+      
+        <dt id="ACTIVE-constant" class="">ACTIVE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates a window is currently the active window, or an object is the active subelement within a container or table. ATK_STATE_ACTIVE should not be used for objects which have ATK_STATE_FOCUSABLE or ATK_STATE_SELECTABLE: Those objects should use ATK_STATE_FOCUSED and ATK_STATE_SELECTED respectively. ATK_STATE_ACTIVE is a means to indicate that an object which is not focusable and not selectable is the currently-active item within its parent container.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:active</span></pre></dd>
+      
+        <dt id="ARMED-constant" class="">ARMED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the object is ‘armed’, i.e. will be activated by if a pointer button-release event occurs within its bounds.  Buttons often enter this state when a pointer click occurs within their bounds, as a precursor to activation. ATK_STATE_ARMED has been deprecated since ATK-2.16 and should not be used in newly-written code.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:armed</span></pre></dd>
+      
+        <dt id="BUSY-constant" class="">BUSY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates the current object is busy, i.e. onscreen representation is in the process of changing, or the object is temporarily unavailable for interaction due to activity already in progress.  This state may be used by implementors of Document to indicate that content loading is underway.  It also may indicate other ‘pending’ conditions; clients may wish to interrogate this object when the ATK_STATE_BUSY flag is removed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:busy</span></pre></dd>
+      
+        <dt id="CHECKED-constant" class="">CHECKED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object is currently checked, for instance a checkbox is ‘non-empty’.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:checked</span></pre></dd>
+      
+        <dt id="DEFUNCT-constant" class="">DEFUNCT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that this object no longer has a valid backing widget (for instance, if its peer object has been destroyed)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:defunct</span></pre></dd>
+      
+        <dt id="EDITABLE-constant" class="">EDITABLE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that this object can contain text, and that the user can change the textual contents of this object by editing those contents directly. For an object which is expected to be editable due to its type, but which cannot be edited due to the application or platform preventing the user from doing so, that object’s Atk::StateSet should lack ATK_STATE_EDITABLE and should contain ATK_STATE_READ_ONLY.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:editable</span></pre></dd>
+      
+        <dt id="ENABLED-constant" class="">ENABLED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that this object is enabled, i.e. that it currently reflects some application state. Objects that are “greyed out” may lack this state, and may lack the STATE_SENSITIVE if direct user interaction cannot cause them to acquire STATE_ENABLED. See also: ATK_STATE_SENSITIVE</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:enabled</span></pre></dd>
+      
+        <dt id="EXPANDABLE-constant" class="">EXPANDABLE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object allows progressive disclosure of its children</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:expandable</span></pre></dd>
+      
+        <dt id="EXPANDED-constant" class="">EXPANDED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object its expanded - see ATK_STATE_EXPANDABLE above</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:expanded</span></pre></dd>
+      
+        <dt id="FOCUSABLE-constant" class="">FOCUSABLE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object can accept keyboard focus, which means all events resulting from typing on the keyboard will normally be passed to it when it has focus</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:focusable</span></pre></dd>
+      
+        <dt id="FOCUSED-constant" class="">FOCUSED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object currently has the keyboard focus</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:focused</span></pre></dd>
+      
+        <dt id="HORIZONTAL-constant" class="">HORIZONTAL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates the orientation of this object is horizontal; used, for instance, by objects of ATK_ROLE_SCROLL_BAR.  For objects where vertical/horizontal orientation is especially meaningful.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:horizontal</span></pre></dd>
+      
+        <dt id="ICONIFIED-constant" class="">ICONIFIED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object is minimized and is represented only by an icon</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:iconified</span></pre></dd>
+      
+        <dt id="MODAL-constant" class="">MODAL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates something must be done with this object before the user can interact with an object in a different window</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:modal</span></pre></dd>
+      
+        <dt id="MULTI_LINE-constant" class="">MULTI_LINE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this (text) object can contain multiple lines of text</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span> <span class='kw'>or</span> <span class='symbol'>:multi_line</span></pre></dd>
+      
+        <dt id="MULTISELECTABLE-constant" class="">MULTISELECTABLE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object allows more than one of its children to be selected at the same time, or in the case of text objects, that the object supports non-contiguous text selections.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:multiselectable</span></pre></dd>
+      
+        <dt id="OPAQUE-constant" class="">OPAQUE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object paints every pixel within its rectangular region.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span> <span class='kw'>or</span> <span class='symbol'>:opaque</span></pre></dd>
+      
+        <dt id="PRESSED-constant" class="">PRESSED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object is currently pressed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:pressed</span></pre></dd>
+      
+        <dt id="RESIZABLE-constant" class="">RESIZABLE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates the size of this object is not fixed</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span> <span class='kw'>or</span> <span class='symbol'>:resizable</span></pre></dd>
+      
+        <dt id="SELECTABLE-constant" class="">SELECTABLE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object is the child of an object that allows its children to be selected and that this child is one of those children that can be selected</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span> <span class='kw'>or</span> <span class='symbol'>:selectable</span></pre></dd>
+      
+        <dt id="SELECTED-constant" class="">SELECTED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object is the child of an object that allows its children to be selected and that this child is one of those children that has been selected</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>21</span> <span class='kw'>or</span> <span class='symbol'>:selected</span></pre></dd>
+      
+        <dt id="SENSITIVE-constant" class="">SENSITIVE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object is sensitive, e.g. to user interaction. STATE_SENSITIVE usually accompanies STATE_ENABLED for user-actionable controls, but may be found in the absence of STATE_ENABLED if the current visible state of the control is “disconnected” from the application state.  In such cases, direct user interaction can often result in the object gaining STATE_SENSITIVE, for instance if a user makes an explicit selection using an object whose current state is ambiguous or undefined. <strong>see</strong> STATE_ENABLED, STATE_INDETERMINATE.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>22</span> <span class='kw'>or</span> <span class='symbol'>:sensitive</span></pre></dd>
+      
+        <dt id="SHOWING-constant" class="">SHOWING =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object, the object’s parent, the object’s parent’s parent, and so on, are all ‘shown’ to the end-user, i.e. subject to “exposure” if blocking or obscuring objects do not interpose between this object and the top of the window stack.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>23</span> <span class='kw'>or</span> <span class='symbol'>:showing</span></pre></dd>
+      
+        <dt id="SINGLE_LINE-constant" class="">SINGLE_LINE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this (text) object can contain only a single line of text</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>24</span> <span class='kw'>or</span> <span class='symbol'>:single_line</span></pre></dd>
+      
+        <dt id="STALE-constant" class="">STALE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the information returned for this object may no longer be synchronized with the application state.  This is implied if the object has STATE_TRANSIENT, and can also occur towards the end of the object peer’s lifecycle. It can also be used to indicate that the index associated with this object has changed since the user accessed the object (in lieu of “index-in-parent-changed” events).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>25</span> <span class='kw'>or</span> <span class='symbol'>:stale</span></pre></dd>
+      
+        <dt id="TRANSIENT-constant" class="">TRANSIENT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object is transient, i.e. a snapshot which may not emit events when its state changes.  Data from objects with ATK_STATE_TRANSIENT should not be cached, since there may be no notification given when the cached data becomes obsolete.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>26</span> <span class='kw'>or</span> <span class='symbol'>:transient</span></pre></dd>
+      
+        <dt id="VERTICAL-constant" class="">VERTICAL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates the orientation of this object is vertical</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>27</span> <span class='kw'>or</span> <span class='symbol'>:vertical</span></pre></dd>
+      
+        <dt id="VISIBLE-constant" class="">VISIBLE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object is visible, e.g. has been explicitly marked for exposure to the user. <strong>note</strong>: %ATK_STATE_VISIBLE is no guarantee that the object is actually unobscured on the screen, only that it is ‘potentially’ visible, barring obstruction, being scrolled or clipped out of the field of view, or having an ancestor container that has not yet made visible. A widget is potentially onscreen if it has both %ATK_STATE_VISIBLE and %ATK_STATE_SHOWING. The absence of %ATK_STATE_VISIBLE and %ATK_STATE_SHOWING is semantically equivalent to saying that an object is ‘hidden’.  See also %ATK_STATE_TRUNCATED, which applies if an object with %ATK_STATE_VISIBLE and %ATK_STATE_SHOWING set lies within a viewport which means that its contents are clipped, e.g. a truncated spreadsheet cell or an image within a scrolling viewport.  Mostly useful for screen-review and magnification algorithms.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>28</span> <span class='kw'>or</span> <span class='symbol'>:visible</span></pre></dd>
+      
+        <dt id="MANAGES_DESCENDANTS-constant" class="">MANAGES_DESCENDANTS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that “active-descendant-changed” event is sent when children become ‘active’ (i.e. are selected or navigated to onscreen). Used to prevent need to enumerate all children in very large containers, like tables. The presence of STATE_MANAGES_DESCENDANTS is an indication to the client. that the children should not, and need not, be enumerated by the client. Objects implementing this state are expected to provide relevant state notifications to listening clients, for instance notifications of visibility changes and activation of their contained child objects, without the client having previously requested references to those children.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>29</span> <span class='kw'>or</span> <span class='symbol'>:manages_descendants</span></pre></dd>
+      
+        <dt id="INDETERMINATE-constant" class="">INDETERMINATE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the value, or some other quantifiable property, of this AtkObject cannot be fully determined. In the case of a large data set in which the total number of items in that set is unknown (e.g. 1 of 999+), implementors should expose the currently-known set size (999) along with this state. In the case of a check box, this state should be used to indicate that the check box is a tri-state check box which is currently neither checked nor unchecked.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>30</span> <span class='kw'>or</span> <span class='symbol'>:indeterminate</span></pre></dd>
+      
+        <dt id="TRUNCATED-constant" class="">TRUNCATED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that an object is truncated, e.g. a text value in a speradsheet cell.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>31</span> <span class='kw'>or</span> <span class='symbol'>:truncated</span></pre></dd>
+      
+        <dt id="REQUIRED-constant" class="">REQUIRED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that explicit user interaction with an object is required by the user interface, e.g. a required field in a “web-form” interface.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>32</span> <span class='kw'>or</span> <span class='symbol'>:required</span></pre></dd>
+      
+        <dt id="INVALID_ENTRY-constant" class="">INVALID_ENTRY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the object has encountered an error condition due to failure of input validation. For instance, a form control may acquire this state in response to invalid or malformed user input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>33</span> <span class='kw'>or</span> <span class='symbol'>:invalid_entry</span></pre></dd>
+      
+        <dt id="SUPPORTS_AUTOCOMPLETION-constant" class="">SUPPORTS_AUTOCOMPLETION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the object in question implements some form of ¨typeahead¨ or pre-selection behavior whereby entering the first character of one or more sub-elements causes those elements to scroll into view or become selected.  Subsequent character input may narrow the selection further as long as one or more sub-elements match the string. This state is normally only useful and encountered on objects that implement Selection. In some cases the typeahead behavior may result in full or partial ¨completion¨ of the data in the input field, in which case these input events may trigger text-changed events from the AtkText interface.  This state supplants <strong>ATK_ROLE_AUTOCOMPLETE</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>34</span> <span class='kw'>or</span> <span class='symbol'>:supports_autocompletion</span></pre></dd>
+      
+        <dt id="SELECTABLE_TEXT-constant" class="">SELECTABLE_TEXT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the object in question supports text selection. It should only be exposed on objects which implement the Text interface, in order to distinguish this state from <strong>ATK_STATE_SELECTABLE</strong>, which infers that the object in question is a selectable child of an object which implements Selection. While similar, text selection and subelement selection are distinct operations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>35</span> <span class='kw'>or</span> <span class='symbol'>:selectable_text</span></pre></dd>
+      
+        <dt id="DEFAULT-constant" class="">DEFAULT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the object is the “default” active component, i.e. the object which is activated by an end-user press of the “Enter” or “Return” key.  Typically a “close” or “submit” button.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>36</span> <span class='kw'>or</span> <span class='symbol'>:default</span></pre></dd>
+      
+        <dt id="ANIMATED-constant" class="">ANIMATED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the object changes its appearance dynamically as an inherent part of its presentation.  This state may come and go if an object is only temporarily animated on the way to a ‘final’ onscreen presentation. <strong>note</strong>: some applications, notably content viewers, may not be able to detect all kinds of animated content.  Therefore the absence of this state should not be taken as definitive evidence that the object’s visual representation is static; this state is advisory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>37</span> <span class='kw'>or</span> <span class='symbol'>:animated</span></pre></dd>
+      
+        <dt id="VISITED-constant" class="">VISITED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the object (typically a hyperlink) has already been ‘activated’, and/or its backing data has already been downloaded, rendered, or otherwise “visited”.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>38</span> <span class='kw'>or</span> <span class='symbol'>:visited</span></pre></dd>
+      
+        <dt id="CHECKABLE-constant" class="">CHECKABLE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object has the potential to be</p>
+
+<pre class="code ruby"><code class="ruby">checked, such as a checkbox or toggle-able table cell. &lt;b&gt;Since&lt;/b&gt;:
+ATK-2.12
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>39</span> <span class='kw'>or</span> <span class='symbol'>:checkable</span></pre></dd>
+      
+        <dt id="HAS_POPUP-constant" class="">HAS_POPUP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that the object has a popup context menu or sub-level menu which may or may not be showing. This means that activation renders conditional content.  Note that ordinary tooltips are not considered popups in this context. <strong>Since</strong>: ATK-2.12</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>40</span> <span class='kw'>or</span> <span class='symbol'>:has_popup</span></pre></dd>
+      
+        <dt id="HAS_TOOLTIP-constant" class="">HAS_TOOLTIP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates this object has a tooltip. <strong>Since</strong>: ATK-2.16</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>41</span> <span class='kw'>or</span> <span class='symbol'>:has_tooltip</span></pre></dd>
+      
+        <dt id="READ_ONLY-constant" class="">READ_ONLY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates that a widget which is ENABLED and SENSITIVE has a value which can be read, but not modified, by the user. Note that this state should only be applied to widget types whose value is normally directly user modifiable, such as check boxes, radio buttons, spin buttons, text input fields, and combo boxes, as a means to convey that the expected interaction with that widget is not possible. When the expected interaction with a widget does not include modification by the user, as is the case with labels and containers, ATK_STATE_READ_ONLY should not be applied. See also ATK_STATE_EDITABLE. <strong>Since</strong>: ATK-2-16</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>42</span> <span class='kw'>or</span> <span class='symbol'>:read_only</span></pre></dd>
+      
+        <dt id="LAST_DEFINED-constant" class="">LAST_DEFINED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Not a valid state, used for finding end of enumeration</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>43</span> <span class='kw'>or</span> <span class='symbol'>:last_defined</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:54 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

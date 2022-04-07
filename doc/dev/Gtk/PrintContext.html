@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::PrintContext
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::PrintContext";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">PrintContext</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::PrintContext
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::PrintContext</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A GtkPrintContext encapsulates context information that is required when drawing pages for printing, such as the cairo context and important parameters like page size and resolution. It also lets you easily create Pango::Layout and #PangoContext objects that match the font metrics of the cairo surface.</p>
+
+<p>GtkPrintContext objects gets passed to the Gtk::PrintOperation::begin-print, Gtk::PrintOperation::end-print, #GtkPrintOperation::request-page-setup and Gtk::PrintOperation::draw-page signals on the #GtkPrintOperation.</p>
+
+<p>## Using GtkPrintContext in a Gtk::PrintOperation::draw-page callback</p>
+
+<pre class="code ruby"><code class="ruby">static void
+draw_page (GtkPrintOperation *operation,
+	   GtkPrintContext   *context,
+	   int                page_nr)
+{
+  cairo_t *cr;
+  PangoLayout *layout;
+  PangoFontDescription *desc;
+
+  cr = gtk_print_context_get_cairo_context (context);
+
+  // Draw a red rectangle, as wide as the paper (inside the margins)
+  cairo_set_source_rgb (cr, 1.0, 0, 0);
+  cairo_rectangle (cr, 0, 0, gtk_print_context_get_width (context), 50);
+
+  cairo_fill (cr);
+
+  // Draw some lines
+  cairo_move_to (cr, 20, 10);
+  cairo_line_to (cr, 40, 20);
+  cairo_arc (cr, 60, 60, 20, 0, M_PI);
+  cairo_line_to (cr, 80, 20);
+
+  cairo_set_source_rgb (cr, 0, 0, 0);
+  cairo_set_line_width (cr, 5);
+  cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
+  cairo_set_line_join (cr, CAIRO_LINE_JOIN_ROUND);
+
+  cairo_stroke (cr);
+
+  // Draw some text
+  layout = gtk_print_context_create_pango_layout (context);
+  pango_layout_set_text (layout, &quot;Hello World! Printing is easy&quot;, -1);
+  desc = pango_font_description_from_string (&quot;sans 28&quot;);
+  pango_layout_set_font_description (layout, desc);
+  pango_font_description_free (desc);
+
+  cairo_move_to (cr, 30, 20);
+  pango_cairo_layout_path (cr, layout);
+
+  // Font Outline
+  cairo_set_source_rgb (cr, 0.93, 1.0, 0.47);
+  cairo_set_line_width (cr, 0.5);
+  cairo_stroke_preserve (cr);
+
+  // Font Fill
+  cairo_set_source_rgb (cr, 0, 0.0, 1.0);
+  cairo_fill (cr);
+
+  g_object_unref (layout);
+}
+</code></pre>
+
+<p>Printing support was added in GTK+ 2.10.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cairo_context-instance_method" title="#cairo_context (instance method)">#<strong>cairo_context</strong>  &#x21d2; cairo::Context </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the cairo context that is associated with the Gtk::PrintContext.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_pango_context-instance_method" title="#create_pango_context (instance method)">#<strong>create_pango_context</strong>  &#x21d2; Pango::Context </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Pango::Context that can be used with the Gtk::PrintContext.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_pango_layout-instance_method" title="#create_pango_layout (instance method)">#<strong>create_pango_layout</strong>  &#x21d2; Pango::Layout </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Pango::Layout that is suitable for use with the Gtk::PrintContext.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dpi_x-instance_method" title="#dpi_x (instance method)">#<strong>dpi_x</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the horizontal resolution of the Gtk::PrintContext, in dots per inch.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dpi_y-instance_method" title="#dpi_y (instance method)">#<strong>dpi_y</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the vertical resolution of the Gtk::PrintContext, in dots per inch.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_hard_margins-instance_method" title="#get_hard_margins (instance method)">#<strong>get_hard_margins</strong>(top, bottom, left, right)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the hardware printer margins of the Gtk::PrintContext, in units.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height-instance_method" title="#height (instance method)">#<strong>height</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the height of the Gtk::PrintContext, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#page_setup-instance_method" title="#page_setup (instance method)">#<strong>page_setup</strong>  &#x21d2; Gtk::PageSetup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the Gtk::PageSetup that determines the page dimensions of the Gtk::PrintContext.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pango_fontmap-instance_method" title="#pango_fontmap (instance method)">#<strong>pango_fontmap</strong>  &#x21d2; Pango::FontMap </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a Pango::FontMap that is suitable for use with the Gtk::PrintContext.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_cairo_context-instance_method" title="#set_cairo_context (instance method)">#<strong>set_cairo_context</strong>(cr, dpi_x, dpi_y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets a new cairo context on a print context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width-instance_method" title="#width (instance method)">#<strong>width</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the width of the Gtk::PrintContext, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="cairo_context-instance_method">
+  
+    #<strong>cairo_context</strong>  &#x21d2; <tt>cairo::Context</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the cairo context that is associated with the Gtk::PrintContext.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the cairo context of <strong>context</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_pango_context-instance_method">
+  
+    #<strong>create_pango_context</strong>  &#x21d2; <tt><span class='object_link'><a href="../Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new Pango::Context that can be used with the Gtk::PrintContext.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new Pango context for <strong>context</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_pango_layout-instance_method">
+  
+    #<strong>create_pango_layout</strong>  &#x21d2; <tt><span class='object_link'><a href="../Pango/Layout.html" title="Pango::Layout (class)">Pango::Layout</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new Pango::Layout that is suitable for use with the Gtk::PrintContext.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Pango/Layout.html" title="Pango::Layout (class)">Pango::Layout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new Pango layout for <strong>context</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dpi_x-instance_method">
+  
+    #<strong>dpi_x</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the horizontal resolution of the Gtk::PrintContext, in dots per inch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the horizontal resolution of <strong>context</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dpi_y-instance_method">
+  
+    #<strong>dpi_y</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the vertical resolution of the Gtk::PrintContext, in dots per inch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the vertical resolution of <strong>context</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_hard_margins-instance_method">
+  
+    #<strong>get_hard_margins</strong>(top, bottom, left, right)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the hardware printer margins of the Gtk::PrintContext, in units.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>top</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>top hardware printer margin</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bottom</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>bottom hardware printer margin</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>left</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>left hardware printer margin</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>right</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>right hardware printer margin</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the hard margins were retrieved</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="height-instance_method">
+  
+    #<strong>height</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the height of the Gtk::PrintContext, in pixels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the height of <strong>context</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="page_setup-instance_method">
+  
+    #<strong>page_setup</strong>  &#x21d2; <tt><span class='object_link'><a href="PageSetup.html" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the Gtk::PageSetup that determines the page dimensions of the Gtk::PrintContext.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PageSetup.html" title="Gtk::PageSetup (class)">Gtk::PageSetup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the page setup of <strong>context</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pango_fontmap-instance_method">
+  
+    #<strong>pango_fontmap</strong>  &#x21d2; <tt><span class='object_link'><a href="../Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a Pango::FontMap that is suitable for use with the Gtk::PrintContext.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the font map of <strong>context</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_cairo_context-instance_method">
+  
+    #<strong>set_cairo_context</strong>(cr, dpi_x, dpi_y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets a new cairo context on a print context.</p>
+
+<p>This function is intended to be used when implementing an internal print preview, it is not needed for printing, since GTK+ itself creates a suitable cairo context in that case.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dpi_x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the horizontal resolution to use with <strong>cr</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dpi_y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the vertical resolution to use with <strong>cr</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="width-instance_method">
+  
+    #<strong>width</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the width of the Gtk::PrintContext, in pixels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the width of <strong>context</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:26 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

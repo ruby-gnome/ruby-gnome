@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gio::FileMonitorEvent
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::FileMonitorEvent";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">FileMonitorEvent</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gio::FileMonitorEvent
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="CHANGED-constant" class="">CHANGED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a file changed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:changed</span></pre></dd>
+      
+        <dt id="CHANGES_DONE_HINT-constant" class="">CHANGES_DONE_HINT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a hint that this was probably the last change in a set of changes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:changes_done_hint</span></pre></dd>
+      
+        <dt id="DELETED-constant" class="">DELETED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a file was deleted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:deleted</span></pre></dd>
+      
+        <dt id="CREATED-constant" class="">CREATED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a file was created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:created</span></pre></dd>
+      
+        <dt id="ATTRIBUTE_CHANGED-constant" class="">ATTRIBUTE_CHANGED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a file attribute was changed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:attribute_changed</span></pre></dd>
+      
+        <dt id="PRE_UNMOUNT-constant" class="">PRE_UNMOUNT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the file location will soon be unmounted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:pre_unmount</span></pre></dd>
+      
+        <dt id="UNMOUNTED-constant" class="">UNMOUNTED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the file location was unmounted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:unmounted</span></pre></dd>
+      
+        <dt id="MOVED-constant" class="">MOVED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the file was moved – only sent if the</p>
+
+<pre class="code ruby"><code class="ruby">(deprecated) %G_FILE_MONITOR_SEND_MOVED flag is set
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:moved</span></pre></dd>
+      
+        <dt id="RENAMED-constant" class="">RENAMED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the file was renamed within the</p>
+
+<pre class="code ruby"><code class="ruby">current directory -- only sent if the %G_FILE_MONITOR_WATCH_MOVES
+flag is set.  Since: 2.46.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:renamed</span></pre></dd>
+      
+        <dt id="MOVED_IN-constant" class="">MOVED_IN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the file was moved into the</p>
+
+<pre class="code ruby"><code class="ruby">monitored directory from another location -- only sent if the
+%G_FILE_MONITOR_WATCH_MOVES flag is set.  Since: 2.46.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:moved_in</span></pre></dd>
+      
+        <dt id="MOVED_OUT-constant" class="">MOVED_OUT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the file was moved out of the</p>
+
+<pre class="code ruby"><code class="ruby">monitored directory to another location -- only sent if the
+%G_FILE_MONITOR_WATCH_MOVES flag is set.  Since: 2.46
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:moved_out</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:50 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gio::ActionGroup
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::ActionGroup";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">ActionGroup</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gio::ActionGroup
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>GAction::Group represents a group of actions. Actions can be used to expose functionality in a structured way, either from one part of a program to another, or to the outside world. Action groups are often used together with a GMenu::Model that provides additional representation data for displaying the actions to the user, e.g. in a menu.</p>
+
+<p>The main way to interact with the actions in a GActionGroup is to activate them with g_action_group_activate_action(). Activating an action may require a #GVariant parameter. The required type of the parameter can be inquired with g_action_group_get_action_parameter_type(). Actions may be disabled, see g_action_group_get_action_enabled(). Activating a disabled action has no effect.</p>
+
+<p>Actions may optionally have a state in the form of a #GVariant. The current state of an action can be inquired with g_action_group_get_action_state(). Activating a stateful action may change its state, but it is also possible to set the state by calling g_action_group_change_action_state().</p>
+
+<p>As typical example, consider a text editing application which has an option to change the current font to ‘bold’. A good way to represent this would be a stateful action, with a boolean state. Activating the action would toggle the state.</p>
+
+<p>Each action in the group has a unique name (which is a string).  All method calls, except g_action_group_list_actions() take the name of an action as an argument.</p>
+
+<p>The GAction::Group API is meant to be the ‘public’ API to the action group.  The calls here are exactly the interaction that ‘external forces’ (eg: UI, incoming D-Bus messages, etc.) are supposed to have with actions.  ‘Internal’ APIs (ie: ones meant only to be accessed by the action group implementation) are found on subclasses.  This is why you will find - for example - g_action_group_get_action_enabled() but not an equivalent set() call.</p>
+
+<p>Signals are emitted on the action group in response to state changes on individual actions.</p>
+
+<p>Implementations of GAction::Group should provide implementations for the virtual functions g_action_group_list_actions() and g_action_group_query_action().  The other virtual functions should not be implemented - their “wrappers” are actually implemented with calls to g_action_group_query_action().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action_added-instance_method" title="#action_added (instance method)">#<strong>action_added</strong>(action_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Emits the GAction::Group::action-added signal on <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action_enabled_changed-instance_method" title="#action_enabled_changed (instance method)">#<strong>action_enabled_changed</strong>(action_name, enabled)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Emits the GAction::Group::action-enabled-changed signal on <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action_removed-instance_method" title="#action_removed (instance method)">#<strong>action_removed</strong>(action_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Emits the GAction::Group::action-removed signal on <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action_state_changed-instance_method" title="#action_state_changed (instance method)">#<strong>action_state_changed</strong>(action_name, state)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Emits the GAction::Group::action-state-changed signal on <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activate_action-instance_method" title="#activate_action (instance method)">#<strong>activate_action</strong>(action_name, parameter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Activate the named action within <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#change_action_state-instance_method" title="#change_action_state (instance method)">#<strong>change_action_state</strong>(action_name, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Request for the state of the named action within <strong>action_group</strong> to be changed to <strong>value</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_action_enabled-instance_method" title="#get_action_enabled (instance method)">#<strong>get_action_enabled</strong>(action_name)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks if the named action within <strong>action_group</strong> is currently enabled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_action_parameter_type-instance_method" title="#get_action_parameter_type (instance method)">#<strong>get_action_parameter_type</strong>(action_name)  &#x21d2; GLib::VariantType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries the type of the parameter that must be given when activating the named action within <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_action_state-instance_method" title="#get_action_state (instance method)">#<strong>get_action_state</strong>(action_name)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries the current state of the named action within <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_action_state_hint-instance_method" title="#get_action_state_hint (instance method)">#<strong>get_action_state_hint</strong>(action_name)  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Requests a hint about the valid range of values for the state of the named action within <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_action_state_type-instance_method" title="#get_action_state_type (instance method)">#<strong>get_action_state_type</strong>(action_name)  &#x21d2; GLib::VariantType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries the type of the state of the named action within <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_action-instance_method" title="#has_action (instance method)">#<strong>has_action</strong>(action_name)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks if the named action exists within <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_actions-instance_method" title="#list_actions (instance method)">#<strong>list_actions</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Lists the actions contained within <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query_action-instance_method" title="#query_action (instance method)">#<strong>query_action</strong>(action_name, enabled, parameter_type, state_type, state_hint, state)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Queries all aspects of the named action within an <strong>action_group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="action_added-instance_method">
+  
+    #<strong>action_added</strong>(action_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Emits the GAction::Group::action-added signal on <strong>action_group</strong>.</p>
+
+<p>This function should only be called by GAction::Group implementations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of an action in the group</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="action_enabled_changed-instance_method">
+  
+    #<strong>action_enabled_changed</strong>(action_name, enabled)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Emits the GAction::Group::action-enabled-changed signal on <strong>action_group</strong>.</p>
+
+<p>This function should only be called by GAction::Group implementations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of an action in the group</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>enabled</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether or not the action is now enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="action_removed-instance_method">
+  
+    #<strong>action_removed</strong>(action_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Emits the GAction::Group::action-removed signal on <strong>action_group</strong>.</p>
+
+<p>This function should only be called by GAction::Group implementations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of an action in the group</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="action_state_changed-instance_method">
+  
+    #<strong>action_state_changed</strong>(action_name, state)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Emits the GAction::Group::action-state-changed signal on <strong>action_group</strong>.</p>
+
+<p>This function should only be called by GAction::Group implementations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of an action in the group</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new state of the named action</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="activate_action-instance_method">
+  
+    #<strong>activate_action</strong>(action_name, parameter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Activate the named action within <strong>action_group</strong>.</p>
+
+<p>If the action is expecting a parameter, then the correct type of parameter must be given as <strong>parameter</strong>.  If the action is expecting no parameters then <strong>parameter</strong> must be nil.  See g_action_group_get_action_parameter_type().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action to activate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parameter</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>parameters to the activation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="change_action_state-instance_method">
+  
+    #<strong>change_action_state</strong>(action_name, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Request for the state of the named action within <strong>action_group</strong> to be changed to <strong>value</strong>.</p>
+
+<p>The action must be stateful and <strong>value</strong> must be of the correct type. See g_action_group_get_action_state_type().</p>
+
+<p>This call merely requests a change.  The action may refuse to change its state or may change its state to something other than <strong>value</strong>. See g_action_group_get_action_state_hint().</p>
+
+<p>If the <strong>value</strong> GVariant is floating, it is consumed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action to request the change on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_action_enabled-instance_method">
+  
+    #<strong>get_action_enabled</strong>(action_name)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks if the named action within <strong>action_group</strong> is currently enabled.</p>
+
+<p>An action must be enabled in order to be activated or in order to have its state changed from outside callers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action to query</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether or not the action is currently enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_action_parameter_type-instance_method">
+  
+    #<strong>get_action_parameter_type</strong>(action_name)  &#x21d2; <tt>GLib::VariantType</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries the type of the parameter that must be given when activating the named action within <strong>action_group</strong>.</p>
+
+<p>When activating the action using g_action_group_activate_action(), the #GVariant given to that function must be of the type returned by this function.</p>
+
+<p>In the case that this function returns nil, you must not give any #GVariant, but nil instead.</p>
+
+<p>The parameter type of a particular action will never change but it is possible for an action to be removed and for a new action to be added with the same name but a different parameter type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action to query</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::VariantType</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the parameter type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_action_state-instance_method">
+  
+    #<strong>get_action_state</strong>(action_name)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries the current state of the named action within <strong>action_group</strong>.</p>
+
+<p>If the action is not stateful then nil will be returned.  If the action is stateful then the type of the return value is the type given by g_action_group_get_action_state_type().</p>
+
+<p>The return value (if non-nil) should be freed with g_variant_unref() when it is no longer required.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action to query</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current state of the action</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_action_state_hint-instance_method">
+  
+    #<strong>get_action_state_hint</strong>(action_name)  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Requests a hint about the valid range of values for the state of the named action within <strong>action_group</strong>.</p>
+
+<p>If nil is returned it either means that the action is not stateful or that there is no hint about the valid range of values for the state of the action.</p>
+
+<p>If a #GVariant array is returned then each item in the array is a possible value for the state.  If a #GVariant pair (ie: two-tuple) is returned then the tuple specifies the inclusive lower and upper bound of valid values for the state.</p>
+
+<p>In any case, the information is merely a hint.  It may be possible to have a state value outside of the hinted range and setting a value within the range may fail.</p>
+
+<p>The return value (if non-nil) should be freed with g_variant_unref() when it is no longer required.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action to query</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the state range hint</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_action_state_type-instance_method">
+  
+    #<strong>get_action_state_type</strong>(action_name)  &#x21d2; <tt>GLib::VariantType</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries the type of the state of the named action within <strong>action_group</strong>.</p>
+
+<p>If the action is stateful then this function returns the GVariant::Type of the state.  All calls to g_action_group_change_action_state() must give a #GVariant of this type and g_action_group_get_action_state() will return a #GVariant of the same type.</p>
+
+<p>If the action is not stateful then this function will return nil. In that case, g_action_group_get_action_state() will return nil and you must not call g_action_group_change_action_state().</p>
+
+<p>The state type of a particular action will never change but it is possible for an action to be removed and for a new action to be added with the same name but a different state type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action to query</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::VariantType</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the state type, if the action is stateful</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_action-instance_method">
+  
+    #<strong>has_action</strong>(action_name)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks if the named action exists within <strong>action_group</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the action to check for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the named action exists</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_actions-instance_method">
+  
+    #<strong>list_actions</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Lists the actions contained within <strong>action_group</strong>.</p>
+
+<p>The caller is responsible for freeing the list with g_strfreev() when it is no longer required. actions in the group</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of the names of the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query_action-instance_method">
+  
+    #<strong>query_action</strong>(action_name, enabled, parameter_type, state_type, state_hint, state)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries all aspects of the named action within an <strong>action_group</strong>.</p>
+
+<p>This function acquires the information available from g_action_group_has_action(), g_action_group_get_action_enabled(), g_action_group_get_action_parameter_type(), g_action_group_get_action_state_type(), g_action_group_get_action_state_hint() and g_action_group_get_action_state() with a single function call.</p>
+
+<p>This provides two main benefits.</p>
+
+<p>The first is the improvement in efficiency that comes with not having to perform repeated lookups of the action in order to discover different things about it.  The second is that implementing GAction::Group can now be done by only overriding this one virtual function.</p>
+
+<p>The interface provides a default implementation of this function that calls the individual functions, as required, to fetch the information.  The interface also provides default implementations of those functions that call this function.  All implementations, therefore, must override either this function or all of the others.</p>
+
+<p>If the action exists, true is returned and any of the requested fields (as indicated by having a non-nil reference passed in) are filled.  If the action doesn’t exist, false is returned and the fields may or may not have been modified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of an action in the group</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>enabled</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>if the action is presently enabled</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parameter_type</span>
+      
+      
+        <span class='type'>(<tt>GLib::VariantType</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the parameter type, or nil if none needed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state_type</span>
+      
+      
+        <span class='type'>(<tt>GLib::VariantType</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the state type, or nil if stateless</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state_hint</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the state hint, or nil if none</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current state, or nil if stateless</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the action exists, else false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:48 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

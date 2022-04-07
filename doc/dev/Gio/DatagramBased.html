@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gio::DatagramBased
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::DatagramBased";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">DatagramBased</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gio::DatagramBased
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A GDatagram::Based is a networking interface for representing datagram-based communications. It is a more or less direct mapping of the core parts of the BSD socket API in a portable GObject interface. It is implemented by #GSocket, which wraps the UNIX socket API on UNIX and winsock2 on Windows.</p>
+
+<p>GDatagram::Based is entirely platform independent, and is intended to be used alongside higher-level networking APIs such as #GIOStream.</p>
+
+<p>It uses vectored scatter/gather I/O by default, allowing for many messages to be sent or received in a single call. Where possible, implementations of the interface should take advantage of vectored I/O to minimise processing or system calls. For example, #GSocket uses recvmmsg() and sendmmsg() where possible. Callers should take advantage of scatter/gather I/O (the use of multiple buffers per message) to avoid unnecessary copying of data to assemble or disassemble a message.</p>
+
+<p>Each GDatagram::Based operation has a timeout parameter which may be negative for blocking behaviour, zero for non-blocking behaviour, or positive for timeout behaviour. A blocking operation blocks until finished or there is an error. A non-blocking operation will return immediately with a %G_IO_ERROR_WOULD_BLOCK error if it cannot make progress. A timeout operation will block until the operation is complete or the timeout expires; if the timeout expires it will return what progress it made, or %G_IO_ERROR_TIMED_OUT if no progress was made. To know when a call would successfully run you can call g_datagram_based_condition_check() or g_datagram_based_condition_wait(). You can also use g_datagram_based_create_source() and attach it to a GMain::Context to get callbacks when I/O is possible.</p>
+
+<p>When running a non-blocking operation applications should always be able to handle getting a %G_IO_ERROR_WOULD_BLOCK error even when some other function said that I/O was possible. This can easily happen in case of a race condition in the application, but it can also happen for other reasons. For instance, on Windows a socket is always seen as writable until a write returns %G_IO_ERROR_WOULD_BLOCK.</p>
+
+<p>As with #GSocket, GDatagram::Baseds can be either connection oriented (for example, SCTP) or connectionless (for example, UDP). GDatagram::Baseds must be datagram-based, not stream-based. The interface does not cover connection establishment — use methods on the underlying type to establish a connection before sending and receiving data through the GDatagram::Based API. For connectionless socket types the target/source address is specified or received in each I/O operation.</p>
+
+<p>Like most other APIs in GLib, GDatagram::Based is not inherently thread safe. To use a GDatagram::Based concurrently from multiple threads, you must implement your own locking.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#condition_check-instance_method" title="#condition_check (instance method)">#<strong>condition_check</strong>(condition)  &#x21d2; GLib::IOCondition </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks on the readiness of <strong>datagram_based</strong> to perform operations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#condition_wait-instance_method" title="#condition_wait (instance method)">#<strong>condition_wait</strong>(condition, timeout, cancellable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Waits for up to <strong>timeout</strong> microseconds for condition to become true on <strong>datagram_based</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_source-instance_method" title="#create_source (instance method)">#<strong>create_source</strong>(condition, cancellable)  &#x21d2; GLib::Source </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a #GSource that can be attached to a GMain::Context to monitor for the availability of the specified <strong>condition</strong> on the GDatagram::Based.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#receive_messages-instance_method" title="#receive_messages (instance method)">#<strong>receive_messages</strong>(messages, num_messages, flags, timeout, cancellable)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Receive one or more data messages from <strong>datagram_based</strong> in one go.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_messages-instance_method" title="#send_messages (instance method)">#<strong>send_messages</strong>(messages, num_messages, flags, timeout, cancellable)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Send one or more data messages from <strong>datagram_based</strong> in one go.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="condition_check-instance_method">
+  
+    #<strong>condition_check</strong>(condition)  &#x21d2; <tt><span class='object_link'><a href="../GLib/IOCondition.html" title="GLib::IOCondition (module)">GLib::IOCondition</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks on the readiness of <strong>datagram_based</strong> to perform operations. The operations specified in <strong>condition</strong> are checked for and masked against the currently-satisfied conditions on <strong>datagram_based</strong>. The result is returned.</p>
+
+<p>%G_IO_IN will be set in the return value if data is available to read with g_datagram_based_receive_messages(), or if the connection is closed remotely (EOS); and if the datagram_based has not been closed locally using some implementation-specific method (such as g_socket_close() or g_socket_shutdown() with <strong>shutdown_read</strong> set, if it’s a #GSocket).</p>
+
+<p>If the connection is shut down or closed (by calling g_socket_close() or g_socket_shutdown() with <strong>shutdown_read</strong> set, if it’s a #GSocket, for example), all calls to this function will return %G_IO_ERROR_CLOSED.</p>
+
+<p>%G_IO_OUT will be set if it is expected that at least one byte can be sent using g_datagram_based_send_messages() without blocking. It will not be set if the datagram_based has been closed locally.</p>
+
+<p>%G_IO_HUP will be set if the connection has been closed locally.</p>
+
+<p>%G_IO_ERR will be set if there was an asynchronous error in transmitting data previously enqueued using g_datagram_based_send_messages().</p>
+
+<p>Note that on Windows, it is possible for an operation to return %G_IO_ERROR_WOULD_BLOCK even immediately after g_datagram_based_condition_check() has claimed that the GDatagram::Based is ready for writing. Rather than calling g_datagram_based_condition_check() and then writing to the GDatagram::Based if it succeeds, it is generally better to simply try writing right away, and try again later if the initial attempt returns %G_IO_ERROR_WOULD_BLOCK.</p>
+
+<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in <strong>condition</strong>; these conditions will always be set in the output if they are true. Apart from these flags, the output is guaranteed to be masked by <strong>condition</strong>.</p>
+
+<p>This call never blocks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>condition</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/IOCondition.html" title="GLib::IOCondition (module)">GLib::IOCondition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GIOCondition mask to check</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/IOCondition.html" title="GLib::IOCondition (module)">GLib::IOCondition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the #GIOCondition mask of the current state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="condition_wait-instance_method">
+  
+    #<strong>condition_wait</strong>(condition, timeout, cancellable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Waits for up to <strong>timeout</strong> microseconds for condition to become true on <strong>datagram_based</strong>. If the condition is met, true is returned.</p>
+
+<p>If <strong>cancellable</strong> is cancelled before the condition is met, or if <strong>timeout</strong> is reached before the condition is met, then false is returned and <strong>error</strong> is set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>condition</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/IOCondition.html" title="GLib::IOCondition (module)">GLib::IOCondition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GIOCondition mask to wait for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the maximum time (in microseconds) to wait, 0 to not block, or -1 to block indefinitely</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the condition was met, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_source-instance_method">
+  
+    #<strong>create_source</strong>(condition, cancellable)  &#x21d2; <tt>GLib::Source</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a #GSource that can be attached to a GMain::Context to monitor for the availability of the specified <strong>condition</strong> on the GDatagram::Based. The #GSource keeps a reference to the <strong>datagram_based</strong>.</p>
+
+<p>The callback on the source is of the GDatagram::BasedSourceFunc type.</p>
+
+<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in <strong>condition</strong>; these conditions will always be reported in the callback if they are true.</p>
+
+<p>If non-nil, <strong>cancellable</strong> can be used to cancel the source, which will cause the source to trigger, reporting the current condition (which is likely 0 unless cancellation happened at the same time as a condition change). You can check for this in the callback using g_cancellable_is_cancelled().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>condition</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/IOCondition.html" title="GLib::IOCondition (module)">GLib::IOCondition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GIOCondition mask to monitor</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Source</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated #GSource</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="receive_messages-instance_method">
+  
+    #<strong>receive_messages</strong>(messages, num_messages, flags, timeout, cancellable)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Receive one or more data messages from <strong>datagram_based</strong> in one go.</p>
+
+<p><strong>messages</strong> must point to an array of GInput::Message structs and <strong>num_messages</strong> must be the length of this array. Each GInput::Message contains a pointer to an array of GInput::Vector structs describing the buffers that the data received in each message will be written to.</p>
+
+<p><strong>flags</strong> modify how all messages are received. The commonly available arguments for this are available in the GSocket::MsgFlags enum, but the values there are the same as the system values, and the flags are passed in as-is, so you can pass in system-specific flags too. These flags affect the overall receive operation. Flags affecting individual messages are returned in GInput::Message.flags.</p>
+
+<p>The other members of GInput::Message are treated as described in its documentation.</p>
+
+<p>If <strong>timeout</strong> is negative the call will block until <strong>num_messages</strong> have been received, the connection is closed remotely (EOS), <strong>cancellable</strong> is cancelled, or an error occurs.</p>
+
+<p>If <strong>timeout</strong> is 0 the call will return up to <strong>num_messages</strong> without blocking, or %G_IO_ERROR_WOULD_BLOCK if no messages are queued in the operating system to be received.</p>
+
+<p>If <strong>timeout</strong> is positive the call will block on the same conditions as if <strong>timeout</strong> were negative. If the timeout is reached before any messages are received, %G_IO_ERROR_TIMED_OUT is returned, otherwise it will return the number of messages received before timing out. (Note: This is effectively the behaviour of ‘MSG_WAITFORONE` with recvmmsg().)</p>
+
+<p>To be notified when messages are available, wait for the %G_IO_IN condition. Note though that you may still receive %G_IO_ERROR_WOULD_BLOCK from g_datagram_based_receive_messages() even if you were previously notified of a %G_IO_IN condition.</p>
+
+<p>If the remote peer closes the connection, any messages queued in the underlying receive buffer will be returned, and subsequent calls to g_datagram_based_receive_messages() will return 0 (with no error set).</p>
+
+<p>If the connection is shut down or closed (by calling g_socket_close() or g_socket_shutdown() with <strong>shutdown_read</strong> set, if it’s a #GSocket, for example), all calls to this function will return %G_IO_ERROR_CLOSED.</p>
+
+<p>On error -1 is returned and <strong>error</strong> is set accordingly. An error will only be returned if zero messages could be received; otherwise the number of messages successfully received before the error will be returned. If <strong>cancellable</strong> is cancelled, %G_IO_ERROR_CANCELLED is returned as with any other error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>messages</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::InputMessage&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of GInput::Message structs</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_messages</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of elements in <strong>messages</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an int containing GSocket::MsgFlags flags for the overall operation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the maximum time (in microseconds) to wait, 0 to not block, or -1 to block indefinitely</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of messages received, or -1 on error. Note that the number of messages received may be smaller than <strong>num_messages</strong> if <strong>timeout</strong> is zero or positive, if the peer closed the connection, or if <strong>num_messages</strong> was larger than ‘UIO_MAXIOV` (1024), in which case the caller may re-try to receive the remaining messages.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_messages-instance_method">
+  
+    #<strong>send_messages</strong>(messages, num_messages, flags, timeout, cancellable)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Send one or more data messages from <strong>datagram_based</strong> in one go.</p>
+
+<p><strong>messages</strong> must point to an array of GOutput::Message structs and <strong>num_messages</strong> must be the length of this array. Each GOutput::Message contains an address to send the data to, and a pointer to an array of GOutput::Vector structs to describe the buffers that the data to be sent for each message will be gathered from.</p>
+
+<p><strong>flags</strong> modify how the message is sent. The commonly available arguments for this are available in the GSocket::MsgFlags enum, but the values there are the same as the system values, and the flags are passed in as-is, so you can pass in system-specific flags too.</p>
+
+<p>The other members of GOutput::Message are treated as described in its documentation.</p>
+
+<p>If <strong>timeout</strong> is negative the call will block until <strong>num_messages</strong> have been sent, <strong>cancellable</strong> is cancelled, or an error occurs.</p>
+
+<p>If <strong>timeout</strong> is 0 the call will send up to <strong>num_messages</strong> without blocking, or will return %G_IO_ERROR_WOULD_BLOCK if there is no space to send messages.</p>
+
+<p>If <strong>timeout</strong> is positive the call will block on the same conditions as if <strong>timeout</strong> were negative. If the timeout is reached before any messages are sent, %G_IO_ERROR_TIMED_OUT is returned, otherwise it will return the number of messages sent before timing out.</p>
+
+<p>To be notified when messages can be sent, wait for the %G_IO_OUT condition. Note though that you may still receive %G_IO_ERROR_WOULD_BLOCK from g_datagram_based_send_messages() even if you were previously notified of a %G_IO_OUT condition. (On Windows in particular, this is very common due to the way the underlying APIs work.)</p>
+
+<p>If the connection is shut down or closed (by calling g_socket_close() or g_socket_shutdown() with <strong>shutdown_write</strong> set, if it’s a #GSocket, for example), all calls to this function will return %G_IO_ERROR_CLOSED.</p>
+
+<p>On error -1 is returned and <strong>error</strong> is set accordingly. An error will only be returned if zero messages could be sent; otherwise the number of messages successfully sent before the error will be returned. If <strong>cancellable</strong> is cancelled, %G_IO_ERROR_CANCELLED is returned as with any other error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>messages</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::OutputMessage&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of GOutput::Message structs</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_messages</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of elements in <strong>messages</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an int containing GSocket::MsgFlags flags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the maximum time (in microseconds) to wait, 0 to not block, or -1 to block indefinitely</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of messages sent, or -1 on error. Note that the number of messages sent may be smaller than <strong>num_messages</strong> if <strong>timeout</strong> is zero or positive, or if <strong>num_messages</strong> was larger than ‘UIO_MAXIOV` (1024), in which case the caller may re-try to send the remaining messages.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:49 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: GdkPixbuf::InterpType
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GdkPixbuf::InterpType";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (I)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GdkPixbuf.html" title="GdkPixbuf (module)">GdkPixbuf</a></span></span>
+     &raquo; 
+    <span class="title">InterpType</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: GdkPixbuf::InterpType
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="NEAREST-constant" class="">NEAREST =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Nearest neighbor sampling; this is the fastest</p>
+
+<pre class="code ruby"><code class="ruby">and lowest quality mode. Quality is normally unacceptable when scaling
+down, but may be OK when scaling up.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:nearest</span></pre></dd>
+      
+        <dt id="TILES-constant" class="">TILES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>This is an accurate simulation of the PostScript</p>
+
+<pre class="code ruby"><code class="ruby">image operator without any interpolation enabled.  Each pixel is
+rendered as a tiny parallelogram of solid color, the edges of which
+are implemented with antialiasing.  It resembles nearest neighbor for
+enlargement, and bilinear for reduction.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:tiles</span></pre></dd>
+      
+        <dt id="BILINEAR-constant" class="">BILINEAR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Best quality/speed balance; use this mode by</p>
+
+<pre class="code ruby"><code class="ruby">default. Bilinear interpolation.  For enlargement, it is
+equivalent to point-sampling the ideal bilinear-interpolated image.
+For reduction, it is equivalent to laying down small tiles and
+integrating over the coverage area.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:bilinear</span></pre></dd>
+      
+        <dt id="HYPER-constant" class="">HYPER =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>This is the slowest and highest quality</p>
+
+<pre class="code ruby"><code class="ruby">reconstruction function. It is derived from the hyperbolic filters in
+Wolberg&#39;s &quot;Digital Image Warping&quot;, and is formally defined as the
+hyperbolic-filter sampling the ideal hyperbolic-filter interpolated
+image (the filter is designed to be idempotent for 1:1 pixel mapping).
+**Deprecated**: this interpolation filter is deprecated, as in reality
+it has a lower quality than the &lt;b&gt;GDK_INTERP_BILINEAR&lt;/b&gt; filter
+(Since: 2.38)
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:hyper</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:51 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

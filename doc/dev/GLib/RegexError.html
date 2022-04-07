@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: GLib::RegexError
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GLib::RegexError";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GLib.html" title="GLib (module)">GLib</a></span></span>
+     &raquo; 
+    <span class="title">RegexError</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: GLib::RegexError
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="COMPILE-constant" class="">COMPILE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Compilation of the regular expression failed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:compile</span></pre></dd>
+      
+        <dt id="OPTIMIZE-constant" class="">OPTIMIZE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Optimization of the regular expression failed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:optimize</span></pre></dd>
+      
+        <dt id="REPLACE-constant" class="">REPLACE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Replacement failed due to an ill-formed replacement</p>
+
+<pre class="code ruby"><code class="ruby">string.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:replace</span></pre></dd>
+      
+        <dt id="MATCH-constant" class="">MATCH =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The match process failed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:match</span></pre></dd>
+      
+        <dt id="INTERNAL-constant" class="">INTERNAL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Internal error of the regular expression engine.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:internal</span></pre></dd>
+      
+        <dt id="STRAY_BACKSLASH-constant" class="">STRAY_BACKSLASH =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>“\” at end of pattern. Since 2.16</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>101</span> <span class='kw'>or</span> <span class='symbol'>:stray_backslash</span></pre></dd>
+      
+        <dt id="MISSING_CONTROL_CHAR-constant" class="">MISSING_CONTROL_CHAR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>“\c” at end of pattern. Since 2.16</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>102</span> <span class='kw'>or</span> <span class='symbol'>:missing_control_char</span></pre></dd>
+      
+        <dt id="UNRECOGNIZED_ESCAPE-constant" class="">UNRECOGNIZED_ESCAPE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Unrecognized character follows “\”.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>103</span> <span class='kw'>or</span> <span class='symbol'>:unrecognized_escape</span></pre></dd>
+      
+        <dt id="QUANTIFIERS_OUT_OF_ORDER-constant" class="">QUANTIFIERS_OUT_OF_ORDER =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Numbers out of order in “{}”</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_quantifier'>quantifier</span><span class='period'>.</span> <span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>104</span> <span class='kw'>or</span> <span class='symbol'>:quantifiers_out_of_order</span></pre></dd>
+      
+        <dt id="QUANTIFIER_TOO_BIG-constant" class="">QUANTIFIER_TOO_BIG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Number too big in “{}” quantifier.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>105</span> <span class='kw'>or</span> <span class='symbol'>:quantifier_too_big</span></pre></dd>
+      
+        <dt id="UNTERMINATED_CHARACTER_CLASS-constant" class="">UNTERMINATED_CHARACTER_CLASS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Missing terminating “]” for</p>
+
+<pre class="code ruby"><code class="ruby">character class. Since 2.16
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>106</span> <span class='kw'>or</span> <span class='symbol'>:unterminated_character_class</span></pre></dd>
+      
+        <dt id="INVALID_ESCAPE_IN_CHARACTER_CLASS-constant" class="">INVALID_ESCAPE_IN_CHARACTER_CLASS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Invalid escape sequence</p>
+
+<pre class="code ruby"><code class="ruby">in character class. Since 2.16
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>107</span> <span class='kw'>or</span> <span class='symbol'>:invalid_escape_in_character_class</span></pre></dd>
+      
+        <dt id="RANGE_OUT_OF_ORDER-constant" class="">RANGE_OUT_OF_ORDER =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Range out of order in character class.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>108</span> <span class='kw'>or</span> <span class='symbol'>:range_out_of_order</span></pre></dd>
+      
+        <dt id="NOTHING_TO_REPEAT-constant" class="">NOTHING_TO_REPEAT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Nothing to repeat. Since 2.16</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>109</span> <span class='kw'>or</span> <span class='symbol'>:nothing_to_repeat</span></pre></dd>
+      
+        <dt id="UNRECOGNIZED_CHARACTER-constant" class="">UNRECOGNIZED_CHARACTER =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Unrecognized character after “(?”,</p>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>(?&lt;</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>or</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>(?P</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span> <span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>112</span> <span class='kw'>or</span> <span class='symbol'>:unrecognized_character</span></pre></dd>
+      
+        <dt id="POSIX_NAMED_CLASS_OUTSIDE_CLASS-constant" class="">POSIX_NAMED_CLASS_OUTSIDE_CLASS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>POSIX named classes are</p>
+
+<pre class="code ruby"><code class="ruby">supported only within a class. Since 2.16
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>113</span> <span class='kw'>or</span> <span class='symbol'>:posix_named_class_outside_class</span></pre></dd>
+      
+        <dt id="UNMATCHED_PARENTHESIS-constant" class="">UNMATCHED_PARENTHESIS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Missing terminating “)” or “)”</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_without'>without</span> <span class='id identifier rubyid_opening'>opening</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>(</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span> <span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>114</span> <span class='kw'>or</span> <span class='symbol'>:unmatched_parenthesis</span></pre></dd>
+      
+        <dt id="INEXISTENT_SUBPATTERN_REFERENCE-constant" class="">INEXISTENT_SUBPATTERN_REFERENCE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Reference to non-existent</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_subpattern'>subpattern</span><span class='period'>.</span> <span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>115</span> <span class='kw'>or</span> <span class='symbol'>:inexistent_subpattern_reference</span></pre></dd>
+      
+        <dt id="UNTERMINATED_COMMENT-constant" class="">UNTERMINATED_COMMENT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Missing terminating “)” after comment.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>118</span> <span class='kw'>or</span> <span class='symbol'>:unterminated_comment</span></pre></dd>
+      
+        <dt id="EXPRESSION_TOO_LARGE-constant" class="">EXPRESSION_TOO_LARGE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Regular expression too large.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>120</span> <span class='kw'>or</span> <span class='symbol'>:expression_too_large</span></pre></dd>
+      
+        <dt id="MEMORY_ERROR-constant" class="">MEMORY_ERROR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Failed to get memory. Since 2.16</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>121</span> <span class='kw'>or</span> <span class='symbol'>:memory_error</span></pre></dd>
+      
+        <dt id="VARIABLE_LENGTH_LOOKBEHIND-constant" class="">VARIABLE_LENGTH_LOOKBEHIND =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Lookbehind assertion is not</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_fixed'>fixed</span> <span class='id identifier rubyid_length'>length</span><span class='period'>.</span> <span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>125</span> <span class='kw'>or</span> <span class='symbol'>:variable_length_lookbehind</span></pre></dd>
+      
+        <dt id="MALFORMED_CONDITION-constant" class="">MALFORMED_CONDITION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Malformed number or name after “(?(”.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>126</span> <span class='kw'>or</span> <span class='symbol'>:malformed_condition</span></pre></dd>
+      
+        <dt id="TOO_MANY_CONDITIONAL_BRANCHES-constant" class="">TOO_MANY_CONDITIONAL_BRANCHES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Conditional group contains</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_more'>more</span> <span class='id identifier rubyid_than'>than</span> <span class='id identifier rubyid_two'>two</span> <span class='id identifier rubyid_branches'>branches</span><span class='period'>.</span> <span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>127</span> <span class='kw'>or</span> <span class='symbol'>:too_many_conditional_branches</span></pre></dd>
+      
+        <dt id="ASSERTION_EXPECTED-constant" class="">ASSERTION_EXPECTED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Assertion expected after “(?(”.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>128</span> <span class='kw'>or</span> <span class='symbol'>:assertion_expected</span></pre></dd>
+      
+        <dt id="UNKNOWN_POSIX_CLASS_NAME-constant" class="">UNKNOWN_POSIX_CLASS_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Unknown POSIX class name.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>130</span> <span class='kw'>or</span> <span class='symbol'>:unknown_posix_class_name</span></pre></dd>
+      
+        <dt id="POSIX_COLLATING_ELEMENTS_NOT_SUPPORTED-constant" class="">POSIX_COLLATING_ELEMENTS_NOT_SUPPORTED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>POSIX collating</p>
+
+<pre class="code ruby"><code class="ruby">elements are not supported. Since 2.16
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>131</span> <span class='kw'>or</span> <span class='symbol'>:posix_collating_elements_not_supported</span></pre></dd>
+      
+        <dt id="HEX_CODE_TOO_LARGE-constant" class="">HEX_CODE_TOO_LARGE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Character value in “\x…” sequence</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_is'>is</span> <span class='id identifier rubyid_too'>too</span> <span class='id identifier rubyid_large'>large</span><span class='period'>.</span> <span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>134</span> <span class='kw'>or</span> <span class='symbol'>:hex_code_too_large</span></pre></dd>
+      
+        <dt id="INVALID_CONDITION-constant" class="">INVALID_CONDITION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Invalid condition “(?(0)”. Since 2.16</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>135</span> <span class='kw'>or</span> <span class='symbol'>:invalid_condition</span></pre></dd>
+      
+        <dt id="SINGLE_BYTE_MATCH_IN_LOOKBEHIND-constant" class="">SINGLE_BYTE_MATCH_IN_LOOKBEHIND =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>\C not allowed in</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_lookbehind'>lookbehind</span> <span class='id identifier rubyid_assertion'>assertion</span><span class='period'>.</span> <span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>136</span> <span class='kw'>or</span> <span class='symbol'>:single_byte_match_in_lookbehind</span></pre></dd>
+      
+        <dt id="INFINITE_LOOP-constant" class="">INFINITE_LOOP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Recursive call could loop indefinitely.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>140</span> <span class='kw'>or</span> <span class='symbol'>:infinite_loop</span></pre></dd>
+      
+        <dt id="MISSING_SUBPATTERN_NAME_TERMINATOR-constant" class="">MISSING_SUBPATTERN_NAME_TERMINATOR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Missing terminator</p>
+
+<pre class="code ruby"><code class="ruby">in subpattern name. Since 2.16
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>142</span> <span class='kw'>or</span> <span class='symbol'>:missing_subpattern_name_terminator</span></pre></dd>
+      
+        <dt id="DUPLICATE_SUBPATTERN_NAME-constant" class="">DUPLICATE_SUBPATTERN_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Two named subpatterns have</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_the'>the</span> <span class='id identifier rubyid_same'>same</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span> <span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>143</span> <span class='kw'>or</span> <span class='symbol'>:duplicate_subpattern_name</span></pre></dd>
+      
+        <dt id="MALFORMED_PROPERTY-constant" class="">MALFORMED_PROPERTY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Malformed “\P” or “\p” sequence.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>146</span> <span class='kw'>or</span> <span class='symbol'>:malformed_property</span></pre></dd>
+      
+        <dt id="UNKNOWN_PROPERTY-constant" class="">UNKNOWN_PROPERTY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Unknown property name after “\P” or</p>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\\p</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span> <span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>147</span> <span class='kw'>or</span> <span class='symbol'>:unknown_property</span></pre></dd>
+      
+        <dt id="SUBPATTERN_NAME_TOO_LONG-constant" class="">SUBPATTERN_NAME_TOO_LONG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Subpattern name is too long</p>
+
+<pre class="code ruby"><code class="ruby">(maximum 32 characters). Since 2.16
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>148</span> <span class='kw'>or</span> <span class='symbol'>:subpattern_name_too_long</span></pre></dd>
+      
+        <dt id="TOO_MANY_SUBPATTERNS-constant" class="">TOO_MANY_SUBPATTERNS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Too many named subpatterns (maximum</p>
+
+<pre class="code ruby"><code class="ruby">10,000). Since 2.16
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>149</span> <span class='kw'>or</span> <span class='symbol'>:too_many_subpatterns</span></pre></dd>
+      
+        <dt id="INVALID_OCTAL_VALUE-constant" class="">INVALID_OCTAL_VALUE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Octal value is greater than “\377”.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>151</span> <span class='kw'>or</span> <span class='symbol'>:invalid_octal_value</span></pre></dd>
+      
+        <dt id="TOO_MANY_BRANCHES_IN_DEFINE-constant" class="">TOO_MANY_BRANCHES_IN_DEFINE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>“DEFINE” group contains more</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_than'>than</span> <span class='id identifier rubyid_one'>one</span> <span class='id identifier rubyid_branch'>branch</span><span class='period'>.</span> <span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>154</span> <span class='kw'>or</span> <span class='symbol'>:too_many_branches_in_define</span></pre></dd>
+      
+        <dt id="DEFINE_REPETION-constant" class="">DEFINE_REPETION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Repeating a “DEFINE” group is not allowed.</p>
+
+<pre class="code ruby"><code class="ruby">This error is never raised. Since: 2.16 Deprecated: 2.34
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>155</span> <span class='kw'>or</span> <span class='symbol'>:define_repetion</span></pre></dd>
+      
+        <dt id="INCONSISTENT_NEWLINE_OPTIONS-constant" class="">INCONSISTENT_NEWLINE_OPTIONS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Inconsistent newline options.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Since</span> <span class='float'>2.16</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>156</span> <span class='kw'>or</span> <span class='symbol'>:inconsistent_newline_options</span></pre></dd>
+      
+        <dt id="MISSING_BACK_REFERENCE-constant" class="">MISSING_BACK_REFERENCE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>“\g” is not followed by a braced,</p>
+
+<pre class="code ruby"><code class="ruby">angle-bracketed, or quoted name or number, or by a plain number. Since: 2.16
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>157</span> <span class='kw'>or</span> <span class='symbol'>:missing_back_reference</span></pre></dd>
+      
+        <dt id="INVALID_RELATIVE_REFERENCE-constant" class="">INVALID_RELATIVE_REFERENCE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>relative reference must not be zero. Since: 2.34</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>158</span> <span class='kw'>or</span> <span class='symbol'>:invalid_relative_reference</span></pre></dd>
+      
+        <dt id="BACKTRACKING_CONTROL_VERB_ARGUMENT_FORBIDDEN-constant" class="">BACKTRACKING_CONTROL_VERB_ARGUMENT_FORBIDDEN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the backtracing</p>
+
+<pre class="code ruby"><code class="ruby">control verb used does not allow an argument. Since: 2.34
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>159</span> <span class='kw'>or</span> <span class='symbol'>:backtracking_control_verb_argument_forbidden</span></pre></dd>
+      
+        <dt id="UNKNOWN_BACKTRACKING_CONTROL_VERB-constant" class="">UNKNOWN_BACKTRACKING_CONTROL_VERB =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>unknown backtracing</p>
+
+<pre class="code ruby"><code class="ruby">control verb. Since: 2.34
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>160</span> <span class='kw'>or</span> <span class='symbol'>:unknown_backtracking_control_verb</span></pre></dd>
+      
+        <dt id="NUMBER_TOO_BIG-constant" class="">NUMBER_TOO_BIG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>number is too big in escape sequence. Since: 2.34</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>161</span> <span class='kw'>or</span> <span class='symbol'>:number_too_big</span></pre></dd>
+      
+        <dt id="MISSING_SUBPATTERN_NAME-constant" class="">MISSING_SUBPATTERN_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Missing subpattern name. Since: 2.34</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>162</span> <span class='kw'>or</span> <span class='symbol'>:missing_subpattern_name</span></pre></dd>
+      
+        <dt id="MISSING_DIGIT-constant" class="">MISSING_DIGIT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Missing digit. Since 2.34</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>163</span> <span class='kw'>or</span> <span class='symbol'>:missing_digit</span></pre></dd>
+      
+        <dt id="INVALID_DATA_CHARACTER-constant" class="">INVALID_DATA_CHARACTER =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>In JavaScript compatibility mode,</p>
+
+<pre class="code ruby"><code class="ruby">&quot;[&quot; is an invalid data character. Since: 2.34
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>164</span> <span class='kw'>or</span> <span class='symbol'>:invalid_data_character</span></pre></dd>
+      
+        <dt id="EXTRA_SUBPATTERN_NAME-constant" class="">EXTRA_SUBPATTERN_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>different names for subpatterns of the</p>
+
+<pre class="code ruby"><code class="ruby">same number are not allowed. Since: 2.34
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>165</span> <span class='kw'>or</span> <span class='symbol'>:extra_subpattern_name</span></pre></dd>
+      
+        <dt id="BACKTRACKING_CONTROL_VERB_ARGUMENT_REQUIRED-constant" class="">BACKTRACKING_CONTROL_VERB_ARGUMENT_REQUIRED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the backtracing control</p>
+
+<pre class="code ruby"><code class="ruby">verb requires an argument. Since: 2.34
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>166</span> <span class='kw'>or</span> <span class='symbol'>:backtracking_control_verb_argument_required</span></pre></dd>
+      
+        <dt id="INVALID_CONTROL_CHAR-constant" class="">INVALID_CONTROL_CHAR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>“\c” must be followed by an ASCII</p>
+
+<pre class="code ruby"><code class="ruby">character. Since: 2.34
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>168</span> <span class='kw'>or</span> <span class='symbol'>:invalid_control_char</span></pre></dd>
+      
+        <dt id="MISSING_NAME-constant" class="">MISSING_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>“\k” is not followed by a braced, angle-bracketed, or</p>
+
+<pre class="code ruby"><code class="ruby">quoted name. Since: 2.34
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>169</span> <span class='kw'>or</span> <span class='symbol'>:missing_name</span></pre></dd>
+      
+        <dt id="NOT_SUPPORTED_IN_CLASS-constant" class="">NOT_SUPPORTED_IN_CLASS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>“\N” is not supported in a class. Since: 2.34</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>171</span> <span class='kw'>or</span> <span class='symbol'>:not_supported_in_class</span></pre></dd>
+      
+        <dt id="TOO_MANY_FORWARD_REFERENCES-constant" class="">TOO_MANY_FORWARD_REFERENCES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>too many forward references. Since: 2.34</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>172</span> <span class='kw'>or</span> <span class='symbol'>:too_many_forward_references</span></pre></dd>
+      
+        <dt id="NAME_TOO_LONG-constant" class="">NAME_TOO_LONG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the name is too long in “(*MARK)”, “(*PRUNE)”,</p>
+
+<pre class="code ruby"><code class="ruby">&quot;(*SKIP)&quot;, or &quot;(*THEN)&quot;. Since: 2.34
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>175</span> <span class='kw'>or</span> <span class='symbol'>:name_too_long</span></pre></dd>
+      
+        <dt id="CHARACTER_VALUE_TOO_LARGE-constant" class="">CHARACTER_VALUE_TOO_LARGE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the character value in the \u sequence is</p>
+
+<pre class="code ruby"><code class="ruby">too large. Since: 2.34
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>176</span> <span class='kw'>or</span> <span class='symbol'>:character_value_too_large</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:46 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

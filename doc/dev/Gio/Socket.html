@@ -1,0 +1,6738 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::Socket
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::Socket";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">Socket</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::Socket
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::Socket</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accept-instance_method" title="#accept (instance method)">#<strong>accept</strong>(cancellable)  &#x21d2; Gio::Socket </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Accept incoming connections on a connection-based socket.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#available_bytes-instance_method" title="#available_bytes (instance method)">#<strong>available_bytes</strong>  &#x21d2; Gio::gssize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the amount of data pending in the OS input buffer, without blocking.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bind-instance_method" title="#bind (instance method)">#<strong>bind</strong>(address, allow_reuse)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>When a socket is created it is attached to an address family, but it doesn’t have an address in this family.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#blocking-instance_method" title="#blocking (instance method)">#<strong>blocking</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the blocking mode of the socket.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#blocking=-instance_method" title="#blocking= (instance method)">#<strong>blocking=</strong>(blocking)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#blocking%3F-instance_method" title="#blocking? (instance method)">#<strong>blocking?</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Blocking.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#broadcast-instance_method" title="#broadcast (instance method)">#<strong>broadcast</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the broadcast setting on <strong>socket</strong>; if true, it is possible to send packets to broadcast addresses.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#broadcast=-instance_method" title="#broadcast= (instance method)">#<strong>broadcast=</strong>(broadcast)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether the socket should allow sending to broadcast addresses.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#broadcast%3F-instance_method" title="#broadcast? (instance method)">#<strong>broadcast?</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether the socket should allow sending to broadcast addresses.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#check_connect_result-instance_method" title="#check_connect_result (instance method)">#<strong>check_connect_result</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks and resets the pending connect error for the socket.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">#<strong>close</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Closes the socket, shutting down any active connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#condition_check-instance_method" title="#condition_check (instance method)">#<strong>condition_check</strong>(condition)  &#x21d2; GLib::IOCondition </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks on the readiness of <strong>socket</strong> to perform operations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#condition_timed_wait-instance_method" title="#condition_timed_wait (instance method)">#<strong>condition_timed_wait</strong>(condition, timeout_us, cancellable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Waits for up to <strong>timeout_us</strong> microseconds for <strong>condition</strong> to become true on <strong>socket</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#condition_wait-instance_method" title="#condition_wait (instance method)">#<strong>condition_wait</strong>(condition, cancellable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Waits for <strong>condition</strong> to become true on <strong>socket</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connect-instance_method" title="#connect (instance method)">#<strong>connect</strong>(address, cancellable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Connect the socket to the specified remote address.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connection_factory_create_connection-instance_method" title="#connection_factory_create_connection (instance method)">#<strong>connection_factory_create_connection</strong>  &#x21d2; Gio::SocketConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a GSocket::Connection subclass of the right type for <strong>socket</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_source-instance_method" title="#create_source (instance method)">#<strong>create_source</strong>(condition, cancellable)  &#x21d2; GLib::Source </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a #GSource that can be attached to a %GMainContext to monitor for the availability of the specified <strong>condition</strong> on the socket.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#credentials-instance_method" title="#credentials (instance method)">#<strong>credentials</strong>  &#x21d2; Gio::Credentials </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the credentials of the foreign process connected to this socket, if any (e.g. it is only supported for %G_SOCKET_FAMILY_UNIX sockets).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#family-instance_method" title="#family (instance method)">#<strong>family</strong>  &#x21d2; Gio::SocketFamily </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Family.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#family=-instance_method" title="#family= (instance method)">#<strong>family=</strong>(family)  &#x21d2; Gio::SocketFamily </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fd-instance_method" title="#fd (instance method)">#<strong>fd</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Fd.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fd=-instance_method" title="#fd= (instance method)">#<strong>fd=</strong>(fd)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_option-instance_method" title="#get_option (instance method)">#<strong>get_option</strong>(level, optname, value)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the value of an integer-valued option on <strong>socket</strong>, as with getsockopt().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_closed-instance_method" title="#is_closed (instance method)">#<strong>is_closed</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks whether a socket is closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_connected-instance_method" title="#is_connected (instance method)">#<strong>is_connected</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Check whether the socket is connected.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#join_multicast_group-instance_method" title="#join_multicast_group (instance method)">#<strong>join_multicast_group</strong>(group, source_specific, iface)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Registers <strong>socket</strong> to receive multicast messages sent to <strong>group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#join_multicast_group_ssm-instance_method" title="#join_multicast_group_ssm (instance method)">#<strong>join_multicast_group_ssm</strong>(group, source_specific, iface)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Registers <strong>socket</strong> to receive multicast messages sent to <strong>group</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keepalive-instance_method" title="#keepalive (instance method)">#<strong>keepalive</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the keepalive mode of the socket.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keepalive=-instance_method" title="#keepalive= (instance method)">#<strong>keepalive=</strong>(keepalive)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keepalive%3F-instance_method" title="#keepalive? (instance method)">#<strong>keepalive?</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Keepalive.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#leave_multicast_group-instance_method" title="#leave_multicast_group (instance method)">#<strong>leave_multicast_group</strong>(group, source_specific, iface)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes <strong>socket</strong> from the multicast group defined by <strong>group</strong>, <strong>iface</strong>, and <strong>source_specific</strong> (which must all have the same values they had when you joined the group).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#leave_multicast_group_ssm-instance_method" title="#leave_multicast_group_ssm (instance method)">#<strong>leave_multicast_group_ssm</strong>(group, source_specific, iface)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes <strong>socket</strong> from the multicast group defined by <strong>group</strong>, <strong>iface</strong>, and <strong>source_specific</strong> (which must all have the same values they had when you joined the group).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#listen-instance_method" title="#listen (instance method)">#<strong>listen</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Marks the socket as a server socket, i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#listen_backlog-instance_method" title="#listen_backlog (instance method)">#<strong>listen_backlog</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Listen-backlog.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#listen_backlog=-instance_method" title="#listen_backlog= (instance method)">#<strong>listen_backlog=</strong>(listen_backlog)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#local_address-instance_method" title="#local_address (instance method)">#<strong>local_address</strong>  &#x21d2; Gio::SocketAddress </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Local-address.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#local_address=-instance_method" title="#local_address= (instance method)">#<strong>local_address=</strong>(local_address)  &#x21d2; Gio::SocketAddress </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#multicast_loopback-instance_method" title="#multicast_loopback (instance method)">#<strong>multicast_loopback</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the multicast loopback setting on <strong>socket</strong>; if true (the default), outgoing multicast packets will be looped back to multicast listeners on the same host.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#multicast_loopback=-instance_method" title="#multicast_loopback= (instance method)">#<strong>multicast_loopback=</strong>(multicast_loopback)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether outgoing multicast packets loop back to the local host.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#multicast_loopback%3F-instance_method" title="#multicast_loopback? (instance method)">#<strong>multicast_loopback?</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether outgoing multicast packets loop back to the local host.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#multicast_ttl-instance_method" title="#multicast_ttl (instance method)">#<strong>multicast_ttl</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Time-to-live out outgoing multicast packets.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#multicast_ttl=-instance_method" title="#multicast_ttl= (instance method)">#<strong>multicast_ttl=</strong>(multicast_ttl)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Time-to-live out outgoing multicast packets.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>(family, type, protocol)  &#x21d2; Gio::Socket </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new #GSocket with the defined family, type and protocol.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_from_fd-instance_method" title="#new_from_fd (instance method)">#<strong>new_from_fd</strong>(fd)  &#x21d2; Gio::Socket </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new #GSocket from a native file descriptor or winsock SOCKET handle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#protocol-instance_method" title="#protocol (instance method)">#<strong>protocol</strong>  &#x21d2; Gio::SocketProtocol </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Protocol.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#protocol=-instance_method" title="#protocol= (instance method)">#<strong>protocol=</strong>(protocol)  &#x21d2; Gio::SocketProtocol </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#receive-instance_method" title="#receive (instance method)">#<strong>receive</strong>(buffer, size, cancellable)  &#x21d2; Gio::gssize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Receive data (up to <strong>size</strong> bytes) from a socket.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#receive_from-instance_method" title="#receive_from (instance method)">#<strong>receive_from</strong>(address, buffer, size, cancellable)  &#x21d2; Gio::gssize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Receive data (up to <strong>size</strong> bytes) from a socket.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#receive_message-instance_method" title="#receive_message (instance method)">#<strong>receive_message</strong>(address, vectors, num_vectors, messages, num_messages, flags, cancellable)  &#x21d2; Gio::gssize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Receive data from a socket.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#receive_messages-instance_method" title="#receive_messages (instance method)">#<strong>receive_messages</strong>(messages, num_messages, flags, cancellable)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Receive multiple data messages from <strong>socket</strong> in one go.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#receive_with_blocking-instance_method" title="#receive_with_blocking (instance method)">#<strong>receive_with_blocking</strong>(buffer, size, blocking, cancellable)  &#x21d2; Gio::gssize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This behaves exactly the same as g_socket_receive(), except that the choice of blocking or non-blocking behavior is determined by the <strong>blocking</strong> argument rather than by <strong>socket</strong>’s properties.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remote_address-instance_method" title="#remote_address (instance method)">#<strong>remote_address</strong>  &#x21d2; Gio::SocketAddress </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Remote-address.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remote_address=-instance_method" title="#remote_address= (instance method)">#<strong>remote_address=</strong>(remote_address)  &#x21d2; Gio::SocketAddress </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send-instance_method" title="#send (instance method)">#<strong>send</strong>(buffer, size, cancellable)  &#x21d2; Gio::gssize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Tries to send <strong>size</strong> bytes from <strong>buffer</strong> on the socket.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_message-instance_method" title="#send_message (instance method)">#<strong>send_message</strong>(address, vectors, num_vectors, messages, num_messages, flags, cancellable)  &#x21d2; Gio::gssize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Send data to <strong>address</strong> on <strong>socket</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_message_with_timeout-instance_method" title="#send_message_with_timeout (instance method)">#<strong>send_message_with_timeout</strong>(address, vectors, num_vectors, messages, num_messages, flags, timeout_us, bytes_written, cancellable)  &#x21d2; Gio::PollableReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This behaves exactly the same as g_socket_send_message(), except that the choice of timeout behavior is determined by the <strong>timeout_us</strong> argument rather than by <strong>socket</strong>’s properties.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_messages-instance_method" title="#send_messages (instance method)">#<strong>send_messages</strong>(messages, num_messages, flags, cancellable)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Send multiple data messages from <strong>socket</strong> in one go.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_to-instance_method" title="#send_to (instance method)">#<strong>send_to</strong>(address, buffer, size, cancellable)  &#x21d2; Gio::gssize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Tries to send <strong>size</strong> bytes from <strong>buffer</strong> to <strong>address</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_with_blocking-instance_method" title="#send_with_blocking (instance method)">#<strong>send_with_blocking</strong>(buffer, size, blocking, cancellable)  &#x21d2; Gio::gssize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This behaves exactly the same as g_socket_send(), except that the choice of blocking or non-blocking behavior is determined by the <strong>blocking</strong> argument rather than by <strong>socket</strong>’s properties.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_option-instance_method" title="#set_option (instance method)">#<strong>set_option</strong>(level, optname, value)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the value of an integer-valued option on <strong>socket</strong>, as with setsockopt().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shutdown-instance_method" title="#shutdown (instance method)">#<strong>shutdown</strong>(shutdown_read, shutdown_write)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Shut down part or all of a full-duplex connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#socket_type-instance_method" title="#socket_type (instance method)">#<strong>socket_type</strong>  &#x21d2; Gio::SocketType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the socket type of the socket.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#speaks_ipv4-instance_method" title="#speaks_ipv4 (instance method)">#<strong>speaks_ipv4</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks if a socket is capable of speaking IPv4.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timeout-instance_method" title="#timeout (instance method)">#<strong>timeout</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The timeout in seconds on socket I/O.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timeout=-instance_method" title="#timeout= (instance method)">#<strong>timeout=</strong>(timeout)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The timeout in seconds on socket I/O.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ttl-instance_method" title="#ttl (instance method)">#<strong>ttl</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Time-to-live for outgoing unicast packets.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ttl=-instance_method" title="#ttl= (instance method)">#<strong>ttl=</strong>(ttl)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Time-to-live for outgoing unicast packets.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type-instance_method" title="#type (instance method)">#<strong>type</strong>  &#x21d2; Gio::SocketType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Type.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type=-instance_method" title="#type= (instance method)">#<strong>type=</strong>(type)  &#x21d2; Gio::SocketType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="accept-instance_method">
+  
+    #<strong>accept</strong>(cancellable)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::Socket (class)">Gio::Socket</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Accept incoming connections on a connection-based socket. This removes the first outstanding connection request from the listening socket and creates a #GSocket object for it.</p>
+
+<p>The <strong>socket</strong> must be bound to a local address with g_socket_bind() and must be listening for incoming connections (g_socket_listen()).</p>
+
+<p>If there are no outstanding connections then the operation will block or return %G_IO_ERROR_WOULD_BLOCK if non-blocking I/O is enabled. To be notified of an incoming connection, wait for the %G_IO_IN condition.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::Socket (class)">Gio::Socket</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new #GSocket, or nil on error. Free the returned object with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="available_bytes-instance_method">
+  
+    #<strong>available_bytes</strong>  &#x21d2; <tt>Gio::gssize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the amount of data pending in the OS input buffer, without blocking.</p>
+
+<p>If <strong>socket</strong> is a UDP or SCTP socket, this will return the size of just the next packet, even if additional packets are buffered after that one.</p>
+
+<p>Note that on Windows, this function is rather inefficient in the UDP case, and so if you know any plausible upper bound on the size of the incoming packet, it is better to just do a g_socket_receive() with a buffer of that size, rather than calling g_socket_get_available_bytes() first and then doing a receive of exactly the right size. without blocking or truncating, or -1 on error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of bytes that can be read from the socket</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bind-instance_method">
+  
+    #<strong>bind</strong>(address, allow_reuse)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>When a socket is created it is attached to an address family, but it doesn’t have an address in this family. g_socket_bind() assigns the address (sometimes called name) of the socket.</p>
+
+<p>It is generally required to bind to a local address before you can receive connections. (See g_socket_listen() and g_socket_accept() ). In certain situations, you may also want to bind a socket that will be used to initiate connections, though this is not normally required.</p>
+
+<p>If <strong>socket</strong> is a TCP socket, then <strong>allow_reuse</strong> controls the setting of the ‘SO_REUSEADDR` socket option; normally it should be true for server sockets (sockets that you will eventually call g_socket_accept() on), and false for client sockets. (Failing to set this flag on a server socket may cause g_socket_bind() to return %G_IO_ERROR_ADDRESS_IN_USE if the server program is stopped and then immediately restarted.)</p>
+
+<p>If <strong>socket</strong> is a UDP socket, then <strong>allow_reuse</strong> determines whether or not other UDP sockets can be bound to the same address at the same time. In particular, you can have several UDP sockets bound to the same address, and they will all receive all of the multicast and broadcast packets sent to that address. (The behavior of unicast UDP packets to an address with multiple listeners is not defined.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Address specifying the local address.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>allow_reuse</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether to allow reusing this address</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="blocking-instance_method">
+  
+    #<strong>blocking</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the blocking mode of the socket. For details on blocking I/O, see g_socket_set_blocking().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if blocking I/O is used, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="blocking=-instance_method">
+  
+    #<strong>blocking=</strong>(blocking)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>blocking</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>blocking</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>blocking</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="blocking?-instance_method">
+  
+    #<strong>blocking?</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns blocking.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>blocking</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="broadcast-instance_method">
+  
+    #<strong>broadcast</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the broadcast setting on <strong>socket</strong>; if true, it is possible to send packets to broadcast addresses.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the broadcast setting on <strong>socket</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="broadcast=-instance_method">
+  
+    #<strong>broadcast=</strong>(broadcast)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Whether the socket should allow sending to broadcast addresses.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>broadcast</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>broadcast</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>broadcast</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="broadcast?-instance_method">
+  
+    #<strong>broadcast?</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Whether the socket should allow sending to broadcast addresses.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>broadcast</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="check_connect_result-instance_method">
+  
+    #<strong>check_connect_result</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks and resets the pending connect error for the socket. This is used to check for errors when g_socket_connect() is used in non-blocking mode.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if no error, false otherwise, setting <strong>error</strong> to the error</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close-instance_method">
+  
+    #<strong>close</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Closes the socket, shutting down any active connection.</p>
+
+<p>Closing a socket does not wait for all outstanding I/O operations to finish, so the caller should not rely on them to be guaranteed to complete even if the close returns with no error.</p>
+
+<p>Once the socket is closed, all other operations will return %G_IO_ERROR_CLOSED. Closing a socket multiple times will not return an error.</p>
+
+<p>Sockets will be automatically closed when the last reference is dropped, but you might want to call this function to make sure resources are released as early as possible.</p>
+
+<p>Beware that due to the way that TCP works, it is possible for recently-sent data to be lost if either you close a socket while the %G_IO_IN condition is set, or else if the remote connection tries to send something to you after you close the socket but before it has finished reading all of the data you sent. There is no easy generic way to avoid this problem; the easiest fix is to design the network protocol such that the client will never send data “out of turn”. Another solution is for the server to half-close the connection by calling g_socket_shutdown() with only the <strong>shutdown_write</strong> flag set, and then wait for the client to notice this and close its side of the connection, after which the server can safely call g_socket_close(). (This is what GTcp::Connection does if you call g_tcp_connection_set_graceful_disconnect(). But of course, this only works if the client will close its connection after the server does.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on error</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="condition_check-instance_method">
+  
+    #<strong>condition_check</strong>(condition)  &#x21d2; <tt><span class='object_link'><a href="../GLib/IOCondition.html" title="GLib::IOCondition (module)">GLib::IOCondition</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks on the readiness of <strong>socket</strong> to perform operations. The operations specified in <strong>condition</strong> are checked for and masked against the currently-satisfied conditions on <strong>socket</strong>. The result is returned.</p>
+
+<p>Note that on Windows, it is possible for an operation to return %G_IO_ERROR_WOULD_BLOCK even immediately after g_socket_condition_check() has claimed that the socket is ready for writing. Rather than calling g_socket_condition_check() and then writing to the socket if it succeeds, it is generally better to simply try writing to the socket right away, and try again later if the initial attempt returns %G_IO_ERROR_WOULD_BLOCK.</p>
+
+<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in condition; these conditions will always be set in the output if they are true.</p>
+
+<p>This call never blocks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>condition</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/IOCondition.html" title="GLib::IOCondition (module)">GLib::IOCondition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GIOCondition mask to check</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/IOCondition.html" title="GLib::IOCondition (module)">GLib::IOCondition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the <strong>GIOCondition</strong> mask of the current state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="condition_timed_wait-instance_method">
+  
+    #<strong>condition_timed_wait</strong>(condition, timeout_us, cancellable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Waits for up to <strong>timeout_us</strong> microseconds for <strong>condition</strong> to become true on <strong>socket</strong>. If the condition is met, true is returned.</p>
+
+<p>If <strong>cancellable</strong> is cancelled before the condition is met, or if <strong>timeout_us</strong> (or the socket’s #GSocket:timeout) is reached before the condition is met, then false is returned and <strong>error</strong>, if non-nil, is set to the appropriate value (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).</p>
+
+<p>If you don’t want a timeout, use g_socket_condition_wait(). (Alternatively, you can pass -1 for <strong>timeout_us</strong>.)</p>
+
+<p>Note that although <strong>timeout_us</strong> is in microseconds for consistency with other GLib APIs, this function actually only has millisecond resolution, and the behavior is undefined if <strong>timeout_us</strong> is not an exact number of milliseconds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>condition</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/IOCondition.html" title="GLib::IOCondition (module)">GLib::IOCondition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GIOCondition mask to wait for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_us</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the maximum time (in microseconds) to wait, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the condition was met, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="condition_wait-instance_method">
+  
+    #<strong>condition_wait</strong>(condition, cancellable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Waits for <strong>condition</strong> to become true on <strong>socket</strong>. When the condition is met, true is returned.</p>
+
+<p>If <strong>cancellable</strong> is cancelled before the condition is met, or if the socket has a timeout set and it is reached before the condition is met, then false is returned and <strong>error</strong>, if non-nil, is set to the appropriate value (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).</p>
+
+<p>See also g_socket_condition_timed_wait().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>condition</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/IOCondition.html" title="GLib::IOCondition (module)">GLib::IOCondition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GIOCondition mask to wait for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the condition was met, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="connect-instance_method">
+  
+    #<strong>connect</strong>(address, cancellable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Connect the socket to the specified remote address.</p>
+
+<p>For connection oriented socket this generally means we attempt to make a connection to the <strong>address</strong>. For a connection-less socket it sets the default address for g_socket_send() and discards all incoming datagrams from other sources.</p>
+
+<p>Generally connection oriented sockets can only connect once, but connection-less sockets can connect multiple times to change the default address.</p>
+
+<p>If the connect call needs to do network I/O it will block, unless non-blocking I/O is enabled. Then %G_IO_ERROR_PENDING is returned and the user can be notified of the connection finishing by waiting for the G_IO_OUT condition. The result of the connection must then be checked with g_socket_check_connect_result().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Address specifying the remote address.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if connected, false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="connection_factory_create_connection-instance_method">
+  
+    #<strong>connection_factory_create_connection</strong>  &#x21d2; <tt><span class='object_link'><a href="SocketConnection.html" title="Gio::SocketConnection (class)">Gio::SocketConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a GSocket::Connection subclass of the right type for <strong>socket</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketConnection.html" title="Gio::SocketConnection (class)">Gio::SocketConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Connection</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_source-instance_method">
+  
+    #<strong>create_source</strong>(condition, cancellable)  &#x21d2; <tt>GLib::Source</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a #GSource that can be attached to a %GMainContext to monitor for the availability of the specified <strong>condition</strong> on the socket. The #GSource keeps a reference to the <strong>socket</strong>.</p>
+
+<p>The callback on the source is of the GSocket::SourceFunc type.</p>
+
+<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in <strong>condition</strong>; these conditions will always be reported output if they are true.</p>
+
+<p><strong>cancellable</strong> if not nil can be used to cancel the source, which will cause the source to trigger, reporting the current condition (which is likely 0 unless cancellation happened at the same time as a condition change). You can check for this in the callback using g_cancellable_is_cancelled().</p>
+
+<p>If <strong>socket</strong> has a timeout set, and it is reached before <strong>condition</strong> occurs, the source will then trigger anyway, reporting %G_IO_IN or %G_IO_OUT depending on <strong>condition</strong>. However, <strong>socket</strong> will have been marked as having had a timeout, and so the next #GSocket I/O method you call will then fail with a %G_IO_ERROR_TIMED_OUT.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>condition</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/IOCondition.html" title="GLib::IOCondition (module)">GLib::IOCondition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GIOCondition mask to monitor</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Source</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly allocated %GSource, free with g_source_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="credentials-instance_method">
+  
+    #<strong>credentials</strong>  &#x21d2; <tt><span class='object_link'><a href="Credentials.html" title="Gio::Credentials (class)">Gio::Credentials</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the credentials of the foreign process connected to this socket, if any (e.g. it is only supported for %G_SOCKET_FAMILY_UNIX sockets).</p>
+
+<p>If this operation isn’t supported on the OS, the method fails with the %G_IO_ERROR_NOT_SUPPORTED error. On Linux this is implemented by reading the %SO_PEERCRED option on the underlying socket.</p>
+
+<p>This method can be expected to be available on the following platforms:</p>
+<ul><li>
+<p>Linux since GLib 2.26</p>
+</li><li>
+<p>OpenBSD since GLib 2.30</p>
+</li><li>
+<p>Solaris, Illumos and OpenSolaris since GLib 2.40</p>
+</li><li>
+<p>NetBSD since GLib 2.42</p>
+</li></ul>
+
+<p>Other ways to obtain credentials from a foreign peer includes the GUnix::CredentialsMessage type and g_unix_connection_send_credentials() / g_unix_connection_receive_credentials() functions. that must be freed with g_object_unref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Credentials.html" title="Gio::Credentials (class)">Gio::Credentials</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil if <strong>error</strong> is set, otherwise a #GCredentials object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="family-instance_method">
+  
+    #<strong>family</strong>  &#x21d2; <tt><span class='object_link'><a href="SocketFamily.html" title="Gio::SocketFamily (module)">Gio::SocketFamily</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns family.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketFamily.html" title="Gio::SocketFamily (module)">Gio::SocketFamily</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>family</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="family=-instance_method">
+  
+    #<strong>family=</strong>(family)  &#x21d2; <tt><span class='object_link'><a href="SocketFamily.html" title="Gio::SocketFamily (module)">Gio::SocketFamily</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>family</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketFamily.html" title="Gio::SocketFamily (module)">Gio::SocketFamily</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketFamily.html" title="Gio::SocketFamily (module)">Gio::SocketFamily</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>family</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketFamily.html" title="Gio::SocketFamily (module)">Gio::SocketFamily</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>family</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fd-instance_method">
+  
+    #<strong>fd</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns fd.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>fd</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fd=-instance_method">
+  
+    #<strong>fd=</strong>(fd)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fd</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>fd</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>fd</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_option-instance_method">
+  
+    #<strong>get_option</strong>(level, optname, value)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the value of an integer-valued option on <strong>socket</strong>, as with getsockopt(). (If you need to fetch a  non-integer-valued option, you will need to call getsockopt() directly.)</p>
+
+<p>The [&lt;<a href="gio-gnetworking.h">gio/gnetworking.h>]</a> header pulls in system headers that will define most of the standard/portable socket options. For unusual socket protocols or platform-dependent options, you may need to include additional headers.</p>
+
+<p>Note that even for socket options that are a single byte in size, <strong>value</strong> is still a pointer to a #gint variable, not a #guchar; g_socket_get_option() will handle the conversion internally.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>level</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the “API level” of the option (eg, ‘SOL_SOCKET`)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>optname</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the “name” of the option (eg, ‘SO_BROADCAST`)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the option value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>success or failure. On failure, <strong>error</strong> will be set, and the system error value (‘errno` or WSAGetLastError()) will still be set to the result of the getsockopt() call.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_closed-instance_method">
+  
+    #<strong>is_closed</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks whether a socket is closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if socket is closed, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_connected-instance_method">
+  
+    #<strong>is_connected</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Check whether the socket is connected. This is only useful for connection-oriented sockets.</p>
+
+<p>If using g_socket_shutdown(), this function will return true until the socket has been shut down for reading and writing. If you do a non-blocking connect, this function will not return true until after you call g_socket_check_connect_result().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if socket is connected, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="join_multicast_group-instance_method">
+  
+    #<strong>join_multicast_group</strong>(group, source_specific, iface)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Registers <strong>socket</strong> to receive multicast messages sent to <strong>group</strong>. <strong>socket</strong> must be a %G_SOCKET_TYPE_DATAGRAM socket, and must have been bound to an appropriate interface and port with g_socket_bind().</p>
+
+<p>If <strong>iface</strong> is nil, the system will automatically pick an interface to bind to based on <strong>group</strong>.</p>
+
+<p>If <strong>source_specific</strong> is true, source-specific multicast as defined in RFC 4604 is used. Note that on older platforms this may fail with a %G_IO_ERROR_NOT_SUPPORTED error.</p>
+
+<p>To bind to a given source-specific multicast address, use g_socket_join_multicast_group_ssm() instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>group</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InetAddress.html" title="Gio::InetAddress (class)">Gio::InetAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GInet::Address specifying the group address to join.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>source_specific</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if source-specific multicast should be used</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iface</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Name of the interface to use, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="join_multicast_group_ssm-instance_method">
+  
+    #<strong>join_multicast_group_ssm</strong>(group, source_specific, iface)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Registers <strong>socket</strong> to receive multicast messages sent to <strong>group</strong>. <strong>socket</strong> must be a %G_SOCKET_TYPE_DATAGRAM socket, and must have been bound to an appropriate interface and port with g_socket_bind().</p>
+
+<p>If <strong>iface</strong> is nil, the system will automatically pick an interface to bind to based on <strong>group</strong>.</p>
+
+<p>If <strong>source_specific</strong> is not nil, use source-specific multicast as defined in RFC 4604. Note that on older platforms this may fail with a %G_IO_ERROR_NOT_SUPPORTED error.</p>
+
+<p>Note that this function can be called multiple times for the same <strong>group</strong> with different <strong>source_specific</strong> in order to receive multicast packets from more than one source. source-specific multicast address or nil to ignore.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>group</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InetAddress.html" title="Gio::InetAddress (class)">Gio::InetAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GInet::Address specifying the group address to join.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>source_specific</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InetAddress.html" title="Gio::InetAddress (class)">Gio::InetAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GInet::Address specifying the</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iface</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Name of the interface to use, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="keepalive-instance_method">
+  
+    #<strong>keepalive</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the keepalive mode of the socket. For details on this, see g_socket_set_keepalive().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if keepalive is active, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="keepalive=-instance_method">
+  
+    #<strong>keepalive=</strong>(keepalive)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>keepalive</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>keepalive</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>keepalive</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="keepalive?-instance_method">
+  
+    #<strong>keepalive?</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns keepalive.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>keepalive</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="leave_multicast_group-instance_method">
+  
+    #<strong>leave_multicast_group</strong>(group, source_specific, iface)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes <strong>socket</strong> from the multicast group defined by <strong>group</strong>, <strong>iface</strong>, and <strong>source_specific</strong> (which must all have the same values they had when you joined the group).</p>
+
+<p><strong>socket</strong> remains bound to its address and port, and can still receive unicast messages after calling this.</p>
+
+<p>To unbind to a given source-specific multicast address, use g_socket_leave_multicast_group_ssm() instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>group</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InetAddress.html" title="Gio::InetAddress (class)">Gio::InetAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GInet::Address specifying the group address to leave.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>source_specific</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if source-specific multicast was used</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iface</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Interface used</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="leave_multicast_group_ssm-instance_method">
+  
+    #<strong>leave_multicast_group_ssm</strong>(group, source_specific, iface)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes <strong>socket</strong> from the multicast group defined by <strong>group</strong>, <strong>iface</strong>, and <strong>source_specific</strong> (which must all have the same values they had when you joined the group).</p>
+
+<p><strong>socket</strong> remains bound to its address and port, and can still receive unicast messages after calling this. source-specific multicast address or nil to ignore.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>group</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InetAddress.html" title="Gio::InetAddress (class)">Gio::InetAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GInet::Address specifying the group address to leave.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>source_specific</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InetAddress.html" title="Gio::InetAddress (class)">Gio::InetAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GInet::Address specifying the</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iface</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Name of the interface to use, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="listen-instance_method">
+  
+    #<strong>listen</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Marks the socket as a server socket, i.e. a socket that is used to accept incoming requests using g_socket_accept().</p>
+
+<p>Before calling this the socket must be bound to a local address using g_socket_bind().</p>
+
+<p>To set the maximum amount of outstanding clients, use g_socket_set_listen_backlog().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="listen_backlog-instance_method">
+  
+    #<strong>listen_backlog</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns listen-backlog.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>listen-backlog</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="listen_backlog=-instance_method">
+  
+    #<strong>listen_backlog=</strong>(listen_backlog)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>listen_backlog</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>listen-backlog</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>listen-backlog</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="local_address-instance_method">
+  
+    #<strong>local_address</strong>  &#x21d2; <tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns local-address.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>local-address</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="local_address=-instance_method">
+  
+    #<strong>local_address=</strong>(local_address)  &#x21d2; <tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>local_address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>local-address</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>local-address</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="multicast_loopback-instance_method">
+  
+    #<strong>multicast_loopback</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the multicast loopback setting on <strong>socket</strong>; if true (the default), outgoing multicast packets will be looped back to multicast listeners on the same host.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the multicast loopback setting on <strong>socket</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="multicast_loopback=-instance_method">
+  
+    #<strong>multicast_loopback=</strong>(multicast_loopback)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Whether outgoing multicast packets loop back to the local host.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>multicast_loopback</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>multicast-loopback</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>multicast-loopback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="multicast_loopback?-instance_method">
+  
+    #<strong>multicast_loopback?</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Whether outgoing multicast packets loop back to the local host.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>multicast-loopback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="multicast_ttl-instance_method">
+  
+    #<strong>multicast_ttl</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Time-to-live out outgoing multicast packets</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>multicast-ttl</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="multicast_ttl=-instance_method">
+  
+    #<strong>multicast_ttl=</strong>(multicast_ttl)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Time-to-live out outgoing multicast packets</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>multicast_ttl</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>multicast-ttl</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>multicast-ttl</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>(family, type, protocol)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::Socket (class)">Gio::Socket</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new #GSocket with the defined family, type and protocol. If <strong>protocol</strong> is 0 (%G_SOCKET_PROTOCOL_DEFAULT) the default protocol type for the family and type is used.</p>
+
+<p>The <strong>protocol</strong> is a family and type specific int that specifies what kind of protocol to use. GSocket::Protocol lists several common ones. Many families only support one protocol, and use 0 for this, others support several and using 0 means to use the default protocol for the family and type.</p>
+
+<p>The protocol id is passed directly to the operating system, so you can use protocols not listed in GSocket::Protocol if you know the protocol number used for it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>family</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketFamily.html" title="Gio::SocketFamily (module)">Gio::SocketFamily</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the socket family to use, e.g. %G_SOCKET_FAMILY_IPV4.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the socket type to use.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>protocol</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketProtocol.html" title="Gio::SocketProtocol (module)">Gio::SocketProtocol</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the id of the protocol to use, or 0 for default.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::Socket (class)">Gio::Socket</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GSocket or nil on error. Free the returned object with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_from_fd-instance_method">
+  
+    #<strong>new_from_fd</strong>(fd)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::Socket (class)">Gio::Socket</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new #GSocket from a native file descriptor or winsock SOCKET handle.</p>
+
+<p>This reads all the settings from the file descriptor so that all properties should work. Note that the file descriptor will be set to non-blocking mode, independent on the blocking mode of the #GSocket.</p>
+
+<p>On success, the returned #GSocket takes ownership of <strong>fd</strong>. On failure, the caller must close <strong>fd</strong> themselves.</p>
+
+<p>Since GLib 2.46, it is no longer a fatal error to call this on a non-socket descriptor.  Instead, a GError will be set with code %G_IO_ERROR_FAILED</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fd</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a native socket file descriptor.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::Socket (class)">Gio::Socket</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GSocket or nil on error. Free the returned object with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="protocol-instance_method">
+  
+    #<strong>protocol</strong>  &#x21d2; <tt><span class='object_link'><a href="SocketProtocol.html" title="Gio::SocketProtocol (module)">Gio::SocketProtocol</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns protocol.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketProtocol.html" title="Gio::SocketProtocol (module)">Gio::SocketProtocol</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>protocol</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="protocol=-instance_method">
+  
+    #<strong>protocol=</strong>(protocol)  &#x21d2; <tt><span class='object_link'><a href="SocketProtocol.html" title="Gio::SocketProtocol (module)">Gio::SocketProtocol</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>protocol</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketProtocol.html" title="Gio::SocketProtocol (module)">Gio::SocketProtocol</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketProtocol.html" title="Gio::SocketProtocol (module)">Gio::SocketProtocol</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>protocol</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketProtocol.html" title="Gio::SocketProtocol (module)">Gio::SocketProtocol</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>protocol</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="receive-instance_method">
+  
+    #<strong>receive</strong>(buffer, size, cancellable)  &#x21d2; <tt>Gio::gssize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Receive data (up to <strong>size</strong> bytes) from a socket. This is mainly used by connection-oriented sockets; it is identical to g_socket_receive_from() with <strong>address</strong> set to nil.</p>
+
+<p>For %G_SOCKET_TYPE_DATAGRAM and %G_SOCKET_TYPE_SEQPACKET sockets, g_socket_receive() will always read either 0 or 1 complete messages from the socket. If the received message is too large to fit in <strong>buffer</strong>, then the data beyond <strong>size</strong> bytes will be discarded, without any explicit indication that this has occurred.</p>
+
+<p>For %G_SOCKET_TYPE_STREAM sockets, g_socket_receive() can return any number of bytes, up to <strong>size</strong>. If more than <strong>size</strong> bytes have been received, the additional data will be returned in future calls to g_socket_receive().</p>
+
+<p>If the socket is in blocking mode the call will block until there is some data to receive, the connection is closed, or there is an error. If there is no data available and the socket is in non-blocking mode, a %G_IO_ERROR_WOULD_BLOCK error will be returned. To be notified when data is available, wait for the %G_IO_IN condition.</p>
+
+<p>On error -1 is returned and <strong>error</strong> is set accordingly. the peer, or -1 on error</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a buffer to read data into (which should be at least <strong>size</strong> bytes long).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of bytes you want to read from the socket</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Number of bytes read, or 0 if the connection was closed by</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="receive_from-instance_method">
+  
+    #<strong>receive_from</strong>(address, buffer, size, cancellable)  &#x21d2; <tt>Gio::gssize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Receive data (up to <strong>size</strong> bytes) from a socket.</p>
+
+<p>If <strong>address</strong> is non-nil then <strong>address</strong> will be set equal to the source address of the received packet. <strong>address</strong> is owned by the caller.</p>
+
+<p>See g_socket_receive() for additional information. the peer, or -1 on error</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a pointer to a GSocket::Address pointer, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a buffer to read data into (which should be at least <strong>size</strong> bytes long).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of bytes you want to read from the socket</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Number of bytes read, or 0 if the connection was closed by</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="receive_message-instance_method">
+  
+    #<strong>receive_message</strong>(address, vectors, num_vectors, messages, num_messages, flags, cancellable)  &#x21d2; <tt>Gio::gssize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Receive data from a socket.  For receiving multiple messages, see g_socket_receive_messages(); for easier use, see g_socket_receive() and g_socket_receive_from().</p>
+
+<p>If <strong>address</strong> is non-nil then <strong>address</strong> will be set equal to the source address of the received packet. <strong>address</strong> is owned by the caller.</p>
+
+<p><strong>vector</strong> must point to an array of GInput::Vector structs and <strong>num_vectors</strong> must be the length of this array.  These structs describe the buffers that received data will be scattered into. If <strong>num_vectors</strong> is -1, then <strong>vectors</strong> is assumed to be terminated by a GInput::Vector with a nil buffer pointer.</p>
+
+<p>As a special case, if <strong>num_vectors</strong> is 0 (in which case, <strong>vectors</strong> may of course be nil), then a single byte is received and discarded. This is to facilitate the common practice of sending a single ‘0’ byte for the purposes of transferring ancillary data.</p>
+
+<p><strong>messages</strong>, if non-nil, will be set to point to a newly-allocated array of GSocket::ControlMessage instances or nil if no such messages was received. These correspond to the control messages received from the kernel, one GSocket::ControlMessage per message from the kernel. This array is nil-terminated and must be freed by the caller using g_free() after calling g_object_unref() on each element. If <strong>messages</strong> is nil, any control messages received will be discarded.</p>
+
+<p><strong>num_messages</strong>, if non-nil, will be set to the number of control messages received.</p>
+
+<p>If both <strong>messages</strong> and <strong>num_messages</strong> are non-nil, then <strong>num_messages</strong> gives the number of GSocket::ControlMessage instances in <strong>messages</strong> (ie: not including the nil terminator).</p>
+
+<p><strong>flags</strong> is an in/out parameter. The commonly available arguments for this are available in the GSocket::MsgFlags enum, but the values there are the same as the system values, and the flags are passed in as-is, so you can pass in system-specific flags too (and g_socket_receive_message() may pass system-specific flags out). Flags passed in to the parameter affect the receive operation; flags returned out of it are relevant to the specific returned message.</p>
+
+<p>As with g_socket_receive(), data may be discarded if <strong>socket</strong> is %G_SOCKET_TYPE_DATAGRAM or %G_SOCKET_TYPE_SEQPACKET and you do not provide enough buffer space to read a complete message. You can pass %G_SOCKET_MSG_PEEK in <strong>flags</strong> to peek at the current message without removing it from the receive queue, but there is no portable way to find out the length of the message other than by reading it into a sufficiently-large buffer.</p>
+
+<p>If the socket is in blocking mode the call will block until there is some data to receive, the connection is closed, or there is an error. If there is no data available and the socket is in non-blocking mode, a %G_IO_ERROR_WOULD_BLOCK error will be returned. To be notified when data is available, wait for the %G_IO_IN condition.</p>
+
+<p>On error -1 is returned and <strong>error</strong> is set accordingly. the peer, or -1 on error</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a pointer to a GSocket::Address pointer, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>vectors</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::InputVector&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of GInput::Vector structs</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_vectors</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of elements in <strong>vectors</strong>, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>messages</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="SocketControlMessage.html" title="Gio::SocketControlMessage (class)">Gio::SocketControlMessage</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a pointer which may be filled with an array of GSocket::ControlMessages, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_messages</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a pointer which will be filled with the number of elements in <strong>messages</strong>, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a pointer to an int containing GSocket::MsgFlags flags, which may additionally contain [other platform specific flags](<a href="http://man7.org/linux/man-pages/man2/recv.2.html">man7.org/linux/man-pages/man2/recv.2.html</a>)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Number of bytes read, or 0 if the connection was closed by</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="receive_messages-instance_method">
+  
+    #<strong>receive_messages</strong>(messages, num_messages, flags, cancellable)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Receive multiple data messages from <strong>socket</strong> in one go.  This is the most complicated and fully-featured version of this call. For easier use, see g_socket_receive(), g_socket_receive_from(), and g_socket_receive_message().</p>
+
+<p><strong>messages</strong> must point to an array of GInput::Message structs and <strong>num_messages</strong> must be the length of this array. Each GInput::Message contains a pointer to an array of GInput::Vector structs describing the buffers that the data received in each message will be written to. Using multiple GInput::Vectors is more memory-efficient than manually copying data out of a single buffer to multiple sources, and more system-call-efficient than making multiple calls to g_socket_receive(), such as in scenarios where a lot of data packets need to be received (e.g. high-bandwidth video streaming over RTP/UDP).</p>
+
+<p><strong>flags</strong> modify how all messages are received. The commonly available arguments for this are available in the GSocket::MsgFlags enum, but the values there are the same as the system values, and the flags are passed in as-is, so you can pass in system-specific flags too. These flags affect the overall receive operation. Flags affecting individual messages are returned in GInput::Message.flags.</p>
+
+<p>The other members of GInput::Message are treated as described in its documentation.</p>
+
+<p>If #GSocket:blocking is true the call will block until <strong>num_messages</strong> have been received, or the end of the stream is reached.</p>
+
+<p>If #GSocket:blocking is false the call will return up to <strong>num_messages</strong> without blocking, or %G_IO_ERROR_WOULD_BLOCK if no messages are queued in the operating system to be received.</p>
+
+<p>In blocking mode, if #GSocket:timeout is positive and is reached before any messages are received, %G_IO_ERROR_TIMED_OUT is returned, otherwise up to <strong>num_messages</strong> are returned. (Note: This is effectively the behaviour of ‘MSG_WAITFORONE` with recvmmsg().)</p>
+
+<p>To be notified when messages are available, wait for the %G_IO_IN condition. Note though that you may still receive %G_IO_ERROR_WOULD_BLOCK from g_socket_receive_messages() even if you were previously notified of a %G_IO_IN condition.</p>
+
+<p>If the remote peer closes the connection, any messages queued in the operating system will be returned, and subsequent calls to g_socket_receive_messages() will return 0 (with no error set).</p>
+
+<p>On error -1 is returned and <strong>error</strong> is set accordingly. An error will only be returned if zero messages could be received; otherwise the number of messages successfully received before the error will be returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>messages</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::InputMessage&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of GInput::Message structs</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_messages</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of elements in <strong>messages</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an int containing GSocket::MsgFlags flags for the overall operation, which may additionally contain [other platform specific flags](<a href="http://man7.org/linux/man-pages/man2/recv.2.html">man7.org/linux/man-pages/man2/recv.2.html</a>)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of messages received, or -1 on error. Note that the number of messages received may be smaller than <strong>num_messages</strong> if in non-blocking mode, if the peer closed the connection, or if <strong>num_messages</strong> was larger than ‘UIO_MAXIOV` (1024), in which case the caller may re-try to receive the remaining messages.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="receive_with_blocking-instance_method">
+  
+    #<strong>receive_with_blocking</strong>(buffer, size, blocking, cancellable)  &#x21d2; <tt>Gio::gssize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This behaves exactly the same as g_socket_receive(), except that the choice of blocking or non-blocking behavior is determined by the <strong>blocking</strong> argument rather than by <strong>socket</strong>’s properties. the peer, or -1 on error</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a buffer to read data into (which should be at least <strong>size</strong> bytes long).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of bytes you want to read from the socket</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blocking</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether to do blocking or non-blocking I/O</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Number of bytes read, or 0 if the connection was closed by</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remote_address-instance_method">
+  
+    #<strong>remote_address</strong>  &#x21d2; <tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns remote-address.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>remote-address</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remote_address=-instance_method">
+  
+    #<strong>remote_address=</strong>(remote_address)  &#x21d2; <tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>remote_address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>remote-address</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>remote-address</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send-instance_method">
+  
+    #<strong>send</strong>(buffer, size, cancellable)  &#x21d2; <tt>Gio::gssize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Tries to send <strong>size</strong> bytes from <strong>buffer</strong> on the socket. This is mainly used by connection-oriented sockets; it is identical to g_socket_send_to() with <strong>address</strong> set to nil.</p>
+
+<p>If the socket is in blocking mode the call will block until there is space for the data in the socket queue. If there is no space available and the socket is in non-blocking mode a %G_IO_ERROR_WOULD_BLOCK error will be returned. To be notified when space is available, wait for the %G_IO_OUT condition. Note though that you may still receive %G_IO_ERROR_WOULD_BLOCK from g_socket_send() even if you were previously notified of a %G_IO_OUT condition. (On Windows in particular, this is very common due to the way the underlying APIs work.)</p>
+
+<p>On error -1 is returned and <strong>error</strong> is set accordingly. on error</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the buffer containing the data to send.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of bytes to send</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Number of bytes written (which may be less than <strong>size</strong>), or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_message-instance_method">
+  
+    #<strong>send_message</strong>(address, vectors, num_vectors, messages, num_messages, flags, cancellable)  &#x21d2; <tt>Gio::gssize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Send data to <strong>address</strong> on <strong>socket</strong>.  For sending multiple messages see g_socket_send_messages(); for easier use, see g_socket_send() and g_socket_send_to().</p>
+
+<p>If <strong>address</strong> is nil then the message is sent to the default receiver (set by g_socket_connect()).</p>
+
+<p><strong>vectors</strong> must point to an array of GOutput::Vector structs and <strong>num_vectors</strong> must be the length of this array. (If <strong>num_vectors</strong> is -1, then <strong>vectors</strong> is assumed to be terminated by a GOutput::Vector with a nil buffer pointer.) The GOutput::Vector structs describe the buffers that the sent data will be gathered from. Using multiple GOutput::Vectors is more memory-efficient than manually copying data from multiple sources into a single buffer, and more network-efficient than making multiple calls to g_socket_send().</p>
+
+<p><strong>messages</strong>, if non-nil, is taken to point to an array of <strong>num_messages</strong> GSocket::ControlMessage instances. These correspond to the control messages to be sent on the socket. If <strong>num_messages</strong> is -1 then <strong>messages</strong> is treated as a nil-terminated array.</p>
+
+<p><strong>flags</strong> modify how the message is sent. The commonly available arguments for this are available in the GSocket::MsgFlags enum, but the values there are the same as the system values, and the flags are passed in as-is, so you can pass in system-specific flags too.</p>
+
+<p>If the socket is in blocking mode the call will block until there is space for the data in the socket queue. If there is no space available and the socket is in non-blocking mode a %G_IO_ERROR_WOULD_BLOCK error will be returned. To be notified when space is available, wait for the %G_IO_OUT condition. Note though that you may still receive %G_IO_ERROR_WOULD_BLOCK from g_socket_send() even if you were previously notified of a %G_IO_OUT condition. (On Windows in particular, this is very common due to the way the underlying APIs work.)</p>
+
+<p>On error -1 is returned and <strong>error</strong> is set accordingly. on error</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Address, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>vectors</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::OutputVector&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of GOutput::Vector structs</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_vectors</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of elements in <strong>vectors</strong>, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>messages</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="SocketControlMessage.html" title="Gio::SocketControlMessage (class)">Gio::SocketControlMessage</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a pointer to an array of GSocket::ControlMessages, or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_messages</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of elements in <strong>messages</strong>, or -1.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an int containing GSocket::MsgFlags flags, which may additionally contain [other platform specific flags](<a href="http://man7.org/linux/man-pages/man2/recv.2.html">man7.org/linux/man-pages/man2/recv.2.html</a>)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Number of bytes written (which may be less than <strong>size</strong>), or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_message_with_timeout-instance_method">
+  
+    #<strong>send_message_with_timeout</strong>(address, vectors, num_vectors, messages, num_messages, flags, timeout_us, bytes_written, cancellable)  &#x21d2; <tt><span class='object_link'><a href="PollableReturn.html" title="Gio::PollableReturn (module)">Gio::PollableReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This behaves exactly the same as g_socket_send_message(), except that the choice of timeout behavior is determined by the <strong>timeout_us</strong> argument rather than by <strong>socket</strong>’s properties.</p>
+
+<p>On error %G_POLLABLE_RETURN_FAILED is returned and <strong>error</strong> is set accordingly, or if the socket is currently not writable %G_POLLABLE_RETURN_WOULD_BLOCK is returned. <strong>bytes_written</strong> will contain 0 in both cases. %G_POLLABLE_RETURN_WOULD_BLOCK if the socket is currently not writable, or %G_POLLABLE_RETURN_FAILED if an error happened and <strong>error</strong> is set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Address, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>vectors</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::OutputVector&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of GOutput::Vector structs</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_vectors</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of elements in <strong>vectors</strong>, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>messages</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="SocketControlMessage.html" title="Gio::SocketControlMessage (class)">Gio::SocketControlMessage</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a pointer to an array of GSocket::ControlMessages, or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_messages</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of elements in <strong>messages</strong>, or -1.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an int containing GSocket::MsgFlags flags, which may additionally contain [other platform specific flags](<a href="http://man7.org/linux/man-pages/man2/recv.2.html">man7.org/linux/man-pages/man2/recv.2.html</a>)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout_us</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the maximum time (in microseconds) to wait, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bytes_written</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to store the number of bytes that were written to the socket</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PollableReturn.html" title="Gio::PollableReturn (module)">Gio::PollableReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>%G_POLLABLE_RETURN_OK if all data was successfully written,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_messages-instance_method">
+  
+    #<strong>send_messages</strong>(messages, num_messages, flags, cancellable)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Send multiple data messages from <strong>socket</strong> in one go.  This is the most complicated and fully-featured version of this call. For easier use, see g_socket_send(), g_socket_send_to(), and g_socket_send_message().</p>
+
+<p><strong>messages</strong> must point to an array of GOutput::Message structs and <strong>num_messages</strong> must be the length of this array. Each GOutput::Message contains an address to send the data to, and a pointer to an array of GOutput::Vector structs to describe the buffers that the data to be sent for each message will be gathered from. Using multiple GOutput::Vectors is more memory-efficient than manually copying data from multiple sources into a single buffer, and more network-efficient than making multiple calls to g_socket_send(). Sending multiple messages in one go avoids the overhead of making a lot of syscalls in scenarios where a lot of data packets need to be sent (e.g. high-bandwidth video streaming over RTP/UDP), or where the same data needs to be sent to multiple recipients.</p>
+
+<p><strong>flags</strong> modify how the message is sent. The commonly available arguments for this are available in the GSocket::MsgFlags enum, but the values there are the same as the system values, and the flags are passed in as-is, so you can pass in system-specific flags too.</p>
+
+<p>If the socket is in blocking mode the call will block until there is space for all the data in the socket queue. If there is no space available and the socket is in non-blocking mode a %G_IO_ERROR_WOULD_BLOCK error will be returned if no data was written at all, otherwise the number of messages sent will be returned. To be notified when space is available, wait for the %G_IO_OUT condition. Note though that you may still receive %G_IO_ERROR_WOULD_BLOCK from g_socket_send() even if you were previously notified of a %G_IO_OUT condition. (On Windows in particular, this is very common due to the way the underlying APIs work.)</p>
+
+<p>On error -1 is returned and <strong>error</strong> is set accordingly. An error will only be returned if zero messages could be sent; otherwise the number of messages successfully sent before the error will be returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>messages</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::OutputMessage&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of GOutput::Message structs</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_messages</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of elements in <strong>messages</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an int containing GSocket::MsgFlags flags, which may additionally contain [other platform specific flags](<a href="http://man7.org/linux/man-pages/man2/recv.2.html">man7.org/linux/man-pages/man2/recv.2.html</a>)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of messages sent, or -1 on error. Note that the number of messages sent may be smaller than <strong>num_messages</strong> if the socket is non-blocking or if <strong>num_messages</strong> was larger than UIO_MAXIOV (1024), in which case the caller may re-try to send the remaining messages.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_to-instance_method">
+  
+    #<strong>send_to</strong>(address, buffer, size, cancellable)  &#x21d2; <tt>Gio::gssize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Tries to send <strong>size</strong> bytes from <strong>buffer</strong> to <strong>address</strong>. If <strong>address</strong> is nil then the message is sent to the default receiver (set by g_socket_connect()).</p>
+
+<p>See g_socket_send() for additional information. on error</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Address, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the buffer containing the data to send.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of bytes to send</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Number of bytes written (which may be less than <strong>size</strong>), or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_with_blocking-instance_method">
+  
+    #<strong>send_with_blocking</strong>(buffer, size, blocking, cancellable)  &#x21d2; <tt>Gio::gssize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This behaves exactly the same as g_socket_send(), except that the choice of blocking or non-blocking behavior is determined by the <strong>blocking</strong> argument rather than by <strong>socket</strong>’s properties. on error</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the buffer containing the data to send.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of bytes to send</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blocking</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether to do blocking or non-blocking I/O</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Number of bytes written (which may be less than <strong>size</strong>), or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_option-instance_method">
+  
+    #<strong>set_option</strong>(level, optname, value)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the value of an integer-valued option on <strong>socket</strong>, as with setsockopt(). (If you need to set a non-integer-valued option, you will need to call setsockopt() directly.)</p>
+
+<p>The [&lt;<a href="gio-gnetworking.h">gio/gnetworking.h>]</a> header pulls in system headers that will define most of the standard/portable socket options. For unusual socket protocols or platform-dependent options, you may need to include additional headers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>level</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the “API level” of the option (eg, ‘SOL_SOCKET`)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>optname</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the “name” of the option (eg, ‘SO_BROADCAST`)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the value to set the option to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>success or failure. On failure, <strong>error</strong> will be set, and the system error value (‘errno` or WSAGetLastError()) will still be set to the result of the setsockopt() call.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shutdown-instance_method">
+  
+    #<strong>shutdown</strong>(shutdown_read, shutdown_write)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Shut down part or all of a full-duplex connection.</p>
+
+<p>If <strong>shutdown_read</strong> is true then the receiving side of the connection is shut down, and further reading is disallowed.</p>
+
+<p>If <strong>shutdown_write</strong> is true then the sending side of the connection is shut down, and further writing is disallowed.</p>
+
+<p>It is allowed for both <strong>shutdown_read</strong> and <strong>shutdown_write</strong> to be true.</p>
+
+<p>One example where it is useful to shut down only one side of a connection is graceful disconnect for TCP connections where you close the sending side, then wait for the other side to close the connection, thus ensuring that the other side saw all sent data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>shutdown_read</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether to shut down the read side</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>shutdown_write</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether to shut down the write side</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false on error</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="socket_type-instance_method">
+  
+    #<strong>socket_type</strong>  &#x21d2; <tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the socket type of the socket.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GSocket::Type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="speaks_ipv4-instance_method">
+  
+    #<strong>speaks_ipv4</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks if a socket is capable of speaking IPv4.</p>
+
+<p>IPv4 sockets are capable of speaking IPv4.  On some operating systems and under some combinations of circumstances IPv6 sockets are also capable of speaking IPv4.  See RFC 3493 section 3.7 for more information.</p>
+
+<p>No other types of sockets are currently considered as being capable of speaking IPv4.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if this socket can be used with IPv4.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="timeout-instance_method">
+  
+    #<strong>timeout</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The timeout in seconds on socket I/O</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>timeout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="timeout=-instance_method">
+  
+    #<strong>timeout=</strong>(timeout)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The timeout in seconds on socket I/O</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>timeout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>timeout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ttl-instance_method">
+  
+    #<strong>ttl</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Time-to-live for outgoing unicast packets</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>ttl</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ttl=-instance_method">
+  
+    #<strong>ttl=</strong>(ttl)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Time-to-live for outgoing unicast packets</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ttl</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>ttl</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>ttl</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type-instance_method">
+  
+    #<strong>type</strong>  &#x21d2; <tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type=-instance_method">
+  
+    #<strong>type=</strong>(type)  &#x21d2; <tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>type</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:08 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

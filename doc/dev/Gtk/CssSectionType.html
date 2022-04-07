@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::CssSectionType
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::CssSectionType";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">CssSectionType</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::CssSectionType
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="DOCUMENT-constant" class="">DOCUMENT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The section describes a complete document.</p>
+
+<pre class="code ruby"><code class="ruby">This section time is the only one where gtk_css_section_get_parent()
+might return nil.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:document</span></pre></dd>
+      
+        <dt id="IMPORT-constant" class="">IMPORT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The section defines an import rule.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:import</span></pre></dd>
+      
+        <dt id="COLOR_DEFINITION-constant" class="">COLOR_DEFINITION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The section defines a color. This</p>
+
+<pre class="code ruby"><code class="ruby">is a GTK extension to CSS.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:color_definition</span></pre></dd>
+      
+        <dt id="BINDING_SET-constant" class="">BINDING_SET =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The section defines a binding set. This</p>
+
+<pre class="code ruby"><code class="ruby">is a GTK extension to CSS.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:binding_set</span></pre></dd>
+      
+        <dt id="RULESET-constant" class="">RULESET =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The section defines a CSS ruleset.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:ruleset</span></pre></dd>
+      
+        <dt id="SELECTOR-constant" class="">SELECTOR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The section defines a CSS selector.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:selector</span></pre></dd>
+      
+        <dt id="DECLARATION-constant" class="">DECLARATION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The section defines the declaration of</p>
+
+<pre class="code ruby"><code class="ruby">a CSS variable.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:declaration</span></pre></dd>
+      
+        <dt id="VALUE-constant" class="">VALUE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The section defines the value of a CSS declaration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:value</span></pre></dd>
+      
+        <dt id="KEYFRAMES-constant" class="">KEYFRAMES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The section defines keyframes. See [CSS</p>
+
+<pre class="code ruby"><code class="ruby">Animations](http://dev.w3.org/csswg/css3-animations/#keyframes) for details. Since 3.6
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:keyframes</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:59 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

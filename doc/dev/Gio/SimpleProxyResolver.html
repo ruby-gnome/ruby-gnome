@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::SimpleProxyResolver
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::SimpleProxyResolver";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">SimpleProxyResolver</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::SimpleProxyResolver
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::SimpleProxyResolver</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_proxy-instance_method" title="#default_proxy (instance method)">#<strong>default_proxy</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The default proxy URI that will be used for any URI that doesn’t match GSimple::ProxyResolver:ignore-hosts, and doesn’t match any of the schemes set with g_simple_proxy_resolver_set_uri_proxy().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_proxy=-instance_method" title="#default_proxy= (instance method)">#<strong>default_proxy=</strong>(default_proxy)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The default proxy URI that will be used for any URI that doesn’t match GSimple::ProxyResolver:ignore-hosts, and doesn’t match any of the schemes set with g_simple_proxy_resolver_set_uri_proxy().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ignore_hosts-instance_method" title="#ignore_hosts (instance method)">#<strong>ignore_hosts</strong>  &#x21d2; Gio:: </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A list of hostnames and IP addresses that the resolver should allow direct connections to.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ignore_hosts=-instance_method" title="#ignore_hosts= (instance method)">#<strong>ignore_hosts=</strong>(ignore_hosts)  &#x21d2; Gio:: </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A list of hostnames and IP addresses that the resolver should allow direct connections to.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_uri_proxy-instance_method" title="#set_uri_proxy (instance method)">#<strong>set_uri_proxy</strong>(uri_scheme, proxy)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a URI-scheme-specific proxy to <strong>resolver</strong>; URIs whose scheme matches <strong>uri_scheme</strong> (and which don’t match GSimple::ProxyResolver:ignore-hosts) will be proxied via <strong>proxy</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="default_proxy-instance_method">
+  
+    #<strong>default_proxy</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The default proxy URI that will be used for any URI that doesn’t match GSimple::ProxyResolver:ignore-hosts, and doesn’t match any of the schemes set with g_simple_proxy_resolver_set_uri_proxy().</p>
+
+<p>Note that as a special case, if this URI starts with “socks://”, GSimple::ProxyResolver will treat it as referring to all three of the socks5, socks4a, and socks4 proxy types.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>default-proxy</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_proxy=-instance_method">
+  
+    #<strong>default_proxy=</strong>(default_proxy)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The default proxy URI that will be used for any URI that doesn’t match GSimple::ProxyResolver:ignore-hosts, and doesn’t match any of the schemes set with g_simple_proxy_resolver_set_uri_proxy().</p>
+
+<p>Note that as a special case, if this URI starts with “socks://”, GSimple::ProxyResolver will treat it as referring to all three of the socks5, socks4a, and socks4 proxy types.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>default_proxy</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>default-proxy</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>default-proxy</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ignore_hosts-instance_method">
+  
+    #<strong>ignore_hosts</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio::</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A list of hostnames and IP addresses that the resolver should allow direct connections to.</p>
+
+<p>Entries can be in one of 4 formats:</p>
+<ul><li>
+<p>A hostname, such as “example.com”, “.example.com”, or “*.example.com”, any of which match “example.com” or any subdomain of it.</p>
+</li><li>
+<p>An IPv4 or IPv6 address, such as “192.168.1.1”, which matches only that address.</p>
+</li><li>
+<p>A hostname or IP address followed by a port, such as “example.com:80”, which matches whatever the hostname or IP address would match, but only for URLs with the (explicitly) indicated port. In the case of an IPv6 address, the address part must appear in brackets: “[::1]:443”</p>
+</li><li>
+<p>An IP address range, given by a base address and prefix length, such as “fe80::/10”, which matches any address in that range.</p>
+</li></ul>
+
+<p>Note that when dealing with Unicode hostnames, the matching is done against the ASCII form of the name.</p>
+
+<p>Also note that hostname exclusions apply only to connections made to hosts identified by name, and IP address exclusions apply only to connections made to hosts identified by address. That is, if example.com has an address of 192.168.1.1, and the :ignore-hosts list contains only “192.168.1.1”, then a connection to “example.com” (eg, via a GNetwork::Address) will use the proxy, and a connection to “192.168.1.1” (eg, via a GInet::SocketAddress) will not.</p>
+
+<p>These rules match the “ignore-hosts”/“noproxy” rules most commonly used by other applications.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio::</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>ignore-hosts</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ignore_hosts=-instance_method">
+  
+    #<strong>ignore_hosts=</strong>(ignore_hosts)  &#x21d2; <tt><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio::</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A list of hostnames and IP addresses that the resolver should allow direct connections to.</p>
+
+<p>Entries can be in one of 4 formats:</p>
+<ul><li>
+<p>A hostname, such as “example.com”, “.example.com”, or “*.example.com”, any of which match “example.com” or any subdomain of it.</p>
+</li><li>
+<p>An IPv4 or IPv6 address, such as “192.168.1.1”, which matches only that address.</p>
+</li><li>
+<p>A hostname or IP address followed by a port, such as “example.com:80”, which matches whatever the hostname or IP address would match, but only for URLs with the (explicitly) indicated port. In the case of an IPv6 address, the address part must appear in brackets: “[::1]:443”</p>
+</li><li>
+<p>An IP address range, given by a base address and prefix length, such as “fe80::/10”, which matches any address in that range.</p>
+</li></ul>
+
+<p>Note that when dealing with Unicode hostnames, the matching is done against the ASCII form of the name.</p>
+
+<p>Also note that hostname exclusions apply only to connections made to hosts identified by name, and IP address exclusions apply only to connections made to hosts identified by address. That is, if example.com has an address of 192.168.1.1, and the :ignore-hosts list contains only “192.168.1.1”, then a connection to “example.com” (eg, via a GNetwork::Address) will use the proxy, and a connection to “192.168.1.1” (eg, via a GInet::SocketAddress) will not.</p>
+
+<p>These rules match the “ignore-hosts”/“noproxy” rules most commonly used by other applications.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ignore_hosts</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio::</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio::</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>ignore-hosts</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio::</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>ignore-hosts</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_uri_proxy-instance_method">
+  
+    #<strong>set_uri_proxy</strong>(uri_scheme, proxy)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a URI-scheme-specific proxy to <strong>resolver</strong>; URIs whose scheme matches <strong>uri_scheme</strong> (and which don’t match GSimple::ProxyResolver:ignore-hosts) will be proxied via <strong>proxy</strong>.</p>
+
+<p>As with GSimple::ProxyResolver:default-proxy, if <strong>proxy</strong> starts with “socks://”, GSimple::ProxyResolver will treat it as referring to all three of the socks5, socks4a, and socks4 proxy types.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri_scheme</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the URI scheme to add a proxy for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>proxy</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the proxy to use for <strong>uri_scheme</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:07 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

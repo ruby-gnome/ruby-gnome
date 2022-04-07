@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: GLib::VariantParseError
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GLib::VariantParseError";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GLib.html" title="GLib (module)">GLib</a></span></span>
+     &raquo; 
+    <span class="title">VariantParseError</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: GLib::VariantParseError
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="FAILED-constant" class="">FAILED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>generic error (unused)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:failed</span></pre></dd>
+      
+        <dt id="BASIC_TYPE_EXPECTED-constant" class="">BASIC_TYPE_EXPECTED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>a non-basic GVariant::Type was given where a basic type was expected</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:basic_type_expected</span></pre></dd>
+      
+        <dt id="CANNOT_INFER_TYPE-constant" class="">CANNOT_INFER_TYPE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>cannot infer the GVariant::Type</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:cannot_infer_type</span></pre></dd>
+      
+        <dt id="DEFINITE_TYPE_EXPECTED-constant" class="">DEFINITE_TYPE_EXPECTED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>an indefinite GVariant::Type was given where a definite type was expected</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:definite_type_expected</span></pre></dd>
+      
+        <dt id="INPUT_NOT_AT_END-constant" class="">INPUT_NOT_AT_END =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>extra data after parsing finished</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:input_not_at_end</span></pre></dd>
+      
+        <dt id="INVALID_CHARACTER-constant" class="">INVALID_CHARACTER =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>invalid character in number or unicode escape</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:invalid_character</span></pre></dd>
+      
+        <dt id="INVALID_FORMAT_STRING-constant" class="">INVALID_FORMAT_STRING =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>not a valid #GVariant format string</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:invalid_format_string</span></pre></dd>
+      
+        <dt id="INVALID_OBJECT_PATH-constant" class="">INVALID_OBJECT_PATH =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>not a valid object path</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:invalid_object_path</span></pre></dd>
+      
+        <dt id="INVALID_SIGNATURE-constant" class="">INVALID_SIGNATURE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>not a valid type signature</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:invalid_signature</span></pre></dd>
+      
+        <dt id="INVALID_TYPE_STRING-constant" class="">INVALID_TYPE_STRING =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>not a valid #GVariant type string</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:invalid_type_string</span></pre></dd>
+      
+        <dt id="NO_COMMON_TYPE-constant" class="">NO_COMMON_TYPE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>could not find a common type for array entries</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:no_common_type</span></pre></dd>
+      
+        <dt id="NUMBER_OUT_OF_RANGE-constant" class="">NUMBER_OUT_OF_RANGE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the numerical value is out of range of the given type</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:number_out_of_range</span></pre></dd>
+      
+        <dt id="NUMBER_TOO_BIG-constant" class="">NUMBER_TOO_BIG =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the numerical value is out of range for any type</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:number_too_big</span></pre></dd>
+      
+        <dt id="TYPE_ERROR-constant" class="">TYPE_ERROR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>cannot parse as variant of the specified type</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:type_error</span></pre></dd>
+      
+        <dt id="UNEXPECTED_TOKEN-constant" class="">UNEXPECTED_TOKEN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>an unexpected token was encountered</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:unexpected_token</span></pre></dd>
+      
+        <dt id="UNKNOWN_KEYWORD-constant" class="">UNKNOWN_KEYWORD =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>an unknown keyword was encountered</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span> <span class='kw'>or</span> <span class='symbol'>:unknown_keyword</span></pre></dd>
+      
+        <dt id="UNTERMINATED_STRING_CONSTANT-constant" class="">UNTERMINATED_STRING_CONSTANT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>unterminated string constant</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:unterminated_string_constant</span></pre></dd>
+      
+        <dt id="VALUE_EXPECTED-constant" class="">VALUE_EXPECTED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>no value given</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span> <span class='kw'>or</span> <span class='symbol'>:value_expected</span></pre></dd>
+      
+        <dt id="RECURSION-constant" class="">RECURSION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>variant was too deeply nested; #GVariant is only guaranteed to handle nesting up to 64 levels (Since: 2.64)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:recursion</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:47 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

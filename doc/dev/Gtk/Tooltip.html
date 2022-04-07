@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::Tooltip
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::Tooltip";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">Tooltip</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::Tooltip
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::Tooltip</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Basic tooltips can be realized simply by using gtk_widget_set_tooltip_text() or gtk_widget_set_tooltip_markup() without any explicit tooltip object.</p>
+
+<p>When you need a tooltip with a little more fancy contents, like adding an image, or you want the tooltip to have different contents per Gtk::TreeView row or cell, you will have to do a little more work:</p>
+<ul><li>
+<p>Set the Gtk::Widget:has-tooltip property to true, this will make GTK+ monitor the widget for motion and related events which are needed to determine when and where to show a tooltip.</p>
+</li><li>
+<p>Connect to the Gtk::Widget::query-tooltip signal.  This signal will be emitted when a tooltip is supposed to be shown. One of the arguments passed to the signal handler is a GtkTooltip object. This is the object that we are about to display as a tooltip, and can be manipulated in your callback using functions like gtk_tooltip_set_icon(). There are functions for setting the tooltip’s markup, setting an image from a named icon, or even putting in a custom widget.</p>
+
+<p>Return true from your query-tooltip handler. This causes the tooltip to be show. If you return false, it will not be shown.</p>
+</li></ul>
+
+<p>In the probably rare case where you want to have even more control over the tooltip that is about to be shown, you can set your own Gtk::Window which will be used as tooltip window.  This works as follows:</p>
+<ul><li>
+<p>Set Gtk::Widget:has-tooltip and connect to #GtkWidget::query-tooltip as before. Use gtk_widget_set_tooltip_window() to set a Gtk::Window created by you as tooltip window.</p>
+</li><li>
+<p>In the Gtk::Widget::query-tooltip callback you can access your window using gtk_widget_get_tooltip_window() and manipulate as you wish. The semantics of the return value are exactly as before, return true to show the window, false to not show it.</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#custom=-instance_method" title="#custom= (instance method)">#<strong>custom=</strong>(custom_widget)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Replaces the widget packed into the tooltip with <strong>custom_widget</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#icon=-instance_method" title="#icon= (instance method)">#<strong>icon=</strong>(pixbuf)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the icon of the tooltip (which is in front of the text) to be <strong>pixbuf</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#markup=-instance_method" title="#markup= (instance method)">#<strong>markup=</strong>(markup)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the text of the tooltip to be <strong>markup</strong>, which is marked up with the [Pango text markup <a href="PangoMarkupFormat">language]</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_icon_from_gicon-instance_method" title="#set_icon_from_gicon (instance method)">#<strong>set_icon_from_gicon</strong>(gicon, size)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the icon of the tooltip (which is in front of the text) to be the icon indicated by <strong>gicon</strong> with the size indicated by <strong>size</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_icon_from_icon_name-instance_method" title="#set_icon_from_icon_name (instance method)">#<strong>set_icon_from_icon_name</strong>(icon_name, size)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the icon of the tooltip (which is in front of the text) to be the icon indicated by <strong>icon_name</strong> with the size indicated by <strong>size</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_icon_from_stock-instance_method" title="#set_icon_from_stock (instance method)">#<strong>set_icon_from_stock</strong>(stock_id, size)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the icon of the tooltip (which is in front of the text) to be the stock item indicated by <strong>stock_id</strong> with the size indicated by <strong>size</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text=-instance_method" title="#text= (instance method)">#<strong>text=</strong>(text)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the text of the tooltip to be <strong>text</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tip_area=-instance_method" title="#tip_area= (instance method)">#<strong>tip_area=</strong>(rect)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the area of the widget, where the contents of this tooltip apply, to be <strong>rect</strong> (in widget coordinates).</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="custom=-instance_method">
+  
+    #<strong>custom=</strong>(custom_widget)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Replaces the widget packed into the tooltip with <strong>custom_widget</strong>. <strong>custom_widget</strong> does not get destroyed when the tooltip goes away. By default a box with a Gtk::Image and #GtkLabel is embedded in the tooltip, which can be configured using gtk_tooltip_set_markup() and gtk_tooltip_set_icon().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>custom_widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::Widget, or nil to unset the old custom widget.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="icon=-instance_method">
+  
+    #<strong>icon=</strong>(pixbuf)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the icon of the tooltip (which is in front of the text) to be <strong>pixbuf</strong>.  If <strong>pixbuf</strong> is nil, the image will be hidden.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pixbuf</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GdkPixbuf/Pixbuf.html" title="GdkPixbuf::Pixbuf (class)">GdkPixbuf::Pixbuf</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Pixbuf, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="markup=-instance_method">
+  
+    #<strong>markup=</strong>(markup)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the text of the tooltip to be <strong>markup</strong>, which is marked up with the [Pango text markup <a href="PangoMarkupFormat">language]</a>. If <strong>markup</strong> is nil, the label will be hidden.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>markup</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a markup string (see [Pango markup <a href="PangoMarkupFormat">format]</a>) or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_icon_from_gicon-instance_method">
+  
+    #<strong>set_icon_from_gicon</strong>(gicon, size)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the icon of the tooltip (which is in front of the text) to be the icon indicated by <strong>gicon</strong> with the size indicated by <strong>size</strong>. If <strong>gicon</strong> is nil, the image will be hidden.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gicon</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gio/Icon.html" title="Gio::Icon (module)">Gio::Icon</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a #GIcon representing the icon, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a stock icon size (Gtk::IconSize)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_icon_from_icon_name-instance_method">
+  
+    #<strong>set_icon_from_icon_name</strong>(icon_name, size)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the icon of the tooltip (which is in front of the text) to be the icon indicated by <strong>icon_name</strong> with the size indicated by <strong>size</strong>.  If <strong>icon_name</strong> is nil, the image will be hidden.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>icon_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an icon name, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a stock icon size (Gtk::IconSize)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_icon_from_stock-instance_method">
+  
+    #<strong>set_icon_from_stock</strong>(stock_id, size)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the icon of the tooltip (which is in front of the text) to be the stock item indicated by <strong>stock_id</strong> with the size indicated by <strong>size</strong>.  If <strong>stock_id</strong> is nil, the image will be hidden.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>stock_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a stock id, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a stock icon size (Gtk::IconSize)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text=-instance_method">
+  
+    #<strong>text=</strong>(text)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the text of the tooltip to be <strong>text</strong>. If <strong>text</strong> is nil, the label will be hidden. See also gtk_tooltip_set_markup().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a text string or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tip_area=-instance_method">
+  
+    #<strong>tip_area=</strong>(rect)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the area of the widget, where the contents of this tooltip apply, to be <strong>rect</strong> (in widget coordinates).  This is especially useful for properly setting tooltips on Gtk::TreeView rows and cells, #GtkIconViews, etc.</p>
+
+<p>For setting tooltips on Gtk::TreeView, please refer to the convenience functions for this: gtk_tree_view_set_tooltip_row() and gtk_tree_view_set_tooltip_cell().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:33 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

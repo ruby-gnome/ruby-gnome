@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gdk::InputSource
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::InputSource";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (I)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">InputSource</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gdk::InputSource
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="MOUSE-constant" class="">MOUSE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the device is a mouse. (This will be reported for the core</p>
+
+<pre class="code ruby"><code class="ruby">pointer, even if it is something else, such as a trackball.)
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:mouse</span></pre></dd>
+      
+        <dt id="PEN-constant" class="">PEN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the device is a stylus of a graphics tablet or similar device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:pen</span></pre></dd>
+      
+        <dt id="ERASER-constant" class="">ERASER =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the device is an eraser. Typically, this would be the other end</p>
+
+<pre class="code ruby"><code class="ruby">of a stylus on a graphics tablet.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:eraser</span></pre></dd>
+      
+        <dt id="CURSOR-constant" class="">CURSOR =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the device is a graphics tablet “puck” or similar device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:cursor</span></pre></dd>
+      
+        <dt id="KEYBOARD-constant" class="">KEYBOARD =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the device is a keyboard.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:keyboard</span></pre></dd>
+      
+        <dt id="TOUCHSCREEN-constant" class="">TOUCHSCREEN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the device is a direct-input touch device, such</p>
+
+<pre class="code ruby"><code class="ruby">as a touchscreen or tablet. This device type has been added in 3.4.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:touchscreen</span></pre></dd>
+      
+        <dt id="TOUCHPAD-constant" class="">TOUCHPAD =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the device is an indirect touch device, such</p>
+
+<pre class="code ruby"><code class="ruby">as a touchpad. This device type has been added in 3.4.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:touchpad</span></pre></dd>
+      
+        <dt id="TRACKPOINT-constant" class="">TRACKPOINT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the device is a trackpoint. This device type has been</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_added'>added</span> <span class='kw'>in</span> <span class='float'>3.22</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:trackpoint</span></pre></dd>
+      
+        <dt id="TABLET_PAD-constant" class="">TABLET_PAD =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>the device is a “pad”, a collection of buttons,</p>
+
+<pre class="code ruby"><code class="ruby">rings and strips found in drawing tablets. This device type has been
+added in 3.22.
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:tablet_pad</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:56 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

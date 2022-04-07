@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gio::AsyncInitable
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::AsyncInitable";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">AsyncInitable</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gio::AsyncInitable
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This is the asynchronous version of #GInitable; it behaves the same in all ways except that initialization is asynchronous. For more details see the descriptions on #GInitable.</p>
+
+<p>A class may implement both the #GInitable and GAsync::Initable interfaces.</p>
+
+<p>Users of objects implementing this are not intended to use the interface method directly; instead it will be used automatically in various ways. For C applications you generally just call g_async_initable_new_async() directly, or indirectly via a foo_thing_new_async() wrapper. This will call g_async_initable_init_async() under the cover, calling back with nil and a set %GError on failure.</p>
+
+<p>A typical implementation might look something like this:</p>
+
+<pre class="code ruby"><code class="ruby">enum {
+   NOT_INITIALIZED,
+   INITIALIZING,
+   INITIALIZED
+};
+
+static void
+_foo_ready_cb (Foo *self)
+{
+  GList *l;
+
+  self-&gt;priv-&gt;state = INITIALIZED;
+
+  for (l = self-&gt;priv-&gt;init_results; l != NULL; l = l-&gt;next)
+    {
+      GTask *task = l-&gt;data;
+
+      if (self-&gt;priv-&gt;success)
+        g_task_return_boolean (task, TRUE);
+      else
+        g_task_return_new_error (task, ...);
+      g_object_unref (task);
+    }
+
+  g_list_free (self-&gt;priv-&gt;init_results);
+  self-&gt;priv-&gt;init_results = NULL;
+}
+
+static void
+foo_init_async (GAsyncInitable       *initable,
+                int                   io_priority,
+                GCancellable         *cancellable,
+                GAsyncReadyCallback   callback,
+                gpointer              user_data)
+{
+  Foo *self = FOO (initable);
+  GTask *task;
+
+  task = g_task_new (initable, cancellable, callback, user_data);
+
+  switch (self-&gt;priv-&gt;state)
+    {
+      case NOT_INITIALIZED:
+        _foo_get_ready (self);
+        self-&gt;priv-&gt;init_results = g_list_append (self-&gt;priv-&gt;init_results,
+                                                  task);
+        self-&gt;priv-&gt;state = INITIALIZING;
+        break;
+      case INITIALIZING:
+        self-&gt;priv-&gt;init_results = g_list_append (self-&gt;priv-&gt;init_results,
+                                                  task);
+        break;
+      case INITIALIZED:
+        if (!self-&gt;priv-&gt;success)
+          g_task_return_new_error (task, ...);
+        else
+          g_task_return_boolean (task, TRUE);
+        g_object_unref (task);
+        break;
+    }
+}
+
+static gboolean
+foo_init_finish (GAsyncInitable       *initable,
+                 GAsyncResult         *result,
+                 GError              **error)
+{
+  g_return_val_if_fail (g_task_is_valid (result, initable), FALSE);
+
+  return g_task_propagate_boolean (G_TASK (result), error);
+}
+
+static void
+foo_async_initable_iface_init (gpointer g_iface,
+                               gpointer data)
+{
+  GAsyncInitableIface *iface = g_iface;
+
+  iface-&gt;init_async = foo_init_async;
+  iface-&gt;init_finish = foo_init_finish;
+}
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#init_async-instance_method" title="#init_async (instance method)">#<strong>init_async</strong>(initable, io_priority, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#init_finish-instance_method" title="#init_finish (instance method)">#<strong>init_finish</strong>(initable, res)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>will return false and set <strong>error</strong> appropriately if present.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_finish-instance_method" title="#new_finish (instance method)">#<strong>new_finish</strong>(res)  &#x21d2; GObject::Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Finishes the async construction for the various g_async_initable_new calls, returning the created object or nil on error.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="init_async-instance_method">
+  
+    #<strong>init_async</strong>(initable, io_priority, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>initable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::AsyncInitable (module)">Gio::AsyncInitable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Initable.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>io_priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the [I/O <a href="io-priority">priority]</a> of the operation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>optional #GCancellable object, nil to ignore.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::ReadyCallback to call when the request is satisfied</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the data to pass to callback function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="init_finish-instance_method">
+  
+    #<strong>init_finish</strong>(initable, res)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>will return false and set <strong>error</strong> appropriately if present.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>initable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::AsyncInitable (module)">Gio::AsyncInitable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Initable.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a GAsync::Result.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if successful. If an error has occurred, this function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_finish-instance_method">
+  
+    #<strong>new_finish</strong>(res)  &#x21d2; <tt>GObject::Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finishes the async construction for the various g_async_initable_new calls, returning the created object or nil on error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the GAsync::Result from the callback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a newly created #GObject, or nil on error. Free with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:45:48 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>

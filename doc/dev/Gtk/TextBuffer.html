@@ -1,0 +1,8030 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::TextBuffer
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::TextBuffer";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">TextBuffer</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::TextBuffer
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::TextBuffer</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_mark-instance_method" title="#add_mark (instance method)">#<strong>add_mark</strong>(mark, where)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds the mark at position <strong>where</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_selection_clipboard-instance_method" title="#add_selection_clipboard (instance method)">#<strong>add_selection_clipboard</strong>(clipboard)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds <strong>clipboard</strong> to the list of clipboards in which the selection contents of <strong>buffer</strong> are available.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#apply_tag-instance_method" title="#apply_tag (instance method)">#<strong>apply_tag</strong>(tag, start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Emits the “apply-tag” signal on <strong>buffer</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#apply_tag_by_name-instance_method" title="#apply_tag_by_name (instance method)">#<strong>apply_tag_by_name</strong>(name, start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calls gtk_text_tag_table_lookup() on the buffer’s tag table to get a Gtk::TextTag, then calls gtk_text_buffer_apply_tag().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#backspace-instance_method" title="#backspace (instance method)">#<strong>backspace</strong>(iter, interactive, default_editable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Performs the appropriate action as if the user hit the delete key with the cursor at the position specified by <strong>iter</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#begin_user_action-instance_method" title="#begin_user_action (instance method)">#<strong>begin_user_action</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Called to indicate that the buffer operations between here and a call to gtk_text_buffer_end_user_action() are part of a single user-visible operation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#char_count-instance_method" title="#char_count (instance method)">#<strong>char_count</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the number of characters in the buffer; note that characters and bytes are not the same, you can’t e.g.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy_clipboard-instance_method" title="#copy_clipboard (instance method)">#<strong>copy_clipboard</strong>(clipboard)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Copies the currently-selected text to a clipboard.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy_target_list-instance_method" title="#copy_target_list (instance method)">#<strong>copy_target_list</strong>  &#x21d2; Gtk::TargetList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of targets this buffer supports for clipboard copying and as DND source.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy_target_list=-instance_method" title="#copy_target_list= (instance method)">#<strong>copy_target_list=</strong>(copy_target_list)  &#x21d2; Gtk::TargetList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of targets this buffer supports for clipboard copying and as DND source.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_child_anchor-instance_method" title="#create_child_anchor (instance method)">#<strong>create_child_anchor</strong>(iter)  &#x21d2; Gtk::TextChildAnchor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is a convenience function which simply creates a child anchor with gtk_text_child_anchor_new() and inserts it into the buffer with gtk_text_buffer_insert_child_anchor().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_mark-instance_method" title="#create_mark (instance method)">#<strong>create_mark</strong>(mark_name, where, left_gravity)  &#x21d2; Gtk::TextMark </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a mark at position <strong>where</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_tag-instance_method" title="#create_tag (instance method)">#<strong>create_tag</strong>(tag_name, first_property_name, array)  &#x21d2; Gtk::TextTag </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a tag and adds it to the tag table for <strong>buffer</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_position-instance_method" title="#cursor_position (instance method)">#<strong>cursor_position</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The position of the insert mark (as offset from the beginning of the buffer).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_position=-instance_method" title="#cursor_position= (instance method)">#<strong>cursor_position=</strong>(cursor_position)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The position of the insert mark (as offset from the beginning of the buffer).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cut_clipboard-instance_method" title="#cut_clipboard (instance method)">#<strong>cut_clipboard</strong>(clipboard, default_editable)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Copies the currently-selected text to a clipboard, then deletes said text if it’s editable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete-instance_method" title="#delete (instance method)">#<strong>delete</strong>(start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Deletes text between <strong>start</strong> and <strong>end</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_interactive-instance_method" title="#delete_interactive (instance method)">#<strong>delete_interactive</strong>(start_iter, end_iter, default_editable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Deletes all editable text in the given range.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_mark-instance_method" title="#delete_mark (instance method)">#<strong>delete_mark</strong>(mark)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Deletes <strong>mark</strong>, so that it’s no longer located anywhere in the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_mark_by_name-instance_method" title="#delete_mark_by_name (instance method)">#<strong>delete_mark_by_name</strong>(name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Deletes the mark named <strong>name</strong>; the mark must exist.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_selection-instance_method" title="#delete_selection (instance method)">#<strong>delete_selection</strong>(interactive, default_editable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Deletes the range between the “insert” and “selection_bound” marks, that is, the currently-selected text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deserialize-instance_method" title="#deserialize (instance method)">#<strong>deserialize</strong>(content_buffer, format, iter, data, length)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function deserializes rich text in format <strong>format</strong> and inserts it at <strong>iter</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deserialize_get_can_create_tags-instance_method" title="#deserialize_get_can_create_tags (instance method)">#<strong>deserialize_get_can_create_tags</strong>(format)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This functions returns the value set with gtk_text_buffer_deserialize_set_can_create_tags().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deserialize_set_can_create_tags-instance_method" title="#deserialize_set_can_create_tags (instance method)">#<strong>deserialize_set_can_create_tags</strong>(format, can_create_tags)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Use this function to allow a rich text deserialization function to create new tags in the receiving buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#end_user_action-instance_method" title="#end_user_action (instance method)">#<strong>end_user_action</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Should be paired with a call to gtk_text_buffer_begin_user_action().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_bounds-instance_method" title="#get_bounds (instance method)">#<strong>get_bounds</strong>(start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the first and last iterators in the buffer, i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_deserialize_formats-instance_method" title="#get_deserialize_formats (instance method)">#<strong>get_deserialize_formats</strong>(n_formats)  &#x21d2; Array&lt;Gdk::Atom&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function returns the rich text deserialize formats registered with <strong>buffer</strong> using gtk_text_buffer_register_deserialize_format() or gtk_text_buffer_register_deserialize_tagset().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_end_iter-instance_method" title="#get_end_iter (instance method)">#<strong>get_end_iter</strong>(iter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Initializes <strong>iter</strong> with the “end iterator,” one past the last valid character in the text buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_iter_at_child_anchor-instance_method" title="#get_iter_at_child_anchor (instance method)">#<strong>get_iter_at_child_anchor</strong>(iter, anchor)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the location of <strong>anchor</strong> within <strong>buffer</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_iter_at_line-instance_method" title="#get_iter_at_line (instance method)">#<strong>get_iter_at_line</strong>(iter, line_number)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Initializes <strong>iter</strong> to the start of the given line.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_iter_at_line_index-instance_method" title="#get_iter_at_line_index (instance method)">#<strong>get_iter_at_line_index</strong>(iter, line_number, byte_index)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains an iterator pointing to <strong>byte_index</strong> within the given line.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_iter_at_line_offset-instance_method" title="#get_iter_at_line_offset (instance method)">#<strong>get_iter_at_line_offset</strong>(iter, line_number, char_offset)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains an iterator pointing to <strong>char_offset</strong> within the given line.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_iter_at_mark-instance_method" title="#get_iter_at_mark (instance method)">#<strong>get_iter_at_mark</strong>(iter, mark)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Initializes <strong>iter</strong> with the current position of <strong>mark</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_iter_at_offset-instance_method" title="#get_iter_at_offset (instance method)">#<strong>get_iter_at_offset</strong>(iter, char_offset)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Initializes <strong>iter</strong> to a position <strong>char_offset</strong> chars from the start of the entire buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_mark-instance_method" title="#get_mark (instance method)">#<strong>get_mark</strong>(name)  &#x21d2; Gtk::TextMark </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the mark named <strong>name</strong> in buffer <strong>buffer</strong>, or nil if no such mark exists in the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_selection_bounds-instance_method" title="#get_selection_bounds (instance method)">#<strong>get_selection_bounds</strong>(start, end)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if some text is selected; places the bounds of the selection in <strong>start</strong> and <strong>end</strong> (if the selection has length 0, then <strong>start</strong> and <strong>end</strong> are filled in with the same value).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_serialize_formats-instance_method" title="#get_serialize_formats (instance method)">#<strong>get_serialize_formats</strong>(n_formats)  &#x21d2; Array&lt;Gdk::Atom&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function returns the rich text serialize formats registered with <strong>buffer</strong> using gtk_text_buffer_register_serialize_format() or gtk_text_buffer_register_serialize_tagset().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_slice-instance_method" title="#get_slice (instance method)">#<strong>get_slice</strong>(start, end, include_hidden_chars)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the text in the range [<strong>start</strong>,<strong>end</strong>).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_start_iter-instance_method" title="#get_start_iter (instance method)">#<strong>get_start_iter</strong>(iter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Initialized <strong>iter</strong> with the first position in the text buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_text-instance_method" title="#get_text (instance method)">#<strong>get_text</strong>(start, end, include_hidden_chars)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the text in the range [<strong>start</strong>,<strong>end</strong>).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_selection-instance_method" title="#has_selection (instance method)">#<strong>has_selection</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Indicates whether the buffer has some text currently selected.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_selection=-instance_method" title="#has_selection= (instance method)">#<strong>has_selection=</strong>(has_selection)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether the buffer has some text currently selected.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_selection%3F-instance_method" title="#has_selection? (instance method)">#<strong>has_selection?</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether the buffer has some text currently selected.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert-instance_method" title="#insert (instance method)">#<strong>insert</strong>(iter, text, len)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Inserts <strong>len</strong> bytes of <strong>text</strong> at position <strong>iter</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_at_cursor-instance_method" title="#insert_at_cursor (instance method)">#<strong>insert_at_cursor</strong>(text, len)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Simply calls gtk_text_buffer_insert(), using the current cursor position as the insertion point.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_child_anchor-instance_method" title="#insert_child_anchor (instance method)">#<strong>insert_child_anchor</strong>(iter, anchor)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Inserts a child widget anchor into the text buffer at <strong>iter</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_interactive-instance_method" title="#insert_interactive (instance method)">#<strong>insert_interactive</strong>(iter, text, len, default_editable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Like gtk_text_buffer_insert(), but the insertion will not occur if <strong>iter</strong> is at a non-editable location in the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_interactive_at_cursor-instance_method" title="#insert_interactive_at_cursor (instance method)">#<strong>insert_interactive_at_cursor</strong>(text, len, default_editable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calls gtk_text_buffer_insert_interactive() at the cursor position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_markup-instance_method" title="#insert_markup (instance method)">#<strong>insert_markup</strong>(iter, markup, len)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Inserts the text in <strong>markup</strong> at position <strong>iter</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_pixbuf-instance_method" title="#insert_pixbuf (instance method)">#<strong>insert_pixbuf</strong>(iter, pixbuf)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Inserts an image into the text buffer at <strong>iter</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_range-instance_method" title="#insert_range (instance method)">#<strong>insert_range</strong>(iter, start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Copies text, tags, and pixbufs between <strong>start</strong> and <strong>end</strong> (the order of <strong>start</strong> and <strong>end</strong> doesn’t matter) and inserts the copy at <strong>iter</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_range_interactive-instance_method" title="#insert_range_interactive (instance method)">#<strong>insert_range_interactive</strong>(iter, start, end, default_editable)  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Same as gtk_text_buffer_insert_range(), but does nothing if the insertion point isn’t editable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_with_tags-instance_method" title="#insert_with_tags (instance method)">#<strong>insert_with_tags</strong>(iter, text, len, first_tag, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Inserts <strong>text</strong> into <strong>buffer</strong> at <strong>iter</strong>, applying the list of tags to the newly-inserted text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_with_tags_by_name-instance_method" title="#insert_with_tags_by_name (instance method)">#<strong>insert_with_tags_by_name</strong>(iter, text, len, first_tag_name, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Same as gtk_text_buffer_insert_with_tags(), but allows you to pass in tag names instead of tag objects.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_count-instance_method" title="#line_count (instance method)">#<strong>line_count</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Obtains the number of lines in the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modified-instance_method" title="#modified (instance method)">#<strong>modified</strong>  &#x21d2; TrueClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Indicates whether the buffer has been modified since the last call to gtk_text_buffer_set_modified() set the modification flag to false.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modified=-instance_method" title="#modified= (instance method)">#<strong>modified=</strong>(setting)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Used to keep track of whether the buffer has been modified since the last time it was saved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#move_mark-instance_method" title="#move_mark (instance method)">#<strong>move_mark</strong>(mark, where)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Moves <strong>mark</strong> to the new location <strong>where</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#move_mark_by_name-instance_method" title="#move_mark_by_name (instance method)">#<strong>move_mark_by_name</strong>(name, where)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Moves the mark named <strong>name</strong> (which must exist) to location <strong>where</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>(table)  &#x21d2; Gtk::TextBuffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new text buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#paste_clipboard-instance_method" title="#paste_clipboard (instance method)">#<strong>paste_clipboard</strong>(clipboard, override_location, default_editable)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Pastes the contents of a clipboard.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#paste_target_list-instance_method" title="#paste_target_list (instance method)">#<strong>paste_target_list</strong>  &#x21d2; Gtk::TargetList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of targets this buffer supports for clipboard pasting and as DND destination.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#paste_target_list=-instance_method" title="#paste_target_list= (instance method)">#<strong>paste_target_list=</strong>(paste_target_list)  &#x21d2; Gtk::TargetList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of targets this buffer supports for clipboard pasting and as DND destination.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#place_cursor-instance_method" title="#place_cursor (instance method)">#<strong>place_cursor</strong>(where)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function moves the “insert” and “selection_bound” marks simultaneously.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_deserialize_format-instance_method" title="#register_deserialize_format (instance method)">#<strong>register_deserialize_format</strong>(mime_type, function, user_data, user_data_destroy)  &#x21d2; Gdk::Atom </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function registers a rich text deserialization <strong>function</strong> along with its <strong>mime_type</strong> with the passed <strong>buffer</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_deserialize_tagset-instance_method" title="#register_deserialize_tagset (instance method)">#<strong>register_deserialize_tagset</strong>(tagset_name)  &#x21d2; Gdk::Atom </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function registers GTK+’s internal rich text serialization format with the passed <strong>buffer</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_serialize_format-instance_method" title="#register_serialize_format (instance method)">#<strong>register_serialize_format</strong>(mime_type, function, user_data, user_data_destroy)  &#x21d2; Gdk::Atom </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function registers a rich text serialization <strong>function</strong> along with its <strong>mime_type</strong> with the passed <strong>buffer</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_serialize_tagset-instance_method" title="#register_serialize_tagset (instance method)">#<strong>register_serialize_tagset</strong>(tagset_name)  &#x21d2; Gdk::Atom </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function registers GTK+’s internal rich text serialization format with the passed <strong>buffer</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_all_tags-instance_method" title="#remove_all_tags (instance method)">#<strong>remove_all_tags</strong>(start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes all tags in the range between <strong>start</strong> and <strong>end</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_selection_clipboard-instance_method" title="#remove_selection_clipboard (instance method)">#<strong>remove_selection_clipboard</strong>(clipboard)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes a Gtk::Clipboard added with gtk_text_buffer_add_selection_clipboard().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_tag-instance_method" title="#remove_tag (instance method)">#<strong>remove_tag</strong>(tag, start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Emits the “remove-tag” signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_tag_by_name-instance_method" title="#remove_tag_by_name (instance method)">#<strong>remove_tag_by_name</strong>(name, start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calls gtk_text_tag_table_lookup() on the buffer’s tag table to get a Gtk::TextTag, then calls gtk_text_buffer_remove_tag().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_range-instance_method" title="#select_range (instance method)">#<strong>select_range</strong>(ins, bound)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function moves the “insert” and “selection_bound” marks simultaneously.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selection_bound-instance_method" title="#selection_bound (instance method)">#<strong>selection_bound</strong>  &#x21d2; Gtk::TextMark </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the mark that represents the selection bound.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#serialize-instance_method" title="#serialize (instance method)">#<strong>serialize</strong>(content_buffer, format, start, end, length)  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function serializes the portion of text between <strong>start</strong> and <strong>end</strong> in the rich text format represented by <strong>format</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_text-instance_method" title="#set_text (instance method)">#<strong>set_text</strong>(text, len)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Deletes current contents of <strong>buffer</strong>, and inserts <strong>text</strong> instead.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tag_table-instance_method" title="#tag_table (instance method)">#<strong>tag_table</strong>  &#x21d2; Gtk::TextTagTable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Tag-table.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tag_table=-instance_method" title="#tag_table= (instance method)">#<strong>tag_table=</strong>(tag_table)  &#x21d2; Gtk::TextTagTable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text-instance_method" title="#text (instance method)">#<strong>text</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The text content of the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text=-instance_method" title="#text= (instance method)">#<strong>text=</strong>(text)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The text content of the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unregister_deserialize_format-instance_method" title="#unregister_deserialize_format (instance method)">#<strong>unregister_deserialize_format</strong>(format)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function unregisters a rich text format that was previously registered using gtk_text_buffer_register_deserialize_format() or gtk_text_buffer_register_deserialize_tagset().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unregister_serialize_format-instance_method" title="#unregister_serialize_format (instance method)">#<strong>unregister_serialize_format</strong>(format)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function unregisters a rich text format that was previously registered using gtk_text_buffer_register_serialize_format() or gtk_text_buffer_register_serialize_tagset().</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_mark-instance_method">
+  
+    #<strong>add_mark</strong>(mark, where)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds the mark at position <strong>where</strong>. The mark must not be added to another buffer, and if its name is not nil then there must not be another mark in the buffer with the same name.</p>
+
+<p>Emits the Gtk::TextBuffer::mark-set signal as notification of the mark’s initial placement.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mark</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextMark.html" title="Gtk::TextMark (class)">Gtk::TextMark</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the mark to add</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>where</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to place mark</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_selection_clipboard-instance_method">
+  
+    #<strong>add_selection_clipboard</strong>(clipboard)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds <strong>clipboard</strong> to the list of clipboards in which the selection contents of <strong>buffer</strong> are available. In most cases, <strong>clipboard</strong> will be the Gtk::Clipboard of type %GDK_SELECTION_PRIMARY for a view of <strong>buffer</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>clipboard</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Clipboard.html" title="Gtk::Clipboard (class)">Gtk::Clipboard</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::Clipboard</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="apply_tag-instance_method">
+  
+    #<strong>apply_tag</strong>(tag, start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Emits the “apply-tag” signal on <strong>buffer</strong>. The default handler for the signal applies <strong>tag</strong> to the given range. <strong>start</strong> and <strong>end</strong> do not have to be in order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextTag.html" title="Gtk::TextTag (class)">Gtk::TextTag</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TextTag</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>one bound of range to be tagged</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>other bound of range to be tagged</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="apply_tag_by_name-instance_method">
+  
+    #<strong>apply_tag_by_name</strong>(name, start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calls gtk_text_tag_table_lookup() on the buffer’s tag table to get a Gtk::TextTag, then calls gtk_text_buffer_apply_tag().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>name of a named Gtk::TextTag</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>one bound of range to be tagged</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>other bound of range to be tagged</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="backspace-instance_method">
+  
+    #<strong>backspace</strong>(iter, interactive, default_editable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Performs the appropriate action as if the user hit the delete key with the cursor at the position specified by <strong>iter</strong>. In the normal case a single character will be deleted, but when combining accents are involved, more than one character can be deleted, and when precomposed character and accent combinations are involved, less than one character will be deleted.</p>
+
+<p>Because the buffer is modified, all outstanding iterators become invalid after calling this function; however, the <strong>iter</strong> will be re-initialized to point to the location where text was deleted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a position in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interactive</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the deletion is caused by user interaction</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_editable</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the buffer is editable by default</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the buffer was modified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="begin_user_action-instance_method">
+  
+    #<strong>begin_user_action</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Called to indicate that the buffer operations between here and a call to gtk_text_buffer_end_user_action() are part of a single user-visible operation. The operations between gtk_text_buffer_begin_user_action() and gtk_text_buffer_end_user_action() can then be grouped when creating an undo stack. Gtk::TextBuffer maintains a count of calls to gtk_text_buffer_begin_user_action() that have not been closed with a call to gtk_text_buffer_end_user_action(), and emits the “begin-user-action” and “end-user-action” signals only for the outermost pair of calls. This allows you to build user actions from other user actions.</p>
+
+<p>The “interactive” buffer mutation functions, such as gtk_text_buffer_insert_interactive(), automatically call begin/end user action around the buffer operations they perform, so there’s no need to add extra calls if you user action consists solely of a single call to one of those functions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="char_count-instance_method">
+  
+    #<strong>char_count</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the number of characters in the buffer; note that characters and bytes are not the same, you can’t e.g. expect the contents of the buffer in string form to be this many bytes long. The character count is cached, so this function is very fast.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of characters in the buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="copy_clipboard-instance_method">
+  
+    #<strong>copy_clipboard</strong>(clipboard)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Copies the currently-selected text to a clipboard.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>clipboard</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Clipboard.html" title="Gtk::Clipboard (class)">Gtk::Clipboard</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Clipboard object to copy to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="copy_target_list-instance_method">
+  
+    #<strong>copy_target_list</strong>  &#x21d2; <tt>Gtk::TargetList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The list of targets this buffer supports for clipboard copying and as DND source.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::TargetList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>copy-target-list</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="copy_target_list=-instance_method">
+  
+    #<strong>copy_target_list=</strong>(copy_target_list)  &#x21d2; <tt>Gtk::TargetList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The list of targets this buffer supports for clipboard copying and as DND source.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>copy_target_list</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TargetList</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::TargetList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>copy-target-list</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::TargetList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>copy-target-list</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_child_anchor-instance_method">
+  
+    #<strong>create_child_anchor</strong>(iter)  &#x21d2; <tt><span class='object_link'><a href="TextChildAnchor.html" title="Gtk::TextChildAnchor (class)">Gtk::TextChildAnchor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is a convenience function which simply creates a child anchor with gtk_text_child_anchor_new() and inserts it into the buffer with gtk_text_buffer_insert_child_anchor(). The new anchor is owned by the buffer; no reference count is returned to the caller of gtk_text_buffer_create_child_anchor().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location in the buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextChildAnchor.html" title="Gtk::TextChildAnchor (class)">Gtk::TextChildAnchor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the created child anchor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_mark-instance_method">
+  
+    #<strong>create_mark</strong>(mark_name, where, left_gravity)  &#x21d2; <tt><span class='object_link'><a href="TextMark.html" title="Gtk::TextMark (class)">Gtk::TextMark</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a mark at position <strong>where</strong>. If <strong>mark_name</strong> is nil, the mark is anonymous; otherwise, the mark can be retrieved by name using gtk_text_buffer_get_mark(). If a mark has left gravity, and text is inserted at the mark’s current location, the mark will be moved to the left of the newly-inserted text. If the mark has right gravity (<strong>left_gravity</strong> = false), the mark will end up on the right of newly-inserted text. The standard left-to-right cursor is a mark with right gravity (when you type, the cursor stays on the right side of the text you’re typing).</p>
+
+<p>The caller of this function does not own a reference to the returned Gtk::TextMark, so you can ignore the return value if you like. Marks are owned by the buffer and go away when the buffer does.</p>
+
+<p>Emits the Gtk::TextBuffer::mark-set signal as notification of the mark’s initial placement.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mark_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>name for mark, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>where</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to place mark</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>left_gravity</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the mark has left gravity</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextMark.html" title="Gtk::TextMark (class)">Gtk::TextMark</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the new Gtk::TextMark object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_tag-instance_method">
+  
+    #<strong>create_tag</strong>(tag_name, first_property_name, array)  &#x21d2; <tt><span class='object_link'><a href="TextTag.html" title="Gtk::TextTag (class)">Gtk::TextTag</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a tag and adds it to the tag table for <strong>buffer</strong>. Equivalent to calling gtk_text_tag_new() and then adding the tag to the buffer’s tag table. The returned tag is owned by the buffer’s tag table, so the ref count will be equal to one.</p>
+
+<p>If <strong>tag_name</strong> is nil, the tag is anonymous.</p>
+
+<p>If <strong>tag_name</strong> is non-nil, a tag called <strong>tag_name</strong> must not already exist in the tag table for this buffer.</p>
+
+<p>The <strong>first_property_name</strong> argument and subsequent arguments are a list of properties to set on the tag, as with g_object_set().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tag_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>name of the new tag, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>name of first property to set, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil-terminated list of property names and values</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextTag.html" title="Gtk::TextTag (class)">Gtk::TextTag</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new tag</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_position-instance_method">
+  
+    #<strong>cursor_position</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The position of the insert mark (as offset from the beginning of the buffer). It is useful for getting notified when the cursor moves.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>cursor-position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_position=-instance_method">
+  
+    #<strong>cursor_position=</strong>(cursor_position)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The position of the insert mark (as offset from the beginning of the buffer). It is useful for getting notified when the cursor moves.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cursor_position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>cursor-position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>cursor-position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cut_clipboard-instance_method">
+  
+    #<strong>cut_clipboard</strong>(clipboard, default_editable)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Copies the currently-selected text to a clipboard, then deletes said text if it’s editable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>clipboard</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Clipboard.html" title="Gtk::Clipboard (class)">Gtk::Clipboard</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Clipboard object to cut to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_editable</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>default editability of the buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete-instance_method">
+  
+    #<strong>delete</strong>(start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Deletes text between <strong>start</strong> and <strong>end</strong>. The order of <strong>start</strong> and <strong>end</strong> is not actually relevant; gtk_text_buffer_delete() will reorder them. This function actually emits the “delete-range” signal, and the default handler of that signal deletes the text. Because the buffer is modified, all outstanding iterators become invalid after calling this function; however, the <strong>start</strong> and <strong>end</strong> will be re-initialized to point to the location where text was deleted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a position in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>another position in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_interactive-instance_method">
+  
+    #<strong>delete_interactive</strong>(start_iter, end_iter, default_editable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Deletes all editable text in the given range. Calls gtk_text_buffer_delete() for each editable sub-range of [<strong>start</strong>,<strong>end</strong>). <strong>start</strong> and <strong>end</strong> are revalidated to point to the location of the last deleted range, or left untouched if no text was deleted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>start of range to delete</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>end of range</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_editable</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the buffer is editable by default</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether some text was actually deleted</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_mark-instance_method">
+  
+    #<strong>delete_mark</strong>(mark)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Deletes <strong>mark</strong>, so that it’s no longer located anywhere in the buffer. Removes the reference the buffer holds to the mark, so if you haven’t called g_object_ref() on the mark, it will be freed. Even if the mark isn’t freed, most operations on <strong>mark</strong> become invalid, until it gets added to a buffer again with gtk_text_buffer_add_mark(). Use gtk_text_mark_get_deleted() to find out if a mark has been removed from its buffer. The Gtk::TextBuffer::mark-deleted signal will be emitted as notification after the mark is deleted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mark</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextMark.html" title="Gtk::TextMark (class)">Gtk::TextMark</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TextMark in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_mark_by_name-instance_method">
+  
+    #<strong>delete_mark_by_name</strong>(name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Deletes the mark named <strong>name</strong>; the mark must exist. See gtk_text_buffer_delete_mark() for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>name of a mark in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_selection-instance_method">
+  
+    #<strong>delete_selection</strong>(interactive, default_editable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Deletes the range between the “insert” and “selection_bound” marks, that is, the currently-selected text. If <strong>interactive</strong> is true, the editability of the selection will be considered (users can’t delete uneditable text).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>interactive</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the deletion is caused by user interaction</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_editable</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the buffer is editable by default</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether there was a non-empty selection to delete</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deserialize-instance_method">
+  
+    #<strong>deserialize</strong>(content_buffer, format, iter, data, length)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function deserializes rich text in format <strong>format</strong> and inserts it at <strong>iter</strong>.</p>
+
+<p><strong>formats</strong> to be used must be registered using gtk_text_buffer_register_deserialize_format() or gtk_text_buffer_register_deserialize_tagset() beforehand.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>content_buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TextBuffer (class)">Gtk::TextBuffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TextBuffer to deserialize into</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the rich text format to use for deserializing</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>insertion point for the deserialized text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>data to deserialize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of <strong>data</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true on success, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deserialize_get_can_create_tags-instance_method">
+  
+    #<strong>deserialize_get_can_create_tags</strong>(format)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This functions returns the value set with gtk_text_buffer_deserialize_set_can_create_tags()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Atom representing a registered rich text format</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether deserializing this format may create tags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deserialize_set_can_create_tags-instance_method">
+  
+    #<strong>deserialize_set_can_create_tags</strong>(format, can_create_tags)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Use this function to allow a rich text deserialization function to create new tags in the receiving buffer. Note that using this function is almost always a bad idea, because the rich text functions you register should know how to map the rich text format they handler to your text buffers set of tags.</p>
+
+<p>The ability of creating new (arbitrary!) tags in the receiving buffer is meant for special rich text formats like the internal one that is registered using gtk_text_buffer_register_deserialize_tagset(), because that format is essentially a dump of the internal structure of the source buffer, including its tag names.</p>
+
+<p>You should allow creation of tags only if you know what you are doing, e.g. if you defined a tagset name for your application suite’s text buffers and you know that it’s fine to receive new tags from these buffers, because you know that your application can handle the newly created tags.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Atom representing a registered rich text format</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>can_create_tags</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether deserializing this format may create tags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="end_user_action-instance_method">
+  
+    #<strong>end_user_action</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Should be paired with a call to gtk_text_buffer_begin_user_action(). See that function for a full explanation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_bounds-instance_method">
+  
+    #<strong>get_bounds</strong>(start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the first and last iterators in the buffer, i.e. the entire buffer lies within the range [<strong>start</strong>,<strong>end</strong>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>iterator to initialize with first position in the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>iterator to initialize with the end iterator</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_deserialize_formats-instance_method">
+  
+    #<strong>get_deserialize_formats</strong>(n_formats)  &#x21d2; <tt>Array&lt;Gdk::Atom&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function returns the rich text deserialize formats registered with <strong>buffer</strong> using gtk_text_buffer_register_deserialize_format() or gtk_text_buffer_register_deserialize_tagset()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_formats</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the number of formats</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gdk::Atom&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of Gdk::Atoms representing the registered formats.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_end_iter-instance_method">
+  
+    #<strong>get_end_iter</strong>(iter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Initializes <strong>iter</strong> with the “end iterator,” one past the last valid character in the text buffer. If dereferenced with gtk_text_iter_get_char(), the end iterator has a character value of 0. The entire buffer lies in the range from the first position in the buffer (call gtk_text_buffer_get_start_iter() to get character position 0) to the end iterator.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>iterator to initialize</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_iter_at_child_anchor-instance_method">
+  
+    #<strong>get_iter_at_child_anchor</strong>(iter, anchor)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the location of <strong>anchor</strong> within <strong>buffer</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an iterator to be initialized</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>anchor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextChildAnchor.html" title="Gtk::TextChildAnchor (class)">Gtk::TextChildAnchor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a child anchor that appears in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_iter_at_line-instance_method">
+  
+    #<strong>get_iter_at_line</strong>(iter, line_number)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Initializes <strong>iter</strong> to the start of the given line. If <strong>line_number</strong> is greater than the number of lines in the <strong>buffer</strong>, the end iterator is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>iterator to initialize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>line_number</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>line number counting from 0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_iter_at_line_index-instance_method">
+  
+    #<strong>get_iter_at_line_index</strong>(iter, line_number, byte_index)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains an iterator pointing to <strong>byte_index</strong> within the given line. <strong>byte_index</strong> must be the start of a UTF-8 character. Note bytes, not characters; UTF-8 may encode one character as multiple bytes.</p>
+
+<p>Before the 3.20 version, it was not allowed to pass an invalid location.</p>
+
+<p>Since the 3.20 version, if <strong>line_number</strong> is greater than the number of lines in the <strong>buffer</strong>, the end iterator is returned. And if <strong>byte_index</strong> is off the end of the line, the iterator at the end of the line is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>iterator to initialize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>line_number</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>line number counting from 0</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>byte_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>byte index from start of line</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_iter_at_line_offset-instance_method">
+  
+    #<strong>get_iter_at_line_offset</strong>(iter, line_number, char_offset)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains an iterator pointing to <strong>char_offset</strong> within the given line. Note characters, not bytes; UTF-8 may encode one character as multiple bytes.</p>
+
+<p>Before the 3.20 version, it was not allowed to pass an invalid location.</p>
+
+<p>Since the 3.20 version, if <strong>line_number</strong> is greater than the number of lines in the <strong>buffer</strong>, the end iterator is returned. And if <strong>char_offset</strong> is off the end of the line, the iterator at the end of the line is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>iterator to initialize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>line_number</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>line number counting from 0</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>char_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>char offset from start of line</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_iter_at_mark-instance_method">
+  
+    #<strong>get_iter_at_mark</strong>(iter, mark)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Initializes <strong>iter</strong> with the current position of <strong>mark</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>iterator to initialize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mark</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextMark.html" title="Gtk::TextMark (class)">Gtk::TextMark</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TextMark in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_iter_at_offset-instance_method">
+  
+    #<strong>get_iter_at_offset</strong>(iter, char_offset)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Initializes <strong>iter</strong> to a position <strong>char_offset</strong> chars from the start of the entire buffer. If <strong>char_offset</strong> is -1 or greater than the number of characters in the buffer, <strong>iter</strong> is initialized to the end iterator, the iterator one past the last valid character in the buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>iterator to initialize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>char_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>char offset from start of buffer, counting from 0, or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_mark-instance_method">
+  
+    #<strong>get_mark</strong>(name)  &#x21d2; <tt><span class='object_link'><a href="TextMark.html" title="Gtk::TextMark (class)">Gtk::TextMark</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the mark named <strong>name</strong> in buffer <strong>buffer</strong>, or nil if no such mark exists in the buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a mark name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextMark.html" title="Gtk::TextMark (class)">Gtk::TextMark</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TextMark, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_selection_bounds-instance_method">
+  
+    #<strong>get_selection_bounds</strong>(start, end)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if some text is selected; places the bounds of the selection in <strong>start</strong> and <strong>end</strong> (if the selection has length 0, then <strong>start</strong> and <strong>end</strong> are filled in with the same value). <strong>start</strong> and <strong>end</strong> will be in ascending order. If <strong>start</strong> and <strong>end</strong> are NULL, then they are not filled in, but the return value still indicates whether text is selected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>iterator to initialize with selection start</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>iterator to initialize with selection end</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the selection has nonzero length</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_serialize_formats-instance_method">
+  
+    #<strong>get_serialize_formats</strong>(n_formats)  &#x21d2; <tt>Array&lt;Gdk::Atom&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function returns the rich text serialize formats registered with <strong>buffer</strong> using gtk_text_buffer_register_serialize_format() or gtk_text_buffer_register_serialize_tagset()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_formats</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the number of formats</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gdk::Atom&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of Gdk::Atoms representing the registered formats.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_slice-instance_method">
+  
+    #<strong>get_slice</strong>(start, end, include_hidden_chars)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the text in the range [<strong>start</strong>,<strong>end</strong>). Excludes undisplayed text (text marked with tags that set the invisibility attribute) if <strong>include_hidden_chars</strong> is false. The returned string includes a 0xFFFC character whenever the buffer contains embedded images, so byte and character indexes into the returned string do correspond to byte and character indexes into the buffer. Contrast with gtk_text_buffer_get_text(). Note that 0xFFFC can occur in normal text as well, so it is not a reliable indicator that a pixbuf or widget is in the buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>start of a range</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>end of a range</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>include_hidden_chars</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether to include invisible text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an allocated UTF-8 string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_start_iter-instance_method">
+  
+    #<strong>get_start_iter</strong>(iter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Initialized <strong>iter</strong> with the first position in the text buffer. This is the same as using gtk_text_buffer_get_iter_at_offset() to get the iter at character offset 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>iterator to initialize</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_text-instance_method">
+  
+    #<strong>get_text</strong>(start, end, include_hidden_chars)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the text in the range [<strong>start</strong>,<strong>end</strong>). Excludes undisplayed text (text marked with tags that set the invisibility attribute) if <strong>include_hidden_chars</strong> is false. Does not include characters representing embedded images, so byte and character indexes into the returned string do not correspond to byte and character indexes into the buffer. Contrast with gtk_text_buffer_get_slice().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>start of a range</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>end of a range</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>include_hidden_chars</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether to include invisible text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an allocated UTF-8 string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_selection-instance_method">
+  
+    #<strong>has_selection</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates whether the buffer has some text currently selected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the there is text selected</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_selection=-instance_method">
+  
+    #<strong>has_selection=</strong>(has_selection)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Whether the buffer has some text currently selected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>has_selection</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>has-selection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>has-selection</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_selection?-instance_method">
+  
+    #<strong>has_selection?</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Whether the buffer has some text currently selected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>has-selection</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert-instance_method">
+  
+    #<strong>insert</strong>(iter, text, len)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Inserts <strong>len</strong> bytes of <strong>text</strong> at position <strong>iter</strong>.  If <strong>len</strong> is -1, <strong>text</strong> must be nul-terminated and will be inserted in its entirety. Emits the “insert-text” signal; insertion actually occurs in the default handler for the signal. <strong>iter</strong> is invalidated when insertion occurs (because the buffer contents change), but the default signal handler revalidates it to point to the end of the inserted text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a position in the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>text in UTF-8 format</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of text in bytes, or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_at_cursor-instance_method">
+  
+    #<strong>insert_at_cursor</strong>(text, len)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Simply calls gtk_text_buffer_insert(), using the current cursor position as the insertion point.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>text in UTF-8 format</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of text, in bytes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_child_anchor-instance_method">
+  
+    #<strong>insert_child_anchor</strong>(iter, anchor)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Inserts a child widget anchor into the text buffer at <strong>iter</strong>. The anchor will be counted as one character in character counts, and when obtaining the buffer contents as a string, will be represented by the Unicode “object replacement character” 0xFFFC. Note that the “slice” variants for obtaining portions of the buffer as a string include this character for child anchors, but the “text” variants do not. E.g. see gtk_text_buffer_get_slice() and gtk_text_buffer_get_text(). Consider gtk_text_buffer_create_child_anchor() as a more convenient alternative to this function. The buffer will add a reference to the anchor, so you can unref it after insertion.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to insert the anchor</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>anchor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextChildAnchor.html" title="Gtk::TextChildAnchor (class)">Gtk::TextChildAnchor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TextChildAnchor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_interactive-instance_method">
+  
+    #<strong>insert_interactive</strong>(iter, text, len, default_editable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Like gtk_text_buffer_insert(), but the insertion will not occur if <strong>iter</strong> is at a non-editable location in the buffer. Usually you want to prevent insertions at ineditable locations if the insertion results from a user action (is interactive).</p>
+
+<p><strong>default_editable</strong> indicates the editability of text that doesn’t have a tag affecting editability applied to it. Typically the result of gtk_text_view_get_editable() is appropriate here.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a position in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>some UTF-8 text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of text in bytes, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_editable</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>default editability of buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether text was actually inserted</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_interactive_at_cursor-instance_method">
+  
+    #<strong>insert_interactive_at_cursor</strong>(text, len, default_editable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calls gtk_text_buffer_insert_interactive() at the cursor position.</p>
+
+<p><strong>default_editable</strong> indicates the editability of text that doesn’t have a tag affecting editability applied to it. Typically the result of gtk_text_view_get_editable() is appropriate here.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>text in UTF-8 format</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of text in bytes, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_editable</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>default editability of buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether text was actually inserted</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_markup-instance_method">
+  
+    #<strong>insert_markup</strong>(iter, markup, len)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Inserts the text in <strong>markup</strong> at position <strong>iter</strong>. <strong>markup</strong> will be inserted in its entirety and must be nul-terminated and valid UTF-8. Emits the Gtk::TextBuffer::insert-text signal, possibly multiple times; insertion actually occurs in the default handler for the signal. <strong>iter</strong> will point to the end of the inserted text on return.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to insert the markup</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>markup</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a nul-terminated UTF-8 string containing [Pango <a href="PangoMarkupFormat">markup]</a></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of <strong>markup</strong> in bytes, or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_pixbuf-instance_method">
+  
+    #<strong>insert_pixbuf</strong>(iter, pixbuf)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Inserts an image into the text buffer at <strong>iter</strong>. The image will be counted as one character in character counts, and when obtaining the buffer contents as a string, will be represented by the Unicode “object replacement character” 0xFFFC. Note that the “slice” variants for obtaining portions of the buffer as a string include this character for pixbufs, but the “text” variants do not. e.g. see gtk_text_buffer_get_slice() and gtk_text_buffer_get_text().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to insert the pixbuf</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pixbuf</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GdkPixbuf/Pixbuf.html" title="GdkPixbuf::Pixbuf (class)">GdkPixbuf::Pixbuf</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Pixbuf</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_range-instance_method">
+  
+    #<strong>insert_range</strong>(iter, start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Copies text, tags, and pixbufs between <strong>start</strong> and <strong>end</strong> (the order of <strong>start</strong> and <strong>end</strong> doesn’t matter) and inserts the copy at <strong>iter</strong>. Used instead of simply getting/inserting text because it preserves images and tags. If <strong>start</strong> and <strong>end</strong> are in a different buffer from <strong>buffer</strong>, the two buffers must share the same tag table.</p>
+
+<p>Implemented via emissions of the insert_text and apply_tag signals, so expect those.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a position in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a position in a Gtk::TextBuffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>another position in the same buffer as <strong>start</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_range_interactive-instance_method">
+  
+    #<strong>insert_range_interactive</strong>(iter, start, end, default_editable)  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Same as gtk_text_buffer_insert_range(), but does nothing if the insertion point isn’t editable. The <strong>default_editable</strong> parameter indicates whether the text is editable at <strong>iter</strong> if no tags enclosing <strong>iter</strong> affect editability. Typically the result of gtk_text_view_get_editable() is appropriate here.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a position in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a position in a Gtk::TextBuffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>another position in the same buffer as <strong>start</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_editable</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>default editability of the buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether an insertion was possible at <strong>iter</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_with_tags-instance_method">
+  
+    #<strong>insert_with_tags</strong>(iter, text, len, first_tag, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Inserts <strong>text</strong> into <strong>buffer</strong> at <strong>iter</strong>, applying the list of tags to the newly-inserted text. The last tag specified must be nil to terminate the list. Equivalent to calling gtk_text_buffer_insert(), then gtk_text_buffer_apply_tag() on the inserted text; gtk_text_buffer_insert_with_tags() is just a convenience function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an iterator in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>UTF-8 text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of <strong>text</strong>, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_tag</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextTag.html" title="Gtk::TextTag (class)">Gtk::TextTag</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>first tag to apply to <strong>text</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>nil-terminated list of tags to apply</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_with_tags_by_name-instance_method">
+  
+    #<strong>insert_with_tags_by_name</strong>(iter, text, len, first_tag_name, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Same as gtk_text_buffer_insert_with_tags(), but allows you to pass in tag names instead of tag objects.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>position in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>UTF-8 text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of <strong>text</strong>, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_tag_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>name of a tag to apply to <strong>text</strong></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>more tag names</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_count-instance_method">
+  
+    #<strong>line_count</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtains the number of lines in the buffer. This value is cached, so the function is very fast.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>number of lines in the buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="modified-instance_method">
+  
+    #<strong>modified</strong>  &#x21d2; <tt>TrueClass</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Indicates whether the buffer has been modified since the last call to gtk_text_buffer_set_modified() set the modification flag to false. Used for example to enable a “save” function in a text editor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the buffer has been modified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="modified=-instance_method">
+  
+    #<strong>modified=</strong>(setting)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Used to keep track of whether the buffer has been modified since the last time it was saved. Whenever the buffer is saved to disk, call gtk_text_buffer_set_modified (<strong>buffer</strong>, FALSE). When the buffer is modified, it will automatically toggled on the modified bit again. When the modified bit flips, the buffer emits the Gtk::TextBuffer::modified-changed signal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>setting</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>modification flag setting</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="move_mark-instance_method">
+  
+    #<strong>move_mark</strong>(mark, where)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Moves <strong>mark</strong> to the new location <strong>where</strong>. Emits the Gtk::TextBuffer::mark-set signal as notification of the move.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mark</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextMark.html" title="Gtk::TextMark (class)">Gtk::TextMark</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TextMark</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>where</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>new location for <strong>mark</strong> in <strong>buffer</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="move_mark_by_name-instance_method">
+  
+    #<strong>move_mark_by_name</strong>(name, where)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Moves the mark named <strong>name</strong> (which must exist) to location <strong>where</strong>. See gtk_text_buffer_move_mark() for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>name of a mark</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>where</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>new location for mark</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>(table)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::TextBuffer (class)">Gtk::TextBuffer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new text buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>table</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextTagTable.html" title="Gtk::TextTagTable (class)">Gtk::TextTagTable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a tag table, or nil to create a new one</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TextBuffer (class)">Gtk::TextBuffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a new text buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="paste_clipboard-instance_method">
+  
+    #<strong>paste_clipboard</strong>(clipboard, override_location, default_editable)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Pastes the contents of a clipboard. If <strong>override_location</strong> is nil, the pasted text will be inserted at the cursor position, or the buffer selection will be replaced if the selection is non-empty.</p>
+
+<p>Note: pasting is asynchronous, that is, we’ll ask for the paste data and return, and at some point later after the main loop runs, the paste data will be inserted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>clipboard</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Clipboard.html" title="Gtk::Clipboard (class)">Gtk::Clipboard</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::Clipboard to paste from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>override_location</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>location to insert pasted text, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_editable</span>
+      
+      
+        <span class='type'>(<tt>TrueClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>whether the buffer is editable by default</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="paste_target_list-instance_method">
+  
+    #<strong>paste_target_list</strong>  &#x21d2; <tt>Gtk::TargetList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The list of targets this buffer supports for clipboard pasting and as DND destination.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::TargetList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>paste-target-list</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="paste_target_list=-instance_method">
+  
+    #<strong>paste_target_list=</strong>(paste_target_list)  &#x21d2; <tt>Gtk::TargetList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The list of targets this buffer supports for clipboard pasting and as DND destination.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>paste_target_list</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TargetList</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::TargetList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>paste-target-list</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::TargetList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>paste-target-list</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="place_cursor-instance_method">
+  
+    #<strong>place_cursor</strong>(where)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function moves the “insert” and “selection_bound” marks simultaneously.  If you move them to the same place in two steps with gtk_text_buffer_move_mark(), you will temporarily select a region in between their old and new locations, which can be pretty inefficient since the temporarily-selected region will force stuff to be recalculated. This function moves them as a unit, which can be optimized.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>where</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>where to put the cursor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_deserialize_format-instance_method">
+  
+    #<strong>register_deserialize_format</strong>(mime_type, function, user_data, user_data_destroy)  &#x21d2; <tt>Gdk::Atom</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function registers a rich text deserialization <strong>function</strong> along with its <strong>mime_type</strong> with the passed <strong>buffer</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mime_type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the format’s mime-type</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>function</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextBufferDeserializeFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the deserialize function to register</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>function</strong>’s user_data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data_destroy</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a function to call when <strong>user_data</strong> is no longer needed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Atom that corresponds to the newly registered format’s mime-type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_deserialize_tagset-instance_method">
+  
+    #<strong>register_deserialize_tagset</strong>(tagset_name)  &#x21d2; <tt>Gdk::Atom</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function registers GTK+’s internal rich text serialization format with the passed <strong>buffer</strong>. See gtk_text_buffer_register_serialize_tagset() for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tagset_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an optional tagset name, on nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Atom that corresponds to the newly registered format’s mime-type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_serialize_format-instance_method">
+  
+    #<strong>register_serialize_format</strong>(mime_type, function, user_data, user_data_destroy)  &#x21d2; <tt>Gdk::Atom</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function registers a rich text serialization <strong>function</strong> along with its <strong>mime_type</strong> with the passed <strong>buffer</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mime_type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the format’s mime-type</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>function</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextBufferSerializeFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the serialize function to register</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><strong>function</strong>’s user_data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data_destroy</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a function to call when <strong>user_data</strong> is no longer needed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Atom that corresponds to the newly registered format’s mime-type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_serialize_tagset-instance_method">
+  
+    #<strong>register_serialize_tagset</strong>(tagset_name)  &#x21d2; <tt>Gdk::Atom</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function registers GTK+’s internal rich text serialization format with the passed <strong>buffer</strong>. The internal format does not comply to any standard rich text format and only works between Gtk::TextBuffer instances. It is capable of serializing all of a text buffer’s tags and embedded pixbufs.</p>
+
+<p>This function is just a wrapper around gtk_text_buffer_register_serialize_format(). The mime type used for registering is “application/x-gtk-text-buffer-rich-text”, or “application/x-gtk-text-buffer-rich-text;format=<strong>tagset_name</strong>” if a <strong>tagset_name</strong> was passed.</p>
+
+<p>The <strong>tagset_name</strong> can be used to restrict the transfer of rich text to buffers with compatible sets of tags, in order to avoid unknown tags from being pasted. It is probably the common case to pass an identifier != nil here, since the nil tagset requires the receiving buffer to deal with with pasting of arbitrary tags.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tagset_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an optional tagset name, on nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gdk::Atom that corresponds to the newly registered format’s mime-type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_all_tags-instance_method">
+  
+    #<strong>remove_all_tags</strong>(start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes all tags in the range between <strong>start</strong> and <strong>end</strong>.  Be careful with this function; it could remove tags added in code unrelated to the code you’re currently writing. That is, using this function is probably a bad idea if you have two or more unrelated code sections that add tags.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>one bound of range to be untagged</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>other bound of range to be untagged</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_selection_clipboard-instance_method">
+  
+    #<strong>remove_selection_clipboard</strong>(clipboard)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes a Gtk::Clipboard added with gtk_text_buffer_add_selection_clipboard().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>clipboard</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Clipboard.html" title="Gtk::Clipboard (class)">Gtk::Clipboard</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::Clipboard added to <strong>buffer</strong> by gtk_text_buffer_add_selection_clipboard()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_tag-instance_method">
+  
+    #<strong>remove_tag</strong>(tag, start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Emits the “remove-tag” signal. The default handler for the signal removes all occurrences of <strong>tag</strong> from the given range. <strong>start</strong> and <strong>end</strong> don’t have to be in order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextTag.html" title="Gtk::TextTag (class)">Gtk::TextTag</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gtk::TextTag</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>one bound of range to be untagged</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>other bound of range to be untagged</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_tag_by_name-instance_method">
+  
+    #<strong>remove_tag_by_name</strong>(name, start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calls gtk_text_tag_table_lookup() on the buffer’s tag table to get a Gtk::TextTag, then calls gtk_text_buffer_remove_tag().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>name of a Gtk::TextTag</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>one bound of range to be untagged</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>other bound of range to be untagged</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_range-instance_method">
+  
+    #<strong>select_range</strong>(ins, bound)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function moves the “insert” and “selection_bound” marks simultaneously.  If you move them in two steps with gtk_text_buffer_move_mark(), you will temporarily select a region in between their old and new locations, which can be pretty inefficient since the temporarily-selected region will force stuff to be recalculated. This function moves them as a unit, which can be optimized.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ins</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>where to put the “insert” mark</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bound</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>where to put the “selection_bound” mark</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selection_bound-instance_method">
+  
+    #<strong>selection_bound</strong>  &#x21d2; <tt><span class='object_link'><a href="TextMark.html" title="Gtk::TextMark (class)">Gtk::TextMark</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the mark that represents the selection bound.  Equivalent to calling gtk_text_buffer_get_mark() to get the mark named “selection_bound”, but very slightly more efficient, and involves less typing.</p>
+
+<p>The currently-selected text in <strong>buffer</strong> is the region between the “selection_bound” and “insert” marks. If “selection_bound” and “insert” are in the same place, then there is no current selection. gtk_text_buffer_get_selection_bounds() is another convenient function for handling the selection, if you just want to know whether there’s a selection and what its bounds are.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextMark.html" title="Gtk::TextMark (class)">Gtk::TextMark</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>selection bound mark</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="serialize-instance_method">
+  
+    #<strong>serialize</strong>(content_buffer, format, start, end, length)  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function serializes the portion of text between <strong>start</strong> and <strong>end</strong> in the rich text format represented by <strong>format</strong>.</p>
+
+<p><strong>formats</strong> to be used must be registered using gtk_text_buffer_register_serialize_format() or gtk_text_buffer_register_serialize_tagset() beforehand.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>content_buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::TextBuffer (class)">Gtk::TextBuffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the Gtk::TextBuffer to serialize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the rich text format to use for serializing</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>start of block of text to serialize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>end of block of test to serialize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return location for the length of the serialized data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the serialized data, encoded as <strong>format</strong></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_text-instance_method">
+  
+    #<strong>set_text</strong>(text, len)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Deletes current contents of <strong>buffer</strong>, and inserts <strong>text</strong> instead. If <strong>len</strong> is -1, <strong>text</strong> must be nul-terminated. <strong>text</strong> must be valid UTF-8.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>UTF-8 text to insert</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>length of <strong>text</strong> in bytes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tag_table-instance_method">
+  
+    #<strong>tag_table</strong>  &#x21d2; <tt><span class='object_link'><a href="TextTagTable.html" title="Gtk::TextTagTable (class)">Gtk::TextTagTable</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns tag-table.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextTagTable.html" title="Gtk::TextTagTable (class)">Gtk::TextTagTable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>tag-table</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tag_table=-instance_method">
+  
+    #<strong>tag_table=</strong>(tag_table)  &#x21d2; <tt><span class='object_link'><a href="TextTagTable.html" title="Gtk::TextTagTable (class)">Gtk::TextTagTable</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tag_table</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextTagTable.html" title="Gtk::TextTagTable (class)">Gtk::TextTagTable</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextTagTable.html" title="Gtk::TextTagTable (class)">Gtk::TextTagTable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>tag-table</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextTagTable.html" title="Gtk::TextTagTable (class)">Gtk::TextTagTable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>tag-table</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text-instance_method">
+  
+    #<strong>text</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The text content of the buffer. Without child widgets and images, see gtk_text_buffer_get_text() for more information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text=-instance_method">
+  
+    #<strong>text=</strong>(text)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The text content of the buffer. Without child widgets and images, see gtk_text_buffer_get_text() for more information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unregister_deserialize_format-instance_method">
+  
+    #<strong>unregister_deserialize_format</strong>(format)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function unregisters a rich text format that was previously registered using gtk_text_buffer_register_deserialize_format() or gtk_text_buffer_register_deserialize_tagset().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Atom representing a registered rich text format.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unregister_serialize_format-instance_method">
+  
+    #<strong>unregister_serialize_format</strong>(format)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function unregisters a rich text format that was previously registered using gtk_text_buffer_register_serialize_format() or gtk_text_buffer_register_serialize_tagset()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Atom</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a Gdk::Atom representing a registered rich text format.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Apr  7 02:46:31 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>
