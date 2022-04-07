@@ -22,12 +22,12 @@ jobs:
           bundler-cache: true
       - name: Install requirements
         run: |
-          ruby extconf.rb
+          bundle exec ruby extconf.rb
           make -j$(nproc)
           make install
       - name: Generate document
         run: |
-          yard doc \
+          bundle exec yard doc \
             -o yard_docs \
             gio2/lib/gio2.rb \
             gdk_pixbuf2/lib/gdk_pixbuf2.rb \
