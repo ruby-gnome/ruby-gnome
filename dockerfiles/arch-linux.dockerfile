@@ -7,6 +7,7 @@ RUN \
     dbus \
     gcc \
     gnome-icon-theme \
+    git \
     gnumeric \
     gst-plugins-good \
     make \

@@ -13,6 +13,7 @@ RUN \
     dejavu-sans-fonts \
     gcc \
     gcc-c++ \
+    git \
     gnome-icon-theme \
     gtksourceview3 \
     libwebkit2-gtk \

@@ -11,6 +11,7 @@ RUN \
     dejavu-sans-fonts \
     gcc \
     gcc-c++ \
+    git \
     gstreamer1-plugins-good \
     make \
     redhat-rpm-config \
