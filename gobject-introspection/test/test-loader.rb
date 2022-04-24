@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2021  Ruby-GNOME Project Team
+# Copyright (C) 2012-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -84,6 +84,20 @@ class TestLoaderInfo < Test::Unit::TestCase
       immutable_menu = immutable_menu_class.new
       assert do
         not immutable_menu.mutable?
+      end
+    end
+  end
+
+  sub_test_case("#==") do
+    def test_invalid
+      assert do
+        not (Gio::File.new_for_path("nonexistent") == "invalid")
+      end
+    end
+
+    def test_nil
+      assert do
+        not (Gio::File.new_for_path("nonexistent") == nil)
       end
     end
   end

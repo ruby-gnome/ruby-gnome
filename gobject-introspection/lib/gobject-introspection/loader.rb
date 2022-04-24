@@ -717,10 +717,13 @@ module GObjectIntrospection
         @valid_n_args_range = (@n_required_in_args..@n_in_args)
 
         @in_arg_types = []
+        @in_arg_nils = []
         @in_arg_nil_indexes = []
         @in_args.each_with_index do |arg, i|
           @in_arg_types << arg.type
-          @in_arg_nil_indexes << i if arg.may_be_null?
+          may_be_null = arg.may_be_null?
+          @in_arg_nils << may_be_null
+          @in_arg_nil_indexes << i if may_be_null
         end
 
         @function_info_p = (@info.class == FunctionInfo)
@@ -772,7 +775,7 @@ module GObjectIntrospection
           type = @in_arg_types[i]
           converted_argument = type.try_convert(argument)
           if converted_argument.nil?
-            next if argument.nil?
+            next if argument.nil? and @in_arg_nils[i]
             if abort_tag
               throw(abort_tag)
             elsif @on_invalid == :fallback
