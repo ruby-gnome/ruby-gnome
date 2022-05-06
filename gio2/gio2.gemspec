@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018  Ruby-GNOME Project Team
+# Copyright (C) 2018-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -43,6 +43,7 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
   s.files += Dir.glob("test/**/*")
 
+  s.add_runtime_dependency("fiddle")
   s.add_runtime_dependency("gobject-introspection", "= #{s.version}")
 
   s.metadata["msys2_mingw_dependencies"] = "glib-networking"

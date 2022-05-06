@@ -14,6 +14,7 @@ RUN \
     ruby-devel \
     sudo \
     which \
+    util-linux \
     xorg-x11-server-Xvfb && \
   dnf clean all
 

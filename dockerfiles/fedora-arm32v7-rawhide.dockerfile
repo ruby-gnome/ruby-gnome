@@ -1,20 +1,20 @@
-FROM centos:8
+FROM arm32v7/fedora:rawhide
 
 RUN \
   dnf install -y \
-    epel-release && \
-  dnf install -y \
     adwaita-gtk2-theme \
     dbus-daemon \
-    dejavu-sans-fonts \
     gcc \
     gcc-c++ \
+    gnome-icon-theme \
+    gnumeric \
     gstreamer1-plugins-good \
     make \
     redhat-rpm-config \
     ruby-devel \
     sudo \
     which \
+    util-linux \
     xorg-x11-server-Xvfb && \
   dnf clean all
 
@@ -32,4 +32,5 @@ USER ruby-gnome
 WORKDIR /home/ruby-gnome
 
 COPY Gemfile .
+RUN sudo gem install cairo
 RUN bundle install

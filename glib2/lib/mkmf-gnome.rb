@@ -72,9 +72,10 @@ def try_compiler_option(opt, &block)
 end
 
 try_compiler_option '-Wall'
-try_compiler_option '-Waggregate-return'
+# NOTE: This generates warnings for functions defined in ruby.h.
+# try_compiler_option '-Waggregate-return'
 try_compiler_option '-Wcast-align'
-# NOTE: Generates way too many false positives.
+# NOTE: This generates way too many false positives.
 # try_compiler_option '-Wconversion'
 try_compiler_option '-Wextra'
 try_compiler_option '-Wformat=2'

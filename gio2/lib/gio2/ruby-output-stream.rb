@@ -1,4 +1,4 @@
-# Copyright (C) 2019-2021  Ruby-GNOME Project Team
+# Copyright (C) 2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,12 +14,37 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module GObjectIntrospection
-  class FunctionInfo
-    def inspect
-      super.gsub(/>\z/) do
-        " lock_gvl_default=#{lock_gvl?.inspect}>"
-      end
+require_relative "ruby-seekable"
+
+module Gio
+  class RubyOutputStream < OutputStream
+    type_register("RubyOutputStream")
+
+    include Seekable
+    include RubySeekable
+
+    def initialize(ruby_output)
+      @ruby_output = ruby_output
+      super()
+    end
+
+    private
+    def ruby_io
+      @ruby_output
+    end
+
+    def virtual_do_write_fn(buffer, cancellable)
+      @ruby_output.write(buffer)
+    end
+
+    def virtual_do_flush(cancellable)
+      @ruby_output.flush
+      true
+    end
+
+    def virtual_do_close_fn(cancellable)
+      @ruby_output.close
+      true
     end
   end
 end

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2015-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2015-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -69,9 +69,10 @@ rbg_variant_to_ruby(GVariant *variant)
         VALUE value = rbg_variant_to_ruby(val);
         g_variant_unref(val);
         return value;
-    } else if (g_variant_type_is_array(type)) {
+    } else if (g_variant_type_is_array(type) ||
+               g_variant_type_is_tuple(type)) {
         gsize i, len = g_variant_n_children(variant);
-        VALUE ary = rb_ary_new2(len);
+        VALUE ary = rb_ary_new_capa(len);
         for (i = 0; i < len; i++) {
             GVariant *val = g_variant_get_child_value(variant, i);
             rb_ary_store(ary, i, rbg_variant_to_ruby(val));

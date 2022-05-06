@@ -153,6 +153,7 @@ EXPORTS
 	rbgutil_glibid_r2g_func
 	rbgutil_sym_g2r_func
 	rbgutil_protect
+	rbgutil_on_callback_error
 	rbgutil_invoke_callback
 	rbgutil_start_callback_dispatch_thread
 	rbgutil_stop_callback_dispatch_thread

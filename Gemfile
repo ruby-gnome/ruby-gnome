@@ -22,6 +22,8 @@ gem "pkg-config"
 gem "rake"
 gem "test-unit"
 gem "webrick"
+gem "yard"
+gem "yard-gobject-introspection", github: "ruby-gnome/yard-gobject-introspection"
 
 local_gemfile = File.join(File.dirname(__FILE__), "Gemfile.local")
 if File.exist?(local_gemfile)

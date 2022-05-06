@@ -1,0 +1,61 @@
+name: Document
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - '*'
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update APT repositories
+        run: |
+          sudo apt update -y
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler-cache: true
+      - name: Install requirements
+        run: |
+          bundle exec ruby extconf.rb
+          make -j$(nproc)
+          make install
+      - name: Generate document
+        run: |
+          bundle exec yard doc \
+            --load yard-gobject-introspection.rb \
+            --output-dir yard_docs \
+            glib2/lib/glib2.rb \
+            gio2/lib/gio2.rb \
+            gdk_pixbuf2/lib/gdk_pixbuf2.rb \
+            pango/lib/pango.rb \
+            atk/lib/atk.rb \
+            gdk3/lib/gdk3.rb \
+            gtk3/lib/gtk3.rb
+          case ${GITHUB_REF} in
+            refs/tags/*)
+              version=${GITHUB_REF##refs/tags}
+              ;;
+            *)
+              version=dev
+              ;;
+          esac
+          mkdir -p public/doc
+          mv yard_docs public/doc/${version}
+          if [ "${version}" != "dev" ]; then
+            cp -a public/doc/${version} public/doc/latest
+          fi
+      - name: Publish Documentation on GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          keep_files: true
+          # We can use this with v4
+          # force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'

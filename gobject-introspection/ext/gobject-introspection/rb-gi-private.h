@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -50,11 +50,14 @@
 #  define RB_TYPE_P(object, type) (TYPE(object) == type)
 #endif
 
+/* GLib 2.60 or later defines this. */
+#ifndef G_GNUC_FALLTHROUGH
+#  define G_GNUC_FALLTHROUGH
+#endif
+
 extern void Init_gobject_introspection(void);
 
 gboolean rb_gi_is_debug_mode(void);
-
-void rb_gi_argument_init             (void);
 
 void rb_gi_type_tag_init             (VALUE rb_mGI);
 void rb_gi_base_info_init            (VALUE rb_mGI);

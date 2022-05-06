@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -29,16 +29,6 @@
 #define GI_BASE_INFO2RVAL_WITH_UNREF(info)		\
     (rb_gi_base_info_to_ruby_with_unref((GIBaseInfo *)(info)))
 #define RVAL2GI_BASE_INFO(rb_object) (rb_gi_base_info_from_ruby(rb_object))
-
-#define GI_ARGUMENT2RVAL(argument, duplicate, type_info,                \
-                         in_args, out_args, args_metadata)              \
-    (rb_gi_argument_to_ruby((argument), (duplicate), (type_info),       \
-                            (in_args), (out_args), (args_metadata)))
-#define GI_RETURN_ARGUMENT2RVAL(callable_info, argument,                \
-                                in_args, out_args, args_metadata)       \
-    (rb_gi_return_argument_to_ruby((callable_info), (argument),         \
-                                   (in_args), (out_args), (args_metadata)))
-
 
 #define RVAL2GI_REGISTERED_TYPE_INFO(rb_object)			\
     ((GIRegisteredTypeInfo *)RVAL2GI_BASE_INFO(rb_object))
@@ -89,17 +79,5 @@
 VALUE       rb_gi_base_info_to_ruby           (GIBaseInfo *info);
 VALUE       rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info);
 GIBaseInfo *rb_gi_base_info_from_ruby         (VALUE rb_info);
-
-VALUE       rb_gi_argument_to_ruby            (GIArgument     *argument,
-                                               gboolean        duplicate,
-                                               GITypeInfo     *type_info,
-                                               GArray         *in_args,
-                                               GArray         *out_args,
-                                               GPtrArray      *args_metadata);
-VALUE       rb_gi_return_argument_to_ruby     (GICallableInfo *callable_info,
-                                               GIArgument     *argument,
-                                               GArray         *in_args,
-                                               GArray         *out_args,
-                                               GPtrArray      *args_metadata);
 
 VALUE       rb_gi_array_type_to_ruby          (GIArrayType type);

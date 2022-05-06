@@ -31,10 +31,10 @@ namespace :dependency do
   task :check do
     package_id = "librsvg-2.0"
     unless PKGConfig.check_version?(package_id)
-      unless NativePackageInstaller.install(:altlinux => "librsvg-devel",
+      unless NativePackageInstaller.install(:alt_linux => "librsvg-devel",
                                             :debian => "librsvg2-dev",
                                             :redhat => "pkgconfig(#{package_id})",
-                                            :arch => "librsvg",
+                                            :arch_linux => "librsvg",
                                             :homebrew => "librsvg",
                                             :macports => "librsvg",
                                             :msys2 => "librsvg")

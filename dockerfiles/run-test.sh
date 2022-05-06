@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2020  Ruby-GNOME Project Team
+# Copyright (C) 2020-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,9 @@ mkdir -p ruby-gnome.build
 cd ruby-gnome.build
 
 cp /ruby-gnome/Gemfile ./
+if [[ -n ${SCL:-} ]]; then
+  gem install cairo
+fi
 bundle install
 
 ruby /ruby-gnome/extconf.rb --enable-debug-build "$@"

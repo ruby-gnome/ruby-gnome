@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2019-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2019-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -50,6 +50,7 @@ typedef struct {
 struct RBGIArgMetadata_ {
     GICallableInfo *callable_info;
     GIArgInfo arg_info;
+    GITypeInfo *type_info;
     const gchar *name;
     RBGIArgMetadataType type;
     RBGIArgMetadataType element_type;
@@ -67,6 +68,7 @@ struct RBGIArgMetadata_ {
     gboolean may_be_null_p;
     gboolean caller_allocates_p;
     gboolean zero_terminated_p;
+    gboolean input_buffer_p;
     gboolean output_buffer_p;
     GIArrayType array_type;
     gint index;
@@ -86,6 +88,12 @@ struct RBGIArgMetadata_ {
 };
 
 G_GNUC_INTERNAL void
+rb_gi_arg_metadata_init_type_info(RBGIArgMetadata *metadata,
+                                  GITypeInfo *type_info);
+G_GNUC_INTERNAL void
+rb_gi_arg_metadata_clear(RBGIArgMetadata *metadata);
+
+G_GNUC_INTERNAL void
 rb_gi_arguments_init(RBGIArguments *args,
                      GICallableInfo *info,
                      VALUE rb_receiver,
@@ -95,11 +103,19 @@ G_GNUC_INTERNAL void
 rb_gi_arguments_clear(RBGIArguments *args);
 
 G_GNUC_INTERNAL VALUE
+rb_gi_arguments_get_rb_in_args(RBGIArguments *args);
+G_GNUC_INTERNAL VALUE
 rb_gi_arguments_get_rb_out_args(RBGIArguments *args);
 
 G_GNUC_INTERNAL VALUE
-rb_gi_arguments_get_rb_return_value(RBGIArguments *args,
-                                    GIArgument *return_value);
+rb_gi_arguments_convert_arg(RBGIArguments *args,
+                            GIArgument *arg,
+                            RBGIArgMetadata *arg_metadata,
+                            gboolean duplicate);
+
+G_GNUC_INTERNAL VALUE
+rb_gi_arguments_convert_return_value(RBGIArguments *args,
+                                     GIArgument *return_value);
 
 G_GNUC_INTERNAL void
 rb_gi_arguments_fill_raw_out_gerror(RBGIArguments *args,

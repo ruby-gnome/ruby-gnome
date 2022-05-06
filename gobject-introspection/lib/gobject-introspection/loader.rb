@@ -90,7 +90,7 @@ module GObjectIntrospection
     end
 
     def define_module_function(target_module, name, function_info)
-      function_info.unlock_gvl = should_unlock_gvl?(function_info, target_module)
+      prepare_function_info_lock_gvl(function_info, target_module)
       full_method_name = "#{target_module}\#.#{name}"
       invoker = Invoker.new(function_info, name, full_method_name)
       target_module::INVOKERS[name] = invoker
@@ -103,7 +103,7 @@ module GObjectIntrospection
     end
 
     def define_singleton_method(klass, name, info)
-      info.unlock_gvl = should_unlock_gvl?(info, klass)
+      prepare_function_info_lock_gvl(info, klass)
       invoker = Invoker.new(info, name, "#{klass}.#{name}")
       singleton_class = klass.singleton_class
       singleton_class::INVOKERS[name] = invoker
@@ -326,7 +326,7 @@ module GObjectIntrospection
       klass.const_set(:INITIALIZE_INVOKERS, invokers)
       infos.each do |info|
         name = "initialize_#{info.name}"
-        info.unlock_gvl = should_unlock_gvl?(info, klass)
+        prepare_function_info_lock_gvl(info, klass)
         invoker = Invoker.new(info, name, "#{klass}\##{name}")
         invokers[name] = invoker
         klass.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ + 1)
@@ -354,7 +354,7 @@ module GObjectIntrospection
           message << arguments.collect(&:inspect).join(", ")
           message << "): "
           message << "available signatures"
-          invokers.each do |invoker|
+          invokers.each_value do |invoker|
             message << ": \#{invoker.signature}"
           end
           raise ArgumentError, message
@@ -519,8 +519,12 @@ module GObjectIntrospection
       end
     end
 
-    def should_unlock_gvl?(function_info, klass)
-      false
+    def prepare_function_info_lock_gvl(function_info, target_module)
+      # For backward compatiblity
+      if respond_to?(:should_unlock_gvl?)
+        function_info.lock_gvl_default =
+          !should_unlock_gvl?(function_info, target_module)
+      end
     end
 
     def load_methods_method(infos, klass)
@@ -544,7 +548,7 @@ module GObjectIntrospection
 
     def define_method(info, klass, method_name)
       return if method_name.empty?
-      info.unlock_gvl = should_unlock_gvl?(info, klass)
+      prepare_function_info_lock_gvl(info, klass)
       remove_existing_method(klass, method_name)
       invoker = Invoker.new(info, method_name, "#{klass}\##{method_name}")
       invokers = klass::INVOKERS
@@ -569,7 +573,7 @@ module GObjectIntrospection
       if method_name == "to_s" and info.n_args.zero?
         klass.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ + 1)
           def inspect
-            super.gsub(/>\z/) {" \#{to_s}>"}
+            super.gsub(/>\\z/) {" \#{to_s}>"}
           end
         DEFINE_METHOD
       end
@@ -713,10 +717,13 @@ module GObjectIntrospection
         @valid_n_args_range = (@n_required_in_args..@n_in_args)
 
         @in_arg_types = []
+        @in_arg_nils = []
         @in_arg_nil_indexes = []
         @in_args.each_with_index do |arg, i|
           @in_arg_types << arg.type
-          @in_arg_nil_indexes << i if arg.may_be_null?
+          may_be_null = arg.may_be_null?
+          @in_arg_nils << may_be_null
+          @in_arg_nil_indexes << i if may_be_null
         end
 
         @function_info_p = (@info.class == FunctionInfo)
@@ -768,7 +775,7 @@ module GObjectIntrospection
           type = @in_arg_types[i]
           converted_argument = type.try_convert(argument)
           if converted_argument.nil?
-            next if argument.nil?
+            next if argument.nil? and @in_arg_nils[i]
             if abort_tag
               throw(abort_tag)
             elsif @on_invalid == :fallback

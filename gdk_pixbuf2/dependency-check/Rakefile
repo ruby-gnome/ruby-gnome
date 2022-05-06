@@ -31,10 +31,10 @@ namespace :dependency do
   task :check do
     package_id = "gdk-pixbuf-2.0"
     unless PKGConfig.check_version?(package_id)
-      unless NativePackageInstaller.install(:altlinux => "gdk-pixbuf-devel",
+      unless NativePackageInstaller.install(:alt_linux => "gdk-pixbuf-devel",
                                             :debian => "libgdk-pixbuf2.0-dev",
                                             :redhat => "pkgconfig(#{package_id})",
-                                            :arch => "gdk-pixbuf2",
+                                            :arch_linux => "gdk-pixbuf2",
                                             :homebrew => "gdk-pixbuf",
                                             :macports => "gdk-pixbuf2",
                                             :msys2 => "gdk-pixbuf2")

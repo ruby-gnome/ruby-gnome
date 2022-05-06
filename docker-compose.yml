@@ -1,6 +1,15 @@
 version: "3.5"
 
 services:
+  almalinux-8:
+    build:
+      context: .
+      dockerfile: dockerfiles/almalinux-8.dockerfile
+    volumes:
+      - .:/ruby-gnome:delegated
+    command:
+      /ruby-gnome/dockerfiles/run-test.sh
+
   apache-arrow:
     build:
       context: .
@@ -26,16 +35,18 @@ services:
     volumes:
       - .:/ruby-gnome:delegated
     command:
-      /ruby-gnome/dockerfiles/run-test.sh
+      /ruby-gnome/dockerfiles/run-test-scl.sh
 
-  centos-8:
+  fedora-arm32v7-rawhide:
     build:
       context: .
-      dockerfile: dockerfiles/centos-7.dockerfile
+      dockerfile: dockerfiles/fedora-arm32v7-rawhide.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
     command:
       /ruby-gnome/dockerfiles/run-test.sh
+    cap_add:
+      - SYS_ADMIN
 
   fedora-rawhide:
     build:
@@ -65,6 +76,17 @@ services:
       dockerfile: dockerfiles/ruby.dockerfile
       args:
         RUBY_VERSION: "3.0"
+    volumes:
+      - .:/ruby-gnome:delegated
+    command:
+      /ruby-gnome/dockerfiles/run-test.sh
+
+  ruby-3.1:
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        RUBY_VERSION: "3.1"
     volumes:
       - .:/ruby-gnome:delegated
     command:

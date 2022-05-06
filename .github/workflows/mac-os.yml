@@ -18,7 +18,102 @@ jobs:
       - name: Build
         run: |
           bundle exec rake build
-      # TODO
-      # - name: Test
-      #   run: |
-      #     bundle exec rake
+      - name: Test
+        run: |
+          bundle exec rake
+
+  # Licensed to the Apache Software Foundation (ASF) under one
+  # or more contributor license agreements.  See the NOTICE file
+  # distributed with this work for additional information
+  # regarding copyright ownership.  The ASF licenses this file
+  # to you under the Apache License, Version 2.0 (the
+  # "License"); you may not use this file except in compliance
+  # with the License.  You may obtain a copy of the License at
+  #
+  #   http://www.apache.org/licenses/LICENSE-2.0
+  #
+  # Unless required by applicable law or agreed to in writing,
+  # software distributed under the License is distributed on an
+  # "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  # KIND, either express or implied.  See the License for the
+  # specific language governing permissions and limitations
+  # under the License.
+  apache-arrow:
+    runs-on: macOS-latest
+    timeout-minutes: 40
+    env:
+      ARROW_BUILD_TESTS: OFF
+      ARROW_FLIGHT: ON
+      ARROW_GANDIVA: ON
+      ARROW_GLIB_GTK_DOC: true
+      ARROW_GLIB_WERROR: true
+      ARROW_HOME: /usr/local
+      ARROW_JEMALLOC: OFF
+      ARROW_ORC: OFF
+      ARROW_PARQUET: ON
+      ARROW_WITH_BROTLI: ON
+      ARROW_WITH_LZ4: ON
+      ARROW_WITH_SNAPPY: ON
+      ARROW_WITH_ZLIB: ON
+      ARROW_WITH_ZSTD: ON
+      XML_CATALOG_FILES: /usr/local/etc/xml/catalog
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0"
+      - name: Build
+        run: |
+          for package in glib2 gobject-introspection gio2; do
+            pushd ${package}
+            rake gem
+            gem install pkg/*.gem
+            popd
+          done
+      - uses: actions/checkout@v2
+        with:
+          repository: apache/arrow
+          path: arrow
+          fetch-depth: 0
+          submodules: recursive
+      - name: Install Homebrew Dependencies
+        shell: bash
+        run: |
+          rm -f /usr/local/bin/2to3
+          brew update --preinstall
+          brew install --overwrite git
+          brew bundle --file=arrow/cpp/Brewfile
+          brew bundle --file=arrow/c_glib/Brewfile
+      - name: Install Ruby Dependencies
+        run: |
+          export MAKEFLAGS="-j$(sysctl -n hw.ncpu)"
+          bundle install --gemfile arrow/c_glib/Gemfile
+          bundle install --gemfile arrow/ruby/Gemfile
+          for ruby_package_gemfile in arrow/ruby/*/Gemfile; do \
+            bundle install --gemfile ${ruby_package_gemfile}
+          done
+      - name: Setup ccache
+        run: |
+          arrow/ci/scripts/ccache_setup.sh
+      - name: ccache info
+        id: ccache-info
+        run: |
+          echo "::set-output name=cache-dir::$(ccache --get-config cache_dir)"
+      - name: Cache ccache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.ccache-info.outputs.cache-dir }}
+          key: arrow-ccache-macos-${{ hashFiles('arrow/cpp/**') }}
+          restore-keys: arrow-ccache-macos-
+      - name: Build C++
+        run: |
+          arrow/ci/scripts/cpp_build.sh $(pwd)/arrow $(pwd)/arrow/build
+      - name: Build GLib
+        run: |
+          arrow/ci/scripts/c_glib_build.sh $(pwd)/arrow $(pwd)/arrow/build
+      - name: Test GLib
+        shell: bash
+        run: arrow/ci/scripts/c_glib_test.sh $(pwd)/arrow $(pwd)/arrow/build
+      - name: Test Ruby
+        shell: bash
+        run: arrow/ci/scripts/ruby_test.sh $(pwd)/arrow $(pwd)/arrow/build

@@ -119,8 +119,11 @@ module Gst
       "Gst::Element#query_state" => true,
       "Gst::Element#send_event"  => true,
     }
-    def should_unlock_gvl?(function_info, klass)
-      UNLOCK_GVL_METHODS["#{klass}\##{function_info.name}"] || super
+    def prepare_function_info_lock_gvl(function_info, klass)
+      super
+      key = "#{klass}\##{function_info.name}"
+      return unless UNLOCK_GVL_METHODS.key?(key)
+      function_info.lock_gvl_default = false
     end
   end
 end

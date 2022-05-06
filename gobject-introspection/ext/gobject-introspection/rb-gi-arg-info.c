@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,41 @@
 
 #define RG_TARGET_NAMESPACE rb_cGIArgInfo
 #define SELF(self) (RVAL2GI_ARG_INFO(self))
+
+gboolean
+rb_gi_arg_info_is_input_buffer(GIArgInfo *info)
+{
+    if (g_arg_info_get_direction(info) != GI_DIRECTION_IN) {
+        return FALSE;
+    }
+
+    /* Heuristic */
+    const gchar *name = g_base_info_get_name((GIBaseInfo *)info);
+    if (strcmp(name, "buffer") != 0) {
+        return FALSE;
+    }
+
+    GITypeInfo type_info;
+    g_arg_info_load_type(info, &type_info);
+    if (g_type_info_get_tag(&type_info) != GI_TYPE_TAG_ARRAY) {
+        return FALSE;
+    }
+
+    GIArrayType array_type = g_type_info_get_array_type(&type_info);
+    if (array_type != GI_ARRAY_TYPE_C) {
+        return FALSE;
+    }
+
+    gint length_index = g_type_info_get_array_length(&type_info);
+    if (length_index == -1) {
+        return FALSE;
+    }
+
+    GITypeInfo *element_type_info = g_type_info_get_param_type(&type_info, 0);
+    GITypeTag element_type_tag = g_type_info_get_tag(element_type_info);
+    g_base_info_unref(element_type_info);
+    return element_type_tag == GI_TYPE_TAG_UINT8;
+}
 
 gboolean
 rb_gi_arg_info_is_output_buffer(GIArgInfo *info)
@@ -149,6 +184,13 @@ rg_type(VALUE self)
 }
 
 static VALUE
+rg_input_buffer_p(VALUE self)
+{
+    GIArgInfo *info = SELF(self);
+    return CBOOL2RVAL(rb_gi_arg_info_is_input_buffer(info));
+}
+
+static VALUE
 rg_output_buffer_p(VALUE self)
 {
     GIArgInfo *info = SELF(self);
@@ -175,6 +217,7 @@ rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(destroy, 0);
     RG_DEF_METHOD(type, 0);
 
+    RG_DEF_METHOD_P(input_buffer, 0);
     RG_DEF_METHOD_P(output_buffer, 0);
 
     G_DEF_CLASS(G_TYPE_I_DIRECTION, "Direction", rb_mGI);

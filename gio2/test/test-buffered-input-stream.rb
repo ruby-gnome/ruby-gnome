@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,9 +15,17 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestBufferedInputStream < Test::Unit::TestCase
-  def test_buffered_input_stream
-    assert_nothing_raised do
-      Gio::BufferedInputStream.new(Gio::FileInputStream.new)
+  def setup
+    Gio::RubyInputStream.open(StringIO.new("Hello!")) do |base_stream|
+      Gio::BufferedInputStream.open(base_stream) do |stream|
+        @stream = stream
+        yield
+      end
     end
+  end
+
+  def test_fill
+    assert_equal(2, @stream.fill(2))
+    assert_equal("He", @stream.read(2))
   end
 end

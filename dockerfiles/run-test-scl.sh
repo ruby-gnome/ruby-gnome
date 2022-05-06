@@ -1,4 +1,6 @@
-# Copyright (C) 2019-2021  Ruby-GNOME Project Team
+#!/bin/bash
+#
+# Copyright (C) 2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,12 +16,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module GObjectIntrospection
-  class FunctionInfo
-    def inspect
-      super.gsub(/>\z/) do
-        " lock_gvl_default=#{lock_gvl?.inspect}>"
-      end
-    end
-  end
-end
+set -eux
+
+scl enable ${SCL} $(dirname $0)/run-test.sh

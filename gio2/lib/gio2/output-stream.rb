@@ -1,4 +1,4 @@
-# Copyright (C) 2019-2021  Ruby-GNOME Project Team
+# Copyright (C) 2014-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,11 +14,18 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module GObjectIntrospection
-  class FunctionInfo
-    def inspect
-      super.gsub(/>\z/) do
-        " lock_gvl_default=#{lock_gvl?.inspect}>"
+module Gio
+  class OutputStream
+    class << self
+      def open(*arguments)
+        output_stream = new(*arguments)
+        return output_stream unless block_given?
+
+        begin
+          yield(output_stream)
+        ensure
+          output_stream.close unless output_stream.closed?
+        end
       end
     end
   end

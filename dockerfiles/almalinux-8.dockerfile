@@ -1,35 +1,28 @@
-FROM centos:7
-
-ENV SCL=rh-ruby30
+FROM almalinux:8
 
 RUN \
-  yum install -y \
-    centos-release-scl-rh \
+  dnf module disable -y ruby && \
+  dnf module enable -y ruby:2.6 && \
+  dnf install -y \
     epel-release && \
-  yum install -y \
+  dnf install -y \
     adwaita-gtk2-theme \
-    clutter-gtk \
     dbus-daemon \
     dejavu-sans-fonts \
     gcc \
     gcc-c++ \
     git \
-    gnome-icon-theme \
-    gtksourceview3 \
-    libwebkit2-gtk \
+    gstreamer1-plugins-good \
     make \
-    ${SCL}-ruby-devel \
-    ${SCL}-ruby-rubygem-bundler \
+    redhat-rpm-config \
+    ruby-devel \
     sudo \
-    vte3 \
-    webkitgtk \
-    webkitgtk3 \
     which \
     xorg-x11-server-Xvfb && \
-  yum clean all
+  dnf clean all
 
 RUN \
-  systemd-machine-id-setup
+  gem install bundler
 
 RUN \
   useradd --user-group --create-home ruby-gnome
@@ -40,3 +33,7 @@ RUN \
 
 USER ruby-gnome
 WORKDIR /home/ruby-gnome
+
+COPY Gemfile .
+RUN sudo gem install cairo
+RUN bundle install

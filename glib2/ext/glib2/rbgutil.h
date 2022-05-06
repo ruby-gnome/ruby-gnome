@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002,2003 Masao Mutoh
+ *  Copyright (C) 2011-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2002,2003  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -92,6 +92,7 @@ extern void rbg_define_singleton_method(VALUE obj, const char *name, VALUE (*fun
 extern VALUE rbgutil_def_setters(VALUE klass);
 extern void rbgutil_set_properties(VALUE self, VALUE hash);
 extern VALUE rbgutil_protect(VALUE (*proc) (VALUE), VALUE data);
+extern void rbgutil_on_callback_error(VALUE error);
 extern VALUE rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg);
 extern void rbgutil_start_callback_dispatch_thread(void);
 extern void rbgutil_stop_callback_dispatch_thread(void);

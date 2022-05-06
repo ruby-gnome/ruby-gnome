@@ -67,9 +67,12 @@ module Gio
       require "gio2/inet-address"
       require "gio2/input-stream"
       require "gio2/menu-item"
+      require "gio2/output-stream"
       require "gio2/pollable-input-stream"
       require "gio2/pollable-output-stream"
       require "gio2/resources"
+      require "gio2/ruby-input-stream"
+      require "gio2/ruby-output-stream"
       require "gio2/settings"
       require "gio2/settings-schema-source"
       require "gio2/simple-action"
@@ -220,17 +223,60 @@ module Gio
       Error
     end
 
-    def should_unlock_gvl?(function_info, klass)
+    def prepare_function_info_lock_gvl(function_info, klass)
+      super
       case klass.name
+      when "Gio::Seekable"
+        function_info.lock_gvl_default = false
+        if defined?(Ractor)
+          predicate = Ractor.current.instance_eval do
+            lambda do |_, receiver|
+              receiver.is_a?(RubySeekable)
+            end
+          end
+          Ractor.make_shareable(predicate)
+        else
+          predicate = lambda do |_, receiver|
+            receiver.is_a?(RubySeekable)
+          end
+        end
+        function_info.add_lock_gvl_predicate(&predicate)
       when "Gio::InputStream"
         case function_info.name
-        when "read", "read_all"
-          true
-        else
-          false
+        when "read", "read_all", "skip", "close"
+          function_info.lock_gvl_default = false
+          if defined?(Ractor)
+            predicate = Ractor.current.instance_eval do
+              lambda do |_, receiver|
+                receiver.is_a?(RubyInputStream)
+              end
+            end
+            Ractor.make_shareable(predicate)
+          else
+            predicate = lambda do |_, receiver|
+              receiver.is_a?(RubyInputStream)
+            end
+          end
+          function_info.add_lock_gvl_predicate(&predicate)
         end
-      else
-        false
+      when "Gio::OutputStream"
+        case function_info.name
+        when "write", "write_all", "flush", "close"
+          function_info.lock_gvl_default = false
+          if defined?(Ractor)
+            predicate = Ractor.current.instance_eval do
+              lambda do |_, receiver|
+                receiver.is_a?(RubyOutputStream)
+              end
+            end
+            Ractor.make_shareable(predicate)
+          else
+            predicate = lambda do |_, receiver|
+              receiver.is_a?(RubyOutputStream)
+            end
+          end
+          function_info.add_lock_gvl_predicate(&predicate)
+        end
       end
     end
   end

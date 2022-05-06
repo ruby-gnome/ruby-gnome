@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,6 @@ rb_gi_arguments_in_to_ruby(RBGIArguments *args)
     rb_in_args = rb_ary_new_capa(args->metadata->len);
     for (i = 0; i < args->metadata->len; i++) {
         RBGIArgMetadata *metadata;
-        GITypeInfo *type_info;
         VALUE rb_arg;
 
         metadata = g_ptr_array_index(args->metadata, i);
@@ -47,15 +46,14 @@ rb_gi_arguments_in_to_ruby(RBGIArguments *args)
         if (metadata->closure_p) {
             continue;
         }
+        if (metadata->array_length_p) {
+            continue;
+        }
 
-        type_info = g_arg_info_get_type(&(metadata->arg_info));
-        /* TODO */
-        rb_arg = GI_ARGUMENT2RVAL(metadata->in_arg,
-                                  FALSE,
-                                  type_info,
-                                  args->in_args,
-                                  args->out_args,
-                                  args->metadata);
+        rb_arg = rb_gi_arguments_convert_arg(args,
+                                             metadata->in_arg,
+                                             metadata,
+                                             FALSE);
         rb_ary_push(rb_in_args, rb_arg);
     }
 
@@ -2023,16 +2021,18 @@ rb_gi_arguments_in_init_arg_raw_interface(RBGIArguments *args,
       metadata->in_arg->v_pointer = *((gpointer *)(args->raw_args[metadata->index]));
       break;
     case GI_INFO_TYPE_BOXED:
+      rb_raise(rb_eNotImpError,
+               "TODO: %s::%s: raw argument -> GIArgument(interface)[%s]: <%s>",
+               g_base_info_get_namespace(args->info),
+               g_base_info_get_name(args->info),
+               g_info_type_to_string(metadata->type.interface_type),
+               g_base_info_get_name(metadata->type.interface_info));
+      break;
     case GI_INFO_TYPE_ENUM:
-        rb_raise(rb_eNotImpError,
-                 "TODO: %s::%s: raw argument -> GIArgument(interface)[%s]: <%s>",
-                 g_base_info_get_namespace(args->info),
-                 g_base_info_get_name(args->info),
-                 g_info_type_to_string(metadata->type.interface_type),
-                 g_base_info_get_name(metadata->type.interface_info));
-        break;
+      metadata->in_arg->v_int32 = *((gint32 *)(args->raw_args[metadata->index]));
+      break;
     case GI_INFO_TYPE_FLAGS:
-      metadata->in_arg->v_int32= *((gint32 *)(args->raw_args[metadata->index]));
+      metadata->in_arg->v_int32 = *((gint32 *)(args->raw_args[metadata->index]));
       break;
     case GI_INFO_TYPE_OBJECT:
     case GI_INFO_TYPE_INTERFACE:
@@ -2164,12 +2164,15 @@ rb_gi_arguments_in_init(RBGIArguments *args)
 void
 rb_gi_arguments_in_clear(RBGIArguments *args)
 {
-    guint i;
+    if (!args->metadata) {
+        return;
+    }
 
     if (!args->rb_mode_p) {
         return;
     }
 
+    guint i;
     for (i = 0; i < args->metadata->len; i++) {
         RBGIArgMetadata *metadata;
 

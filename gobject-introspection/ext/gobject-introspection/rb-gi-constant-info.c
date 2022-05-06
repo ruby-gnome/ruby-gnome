@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -47,17 +47,21 @@ rg_type(VALUE self)
 static VALUE
 rg_value(VALUE self)
 {
-    GIConstantInfo *info;
+    GIConstantInfo *info = SELF(self);
     GIArgument value;
-    G_GNUC_UNUSED gint value_size;
-    GITypeInfo *type_info;
-    VALUE rb_value;
+    G_GNUC_UNUSED gint value_size = g_constant_info_get_value(info, &value);
 
-    info = SELF(self);
-    type_info = g_constant_info_get_type(info);
-    value_size = g_constant_info_get_value(info, &value);
-    rb_value = GI_ARGUMENT2RVAL(&value, FALSE, type_info, NULL, NULL, NULL);
-    g_base_info_unref(type_info);
+    RBGIArguments args;
+    rb_gi_arguments_init(&args, NULL, Qnil, Qnil, NULL);
+    RBGIArgMetadata value_metadata;
+    rb_gi_arg_metadata_init_type_info(&value_metadata,
+                                      g_constant_info_get_type(info));
+    VALUE rb_value = rb_gi_arguments_convert_arg(&args,
+                                                 &value,
+                                                 &value_metadata,
+                                                 FALSE);
+    rb_gi_arg_metadata_clear(&value_metadata);
+    rb_gi_arguments_clear(&args);
     g_constant_info_free_value(info, &value);
 
     return rb_value;

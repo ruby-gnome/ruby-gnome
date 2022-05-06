@@ -32,7 +32,7 @@ namespace :dependency do
   task :check do
     package_id = "vte-2.91"
     unless PKGConfig.check_version?(package_id)
-      unless NativePackageInstaller.install(:altlinux => "libvte3-devel",
+      unless NativePackageInstaller.install(:alt_linux => "libvte3-devel",
                                             :debian => "libvte-2.91-dev",
                                             :redhat => "pkgconfig(#{package_id})",
                                             :homebrew => "vte3")

@@ -15,6 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 require "pathname"
+require "stringio"
 require "tempfile"
 
 require_relative "gio2-test-utils/fixture"
