@@ -551,7 +551,16 @@ module GObjectIntrospection
       prepare_function_info_lock_gvl(info, klass)
       remove_existing_method(klass, method_name)
       invoker = Invoker.new(info, method_name, "#{klass}\##{method_name}")
+      unless klass.const_defined?(:INVOKERS)
+        STDERR.puts "#{klass}::INVOKERS is missing - creating an empty one"
+        klass.const_set(:INVOKERS, {})
+      end
       invokers = klass::INVOKERS
+      if invokers.frozen?
+        STDERR.puts "#{klass}::INVOKERS is frozen - making an unfrozen copy"
+        invokers = invokers.dup
+        klass.const_set :INVOKERS, invokers
+      end
       invokers[method_name] = invoker
       klass.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ + 1)
         def #{method_name}(*arguments, &block)
