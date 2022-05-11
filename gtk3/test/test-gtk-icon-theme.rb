@@ -8,11 +8,13 @@ class TestGtkIconTheme < Test::Unit::TestCase
   def test_choose_icon
     assert_nil(@theme.choose_icon("non-existent", 100))
 
-    icon = @theme.choose_icon("face-cool", 10)
+    icon = @theme.choose_icon("face-cool-symbolic", 10)
     assert_not_nil(icon)
-    assert_match(/face-cool/, icon.filename)
+    assert_match(/face-cool-symbolic/, icon.filename)
 
-    assert_not_nil(@theme.choose_icon("face-cool", 29, [:use_builtin, :no_svg]))
+    assert_not_nil(@theme.choose_icon("face-cool-symbolic",
+                                      29,
+                                      [:use_builtin, :no_svg]))
   end
 
   def test_contexts
@@ -21,7 +23,7 @@ class TestGtkIconTheme < Test::Unit::TestCase
 
   class TestIcons < self
     def test_no_argument
-      assert_operator(@theme.icons, :include?, "face-cool")
+      assert_operator(@theme.icons, :include?, "face-cool-symbolic")
     end
 
     def test_context
