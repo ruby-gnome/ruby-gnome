@@ -24,6 +24,11 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v2
+      - name: Workaround for Docker
+        # https://github.com/actions/virtual-environments/issues/5490#issuecomment-1118328567
+        run: |
+          sudo rm /etc/docker/daemon.json
+          sudo systemctl restart docker
       - name: Build Docker image
         run: |
           docker-compose build ${{ matrix.service }}
