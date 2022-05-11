@@ -3,6 +3,7 @@ FROM archlinux
 RUN \
   pacman --sync --noconfirm --refresh --sysupgrade && \
   pacman --sync --noconfirm \
+    adwaita-icon-theme \
     awk \
     dbus \
     gcc \
