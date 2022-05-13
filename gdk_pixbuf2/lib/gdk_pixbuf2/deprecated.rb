@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2022  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -138,8 +138,10 @@ module GdkPixbuf
   class PixbufFormat
     extend GLib::Deprecatable
 
-    define_deprecated_method "domain", :raise => "Don't use this method anymore."
-    define_deprecated_method "signature", :raise => "Don't use this method anymore."
+    undef_method :domain
+    define_deprecated_method :domain, :raise => "Don't use this method anymore."
+    undef_method :signature
+    define_deprecated_method :signature, :raise => "Don't use this method anymore."
   end
 
   class Pixdata
