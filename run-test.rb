@@ -43,7 +43,6 @@ candidates.each do |dir|
 end
 
 ignored_modules = [
-  "gdk4",
   "gtk4",
 ]
 
