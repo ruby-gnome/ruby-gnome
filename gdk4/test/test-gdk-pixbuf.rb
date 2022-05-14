@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,21 +15,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGdkPixbuf < Test::Unit::TestCase
-  def test_window
-    gdk_window = Gdk.default_root_window
-    src_x = 0
-    src_y = 0
-    width = 290
-    height = 200
-
-    pixbuf = gdk_window.to_pixbuf(src_x,
-                                  src_y,
-                                  width,
-                                  height)
-    assert_equal([width, height],
-                 [pixbuf.width, pixbuf.height])
-  end
-
   def test_surface
     width = 290
     height = 200

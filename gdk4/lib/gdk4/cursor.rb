@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,9 +14,19 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestGdkGeometry < Test::Unit::TestCase
-  def test_min_width
-    geometry = Gdk::Geometry.new
-    assert_equal(0, geometry.min_width)
+module Gdk
+  class Cursor
+    @caches = {}
+    class << self
+      def new(*args)
+        first_arg = args.first
+        case first_arg
+        when String, Symbol
+          @caches[first_arg] ||= super
+        else
+          super
+        end
+      end
+    end
   end
 end

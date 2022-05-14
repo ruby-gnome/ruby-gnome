@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,17 +16,21 @@
 
 module Cairo
   class Context
-    alias_method :set_source_rgba_raw, :set_source_rgba
-    def set_source_rgba(rgba, g=nil, b=nil, a=nil)
-      case rgba
-      when Gdk::RGBA
-        set_source_gdk_rgba(rgba)
-      when Array
-        set_source_rgba_raw(rgba)
-      else
-        r = rgba
-        set_source_rgba_raw([r, g, b, a || 1.0])
+    if method_defined?(:set_source_rgba)
+      alias_method :set_source_rgba_raw, :set_source_rgba
+      def set_source_rgba(rgba, g=nil, b=nil, a=nil)
+        case rgba
+        when Gdk::RGBA
+          set_source_gdk_rgba(rgba)
+        when Array
+          set_source_rgba_raw(rgba)
+        else
+          r = rgba
+          set_source_rgba_raw([r, g, b, a || 1.0])
+        end
       end
+    else
+      alias_method :set_source_rgba, :set_source_gdk_rgba
     end
 
     def source_rgba=(rgba)

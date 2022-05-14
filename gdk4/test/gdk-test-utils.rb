@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2021  Ruby-GNOME Project Team
+# Copyright (C) 2013-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,10 +14,18 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
+require "pkg-config"
+require "test-unit"
+
+require "gdk4"
+
 module GdkTestUtils
   private
   def only_gdk_version(major, minor, micro=nil)
-    unless Gdk::Version.or_later?(major, minor, micro)
+    micro ||= 0
+    gdk_version_raw = PKGConfig.modversion("gdk-4.0")
+    gdk_version = gdk_version_raw.split(".").collect(&:to_i)
+    unless (gdk_version <=> [major, minor, micro]) >= 0
       omit("Require GDK >= #{major}.#{minor}.#{micro}")
     end
   end
