@@ -14,7 +14,7 @@ class TestGtkIconTheme < Test::Unit::TestCase
 
     assert_not_nil(@theme.choose_icon("face-cool-symbolic",
                                       29,
-                                      [:use_builtin, :no_svg]))
+                                      [:use_builtin]))
   end
 
   def test_contexts
