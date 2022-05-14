@@ -32,6 +32,7 @@ namespace :dependency do
     package_id = "gdk-3.0"
     unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:alt_linux => "libgtk+3-devel",
+                                            :arch_linux => "gtk3",
                                             :debian => "libgtk-3-dev",
                                             :redhat => "pkgconfig(#{package_id})",
                                             :homebrew => "gtk+3",
