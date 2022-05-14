@@ -138,10 +138,12 @@ module GdkPixbuf
   class PixbufFormat
     extend GLib::Deprecatable
 
-    undef_method :domain
-    define_deprecated_method :domain, :raise => "Don't use this method anymore."
-    undef_method :signature
-    define_deprecated_method :signature, :raise => "Don't use this method anymore."
+    unless method_defined?(:domain)
+      define_deprecated_method :domain, :raise => "Don't use this method anymore."
+    end
+    unless method_defined?(:signature)
+      define_deprecated_method :signature, :raise => "Don't use this method anymore."
+    end
   end
 
   class Pixdata
