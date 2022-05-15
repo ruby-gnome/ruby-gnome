@@ -14,11 +14,9 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gobject-introspection"
 require "cairo-gobject"
-require "atk"
-require "pango"
 require "gdk_pixbuf2"
+require "pango"
 
 require "gdk4/loader"
 require "gdk4/x11-loader"
