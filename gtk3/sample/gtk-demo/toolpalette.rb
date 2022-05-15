@@ -344,14 +344,12 @@ class ToolpaletteDemo
     group = Gtk::ToolItemGroup.new("Radio Item")
     @palette.add(group)
 
-    toggle_group = nil
-
+    item = nil
     (1..10).each do |i|
       label = "##{i}"
-      item = Gtk::RadioToolButton.new(toggle_group)
+      item = Gtk::RadioToolButton.new(item)
       item.label = label
-      group .insert(item, -1)
-      toggle_group = item.group
+      group.insert(item, -1)
     end
   end
 
