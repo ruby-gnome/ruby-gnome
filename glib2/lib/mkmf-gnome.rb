@@ -191,12 +191,12 @@ end
 
 def add_depend_package_path(target_name, target_source_dir, target_build_dir)
   if File.exist?(target_source_dir)
-    $INCFLAGS = "-I#{target_source_dir} #{$INCFLAGS}"
+    $INCFLAGS = "-I#{target_source_dir}".quote + " #{$INCFLAGS}"
   end
 
   return unless File.exist?(target_build_dir)
   if target_source_dir != target_build_dir
-    $INCFLAGS = "-I#{target_build_dir} #{$INCFLAGS}"
+    $INCFLAGS = "-I#{target_build_dir}".quote + " #{$INCFLAGS}"
   end
 
   library_base_name = File.basename(target_source_dir).gsub(/-/, "_")
