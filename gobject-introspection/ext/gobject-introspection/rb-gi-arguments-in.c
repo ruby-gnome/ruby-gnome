@@ -1501,7 +1501,7 @@ rb_gi_arguments_in_init_arg_ruby_ghash_convert(VALUE rb_key,
     data->key_ruby_to_c_data->rb_value = rb_key;
     key = data->key_ruby_to_c_func(data->key_ruby_to_c_data);
     data->value_ruby_to_c_data->rb_value = rb_value;
-    value = data->key_ruby_to_c_func(data->value_ruby_to_c_data);
+    value = data->value_ruby_to_c_func(data->value_ruby_to_c_data);
     g_hash_table_insert(data->hash_table, key, value);
     return ST_CONTINUE;
 }
