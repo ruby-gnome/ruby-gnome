@@ -1,4 +1,4 @@
-# Copyright (C) 2019-2022  Ruby-GNOME Project Team
+# Copyright (C) 2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,22 +14,17 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestSecretSchema < Test::Unit::TestCase
-  test ".new" do
-    schema = Secret::Schema.new("jp.osdn.ruby-gnome2.test",
-                                :none,
-                                {"name" => Secret::SchemaAttributeType::STRING})
-    assert_equal([
-                   "jp.osdn.ruby-gnome2.test",
-                   Secret::SchemaFlags::NONE,
-                   {
-                     "name" => Secret::SchemaAttributeType::STRING,
-                   },
-                 ],
-                 [
-                   schema.name,
-                   schema.flags,
-                   schema.attributes,
-                 ])
+module Secret
+  class Schema
+    alias_method :attributes_raw, :attributes
+    def attributes
+      attrs = {}
+      attributes_raw.each do |attribute|
+        name = attribute.name
+        break if name.nil?
+        attrs[name] = attribute.type
+      end
+      attrs
+    end
   end
 end

@@ -1,4 +1,4 @@
-# Copyright (C) 2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2019-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,8 +14,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "English"
-
 module Secret
   class Loader < GObjectIntrospection::Loader
     private
@@ -27,6 +25,7 @@ module Secret
     end
 
     def require_libraries
+      require_relative "schema"
     end
   end
 end
