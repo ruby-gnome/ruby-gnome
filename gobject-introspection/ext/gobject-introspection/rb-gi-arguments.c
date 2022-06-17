@@ -659,7 +659,8 @@ rb_gi_arguments_convert_arg_array_like_ensure(VALUE user_data)
 static VALUE
 rb_gi_arguments_convert_arg_array_body_c_sized_interface(
     ArrayLikeToRubyData *data,
-    gint64 length)
+    gint64 length,
+    const char *array_c_type)
 {
     gconstpointer *elements = data->arg->v_pointer;
     data->interface_type_info =
@@ -671,7 +672,8 @@ rb_gi_arguments_convert_arg_array_body_c_sized_interface(
       case GI_INFO_TYPE_FUNCTION:
       case GI_INFO_TYPE_CALLBACK:
         rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[c][interface(%s)](%s) -> Ruby",
+                 "TODO: GIArgument(array)[c][%s][interface(%s)](%s) -> Ruby",
+                 array_c_type,
                  g_info_type_to_string(type),
                  g_type_name(gtype));
         return Qnil;
@@ -702,7 +704,8 @@ rb_gi_arguments_convert_arg_array_body_c_sized_interface(
       case GI_INFO_TYPE_ENUM:
       case GI_INFO_TYPE_FLAGS:
         rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[c][interface(%s)](%s) -> Ruby",
+                 "TODO: GIArgument(array)[c][%s][interface(%s)](%s) -> Ruby",
+                 array_c_type,
                  g_info_type_to_string(type),
                  g_type_name(gtype));
         return Qnil;
@@ -728,7 +731,8 @@ rb_gi_arguments_convert_arg_array_body_c_sized_interface(
       case GI_INFO_TYPE_TYPE:
       case GI_INFO_TYPE_UNRESOLVED:
         rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[c][interface(%s)](%s) -> Ruby",
+                 "TODO: GIArgument(array)[c][%s][interface(%s)](%s) -> Ruby",
+                 array_c_type,
                  g_info_type_to_string(type),
                  g_type_name(gtype));
         return Qnil;
@@ -742,11 +746,13 @@ static VALUE
 rb_gi_arguments_convert_arg_array_body_c_sized(ArrayLikeToRubyData *data,
                                                gint64 length)
 {
+    const char *array_c_type = "length";
     gconstpointer elements = data->arg->v_pointer;
     switch (data->element_type_tag) {
       case GI_TYPE_TAG_VOID:
         rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[c][%s] -> Ruby",
+                 "TODO: GIArgument(array)[c][%s][%s] -> Ruby",
+                 array_c_type,
                  g_type_tag_to_string(data->element_type_tag));
         return Qnil;
       case GI_TYPE_TAG_BOOLEAN:
@@ -865,7 +871,8 @@ rb_gi_arguments_convert_arg_array_body_c_sized(ArrayLikeToRubyData *data,
         }
       case GI_TYPE_TAG_GTYPE:
         rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[c][%s] -> Ruby",
+                 "TODO: GIArgument(array)[c][%s][%s] -> Ruby",
+                 array_c_type,
                  g_type_tag_to_string(data->element_type_tag));
         return Qnil;
       case GI_TYPE_TAG_UTF8:
@@ -890,20 +897,73 @@ rb_gi_arguments_convert_arg_array_body_c_sized(ArrayLikeToRubyData *data,
         }
       case GI_TYPE_TAG_ARRAY:
         rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[c][%s] -> Ruby",
+                 "TODO: GIArgument(array)[c][%s][%s] -> Ruby",
+                 array_c_type,
                  g_type_tag_to_string(data->element_type_tag));
         return Qnil;
       case GI_TYPE_TAG_INTERFACE:
-        return
-            rb_gi_arguments_convert_arg_array_body_c_sized_interface(data,
-                                                                     length);
+        return rb_gi_arguments_convert_arg_array_body_c_sized_interface(
+            data, length, array_c_type);
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
       case GI_TYPE_TAG_ERROR:
       case GI_TYPE_TAG_UNICHAR:
         rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[c][%s] -> Ruby",
+                 "TODO: GIArgument(array)[c][%s][%s] -> Ruby",
+                 array_c_type,
+                 g_type_tag_to_string(data->element_type_tag));
+        return Qnil;
+      default:
+        g_assert_not_reached();
+        return Qnil;
+    }
+}
+
+static VALUE
+rb_gi_arguments_convert_arg_array_body_c_fixed_size(ArrayLikeToRubyData *data,
+                                                    gint fixed_size)
+{
+    const char *array_c_type = "[fixed-size]";
+    gconstpointer elements = data->arg->v_pointer;
+    switch (data->element_type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[c][%s][%s] -> Ruby",
+                 array_c_type,
+                 g_type_tag_to_string(data->element_type_tag));
+        return Qnil;
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[c][%s][%s] -> Ruby",
+                 array_c_type,
+                 g_type_tag_to_string(data->element_type_tag));
+        return Qnil;
+      case GI_TYPE_TAG_INTERFACE:
+        return rb_gi_arguments_convert_arg_array_body_c_sized_interface(
+            data, fixed_size, array_c_type);
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[c][%s][%s] -> Ruby",
+                 array_c_type,
                  g_type_tag_to_string(data->element_type_tag));
         return Qnil;
       default:
@@ -929,6 +989,9 @@ rb_gi_arguments_convert_arg_array_body_c(ArrayLikeToRubyData *data,
         return rb_gi_arguments_convert_arg_array_body_c_sized(data, length);
     } else if (zero_terminated_p) {
         return STRV2RVAL((const gchar **)elements);
+    } else if (fixed_size != -1) {
+        return rb_gi_arguments_convert_arg_array_body_c_fixed_size(data,
+                                                                   fixed_size);
     } else {
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(array)[c] -> Ruby: "
