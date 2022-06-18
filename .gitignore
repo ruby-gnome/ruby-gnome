@@ -3,6 +3,7 @@
 *.o
 *.so
 *.swp
+*.yardoc
 .emacs.desktop
 .emacs.desktop.lock
 Makefile
@@ -27,6 +28,7 @@ mkmf.log
 */tmp/
 */vendor/
 */pkg/
+*/yard_docs/
 .gdb_history
 /dist/
 /misc/release.rb

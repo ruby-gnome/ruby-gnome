@@ -4,6 +4,7 @@ require "pathname"
 require "find"
 require "tmpdir"
 require "open-uri"
+require 'shellwords'
 
 task :default => :test
 
@@ -112,6 +113,32 @@ namespace :gem do
         ruby("-S", "rake", "gem")
       end
     end
+  end
+
+  desc "document all gems"
+  task docs: [:girdocs, :rubydocs]
+  CLEAN.include("./yard_docs")
+
+  task :girdocs do
+    packages_rb = packages.map { |pkg|
+      File.join(pkg, "lib", pkg + ".rb")
+    }
+    ygir_gem = Gem::Specification.find_by_name('yard-gobject-introspection')
+    ygir_lib = File.expand_path('lib/yard-gobject-introspection.rb',
+                                ygir_gem.full_gem_path)
+    args = [ygir_lib, * packages_rb]
+    all_args = %w(bundle exec yard doc -o ./yard_docs/gir/ --load).concat(args)
+    sh Shellwords.join(all_args)
+  end
+
+  task :rubydocs do
+    file_globs = packages.flat_map { |pkg|
+      [ File.join(pkg, "lib", pkg + ".rb"),
+        File.join(pkg, "lib", pkg, "**/*.rb"),
+        File.join(pkg, "ext", pkg, "**/*.h")
+      ]}
+    all_args = %w(bundle exec yard doc -o ./yard_docs/ruby/).concat(file_globs)
+    sh Shellwords.join(all_args)
   end
 
   desc "push all gems"
