@@ -90,9 +90,10 @@ task :build => ["Makefile"] do
   sh("make")
 end
 
-desc "clean all packages"
+desc "clean all packages, docs"
 task :clean do
   sh("make", "clean") if File.exist?("Makefile")
+  sh("rm", "-rf", "./yard_docs")
 end
 
 desc "more clean all packages"
@@ -117,7 +118,6 @@ namespace :gem do
 
   desc "document all gems"
   task docs: [:girdocs, :rubydocs]
-  CLEAN.include("./yard_docs")
 
   task :girdocs do
     packages_rb = packages.map { |pkg|
