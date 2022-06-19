@@ -27,5 +27,5 @@ gem "yard-gobject-introspection", github: "ruby-gnome/yard-gobject-introspection
 
 local_gemfile = File.join(File.dirname(__FILE__), "Gemfile.local")
 if File.exist?(local_gemfile)
-  instance_eval File.read(local_gemfile)
+  self.eval_gemfile(local_gemfile)
 end
