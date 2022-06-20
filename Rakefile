@@ -4,7 +4,6 @@ require "pathname"
 require "find"
 require "tmpdir"
 require "open-uri"
-require 'shellwords'
 
 task :default => :test
 
