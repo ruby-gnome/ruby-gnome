@@ -64,10 +64,5 @@ module Vte
         end
       end
     end
-
-    alias_method :feed_child_raw, :feed_child
-    def feed_child(text)
-      feed_child_raw(text, text.bytesize)
-    end
   end
 end
