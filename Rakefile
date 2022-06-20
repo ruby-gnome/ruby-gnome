@@ -89,9 +89,10 @@ task :build => ["Makefile"] do
   sh("make")
 end
 
-desc "clean all packages"
+desc "clean all packages, docs"
 task :clean do
   sh("make", "clean") if File.exist?("Makefile")
+  rm_rf("yard_docs")
 end
 
 desc "more clean all packages"
@@ -112,6 +113,31 @@ namespace :gem do
         ruby("-S", "rake", "gem")
       end
     end
+  end
+
+  desc "document all gems"
+  task docs: [:girdocs, :rubydocs]
+
+  task :girdocs do
+    packages_rb = packages.map { |pkg|
+      File.join(pkg, "lib", pkg + ".rb")
+    }
+    ygir_gem = Gem::Specification.find_by_name('yard-gobject-introspection')
+    ygir_lib = File.expand_path('lib/yard-gobject-introspection.rb',
+                                ygir_gem.full_gem_path)
+    args = [ygir_lib, * packages_rb]
+    all_args = %w(bundle exec yard doc -o ./yard_docs/gir/ --load).concat(args)
+    sh(*all_args)
+  end
+
+  task :rubydocs do
+    file_globs = packages.flat_map { |pkg|
+      [ File.join(pkg, "lib", pkg + ".rb"),
+        File.join(pkg, "lib", pkg, "**/*.rb"),
+        File.join(pkg, "ext", pkg, "**/*.h")
+      ]}
+    all_args = %w(bundle exec yard doc -o ./yard_docs/ruby/).concat(file_globs)
+    sh(*all_args)
   end
 
   desc "push all gems"

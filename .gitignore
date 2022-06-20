@@ -27,6 +27,7 @@ mkmf.log
 */tmp/
 */vendor/
 */pkg/
+yard_docs
 .gdb_history
 /dist/
 /misc/release.rb
@@ -35,5 +36,6 @@ mkmf.log
 /Gemfile.lock
 /Gemfile.local
 /build/.vagrant/
+/.yardoc/
 .RUBYLIBDIR*.time
 .RUBYARCHDIR.time
