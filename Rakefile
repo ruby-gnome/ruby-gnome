@@ -93,7 +93,7 @@ end
 desc "clean all packages, docs"
 task :clean do
   sh("make", "clean") if File.exist?("Makefile")
-  sh("rm", "-rf", "./yard_docs")
+  rm_rf("yard_docs")
 end
 
 desc "more clean all packages"
@@ -128,7 +128,7 @@ namespace :gem do
                                 ygir_gem.full_gem_path)
     args = [ygir_lib, * packages_rb]
     all_args = %w(bundle exec yard doc -o ./yard_docs/gir/ --load).concat(args)
-    sh Shellwords.join(all_args)
+    sh(*all_args)
   end
 
   task :rubydocs do
@@ -138,7 +138,7 @@ namespace :gem do
         File.join(pkg, "ext", pkg, "**/*.h")
       ]}
     all_args = %w(bundle exec yard doc -o ./yard_docs/ruby/).concat(file_globs)
-    sh Shellwords.join(all_args)
+    sh(*all_args)
   end
 
   desc "push all gems"

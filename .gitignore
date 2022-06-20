@@ -3,7 +3,6 @@
 *.o
 *.so
 *.swp
-*.yardoc
 .emacs.desktop
 .emacs.desktop.lock
 Makefile
@@ -37,5 +36,6 @@ yard_docs
 /Gemfile.lock
 /Gemfile.local
 /build/.vagrant/
+/.yardoc/
 .RUBYLIBDIR*.time
 .RUBYARCHDIR.time
