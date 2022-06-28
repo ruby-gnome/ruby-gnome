@@ -92,6 +92,8 @@ rb_gi_arg_metadata_init_type_info(RBGIArgMetadata *metadata,
                                   GITypeInfo *type_info);
 G_GNUC_INTERNAL void
 rb_gi_arg_metadata_clear(RBGIArgMetadata *metadata);
+G_GNUC_INTERNAL void
+rb_gi_arg_metadata_free(RBGIArgMetadata *metadata);
 
 G_GNUC_INTERNAL void
 rb_gi_arguments_init(RBGIArguments *args,

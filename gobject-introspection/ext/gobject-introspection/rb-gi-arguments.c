@@ -170,7 +170,7 @@ rb_gi_arg_metadata_clear(RBGIArgMetadata *metadata)
     rb_gi_arg_metadata_type_clear(&(metadata->type));
 }
 
-static void
+void
 rb_gi_arg_metadata_free(RBGIArgMetadata *metadata)
 {
     rb_gi_arg_metadata_clear(metadata);

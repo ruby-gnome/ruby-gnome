@@ -299,7 +299,7 @@ rb_gi_callback_data_free(RBGICallbackData *callback_data)
                                (ID)0,
                                callback_data->rb_callback);
     }
-    xfree(callback_data->metadata);
+    rb_gi_arg_metadata_free(callback_data->metadata);
     xfree(callback_data);
 }
 
