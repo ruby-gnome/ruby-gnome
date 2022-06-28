@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -48,7 +48,7 @@ rg_return_type(VALUE self)
     GICallableInfo *info;
 
     info = SELF(self);
-    return GI_BASE_INFO2RVAL(g_callable_info_get_return_type(info));
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_callable_info_get_return_type(info));
 }
 
 static VALUE
