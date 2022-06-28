@@ -20,6 +20,21 @@
 
 #include "rb-gi-private.h"
 
+#if !GI_CHECK_VERSION(1, 72, 0)
+#  define g_callable_info_create_closure(callable_info,                 \
+                                         cif,                           \
+                                         callback,                      \
+                                         user_data)                     \
+    g_callable_info_prepare_closure((callable_info),                    \
+                                    (cif),                              \
+                                    (callback),                         \
+                                    (user_data))
+#  define g_callable_info_destroy_closure(callable_info,                \
+                                          closure)                      \
+    g_callable_info_free_closure((callable_info),                       \
+                                 (closure))
+#endif
+
 struct RBGICallbackData_ {
     RBGICallback *callback;
     RBGIArgMetadata *metadata;
@@ -185,18 +200,18 @@ rb_gi_callback_new(GICallbackInfo *callback_info,
     g_base_info_ref(callback->callback_info);
     callback->method_name = g_strdup(method_name);
     callback->closure =
-        g_callable_info_prepare_closure(callback->callback_info,
-                                        &(callback->cif),
-                                        rb_gi_ffi_closure_callback,
-                                        callback);
+        g_callable_info_create_closure(callback->callback_info,
+                                       &(callback->cif),
+                                       rb_gi_ffi_closure_callback,
+                                       callback);
     return callback;
 }
 
 static void
 rb_gi_callback_free(RBGICallback *callback)
 {
-    g_callable_info_free_closure(callback->callback_info,
-                                 callback->closure);
+    g_callable_info_destroy_closure(callback->callback_info,
+                                    callback->closure);
     g_free(callback->method_name);
     g_base_info_unref(callback->callback_info);
     xfree(callback);
