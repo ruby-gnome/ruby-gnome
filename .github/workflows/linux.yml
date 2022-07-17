@@ -33,6 +33,11 @@ jobs:
       - name: Build Docker image
         run: |
           docker-compose build ${{ matrix.service }}
+      - name: Cache ccache
+        uses: actions/cache@v3
+        with:
+          path: .ccache
+          key: docker-${{ runner.service }}
       - name: Run
         run: |
           docker-compose run ${{ matrix.service }}

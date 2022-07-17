@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2020  Ruby-GNOME Project Team
+# Copyright (C) 2020-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,6 +18,9 @@
 
 set -eux
 
+export CCACHE_DIR=/ruby-gnome/.ccache
+ccache -s
+
 mkdir -p ruby-gnome.build
 cd ruby-gnome.build
 
@@ -32,12 +35,38 @@ for package in glib2 gobject-introspection; do
   popd
 done
 
+git clone --depth 1 https://github.com/apache/arrow.git
+mkdir -p arrow.build
+cmake \
+  -G Ninja \
+  -DARROW_COMPUTE=ON \
+  -DARROW_CSV=ON \
+  -DARROW_DATASET=ON \
+  -DARROW_FILESYSTEM=ON \
+  -DARROW_FLIGHT=ON \
+  -DARROW_GANDIVA=ON \
+  -DARROW_HDFS=ON \
+  -DARROW_JSON=ON \
+  -DARROW_ORC=ON \
+  -DARROW_PARQUET=ON \
+  -DARROW_PLASMA=ON \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DCMAKE_INSTALL_LIBDIR=lib \
+  -DCMAKE_INSTALL_PREFIX=/usr \
+  -DProtobuf_SOURCE=BUNDLED \
+  -S arrow/cpp \
+  -B arrow.build/cpp
+ninja -C arrow.build/cpp
+ccache -s
+sudo ninja -C arrow.build/cpp install
+
 meson \
   --prefix=/usr \
   --libdir=lib \
   --buildtype=debug \
-  arrow-glib \
-  /arrow/c_glib
-ninja -C arrow-glib
-sudo ninja -C arrow-glib install
-ninja -C arrow-glib test
+  arrow.build/c_glib \
+  arrow/c_glib
+ninja -C arrow.build/c_glib
+ccache -s
+sudo ninja -C arrow.build/c_glib install
+ninja -C arrow.build/c_glib test

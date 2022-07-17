@@ -46,32 +46,6 @@ RUN \
   pip3 install --upgrade meson
 
 RUN \
-  git clone --depth 1 https://github.com/apache/arrow.git /arrow && \
-  mkdir -p /arrow.build && \
-  cmake \
-    -G Ninja \
-    -DARROW_COMPUTE=ON \
-    -DARROW_CSV=ON \
-    -DARROW_DATASET=ON \
-    -DARROW_FILESYSTEM=ON \
-    -DARROW_FLIGHT=ON \
-    -DARROW_GANDIVA=ON \
-    -DARROW_HDFS=ON \
-    -DARROW_JSON=ON \
-    -DARROW_ORC=ON \
-    -DARROW_PARQUET=ON \
-    -DARROW_PLASMA=ON \
-    -DCMAKE_BUILD_TYPE=Debug \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DProtobuf_SOURCE=BUNDLED \
-    -S /arrow/cpp \
-    -B /arrow.build/cpp && \
-  ninja -C /arrow.build/cpp && \
-  ninja -C /arrow.build/cpp install && \
-  rm -rf /arrow.build
-
-RUN \
   useradd --user-group --create-home ruby-gnome
 
 RUN \
