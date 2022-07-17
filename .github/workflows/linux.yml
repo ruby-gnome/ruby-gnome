@@ -34,10 +34,12 @@ jobs:
         run: |
           docker-compose build ${{ matrix.service }}
       - name: Cache ccache
+        if: |
+          runner.service == 'apache-arrow'
         uses: actions/cache@v3
         with:
           path: .ccache
-          key: docker-${{ runner.service }}
+          key: arrow-ccache-docker-${{ runner.service }}
       - name: Run
         run: |
           docker-compose run ${{ matrix.service }}
