@@ -147,6 +147,7 @@ module Gdk
       require_relative "paintable"
       require_relative "rectangle"
       require_relative "rgba"
+      require_relative "texture"
 
       require_relative "cairo"
 
