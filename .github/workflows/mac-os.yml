@@ -41,7 +41,7 @@ jobs:
   # under the License.
   apache-arrow:
     runs-on: macOS-latest
-    timeout-minutes: 40
+    timeout-minutes: 60
     env:
       ARROW_BUILD_TESTS: OFF
       ARROW_FLIGHT: ON
