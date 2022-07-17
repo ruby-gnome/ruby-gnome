@@ -36,7 +36,6 @@ Gem::Specification.new do |s|
   ]
   s.files += Dir.glob("lib/**/*.rb")
   s.files += Dir.glob("sample/**/*")
-  s.files += Dir.glob("test/**/*")
 
   s.add_runtime_dependency("atk", "= #{s.version}")
   s.add_runtime_dependency("gdk4", "= #{s.version}")

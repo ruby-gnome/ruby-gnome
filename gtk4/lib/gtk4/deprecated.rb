@@ -1,21 +1,44 @@
+# Copyright (C) 2011-2022  Ruby-GNOME Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
 module Gtk
   extend GLib::Deprecatable
+  define_deprecated_const :AccelGroup, raise: "Don't use this class."
+  define_deprecated_const :ActionGroup, raise: "Use 'Gio::SimpleActionGroup' instead."
   define_deprecated_const :Allocation, "Gdk::Rectangle"
-
+  define_deprecated_const :Arrow, raise: "Don't use this class."
+  define_deprecated_const :ButtonBox, raise: "Don't use this class."
+  define_deprecated_const :Clipboard, raise: "Use 'Gdk::Clipboard' instead."
   define_deprecated_const :Combo,                  :raise => "Use 'Gtk::ComboBoxText' instead."
   define_deprecated_const :ComboBoxEntry,          :raise => "Use 'Gtk::ComboBox' instead."
   define_deprecated_const :Curve,                  :raise => "Don't use this widget anymore."
   define_deprecated_const :FileSelection,          :raise => "Use 'Gtk::FileChooserDialog' instead."
   define_deprecated_const :FontSelection,          :raise => "Use 'Gtk::FontChooserWidget' instead."
   define_deprecated_const :FontSelectionDialog,    :raise => "Use 'Gtk::FontChooserDialog' instead."
-  remove_const(:ColorSelection)
   define_deprecated_const :ColorSelection,         :raise => "Use 'Gtk::ColorChooserWidget' instead."
-  remove_const(:ColorSelectionDialog)
   define_deprecated_const :ColorSelectionDialog,   :raise => "Use 'Gtk::ColorChooserDialog' instead."
   define_deprecated_const :GammaCurve,             :raise => "Don't use this widget anymore."
   define_deprecated_const :HRuler,                 :raise => "Don't use this widget anymore."
   define_deprecated_const :InputDialog,            :raise => "Don't use this widget anymore."
   define_deprecated_const :ItemFactory,            :raise => "Use 'Gtk::UIManager' instead."
+  define_deprecated_const :Menu, raise: "Use 'Gtk::PopoverMenu' instead."
+  define_deprecated_const :MenuBar, raise: "Use 'Gtk::PopoverMenuBar' instead."
+  define_deprecated_const :MenuItem, raise: "Don't use this class."
+  define_deprecated_const :MenuShell, raise: "Don't use this class."
+  define_deprecated_const :MenuToolButton, raise: "Don't use this class."
   define_deprecated_const :OptionMenu,             :raise => "Use 'Gtk::ComboBox' instead."
   define_deprecated_const :PageSetupUnixDialog,    :raise => "Use 'Gtk::PrintOperation' instead."
   define_deprecated_const :Printer,                :raise => "Use 'Gtk::PrintOperation' instead."
@@ -24,31 +47,41 @@ module Gtk
   define_deprecated_const :PrintUnixDialog,        :raise => "Use 'Gtk::PrintOperation' instead."
   define_deprecated_const :RC,                     :raise => "Use 'Gtk::StyleContext' instead."
   define_deprecated_const :RcStyle,                :raise => "Use 'Gtk::CssProvider' instead."
+  define_deprecated_const :RecentChooser, raise: "Don't use this class."
+  define_deprecated_const :RecentFilter, raise: "Don't use this class."
   define_deprecated_const :Ruler,                  :raise => "Don't use this widget anymore."
+  define_deprecated_const :SelectionData, raise: "Use 'Gtk::DragSource' instead."
+  define_deprecated_const :Stock, raise: "Use 'Gtk::Image.new(icon_name)' instead."
+  define_deprecated_const :StockItem, raise: "Use 'Gtk::Image.new(icon_name)' instead."
   define_deprecated_const :Style,                  :raise => "Use 'Gtk::StyleContext' instead."
+  define_deprecated_const :StyleProperties, raise: "Don't use this class."
+  define_deprecated_const :Table, raise: "Use 'Gtk::Grid' instead."
+  define_deprecated_const :TargetEntry, raise: "Use 'Gtk::DragSource' instead."
+  define_deprecated_const :TargetList, raise: "Use 'Gtk::DragSource' instead."
   define_deprecated_const :Tooltips,               :raise => "Use 'Gtk::Tooltip' API."
+  define_deprecated_const :UIManager, raise: "Use 'Gtk::Builder' instead."
   define_deprecated_const :VRuler,                 :raise => "Don't use this widget anymore."
-  define_deprecated_flags :AccelFlags, 'ACCEL'
-  define_deprecated_flags :AttachOptions
+  define_deprecated_const :AccelFlags, raise: "Don't use this class."
+  define_deprecated_const :AttachOptions, raise: "Don't use this class."
   define_deprecated_enums :CornerType, 'CORNER'
   define_deprecated_enums :DeleteType, 'DELETE'
   define_deprecated_enums :DirectionType, 'DIR'
-  define_deprecated_enums :ExpanderStyle, 'EXPANDER'
+  define_deprecated_const :ExpanderStyle, raise: "Don't use this class."
   define_deprecated_enums :Justification, 'JUSTIFY'
   define_deprecated_enums :MovementStep, 'MOVEMENT'
   define_deprecated_enums :Orientation, 'ORIENTATION'
   define_deprecated_enums :PackType, 'PACK'
-  define_deprecated_enums :PathPriorityType, 'PATH_PRIO'
-  define_deprecated_enums :PathType, 'PATH'
+  define_deprecated_const :PathPriorityType, raise: "Don't use this class."
+  define_deprecated_const :PathType, raise: "Don't use this class."
   define_deprecated_enums :PolicyType, 'POLICY'
   define_deprecated_enums :PositionType, 'POS'
-  define_deprecated_enums :ReliefStyle, 'RELIEF'
-  define_deprecated_enums :ResizeMode, 'RESIZE'
+  define_deprecated_const :ReliefStyle, raise: "Don't use this class."
+  define_deprecated_const :ResizeMode, raise: "Don't use this class."
   define_deprecated_enums :ScrollStep, 'SCROLL'
   define_deprecated_enums :ScrollType, 'SCROLL'
   define_deprecated_enums :SelectionMode, 'SELECTION'
-  define_deprecated_enums :ShadowType, 'SHADOW'
-  define_deprecated_enums :StateType, 'STATE'
+  define_deprecated_const :ShadowType, raise: "Don't use this class."
+  define_deprecated_const :StateType, raise: "Don't use this class."
   define_deprecated_enums :SortType, 'SORT'
   define_deprecated_const :AnchorType
   define_deprecated_const :ANCHOR_CENTER
@@ -125,11 +158,6 @@ module Gtk
     define_deprecated_const :Align, "Gtk::Align"
   end
 
-  class Arrow
-    extend GLib::Deprecatable
-    define_deprecated_enums :Type
-  end
-
   class Assistant
     extend GLib::Deprecatable
     define_deprecated_const :PageType, "Gtk::AssistantPageType"
@@ -150,25 +178,59 @@ module Gtk
 
   class Box
     extend GLib::Deprecatable
-    define_deprecated_method :pack_start_defaults, :pack_start
-    define_deprecated_method :pack_end_defaults, :pack_end
-    define_deprecated_method_by_hash_args :pack_start,
-        'child, expand = true, fill = true, padding = 0',
-        'child, :expand => true, :fill => true, :padding => 0', 1 do
-        |_self, child, expand, fill, padding|
-      [child, {:expand => expand, :fill => fill, :padding => padding}]
+    define_deprecated_method :add, :append
+    define_deprecated_method :pack_start_defaults, :prepend
+    define_deprecated_method :pack_end_defaults, :append
+    set_pack_properties = lambda do |_self, child, args|
+      if args.size == 1 and args[0].is_a?(Hash)
+        options = args[0]
+        expand = options[:expand]
+        fill = options[:fill]
+        padding = options[:padding]
+        pack_type = options[:pack_type]
+      else
+        expand, fill, padding, pack_type, = *args
+      end
+      unless expand.nil?
+        if _self.orientation == Orientation::HORIZONTAL
+          child.hexpand = expand
+        else
+          child.vexpand = expand
+        end
+      end
+      if fill
+        if _self.orientation == Orientation::HORIZONTAL
+          child.halign = :fill
+        else
+          child.valign = :fill
+        end
+      end
+      unless padding.nil?
+        child.mergin_top = padding
+        child.mergin_bottom = padding
+        child.mergin_start = padding
+        child.mergin_end = padding
+      end
+      if pack_type
+        if _self.orientation == Orientation::HORIZONTAL
+          child.halign = pack_type
+        else
+          child.valign = pack_type
+        end
+      end
     end
-    define_deprecated_method_by_hash_args :pack_end,
-        'child, expand = true, fill = true, padding = 0',
-        'child, :expand => true, :fill => true, :padding => 0', 1 do
-        |_self, child, expand, fill, padding|
-      [child, {:expand => expand, :fill => fill, :padding => padding}]
+    define_deprecated_method :pack_start, :prepend do |_self, child, *args|
+      _self.prepend(child)
+      set_pack_properties.call(_self, child, args)
     end
-    define_deprecated_method_by_hash_args :set_child_packing,
-        'child, expand, fill, padding, pack_type',
-        'child, :expand => nil, :fill => nil, :padding => nil, :pack_type => nil', 1 do
-        |_self, child, expand, fill, padding, pack_type|
-      [child, {:expand => expand, :fill => fill, :padding => padding, :pack_type => pack_type}]
+    define_deprecated_method :pack_end, :append do |_self, child, *args|
+      _self.append(child)
+      set_pack_properties.call(_self, child, args)
+    end
+    message = "Set child's Gtk::Widget::mergin-* properties instead."
+    define_deprecated_method :set_child_packing,
+                             warn: message do |_self, child, *args|
+      set_pack_properties.call(_self, child, args)
     end
   end
 
@@ -197,17 +259,20 @@ module Gtk
     end
   end
 
-  class ButtonBox
-    extend GLib::Deprecatable
-    define_deprecated_const :Style, "Gtk::ButtonBoxStyle"
-    define_deprecated_enums "Gtk::ButtonBoxStyle", "STYLE"
-  end
-
   class Calendar
     extend GLib::Deprecatable
-    define_deprecated_flags "Gtk::CalendarDisplayOptions"
+    define_deprecated_const :CalendarDisplayOptions, raise: "Don't use this class."
     define_deprecated_method :freeze, :warn => "Don't use this method."
     define_deprecated_method :thaw, :warn => "Don't use this method."
+    define_deprecated_method :select_month, :select_day do |_self, month, year|
+      date = _self.date
+      _self.select_day(GLib::DateTime.new(year: year,
+                                          month: month,
+                                          day: date.day,
+                                          hour: date.hour,
+                                          minute: date.minute,
+                                          second: date.second))
+    end
   end
 
   class CellRenderer
@@ -282,6 +347,8 @@ module Gtk
         |_self, title, parent, flags, *buttons|
       [{:title => title, :parent => parent, :flags => flags, :buttons => buttons}]
     end
+    message = "Use Gtk::Window#set_modal and 'response' signal instead."
+    define_deprecated_method :run, raise: message
   end
 
   module Drag
@@ -421,7 +488,7 @@ module Gtk
     define_deprecated_const :Action, "Gtk::FileChooserAction"
     define_deprecated_enums :FileChooserAction, 'ACTION'
     define_deprecated_const :Confirmation, "Gtk::FileChooserConfirmation"
-    define_deprecated_enums :FileChooserConfirmation, 'CONFIRMATION'
+    define_deprecated_const :FileChooserConfirmation, raise: "Don't use this class."
   end
 
   class FileChooserDialog
@@ -442,8 +509,8 @@ module Gtk
 
   class FileFilter
     extend GLib::Deprecatable
-    define_deprecated_const :Flags, "Gtk::FileFilterFlags"
-    define_deprecated_flags :FileFilterFlags
+    define_deprecated_const :Flags, raise: "Don't use this class."
+    define_deprecated_const :FileFilterFlags, raise: "Don't use this class."
   end
 
   class HBox
@@ -498,12 +565,14 @@ module Gtk
   class IconSize
    extend GLib::Deprecatable
    define_deprecated_const :IconSize, "Gtk::IconSize"
+   define_deprecated_singleton_method :lookup, raise: "Don't use this method"
   end
 
   class IconTheme
     extend GLib::Deprecatable
     define_deprecated_const :LookupFlags, "Gtk::IconLookupFlags"
     define_deprecated_flags :IconLookupFlags, 'LOOKUP'
+    define_deprecated_method :choose_icon, :lookup_icon
   end
 
   class IconView
@@ -563,48 +632,14 @@ module Gtk
     end
   end
 
+  class LevelBar
+    extend GLib::Deprecatable
+    define_deprecated_const :Mode, "Gtk::LevelBarMode"
+  end
+
   class LinkButton
     extend GLib::Deprecatable
     define_deprecated_singleton_method :set_uri_hook, :warn => "Use 'clicked' signal."
-  end
-
-  class MenuBar
-    extend GLib::Deprecatable
-    define_deprecated_enums :PackDirection, 'PACK_DIRECTION'
-  end
-
-  class MenuItem
-    extend GLib::Deprecatable
-
-    define_deprecated_method_by_hash_args :initialize,
-        "label, use_underline=false",
-        ":label => label, :use_underline => use_underline" do |_self, label, use_underline|
-      [{:label => label, :use_underline => use_underline}]
-    end
-
-    define_deprecated_method :remove_submenu, :warn => "Use '#{self}#set_submenu'." do |_self|
-      _self.set_submenu(nil)
-    end
-  end
-
-  class MenuShell
-    extend GLib::Deprecatable
-    define_deprecated_enums :DirectionType, 'DIR'
-  end
-
-  class MenuToolButton
-    extend GLib::Deprecatable
-    define_deprecated_method_by_hash_args :initialize,
-        'icon_widget_or_stock_id = nil, label = nil',
-        ':icon_widget => nil, :label => nil, :stock_id => nil' do
-        |_self, icon_widget_or_stock_id, label|
-      case icon_widget_or_stock_id
-      when String, Symbol
-        [{:stock_id => icon_widget_or_stock_id}]
-      when Gtk::Widget
-        [{:icon_widget => icon_widget_or_stock_id, :label => label}]
-      end
-    end
   end
 
   class MessageDialog
@@ -630,6 +665,18 @@ module Gtk
     define_deprecated_method :set_tab_label_packing, :warn => "Use 'tab-expand' and 'tab-fill' child property." do |_self, child, expand, fill, pack_type|
       _self.child_set_property(child, 'tab-expand', expand)
       _self.child_set_property(child, 'tab-fill', fill)
+    end
+  end
+
+  class Paned
+    extend GLib::Deprecatable
+    define_deprecated_method :pack1,
+                             :set_start_child do |_self, child, options=nil|
+      _self.set_start_child(child, options)
+    end
+    define_deprecated_method :pack2,
+                             :set_end_child do |_self, child, options=nil|
+      _self.set_end_child(child, options)
     end
   end
 
@@ -759,12 +806,6 @@ module Gtk
     end
   end
 
-  class RecentFilter
-    extend GLib::Deprecatable
-    define_deprecated_const :Flags, "Gtk::RecentFilterFlags"
-    define_deprecated_flags :RecentFilterFlags
-  end
-
   class RecentManager
     extend GLib::Deprecatable
     define_deprecated_singleton_method :get_for_screen, :warn => "Use '#{self}.default'." do |_self, screen|
@@ -772,6 +813,11 @@ module Gtk
     end
     define_deprecated_method :set_screen, :warn => "Don't use this method."
     alias :screen= :set_screen
+  end
+
+  class Revelar
+    extend GLib::Deprecatable
+    define_deprecated_const :TransitionType, "Gtk::RevelarTransitionType"
   end
 
   class ProgressBar
@@ -812,6 +858,16 @@ module Gtk
     define_deprecated_enums :SpinButtonUpdatePolicy, 'UPDATE'
   end
 
+  class StypeContext
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :add_provider_for_screen,
+                                       :add_provider_for_display do |_self, display, provider, priority=nil|
+      _self.add_privder_for_display(display, provider, priority)
+    end
+    define_deprecated_singleton_method :reset_widgets,
+                                       warn: "Don't use this method."
+  end
+
   class TextAttributes
     extend GLib::Deprecatable
     define_deprecated_method :realized?, :warn => "Don't use this method." do |_self|
@@ -847,9 +903,12 @@ module Gtk
         :warn => "Use '#{self}#get_iter_at(:anchor => nil)'." do |_self, anchor|
       _self.get_iter_at(:anchor => anchor)
     end
-    define_deprecated_method :insert_pixbuf, :insert
     define_deprecated_method :insert_child_anchor, :insert
+    define_deprecated_method :insert_paintable, :insert
+    define_deprecated_method :insert_pixbuf, :insert
     define_deprecated_method :insert_with_tags, :insert
+    define_deprecated_method :deserialize, raise: "Don't use this method."
+    define_deprecated_method :serialize, raise: "Don't use this method."
   end
 
   class TextIter
@@ -867,7 +926,7 @@ module Gtk
 
   class TextView
     extend GLib::Deprecatable
-    define_deprecated_enums :WindowType, 'WINDOW'
+    define_deprecated_const :WindowType, raise: "Don't use this class."
   end
 
   class ToggleAction
@@ -956,12 +1015,6 @@ module Gtk
     end
   end
 
-  class UIManager
-    extend GLib::Deprecatable
-    define_deprecated_const :ItemType, "Gtk::UIManagerItemType"
-    define_deprecated_flags :UIManagerItemType
-  end
-
   class VBox
     extend GLib::Deprecatable
     define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box.new(:vertical, spacing)'." do |_self, homogeneous, spacing|
@@ -1010,7 +1063,7 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_const :Align, "Gtk::Align"
     define_deprecated_const :HelpType, "Gtk::WidgetHelpType"
-    define_deprecated_enums :WidgetHelpType, 'HELP'
+    define_deprecated_const :WidgetHelpType, raise: "Don't use this class."
     define_deprecated_const :TextDirection, "Gtk::TextDIrection"
     define_deprecated_enums "Gtk::TextDirection", 'TEXT_DIR'
     define_deprecated_singleton_method :push_colormap, :warn => "Don't use this method."
@@ -1078,32 +1131,30 @@ module Gtk
     define_deprecated_method :set_requisition, :warn => "Don't use this method."
     define_deprecated_method :saved_state, :raise => "Don't use this method."
     define_deprecated_method :pointer, :raise => "Use 'Gdk::Window#get_device_position'."
-
-    alias :__set_allocation__ :set_allocation
-    private :__set_allocation__
-    def set_allocation(*args)
-      case args.size
-      when 1
-        __set_allocation__(args.first)
-      when 4
-        warn "#{caller[0]}: '#{self.class}#set_allocation(x, y, width, height)' style has been deprecated. Use '#{self.class}#set_allocation(alloc)' style."
-        __set_allocation__(Gtk::Allocation.new(*args))
-      else
-        raise ArgumentError.new("need 1 or 4 arguments.")
-      end
-    end
-
+    define_deprecated_method :set_allocation, raise: "Don't use this method."
     define_deprecated_signal :expose_event, :warn => "Use '#{self}::draw' signal."
     define_deprecated_signal :state_changed, :warn => "Use '#{self}::state-flags-changed' signal."
     define_deprecated_signal :style_set, :warn => "Use '#{self}::style-updated' signal."
+
+    define_deprecated_method :events, raise: "Use 'Gtk::EventControllers' instead."
+    define_deprecated_method :add_events, raise: "Use 'Gtk::EventControllers' instead."
+    define_deprecated_method :set_events, raise: "Use 'Gtk::EventControllers' instead."
+    define_deprecated_method :events=, raise: "Use 'Gtk::EventControllers' instead."
+    define_deprecated_method :drag_source_set, raise: "Use 'Gtk::DragSource' instead."
+    define_deprecated_method :drag_dest_set, raise: "Use 'Gtk::DropTarget' instead."
+    define_deprecated_method :style_attach, raise: "Don't use this method."
+    define_deprecated_method :style_get, raise: "Don't use this method."
+    define_deprecated_method :style_get_property, raise: "Don't use this method."
+    define_deprecated_method :render_icon_pixbuf,
+                             raise: "Don't use this method."
+    define_deprecated_method :set_icon, raise: "Use '#{self}#set_icon_name' instead."
+    define_deprecated_method :icon=, raise: "Use '#{self}#icon_name=' instead."
   end
 
   class Window
     extend GLib::Deprecatable
-    define_deprecated_const :Position, "Gtk::WindowPosition"
-    define_deprecated_enums "Gtk::WindowPosition", 'POS'
-    define_deprecated_const :Type, "Gtk::WindowType"
-    define_deprecated_enums "Gtk::WindowType"
+    define_deprecated_const :Position, raise: "Don't use this class."
+    define_deprecated_const :Type, raise: "Don't use this class."
     define_deprecated_method :active_focus, :activate_focus
     define_deprecated_method :active_default, :activate_default
   end
@@ -1115,17 +1166,8 @@ module Gtk
 end
 
 module Gdk
-  class DragContext
-    define_deprecated_method_by_hash_args :finish,
-        'success, delete, time',
-        ':success => true, :delete => false, :time => Gdk::CURRENT_TIME' do |_self, success, delete, time|
-      [{:success => success, :delete => delete, :time => time}]
-    end
-  end
-
   class Event
-    define_deprecated_method :event_widget, :warn => "Use 'Gdk::Event#widget'." do |_self|
-      _self.widget
-    end
+    define_deprecated_method :event_widget, raise: "Use 'Gtk::EventController#widget' instead."
+    define_deprecated_method :widget, raise: "Use 'Gtk::EventController#widget' instead."
   end
 end

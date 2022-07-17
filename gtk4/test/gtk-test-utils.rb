@@ -1,4 +1,4 @@
-# Copyright (C) 2011-2021  Ruby-GNOME Project Team
+# Copyright (C) 2011-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,6 +17,8 @@
 require "tempfile"
 require "fileutils"
 
+require "gtk4"
+
 module GtkTestUtils
   private
   def only_gtk_version(major, minor, micro=nil)
@@ -30,7 +32,29 @@ module GtkTestUtils
     Gdk::Screen.default.class.gtype.name
   end
 
+  module WindowSystemTypeNames
+    X11 = "GdkX11Screen"
+    WINDOWS = "GdkWin32Screen"
+  end
+
+  def x11?
+    window_system_type_name == WindowSystemTypeNames::X11
+  end
+
+  def csd_supported?
+    screen = Gdk::Screen.default
+    case window_system_type_name
+    when WindowSystemTypeNames::X11
+      screen.composited? and screen.rgba_visual
+    when WindowSystemTypeNames::WINDOWS
+      screen.rgba_visual
+    else
+      true
+    end
+  end
+
   def fixture_path(*components)
-    File.join(File.dirname(__FILE__), "fixture", *components)
+    File.expand_path(File.join(*components),
+                     ENV["GTK4_FIXTURE_DIR"] || File.join("test", "fixture"))
   end
 end

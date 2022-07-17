@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -37,7 +37,11 @@ module Gtk
           initialize_new_with_label(label)
         end
       elsif icon_name
-        initialize_new_from_icon_name(icon_name)
+        case icon_size
+        when Symbol, String
+          icon_size = IconSize.new(icon_size.to_s)
+        end
+        initialize_new_from_icon_name(icon_name, icon_size)
       else
         initialize_raw
       end

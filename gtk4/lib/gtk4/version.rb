@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,7 +20,7 @@ module Gtk
 
     class << self
       def or_later?(major, minor, micro=nil)
-        error_message = Gtk.check_version(major, minor, micro)
+        error_message = Gtk.check_version(major, minor, micro || 0)
         error_message.nil?
       end
     end

@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-20122  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,8 @@ module Gtk
       return nil unless succeeded
 
       properties.each do |name, value|
-        tag.__send__("#{name}=", value)
+        property_name = name.to_s.gsub(/-/, "_")
+        tag.__send__("#{property_name}=", value)
       end
 
       tag
@@ -94,7 +95,7 @@ module Gtk
     end
 
     alias_method :insert_raw,              :insert
-    alias_method :insert_pixbuf_raw,       :insert_pixbuf
+    alias_method :insert_paintable_raw,    :insert_paintable
     alias_method :insert_child_anchor_raw, :insert_child_anchor
     def insert(iter, target, *args)
       options = nil
@@ -129,8 +130,10 @@ module Gtk
         insert_interactive(iter, target, default_editable)
       else
         case target
+        when Gdk::Paintable
+          insert_paintable_raw(iter, target)
         when GdkPixbuf::Pixbuf
-          insert_pixbuf_raw(iter, target)
+          insert_paintable_raw(iter, target)
         when TextChildAnchor
           insert_text_child_anchor_raw(iter, target)
         when GLib::Bytes
@@ -143,7 +146,13 @@ module Gtk
       if tags
         start_iter = get_iter_at(:offset => start_offset)
         tags.each do |tag|
-          tag = tag_table.lookup(tag) if tag.is_a?(String)
+          if tag.is_a?(String)
+            resolved_tag = tag_table.lookup(tag)
+            if resolved_tag.nil?
+              raise ArgumentError "unknown tag: #{tag.inspect}"
+            end
+            tag = resolved_tag
+          end
           apply_tag(tag, start_iter, iter)
         end
       end
@@ -196,11 +205,6 @@ module Gtk
       else
         apply_tag_raw(tag, start, last)
       end
-    end
-
-    alias_method :serialize_raw, :serialize
-    def serialize(*arguments)
-      serialize_raw(*arguments).pack("C*")
     end
 
     alias_method :selection_bounds_raw, :selection_bounds

@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -38,16 +38,6 @@ module Gtk
       add_buttons(*buttons) if buttons
     end
 
-    alias_method :run_raw, :run
-    def run
-      response_id = run_raw
-      if response_id < 0
-        ResponseType.new(response_id)
-      else
-        response_id
-      end
-    end
-
     def add_buttons(*buttons)
       buttons.each do |text, response_id|
         add_button(text, response_id)
@@ -56,21 +46,20 @@ module Gtk
 
     alias_method :add_button_raw, :add_button
     def add_button(text, response_id)
-      case response_id
-      when Symbol
-        response_id = ResponseType.new(response_id)
-      end
-      add_button_raw(text, response_id)
+      add_button_raw(text, ResponseType.resolve(response_id))
     end
 
     alias_method :get_widget_for_response_raw, :get_widget_for_response
     def get_widget_for_response(response_id)
-      case response_id
-      when Symbol
-        response_id = ResponseType.new(response_id)
-      end
-      get_widget_for_response_raw(response_id)
+      get_widget_for_response_raw(ResponseType.resolve(response_id))
     end
+
+    alias_method :set_default_response_raw, :set_default_response
+    def set_default_response(response_id)
+      set_default_response_raw(ResponseType.resolve(response_id))
+    end
+    alias_method :default_response_raw=, :default_response=
+    alias_method :default_response=, :set_default_response
 
     if method_defined?(:use_header_bar)
       alias_method :use_header_bar_raw, :use_header_bar

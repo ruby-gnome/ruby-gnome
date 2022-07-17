@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,22 +16,30 @@
 
 module Gtk
   class Paned
-    alias_method :pack1_raw, :pack1
-    def pack1(child, options={})
-      resize = options[:resize]
-      resize = false if resize.nil?
-      shrink = options[:shrink]
-      shrink = true if shrink.nil?
-      pack1_raw(child, resize, shrink)
+    alias_method :set_start_child_raw, :set_start_child
+    def set_start_child(child, options=nil)
+      set_start_child_raw(child)
+      if options
+        resize = options[:resize]
+        resize = false if resize.nil?
+        set_resize_start_child(resize)
+        shrink = options[:shrink]
+        shrink = true if shrink.nil?
+        set_shring_start_child(shrink)
+      end
     end
 
-    alias_method :pack2_raw, :pack2
-    def pack2(child, options={})
-      resize = options[:resize]
-      resize = true if resize.nil?
-      shrink = options[:shrink]
-      shrink = true if shrink.nil?
-      pack2_raw(child, resize, shrink)
+    alias_method :set_end_child_raw, :set_end_child
+    def set_end_child(child, options=nil)
+      set_end_child_raw(child)
+      if options
+        resize = options[:resize]
+        resize = false if resize.nil?
+        set_resize_end_child(resize)
+        shrink = options[:shrink]
+        shrink = true if shrink.nil?
+        set_shring_end_child(shrink)
+      end
     end
   end
 end

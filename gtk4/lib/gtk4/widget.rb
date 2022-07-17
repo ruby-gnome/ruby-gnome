@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -49,63 +49,24 @@ module Gtk
           attr_reader(name)
         end
       end
+    end
 
-      alias_method :set_connect_func_raw, :set_connect_func
-      def set_connect_func(&block)
-        set_connect_func_raw do |*args|
-          Builder.connect_signal(*args, &block)
-        end
+    alias_method :set_size_request_raw, :set_size_request
+    def set_size_request(*args)
+      case args.size
+      when 1
+        options = args[0]
+        raise ArgumentError, ":width is missing" unless options.key?(:width)
+        width = options[:width]
+        raise ArgumentError, ":height is missing" unless options.key?(:height)
+        height = options[:height]
+      when 2
+        width, height = args
+      else
+        message = "wrong number of arguments (given #{args.size}, expected 1..2)"
+        raise ArgumentError, message
       end
-    end
-
-    alias_method :events_raw, :events
-    def events
-      Gdk::EventMask.new(events_raw)
-    end
-
-    alias_method :add_events_raw, :add_events
-    def add_events(new_events)
-      unless new_events.is_a?(Gdk::EventMask)
-        new_events = Gdk::EventMask.new(new_events)
-      end
-      add_events_raw(new_events.to_i)
-    end
-
-    alias_method :set_events_raw, :set_events
-    def set_events(new_events)
-      unless new_events.is_a?(Gdk::EventMask)
-        new_events = Gdk::EventMask.new(new_events)
-      end
-      set_events_raw(new_events.to_i)
-    end
-
-    alias_method :events_raw=, :events=
-    alias_method :events=, :set_events
-
-    alias_method :drag_source_set_raw, :drag_source_set
-    def drag_source_set(flags, targets, actions)
-      targets = ensure_drag_targets(targets)
-      drag_source_set_raw(flags, targets, actions)
-    end
-
-    alias_method :drag_dest_set_raw, :drag_dest_set
-    def drag_dest_set(flags, targets, actions)
-      targets = ensure_drag_targets(targets)
-      drag_dest_set_raw(flags, targets, actions)
-    end
-
-    alias_method :style_get_property_raw, :style_get_property
-    def style_get_property(name)
-      property = self.class.find_style_property(name)
-      value = GLib::Value.new(property.value_type)
-      style_get_property_raw(name, value)
-      value.value
-    end
-
-    alias_method :render_icon_pixbuf_raw, :render_icon_pixbuf
-    def render_icon_pixbuf(stock_id, size)
-      size = IconSize.new(size) unless size.is_a?(IconSize)
-      render_icon_pixbuf_raw(stock_id, size)
+      set_size_request_raw(width, height)
     end
 
     alias_method :translate_coordinates_raw, :translate_coordinates
@@ -116,6 +77,21 @@ module Gtk
       else
         nil
       end
+    end
+
+    alias_method :style_context_raw, :style_context
+    def style_context
+      @style_context ||= style_context_raw
+    end
+
+    def children
+      _children = []
+      child = first_child
+      while child
+        _children << child
+        child = child.next_sibling
+      end
+      _children
     end
 
     private

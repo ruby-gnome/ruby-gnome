@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -25,18 +25,5 @@ module Gtk
         initialize_raw(type)
       end
     end
-
-    alias_method :set_icon_raw, :set_icon
-    def set_icon(icon_or_file_name)
-      case icon_or_file_name
-      when String
-        set_icon_from_file(icon_or_file_name)
-      else
-        set_icon_raw(icon_or_file_name)
-      end
-    end
-
-    remove_method :icon=
-    alias_method :icon=, :set_icon
   end
 end

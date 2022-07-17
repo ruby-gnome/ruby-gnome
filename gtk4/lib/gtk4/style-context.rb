@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,10 +17,26 @@
 module Gtk
   class StyleContext
     class << self
-      alias_method :reset_widgets_raw, :reset_widgets
-      def reset_widgets(screen=nil)
-        reset_widgets_raw(screen || Gdk::Screen.default)
+      def resolve_priority(priority)
+        case priority
+        when Symbol, String
+          StyleProvider.const_get("PRIORITY_#{priority.to_s.upcase}")
+        else
+          priority || StyleProvider::PRIORITY_APPLICATION
+        end
       end
+
+      alias_method :add_provider_for_display_raw, :add_provider_for_display
+      def add_provider_for_display(display, provider, priority=nil)
+        priority = resolve_priority(priority)
+        add_provider_for_display_raw(display, provider, priority)
+      end
+    end
+
+    alias_method :add_provider_raw, :add_provider
+    def add_provider(provider, priority=nil)
+      priority = self.class.resolve_priority(priority)
+      add_provider_raw(provider, priority)
     end
   end
 end

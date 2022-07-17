@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,22 +16,19 @@
 
 module Gtk
   class IconTheme
-    alias_method :choose_icon_raw, :choose_icon
-    def choose_icon(icon_names, size, flags=nil)
-      icon_names = [icon_names] unless icon_names.is_a?(Array)
-      flags ||= 0
-      choose_icon_raw(icon_names, size, flags)
-    end
-
     alias_method :lookup_icon_raw, :lookup_icon
-    def lookup_icon(icon, size, flags=nil)
+    def lookup_icon(icon, size, scale, direction, flags=nil)
       case icon
       when String, Symbol
         flags ||= :generic_fallback
-        lookup_icon_raw(icon.to_s, size, flags)
+        lookup_icon_raw(icon.to_s, nil, size, scale, direction, flags)
+      when Array
+        icon, *fallbacks = *icon
+        flags ||= :generic_fallback
+        lookup_icon_raw(icon.to_s, fallbacks, size, scale, direction, flags)
       else
         flags ||= 0
-        lookup_by_gicon(icon, size, flags)
+        lookup_by_gicon(icon, size, scale, direction, flags)
       end
     end
   end

@@ -1,4 +1,4 @@
-# Copyright (C) 2006-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2006-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,12 +14,9 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gobject-introspection"
-require "atk"
 require "gdk4"
-require "gio2"
 
-require "gtk4/loader"
+require_relative "gtk4/loader"
 
 module Gtk
   LOG_DOMAIN = "Gtk"
@@ -31,34 +28,6 @@ module Gtk
   class InitError < Error
   end
 
-  class << self
-    def const_missing(name)
-      init()
-      if const_defined?(name)
-        const_get(name)
-      else
-        super
-      end
-    end
-
-    def method_missing(name, *args, &block)
-      init()
-      if respond_to?(name)
-        __send__(name, *args, &block)
-      else
-        super
-      end
-    end
-
-    def init(*argv)
-      class << self
-        remove_method(:init)
-        remove_method(:const_missing)
-        remove_method(:method_missing)
-      end
-      Gdk.init if Gdk.respond_to?(:init)
-      loader = Loader.new(self, argv)
-      loader.load
-    end
-  end
+  loader = Loader.new(self)
+  loader.load
 end
