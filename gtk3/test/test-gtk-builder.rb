@@ -250,15 +250,6 @@ EOX
 EOX
   end
 
-  def ui_definition_with_signal
-    <<-EOX
-<interface>
-  <object class="GtkWindow" id="main-window">
-  </object>
-</interface>
-EOX
-  end
-
   def ui_definition_file
     xml = Tempfile.new("Gtk::Builder")
     xml.print(ui_definition)
