@@ -925,7 +925,6 @@ rb_gi_arguments_convert_arg_array_body_c_fixed_size(ArrayLikeToRubyData *data,
                                                     gint fixed_size)
 {
     const char *array_c_type = "[fixed-size]";
-    gconstpointer elements = data->arg->v_pointer;
     switch (data->element_type_tag) {
       case GI_TYPE_TAG_VOID:
       case GI_TYPE_TAG_BOOLEAN:
