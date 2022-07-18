@@ -34,15 +34,6 @@ class TestGtkComboBox < Test::Unit::TestCase
         end
         assert_equal(model, combo_box.model)
       end
-
-      test ":area" do
-        area = Gtk::CellAreaBox.new
-        combo_box = Gtk::ComboBox.new(:entry => true, :area => area)
-        assert do
-          combo_box.has_entry?
-        end
-        assert_equal(area, combo_box.area)
-      end
     end
 
     sub_test_case("no :entry") do
@@ -61,15 +52,6 @@ class TestGtkComboBox < Test::Unit::TestCase
           not combo_box.has_entry?
         end
         assert_equal(model, combo_box.model)
-      end
-
-      test ":area" do
-        area = Gtk::CellAreaBox.new
-        combo_box = Gtk::ComboBox.new(:area => area)
-        assert do
-          not combo_box.has_entry?
-        end
-        assert_equal(area, combo_box.area)
       end
     end
   end

@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,21 +20,16 @@ module Gtk
     def initialize(options={})
       entry = options[:entry]
       model = options[:model]
-      area  = options[:area]
 
       if entry
         if model
           initialize_new_with_model_and_entry(model)
-        elsif area
-          initialize_new_with_area_and_entry(area)
         else
           initialize_new_with_entry
         end
       else
         if model
           initialize_new_with_model(model)
-        elsif area
-          initialize_new_with_area(area)
         else
           initialize_new
         end
