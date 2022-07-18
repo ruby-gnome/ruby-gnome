@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,12 +18,11 @@ class TestGtkAccessible < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    @accessible = Gtk::Accessible.new
+    @accessible = Gtk::Box.new(:horizontal)
   end
 
-  def test_widget_accessors
-    widget = Gtk::Box.new(:horizontal)
-    @accessible.widget = widget
-    assert_equal(widget, @accessible.widget)
+  def test_accessible_role
+    assert_equal(Gtk::AccessibleRole::GROUP,
+                 @accessible.accessible_role)
   end
 end
