@@ -57,4 +57,13 @@ module GtkTestUtils
     File.expand_path(File.join(*components),
                      ENV["GTK4_FIXTURE_DIR"] || File.join("test", "fixture"))
   end
+
+  def suppress_warning
+    verbose, $VERBOSE = $VERBOSE, nil
+    begin
+      yield
+    ensure
+      $VERBOSE = verbose
+    end
+  end
 end

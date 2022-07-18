@@ -28,14 +28,30 @@ class TestGtkBox < Test::Unit::TestCase
 
   test "set_child_packing" do
     box = Gtk::Box.new(:vertical)
-    child = Gtk::EventBox.new
-    box.add(child)
-    box.set_child_packing(child,
-                          :expand => false,
-                          :fill   => true,
-                          :padding => 100,
-                          :pack_type => :end)
-    assert_equal([false, true, 100, Gtk::PackType::END],
-                 box.query_child_packing(child))
+    child = Gtk::Box.new(:horizontal)
+    box.append(child)
+    suppress_warning do
+      box.set_child_packing(child,
+                            expand: false,
+                            fill: true,
+                            padding: 100,
+                            pack_type: :end)
+    end
+    assert_equal([
+                   false,
+                   Gtk::Align::END,
+                   100,
+                   100,
+                   100,
+                   100,
+                 ],
+                 [
+                   child.vexpand?,
+                   child.valign,
+                   child.margin_top,
+                   child.margin_bottom,
+                   child.margin_start,
+                   child.margin_end,
+                 ])
   end
 end

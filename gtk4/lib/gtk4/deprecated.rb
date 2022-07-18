@@ -193,10 +193,10 @@ module Gtk
         end
       end
       unless padding.nil?
-        child.mergin_top = padding
-        child.mergin_bottom = padding
-        child.mergin_start = padding
-        child.mergin_end = padding
+        child.margin_top = padding
+        child.margin_bottom = padding
+        child.margin_start = padding
+        child.margin_end = padding
       end
       if pack_type
         if _self.orientation == Orientation::HORIZONTAL
@@ -214,7 +214,9 @@ module Gtk
       _self.append(child)
       set_pack_properties.call(_self, child, args)
     end
-    message = "Set child's Gtk::Widget::mergin-* properties instead."
+    message = "Set child's " +
+              "Gtk::Widget::{hexpand,vexpand,halign,valign,margin-*} " +
+              "properties instead."
     define_deprecated_method :set_child_packing,
                              warn: message do |_self, child, *args|
       set_pack_properties.call(_self, child, args)
