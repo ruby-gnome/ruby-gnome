@@ -73,7 +73,6 @@ module Gtk
       require_relative "gdk-display"
 
       require_relative "about-dialog"
-      require_relative "action"
       require_relative "application"
       require_relative "binding-set"
       require_relative "border"
