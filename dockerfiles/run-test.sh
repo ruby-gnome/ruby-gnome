@@ -18,20 +18,28 @@
 
 set -eux
 
+echo "::group::Prepare build directory"
 mkdir -p ruby-gnome.build
 cd ruby-gnome.build
+echo "::endgroup::"
 
+echo "::group::Install dependencies"
 cp /ruby-gnome/Gemfile ./
 if [[ -n ${SCL:-} ]]; then
   gem install cairo
 fi
 bundle install
+echo "::endgroup::"
 
 ruby /ruby-gnome/extconf.rb --enable-debug-build "$@"
-make -j$(nproc)
+for makefile in */Makefile; do
+  target=$(dirname ${makefile})
+  echo "::group::Build ${target}"
+  make -C ${target} -j$(nproc)
+  echo "::endgroup::"
+done
 
 export RUBY_GNOME_BUILD_DIR="${PWD}"
-
 if type dbus-run-session > /dev/null 2>&1; then
   dbus-run-session \
     xvfb-run --server-args "-screen 0 640x480x24" \

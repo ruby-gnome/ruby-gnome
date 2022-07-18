@@ -47,6 +47,9 @@ jobs:
         run: |
           mkdir -p .ccache
           chmod -R a+rwx .ccache
+      - name: Build
+        run: |
+          docker-compose build ${{ matrix.service }}
       - name: Run
         run: |
-          docker-compose run ${{ matrix.service }}
+          docker-compose run --rm ${{ matrix.service }}

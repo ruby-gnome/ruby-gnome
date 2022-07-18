@@ -43,7 +43,6 @@ candidates.each do |dir|
 end
 
 ignored_modules = [
-  "gtk4",
 ]
 
 failed_target_names = []
@@ -51,6 +50,7 @@ targets.each do |target|
   next if target.basename.to_s.end_with?("-no-gi")
   next if ignored_modules.include?(target.basename.to_s)
 
+  puts "::group::Test #{target}"
   puts "#{Time.now.iso8601}: Running test for #{target}"
   puts separator
 
@@ -71,6 +71,7 @@ targets.each do |target|
   end
 
   puts separator
+  puts "::endgroup::"
 end
 
 if failed_target_names.empty?

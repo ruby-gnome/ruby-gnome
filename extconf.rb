@@ -78,6 +78,7 @@ else
 end
 
 subdirs.each do |subdir|
+  puts "::group::Run extconf.rb: #{subdir}"
   STDERR.puts("#{$0}: Entering directory `#{subdir}'")
   FileUtils.mkdir_p(subdir)
   topdir = File.join(*([".."] * subdir.split(/\/+/).size))
@@ -94,8 +95,11 @@ subdirs.each do |subdir|
   else
     ignore_modules << subdir
   end
+  puts "::endgroup::"
 end
-puts "\n-----"
+
+puts "::group::Show top-level extconf.rb results"
+puts "-----"
 unless target_modules.empty?
   puts "Target libraries: #{target_modules.join(', ')}"
 end
@@ -147,5 +151,6 @@ end
 
 puts "-----"
 puts "Done."
+puts "::endgroup::"
 
 $makefile_created = true
