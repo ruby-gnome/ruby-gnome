@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2003-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2003-2022  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *  Copyright (C) 1998-2000  Yukihiro Matsumoto,
  *                           Daisuke Kanda,
@@ -343,7 +343,7 @@ rbgobj_define_property_accessors(VALUE klass)
 
         if (pspec->flags & G_PARAM_READABLE){
             g_string_append_printf(
-                source, 
+                source,
                 "def %s%s; get_property('%s'); end\n",
                 prop_name,
                 (G_PARAM_SPEC_VALUE_TYPE(pspec) == G_TYPE_BOOLEAN) ? "?" : "",
@@ -361,11 +361,12 @@ rbgobj_define_property_accessors(VALUE klass)
         g_free(buf);
     }
 
-    if (source->len > 0)
+    if (source->len > 0) {
         rb_funcall(klass, id_module_eval, 3,
                    rb_str_new2(source->str),
                    rb_str_new2(__FILE__),
                    INT2NUM(__LINE__));
+    }
     g_string_free(source, TRUE);
 }
 
