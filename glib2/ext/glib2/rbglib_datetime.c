@@ -230,7 +230,7 @@ rg_format(VALUE self, VALUE rb_format)
     return CSTR2RVAL(g_date_time_format(_SELF(self), format));
 }
 
-#if GLIB_CHECK_VERSION(2, 56, 0)
+#if GLIB_CHECK_VERSION(2, 62, 0)
 static VALUE
 rg_format_iso8601(VALUE self)
 {
@@ -255,7 +255,7 @@ Init_glib_date_time(void)
     RG_DEF_METHOD(minute, 0);
     RG_DEF_METHOD(second, 0);
     RG_DEF_METHOD(format, 1);
-#if GLIB_CHECK_VERSION(2, 56, 0)
+#if GLIB_CHECK_VERSION(2, 62, 0)
     RG_DEF_METHOD(format_iso8601, 0);
 #endif
 }
