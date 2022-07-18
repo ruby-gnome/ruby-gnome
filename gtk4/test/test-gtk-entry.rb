@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2021  Ruby-GNOME Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,15 +21,6 @@ class TestGtkEntry < Test::Unit::TestCase
     @entry = Gtk::Entry.new
   end
 
-  def test_cursor_hadjustment
-    assert_nil(@entry.cursor_hadjustment)
-    adjustment = Gtk::Adjustment.new(0.0, 0.0,
-                                     100.0, 100.0,
-                                     1.0, 1.0)
-    @entry.cursor_hadjustment = adjustment
-    assert_equal(adjustment, @entry.cursor_hadjustment)
-  end
-
   def test_completion_accsessors
     entry_completion = Gtk::EntryCompletion.new
     @entry.completion = entry_completion
@@ -38,12 +29,10 @@ class TestGtkEntry < Test::Unit::TestCase
 
   class TestEnum < self
     def test_input_purpose_enum
-      only_gtk_version(3, 6, 0)
       assert_const_defined(Gtk::InputPurpose, :ALPHA)
     end
 
     def test_input_hints_enum
-      only_gtk_version(3, 6, 0)
       assert_const_defined(Gtk::InputHints, :SPELLCHECK)
     end
   end
