@@ -40,7 +40,7 @@ jobs:
         with:
           path: .ccache
           key: arrow-ccache-docker-${{ matrix.service }}-${{ github.sha }}
-          restore-keys: arrow-ccache-docker-${{ matrix.service }}
+          restore-keys: arrow-ccache-docker-${{ matrix.service }}-
       - name: Adjust permission for cache
         if: |
           matrix.service == 'apache-arrow'
