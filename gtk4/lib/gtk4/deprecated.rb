@@ -257,7 +257,7 @@ module Gtk
       date = _self.date
       _self.select_day(GLib::DateTime.new(year: year,
                                           month: month,
-                                          day: date.day,
+                                          day: date.day_of_month,
                                           hour: date.hour,
                                           minute: date.minute,
                                           second: date.second))

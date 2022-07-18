@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,10 +21,20 @@ class TestGtkCalendar < Test::Unit::TestCase
     @calendar = Gtk::Calendar.new
   end
 
-  test "accessor" do
-    @calendar.select_month(12, 2015)
-    @calendar.select_day(31)
-    assert_equal([2015, 12, 31],
-                 @calendar.date)
+  test "#select_month" do
+    now = Time.now
+    @calendar.select_day(now)
+    suppress_warning do
+      @calendar.select_month(12, 2015)
+    end
+    assert_equal(now.strftime("2015-12-%d"),
+                 @calendar.date.format("%Y-%m-%d"))
+  end
+
+  test "#select_day" do
+    now = Time.now
+    @calendar.select_day(now)
+    assert_equal(now.strftime("%Y-%m-%d"),
+                 @calendar.date.format("%Y-%m-%d"))
   end
 end
