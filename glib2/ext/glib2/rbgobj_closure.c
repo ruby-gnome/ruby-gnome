@@ -121,8 +121,8 @@ rclosure_marshal_do(VALUE arg_)
 
         ret = rb_apply(callback, id_call, args);
     } else {
-        rb_warn("GRClosure invoking callback: already destroyed: %s",
-                rclosure->tag[0] ? rclosure->tag : "(anonymous)");
+        g_warning("GRClosure invoking callback: already destroyed: %s",
+                  rclosure->tag[0] ? rclosure->tag : "(anonymous)");
     }
 
     if (return_value && G_VALUE_TYPE(return_value))

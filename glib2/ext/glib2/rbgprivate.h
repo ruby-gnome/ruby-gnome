@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2007-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2007-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,8 @@
  * Ubuntu 20.04: GLib 2.64
  */
 #define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_48
+
+#define G_LOG_DOMAIN "Ruby/GLib2"
 
 #include "rbgobject.h"
 
