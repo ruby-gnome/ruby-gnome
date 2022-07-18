@@ -174,15 +174,6 @@ module Gdk
         else
           super
         end
-      when /\Aevent_/
-        raise "XXX: #{name}"
-        name = $POSTMATCH
-        case name
-        when "request_motions"
-          define_method(info, @event_motion_methods_module, "request")
-        else
-          # ignore because moved to Gdk::Event
-        end
       when /\Aevents_/
         method_name = rubyish_method_name(info, :prefix => "events_")
         define_method(info, @event_methods_module, method_name)
