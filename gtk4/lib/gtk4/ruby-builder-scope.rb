@@ -32,8 +32,7 @@ module Gtk
                                   function_name,
                                   flags,
                                   object)
-      p [builder, function_name, flags, object, builder.current_object]
-      object ||= builder.current_object
+      object ||= builder.current_object || builder
       method_name = normalize_name(function_name)
       GLib::Closure.new do |*args|
         object.__send__(method_name, *args)
