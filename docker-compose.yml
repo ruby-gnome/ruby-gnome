@@ -1,7 +1,11 @@
 version: "3.5"
 
 services:
+  almalinux-8-base:
+    image: almalinux:8
+
   almalinux-8:
+    image: ghcr.io/${GITHUB_REPOSITORY}:almalinux-8
     build:
       context: .
       dockerfile: dockerfiles/almalinux-8.dockerfile
@@ -10,7 +14,11 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
+  apache-arrow-base:
+    image: ruby:2.7
+
   apache-arrow:
+    image: ghcr.io/${GITHUB_REPOSITORY}:apache-arrow
     build:
       context: .
       dockerfile: dockerfiles/apache-arrow.dockerfile
@@ -19,7 +27,11 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-apache-arrow-test.sh
 
+  arch-linux-base:
+    image: archlinux
+
   arch-linux:
+    image: ghcr.io/${GITHUB_REPOSITORY}:arch-linux
     build:
       context: .
       dockerfile: dockerfiles/arch-linux.dockerfile
@@ -28,7 +40,11 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
+  centos-7-base:
+    image: centos:7
+
   centos-7:
+    image: ghcr.io/${GITHUB_REPOSITORY}:centos-7
     build:
       context: .
       dockerfile: dockerfiles/centos-7.dockerfile
@@ -37,7 +53,11 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test-scl.sh
 
+  fedora-arm32v7-rawhide-base:
+    image: arm32v7/fedora:rawhide
+
   fedora-arm32v7-rawhide:
+    image: ghcr.io/${GITHUB_REPOSITORY}:fedora-arm32v7-rawhide
     build:
       context: .
       dockerfile: dockerfiles/fedora-arm32v7-rawhide.dockerfile
@@ -48,7 +68,11 @@ services:
     cap_add:
       - SYS_ADMIN
 
+  fedora-rawhide-base:
+    image: fedora:rawhide
+
   fedora-rawhide:
+    image: ghcr.io/${GITHUB_REPOSITORY}:fedora-rawhide
     build:
       context: .
       dockerfile: dockerfiles/fedora-rawhide.dockerfile
@@ -59,7 +83,11 @@ services:
     cap_add:
       - SYS_ADMIN
 
+  ruby-2.7-base:
+    image: ruby:2.7
+
   ruby-2.7:
+    image: ghcr.io/${GITHUB_REPOSITORY}:ruby-2.7
     build:
       context: .
       dockerfile: dockerfiles/ruby.dockerfile
@@ -70,7 +98,11 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
+  ruby-3.0-base:
+    image: ruby:3.0
+
   ruby-3.0:
+    image: ghcr.io/${GITHUB_REPOSITORY}:ruby-3.0
     build:
       context: .
       dockerfile: dockerfiles/ruby.dockerfile
@@ -81,7 +113,11 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
+  ruby-3.1-base:
+    image: ruby:3.1
+
   ruby-3.1:
+    image: ghcr.io/${GITHUB_REPOSITORY}:ruby-3.1
     build:
       context: .
       dockerfile: dockerfiles/ruby.dockerfile
@@ -92,7 +128,11 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
+  ubuntu-18.04-base:
+    image: ubuntu:18.04
+
   ubuntu-18.04:
+    image: ghcr.io/${GITHUB_REPOSITORY}:ubuntu-18.04
     build:
       context: .
       dockerfile: dockerfiles/ubuntu-18.04.dockerfile
@@ -101,7 +141,11 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
+  ubuntu-20.04-base:
+    image: ubuntu:20.04
+
   ubuntu-20.04:
+    image: ghcr.io/${GITHUB_REPOSITORY}:ubuntu-20.04
     build:
       context: .
       dockerfile: dockerfiles/ubuntu-20.04.dockerfile
@@ -110,7 +154,11 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
+  ubuntu-22.04-base:
+    image: ubuntu:22.04
+
   ubuntu-22.04:
+    image: ghcr.io/${GITHUB_REPOSITORY}:ubuntu-22.04
     build:
       context: .
       dockerfile: dockerfiles/ubuntu-22.04.dockerfile
