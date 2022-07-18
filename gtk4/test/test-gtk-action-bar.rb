@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,26 +18,12 @@ class TestGtkActionBar < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    only_gtk_version(3, 12, 0)
     @action_bar = Gtk::ActionBar.new
   end
 
   def test_center_widget
-    widget = Gtk::EventBox.new
+    widget = Gtk::Box.new(:horizontal)
     @action_bar.center_widget = widget
     assert_equal(widget, @action_bar.center_widget)
-  end
-
-  def test_pack
-    start1 = Gtk::EventBox.new
-    start2 = Gtk::EventBox.new
-    end1 = Gtk::EventBox.new
-    end2 = Gtk::EventBox.new
-    @action_bar.pack_start(start1)
-    @action_bar.pack_start(start2)
-    @action_bar.pack_end(end1)
-    @action_bar.pack_end(end2)
-    assert_equal([start1, start2, end2, end1],
-                 @action_bar.children)
   end
 end
