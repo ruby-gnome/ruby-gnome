@@ -123,6 +123,7 @@ rb_gi_callback_invoke(VALUE user_data)
                 rbgutil_on_callback_error(error);
             }
             rb_gi_arguments_fill_raw_out_gerror(data->args, error);
+            memset(data->return_value, 0, sizeof(GIFFIReturnValue));
         }
     }
     return Qnil;
