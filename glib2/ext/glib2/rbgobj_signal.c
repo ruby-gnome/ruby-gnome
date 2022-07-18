@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2022  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -39,18 +39,26 @@ static const rb_data_type_t rg_glib_signal_type = {
     RUBY_TYPED_FREE_IMMEDIATELY | RUBY_TYPED_FROZEN_SHAREABLE,
 };
 
+static VALUE
+rbgobj_signal_alloc_func(VALUE klass)
+{
+    GSignalQuery *query;
+    VALUE rb_query = TypedData_Make_Struct(RG_TARGET_NAMESPACE,
+                                           GSignalQuery,
+                                           &rg_glib_signal_type,
+                                           query);
+    return rb_query;
+}
+
 VALUE
 rbgobj_signal_new(guint id)
 {
-    VALUE rb_query;
-    GSignalQuery *query;
-
-    rb_query = TypedData_Make_Struct(RG_TARGET_NAMESPACE,
-                                     GSignalQuery,
-                                     &rg_glib_signal_type,
-                                     query);
-    g_signal_query(id, query);
-    return rb_query;
+    ID id_new;
+    CONST_ID(id_new, "new");
+    return rb_funcall(RG_TARGET_NAMESPACE,
+                      id_new,
+                      1,
+                      UINT2NUM(id));
 }
 
 static GSignalQuery *
@@ -746,6 +754,13 @@ rbgobj_signal_wrap(guint sig_id)
 }
 
 static VALUE
+rg_initialize(VALUE self, VALUE id)
+{
+    g_signal_query(NUM2UINT(id), rbgobj_signal_get_raw(self));
+    return RUBY_Qnil;
+}
+
+static VALUE
 rg_id(VALUE self)
 {
     return UINT2NUM(rbgobj_signal_get_raw(self)->signal_id);
@@ -958,7 +973,9 @@ Init_gobject_gsignal(void)
     VALUE cSignalFlags, cSignalMatchType;
 
     RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Signal", rb_cObject);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, rbgobj_signal_alloc_func);
 
+    RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(id, 0);
     RG_DEF_METHOD(name, 0);
     RG_DEF_METHOD(flags, 0);
