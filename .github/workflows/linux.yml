@@ -35,11 +35,16 @@ jobs:
           docker-compose build ${{ matrix.service }}
       - name: Cache ccache
         if: |
-          runner.service == 'apache-arrow'
+          matrix.service == 'apache-arrow'
         uses: actions/cache@v3
         with:
           path: .ccache
           key: arrow-ccache-docker-${{ runner.service }}
+      - name: Adjust permission for cache
+        if: |
+          matrix.service == 'apache-arrow'
+        run: |
+          chmod -R a+rwx .ccache
       - name: Run
         run: |
           docker-compose run ${{ matrix.service }}
