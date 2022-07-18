@@ -52,7 +52,7 @@ jobs:
           docker-compose build ${{ matrix.service }}
       - name: Register problem matchers
         run: |
-          echo ::add-matcher::dockerfiles/problem-matchers.json"
+          echo ::add-matcher::dockerfiles/problem-matchers.json
       - name: Run
         run: |
           docker-compose run --rm ${{ matrix.service }}
