@@ -22,12 +22,13 @@
 
 /*
  * CentOS 7: GLib 2.50
- * CentOS 8: GLib 2.56
- * Ubuntu 16.04: GLib 2.48
+ * AlmaLinux 8: GLib 2.56
+ * AlmaLinux 9: GLib 2.68
  * Ubuntu 18.04: GLib 2.56
  * Ubuntu 20.04: GLib 2.64
+ * Ubuntu 22.04: GLib 2.72
  */
-#define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_48
+#define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_50
 
 #define G_LOG_DOMAIN "Ruby/GLib2"
 
