@@ -1,0 +1,28 @@
+{
+    "problemMatcher": [
+	{
+	    "owner": "test-unit-error",
+	    "pattern": {
+		"regexp": "^Error: .* /ruby-gnome/([^:]+):(\\d+):(.*)$",
+		"file": 1,
+		"line": 2,
+		"message": 3,
+	    }
+	},
+	{
+	    "owner": "test-unit-failure",
+	    "pattern": [
+		{
+		    "regexp": "^(Failure): (.*)$",
+		    "severity": 1,
+		    "message": 2
+		},
+		{
+		    "regexp": "^/ruby-gnome/([^:]+/test.*\\.rb):(\\d+):",
+		    "file": 1,
+		    "line": 2,
+		}
+	    ]
+	}
+    ]
+}
