@@ -47,9 +47,6 @@ jobs:
         run: |
           mkdir -p .ccache
           chmod -R a+rwx .ccache
-      - name: Build
-        run: |
-          docker-compose build ${{ matrix.service }}
       - name: Register problem matchers
         run: |
           echo ::add-matcher::dockerfiles/problem-matchers.json
