@@ -6,7 +6,7 @@
 		"regexp": "^Error: .* /ruby-gnome/([^:]+):(\\d+):(.*)$",
 		"file": 1,
 		"line": 2,
-		"message": 3,
+		"message": 3
 	    }
 	},
 	{
@@ -20,7 +20,7 @@
 		{
 		    "regexp": "^/ruby-gnome/([^:]+/test.*\\.rb):(\\d+):",
 		    "file": 1,
-		    "line": 2,
+		    "line": 2
 		}
 	    ]
 	}
