@@ -44,6 +44,7 @@ jobs:
         if: |
           matrix.service == 'apache-arrow'
         run: |
+          mkdir -p .ccache
           chmod -R a+rwx .ccache
       - name: Run
         run: |
