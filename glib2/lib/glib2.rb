@@ -336,6 +336,7 @@ GLib::Log.set_log_domain(GLib::Module::LOG_DOMAIN)
 
 require "glib2/version"
 require "glib2/regex"
+require "glib2/date-time"
 require "glib2/deprecated"
 =begin
 Don't we need this?

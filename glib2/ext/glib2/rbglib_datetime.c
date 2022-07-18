@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2016-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2016-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -230,6 +230,14 @@ rg_format(VALUE self, VALUE rb_format)
     return CSTR2RVAL(g_date_time_format(_SELF(self), format));
 }
 
+#if GLIB_CHECK_VERSION(2, 56, 0)
+static VALUE
+rg_format_iso8601(VALUE self)
+{
+    return CSTR2RVAL(g_date_time_format_iso8601(_SELF(self)));
+}
+#endif
+
 void
 Init_glib_date_time(void)
 {
@@ -247,4 +255,7 @@ Init_glib_date_time(void)
     RG_DEF_METHOD(minute, 0);
     RG_DEF_METHOD(second, 0);
     RG_DEF_METHOD(format, 1);
+#if GLIB_CHECK_VERSION(2, 56, 0)
+    RG_DEF_METHOD(format_iso8601, 0);
+#endif
 }
