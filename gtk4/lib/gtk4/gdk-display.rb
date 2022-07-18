@@ -15,13 +15,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Gdk # Not Gtk!
-  class Screen
+  class Display
     def add_style_provider(provider, priority=nil)
-      Gtk::StyleContext.add_provider_for_screen(self, provider, priority)
+      Gtk::StyleContext.add_provider_for_display(self, provider, priority)
     end
 
     def remove_style_provider(provider)
-      Gtk::StyleContext.remove_provider_for_screen(self, provider)
+      Gtk::StyleContext.remove_provider_for_display(self, provider)
     end
   end
 end

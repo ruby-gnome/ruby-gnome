@@ -70,7 +70,7 @@ module Gtk
     end
 
     def require_libraries
-      require_relative "gdk-screen"
+      require_relative "gdk-display"
 
       require_relative "about-dialog"
       require_relative "action"
