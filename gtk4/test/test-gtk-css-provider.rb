@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -48,7 +48,7 @@ GtkWindow {
     end
 
     test ":path" do
-      file = Tempfile.new(["ruby-gtk3", ".css"])
+      file = Tempfile.new(["ruby-gtk4", ".css"])
       file.puts("GtkWindow {background-color: red;}")
       file.close
       assert do
@@ -62,9 +62,7 @@ GtkWindow {
     end
 
     test ":resource_path" do
-      only_gtk_version(3, 16, 0)
-
-      css = Tempfile.new(["ruby-gtk3", ".css"])
+      css = Tempfile.new(["ruby-gtk4", ".css"])
       css.puts("GtkWindow {background-color: red;}")
       css.close
       resource_xml = Tempfile.new(["ruby-gtk3", ".gresource.xml"])
