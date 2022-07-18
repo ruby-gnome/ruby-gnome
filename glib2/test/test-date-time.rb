@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2021  Ruby-GNOME Project Team
+# Copyright (C) 2016-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -24,7 +24,6 @@ class TestDateTime < Test::Unit::TestCase
   end
 
   sub_test_case "new" do
-
     test "unix: :local" do
       time = Time.now
       format = "%Y-%m-%d-%H-%M"
@@ -110,5 +109,18 @@ class TestDateTime < Test::Unit::TestCase
       assert_equal(time.min, datetime.minute)
       assert_equal(time.sec, datetime.second)
     end
+  end
+
+  def test_format_iso8601
+    only_glib_version(2, 56, 0)
+    datetime = GLib::DateTime.new(year: 2022,
+                                  month: 7,
+                                  day: 18,
+                                  hour: 23,
+                                  minute: 24,
+                                  second: 4.9,
+                                  timezone: GLib::TimeZone.utc)
+    assert_equal("2022-07-18T23:24:04.900000Z",
+                 datetime.format_iso8601)
   end
 end
