@@ -128,7 +128,6 @@ module Gtk
       require_relative "tree-view-column"
       require_relative "version"
       require_relative "widget"
-      require_relative "window"
 
       require_relative "deprecated"
     end
