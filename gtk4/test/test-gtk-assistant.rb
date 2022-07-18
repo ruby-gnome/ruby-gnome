@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -29,9 +29,9 @@ class TestGtkAssistant < Test::Unit::TestCase
       next_page
     end
 
-    page1 = Gtk::EventBox.new
-    page2 = Gtk::EventBox.new
-    page3 = Gtk::EventBox.new
+    page1 = Gtk::Box.new(:horizontal)
+    page2 = Gtk::Box.new(:horizontal)
+    page3 = Gtk::Box.new(:horizontal)
     @assistant.append_page(page1)
     @assistant.append_page(page2)
     @assistant.append_page(page3)
