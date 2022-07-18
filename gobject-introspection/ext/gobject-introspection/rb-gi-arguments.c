@@ -2474,7 +2474,37 @@ rb_gi_arguments_fill_raw_result_interface(RBGIArguments *args,
     case GI_INFO_TYPE_INVALID:
     case GI_INFO_TYPE_FUNCTION:
     case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: %s::%s: out raw result(interface)[%s]: <%s>",
+                 args->namespace,
+                 args->name,
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
+        break;
     case GI_INFO_TYPE_STRUCT:
+      {
+          gpointer value;
+          GType gtype = g_registered_type_info_get_g_type(interface_info);
+          if (gtype == G_TYPE_NONE) {
+              /* Is it OK? */
+              /* value = RVAL2GPTR(rb_result); */
+              rb_raise(rb_eNotImpError,
+                       "TODO: %s::%s: out raw result(interface)[%s][%s]: <%s>",
+                       args->namespace,
+                       args->name,
+                       g_info_type_to_string(interface_type),
+                       g_type_name(gtype),
+                       g_base_info_get_name(interface_info));
+          } else {
+              value = RVAL2BOXED(rb_result, gtype);
+          }
+          if (is_return_value) {
+              ffi_return_value->v_pointer = value;
+          } else {
+              *((gpointer *)raw_result) = value;
+          }
+      }
+      break;
     case GI_INFO_TYPE_BOXED:
         rb_raise(rb_eNotImpError,
                  "TODO: %s::%s: out raw result(interface)[%s]: <%s>",
