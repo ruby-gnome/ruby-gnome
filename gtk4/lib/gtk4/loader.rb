@@ -61,7 +61,12 @@ module Gtk
     def post_load(repository, namespace)
       apply_pending_constants
       apply_methods_modules
+      require_extension
       require_libraries
+    end
+
+    def require_extension
+      require "gtk4.so"
     end
 
     def require_libraries

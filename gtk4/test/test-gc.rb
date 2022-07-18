@@ -3,7 +3,7 @@ class TestGC < Test::Unit::TestCase
   def test_closure
     10.times do
       widget = Gtk::Box.new(:horizontal)
-      widget.signal_connect("destroy") {}
+      widget.signal_connect("hide") {}
       GC.start
     end
   end
