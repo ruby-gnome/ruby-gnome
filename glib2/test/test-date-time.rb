@@ -112,7 +112,7 @@ class TestDateTime < Test::Unit::TestCase
   end
 
   def test_format_iso8601
-    only_glib_version(2, 62, 0)
+    only_glib_version(2, 66, 0)
     datetime = GLib::DateTime.new(year: 2022,
                                   month: 7,
                                   day: 18,
