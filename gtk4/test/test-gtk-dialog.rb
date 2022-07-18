@@ -65,7 +65,6 @@ class TestGtkDialog < Test::Unit::TestCase
     end
 
     test "#use_header_bar?" do
-      only_gtk_version(3, 12, 0)
       assert do
         not @dialog.use_header_bar?
       end
