@@ -608,33 +608,34 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_const :Type, "Gtk::ImageType"
     define_deprecated_enums :ImageType
-    define_deprecated_method :set, :warn => "Use '#{self}#set_stock', '#{self}#set_icon_name', '#{self}#set_icon_set', '#{self}#set_file', '#{self}#set_pixbuf' or '#{self}#set_pixbuf_animation'."
+    message = "Use '#{self}#set_icon_name', " +
+              "'#{self}#set_file' or '#{self}#set_pixbuf'."
+    define_deprecated_method :set, warn: message
     define_deprecated_method_by_hash_args :initialize,
-        'image, size = nil',
-        ':stock => nil, :icon_name => nil, :icon_set => nil, :icon => nil, :file => nil, :pixbuf => nil, :animation => nil, :surface => nil, :size => nil' do
-        |_self, image, size|
+        'image',
+        'icon_name: nil, icon: nil, file: nil, pixbuf: nil' do
+        |_self, image|
       case image
       when String
-        if size
-          [{:icon_name => image, :size => size}]
+        if File.extname(image).empty?
+          [{icon_name: image}]
         else
-          [{:file => image}]
+          [{file: image}]
         end
       when Symbol
-        [{:stock => image, :size => size}]
+        [{icon_name: iamge}]
       when GdkPixbuf::Pixbuf
         [{:pixbuf => image}]
-      when Gtk::IconSet
-        [{:icon_set => image, :size => size}]
       when Gio::Icon
-        [{:icon => image, :size => size}]
+        [{icon: image}]
       else
         message =
-          "Image must be String, Symbol, GdkPixbuf::Pixbuf, Gtk::IconSet or " +
+          "Image must be String, Symbol, GdkPixbuf::Pixbuf or " +
           "Gio::Icon: #{image.inspect}"
         raise ArgumentError, message
       end
     end
+    define_deprecated_method :pixbuf, :paintable
   end
 
   class ImageMenuItem
