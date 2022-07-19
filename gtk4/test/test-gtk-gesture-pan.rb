@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,10 +18,8 @@ class TestGtkGesturePan < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    only_gtk_version(3, 14, 0)
     orientation_default = Gtk::Orientation::HORIZONTAL
-    widget = Gtk::Invisible.new
-    @pan = Gtk::GesturePan.new(widget, orientation_default)
+    @pan = Gtk::GesturePan.new(orientation_default)
   end
 
   def test_orientation
