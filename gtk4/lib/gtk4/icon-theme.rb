@@ -17,14 +17,14 @@
 module Gtk
   class IconTheme
     alias_method :lookup_icon_raw, :lookup_icon
-    def lookup_icon(icon, size, scale, direction, flags=nil)
+    def lookup_icon(icon, size, scale: 1, direction: :none, flags: nil)
       case icon
       when String, Symbol
-        flags ||= :generic_fallback
+        flags ||= 0
         lookup_icon_raw(icon.to_s, nil, size, scale, direction, flags)
       when Array
         icon, *fallbacks = *icon
-        flags ||= :generic_fallback
+        flags ||= 0
         lookup_icon_raw(icon.to_s, fallbacks, size, scale, direction, flags)
       else
         flags ||= 0

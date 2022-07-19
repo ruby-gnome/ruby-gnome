@@ -23,5 +23,9 @@ module Gdk # Not Gtk!
     def remove_style_provider(provider)
       Gtk::StyleContext.remove_provider_for_display(self, provider)
     end
+
+    def icon_theme
+      Gtk::IconTheme.get_for_display(self)
+    end
   end
 end

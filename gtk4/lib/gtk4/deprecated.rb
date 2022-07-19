@@ -587,7 +587,7 @@ module Gtk
   class IconSize
    extend GLib::Deprecatable
    define_deprecated_const :IconSize, "Gtk::IconSize"
-   define_deprecated_singleton_method :lookup, raise: "Don't use this method"
+   define_deprecated_singleton_method :lookup, raise: "Don't use this method."
   end
 
   class IconTheme
@@ -595,6 +595,8 @@ module Gtk
     define_deprecated_const :LookupFlags, "Gtk::IconLookupFlags"
     define_deprecated_flags :IconLookupFlags, 'LOOKUP'
     define_deprecated_method :choose_icon, :lookup_icon
+    define_deprecated_method :contexts, raise: "Don't use this method."
+    define_deprecated_method :icons, :icon_names
   end
 
   class IconView
