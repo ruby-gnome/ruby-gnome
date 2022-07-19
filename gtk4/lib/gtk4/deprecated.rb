@@ -546,6 +546,39 @@ module Gtk
     end
   end
 
+  class HeaderBar
+    extend GLib::Deprecatable
+
+    define_deprecated_method :title,
+                             raise: "Use '#{self}#title_widget' instead."
+    define_deprecated_method :set_title,
+                             raise: "Use '#{self}#set_title_widget' instead."
+    define_deprecated_method :title=,
+                             raise: "Use '#{self}#title_widget=' instead."
+
+    define_deprecated_method :custom_title,
+                             raise: "Use '#{self}#title_widget' instead."
+    define_deprecated_method :set_custom_title,
+                             raise: "Use '#{self}#set_title_widget' instead."
+    define_deprecated_method :custom_title=,
+                             raise: "Use '#{self}#title_widget=' instead."
+
+    define_deprecated_method :subtitle, raise: "Don't use this method."
+    define_deprecated_method :set_subtitle, raise: "Don't use this method."
+    define_deprecated_method :subtitle=, raise: "Don't use this method."
+
+    define_deprecated_method :show_close_button?, :show_title_buttons?
+    define_deprecated_method :set_show_close_button, :set_show_title_buttons
+    define_deprecated_method :show_close_button=, :show_title_buttons=
+
+    define_deprecated_method :spacing,
+                             raise: "Use 'Gtk::Widget#margin_*' instead."
+    define_deprecated_method :set_spacing,
+                             raise: "Use 'Gtk::Widget#set_margin_*' instead."
+    define_deprecated_method :spacing=,
+                             raise: "Use 'Gtk::Widget#margin_*=' instead."
+  end
+
   class IconSet
     extend GLib::Deprecatable
     define_deprecated_method :render_icon, :raise => "Use '#{self}#render_icon_pixbuf'."

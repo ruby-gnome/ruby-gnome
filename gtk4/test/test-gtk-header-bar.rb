@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,63 +18,44 @@ class TestGtkHeaderBar < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    only_gtk_version(3, 10, 0)
     @header_bar = Gtk::HeaderBar.new
   end
 
-  def test_custom_title_accessors
-    widget = Gtk::EventBox.new
-    @header_bar.custom_title = widget
-    assert_equal(widget, @header_bar.custom_title)
+  def test_title_widget_accessors
+    widget = Gtk::Label.new("title")
+    @header_bar.title_widget = widget
+    assert_equal(widget, @header_bar.title_widget)
   end
 
-  def test_title_accessors
-    header_bar_title = "no title"
-    @header_bar.title = header_bar_title
-    assert_equal(header_bar_title, @header_bar.title)
-  end
-
-  def test_subtitle_accessors
-    header_bar_subtitle = "sub title"
-    @header_bar.subtitle = header_bar_subtitle
-    assert_equal(header_bar_subtitle, @header_bar.subtitle)
-  end
-
-  def test_show_close_button_accessors
-    @header_bar.show_close_button = true
-    assert_equal(true, @header_bar.show_close_button?)
-  end
-
-  def test_spacing_accessors
-    spacing_size = 10
-    @header_bar.spacing = spacing_size
-    assert_equal(spacing_size, @header_bar.spacing)
+  def test_show_title_buttons_accessors
+    @header_bar.show_title_buttons = true
+    assert do
+      @header_bar.show_title_buttons?
+    end
   end
 
   def test_pack
-    start1 = Gtk::EventBox.new
-    start2 = Gtk::EventBox.new
-    end1 = Gtk::EventBox.new
-    end2 = Gtk::EventBox.new
+    start1 = Gtk::Label.new("start1")
+    start2 = Gtk::Label.new("start2")
+    end1 = Gtk::Label.new("end1")
+    end2 = Gtk::Label.new("end2")
     @header_bar.pack_start(start1)
     @header_bar.pack_start(start2)
     @header_bar.pack_end(end1)
     @header_bar.pack_end(end2)
-    assert_equal([start1, start2, end1, end2],
-                 @header_bar.children)
+    assert_equal([
+                   [start1, start2],
+                   [end2, end1],
+                 ],
+                 [
+                   start1.parent.children[1..-1],
+                   end1.parent.children[0..-2],
+                 ])
   end
 
   def test_decolation_layout_accessors
-    only_gtk_version(3, 12, 0)
     layout = "decolated"
     @header_bar.decoration_layout = layout
     assert_equal(layout, @header_bar.decoration_layout)
-    assert_true(@header_bar.decoration_layout_set?)
-  end
-
-  def test_has_subtitle_accessors
-    only_gtk_version(3, 12, 0)
-    @header_bar.has_subtitle = false
-    assert_false(@header_bar.has_subtitle?)
   end
 end
