@@ -39,8 +39,8 @@ jobs:
           sudo systemctl restart docker
       - name: Pull Docker images
         run: |
-          docker-compose pull --ignore-pull-failures ${{ matrix.service }}-base
-          docker-compose pull --ignore-pull-failures ${{ matrix.service }}
+          docker-compose pull --ignore-pull-failures ${{ matrix.service }}-base || :
+          docker-compose pull --ignore-pull-failures ${{ matrix.service }} || :
       - name: Build Docker image
         run: |
           docker-compose build ${{ matrix.service }}
@@ -48,7 +48,7 @@ jobs:
         if: |
           github.event_name == 'push'
         run: |
-          docker-compose push --ignore-push-failures ${{ matrix.service }}
+          docker-compose push --ignore-push-failures ${{ matrix.service }} || :
       - name: Cache ccache
         if: |
           matrix.service == 'apache-arrow'
