@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2015-2018  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2015-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -24,11 +24,9 @@
 /*
  * CentOS 6: No GTK+ 3
  * CentOS 7: GTK+ 3.22
- * Ubuntu 14.04: GTK+ 3.10
- * Ubuntu 16.04: GTK+ 3.18
  * Ubuntu 18.04: GTK+ 3.22
  */
-#define GDK_VERSION_MIN_REQUIRED GDK_VERSION_3_10
+#define GDK_VERSION_MIN_REQUIRED GDK_VERSION_3_22
 
 #include "rb-gtk3.h"
 
