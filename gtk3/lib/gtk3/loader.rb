@@ -245,6 +245,12 @@ module Gtk
         when "events_pending"
           name = "events_pending?"
         end
+      when "Gtk::AccelMap"
+        case name
+        when "each", "foreach_unfiltered"
+          # Implemented in C
+          return
+        end
       when "Gtk::Widget"
         case name
         when "default_style"
