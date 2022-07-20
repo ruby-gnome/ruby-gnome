@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -106,6 +106,25 @@ module Gtk
     end
 
     alias_method :create_filter, :filter_new
+
+    alias_method :each_raw, :each
+    def each
+      return to_enum(__method__) unless block_given?
+      exception = nil
+      each_raw do |*args|
+        stop = true
+        # TODO: This doesn't return 'stop' to GTK when caller uses 'break'.
+        begin
+          yield(*args)
+          stop = false
+        rescue Exception => e
+          exception = e
+        end
+        stop
+      end
+      raise exception if exception
+      self
+    end
 
     private
     def setup_iter(iter)
