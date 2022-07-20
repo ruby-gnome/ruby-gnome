@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,9 +18,9 @@ class TestGtkLabel < Test::Unit::TestCase
   include GtkTestUtils
 
   sub_test_case ".new" do
-    test ":use_underline => true" do
-      label = Gtk::Label.new("_Hello", :use_underline => true)
-      assert_equal("h", [label.mnemonic_keyval].pack("U"))
+    test "use_underline: true" do
+      label = Gtk::Label.new("_Hello", use_underline: true)
+      assert_equal("H", [label.mnemonic_keyval].pack("U"))
     end
   end
 
@@ -30,9 +30,9 @@ class TestGtkLabel < Test::Unit::TestCase
         @label = Gtk::Label.new
       end
 
-      test ":use_underline => true" do
-        @label.set_markup("_Hello", :use_underline => true)
-        assert_equal("h", [@label.mnemonic_keyval].pack("U"))
+      test "use_underline: true" do
+        @label.set_markup("_Hello", use_underline: true)
+        assert_equal("H", [@label.mnemonic_keyval].pack("U"))
       end
     end
   end
