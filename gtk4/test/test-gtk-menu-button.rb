@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,15 +18,14 @@ class TestGtkMenuButton < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    only_gtk_version(3, 6, 0)
     @menu_button = Gtk::MenuButton.new
   end
 
-  def test_popup
-    assert_nil(@menu_button.popup)
-    popup = Gtk::Menu.new
-    @menu_button.popup = popup
-    assert_equal(popup, @menu_button.popup)
+  def test_popover
+    assert_nil(@menu_button.popover)
+    popover = Gtk::PopoverMenu.new
+    @menu_button.popover = popover
+    assert_equal(popover, @menu_button.popover)
   end
 
   def test_menu_model
@@ -34,16 +33,8 @@ class TestGtkMenuButton < Test::Unit::TestCase
   end
 
   def test_direction
-    assert_equal(Gtk::Arrow::Type::DOWN, @menu_button.direction)
+    assert_equal(Gtk::ArrowType::DOWN, @menu_button.direction)
     @menu_button.direction = :up
-    assert_equal(Gtk::Arrow::Type::UP, @menu_button.direction)
-  end
-
-  def test_align_widget
-    assert_nil(@menu_button.align_widget)
-    align_widget = Gtk::Box.new(:horizontal)
-    align_widget.add(@menu_button)
-    @menu_button.align_widget = align_widget
-    assert_equal(align_widget, @menu_button.align_widget)
+    assert_equal(Gtk::ArrowType::UP, @menu_button.direction)
   end
 end
