@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,10 +16,6 @@
 
 class TestGtkLevelBar < Test::Unit::TestCase
   include GtkTestUtils
-
-  def setup
-    only_gtk_version(3, 6, 0)
-  end
 
   class TestConstructor < self
     def test_no_arguments
@@ -80,7 +76,6 @@ class TestGtkLevelBar < Test::Unit::TestCase
     end
 
     def test_inverted
-      only_gtk_version(3, 8, 0)
       @level_bar.inverted = true
       assert_true(@level_bar.inverted?)
     end
@@ -88,7 +83,7 @@ class TestGtkLevelBar < Test::Unit::TestCase
 
   class TestEnum < self
     def test_level_bar_mode
-      assert_const_defined(Gtk::LevelBar::Mode, :CONTINUOUS)
+      assert_const_defined(Gtk::LevelBarMode, :CONTINUOUS)
     end
   end
 end
