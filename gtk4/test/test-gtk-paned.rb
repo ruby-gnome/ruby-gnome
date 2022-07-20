@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,88 +21,88 @@ class TestGtkPaned < Test::Unit::TestCase
     @paned = Gtk::Paned.new(:horizontal)
   end
 
-  sub_test_case "#pack1" do
+  sub_test_case "#set_start_child" do
     def setup
       super
-      @child = Gtk::EventBox.new
+      @child = Gtk::Box.new(:horizontal)
     end
 
     test "no options" do
-      @paned.pack1(@child)
+      @paned.set_start_child(@child)
       assert_equal({
-                     :resize => false,
-                     :shrink => true,
+                     resize: true,
+                     shrink: true,
                    },
                    {
-                     :resize => @paned.child_get_property(@child, :resize),
-                     :shrink => @paned.child_get_property(@child, :shrink),
+                     resize: @paned.resize_start_child?,
+                     shrink: @paned.shrink_start_child?,
                    })
     end
 
-    test ":resize => true" do
-      @paned.pack1(@child, :resize => true)
+    test "resize: true" do
+      @paned.set_start_child(@child, resize: true)
       assert_equal({
-                     :resize => true,
-                     :shrink => true,
+                     resize: true,
+                     shrink: true,
                    },
                    {
-                     :resize => @paned.child_get_property(@child, :resize),
-                     :shrink => @paned.child_get_property(@child, :shrink),
+                     resize: @paned.resize_start_child?,
+                     shrink: @paned.shrink_start_child?,
                    })
     end
 
-    test ":shrink => false" do
-      @paned.pack1(@child, :shrink => false)
+    test "shrink: false" do
+      @paned.set_start_child(@child, shrink: false)
       assert_equal({
-                     :resize => false,
-                     :shrink => false,
+                     resize: true,
+                     shrink: false,
                    },
                    {
-                     :resize => @paned.child_get_property(@child, :resize),
-                     :shrink => @paned.child_get_property(@child, :shrink),
+                     resize: @paned.resize_start_child?,
+                     shrink: @paned.shrink_start_child?,
                    })
     end
   end
 
-  sub_test_case "#pack2" do
+  sub_test_case "#set_end_child" do
     def setup
       super
-      @child = Gtk::EventBox.new
+      @child = Gtk::Box.new(:horizontal)
     end
 
     test "no options" do
-      @paned.pack2(@child)
+      @paned.set_end_child(@child)
       assert_equal({
-                     :resize => true,
-                     :shrink => true,
+                     resize: true,
+                     shrink: true,
                    },
                    {
-                     :resize => @paned.child_get_property(@child, :resize),
-                     :shrink => @paned.child_get_property(@child, :shrink),
+                     resize: @paned.resize_end_child?,
+                     shrink: @paned.shrink_end_child?,
                    })
     end
 
-    test ":resize => false" do
-      @paned.pack2(@child, :resize => false)
+    test "resize: false" do
+      @paned.set_end_child(@child, resize: false)
       assert_equal({
-                     :resize => false,
-                     :shrink => true,
+                     resize: false,
+                     shrink: true,
                    },
                    {
-                     :resize => @paned.child_get_property(@child, :resize),
-                     :shrink => @paned.child_get_property(@child, :shrink),
+                     resize: @paned.resize_end_child?,
+                     shrink: @paned.shrink_end_child?,
                    })
     end
 
-    test ":shrink => false" do
-      @paned.pack2(@child, :shrink => false)
+    test "shrink: false" do
+      @paned.set_end_child(@child, shrink: false)
       assert_equal({
-                     :resize => true,
-                     :shrink => false,
+                     resize: true,
+                     shrink: false,
                    },
                    {
-                     :resize => @paned.child_get_property(@child, :resize),
-                     :shrink => @paned.child_get_property(@child, :shrink),
+                     resize: @paned.resize_end_child?,
+                     shrink: @paned.shrink_end_child?,
                    })
     end
   end

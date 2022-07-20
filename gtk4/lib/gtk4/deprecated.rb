@@ -697,10 +697,12 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_method :pack1,
                              :set_start_child do |_self, child, options=nil|
+      options = {resize: false, shrink: true}.merge(options || {})
       _self.set_start_child(child, options)
     end
     define_deprecated_method :pack2,
                              :set_end_child do |_self, child, options=nil|
+      options = {resize: true, shrink: true}.merge(options || {})
       _self.set_end_child(child, options)
     end
   end

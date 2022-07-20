@@ -19,27 +19,25 @@ module Gtk
     alias_method :set_start_child_raw, :set_start_child
     def set_start_child(child, options=nil)
       set_start_child_raw(child)
-      if options
-        resize = options[:resize]
-        resize = false if resize.nil?
-        set_resize_start_child(resize)
-        shrink = options[:shrink]
-        shrink = true if shrink.nil?
-        set_shring_start_child(shrink)
-      end
+      return self unless options
+
+      resize = options[:resize]
+      set_resize_start_child(resize) unless resize.nil?
+      shrink = options[:shrink]
+      set_shrink_start_child(shrink) unless shrink.nil?
+      self
     end
 
     alias_method :set_end_child_raw, :set_end_child
     def set_end_child(child, options=nil)
       set_end_child_raw(child)
-      if options
-        resize = options[:resize]
-        resize = false if resize.nil?
-        set_resize_end_child(resize)
-        shrink = options[:shrink]
-        shrink = true if shrink.nil?
-        set_shring_end_child(shrink)
-      end
+      return self unless options
+
+      resize = options[:resize]
+      set_resize_end_child(resize) unless resize.nil?
+      shrink = options[:shrink]
+      set_shrink_end_child(shrink) unless shrink.nil?
+      self
     end
   end
 end
