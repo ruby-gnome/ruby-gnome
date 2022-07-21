@@ -64,6 +64,7 @@ module Gtk
   define_deprecated_const :TargetEntry, raise: "Use 'Gtk::DragSource' instead."
   define_deprecated_const :TargetList, raise: "Use 'Gtk::DragSource' instead."
   define_deprecated_const :ToggleAction, raise: "Don't use this class."
+  define_deprecated_const :ToolButton, raise: "Don't use this class."
   define_deprecated_const :Tooltips,               :raise => "Use 'Gtk::Tooltip' API."
   define_deprecated_const :UIManager, raise: "Use 'Gtk::Builder' instead."
   define_deprecated_const :VRuler,                 :raise => "Don't use this widget anymore."
@@ -925,21 +926,6 @@ module Gtk
     define_deprecated_method :prepend_space, :warn => "Don't use this method."
     define_deprecated_method :insert_space, :warn => "Don't use this method."
     define_deprecated_method :remove_space, :warn => "Don't use this method."
-  end
-
-  class ToolButton
-    extend GLib::Deprecatable
-    define_deprecated_method_by_hash_args :initialize,
-        'icon_widget_or_stock_id = nil, label = nil',
-        ':icon_widget => nil, :label => nil, :stock_id => nil' do
-        |_self, icon_widget_or_stock_id, label|
-      case icon_widget_or_stock_id
-      when String, Symbol
-        [{:stock_id => icon_widget_or_stock_id}]
-      when Gtk::Widget
-        [{:icon_widget => icon_widget_or_stock_id, :label => label}]
-      end
-    end
   end
 
   class Tooltip

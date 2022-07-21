@@ -112,7 +112,6 @@ module Gtk
       require_relative "text-tag-table"
       require_relative "text-view"
       require_relative "toggle-button"
-      require_relative "tool-button"
       require_relative "tree-iter"
       require_relative "tree-model"
       require_relative "tree-model-filter"
