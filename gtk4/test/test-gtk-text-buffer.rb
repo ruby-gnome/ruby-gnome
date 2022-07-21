@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -60,10 +60,6 @@ class TestGtkTextBuffer < Test::Unit::TestCase
     end
 
     sub_test_case "#insert_markup" do
-      setup do
-        only_gtk_version(3, 16)
-      end
-
       test "String" do
         iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
         @text_buffer.insert_markup(iter, "<b>Ruby</b> ")
@@ -121,33 +117,6 @@ class TestGtkTextBuffer < Test::Unit::TestCase
     test "#text=" do
       @text_buffer.text = "Hello Ruby World!"
       assert_equal("Hello Ruby World!", @text_buffer.text)
-    end
-
-    test "#serialize_formats" do
-      assert_equal([Gdk::Atom],
-                   @text_buffer.serialize_formats.collect(&:class))
-    end
-
-    test "#deserialize_formats" do
-      @text_buffer.register_deserialize_tagset(nil)
-      assert_equal([Gdk::Atom],
-                   @text_buffer.deserialize_formats.collect(&:class))
-    end
-
-    test "#serialize and #deserialize" do
-      format = @text_buffer.serialize_formats[0]
-      serialized = @text_buffer.serialize(@text_buffer,
-                                          format,
-                                          @text_buffer.start_iter,
-                                          @text_buffer.end_iter)
-      output_text_buffer = Gtk::TextBuffer.new
-      output_format = output_text_buffer.register_deserialize_tagset(nil)
-      output_text_buffer.deserialize(output_text_buffer,
-                                     output_format,
-                                     output_text_buffer.start_iter,
-                                     serialized)
-      assert_equal(@text_buffer.text,
-                   output_text_buffer.text)
     end
 
     sub_test_case "#selection_bounds" do
