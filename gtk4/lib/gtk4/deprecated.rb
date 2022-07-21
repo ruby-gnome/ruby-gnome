@@ -51,6 +51,7 @@ module Gtk
   define_deprecated_const :RadioButton, raise: "Don't use this class."
   define_deprecated_const :RcStyle,                :raise => "Use 'Gtk::CssProvider' instead."
   define_deprecated_const :RecentChooser, raise: "Don't use this class."
+  define_deprecated_const :RecentChooserDialog, raise: "Don't use this class."
   define_deprecated_const :RecentFilter, raise: "Don't use this class."
   define_deprecated_const :Ruler,                  :raise => "Don't use this widget anymore."
   define_deprecated_const :SelectionData, raise: "Use 'Gtk::DragSource' instead."
@@ -769,38 +770,6 @@ module Gtk
         'name, :label => nil, :tooltip => nil, :stock_id => nil, :manager => nil', 1 do
         |_self, name, label, tooltip, stock_id, manager|
       [name, {:label => label, :tooltip => tooltip, :stock_id => stock_id, :manager => manager}]
-    end
-  end
-
-  module RecentChooser
-    extend GLib::Deprecatable
-    define_deprecated_enums :SortType, 'SORT'
-    define_deprecated_method :show_numbers, :warn => "Use 'Gtk::RecentChooserMenu#show_numbers?'." do |_self|
-      false
-    end
-    define_deprecated_method :set_show_numbers, :warn => "Use 'Gtk::RecentChooserMenu#set_show_numbers'."
-    alias :show_numbers= :set_show_numbers
-  end
-
-  class RecentChooserDialog
-    extend GLib::Deprecatable
-    define_deprecated_method_by_hash_args :initialize,
-        'title, parent, manager, *buttons',
-        ':title => nil, :parent => nil, ' +
-        ':recent_manager => nil, :buttons => nil' do |_self, title, parent, *buttons|
-      if buttons.first.is_a?(RecentManager)
-        recent_manager = buttons.shift
-      else
-        recent_manager = nil
-      end
-      [
-        {
-          :title          => title,
-          :parent         => parent,
-          :recent_manager => recent_manager,
-          :buttons        => buttons,
-        },
-      ]
     end
   end
 

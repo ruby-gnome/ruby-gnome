@@ -98,7 +98,6 @@ module Gtk
       require_relative "list-store"
       require_relative "message-dialog"
       require_relative "paned"
-      require_relative "recent-chooser-dialog"
       require_relative "response-type"
       require_relative "scale-button"
       require_relative "scrolled-window"
