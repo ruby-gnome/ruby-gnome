@@ -18,7 +18,8 @@ class TestGtkStyleContext < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    @style_context = Gtk::StyleContext.new
+    @widget = Gtk::Box.new(:horizontal)
+    @style_context = @widget.style_context
   end
 
   sub_test_case("#add_provider") do
