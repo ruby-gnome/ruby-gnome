@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,9 +22,12 @@ class TestGtkRecentInfo < Test::Unit::TestCase
       manager = Gtk::RecentManager.new
       uri = "file:///#{__FILE__}"
       manager.add_item(uri)
-      while Gtk.events_pending?
-        Gtk.main_iteration
+      loop = GLib::MainLoop.new
+      GLib::Idle.add do
+        loop.quit
+        GLib::Source::REMOVE
       end
+      loop.run
       @info = manager.lookup_item(uri)
     end
 
