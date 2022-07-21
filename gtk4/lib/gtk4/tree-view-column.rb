@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -56,6 +56,14 @@ module Gtk
     def add_attribute(renderer, key, value)
       key = key.to_s if key.is_a?(Symbol)
       add_attribute_raw(renderer, key, value)
+    end
+
+    alias_method :set_cell_data_func_raw, :set_cell_data_func
+    def set_cell_data_func(cell)
+      set_cell_data_func_raw(cell) do |column, cell, model, iter|
+        iter.model = model
+        yield(column, cell, model, iter)
+      end
     end
   end
 end
