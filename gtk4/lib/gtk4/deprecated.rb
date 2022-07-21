@@ -63,6 +63,7 @@ module Gtk
   define_deprecated_const :Table, raise: "Use 'Gtk::Grid' instead."
   define_deprecated_const :TargetEntry, raise: "Use 'Gtk::DragSource' instead."
   define_deprecated_const :TargetList, raise: "Use 'Gtk::DragSource' instead."
+  define_deprecated_const :ToggleAction, raise: "Don't use this class."
   define_deprecated_const :Tooltips,               :raise => "Use 'Gtk::Tooltip' API."
   define_deprecated_const :UIManager, raise: "Use 'Gtk::Builder' instead."
   define_deprecated_const :VRuler,                 :raise => "Don't use this widget anymore."
@@ -900,16 +901,6 @@ module Gtk
   class TextView
     extend GLib::Deprecatable
     define_deprecated_const :WindowType, raise: "Don't use this class."
-  end
-
-  class ToggleAction
-    extend GLib::Deprecatable
-    define_deprecated_method_by_hash_args :initialize,
-        'name, label, tooltip = nil, stock_id = nil',
-        'name, :label => nil, :tooltip => nil, :stock_id => nil', 1 do
-        |_self, name, label, tooltip, stock_id|
-      [name, {:label => label, :tooltip => tooltip, :stock_id => stock_id}]
-    end
   end
 
   class ToggleButton

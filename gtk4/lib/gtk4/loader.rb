@@ -111,7 +111,6 @@ module Gtk
       require_relative "text-tag"
       require_relative "text-tag-table"
       require_relative "text-view"
-      require_relative "toggle-action"
       require_relative "toggle-button"
       require_relative "tool-button"
       require_relative "tree-iter"
