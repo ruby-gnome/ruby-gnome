@@ -98,7 +98,6 @@ module Gtk
       require_relative "list-store"
       require_relative "message-dialog"
       require_relative "paned"
-      require_relative "radio-action"
       require_relative "radio-button"
       require_relative "recent-chooser-dialog"
       require_relative "response-type"

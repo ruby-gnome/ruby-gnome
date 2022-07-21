@@ -47,6 +47,7 @@ module Gtk
   define_deprecated_const :PrintJob,               :raise => "Use 'Gtk::PrintOperation' instead."
   define_deprecated_const :PrintUnixDialog,        :raise => "Use 'Gtk::PrintOperation' instead."
   define_deprecated_const :RC,                     :raise => "Use 'Gtk::StyleContext' instead."
+  define_deprecated_const :RadioAction, raise: "Don't use this class."
   define_deprecated_const :RcStyle,                :raise => "Use 'Gtk::CssProvider' instead."
   define_deprecated_const :RecentChooser, raise: "Don't use this class."
   define_deprecated_const :RecentFilter, raise: "Don't use this class."
@@ -749,16 +750,6 @@ module Gtk
         'child, :resize => true, :shrink => true', 1 do
         |_self, child, resize, shrink|
       [child, {:resize => resize, :shrink => shrink}]
-    end
-  end
-
-  class RadioAction
-    extend GLib::Deprecatable
-    define_deprecated_method_by_hash_args :initialize,
-        'name, label, tooltip, stock_id, value',
-        'name, value, :label => nil, :tooltip => nil, :stock_id => nil', 2 do
-        |_self, name, label, tooltip, stock_id, value|
-      [name, value, {:label => label, :tooltip => tooltip, :stock_id => stock_id}]
     end
   end
 
