@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,7 @@ class TestGtkTreeView < Test::Unit::TestCase
       @view.append_column(@column)
 
       @window = Gtk::Window.new
-      @window.add(@view)
+      @window.child = @view
       @window.signal_connect("destroy") do
         Gtk.main_quit
       end
@@ -38,13 +38,15 @@ class TestGtkTreeView < Test::Unit::TestCase
         iter = @store.append(nil)
         iter[0] = "Hello"
         result = nil
+        main_loop = GLib::MainLoop.new
         GLib::Idle.add do
           result = @view.get_path_at_pos(0, 0)
           @window.destroy
+          main_loop.quit
           GLib::Source::REMOVE
         end
-        @window.show_all
-        Gtk.main
+        @window.present
+        main_loop.run
 
         result[0] = result[0].to_s if result[0].is_a?(Gtk::TreePath)
         assert_equal(["0", @column, 0, 0],
@@ -53,13 +55,15 @@ class TestGtkTreeView < Test::Unit::TestCase
 
       test "not found" do
         result = nil
+        main_loop = GLib::MainLoop.new
         GLib::Idle.add do
           result = @view.get_path_at_pos(0, 0)
           @window.destroy
+          main_loop.quit
           GLib::Source::REMOVE
         end
-        @window.show_all
-        Gtk.main
+        @window.present
+        main_loop.run
 
         assert_nil(result)
       end
