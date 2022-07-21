@@ -53,6 +53,7 @@ module Gtk
   define_deprecated_const :RecentChooser, raise: "Don't use this class."
   define_deprecated_const :RecentChooserDialog, raise: "Don't use this class."
   define_deprecated_const :RecentFilter, raise: "Don't use this class."
+  define_deprecated_const :RecentFilterInfo, raise: "Don't use this class."
   define_deprecated_const :Ruler,                  :raise => "Don't use this widget anymore."
   define_deprecated_const :SelectionData, raise: "Use 'Gtk::DragSource' instead."
   define_deprecated_const :Stock, raise: "Use 'Gtk::Image.new(icon_name)' instead."
@@ -1124,11 +1125,6 @@ module Gtk
     define_deprecated_const :Type, raise: "Don't use this class."
     define_deprecated_method :active_focus, :activate_focus
     define_deprecated_method :active_default, :activate_default
-  end
-
-  class RecentFilter
-    extend GLib::Deprecatable
-    define_deprecated_const :Flags, 'Gtk::RecentFilterFlags'
   end
 end
 
