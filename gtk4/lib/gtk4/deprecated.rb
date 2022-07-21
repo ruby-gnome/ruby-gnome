@@ -826,6 +826,11 @@ module Gtk
     define_deprecated_enums :SpinButtonUpdatePolicy, 'UPDATE'
   end
 
+  class Stack
+    extend GLib::Deprecatable
+    define_deprecated_const :TransitionType, "Gtk::StackTransitionType"
+  end
+
   class StypeContext
     extend GLib::Deprecatable
     define_deprecated_singleton_method :add_provider_for_screen,

@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,14 +18,13 @@ class TestGtkStack < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    only_gtk_version(3, 10, 0)
     @stack = Gtk::Stack.new
   end
 
   class TestAdd < self
     def setup
       super
-      @child = Gtk::EventBox.new
+      @child = Gtk::Box.new(:horizontal)
     end
 
     def test_return_value
@@ -41,7 +40,7 @@ class TestGtkStack < Test::Unit::TestCase
       widget_name = "set widget name"
       @stack.add(@child, widget_name)
       assert_equal(widget_name,
-                   @stack.child_get_property(@child, "name"))
+                   @stack.get_page(@child).name)
     end
 
     def test_name_add_title
@@ -53,15 +52,24 @@ class TestGtkStack < Test::Unit::TestCase
                      widget_title,
                    ],
                    [
-                     @stack.child_get_property(@child, "name"),
-                     @stack.child_get_property(@child, "title"),
+                     @stack.get_page(@child).name,
+                     @stack.get_page(@child).title,
                    ])
     end
   end
 
-  def test_homogeneous_accessors
-    @stack.homogeneous = false
-    assert_false(@stack.homogeneous?)
+  def test_hhomogeneous_accessors
+    @stack.hhomogeneous = false
+    assert do
+      not @stack.hhomogeneous?
+    end
+  end
+
+  def test_vhomogeneous_accessors
+    @stack.vhomogeneous = false
+    assert do
+      not @stack.vhomogeneous?
+    end
   end
 
   def test_transition_duration_accessors
@@ -71,7 +79,7 @@ class TestGtkStack < Test::Unit::TestCase
   end
 
   def test_transition_type_accessors
-    stack_transition_type = Gtk::Stack::TransitionType::SLIDE_UP
+    stack_transition_type = Gtk::StackTransitionType::SLIDE_UP
     @stack.transition_type = stack_transition_type
     assert_equal(stack_transition_type, @stack.transition_type)
   end
@@ -79,7 +87,7 @@ class TestGtkStack < Test::Unit::TestCase
   class TestVisibleChild < self
     def setup
       super
-      @visible_widget = Gtk::EventBox.new
+      @visible_widget = Gtk::Box.new(:horizontal)
       @visible_widget.show
       @visible_widget_name = "visible widget"
       @stack.add(@visible_widget, @visible_widget_name)
@@ -108,15 +116,14 @@ class TestGtkStack < Test::Unit::TestCase
     end
 
     def test_child_by_name
-      only_gtk_version(3, 12, 0)
-      assert_kind_of(Gtk::EventBox,
-                     @stack.get_child_by_name(@visible_widget_name))
+      assert_equal(@visible_widget,
+                   @stack.get_child_by_name(@visible_widget_name))
     end
   end
 
   class TestEnum < self
     def test_transition_type
-      assert_const_defined(Gtk::Stack::TransitionType, :CROSSFADE)
+      assert_const_defined(Gtk::StackTransitionType, :CROSSFADE)
     end
   end
 end

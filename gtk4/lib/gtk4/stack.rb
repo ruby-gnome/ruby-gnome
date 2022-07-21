@@ -42,7 +42,7 @@ module Gtk
       elsif name
         add_named(widget, name)
       else
-        super(widget)
+        add_child(widget)
       end
       self
     end
