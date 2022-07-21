@@ -22,7 +22,7 @@ class TestGtkAboutDialog < Test::Unit::TestCase
   end
 
   def test_program_name
-    assert_nil(@dialog.program_name)
+    assert_equal("gtk4-test", @dialog.program_name)
     @dialog.program_name = "my-program"
     assert_equal("my-program", @dialog.program_name)
   end
