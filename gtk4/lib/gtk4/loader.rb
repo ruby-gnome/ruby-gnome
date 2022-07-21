@@ -118,6 +118,7 @@ module Gtk
       require_relative "tree-model-sort"
       require_relative "tree-path"
       require_relative "tree-selection"
+      require_relative "tree-sortable"
       require_relative "tree-store"
       require_relative "tree-view"
       require_relative "tree-view-column"

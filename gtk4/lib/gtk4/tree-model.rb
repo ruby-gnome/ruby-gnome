@@ -111,11 +111,12 @@ module Gtk
     def each
       return to_enum(__method__) unless block_given?
       exception = nil
-      each_raw do |*args|
+      each_raw do |model, path, iter|
         stop = true
         # TODO: This doesn't return 'stop' to GTK when caller uses 'break'.
         begin
-          yield(*args)
+          iter.model = model
+          yield(model, path, iter)
           stop = false
         rescue Exception => e
           exception = e
