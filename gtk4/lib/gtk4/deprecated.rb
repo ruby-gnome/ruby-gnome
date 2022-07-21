@@ -1107,6 +1107,7 @@ module Gtk
     define_deprecated_const :Type, raise: "Don't use this class."
     define_deprecated_method :active_focus, :activate_focus
     define_deprecated_method :active_default, :activate_default
+    define_deprecated_method :add, :set_child
   end
 end
 
