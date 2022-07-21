@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,6 @@ class TestGtkSwitch < Test::Unit::TestCase
   end
 
   def test_state_accessors
-    only_gtk_version(3, 14, 0)
     @switch.state = true
     assert_true(@switch.state?)
   end
