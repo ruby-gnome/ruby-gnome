@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,12 +18,10 @@ class TestGtkSearchEntry < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    only_gtk_version(3, 6, 0)
     @search_entry = Gtk::SearchEntry.new
   end
 
   def test_search_changed_signal
-    only_gtk_version(3, 10, 0)
     called = false
     @search_entry.signal_connect("search-changed") do
       called = true
