@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,6 @@ class TestGtkTextView < Test::Unit::TestCase
 
   sub_test_case "instance methods" do
     def setup
-      only_gtk_version(3, 14)
       @text_buffer = Gtk::TextBuffer.new
       @text_buffer.text = "Hello"
       @text_view = Gtk::TextView.new(@text_buffer)
@@ -45,7 +44,6 @@ class TestGtkTextView < Test::Unit::TestCase
       end
 
       test "not found" do
-        only_gtk_version(3, 20)
         assert_nil(@text_view.get_iter_at_location(100, 0))
       end
     end
@@ -58,7 +56,6 @@ class TestGtkTextView < Test::Unit::TestCase
       end
 
       test "not found" do
-        only_gtk_version(3, 20)
         assert_nil(@text_view.get_iter_at_position(100, 0))
       end
     end
