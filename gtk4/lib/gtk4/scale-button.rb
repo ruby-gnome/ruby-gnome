@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,18 +18,11 @@ module Gtk
   class ScaleButton
     alias_method :initialize_raw, :initialize
     def initialize(options={})
-      icon_size = options[:icon_size] || :button
-      min       = options[:min]       || 0
-      max       = options[:max]       || 100
-      step      = options[:step]      || 2
-      icons     = options[:icons]     || nil
-
-      case icon_size
-      when Symbol, String
-        icon_size = IconSize.new(icon_size.to_s)
-      end
-
-      initialize_raw(icon_size, min, max, step, icons)
+      min       = options[:min]   || 0
+      max       = options[:max]   || 100
+      step      = options[:step]  || 2
+      icons     = options[:icons] || nil
+      initialize_raw(min, max, step, icons)
     end
   end
 end
