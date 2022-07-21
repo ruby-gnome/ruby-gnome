@@ -783,9 +783,9 @@ module Gtk
     alias :screen= :set_screen
   end
 
-  class Revelar
+  class Revealer
     extend GLib::Deprecatable
-    define_deprecated_const :TransitionType, "Gtk::RevelarTransitionType"
+    define_deprecated_const :TransitionType, "Gtk::RevealerTransitionType"
   end
 
   class ProgressBar

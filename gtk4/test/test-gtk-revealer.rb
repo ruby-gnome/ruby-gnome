@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,7 +18,6 @@ class TestGtkRevealer < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    only_gtk_version(3, 10, 0)
     @revealer = Gtk::Revealer.new
   end
 
@@ -44,14 +43,14 @@ class TestGtkRevealer < Test::Unit::TestCase
   end
 
   def test_transition_type_accessors
-    revealer_transition_type = Gtk::Revealer::TransitionType::SLIDE_UP
+    revealer_transition_type = Gtk::RevealerTransitionType::SLIDE_UP
     @revealer.transition_type = revealer_transition_type
     assert_equal(revealer_transition_type, @revealer.transition_type)
   end
 
   class TestEnum < self
     def test_transition_type
-      assert_const_defined(Gtk::Revealer::TransitionType, :CROSSFADE)
+      assert_const_defined(Gtk::RevealerTransitionType, :CROSSFADE)
     end
   end
 end
