@@ -48,6 +48,7 @@ module Gtk
   define_deprecated_const :PrintUnixDialog,        :raise => "Use 'Gtk::PrintOperation' instead."
   define_deprecated_const :RC,                     :raise => "Use 'Gtk::StyleContext' instead."
   define_deprecated_const :RadioAction, raise: "Don't use this class."
+  define_deprecated_const :RadioButton, raise: "Don't use this class."
   define_deprecated_const :RcStyle,                :raise => "Use 'Gtk::CssProvider' instead."
   define_deprecated_const :RecentChooser, raise: "Don't use this class."
   define_deprecated_const :RecentFilter, raise: "Don't use this class."
@@ -750,27 +751,6 @@ module Gtk
         'child, :resize => true, :shrink => true', 1 do
         |_self, child, resize, shrink|
       [child, {:resize => resize, :shrink => shrink}]
-    end
-  end
-
-  class RadioButton
-    extend GLib::Deprecatable
-    define_deprecated_method_by_hash_args :initialize,
-        'member_or_label, label_or_use_underline, use_underline',
-        ':label => label, :member => member, :use_underline => use_underline',
-        0 do |_self, member_or_label, label_or_use_underline, use_underline|
-      options = {}
-      if member_or_label.is_a?(Gtk::RadioButton)
-        options[:member] = member_or_label
-        if label_or_use_underline.is_a?(String)
-          options[:label] = label_or_use_underline
-          options[:use_underline] = use_underline
-        end
-      else
-        options[:label] = member_or_label
-        options[:use_underline] = label_or_use_underline
-      end
-      [options]
     end
   end
 
