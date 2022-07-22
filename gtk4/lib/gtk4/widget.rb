@@ -17,9 +17,6 @@
 module Gtk
   class Widget
     class << self
-      def init
-      end
-
       def have_template?
         @have_template ||= false
       end
@@ -38,6 +35,8 @@ module Gtk
           else
             set_template_raw(data)
           end
+          @scope = Gtk::RubyBuilderScope.new
+          set_template_scope(@scope)
           @have_template = true
         end
 
