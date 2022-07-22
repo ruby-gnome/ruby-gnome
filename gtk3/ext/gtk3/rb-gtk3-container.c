@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2015-2022  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -100,43 +100,17 @@ set_child_prop_func(GtkContainer *container,
                GOBJ2RVAL(child), GVAL2RVAL(value));
 }
 
-static void
-class_init_func(gpointer g_class, gpointer class_data)
+static VALUE
+rg_s_init(VALUE klass)
 {
-    GtkContainerClass *g_container_class = GTK_CONTAINER_CLASS(g_class);
+    rb_call_super(0, NULL);
 
-    rbgobj_class_init_func(g_class, class_data);
-
+    GType type = CLASS2GTYPE(klass);
+    GtkContainerClass *g_container_class =
+        GTK_CONTAINER_CLASS(g_type_class_ref(type));
     g_container_class->set_child_property = set_child_prop_func;
     g_container_class->get_child_property = get_child_prop_func;
-
-    rbgtk3_class_init_func(g_class, class_data);
-}
-
-static VALUE
-rg_initialize(int argc, VALUE *argv, VALUE self)
-{
-    rb_call_super(argc, argv);
-    rbgtk3_initialize(self);
-    return Qnil;
-}
-
-static VALUE
-rg_s_type_register(int argc, VALUE *argv, VALUE klass)
-{
-    VALUE type_name;
-
-    rb_scan_args(argc, argv, "01", &type_name);
-
-    rbgobj_register_type(klass, type_name, class_init_func);
-
-    {
-        VALUE initialize_module;
-        initialize_module = rb_define_module_under(klass, "ContainerHook");
-        rbg_define_method(initialize_module,
-                          "initialize", rg_initialize, -1);
-        rb_include_module(klass, initialize_module);
-    }
+    g_type_class_unref(g_container_class);
 
     return Qnil;
 }
@@ -155,5 +129,5 @@ rbgtk3_container_init(void)
 
     rbgobj_register_mark_func(GTK_TYPE_CONTAINER, rb_gtk3_container_mark);
 
-    RG_DEF_SMETHOD(type_register, -1);
+    RG_DEF_SMETHOD(init, 0);
 }

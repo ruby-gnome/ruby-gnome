@@ -25,37 +25,26 @@
 #define RG_TARGET_NAMESPACE cWidget
 #define _SELF(self) (RVAL2GTKWIDGET(self))
 
-static void
-class_init_func(gpointer g_class, gpointer class_data)
-{
-    rbgobj_class_init_func(g_class, class_data);
-    rbgtk3_class_init_func(g_class, class_data);
-}
-
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     rb_call_super(argc, argv);
-    rbgtk3_initialize(self);
+
+    GObject *object = RVAL2GOBJ(self);
+    g_object_ref_sink(object);
+    rb_funcall(self, rb_intern("initialize_post"), 0);
+
     return Qnil;
 }
 
 static VALUE
 rg_s_type_register(int argc, VALUE *argv, VALUE klass)
 {
-    VALUE type_name;
+    rb_call_super(argc, argv);
 
-    rb_scan_args(argc, argv, "01", &type_name);
-
-    rbgobj_register_type(klass, type_name, class_init_func);
-
-    {
-        VALUE initialize_module;
-        initialize_module = rb_define_module_under(klass, "WidgetHook");
-        rbg_define_method(initialize_module,
-                          "initialize", rg_initialize, -1);
-        rb_include_module(klass, initialize_module);
-    }
+    VALUE initialize_module = rb_define_module_under(klass, "WidgetHook");
+    rbg_define_method(initialize_module, "initialize", rg_initialize, -1);
+    rb_include_module(klass, initialize_module);
 
     return Qnil;
 }

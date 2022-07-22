@@ -278,6 +278,7 @@ class TestGtkWidget < Test::Unit::TestCase
         type_register "SetConnectFunc"
 
         singleton_class.send(:define_method, :init) do
+          super()
           set_template(:data => data)
           bind_template_child(:label)
           set_connect_func do |handler_name|

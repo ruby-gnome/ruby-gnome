@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2022  Ruby-GNOME Project Team
  *  Copyright (C) 2002-2003  Masahiro Sakai
  *  Copyright (C) 1998-2000  Yukihiro Matsumoto,
  *                           Daisuke Kanda,
@@ -309,6 +309,12 @@ rg_s_new_bang(int argc, VALUE *argv, VALUE self)
     g_object_unref(gobj);
 
     return result;
+}
+
+static VALUE
+rg_s_init(int argc, VALUE *argv, VALUE self)
+{
+    return RUBY_Qnil;
 }
 
 struct param_setup_arg {
@@ -956,6 +962,9 @@ rbgobj_class_init_func(gpointer g_class, G_GNUC_UNUSED gpointer class_data)
 
     g_object_class->set_property = set_prop_func;
     g_object_class->get_property = get_prop_func;
+
+    VALUE rb_class = GTYPE2CLASS(G_TYPE_FROM_CLASS(g_class));
+    rb_funcall(rb_class, rb_intern("init"), 0);
 }
 
 void
@@ -1073,6 +1082,8 @@ Init_gobject_gobject(void)
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rbgobj_object_alloc_func);
     RG_DEF_SMETHOD_BANG(new, -1);
+
+    RG_DEF_SMETHOD(init, 0);
 
     rbg_define_singleton_method(RG_TARGET_NAMESPACE, "property", &gobj_s_property, 1);
     rbg_define_singleton_method(RG_TARGET_NAMESPACE, "properties", &gobj_s_properties, -1);

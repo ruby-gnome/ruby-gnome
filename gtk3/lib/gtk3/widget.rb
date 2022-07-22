@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2020  Ruby-GNOME Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,9 +17,6 @@
 module Gtk
   class Widget
     class << self
-      def init
-      end
-
       def have_template?
         @have_template ||= false
       end
