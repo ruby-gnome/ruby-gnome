@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -39,16 +39,15 @@ class TestPangoContext < Test::Unit::TestCase
     label.attributes = attrs
 
     window = Gtk::Window.new
-    window.signal_connect("destroy") do
-      Gtk.main_quit
-    end
-    window.add(label)
+    main_loop = GLib::MainLoop.new
+    window.child = label
     GLib::Timeout.add(1000) do
       window.destroy
+      main_loop.quit
       GLib::Source::REMOVE
     end
-    window.show_all
-    Gtk.main
+    window.present
+    main_loop.run
 
     assert_equal([Cairo::Context, Pango::AttrShape, false],
                  last_block_arguments)
