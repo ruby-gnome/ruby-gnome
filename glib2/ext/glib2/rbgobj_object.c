@@ -878,6 +878,15 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     gobj = rbgobj_gobject_new(RVAL2GTYPE(self), params_hash);
 
     G_INITIALIZE(self, gobj);
+
+    rb_funcall(self, rb_intern("initialize_post"), 0);
+
+    return Qnil;
+}
+
+static VALUE
+rg_initialize_post(VALUE self)
+{
     return Qnil;
 }
 
@@ -1100,6 +1109,7 @@ Init_gobject_gobject(void)
     RG_DEF_METHOD_P(destroyed, 0);
 
     RG_DEF_METHOD(initialize, -1);
+    RG_DEF_PRIVATE_METHOD(initialize_post, 0);
     rbg_define_method(RG_TARGET_NAMESPACE, "ref_count", gobj_ref_count, 0); /* for debugging */
     RG_DEF_METHOD_P(floating, 0); /* for debugging */
     RG_DEF_METHOD(unref, 0);

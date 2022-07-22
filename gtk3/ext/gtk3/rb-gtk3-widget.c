@@ -26,25 +26,14 @@
 #define _SELF(self) (RVAL2GTKWIDGET(self))
 
 static VALUE
-rg_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize_post(VALUE self)
 {
-    rb_call_super(argc, argv);
-
     GObject *object = RVAL2GOBJ(self);
     g_object_ref_sink(object);
-    rb_funcall(self, rb_intern("initialize_post"), 0);
 
-    return Qnil;
-}
-
-static VALUE
-rg_s_type_register(int argc, VALUE *argv, VALUE klass)
-{
-    rb_call_super(argc, argv);
-
-    VALUE initialize_module = rb_define_module_under(klass, "WidgetHook");
-    rbg_define_method(initialize_module, "initialize", rg_initialize, -1);
-    rb_include_module(klass, initialize_module);
+    ID id_initialize_template;
+    CONST_ID(id_initialize_template, "initialize_template");
+    rb_funcall(self, id_initialize_template, 0);
 
     return Qnil;
 }
@@ -82,7 +71,7 @@ rbgtk3_widget_init(void)
     mGtk = rb_const_get(rb_cObject, rb_intern("Gtk"));
     RG_TARGET_NAMESPACE = rb_const_get(mGtk, rb_intern("Widget"));
 
-    RG_DEF_SMETHOD(type_register, -1);
+    RG_DEF_PRIVATE_METHOD(initialize_post, 0);
 
     rbgobj_set_signal_call_func(RG_TARGET_NAMESPACE,
                                 "draw",

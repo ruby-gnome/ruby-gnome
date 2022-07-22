@@ -55,6 +55,8 @@ G_BEGIN_DECLS
 #define RG_DEF_ATTR(attr, read, write, ex) \
         rb_attr(RG_TARGET_NAMESPACE, rb_intern(attr), read, write, ex)
 #define RG_DEF_ALIAS(new, old) rb_define_alias(RG_TARGET_NAMESPACE, new, old)
+#define RG_DEF_PRIVATE_METHOD(method, argc) \
+        rbg_define_private_method(RG_TARGET_NAMESPACE, #method, rg_ ## method, argc)
 
 #define RG_REG_GLIBID_SETTER(name) \
         rbgobj_register_property_setter(CLASS2GTYPE(RG_TARGET_NAMESPACE), name, rbgutil_glibid_r2g_func)
@@ -88,6 +90,7 @@ G_BEGIN_DECLS
     (rbgutil_string_set_utf8_encoding(string))
 
 extern void rbg_define_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc);
+extern void rbg_define_private_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc);
 extern void rbg_define_singleton_method(VALUE obj, const char *name, VALUE (*func)(ANYARGS), int argc);
 extern VALUE rbgutil_def_setters(VALUE klass);
 extern void rbgutil_set_properties(VALUE self, VALUE hash);

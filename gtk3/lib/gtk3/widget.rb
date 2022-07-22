@@ -142,7 +142,7 @@ module Gtk
     end
 
     private
-    def initialize_post
+    def initialize_template
       klass = self.class
       return unless klass.have_template?
       return unless respond_to?(:init_template)

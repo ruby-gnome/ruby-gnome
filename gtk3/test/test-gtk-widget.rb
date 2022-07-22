@@ -242,6 +242,7 @@ class TestGtkWidget < Test::Unit::TestCase
         type_register "BindTemplateChildNothing"
 
         singleton_class.send(:define_method, :init) do
+          super()
           set_template(:data => data)
         end
       end
@@ -255,6 +256,7 @@ class TestGtkWidget < Test::Unit::TestCase
         type_register "BindTemplateChildBind"
 
         singleton_class.send(:define_method, :init) do
+          super()
           set_template(:data => data)
           bind_template_child(:label)
         end
