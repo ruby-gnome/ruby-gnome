@@ -10,6 +10,7 @@ jobs:
       matrix:
         service:
           - almalinux-8
+          - almalinux-9
           - apache-arrow
           - arch-linux
           - centos-7

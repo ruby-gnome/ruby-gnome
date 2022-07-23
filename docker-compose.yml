@@ -14,6 +14,19 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
+  almalinux-9-base:
+    image: almalinux:9
+
+  almalinux-9:
+    image: ghcr.io/${GITHUB_REPOSITORY}:almalinux-9
+    build:
+      context: .
+      dockerfile: dockerfiles/almalinux-9.dockerfile
+    volumes:
+      - .:/ruby-gnome:delegated
+    command:
+      /ruby-gnome/dockerfiles/run-test.sh
+
   apache-arrow-base:
     image: ruby:2.7
 
