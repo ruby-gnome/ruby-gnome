@@ -76,6 +76,7 @@ EXPORTS
 	g_rclosure_new
 	g_rclosure_new_call
 	g_rclosure_attach
+	g_rclosure_attach_gobject
 	g_rclosure_set_tag
 	rbgobj_ruby_value_get_type
 	g_value_get_ruby_value

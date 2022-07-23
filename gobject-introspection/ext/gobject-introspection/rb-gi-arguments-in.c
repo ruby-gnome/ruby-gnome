@@ -1201,10 +1201,14 @@ rb_gi_arguments_in_init_arg_ruby_interface(RBGIArguments *args,
                     rb_gi_arguments_in_free_interface_struct_gbytes;
             }
         } else if (metadata->type.interface_gtype == G_TYPE_CLOSURE) {
-            GClosure *rclosure = NULL;
-
-            rclosure = g_rclosure_new(metadata->rb_arg, Qnil, NULL);
-            g_rclosure_attach(rclosure, args->rb_receiver);
+            GClosure *rclosure = g_rclosure_new(metadata->rb_arg, Qnil, NULL);
+            if (RVAL2CBOOL(rb_obj_is_kind_of(args->rb_receiver,
+                                             rbg_cGLibObject()))) {
+                g_rclosure_attach_gobject(rclosure, args->rb_receiver);
+                g_closure_unref(rclosure);
+            } else {
+                g_rclosure_attach(rclosure, args->rb_receiver);
+            }
             metadata->in_arg->v_pointer = rclosure;
         } else {
             metadata->in_arg->v_pointer =

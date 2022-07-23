@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2022  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -34,7 +34,6 @@ struct _GRClosure
     VALUE callback;
     VALUE extra_args;
     VALUE rb_holder;
-    gint count;
     GList *objects;
     GValToRValSignalFunc g2r_func;
     RGClosureCallFunc call_func;
@@ -64,7 +63,7 @@ struct marshal_arg
 static int
 rclosure_alive_p(GRClosure *rclosure)
 {
-    return (rclosure->count > 0 && !NIL_P(rclosure->rb_holder));
+    return !NIL_P(rclosure->rb_holder);
 }
 
 static VALUE
@@ -159,43 +158,25 @@ rclosure_marshal(GClosure*       closure,
 static void rclosure_weak_notify(gpointer data, GObject* where_the_object_was);
 
 static void
-rclosure_unref(GRClosure *rclosure)
+rclosure_finalize(G_GNUC_UNUSED gpointer data, GClosure *closure)
 {
-    rclosure->count--;
+    GRClosure *rclosure = (GRClosure *)closure;
 
-    if (!rclosure_alive_p(rclosure)) {
-        GList *next;
-        for (next = rclosure->objects; next; next = next->next) {
-            GObject *object = G_OBJECT(next->data);
-            g_object_weak_unref(object, rclosure_weak_notify, rclosure);
-        }
-        g_list_free(rclosure->objects);
-        rclosure->objects = NULL;
-        if (!NIL_P(rclosure->rb_holder)) {
-            RTYPEDDATA_DATA(rclosure->rb_holder) = NULL;
-            rclosure->rb_holder = Qnil;
+    GList *next;
+    for (next = rclosure->objects; next; next = next->next) {
+        GObject *object = G_OBJECT(next->data);
+        g_object_weak_unref(object, rclosure_weak_notify, rclosure);
+        VALUE obj = rbgobj_ruby_object_from_instance2(object, FALSE);
+        if (!NIL_P(rclosure->rb_holder) && !NIL_P(obj)) {
+            rbgobj_object_remove_relative(obj, rclosure->rb_holder);
         }
     }
-}
+    g_list_free(rclosure->objects);
+    rclosure->objects = NULL;
 
-static void
-rclosure_invalidate(G_GNUC_UNUSED gpointer data, GClosure *closure)
-{
-    GRClosure *rclosure = (GRClosure*)closure;
-
-    if (rclosure->count > 0) {
-        GList *next;
-
-        rclosure->count = 1;
-        for (next = rclosure->objects; next; next = next->next) {
-            GObject *object = G_OBJECT(next->data);
-            VALUE obj = rbgobj_ruby_object_from_instance2(object, FALSE);
-            if (!NIL_P(rclosure->rb_holder) && !NIL_P(obj)) {
-                rbgobj_object_remove_relative(obj, rclosure->rb_holder);
-            }
-        }
-
-        rclosure_unref(rclosure);
+    if (!NIL_P(rclosure->rb_holder)) {
+        RTYPEDDATA_DATA(rclosure->rb_holder) = NULL;
+        rclosure->rb_holder = Qnil;
     }
 }
 
@@ -219,13 +200,7 @@ gr_closure_holder_free(void *data)
     if (!rclosure)
         return;
 
-    if (rclosure->count > 0) {
-        rclosure->count = 1;
-
-        /* No need to remove us from the relatives hash of our objects, as
-         * those aren't alive anymore anyway */
-        rclosure_unref(rclosure);
-    }
+    g_closure_unref((GClosure *)rclosure);
 }
 
 static const rb_data_type_t rbg_closure_holder_type = {
@@ -245,26 +220,24 @@ g_rclosure_new_raw(VALUE callback_proc,
                    GValToRValSignalFunc g2r_func,
                    RGClosureCallFunc call_func)
 {
-    GRClosure* closure;
+    GClosure *closure = g_closure_new_simple(sizeof(GRClosure), NULL);
 
-    closure = (GRClosure*)g_closure_new_simple(sizeof(GRClosure), NULL);
+    GRClosure *rclosure = (GRClosure *)closure;
 
-    closure->count      = 1;
-    closure->g2r_func   = g2r_func;
-    closure->call_func  = call_func;
-    closure->objects    = NULL;
-    closure->callback   = callback_proc;
-    closure->extra_args = extra_args;
-    closure->rb_holder  = TypedData_Wrap_Struct(rb_cObject,
-                                                &rbg_closure_holder_type,
-                                                closure);
-    closure->tag[0]     = '\0';
+    rclosure->g2r_func   = g2r_func;
+    rclosure->call_func  = call_func;
+    rclosure->objects    = NULL;
+    rclosure->callback   = callback_proc;
+    rclosure->extra_args = extra_args;
+    rclosure->rb_holder  = TypedData_Wrap_Struct(rb_cObject,
+                                                 &rbg_closure_holder_type,
+                                                 rclosure);
+    rclosure->tag[0]     = '\0';
 
-    g_closure_set_marshal((GClosure*)closure, &rclosure_marshal);
-    g_closure_add_invalidate_notifier((GClosure*)closure, NULL,
-                                      &rclosure_invalidate);
+    g_closure_set_marshal(closure, &rclosure_marshal);
+    g_closure_add_finalize_notifier(closure, NULL, rclosure_finalize);
 
-    return (GClosure*)closure;
+    return closure;
 }
 
 GClosure *
@@ -287,34 +260,30 @@ g_rclosure_new_call(VALUE callback_proc,
 }
 
 static void
-rclosure_weak_notify(gpointer data, GObject* where_the_object_was)
+rclosure_weak_notify(gpointer data, GObject *where_the_object_was)
 {
     GRClosure *rclosure = data;
-    if (rclosure_alive_p(rclosure)) {
-        rclosure->objects =
-            g_list_remove(rclosure->objects, where_the_object_was);
-        rclosure_unref(rclosure);
-    }
+    rclosure->objects = g_list_remove(rclosure->objects, where_the_object_was);
+    g_closure_unref((GClosure *)rclosure);
 }
 
 void
 g_rclosure_attach(GClosure *closure, VALUE object)
 {
-    static VALUE cGLibObject = Qnil;
     GRClosure *rclosure = (GRClosure *)closure;
-
     rbgobj_add_relative(object, rclosure->rb_holder);
+}
 
-    if (NIL_P(cGLibObject)) {
-        cGLibObject = rb_const_get(mGLib, rb_intern("Object"));
-    }
-    if (rb_obj_is_kind_of(object, cGLibObject)) {
-        GObject *gobject;
-        gobject = RVAL2GOBJ(object);
-        rclosure->count++;
-        g_object_weak_ref(gobject, rclosure_weak_notify, rclosure);
-        rclosure->objects = g_list_prepend(rclosure->objects, gobject);
-    }
+void
+g_rclosure_attach_gobject(GClosure *closure, VALUE object)
+{
+    GRClosure *rclosure = (GRClosure *)closure;
+    g_rclosure_attach(closure, object);
+
+    GObject *gobject = RVAL2GOBJ(object);
+    g_closure_ref(closure);
+    g_object_weak_ref(gobject, rclosure_weak_notify, rclosure);
+    rclosure->objects = g_list_prepend(rclosure->objects, gobject);
 }
 
 void
@@ -350,8 +319,9 @@ init_rclosure(void)
 static VALUE
 rg_initialize(VALUE self)
 {
-    GClosure* closure = g_rclosure_new(rb_block_proc(), Qnil, NULL);
+    GClosure *closure = g_rclosure_new(rb_block_proc(), Qnil, NULL);
     G_INITIALIZE(self, closure);
+    g_closure_ref(closure);
     g_closure_sink(closure);
     return self;
 }

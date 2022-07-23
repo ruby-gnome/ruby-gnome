@@ -1,10 +1,17 @@
 class TestGC < Test::Unit::TestCase
   priority :must
   def test_closure
-    10.times do
+    klass = Class.new
+    n_tries = 100
+    n_tries.times do
       widget = Gtk::Box.new(:horizontal)
-      widget.signal_connect("hide") {}
-      GC.start
+      closed_object = klass.new
+      widget.signal_connect("hide") {p closed_object}
+    end
+    GC.start
+    n_closed_objects = ObjectSpace.each_object(klass) {}
+    assert do
+      n_closed_objects < n_tries
     end
   end
 
