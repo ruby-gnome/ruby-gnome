@@ -90,17 +90,17 @@ Init_glib_win32(void)
 {
 #ifdef G_OS_WIN32
     /* glib/gwin32.h */
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Win32");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "Win32");
 
     RG_DEF_SMETHOD(error_message, 1);
     RG_DEF_SMETHOD(locale, 0);
     RG_DEF_SMETHOD(version, 0);
     /* Deprecated */
-    rbg_define_singleton_method(mGLib, "win32_locale", rbglib_m_win32_locale_deprecated, 0);
+    rbg_define_singleton_method(rbg_mGLib(), "win32_locale", rbglib_m_win32_locale_deprecated, 0);
 
     RG_DEF_SMETHOD(locale_filename_from_utf8, 1);
     /* Deprecated */
-    rbg_define_singleton_method(mGLib, "win32_locale_filename_from_utf8",
+    rbg_define_singleton_method(rbg_mGLib(), "win32_locale_filename_from_utf8",
                               rbglib_m_win32_locale_filename_from_utf8_deprecated, 1);
 
     RG_DEF_SMETHOD(get_package_installation_directory_of_module, -1);

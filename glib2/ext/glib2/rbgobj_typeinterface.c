@@ -107,7 +107,7 @@ rg_property(VALUE self, VALUE property_name)
         rb_raise(rb_eTypeError, "%s isn't interface module", rb_class2name(self));
     /* XXX: g_type_default_interface_ref(G_TYPE_INTERFACE) causes SEGV. */
     if (gtype == G_TYPE_INTERFACE) {
-        rb_raise(rb_const_get(mGLib, rb_intern("NoPropertyError")),
+        rb_raise(rb_const_get(rbg_mGLib(), rb_intern("NoPropertyError")),
                  "No such property: %s", name);
     }
 
@@ -115,7 +115,7 @@ rg_property(VALUE self, VALUE property_name)
     prop = g_object_interface_find_property(ginterface, name);
     if (!prop){
         g_type_default_interface_unref(ginterface);
-        rb_raise(rb_const_get(mGLib, rb_intern("NoPropertyError")),
+        rb_raise(rb_const_get(rbg_mGLib(), rb_intern("NoPropertyError")),
                  "No such property: %s", name);
     }
     result = GOBJ2RVAL(prop);
@@ -173,7 +173,7 @@ rbgobj_init_interface(VALUE interf)
 void
 Init_gobject_typeinterface(void)
 {
-    RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "MetaInterface");
+    RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "MetaInterface");
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     RG_DEF_METHOD(append_features, 1);
     RG_DEF_METHOD(included, 1);
@@ -181,5 +181,5 @@ Init_gobject_typeinterface(void)
     RG_DEF_METHOD(property, 1);
     RG_DEF_METHOD(properties, -1);
 
-    rbgobj_mInterface = G_DEF_INTERFACE(G_TYPE_INTERFACE, "Interface", mGLib);
+    rbgobj_mInterface = G_DEF_INTERFACE(G_TYPE_INTERFACE, "Interface", rbg_mGLib());
 }

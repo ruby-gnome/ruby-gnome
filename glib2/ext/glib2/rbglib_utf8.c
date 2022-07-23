@@ -218,7 +218,7 @@ rg_s_to_ucs4(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 void
 Init_glib_utf8(void)
 {
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "UTF8");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "UTF8");
 
     /*
       Not implemented.

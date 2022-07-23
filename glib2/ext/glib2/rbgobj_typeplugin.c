@@ -51,7 +51,7 @@ void    g_type_plugin_complete_interface_info  (GTypePlugin     *plugin,
 void
 Init_gobject_gtypeplugin(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_TYPE_PLUGIN, "TypePlugin", mGLib);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_TYPE_PLUGIN, "TypePlugin", rbg_mGLib());
     RG_DEF_METHOD(use, 0);
     RG_DEF_METHOD(unuse, 0);
 }

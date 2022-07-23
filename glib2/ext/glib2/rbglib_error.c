@@ -190,12 +190,12 @@ Init_glib_error(void)
     rb_global_variable(&gerror_table);
 
 #define RG_TARGET_NAMESPACE error_info
-    error_info = rb_define_module_under(mGLib, "ErrorInfo");
+    error_info = rb_define_module_under(rbg_mGLib(), "ErrorInfo");
     rb_define_attr(error_info, "code", TRUE, FALSE);
     rb_define_attr(error_info, "domain", TRUE, FALSE);
     RG_DEF_METHOD(initialize, -1);
 
-    generic_error = rb_define_class_under(mGLib, "Error", rb_eRuntimeError);
+    generic_error = rb_define_class_under(rbg_mGLib(), "Error", rb_eRuntimeError);
     rb_define_const(generic_error, name_CODE, Qnil);
     rb_define_const(generic_error, name_DOMAIN, Qnil);
     rb_include_module(generic_error, error_info);

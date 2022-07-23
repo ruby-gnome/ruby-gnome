@@ -116,7 +116,7 @@ rg_reset(VALUE self)
 void
 Init_glib_timer(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_TIMER, "Timer", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_TIMER, "Timer", rbg_mGLib()); 
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(start, 0);

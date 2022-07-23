@@ -498,11 +498,11 @@ child_watch_add(VALUE self, VALUE pid)
 void
 Init_glib_main_context(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MAIN_CONTEXT, "MainContext", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MAIN_CONTEXT, "MainContext", rbg_mGLib()); 
 
-    VALUE timeout = rb_define_module_under(mGLib, "Timeout");
-    VALUE idle = rb_define_module_under(mGLib, "Idle");
-    VALUE child_watch = rb_define_module_under(mGLib, "ChildWatch");
+    VALUE timeout = rb_define_module_under(rbg_mGLib(), "Timeout");
+    VALUE idle = rb_define_module_under(rbg_mGLib(), "Idle");
+    VALUE child_watch = rb_define_module_under(rbg_mGLib(), "ChildWatch");
 
     id_call = rb_intern("call");
 
@@ -510,10 +510,10 @@ Init_glib_main_context(void)
 
     main_thread = g_thread_self();
 
-    rbg_define_singleton_method(mGLib, "set_ruby_thread_priority",
+    rbg_define_singleton_method(rbg_mGLib(), "set_ruby_thread_priority",
                                ruby_source_set_priority, 1);
 
-    mGLibSource = rb_const_get(mGLib, rb_intern("Source"));
+    mGLibSource = rb_const_get(rbg_mGLib(), rb_intern("Source"));
     rbg_define_singleton_method(mGLibSource, "remove", source_remove, 1);
     rbg_define_singleton_method(mGLibSource, "current", source_current_source, 0);
 /*

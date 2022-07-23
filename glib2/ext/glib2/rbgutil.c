@@ -103,7 +103,7 @@ rbgutil_set_properties(VALUE self, VALUE hash)
 VALUE
 rbgutil_def_setters(VALUE klass)
 {
-    return rb_funcall(mGLib, id_add_one_arg_setter, 1, klass);
+    return rb_funcall(rbg_mGLib(), id_add_one_arg_setter, 1, klass);
 }
 
 void

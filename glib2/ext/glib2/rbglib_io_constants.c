@@ -23,7 +23,7 @@
 void
 Init_glib_io_constants(void)
 {
-    VALUE RG_TARGET_NAMESPACE = mGLib;
+    VALUE RG_TARGET_NAMESPACE = rbg_mGLib();
 
     /* GIOCondition */
     G_DEF_CLASS(G_TYPE_IO_CONDITION, "IOCondition", RG_TARGET_NAMESPACE);

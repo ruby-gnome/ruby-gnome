@@ -500,9 +500,10 @@ rg_move_item(VALUE self, VALUE old_uri, VALUE new_uri)
 void
 Init_glib_bookmark_file(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BOOKMARK_FILE, "BookmarkFile", mGLib);
+    VALUE RG_TARGET_NAMESPACE =
+        G_DEF_CLASS(G_TYPE_BOOKMARK_FILE, "BookmarkFile", rbg_mGLib());
 
-    G_DEF_ERROR(G_BOOKMARK_FILE_ERROR, "BookmarkFileError", mGLib, 
+    G_DEF_ERROR(G_BOOKMARK_FILE_ERROR, "BookmarkFileError", rbg_mGLib(),
                 rb_eRuntimeError, G_TYPE_BOOKMARK_FILE_ERROR);
 
     RG_DEF_METHOD(initialize, 0);

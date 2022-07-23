@@ -413,7 +413,7 @@ Init_gobject_genums(void)
     id_to_s = rb_intern("to_s");
     id_values = rb_intern("values");
 
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ENUM, "Enum", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ENUM, "Enum", rbg_mGLib());
 
     rbg_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);

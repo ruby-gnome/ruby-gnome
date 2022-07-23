@@ -56,7 +56,7 @@ rbgutil_protect(VALUE (*func) (VALUE), VALUE data)
 void
 rbgutil_on_callback_error(VALUE error)
 {
-    rb_funcall(mGLib, id_exit_application, 2, error, INT2NUM(EXIT_FAILURE));
+    rb_funcall(rbg_mGLib(), id_exit_application, 2, error, INT2NUM(EXIT_FAILURE));
 }
 
 /**********************************************************************/
@@ -228,13 +228,13 @@ rbgutil_start_callback_dispatch_thread(void)
     VALUE callback_dispatch_thread;
 
     g_mutex_lock(&callback_dispatch_thread_mutex);
-    callback_dispatch_thread = rb_ivar_get(mGLib, id_callback_dispatch_thread);
+    callback_dispatch_thread = rb_ivar_get(rbg_mGLib(), id_callback_dispatch_thread);
     if (NIL_P(callback_dispatch_thread)) {
         if (pipe(callback_pipe_fds) == -1)
             rb_sys_fail("pipe()");
 
         callback_dispatch_thread = rb_thread_create(mainloop, NULL);
-        rb_ivar_set(mGLib, id_callback_dispatch_thread,
+        rb_ivar_set(rbg_mGLib(), id_callback_dispatch_thread,
                     callback_dispatch_thread);
     }
     g_mutex_unlock(&callback_dispatch_thread_mutex);
@@ -248,10 +248,10 @@ rbgutil_stop_callback_dispatch_thread(void)
     VALUE callback_dispatch_thread;
 
     g_mutex_lock(&callback_dispatch_thread_mutex);
-    callback_dispatch_thread = rb_ivar_get(mGLib, id_callback_dispatch_thread);
+    callback_dispatch_thread = rb_ivar_get(rbg_mGLib(), id_callback_dispatch_thread);
     if (!NIL_P(callback_dispatch_thread)) {
         queue_callback_request(NULL);
-        rb_ivar_set(mGLib, id_callback_dispatch_thread, Qnil);
+        rb_ivar_set(rbg_mGLib(), id_callback_dispatch_thread, Qnil);
     }
     g_mutex_unlock(&callback_dispatch_thread_mutex);
 #endif
@@ -262,12 +262,12 @@ Init_gutil_callback(void)
 {
     id_exit_application = rb_intern("exit_application");
     rbgutil_eGLibCallbackNotInitializedError =
-        rb_define_class_under(mGLib, "CallbackNotInitializedError",
+        rb_define_class_under(rbg_mGLib(), "CallbackNotInitializedError",
                               rb_eRuntimeError);
 
 #ifdef HAVE_NATIVETHREAD
     id_callback_dispatch_thread = rb_intern("callback_dispatch_thread");
-    rb_ivar_set(mGLib, id_callback_dispatch_thread, Qnil);
+    rb_ivar_set(rbg_mGLib(), id_callback_dispatch_thread, Qnil);
 
     callback_request_queue = g_async_queue_new();
     g_mutex_init(&callback_dispatch_thread_mutex);

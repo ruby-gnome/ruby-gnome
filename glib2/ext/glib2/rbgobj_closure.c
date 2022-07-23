@@ -387,7 +387,7 @@ Init_gobject_gclosure(void)
 
     init_rclosure();
 
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", rbg_mGLib());
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD_P(in_marshal, 0);

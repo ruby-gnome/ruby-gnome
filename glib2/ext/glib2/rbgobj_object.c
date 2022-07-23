@@ -1086,11 +1086,11 @@ rg_s_type_register(int argc, VALUE *argv, VALUE self)
 void
 Init_gobject_gobject(void)
 {
-    RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_OBJECT, "Object", mGLib,
+    RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_OBJECT, "Object", rbg_mGLib(),
                                                   gobj_mark, NULL);
 
 #ifdef G_TYPE_INITIALLY_UNOWNED
-    G_DEF_CLASS(G_TYPE_INITIALLY_UNOWNED, "InitiallyUnowned", mGLib);
+    G_DEF_CLASS(G_TYPE_INITIALLY_UNOWNED, "InitiallyUnowned", rbg_mGLib());
 #endif
 
     RUBY_GOBJECT_OBJ_KEY = g_quark_from_static_string("__ruby_gobject_object__");
@@ -1123,9 +1123,9 @@ Init_gobject_gobject(void)
     RG_DEF_METHOD(type_name, 0);
 
     RG_DEF_METHOD(bind_property, -1);
-    G_DEF_CLASS(G_TYPE_BINDING_FLAGS, "BindingFlags", mGLib);
+    G_DEF_CLASS(G_TYPE_BINDING_FLAGS, "BindingFlags", rbg_mGLib());
 
-    eNoPropertyError = rb_define_class_under(mGLib, "NoPropertyError",
+    eNoPropertyError = rb_define_class_under(rbg_mGLib(), "NoPropertyError",
                                              rb_eNameError);
 
     rbg_type_to_prop_setter_tables =

@@ -24,8 +24,6 @@
 #undef _
 #include <glib/gi18n.h>
 
-#define RG_TARGET_NAMESPACE mGLib
-
 static VALUE
 rg_s_language_names(G_GNUC_UNUSED VALUE self)
 {
@@ -35,6 +33,8 @@ rg_s_language_names(G_GNUC_UNUSED VALUE self)
 void
 Init_glib_i18n(void)
 {
+    VALUE RG_TARGET_NAMESPACE = rbg_mGLib();
+
     /* glib/gi18n.h */
     RG_DEF_SMETHOD(language_names, 0);
 }

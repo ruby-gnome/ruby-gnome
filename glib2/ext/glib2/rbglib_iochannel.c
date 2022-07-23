@@ -777,7 +777,7 @@ rg_print(int argc, VALUE *argv, VALUE out)
 void
 Init_glib_io_channel(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_CHANNEL, "IOChannel", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_CHANNEL, "IOChannel", rbg_mGLib()); 
 
     rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
@@ -851,7 +851,7 @@ Init_glib_io_channel(void)
     rb_define_const(RG_TARGET_NAMESPACE, "FLAG_GET_MASK", INT2NUM(G_IO_FLAG_GET_MASK));
     rb_define_const(RG_TARGET_NAMESPACE, "FLAG_SET_MASK", INT2NUM(G_IO_FLAG_SET_MASK));
 
-    rb_mIOChannelSource = rb_define_module_under(mGLib, "IOChannelSource");
+    rb_mIOChannelSource = rb_define_module_under(rbg_mGLib(), "IOChannelSource");
     rb_define_method(rb_mIOChannelSource,
                      "set_callback",
                      rg_io_channel_source_set_callback,

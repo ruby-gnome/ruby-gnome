@@ -71,7 +71,7 @@ rbglib_m_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 void
 Init_glib_fileutils(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_ERROR2(G_FILE_ERROR, "FileError", mGLib, rb_eIOError);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_ERROR2(G_FILE_ERROR, "FileError", rbg_mGLib(), rb_eIOError);
 
     rb_define_const(RG_TARGET_NAMESPACE, "EXIST", INT2NUM(G_FILE_ERROR_EXIST));
     rb_define_const(RG_TARGET_NAMESPACE, "ISDIR", INT2NUM(G_FILE_ERROR_ISDIR));
@@ -98,6 +98,6 @@ Init_glib_fileutils(void)
     rb_define_const(RG_TARGET_NAMESPACE, "PERM", INT2NUM(G_FILE_ERROR_PERM));
     rb_define_const(RG_TARGET_NAMESPACE, "FAILED", INT2NUM(G_FILE_ERROR_FAILED));
 
-    rbg_define_singleton_method(mGLib, "format_size",
+    rbg_define_singleton_method(rbg_mGLib(), "format_size",
                                 rbglib_m_format_size, -1);
 }

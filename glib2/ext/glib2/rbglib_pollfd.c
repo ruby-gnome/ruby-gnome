@@ -75,7 +75,7 @@ rg_revents(VALUE self)
 void
 Init_glib_poll_fd(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_POLLFD, "PollFD", mGLib);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_POLLFD, "PollFD", rbg_mGLib());
 
     RG_DEF_METHOD(initialize, 3);
 

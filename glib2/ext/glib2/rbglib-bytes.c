@@ -122,7 +122,7 @@ rg_pointer(VALUE self)
 void
 Init_glib_bytes(void)
 {
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BYTES, "Bytes", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BYTES, "Bytes", rbg_mGLib());
 
     RG_DEF_SMETHOD(try_convert, 1);
 

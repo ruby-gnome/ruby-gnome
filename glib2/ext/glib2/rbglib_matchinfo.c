@@ -163,7 +163,7 @@ Init_glib_matchinfo(void)
 {
     VALUE RG_TARGET_NAMESPACE;
 
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MATCH_INFO, "MatchInfo", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MATCH_INFO, "MatchInfo", rbg_mGLib());
     RG_DEF_METHOD(regex, 0);
     RG_DEF_METHOD(string, 0);
     RG_DEF_METHOD_P(matches, 0);

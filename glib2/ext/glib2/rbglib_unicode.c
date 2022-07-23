@@ -52,7 +52,7 @@ rg_s_canonical_ordering(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
 void
 Init_glib_unicode(void)
 {
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Unicode");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "Unicode");
 
     /* GUnicodeType */
     G_DEF_CLASS(G_TYPE_UNICODE_TYPE, "Type", RG_TARGET_NAMESPACE);
@@ -65,9 +65,9 @@ Init_glib_unicode(void)
     G_DEF_CLASS(G_TYPE_UNICODE_SCRIPT, "Script", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_UNICODE_SCRIPT, "G_UNICODE_");
 
-    G_DEF_CLASS(G_TYPE_NORMALIZE_MODE, "NormalizeMode", mGLib);
+    G_DEF_CLASS(G_TYPE_NORMALIZE_MODE, "NormalizeMode", rbg_mGLib());
 
-    rbg_define_singleton_method(mGLib, "charset", rbglib_m_charset, 0);
+    rbg_define_singleton_method(rbg_mGLib(), "charset", rbglib_m_charset, 0);
 
     RG_DEF_SMETHOD(canonical_ordering, 1);
 }

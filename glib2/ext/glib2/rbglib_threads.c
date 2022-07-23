@@ -41,7 +41,7 @@ rg_s_supported_p(G_GNUC_UNUSED VALUE self)
 void
 Init_glib_threads(void)
 {
-    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Thread", rb_cObject);
+    RG_TARGET_NAMESPACE = rb_define_class_under(rbg_mGLib(), "Thread", rb_cObject);
 
     RG_DEF_SMETHOD(init, 0);
     RG_DEF_SMETHOD_P(supported, 0);

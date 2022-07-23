@@ -234,7 +234,7 @@ rg_element(VALUE self)
 void
 Init_glib_variant_type(void)
 {
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VARIANT_TYPE, "VariantType", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VARIANT_TYPE, "VariantType", rbg_mGLib());
 
     RG_DEF_SMETHOD_P(valid, 1);
     RG_DEF_SMETHOD(scan, 1);

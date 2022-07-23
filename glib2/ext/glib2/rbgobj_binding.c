@@ -44,7 +44,7 @@ Init_gobject_gbinding(void)
 {
     VALUE RG_TARGET_NAMESPACE;
 
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BINDING, "Binding", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BINDING, "Binding", rbg_mGLib());
 
     RG_DEF_METHOD(unbind, 0);
 }

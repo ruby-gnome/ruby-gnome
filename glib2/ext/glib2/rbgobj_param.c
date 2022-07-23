@@ -353,7 +353,7 @@ void
 Init_gobject_gparam(void)
 {
     qparamspec = g_quark_from_static_string("__ruby_gobject_param_spec__");
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_PARAM, "Param", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_PARAM, "Param", rbg_mGLib());
 
     /* GParamFlags */
     rb_define_const(RG_TARGET_NAMESPACE, "READABLE",

@@ -43,6 +43,6 @@ Init_glib_gettext(void)
 {
     VALUE RG_TARGET_NAMESPACE;
 
-    RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "GetText");
+    RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "GetText");
     RG_DEF_SMETHOD(bindtextdomain, -1);
 }

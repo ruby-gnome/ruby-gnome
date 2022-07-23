@@ -422,7 +422,7 @@ Init_gobject_gvalue(void)
     qRValueToGValueFunc = g_quark_from_static_string("__ruby_r2g_func__");
     qGValueToRValueFunc = g_quark_from_static_string("__ruby_g2r_func__");
 
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VALUE, "Value", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VALUE, "Value", rbg_mGLib());
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(type, 0);
     RG_DEF_METHOD(value, 0);

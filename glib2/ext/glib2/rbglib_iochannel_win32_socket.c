@@ -47,9 +47,9 @@ Init_glib_io_channel_win32_socket(void)
     /* GIOWin32Channel */
     VALUE RG_TARGET_NAMESPACE;
     RG_TARGET_NAMESPACE =
-        rb_define_class_under(mGLib,
+        rb_define_class_under(rbg_mGLib(),
                               "IOChannelWin32Socket",
-                              rb_const_get(mGLib, rb_intern("IOChannel")));
+                              rb_const_get(rbg_mGLib(), rb_intern("IOChannel")));
     RG_DEF_METHOD(initialize, 1);
 #endif
 }

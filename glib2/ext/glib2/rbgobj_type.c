@@ -993,12 +993,12 @@ Init_gobject_gtype(void)
     id_lock = rb_intern("lock");
     id_unlock = rb_intern("unlock");
     lookup_class_mutex = rb_funcall(rb_cMutex, id_new, 0);
-    rb_iv_set(mGLib, "lookup_class_mutex", lookup_class_mutex);
+    rb_iv_set(rbg_mGLib(), "lookup_class_mutex", lookup_class_mutex);
 
     dynamic_gtype_list = g_hash_table_new(g_str_hash, g_str_equal);
     id_gtype = rb_intern("__gobject_gtype__");
 
-    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Type", rb_cObject);
+    RG_TARGET_NAMESPACE = rb_define_class_under(rbg_mGLib(), "Type", rb_cObject);
 
     RG_DEF_SMETHOD(try_convert, 1);
 

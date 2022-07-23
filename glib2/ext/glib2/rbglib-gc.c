@@ -191,7 +191,7 @@ void
 Init_glib_gc(void)
 {
     VALUE gc_marker = rbg_gc_marker_new_raw();
-    rb_ivar_set(mGLib, rb_intern("gc_marker"), gc_marker);
+    rb_ivar_set(rbg_mGLib(), rb_intern("gc_marker"), gc_marker);
     TypedData_Get_Struct(gc_marker,
                          RBGGCMarker,
                          &rbg_gc_marker_type,

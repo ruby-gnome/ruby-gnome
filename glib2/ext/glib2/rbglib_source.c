@@ -177,7 +177,7 @@ gboolean    g_source_remove_by_user_data    (gpointer user_data);
 void
 Init_glib_source(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOURCE, "Source", mGLib);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOURCE, "Source", rbg_mGLib());
 
     id_call = rb_intern("call");
 

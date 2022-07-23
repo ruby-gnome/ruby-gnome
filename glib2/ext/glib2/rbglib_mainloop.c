@@ -119,7 +119,7 @@ rg_context(VALUE self)
 void
 Init_glib_main_loop(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MAIN_LOOP, "MainLoop", mGLib);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MAIN_LOOP, "MainLoop", rbg_mGLib());
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(run, 0);

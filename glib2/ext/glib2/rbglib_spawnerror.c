@@ -28,7 +28,7 @@
 void
 Init_glib_spawnerror(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_ERROR2(G_SPAWN_ERROR, "SpawnError", mGLib, rb_eIOError);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_ERROR2(G_SPAWN_ERROR, "SpawnError", rbg_mGLib(), rb_eIOError);
 
     rb_define_const(RG_TARGET_NAMESPACE, "FORK", INT2NUM(G_SPAWN_ERROR_FORK));
     rb_define_const(RG_TARGET_NAMESPACE, "READ", INT2NUM(G_SPAWN_ERROR_READ));

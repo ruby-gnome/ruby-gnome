@@ -71,7 +71,7 @@ rg_s_to_utf8(G_GNUC_UNUSED VALUE self, VALUE rb_utf16)
 void
 Init_glib_utf16(void)
 {
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "UTF16");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "UTF16");
 
     RG_DEF_SMETHOD(to_ucs4, 1);
     RG_DEF_SMETHOD(to_utf8, 1);

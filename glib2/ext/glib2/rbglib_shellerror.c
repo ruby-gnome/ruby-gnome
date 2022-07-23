@@ -26,7 +26,7 @@
 void
 Init_glib_shellerror(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_ERROR2(G_SHELL_ERROR, "ShellError", mGLib, rb_eRuntimeError);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_ERROR2(G_SHELL_ERROR, "ShellError", rbg_mGLib(), rb_eRuntimeError);
 
     rb_define_const(RG_TARGET_NAMESPACE, "BAD_QUOTING", INT2FIX(G_SHELL_ERROR_BAD_QUOTING));
     rb_define_const(RG_TARGET_NAMESPACE, "EMPTY_STRING", INT2FIX(G_SHELL_ERROR_EMPTY_STRING));

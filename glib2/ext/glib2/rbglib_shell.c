@@ -56,7 +56,7 @@ rg_s_unquote(G_GNUC_UNUSED VALUE self, VALUE quoted_string)
 void
 Init_glib_shell(void)
 {
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Shell");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "Shell");
 
     RG_DEF_SMETHOD(parse, 1);
     RG_DEF_SMETHOD(quote, 1);

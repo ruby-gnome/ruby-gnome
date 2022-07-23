@@ -459,7 +459,7 @@ rg_s_have_reference_p(G_GNUC_UNUSED VALUE self, VALUE rb_replacement)
 void
 Init_glib_regex(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_REGEX, "Regex", mGLib);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_REGEX, "Regex", rbg_mGLib());
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(pattern, 0);
@@ -479,6 +479,6 @@ Init_glib_regex(void)
     RG_DEF_SMETHOD(check_replacement, 1);
     RG_DEF_SMETHOD_P(have_reference, 1);
 
-    G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", mGLib);
-    G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", mGLib);
+    G_DEF_CLASS(G_TYPE_REGEX_MATCH_FLAGS, "RegexMatchFlags", rbg_mGLib());
+    G_DEF_CLASS(G_TYPE_REGEX_COMPILE_FLAGS, "RegexCompileFlags", rbg_mGLib());
 }

@@ -185,7 +185,7 @@ rg_s_decompose(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 void
 Init_glib_unichar(void)
 {
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "UniChar");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "UniChar");
 
     rbg_define_singleton_method(RG_TARGET_NAMESPACE, "alnum?",
                               rbglib_m_unichar_isalnum, 1);

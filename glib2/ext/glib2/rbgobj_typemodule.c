@@ -64,7 +64,7 @@ void     g_type_module_add_interface (GTypeModule           *module,
 void
 Init_gobject_gtypemodule(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_TYPE_MODULE, "TypeModule", mGLib);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_TYPE_MODULE, "TypeModule", rbg_mGLib());
     RG_DEF_METHOD(use, 0);
     RG_DEF_METHOD(unuse, 0);
     RG_DEF_METHOD(name, 0);

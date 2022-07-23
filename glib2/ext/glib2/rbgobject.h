@@ -237,6 +237,7 @@ extern GClosure* g_rclosure_new_call(VALUE callback_proc,
                                      VALUE extra_args,
                                      RGClosureCallFunc func);
 extern void g_rclosure_attach(GClosure *closure, VALUE object);
+extern void g_rclosure_attach_gobject(GClosure *closure, VALUE object);
 extern void g_rclosure_set_tag(GClosure *closure, const gchar *tag);
 
 /* rbgobj_value.c */

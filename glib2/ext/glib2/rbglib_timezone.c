@@ -73,7 +73,7 @@ void
 Init_glib_time_zone(void)
 {
     VALUE RG_TARGET_NAMESPACE;
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_TIME_ZONE, "TimeZone", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_TIME_ZONE, "TimeZone", rbg_mGLib());
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_SMETHOD(local, 0);
     RG_DEF_SMETHOD(utc, 0);

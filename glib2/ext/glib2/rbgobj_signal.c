@@ -406,15 +406,16 @@ gobj_sig_connect_impl(gboolean after, int argc, VALUE *argv, VALUE self)
                                       rbgobj_get_signal_func(signal_id));
         }
     }
-    g_rclosure_attach((GClosure *)rclosure, self);
+    g_rclosure_attach_gobject(rclosure, self);
     g_object = RVAL2GOBJ(self);
     tag = g_strdup_printf("%s::%s",
                           G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(g_object)),
                           sig_name);
-    g_rclosure_set_tag((GClosure *)rclosure, tag);
+    g_rclosure_set_tag(rclosure, tag);
     g_free(tag);
     handler_id = g_signal_connect_closure_by_id(g_object, signal_id, detail,
                                                 rclosure, after);
+    g_closure_unref(rclosure);
 
     return ULONG2NUM(handler_id);
 }
@@ -733,7 +734,7 @@ gobj_s_signal_handler_attach(VALUE klass,
                                         Qnil,
                                         rbgobj_get_signal_func(signal_id));
     g_rclosure_set_tag(rclosure, handler_name);
-    g_rclosure_attach((GClosure *)rclosure, klass);
+    g_rclosure_attach(rclosure, klass);
     g_signal_override_class_closure(signal_id, cinfo->gtype, rclosure);
 
     {
@@ -972,7 +973,7 @@ Init_gobject_gsignal(void)
 {
     VALUE cSignalFlags, cSignalMatchType;
 
-    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Signal", rb_cObject);
+    RG_TARGET_NAMESPACE = rb_define_class_under(rbg_mGLib(), "Signal", rb_cObject);
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rbgobj_signal_alloc_func);
 
     RG_DEF_METHOD(initialize, 1);
@@ -989,7 +990,7 @@ Init_gobject_gsignal(void)
     RG_DEF_METHOD(remove_emission_hook, 1);
 
     /* GSignalFlags */
-    cSignalFlags = G_DEF_CLASS(G_TYPE_SIGNAL_FLAGS, "SignalFlags", mGLib);
+    cSignalFlags = G_DEF_CLASS(G_TYPE_SIGNAL_FLAGS, "SignalFlags", rbg_mGLib());
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SIGNAL_FLAGS, "G_SIGNAL_");
     rb_define_const(cSignalFlags, "MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
     rb_define_const(RG_TARGET_NAMESPACE, "FLAGS_MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
@@ -1003,19 +1004,19 @@ Init_gobject_gsignal(void)
     rbg_define_method(RG_TARGET_NAMESPACE, "no_hooks?", query_is_G_SIGNAL_NO_HOOKS, 0);
 
     /* GConnectFlags */
-    G_DEF_CLASS(G_TYPE_CONNECT_FLAGS, "ConnectFlags", mGLib);
+    G_DEF_CLASS(G_TYPE_CONNECT_FLAGS, "ConnectFlags", rbg_mGLib());
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_CONNECT_FLAGS, "G_");
 
     /* GSignalMatchType */
     cSignalMatchType = G_DEF_CLASS(G_TYPE_SIGNAL_MATCH_TYPE,
-                                   "SignalMatchType", mGLib);
+                                   "SignalMatchType", rbg_mGLib());
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SIGNAL_MATCH_TYPE, "G_SIGNAL_");
     rb_define_const(cSignalMatchType, "MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
     rb_define_const(RG_TARGET_NAMESPACE, "MATCH_MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
 
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STATIC_SCOPE", INT2FIX(G_SIGNAL_TYPE_STATIC_SCOPE));
 
-    eNoSignalError = rb_define_class_under(mGLib, "NoSignalError", rb_eNameError);
+    eNoSignalError = rb_define_class_under(rbg_mGLib(), "NoSignalError", rb_eNameError);
 
     rbg_signal_func_table = g_hash_table_new(g_direct_hash, g_direct_equal);
     g_mutex_init(&rbg_signal_func_table_mutex);

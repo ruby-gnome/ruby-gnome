@@ -32,7 +32,7 @@ rg_s_from_errno(G_GNUC_UNUSED VALUE self, VALUE errno_)
 void
 Init_glib_io_channelerror(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_ERROR2(G_IO_CHANNEL_ERROR, "IOChannelError", mGLib, rb_eIOError);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_ERROR2(G_IO_CHANNEL_ERROR, "IOChannelError", rbg_mGLib(), rb_eIOError);
 
     /* GIOChannelError */
     RG_DEF_SMETHOD(from_errno, 1);

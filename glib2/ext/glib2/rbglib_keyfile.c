@@ -631,8 +631,8 @@ rg_remove_comment(VALUE self, VALUE group_name, VALUE key)
 void
 Init_glib_keyfile(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_KEY_FILE, "KeyFile", mGLib);   
-    G_DEF_ERROR(G_KEY_FILE_ERROR, "KeyFileError", mGLib, 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_KEY_FILE, "KeyFile", rbg_mGLib());   
+    G_DEF_ERROR(G_KEY_FILE_ERROR, "KeyFileError", rbg_mGLib(), 
                 rb_eRuntimeError, G_TYPE_KEY_FILE_ERROR);
 
     RG_DEF_METHOD(initialize, 0);

@@ -286,7 +286,7 @@ rg_type(VALUE self)
 void
 Init_glib_variant(void)
 {
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VARIANT, "Variant", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VARIANT, "Variant", rbg_mGLib());
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rg_variant_allocate);
 

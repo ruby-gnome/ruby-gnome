@@ -23,8 +23,6 @@
 #include "rbgprivate.h"
 #include "rbglib.h"
 
-#define RG_TARGET_NAMESPACE mGLib
-
 static VALUE
 rg_s_convert(G_GNUC_UNUSED VALUE self, VALUE str, VALUE to, VALUE from)
 {
@@ -171,6 +169,8 @@ rg_s_utf8_validate(G_GNUC_UNUSED VALUE self, VALUE str)
 void
 Init_glib_convert(void)
 {
+    VALUE RG_TARGET_NAMESPACE = rbg_mGLib();
+
     VALUE cCharError = G_DEF_ERROR2(G_CONVERT_ERROR, "ConvertError", RG_TARGET_NAMESPACE, rb_eIOError);
 
     rb_define_const(cCharError, "NO_CONVERSION", INT2NUM(G_CONVERT_ERROR_NO_CONVERSION));

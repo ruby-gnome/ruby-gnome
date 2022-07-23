@@ -21,7 +21,7 @@
 
 #include "rbgprivate.h"
 
-#define RG_TARGET_NAMESPACE mGLib
+#define RG_TARGET_NAMESPACE rbg_mGLib()
 
 static VALUE
 rg_s_application_name(G_GNUC_UNUSED VALUE self)

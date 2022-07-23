@@ -53,7 +53,7 @@ is_timezone(VALUE rb_timezone)
 {
     VALUE rb_cTimeZone;
 
-    rb_cTimeZone = rb_const_get(mGLib, rb_intern("TimeZone"));
+    rb_cTimeZone = rb_const_get(rbg_mGLib(), rb_intern("TimeZone"));
     return RVAL2CBOOL(rb_obj_is_kind_of(rb_timezone, rb_cTimeZone));
 }
 
@@ -243,7 +243,7 @@ Init_glib_date_time(void)
 {
     VALUE RG_TARGET_NAMESPACE;
 
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DATE_TIME, "DateTime", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DATE_TIME, "DateTime", rbg_mGLib());
 
     RG_DEF_SMETHOD(now, -1);
 

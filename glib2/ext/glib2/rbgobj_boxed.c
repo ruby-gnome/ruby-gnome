@@ -302,7 +302,7 @@ boxed_from_ruby(VALUE from, GValue *to)
 void
 Init_gobject_gboxed(void)
 {
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", rbg_mGLib());
 
     rbgobj_register_g2r_func(G_TYPE_BOXED, boxed_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_BOXED, boxed_from_ruby);

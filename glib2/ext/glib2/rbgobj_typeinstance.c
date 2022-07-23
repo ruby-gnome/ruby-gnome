@@ -125,7 +125,7 @@ void
 Init_gobject_typeinstance(void)
 {
     /* should be renamed to GLib::Instance? */
-    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Instantiatable", rb_cObject);
+    RG_TARGET_NAMESPACE = rb_define_class_under(rbg_mGLib(), "Instantiatable", rb_cObject);
     rb_extend_object(RG_TARGET_NAMESPACE, mMetaInterface);
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))instantiatable_s_allocate);

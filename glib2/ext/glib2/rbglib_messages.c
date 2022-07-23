@@ -129,7 +129,7 @@ rg_s_log(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE level, VALUE str)
 void
 Init_glib_messages(void)
 {
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Log");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "Log");
 
     log_canceled = FALSE;
 

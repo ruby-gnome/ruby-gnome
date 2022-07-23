@@ -217,7 +217,7 @@ rg_s_close_pid(G_GNUC_UNUSED VALUE self, VALUE pid)
 void
 Init_glib_spawn(void)
 {
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Spawn");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "Spawn");
 
     id_call = rb_intern("call");
     id_new = rb_intern("new");

@@ -542,7 +542,7 @@ Init_gobject_gflags(void)
     id_or = rb_intern("|");
     id_to_i = rb_intern("to_i");
 
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FLAGS, "Flags", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FLAGS, "Flags", rbg_mGLib());
 
     rbg_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
