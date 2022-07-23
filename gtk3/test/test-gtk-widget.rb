@@ -244,6 +244,11 @@ class TestGtkWidget < Test::Unit::TestCase
         singleton_class.send(:define_method, :init) do
           super()
           set_template(:data => data)
+          set_connect_func do |handler_name|
+            lambda do
+              # Do nothing
+            end
+          end
         end
       end
       widget = widget_class.new
@@ -259,6 +264,11 @@ class TestGtkWidget < Test::Unit::TestCase
           super()
           set_template(:data => data)
           bind_template_child(:label)
+          set_connect_func do |handler_name|
+            lambda do
+              # Do nothing
+            end
+          end
         end
       end
       widget = widget_class.new
