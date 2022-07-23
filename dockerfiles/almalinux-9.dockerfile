@@ -1,8 +1,6 @@
 FROM almalinux:9
 
 RUN \
-  dnf module disable -y ruby && \
-  dnf module enable -y ruby:3.0 && \
   dnf install -y \
     epel-release && \
   dnf install -y \
