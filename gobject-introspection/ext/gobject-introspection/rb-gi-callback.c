@@ -52,7 +52,6 @@ typedef struct {
 } RBGICallbackInvokeData;
 
 static GPtrArray *callback_finders;
-static VALUE mGLibObject = Qnil;
 static VALUE mGI = Qnil;
 
 static VALUE
@@ -248,14 +247,14 @@ rb_gi_callback_data_new(RBGIArguments *args,
     if (NIL_P(rb_owner)) {
         /* Module function case. */
         VALUE rb_first_argument = RARRAY_AREF(args->rb_args, 0);
-        if (RVAL2CBOOL(rb_obj_is_kind_of(rb_first_argument, mGLibObject))) {
+        if (RVAL2CBOOL(rb_obj_is_kind_of(rb_first_argument, rbg_cGLibObject()))) {
             /* If the first argument of the module function call is
                GObject, it's suitable for owner.
                For example: pango_cairo_context_set_shape_renderer() */
             rb_owner = rb_first_argument;
         }
     }
-    if (RVAL2CBOOL(rb_obj_is_kind_of(rb_owner, mGLibObject))) {
+    if (RVAL2CBOOL(rb_obj_is_kind_of(rb_owner, rbg_cGLibObject()))) {
         rbgobj_object_add_relative(rb_owner, callback_data->rb_callback);
         callback_data->owner = RVAL2GOBJ(rb_owner);
         g_object_weak_ref(callback_data->owner,
@@ -413,6 +412,5 @@ rb_gi_callback_init(VALUE rb_mGI)
     callback_finders = g_ptr_array_new();
     rb_gi_callback_register_finder(source_func_callback_finder);
 
-    mGLibObject = rb_const_get(mGLib, rb_intern("Object"));
     mGI = rb_mGI;
 }

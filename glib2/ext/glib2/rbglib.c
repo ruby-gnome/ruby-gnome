@@ -29,6 +29,12 @@ static ID id_inspect;
 
 VALUE RG_TARGET_NAMESPACE;
 
+VALUE
+rbg_mGLib(void)
+{
+    return RG_TARGET_NAMESPACE;
+}
+
 const gchar *
 rbg_rval2cstr(VALUE *str)
 {

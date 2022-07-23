@@ -30,6 +30,12 @@ VALUE RG_TARGET_NAMESPACE;
 static VALUE eNoPropertyError;
 static GQuark RUBY_GOBJECT_OBJ_KEY;
 
+VALUE
+rbg_cGLibObject(void)
+{
+    return RG_TARGET_NAMESPACE;
+}
+
 gboolean
 rbg_is_object(VALUE object)
 {

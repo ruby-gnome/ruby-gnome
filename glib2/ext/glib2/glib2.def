@@ -81,6 +81,8 @@ EXPORTS
 	g_value_get_ruby_value
 	g_value_set_ruby_value
 	g_key_file_get_type
+	rbg_mGLib
+	rbg_cGLibObject
 	rbg_rval_inspect
 	rbg_string_value_ptr
 	rbg_rval2cstr

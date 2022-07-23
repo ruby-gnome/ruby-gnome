@@ -2425,7 +2425,7 @@ rb_gi_arguments_fill_raw_out_gerror(RBGIArguments *args,
     gint n_args = g_callable_info_get_n_args(args->info);
     /* GError ** isn't listed in args. */
     GError **gerror = *((gpointer *)(args->raw_args[n_args]));
-    VALUE cGLibErrorInfo = rb_const_get(mGLib, rb_intern("ErrorInfo"));
+    VALUE cGLibErrorInfo = rb_const_get(rbg_mGLib(), rb_intern("ErrorInfo"));
     if (NIL_P(rb_error)) {
         g_set_error(gerror,
                     RBG_RUBY_ERROR,

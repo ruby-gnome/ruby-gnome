@@ -173,7 +173,12 @@ G_BEGIN_DECLS
 #  define RUBY_GLIB2_VAR extern
 #endif
 
+/* Deprecated. Use rbg_mGLib() instead. */
+G_GNUC_DEPRECATED_FOR(rbg_mGLib())
 RUBY_GLIB2_VAR VALUE mGLib;
+
+extern VALUE rbg_mGLib(void);
+extern VALUE rbg_cGLibObject(void);
 
 extern const gchar *rbg_rval_inspect(VALUE object);
 
