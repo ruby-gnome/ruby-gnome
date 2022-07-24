@@ -28,12 +28,13 @@ require "mkmf-gnome"
 
 unless required_pkg_config_package([package_id, 2, 12, 0],
                                    :alt_linux => "glib2-devel",
-                                   :debian => "libglib2.0-dev",
-                                   :redhat => "pkgconfig(#{package_id})",
                                    :arch_linux => "glib2",
+                                   :debian => "libglib2.0-dev",
+                                   :gentoo_linux => "dev-libs/glib",
                                    :homebrew => "glib",
                                    :macports => "glib2",
-                                   :msys2 => "glib2")
+                                   :msys2 => "glib2",
+                                   :redhat => "pkgconfig(#{package_id})")
   exit(false)
 end
 PKGConfig.have_package('gthread-2.0')
