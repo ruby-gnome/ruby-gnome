@@ -2497,6 +2497,9 @@ rb_gi_arguments_fill_raw_result_interface(RBGIArguments *args,
                        g_base_info_get_name(interface_info));
           } else {
               value = RVAL2BOXED(rb_result, gtype);
+              if (transfer == GI_TRANSFER_EVERYTHING) {
+                  value = g_boxed_copy(gtype, value);
+              }
           }
           if (is_return_value) {
               ffi_return_value->v_pointer = value;
