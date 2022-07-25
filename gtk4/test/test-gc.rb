@@ -23,7 +23,7 @@ class TestGC < Test::Unit::TestCase
       box.append(button.new)
     end
     GC.start
-    assert_equal([button] * 10,
+    assert_equal([button] * n,
                  box.children.collect {|item| item.class})
   end
 end

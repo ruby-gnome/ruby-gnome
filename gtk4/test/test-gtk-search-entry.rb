@@ -23,10 +23,11 @@ class TestGtkSearchEntry < Test::Unit::TestCase
 
   def test_search_changed_signal
     called = false
-    @search_entry.signal_connect("search-changed") do
+    id = @search_entry.signal_connect("search-changed") do
       called = true
     end
     @search_entry.signal_emit("search-changed")
+    @search_entry.signal_handler_disconnect(id)
     assert_true(called)
   end
 end

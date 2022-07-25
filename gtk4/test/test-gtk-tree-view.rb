@@ -28,9 +28,6 @@ class TestGtkTreeView < Test::Unit::TestCase
 
       @window = Gtk::Window.new
       @window.child = @view
-      @window.signal_connect("destroy") do
-        Gtk.main_quit
-      end
     end
 
     sub_test_case "#get_path_at_pos" do
@@ -206,6 +203,10 @@ class TestGtkTreeView < Test::Unit::TestCase
       child[0] = "child"
       grand_child = @store.append(child)
       grand_child[0] = "grand child"
+    end
+
+    def teardown
+      GC.start
     end
 
     test "row-collapsed" do

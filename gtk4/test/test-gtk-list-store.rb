@@ -247,10 +247,7 @@ class TestGtkListStore < Test::Unit::TestCase
 
     private
     def count_objects(klass)
-      n_objects = ObjectSpace.each_object(Gtk::TreeIter) do
-        # do nothing
-      end
-      n_objects
+      ObjectSpace.each_object(klass) {}
     end
   end
 end

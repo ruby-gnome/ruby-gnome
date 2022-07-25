@@ -17,6 +17,10 @@
 class TestGtkBuilder < Test::Unit::TestCase
   include GtkTestUtils
 
+  def teardown
+    GC.start
+  end
+
   def test_constants
     assert_const_defined(Gtk::BuilderError, :INVALID_TAG)
   end
