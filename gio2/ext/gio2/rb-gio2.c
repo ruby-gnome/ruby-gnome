@@ -22,6 +22,46 @@
 
 #define RG_TARGET_NAMESPACE rb_mGio
 
+static void
+rb_gio2_action_mark(gpointer object)
+{
+    GAction *action = G_ACTION(object);
+    rbgobj_gc_mark_instance(action);
+}
+
+static void
+rb_gio2_action_proxy_mark(gpointer object)
+{
+    gchar **names;
+    gchar *name;
+    GAction *action;
+
+    names = g_action_group_list_actions(G_ACTION_GROUP(object));
+    for (size_t n = 0;  names[n] != NULL; n++) {
+        name = names[n];
+        action = g_action_map_lookup_action(G_ACTION_MAP(object), name);
+        if (action != NULL) {
+            rb_gio2_action_mark(action);
+        }
+    }
+    g_strfreev(names);
+}
+
+static void
+rb_gio2_application_mark(gpointer object)
+{
+    rb_gio2_action_proxy_mark(object);
+    rbgobj_gc_mark_instance(G_APPLICATION(object));
+}
+
+static void
+rb_gio2_simple_action_group_mark(gpointer object)
+{
+    rb_gio2_action_proxy_mark(object);
+    rbgobj_gc_mark_instance(G_SIMPLE_ACTION_GROUP(object));
+}
+
+
 void
 Init_gio2 (void)
 {
@@ -31,4 +71,8 @@ Init_gio2 (void)
 
     rb_gio2_init_application(RG_TARGET_NAMESPACE);
     rb_gio2_init_pollable_source(RG_TARGET_NAMESPACE);
+
+    rbgobj_register_mark_func(G_TYPE_ACTION, rb_gio2_action_mark);
+    rbgobj_register_mark_func(G_TYPE_APPLICATION, rb_gio2_application_mark);
+    rbgobj_register_mark_func(G_TYPE_SIMPLE_ACTION_GROUP, rb_gio2_simple_action_group_mark);
 }

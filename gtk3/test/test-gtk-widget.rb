@@ -305,4 +305,36 @@ class TestGtkWidget < Test::Unit::TestCase
       assert_equal(["on_move_cursor"], handler_names)
     end
   end
+
+  sub_test_case "Gio::ActionGroup support" do
+    def setup
+      super
+      @action_group = Gio::SimpleActionGroup.new
+      @action_prefix = "rg"
+    end
+
+    test("#insert_action_group [add]") do
+      @widget.insert_action_group(@action_prefix, @action_group)
+    end
+
+    test("#get_action_group") do
+      @widget.insert_action_group(@action_prefix, @action_group)
+      group_out = @widget.get_action_group(@action_prefix)
+      assert_not_nil(group_out)
+      assert_equal(group_out, @action_group)
+    end
+
+    test("#insert_action_group [remove]") do
+      @widget.insert_action_group(@action_prefix, @action_group)
+      @widget.insert_action_group(@action_prefix, nil)
+      group_out = @widget.get_action_group(@action_prefix)
+      assert_nil(group_out)
+    end
+
+    test("#list_action_prefixes") do
+      @widget.insert_action_group(@action_prefix, @action_group)
+      prefixes = @widget.action_prefixes
+      assert_equal(prefixes, [@action_prefix])
+    end
+  end
 end

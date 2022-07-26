@@ -21,6 +21,7 @@
 #ifndef RB_GTK3_H
 #define RB_GTK3_H
 
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 
 #include <rb-gobject-introspection.h>

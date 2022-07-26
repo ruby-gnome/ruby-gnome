@@ -44,4 +44,5 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("atk", "= #{s.version}")
   s.add_runtime_dependency("gdk3", "= #{s.version}")
+  s.add_runtime_dependency("gio2", "= #{s.version}")
 end

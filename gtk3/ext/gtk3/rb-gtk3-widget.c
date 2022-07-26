@@ -62,6 +62,29 @@ rb_gtk3_widget_draw(RGClosureCallData *data)
                         RVAL2CBOOL(rb_stop_propagate));
 }
 
+
+static void
+rb_gtk3_widget_mark(gpointer object)
+{
+    GtkWidget *widget;
+    GActionGroup *group;
+    const gchar** prefixes;
+    const gchar* prefix;
+    size_t n;
+
+    widget = GTK_WIDGET(object);
+    rbgobj_gc_mark_instance(widget);
+
+    prefixes = gtk_widget_list_action_prefixes(widget);
+    for (n = 0; prefixes[n] != NULL; n++) {
+        prefix = prefixes[n];
+        group = gtk_widget_get_action_group(widget, prefix);
+        if (group != NULL) {
+            rbgobj_gc_mark_instance(group);
+        }
+    }
+}
+
 void
 rbgtk3_widget_init(void)
 {
@@ -72,6 +95,8 @@ rbgtk3_widget_init(void)
     RG_TARGET_NAMESPACE = rb_const_get(mGtk, rb_intern("Widget"));
 
     RG_DEF_PRIVATE_METHOD(initialize_post, 0);
+
+    rbgobj_register_mark_func(GTK_TYPE_WIDGET, rb_gtk3_widget_mark);
 
     rbgobj_set_signal_call_func(RG_TARGET_NAMESPACE,
                                 "draw",
