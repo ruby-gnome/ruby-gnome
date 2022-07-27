@@ -283,6 +283,43 @@ rg_type(VALUE self)
     return GVARIANTTYPE2RVAL((GVariantType *)g_variant_get_type(variant));
 }
 
+static VALUE
+rg_variant_print(VALUE self, VALUE type_annotate)
+{
+    GVariant *variant;
+    gboolean annotate;
+
+    variant = _SELF(self);
+    annotate = RVAL2CBOOL(type_annotate);
+
+    return CSTR2RVAL(g_variant_print(variant, annotate));
+}
+
+static VALUE
+rg_s_parse(VALUE self, VALUE str, VALUE rb_variant_type)
+{
+    const gchar *text = RVAL2CSTR(str);
+    const GVariantType *variant_type =
+        NIL_P(rb_variant_type) ? NULL : RVAL2GVARIANTTYPE(rb_variant_type);
+    const gchar *limit = NULL;
+    const gchar **endptr = NULL;
+    GVariant *variant;
+    GError *err = NULL;
+
+    variant = g_variant_parse(variant_type, text, limit, endptr, &err);
+
+    if (err != NULL) {
+        gchar* info = g_variant_parse_error_print_context(err, text);
+        g_log(G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, info);
+        RAISE_GERROR(err);
+    }
+    VALUE rb_value = rg_variant_allocate(self);
+    g_variant_ref_sink(variant);
+    RTYPEDDATA_DATA(rb_value) = variant;
+    return rb_value;
+}
+
+
 void
 Init_glib_variant(void)
 {
@@ -293,4 +330,6 @@ Init_glib_variant(void)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(value, 0);
     RG_DEF_METHOD(type, 0);
+    RG_DEF_METHOD(variant_print, 0);
+    RG_DEF_SMETHOD(parse, 2);
 }

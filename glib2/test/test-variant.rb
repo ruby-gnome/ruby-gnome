@@ -24,4 +24,53 @@ class TestGLibVariant < Test::Unit::TestCase
                    [variant.type, variant.value])
     end
   end
+
+  sub_test_case ".parse" do
+    test "value: true" do
+      variant = GLib::Variant.parse("true")
+      assert_equal(true, variant.value)
+    end
+
+    test "value: float" do
+      variant = GLib::Variant.parse(Math::PI.to_s)
+      assert_equal(Math::PI, variant.value)
+    end
+
+    test "value: infinity" do
+      variant = GLib::Variant.parse("inf")
+      assert_equal(Float::INFINITY, variant.value)
+    end
+
+    test "value: int vector" do
+      variant = GLib::Variant.parse("[1, 2, 3]")
+      assert_equal([1, 2, 3], variant.value)
+    end
+  end
+
+  sub_test_case "#variant_print" do
+    test "value: true" do
+      variant = GLib::Variant.new(true)
+      out = variant.variant_print
+      assert_equal("true", out)
+    end
+
+    test "value: float" do
+      variant = GLib::Variant.new(Math::PI)
+      out = variant.variant_print
+      ## this may avoid mismatch from rounding error
+      assert_equal(Math::PI, out.to_f)
+    end
+
+    test "value: infinity" do
+      variant = GLib::Variant.new(Float::INFINITY)
+      out = variant.variant_print
+      assert_equal("inf", out)
+    end
+
+    test "value: int vector" do
+      variant = GLib::Variant.new([1, 2, 3])
+      out = variant.variant_print
+      assert_equal("[1, 2, 3]", out)
+    end
+  end
 end
