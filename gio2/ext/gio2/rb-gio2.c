@@ -50,15 +50,19 @@ rb_gio2_action_proxy_mark(gpointer object)
 static void
 rb_gio2_application_mark(gpointer object)
 {
-    rb_gio2_action_proxy_mark(object);
-    rbgobj_gc_mark_instance(G_APPLICATION(object));
+    GApplication *app = G_APPLICATION(object);
+    rbgobj_gc_mark_instance(app);
+    if (g_application_get_is_registered(app)) {
+        rb_gio2_action_proxy_mark(app);
+    }
 }
 
 static void
 rb_gio2_simple_action_group_mark(gpointer object)
 {
-    rb_gio2_action_proxy_mark(object);
-    rbgobj_gc_mark_instance(G_SIMPLE_ACTION_GROUP(object));
+    GSimpleActionGroup *group = G_SIMPLE_ACTION_GROUP(object);
+    rbgobj_gc_mark_instance(group);
+    rb_gio2_action_proxy_mark(group);
 }
 
 
