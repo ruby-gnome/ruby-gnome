@@ -48,4 +48,32 @@ class TestActionMap < Test::Unit::TestCase
       assert_equal([action, "X"], args)
     end
   end
+
+  sub_test_case "#add_action / #lookup_action / #remove_action" do
+    def setup
+      super
+      @action_name = "test"
+      @action = Gio::SimpleAction.new(@action_name)
+    end
+
+    test "add action, lookup action" do
+      @map.add_action(@action)
+      out = @map.lookup_action(@action_name)
+      assert_equal(@action, out)
+    end
+
+    test "add action, remove action, lookup action" do
+      @map.add_action(@action)
+      @map.remove_action(@action_name)
+      out = @map.lookup_action(@action_name)
+      assert_nil(out)
+    end
+
+    test "add action, GC, lookup action" do
+      @map.add_action(@action)
+      GC.start
+      out = @map.lookup_action(@action_name)
+      assert_equal(@action, out)
+    end
+  end
 end

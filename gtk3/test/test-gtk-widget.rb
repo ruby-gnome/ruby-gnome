@@ -313,11 +313,7 @@ class TestGtkWidget < Test::Unit::TestCase
       @action_prefix = "rg"
     end
 
-    test("#insert_action_group [add]") do
-      @widget.insert_action_group(@action_prefix, @action_group)
-    end
-
-    test("#get_action_group") do
+    test("#insert_action_group, #get_action_group") do
       @widget.insert_action_group(@action_prefix, @action_group)
       group_out = @widget.get_action_group(@action_prefix)
       assert_not_nil(group_out)
@@ -333,6 +329,13 @@ class TestGtkWidget < Test::Unit::TestCase
 
     test("#list_action_prefixes") do
       @widget.insert_action_group(@action_prefix, @action_group)
+      prefixes = @widget.action_prefixes
+      assert_equal(prefixes, [@action_prefix])
+    end
+
+    test("#list_action_prefixes [GC]") do
+      @widget.insert_action_group(@action_prefix, @action_group)
+      GC.start
       prefixes = @widget.action_prefixes
       assert_equal(prefixes, [@action_prefix])
     end
