@@ -45,6 +45,12 @@ class TestGLibVariant < Test::Unit::TestCase
       variant = GLib::Variant.parse("[1, 2, 3]")
       assert_equal([1, 2, 3], variant.value)
     end
+
+    test "value: integer, type: UINT16" do
+      variant = GLib::Variant.parse("65535", GLib::VariantType::UINT16)
+      assert_equal(65535, variant.value)
+      assert_equal("q", variant.type.to_s)
+    end
   end
 
   sub_test_case "#variant_print" do
@@ -71,6 +77,18 @@ class TestGLibVariant < Test::Unit::TestCase
       variant = GLib::Variant.new([1, 2, 3])
       out = variant.variant_print
       assert_equal("[1, 2, 3]", out)
+    end
+
+    test "value: integer, type: UINT16, type_annotate: true" do
+      variant = GLib::Variant.new(65535, GLib::VariantType::UINT16)
+      out = variant.variant_print(true)
+      assert_equal("uint16 65535", out)
+    end
+
+    test "value: int vector, type_anntoate: true" do
+      variant = GLib::Variant.new([1, 2, 3])
+      out = variant.variant_print(true)
+      assert_equal("[int64 1, 2, 3]", out)
     end
   end
 end

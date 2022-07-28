@@ -330,6 +330,6 @@ Init_glib_variant(void)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(value, 0);
     RG_DEF_METHOD(type, 0);
-    RG_DEF_METHOD(variant_print, 0);
+    RG_DEF_METHOD(variant_print, 1);
     RG_DEF_SMETHOD(parse, 2);
 }

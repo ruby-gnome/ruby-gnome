@@ -23,5 +23,11 @@ module GLib
         parse_raw(string, type)
       end
     end
+
+    alias_method :variant_print_raw, :variant_print
+
+    def variant_print(type_annotate = false)
+      variant_print_raw(type_annotate)
+    end
   end
 end
