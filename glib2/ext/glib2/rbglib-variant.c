@@ -107,10 +107,21 @@ rg_variant_free(gpointer object)
     g_variant_unref(variant);
 }
 
+static const rb_data_type_t rbg_variant_type = {
+    "GLib::Variant",
+    {
+        NULL,
+        rg_variant_free,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
+
 static VALUE
 rg_variant_allocate(VALUE klass)
 {
-    return Data_Wrap_Struct(klass, NULL, rg_variant_free, NULL);
+    return TypedData_Wrap_Struct(klass, &rbg_variant_type, NULL);
 }
 
 static GVariant *
