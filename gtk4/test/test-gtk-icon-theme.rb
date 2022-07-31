@@ -50,18 +50,18 @@ class TestGtkIconTheme < Test::Unit::TestCase
   sub_test_case "#lookup_icon" do
     sub_test_case "icon" do
       test "String" do
-        assert_equal("edit-find",
-                     @theme.lookup_icon("edit-find", 16).icon_name)
+        assert_equal("edit-find-symbolic",
+                     @theme.lookup_icon("edit-find-symbolic", 16).icon_name)
       end
 
       test "Symbol" do
-        assert_equal("edit-find",
-                     @theme.lookup_icon(:"edit-find", 16).icon_name)
+        assert_equal("edit-find-symbolic",
+                     @theme.lookup_icon(:"edit-find-symbolic", 16).icon_name)
       end
 
       test "Gio::Icon" do
-        icon = Gio::ThemedIcon.new("edit-find")
-        assert_equal("edit-find",
+        icon = Gio::ThemedIcon.new("edit-find-symbolic")
+        assert_equal("edit-find-symbolic",
                      @theme.lookup_icon(icon, 16).icon_name)
       end
     end
