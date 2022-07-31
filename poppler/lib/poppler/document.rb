@@ -48,18 +48,15 @@ module Poppler
       password = options[:password]
 
       if data
-        # Workaround: poppler_document_new_from_data()'s .gir
-        # accepts PDF data as UTF-8 string. PDF data is not UTF-8
-        # string. So UTF-8 validation is failed.
-        #
-        # TODO: Enable the following:
-        # initialize_new_from_data(data, password)
-
-        @file = Tempfile.new(["poppler", ".pdf"])
-        @file.binmode
-        @file.write(data)
-        @file.close
-        initialize_new_from_file(ensure_uri(@file.path), password)
+        if respond_to?(:initialize_new_from_bytes)
+          initialize_new_from_bytes(data, password)
+        else
+          @file = Tempfile.new(["poppler", ".pdf"])
+          @file.binmode
+          @file.write(data)
+          @file.close
+          initialize_new_from_file(ensure_uri(@file.path), password)
+        end
       elsif uri
         initialize_new_from_file(uri, password)
       elsif path

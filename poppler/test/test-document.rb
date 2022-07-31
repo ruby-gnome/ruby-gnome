@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2021  Ruby-GNOME Project Team
+# Copyright (C) 2008-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -32,15 +32,27 @@ class TestDocument < Test::Unit::TestCase
         end
       end
 
-      def test_default_internal
+      def setup
         pdf = StringIO.new("".b)
-        surface = Cairo::PDFSurface.new(pdf, 100, 100)
-        context = Cairo::Context.new(surface)
-        context.show_text("Hello")
-        surface.finish
+        Cairo::PDFSurface.create(pdf, 100, 100) do |surface|
+          Cairo::Context.create(surface) do |context|
+            context.show_text("Hello")
+          end
+        end
+        @pdf_data = pdf.string.freeze
+      end
 
+      def test_default_internal
         document = with_default_internal(Encoding::UTF_8) do
-          Poppler::Document.new(:data => pdf.string)
+          Poppler::Document.new(data: @pdf_data)
+        end
+        assert_equal("Hello", document[0].text)
+      end
+
+      def test_glib_bytes
+        only_poppler_version(0, 82, 0)
+        document = with_default_internal(Encoding::UTF_8) do
+          Poppler::Document.new(data: GLib::Bytes.new(@pdf_data))
         end
         assert_equal("Hello", document[0].text)
       end
