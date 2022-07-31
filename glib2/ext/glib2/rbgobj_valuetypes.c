@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2020  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2022  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -22,11 +22,21 @@
 #include "rbgprivate.h"
 #include "rbgobject.h"
 
+static const rb_data_type_t rbg_pointer_type = {
+    "GLib::Poitner",
+    {
+        NULL,
+        NULL,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
 
 VALUE
 rbgobj_ptr_new(GType type, gpointer ptr)
 {
-    return Data_Wrap_Struct(GTYPE2CLASS(type), NULL, NULL, ptr);
+    return TypedData_Wrap_Struct(GTYPE2CLASS(type), &rbg_pointer_type, ptr);
 }
 
 gpointer
@@ -34,7 +44,7 @@ rbgobj_ptr2cptr(VALUE ptr)
 {
     gpointer dest;
     if (rb_obj_is_kind_of(ptr, GTYPE2CLASS(G_TYPE_POINTER))){
-        Data_Get_Struct(ptr, void, dest);
+        TypedData_Get_Struct(ptr, void, &rbg_pointer_type, dest);
     } else if (rb_obj_is_kind_of(ptr, rb_cObject)){
         dest = (gpointer)ptr;
     } else{
