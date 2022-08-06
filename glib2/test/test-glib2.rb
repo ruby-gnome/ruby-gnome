@@ -134,14 +134,14 @@ class TestGLib < Test::Unit::TestCase
     klass = Class.new
     n_tries = 100
     n_tries.times {
-      closed_object = klass.new
-      id = object.signal_connect("notify") { p closed_object }
+      garbage_collected_object = klass.new
+      id = object.signal_connect("notify") { p garbage_collected_object }
       object.signal_handler_disconnect(id)
     }
     GC.start
-    n_closed_objects = ObjectSpace.each_object(klass) {}
+    n_alive_objects = ObjectSpace.each_object(klass) {}
     assert do
-      n_closed_objects < n_tries
+      n_alive_objects < n_tries
     end
   end
 
