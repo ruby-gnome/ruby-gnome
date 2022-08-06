@@ -116,18 +116,5 @@ module Gtk
         instance_variable_set("@#{name}", get_template_child(gtype, name))
       end
     end
-
-    def ensure_drag_targets(targets)
-      return targets unless targets.is_a?(Array)
-
-      targets.collect do |target|
-        case target
-        when Array
-          TargetEntry.new(*target)
-        else
-          target
-        end
-      end
-    end
   end
 end
