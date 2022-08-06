@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2020  Ruby-GNOME Project Team
+# Copyright (C) 2008-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -304,5 +304,24 @@ class TestGtkWidget < Test::Unit::TestCase
       widget_class.new
       assert_equal(["on_move_cursor"], handler_names)
     end
+  end
+
+  def test_gc_action_group
+    GC.start
+    n_alive_action_groups_before =
+      ObjectSpace.each_object(Gio::SimpleActionGroup) {}
+    n_tries = 100
+    n_tries.times do |i|
+      action_prefix = "test#{i}"
+      action_group = Gio::SimpleActionGroup.new
+      @widget.insert_action_group(action_prefix, action_group)
+    end
+    GC.start
+    n_alive_action_groups_after =
+      ObjectSpace.each_object(Gio::SimpleActionGroup) {}
+    n_alive_action_groups =
+      n_alive_action_groups_after -
+      n_alive_action_groups_before
+    assert_equal(n_tries, n_alive_action_groups)
   end
 end
