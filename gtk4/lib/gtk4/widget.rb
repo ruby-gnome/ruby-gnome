@@ -83,6 +83,17 @@ module Gtk
       @style_context ||= style_context_raw
     end
 
+    alias_method :insert_action_group_raw, :insert_action_group
+    def insert_action_group(name, group)
+      insert_action_group_raw(name, group)
+      @action_groups ||= {}
+      if group.nil?
+        @action_groups.delete(name)
+      else
+        @action_groups[name] = group
+      end
+    end
+
     def children
       _children = []
       child = first_child
