@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -47,5 +47,20 @@ class TestActionMap < Test::Unit::TestCase
       action.activate("X")
       assert_equal([action, "X"], args)
     end
+  end
+
+  def test_gc
+    GC.start
+    n_alive_actions_before = ObjectSpace.each_object(Gio::SimpleAction) {}
+    n_tries = 100
+    n_tries.times do |i|
+      action_name = "test#{i}"
+      action = Gio::SimpleAction.new(action_name)
+      @map.add_action(action)
+    end
+    GC.start
+    n_alive_actions_after = ObjectSpace.each_object(Gio::SimpleAction) {}
+    n_alive_actions = n_alive_actions_after - n_alive_actions_before
+    assert_equal(n_tries, n_alive_actions)
   end
 end
