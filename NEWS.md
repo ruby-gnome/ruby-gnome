@@ -44,6 +44,14 @@ This is a release that supports GTK 4.
 
     * Added `GLib.free`.
 
+    * Added `GLib::Variant#to_s`.
+      [GitHub#1491][Reported by Sean Champ]
+
+    * Added `GLib::Variant#inspect`.
+
+    * Added `GLib::Variant.parse`.
+      [GitHub#1491][Reported by Sean Champ]
+
   * Fixes
 
     * closure: Fixed a reference count problem.
