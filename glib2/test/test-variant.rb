@@ -36,4 +36,10 @@ class TestGLibVariant < Test::Unit::TestCase
       assert_equal("byte 0x1d", variant.to_s(type_annotate: true))
     end
   end
+
+  test "#inspect" do
+    variant = GLib::Variant.new(29, "y")
+    assert_equal("#<GLib::Variant:0x00 type=y value=29>",
+                 variant.inspect.gsub(/0x\h+/, "0x00"))
+  end
 end

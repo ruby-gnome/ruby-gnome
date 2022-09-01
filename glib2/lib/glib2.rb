@@ -335,9 +335,13 @@ GLib::Log.set_log_domain(GLib::Thread::LOG_DOMAIN)
 GLib::Log.set_log_domain(GLib::Module::LOG_DOMAIN)
 
 require "glib2/version"
-require "glib2/regex"
-require "glib2/date-time"
+
 require "glib2/deprecated"
+
+require "glib2/date-time"
+require "glib2/regex"
+require "glib2/variant"
+
 =begin
 Don't we need this?
 ObjectSpace.define_finalizer(GLib) {
