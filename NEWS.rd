@@ -2,7 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME 3.5.1: 2021-01-17
+== Ruby-GNOME 3.5.1: 2022-01-17
 
 This is a release for Windows.
 
@@ -10,8 +10,14 @@ This is a release for Windows.
 
 ==== All
 
-  * windows: Add workaround for mingw-w64-x86_64-gettext-0.21-1 or
+  * windows: Added workaround for mingw-w64-x86_64-gettext-0.21-1 or
     later. Dummy (({DllMain()})) is defined.
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements
+
+    * Suppressed method redefining warnings.
 
 ==== Ruby/Pango
 
@@ -31,7 +37,7 @@ This is a release for Windows.
 
   * Akira Ouchi
 
-== Ruby-GNOME 3.5.0: 2021-01-11
+== Ruby-GNOME 3.5.0: 2022-01-11
 
 This is a release that adds support for Ractor.
 
