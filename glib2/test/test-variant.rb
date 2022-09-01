@@ -17,6 +17,31 @@
 class TestGLibVariant < Test::Unit::TestCase
   include GLibTestUtils
 
+  sub_test_case ".parse" do
+    test "no type" do
+      variant = GLib::Variant.parse("'hello'")
+      assert_equal([GLib::VariantType::STRING, "hello"],
+                   [variant.type, variant.value])
+    end
+
+    test "type" do
+      variant = GLib::Variant.parse("29", "y")
+      assert_equal([GLib::VariantType::BYTE, 29],
+                   [variant.type, variant.value])
+    end
+
+    test "garbage" do
+      message = <<-MESSAGE
+expected end of input:
+  29 hello
+     ^    
+      MESSAGE
+      assert_raise(GLib::VariantParseError::InputNotAtEnd.new(message)) do
+        GLib::Variant.parse("29 hello", "y")
+      end
+    end
+  end
+
   sub_test_case "#initialize" do
     test "type: string" do
       variant = GLib::Variant.new("hello", "s")

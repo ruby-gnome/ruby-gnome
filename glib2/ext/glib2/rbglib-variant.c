@@ -124,6 +124,38 @@ rg_variant_allocate(VALUE klass)
     return TypedData_Wrap_Struct(klass, &rbg_variant_type, NULL);
 }
 
+static VALUE
+rg_s_parse(int argc, VALUE *argv, VALUE klass)
+{
+    VALUE rb_text;
+    VALUE rb_variant_type;
+    rb_scan_args(argc, argv, "11", &rb_text, &rb_variant_type);
+    const gchar *text = RVAL2CSTR(rb_text);
+    const gchar *limit = text + RSTRING_LEN(rb_text);
+    const GVariantType *variant_type = NULL;
+    if (!NIL_P(rb_variant_type)) {
+        variant_type = RVAL2GVARIANTTYPE(rb_variant_type);
+    }
+    GError *error = NULL;
+    GVariant *variant = g_variant_parse(variant_type,
+                                        text,
+                                        limit,
+                                        NULL,
+                                        &error);
+    if (error) {
+        GError *detailed_error = NULL;
+        gchar *context = g_variant_parse_error_print_context(error, text);
+        g_set_error_literal(&detailed_error,
+                            error->domain,
+                            error->code,
+                            context);
+        g_free(context);
+        g_error_free(error);
+        RG_RAISE_ERROR(detailed_error);
+    }
+    return TypedData_Wrap_Struct(klass, &rbg_variant_type, variant);
+}
+
 static GVariant *
 rg_ruby_to_variant(VALUE rb_value, VALUE rb_variant_type)
 {
@@ -322,8 +354,16 @@ Init_glib_variant(void)
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rg_variant_allocate);
 
+    RG_DEF_SMETHOD(parse, -1);
+
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(value, 0);
     RG_DEF_METHOD(type, 0);
     RG_DEF_METHOD(to_s, -1);
+
+    G_DEF_ERROR(G_VARIANT_PARSE_ERROR,
+                "VariantParseError",
+                rbg_mGLib(),
+                rb_eRuntimeError,
+                G_TYPE_VARIANT_PARSE_ERROR);
 }
