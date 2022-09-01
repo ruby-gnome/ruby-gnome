@@ -143,10 +143,10 @@ G_BEGIN_DECLS
 #define POINTER2RVAL(pointer) ((VALUE)(pointer))
 
 #if SIZEOF_VOIDP == SIZEOF_LONG
-#  define NUM2POINTER(number) NUM2ULONG(number)
+#  define NUM2POINTER(number) ((gpointer)NUM2ULONG(number))
 #  define POINTER2NUM(pointer) ULONG2NUM((unsigned long)pointer)
 #else
-#  define NUM2POINTER(number) NUM2ULL(number)
+#  define NUM2POINTER(number) ((gpointer)NUM2ULL(number))
 #  define POINTER2NUM(pointer) ULL2NUM((unsigned LONG_LONG)pointer)
 #endif
 

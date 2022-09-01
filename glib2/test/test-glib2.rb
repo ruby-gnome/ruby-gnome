@@ -1,6 +1,6 @@
 # coding: ascii-8bit
 #
-# Copyright (C) 2015-2019  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -151,5 +151,15 @@ class TestGLib < Test::Unit::TestCase
 
     obj = GLib::Object.new
     assert_equal(obj.gtype, GLib::Object.gtype)
+  end
+
+  def test_malloc
+    address = GLib.malloc(29)
+    GLib.free(address)
+  end
+
+  def test_malloc0
+    address = GLib.malloc0(29)
+    GLib.free(address)
   end
 end

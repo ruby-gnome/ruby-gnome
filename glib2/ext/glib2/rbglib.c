@@ -1073,6 +1073,25 @@ rg_s_os_unix_p(G_GNUC_UNUSED VALUE self)
 #endif
 }
 
+static VALUE
+rg_s_malloc(G_GNUC_UNUSED VALUE self, VALUE size)
+{
+    return POINTER2NUM(g_malloc(NUM2SIZET(size)));
+}
+
+static VALUE
+rg_s_malloc0(G_GNUC_UNUSED VALUE self, VALUE size)
+{
+    return POINTER2NUM(g_malloc0(NUM2SIZET(size)));
+}
+
+static VALUE
+rg_s_free(G_GNUC_UNUSED VALUE self, VALUE address)
+{
+    g_free(NUM2POINTER(address));
+    return RUBY_Qnil;
+}
+
 extern void Init_glib2(void);
 
 void
@@ -1158,6 +1177,10 @@ Init_glib2(void)
     RG_DEF_SMETHOD_P(os_win32, 0);
     RG_DEF_SMETHOD_P(os_beos, 0);
     RG_DEF_SMETHOD_P(os_unix, 0);
+
+    RG_DEF_SMETHOD(malloc, 1);
+    RG_DEF_SMETHOD(malloc0, 1);
+    RG_DEF_SMETHOD(free, 1);
 
     rb_define_const(RG_TARGET_NAMESPACE, "DIR_SEPARATOR", CSTR2RVAL(G_DIR_SEPARATOR_S));
     rb_define_const(RG_TARGET_NAMESPACE, "SEARCHPATH_SEPARATOR", CSTR2RVAL(G_SEARCHPATH_SEPARATOR_S));
