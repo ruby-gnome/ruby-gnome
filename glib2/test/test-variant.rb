@@ -1,4 +1,4 @@
-# Copyright (C) 2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2018-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,18 @@ class TestGLibVariant < Test::Unit::TestCase
       variant = GLib::Variant.new("hello", "s")
       assert_equal([GLib::VariantType::STRING, "hello"],
                    [variant.type, variant.value])
+    end
+  end
+
+  sub_test_case "#to_s" do
+    test "default" do
+      variant = GLib::Variant.new(29, "y")
+      assert_equal("0x1d", variant.to_s)
+    end
+
+    test "type_annotate:" do
+      variant = GLib::Variant.new(29, "y")
+      assert_equal("byte 0x1d", variant.to_s(type_annotate: true))
     end
   end
 end

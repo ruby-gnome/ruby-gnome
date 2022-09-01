@@ -294,6 +294,27 @@ rg_type(VALUE self)
     return GVARIANTTYPE2RVAL((GVariantType *)g_variant_get_type(variant));
 }
 
+static VALUE
+rg_to_s(int argc, VALUE *argv, VALUE self)
+{
+    VALUE options = Qnil;
+    gboolean type_annotate = false;
+    rb_scan_args(argc, argv, ":", &options);
+    if (!NIL_P(options)) {
+        ID keywords[1];
+        VALUE values[1];
+        keywords[0] = rb_intern("type_annotate");
+        rb_get_kwargs(options, keywords, 0, 1, values);
+        if (values[0] != Qundef) {
+            type_annotate = CBOOL2RVAL(values[0]);
+        }
+    }
+
+    GVariant *variant = _SELF(self);
+    gchar *string = g_variant_print(variant, type_annotate);
+    return CSTR2RVAL_FREE(string);
+}
+
 void
 Init_glib_variant(void)
 {
@@ -304,4 +325,5 @@ Init_glib_variant(void)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(value, 0);
     RG_DEF_METHOD(type, 0);
+    RG_DEF_METHOD(to_s, -1);
 }
