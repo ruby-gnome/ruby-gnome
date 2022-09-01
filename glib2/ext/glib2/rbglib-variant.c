@@ -330,7 +330,7 @@ static VALUE
 rg_to_s(int argc, VALUE *argv, VALUE self)
 {
     VALUE options = Qnil;
-    gboolean type_annotate = false;
+    gboolean type_annotate = FALSE;
     rb_scan_args(argc, argv, ":", &options);
     if (!NIL_P(options)) {
         ID keywords[1];
