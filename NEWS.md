@@ -1,5 +1,17 @@
 # NEWS
 
+## Ruby-GNOME 4.0.1: 2022-09-02
+
+This is a bug fix release of 4.0.0.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Fixes
+
+    * Fixed wrong false constant value.
+
 ## Ruby-GNOME 4.0.0: 2022-09-01
 
 This is a release that supports GTK 4.
