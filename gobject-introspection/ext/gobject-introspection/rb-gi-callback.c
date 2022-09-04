@@ -29,6 +29,9 @@
                                     (cif),                              \
                                     (callback),                         \
                                     (user_data))
+#  define g_callable_info_get_closure_address(callable_info,            \
+                                              closure)                  \
+    (closure)
 #  define g_callable_info_destroy_closure(callable_info,                \
                                           closure)                      \
     g_callable_info_free_closure((callable_info),                       \
@@ -204,6 +207,9 @@ rb_gi_callback_new(GICallbackInfo *callback_info,
                                        &(callback->cif),
                                        rb_gi_ffi_closure_callback,
                                        callback);
+    callback->closure_native_address =
+        g_callable_info_get_closure_native_address(callback->callback_info,
+                                                   callback->closure);
     return callback;
 }
 

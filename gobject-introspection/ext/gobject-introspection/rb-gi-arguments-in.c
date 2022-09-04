@@ -105,7 +105,7 @@ rb_gi_arguments_in_init_arg_ruby_callback(RBGIArguments *args,
         callback = rb_gi_callback_new(callback_info, NULL);
         g_base_info_unref(callback_info);
         g_base_info_unref(type_info);
-        callback_argument->v_pointer = callback->closure;
+        callback_argument->v_pointer = callback->closure_native_address;
     }
 
     if (closure_argument) {

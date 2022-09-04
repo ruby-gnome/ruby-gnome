@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -183,7 +183,7 @@ rg_s_implement_virtual_function(G_GNUC_UNUSED VALUE klass,
         }
         offset = g_field_info_get_offset(field_info);
         method_address = G_STRUCT_MEMBER_P(vtable_struct, offset);
-        *method_address = callback->closure;
+        *method_address = callback->closure_native_address;
         g_type_class_unref(implementor_struct);
     }
 
