@@ -6,6 +6,7 @@ RUN \
     dbus-daemon \
     gcc \
     gcc-c++ \
+    git \
     gnome-icon-theme \
     gnumeric \
     gstreamer1-plugins-good \
