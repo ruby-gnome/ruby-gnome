@@ -29,8 +29,8 @@
                                     (cif),                              \
                                     (callback),                         \
                                     (user_data))
-#  define g_callable_info_get_closure_address(callable_info,            \
-                                              closure)                  \
+#  define g_callable_info_get_closure_native_address(callable_info,     \
+                                                     closure)           \
     (closure)
 #  define g_callable_info_destroy_closure(callable_info,                \
                                           closure)                      \
