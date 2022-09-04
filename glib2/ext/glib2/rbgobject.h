@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2003-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2003-2022  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -238,6 +238,8 @@ extern GClosure* g_rclosure_new_call(VALUE callback_proc,
                                      RGClosureCallFunc func);
 extern void g_rclosure_attach(GClosure *closure, VALUE object);
 extern void g_rclosure_attach_gobject(GClosure *closure, VALUE object);
+extern void g_rclosure_detach(GClosure *closure, VALUE object);
+extern void g_rclosure_detach_gobject(GClosure *closure, VALUE object);
 extern void g_rclosure_set_tag(GClosure *closure, const gchar *tag);
 
 /* rbgobj_value.c */

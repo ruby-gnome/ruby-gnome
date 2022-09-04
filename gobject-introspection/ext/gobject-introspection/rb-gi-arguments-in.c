@@ -1205,7 +1205,6 @@ rb_gi_arguments_in_init_arg_ruby_interface(RBGIArguments *args,
             if (RVAL2CBOOL(rb_obj_is_kind_of(args->rb_receiver,
                                              rbg_cGLibObject()))) {
                 g_rclosure_attach_gobject(rclosure, args->rb_receiver);
-                g_closure_unref(rclosure);
             } else {
                 g_rclosure_attach(rclosure, args->rb_receiver);
             }

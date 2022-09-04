@@ -23,6 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cSignal
 
+static ID id_connected_closures;
 static VALUE RG_TARGET_NAMESPACE;
 VALUE rbgobj_signal_wrap(guint sig_id);
 
@@ -415,9 +416,19 @@ gobj_sig_connect_impl(gboolean after, int argc, VALUE *argv, VALUE self)
     g_free(tag);
     handler_id = g_signal_connect_closure_by_id(g_object, signal_id, detail,
                                                 rclosure, after);
-    g_closure_unref(rclosure);
+    VALUE rb_handler_id = ULONG2NUM(handler_id);
+    if (handler_id != 0) {
+        VALUE rb_connected_closures = rb_ivar_get(self, id_connected_closures);
+        if (NIL_P(rb_connected_closures)) {
+            rb_connected_closures = rb_hash_new();
+            rb_ivar_set(self, id_connected_closures, rb_connected_closures);
+        }
+        rb_hash_aset(rb_connected_closures,
+                     rb_handler_id,
+                     POINTER2NUM(rclosure));
+    }
 
-    return ULONG2NUM(handler_id);
+    return rb_handler_id;
 }
 
 static VALUE
@@ -604,6 +615,19 @@ static VALUE
 gobj_sig_handler_disconnect(VALUE self, VALUE id)
 {
     g_signal_handler_disconnect(RVAL2GOBJ(self), NUM2ULONG(id));
+    VALUE rb_connected_closures = rb_ivar_get(self, id_connected_closures);
+    if (NIL_P(rb_connected_closures)) {
+        return self;
+    }
+    VALUE rb_rclosure_pointer = rb_hash_aref(rb_connected_closures, id);
+    if (NIL_P(rb_rclosure_pointer)) {
+        return self;
+    }
+    GClosure *rclosure = NUM2POINTER(rb_rclosure_pointer);
+    if (!rclosure) {
+        return self;
+    }
+    g_rclosure_detach_gobject(rclosure, self);
     return self;
 }
 
@@ -971,6 +995,8 @@ rbgobj_define_action_methods(VALUE klass)
 void
 Init_gobject_gsignal(void)
 {
+    id_connected_closures = rb_intern("connected_closures");
+
     VALUE cSignalFlags, cSignalMatchType;
 
     RG_TARGET_NAMESPACE = rb_define_class_under(rbg_mGLib(), "Signal", rb_cObject);

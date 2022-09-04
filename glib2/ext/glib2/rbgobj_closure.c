@@ -234,6 +234,8 @@ g_rclosure_new_raw(VALUE callback_proc,
                                                  rclosure);
     rclosure->tag[0]     = '\0';
 
+    g_closure_ref(closure);
+    g_closure_sink(closure);
     g_closure_set_marshal(closure, &rclosure_marshal);
     g_closure_add_finalize_notifier(closure, NULL, rclosure_finalize);
 
@@ -271,7 +273,10 @@ void
 g_rclosure_attach(GClosure *closure, VALUE object)
 {
     GRClosure *rclosure = (GRClosure *)closure;
-    rbgobj_add_relative(object, rclosure->rb_holder);
+    rbgobj_add_relative_removable(object,
+                                  Qnil,
+                                  id_closures,
+                                  rclosure->rb_holder);
 }
 
 void
@@ -284,6 +289,24 @@ g_rclosure_attach_gobject(GClosure *closure, VALUE object)
     g_closure_ref(closure);
     g_object_weak_ref(gobject, rclosure_weak_notify, rclosure);
     rclosure->objects = g_list_prepend(rclosure->objects, gobject);
+}
+
+void
+g_rclosure_detach(GClosure *closure, VALUE object)
+{
+    GRClosure *rclosure = (GRClosure *)closure;
+    rbgobj_remove_relative(object, id_closures, rclosure->rb_holder);
+}
+
+void
+g_rclosure_detach_gobject(GClosure *closure, VALUE object)
+{
+    GRClosure *rclosure = (GRClosure *)closure;
+    g_rclosure_detach(closure, object);
+
+    GObject *gobject = RVAL2GOBJ(object);
+    g_object_weak_unref(gobject, rclosure_weak_notify, rclosure);
+    rclosure_weak_notify(rclosure, gobject);
 }
 
 void
@@ -321,8 +344,6 @@ rg_initialize(VALUE self)
 {
     GClosure *closure = g_rclosure_new(rb_block_proc(), Qnil, NULL);
     G_INITIALIZE(self, closure);
-    g_closure_ref(closure);
-    g_closure_sink(closure);
     return self;
 }
 
