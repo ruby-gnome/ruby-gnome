@@ -1,5 +1,32 @@
 # NEWS
 
+## Ruby-GNOME 4.0.2: 2022-09-05
+
+This is a bug fix release of 4.0.1.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Fixes
+
+    * Fixed a bug that closure may be GC-ed.
+      [GitHub#1495][Reported by Matijs van Zuijlen]
+
+#### Ruby/GObjectIntrospection
+
+  * Fixes
+
+    * Fixed a bug that callback doesn't work with GObject
+      Introspection 1.72.0 or later.
+      [GitHub#1496][Reported by Mamoru TASAKA]
+
+### Thanks
+
+  * Mamoru TASAKA
+
+  * Matijs van Zuijlen
+
 ## Ruby-GNOME 4.0.1: 2022-09-02
 
 This is a bug fix release of 4.0.0.
