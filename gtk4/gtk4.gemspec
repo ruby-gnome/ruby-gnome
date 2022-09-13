@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
     "#{s.name}.gemspec",
   ]
   s.files += Dir.glob("lib/**/*.rb")
+  s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
   s.files += Dir.glob("sample/**/*")
 
   s.add_runtime_dependency("atk", "= #{s.version}")
