@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,7 +18,9 @@ module Gtk
   class ScrolledWindow
     alias_method :initialize_raw, :initialize
     def initialize(hadjustment=nil, vadjustment=nil)
-      initialize_raw(hadjustment, vadjustment)
+      initialize_raw
+      set_hadjustment(hadjustment) if hadjustment
+      set_vadjustment(vadjustment) if vadjustment
     end
   end
 end
