@@ -1,5 +1,22 @@
 # NEWS
 
+## Ruby-GNOME 4.0.3: 2022-09-13
+
+This is a bug fix release of 4.0.2.
+
+### Changes
+
+#### Ruby/GTK4
+
+  * Fixes
+
+    * Fixed a bug that `ext/**/*.*` aren't included in `.gem`.
+      [GitHub#1498][Reported by Anatol Pomozov]
+
+### Thanks
+
+  * Anatol Pomozov
+
 ## Ruby-GNOME 4.0.2: 2022-09-05
 
 This is a bug fix release of 4.0.1.
