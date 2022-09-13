@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.homepage      = "https://ruby-gnome2.osdn.jp/"
   s.licenses      = ["LGPL-2.1+"]
   s.version       = ruby_glib2_version
+  s.extensions    = ["ext/#{s.name}/extconf.rb"]
   s.require_paths = ["lib"]
   s.files = [
     "COPYING.LIB",
