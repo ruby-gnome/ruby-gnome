@@ -23,7 +23,7 @@
 #include "rbgobject.h"
 
 static const rb_data_type_t rbg_pointer_type = {
-    "GLib::Poitner",
+    "GLib::Pointer",
     {
         NULL,
         NULL,
@@ -43,9 +43,9 @@ gpointer
 rbgobj_ptr2cptr(VALUE ptr)
 {
     gpointer dest;
-    if (rb_obj_is_kind_of(ptr, GTYPE2CLASS(G_TYPE_POINTER))){
+    if (RVAL2CBOOL(rb_obj_is_kind_of(ptr, GTYPE2CLASS(G_TYPE_POINTER)))) {
         TypedData_Get_Struct(ptr, void, &rbg_pointer_type, dest);
-    } else if (rb_obj_is_kind_of(ptr, rb_cObject)){
+    } else if (RVAL2CBOOL(rb_obj_is_kind_of(ptr, rb_cObject))) {
         dest = (gpointer)ptr;
     } else{
         rb_raise(rb_eTypeError, "not a pointer object");
@@ -54,9 +54,27 @@ rbgobj_ptr2cptr(VALUE ptr)
 }
 
 static VALUE
+ptr_alloc(VALUE klass)
+{
+    gpointer pointer;
+    return TypedData_Make_Struct(klass,
+                                 gpointer,
+                                 &rbg_pointer_type,
+                                 pointer);
+}
+
+
+static VALUE
 ptr_s_gtype(VALUE klass)
 {
     return rbgobj_gtype_new(rbgobj_lookup_class(klass)->gtype);
+}
+
+static VALUE
+ptr_initialize(VALUE self, VALUE address)
+{
+    RTYPEDDATA_DATA(self) = NUM2POINTER(address);
+    return RUBY_Qnil;
 }
 
 static VALUE
@@ -65,13 +83,21 @@ ptr_gtype(VALUE self)
     return ptr_s_gtype(CLASS_OF(self));
 }
 
+static VALUE
+ptr_to_i(VALUE self)
+{
+    return POINTER2NUM(rbgobj_ptr2cptr(self));
+}
+
 static void
 Init_gtype_pointer(void)
 {
     VALUE cPtr = G_DEF_CLASS(G_TYPE_POINTER, "Pointer", rbg_mGLib());
-    rb_undef_alloc_func(cPtr);
+    rb_define_alloc_func(cPtr, ptr_alloc);
     rbg_define_singleton_method(cPtr, "gtype", ptr_s_gtype, 0);
+    rbg_define_method(cPtr, "initialize", ptr_initialize, 1);
     rbg_define_method(cPtr, "gtype", ptr_gtype, 0);
+    rbg_define_method(cPtr, "to_i", ptr_to_i, 0);
 }
 
 /**********************************************************************/
