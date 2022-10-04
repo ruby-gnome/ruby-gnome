@@ -29,8 +29,8 @@ application.signal_connect "activate" do |app|
   win.title = "window"
   win.set_default_size(200, 200)
 
-  button_box = Gtk::ButtonBox.new(:horizontal)
-  win.add(button_box)
+  button_box = Gtk::Box.new(:horizontal)
+  win.set_child(button_box)
 
   button = Gtk::Button.new(:label => "Hello World")
   button.signal_connect "clicked" do
@@ -38,7 +38,7 @@ application.signal_connect "activate" do |app|
     win.destroy
   end
 
-  button_box.add(button)
+  button_box.append(button)
 
   win.show
 end
