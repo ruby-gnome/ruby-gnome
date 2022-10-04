@@ -30,17 +30,17 @@ application.signal_connect "activate" do |app|
   window.set_default_size(200, 200)
 
   button = Gtk::Button.new(label: "Hello World")
-  button.set_halign(:center)
-  button.set_valign(:center)
+  button.halign = :center
+  button.valign = :center
 
   button.signal_connect "clicked" do
     puts "Hello World"
     window.destroy
   end
 
-  window.set_child(button)
+  window.child = button
 
   window.show
 end
 
-app.run
+application.run
