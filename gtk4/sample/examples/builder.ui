@@ -1,44 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <object id="window" class="GtkWindow">
-    <property name="visible">True</property>
     <property name="title">Grid</property>
     <child>
       <object id="grid" class="GtkGrid">
-        <property name="visible">True</property>
         <child>
           <object id="button1" class="GtkButton">
-            <property name="visible">True</property>
             <property name="label">Button 1</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
           </object>
-          <packing>
-            <property name="left-attach">0</property>
-            <property name="top-attach">0</property>
-          </packing>
         </child>
         <child>
           <object id="button2" class="GtkButton">
-            <property name="visible">True</property>
             <property name="label">Button 2</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
           </object>
-          <packing>
-            <property name="left-attach">1</property>
-            <property name="top-attach">0</property>
-          </packing>
         </child>
         <child>
           <object id="quit" class="GtkButton">
-            <property name="visible">True</property>
             <property name="label">Quit</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="row">1</property>
+              <property name="column-span">2</property>
+            </layout>
           </object>
-          <packing>
-            <property name="left-attach">0</property>
-            <property name="top-attach">1</property>
-            <property name="width">2</property>
-          </packing>
         </child>
       </object>
-      <packing>
-      </packing>
     </child>
   </object>
 </interface>
+

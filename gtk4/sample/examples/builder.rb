@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,26 +16,33 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-# example from https://github.com/GNOME/gtk/blob/master/examples/builder.c
+# example from https://gitlab.gnome.org/GNOME/gtk/blob/main/examples/builder.c
 
 require_relative "utils"
 
 require_gtk4
 
-# Construct a GtkBuilder instance and load our UI description
-builder = Gtk::Builder.new(:file => "#{path}/builder.ui")
+app = Gtk::Application.new("org.gtk.example", :flags_none)
 
-# Connect signal handlers to the constructed widgets.
-window = builder["window"]
-window.signal_connect("destroy") { Gtk.main_quit }
+app.signal_connect "activate" do
+  # Construct a GtkBuilder instance and load our UI description
+  builder = Gtk::Builder.new(file: File.join(__dir__, "builder.ui"))
 
-button = builder["button1"]
-button.signal_connect("clicked") { puts "Hello World!" }
+  # Connect signal handlers to the constructed widgets.
+  window = builder["window"]
+  window.set_application(app)
 
-button = builder["button2"]
-button.signal_connect("clicked") { puts "Hello World!" }
+  button = builder["button1"]
+  button.signal_connect("clicked") { puts "Hello World!" }
 
-button = builder["quit"]
-button.signal_connect("clicked") { Gtk.main_quit }
+  button = builder["button2"]
+  button.signal_connect("clicked") { puts "Hello World!" }
 
-Gtk.main
+  button = builder["quit"]
+  button.signal_connect("clicked") { window.close }
+
+  window.show
+end
+
+app.run
+
