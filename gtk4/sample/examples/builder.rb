@@ -16,30 +16,30 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-# example from https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/builder.c
+# example from https://gitlab.gnome.org/GNOME/gtk/blob/main/examples/builder.c
 
-require_relative 'utils'
+require_relative "utils"
 
 require_gtk4
 
-app = Gtk::Application.new('org.gtk.example', :flags_none)
+app = Gtk::Application.new("org.gtk.example", :flags_none)
 
-app.signal_connect 'activate' do
+app.signal_connect "activate" do
   # Construct a GtkBuilder instance and load our UI description
-  builder = Gtk::Builder.new(file: File.join(__dir__, 'builder.ui'))
+  builder = Gtk::Builder.new(file: File.join(__dir__, "builder.ui"))
 
   # Connect signal handlers to the constructed widgets.
-  window = builder['window']
+  window = builder["window"]
   window.set_application(app)
 
-  button = builder['button1']
-  button.signal_connect('clicked') { puts 'Hello World!' }
+  button = builder["button1"]
+  button.signal_connect("clicked") { puts "Hello World!" }
 
-  button = builder['button2']
-  button.signal_connect('clicked') { puts 'Hello World!' }
+  button = builder["button2"]
+  button.signal_connect("clicked") { puts "Hello World!" }
 
-  button = builder['quit']
-  button.signal_connect('clicked') { window.close }
+  button = builder["quit"]
+  button.signal_connect("clicked") { window.close }
 
   window.show
 end
