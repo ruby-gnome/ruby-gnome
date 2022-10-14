@@ -154,20 +154,14 @@ end
 setup_homebrew
 
 #add_depend_package("glib2", "ext/glib2", "/...../ruby-gnome2")
-def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
-  gem_spec = find_gem_spec(target_name)
-  if gem_spec
-    target_source_dir = File.join(gem_spec.full_gem_path, "ext/#{target_name}")
-    target_build_dir = target_source_dir
-    add_depend_package_path(target_name,
-                            target_source_dir,
-                            target_build_dir)
-  end
-
-  [top_srcdir,
-   File.join(top_srcdir, target_name),
-   $configure_args['--topdir'],
-   File.join($configure_args['--topdir'], target_name)].each do |topdir|
+def add_depend_package(target_name, target_srcdir, top_srcdir, **options)
+  found_build_dir = false
+  [
+    top_srcdir,
+    File.join(top_srcdir, target_name),
+    $configure_args['--topdir'],
+    File.join($configure_args['--topdir'], target_name),
+  ].each do |topdir|
     topdir = File.expand_path(topdir)
     target_source_dir_full_path = File.join(topdir, target_srcdir)
 
@@ -185,11 +179,29 @@ def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
     end
     add_depend_package_path(target_name,
                             target_source_dir_full_path,
-                            target_build_dir_full_path)
+                            target_build_dir_full_path,
+                            **options)
+    if File.exist?(target_build_dir_full_path)
+      found_build_dir = true
+    end
+  end
+  return if found_build_dir
+
+  gem_spec = find_gem_spec(target_name)
+  if gem_spec
+    target_source_dir = File.join(gem_spec.full_gem_path, "ext/#{target_name}")
+    target_build_dir = target_source_dir
+    add_depend_package_path(target_name,
+                            target_source_dir,
+                            target_build_dir,
+                            **options)
   end
 end
 
-def add_depend_package_path(target_name, target_source_dir, target_build_dir)
+def add_depend_package_path(target_name,
+                            target_source_dir,
+                            target_build_dir,
+                            **options)
   if File.exist?(target_source_dir)
     $INCFLAGS = "-I#{target_source_dir}".quote + " #{$INCFLAGS}"
   end
@@ -199,13 +211,22 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
     $INCFLAGS = "-I#{target_build_dir}".quote + " #{$INCFLAGS}"
   end
 
+  return if options[:use_only_header]
+
   library_base_name = File.basename(target_source_dir).gsub(/-/, "_")
+  dlext = RbConfig::CONFIG["DLEXT"]
+  library_path = File.join(target_build_dir, "#{library_base_name}.#{dlext}")
   case RUBY_PLATFORM
   when /cygwin|mingw/
-    $libs << " " << File.join(target_build_dir, "#{library_base_name}.so")
+    $libs << " #{library_path.quote}"
   when /mswin/
     $DLDFLAGS << " /libpath:#{target_build_dir}"
     $libs << " #{library_base_name}-$(arch).lib"
+  when /darwin/
+    bundler_loader_flag = "-bundle_loader #{library_path.quote}"
+    unless $DLDFLAGS.include?(bundler_loader_flag)
+      $DLDFLAGS << " #{bundler_loader_flag}"
+    end
   end
 end
 
@@ -440,7 +461,7 @@ def check_cairo(options={})
     if File.exist?(File.join(rcairo_source_dir, build_dir))
       options[:target_build_dir] = build_dir
     end
-    add_depend_package("cairo", "ext/cairo", rcairo_source_dir, options)
+    add_depend_package("cairo", "ext/cairo", rcairo_source_dir, **options)
   end
 
   PKGConfig.have_package("cairo") and have_header("rb_cairo.h")
