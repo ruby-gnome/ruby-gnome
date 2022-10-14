@@ -20,7 +20,7 @@
 
 #include <gio/gio.h>
 
-#include <rb-gobject-introspection.h>
+#include <rbgobject.h>
 
 extern void Init_gio2 (void);
 G_GNUC_INTERNAL extern void rb_gio2_init_application (VALUE rb_mGio);

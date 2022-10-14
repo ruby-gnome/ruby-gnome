@@ -38,7 +38,7 @@ package_id = "gio-2.0"
 
 require "mkmf-gnome"
 
-["glib2", "gobject-introspection"].each do |package|
+["glib2"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_base_path = "#{directory}/tmp/#{RUBY_PLATFORM}"
   package_library_name = package.gsub(/-/, "_")
