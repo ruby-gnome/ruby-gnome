@@ -629,7 +629,7 @@ module Gtk
           [{file: image}]
         end
       when Symbol
-        [{icon_name: iamge}]
+        [{icon_name: image}]
       when GdkPixbuf::Pixbuf
         [{:pixbuf => image}]
       when Gio::Icon
