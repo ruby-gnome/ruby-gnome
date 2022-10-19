@@ -418,8 +418,10 @@ gobj_sig_connect_impl(gboolean after, int argc, VALUE *argv, VALUE self)
                                                 rclosure, after);
     VALUE rb_handler_id = ULONG2NUM(handler_id);
     if (handler_id != 0) {
-        VALUE rb_connected_closures = rb_ivar_get(self, id_connected_closures);
-        if (NIL_P(rb_connected_closures)) {
+        VALUE rb_connected_closures;
+        if (RVAL2CBOOL(rb_ivar_defined(self, id_connected_closures))) {
+            rb_connected_closures = rb_ivar_get(self, id_connected_closures);
+        } else {
             rb_connected_closures = rb_hash_new();
             rb_ivar_set(self, id_connected_closures, rb_connected_closures);
         }
