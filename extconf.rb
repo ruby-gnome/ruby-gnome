@@ -1,9 +1,9 @@
 =begin
-  top-level extconf.rb for Ruby-GNOME2
+  top-level extconf.rb for Ruby-GNOME
 
   $Id: extconf.rb,v 1.17 2007/10/22 12:19:17 ktou Exp $
 
-  Copyright (C) 2003-2005 Ruby-GNOME2 Project Team
+  Copyright (C) 2003-2022  Ruby-GNOME Project Team
 =end
 
 require 'English'
@@ -11,7 +11,7 @@ require 'mkmf'
 require 'fileutils'
 require 'pathname'
 
-priorlibs = [
+prior_libs = [
   "glib2",
   "cairo-gobject",
   "gobject-introspection",
@@ -21,6 +21,8 @@ priorlibs = [
   "atk",
   "gdk3",
   "gtk3",
+  "gdk4",
+  "gtk4",
 ]
 
 unsupported_libraries = [
@@ -55,9 +57,9 @@ if subdirs.empty?
     subdir[0..$topsrcdir.size] = ""
     File.dirname(subdir)
   end
-  priorlibs &= subdirs
-  subdirs -= priorlibs
-  subdirs = priorlibs + subdirs #Change the order
+  prior_libs &= subdirs
+  subdirs -= prior_libs
+  subdirs = prior_libs + subdirs # Change the order
 end
 subdirs = subdirs.delete_if do |subdir|
   subdir.end_with?("-no-gi")
