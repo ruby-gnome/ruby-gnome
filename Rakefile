@@ -44,6 +44,7 @@ def gem_push(path, name, version)
 end
 
 packages = [
+  "adwaita",
   "atk",
   "cairo-gobject",
   "clutter",
@@ -65,6 +66,7 @@ packages = [
   "gtk4",
   "gtksourceview3",
   "gtksourceview4",
+  "gtksourceview5",
   "libsecret",
   "pango",
   "poppler",
