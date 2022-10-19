@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2019  Ruby-GNOME Project Team
+# Copyright (C) 2019-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -37,7 +37,6 @@ Gem::Specification.new do |s|
     "dependency-check/Rakefile",
   ]
   s.files += Dir.glob("lib/**/*.rb")
-  s.files += Dir.glob("test/**/*")
 
   s.add_runtime_dependency("gobject-introspection", "= #{s.version}")
 
