@@ -4,8 +4,7 @@ Ruby/Adwaita is a Ruby binding of Adwaita.
 
 ## Requirements
 
-* Ruby/GObjectIntrospection in
-  [Ruby-GNOME2](https://ruby-gnome.github.io/)
+* Ruby/GTK4 in [Ruby-GNOME](https://ruby-gnome.github.io/)
 * [adwaita](https://gnome.pages.gitlab.gnome.org/libadwaita/)
 
 ## Install
