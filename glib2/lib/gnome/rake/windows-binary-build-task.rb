@@ -1,4 +1,4 @@
-# Copyright(C) 2011-2022  Ruby-GNOME Project.
+# Copyright(C) 2012-2022  Ruby-GNOME Project.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -13,13 +13,33 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-# This program is licenced under the same license of Ruby-GNOME2.
 
-# Just for backward compatibility.
-require "gnome/rake/package-task"
-
-module GNOME2
+module GNOME
   module Rake
-    PackageTask = GNOME::Rake::PackageTask
+    class WindowsBinaryBuildTask
+      def initialize(package)
+        @package = package
+      end
+
+      def define
+      end
+
+      def rcairo_binary_base_dir
+        rcairo_dir + "vendor" + "local"
+      end
+
+      def glib2_binary_base_dir
+        @package.glib2_root_dir + "vendor" + "local"
+      end
+
+      def binary_base_dir(package)
+        @package.project_root_dir + package + "vendor" + "local"
+      end
+
+      private
+      def rcairo_dir
+        @package.project_root_dir.parent + "rcairo"
+      end
+    end
   end
 end
