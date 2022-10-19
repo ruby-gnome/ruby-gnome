@@ -41,5 +41,5 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("gobject-introspection", "= #{s.version}")
 
-  s.metadata["msys2_mingw_dependencies"] = "gegl"
+  s.metadata["msys2_mingw_dependencies"] = "libsecret"
 end
