@@ -14,8 +14,11 @@ jobs:
           ruby \
             -e 'print("## "); puts(ARGF.read.split(/^## /)[1])' \
             NEWS.md > release-note.md
+          echo "RELEASE_NAME=$(head -n 1 release-note.md | sed -e 's/^## //')" >> \
+            $GITHUB_ENV
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          name: ${{ env.RELEASE_NAME }}
           body_path: release-note.md
           discussion_category_name: "Releases"
