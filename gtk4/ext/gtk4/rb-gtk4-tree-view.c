@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2015-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -20,11 +20,25 @@
 
 #include "rb-gtk4-private.h"
 
-void
-Init_gtk4(void)
+static void
+rb_gtk4_tree_view_mark(gpointer object)
 {
-    rb_gtk4_cell_layout_init();
-    rb_gtk4_tree_view_init();
-    rb_gtk4_widget_init();
-    rb_gtk4_window_init();
+    GtkTreeView *tree_view = object;
+
+    GList *columns = gtk_tree_view_get_columns(tree_view);
+    GList *node;
+    for (node = columns; node; node = g_list_next(node)) {
+        GtkTreeViewColumn *column = node->data;
+        rbgobj_gc_mark_instance(column);
+    }
+    g_list_free(columns);
+
+    GtkTreeSelection *selection = gtk_tree_view_get_selection(tree_view);
+    rbgobj_gc_mark_instance(selection);
+}
+
+void
+rb_gtk4_tree_view_init(void)
+{
+    rbgobj_register_mark_func(GTK_TYPE_TREE_VIEW, rb_gtk4_tree_view_mark);
 }

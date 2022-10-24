@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2015-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -20,11 +20,22 @@
 
 #include "rb-gtk4-private.h"
 
-void
-Init_gtk4(void)
+static void
+rb_gtk4_cell_layout_mark(gpointer object)
 {
-    rb_gtk4_cell_layout_init();
-    rb_gtk4_tree_view_init();
-    rb_gtk4_widget_init();
-    rb_gtk4_window_init();
+    GtkCellLayout *cell_layout = object;
+
+    GList *renderers = gtk_cell_layout_get_cells(cell_layout);
+    GList *node;
+    for (node = renderers; node; node = g_list_next(node)) {
+        GtkCellRenderer *renderer = node->data;
+        rbgobj_gc_mark_instance(renderer);
+    }
+    g_list_free(renderers);
+}
+
+void
+rb_gtk4_cell_layout_init(void)
+{
+    rbgobj_register_mark_func(GTK_TYPE_CELL_LAYOUT, rb_gtk4_cell_layout_mark);
 }

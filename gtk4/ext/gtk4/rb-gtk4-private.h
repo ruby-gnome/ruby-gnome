@@ -29,5 +29,7 @@
 
 #include "rb-gtk4.h"
 
+G_GNUC_INTERNAL void rb_gtk4_cell_layout_init(void);
+G_GNUC_INTERNAL void rb_gtk4_tree_view_init(void);
 G_GNUC_INTERNAL void rb_gtk4_widget_init(void);
 G_GNUC_INTERNAL void rb_gtk4_window_init(void);
