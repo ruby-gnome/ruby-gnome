@@ -28,7 +28,9 @@
  * Ubuntu 20.04: GLib 2.64
  * Ubuntu 22.04: GLib 2.72
  */
-#define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_50
+#ifndef GLIB_VERSION_MIN_REQUIRED
+#  define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_50
+#endif
 
 #define G_LOG_DOMAIN "Ruby/GLib2"
 
@@ -189,6 +191,7 @@ G_GNUC_INTERNAL void Init_gobject_gvalue(void);
 G_GNUC_INTERNAL void Init_gobject_gvaluetypes(void);
 G_GNUC_INTERNAL void Init_gobject_gboxed(void);
 G_GNUC_INTERNAL void Init_gobject_gstrv(void);
+G_GNUC_INTERNAL void Init_gobject_value_array(void);
 G_GNUC_INTERNAL void Init_gobject_genumflags(void);
 G_GNUC_INTERNAL void Init_gobject_genums(void);
 G_GNUC_INTERNAL void Init_gobject_gflags(void);

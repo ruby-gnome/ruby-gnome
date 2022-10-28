@@ -390,6 +390,7 @@ Init_gobject(void)
     Init_gobject_gvaluetypes();
     Init_gobject_gboxed();
     Init_gobject_gstrv();
+    Init_gobject_value_array();
     Init_gobject_genumflags();
     Init_gobject_gparam();
     Init_gobject_gparamspecs();
