@@ -106,6 +106,7 @@ rbgobj_class_info_create_data_type(VALUE klass)
     rb_data_type_t *data_type;
 
     data_type = RB_ZALLOC(rb_data_type_t);
+    data_type->wrap_struct_name = "glib2/rbgobj";
     data_type->function.dmark = cinfo_mark;
     data_type->function.dfree = cinfo_free;
     if (RB_TYPE_P(klass, RUBY_T_CLASS) && klass != rb_cObject) {
