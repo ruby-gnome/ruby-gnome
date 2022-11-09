@@ -68,6 +68,7 @@ cinfo_free(void *data)
     RGObjClassInfo *cinfo = data;
     xfree(cinfo->name);
     xfree(cinfo->data_type);
+    xfree(cinfo);
 }
 
 static RGObjClassInfo *
