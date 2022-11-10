@@ -66,8 +66,10 @@ static void
 cinfo_free(void *data)
 {
     RGObjClassInfo *cinfo = data;
+    g_hash_table_remove(gtype_to_cinfo, GUINT_TO_POINTER(cinfo->gtype));
     xfree(cinfo->name);
     xfree(cinfo->data_type);
+    xfree(cinfo);
 }
 
 static RGObjClassInfo *
