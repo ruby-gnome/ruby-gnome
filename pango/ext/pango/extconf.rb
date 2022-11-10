@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2017-2019  Ruby-GNOME Project Team
+# Copyright (C) 2017-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -86,6 +86,26 @@ have_func("pango_attr_iterator_get_attrs", pango_header)
 
 create_pkg_config_file("Ruby/Pango", package_id)
 $defs << " -DRUBY_PANGO_COMPILATION"
+case RUBY_PLATFORM
+when /darwin/
+  symbols_in_external_bundles = [
+    "_rb_gi_struct_get_raw",
+    "_rbg_define_method",
+    "_rbg_define_singleton_method",
+    "_rbg_rval2cstr",
+    "_rbgobj_add_relative",
+    "_rbgobj_boxed_get",
+    "_rbgobj_define_class",
+    "_rbgobj_get_enum",
+    "_rbgobj_initialize_object",
+    "_rbgobj_make_boxed",
+    "_rbgobj_make_boxed_raw",
+    "_rbgobj_make_enum",
+  ]
+  symbols_in_external_bundles.each do |symbol|
+    $DLDFLAGS << " -Wl,-U,#{symbol}"
+  end
+end
 create_makefile(module_name)
 
 pkg_config_dir = with_config("pkg-config-dir")
