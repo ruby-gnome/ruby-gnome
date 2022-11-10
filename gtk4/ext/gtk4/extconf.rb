@@ -80,6 +80,16 @@ end
 create_pkg_config_file("Ruby/GTK4", package_id)
 
 $defs << "-DRUBY_GTK4_COMPILATION"
+case RUBY_PLATFORM
+when /darwin/
+  symbols_in_external_bundles = [
+    "_rbgobj_gc_mark_instance",
+    "_rbgobj_register_mark_func",
+  ]
+  symbols_in_external_bundles.each do |symbol|
+    $DLDFLAGS << " -Wl,-U,#{symbol}"
+  end
+end
 create_makefile(module_name)
 
 pkg_config_dir = with_config("pkg-config-dir")
