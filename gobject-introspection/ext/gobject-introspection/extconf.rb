@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012-2021  Ruby-GNOME Project Team
+# Copyright (C) 2012-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -76,6 +76,81 @@ create_pkg_config_file("Ruby/GObjectIntrospection",
 ensure_objs
 
 $defs << "-DRUBY_GOBJECT_INTROSPECTION_COMPILATION"
+case RUBY_PLATFORM
+when /darwin/
+  symbols_in_external_bundles = [
+    "_g_rclosure_attach",
+    "_g_rclosure_attach_gobject",
+    "_g_rclosure_new",
+    "_g_signal_flags_get_type",
+    "_rbg_cGLibObject",
+    "_rbg_cstr2rval",
+    "_rbg_cstr2rval_free",
+    "_rbg_define_method",
+    "_rbg_define_singleton_method",
+    "_rbg_filename_from_ruby",
+    "_rbg_filename_to_ruby",
+    "_rbg_glist2rval",
+    "_rbg_glist2rval_with_type",
+    "_rbg_gslist2rval",
+    "_rbg_gslist2rval_with_type",
+    "_rbg_inspect",
+    "_rbg_is_bytes",
+    "_rbg_is_object",
+    "_rbg_is_value",
+    "_rbg_mGLib",
+    "_rbg_rval2cstr",
+    "_rbg_rval2cstr_accept_nil",
+    "_rbg_rval2cstr_accept_symbol",
+    "_rbg_rval2filenamev",
+    "_rbg_rval2glist",
+    "_rbg_rval2gslist",
+    "_rbg_rval2strv",
+    "_rbg_rval2strv_dup",
+    "_rbg_scan_options",
+    "_rbg_strv2rval",
+    "_rbg_to_array",
+    "_rbg_variant_from_ruby",
+    "_rbg_variant_to_ruby",
+    "_rbgerr_define_gerror",
+    "_rbgerr_gerror2exception",
+    "_rbgerr_ruby_error_quark",
+    "_rbgobj_add_relative",
+    "_rbgobj_boxed_get",
+    "_rbgobj_boxed_unown",
+    "_rbgobj_constant_remap",
+    "_rbgobj_convert_define",
+    "_rbgobj_define_class",
+    "_rbgobj_get_enum",
+    "_rbgobj_get_flags",
+    "_rbgobj_get_ruby_object_from_gobject",
+    "_rbgobj_gobject_initialize",
+    "_rbgobj_gtype_from_ruby",
+    "_rbgobj_gtype_new",
+    "_rbgobj_initialize_gvalue",
+    "_rbgobj_initialize_object",
+    "_rbgobj_instance_from_ruby_object",
+    "_rbgobj_instance_unref",
+    "_rbgobj_lookup_class",
+    "_rbgobj_make_boxed",
+    "_rbgobj_make_boxed_default",
+    "_rbgobj_make_boxed_raw",
+    "_rbgobj_make_enum",
+    "_rbgobj_make_flags",
+    "_rbgobj_object_add_relative",
+    "_rbgobj_object_alloc_func",
+    "_rbgobj_object_remove_relative",
+    "_rbgobj_remove_relative",
+    "_rbgobj_ruby_object_from_instance",
+    "_rbgobj_ruby_object_from_instance2",
+    "_rbgutil_invoke_callback",
+    "_rbgutil_on_callback_error",
+    "_rbgutil_start_callback_dispatch_thread",
+  ]
+  symbols_in_external_bundles.each do |symbol|
+    $DLDFLAGS << " -Wl,-U,#{symbol}"
+  end
+end
 create_makefile(module_name)
 
 pkg_config_dir = with_config("pkg-config-dir")
