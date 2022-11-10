@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2003-2019  Ruby-GNOME Project Team
+# Copyright (C) 2003-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -66,7 +66,27 @@ end
 
 create_pkg_config_file("Ruby/GStreamer", package_id)
 $defs << "-DRUBY_GST_COMPILATION"
+case RUBY_PLATFORM
+when /darwin/
+  symbols_in_external_bundles = [
+    "_rbg_define_method",
+    "_rbg_inspect",
+    "_rbg_mGLib",
+    "_rbg_rval2cstr_accept_symbol",
+    "_rbg_to_array",
+    "_rbgobj_gvalue_to_rvalue",
+    "_rbgobj_instance_from_ruby_object",
+    "_rbgobj_lookup_class",
+    "_rbgobj_register_g2r_func",
+    "_rbgobj_register_r2g_func",
+    "_rbgobj_rvalue_to_gvalue",
+  ]
+  symbols_in_external_bundles.each do |symbol|
+    $DLDFLAGS << " -Wl,-U,#{symbol}"
+  end
+end
 create_makefile(module_name)
+
 pkg_config_dir = with_config("pkg-config-dir")
 if pkg_config_dir.is_a?(String)
   File.open("Makefile", "ab") do |makefile|

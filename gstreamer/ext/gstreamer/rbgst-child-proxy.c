@@ -29,7 +29,7 @@ rg_raise_no_property_error(VALUE object, const gchar *name)
 {
     VALUE eNoSuchProperty;
 
-    eNoSuchProperty = rb_const_get(mGLib, rb_intern("NoSuchProperty"));
+    eNoSuchProperty = rb_const_get(rbg_mGLib(), rb_intern("NoSuchProperty"));
     rb_raise(eNoSuchProperty,
              "%s: No such property: <%s>",
              rbg_inspect(object),
