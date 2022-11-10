@@ -19,6 +19,12 @@ RUN \
     xorg-x11-server-Xvfb && \
   dnf clean all
 
+# Truncate /usr/lib/rpm/redhat/redhat-package-notes because it
+# requires RPM_ARCH, RPM_PACKAGE_RELEASE and so on environment
+# variables.
+RUN \
+  echo > /usr/lib/rpm/redhat/redhat-package-notes
+
 RUN \
   gem install bundler
 
