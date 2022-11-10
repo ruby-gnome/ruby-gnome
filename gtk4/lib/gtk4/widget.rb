@@ -106,6 +106,10 @@ module Gtk
 
     private
     def initialize_post
+      super
+
+      GObjectIntrospection::Loader.reference_gobject(self, sink: true)
+
       klass = self.class
       return unless klass.have_template?
       return unless respond_to?(:init_template)
