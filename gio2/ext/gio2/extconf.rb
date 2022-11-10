@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2014-2019  Ruby-GNOME Project Team
+# Copyright (C) 2014-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -66,6 +66,20 @@ end
 create_pkg_config_file("Ruby/GIO2", package_id)
 
 $defs << "-DRUBY_GIO2_COMPILATION"
+case RUBY_PLATFORM
+when /darwin/
+  symbols_in_external_bundles = [
+    "_rbg_define_method",
+    "_rbgobj_add_relative",
+    "_rbgobj_boxed_get",
+    "_rbgobj_gvalue_to_rvalue",
+    "_rbgobj_ruby_object_from_instance",
+    "_rbgobj_set_signal_func",
+  ]
+  symbols_in_external_bundles.each do |symbol|
+    $DLDFLAGS << " -Wl,-U,#{symbol}"
+  end
+end
 create_makefile(module_name)
 
 pkg_config_dir = with_config("pkg-config-dir")
