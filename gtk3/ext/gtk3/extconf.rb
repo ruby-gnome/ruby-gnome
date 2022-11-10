@@ -83,6 +83,28 @@ $defs << "-DRUBY_GTK3_COMPILATION"
 case RUBY_PLATFORM
 when /darwin/
   symbols_in_external_bundles = [
+    "_rb_gi_callback_data_get_rb_callback",
+    "_rb_gi_callback_register_finder",
+    "_rb_gi_struct_new_raw",
+    "_rbg_check_array_type",
+    "_rbg_cstr2rval",
+    "_rbg_define_private_method",
+    "_rbg_define_singleton_method",
+    "_rbg_rval2cstr",
+    "_rbg_rval_inspect",
+    "_rbg_strv2rval",
+    "_rbgobj_boxed_not_copy_obj",
+    "_rbgobj_gc_mark_gvalue",
+    "_rbgobj_gc_mark_instance",
+    "_rbgobj_gvalue_to_rvalue",
+    "_rbgobj_instance_from_ruby_object",
+    "_rbgobj_lookup_class",
+    "_rbgobj_make_boxed",
+    "_rbgobj_make_flags",
+    "_rbgobj_register_mark_func",
+    "_rbgobj_ruby_object_from_instance",
+    "_rbgobj_rvalue_to_gvalue",
+    "_rbgobj_set_signal_call_func",
   ]
   symbols_in_external_bundles.each do |symbol|
     $DLDFLAGS << " -Wl,-U,#{symbol}"
