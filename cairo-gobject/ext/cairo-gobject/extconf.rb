@@ -68,6 +68,42 @@ create_pkg_config_file("Ruby/CairoGObject",
 ensure_objs
 
 $defs << "-DRUBY_CAIRO_GOBJECT_COMPILATION"
+case RUBY_PLATFORM
+when /darwin/
+  symbols_in_external_bundles = [
+    "_rb_cCairo_Context",
+    "_rb_cCairo_Device",
+    "_rb_cCairo_FontFace",
+    "_rb_cCairo_FontOptions",
+    "_rb_cCairo_Pattern",
+    "_rb_cCairo_Region",
+    "_rb_cCairo_ScaledFont",
+    "_rb_cCairo_Surface",
+    "_rb_cairo_context_from_ruby_object",
+    "_rb_cairo_context_to_ruby_object",
+    "_rb_cairo_device_from_ruby_object",
+    "_rb_cairo_device_to_ruby_object",
+    "_rb_cairo_font_face_from_ruby_object",
+    "_rb_cairo_font_face_to_ruby_object",
+    "_rb_cairo_font_options_from_ruby_object",
+    "_rb_cairo_font_options_to_ruby_object",
+    "_rb_cairo_pattern_from_ruby_object",
+    "_rb_cairo_pattern_to_ruby_object",
+    "_rb_cairo_region_from_ruby_object",
+    "_rb_cairo_region_to_ruby_object",
+    "_rb_cairo_scaled_font_from_ruby_object",
+    "_rb_cairo_scaled_font_to_ruby_object",
+    "_rb_cairo_surface_from_ruby_object",
+    "_rb_cairo_surface_to_ruby_object",
+    "_rbgobj_convert_define",
+    "_rbgobj_define_class",
+    "_rbgobj_gtype_new",
+    "_rbgobj_make_boxed",
+  ]
+  symbols_in_external_bundles.each do |symbol|
+    $DLDFLAGS << " -Wl,-U,#{symbol}"
+  end
+end
 create_makefile(module_name)
 
 pkg_config_dir = with_config("pkg-config-dir")
