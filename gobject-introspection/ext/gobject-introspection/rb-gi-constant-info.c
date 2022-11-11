@@ -56,6 +56,7 @@ rg_value(VALUE self)
     RBGIArgMetadata value_metadata;
     rb_gi_arg_metadata_init_type_info(&value_metadata,
                                       g_constant_info_get_type(info));
+    rb_gi_arg_metadata_init_struct_info(&value_metadata, NULL, NULL);
     VALUE rb_value = rb_gi_arguments_convert_arg(&args,
                                                  &value,
                                                  &value_metadata,

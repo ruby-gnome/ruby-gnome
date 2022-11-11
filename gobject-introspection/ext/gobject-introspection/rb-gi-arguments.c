@@ -758,7 +758,7 @@ rb_gi_arguments_convert_arg_array_body_get_length(ArrayLikeToRubyData *data)
         return -1;
     }
 
-    if (data->arg_metadata->struct_info) {
+    if (!data->args->metadata && data->arg_metadata->struct_info) {
         GIFieldInfo *field_info =
             g_struct_info_get_field(data->arg_metadata->struct_info,
                                     length_index);
@@ -1756,11 +1756,13 @@ rb_gi_arguments_convert_arg_ghash(RBGIArguments *args,
     RBGIArgMetadata key_metadata;
     rb_gi_arg_metadata_init_type_info(&key_metadata,
                                       g_type_info_get_param_type(type_info, 0));
+    rb_gi_arg_metadata_init_struct_info(&key_metadata, NULL, NULL);
     data.key_metadata = &key_metadata;
 
     RBGIArgMetadata value_metadata;
     rb_gi_arg_metadata_init_type_info(&value_metadata,
                                       g_type_info_get_param_type(type_info, 1));
+    rb_gi_arg_metadata_init_struct_info(&value_metadata, NULL, NULL);
     data.value_metadata = &value_metadata;
 
     return rb_ensure(rb_gi_arguments_convert_arg_ghash_body, (VALUE)&data,
@@ -2453,6 +2455,7 @@ rb_gi_arguments_convert_return_value(RBGIArguments *args,
     RBGIArgMetadata metadata;
     GITypeInfo *return_value_info = g_callable_info_get_return_type(args->info);
     rb_gi_arg_metadata_init_type_info(&metadata, return_value_info);
+    rb_gi_arg_metadata_init_struct_info(&metadata, NULL, NULL);
     data.metadata = &metadata;
 
     return rb_ensure(rb_gi_arguments_convert_return_value_body, (VALUE)&data,
