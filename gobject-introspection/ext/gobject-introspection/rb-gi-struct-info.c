@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -218,7 +218,7 @@ rg_get_field_value(VALUE self, VALUE rb_struct, VALUE rb_n)
     raw_struct = rb_gi_struct_info_from_ruby(info, rb_struct);
     n = NUM2INT(rb_n);
     field_info = g_struct_info_get_field(info, n);
-    rb_value = rb_gi_field_info_get_field_raw(field_info, raw_struct);
+    rb_value = rb_gi_field_info_get_field_raw(field_info, info, raw_struct);
     g_base_info_unref(field_info);
 
     return rb_value;
@@ -236,7 +236,7 @@ rg_set_field_value(VALUE self, VALUE rb_struct, VALUE rb_n, VALUE rb_value)
     raw_struct = rb_gi_struct_info_from_ruby(info, rb_struct);
     n = NUM2INT(rb_n);
     field_info = g_struct_info_get_field(info, n);
-    rb_gi_field_info_set_field_raw(field_info, raw_struct, rb_value);
+    rb_gi_field_info_set_field_raw(field_info, info, raw_struct, rb_value);
     /* TODO: use rb_ensure() to unref field_info. */
     g_base_info_unref(field_info);
 

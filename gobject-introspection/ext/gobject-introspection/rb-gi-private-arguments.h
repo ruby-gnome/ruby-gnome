@@ -51,6 +51,8 @@ struct RBGIArgMetadata_ {
     GICallableInfo *callable_info;
     GIArgInfo arg_info;
     GITypeInfo *type_info;
+    GIFieldInfo *struct_info;
+    gpointer *struct_memory;
     const gchar *name;
     RBGIArgMetadataType type;
     RBGIArgMetadataType element_type;
@@ -90,6 +92,10 @@ struct RBGIArgMetadata_ {
 G_GNUC_INTERNAL void
 rb_gi_arg_metadata_init_type_info(RBGIArgMetadata *metadata,
                                   GITypeInfo *type_info);
+G_GNUC_INTERNAL void
+rb_gi_arg_metadata_init_struct_info(RBGIArgMetadata *metadata,
+                                    GIStructInfo *struct_info,
+                                    gpointer struct_memory);
 G_GNUC_INTERNAL void
 rb_gi_arg_metadata_clear(RBGIArgMetadata *metadata);
 G_GNUC_INTERNAL void

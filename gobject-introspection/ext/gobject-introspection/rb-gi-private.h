@@ -116,8 +116,10 @@ VALUE rb_gi_function_info_invoke_raw (GIFunctionInfo *info,
                                       VALUE *rb_return_value);
 
 VALUE rb_gi_field_info_get_field_raw (GIFieldInfo *info,
+                                      GIStructInfo *struct_info,
                                       gpointer     memory);
 void  rb_gi_field_info_set_field_raw (GIFieldInfo *info,
+                                      GIStructInfo *struct_info,
                                       gpointer     memory,
                                       VALUE        rb_field_value);
 

@@ -135,6 +135,15 @@ rb_gi_arg_metadata_init_type_info(RBGIArgMetadata *metadata,
     }
 }
 
+void
+rb_gi_arg_metadata_init_struct_info(RBGIArgMetadata *metadata,
+                                    GIStructInfo *struct_info,
+                                    gpointer struct_memory)
+{
+    metadata->struct_info = struct_info;
+    metadata->struct_memory = struct_memory;
+}
+
 static RBGIArgMetadata *
 rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
 {
@@ -144,6 +153,8 @@ rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
     GIArgInfo *arg_info = &(metadata->arg_info);
     g_callable_info_load_arg(callable_info, i, arg_info);
     metadata->name = g_base_info_get_name(arg_info);
+    metadata->struct_info = NULL;
+    metadata->struct_memory = NULL;
     metadata->index = i;
 
     rb_gi_arg_metadata_init_type_info(metadata,
@@ -656,6 +667,156 @@ rb_gi_arguments_convert_arg_array_like_ensure(VALUE user_data)
     return Qnil;
 }
 
+static gint64
+rb_gi_arguments_convert_arg_array_body_extract_length(GIArgument *arg,
+                                                      RBGIArgMetadata *metadata,
+                                                      gboolean is_pointer)
+{
+    switch (metadata->type.tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+        rb_raise(rb_eNotImpError,
+                 "TODO: invalid out array length argument?: <%s>",
+                 g_type_tag_to_string(metadata->type.tag));
+        return -1;
+      case GI_TYPE_TAG_INT8:
+        if (is_pointer) {
+            return *((gint8 *)arg->v_pointer);
+        } else {
+            return arg->v_int8;
+        }
+      case GI_TYPE_TAG_UINT8:
+        if (is_pointer) {
+            return *((guint8 *)arg->v_pointer);
+        } else {
+            return arg->v_uint8;
+        }
+      case GI_TYPE_TAG_INT16:
+        if (is_pointer) {
+            return *((gint16 *)arg->v_pointer);
+        } else {
+            return arg->v_int16;
+        }
+      case GI_TYPE_TAG_UINT16:
+        if (is_pointer) {
+            return *((guint16 *)arg->v_pointer);
+        } else {
+            return arg->v_uint16;
+        }
+      case GI_TYPE_TAG_INT32:
+        if (is_pointer) {
+            return *((gint32 *)arg->v_pointer);
+        } else {
+            return arg->v_int32;
+        }
+      case GI_TYPE_TAG_UINT32:
+        if (is_pointer) {
+            return *((guint32 *)arg->v_pointer);
+        } else {
+            return arg->v_uint32;
+        }
+      case GI_TYPE_TAG_INT64:
+        if (is_pointer) {
+            return *((gint64 *)arg->v_pointer);
+        } else {
+            return arg->v_int64;
+        }
+      case GI_TYPE_TAG_UINT64:
+        if (is_pointer) {
+            return *((guint64 *)arg->v_pointer);
+        } else {
+            return arg->v_uint64;
+        }
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: invalid out array length argument?: <%s>",
+                 g_type_tag_to_string(metadata->type.tag));
+        return -1;
+      default:
+        g_assert_not_reached();
+        return -1;
+    }
+}
+
+static gint64
+rb_gi_arguments_convert_arg_array_body_get_length(ArrayLikeToRubyData *data)
+{
+    GITypeInfo *type_info = data->arg_metadata->type_info;
+    gint length_index = g_type_info_get_array_length(type_info);
+    if (length_index == -1) {
+        return -1;
+    }
+
+    if (data->arg_metadata->struct_info) {
+        GIFieldInfo *field_info =
+            g_struct_info_get_field(data->arg_metadata->struct_info,
+                                    length_index);
+        GIArgument value;
+        g_field_info_get_field(field_info,
+                               data->arg_metadata->struct_memory,
+                               &value);
+        RBGIArgMetadata length_metadata;
+        GITypeInfo *length_type_info = g_field_info_get_type(field_info);
+        rb_gi_arg_metadata_init_type_info(&length_metadata, length_type_info);
+        rb_gi_arg_metadata_init_struct_info(&length_metadata,
+                                            data->arg_metadata->struct_info,
+                                            data->arg_metadata->struct_memory);
+        int64_t length =
+            rb_gi_arguments_convert_arg_array_body_extract_length(
+                &value,
+                &length_metadata,
+                FALSE);
+        /* TODO: Use ensure */
+        rb_gi_arg_metadata_clear(&length_metadata);
+        g_base_info_unref(field_info);
+        return length;
+    }
+
+    GIArgument *length_arg = NULL;
+    RBGIArgMetadata *length_metadata =
+        g_ptr_array_index(data->args->metadata, length_index);
+    if (length_metadata->direction == GI_DIRECTION_OUT) {
+        length_arg = &g_array_index(data->args->out_args,
+                                    GIArgument,
+                                    length_metadata->out_arg_index);
+    } else if (length_metadata->direction == GI_DIRECTION_INOUT) {
+        length_arg = &g_array_index(data->args->in_args,
+                                    GIArgument,
+                                    length_metadata->in_arg_index);
+    }
+
+    if (length_arg) {
+        gboolean is_pointer =
+            !(length_metadata->array_metadata &&
+              length_metadata->array_metadata->output_buffer_p);
+        return
+            rb_gi_arguments_convert_arg_array_body_extract_length(
+                length_arg,
+                length_metadata,
+                is_pointer);
+    } else {
+        length_arg = &g_array_index(data->args->in_args,
+                                    GIArgument,
+                                    length_metadata->in_arg_index);
+        return
+            rb_gi_arguments_convert_arg_array_body_extract_length(
+                length_arg,
+                length_metadata,
+                FALSE);
+    }
+}
+
 static VALUE
 rb_gi_arguments_convert_arg_array_body_c_sized_interface(
     ArrayLikeToRubyData *data,
@@ -1115,135 +1276,19 @@ rb_gi_arguments_convert_arg_array_body_array(ArrayLikeToRubyData *data)
     }
 }
 
-static gint64
-rb_gi_arguments_convert_arg_array_body_extract_length(GIArgument *arg,
-                                                      RBGIArgMetadata *metadata,
-                                                      gboolean is_pointer)
-{
-    switch (metadata->type.tag) {
-      case GI_TYPE_TAG_VOID:
-      case GI_TYPE_TAG_BOOLEAN:
-        rb_raise(rb_eNotImpError,
-                 "TODO: invalid out array length argument?: <%s>",
-                 g_type_tag_to_string(metadata->type.tag));
-        return -1;
-      case GI_TYPE_TAG_INT8:
-        if (is_pointer) {
-            return *((gint8 *)arg->v_pointer);
-        } else {
-            return arg->v_int8;
-        }
-      case GI_TYPE_TAG_UINT8:
-        if (is_pointer) {
-            return *((guint8 *)arg->v_pointer);
-        } else {
-            return arg->v_uint8;
-        }
-      case GI_TYPE_TAG_INT16:
-        if (is_pointer) {
-            return *((gint16 *)arg->v_pointer);
-        } else {
-            return arg->v_int16;
-        }
-      case GI_TYPE_TAG_UINT16:
-        if (is_pointer) {
-            return *((guint16 *)arg->v_pointer);
-        } else {
-            return arg->v_uint16;
-        }
-      case GI_TYPE_TAG_INT32:
-        if (is_pointer) {
-            return *((gint32 *)arg->v_pointer);
-        } else {
-            return arg->v_int32;
-        }
-      case GI_TYPE_TAG_UINT32:
-        if (is_pointer) {
-            return *((guint32 *)arg->v_pointer);
-        } else {
-            return arg->v_uint32;
-        }
-      case GI_TYPE_TAG_INT64:
-        if (is_pointer) {
-            return *((gint64 *)arg->v_pointer);
-        } else {
-            return arg->v_int64;
-        }
-      case GI_TYPE_TAG_UINT64:
-        if (is_pointer) {
-            return *((guint64 *)arg->v_pointer);
-        } else {
-            return arg->v_uint64;
-        }
-      case GI_TYPE_TAG_FLOAT:
-      case GI_TYPE_TAG_DOUBLE:
-      case GI_TYPE_TAG_GTYPE:
-      case GI_TYPE_TAG_UTF8:
-      case GI_TYPE_TAG_FILENAME:
-      case GI_TYPE_TAG_ARRAY:
-      case GI_TYPE_TAG_INTERFACE:
-      case GI_TYPE_TAG_GLIST:
-      case GI_TYPE_TAG_GSLIST:
-      case GI_TYPE_TAG_GHASH:
-      case GI_TYPE_TAG_ERROR:
-      case GI_TYPE_TAG_UNICHAR:
-        rb_raise(rb_eNotImpError,
-                 "TODO: invalid out array length argument?: <%s>",
-                 g_type_tag_to_string(metadata->type.tag));
-        return -1;
-      default:
-        g_assert_not_reached();
-        return -1;
-    }
-}
-
 static VALUE
 rb_gi_arguments_convert_arg_array_body(VALUE user_data)
 {
     ArrayLikeToRubyData *data = (ArrayLikeToRubyData *)user_data;
     GITypeInfo *type_info = data->arg_metadata->type_info;
-
-    gint length_index = g_type_info_get_array_length(type_info);
-    gint64 length = -1;
-    if (length_index != -1) {
-        GIArgument *length_arg = NULL;
-        RBGIArgMetadata *length_metadata =
-            g_ptr_array_index(data->args->metadata, length_index);
-        if (length_metadata->direction == GI_DIRECTION_OUT) {
-            length_arg = &g_array_index(data->args->out_args,
-                                        GIArgument,
-                                        length_metadata->out_arg_index);
-        } else if (length_metadata->direction == GI_DIRECTION_INOUT) {
-            length_arg = &g_array_index(data->args->in_args,
-                                        GIArgument,
-                                        length_metadata->in_arg_index);
-        }
-
-        if (length_arg) {
-            gboolean is_pointer =
-                !(length_metadata->array_metadata &&
-                  length_metadata->array_metadata->output_buffer_p);
-            length =
-                rb_gi_arguments_convert_arg_array_body_extract_length(
-                    length_arg,
-                    length_metadata,
-                    is_pointer);
-        } else {
-            length_arg = &g_array_index(data->args->in_args,
-                                        GIArgument,
-                                        length_metadata->in_arg_index);
-            length =
-                rb_gi_arguments_convert_arg_array_body_extract_length(
-                    length_arg,
-                    length_metadata,
-                    FALSE);
-        }
-    }
-
     GIArrayType array_type = g_type_info_get_array_type(type_info);
     switch (array_type) {
       case GI_ARRAY_TYPE_C:
-        return rb_gi_arguments_convert_arg_array_body_c(data, length);
+        {
+            gint64 length =
+                rb_gi_arguments_convert_arg_array_body_get_length(data);
+            return rb_gi_arguments_convert_arg_array_body_c(data, length);
+        }
       case GI_ARRAY_TYPE_ARRAY:
         return rb_gi_arguments_convert_arg_array_body_array(data);
       case GI_ARRAY_TYPE_PTR_ARRAY:

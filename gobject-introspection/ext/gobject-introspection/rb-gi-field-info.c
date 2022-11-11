@@ -232,12 +232,15 @@ rb_gi_field_info_get_field_raw_ensure(VALUE user_data)
 }
 
 VALUE
-rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
+rb_gi_field_info_get_field_raw(GIFieldInfo *info,
+                               GIStructInfo *struct_info,
+                               gpointer memory)
 {
     FieldToRubyData data;
     rb_gi_arguments_init(&(data.args), NULL, Qnil, Qnil, NULL);
     GITypeInfo *type_info = g_field_info_get_type(info);
     rb_gi_arg_metadata_init_type_info(&(data.metadata), type_info);
+    rb_gi_arg_metadata_init_struct_info(&(data.metadata), struct_info, memory);
     data.info = info;
     data.memory = memory;
 
@@ -246,7 +249,10 @@ rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
 }
 
 void
-rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
+rb_gi_field_info_set_field_raw(GIFieldInfo *info,
+                               /* TODO: Use this to set length field. */
+                               GIStructInfo *struct_info,
+                               gpointer memory,
                                VALUE rb_field_value)
 {
     gint offset;
@@ -444,26 +450,24 @@ rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
 }
 
 static VALUE
-rg_get_field(VALUE self, VALUE rb_memory)
+rg_get_field(VALUE self, VALUE rb_struct_info, VALUE rb_memory)
 {
-    GIFieldInfo *info;
-    gpointer memory;
-
-    info = SELF(self);
-    memory = GUINT_TO_POINTER(NUM2ULONG(rb_memory));
-    return rb_gi_field_info_get_field_raw(info, memory);
+    GIFieldInfo *info = SELF(self);
+    GIStructInfo *struct_info = RVAL2GI_STRUCT_INFO(rb_struct_info);
+    gpointer memory = GUINT_TO_POINTER(NUM2ULONG(rb_memory));
+    return rb_gi_field_info_get_field_raw(info, struct_info, memory);
 }
 
 static VALUE
-rg_set_field(VALUE self, VALUE rb_memory, VALUE rb_field_value)
+rg_set_field(VALUE self,
+             VALUE rb_struct_info,
+             VALUE rb_memory,
+             VALUE rb_field_value)
 {
-    GIFieldInfo *info;
-    gpointer memory;
-
-    info = SELF(self);
-    memory = GUINT_TO_POINTER(NUM2ULONG(rb_memory));
-    rb_gi_field_info_set_field_raw(info, memory, rb_field_value);
-
+    GIFieldInfo *info = SELF(self);
+    GIStructInfo *struct_info = RVAL2GI_STRUCT_INFO(rb_struct_info);
+    gpointer memory = GUINT_TO_POINTER(NUM2ULONG(rb_memory));
+    rb_gi_field_info_set_field_raw(info, struct_info, memory, rb_field_value);
     return Qnil;
 }
 
@@ -480,8 +484,8 @@ rb_gi_field_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(size, 0);
     RG_DEF_METHOD(offset, 0);
     RG_DEF_METHOD(type, 0);
-    RG_DEF_METHOD(get_field, 1);
-    RG_DEF_METHOD(set_field, 2);
+    RG_DEF_METHOD(get_field, 2);
+    RG_DEF_METHOD(set_field, 3);
 
     G_DEF_CLASS(G_TYPE_I_FIELD_INFO_FLAGS, "FieldInfoFlags", rb_mGI);
 }

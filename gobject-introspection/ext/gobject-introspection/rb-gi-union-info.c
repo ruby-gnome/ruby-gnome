@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -69,6 +69,8 @@ rg_get_field_value(VALUE self, VALUE rb_union, VALUE rb_n)
     field_info = g_union_info_get_field(info, n);
     gtype = g_registered_type_info_get_g_type(info);
     rb_value = rb_gi_field_info_get_field_raw(field_info,
+                                              /* TODO: use info */
+                                              NULL,
                                               RVAL2BOXED(rb_union, gtype));
     g_base_info_unref(field_info);
 
@@ -88,6 +90,8 @@ rg_set_field_value(VALUE self, VALUE rb_union, VALUE rb_n, VALUE rb_value)
     field_info = g_union_info_get_field(info, n);
     gtype = g_registered_type_info_get_g_type(info);
     rb_gi_field_info_set_field_raw(field_info,
+                                   /* TODO: use info */
+                                   NULL,
                                    RVAL2BOXED(rb_union, gtype),
                                    rb_value);
     /* TODO: use rb_ensure() to unref field_info. */
