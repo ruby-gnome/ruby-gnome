@@ -34,17 +34,13 @@ def draw_brush(widget, surface, x, y)
   cr = Cairo::Context.new(surface)
   cr.rectangle(x - 3, y - 3, 6, 6)
   cr.fill
-  widget.queue_draw_area(x - 3, y - 3, 6, 6)
+  widget.queue_draw
 end
 
 def generate_surface_from_widget(widget)
-  surface = nil
-  if widget.window
-    surface = widget.window.create_similar_surface(Cairo::CONTENT_COLOR,
-                                                   widget.allocated_width,
-                                                   widget.allocated_height)
-  end
-  surface
+  widget.native.surface.create_similar_surface(Cairo::CONTENT_COLOR,
+                                               widget.allocated_width,
+                                               widget.allocated_height)
 end
 
 myapp = Gtk::Application.new("org.gtk.example", :flags_none)
@@ -60,14 +56,10 @@ myapp.signal_connect "activate" do |app|
     win.destroy
   end
 
-  frame = Gtk::Frame.new
-  frame.shadow_type = Gtk::ShadowType::IN
-  win.add(frame)
-
   drawing_area = Gtk::DrawingArea.new
   # Set a minimum size
   drawing_area.set_size_request(100, 100)
-  frame.add(drawing_area)
+  win.set_child(drawing_area)
 
   drawing_area.set_draw_func do |da, cr|
     if surface.nil?
@@ -82,15 +74,16 @@ myapp.signal_connect "activate" do |app|
     cr.paint
   end
 
-  drawing_area.signal_connect_after "size-allocate" do |da, alloc|
+  drawing_area.signal_connect_after "resize" do |da, alloc|
     surface.destroy if surface
     surface = generate_surface_from_widget(da)
     # Initialize the surface to white
     clear_surface(surface) if surface
   end
 
-  drag = Gtk::GestureDrag.new(drawing_area)
+  drag = Gtk::GestureDrag.new
   drag.button = Gdk::BUTTON_PRIMARY
+  drawing_area.add_controller(drag)
 
   start_x = 0.0
   start_y = 0.0
@@ -109,8 +102,9 @@ myapp.signal_connect "activate" do |app|
     draw_brush(drawing_area, surface, start_x + x, start_y + y)
   end
 
-  press = Gtk::GestureMultiPress.new(drawing_area)
+  press = Gtk::GestureClick.new
   press.button = Gdk::BUTTON_SECONDARY
+  drawing_area.add_controller(press)
   press.signal_connect "pressed" do |gesture, n_press, x, y|
     clear_surface(surface)
     drawing_area.queue_draw

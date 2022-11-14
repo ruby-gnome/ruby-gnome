@@ -123,7 +123,7 @@ application.signal_connect "activate" do |app|
   button.menu_model = buttonmenu
   button.halign = :center
   button.valign = :start
-  win.add(button)
+  win.set_child(button)
   win.show
 end
 
