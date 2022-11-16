@@ -33,7 +33,7 @@ application.signal_connect "activate" do |app|
   grid = Gtk::Grid.new
 
   # Pack the container in the window
-  win.add(grid)
+  win.set_child(grid)
 
   button = Gtk::Button.new(:label => "Button 1")
   button.signal_connect("clicked") { puts "Hello World!" }
