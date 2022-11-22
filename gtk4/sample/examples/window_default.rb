@@ -17,6 +17,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 # example from https://gitlab.gnome.org/GNOME/gtk/blob/main/examples/window-default.c
+#
+# License: LGPL2.1+
 
 require_relative "utils"
 
