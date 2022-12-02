@@ -66,7 +66,7 @@ have_func("rsvg_handle_get_pixbuf_sub", rsvg_header)
 have_header("librsvg/rsvg-gz.h")
 have_type("RsvgDimensionData", "librsvg/rsvg.h")
 
-have_header("librsvg/rsvg-cairo.h")
+have_header("librsvg/rsvg-cairo.h", ["librsvg/rsvg.h"])
 
 create_pkg_config_file("Ruby/RSVG", package_id, nil, "ruby-rsvg2.pc")
 
