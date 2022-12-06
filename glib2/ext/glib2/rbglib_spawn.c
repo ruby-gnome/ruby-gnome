@@ -260,6 +260,7 @@ Init_glib_spawn(void)
     rb_define_const(RG_TARGET_NAMESPACE,
                     "CLOEXEC_PIPES",
                     INT2NUM(G_SPAWN_CLOEXEC_PIPES));
+#if GLIB_CHECK_VERSION(2, 74, 0)
     rb_define_const(RG_TARGET_NAMESPACE,
                     "CHILD_INHERITS_STDOUT",
                     INT2NUM(G_SPAWN_CHILD_INHERITS_STDOUT));
@@ -269,4 +270,5 @@ Init_glib_spawn(void)
     rb_define_const(RG_TARGET_NAMESPACE,
                     "STDIN_FROM_DEV_NULL",
                     INT2NUM(G_SPAWN_STDIN_FROM_DEV_NULL));
+#endif
 }
