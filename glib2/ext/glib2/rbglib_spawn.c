@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2022  Ruby-GNOME Project Team
  *  Copyright (C) 2004  Masao Mutoh
  *  Copyright (C) 2004  Kazuhiro NISHIYAMA
  *
@@ -230,11 +230,43 @@ Init_glib_spawn(void)
     RG_DEF_SMETHOD(command_line_async, 1);
     RG_DEF_SMETHOD(close_pid, 1);
 
-    rb_define_const(RG_TARGET_NAMESPACE, "LEAVE_DESCRIPTORS_OPEN", INT2NUM(G_SPAWN_LEAVE_DESCRIPTORS_OPEN));
-    rb_define_const(RG_TARGET_NAMESPACE, "DO_NOT_REAP_CHILD", INT2NUM(G_SPAWN_DO_NOT_REAP_CHILD));
-    rb_define_const(RG_TARGET_NAMESPACE, "SEARCH_PATH", INT2NUM(G_SPAWN_SEARCH_PATH));
-    rb_define_const(RG_TARGET_NAMESPACE, "STDOUT_TO_DEV_NULL", INT2NUM(G_SPAWN_STDOUT_TO_DEV_NULL));
-    rb_define_const(RG_TARGET_NAMESPACE, "STDERR_TO_DEV_NULL", INT2NUM(G_SPAWN_STDERR_TO_DEV_NULL));
-    rb_define_const(RG_TARGET_NAMESPACE, "CHILD_INHERITS_STDIN", INT2NUM(G_SPAWN_CHILD_INHERITS_STDIN));
-    rb_define_const(RG_TARGET_NAMESPACE, "FILE_AND_ARGV_ZERO", INT2NUM(G_SPAWN_FILE_AND_ARGV_ZERO));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "DEFAULT",
+                    INT2NUM(G_SPAWN_DEFAULT));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "LEAVE_DESCRIPTORS_OPEN",
+                    INT2NUM(G_SPAWN_LEAVE_DESCRIPTORS_OPEN));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "DO_NOT_REAP_CHILD",
+                    INT2NUM(G_SPAWN_DO_NOT_REAP_CHILD));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "SEARCH_PATH",
+                    INT2NUM(G_SPAWN_SEARCH_PATH));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "STDOUT_TO_DEV_NULL",
+                    INT2NUM(G_SPAWN_STDOUT_TO_DEV_NULL));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "STDERR_TO_DEV_NULL",
+                    INT2NUM(G_SPAWN_STDERR_TO_DEV_NULL));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "CHILD_INHERITS_STDIN",
+                    INT2NUM(G_SPAWN_CHILD_INHERITS_STDIN));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "FILE_AND_ARGV_ZERO",
+                    INT2NUM(G_SPAWN_FILE_AND_ARGV_ZERO));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "SEARCH_PATH_FROM_ENVP",
+                    INT2NUM(G_SPAWN_SEARCH_PATH_FROM_ENVP));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "CLOEXEC_PIPES",
+                    INT2NUM(G_SPAWN_CLOEXEC_PIPES));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "CHILD_INHERITS_STDOUT",
+                    INT2NUM(G_SPAWN_CHILD_INHERITS_STDOUT));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "CHILD_INHERITS_STDERR",
+                    INT2NUM(G_SPAWN_CHILD_INHERITS_STDERR));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "STDIN_FROM_DEV_NULL",
+                    INT2NUM(G_SPAWN_STDIN_FROM_DEV_NULL));
 }
