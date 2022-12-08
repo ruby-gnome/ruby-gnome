@@ -67,6 +67,7 @@ packages = [
   "gtksourceview3",
   "gtksourceview4",
   "gtksourceview5",
+  "handy",
   "libsecret",
   "pango",
   "poppler",
