@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2021  Ruby-GNOME Project Team
+# Copyright (C) 2013-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -76,6 +76,7 @@ module Gio
       require "gio2/settings"
       require "gio2/settings-schema-source"
       require "gio2/simple-action"
+      require "gio2/volume"
 
       require "gio2/deprecated"
     end
@@ -205,6 +206,20 @@ module Gio
         define_method(info, klass, method_name)
       when "Gio::Icon#new_for_string"
         super(info, klass, "find")
+      else
+        super
+      end
+    end
+
+    def rubyish_method_name(function_info, options={})
+      case function_info.name
+      when "get_mount"
+        case function_info.container&.name
+        when "Volume"
+          "get_mount"
+        else
+          super
+        end
       else
         super
       end
