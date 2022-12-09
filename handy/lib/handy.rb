@@ -16,8 +16,6 @@
 
 require "gtk3"
 
-Gtk::Window # Ensure initializing GTK+ 3
-
 require "handy/loader"
 
 module Handy
