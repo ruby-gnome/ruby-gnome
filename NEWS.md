@@ -1,5 +1,161 @@
 # NEWS
 
+## Ruby-GNOME 4.0.4: 2022-12-09
+
+This is a release that adds more new libraries: Ruby/Adwaita,
+Ruby/GtkSourceView3 and Ruby/Handy.
+
+### Changes
+
+#### Documents
+
+  * Improvements
+
+    * Added gdk4 and gtk4.
+      [[GitHub#1514](https://github.com/ruby-gnome/ruby-gnome/issues/1514)]
+      [Reported by codart]
+
+#### All
+
+  * Improvements
+
+    * Added support for macOS 12/Xcode 14.
+      [[GitHub#1516](https://github.com/ruby-gnome/ruby-gnome/issues/1516)]
+      [Reported by Apoorv Sohal]
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Added support for instantiating `GLib::Pointer` and getting
+      address of it.
+
+    * Renamed `gnome2/` to `gnome/` in internal library path.
+
+    * Suppressed `connected_closures` isn't initialized warning.
+
+    * Re-added `GLib::ValueArray` because GStreamer still uses it
+      without replacement.
+      [[GitHub#1520](https://github.com/ruby-gnome/ruby-gnome/issues/1520)]
+      [Reported by Matt Palmer]
+
+    * Set missing `rb_data_type_t::wrap_struct_name`.
+      [[GitHub#1522](https://github.com/ruby-gnome/ruby-gnome/issues/1522)]
+      [Patch by Peter Zhu]
+
+    * Added support for more `GSpawnFlags`.
+
+  * Fixes
+
+    * Fixed a bug that `GLib::Pointer.gtype` and `GLib::Pointer#gtype`
+      use the wrong number of arguments.
+
+    * Fixed a memory leak in `GLib::Object` based classes.
+      [[GitHub#1523](https://github.com/ruby-gnome/ruby-gnome/issues/1523)]
+      [Patch by Peter Zhu]
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for `length` in field.
+      [[GitHub#1524](https://github.com/ruby-gnome/ruby-gnome/issues/1524)]
+      [Reported by jvmf1]
+
+#### Ruby/GIO2
+
+  * Improvements
+
+    * Added support for getting `GLib::Mount` by `Gio::Volume#mount`.
+      [[GitHub#604](https://github.com/ruby-gnome/ruby-gnome/issues/604)]
+
+#### Ruby/GTK4
+
+  * Improvements
+
+    * [sample] Updated.
+      [[GitHub#1512](https://github.com/ruby-gnome/ruby-gnome/issues/1512)]
+      [[GitHub#1515](https://github.com/ruby-gnome/ruby-gnome/issues/1515)]
+      [Patch by kojix2]
+      [[GitHub#1526](https://github.com/ruby-gnome/ruby-gnome/issues/1526)]
+      [[GitHub#1527](https://github.com/ruby-gnome/ruby-gnome/issues/1527)]
+      [Patch by Daniel Mircea]
+
+  * Fixes
+
+    * Fixed a bug that `Gtk::ScrolledWindow` can't be created.
+      [[GitHub#1504](https://github.com/ruby-gnome/ruby-gnome/issues/1504)]
+      [Reported by rubyFeedback]
+
+    * Fixed a typo in `Gtk::Image.new`.
+      [[GitHub#1504](https://github.com/ruby-gnome/ruby-gnome/issues/1504)]
+      [Reported by rubyFeedback]
+
+    * Fixed a bug that `Gtk::CellRendereText` may be GC-ed.
+      [[GitHub#1518](https://github.com/ruby-gnome/ruby-gnome/issues/1518)]
+      [Reported by galtgenod]
+
+    * Fixed a crash bug that is caused when GLib based class defined
+      by Ruby is used.
+      [[GitHub#1444](https://github.com/ruby-gnome/ruby-gnome/issues/1444)]
+      [Reported by HuBandiT]
+
+#### Ruby/libsecret
+
+  * Fixes
+
+    * Fixed wrong MSYS2 package name.
+
+#### Ruby/GtkSourceView4
+
+  * Fixes
+
+    * Fixed package ID.
+      [[GitHub#1525](https://github.com/ruby-gnome/ruby-gnome/issues/1525)]
+      [Reported by Daniel Mircea]
+
+#### Ruby/GtkSourceView5
+
+  * Added.
+    [[GitHub#1511](https://github.com/ruby-gnome/ruby-gnome/issues/1511)]
+    [Reported by galtgendo]
+
+#### Ruby/Adwaita
+
+  * Added.
+    [[GitHub#1510](https://github.com/ruby-gnome/ruby-gnome/issues/1510)]
+    [Reported by rubyFeedback]
+
+#### Ruby/Handy
+
+  * Added.
+    [[GitHub#1434](https://github.com/ruby-gnome/ruby-gnome/issues/1434)]
+    [Reported by Jacob Michalskie]
+
+### Thanks
+
+  * rubyFeedback
+
+  * kojix2
+
+  * codart
+
+  * Apoorv Sohal
+
+  * galtgendo
+
+  * Matt Palmer
+
+  * Peter Zhu
+
+  * HuBandiT
+
+  * jvmf1
+
+  * Daniel Mircea
+
+  * Jacob Michalskie
+
 ## Ruby-GNOME 4.0.3: 2022-09-13
 
 This is a bug fix release of 4.0.2.
