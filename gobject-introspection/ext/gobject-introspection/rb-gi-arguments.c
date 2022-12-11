@@ -419,8 +419,23 @@ static void
 rb_gi_arguments_metadata_free(gpointer data)
 {
     RBGIArgMetadata *metadata = data;
-    if (metadata->scope_type == GI_SCOPE_TYPE_ASYNC ||
-        metadata->scope_type == GI_SCOPE_TYPE_NOTIFIED) {
+    if (metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
+        /* We can't free async scope argument's metadata immediately
+         * because async scope argument is called later and it uses its
+         * metadata. Its metadata is freed when async scope argument is called.
+         *
+         * Exception: We can free GDestroyNotify's metadata
+         * immediately because GDestroyNotify is only used in
+         * Ruby/GObjectIntrospection and Ruby/GObjectIntorspection
+         * doesn't use GDestroyNotify's metadata. */
+        if (!metadata->destroy_p) {
+            return;
+        }
+    }
+    /* We can't free notified scope argument's metadata immediately
+     * because notified scope argument is called later and it uses its
+     * metadata. Its metadata is freed when its GDestroyNotify is called. */
+    if (metadata->scope_type == GI_SCOPE_TYPE_NOTIFIED) {
         return;
     }
     rb_gi_arg_metadata_free(metadata);
