@@ -1,5 +1,18 @@
 # NEWS
 
+## Ruby-GNOME 4.0.5: 2022-12-12
+
+This is a bug fix release of 4.0.4.
+
+### Changes
+
+#### Ruby/GObjectIntrospection
+
+  * Fixes
+
+    * Fixed a memory leak that `GDestroyNotify` argument's metadata
+      isn't freed. For example, this is happen with `GLib::Timeout.add`.
+
 ## Ruby-GNOME 4.0.4: 2022-12-09
 
 This is a release that adds more new libraries: Ruby/Adwaita,
