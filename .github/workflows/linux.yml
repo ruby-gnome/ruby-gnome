@@ -16,9 +16,9 @@ jobs:
           - centos-7
           # - fedora-arm32v7-rawhide
           - fedora-rawhide
-          - ruby-2.7
           - ruby-3.0
           - ruby-3.1
+          - ruby-3.2
           - ubuntu-18.04
           - ubuntu-20.04
           - ubuntu-22.04

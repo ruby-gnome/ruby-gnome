@@ -28,7 +28,7 @@ services:
       /ruby-gnome/dockerfiles/run-test.sh
 
   apache-arrow-base:
-    image: ruby:2.7
+    image: ruby:3.2
 
   apache-arrow:
     image: ghcr.io/${GITHUB_REPOSITORY}:apache-arrow
@@ -96,21 +96,6 @@ services:
     cap_add:
       - SYS_ADMIN
 
-  ruby-2.7-base:
-    image: ruby:2.7
-
-  ruby-2.7:
-    image: ghcr.io/${GITHUB_REPOSITORY}:ruby-2.7
-    build:
-      context: .
-      dockerfile: dockerfiles/ruby.dockerfile
-      args:
-        RUBY_VERSION: "2.7"
-    volumes:
-      - .:/ruby-gnome:delegated
-    command:
-      /ruby-gnome/dockerfiles/run-test.sh
-
   ruby-3.0-base:
     image: ruby:3.0
 
@@ -136,6 +121,21 @@ services:
       dockerfile: dockerfiles/ruby.dockerfile
       args:
         RUBY_VERSION: "3.1"
+    volumes:
+      - .:/ruby-gnome:delegated
+    command:
+      /ruby-gnome/dockerfiles/run-test.sh
+
+  ruby-3.2-base:
+    image: ruby:3.2
+
+  ruby-2.7:
+    image: ghcr.io/${GITHUB_REPOSITORY}:ruby-3.2
+    build:
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        RUBY_VERSION: "3.2"
     volumes:
       - .:/ruby-gnome:delegated
     command:
