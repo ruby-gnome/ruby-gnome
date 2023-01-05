@@ -20,7 +20,7 @@ RUN \
     xvfb
 
 RUN \
-  gem install bundler
+  gem install bundler -v "< 2.4"
 
 RUN \
   useradd --user-group --create-home ruby-gnome
