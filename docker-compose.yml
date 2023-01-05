@@ -129,7 +129,7 @@ services:
   ruby-3.2-base:
     image: ruby:3.2
 
-  ruby-2.7:
+  ruby-3.2:
     image: ghcr.io/${GITHUB_REPOSITORY}:ruby-3.2
     build:
       context: .
