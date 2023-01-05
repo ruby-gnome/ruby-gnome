@@ -30,7 +30,3 @@ RUN \
 
 USER ruby-gnome
 WORKDIR /home/ruby-gnome
-
-COPY Gemfile .
-RUN sudo gem install cairo
-RUN bundle install

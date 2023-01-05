@@ -54,6 +54,3 @@ RUN \
 
 USER ruby-gnome
 WORKDIR /home/ruby-gnome
-
-COPY Gemfile .
-RUN bundle install

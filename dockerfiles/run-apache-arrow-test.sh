@@ -25,12 +25,13 @@ mkdir -p ruby-gnome.build
 cd ruby-gnome.build
 
 cp /ruby-gnome/Gemfile ./
+bundle config set --local path vendor/bundle
 bundle install
 
 for package in glib2 gobject-introspection; do
   cp -a /ruby-gnome/${package} ./
   pushd ${package}
-  rake gem
+  bundle exec rake gem
   gem install pkg/*.gem
   popd
 done
