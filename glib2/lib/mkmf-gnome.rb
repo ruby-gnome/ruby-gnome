@@ -211,7 +211,8 @@ def add_depend_package_path(target_name,
   end
   case RUBY_PLATFORM
   when /cygwin|mingw/
-    $libs << " " << File.join(library_dir, "#{library_base_name}.so")
+    library_path = File.join(library_dir, "#{library_base_name}.so")
+    $libs << " #{library_path}" if File.exist?(library_path)
   when /mswin/
     $DLDFLAGS << " /libpath:#{library_dir}"
     $libs << " #{library_base_name}-$(arch).lib"
