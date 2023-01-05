@@ -161,7 +161,8 @@ def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
     target_build_dir = target_source_dir
     add_depend_package_path(target_name,
                             target_source_dir,
-                            target_build_dir)
+                            target_build_dir,
+                            true)
   end
 
   [top_srcdir,
@@ -185,11 +186,15 @@ def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
     end
     add_depend_package_path(target_name,
                             target_source_dir_full_path,
-                            target_build_dir_full_path)
+                            target_build_dir_full_path,
+                            false)
   end
 end
 
-def add_depend_package_path(target_name, target_source_dir, target_build_dir)
+def add_depend_package_path(target_name,
+                            target_source_dir,
+                            target_build_dir,
+                            is_gem)
   if File.exist?(target_source_dir)
     $INCFLAGS = "-I#{target_source_dir}".quote + " #{$INCFLAGS}"
   end
@@ -199,23 +204,17 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
     $INCFLAGS = "-I#{target_build_dir}".quote + " #{$INCFLAGS}"
   end
 
-  library_base_name = File.basename(target_source_dir).gsub(/-/, "_")
-  if File.exist?(File.join(target_build_dir, "#{library_base_name}.so"))
-    library_dir = target_build_dir
-  else
-    # For Ruby 3.2 or later.
+  library_base_name = target_name.gsub(/-/, "_")
+  if is_gem
     # .../glib2/ext/glib2/ -> .../glib2/ext/glib2/../../lib/
     #                        (.../glib2/lib/)
     library_dir = File.join(target_source_dir, "..", "..", "lib")
+  else
+    library_dir = target_build_dir
   end
   case RUBY_PLATFORM
   when /cygwin|mingw/
-    library_name = File.join(library_dir, "#{library_base_name}.so")
-    if File.exist?(library_name)
-      $libs << " " << library_name
-    else
-      $libs << " " << library_name
-    end
+    $libs << " " << File.join(library_dir, "#{library_base_name}.so")
   when /mswin/
     $DLDFLAGS << " /libpath:#{library_dir}"
     $libs << " #{library_base_name}-$(arch).lib"
