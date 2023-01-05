@@ -159,10 +159,7 @@ def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
   if gem_spec
     target_source_dir = File.join(gem_spec.full_gem_path, "ext/#{target_name}")
     target_build_dir = target_source_dir
-    add_depend_package_path(target_name,
-                            target_source_dir,
-                            target_build_dir,
-                            true)
+    add_depend_package_path(target_name, target_source_dir, target_build_dir)
   end
 
   [top_srcdir,
@@ -194,7 +191,7 @@ end
 def add_depend_package_path(target_name,
                             target_source_dir,
                             target_build_dir,
-                            is_gem)
+                            is_gem=true)
   if File.exist?(target_source_dir)
     $INCFLAGS = "-I#{target_source_dir}".quote + " #{$INCFLAGS}"
   end
