@@ -200,11 +200,24 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
   end
 
   library_base_name = File.basename(target_source_dir).gsub(/-/, "_")
+  if File.exist?(File.join(target_build_dir, "#{library_base_name}.so"))
+    library_dir = target_build_dir
+  else
+    # For Ruby 3.2 or later.
+    # .../glib2/ext/glib2/ -> .../glib2/ext/glib2/../../lib/
+    #                        (.../glib2/lib/)
+    library_dir = File.join(target_source_dir, "..", "..", "lib")
+  end
   case RUBY_PLATFORM
   when /cygwin|mingw/
-    $libs << " " << File.join(target_build_dir, "#{library_base_name}.so")
+    library_name = File.join(library_dir, "#{library_base_name}.so")
+    if File.exist?(library_name)
+      $libs << " " << library_name
+    else
+      $libs << " " << library_name
+    end
   when /mswin/
-    $DLDFLAGS << " /libpath:#{target_build_dir}"
+    $DLDFLAGS << " /libpath:#{library_dir}"
     $libs << " #{library_base_name}-$(arch).lib"
   end
 end
