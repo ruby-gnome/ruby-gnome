@@ -456,10 +456,14 @@ def check_cairo(options={})
   end
   if rcairo_source_dir.nil?
     cairo_gem_spec = find_gem_spec("cairo")
-    rcairo_source_dir = cairo_gem_spec.full_gem_path if cairo_gem_spec
-  end
-
-  unless rcairo_source_dir.nil?
+    if cairo_gem_spec
+      rcairo_source_dir = cairo_gem_spec.full_gem_path
+      rcairo_ext_source_dir = File.join(rcairo_source_dir, "ext", "cairo")
+      add_depend_package_path("cairo",
+                              rcairo_ext_source_dir,
+                              rcairo_ext_source_dir)
+    end
+  else
     options = {}
     build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
     if File.exist?(File.join(rcairo_source_dir, build_dir))
