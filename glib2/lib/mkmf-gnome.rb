@@ -1,4 +1,4 @@
-# Copyright (C) 2003-2019 Ruby-GNOME Project Team
+# Copyright (C) 2003-2022  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -227,7 +227,7 @@ def add_depend_package_path(target_name,
   case RUBY_PLATFORM
   when /cygwin|mingw/
     library_path = File.join(library_dir, "#{library_base_name}.so")
-    $libs << " #{library_path}" if File.exist?(library_path)
+    $libs << " #{library_path}"
   when /mswin/
     $DLDFLAGS << " /libpath:#{library_dir}"
     $libs << " #{library_base_name}-$(arch).lib"
