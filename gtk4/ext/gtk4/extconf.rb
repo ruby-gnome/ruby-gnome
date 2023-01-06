@@ -43,7 +43,6 @@ depended_packages = [
   "gobject-introspection",
   "cairo-gobject",
   "pango",
-  "gdk4",
 ]
 depended_packages.each do |package|
   directory = "#{package}#{version_suffix}"
