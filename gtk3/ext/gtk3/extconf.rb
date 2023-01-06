@@ -42,7 +42,6 @@ depended_packages = [
   "glib2",
   "gobject-introspection",
   "cairo-gobject",
-  "atk",
   "pango",
   "gdk_pixbuf2",
   "gdk3",
@@ -52,7 +51,8 @@ depended_packages.each do |package|
   build_base_path = "#{directory}/tmp/#{RUBY_PLATFORM}"
   package_library_name = package.gsub(/-/, "_")
   build_dir = "#{build_base_path}/#{package_library_name}/#{RUBY_VERSION}"
-  add_depend_package(package, "#{directory}/ext/#{package}",
+  add_depend_package(package,
+                     "#{directory}/ext/#{package}",
                      top_dir.to_s,
                      :top_build_dir => top_build_dir.to_s,
                      :target_build_dir => build_dir)
