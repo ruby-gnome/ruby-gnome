@@ -17,6 +17,7 @@
 class TestTypeInterface < Test::Unit::TestCase
   sub_test_case("#append_features") do
     def test_not_instantiatable
+      omit("Crashed with Ruby 2.5") if RUBY_VERSION < "2.6"
       plain_class = Class.new
       assert_raise(TypeError.new("Not a subclass of GLib::Instantiatable")) do
         plain_class.class_eval do
