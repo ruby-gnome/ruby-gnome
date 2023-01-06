@@ -141,19 +141,6 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
-  ubuntu-18.04-base:
-    image: ubuntu:18.04
-
-  ubuntu-18.04:
-    image: ghcr.io/${GITHUB_REPOSITORY}:ubuntu-18.04
-    build:
-      context: .
-      dockerfile: dockerfiles/ubuntu-18.04.dockerfile
-    volumes:
-      - .:/ruby-gnome:delegated
-    command:
-      /ruby-gnome/dockerfiles/run-test.sh
-
   ubuntu-20.04-base:
     image: ubuntu:20.04
 
