@@ -43,7 +43,6 @@ depended_packages = [
   "gobject-introspection",
   "cairo-gobject",
   "pango",
-  "gdk_pixbuf2",
   "gdk4",
 ]
 depended_packages.each do |package|
