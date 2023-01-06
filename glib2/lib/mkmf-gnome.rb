@@ -155,19 +155,15 @@ setup_homebrew
 
 #add_depend_package("glib2", "ext/glib2", "/...../ruby-gnome2")
 def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
-  gem_spec = find_gem_spec(target_name)
-  if gem_spec
-    target_source_dir = File.join(gem_spec.full_gem_path, "ext/#{target_name}")
-    target_build_dir = target_source_dir
-    add_depend_package_path(target_name, target_source_dir, target_build_dir)
-  end
-
-  [top_srcdir,
-   File.join(top_srcdir, target_name),
-   $configure_args['--topdir'],
-   File.join($configure_args['--topdir'], target_name)].each do |topdir|
+  [
+    top_srcdir,
+    File.join(top_srcdir, target_name),
+    $configure_args['--topdir'],
+    File.join($configure_args['--topdir'], target_name),
+  ].each do |topdir|
     topdir = File.expand_path(topdir)
     target_source_dir_full_path = File.join(topdir, target_srcdir)
+    next unless File.exist?(target_source_dir_full_path)
 
     top_build_dir = options[:top_build_dir] || topdir
     target_build_dir = options[:target_build_dir] || target_srcdir
@@ -185,7 +181,14 @@ def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
                             target_source_dir_full_path,
                             target_build_dir_full_path,
                             false)
+    return
   end
+
+  gem_spec = find_gem_spec(target_name)
+  raise "depended gem isn't found: #{target_name}" unless gem_spec
+  target_source_dir = File.join(gem_spec.full_gem_path, "ext/#{target_name}")
+  target_build_dir = target_source_dir
+  add_depend_package_path(target_name, target_source_dir, target_build_dir)
 end
 
 def add_depend_package_path(target_name,
