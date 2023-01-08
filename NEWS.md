@@ -1,5 +1,23 @@
 # NEWS
 
+## Ruby-GNOME 4.0.6: 2023-01-08
+
+This is a release for Ruby 3.2 on Windows.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Added support for Ruby 3.2 on Windows.
+      [GH-1533]
+      [Reported by dsisnero]
+
+### Thanks
+
+  * dsisnero
+
 ## Ruby-GNOME 4.0.5: 2022-12-12
 
 This is a bug fix release of 4.0.4.
