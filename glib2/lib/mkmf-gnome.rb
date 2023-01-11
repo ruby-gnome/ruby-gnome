@@ -195,18 +195,6 @@ def add_depend_package_path(target_name,
                             target_source_dir,
                             target_build_dir,
                             is_gem=true)
-  pp [__method__,
-      target_name,
-      target_source_dir,
-      target_build_dir,
-      is_gem,
-      File.exist?(target_source_dir),
-      File.exist?(target_build_dir),
-      File.join(target_source_dir, "..", "..", "lib", target_name.gsub(/-/, "_") + ".so"),
-      File.exist?(File.join(target_source_dir, "..", "..", "lib", target_name.gsub(/-/, "_") + ".so")),
-      File.join(target_build_dir, target_name.gsub(/-/, "_") + ".so"),
-      File.exist?(File.join(target_build_dir, target_name.gsub(/-/, "_") + ".so")),
-     ]
   if File.exist?(target_source_dir)
     $INCFLAGS = "-I#{target_source_dir}".quote + " #{$INCFLAGS}"
   end
