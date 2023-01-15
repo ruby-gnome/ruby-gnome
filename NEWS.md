@@ -1,5 +1,18 @@
 # NEWS
 
+## Ruby-GNOME 4.0.8: 2023-01-15
+
+This is a bug fix release of 4.0.7.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Fixes
+
+    * Fixed a bug that gems that depend on glib2 gem can't find
+      `glib-enum-types.h`.
+
 ## Ruby-GNOME 4.0.7: 2023-01-15
 
 This is a release for Ruby 3.2 on Windows again.
