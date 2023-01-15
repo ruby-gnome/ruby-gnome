@@ -159,7 +159,7 @@ namespace :gem do
   desc "install all gems"
   task :install do
     packages.each do |package|
-      ruby("-S", "gem", "install", "--local", "--user-install",
+      ruby("-S", "gem", "install", "--user-install",
            *Dir.glob(File.join(package, "pkg", "*-#{version}.gem")))
     end
   end
