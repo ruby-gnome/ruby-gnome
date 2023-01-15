@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012-2022  Ruby-GNOME Project Team
+# Copyright (C) 2012-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -24,15 +24,8 @@ top_dir = base_dir.parent.expand_path
 top_build_dir = Pathname(".").parent.parent.parent.expand_path
 
 mkmf_gnome2_dir = top_dir + "glib2" + "lib"
-version_suffix = ""
-unless mkmf_gnome2_dir.exist?
-  if /(-\d+\.\d+\.\d+)(?:\.\d+)?\z/ =~ base_dir.basename.to_s
-    version_suffix = $1
-    mkmf_gnome2_dir = top_dir + "glib2#{version_suffix}" + "lib"
-  end
-end
+$LOAD_PATH.unshift(mkmf_gnome2_dir.to_s) if mkmf_gnome2_dir.exist?
 
-$LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 
 module_name = "gobject_introspection"
 package_id = "gobject-introspection-1.0"
@@ -40,12 +33,7 @@ package_id = "gobject-introspection-1.0"
 require "mkmf-gnome"
 
 ["glib2"].each do |package|
-  directory = "#{package}#{version_suffix}"
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
-  add_depend_package(package, "#{directory}/ext/#{package}",
-                     top_dir.to_s,
-                     :top_build_dir => top_build_dir.to_s,
-                     :target_build_dir => build_dir)
+  add_depend_package(package, "#{package}/ext/#{package}", top_dir.to_s)
 end
 
 unless required_pkg_config_package(package_id,

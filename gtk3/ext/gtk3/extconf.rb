@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2015-2022  Ruby-GNOME Project Team
+# Copyright (C) 2015-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -23,15 +23,8 @@ top_dir = base_dir.parent
 top_build_dir = Pathname(".").parent.parent.parent.expand_path
 
 mkmf_gnome2_dir = top_dir + "glib2" + "lib"
-version_suffix = ""
-unless mkmf_gnome2_dir.exist?
-  if /(-\d+\.\d+\.\d+)\z/ =~ base_dir.basename.to_s
-    version_suffix = $1
-    mkmf_gnome2_dir = top_dir + "glib2#{version_suffix}" + "lib"
-  end
-end
+$LOAD_PATH.unshift(mkmf_gnome2_dir.to_s) if mkmf_gnome2_dir.exist?
 
-$LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 
 module_name = "gtk3"
 package_id = "gtk+-3.0"
@@ -45,15 +38,7 @@ depended_packages = [
   "pango",
 ]
 depended_packages.each do |package|
-  directory = "#{package}#{version_suffix}"
-  build_base_path = "#{directory}/tmp/#{RUBY_PLATFORM}"
-  package_library_name = package.gsub(/-/, "_")
-  build_dir = "#{build_base_path}/#{package_library_name}/#{RUBY_VERSION}"
-  add_depend_package(package,
-                     "#{directory}/ext/#{package}",
-                     top_dir.to_s,
-                     :top_build_dir => top_build_dir.to_s,
-                     :target_build_dir => build_dir)
+  add_depend_package(package, "#{package}/ext/#{package}", top_dir.to_s)
 end
 
 unless check_cairo(:top_dir => top_dir)

@@ -43,7 +43,7 @@ def gem_push(path, name, version)
   end
 end
 
-packages = [
+default_packages = [
   "adwaita",
   "atk",
   "cairo-gobject",
@@ -77,6 +77,8 @@ packages = [
   "webkit2-gtk",
   "wnck3",
 ]
+packages = (ENV["PACKAGES"] || "").split(",")
+packages = default_packages if packages.empty?
 
 desc "configure all packages"
 task :configure do
