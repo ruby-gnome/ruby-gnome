@@ -38,7 +38,10 @@ depended_packages = [
   "pango",
 ]
 depended_packages.each do |package|
-  add_depend_package(package, "#{package}/ext/#{package}", top_dir.to_s)
+  add_depend_package(package,
+                     "#{package}/ext/#{package}",
+                     top_dir.to_s,
+                     top_build_dir: top_build_dir.to_s)
 end
 
 unless check_cairo(:top_dir => top_dir)

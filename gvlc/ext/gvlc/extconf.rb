@@ -32,7 +32,10 @@ package_id = "libvlc"
 require "mkmf-gnome"
 
 ["glib2"].each do |package|
-  add_depend_package(package, "#{package}/ext/#{package}", top_dir.to_s)
+  add_depend_package(package,
+                     "#{package}/ext/#{package}",
+                     top_dir.to_s,
+                     top_build_dir: top_build_dir.to_s)
 end
 
 unless required_pkg_config_package([package_id, 2, 0, 0],

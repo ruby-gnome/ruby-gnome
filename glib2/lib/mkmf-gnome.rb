@@ -199,19 +199,20 @@ def add_depend_package_path(target_name,
     $INCFLAGS = "-I#{target_source_dir}".quote + " #{$INCFLAGS}"
   end
 
-  return unless File.exist?(target_build_dir)
-  if target_source_dir != target_build_dir
-    $INCFLAGS = "-I#{target_build_dir}".quote + " #{$INCFLAGS}"
-  end
-
-  library_base_name = target_name.gsub(/-/, "_")
   if is_gem
     # .../glib2/ext/glib2/ -> .../glib2/ext/glib2/../../lib/
     #                        (.../glib2/lib/)
     library_dir = File.join(target_source_dir, "..", "..", "lib")
   else
+    return unless File.exist?(target_build_dir)
     library_dir = target_build_dir
   end
+
+  if target_source_dir != library_dir
+    $INCFLAGS = "-I#{library_dir}".quote + " #{$INCFLAGS}"
+  end
+
+  library_base_name = target_name.gsub(/-/, "_")
   case RUBY_PLATFORM
   when /cygwin|mingw/
     library_path = File.join(library_dir, "#{library_base_name}.so")
