@@ -1,5 +1,24 @@
 # NEWS
 
+## Ruby-GNOME 4.1.0: 2023-01-31
+
+This is a bug fix release of 4.0.9.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Fixes
+
+    * Fixed a memory leak introduced in 4.0.9.
+
+#### Ruby/Handy
+
+  * Improvements
+
+    * Renamed gem name to `libhandy` from `handy` because `handy` gem
+      already exists.
+
 ## Ruby-GNOME 4.0.9: 2023-01-31
 
 This is a bug fix release of 4.0.8.
