@@ -201,7 +201,7 @@ gr_closure_holder_free(void *data)
         return;
 
     GClosure *closure = (GClosure *)rclosure;
-    bool last_reference = (closure->ref_count == 1);
+    gboolean last_reference = (closure->ref_count == 1);
     g_closure_unref(closure);
     if (!last_reference) {
         g_closure_invalidate(closure);
