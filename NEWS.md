@@ -1,5 +1,17 @@
 # NEWS
 
+## Ruby-GNOME 4.0.9: 2023-01-31
+
+This is a bug fix release of 4.0.8.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Fixes
+
+    * Fixed a crash bug that is related to closure and GC.
+
 ## Ruby-GNOME 4.0.8: 2023-01-15
 
 This is a bug fix release of 4.0.7.
