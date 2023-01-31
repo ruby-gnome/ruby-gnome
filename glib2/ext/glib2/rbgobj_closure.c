@@ -158,7 +158,7 @@ rclosure_marshal(GClosure*       closure,
 static void rclosure_weak_notify(gpointer data, GObject* where_the_object_was);
 
 static void
-rclosure_finalize(G_GNUC_UNUSED gpointer data, GClosure *closure)
+rclosure_invalidate(G_GNUC_UNUSED gpointer data, GClosure *closure)
 {
     GRClosure *rclosure = (GRClosure *)closure;
 
@@ -200,7 +200,12 @@ gr_closure_holder_free(void *data)
     if (!rclosure)
         return;
 
-    g_closure_unref((GClosure *)rclosure);
+    GClosure *closure = (GClosure *)rclosure;
+    bool last_reference = (closure->ref_count == 1);
+    g_closure_unref(closure);
+    if (!last_reference) {
+        g_closure_invalidate(closure);
+    }
 }
 
 static const rb_data_type_t rbg_closure_holder_type = {
@@ -237,7 +242,7 @@ g_rclosure_new_raw(VALUE callback_proc,
     g_closure_ref(closure);
     g_closure_sink(closure);
     g_closure_set_marshal(closure, &rclosure_marshal);
-    g_closure_add_finalize_notifier(closure, NULL, rclosure_finalize);
+    g_closure_add_invalidate_notifier(closure, NULL, rclosure_invalidate);
 
     return closure;
 }
