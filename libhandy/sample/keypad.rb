@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2022  Ruby-GNOME Project Team
+# Copyright (C) 2022-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,7 +21,7 @@
 # License: LGPL-2.1+
 # Author: https://gitlab.gnome.org/GNOME/libhandy/-/blob/main/AUTHORS
 
-require "handy"
+require "libhandy"
 
 window = Gtk::Window.new("Keypad Example with Ruby")
 vbox = Gtk::Box.new(:vertical)

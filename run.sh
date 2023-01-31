@@ -48,6 +48,6 @@ RUBYLIB="${source_dir}/goffice/lib:${RUBYLIB}"
 RUBYLIB="${source_dir}/gnumeric/lib:${RUBYLIB}"
 RUBYLIB="${source_dir}/gegl/lib:${RUBYLIB}"
 RUBYLIB="${source_dir}/libsecret/lib:${RUBYLIB}"
-RUBYLIB="${source_dir}/handy/lib:${RUBYLIB}"
+RUBYLIB="${source_dir}/libhandy/lib:${RUBYLIB}"
 
 RUBYLIB="${RUBYLIB}" "$@"

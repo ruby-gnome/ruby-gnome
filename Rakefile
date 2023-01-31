@@ -67,7 +67,7 @@ default_packages = [
   "gtksourceview3",
   "gtksourceview4",
   "gtksourceview5",
-  "handy",
+  "libhandy",
   "libsecret",
   "pango",
   "poppler",

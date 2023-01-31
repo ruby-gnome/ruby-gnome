@@ -19,7 +19,7 @@
 require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
-  s.name          = "handy"
+  s.name          = "libhandy"
   s.summary       = "Ruby/Handy is a Ruby binding of Handy."
   s.description   = "Ruby/Handy is a Ruby binding of Handy."
   s.author        = "The Ruby-GNOME Project Team"

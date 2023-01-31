@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2022  Ruby-GNOME Project Team
+# Copyright (C) 2022-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -29,10 +29,10 @@ run_test(__dir__,
            "pango",
            "gdk3",
            "gtk3",
-           "handy",
+           "libhandy",
          ]) do
   begin
-    require "handy"
+    require "libhandy"
   rescue GObjectIntrospection::RepositoryError
     puts("Omit because typelib file doesn't exist: #{$!.message}")
     exit(true)
