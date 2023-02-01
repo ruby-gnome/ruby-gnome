@@ -1044,6 +1044,11 @@ rbgobj_register_type(VALUE klass, VALUE type_name, GClassInitFunc class_init)
                                             StringValueCStr(type_name),
                                             info,
                                             0);
+        if (type == G_TYPE_INVALID) {
+            rb_raise(rb_eArgError,
+                     "failed to register type: <%s>",
+                     StringValueCStr(type_name));
+        }
 
         rbgobj_register_class(klass, type, TRUE, TRUE);
 
