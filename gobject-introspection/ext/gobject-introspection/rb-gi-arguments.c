@@ -3030,6 +3030,7 @@ rb_gi_arguments_fill_raw_results(RBGIArguments *args,
                                  VALUE rb_results,
                                  gpointer raw_return_value)
 {
+    const bool rb_results_is_array = RB_TYPE_P(rb_results, RUBY_T_ARRAY);
     int i_rb_result = 0;
     guint i;
     GITypeInfo *return_type_info;
@@ -3049,13 +3050,19 @@ rb_gi_arguments_fill_raw_results(RBGIArguments *args,
                                             transfer,
                                             TRUE);
         } else {
+            VALUE rb_return_value;
+            if (rb_results_is_array) {
+                rb_return_value = RARRAY_AREF(rb_results, i_rb_result);
+            } else {
+                rb_return_value = rb_results;
+            }
+            i_rb_result++;
             rb_gi_arguments_fill_raw_result(args,
-                                            RARRAY_AREF(rb_results, i_rb_result),
+                                            rb_return_value,
                                             raw_return_value,
                                             return_type_info,
                                             transfer,
                                             TRUE);
-            i_rb_result++;
         }
     }
     g_base_info_unref(return_type_info);
@@ -3078,13 +3085,23 @@ rb_gi_arguments_fill_raw_results(RBGIArguments *args,
                                   metadata->out_arg_index);
         type_info = g_arg_info_get_type(&(metadata->arg_info));
         transfer = g_arg_info_get_ownership_transfer(&(metadata->arg_info));
+        VALUE rb_result_value;
+        if (rb_results_is_array) {
+            rb_result_value = RARRAY_AREF(rb_results, i_rb_result);
+        } else {
+            if (i_rb_result == 0) {
+                rb_result_value = rb_results;
+            } else {
+                rb_result_value = RUBY_Qnil;
+            }
+        }
+        i_rb_result++;
         rb_gi_arguments_fill_raw_result(args,
-                                        RARRAY_AREF(rb_results, i_rb_result),
+                                        rb_result_value,
                                         argument->v_pointer,
                                         type_info,
                                         transfer,
                                         FALSE);
-        i_rb_result++;
         g_base_info_unref(type_info);
     }
 }
