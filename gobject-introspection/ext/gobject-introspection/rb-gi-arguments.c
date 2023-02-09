@@ -3030,7 +3030,7 @@ rb_gi_arguments_fill_raw_results(RBGIArguments *args,
                                  VALUE rb_results,
                                  gpointer raw_return_value)
 {
-    const bool rb_results_is_array = RB_TYPE_P(rb_results, RUBY_T_ARRAY);
+    const gboolean rb_results_is_array = RB_TYPE_P(rb_results, RUBY_T_ARRAY);
     int i_rb_result = 0;
     guint i;
     GITypeInfo *return_type_info;
