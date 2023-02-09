@@ -180,15 +180,26 @@ rbgobj_boxed_initialize(VALUE obj, gpointer boxed)
 gpointer
 rbgobj_boxed_get_default(VALUE obj, GType gtype)
 {
-    boxed_holder *holder;
+    VALUE klass = GTYPE2CLASS(gtype);
 
-    if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, GTYPE2CLASS(gtype))))
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, klass))) {
+        ID id_try_convert;
+        CONST_ID(id_try_convert, "try_convert");
+        if (rb_respond_to(klass, id_try_convert)) {
+            VALUE converted_obj = rb_funcall(klass, id_try_convert, 1, obj);
+            if (!NIL_P(converted_obj)) {
+                obj = converted_obj;
+            }
+        }
+    }
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, klass))) {
         rb_raise(rb_eArgError,
                  "invalid argument %" PRIsVALUE " (expect %" PRIsVALUE ")",
                  CLASS_OF(obj),
                  GTYPE2CLASS(gtype));
+    }
 
-    holder = rbgobj_boxed_get_raw(obj);
+    boxed_holder *holder = rbgobj_boxed_get_raw(obj);
     if (!holder->boxed)
         rb_raise(rb_eArgError, "uninitialize %" PRIsVALUE,
                  CLASS_OF(obj));
