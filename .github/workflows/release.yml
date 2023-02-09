@@ -17,4 +17,7 @@ jobs:
           gh release create \
             ${GITHUB_REF_NAME} \
             --discussion-category Releases \
-            --notes-file release-node.md
+            --notes-file release-node.md \
+            --title "$(head -n 1 release-note.md | sed -e 's/^## //')"
+        env:
+          GH_TOKEN: ${{ github.token }}
