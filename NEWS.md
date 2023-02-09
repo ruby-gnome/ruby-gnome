@@ -1,5 +1,37 @@
 # NEWS
 
+## Ruby-GNOME 4.1.1: 2023-02-09
+
+This is a release to improve callback.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Added missing error check in `GLib::Object.type_register`.
+      [GH-1543]
+      [Reported by D-W-L]
+
+    * Added support for `try_convert` protocol on converting a Ruby
+      object to boxed value.
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Relaxed return values from callback. Non `Array` value is
+      accepted for callback that needs multiple return values. Missing
+      return values are processed as `nil`.
+
+    * Suppressed a warning that is reported when returning `nil` for
+      boxed value.
+
+### Thanks
+
+  * D-W-L
+
 ## Ruby-GNOME 4.1.0: 2023-01-31
 
 This is a bug fix release of 4.0.9.
