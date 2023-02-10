@@ -349,13 +349,14 @@ module GObjectIntrospection
               return
             end
           end
+          full_method_name = "\#{self.class.name}\#\#{__method__}"
           message = "wrong arguments: "
-          message << "\#{self.class.name}#initialize("
+          message << "\#{full_method_name}("
           message << arguments.collect(&:inspect).join(", ")
-          message << "): "
-          message << "available signatures"
+          message << "):\\n"
+          message << "available signatures:"
           invokers.each_value do |invoker|
-            message << ": \#{invoker.signature}"
+            message << "\\n\#{full_method_name}\#{invoker.signature}"
           end
           raise ArgumentError, message
         end
