@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,7 @@ module Gtk
     end
 
     alias_method :load_from_data_raw, :load_from_data
-    if Version.or_later?(4, 9, 5)
+    if Version.or_later?(4, 9, 3)
       def load_from_data(data)
         data = data.to_s if data.is_a?(GLib::Bytes)
         load_from_data_raw(data, data.bytesize)
