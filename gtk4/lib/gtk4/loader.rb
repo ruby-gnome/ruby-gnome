@@ -70,6 +70,8 @@ module Gtk
     end
 
     def require_libraries
+      require_relative "version"
+
       require_relative "gdk-display"
 
       require_relative "about-dialog"
@@ -122,7 +124,6 @@ module Gtk
       require_relative "tree-store"
       require_relative "tree-view"
       require_relative "tree-view-column"
-      require_relative "version"
       require_relative "widget"
 
       require_relative "deprecated"

@@ -36,10 +36,14 @@ module Gtk
     end
 
     alias_method :load_from_data_raw, :load_from_data
-    def load_from_data(data)
-      if data.is_a?(GLib::Bytes)
-        load_from_data_raw(data.to_s)
-      else
+    if Version.or_later?(4, 9, 5)
+      def load_from_data(data)
+        data = data.to_s if data.is_a?(GLib::Bytes)
+        load_from_data_raw(data, data.bytesize)
+      end
+    else
+      def load_from_data(data)
+        data = data.to_s if data.is_a?(GLib::Bytes)
         load_from_data_raw(data)
       end
     end
