@@ -18,16 +18,13 @@ Note:
 
 1. You need to install your exampleapp.rb in advance.
 
-```console
-$ cp exampleapp.rb $HOME/.local/bin/exampleapp.rb
-$ chmod 755 $HOME/.local/bin/exampleapp.rb
-```
+   ```console
+   $ cp exampleapp.rb ~/.local/bin/exampleapp.rb
+   $ chmod +c ~/.local/bin/exampleapp.rb
 
 2. If you use rbenv, your ruby executable may not be found.
    You can solve this by creating a symbolic link in `~/.local/bin` to your ruby executable.
    For example,
 
-```console
-$ cd $HOME/.local/bin
-$ ln -s $HOME/.rbenv/versions/3.1.2/bin/ruby ruby
-```
+   ```console
+   $ ln -s $(rbenv which ruby) ~/.local/bin/ruby
