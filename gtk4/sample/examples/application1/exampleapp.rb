@@ -15,10 +15,11 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+#
 # Example from:
 # * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application1/exampleapp.c
 # * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application1/exampleappwin.c#
-# License: LGPL2.1+
+# License: LGPL2.1-or-later
 
 require "gtk4"
 
