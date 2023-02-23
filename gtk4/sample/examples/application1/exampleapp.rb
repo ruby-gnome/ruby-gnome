@@ -1,9 +1,6 @@
-#!/bin/sh
-exec ruby -x "$0" "$@"
-#!ruby
-
+#!/usr/bin/env ruby
 #
-# Copyright (C) 2022  Ruby-GNOME Project Team
+# Copyright (C) 2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,17 +15,15 @@ exec ruby -x "$0" "$@"
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-
-# example from https://gitlab.gnome.org/GNOME/gtk/blob/main/examples/window-default.c
-#
+# Example from:
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application1/exampleapp.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application1/exampleappwin.c#
 # License: LGPL2.1+
 
 require "gtk4"
 
 class ExampleAppWindow < Gtk::ApplicationWindow
-
   def open(file)
-    
   end
 end
 
@@ -41,21 +36,14 @@ class ExampleApp < Gtk::Application
       window.present
     end
     signal_connect "open" do |application, files, hin|
-      windows = application.windows
-      win = nil
-      unless windows.empty?
-        win = windows.first
-      else
-        win = ExampleAppWindow.new(application)
+      window = application.windows[0] || ExampleAppWindow.new(application)
+      files.each do |file|
+        window.open(file)
       end
-
-      files.each { |file| win.open(file) }
-        
-      win.present
+      window.present
     end
   end
 end
 
 app = ExampleApp.new
-
-puts app.run
+app.run
