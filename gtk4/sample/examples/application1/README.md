@@ -20,7 +20,8 @@ Note:
 
    ```console
    $ cp exampleapp.rb ~/.local/bin/exampleapp.rb
-   $ chmod +c ~/.local/bin/exampleapp.rb
+   $ chmod +x ~/.local/bin/exampleapp.rb
+   ```
 
 2. If you use rbenv, your ruby executable may not be found.
    You can solve this by creating a symbolic link in `~/.local/bin` to your ruby executable.
@@ -28,3 +29,4 @@ Note:
 
    ```console
    $ ln -s $(rbenv which ruby) ~/.local/bin/ruby
+   ```
