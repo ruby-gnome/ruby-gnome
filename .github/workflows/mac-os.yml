@@ -14,6 +14,7 @@ jobs:
           ruby-version: ruby
       - name: Install dependencies
         run: |
+          brew install pkg-config
           bundle install
       - name: Build
         run: |
@@ -65,6 +66,7 @@ jobs:
           ruby-version: ruby
       - name: Build
         run: |
+          brew install pkg-config
           for package in glib2 gobject-introspection gio2; do
             pushd ${package}
             rake gem
