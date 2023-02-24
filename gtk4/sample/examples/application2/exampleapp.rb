@@ -17,13 +17,41 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #
 # Example from:
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application1/exampleapp.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application1/exampleappwin.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application2/exampleapp.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application2/exampleappwin.c
 # License: LGPL2.1-or-later
 
 require "gtk4"
+require "fileutils"
+
+current_path = File.expand_path(File.dirname(__FILE__))
+gresource_bin = "#{current_path}/exampleapp.gresource"
+gresource_xml = "#{current_path}/exampleapp.gresource.xml"
+
+system("glib-compile-resources",
+       "--target", gresource_bin,
+       "--sourcedir", current_path,
+       gresource_xml)
+
+at_exit do
+  FileUtils.rm_f(gresource_bin)
+end
+
+resource = Gio::Resource.load(gresource_bin)
+Gio::Resources.register(resource)
 
 class ExampleAppWindow < Gtk::ApplicationWindow
+  type_register
+  class << self
+    def init
+      set_template(:resource => "/org/gtk/exampleapp/window.ui")
+    end
+  end
+
+  def initialize(application)
+    super(:application => application)
+  end
+
   def open(file)
   end
 end
