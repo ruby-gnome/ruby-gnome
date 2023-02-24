@@ -1,5 +1,47 @@
 # NEWS
 
+## Ruby-GNOME 4.1.2: 2023-02-24
+
+This is a release to improve support for the latest GNOME related libraries.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Added support for GLib 2.75 or later.
+      [GH-1547]
+      [Reported by Mamoru TASAKA]
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Improved wrong arguments error message for `#initialize`.
+      [GH-1545]
+      [Reported by D-W-L]
+
+#### Ruby/GTK4
+
+  * Improvements
+
+    * Added support for GTK 4.9.3 or later.
+      [GH-1548]
+      [Reported by Mamoru TASAKA]
+
+    * Added an example.
+      [GH-1549]
+      [Patch by Toshio Sekiya]
+
+### Thanks
+
+  * D-W-L
+
+  * Mamoru TASAKA
+
+  * Toshio Sekiya
+
 ## Ruby-GNOME 4.1.1: 2023-02-09
 
 This is a release to improve callback.
