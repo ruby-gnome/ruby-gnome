@@ -81,6 +81,9 @@ class TestTerminal < Test::Unit::TestCase
 
   def test_get_text_range
     only_vte_version(0, 52)
+    if Vte::Version.or_later?(0, 71, 0)
+      omit("Require VTE < 0.71.0")
+    end
     text, attributes = @terminal.get_text_range(0, 0, 1, 1)
     assert_equal([
                    "\n",
