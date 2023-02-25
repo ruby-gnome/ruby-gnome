@@ -22,29 +22,30 @@
 # License: LGPL2.1-or-later
 
 require "gtk4"
-require "fileutils"
-
-current_path = File.expand_path(File.dirname(__FILE__))
-gresource_bin = "#{current_path}/exampleapp.gresource"
-gresource_xml = "#{current_path}/exampleapp.gresource.xml"
-
-system("glib-compile-resources",
-       "--target", gresource_bin,
-       "--sourcedir", current_path,
-       gresource_xml)
-
-at_exit do
-  FileUtils.rm_f(gresource_bin)
-end
-
-resource = Gio::Resource.load(gresource_bin)
-Gio::Resources.register(resource)
 
 class ExampleAppWindow < Gtk::ApplicationWindow
   type_register
   class << self
     def init
-      set_template(:resource => "/org/gtk/exampleapp/window.ui")
+      ui_string = <<~EOS
+      <?xml version="1.0" encoding="UTF-8"?>
+      <interface>
+        <template class="ExampleAppWindow" parent="GtkApplicationWindow">
+          <property name="title" translatable="yes">Example Application</property>
+          <property name="default-width">600</property>
+          <property name="default-height">400</property>
+          <child>
+            <object class="GtkBox" id="content_box">
+              <property name="orientation">vertical</property>
+              <child>
+                <object class="GtkStack" id="stack"/>
+              </child>
+            </object>
+          </child>
+        </template>
+      </interface>
+      EOS
+      set_template(:data => ui_string)
     end
   end
 
