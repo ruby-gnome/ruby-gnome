@@ -17,13 +17,43 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #
 # Example from:
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application1/exampleapp.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application1/exampleappwin.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application2/exampleapp.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application2/exampleappwin.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application2/window.ui
 # License: LGPL2.1-or-later
 
 require "gtk4"
 
 class ExampleAppWindow < Gtk::ApplicationWindow
+  type_register
+  class << self
+    def init
+      template = <<~TEMPLATE
+      <?xml version="1.0" encoding="UTF-8"?>
+      <interface>
+        <template class="ExampleAppWindow" parent="GtkApplicationWindow">
+          <property name="title" translatable="yes">Example Application</property>
+          <property name="default-width">600</property>
+          <property name="default-height">400</property>
+          <child>
+            <object class="GtkBox" id="content_box">
+              <property name="orientation">vertical</property>
+              <child>
+                <object class="GtkStack" id="stack"/>
+              </child>
+            </object>
+          </child>
+        </template>
+      </interface>
+      TEMPLATE
+      set_template(data: template)
+    end
+  end
+
+  def initialize(application)
+    super(application: application)
+  end
+
   def open(file)
   end
 end
