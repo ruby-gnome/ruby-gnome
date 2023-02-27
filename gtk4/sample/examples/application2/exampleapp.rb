@@ -19,6 +19,7 @@
 # Example from:
 # * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application2/exampleapp.c
 # * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application2/exampleappwin.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application2/window.ui
 # License: LGPL2.1-or-later
 
 require "gtk4"
@@ -27,7 +28,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
   type_register
   class << self
     def init
-      ui_string = <<~EOS
+      template = <<~TEMPLATE
       <?xml version="1.0" encoding="UTF-8"?>
       <interface>
         <template class="ExampleAppWindow" parent="GtkApplicationWindow">
@@ -44,13 +45,13 @@ class ExampleAppWindow < Gtk::ApplicationWindow
           </child>
         </template>
       </interface>
-      EOS
-      set_template(:data => ui_string)
+      TEMPLATE
+      set_template(data: template)
     end
   end
 
   def initialize(application)
-    super(:application => application)
+    super(application: application)
   end
 
   def open(file)
