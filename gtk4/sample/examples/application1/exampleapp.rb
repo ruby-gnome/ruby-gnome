@@ -36,7 +36,7 @@ class ExampleApp < Gtk::Application
       window = ExampleAppWindow.new(application)
       window.present
     end
-    signal_connect "open" do |application, files, hin|
+    signal_connect "open" do |application, files, hint|
       window = application.windows[0] || ExampleAppWindow.new(application)
       files.each do |file|
         window.open(file)

@@ -17,9 +17,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #
 # Example from:
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application2/exampleapp.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application2/exampleappwin.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application2/window.ui
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application3/exampleapp.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application3/exampleappwin.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application3/window.ui
 # License: LGPL2.1-or-later
 
 require "gtk4"
@@ -35,6 +35,15 @@ class ExampleAppWindow < Gtk::ApplicationWindow
           <property name="title" translatable="yes">Example Application</property>
           <property name="default-width">600</property>
           <property name="default-height">400</property>
+          <child type="titlebar">
+            <object class="GtkHeaderBar" id="header">
+              <child type="title">
+                <object class="GtkStackSwitcher" id="tabs">
+                  <property name="stack">stack</property>
+                </object>
+              </child>
+            </object>
+          </child>
           <child>
             <object class="GtkBox" id="content_box">
               <property name="orientation">vertical</property>
@@ -47,6 +56,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
       </interface>
       TEMPLATE
       set_template(data: template)
+      bind_template_child("stack")
     end
   end
 
@@ -55,6 +65,17 @@ class ExampleAppWindow < Gtk::ApplicationWindow
   end
 
   def open(file)
+    basename = file.basename
+    scrolled = Gtk::ScrolledWindow.new
+    scrolled.hexpand = true
+    scrolled.vexpand = true
+    view = Gtk::TextView.new
+    view.editable = false
+    view.cursor_visible = false
+    scrolled.child = view
+    stack.add_titled(scrolled, basename, basename)
+    stream = file.read
+    view.buffer.text = stream.read
   end
 end
 
@@ -77,4 +98,9 @@ class ExampleApp < Gtk::Application
 end
 
 app = ExampleApp.new
-app.run
+
+# Gtk::Application#run needs C style argv ([prog, arg1, arg2, ...,argn]).
+# The ARGV ruby variable only contains the arguments ([arg1, arg2, ...,argb])
+# and not the program name. We have to add it explicitly.
+
+app.run([$PROGRAM_NAME] + ARGV)
