@@ -112,13 +112,13 @@ class ExampleApp < Gtk::Application
     super("org.gtk.exampleapp", :handles_open)
 
     signal_connect "startup" do |application|
-      [ # action_name, handler (handler can be a Method object or Proc object)
-        ["preferences"],
-        ["quit", application.method(:quit)]
-      ].each do |action_name, handler|
+      [
+        "preferences",
+        "quit"
+      ].each do |action_name|
         action = Gio::SimpleAction.new(action_name)
         action.signal_connect("activate") do |_action, _parameter|
-          handler.call if handler
+          __send__("#{action_name}_activated")
         end
         application.add_action(action)
       end
@@ -135,6 +135,15 @@ class ExampleApp < Gtk::Application
       end
       window.present
     end
+  end
+
+  private
+
+  def preferences_activated
+  end
+
+  def quit_activated
+    quit
   end
 end
 
