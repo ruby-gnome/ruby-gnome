@@ -4,46 +4,36 @@ The original files are located in the following directory.
 
 - https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application5
 
-This program uses GSettings object of the GIO library.
-You need to compile and install the schema file (`org.gtk.exampleapp.gschema.xml`) in this directory.
-To install it, just run `install_schema.rb`.
-
-```console
-$ ruby gtk4/sample/examples/application5/install_schema.rb
-```
-
-Once you install it, you don't need to do it again.
-
 The original schema file is [here](https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application5/org.gtk.exampleapp.gschema.xml) and the license is LGPL 2.1 or later.
 
-Now you can run the Ruby program `exampleapp.rb` with files.
+This program uses GSettings object of the GIO library.
+You need to compile the schema file (`org.gtk.exampleapp.gschema.xml`) in advance.
+Therefore, there are two tasks.
 
-```console
-$ ruby gtk4/sample/examples/application5/exampleapp.rb README.md NEWS.md
-```
+- Compile the schema file
+- Run the Ruby script `exampleapp.rb`
 
-If you want to uninstall the schema file, run `uninstall_schema.rb`.
-
-```console
-$ ruby gtk4/sample/examples/application5/uninstall_schema.rb
-```
-
-Note:
-
-The original C program doesn't install the schema into a schema directory, which is `/usr/local/share/glib-2.0/schemas` or `~/.local/share/glib-2.0/schemas`.
-It just compiles it in the build directory to test the program.
-
-If you just want to test the program and don't want to install the schema file, do like this:
-
-- Compile the schema file in the current directory.
+These tasks are integrated into a Rakefile.
+What you need is just to type `rake`.
 
 ```console
 $ cd gtk4/sample/examples/application5
-$ glib-compile-schemas . # Don't forget the argument . (dot -- current directory)
+$ rake
 ```
 
-- Set `GSETTINGS_SCHEMA_DIR` environment variable to the current directory and execute `exampleapp.rb`.
+If you want to give filenames to `exampleapp.rb`, use square bracket.
 
 ```console
-$ GSETTINGS_SCHEMA_DIR=. ruby exampleapp.rb exampleapp.rb
+$ rake default[README.md,Rakefile]
+```
+
+The two arguments `README.md` and `Rakefile` are given to the Ruby script so that you can see the contents of them in the window.
+If you want to put spaces after the comma, surround the bracket with double quotes.
+It is because spaces are shell script delimiters.
+
+The `rake` creates a file `gschema.compiled`.
+If you want to remove it, do like this:
+
+```console
+$ rake clean
 ```
