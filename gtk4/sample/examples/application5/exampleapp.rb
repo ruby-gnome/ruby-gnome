@@ -153,6 +153,12 @@ class ExampleApp < Gtk::Application
   end
 end
 
+if File.exist?(File.join(__dir__, "gschemas.compiled"))
+  ENV["GSETTINGS_SCHEMA_DIR"] = __dir__
+else
+ raise %{gschemas.compiled doesn't exist. Run "rake" to generate it.}
+end
+
 app = ExampleApp.new
 
 # Gtk::Application#run needs C style argv ([prog, arg1, arg2, ...,argn]).

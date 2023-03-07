@@ -1,13 +1,9 @@
 require 'rake/clean'
 
-task default: :run
+task :default => "gschemas.compiled"
 
 file "gschemas.compiled" => "org.gtk.exampleapp.gschema.xml" do
   sh("glib-compile-schemas", ".")
-end
-
-task :run, [] => "gschemas.compiled" do |t, args|
-  sh({"GSETTINGS_SCHEMA_DIR" => __dir__}, FileUtils::RUBY, *(["exampleapp.rb"]+args.extras))
 end
 
 CLEAN << "gschemas.compiled"

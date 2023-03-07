@@ -8,31 +8,22 @@ The original schema file is [here](https://gitlab.gnome.org/GNOME/gtk/-/blob/mai
 
 This program uses GSettings object of the GIO library.
 You need to compile the schema file (`org.gtk.exampleapp.gschema.xml`) in advance.
-Therefore, there are two tasks.
-
-- Compile the schema file
-- Run the Ruby script `exampleapp.rb`
-
-These tasks are integrated into a Rakefile.
-What you need is just to type `rake`.
+The instruction is written in the `Rakefile`, so you just run `rake` to compile it.
 
 ```console
 $ cd gtk4/sample/examples/application5
 $ rake
 ```
 
-If you want to give filenames to `exampleapp.rb`, use square bracket.
+The Ruby script `exampleapp.rb` works with `gschemas.compiled`.
 
 ```console
-$ rake default[README.md,Rakefile]
+$ ruby exampleapp.rb README.md Rakefile
 ```
 
-The two arguments `README.md` and `Rakefile` are given to the Ruby script so that you can see the contents of them in the window.
-If you want to put spaces after the comma, surround the bracket with double quotes.
-It is because spaces are shell script delimiters.
+You will see the contents of the two files `README.md` and `Rakefile` in the window.
 
-The `rake` creates a file `gschema.compiled`.
-If you want to remove it, do like this:
+If you want to remove `gschemas.compiled`, do like this:
 
 ```console
 $ rake clean
