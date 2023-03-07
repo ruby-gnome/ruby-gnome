@@ -110,7 +110,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     tag = buffer.create_tag
     @settings.bind("font", tag, "font", Gio::SettingsBindFlags::DEFAULT)
     buffer.apply_tag(tag, buffer.start_iter, buffer.end_iter)
-    end
+  end
 end
 
 class ExampleApp < Gtk::Application
@@ -156,7 +156,7 @@ end
 if File.exist?(File.join(__dir__, "gschemas.compiled"))
   ENV["GSETTINGS_SCHEMA_DIR"] = __dir__
 else
- raise %{gschemas.compiled doesn't exist. Run "rake" to generate it.}
+  raise %{gschemas.compiled doesn't exist. Run "rake" to generate it.}
 end
 
 app = ExampleApp.new
