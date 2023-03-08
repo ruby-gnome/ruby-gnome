@@ -17,10 +17,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #
 # Example from:
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application5/exampleapp.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application5/exampleappwin.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application5/window.ui
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application5/gears-menu.ui
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/exampleapp.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/exampleappwin.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/window.ui
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/gears-menu.ui
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/prefs.ui
 # License: LGPL2.1-or-later
 
 if File.exist?(File.join(__dir__, "gschemas.compiled"))
@@ -30,6 +31,96 @@ else
 end
 
 require "gtk4"
+
+class ExampleAppPrefs <Gtk::Dialog
+  type_register
+  class << self
+    def init
+      template = <<~TEMPLATE
+      <?xml version="1.0" encoding="UTF-8"?>
+      <interface>
+        <template class="ExampleAppPrefs" parent="GtkDialog">
+          <property name="title" translatable="yes">Preferences</property>
+          <property name="resizable">0</property>
+          <property name="modal">1</property>
+          <child internal-child="content_area">
+            <object class="GtkBox" id="content_area">
+              <child>
+                <object class="GtkGrid" id="grid">
+                  <property name="margin-start">12</property>
+                  <property name="margin-end">12</property>
+                  <property name="margin-top">12</property>
+                  <property name="margin-bottom">12</property>
+                  <property name="row-spacing">12</property>
+                  <property name="column-spacing">12</property>
+                  <child>
+                    <object class="GtkLabel" id="fontlabel">
+                      <property name="label">_Font:</property>
+                      <property name="use-underline">1</property>
+                      <property name="mnemonic-widget">font</property>
+                      <property name="xalign">1</property>
+                      <layout>
+                        <property name="column">0</property>
+                        <property name="row">0</property>
+                      </layout>
+                    </object>
+                  </child>
+                  <child>
+                    <object class="GtkFontButton" id="font">
+                      <layout>
+                        <property name="column">1</property>
+                        <property name="row">0</property>
+                      </layout>
+                    </object>
+                  </child>
+                  <child>
+                    <object class="GtkLabel" id="transitionlabel">
+                      <property name="label">_Transition:</property>
+                      <property name="use-underline">1</property>
+                      <property name="mnemonic-widget">transition</property>
+                      <property name="xalign">1</property>
+                      <layout>
+                        <property name="column">0</property>
+                        <property name="row">1</property>
+                      </layout>
+                    </object>
+                  </child>
+                  <child>
+                    <object class="GtkComboBoxText" id="transition">
+                      <items>
+                        <item translatable="yes" id="none">None</item>
+                        <item translatable="yes" id="crossfade">Fade</item>
+                        <item translatable="yes" id="slide-left-right">Slide</item>
+                      </items>
+                      <layout>
+                        <property name="column">1</property>
+                        <property name="row">1</property>
+                      </layout>
+                    </object>
+                  </child>
+                </object>
+              </child>
+            </object>
+          </child>
+        </template>
+      </interface>
+      TEMPLATE
+      set_template(data: template)
+      bind_template_child("font")
+      bind_template_child("transition")
+    end
+  end
+
+  def initialize(win)
+    # The original C program sets use-header-bar property to TRUE instead of 1.
+    # But the property type is int, not gboolean.
+    # Therefore, the property value must be 1, not `true` here.
+    super('transient-for': win, 'use-header-bar': 1)
+    settings = Gio::Settings.new("org.gtk.exampleapp")
+    settings.bind("font", font, "font", Gio::SettingsBindFlags::DEFAULT)
+    settings.bind("transition", transition, "active-id", Gio::SettingsBindFlags::DEFAULT)
+  end
+end
 
 class ExampleAppWindow < Gtk::ApplicationWindow
   type_register
@@ -152,6 +243,8 @@ class ExampleApp < Gtk::Application
   private
 
   def preferences_activated
+    prefs = ExampleAppPrefs.new(active_window)
+    prefs.present
   end
 
   def quit_activated

@@ -1,0 +1,11 @@
+require "rake/clean"
+
+task :default => "gschemas.compiled"
+
+file "gschemas.compiled" => "org.gtk.exampleapp.gschema.xml" do
+  sh("glib-compile-schemas", ".")
+end
+
+CLEAN << "gschemas.compiled"
+
+task :clean
