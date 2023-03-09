@@ -24,6 +24,8 @@
 # * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/prefs.ui
 # License: LGPL2.1-or-later
 
+# GSETTINGS_SCHEMA_DIR must be set before requiring "gtk4" gem because it is used in the GIO initialization.
+
 if File.exist?(File.join(__dir__, "gschemas.compiled"))
   ENV["GSETTINGS_SCHEMA_DIR"] = __dir__
 else
@@ -32,7 +34,7 @@ end
 
 require "gtk4"
 
-class ExampleAppPrefs <Gtk::Dialog
+class ExampleAppPrefs < Gtk::Dialog
   type_register
   class << self
     def init

@@ -11,5 +11,5 @@ Run `rake` before trying `exampleapp.rb`.
 ```console
 $ cd gtk4/sample/examples/application6
 $ rake
-$ ruby exampleapp.rb
+$ ruby exampleapp.rb README.md Rakefile
 ```
