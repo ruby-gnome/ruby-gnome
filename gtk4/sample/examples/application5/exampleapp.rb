@@ -23,6 +23,8 @@
 # * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application5/gears-menu.ui
 # License: LGPL2.1-or-later
 
+# GSETTINGS_SCHEMA_DIR must be set before requiring "gtk4" gem because it is used in the GIO initialization.
+
 if File.exist?(File.join(__dir__, "gschemas.compiled"))
   ENV["GSETTINGS_SCHEMA_DIR"] = __dir__
 else
