@@ -120,8 +120,8 @@ class ExampleAppPrefs < Gtk::Dialog
     # Therefore, the property value must be 1, not `true` here.
     super('transient-for': win, 'use-header-bar': 1)
     settings = Gio::Settings.new("org.gtk.exampleapp")
-    settings.bind("font", font, "font", Gio::SettingsBindFlags::DEFAULT)
-    settings.bind("transition", transition, "active-id", Gio::SettingsBindFlags::DEFAULT)
+    settings.bind("font", font, "font", :default)
+    settings.bind("transition", transition, "active-id", :default)
   end
 end
 
@@ -212,7 +212,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     builder = Gtk::Builder.new(string: menu_ui)
     gears.menu_model = builder["menu"]
     @settings = Gio::Settings.new("org.gtk.exampleapp")
-    @settings.bind("transition", stack, "transition-type", Gio::SettingsBindFlags::DEFAULT)
+    @settings.bind("transition", stack, "transition-type", :default)
     search.bind_property("active", searchbar, "search-mode-enabled", :bidirectional)
   end
 
@@ -230,7 +230,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     stream = file.read
     buffer.text = stream.read
     tag = buffer.create_tag
-    @settings.bind("font", tag, "font", Gio::SettingsBindFlags::DEFAULT)
+    @settings.bind("font", tag, "font", :default)
     buffer.apply_tag(tag, buffer.start_iter, buffer.end_iter)
     search.sensitive = true
   end
@@ -244,7 +244,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     tab = stack.visible_child
     view = tab.child
     buffer = view.buffer
-    range = buffer.start_iter.forward_search(text, Gtk::TextSearchFlags::CASE_INSENSITIVE)
+    range = buffer.start_iter.forward_search(text, :case_insensitive)
     return unless range
     buffer.select_range(range[0], range[1])
     view.scroll_to_iter(range[0], 0.0, false, 0.0, 0.0)
