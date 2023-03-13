@@ -113,8 +113,9 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     scrolled.child = view
     stack.add_titled(scrolled, basename, basename)
     buffer = view.buffer
-    stream = file.read
-    buffer.text = stream.read
+    file.read do |stream|
+      buffer.text = stream.read.force_encoding(Encoding::UTF_8)
+    end
     tag = buffer.create_tag
     @settings.bind("font", tag, "font", :default)
     buffer.apply_tag(tag, buffer.start_iter, buffer.end_iter)

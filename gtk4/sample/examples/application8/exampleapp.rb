@@ -246,7 +246,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     end
     action = @settings.create_action("show-words")
     add_action(action)
-end
+  end
 
   def open(file)
     basename = file.basename
@@ -259,8 +259,9 @@ end
     scrolled.child = view
     stack.add_titled(scrolled, basename, basename)
     buffer = view.buffer
-    stream = file.read
-    buffer.text = stream.read
+    file.read do |stream|
+      buffer.text = stream.read.force_encoding(Encoding::UTF_8)
+    end
     tag = buffer.create_tag
     @settings.bind("font", tag, "font", :default)
     buffer.apply_tag(tag, buffer.start_iter, buffer.end_iter)
@@ -288,8 +289,7 @@ end
     return unless tab
     view = tab.child
     buffer = view.buffer
-    strings = buffer.text.downcase.split(/\W+/).uniq
-    strings.delete("")
+    strings = buffer.text.downcase.scan(/[[:word:]]+/).uniq 
     while (child = words.first_child)
       words.remove(child)
     end
