@@ -241,7 +241,6 @@ class ExampleAppWindow < Gtk::ApplicationWindow
   def search_text_changed(search_entry)
     text = search_entry.text
     return if text.empty?
-
     tab = stack.visible_child
     view = tab.child
     buffer = view.buffer
