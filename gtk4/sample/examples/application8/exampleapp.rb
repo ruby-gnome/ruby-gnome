@@ -17,12 +17,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #
 # Example from:
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/exampleapp.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/exampleappwin.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/exampleappprefs.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/window.ui
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/gears-menu.ui
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application6/prefs.ui
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/exampleapp.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/exampleappwin.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/exampleappprefs.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/window.ui
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/gears-menu.ui
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/prefs.ui
 # License: LGPL2.1-or-later
 
 # GSETTINGS_SCHEMA_DIR must be set before requiring "gtk4" gem because it is used in the GIO initialization.
@@ -144,6 +144,12 @@ class ExampleAppWindow < Gtk::ApplicationWindow
                 </object>
               </child>
               <child type="end">
+                <object class="GtkToggleButton" id="search">
+                  <property name="sensitive">0</property>
+                  <property name="icon-name">edit-find-symbolic</property>
+                </object>
+              </child>
+              <child type="end">
                 <object class="GtkMenuButton" id="gears">
                   <property name="direction">none</property>
                 </object>
@@ -154,7 +160,37 @@ class ExampleAppWindow < Gtk::ApplicationWindow
             <object class="GtkBox" id="content_box">
               <property name="orientation">vertical</property>
               <child>
-                <object class="GtkStack" id="stack"/>
+                <object class="GtkSearchBar" id="searchbar">
+                  <child>
+                    <object class="GtkSearchEntry" id="searchentry">
+                      <signal name="search-changed" handler="search_text_changed"/>
+                    </object>
+                  </child>
+                </object>
+              </child>
+              <child>
+                <object class="GtkBox" id="hbox">
+                  <child>
+                    <object class="GtkRevealer" id="sidebar">
+                      <property name="transition-type">slide-right</property>
+                      <child>
+                        <object class="GtkScrolledWindow" id="sidebar-sw">
+                          <property name="hscrollbar-policy">never</property>
+                          <child>
+                            <object class="GtkListBox" id="words">
+                              <property name="selection-mode">none</property>
+                            </object>
+                          </child>
+                        </object>
+                      </child>
+                    </object>
+                  </child>
+                  <child>
+                    <object class="GtkStack" id="stack">
+                      <signal name="notify::visible-child" handler="visible_child_changed"/>
+                    </object>
+                  </child>
+                </object>
               </child>
             </object>
           </child>
@@ -164,6 +200,13 @@ class ExampleAppWindow < Gtk::ApplicationWindow
       set_template(data: template)
       bind_template_child("stack")
       bind_template_child("gears")
+      bind_template_child("search")
+      bind_template_child("searchbar")
+      bind_template_child("searchentry")
+      bind_template_child("words")
+      bind_template_child("sidebar")
+      bind_template_callback_full("search_text_changed")
+      bind_template_callback_full("visible_child_changed")
     end
   end
 
@@ -173,6 +216,10 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     <interface>
       <menu id="menu">
         <section>
+          <item>
+            <attribute name="label" translatable="yes">_Words</attribute>
+            <attribute name="action">win.show-words</attribute>
+          </item>
           <item>
             <attribute name="label" translatable="yes">_Preferences</attribute>
             <attribute name="action">app.preferences</attribute>
@@ -192,6 +239,13 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     gears.menu_model = builder["menu"]
     @settings = Gio::Settings.new("org.gtk.exampleapp")
     @settings.bind("transition", stack, "transition-type", :default)
+    @settings.bind("show-words", sidebar, "reveal-child", :default)
+    search.bind_property("active", searchbar, "search-mode-enabled", :bidirectional)
+    sidebar.signal_connect "notify::reveal-child" do |_sidebar, _pspec|
+      update_words
+    end
+    action = @settings.create_action("show-words")
+    add_action(action)
   end
 
   def open(file)
@@ -211,6 +265,45 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     tag = buffer.create_tag
     @settings.bind("font", tag, "font", :default)
     buffer.apply_tag(tag, buffer.start_iter, buffer.end_iter)
+    search.sensitive = true
+    update_words
+  end
+
+  private
+
+  def search_text_changed(search_entry)
+    text = search_entry.text
+    return if text.empty?
+
+    tab = stack.visible_child
+    view = tab.child
+    buffer = view.buffer
+    range = buffer.start_iter.forward_search(text, :case_insensitive)
+    return unless range
+    buffer.select_range(range[0], range[1])
+    view.scroll_to_iter(range[0], 0.0, false, 0.0, 0.0)
+  end
+
+  def update_words
+    tab = stack.visible_child
+    return unless tab
+    view = tab.child
+    buffer = view.buffer
+    strings = buffer.text.downcase.scan(/[[:word:]]+/).uniq 
+    while (child = words.first_child)
+      words.remove(child)
+    end
+    strings.each do |s|
+      row = Gtk::Button.new(label: s)
+      row.signal_connect("clicked") {searchentry.text = s}
+      words.insert(row, -1)
+    end
+  end  
+
+  def visible_child_changed(stack, params)
+    return if stack.in_destruction?
+    searchbar.search_mode = false
+    update_words
   end
 end
 

@@ -74,8 +74,10 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     view.cursor_visible = false
     scrolled.child = view
     stack.add_titled(scrolled, basename, basename)
-    stream = file.read
-    view.buffer.text = stream.read
+    buffer = view.buffer
+    file.read do |stream|
+      buffer.text = stream.read.force_encoding(Encoding::UTF_8)
+    end
   end
 end
 
