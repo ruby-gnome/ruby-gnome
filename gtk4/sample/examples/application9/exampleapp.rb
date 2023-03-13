@@ -17,12 +17,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #
 # Example from:
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/exampleapp.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/exampleappwin.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/exampleappprefs.c
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/window.ui
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/gears-menu.ui
-# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application8/prefs.ui
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application9/exampleapp.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application9/exampleappwin.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application9/exampleappprefs.c
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application9/window.ui
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application9/gears-menu.ui
+# * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/examples/application9/prefs.ui
 # License: LGPL2.1-or-later
 
 # GSETTINGS_SCHEMA_DIR must be set before requiring "gtk4" gem because it is used in the GIO initialization.
@@ -138,6 +138,17 @@ class ExampleAppWindow < Gtk::ApplicationWindow
           <property name="default-height">400</property>
           <child type="titlebar">
             <object class="GtkHeaderBar" id="header">
+              <child>
+                <object class="GtkLabel" id="lines_label">
+                  <property name="visible">0</property>
+                  <property name="label" translatable="yes">Lines:</property>
+                </object>
+              </child>
+              <child>
+                <object class="GtkLabel" id="lines">
+                  <property name="visible">0</property>
+                </object>
+              </child>
               <child type="title">
                 <object class="GtkStackSwitcher" id="tabs">
                   <property name="stack">stack</property>
@@ -205,6 +216,8 @@ class ExampleAppWindow < Gtk::ApplicationWindow
       bind_template_child("searchentry")
       bind_template_child("words")
       bind_template_child("sidebar")
+      bind_template_child("lines")
+      bind_template_child("lines_label")
       bind_template_callback_full("search_text_changed")
       bind_template_callback_full("visible_child_changed")
     end
@@ -219,6 +232,10 @@ class ExampleAppWindow < Gtk::ApplicationWindow
           <item>
             <attribute name="label" translatable="yes">_Words</attribute>
             <attribute name="action">win.show-words</attribute>
+          </item>
+          <item>
+            <attribute name="label" translatable="yes">_Lines</attribute>
+            <attribute name="action">win.show-lines</attribute>
           </item>
           <item>
             <attribute name="label" translatable="yes">_Preferences</attribute>
@@ -246,6 +263,9 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     end
     action = @settings.create_action("show-words")
     add_action(action)
+    action = Gio::PropertyAction.new("show-lines", lines, "visible")
+    add_action(action)
+    lines.bind_property("visible", lines_label, "visible", :default)
   end
 
   def open(file)
@@ -267,6 +287,7 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     buffer.apply_tag(tag, buffer.start_iter, buffer.end_iter)
     search.sensitive = true
     update_words
+    update_lines
   end
 
   private
@@ -299,10 +320,19 @@ class ExampleAppWindow < Gtk::ApplicationWindow
     end
   end  
 
+  def update_lines
+    tab = stack.visible_child
+    return unless tab
+    view = tab.child
+    buffer = view.buffer
+    lines.text = buffer.line_count.to_s
+  end
+
   def visible_child_changed(stack, params)
     return if stack.in_destruction?
     searchbar.search_mode = false
     update_words
+    update_lines
   end
 end
 
