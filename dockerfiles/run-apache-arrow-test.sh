@@ -40,7 +40,7 @@ git clone --depth 1 https://github.com/apache/arrow.git
 mkdir -p arrow.build
 cmake \
   -G Ninja \
-  -DARROW_COMPUTE=ON \
+  -DARROW_ACERO=ON \
   -DARROW_CSV=ON \
   -DARROW_DATASET=ON \
   -DARROW_FILESYSTEM=ON \
@@ -50,7 +50,6 @@ cmake \
   -DARROW_JSON=ON \
   -DARROW_ORC=ON \
   -DARROW_PARQUET=ON \
-  -DARROW_PLASMA=ON \
   -DCMAKE_BUILD_TYPE=Debug \
   -DCMAKE_INSTALL_LIBDIR=lib \
   -DCMAKE_INSTALL_PREFIX=/usr \
