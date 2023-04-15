@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2022  Ruby-GNOME Project Team
+# Copyright (C) 2013-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -135,13 +135,13 @@ module Gio
       when /\Acontent_type_/
         load_function_info_content_type(info)
       when "content_types_get_registered"
-        define_singleton_method(@content_type_class, "registered", info)
+        define_singleton_method(info, @content_type_class, "registered")
       when /\Aresources_/
         name = rubyish_method_name(info, :prefix => "resources_")
-        define_singleton_method(@resources_module, name, info)
+        define_singleton_method(info, @resources_module, name)
       when /\Adbus_/
         name = rubyish_method_name(info, :prefix => "dbus_")
-        define_singleton_method(@dbus_module, name, info)
+        define_singleton_method(info, @dbus_module, name)
       when /\A{file,icon}_/
         # Ignore because they are defined by load_interface_info
       else
@@ -186,7 +186,7 @@ module Gio
       when "guess_for_tree"
         @content_type_guess_for_tree_info = info
       when "guess"
-        define_singleton_method(@content_type_class, name, info)
+        define_singleton_method(info, @content_type_class, name)
       else
         case name
         when /\Aget_/

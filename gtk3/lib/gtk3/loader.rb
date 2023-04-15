@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2021  Ruby-GNOME Project Team
+# Copyright (C) 2014-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -203,9 +203,9 @@ module Gtk
         # ignore
       when /\Astock_/
         method_name = rubyish_method_name(info, :prefix => "stock_")
-        define_module_function(@stock_singleton_methods_module,
-                               method_name,
-                               info)
+        define_module_function(info,
+                               @stock_singleton_methods_module,
+                               method_name)
       when /\Adrag_(?:source_|dest_|get_data\z|(?:un)highlight\z|begin|check_threshold\z)/
         # For OS X. It may be broken. It's not tested.
         method_name = rubyish_method_name(info)
@@ -219,17 +219,17 @@ module Gtk
         # Ignore because singleton methods are defined.
       when /\Aicon_size_/
         method_name = rubyish_method_name(info, :prefix => "icon_size_")
-        define_module_function(@icon_size_class_methods_module,
-                               method_name,
-                               info)
+        define_module_function(info,
+                               @icon_size_class_methods_module,
+                               method_name)
       when /\Atest_widget_/
         name = $POSTMATCH
         define_method(info, @widget_methods_module, name)
       when /\Aaccel_groups_/
         method_name = rubyish_method_name(info, :prefix => "accel_groups_")
-        define_module_function(@accel_group_class_methods_module,
-                               method_name,
-                               info)
+        define_module_function(info,
+                               @accel_group_class_methods_module,
+                               method_name)
       else
         super
       end
