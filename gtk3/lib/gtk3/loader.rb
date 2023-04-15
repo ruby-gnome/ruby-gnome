@@ -235,7 +235,7 @@ module Gtk
       end
     end
 
-    def define_singleton_method(klass, name, info)
+    def define_singleton_method(info, klass, name)
       case klass.name
       when "Gtk"
         case name
@@ -259,7 +259,7 @@ module Gtk
         end
       end
 
-      super(klass, name, info)
+      super(info, klass, name)
     end
 
     def define_enum(info)
