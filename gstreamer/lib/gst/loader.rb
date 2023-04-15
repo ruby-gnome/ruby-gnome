@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2021  Ruby-GNOME Project Team
+# Copyright (C) 2013-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -86,7 +86,7 @@ module Gst
 
     def load_value_function_info(info, method_name)
       value_functions_module = @value_functions_module
-      define_module_function(value_functions_module, method_name, info)
+      define_module_function(info, value_functions_module, method_name)
       @value_methods_module.module_eval do
         define_method(method_name) do |*arguments, &block|
           value_functions_module.send(method_name, self, *arguments, &block)
