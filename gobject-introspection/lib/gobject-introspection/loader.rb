@@ -82,14 +82,14 @@ module GObjectIntrospection
 
     def load_function_info(info)
       name = rubyish_method_name(info)
-      define_singleton_method(@base_module, name, info)
+      define_singleton_method(info, @base_module, name)
     end
 
     def load_function_info_singleton_method(info, klass, method_name)
-      define_singleton_method(klass, method_name, info)
+      define_singleton_method(info, klass, method_name)
     end
 
-    def define_module_function(target_module, name, function_info)
+    def define_module_function(function_info, target_module, name)
       prepare_function_info_lock_gvl(function_info, target_module)
       full_method_name = "#{target_module}\#.#{name}"
       invoker = Invoker.new(function_info, name, full_method_name)
@@ -102,7 +102,7 @@ module GObjectIntrospection
       DEFINE_METHOD
     end
 
-    def define_singleton_method(klass, name, info)
+    def define_singleton_method(info, klass, name)
       prepare_function_info_lock_gvl(info, klass)
       invoker = Invoker.new(info, name, "#{klass}.#{name}")
       singleton_class = klass.singleton_class
