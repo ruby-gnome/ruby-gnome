@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2021  Ruby-GNOME Project Team
+# Copyright (C) 2012-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -149,14 +149,14 @@ module Clutter
       when "init"
         # ignore
       when /\Athreads_/
-        define_module_function(@threads_module, $POSTMATCH, info)
+        define_module_function(info, @threads_module, $POSTMATCH)
       when /\Afeature_/
         method_name = rubyish_method_name(info, :prefix => "feature_")
         case method_name
         when "available"
           method_name = "#{method_name}?"
         end
-        define_module_function(@feature_module, method_name, info)
+        define_module_function(info, @feature_module, method_name)
       else
         super
       end
