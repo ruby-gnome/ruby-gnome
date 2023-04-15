@@ -177,9 +177,12 @@ module GObjectIntrospection
     def define_enum(info)
       # TODO: Can we do the same things for flags on NONE GType?
       return if info.gtype == GLib::Type::NONE
-      self.class.define_class(info.gtype,
-                              rubyish_class_name(info),
-                              @base_module)
+      klass = self.class.define_class(info.gtype,
+                                     rubyish_class_name(info),
+                                     @base_module)
+      prepare_class(klass) do
+        load_methods(info, klass)
+      end
     end
 
     def define_error(info)
@@ -222,7 +225,12 @@ module GObjectIntrospection
         end
         @base_module.const_set(rubyish_class_name(info), flags_module)
       else
-        self.class.define_class(info.gtype, flags_class_name(info), @base_module)
+        klass = self.class.define_class(info.gtype,
+                                        flags_class_name(info),
+                                        @base_module)
+        prepare_class(klass) do
+          load_methods(info, klass)
+        end
       end
     end
 
@@ -479,7 +487,11 @@ module GObjectIntrospection
             name
           end
         when "to_string"
-          "to_s"
+          if n_in_args.zero?
+            "to_s"
+          else
+            name
+          end
         when "to_integer"
           "to_i"
         when "foreach"
