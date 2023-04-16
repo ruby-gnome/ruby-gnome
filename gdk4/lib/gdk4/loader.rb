@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2022  Ruby-GNOME Project Team
+# Copyright (C) 2013-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -203,7 +203,7 @@ module Gdk
         when "name"
           name = "to_name"
         end
-        define_module_function(@keyval_module, name, info)
+        define_module_function(info, @keyval_module, name)
       else
         super
       end
