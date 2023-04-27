@@ -768,7 +768,8 @@ module GObjectIntrospection
         end
 
         n_missing_arguments = @n_in_args - arguments.size
-        if 0 < n_missing_arguments
+        n_in_arg_nil_indexes = @in_arg_nil_indexes.size
+        if 0 < n_missing_arguments and n_missing_arguments < n_in_arg_nil_indexes
           @in_arg_nil_indexes[-n_missing_arguments..-1].each do |nil_index|
             arguments.insert(nil_index, nil)
           end
