@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2021  Ruby-GNOME Project Team
+# Copyright (C) 2012-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -769,8 +769,7 @@ module GObjectIntrospection
 
         n_missing_arguments = @n_in_args - arguments.size
         if 0 < n_missing_arguments
-          @in_arg_nil_indexes.each_with_index do |nil_index, i|
-            next if i <= n_missing_arguments
+          @in_arg_nil_indexes[-n_missing_arguments..-1].each do |nil_index|
             arguments.insert(nil_index, nil)
           end
         end
