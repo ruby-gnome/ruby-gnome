@@ -1,5 +1,44 @@
 # NEWS
 
+## Ruby-GNOME 4.1.3: 2023-04-28
+
+This is a bug fix release for 4.1.2.
+
+### Changes
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for methods and functions for enum and flags.
+
+    * Improved internal `GObjectIntrospection::Loader` APIs but some
+      libraries may use these APIs. So this may be a backward
+      incompatible change.
+
+  * Fixes
+
+    * Fixed a bug for nullable argument support.
+
+#### Ruby/GTK4
+
+  * Improvements
+
+    * Added examples:
+      * GH-1551
+      * GH-1552
+      * GH-1553
+      * GH-1554
+      * GH-1555
+      * GH-1556
+      * GH-1557
+      * GH-1558
+      [Patch by Toshio Sekiya]
+
+### Thanks
+
+  * Toshio Sekiya
+
 ## Ruby-GNOME 4.1.2: 2023-02-24
 
 This is a release to improve support for the latest GNOME related libraries.
