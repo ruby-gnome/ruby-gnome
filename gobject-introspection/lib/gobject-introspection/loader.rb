@@ -645,6 +645,8 @@ module GObjectIntrospection
       return unless defined?(Ractor)
       Ractor.make_shareable(klass::INVOKERS)
       Ractor.make_shareable(klass.singleton_class::INVOKERS)
+      klass.private_constant(:INVOKERS)
+      klass.singleton_class.private_constant(:INVOKERS)
     end
 
     def define_methods_module(name)
@@ -662,6 +664,7 @@ module GObjectIntrospection
     def post_methods_module(mod)
       return unless defined?(Ractor)
       Ractor.make_shareable(mod::INVOKERS)
+      mod.private_constant(:INVOKERS)
     end
 
     class Invoker
