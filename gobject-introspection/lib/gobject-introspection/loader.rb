@@ -142,11 +142,12 @@ module GObjectIntrospection
         unless method_infos.empty?
           base_class = @base_module.const_get(base_class_name)
           singleton_class = base_class.singleton_class
-          invokers = singleton_class::INVOKERS.dup
+          invokers = singleton_class.const_get(:INVOKERS).dup
           singleton_class.__send__(:remove_const, :INVOKERS)
           singleton_class.const_set(:INVOKERS, invokers)
           load_methods_method(method_infos, singleton_class)
           Ractor.make_shareable(singleton_class::INVOKERS) if defined?(Ractor)
+          singleton_class.private_constant(:INVOKERS)
         end
       else
         return if info.gtype_struct?
