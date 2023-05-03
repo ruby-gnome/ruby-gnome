@@ -1,5 +1,23 @@
 # NEWS
 
+## Ruby-GNOME 4.1.4: 2023-05-04
+
+This is a bug fix release for 4.1.3.
+
+### Changes
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Hid internal `INVOKERS` constant to improve backward compatibility.
+      GH-1551
+      [Reported by Mamoru TASAKA]
+
+### Thanks
+
+  * Mamoru TASAKA
+
 ## Ruby-GNOME 4.1.3: 2023-04-28
 
 This is a bug fix release for 4.1.2.
