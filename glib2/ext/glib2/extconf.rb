@@ -67,6 +67,7 @@ include_paths = PKGConfig.cflags_only_I("glib-2.0")
 ignore_headers = [
   "giochannel.h",
   "gmain.h",
+  "gmodule.h",
   "gscanner.h",
 ]
 unless windows_platform?
