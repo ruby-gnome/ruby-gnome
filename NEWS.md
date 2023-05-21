@@ -1,5 +1,22 @@
 # NEWS
 
+## Ruby-GNOME 4.1.6: 2023-05-21
+
+This is a minor improvement release for 4.1.5.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Avoided closure related `TypeError` in GC at exit.
+      [Reported by Matijs van Zuijlen]
+
+### Thanks
+
+  * Matijs van Zuijlen
+
 ## Ruby-GNOME 4.1.5: 2023-05-11
 
 This is a bug fix release for 4.1.4.
