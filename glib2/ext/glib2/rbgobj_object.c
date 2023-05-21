@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2023  Ruby-GNOME Project Team
  *  Copyright (C) 2002-2003  Masahiro Sakai
  *  Copyright (C) 1998-2000  Yukihiro Matsumoto,
  *                           Daisuke Kanda,
@@ -133,6 +133,15 @@ rbgobj_object_add_relative(VALUE rb_gobject, VALUE rb_relative)
 }
 
 void
+rbgobj_gobject_remove_relative(GObject *gobject, VALUE rb_relative)
+{
+    gobj_holder *holder = g_object_get_qdata(gobject, RUBY_GOBJECT_OBJ_KEY);
+    if (holder && holder->rb_relatives) {
+        g_hash_table_remove(holder->rb_relatives, (gpointer)(rb_relative));
+    }
+}
+
+void
 rbgobj_object_remove_relative(VALUE rb_gobject, VALUE rb_relative)
 {
     gobj_holder *holder;
@@ -141,8 +150,7 @@ rbgobj_object_remove_relative(VALUE rb_gobject, VALUE rb_relative)
                          &rg_glib_object_type,
                          holder);
     if (holder->rb_relatives) {
-        g_hash_table_remove(holder->rb_relatives,
-                            (gpointer)(rb_relative));
+        g_hash_table_remove(holder->rb_relatives, (gpointer)(rb_relative));
     }
 }
 

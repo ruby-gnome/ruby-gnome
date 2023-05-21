@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2003-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2003-2023  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -146,6 +146,8 @@ extern void rbgobj_instance_unref(gpointer instance);
 
 extern void rbgobj_object_add_relative(VALUE rb_gobject,
                                        VALUE rb_relative);
+extern void rbgobj_gobject_remove_relative(GObject *gobject,
+                                           VALUE rb_relative);
 extern void rbgobj_object_remove_relative(VALUE rb_gobject,
                                           VALUE rb_relative);
 extern void rbgobj_object_remove_relatives(VALUE rb_gobject,

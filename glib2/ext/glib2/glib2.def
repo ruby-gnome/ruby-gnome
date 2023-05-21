@@ -63,6 +63,7 @@ EXPORTS
 	rbgobj_register_type
 	rbgobj_object_alloc_func
 	rbgobj_object_add_relative
+	rbgobj_gobject_remove_relative
 	rbgobj_object_remove_relative
 	rbgobj_object_remove_relatives
 	rbgobj_set_signal_func

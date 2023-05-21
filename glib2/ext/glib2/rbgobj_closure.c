@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2023  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cClosure
 
-static ID id_call, id_closures;
+static ID id_call;
 static gboolean rclosure_initialized = FALSE;
 
 #define TAG_SIZE 64
@@ -155,6 +155,7 @@ rclosure_marshal(GClosure*       closure,
     G_PROTECT_CALLBACK(rclosure_marshal_do, &arg);
 }
 
+static void g_rclosure_detach_raw_gobject(GClosure *closure, GObject *gobject);
 static void rclosure_weak_notify(gpointer data, GObject* where_the_object_was);
 
 static void
@@ -165,12 +166,11 @@ rclosure_invalidate(G_GNUC_UNUSED gpointer data, GClosure *closure)
     GList *next;
     for (next = rclosure->objects; next; next = next->next) {
         GObject *object = G_OBJECT(next->data);
+        if (!NIL_P(rclosure->rb_holder)) {
+            g_rclosure_detach_raw_gobject(closure, object);
+        }
         g_object_weak_unref(object, rclosure_weak_notify, rclosure);
         g_closure_unref(closure);
-        VALUE obj = rbgobj_ruby_object_from_instance2(object, FALSE);
-        if (!NIL_P(rclosure->rb_holder) && !NIL_P(obj)) {
-            rbgobj_object_remove_relative(obj, rclosure->rb_holder);
-        }
     }
     g_list_free(rclosure->objects);
     rclosure->objects = NULL;
@@ -279,10 +279,7 @@ void
 g_rclosure_attach(GClosure *closure, VALUE object)
 {
     GRClosure *rclosure = (GRClosure *)closure;
-    rbgobj_add_relative_removable(object,
-                                  Qnil,
-                                  id_closures,
-                                  rclosure->rb_holder);
+    rbgobj_add_relative(object, rclosure->rb_holder);
 }
 
 void
@@ -297,11 +294,18 @@ g_rclosure_attach_gobject(GClosure *closure, VALUE object)
     rclosure->objects = g_list_prepend(rclosure->objects, gobject);
 }
 
+static void
+g_rclosure_detach_raw_gobject(GClosure *closure, GObject *gobject)
+{
+    GRClosure *rclosure = (GRClosure *)closure;
+    rbgobj_gobject_remove_relative(gobject, rclosure->rb_holder);
+}
+
 void
 g_rclosure_detach(GClosure *closure, VALUE object)
 {
     GRClosure *rclosure = (GRClosure *)closure;
-    rbgobj_remove_relative(object, id_closures, rclosure->rb_holder);
+    rbgobj_remove_relative(object, 0, rclosure->rb_holder);
 }
 
 void
@@ -338,7 +342,6 @@ static void
 init_rclosure(void)
 {
     id_call = rb_intern("call");
-    id_closures = rb_intern("closures");
     rclosure_initialized = TRUE;
     rb_set_end_proc(rclosure_end_proc, Qnil);
 }
