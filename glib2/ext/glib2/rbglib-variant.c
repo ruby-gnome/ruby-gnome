@@ -115,7 +115,9 @@ static const rb_data_type_t rbg_variant_type = {
     },
     NULL,
     NULL,
-    RUBY_TYPED_FREE_IMMEDIATELY | RUBY_TYPED_WB_PROTECTED,
+    RUBY_TYPED_FREE_IMMEDIATELY |
+    RUBY_TYPED_WB_PROTECTED |
+    RUBY_TYPED_FROZEN_SHAREABLE,
 };
 
 static VALUE
