@@ -30,7 +30,8 @@ static const rb_data_type_t rbg_pointer_type = {
     },
     NULL,
     NULL,
-    RUBY_TYPED_FREE_IMMEDIATELY,
+    RUBY_TYPED_FREE_IMMEDIATELY |
+    RUBY_TYPED_WB_PROTECTED,
 };
 
 VALUE
