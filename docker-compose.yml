@@ -11,6 +11,8 @@ services:
       dockerfile: dockerfiles/almalinux-8.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
@@ -24,6 +26,8 @@ services:
       dockerfile: dockerfiles/almalinux-9.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
@@ -37,6 +41,8 @@ services:
       dockerfile: dockerfiles/apache-arrow.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-apache-arrow-test.sh
 
@@ -50,6 +56,8 @@ services:
       dockerfile: dockerfiles/arch-linux.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
@@ -63,6 +71,8 @@ services:
       dockerfile: dockerfiles/centos-7.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-test-scl.sh
 
@@ -76,6 +86,8 @@ services:
       dockerfile: dockerfiles/fedora-arm32v7-rawhide.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
     cap_add:
@@ -91,6 +103,8 @@ services:
       dockerfile: dockerfiles/fedora-rawhide.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
     cap_add:
@@ -108,6 +122,8 @@ services:
         RUBY_VERSION: "3.0"
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
@@ -123,6 +139,8 @@ services:
         RUBY_VERSION: "3.1"
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
@@ -138,6 +156,8 @@ services:
         RUBY_VERSION: "3.2"
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
@@ -151,6 +171,8 @@ services:
       dockerfile: dockerfiles/ubuntu-20.04.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
@@ -164,5 +186,7 @@ services:
       dockerfile: dockerfiles/ubuntu-22.04.dockerfile
     volumes:
       - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
