@@ -42,9 +42,18 @@ done
 
 export RUBY_GNOME_BUILD_DIR="${PWD}"
 if type dbus-run-session > /dev/null 2>&1; then
-  dbus-run-session \
-    xvfb-run --server-args "-screen 0 640x480x24" \
-    bundle exec /ruby-gnome/run-test.rb "$@"
+  if type gtk4-broadwayd; then
+    gtk4-broadwayd :5 &
+    GDK_BACKEND=broadway \
+      BROADWAY_DISPLAY=:5 \
+      dbus-run-session \
+      bundle exec /ruby-gnome/run-test.rb "$@"
+    kill %1
+  else
+    dbus-run-session \
+      xvfb-run --server-args "-screen 0 640x480x24" \
+      bundle exec /ruby-gnome/run-test.rb "$@"
+  fi
 else
   bundle exec /ruby-gnome/run-test.rb "$@"
 fi

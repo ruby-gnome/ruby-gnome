@@ -65,7 +65,7 @@ targets.each do |target|
   end
 
   run_test = target + "test/run-test.rb"
-  unless system(ruby, *includes, run_test.to_s, "-v")
+  unless system(ruby, *includes, run_test.to_s)
     puts "Failed to run test: #{target.basename}"
     failed_target_names << target.basename.to_s
   end

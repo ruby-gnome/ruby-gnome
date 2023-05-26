@@ -38,7 +38,12 @@ module GtkTestUtils
   end
 
   def x11?
-    window_system_type_name == WindowSystemTypeNames::X11
+    gdk_backend = ENV["GDK_BACKEND"]
+    if gdk_backend.nil?
+      window_system_type_name == WindowSystemTypeNames::X11
+    else
+      gdk_backend == "x11"
+    end
   end
 
   def fixture_path(*components)
