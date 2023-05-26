@@ -106,7 +106,7 @@ services:
     environment:
       GITHUB_ACTIONS:
     command:
-      /ruby-gnome/dockerfiles/run-test.sh -v
+      /ruby-gnome/dockerfiles/run-test.sh
     cap_add:
       - SYS_ADMIN
 
