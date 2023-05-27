@@ -32,8 +32,9 @@ class TestGdkDisplay < Test::Unit::TestCase
     test("no type") do
       theme_name_value = GLib::Value.new(GLib::Type::STRING, "")
       success = @display.get_setting("gtk-theme-name", theme_name_value)
-      if (not success) and x11?
-        omit("XSETTINGS is required.")
+      unless success
+        omit("XSETTINGS is required.") if x11?
+        omit("Broadway isn't supported.") if broadway?
       end
       assert_equal(Gtk::Settings.default.gtk_theme_name,
                    theme_name_value.value)
@@ -42,8 +43,9 @@ class TestGdkDisplay < Test::Unit::TestCase
     test("custom type") do
       double_click_time_value = GLib::Value.new(GLib::Type::INT, 0)
       success = @display.get_setting("gtk-double-click-time", double_click_time_value)
-      if (not success) and x11?
-        omit("XSETTINGS is required.")
+      unless success
+        omit("XSETTINGS is required.") if x11?
+        omit("Broadway isn't supported.") if broadway?
       end
       assert_equal(Gtk::Settings.default.gtk_double_click_time,
                    double_click_time_value.value)

@@ -14,6 +14,27 @@ def separator
   "-" * 80
 end
 
+def run_broadwayd(target)
+  unless ENV["RUBY_GNOME_GTK4_USE_BROADWAY"] == "yes"
+    return yield
+  end
+
+  case target.basename.to_s
+  when "gdk4", "gtk4"
+    pid = spawn("gtk4-broadwayd")
+    begin
+      gdk_backend, ENV["GDK_BACKEND"] = ENV["GDK_BACKEND"], "broadway"
+      yield
+    ensure
+      ENV["GDK_BACKEND"] = gdk_backend
+      Process.kill(:TERM, pid)
+      Process.waitpid(pid)
+    end
+  else
+    return yield
+  end
+end
+
 targets = []
 includes = []
 
@@ -64,10 +85,12 @@ targets.each do |target|
     end
   end
 
-  run_test = target + "test/run-test.rb"
-  unless system(ruby, *includes, run_test.to_s)
-    puts "Failed to run test: #{target.basename}"
-    failed_target_names << target.basename.to_s
+  run_broadwayd(target) do
+    run_test = target + "test/run-test.rb"
+    unless system(ruby, *includes, run_test.to_s)
+      puts "Failed to run test: #{target.basename}"
+      failed_target_names << target.basename.to_s
+    end
   end
 
   puts separator

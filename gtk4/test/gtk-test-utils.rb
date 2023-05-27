@@ -33,6 +33,7 @@ module GtkTestUtils
   end
 
   module WindowSystemTypeNames
+    BROADWAY = "GdkBroadwayDisplay"
     X11 = "GdkX11Display"
     WINDOWS = "GdkWin32Display"
   end
@@ -43,6 +44,15 @@ module GtkTestUtils
       window_system_type_name == WindowSystemTypeNames::X11
     else
       gdk_backend == "x11"
+    end
+  end
+
+  def broadway?
+    gdk_backend = ENV["GDK_BACKEND"]
+    if gdk_backend.nil?
+      window_system_type_name == WindowSystemTypeNames::BROADWAY
+    else
+      gdk_backend == "broadway"
     end
   end
 
