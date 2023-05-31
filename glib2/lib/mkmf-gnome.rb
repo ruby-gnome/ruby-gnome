@@ -431,7 +431,7 @@ def glib_mkenums(prefix, files, g_type_prefix, include_files, options={})
 end
 
 def check_cairo(options={})
-  rcairo_source_dir = options[:rcairo_source_dir]
+  rcairo_source_dir = options[:rcairo_source_dir] || ENV["RCAIRO_SOURCE_DIR"]
   if rcairo_source_dir.nil?
     rcairo_source_base_dir = "rcairo"
     top_dir = options[:top_dir]
