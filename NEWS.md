@@ -1,5 +1,24 @@
 # NEWS
 
+## Ruby-GNOME 4.1.7: 2023-05-31
+
+This is a minor improvement release for 4.1.6.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Added support for writer barrier.
+
+#### Ruby/CairoGObject
+
+  * Improvements
+
+    * Added support for specifying rcairo's source directory by
+      `RCAIRO_SOURCE_DIR`.
+
 ## Ruby-GNOME 4.1.6: 2023-05-21
 
 This is a minor improvement release for 4.1.5.
