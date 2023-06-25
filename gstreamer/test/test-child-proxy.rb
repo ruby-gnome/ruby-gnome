@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,12 +16,12 @@
 
 class TestChildProxy < Test::Unit::TestCase
   def setup
-    @bin = Gst::ElementFactory.make("decodebin")
+    @capsfilter = Gst::ElementFactory.make("capsfilter")
   end
 
   def test_property
     any_caps = Gst::Caps.any
-    @bin.caps = any_caps
-    assert_equal(any_caps.to_s, @bin.caps.to_s)
+    @capsfilter.caps = any_caps
+    assert_equal(any_caps.to_s, @capsfilter.caps.to_s)
   end
 end

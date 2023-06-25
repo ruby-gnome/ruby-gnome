@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2022  Ruby-GNOME Project Team
+# Copyright (C) 2016-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,9 @@
 
 class TestMapInfo < Test::Unit::TestCase
   def setup
+    unless Gst::ElementFactory.find("videotestsrc")
+      omit("gst-plugins-good is needed")
+    end
     @pipeline = Gst.parse_launch("videotestsrc ! appsink name=sink")
     @sink = @pipeline.get_by_name("sink")
   end

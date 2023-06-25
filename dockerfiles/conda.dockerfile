@@ -7,6 +7,7 @@ RUN \
 RUN \
   apt update && \
   apt install -y \
+    shared-mime-info \
     xvfb
 
 # Ruby in conda uses /usr/bin/mkdir not /bin/mkdir
