@@ -40,6 +40,7 @@ end
 
 unless required_pkg_config_package(package_id,
                                    :alt_linux => "gstreamer1.0-devel",
+                                   :conda => "gstreamer",
                                    :debian => "libgstreamer1.0-dev",
                                    :redhat => "pkgconfig(#{package_id})",
                                    :arch_linux => "gstreamer",

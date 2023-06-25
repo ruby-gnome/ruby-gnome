@@ -16,7 +16,7 @@
 
 class TestElementFactory < Test::Unit::TestCase
   def test_find
-    name = "playbin"
+    name = "tee"
     factory = Gst::ElementFactory.find(name)
     assert_equal(name, factory.name)
   end

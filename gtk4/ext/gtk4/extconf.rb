@@ -50,9 +50,10 @@ end
 
 unless required_pkg_config_package(package_id,
                                    :alt_linux => "libgtk4-devel",
+                                   :arch_linux => "gtk4",
+                                   :conda => "gtk4",
                                    :debian => "libgtk-4-dev",
                                    :redhat => "pkgconfig(#{package_id})",
-                                   :arch_linux => "gtk4",
                                    :homebrew => "gtk4",
                                    :macports => "gtk4",
                                    :msys2 => "gtk4")

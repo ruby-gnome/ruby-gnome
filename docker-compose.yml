@@ -76,6 +76,21 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test-scl.sh
 
+  conda:
+    image: continuumio/miniconda3
+
+  conda:
+    image: ghcr.io/${GITHUB_REPOSITORY}:conda
+    build:
+      context: .
+      dockerfile: dockerfiles/conda.dockerfile
+    volumes:
+      - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
+    command:
+      /ruby-gnome/dockerfiles/run-test.sh
+
   fedora-arm32v7-rawhide-base:
     image: arm32v7/fedora:rawhide
 

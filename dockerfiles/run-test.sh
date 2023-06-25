@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/bash -l
 #
-# Copyright (C) 2020-2022  Ruby-GNOME Project Team
+# Copyright (C) 2020-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,6 +19,7 @@
 set -eux
 
 echo "::group::Prepare build directory"
+rm -rf ruby-gnome.build
 mkdir -p ruby-gnome.build
 cd ruby-gnome.build
 echo "::endgroup::"

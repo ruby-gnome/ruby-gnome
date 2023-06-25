@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2019  Ruby-GNOME Project Team
+# Copyright (C) 2017-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -33,6 +33,10 @@ namespace :dependency do
     unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:alt_linux => "libgtk+3-devel",
                                             :arch_linux => "gtk3",
+                                            :conda => [
+                                              "gtk3",
+                                              "xorg-xineramaproto",
+                                            ],
                                             :debian => "libgtk-3-dev",
                                             :redhat => "pkgconfig(#{package_id})",
                                             :homebrew => "gtk+3",

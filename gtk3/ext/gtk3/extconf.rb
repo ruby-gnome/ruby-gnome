@@ -50,9 +50,13 @@ end
 
 unless required_pkg_config_package(package_id,
                                    :alt_linux => "libgtk+3-devel",
+                                   :arch_linux => "gtk3",
+                                   :conda => [
+                                     "gtk3",
+                                     "xorg-xineramaproto",
+                                   ],
                                    :debian => "libgtk-3-dev",
                                    :redhat => "pkgconfig(#{package_id})",
-                                   :arch_linux => "gtk3",
                                    :homebrew => "gtk+3",
                                    :macports => "gtk3",
                                    :msys2 => "gtk3")
