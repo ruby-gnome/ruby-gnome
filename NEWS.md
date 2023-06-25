@@ -1,5 +1,17 @@
 # NEWS
 
+## Ruby-GNOME 4.1.8: 2023-06-25
+
+This is a conda support release.
+
+### Changes
+
+#### All
+
+  * Improvements
+
+    * Added support for installing conda packages automatically.
+
 ## Ruby-GNOME 4.1.7: 2023-05-31
 
 This is a minor improvement release for 4.1.6.
