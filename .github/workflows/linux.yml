@@ -14,6 +14,7 @@ jobs:
           - apache-arrow
           - arch-linux
           - centos-7
+          - conda
           # - fedora-arm32v7-rawhide
           - fedora-rawhide
           - ruby-3.0
