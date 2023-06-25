@@ -76,7 +76,7 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test-scl.sh
 
-  conda:
+  conda-base:
     image: continuumio/miniconda3
 
   conda:
