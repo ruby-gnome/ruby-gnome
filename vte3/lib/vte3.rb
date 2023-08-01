@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,5 +27,6 @@ module Vte
 
   Gtk.init if Gtk.respond_to?(:init)
   loader = Loader.new(self)
+  loader.version = "2.91"
   loader.load("Vte")
 end
