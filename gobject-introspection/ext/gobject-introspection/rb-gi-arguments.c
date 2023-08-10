@@ -147,8 +147,9 @@ rb_gi_arg_metadata_init_struct_info(RBGIArgMetadata *metadata,
 static RBGIArgMetadata *
 rb_gi_arg_metadata_new(GICallableInfo *callable_info, gint i)
 {
-
-    RBGIArgMetadata *metadata = ALLOC(RBGIArgMetadata);
+    /* We can't use ALLOC() (Ruby API) here because this may be called
+       in a thread that isn't the Ruby's main thread. */
+    RBGIArgMetadata *metadata = g_new(RBGIArgMetadata, 1);
     metadata->callable_info = callable_info;
     GIArgInfo *arg_info = &(metadata->arg_info);
     g_callable_info_load_arg(callable_info, i, arg_info);
@@ -185,7 +186,7 @@ void
 rb_gi_arg_metadata_free(RBGIArgMetadata *metadata)
 {
     rb_gi_arg_metadata_clear(metadata);
-    xfree(metadata);
+    g_free(metadata);
 }
 
 static void
