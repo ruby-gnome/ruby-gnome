@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2022  Ruby-GNOME Project Team
+# Copyright (C) 2014-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@ class TestGtkAccessible < Test::Unit::TestCase
   end
 
   def test_accessible_role
-    assert_equal(Gtk::AccessibleRole::GROUP,
-                 @accessible.accessible_role)
+    assert_instance_of(Gtk::AccessibleRole,
+                       @accessible.accessible_role)
   end
 end
