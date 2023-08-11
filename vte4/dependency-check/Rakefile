@@ -30,7 +30,7 @@ end
 namespace :dependency do
   desc "Check dependency"
   task :check do
-    package_id = "vte-2.91-vte4"
+    package_id = "vte-2.91-gtk4"
     unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:alt_linux => "libvte3-devel",
                                             :debian => "libvte-2.91-gtk4-dev",
