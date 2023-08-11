@@ -1,5 +1,31 @@
 # NEWS
 
+## Ruby-GNOME 4.1.9: 2023-08-11
+
+This is a vte4 added release.
+
+### Changes
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Changed to use GLib memory allocation functions instead of
+      Ruby's one when calling callbacks. Because callbacks may be
+      called in out of the main Ruby thread.
+
+#### Ruby/VTE3
+
+  * Improvements
+
+    * Ensured using GTK3.
+
+#### Ruby/VTE4
+
+  * Improvements
+
+    * Added.
+
 ## Ruby-GNOME 4.1.8: 2023-06-25
 
 This is a conda support release.
