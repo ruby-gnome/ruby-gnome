@@ -19,12 +19,12 @@
 require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
-  s.name          = "vte3"
-  s.summary       = "Ruby/VTE3 is a Ruby binding of VTE for GTK 3"
-  s.description   = "Ruby/VTE3 is a Ruby binding of VTE for GTK 3"
+  s.name          = "vte4"
+  s.summary       = "Ruby/VTE4 is a Ruby binding of VTE for GTK 4"
+  s.description   = "Ruby/VTE4 is a Ruby binding of VTE for GTK 4"
   s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
-  s.homepage      = "https://ruby-gnome2.github.io/"
+  s.homepage      = "https://ruby-gnome.github.io/"
   s.licenses      = ["LGPL-2.1+"]
   s.version       = ruby_glib2_version
   s.extensions    = ["dependency-check/Rakefile"]
@@ -39,5 +39,5 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("lib/**/*.rb")
   s.files += Dir.glob("test/**/*")
 
-  s.add_runtime_dependency("gtk3", "= #{s.version}")
+  s.add_runtime_dependency("gtk4", "= #{s.version}")
 end

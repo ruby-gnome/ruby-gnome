@@ -1,0 +1,43 @@
+# Copyright (C) 2017-2023  Ruby-GNOME Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+require "pkg-config"
+require "native-package-installer"
+
+case RUBY_PLATFORM
+when /mingw|mswin/
+  task :default => "nothing"
+else
+  task :default => "dependency:check"
+end
+
+task :nothing do
+end
+
+namespace :dependency do
+  desc "Check dependency"
+  task :check do
+    package_id = "vte-2.91-vte4"
+    unless PKGConfig.check_version?(package_id)
+      unless NativePackageInstaller.install(:alt_linux => "libvte3-devel",
+                                            :debian => "libvte-2.91-gtk4-dev",
+                                            :redhat => "pkgconfig(#{package_id})",
+                                            :homebrew => "vte3")
+        exit(false)
+      end
+    end
+  end
+end

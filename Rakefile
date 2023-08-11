@@ -73,6 +73,7 @@ default_packages = [
   "poppler",
   "rsvg2",
   "vte3",
+  "vte4",
   "webkit-gtk",
   "webkit2-gtk",
   "wnck3",
