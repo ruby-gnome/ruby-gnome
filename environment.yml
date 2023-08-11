@@ -1,0 +1,12 @@
+name: ruby-gnome
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - adwaita-icon-theme
+  - compilers
+  - dbus
+  - glib
+  - libgcc-ng
+  - make
+  - ruby

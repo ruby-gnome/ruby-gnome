@@ -13,14 +13,7 @@ RUN \
 # Ruby in conda uses /usr/bin/mkdir not /bin/mkdir
 RUN ln -s /bin/mkdir /usr/bin/
 
+COPY environment.yml /
 RUN \
-  conda update -c conda-forge -y --quiet --all && \
-  conda install -c conda-forge -y --quiet \
-    adwaita-icon-theme \
-    compilers \
-    dbus \
-    glib \
-    libgcc-ng \
-    make \
-    ruby && \
-  conda update -c conda-forge -y --quiet --all
+  conda env create && \
+  echo "conda activate ruby-gnome" >> ~/.bashrc
