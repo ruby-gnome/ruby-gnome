@@ -1,5 +1,17 @@
 # NEWS
 
+## Ruby-GNOME 4.2.0: 2023-08-19
+
+This is a minor bug fix release.
+
+### Changes
+
+#### Ruby/GTK3
+
+  * Fixes
+
+    * Suppressed a build type warning.
+
 ## Ruby-GNOME 4.1.9: 2023-08-11
 
 This is a vte4 added release.
