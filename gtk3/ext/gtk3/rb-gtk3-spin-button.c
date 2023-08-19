@@ -46,7 +46,7 @@ rb_gtk3_spin_button_input_body(VALUE user_data)
 }
 
 static VALUE
-rb_gtk3_spin_button_input_rescue(VALUE user_data)
+rb_gtk3_spin_button_input_rescue(VALUE user_data, VALUE error)
 {
     InputData *input_data = (InputData *)user_data;
     g_value_set_int(input_data->data->return_value, GTK_INPUT_ERROR);
