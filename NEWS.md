@@ -10,7 +10,7 @@ This is a minor bug fix release.
 
   * Fixes
 
-    * Suppressed a build type warning.
+    * Suppressed a build time warning.
 
 ## Ruby-GNOME 4.1.9: 2023-08-11
 
