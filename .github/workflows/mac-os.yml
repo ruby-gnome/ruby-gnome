@@ -8,7 +8,7 @@ jobs:
     runs-on: macOS-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ruby
@@ -60,7 +60,7 @@ jobs:
       ARROW_WITH_ZSTD: ON
       XML_CATALOG_FILES: /usr/local/etc/xml/catalog
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ruby
@@ -73,7 +73,7 @@ jobs:
             gem install pkg/*.gem
             popd
           done
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: apache/arrow
           path: arrow
