@@ -44,6 +44,7 @@ jobs:
     runs-on: macOS-latest
     timeout-minutes: 60
     env:
+      ARROW_ACERO: ON
       ARROW_BUILD_TESTS: OFF
       ARROW_FLIGHT: ON
       ARROW_GANDIVA: ON
