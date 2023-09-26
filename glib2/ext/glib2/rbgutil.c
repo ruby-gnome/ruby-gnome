@@ -133,7 +133,7 @@ rbgutil_generic_gtype(VALUE self)
 }
 
 VALUE
-rbgutil_generic_s_inspect_gtype_fallback(VALUE klass)
+rbgutil_generic_s_to_s_gtype_name_fallback(VALUE klass)
 {
     VALUE rb_name = rb_funcall(klass, rb_intern("name"), 0);
     if (NIL_P(rb_name)) {

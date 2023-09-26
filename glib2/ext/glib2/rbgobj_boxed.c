@@ -321,9 +321,10 @@ Init_gobject_gboxed(void)
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rbgobj_boxed_alloc_func);
     rbg_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     rbg_define_singleton_method(RG_TARGET_NAMESPACE,
-                                "inspect",
-                                rbgutil_generic_s_inspect_gtype_fallback,
+                                "to_s",
+                                rbgutil_generic_s_to_s_gtype_name_fallback,
                                 0);
+    RG_DEF_SALIAS("to_s", "inspect");
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(inspect, 0);

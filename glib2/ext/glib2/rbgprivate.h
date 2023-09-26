@@ -108,7 +108,7 @@ VALUE rbgutil_generic_gtype(VALUE self);
 #define generic_s_gtype rbgutil_generic_s_gtype
 #define generic_gtype rbgutil_generic_gtype
 
-VALUE rbgutil_generic_s_inspect_gtype_fallback(VALUE klass);
+VALUE rbgutil_generic_s_to_s_gtype_name_fallback(VALUE klass);
 
 extern gboolean rbgobj_convert_has_type(GType type);
 extern RGConvertTable *rbgobj_convert_lookup(GType type);

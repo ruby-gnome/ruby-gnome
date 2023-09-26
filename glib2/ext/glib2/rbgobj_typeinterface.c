@@ -175,9 +175,10 @@ Init_gobject_typeinterface(void)
     RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "MetaInterface");
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     rbg_define_method(RG_TARGET_NAMESPACE,
-                      "inspect",
-                      rbgutil_generic_s_inspect_gtype_fallback,
+                      "to_s",
+                      rbgutil_generic_s_to_s_gtype_name_fallback,
                       0);
+    RG_DEF_ALIAS("inspect", "to_s");
     RG_DEF_METHOD(append_features, 1);
     RG_DEF_METHOD(included, 1);
     RG_DEF_METHOD(install_property, 1);
