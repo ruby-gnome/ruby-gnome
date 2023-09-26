@@ -326,7 +326,7 @@ rg_s_new_bang(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_s_init(int argc, VALUE *argv, VALUE self)
+rg_s_init(VALUE self)
 {
     return RUBY_Qnil;
 }
