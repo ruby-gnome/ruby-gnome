@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2023  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -1005,7 +1005,7 @@ Init_gobject_gtype(void)
 
     RG_DEF_SMETHOD(try_convert, 1);
 
-    rb_define_alias(CLASS_OF(RG_TARGET_NAMESPACE), "[]", "new");
+    RG_DEF_SALIAS("[]", "new");
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(inspect, 0);
     RG_DEF_METHOD_OPERATOR("<=>", type_compare, 1);

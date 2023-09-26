@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2023  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -55,6 +55,8 @@ G_BEGIN_DECLS
 #define RG_DEF_ATTR(attr, read, write, ex) \
         rb_attr(RG_TARGET_NAMESPACE, rb_intern(attr), read, write, ex)
 #define RG_DEF_ALIAS(new, old) rb_define_alias(RG_TARGET_NAMESPACE, new, old)
+#define RG_DEF_SALIAS(new, old) \
+        rb_define_alias(rb_class_of(RG_TARGET_NAMESPACE), new, old)
 #define RG_DEF_PRIVATE_METHOD(method, argc) \
         rbg_define_private_method(RG_TARGET_NAMESPACE, #method, rg_ ## method, argc)
 
