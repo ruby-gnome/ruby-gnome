@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2004-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2004-2023  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -547,6 +547,10 @@ Init_gobject_gflags(void)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FLAGS, "Flags", rbg_mGLib());
 
     rbg_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
+    rbg_define_singleton_method(RG_TARGET_NAMESPACE,
+                                "inspect",
+                                rbgutil_generic_s_inspect_gtype_fallback,
+                                0);
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
 
     RG_DEF_SMETHOD(mask, 0);

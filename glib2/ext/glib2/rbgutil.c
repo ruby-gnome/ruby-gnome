@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2004 Masao Mutoh
+ *  Copyright (C) 2011-2023  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2002-2004  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -130,6 +130,17 @@ VALUE
 rbgutil_generic_gtype(VALUE self)
 {
     return generic_s_gtype(CLASS_OF(self));
+}
+
+VALUE
+rbgutil_generic_s_inspect_gtype_fallback(VALUE klass)
+{
+    VALUE rb_name = rb_funcall(klass, rb_intern("name"), 0);
+    if (NIL_P(rb_name)) {
+        return rb_str_new_cstr(g_type_name(CLASS2GTYPE(klass)));
+    } else {
+        return rb_call_super(0, NULL);
+    }
 }
 
 VALUE

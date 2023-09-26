@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2007-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2007-2023  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -107,6 +107,8 @@ VALUE rbgutil_generic_s_gtype(VALUE klass);
 VALUE rbgutil_generic_gtype(VALUE self);
 #define generic_s_gtype rbgutil_generic_s_gtype
 #define generic_gtype rbgutil_generic_gtype
+
+VALUE rbgutil_generic_s_inspect_gtype_fallback(VALUE klass);
 
 extern gboolean rbgobj_convert_has_type(GType type);
 extern RGConvertTable *rbgobj_convert_lookup(GType type);
