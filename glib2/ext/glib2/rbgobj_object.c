@@ -699,23 +699,16 @@ static VALUE
 rg_inspect(VALUE self)
 {
     gobj_holder* holder;
-    const char *class_name;
-    char *s;
-    VALUE result;
 
     TypedData_Get_Struct(self, gobj_holder, &rg_glib_object_type, holder);
 
-    class_name = rb_class2name(CLASS_OF(self));
-    if (!holder->destroyed)
-        s = g_strdup_printf("#<%s:%p ptr=%p>", class_name, (void *)self,
-                            holder->gobj);
-    else
-        s = g_strdup_printf("#<%s:%p destroyed>", class_name, (void *)self);
-
-    result = rb_str_new2(s);
-    g_free(s);
-
-    return result;
+    if (holder->destroyed) {
+        return rb_sprintf("#<%" PRIsVALUE ":%p destroyed>",
+                          rb_obj_class(self), (void *)self);
+    } else {
+        return rb_sprintf("#<%" PRIsVALUE ":%p ptr=%p>",
+                          rb_obj_class(self), (void *)self, holder->gobj);
+    }
 }
 
 static VALUE
