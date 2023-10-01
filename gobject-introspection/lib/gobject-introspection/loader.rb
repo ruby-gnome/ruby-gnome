@@ -103,6 +103,12 @@ module GObjectIntrospection
     end
 
     def define_singleton_method(info, klass, name)
+      case name
+      when "hash"
+        # Ignore methods that require 1+ arguments and use well-known
+        # name. It may break something.
+        return unless info.n_required_in_args.zero?
+      end
       prepare_function_info_lock_gvl(info, klass)
       invoker = Invoker.new(info, name, "#{klass}.#{name}")
       singleton_class = klass.singleton_class
