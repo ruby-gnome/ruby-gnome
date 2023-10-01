@@ -26,14 +26,14 @@ cd ruby-gnome.build
 
 cp /ruby-gnome/Gemfile ./
 bundle config set --local path vendor/bundle
-bundle install
+MAKEFLAGS="-j$(nproc)" bundle install
 
 for package in glib2 gobject-introspection; do
   cp -a /ruby-gnome/${package} ./
   pushd ${package}
   rm -rf pkg
   bundle exec rake gem
-  gem install pkg/*.gem
+  MAKEFLAGS="-j$(nproc)" gem install pkg/*.gem
   popd
 done
 
