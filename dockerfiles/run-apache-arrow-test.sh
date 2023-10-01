@@ -31,6 +31,7 @@ bundle install
 for package in glib2 gobject-introspection; do
   cp -a /ruby-gnome/${package} ./
   pushd ${package}
+  rm -rf pkg
   bundle exec rake gem
   gem install pkg/*.gem
   popd
