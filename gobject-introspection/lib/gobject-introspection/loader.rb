@@ -248,7 +248,7 @@ module GObjectIntrospection
     def load_object_info(info)
       return if info.gtype == GLib::Type::NONE
       # e.g.: GstBitmask
-      return if info.fundamental?
+      return if info.fundamental? and !info.gtype.instantiatable?
       klass = self.class.define_class(info.gtype,
                                       rubyish_class_name(info),
                                       @base_module)
