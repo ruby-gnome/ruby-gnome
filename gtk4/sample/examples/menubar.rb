@@ -32,7 +32,6 @@ app.signal_connect "activate" do
   app.add_action(act_quit)
   act_quit.signal_connect "activate" do |_simple_action, _parameter|
     window.destroy
-    exit!
   end
 
   menubar = Gio::Menu.new
