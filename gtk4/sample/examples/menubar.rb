@@ -26,7 +26,7 @@ app = Gtk::Application.new("org.gtk.example", :flags_none)
 
 app.signal_connect "activate" do
   window = Gtk::ApplicationWindow.new(app)
-  window.set_application(app)
+  window.application = app
 
   act_quit = Gio::SimpleAction.new("quit")
   app.add_action(act_quit)
