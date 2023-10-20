@@ -43,7 +43,7 @@ app.signal_connect "activate" do
   menu_item_menu.submenu = menu
   menubar.append_item(menu_item_menu)
   app.menubar = menubar
-  window.set_show_menubar true
+  window.show_menubar = true
 
   window.show
 end
