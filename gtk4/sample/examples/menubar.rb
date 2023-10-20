@@ -35,7 +35,7 @@ app.signal_connect "activate" do
     exit!
   end
 
-  menubar = Gio::Menu.new()
+  menubar = Gio::Menu.new
   menu_item_menu = Gio::MenuItem.new("Menu", nil)
   menu = Gio::Menu.new()
   menu_item_quit = Gio::MenuItem.new("Quit", "app.quit")
