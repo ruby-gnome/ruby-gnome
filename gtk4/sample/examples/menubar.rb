@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2023  ToshioCP (Toshio Sekiya), Ruby-GNOME2 Project Team
+# Copyright (C) 2020,2023  ToshioCP (Toshio Sekiya)
+# Copyright (C) 2023  Ruby-GNOME2 Project Team
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
