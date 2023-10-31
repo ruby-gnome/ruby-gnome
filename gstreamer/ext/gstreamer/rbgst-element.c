@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2013-2023  Ruby-GNOME Project Team
+ *  Copyright (C) 2023  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -18,10 +18,20 @@
  *  MA  02110-1301  USA
  */
 
-#include <gst/gst.h>
+#include "rbgst.h"
 
-#include <rb-gobject-introspection.h>
+static void
+rb_gst_element_mark(gpointer object)
+{
+    GstBus *bus = gst_element_get_bus(GST_ELEMENT(object));
+    if (bus) {
+        rbgobj_gc_mark_instance(bus);
+        gst_object_unref(bus);
+    }
+}
 
-extern void Init_gstreamer (void);
-G_GNUC_INTERNAL extern void rb_gst_init_child_proxy (void);
-G_GNUC_INTERNAL extern void rb_gst_init_element (void);
+void
+rb_gst_init_element(void)
+{
+    rbgobj_register_mark_func(GST_TYPE_ELEMENT, rb_gst_element_mark);
+}

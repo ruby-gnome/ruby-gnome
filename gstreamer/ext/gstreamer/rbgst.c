@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2013-2019  Ruby-GNOME Project Team
+ *  Copyright (C) 2013-2023  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -71,4 +71,5 @@ Init_gstreamer (void)
     rbgobj_register_g2r_func(GST_TYPE_LIST, rg_gst_value_list_g2r);
 
     rb_gst_init_child_proxy();
+    rb_gst_init_element();
 }
