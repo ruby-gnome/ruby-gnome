@@ -241,15 +241,15 @@ module Gtk
     define_deprecated_signal :released, :warn => "Use 'Gtk::Widget::button-release-event' signal."
     define_deprecated_method_by_hash_args :initialize,
         'label_or_stock_id, use_underline = nil',
-        ':label => nil, :use_underline => nil, :stock_id => nil' do
-        |_self, label_or_stock_id, use_underline|
-      case label_or_stock_id
+        ':label => nil, :use_underline => nil, :icon_name: => nil' do
+        |_self, label_or_icon_name, use_underline|
+      case label_or_icon_name
       when String
-        [{:label => label_or_stock_id, :use_underline => use_underline}]
+        [{label: label_or_icon_name, use_underline: use_underline}]
       when Symbol
-        [{:stock_id => label_or_stock_id}]
+        [{icon_name: label_or_icon_name}]
       else
-        [label_or_stock_id]
+        [label_or_icon_name]
       end
     end
   end
