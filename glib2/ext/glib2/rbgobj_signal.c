@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2023  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -25,6 +25,7 @@
 
 static ID id_connected_closures;
 static VALUE RG_TARGET_NAMESPACE;
+VALUE rbgobj_mMetaSignal;
 VALUE rbgobj_signal_wrap(guint sig_id);
 
 /**********************************************************************/
@@ -244,7 +245,7 @@ gobj_s_define_signal(int argc, VALUE* argv, VALUE self)
     signal_flags = RVAL2GFLAGS(rbsignal_flags, G_TYPE_SIGNAL_FLAGS);
 
     {
-        VALUE proc = rb_funcall(mMetaInterface,
+        VALUE proc = rb_funcall(rbgobj_mMetaSignal,
                                 rb_intern("signal_callback"),
                                 2,
                                 self,
@@ -1054,10 +1055,13 @@ Init_gobject_gsignal(void)
     rbg_signal_call_func_table = g_hash_table_new(g_direct_hash, g_direct_equal);
     g_mutex_init(&rbg_signal_call_func_table_mutex);
 
-    rbg_define_method(mMetaInterface, "define_signal", gobj_s_define_signal, -1);
-    rb_define_alias(mMetaInterface, "signal_new", "define_signal");
-    rbg_define_method(mMetaInterface, "signals", gobj_s_signals, -1);
-    rbg_define_method(mMetaInterface, "signal", gobj_s_signal, 1);
+    rbgobj_mMetaSignal = rb_define_module_under(rbg_mGLib(), "MetaSignal");
+    rbg_define_method(rbgobj_mMetaSignal, "define_signal", gobj_s_define_signal, -1);
+    rb_define_alias(rbgobj_mMetaSignal, "signal_new", "define_signal");
+    rbg_define_method(rbgobj_mMetaSignal, "signals", gobj_s_signals, -1);
+    rbg_define_method(rbgobj_mMetaSignal, "signal", gobj_s_signal, 1);
+    rb_extend_object(rbgobj_cObject, rbgobj_mMetaSignal);
+    rb_extend_object(rbgobj_mInterface, rbgobj_mMetaSignal);
 
     rbg_define_method(cInstantiatable, "signal_has_handler_pending?",
                      gobj_sig_has_handler_pending, -1);

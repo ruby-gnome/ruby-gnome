@@ -80,6 +80,7 @@ extern VALUE rbgobj_cObject;
 
 extern VALUE rbgobj_cInstantiatable;
 extern VALUE rbgobj_mMetaInterface;
+extern VALUE rbgobj_mMetaSignal;
 #define cInstantiatable   rbgobj_cInstantiatable
 #define mMetaInterface rbgobj_mMetaInterface
 

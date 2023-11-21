@@ -1094,7 +1094,6 @@ Init_gobject_gobject(void)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_OBJECT, "Object", rbg_mGLib(),
                                                   gobj_mark, NULL);
-    rb_extend_object(RG_TARGET_NAMESPACE, mMetaInterface);
 
 #ifdef G_TYPE_INITIALLY_UNOWNED
     G_DEF_CLASS(G_TYPE_INITIALLY_UNOWNED, "InitiallyUnowned", rbg_mGLib());

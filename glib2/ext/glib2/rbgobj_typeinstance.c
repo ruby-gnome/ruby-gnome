@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2002-2023  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -126,6 +125,7 @@ Init_gobject_typeinstance(void)
 {
     /* should be renamed to GLib::Instance? */
     RG_TARGET_NAMESPACE = rb_define_class_under(rbg_mGLib(), "Instantiatable", rb_cObject);
+    rb_extend_object(RG_TARGET_NAMESPACE, mMetaInterface);
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))instantiatable_s_allocate);
     RG_DEF_METHOD(gtype, 0);

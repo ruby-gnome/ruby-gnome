@@ -1,4 +1,4 @@
-# Copyright (C) 2005-2021  Ruby-GNOME Project Team
+# Copyright (C) 2005-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -120,7 +120,7 @@ module GLib
   SIGNAL_HANDLER_PREFIX = "signal_do_"
   VIRTUAL_FUNCTION_IMPLEMENTATION_PREFIX = "virtual_do_"
 
-  module MetaInterface
+  module MetaSignal
     class << self
       def signal_callback(klass, name)
         lambda do |instance, *args|
