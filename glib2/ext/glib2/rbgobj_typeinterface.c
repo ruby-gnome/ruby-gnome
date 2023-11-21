@@ -186,4 +186,5 @@ Init_gobject_typeinterface(void)
     RG_DEF_METHOD(properties, -1);
 
     rbgobj_mInterface = G_DEF_INTERFACE(G_TYPE_INTERFACE, "Interface", rbg_mGLib());
+    rb_extend_object(RG_TARGET_NAMESPACE, mMetaInterface);
 }
