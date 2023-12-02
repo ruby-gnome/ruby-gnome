@@ -1047,11 +1047,15 @@ rb_gi_arguments_convert_arg_array_body_c_sized(ArrayLikeToRubyData *data,
             return rb_arg;
         }
       case GI_TYPE_TAG_GTYPE:
-        rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(array)[c][%s][%s] -> Ruby",
-                 array_c_type,
-                 g_type_tag_to_string(data->element_type_tag));
-        return Qnil;
+        {
+            const GType *types = (const GType *)elements;
+            VALUE rb_arg = rb_ary_new_capa(length);
+            gint64 i;
+            for (i = 0; i < length; i++) {
+                rb_ary_push(rb_arg, rbgobj_gtype_new(types[i]));
+            }
+            return rb_arg;
+        }
       case GI_TYPE_TAG_UTF8:
         {
             const gchar **strings = (const gchar **)elements;
