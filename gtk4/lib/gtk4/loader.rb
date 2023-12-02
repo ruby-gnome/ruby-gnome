@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2022  Ruby-GNOME Project Team
+# Copyright (C) 2014-2023  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -87,6 +87,7 @@ module Gtk
       require_relative "combo-box-text"
       require_relative "css-provider"
       require_relative "dialog"
+      require_relative "drop-target"
       require_relative "entry"
       require_relative "entry-buffer"
       require_relative "file-chooser-dialog"
