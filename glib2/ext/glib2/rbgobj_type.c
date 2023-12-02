@@ -613,7 +613,7 @@ VALUE
 rbgobj_gtype_new(GType gtype)
 {
     VALUE result = rb_obj_alloc(RG_TARGET_NAMESPACE);
-    VALUE arg = SIZET2NUM(gtype);
+    VALUE arg = (gtype == G_TYPE_INVALID ? RUBY_Qnil : SIZET2NUM(gtype));
     rb_obj_call_init(result, 1, &arg);
     return result;
 }
@@ -632,7 +632,7 @@ rg_s_try_convert(VALUE self, VALUE value)
     CONST_ID(id_new, "new");
 
     if (NIL_P(value))
-        return Qnil;
+        return rb_funcall(self, id_new, 1, value);
 
     if (RVAL2CBOOL(rb_obj_is_kind_of(value, RG_TARGET_NAMESPACE)))
         return value;
@@ -685,16 +685,20 @@ rg_initialize(VALUE self, VALUE type)
 {
     GType gtype;
 
-    if (RVAL2CBOOL(rb_obj_is_kind_of(type, rb_cInteger))) {
-        gtype = NUM2SIZET(type);
-        if (!g_type_name(gtype))
-            gtype = G_TYPE_INVALID;
+    if (RB_NIL_P(type)) {
+        gtype = G_TYPE_INVALID;
     } else {
-        gtype = g_type_from_name(StringValuePtr(type));
-    }
+        if (RVAL2CBOOL(rb_obj_is_kind_of(type, rb_cInteger))) {
+            gtype = NUM2SIZET(type);
+            if (!g_type_name(gtype))
+                gtype = G_TYPE_INVALID;
+        } else {
+            gtype = g_type_from_name(StringValuePtr(type));
+        }
 
-    if (G_TYPE_INVALID == gtype)
-        rb_raise(rb_eArgError, "invalid GType");
+        if (G_TYPE_INVALID == gtype)
+            rb_raise(rb_eArgError, "invalid GType: %+" PRIsVALUE, type);
+    }
 
     rb_ivar_set(self, id_gtype, SIZET2NUM(gtype));
 
@@ -1047,6 +1051,7 @@ Init_gobject_gtype(void)
     {
     VALUE ary = rb_ary_new();
     rb_define_const(RG_TARGET_NAMESPACE, "FUNDAMENTAL_MAX", INT2FIX(G_TYPE_FUNDAMENTAL_MAX));
+    _def_fundamental_type(ary, G_TYPE_INVALID,   "INVALID");
     _def_fundamental_type(ary, G_TYPE_NONE,      "NONE");
     _def_fundamental_type(ary, G_TYPE_INTERFACE, "INTERFACE");
     _def_fundamental_type(ary, G_TYPE_CHAR,      "CHAR");

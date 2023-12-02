@@ -17,7 +17,8 @@
 class TestGLibType < Test::Unit::TestCase
   sub_test_case(".try_convert") do
     def test_nil
-      assert_nil(GLib::Type.try_convert(nil))
+      assert_equal(GLib::Type::INVALID,
+                   GLib::Type.try_convert(nil))
     end
 
     def test_type
@@ -46,6 +47,13 @@ class TestGLibType < Test::Unit::TestCase
 
     def test_unconvertable
       assert_nil(GLib::Type.try_convert([]))
+    end
+  end
+
+  sub_test_case(".[]") do
+    def test_nil
+      assert_equal(GLib::Type::INVALID,
+                   GLib::Type[nil])
     end
   end
 end
