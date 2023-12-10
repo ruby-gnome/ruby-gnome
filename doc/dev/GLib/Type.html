@@ -139,7 +139,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#decendants-instance_method" title="#decendants (instance method)">#<strong>decendants</strong>  &#x21d2; Object </a>
+      <a href="#descendants-instance_method" title="#descendants (instance method)">#<strong>descendants</strong>  &#x21d2; Object </a>
     
 
     
@@ -200,9 +200,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="decendants-instance_method">
+  <h3 class="signature " id="descendants-instance_method">
   
-    #<strong>decendants</strong>  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="GLib::Object (class)">Object</a></span></tt> 
+    #<strong>descendants</strong>  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="GLib::Object (class)">Object</a></span></tt> 
   
 
   
@@ -221,8 +221,8 @@
     <td>
       <pre class="code"><span class="info file"># File 'glib2/lib/glib2.rb', line 190</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_decendants'>decendants</span>
-  <span class='lbracket'>[</span><span class='kw'>self</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_children'>children</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_decendants'>decendants</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_descendants'>descendants</span>
+  <span class='lbracket'>[</span><span class='kw'>self</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_children'>children</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_descendants'>descendants</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
