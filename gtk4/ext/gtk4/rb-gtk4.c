@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2022-2023  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -24,6 +24,7 @@ void
 Init_gtk4(void)
 {
     rb_gtk4_cell_layout_init();
+    rb_gtk4_picture_init();
     rb_gtk4_tree_view_init();
     rb_gtk4_widget_init();
     rb_gtk4_window_init();
