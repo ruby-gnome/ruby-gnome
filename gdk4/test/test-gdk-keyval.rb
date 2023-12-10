@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGdkKeyval < Test::Unit::TestCase
-  def test_consntant_name
+  def test_constant_name
     assert_equal("a".unpack("c")[0], Gdk::Keyval::KEY_a)
   end
 
