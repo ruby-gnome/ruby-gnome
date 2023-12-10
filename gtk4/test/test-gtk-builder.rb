@@ -214,7 +214,7 @@ class TestGtkBuilder < Test::Unit::TestCase
     end
   end
 
-  def test_signal_corrent_object
+  def test_signal_correct_object
     object = Class.new(GLib::Object).new
     def object.button_cancel_clicked(*args)
       @button_cancel_clicked = true
