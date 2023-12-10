@@ -187,8 +187,8 @@ module GLib
 
   class Type
 
-    def decendants
-      [self] + children.map{|t| t.decendants }.flatten
+    def descendants
+      [self] + children.map{|t| t.descendants }.flatten
     end
 
     def ancestors

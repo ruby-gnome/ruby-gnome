@@ -42,7 +42,7 @@ rbg_is_object(VALUE object)
     return RVAL2CBOOL(rb_obj_is_kind_of(object, RG_TARGET_NAMESPACE));
 }
 
-/* deperecated */
+/* deprecated */
 void
 rbgobj_add_abstract_but_create_instance_class(G_GNUC_UNUSED GType gtype)
 {

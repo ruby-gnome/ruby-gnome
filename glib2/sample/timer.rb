@@ -22,10 +22,10 @@ sleep(3)
 
 puts "after 3 sec (status = running) : #{timer.elapsed}"
 timer.stop
-puts "stop (status = stoped) : #{timer.elapsed}"
+puts "stop (status = stopped) : #{timer.elapsed}"
 
 sleep(3)
-puts "after 3 sec (status = stoped) : #{timer.elapsed}"
+puts "after 3 sec (status = stopped) : #{timer.elapsed}"
 
 timer.continue
 puts "continue (status = running) : #{timer.elapsed}"

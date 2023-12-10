@@ -48,33 +48,33 @@ class TestRegex < Test::Unit::TestCase
     test "no options" do
       regex = GLib::Regex.new("\s")
       string_to_split = "a bc"
-      splited_strings = regex.split(string_to_split)
-      assert_equal(["a", "bc"], splited_strings)
+      split_strings = regex.split(string_to_split)
+      assert_equal(["a", "bc"], split_strings)
     end
 
     test "start_position" do
       regex = GLib::Regex.new("\s")
       string_to_split = "a bc"
-      splited_strings = regex.split(string_to_split, :start_position => 2)
-      assert_equal(["bc"], splited_strings)
+      split_strings = regex.split(string_to_split, :start_position => 2)
+      assert_equal(["bc"], split_strings)
     end
 
     test "max_tokens" do
       regex = GLib::Regex.new("\s")
       string_to_split = "a bc de fg"
-      splited_strings = regex.split(string_to_split, :max_tokens => 2)
-      assert_equal(["a", "bc de fg"], splited_strings)
+      split_strings = regex.split(string_to_split, :max_tokens => 2)
+      assert_equal(["a", "bc de fg"], split_strings)
     end
 
     test "match_options" do
       regex = GLib::Regex.new("a?b?")
       string_to_split = "toto ab"
-      splited_strings = regex.split(string_to_split)
+      split_strings = regex.split(string_to_split)
       assert_equal(["t", "o", "t", "o", " "],
-                   splited_strings)
-      splited_strings = regex.split(string_to_split,
+                   split_strings)
+      split_strings = regex.split(string_to_split,
                                     :match_options => :notempty)
-      assert_equal(["toto ", ""], splited_strings)
+      assert_equal(["toto ", ""], split_strings)
     end
   end
 
@@ -237,18 +237,18 @@ class TestRegex < Test::Unit::TestCase
 
   sub_test_case "split simple" do
     test "no options" do
-      splited_strings = GLib::Regex.split("\s", "a bc")
-      assert_equal(["a", "bc"], splited_strings)
+      split_strings = GLib::Regex.split("\s", "a bc")
+      assert_equal(["a", "bc"], split_strings)
     end
 
     test "match_options" do
-      splited_strings = GLib::Regex.split("a?b?", "toto ab")
-      assert_equal(["t", "o", "t", "o", " "], splited_strings)
+      split_strings = GLib::Regex.split("a?b?", "toto ab")
+      assert_equal(["t", "o", "t", "o", " "], split_strings)
 
-      splited_strings = GLib::Regex.split("a?b?",
+      split_strings = GLib::Regex.split("a?b?",
                                     "toto ab",
                                     :match_options => :notempty)
-      assert_equal(["toto ", ""], splited_strings)
+      assert_equal(["toto ", ""], split_strings)
     end
   end
 
