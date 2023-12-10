@@ -144,6 +144,7 @@ module Gdk
 
     def require_post_libraries
       require_relative "cursor"
+      require_relative "memory-texture"
       require_relative "paintable"
       require_relative "rectangle"
       require_relative "rgba"
