@@ -35,7 +35,7 @@ When creating a Gtk::Application you need to pick an application identifier (a n
 
 Lastly `Gtk::Application#new` takes a `Gio::ApplicationFlags` constant as input for your application, if your application would have special needs (those constants can be replaced by theirs respective symbol ie. `Gio::ApplicationFlags::FLAGS_NONE` == `:flags_none`). You must know that `Gio:::Application` ignores arguments passed to `Gio::Application#run` on the Windows systems. It always uses command line arguments even when we pass an empty array to `Gio::Application#run`.
 
-If you plan to create a cross-platform application, it is recommanded to use the `:handles_command_line` flags and the *command-line* signal. (reference : https://github.com/ruby-gnome/ruby-gnome/issues/721 ).
+If you plan to create a cross-platform application, it is recommended to use the `:handles_command_line` flags and the *command-line* signal. (reference : https://github.com/ruby-gnome/ruby-gnome/issues/721 ).
 
 Next we add instructions for the "activate" event of the `Gtk::Application` instance we created. The activate signal will be sent when your application is launched with the method `Gtk::Application#run` on the line below. This method also takes as arguments a ruby array of string. This allows GTK to parse specific command line arguments that control the behavior of GTK itself. Your application can override the command line handling, e.g. to open files passed on the commandline.
 
