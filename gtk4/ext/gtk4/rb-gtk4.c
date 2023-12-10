@@ -24,6 +24,7 @@ void
 Init_gtk4(void)
 {
     rb_gtk4_cell_layout_init();
+    rb_gtk4_image_init();
     rb_gtk4_picture_init();
     rb_gtk4_tree_view_init();
     rb_gtk4_widget_init();

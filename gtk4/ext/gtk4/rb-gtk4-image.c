@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2022-2023  Ruby-GNOME Project Team
+ *  Copyright (C) 2023  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -18,20 +18,19 @@
  *  MA  02110-1301  USA
  */
 
-#pragma once
+#include "rb-gtk4-private.h"
 
-/*
- * AlmaLinux 9: GTK 4.4
- * Debian GNU/Linux bookworm: GTK 4.6
- * Ubuntu 22.04: GTK 4.6
- */
-#define GDK_VERSION_MIN_REQUIRED GDK_VERSION_4_4
+static void
+rb_gtk4_image_mark(gpointer object)
+{
+    GdkPaintable *paintable = gtk_image_get_paintable(object);
+    if (paintable) {
+        rbgobj_gc_mark_instance(paintable);
+    }
+}
 
-#include "rb-gtk4.h"
-
-G_GNUC_INTERNAL void rb_gtk4_cell_layout_init(void);
-G_GNUC_INTERNAL void rb_gtk4_image_init(void);
-G_GNUC_INTERNAL void rb_gtk4_picture_init(void);
-G_GNUC_INTERNAL void rb_gtk4_tree_view_init(void);
-G_GNUC_INTERNAL void rb_gtk4_widget_init(void);
-G_GNUC_INTERNAL void rb_gtk4_window_init(void);
+void
+rb_gtk4_image_init(void)
+{
+    rbgobj_register_mark_func(GTK_TYPE_IMAGE, rb_gtk4_image_mark);
+}
