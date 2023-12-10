@@ -73,7 +73,7 @@ class TestRegex < Test::Unit::TestCase
       assert_equal(["t", "o", "t", "o", " "],
                    split_strings)
       split_strings = regex.split(string_to_split,
-                                    :match_options => :notempty)
+                                  :match_options => :notempty)
       assert_equal(["toto ", ""], split_strings)
     end
   end
