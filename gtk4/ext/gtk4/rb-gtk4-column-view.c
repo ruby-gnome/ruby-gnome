@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2022-2023  Ruby-GNOME Project Team
+ *  Copyright (C) 2023  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -20,14 +20,17 @@
 
 #include "rb-gtk4-private.h"
 
-void
-Init_gtk4(void)
+static void
+rb_gtk4_column_view_mark(gpointer object)
 {
-    rb_gtk4_cell_layout_init();
-    rb_gtk4_image_init();
-    rb_gtk4_column_view_init();
-    rb_gtk4_picture_init();
-    rb_gtk4_tree_view_init();
-    rb_gtk4_widget_init();
-    rb_gtk4_window_init();
+    GtkSelectionModel *model = gtk_column_view_get_model(object);
+    if (model) {
+        rbgobj_gc_mark_instance(model);
+    }
+}
+
+void
+rb_gtk4_column_view_init(void)
+{
+    rbgobj_register_mark_func(GTK_TYPE_COLUMN_VIEW, rb_gtk4_column_view_mark);
 }
