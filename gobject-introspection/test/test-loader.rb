@@ -60,16 +60,16 @@ class TestLoaderInfo < Test::Unit::TestCase
 
         include Gio::Converter
 
-        attr_reader :resetted
+        attr_reader :was_reset
 
         def virtual_do_reset
-          @resetted = true
+          @was_reset = true
         end
       end
       resettable_converter = resettable_converter_class.new
       resettable_converter.reset
       assert do
-        resettable_converter.resetted
+        resettable_converter.was_reset
       end
     end
 
