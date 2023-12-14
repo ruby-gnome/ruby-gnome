@@ -33,6 +33,7 @@ G_GNUC_INTERNAL void rb_gtk4_cell_layout_init(void);
 G_GNUC_INTERNAL void rb_gtk4_column_view_init(void);
 G_GNUC_INTERNAL void rb_gtk4_image_init(void);
 G_GNUC_INTERNAL void rb_gtk4_picture_init(void);
+G_GNUC_INTERNAL void rb_gtk4_single_selection_init(void);
 G_GNUC_INTERNAL void rb_gtk4_tree_view_init(void);
 G_GNUC_INTERNAL void rb_gtk4_widget_init(void);
 G_GNUC_INTERNAL void rb_gtk4_window_init(void);
