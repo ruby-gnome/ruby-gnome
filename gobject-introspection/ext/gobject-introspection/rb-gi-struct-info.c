@@ -167,10 +167,10 @@ rb_gi_struct_info_to_ruby(GIStructInfo *info,
 gpointer
 rb_gi_struct_info_from_ruby(GIStructInfo *info, VALUE rb_object)
 {
-    GIRegisteredTypeInfo *registerd_type_info = (GIRegisteredTypeInfo *)info;
+    GIRegisteredTypeInfo *registered_type_info = (GIRegisteredTypeInfo *)info;
     GType gtype;
 
-    gtype = g_registered_type_info_get_g_type(registerd_type_info);
+    gtype = g_registered_type_info_get_g_type(registered_type_info);
     return rb_gi_struct_get_raw(rb_object, gtype);
 }
 
