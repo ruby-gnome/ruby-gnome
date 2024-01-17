@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -47,14 +47,17 @@ class TestRepository < Test::Unit::TestCase
 
   def test_loaded_namespaces
     assert_equal(["GLib", "GObject", "Gio"].sort,
-                 @repository.loaded_namespaces.sort)
+                 # Gio 2.79.0 or later depend on GModule too
+                 @repository.loaded_namespaces.sort - ["GModule"])
   end
 
   def test_enumerable
     namespaces = @repository.collect do |info|
       info.namespace
     end
-    assert_equal(["GLib", "GObject", "Gio"].sort, namespaces.uniq.sort)
+    assert_equal(["GLib", "GObject", "Gio"].sort,
+                 # Gio 2.79.0 or later depend on GModule too
+                 namespaces.uniq.sort - ["GModule"])
   end
 
   def test_find_by_gtype
