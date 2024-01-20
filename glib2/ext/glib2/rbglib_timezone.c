@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2016-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2016-2024  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -69,6 +69,14 @@ rg_offset(VALUE self, VALUE rb_interval)
     return INT2NUM(g_time_zone_get_offset(_SELF(self), interval));
 }
 
+#if GLIB_CHECK_VERSION(2, 58, 0)
+static VALUE
+rg_identifier(VALUE self)
+{
+    return CSTR2RVAL(g_time_zone_get_identifier(_SELF(self)));
+}
+#endif
+
 void
 Init_glib_time_zone(void)
 {
@@ -79,4 +87,7 @@ Init_glib_time_zone(void)
     RG_DEF_SMETHOD(utc, 0);
     RG_DEF_METHOD(abbreviation, 1);
     RG_DEF_METHOD(offset, 1);
+#if GLIB_CHECK_VERSION(2, 58, 0)
+    RG_DEF_METHOD(identifier, 0);
+#endif
 }
