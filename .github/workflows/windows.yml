@@ -19,7 +19,13 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true
+          # We can't use "bundler-cache" because we want to install MSYS2
+          # packages such as mingw-w64-ucrt-x86_64-pkg-config
+          # automatically by installing gems such as rcairo.
+          # bundler-cache: true
+      - name: Install dependencies
+        run: |
+          bundle install
       - name: Build
         run: |
           bundle exec ruby -rdevkit -S rake build
