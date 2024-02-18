@@ -120,4 +120,6 @@ jobs:
         run: arrow/ci/scripts/c_glib_test.sh $(pwd)/arrow $(pwd)/arrow/build
       - name: Test Ruby
         shell: bash
-        run: arrow/ci/scripts/ruby_test.sh $(pwd)/arrow $(pwd)/arrow/build
+        run: |
+          unset GITHUB_ACTIONS
+          arrow/ci/scripts/ruby_test.sh $(pwd)/arrow $(pwd)/arrow/build
