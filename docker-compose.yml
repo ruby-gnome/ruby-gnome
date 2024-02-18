@@ -35,9 +35,6 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
-  apache-arrow-base:
-    image: ruby:3.2
-
   apache-arrow:
     image: ghcr.io/${GITHUB_REPOSITORY}:apache-arrow
     build:

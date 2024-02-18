@@ -1,4 +1,4 @@
-FROM ruby:2.7
+FROM ubuntu:22.04
 
 RUN \
   echo "debconf debconf/frontend select Noninteractive" | \
@@ -8,6 +8,7 @@ RUN \
   apt update && \
   apt install -y -V \
     build-essential \
+    bundler \
     ccache \
     clang \
     cmake \
@@ -39,6 +40,7 @@ RUN \
     pkg-config \
     protobuf-compiler-grpc \
     rapidjson-dev \
+    ruby-dev \
     sudo \
     zlib1g-dev
 
