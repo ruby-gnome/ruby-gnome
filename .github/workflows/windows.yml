@@ -11,6 +11,7 @@ jobs:
         ruby-version:
           - "3.1"
           - "3.2"
+          - "3.3"
     runs-on: windows-latest
     timeout-minutes: 45
     steps:
@@ -18,16 +19,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
-      - name: Update MSYS2
-        run: |
-          ridk exec pacman -Syu --noconfirm
-          taskkill /F /FI "MODULES eq msys-2.0.dll"
-      - name: Install Bundler
-        run: |
-          gem install bundler
-      - name: Install dependencies
-        run: |
-          bundle install
+          bundler-cache: true
       - name: Build
         run: |
           bundle exec ruby -rdevkit -S rake build
@@ -48,6 +40,7 @@ jobs:
         ruby-version:
           - "3.1"
           - "3.2"
+          - "3.3"
     runs-on: windows-latest
     timeout-minutes: 10
     env:
