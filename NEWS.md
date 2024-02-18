@@ -1,5 +1,103 @@
 # NEWS
 
+## Ruby-GNOME 4.2.1: 2024-02-18
+
+This is a minor bug fix release.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Added support for showing `GType` name for anonymous `GType`
+      based classes.
+      * GH-1577
+      * Reported by Sami Sieranoja
+
+    * Added `RG_DEF_SALIAS()`.
+
+    * Stopped providing unusable signal related methods to not signal
+      ready objects such as `GLib::Instantiatable`.
+      * GH-1589
+      * Reported by Sami Sieranoja
+
+    * Added `GLib::Type::INVALID`. `GLib::Type[nil]` is also accepted.
+      * GH-1594
+      * Reported by Sami Sieranoja
+
+    * Added `GLib::TimeZone#identifier`.
+
+    * Added `GLib::TimeZone.try_convert`.
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Ignored `.hash(some_arguments)` methods. It may break something.
+
+    * Ignored fundamental `GType`.
+      * GH-1580
+      * Reported by Sami Sieranoja
+
+    * Added support for returning sized `GType` array.
+
+#### Ruby/GDK4
+
+  * Fixes
+
+    * Fixed a GC related bug of `Gdk::MemoryTexture.new`.
+      * GH-1596
+      * Reported by HuBandiT
+
+    * Fixed a GC related bug of `Gdk::Picture`.
+      * GH-1596
+      * Reported by HuBandiT
+
+#### Ruby/GTK4
+
+  * Improvements
+
+    * Added a menu bar sample.
+      * GH-1581
+      * GH-1582
+      * GH-1584
+      * Patch by Sami Sieranoja
+
+    * Added support for `Gtk::DropTarget.new([type, ...], actions)`.
+      * GH-1594
+      * Reported by Sami Sieranoja
+
+  * Fixes
+
+    * Fixed deprecation message of `Gtk::Button.new`.
+      * GH-1587
+      * Reported by Sami Sieranoja
+
+    * Fixed a GC related bug of `Gtk::Image`.
+
+    * Fixed a GC related bug of `Gtk::ColumnView`.
+      * GH-1600
+      * Reported by HuBandiT
+
+    * Fixed a GC related bug of `Gtk::SingleSelection`.
+      * GH-1600
+      * Reported by HuBandiT
+
+#### Ruby/GStreamer
+
+  * Improvements
+
+    * Added a missing GC guard for `Gst::Element#bus`.
+      * GH-1586
+      * Reported by Sami Sieranoja
+
+### Thanks
+
+  * Sami Sieranoja
+
+  * HuBandiT
+
 ## Ruby-GNOME 4.2.0: 2023-08-19
 
 This is a minor bug fix release.
