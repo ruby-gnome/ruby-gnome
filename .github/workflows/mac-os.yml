@@ -44,10 +44,14 @@ jobs:
     runs-on: macOS-latest
     timeout-minutes: 60
     env:
-      ARROW_ACERO: ON
+      ARROW_BUILD_STATIC: OFF
       ARROW_BUILD_TESTS: OFF
+      ARROW_BUILD_UTILITIES: OFF
+      ARROW_DATASET: ON
       ARROW_FLIGHT: ON
+      ARROW_FLIGHT_SQL: ON
       ARROW_GANDIVA: ON
+      ARROW_GCS: ON
       ARROW_GLIB_GTK_DOC: true
       ARROW_GLIB_WERROR: true
       ARROW_HOME: /usr/local
