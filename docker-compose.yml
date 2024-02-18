@@ -198,6 +198,25 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
+  ruby-3.3-base:
+    image: ruby:3.3
+
+  ruby-3.3:
+    image: ghcr.io/${GITHUB_REPOSITORY}:ruby-3.3
+    build:
+      cache_from:
+        - ghcr.io/${GITHUB_REPOSITORY}:ruby-3.3
+      context: .
+      dockerfile: dockerfiles/ruby.dockerfile
+      args:
+        RUBY_VERSION: "3.3"
+    volumes:
+      - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
+    command:
+      /ruby-gnome/dockerfiles/run-test.sh
+
   ubuntu-20.04-base:
     image: ubuntu:20.04
 
