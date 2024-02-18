@@ -24,7 +24,6 @@
  * CentOS 7: GLib 2.56
  * AlmaLinux 8: GLib 2.56
  * AlmaLinux 9: GLib 2.68
- * Ubuntu 18.04: GLib 2.56
  * Ubuntu 20.04: GLib 2.64
  * Ubuntu 22.04: GLib 2.72
  */
