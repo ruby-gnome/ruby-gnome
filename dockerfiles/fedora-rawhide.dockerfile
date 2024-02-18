@@ -2,10 +2,11 @@ FROM fedora:rawhide
 
 RUN \
   dnf install -y \
-    adwaita-gtk2-theme \
+    adwaita-icon-theme \
     dbus-daemon \
     gcc \
     gcc-c++ \
+    gdk-pixbuf2-modules \
     git \
     gnome-icon-theme \
     gnumeric \
