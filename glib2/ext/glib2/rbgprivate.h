@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2007-2023  Ruby-GNOME Project Team
+ *  Copyright (C) 2007-2024  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -21,7 +21,7 @@
 #pragma once
 
 /*
- * CentOS 7: GLib 2.50
+ * CentOS 7: GLib 2.56
  * AlmaLinux 8: GLib 2.56
  * AlmaLinux 9: GLib 2.68
  * Ubuntu 18.04: GLib 2.56
@@ -29,7 +29,7 @@
  * Ubuntu 22.04: GLib 2.72
  */
 #ifndef GLIB_VERSION_MIN_REQUIRED
-#  define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_50
+#  define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_56
 #endif
 
 #define G_LOG_DOMAIN "Ruby/GLib2"
