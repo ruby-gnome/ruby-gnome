@@ -33,7 +33,7 @@ for package in glib2 gobject-introspection; do
   pushd ${package}
   rm -rf pkg
   bundle exec rake gem
-  MAKEFLAGS="-j$(nproc)" gem install pkg/*.gem
+  sudo env MAKEFLAGS="-j$(nproc)" gem install pkg/*.gem
   popd
 done
 
