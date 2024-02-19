@@ -66,9 +66,6 @@ jobs:
       XML_CATALOG_FILES: /usr/local/etc/xml/catalog
     steps:
       - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ruby
       - name: Build
         run: |
           brew install pkg-config
