@@ -117,7 +117,9 @@ jobs:
           arrow/ci/scripts/c_glib_build.sh $(pwd)/arrow $(pwd)/arrow/build
       - name: Test GLib
         shell: bash
-        run: arrow/ci/scripts/c_glib_test.sh $(pwd)/arrow $(pwd)/arrow/build
+        run: |
+          unset GITHUB_ACTIONS
+          arrow/ci/scripts/c_glib_test.sh $(pwd)/arrow $(pwd)/arrow/build
       - name: Test Ruby
         shell: bash
         run: |
