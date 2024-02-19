@@ -42,6 +42,7 @@ RUN \
     rapidjson-dev \
     ruby-dev \
     sudo \
+    tzdata \
     zlib1g-dev
 
 RUN \
