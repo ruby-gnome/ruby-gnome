@@ -118,8 +118,11 @@ jobs:
       - name: Test GLib
         shell: bash
         run: |
-          unset GITHUB_ACTIONS
-          arrow/ci/scripts/c_glib_test.sh $(pwd)/arrow $(pwd)/arrow/build
+          export PKG_CONFIG_PATH=${ARROW_HOME}/lib/pkgconfig
+          export GI_TYPELIB_PATH=${ARROW_HOME}/lib/girepository-1.0
+          export ARROW_DEBUG_MEMORY_POOL=trap
+          cd arrow/c_glib
+          ruby test/run-test.rb -v
       - name: Test Ruby
         shell: bash
         run: |
