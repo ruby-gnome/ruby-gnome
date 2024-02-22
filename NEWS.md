@@ -1,6 +1,6 @@
 # NEWS
 
-## Ruby-GNOME 4.2.1: 2024-02-18
+## Ruby-GNOME 4.2.1: 2024-02-23
 
 This is a minor bug fix release.
 
