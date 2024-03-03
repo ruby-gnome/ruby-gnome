@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2023  Ruby-GNOME Project Team
+# Copyright (C) 2014-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,12 +17,30 @@
 module Gtk
   class CssProvider
     def load(options)
+      string = options[:string]
+      bytes = options[:bytes]
       data = options[:data]
       file = options[:file]
       path = options[:path]
       resource_path = options[:resource_path]
-      if data
-        load_from_data(data)
+      if string
+        if Version.or_later?(4, 12, 0)
+          load_from_string(string)
+        else
+          load_from_data(string)
+        end
+      elsif bytes
+        if Version.or_later?(4, 12, 0)
+          load_from_bytes(bytes)
+        else
+          load_from_data(bytes)
+        end
+      elsif data
+        if Version.or_later?(4, 12, 0)
+          load_from_bytes(data)
+        else
+          load_from_data(data)
+        end
       elsif file
         load_from_file(file)
       elsif path
@@ -30,7 +48,8 @@ module Gtk
       elsif resource_path
         load_from_resource(resource_path)
       else
-        message = "Must specify one of :data, :file, :path or :resource_path"
+        message = "Must specify one of " +
+                  ":string, :bytes, :data, :file, :path or :resource_path"
         raise ArgumentError, "#{message}: #{options.inspect}"
       end
     end
