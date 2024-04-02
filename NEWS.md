@@ -1,5 +1,37 @@
 # NEWS
 
+## Ruby-GNOME 4.2.2: 2024-04-02
+
+This is a GLib 2.80 support improvement release.
+
+### Changes
+
+#### Ruby/GIO2
+
+  * Improvements
+
+    * Fixed a load error with GLib 2.80.
+      * GH-1610
+      * Reported by Dmitry Vorotilin
+
+#### Ruby/GTK4
+
+  * Improvements
+
+    * `Gtk::CssProvider#load(string:)`: Added.
+      * GH-1608
+      * Reported by Sami Sieranoja
+
+    * `Gtk::CssProvider#load(bytes:)`: Added.
+      * GH-1608
+      * Reported by Sami Sieranoja
+
+### Thanks
+
+  * Sami Sieranoja
+
+  * Dmitry Vorotilin
+
 ## Ruby-GNOME 4.2.1: 2024-02-23
 
 This is a minor bug fix release.
