@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,11 +16,13 @@
 
 module Gio
   class ContentType
-    class << self
-      alias_method :registered_raw, :registered
-      def registered
-        registered_raw([]).collect do |type|
-          new(type)
+    if respond_to?(:registered)
+      class << self
+        alias_method :registered_raw, :registered
+        def registered
+          registered_raw.collect do |type|
+            new(type)
+          end
         end
       end
     end
