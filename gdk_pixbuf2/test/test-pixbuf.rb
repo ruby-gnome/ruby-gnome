@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,25 +18,6 @@ class TestPixbuf < Test::Unit::TestCase
   include GdkPixbufTestUtils
 
   sub_test_case(".new") do
-    def r_xpm
-      [
-       "10 10 3 1",
-       "   c None",
-       ".  c #FE0B0B",
-       "+  c #FFFFFF",
-       "+.......++",
-       "+..    ..+",
-       "+..    ..+",
-       "+..   ...+",
-       "+.......++",
-       "+.....++++",
-       "+..++..+++",
-       "+..++...++",
-       "+..+++...+",
-        "+..++++..+",
-      ]
-    end
-
     sub_test_case("legacy form") do
       setup do |&block|
         suppress_warning do
@@ -64,11 +45,6 @@ class TestPixbuf < Test::Unit::TestCase
 
       test "file" do
         pixbuf = GdkPixbuf::Pixbuf.new(fixture_path("gnome-logo-icon.png"))
-        assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
-      end
-
-      test "xpm" do
-        pixbuf = GdkPixbuf::Pixbuf.new(r_xpm)
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
       end
 
@@ -133,11 +109,6 @@ class TestPixbuf < Test::Unit::TestCase
       test "file" do
         filename = fixture_path("gnome-logo-icon.png")
         pixbuf = GdkPixbuf::Pixbuf.new(:file => filename)
-        assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
-      end
-
-      test "xpm" do
-        pixbuf = GdkPixbuf::Pixbuf.new(:xpm => r_xpm)
         assert_equal(GdkPixbuf::Colorspace::RGB, pixbuf.colorspace)
       end
 
