@@ -5,7 +5,7 @@ Ruby/CairoGObject is a Ruby binding of cairo-gobject.
 ## Requirements
 
 * Ruby/GLib2 in
-  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
+  [Ruby-GNOME2](https://ruby-gnome.github.io/)
 * [rcairo](https://github.com/rcairo/rcairo)
 * [cairo](http://cairographics.org/) GObject binding
 
@@ -22,4 +22,4 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 ## Project Website
 
-https://ruby-gnome2.osdn.jp/
+https://ruby-gnome.github.io/

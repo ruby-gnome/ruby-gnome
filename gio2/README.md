@@ -5,7 +5,7 @@ Ruby/GIO2 is a Ruby binding of gio-2.0.x.
 ## Requirements
 
 * Ruby/GObjectIntrospection in
-  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
+  [Ruby-GNOME2](https://ruby-gnome.github.io/)
 * [GIO](http://library.gnome.org/devel/gio/stable)
 
 ## Install
@@ -21,4 +21,4 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 ## Project Website
 
-https://ruby-gnome2.osdn.jp/
+https://ruby-gnome.github.io/

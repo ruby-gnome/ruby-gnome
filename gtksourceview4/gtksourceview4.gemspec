@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.description   = "Ruby/GtkSourceView4 is a Ruby binding of gtksourceview-4.x."
   s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
-  s.homepage      = "https://ruby-gnome2.osdn.jp/"
+  s.homepage      = "https://ruby-gnome.github.io/"
   s.licenses      = ["LGPL-2.1+"]
   s.version       = ruby_glib2_version
   s.extensions    = ["dependency-check/Rakefile"]

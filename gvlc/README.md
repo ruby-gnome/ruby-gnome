@@ -33,4 +33,4 @@ Copying
 
 Project Website
 ---------------
-   https://ruby-gnome2.osdn.jp/
+   https://ruby-gnome.github.io/

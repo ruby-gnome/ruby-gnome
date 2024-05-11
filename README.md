@@ -102,4 +102,4 @@ See [gtk3/sample/](/gtk3/sample) directory for details.
 
 ## Project Website
 
-[https://ruby-gnome2.osdn.jp/](https://ruby-gnome2.osdn.jp/)
+[https://ruby-gnome.github.io/](https://ruby-gnome.github.io/)

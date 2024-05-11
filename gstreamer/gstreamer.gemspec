@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.description   = "Ruby/GStreamer is a Ruby binding for GStreamer."
   s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
-  s.homepage      = "https://ruby-gnome2.osdn.jp/"
+  s.homepage      = "https://ruby-gnome.github.io/"
   s.licenses      = ["LGPL-2.1+"]
   s.version       = ruby_glib2_version
   s.extensions    = ["ext/#{s.name}/extconf.rb"]

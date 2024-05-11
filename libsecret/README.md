@@ -5,7 +5,7 @@ Ruby/libsecret is a Ruby binding of libsecret.
 ## Requirements
 
 * Ruby/GObjectIntrospection in
-  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
+  [Ruby-GNOME2](https://ruby-gnome.github.io/)
 * [libsecret](https://wiki.gnome.org/Projects/Libsecret)
 
 ## Install
@@ -21,4 +21,4 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 ## Project Website
 
-https://ruby-gnome2.osdn.jp/
+https://ruby-gnome.github.io/
