@@ -5,7 +5,7 @@ Ruby/GtkSourceView3 is a Ruby binding of gtksourceview-3.x.
 ## Requirements
 
 * Ruby/GTK3 in
-  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
+  [Ruby-GNOME2](https://ruby-gnome.github.io/)
 * [GtkSourceView](http://projects.gnome.org/gtksourceview/) 3.4.2 or later
 
 ## Install
@@ -21,4 +21,4 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 ## Project Website
 
-https://ruby-gnome2.osdn.jp/
+https://ruby-gnome.github.io/

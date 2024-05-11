@@ -126,7 +126,7 @@ module GNOME
         @description = ""
         @author = "The Ruby-GNOME2 Project Team"
         @email = "ruby-gnome2-devel-en@lists.sourceforge.net"
-        @homepage = "https://ruby-gnome2.osdn.jp/"
+        @homepage = "https://ruby-gnome.github.io/"
         @external_packages = []
       end
 

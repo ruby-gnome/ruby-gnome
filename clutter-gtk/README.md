@@ -5,7 +5,7 @@ Ruby/ClutterGTK is a Ruby binding of Clutter-GTK.
 ## Requirements
 
 * Ruby/Clutter and Ruby/GTK3 in
-  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
+  [Ruby-GNOME2](https://ruby-gnome.github.io/)
 * [Clutter-GTK](http://blogs.gnome.org/clutter/)
 
 ## Install
@@ -28,4 +28,4 @@ are licensed under the LGPL v2.1 or later.
 
 ## Project Website
 
-https://ruby-gnome2.osdn.jp/
+https://ruby-gnome.github.io/

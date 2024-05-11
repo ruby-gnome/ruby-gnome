@@ -5,7 +5,7 @@ Ruby/WNCK3 is a Ruby binding of libwnck 3.
 ## Requirements
 
 * Ruby/GObjectIntrospection in
-  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
+  [Ruby-GNOME2](https://ruby-gnome.github.io/)
 * [libwnck](https://developer.gnome.org/libwnck/stable/)
 
 ## Install
@@ -21,4 +21,4 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 ## Project Website
 
-https://ruby-gnome2.osdn.jp/
+https://ruby-gnome.github.io/

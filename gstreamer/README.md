@@ -5,7 +5,7 @@ Ruby/GStreamer is a Ruby binding for GStreamer.
 ## Requirements
 
 * Ruby/GLib2 and Ruby/GObjectIntrospection in
-  [Ruby-GNOME2](https://ruby-gnome2.osdn.jp/)
+  [Ruby-GNOME2](https://ruby-gnome.github.io/)
 * [GStreamer](http://gstreamer.freedesktop.org/)
 
 ## Install
@@ -28,4 +28,4 @@ are licensed under the LGPL v2.1 or later.
 
 ## Project Website
 
-https://ruby-gnome2.osdn.jp/
+https://ruby-gnome.github.io/

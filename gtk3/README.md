@@ -6,7 +6,7 @@ Ruby/GTK3 is a Ruby binding of GTK+ 3.
 
 * Ruby/GLib2, Ruby/ATK, Ruby/Pango, Ruby/GdkPixbuf2, Ruby/GIO2,
   Ruby/GDK3, Ruby/GObjectIntrospection and Ruby/GTK3 in
-  [Ruby-GNOME](https://ruby-gnome2.osdn.jp/)
+  [Ruby-GNOME](https://ruby-gnome.github.io/)
 * [rcairo](https://github.com/rcairo/rcairo)
 * [GTK+](http://www.gtk.org/) 3.4.2 or later
 
@@ -31,4 +31,4 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 ## Project Websites
 
 * https://github.com/ruby-gnome/ruby-gnome
-* https://ruby-gnome2.osdn.jp/
+* https://ruby-gnome.github.io/
