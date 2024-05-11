@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
     "Ruby/ClutterGDK is a Ruby binding of GDK specific API of Clutter."
   s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
-  s.homepage      = "https://ruby-gnome2.osdn.jp/"
+  s.homepage      = "https://ruby-gnome.github.io/"
   s.licenses      = ["LGPL-2.1+"]
   s.version       = ruby_glib2_version
   s.require_paths = ["lib"]
