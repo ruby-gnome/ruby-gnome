@@ -17,7 +17,7 @@ $KCODE = "U"
 URI = "https://ruby-gnome2.osdn.jp/"
 bf = GLib::BookmarkFile.new
 bf.set_title(URI, "Ruby-GNOME2 sample")
-bf.set_description(URI, "Ruby-GNOME2 Sampe for GLib::BookmarkFile")
+bf.set_description(URI, "Ruby-GNOME2 Sample for GLib::BookmarkFile")
 bf.set_mime_type(URI, "text/html")
 bf.set_private(URI, false)
 bf.set_icon(URI, "https://ruby-gnome2.osdn.jp/logo-gy.png", "image/png")
