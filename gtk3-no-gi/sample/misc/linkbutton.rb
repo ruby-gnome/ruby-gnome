@@ -8,12 +8,12 @@
   $Id: linkbutton.rb,v 1.1 2006/10/21 16:58:00 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("Gtk::LinkButton sample")
 window.signal_connect("destroy"){Gtk.main_quit}
 
-vbox = Gtk::VBox.new
+vbox = Gtk::Box.new(:vertical,0)
 
 # URI only
 button1 = Gtk::LinkButton.new("https://ruby-gnome2.osdn.jp/")
@@ -28,11 +28,6 @@ button2 = Gtk::LinkButton.new("https://ruby-gnome2.osdn.jp/",
 button2.signal_connect("clicked") do
   puts button2.uri
 end
-
-# Global setting instead of using clicked signals.
-Gtk::LinkButton.set_uri_hook {|button, link|
-  puts "set_uri_hook: " + link
-}
 
 vbox.pack_start(button2)
 
