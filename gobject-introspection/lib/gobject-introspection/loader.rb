@@ -185,8 +185,8 @@ module GObjectIntrospection
       # TODO: Can we do the same things for flags on NONE GType?
       return if info.gtype == GLib::Type::NONE
       klass = self.class.define_class(info.gtype,
-                                     rubyish_class_name(info),
-                                     @base_module)
+                                      rubyish_class_name(info),
+                                      @base_module)
       prepare_class(klass) do
         load_methods(info, klass)
       end
