@@ -16,6 +16,8 @@
 
 module Gtk
   class Loader < GObjectIntrospection::Loader
+    register_constant_rename_map("0BSD", "BSD_0")
+
     def load
       self.version = "4.0"
       super("Gtk")
