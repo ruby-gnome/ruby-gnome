@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,9 +27,9 @@ module Gio
     alias_method :read_nonblocking_raw, :read_nonblocking
     def read_nonblocking(size=nil)
       if size.nil?
-        all = "".force_encoding("ASCII-8BIT")
+        all = "".b
         buffer_size = 8192
-        buffer = " ".force_encoding("ASCII-8BIT") * buffer_size
+        buffer = " ".b * buffer_size
         loop do
           begin
             read_bytes = read_nonblocking_raw_compatible(buffer)
@@ -41,7 +41,7 @@ module Gio
         end
         all
       else
-        buffer = " " * size
+        buffer = " ".b * size
         read_bytes = read_nonblocking_raw_compatible(buffer)
         buffer.replace(buffer.byteslice(0, read_bytes))
         buffer
