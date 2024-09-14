@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2021  Ruby-GNOME Project Team
+# Copyright (C) 2014-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -32,9 +32,9 @@ module Gio
     alias_method :read_raw, :read
     def read(size=nil)
       if size.nil?
-        all = "".force_encoding("ASCII-8BIT")
+        all = "".b
         buffer_size = 8192
-        buffer = " ".force_encoding("ASCII-8BIT") * buffer_size
+        buffer = " ".b * buffer_size
         loop do
           read_bytes = read_all_raw_compatible(buffer)
           all << buffer.byteslice(0, read_bytes)
@@ -42,7 +42,7 @@ module Gio
         end
         all
       else
-        buffer = " " * size
+        buffer = " ".b * size
         read_bytes = read_raw_compatible(buffer)
         buffer.replace(buffer.byteslice(0, read_bytes))
         buffer
@@ -51,7 +51,7 @@ module Gio
 
     alias_method :read_all_raw, :read_all
     def read_all(size)
-      buffer = " " * size
+      buffer = " ".b * size
       read_bytes = read_all_raw_compatible(buffer)
       buffer.replace(buffer.byteslice(0, read_bytes))
       buffer
