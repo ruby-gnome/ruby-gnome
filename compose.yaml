@@ -64,23 +64,6 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
-  centos-7-base:
-    image: centos:7
-
-  centos-7:
-    image: ghcr.io/${GITHUB_REPOSITORY}:centos-7
-    build:
-      cache_from:
-        - ghcr.io/${GITHUB_REPOSITORY}:centos-7
-      context: .
-      dockerfile: dockerfiles/centos-7.dockerfile
-    volumes:
-      - .:/ruby-gnome:delegated
-    environment:
-      GITHUB_ACTIONS:
-    command:
-      /ruby-gnome/dockerfiles/run-test-scl.sh
-
   conda-base:
     image: continuumio/miniconda3
 

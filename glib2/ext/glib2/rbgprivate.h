@@ -21,11 +21,11 @@
 #pragma once
 
 /*
- * CentOS 7: GLib 2.56
  * AlmaLinux 8: GLib 2.56
  * AlmaLinux 9: GLib 2.68
  * Ubuntu 20.04: GLib 2.64
  * Ubuntu 22.04: GLib 2.72
+ * Ubuntu 24.04: GLib 2.80
  */
 #ifndef GLIB_VERSION_MIN_REQUIRED
 #  define GLIB_VERSION_MIN_REQUIRED GLIB_VERSION_2_56
