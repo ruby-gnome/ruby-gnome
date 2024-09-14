@@ -26,6 +26,10 @@ class TestListModel < Test::Unit::TestCase
     end
   end
 
+  def test_aref
+    assert_equal(@elements[0], @list_model[0])
+  end
+
   def test_each
     assert_equal(@elements, @list_model.to_a)
   end

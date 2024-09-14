@@ -24,5 +24,9 @@ module Gio
         yield(get_item(i))
       end
     end
+
+    def [](index)
+      get_item(index)
+    end
   end
 end
