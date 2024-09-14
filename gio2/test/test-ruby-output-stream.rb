@@ -1,4 +1,4 @@
-# Copyright (C) 2021  Ruby-GNOME Project Team
+# Copyright (C) 2021-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,7 +16,7 @@
 
 class TestRubyOutputStream < Test::Unit::TestCase
   def setup
-    @base_stream = StringIO.new("Hello World")
+    @base_stream = StringIO.new(+"Hello World")
     Gio::RubyOutputStream.open(@base_stream) do |stream|
       @stream = stream
       yield
