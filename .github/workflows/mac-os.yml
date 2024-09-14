@@ -47,6 +47,7 @@ jobs:
       ARROW_BUILD_STATIC: OFF
       ARROW_BUILD_TESTS: OFF
       ARROW_BUILD_UTILITIES: OFF
+      ARROW_AZURE: ON
       ARROW_DATASET: ON
       ARROW_FLIGHT: ON
       ARROW_FLIGHT_SQL: ON
@@ -54,16 +55,16 @@ jobs:
       ARROW_GCS: ON
       ARROW_GLIB_GTK_DOC: true
       ARROW_GLIB_WERROR: true
-      ARROW_HOME: /usr/local
+      ARROW_HOME: /tmp/local
       ARROW_JEMALLOC: OFF
       ARROW_ORC: OFF
       ARROW_PARQUET: ON
+      ARROW_S3: ON
       ARROW_WITH_BROTLI: ON
       ARROW_WITH_LZ4: ON
       ARROW_WITH_SNAPPY: ON
       ARROW_WITH_ZLIB: ON
       ARROW_WITH_ZSTD: ON
-      XML_CATALOG_FILES: /usr/local/etc/xml/catalog
     steps:
       - uses: actions/checkout@v4
       - name: Build
