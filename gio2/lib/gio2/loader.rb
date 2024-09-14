@@ -212,6 +212,16 @@ module Gio
       end
     end
 
+    def load_interface_info(info)
+      super
+      case info.gtype.name
+      when "GListModel"
+        # This is workaround for Ruby < 3.
+        # AlmaLinux 8 and Ubuntu 20.04 still use Ruby < 3.
+        require_relative "list-model"
+      end
+    end
+
     def rubyish_method_name(function_info, options={})
       case function_info.name
       when "get_mount"
