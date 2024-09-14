@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2023  Ruby-GNOME Project Team
+# Copyright (C) 2013-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -66,6 +66,7 @@ module Gio
       require "gio2/icon"
       require "gio2/inet-address"
       require "gio2/input-stream"
+      require "gio2/list-model"
       require "gio2/menu-item"
       require "gio2/output-stream"
       require "gio2/pollable-input-stream"
