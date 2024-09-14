@@ -1,4 +1,4 @@
-# Copyright (C) 2021  Ruby-GNOME Project Team
+# Copyright (C) 2021-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,7 @@ module Gio
 
     def initialize(ruby_input)
       @ruby_input = ruby_input
-      @buffer = ""
+      @buffer = +""
       super()
     end
 
