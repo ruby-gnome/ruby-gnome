@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2024  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -119,7 +119,7 @@ cb_exit_handler(void *self)
     if (NIL_P(func))
         rb_warn("exit handler not found");
     else
-        rb_funcall(func, rb_intern("call"), 1, self);
+        rb_funcall(func, rb_intern("call"), 1, (VALUE)self);
 }
 
 /*
