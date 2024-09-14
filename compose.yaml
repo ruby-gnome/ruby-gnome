@@ -1,5 +1,3 @@
-version: "3.5"
-
 services:
   almalinux-8-base:
     image: almalinux:8
