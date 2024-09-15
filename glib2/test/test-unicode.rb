@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2021  Ruby-GNOME Project Team
+# Copyright (C) 2015-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -400,10 +400,11 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def binary(string)
-    if string.respond_to?(:force_encoding)
-      string.force_encoding("ascii-8bit")
+    if string.respond_to?(:b)
+      string.b
+    else
+      string
     end
-    string
   end
 
   def little_endian?
