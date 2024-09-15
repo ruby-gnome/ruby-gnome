@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2021  Ruby-GNOME Project Team
+# Copyright (C) 2015-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -44,10 +44,12 @@ class TestGLibUtils < Test::Unit::TestCase
   end
 
   def test_get_os_info
+    only_glib_version(2, 64, 0)
     assert_kind_of(String, GLib.get_os_info(GLib::OSInfoKey::NAME))
   end
 
   def test_get_os_info_symbol
+    only_glib_version(2, 64, 0)
     assert_kind_of(String, GLib.get_os_info(:name))
   end
 end
