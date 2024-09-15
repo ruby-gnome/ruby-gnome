@@ -42,4 +42,8 @@ class TestGLibUtils < Test::Unit::TestCase
       GLib.get_user_special_dir(GLib::UserDirectory::DESKTOP)
     end
   end
+
+  def test_get_os_info
+    assert_kind_of(String, GLib.get_os_info(GLib::OSInfoKey::NAME))
+  end
 end

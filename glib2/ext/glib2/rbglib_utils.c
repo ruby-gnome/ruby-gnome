@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2004-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2004-2024  Ruby-GNOME Project Team
  *  Copyright (C) 2004  Pascal Terjan
  *
  *  This library is free software; you can redistribute it and/or
@@ -279,6 +279,15 @@ rg_s_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE m
                        glib_micro_version >= NUM2UINT(micro)));
 }
 
+#if GLIB_CHECK_VERSION(2, 64, 0)
+static VALUE
+rg_s_get_os_info(G_GNUC_UNUSED VALUE self, VALUE rb_key)
+{
+    return CSTR2RVAL_FREE(g_get_os_info(RVAL2CSTR(rb_key)));
+}
+#endif
+
+
 void
 Init_glib_utils(void)
 {
@@ -323,4 +332,26 @@ Init_glib_utils(void)
     RG_DEF_SMETHOD(parse_debug_string, 2);
     RG_DEF_SMETHOD_P(check_version, 3);
 
+#if GLIB_CHECK_VERSION(2, 64, 0)
+    RG_DEF_SMETHOD(get_os_info, 1);
+
+    VALUE mOSInfoKey = rb_define_module_under(RG_TARGET_NAMESPACE, "OSInfoKey");
+#  define RG_DEF_OS_INFO_KEY(NAME)                      \
+    rb_define_const(mOSInfoKey,                         \
+                    G_STRINGIFY(NAME),                  \
+                    CSTR2RVAL(G_OS_INFO_KEY_ ## NAME))
+
+    RG_DEF_OS_INFO_KEY(NAME);
+    RG_DEF_OS_INFO_KEY(PRETTY_NAME);
+    RG_DEF_OS_INFO_KEY(VERSION);
+    RG_DEF_OS_INFO_KEY(VERSION_CODENAME);
+    RG_DEF_OS_INFO_KEY(VERSION_ID);
+    RG_DEF_OS_INFO_KEY(ID);
+    RG_DEF_OS_INFO_KEY(HOME_URL);
+    RG_DEF_OS_INFO_KEY(DOCUMENTATION_URL);
+    RG_DEF_OS_INFO_KEY(SUPPORT_URL);
+    RG_DEF_OS_INFO_KEY(BUG_REPORT_URL);
+    RG_DEF_OS_INFO_KEY(PRIVACY_POLICY_URL);
+#  undef RG_DEF_OS_INFO_KEY
+#endif
 }
