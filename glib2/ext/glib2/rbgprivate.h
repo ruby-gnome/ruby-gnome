@@ -185,6 +185,7 @@ G_GNUC_INTERNAL void Init_glib_matchinfo(void);
 G_GNUC_INTERNAL void Init_glib_date_time(void);
 G_GNUC_INTERNAL void Init_glib_time_zone(void);
 G_GNUC_INTERNAL void Init_glib_bytes(void);
+G_GNUC_INTERNAL void Init_glib_option(void);
 
 G_GNUC_INTERNAL void Init_gobject_convert(void);
 G_GNUC_INTERNAL void Init_gobject_gtype(void);
