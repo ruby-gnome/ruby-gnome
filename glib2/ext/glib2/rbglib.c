@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2024  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -1284,6 +1284,7 @@ union       GDoubleIEEE754;
     Init_glib_bookmark_file();
     Init_glib_variant_type();
     Init_glib_variant();
+    Init_glib_variant_dict();
     Init_glib_regex();
     Init_glib_matchinfo();
     Init_glib_date_time();

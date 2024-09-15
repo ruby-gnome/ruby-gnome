@@ -179,6 +179,7 @@ G_GNUC_INTERNAL void Init_glib_keyfile(void);
 G_GNUC_INTERNAL void Init_glib_bookmark_file(void);
 G_GNUC_INTERNAL void Init_glib_variant_type(void);
 G_GNUC_INTERNAL void Init_glib_variant(void);
+G_GNUC_INTERNAL void Init_glib_variant_dict(void);
 G_GNUC_INTERNAL void Init_glib_regex(void);
 G_GNUC_INTERNAL void Init_glib_matchinfo(void);
 G_GNUC_INTERNAL void Init_glib_date_time(void);

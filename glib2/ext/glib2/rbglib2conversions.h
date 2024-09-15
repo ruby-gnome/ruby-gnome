@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2024  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -43,6 +43,10 @@
 #define GVALUE2RVAL(o)                     (BOXED2RVAL(o, G_TYPE_VALUE))
 #define RVAL2GVARIANTTYPE(o)               (rbg_variant_type_from_ruby(o))
 #define GVARIANTTYPE2RVAL(o)               (BOXED2RVAL(o, G_TYPE_VARIANT_TYPE))
+#define RVAL2GVARIANT(o)                   (rbg_variant_from_ruby(o))
+#define GVARIANT2RVAL(o)                   (rbg_variant_to_ruby(o))
+#define RVAL2GVARIANTDICT(o)               ((GVariantDict *)RVAL2BOXED(o, G_TYPE_VARIANT_DICT))
+#define GVARIANTDICT2RVAL(o)               (BOXED2RVAL(o, G_TYPE_VARIANT_DICT))
 
 #define RVAL2GIOCONDITION(o)               (RVAL2GFLAGS(o, G_TYPE_IO_CONDITION))
 #define GIOCONDITION2RVAL(o)               (GFLAGS2RVAL(o, G_TYPE_IO_CONDITION))
