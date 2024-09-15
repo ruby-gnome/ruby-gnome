@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2022  Ruby-GNOME Project Team
+# Copyright (C) 2015-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -63,7 +63,7 @@ class TestGtkTreeViewColumn < Test::Unit::TestCase
 
       test "unknown" do
         options = {:unknown => true}
-        message = "unknown option(s): [:unknown]: "
+        message = +"unknown option(s): [:unknown]: "
         message << "available options: [:area, :renderer, :title, :attributes]"
         assert_raise(ArgumentError.new(message)) do
           Gtk::TreeViewColumn.new(options)
