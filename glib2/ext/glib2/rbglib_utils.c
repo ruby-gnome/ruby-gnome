@@ -283,6 +283,11 @@ rg_s_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE m
 static VALUE
 rg_s_get_os_info(G_GNUC_UNUSED VALUE self, VALUE rb_key)
 {
+    if (RB_SYMBOL_P(rb_key)) {
+        VALUE mOSInfoKey = rb_const_get(rbg_mGLib(), rb_intern("OSInfoKey"));
+        VALUE rb_KEY = rb_funcall(rb_sym2str(rb_key), rb_intern("upcase"), 0);
+        rb_key = rb_const_get(mOSInfoKey, rb_intern_str(rb_KEY));
+    }
     return CSTR2RVAL_FREE(g_get_os_info(RVAL2CSTR(rb_key)));
 }
 #endif

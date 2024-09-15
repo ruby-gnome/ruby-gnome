@@ -46,4 +46,8 @@ class TestGLibUtils < Test::Unit::TestCase
   def test_get_os_info
     assert_kind_of(String, GLib.get_os_info(GLib::OSInfoKey::NAME))
   end
+
+  def test_get_os_info_symbol
+    assert_kind_of(String, GLib.get_os_info(:name))
+  end
 end
