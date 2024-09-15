@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2022  Ruby-GNOME Project Team
+# Copyright (C) 2015-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -25,5 +25,9 @@ class TestGtkWindow < Test::Unit::TestCase
     assert_nil(@window.icon_name)
     @window.icon_name = "gnome"
     assert_equal("gnome", @window.icon_name)
+  end
+
+  def test_interactive_debugging=
+    Gtk::Window.interactive_debugging = false
   end
 end

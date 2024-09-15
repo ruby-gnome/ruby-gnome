@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2023  Ruby-GNOME Project Team
+# Copyright (C) 2012-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -87,6 +87,7 @@ module GObjectIntrospection
 
     def load_function_info_singleton_method(info, klass, method_name)
       define_singleton_method(info, klass, method_name)
+      define_equal_style_setter(info, klass.singleton_class, method_name)
     end
 
     def define_module_function(function_info, target_module, name)
