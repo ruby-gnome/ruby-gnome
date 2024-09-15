@@ -83,6 +83,7 @@ module GObjectIntrospection
     def load_function_info(info)
       name = rubyish_method_name(info)
       define_singleton_method(info, @base_module, name)
+      define_equal_style_setter(info, @base_module.singleton_class, name)
     end
 
     def load_function_info_singleton_method(info, klass, method_name)

@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,6 +18,12 @@ class TestGtk < Test::Unit::TestCase
   include GtkTestUtils
 
   def test_show_uri
-    assert_true(Gtk.respond_to?(:show_uri))
+    assert do
+      Gtk.respond_to?(:show_uri)
+    end
+  end
+
+  def test_debug_flags=
+    Gtk.debug_flags = 0
   end
 end
