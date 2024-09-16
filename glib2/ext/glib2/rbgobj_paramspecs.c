@@ -75,9 +75,9 @@ typename##_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,  \
                       VALUE flags)                                      \
 {                                                                       \
     GParamSpec* pspec;                                                  \
-    pspec = g_param_spec_##typename(StringValuePtr(name),               \
-                                    StringValuePtr(nick),               \
-                                    StringValuePtr(blurb),              \
+    pspec = g_param_spec_##typename(RVAL2CSTR(name),                    \
+                                    RVAL2CSTR_ACCEPT_NIL(nick),         \
+                                    RVAL2CSTR_ACCEPT_NIL(blurb),        \
                                     from_ruby(minimum),                 \
                                     from_ruby(maximum),                 \
                                     from_ruby(default_value),           \
@@ -134,9 +134,9 @@ boolean_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
                    VALUE default_value, VALUE flags)
 {
     GParamSpec* pspec;
-    pspec = g_param_spec_boolean(StringValuePtr(name),
-                                 StringValuePtr(nick),
-                                 StringValuePtr(blurb),
+    pspec = g_param_spec_boolean(RVAL2CSTR(name),
+                                 RVAL2CSTR_ACCEPT_NIL(nick),
+                                 RVAL2CSTR_ACCEPT_NIL(blurb),
                                  RVAL2CBOOL(default_value),
                                  resolve_flags(flags));
     rbgobj_param_spec_initialize(self, pspec);
@@ -148,9 +148,9 @@ unichar_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
                    VALUE default_value, VALUE flags)
 {
     GParamSpec* pspec;
-    pspec = g_param_spec_unichar(StringValuePtr(name),
-                                 StringValuePtr(nick),
-                                 StringValuePtr(blurb),
+    pspec = g_param_spec_unichar(RVAL2CSTR(name),
+                                 RVAL2CSTR_ACCEPT_NIL(nick),
+                                 RVAL2CSTR_ACCEPT_NIL(blurb),
                                  NUM2UINT(default_value),
                                  resolve_flags(flags));
     rbgobj_param_spec_initialize(self, pspec);
@@ -164,9 +164,9 @@ enum_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
     GParamSpec* pspec;
     GType gtype = rbgobj_gtype_from_ruby(enum_type);
 
-    pspec = g_param_spec_enum(StringValuePtr(name),
-                              StringValuePtr(nick),
-                              StringValuePtr(blurb),
+    pspec = g_param_spec_enum(RVAL2CSTR(name),
+                              RVAL2CSTR_ACCEPT_NIL(nick),
+                              RVAL2CSTR_ACCEPT_NIL(blurb),
                               gtype,
                               RVAL2GENUM(default_value, gtype),
                               resolve_flags(flags));
@@ -181,9 +181,9 @@ flags_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
     GParamSpec* pspec;
     GType gtype = rbgobj_gtype_from_ruby(flags_type);
 
-    pspec = g_param_spec_flags(StringValuePtr(name),
-                               StringValuePtr(nick),
-                               StringValuePtr(blurb),
+    pspec = g_param_spec_flags(RVAL2CSTR(name),
+                               RVAL2CSTR_ACCEPT_NIL(nick),
+                               RVAL2CSTR_ACCEPT_NIL(blurb),
                                gtype,
                                RVAL2GFLAGS(default_value, gtype),
                                resolve_flags(flags));
@@ -196,9 +196,9 @@ string_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
                   VALUE default_value, VALUE flags)
 {
     GParamSpec* pspec;
-    pspec = g_param_spec_string(StringValuePtr(name),
-                                StringValuePtr(nick),
-                                StringValuePtr(blurb),
+    pspec = g_param_spec_string(RVAL2CSTR(name),
+                                RVAL2CSTR_ACCEPT_NIL(nick),
+                                RVAL2CSTR_ACCEPT_NIL(blurb),
                                 RVAL2CSTR_ACCEPT_NIL(default_value),
                                 resolve_flags(flags));
     rbgobj_param_spec_initialize(self, pspec);
@@ -210,9 +210,9 @@ param_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
                  VALUE param_type, VALUE flags)
 {
     GParamSpec* pspec;
-    pspec = g_param_spec_param(StringValuePtr(name),
-                               StringValuePtr(nick),
-                               StringValuePtr(blurb),
+    pspec = g_param_spec_param(RVAL2CSTR(name),
+                               RVAL2CSTR_ACCEPT_NIL(nick),
+                               RVAL2CSTR_ACCEPT_NIL(blurb),
                                rbgobj_gtype_from_ruby(param_type),
                                resolve_flags(flags));
     rbgobj_param_spec_initialize(self, pspec);
@@ -224,9 +224,9 @@ boxed_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
                  VALUE boxed_type, VALUE flags)
 {
     GParamSpec* pspec;
-    pspec = g_param_spec_boxed(StringValuePtr(name),
-                               StringValuePtr(nick),
-                               StringValuePtr(blurb),
+    pspec = g_param_spec_boxed(RVAL2CSTR(name),
+                               RVAL2CSTR_ACCEPT_NIL(nick),
+                               RVAL2CSTR_ACCEPT_NIL(blurb),
                                rbgobj_gtype_from_ruby(boxed_type),
                                resolve_flags(flags));
     rbgobj_param_spec_initialize(self, pspec);
@@ -237,9 +237,9 @@ static VALUE
 pointer_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb, VALUE flags)
 {
     GParamSpec* pspec;
-    pspec = g_param_spec_pointer(StringValuePtr(name),
-                                 StringValuePtr(nick),
-                                 StringValuePtr(blurb),
+    pspec = g_param_spec_pointer(RVAL2CSTR(name),
+                                 RVAL2CSTR_ACCEPT_NIL(nick),
+                                 RVAL2CSTR_ACCEPT_NIL(blurb),
                                  resolve_flags(flags));
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;
@@ -250,9 +250,9 @@ value_array_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
                        VALUE element_spec, VALUE flags)
 {
     GParamSpec *pspec;
-    pspec = g_param_spec_value_array(StringValuePtr(name),
-                                     StringValuePtr(nick),
-                                     StringValuePtr(blurb),
+    pspec = g_param_spec_value_array(RVAL2CSTR(name),
+                                     RVAL2CSTR_ACCEPT_NIL(nick),
+                                     RVAL2CSTR_ACCEPT_NIL(blurb),
                                      RVAL2GOBJ(element_spec),
                                      resolve_flags(flags));
     rbgobj_param_spec_initialize(self, pspec);
@@ -264,9 +264,9 @@ object_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
                   VALUE object_type, VALUE flags)
 {
     GParamSpec* pspec;
-    pspec = g_param_spec_object(StringValuePtr(name),
-                                StringValuePtr(nick),
-                                StringValuePtr(blurb),
+    pspec = g_param_spec_object(RVAL2CSTR(name),
+                                RVAL2CSTR_ACCEPT_NIL(nick),
+                                RVAL2CSTR_ACCEPT_NIL(blurb),
                                 rbgobj_gtype_from_ruby(object_type),
                                 resolve_flags(flags));
     rbgobj_param_spec_initialize(self, pspec);

@@ -21,15 +21,15 @@ class TestGLibBinding < Test::Unit::TestCase
       type_register
 
       install_property(GLib::Param::Int.new("source", # name
-                                            "Source", # nick
-                                            "The source data", # blurb
+                                            nil, # nick
+                                            nil, # blurb
                                             0,     # min
                                             100,   # max
                                             0,     # default
                                             [:readable, :writable]))
       install_property(GLib::Param::Int.new("target", # name
-                                            "Target", # nick
-                                            "The target data", # blurb
+                                            nil, # nick
+                                            nil, # blurb
                                             0,     # min
                                             100,   # max
                                             0,     # default
