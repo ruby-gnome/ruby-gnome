@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2021  Ruby-GNOME Project Team
+# Copyright (C) 2015-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -26,16 +26,14 @@ class TestGLibBinding < Test::Unit::TestCase
                                             0,     # min
                                             100,   # max
                                             0,     # default
-                                            GLib::Param::READABLE |
-                                            GLib::Param::WRITABLE))
+                                            [:readable, :writable]))
       install_property(GLib::Param::Int.new("target", # name
                                             "Target", # nick
                                             "The target data", # blurb
                                             0,     # min
                                             100,   # max
                                             0,     # default
-                                            GLib::Param::READABLE |
-                                            GLib::Param::WRITABLE))
+                                            :readwrite))
 
       attr_reader :source, :target
       def initialize
@@ -106,8 +104,7 @@ class TestGLibBinding < Test::Unit::TestCase
                                                "Target", # nick
                                                "The target data", # blurb
                                                "",     # default
-                                               GLib::Param::READABLE |
-                                               GLib::Param::WRITABLE))
+                                               GLib::Param::READWRITE))
 
       attr_reader :source, :target
       def initialize
