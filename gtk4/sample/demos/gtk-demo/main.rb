@@ -69,6 +69,38 @@ def create_demo_model(window)
   store
 end
 
+def load_file(demo, notebook, info_view)
+  notebook.n_pages.downto(1) do |i|
+    notebook.remove_page(i)
+  end
+
+  info_buffer = Gtk::TextBuffer.new
+  info_buffer.create_tag("title",
+                         size: 18 * Pango::SCALE,
+                         pixels_below_lines: 10)
+  info_buffer.begin_irreversible_action do
+    info_buffer_iter = info_buffer.get_iter_at(offset: 0)
+    info_buffer.insert(info_buffer_iter, demo.title, tags: ["title"])
+    info_buffer.insert(info_buffer_iter, "\n")
+    info_buffer.insert(info_buffer_iter, demo.description)
+  end
+  info_view.buffer = info_buffer
+end
+
+def select_item(selection, window, notebook, info_view)
+  row = selection.selected_item
+  notebook.sensitive = !!row
+  if row
+    demo = row.item
+    load_file(demo, notebook, info_view)
+    run_action = window.lookup_action("run")
+    run_action.enabled = true
+    window.title = demo.title
+  else
+    window.title = "No match"
+  end
+end
+
 
 app = Gtk::Application.new("com.github.ruby-gnome.gtk4.Demo",
                            [:non_unique, :handles_command_line])
@@ -203,7 +235,11 @@ app.signal_connect("activate") do |_app|
   search_entry = builder["search-entry"]
 
   selection = Gtk::SingleSelection.new(filter_model)
+  selection.signal_connect("notify::selected-item") do
+    select_item(selection, window, notebook, info_view)
+  end
   list_view.model = selection
+  select_item(selection, window, notebook, info_view)
 
   target_demo = nil
   if run

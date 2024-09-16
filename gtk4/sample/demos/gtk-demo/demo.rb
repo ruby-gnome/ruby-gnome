@@ -63,12 +63,14 @@ class GtkDemo < GLib::Object
   install_property(GLib::Param::String.new("filename", nil, nil, nil, :readable))
   attr_reader :filename
 
+  attr_reader :description
   attr_accessor :children_model
 
-  def initialize(filename, title, keywords)
+  def initialize(filename, title, description, keywords)
     super()
     @name = File.basename(filename, ".rb")
     @title = title
+    @description = description
     @keywords = keywords
     @filename = filename
     @children_model = nil

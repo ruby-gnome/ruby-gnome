@@ -30,7 +30,10 @@ class GtkGLAreaDemo < GtkDemo
   N_AXISES = 3
 
   def initialize
-    super(__FILE__, "OpenGL/OpenGL Area", [])
+    super(__FILE__,
+          "OpenGL/OpenGL Area",
+          "Gtk::GLArea is a widget that allows custom drawing using OpenGL calls.",
+          [])
   end
 
   def run(parent)
