@@ -217,6 +217,17 @@ module Gtk
       end
     end
 
+    alias_method :begin_irreversible_action_raw, :begin_irreversible_action
+    def begin_irreversible_action
+      begin_irreversible_action_raw
+      return unless block_given?
+      begin
+        yield
+      ensure
+        end_irreversible_action
+      end
+    end
+
     private
     alias_method :insert_interactive_raw, :insert_interactive
     def insert_interactive(iter, text, default_ediatable)

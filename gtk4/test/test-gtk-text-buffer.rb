@@ -146,5 +146,15 @@ class TestGtkTextBuffer < Test::Unit::TestCase
         assert_equal("new-tag", tag.name)
       end
     end
+
+    sub_test_case "#begin_irreversible_action" do
+      test "block" do
+        called = false
+        @text_buffer.begin_irreversible_action do
+          called = true
+        end
+        assert_true(called)
+      end
+    end
   end
 end
