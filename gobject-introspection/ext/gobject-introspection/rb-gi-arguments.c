@@ -2858,12 +2858,21 @@ rb_gi_arguments_fill_raw_result(RBGIArguments *args,
                                 gpointer raw_result,
                                 GITypeInfo *type_info,
                                 GITransfer transfer,
+                                gboolean may_return_null,
                                 gboolean is_return_value)
 {
     GIFFIReturnValue *ffi_return_value = raw_result;
-    GITypeTag type_tag;
 
-    type_tag = g_type_info_get_tag(type_info);
+    if (may_return_null && RB_NIL_P(rb_result)) {
+        if (is_return_value) {
+            ffi_return_value->v_pointer = NULL;
+        } else {
+            *((gpointer *)raw_result) = NULL;
+        }
+        return;
+    }
+
+    GITypeTag type_tag = g_type_info_get_tag(type_info);
     switch (type_tag) {
       case GI_TYPE_TAG_VOID:
         g_assert_not_reached();
@@ -3044,8 +3053,8 @@ rb_gi_arguments_fill_raw_results(RBGIArguments *args,
     return_type_info = g_callable_info_get_return_type(args->info);
     return_type_tag = g_type_info_get_tag(return_type_info);
     if (return_type_tag != GI_TYPE_TAG_VOID) {
-        GITransfer transfer;
-        transfer = g_callable_info_get_caller_owns(args->info);
+        GITransfer transfer = g_callable_info_get_caller_owns(args->info);
+        gboolean may_return_null = g_callable_info_may_return_null(args->info);
         if (args->out_args->len == 0) {
             VALUE rb_return_value = rb_results;
             rb_gi_arguments_fill_raw_result(args,
@@ -3053,6 +3062,7 @@ rb_gi_arguments_fill_raw_results(RBGIArguments *args,
                                             raw_return_value,
                                             return_type_info,
                                             transfer,
+                                            may_return_null,
                                             TRUE);
         } else {
             VALUE rb_return_value;
@@ -3067,6 +3077,7 @@ rb_gi_arguments_fill_raw_results(RBGIArguments *args,
                                             raw_return_value,
                                             return_type_info,
                                             transfer,
+                                            may_return_null,
                                             TRUE);
         }
     }
@@ -3106,6 +3117,7 @@ rb_gi_arguments_fill_raw_results(RBGIArguments *args,
                                         argument->v_pointer,
                                         type_info,
                                         transfer,
+                                        metadata->may_be_null_p,
                                         FALSE);
         g_base_info_unref(type_info);
     }
