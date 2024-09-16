@@ -45,6 +45,31 @@ end
 resource = Gio::Resource.load(gresource)
 Gio::Resources.register(resource)
 
+
+require_relative "demo"
+Dir.glob("#{__dir__}/*.rb") do |rb|
+  base_name = File.basename(rb, ".rb")
+  next if base_name == "main"
+  require_relative base_name
+end
+
+
+def run_demo(demo, window)
+  demo_window = demo.run(window)
+  demo_window.transient_for = window
+  demo_window.modal = true
+  demo_window
+end
+
+def create_demo_model(window)
+  store = Gio::ListStore.new(GtkDemo)
+  GtkDemo.all.each do |demo|
+    store.append(demo)
+  end
+  store
+end
+
+
 app = Gtk::Application.new("com.github.ruby-gnome.gtk4.Demo",
                            [:non_unique, :handles_command_line])
 
@@ -90,6 +115,8 @@ inspector_action.signal_connect("activate") do
   Gtk::Window.interactive_debugging = true
 end
 app.add_action(inspector_action)
+app.set_accels_for_action("app.about", ["F1"])
+app.set_accels_for_action("app.quit", ["<Control>q"])
 
 app.add_main_option("version",
                     0,
@@ -134,9 +161,68 @@ end
 
 app.signal_connect("activate") do |_app|
   builder = Gtk::Builder.new(resource: "/ui/main.ui")
-  window = builder.get_object("window")
+  window = builder["window"]
   app.add_window(window)
-  window.present
+
+  run_action = Gio::SimpleAction.new("run")
+  run_action.signal_connect("activate") do
+    row = selection.selected_item
+    demo = row.item
+    run_demo(demo, window)
+  end
+  window.add_action(run_action)
+
+  notebook = builder["notebook"]
+
+  info_view = builder["info-textview"]
+  source_view = builder["source-textview"]
+  list_view = builder["listview"]
+  list_view.signal_connect("activate") do |_, position|
+    model = list_view.model
+    row = model.get_item(position)
+    run_demo(row.item, window)
+  end
+  search_bar = builder["searchbar"]
+  search_bar.signal_connect("notify::search-mode-enabled") do
+    unless search_bar.search_mode?
+      bar.child.text = ""
+    end
+  end
+
+  list_model = create_demo_model(window)
+  tree_model = Gtk::TreeListModel.new(list_model, false, true) do |item|
+    item.children_model
+  end
+  filter_model = Gtk::FilterListModel.new(tree_model, nil)
+  filter = Gtk::CustomFilter.new do
+    # TODO
+    true
+  end
+  filter_model.filter = filter
+
+  search_entry = builder["search-entry"]
+
+  selection = Gtk::SingleSelection.new(filter_model)
+  list_view.model = selection
+
+  target_demo = nil
+  if run
+    GtkDemo.each do |demo|
+      if demo.name == run
+        target_demo = demo
+        break
+      end
+    end
+  end
+  if target_demo
+    demo_window = run_demo(target_demo, window)
+    # TODO: This doesn't work
+    demo_window.signal_connect("destroy") do
+      app.quit
+    end
+  else
+    window.present
+  end
 end
 
 app.run([$0] + ARGV)
