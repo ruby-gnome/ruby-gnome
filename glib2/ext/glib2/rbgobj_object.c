@@ -987,7 +987,6 @@ void
 rbgobj_register_type(VALUE klass, VALUE type_name, GClassInitFunc class_init)
 {
     GType parent_type;
-    GTypeInfo *info;
 
     {
         const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
@@ -1025,26 +1024,13 @@ rbgobj_register_type(VALUE klass, VALUE type_name, GClassInitFunc class_init)
         GTypeQuery query;
         g_type_query(parent_type, &query);
 
-        /* TODO: Why new?  g_type_register_static() doesn’t retain a copy, so
-         * this should be allocated on the stack. */
-        info = g_new0(GTypeInfo, 1);
-        info->class_size     = query.class_size;
-        info->base_init      = NULL;
-        info->base_finalize  = NULL;
-        info->class_init     = class_init;
-        info->class_finalize = NULL;
-        info->class_data     = NULL;
-        info->instance_size  = query.instance_size;
-        info->n_preallocs    = 0;
-        info->instance_init  = NULL;
-        info->value_table    = NULL;
-    }
-
-    {
-        GType type = g_type_register_static(parent_type,
-                                            StringValueCStr(type_name),
-                                            info,
-                                            0);
+        GType type = g_type_register_static_simple(parent_type,
+                                                   StringValueCStr(type_name),
+                                                   query.class_size,
+                                                   class_init,
+                                                   query.instance_size,
+                                                   NULL,
+                                                   0);
         if (type == G_TYPE_INVALID) {
             rb_raise(rb_eArgError,
                      "failed to register type: <%s>",
