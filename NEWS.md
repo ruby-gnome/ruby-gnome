@@ -1,5 +1,88 @@
 # NEWS
 
+## Ruby-GNOME 4.2.3: 2024-09-19
+
+This is a GTK 4 support improvement release.
+
+### Changes
+
+#### All
+
+  * Improvements
+
+    * Update project website URL.
+      * GH-1611
+      * GH-1615
+      * Patch by Kazuhiro NISHIYAMA
+
+    * Dropped support for CentOS 7.
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Added `GLib::VariantDict`.
+
+    * Added `GLib::OptionArg`.
+
+    * Added `GLib::OptionFlags`.
+
+    * Added `GLib.get_os_info`.
+
+    * `GLib::Param::*.new`: Added support for flag names.
+
+    * `GLib::Param::*.new`: Added support for `nil` name and blurb.
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support auto setter generation for class methods.
+
+    * Added support auto setter generation for base module methods.
+
+    * Added support for `nullable` of callback return value.
+
+    * Added support for `nullable` `GHashTable`.
+
+#### Ruby/GIO2
+
+  * Improvements
+
+    * Made `Gio::ListModel` enumerable.
+
+    * Added `Gio::ListModel#[]`.
+
+#### Ruby/GdkPixbuf2
+
+  * Improvements
+
+    * Removed tests that use XPM.
+      * GH-1614
+      * Reported by Mamoru TASAKA
+
+#### Ruby/GTK4
+
+  * Improvements
+
+    * Renamed `Gtk::License::0BSD` to `Gtk::License::BSD_0`.
+      * GH-1618
+      * Reported by rubyFeedback
+      * Reported by kojix2
+
+    * `Gtk::TextBuffer#begin_irreversible_action`: Added support for
+      block.
+
+### Thanks
+
+  * Mamoru TASAKA
+
+  * Kazuhiro NISHIYAMA
+
+  * rubyFeedback
+
+  * kojix2
+
 ## Ruby-GNOME 4.2.2: 2024-04-02
 
 This is a GLib 2.80 support improvement release.
