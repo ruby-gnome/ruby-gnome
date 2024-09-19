@@ -1764,6 +1764,10 @@ rb_gi_arguments_convert_arg_ghash(RBGIArguments *args,
                                   GIArgument *arg,
                                   RBGIArgMetadata *arg_metadata)
 {
+    if (arg_metadata->may_be_null_p && !arg->v_pointer) {
+        return Qnil;
+    }
+
     GHashToRubyData data;
 
     data.args = args;
