@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,15 +16,14 @@
 
 require "webkit-gtk"
 
-window = Gtk::Window.new
-window.signal_connect("destroy") do
-  Gtk.main_quit
+app = Gtk::Application.new("com.github.ruby-gnome.webkit-gtk.Browser",
+                           [:non_unique])
+app.signal_connect("activate") do
+  window = Gtk::ApplicationWindow.new(app)
+  window.set_default_size(1200, 800)
+  view = WebKitGtk::WebView.new
+  view.load_uri("https://webkitgtk.org/")
+  window.child = view
+  window.present
 end
-
-view = WebKitGtk::WebView.new
-view.load_uri("http://webkitgtk.org/")
-
-window.add(view)
-window.show_all
-
-Gtk.main
+app.run([$0] + ARGV)
