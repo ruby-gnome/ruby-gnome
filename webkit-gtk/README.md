@@ -1,12 +1,12 @@
 # Ruby/WebKitGTK
 
-Ruby/WebKitGTK is a Ruby binding of WebKitGTK+.
+Ruby/WebKitGTK is a Ruby binding of WebKitGTK.
 
 ## Requirements
 
-* Ruby/GObjectIntrospection and Ruby/GTK3 in
-  [Ruby-GNOME2](https://ruby-gnome.github.io/)
-* [WebKitGTK+](http://webkitgtk.org/) 2.4.11 or later.
+* Ruby/GObjectIntrospection and Ruby/GTK in
+  [Ruby-GNOME](https://ruby-gnome.github.io/)
+* [WebKitGTK](http://webkitgtk.org/) 2.42.0 or later.
 
 ## Install
 
@@ -14,7 +14,7 @@ Ruby/WebKitGTK is a Ruby binding of WebKitGTK+.
 
 ## License
 
-Copyright (c) 2013 Ruby-GNOME2 Project Team
+Copyright (C) 2013-2024  Ruby-GNOME Project Team
 
 This program is free software. You can distribute/modify this program
 under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.

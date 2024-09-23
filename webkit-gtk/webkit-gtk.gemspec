@@ -20,8 +20,8 @@ require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
   s.name          = "webkit-gtk"
-  s.summary       = "Ruby/WebKitGTK is a Ruby binding of WebKitGTK+."
-  s.description   = "Ruby/WebKitGTK is a Ruby binding of WebKitGTK+."
+  s.summary       = "Ruby/WebKitGTK is a Ruby binding of WebKitGTK."
+  s.description   = "Ruby/WebKitGTK is a Ruby binding of WebKitGTK."
   s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome.github.io/"
@@ -40,7 +40,5 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("test/**/*")
 
-  s.add_runtime_dependency("gtk3", "= #{s.version}")
-
-  s.metadata["msys2_mingw_dependencies"] = "webkitgtk3"
+  s.add_runtime_dependency("gtk4", "= #{s.version}")
 end
