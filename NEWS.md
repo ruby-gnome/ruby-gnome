@@ -1,5 +1,23 @@
 # NEWS
 
+## Ruby-GNOME 4.2.4: 2024-09-24
+
+This is a WebKitGTK support improvement release.
+
+### Changes
+
+#### Ruby/WebKitGTK
+
+  * Improvements
+
+    * Changed to require GTK 4 and `webkitgtk-6.0`/`WebKit-6.0`.
+
+#### Ruby/WebKit2GTK
+
+  * Improvements
+
+    * Added support for WebKitGTK 2.44.0 or later.
+
 ## Ruby-GNOME 4.2.3: 2024-09-19
 
 This is a GTK 4 support improvement release.
