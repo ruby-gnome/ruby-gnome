@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2021  Ruby-GNOME Project Team
+# Copyright (C) 2013-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,8 +27,8 @@ run_test(__dir__,
            "atk",
            "cairo-gobject",
            "pango",
-           "gdk3",
-           "gtk3",
+           "gdk4",
+           "gtk4",
            "webkit-gtk",
          ]) do
   require_relative "../../gobject-introspection/test/gobject-introspection-test-utils"
