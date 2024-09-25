@@ -55,6 +55,7 @@ end
 
 
 def run_demo(demo, window)
+  return if demo.group?
   demo_window = demo.run(window)
   demo_window.transient_for = window
   demo_window.modal = true
@@ -63,8 +64,19 @@ end
 
 def create_demo_model(window)
   store = Gio::ListStore.new(GtkDemo)
+  groups = {}
   GtkDemo.all.each do |demo|
-    store.append(demo)
+    if demo.group
+      group = groups[demo.group]
+      if group.nil?
+        group = GtkDemo.new(nil, nil, demo.group, nil, [])
+        group.children_model = Gio::ListStore.new(GtkDemo)
+      end
+      group.children_model.append(demo)
+      store.append(group)
+    else
+      store.append(demo)
+    end
   end
   store
 end
@@ -92,6 +104,7 @@ def select_item(selection, window, notebook, info_view)
   notebook.sensitive = !!row
   if row
     demo = row.item
+    return if demo.group?
     load_file(demo, notebook, info_view)
     run_action = window.lookup_action("run")
     run_action.enabled = true

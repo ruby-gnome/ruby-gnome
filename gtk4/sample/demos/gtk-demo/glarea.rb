@@ -31,7 +31,8 @@ class GtkGLAreaDemo < GtkDemo
 
   def initialize
     super(__FILE__,
-          "OpenGL/OpenGL Area",
+          "OpenGL",
+          "OpenGL Area",
           "Gtk::GLArea is a widget that allows custom drawing using OpenGL calls.",
           [])
   end

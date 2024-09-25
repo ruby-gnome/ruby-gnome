@@ -54,6 +54,8 @@ class GtkDemo < GLib::Object
   install_property(GLib::Param::String.new("name", nil, nil, nil, :readable))
   attr_reader :name
 
+  attr_reader :group
+
   install_property(GLib::Param::String.new("title", nil, nil, nil, :readable))
   attr_reader :title
 
@@ -66,9 +68,14 @@ class GtkDemo < GLib::Object
   attr_reader :description
   attr_accessor :children_model
 
-  def initialize(filename, title, description, keywords)
+  def initialize(filename, group, title, description, keywords)
     super()
-    @name = File.basename(filename, ".rb")
+    if filename.nil?
+      @name = nil
+    else
+      @name = File.basename(filename, ".rb")
+    end
+    @group = group
     @title = title
     @description = description
     @keywords = keywords
@@ -76,7 +83,11 @@ class GtkDemo < GLib::Object
     @children_model = nil
   end
 
+  def group?
+    @name.nil?
+  end
+
   def run(parent)
-    raise NotImplemented
+    raise NotImplementedError
   end
 end
