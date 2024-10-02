@@ -638,7 +638,7 @@ rg_s_try_convert(VALUE self, VALUE value)
         return value;
 
     if (RVAL2CBOOL(rb_obj_is_kind_of(value, rb_cInteger))) {
-        GType gtype = NUM2ULONG(value);
+        GType gtype = NUM2SIZET(value);
         if (!g_type_name(gtype))
             return Qnil;
         return rb_funcall(self, id_new, 1, value);
@@ -672,7 +672,7 @@ rg_s_try_convert(VALUE self, VALUE value)
             } else {
                 Data_Get_Struct(data, RGObjClassInfo, cinfo);
             }
-            return rb_funcall(self, id_new, 1, ULONG2NUM(cinfo->gtype));
+            return rb_funcall(self, id_new, 1, SIZET2NUM(cinfo->gtype));
         }
         return Qnil;
     }
