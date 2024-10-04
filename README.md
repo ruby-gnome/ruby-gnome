@@ -1,21 +1,40 @@
 # Ruby-GNOME
-
-[![Gem Version](https://badge.fury.io/rb/gtk3.svg)](https://badge.fury.io/rb/gtk3)
+[![Gem Version](https://badge.fury.io/rb/gtk4.svg)](https://badge.fury.io/rb/gtk4)
 
 ![Ruby-GNOME Logo](https://avatars1.githubusercontent.com/u/416159?v=3&s=200)
 Ruby bindings for GNOME
 
 This is a set of bindings for the GNOME 3.x and 4.x libraries to use
-from Ruby 2.5, 2.6 and 2.7.
+from Ruby.
 
 ## Installation
 
-### Install the current releases.
+### Install the current releases
 
 The gems of the Ruby-GNOME projects can be easily installed with the `gem` command.
-For example in order to install the gtk3 gem and its dependencies:
 
-    gem install gtk3
+Here is an example to install the gtk4 gem and its dependencies:
+
+```bash
+gem install gtk4
+```
+
+Here are instructions for individual environments.
+
+#### Debian/Ubuntu
+
+```bash
+apt install -y gcc make ruby-dev
+sudo gem install gtk4
+```
+
+#### macOS
+
+...
+
+#### Windows
+
+...
 
 ### Install from GitHub master branch
 
@@ -27,7 +46,7 @@ Create `Gemfile` like the following:
 source "https://rubygems.org/"
 
 git "https://github.com/ruby-gnome/ruby-gnome.git" do
-  gem "gtk3"
+  gem "gtk4"
 end
 ```
 
@@ -46,7 +65,7 @@ Install these gems by Bundler:
 To compile and install a particular sub-binding, you can add arguments:
 
     % ruby extconf.rb [subdir]...
-    e.g.) ruby extconf.rb glib2 pango atk gdk_pixbuf2 gtk2
+    e.g.) ruby extconf.rb glib2 pango atk gdk_pixbuf2 gtk4
 
 Or you can compile each sub-binding:
 
@@ -82,7 +101,7 @@ or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
 
 ## Copying
 
-Copyright (c) 2002-2021 Ruby-GNOME Project Team
+Copyright (c) 2002-2024 Ruby-GNOME Project Team
 
 This program is free software.
 You can distribute/modify this program under the terms of
