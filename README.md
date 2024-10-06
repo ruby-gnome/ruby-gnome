@@ -5,38 +5,88 @@
 Ruby bindings for GNOME
 
 This is a set of bindings for the GNOME 3.x and 4.x libraries to use
-from Ruby.
+from Ruby that allow you to write graphical user interaces in ruby.
 
-## Installation
+## Installation Instructions for gtk3 and gtk4
 
-### Install the current releases
+### Debian/Ubuntu
 
-The gems of the Ruby-GNOME projects can be easily installed with the `gem` command.
-
-Here is an example to install the gtk4 gem and its dependencies:
+Ruby can be run from the system directories, or from your home directory, or both.  
+Most people won't have the correct permissions for a system intsall, So the vast majority of
+people to run ruby from their local, <b>home/...</b> folder.  To test if your copy of
+ruby is running locally enter this on the command line:
 
 ```bash
-gem install gtk4
+which ruby
 ```
 
-Here are instructions for individual environments.
+If it outputs something like this:
+```bash
+/home/ralph/.rbenv/shims/ruby
+```
+that starts with "home", that's local (good!) 
 
-#### Debian/Ubuntu
+But if outputs something like this:
+```bash
+/usr/bin/ruby
+```
+That is a system folder, and the gtk3 gem will fail to install.  Actually,
+a system administrator with super-user permissions could install everything
+in the system folders (see advanced install), but its much better for everyone else to run ruby locally.
+
+If you're already running a copy of ruby under your home folder, you can install gtk3:
+
+```bash
+gem install gtk3
+```
+
+But if you're running ruby from the system folders, you can install a ruby version manager
+like <a href=https://rvm.io>RVM</a> or <a href="https://github.com/rbenv/rbenv?tab=readme-ov-file">rbenv</a>.  
+These programs allow you to run multiple versions of ruby
+from your home directory.
+
+rbenv has a <a href=https://github.com/rbenv/rbenv-installer#rbenv-installer>rvenv-installer</a>
+that installs everything and adds a line to your .bashrc file so you're running
+local copies of ruby.
+
+To get rvenv:
+1) Run the installer
+2) Restart your command prompt
+3) Run $rbenv install --list    #(find recent ruby version)
+4) Run $rbenv install 3.3.5      #(example version.  choose one from list)
+5) Run $which ruby              #(check that its running from home directory
+
+If that works, then you're ready to install gtk3:
+
+```bash
+gem install gtk3
+```
+
+### macOS
+
+Input neded...
+
+### Windows
+
+In windows, the gem should install without issue.  If you install ruby using the <a href="https://rubyinstaller.org/">
+Ruby Installer</a>, make sure that MSYS2 gets installed too.  Gtk needs MSYS2 to make the binary filees.
+Then, at the ruby command prompt:
+
+```bash
+gem install gtk3
+```
+
+
+## Advanced Installation instructions
+
+### Debian/Ubuntu
 
 ```bash
 apt install -y gcc make ruby-dev
 sudo gem install gtk4
 ```
 
-#### macOS
-
-...
-
-#### Windows
-
-...
-
-### Install from GitHub master branch
+## Install from GitHub master branch
 
 You can also install these gems from GitHub master branch.
 
@@ -56,7 +106,7 @@ Install these gems by Bundler:
 % bundle install
 ```
 
-## Advanced Installation
+## Build From Source Code
 
     % ruby extconf.rb
     % make
