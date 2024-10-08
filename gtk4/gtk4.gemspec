@@ -21,12 +21,12 @@ require_relative "../glib2/version"
 Gem::Specification.new do |s|
   s.name          = "gtk4"
   s.summary       = "Ruby/GTK4 is a Ruby binding of GTK+-4.x."
-  s.description = "Ruby/Gtk4 is a ruby binding of Gtk+ 4.x.  It allows ruby programmers to use " + 
-	  "the GTK+ graphics toolkit to make graphical user interfaces for their ruby scripts.  " +
+  s.description = "Ruby/GTK4 is a Ruby binding of GTK 4.x. It allows Ruby programmers to use " + 
+	  "the GTK graphics toolkit to make graphical user interfaces for their Ruby scripts. " +
 	  "Many of the programs you use like file explorers, browsers, graphics programs etc. " +
-	  "use gtk+ to make their GUI.  In fact, there's a good chance that you're looking at " +
-	  "a gtk+ window right now.  All the gtk+ commands and widets have been translated into " +
-	  "ruby, so ruby programmers can write scripts that create windows instead of only " +
+	  "use GTK to make their GUI. In fact, there's a good chance that you're looking at " +
+	  "a GTK window right now. All the GTK commands and widgets have been translated into " +
+	  "Ruby, so Ruby programmers can write scripts that create windows instead of only " +
 	  "using the command line. " +  
 	  "Visit our homepage for install instructions and tutorials." 
 
