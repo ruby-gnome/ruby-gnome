@@ -82,7 +82,7 @@ gem install gtk4
 ### Debian/Ubuntu
 
 ```bash
-apt install -y gcc make ruby-dev
+sudo apt install -y gcc make ruby-dev
 sudo gem install gtk4
 ```
 
