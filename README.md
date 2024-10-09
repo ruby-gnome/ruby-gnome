@@ -5,7 +5,7 @@
 Ruby bindings for GNOME
 
 This is a set of bindings for the GNOME 3.x and 4.x libraries to use
-from Ruby that allow you to write graphical user interaces in ruby.
+from Ruby that allows you to write graphical user interfaces in Ruby.
 
 ## Installation Instructions for gtk3 and gtk4
 
