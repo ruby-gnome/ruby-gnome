@@ -52,7 +52,7 @@ local copies of ruby.
 To get rvenv:
 1) Run the installer
 2) Restart your command prompt
-3) Run $rbenv install --list    #(find recent ruby version)
+3. Run `rbenv install --list` (find recent Ruby version)
 4) Run $rbenv install 3.3.5      #(example version.  choose one from list)
 5) Run $which ruby              #(check that its running from home directory
 
