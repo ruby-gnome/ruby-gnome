@@ -13,7 +13,7 @@ from Ruby that allows you to write graphical user interfaces in Ruby.
 
 Ruby can be run from the system directories, or from your home directory, or both.  
 Most people won't have the correct permissions for a system install, so the vast majority of
-people to run ruby from their local, <b>home/...</b> folder.  
+people to run Ruby from their local, `/home/...` directory.  
 
 To test if your copy of Ruby is running locally enter this on the command line:
 
