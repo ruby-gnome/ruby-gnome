@@ -12,7 +12,7 @@ from Ruby that allows you to write graphical user interfaces in Ruby.
 ### Debian/Ubuntu
 
 Ruby can be run from the system directories, or from your home directory, or both.  
-Most people won't have the correct permissions for a system intsall, So the vast majority of
+Most people won't have the correct permissions for a system install, so the vast majority of
 people to run ruby from their local, <b>home/...</b> folder.  
 
 To test if your copy of ruby is running locally enter this on the command line:
