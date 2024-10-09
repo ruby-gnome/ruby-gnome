@@ -68,9 +68,9 @@ Input needed...
 
 ### Windows
 
-In windows, the gem should install without issue.  If you install ruby using the <a href="https://rubyinstaller.org/">
-Ruby Installer</a>, make sure that MSYS2 gets installed too.  Gtk needs MSYS2 to make the binary filees.
-Then, at the ruby command prompt:
+In Windows, the gem should be installed without issue.  If you install Ruby using the
+[Ruby Installer](https://rubyinstaller.org/), make sure that MSYS2 gets installed too.  GTK needs MSYS2 to make the binary files.
+Then, at the Ruby command prompt:
 
 ```bash
 gem install gtk4
