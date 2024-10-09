@@ -25,7 +25,7 @@ If it outputs something like this:
 ```bash
 /home/ralph/.rbenv/shims/ruby
 ```
-that starts with "home", that's local (good!) 
+that starts with `/home/`, that's local (good!) 
 
 But if outputs something like this:
 ```bash
