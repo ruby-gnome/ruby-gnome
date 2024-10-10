@@ -31,27 +31,27 @@ But if outputs something like this:
 ```bash
 /usr/bin/ruby
 ```
-That is a system folder, and the gtk3 gem will fail to install.  Actually,
+That is a system directory, and the gtk4 gem will fail to install.  Actually,
 a system administrator with super-user permissions could install everything
-in the system folders (see advanced install), but its much better for everyone else to run ruby locally.
+in the system folders (see advanced install), but its much better for everyone else to run Ruby locally.
 
-If you're already running a copy of ruby under your home folder, you can install gtk4 (or gtk3):
+If you're already running a copy of Ruby under your home directory, you can install gtk4 (or gtk3):
 
 ```bash
 gem install gtk4
 ```
 
-But if you're running ruby from the system folders, you can install a ruby version manager
-like <a href=https://rvm.io>RVM</a> or <a href="https://github.com/rbenv/rbenv?tab=readme-ov-file">rbenv</a>.  
-These programs allow you to run multiple versions of ruby from your home directory.
+But if you're running ruby from the system folders, you can install a Ruby version manager
+like [RVM](https://rvm.io/) or [rbenv](https://github.com/rbenv/rbenv).  
+These programs allow you to run multiple versions of Ruby from your home directory.
 
-rbenv has a <a href=https://github.com/rbenv/rbenv-installer#rbenv-installer>rvenv-installer</a>
-that installs everything and adds a line to your .bashrc file so you're running
-local copies of ruby.
+rbenv has a [rbenv-installer](https://github.com/rbenv/rbenv-installer)
+that installs everything and adds a line to your `.bashrc` file so you're running
+local copies of Ruby.
 
 To get rvenv:
-1) Run the installer
-2) Restart your command prompt
+1. Run the installer
+2. Restart your command prompt
 3. Run `rbenv install --list` (find recent Ruby version)
 4. Run `rbenv install 3.3.5` (example version.  choose one from list)
 5. Run `which ruby` (check that its running from home directory)
