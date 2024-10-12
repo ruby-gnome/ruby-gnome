@@ -21,7 +21,11 @@
 #   * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/AUTHORS
 #   * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/COPYING
 
-require "opengl"
+begin
+  require "opengl"
+rescue LoadError
+  $stderr.puts("opengl gem can't be loaded")
+end
 
 class GtkGLAreaDemo < GtkDemo
   X_AXIS = 0
@@ -320,5 +324,5 @@ class GtkGLAreaDemo < GtkDemo
     box
   end
 
-  GtkDemo.register(new)
+  GtkDemo.register(new) if defined?(GL)
 end
