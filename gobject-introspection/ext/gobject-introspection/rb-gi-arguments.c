@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2024  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -1100,26 +1100,116 @@ static VALUE
 rb_gi_arguments_convert_arg_array_body_c_fixed_size(ArrayLikeToRubyData *data,
                                                     gint fixed_size)
 {
-    const char *array_c_type = "[fixed-size]";
+    const char *array_c_type = "fixed-size";
     switch (data->element_type_tag) {
       case GI_TYPE_TAG_VOID:
       case GI_TYPE_TAG_BOOLEAN:
-      case GI_TYPE_TAG_INT8:
-      case GI_TYPE_TAG_UINT8:
-      case GI_TYPE_TAG_INT16:
-      case GI_TYPE_TAG_UINT16:
-      case GI_TYPE_TAG_INT32:
-      case GI_TYPE_TAG_UINT32:
-      case GI_TYPE_TAG_INT64:
-      case GI_TYPE_TAG_UINT64:
-      case GI_TYPE_TAG_FLOAT:
-      case GI_TYPE_TAG_DOUBLE:
-      case GI_TYPE_TAG_GTYPE:
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(array)[c][%s][%s] -> Ruby",
                  array_c_type,
                  g_type_tag_to_string(data->element_type_tag));
         return Qnil;
+      case GI_TYPE_TAG_INT8:
+        {
+            gint8 *array = (gint8 *)(data->arg->v_pointer);
+            VALUE rb_array = rb_ary_new_capa(fixed_size);
+            gint i;
+            for (i = 0; i < fixed_size; i++) {
+                rb_ary_push(rb_array, RB_INT2NUM(array[i]));
+            }
+            return rb_array;
+        }
+      case GI_TYPE_TAG_UINT8:
+        {
+            guint8 *array = (guint8 *)(data->arg->v_pointer);
+            VALUE rb_array = rb_ary_new_capa(fixed_size);
+            gint i;
+            for (i = 0; i < fixed_size; i++) {
+                rb_ary_push(rb_array, RB_UINT2NUM(array[i]));
+            }
+            return rb_array;
+        }
+      case GI_TYPE_TAG_INT16:
+        {
+            gint16 *array = (gint16 *)(data->arg->v_pointer);
+            VALUE rb_array = rb_ary_new_capa(fixed_size);
+            gint i;
+            for (i = 0; i < fixed_size; i++) {
+                rb_ary_push(rb_array, RB_INT2NUM(array[i]));
+            }
+            return rb_array;
+        }
+      case GI_TYPE_TAG_UINT16:
+        {
+            guint16 *array = (guint16 *)(data->arg->v_pointer);
+            VALUE rb_array = rb_ary_new_capa(fixed_size);
+            gint i;
+            for (i = 0; i < fixed_size; i++) {
+                rb_ary_push(rb_array, RB_UINT2NUM(array[i]));
+            }
+            return rb_array;
+        }
+      case GI_TYPE_TAG_INT32:
+        {
+            gint32 *array = (gint32 *)(data->arg->v_pointer);
+            VALUE rb_array = rb_ary_new_capa(fixed_size);
+            gint i;
+            for (i = 0; i < fixed_size; i++) {
+                rb_ary_push(rb_array, RB_INT2NUM(array[i]));
+            }
+            return rb_array;
+        }
+      case GI_TYPE_TAG_UINT32:
+        {
+            guint32 *array = (guint32 *)(data->arg->v_pointer);
+            VALUE rb_array = rb_ary_new_capa(fixed_size);
+            gint i;
+            for (i = 0; i < fixed_size; i++) {
+                rb_ary_push(rb_array, RB_UINT2NUM(array[i]));
+            }
+            return rb_array;
+        }
+      case GI_TYPE_TAG_INT64:
+        {
+            gint64 *array = (gint64 *)(data->arg->v_pointer);
+            VALUE rb_array = rb_ary_new_capa(fixed_size);
+            gint i;
+            for (i = 0; i < fixed_size; i++) {
+                rb_ary_push(rb_array, RB_LL2NUM(array[i]));
+            }
+            return rb_array;
+        }
+      case GI_TYPE_TAG_UINT64:
+        {
+            guint64 *array = (guint64 *)(data->arg->v_pointer);
+            VALUE rb_array = rb_ary_new_capa(fixed_size);
+            gint i;
+            for (i = 0; i < fixed_size; i++) {
+                rb_ary_push(rb_array, RB_ULL2NUM(array[i]));
+            }
+            return rb_array;
+        }
+      case GI_TYPE_TAG_FLOAT:
+        {
+            float *array = (float *)(data->arg->v_pointer);
+            VALUE rb_array = rb_ary_new_capa(fixed_size);
+            gint i;
+            for (i = 0; i < fixed_size; i++) {
+                rb_ary_push(rb_array, rb_float_new(array[i]));
+            }
+            return rb_array;
+        }
+      case GI_TYPE_TAG_DOUBLE:
+        {
+            double *array = (double *)(data->arg->v_pointer);
+            VALUE rb_array = rb_ary_new_capa(fixed_size);
+            gint i;
+            for (i = 0; i < fixed_size; i++) {
+                rb_ary_push(rb_array, rb_float_new(array[i]));
+            }
+            return rb_array;
+        }
+      case GI_TYPE_TAG_GTYPE:
       case GI_TYPE_TAG_UTF8:
       case GI_TYPE_TAG_FILENAME:
       case GI_TYPE_TAG_ARRAY:
