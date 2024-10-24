@@ -35,55 +35,12 @@ G_BEGIN_DECLS
 #define RBGLIB_MINOR_VERSION 2
 #define RBGLIB_MICRO_VERSION 5
 
-#ifndef RB_ZALLOC
-#  ifdef ZALLOC
-#    define RB_ZALLOC(type) ZALLOC(type)
-#  else
-#    define RB_ZALLOC(type) rbg_memzero(ALLOC(type), sizeof(type))
-#  endif
-#endif
-
-#ifndef RB_ALLOC
-#  define RB_ALLOC(type) ALLOC(type)
-#endif
-
-#ifndef RB_ALLOC_N
-#  define RB_ALLOC_N(type, n) ALLOC_N(type, n)
-#endif
-
-/* For Ruby < 2.3 */
-#ifndef RB_OBJ_FROZEN
-#  define RB_OBJ_FROZEN(obj) OBJ_FROZEN(obj)
-#endif
-
-#ifndef RSTRING_PTR
-#  define RSTRING_PTR(s) (RSTRING(s)->ptr)
-#  define RSTRING_LEN(s) (RSTRING(s)->len)
-#endif
-
-#ifndef RARRAY_PTR
-#  define RARRAY_PTR(a) (RARRAY(a)->ptr)
-#  define RARRAY_LEN(a) (RARRAY(a)->len)
-#endif
-
-#ifndef RARRAY_CONST_PTR
-#  define RARRAY_CONST_PTR(a) RARRAY_PTR(a)
-#endif
-
-#ifndef DBL2NUM
-#  define DBL2NUM(v)      (rb_float_new(v))
-#endif
-
 /* For Ruby < 3.0 */
 #ifndef RB_LL2NUM
 #  define RB_LL2NUM LL2NUM
 #endif
 #ifndef RB_ULL2NUM
 #  define RB_ULL2NUM ULL2NUM
-#endif
-
-#ifndef RBASIC_CLASS
-#  define RBASIC_CLASS(obj) (RBASIC(obj)->klass)
 #endif
 
 #ifndef G_SOURCE_REMOVE
