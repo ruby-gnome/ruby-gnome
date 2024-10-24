@@ -108,11 +108,11 @@ G_BEGIN_DECLS
 #define POINTER2RVAL(pointer) ((VALUE)(pointer))
 
 #if SIZEOF_VOIDP == SIZEOF_LONG
-#  define NUM2POINTER(number) ((gpointer)NUM2ULONG(number))
-#  define POINTER2NUM(pointer) ULONG2NUM((unsigned long)pointer)
+#  define NUM2POINTER(number) ((gpointer)RB_NUM2ULONG(number))
+#  define POINTER2NUM(pointer) RB_ULONG2NUM((unsigned long)pointer)
 #else
-#  define NUM2POINTER(number) ((gpointer)NUM2ULL(number))
-#  define POINTER2NUM(pointer) ULL2NUM((unsigned LONG_LONG)pointer)
+#  define NUM2POINTER(number) ((gpointer)RB_NUM2ULL(number))
+#  define POINTER2NUM(pointer) RB_ULL2NUM((unsigned LONG_LONG)pointer)
 #endif
 
 #define GINTS2RVAL(ary, n) rbg_gints2rval(ary, n)
