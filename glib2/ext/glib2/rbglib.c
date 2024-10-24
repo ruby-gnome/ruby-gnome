@@ -1248,7 +1248,6 @@ union       GDoubleIEEE754;
     Init_gutil_callback();
 
     Init_glib_gettext();
-    Init_glib_int64();
     Init_glib_error();
     Init_glib_threads();
     Init_glib_convert();

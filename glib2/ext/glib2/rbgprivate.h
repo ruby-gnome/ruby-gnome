@@ -146,7 +146,6 @@ G_GNUC_INTERNAL void Init_glib_gc(void);
 G_GNUC_INTERNAL void Init_gutil(void);
 G_GNUC_INTERNAL void Init_gutil_callback(void);
 G_GNUC_INTERNAL void Init_glib_gettext(void);
-G_GNUC_INTERNAL void Init_glib_int64(void);
 G_GNUC_INTERNAL void Init_glib_error(void);
 G_GNUC_INTERNAL void Init_glib_error_conversions(void);
 G_GNUC_INTERNAL void Init_glib_threads(void);
