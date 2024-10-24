@@ -20,24 +20,28 @@
 
 #include "rbgprivate.h"
 
+/* Deprecated. Use RB_LL2NUM() directly. */
 VALUE
 rbglib_int64_to_num(guint64 val)
 {
     return RB_LL2NUM(val);
 }
 
+/* Deprecated. Use RB_ULL2NUM() directly. */
 VALUE
 rbglib_uint64_to_num(guint64 val)
 {
     return RB_ULL2NUM(val);
 }
 
+/* Deprecated. Use RB_NUM2LL() directly. */
 gint64
 rbglib_num_to_int64(VALUE val)
 {
     return RB_NUM2LL(val);
 }
 
+/* Deprecated. Use RB_NUM2ULL() directly. */
 guint64
 rbglib_num_to_uint64(VALUE val)
 {

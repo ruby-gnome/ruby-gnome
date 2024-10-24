@@ -210,6 +210,8 @@ extern GQuark rbgerr_ruby_error_quark(void);
 extern VALUE rbgerr_gerror2exception(GError *error);
 extern VALUE rbgerr_define_gerror(GQuark domain, const gchar* name, VALUE module, VALUE parent, GType gtype);
 
+/* Deprecated. Use RB_LL2NUM()/RB_ULL2NUM()/RB_NUM2LL()/RB_NUM2ULL()
+ * directly. */
 extern VALUE rbglib_int64_to_num(guint64 val);
 extern VALUE rbglib_uint64_to_num(guint64 val);
 extern gint64 rbglib_num_to_int64(VALUE val);
