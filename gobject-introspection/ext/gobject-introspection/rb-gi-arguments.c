@@ -683,10 +683,10 @@ rb_gi_arguments_convert_arg_array_like_ensure(VALUE user_data)
     return Qnil;
 }
 
-static gint64
-rb_gi_arguments_convert_arg_array_body_extract_length(GIArgument *arg,
-                                                      RBGIArgMetadata *metadata,
-                                                      gboolean is_pointer)
+gint64
+rb_gi_argument_out_array_get_length(GIArgument *arg,
+                                    RBGIArgMetadata *metadata,
+                                    gboolean is_pointer)
 {
     switch (metadata->type.tag) {
       case GI_TYPE_TAG_VOID:
@@ -697,49 +697,49 @@ rb_gi_arguments_convert_arg_array_body_extract_length(GIArgument *arg,
         return -1;
       case GI_TYPE_TAG_INT8:
         if (is_pointer) {
-            return *((gint8 *)arg->v_pointer);
+            return *((gint8 *)(arg->v_pointer));
         } else {
             return arg->v_int8;
         }
       case GI_TYPE_TAG_UINT8:
         if (is_pointer) {
-            return *((guint8 *)arg->v_pointer);
+            return *((guint8 *)(arg->v_pointer));
         } else {
             return arg->v_uint8;
         }
       case GI_TYPE_TAG_INT16:
         if (is_pointer) {
-            return *((gint16 *)arg->v_pointer);
+            return *((gint16 *)(arg->v_pointer));
         } else {
             return arg->v_int16;
         }
       case GI_TYPE_TAG_UINT16:
         if (is_pointer) {
-            return *((guint16 *)arg->v_pointer);
+            return *((guint16 *)(arg->v_pointer));
         } else {
             return arg->v_uint16;
         }
       case GI_TYPE_TAG_INT32:
         if (is_pointer) {
-            return *((gint32 *)arg->v_pointer);
+            return *((gint32 *)(arg->v_pointer));
         } else {
             return arg->v_int32;
         }
       case GI_TYPE_TAG_UINT32:
         if (is_pointer) {
-            return *((guint32 *)arg->v_pointer);
+            return *((guint32 *)(arg->v_pointer));
         } else {
             return arg->v_uint32;
         }
       case GI_TYPE_TAG_INT64:
         if (is_pointer) {
-            return *((gint64 *)arg->v_pointer);
+            return *((gint64 *)(arg->v_pointer));
         } else {
             return arg->v_int64;
         }
       case GI_TYPE_TAG_UINT64:
         if (is_pointer) {
-            return *((guint64 *)arg->v_pointer);
+            return *((guint64 *)(arg->v_pointer));
         } else {
             return arg->v_uint64;
         }
@@ -789,10 +789,9 @@ rb_gi_arguments_convert_arg_array_body_get_length(ArrayLikeToRubyData *data)
                                             data->arg_metadata->struct_info,
                                             data->arg_metadata->struct_memory);
         int64_t length =
-            rb_gi_arguments_convert_arg_array_body_extract_length(
-                &value,
-                &length_metadata,
-                FALSE);
+            rb_gi_argument_out_array_get_length(&value,
+                                                &length_metadata,
+                                                FALSE);
         /* TODO: Use ensure */
         rb_gi_arg_metadata_clear(&length_metadata);
         g_base_info_unref(field_info);
@@ -816,20 +815,16 @@ rb_gi_arguments_convert_arg_array_body_get_length(ArrayLikeToRubyData *data)
         gboolean is_pointer =
             !(length_metadata->array_metadata &&
               length_metadata->array_metadata->output_buffer_p);
-        return
-            rb_gi_arguments_convert_arg_array_body_extract_length(
-                length_arg,
-                length_metadata,
-                is_pointer);
+        return rb_gi_argument_out_array_get_length(length_arg,
+                                                   length_metadata,
+                                                   is_pointer);
     } else {
         length_arg = &g_array_index(data->args->in_args,
                                     GIArgument,
                                     length_metadata->in_arg_index);
-        return
-            rb_gi_arguments_convert_arg_array_body_extract_length(
-                length_arg,
-                length_metadata,
-                FALSE);
+        return rb_gi_argument_out_array_get_length(length_arg,
+                                                   length_metadata,
+                                                   FALSE);
     }
 }
 

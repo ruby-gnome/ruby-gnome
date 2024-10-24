@@ -101,6 +101,11 @@ rb_gi_arg_metadata_clear(RBGIArgMetadata *metadata);
 G_GNUC_INTERNAL void
 rb_gi_arg_metadata_free(RBGIArgMetadata *metadata);
 
+G_GNUC_INTERNAL gint64
+rb_gi_argument_out_array_get_length(GIArgument *arg,
+                                    RBGIArgMetadata *metadata,
+                                    gboolean is_pointer);
+
 G_GNUC_INTERNAL void
 rb_gi_arguments_init(RBGIArguments *args,
                      GICallableInfo *info,

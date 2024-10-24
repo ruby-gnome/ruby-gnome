@@ -103,14 +103,39 @@ rb_gi_arguments_out_free_array_c_interface(RBGIArguments *args,
         g_free(*target);
         break;
       case GI_TRANSFER_EVERYTHING:
-      default:
-        rb_raise(rb_eNotImpError,
-                 "TODO: [%s] %s free GIArgument(%s/%s)[%s]",
-                 metadata->name,
-                 rb_gi_direction_to_string(metadata->direction),
-                 g_type_tag_to_string(metadata->type.tag),
-                 rb_gi_array_type_to_string(metadata->array_type),
-                 rb_gi_transfer_to_string(metadata->transfer));
+        {
+            GIArgument *length_arg = metadata->array_length_arg;
+            RBGIArgMetadata *length_metadata = metadata->array_length_metadata;
+            gint64 length = rb_gi_argument_out_array_get_length(length_arg,
+                                                                length_metadata,
+                                                                TRUE);
+            if (length == -1) {
+                rb_raise(rb_eNotImpError,
+                         "TODO: [%s] %s free GIArgument(%s/%s)[%s]: no length",
+                         metadata->name,
+                         rb_gi_direction_to_string(metadata->direction),
+                         g_type_tag_to_string(metadata->type.tag),
+                         rb_gi_array_type_to_string(metadata->array_type),
+                         rb_gi_transfer_to_string(metadata->transfer));
+            }
+
+            if (metadata->element_type.interface_gtype == G_TYPE_NONE) {
+                gint64 i;
+                for (i = 0; i < length; i++) {
+                    g_free((*target)[i]);
+                }
+                g_free(*target);
+            } else {
+                rb_raise(rb_eNotImpError,
+                         "TODO: [%s] %s free GIArgument(%s/%s)[%s]",
+                         metadata->name,
+                         rb_gi_direction_to_string(metadata->direction),
+                         g_type_tag_to_string(metadata->type.tag),
+                         rb_gi_array_type_to_string(metadata->array_type),
+                         rb_gi_transfer_to_string(metadata->transfer));
+            }
+        }
+        break;
     }
     xfree(target);
 }
@@ -337,6 +362,7 @@ rb_gi_arguments_out_init_arg_array_c(RBGIArguments *args,
         break;
       case GI_TYPE_TAG_UTF8:
         argument->v_pointer = ALLOC(gchar **);
+        *((gchar **)(argument->v_pointer)) = NULL;
         metadata->free_func = rb_gi_arguments_out_free_array_c_string;
         break;
       case GI_TYPE_TAG_FILENAME:
@@ -349,6 +375,7 @@ rb_gi_arguments_out_init_arg_array_c(RBGIArguments *args,
         break;
       case GI_TYPE_TAG_INTERFACE:
         argument->v_pointer = ALLOC(gpointer *);
+        *((gpointer *)(argument->v_pointer)) = NULL;
         metadata->free_func = rb_gi_arguments_out_free_array_c_interface;
         break;
       case GI_TYPE_TAG_GLIST:
