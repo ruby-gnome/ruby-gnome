@@ -74,6 +74,14 @@ G_BEGIN_DECLS
 #  define DBL2NUM(v)      (rb_float_new(v))
 #endif
 
+/* For Ruby < 3.0 */
+#ifndef RB_LL2NUM
+#  define RB_LL2NUM LL2NUM
+#endif
+#ifndef RB_ULL2NUM
+#  define RB_ULL2NUM ULL2NUM
+#endif
+
 #ifndef RBASIC_CLASS
 #  define RBASIC_CLASS(obj) (RBASIC(obj)->klass)
 #endif
