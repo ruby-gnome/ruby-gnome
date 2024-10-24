@@ -7,6 +7,7 @@ jobs:
   github:
     name: GitHub
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Release
@@ -23,3 +24,23 @@ jobs:
             --title "${title}"
         env:
           GH_TOKEN: ${{ github.token }}
+
+  rubygems:
+    name: RubyGems
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      id-token: write
+    environment: release
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ruby
+      - name: Build gems
+        run: |
+          rake gem:build
+      - uses: rubygems/configure-rubygems-credentials@v1.0.0
+      - name: Push gems
+        run: |
+          rake gem:push
