@@ -35,11 +35,11 @@ rbglib_uint64_to_num(guint64 val)
 gint64
 rbglib_num_to_int64(VALUE val)
 {
-    return NUM2LL(val);
+    return RB_NUM2LL(val);
 }
 
 guint64
 rbglib_num_to_uint64(VALUE val)
 {
-    return NUM2ULL(val);
+    return RB_NUM2ULL(val);
 }
