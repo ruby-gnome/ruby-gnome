@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2022  Ruby-GNOME Project Team
+# Copyright (C) 2013-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -96,7 +96,7 @@ class TestGdkRGBA < Test::Unit::TestCase
     end
 
     def test_invalid
-      message = "invalid RGBA format: \"invalid\" "
+      message = +"invalid RGBA format: \"invalid\" "
       message << "(available formats: "
       message << "COLOR_NAME, "
       message << "\#RGB, "
