@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2023  Ruby-GNOME Project Team
+# Copyright (C) 2014-2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -95,6 +95,7 @@ module Gtk
       require_relative "file-chooser-dialog"
       require_relative "font-chooser-dialog"
       require_relative "gesture-multi-press"
+      require_relative "gesture-stylus"
       require_relative "icon-theme"
       require_relative "icon-view"
       require_relative "image"
