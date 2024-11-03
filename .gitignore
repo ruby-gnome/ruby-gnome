@@ -1,41 +1,51 @@
+# Copyright (C) 2011-2024  Ruby-GNOME Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
 *.a
 *.bundle
 *.o
 *.pc
 *.so
 *.swp
-*/pkg/
-*/tmp/
-*/vendor/
 .RUBYARCHDIR.time
 .RUBYLIBDIR*.time
 .emacs.desktop
 .emacs.desktop.lock
 .gdb_history
-.rbx/
 /*.tar.gz
+/*/.yardoc/
+/*/ext/*/Makefile
+/*/ext/*/Makefile.lib
+/*/ext/*/mkmf.log
+/*/pkg/
+/*/tmp/
+/*/yard_docs/
 /.ccache/
-/.yardoc/
 /Gemfile.local
 /Gemfile.lock
-/build/.vagrant/
-/dist/
 /gdk3/ext/gdk3/rbgdkkeysyms.h
 /gio2/test/fixture/resource/ruby-gio2.gresource
+/gio2/test/fixture/schema/*/gschemas.compiled
 /glib2/ext/glib2/glib-enum-types.c
 /glib2/ext/glib2/glib-enum-types.h
 /gobject-introspection/ext/gobject-introspection/gobject-introspection-enum-types.c
 /gobject-introspection/ext/gobject-introspection/gobject-introspection-enum-types.h
 /gobject-introspection/ext/gobject-introspection/rbgiversion.h
-/goocanvas/ext/goocanvas/rbgoo_canvasversion.h
 /gtk3/test/fixture/*.gresource
-/gtksourceview2/ext/gtksourceview2/rbgtksourceview2version.h
 /gtksourceview3/ext/gtksourceview3/rbgtksourceview3version.h
-/misc/release.rb
 /poppler/test/tmp/
 /tmp/
-Makefile
-Makefile.lib
-gschemas.compiled
-mkmf.log
-yard_docs
+/yard_docs/

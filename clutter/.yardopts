@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2024  Ruby-GNOME Project Team
+# Copyright (C) 2024  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,19 +14,10 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-source "https://rubygems.org/"
-
-gem "cairo"
-gem "commonmarker"
-gem "native-package-installer"
-gem "pkg-config"
-gem "rake"
-gem "test-unit"
-gem "webrick"
-gem "yard"
-gem "yard-gobject-introspection", github: "ruby-gnome/yard-gobject-introspection"
-
-local_gemfile = File.join(File.dirname(__FILE__), "Gemfile.local")
-if File.exist?(local_gemfile)
-  eval_gemfile(local_gemfile)
-end
+--files doc/**/*.*
+--load yard-gobject-introspection.rb
+--markup markdown
+--markup-provider commonmarker
+--output-dir yard_docs
+--title Ruby/Clutter
+lib/**/*.rb

@@ -1,9 +1,26 @@
 # -*- ruby -*-
+#
+# Copyright (C) 2008-2024  Ruby-GNOME Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "pathname"
+require "erb/util"
 require "find"
-require "tmpdir"
 require "open-uri"
+require "pathname"
+require "tmpdir"
 
 task :default => :test
 
@@ -177,4 +194,54 @@ desc "tag the current release"
 task :tag do
   sh("git", "tag", "-a", version, "-m", "release #{version}!!!")
   sh("git", "push", "--tags")
+end
+
+namespace :doc do
+  generate_tasks = []
+  namespace :generate do
+    packages.each do |package|
+      desc "generate documents for #{package}"
+      task package do
+        rm_rf("#{package}/yard_docs")
+        ruby("-C#{package}", "-S", "yard", "doc")
+      end
+      generate_tasks << "doc:generate:#{package}"
+    end
+  end
+
+  desc "generate all documents"
+  task generate: generate_tasks do
+    rm_rf("yard_docs")
+    mkdir_p("yard_docs")
+    packages.each do |package|
+      cp_r("#{package}/yard_docs/", "yard_docs/#{package}")
+    end
+
+    File.open("yard_docs/index.html", "w") do |index_html|
+      index_html << <<-HEADER
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruby-GNOME</title>
+  </head>
+  <body>
+    <h1>Ruby-GNOME documents</h1>
+    <ul>
+      HEADER
+
+      packages.each do |package|
+        index_html << <<-PACKAGE
+      <li><a href="#{ERB::Util.h(package)}/">#{ERB::Util.h(package)}</li>
+        PACKAGE
+      end
+
+      index_html << <<-FOOTER
+    </ul>
+  </body>
+</html>
+      FOOTER
+    end
+  end
 end
