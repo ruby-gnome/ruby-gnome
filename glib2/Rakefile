@@ -19,10 +19,10 @@
 base_dir = __dir__
 
 $LOAD_PATH.unshift(File.join(base_dir, "lib"))
-require "gnome2/rake/package-task"
+require "gnome/rake/package-task"
 
 package_name = File.basename(base_dir)
 spec = Gem::Specification.load(File.join(base_dir, "#{package_name}.gemspec"))
 
-GNOME2::Rake::PackageTask.define(spec, __dir__) do |package|
+GNOME::Rake::PackageTask.define(spec, __dir__) do |package|
 end
