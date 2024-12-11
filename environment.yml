@@ -9,4 +9,5 @@ dependencies:
   - glib
   - libgcc-ng
   - make
+  - pkgconf
   - ruby
