@@ -14,8 +14,7 @@ require 'gtksourceview5'
 main = Gtk::Application.new("org.test.gtksourceview5")
 
 main.signal_connect("activate") do |app|
-  window = Gtk::Window.new()
-  window.application = app
+  window = Gtk::ApplicationWindow.new(app)
   
   view = GtkSource::View.new
   scrolled_window = Gtk::ScrolledWindow.new
