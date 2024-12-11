@@ -18,7 +18,9 @@ main.signal_connect("activate") do |app|
   window.application = app
   
   view = GtkSource::View.new
-  window.set_child(Gtk::ScrolledWindow.new.set_child(view))
+  scrolled_window = Gtk::ScrolledWindow.new
+  scrolled_window.child = view
+  window.child = scrolled_window
   view.show_line_numbers = true
   view.insert_spaces_instead_of_tabs = true
   view.indent_width = 2
