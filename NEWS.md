@@ -1,5 +1,38 @@
 # NEWS
 
+## Ruby-GNOME 4.2.5: 2024-12-15
+
+This is a minor bug fix release.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Fixes
+
+    * Windows: Fixed a bug that `GType` conversion may be failed.
+      * GH-1621
+      * Reported by Eric Cunningham
+
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for transfer everything struct C array.
+
+    * Added support for converting fixed size number array to `Array`.
+
+#### Ruby/GTK4
+
+  * Improvements
+
+    * `Gtk::GestureStylus#backlog`: Improved API.
+
+### Thanks
+
+  * Eric Cunningham
+
 ## Ruby-GNOME 4.2.4: 2024-09-24
 
 This is a WebKitGTK support improvement release.
