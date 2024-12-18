@@ -27,7 +27,7 @@ class TestAudio < Test::Unit::TestCase
     assert_equal(44100, structure.get_value("rate").value)
     assert_equal(2, structure.get_value("channels").value)
 
-    audio_info.set_format(Gst::AudioFormat::F32LE, 16000, 1)
+    audio_info.set_format(:f32le, 16000, 1)
     modified_structure = audio_info.to_caps.structures[0]
     assert_equal("F32LE", modified_structure.get_value("format").value)
     assert_equal(16000, modified_structure.get_value("rate").value)
