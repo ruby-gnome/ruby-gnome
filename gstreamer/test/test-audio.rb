@@ -21,8 +21,7 @@ class TestAudio < Test::Unit::TestCase
     caps.set_value("rate", 44100)
     caps.set_value("channels", 2)
 
-    success, audio_info = Gst::AudioInfo.from_caps(caps)
-    assert(success)
+    audio_info = Gst::AudioInfo.new(caps)
     structure = audio_info.to_caps.structures[0]
     assert_equal(44100, structure.get_value("rate").value)
     assert_equal(2, structure.get_value("channels").value)
