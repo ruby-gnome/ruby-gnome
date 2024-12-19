@@ -21,6 +21,7 @@ require "gobject-introspection"
 require "gst/loader"
 require "gst/base-loader"
 require "gst/controller-loader"
+require "gst/audio-loader"
 
 module Gst
   LOG_DOMAIN = "GStreamer"
@@ -55,6 +56,7 @@ module Gst
       loader.load
       init_base
       init_controller
+      init_audio
     end
 
     private
@@ -68,6 +70,12 @@ module Gst
       loader = GstController::Loader.new(GstController)
       loader.load
       Gst.include(GstController)
+    end
+
+    def init_audio
+      loader = GstAudio::Loader.new(GstAudio)
+      loader.load
+      Gst.include(GstAudio)
     end
   end
 end
