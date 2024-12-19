@@ -15,7 +15,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestAudio < Test::Unit::TestCase
-  def test_audio
+  def test_audio_info
+    audio_info = Gst::AudioInfo.new
+    audio_info.set_format(:s8, 44100, 2)
+    structure = audio_info.to_caps.structures[0]
+    assert_equal(44100, audio_info.rate)
+    assert_equal(2, audio_info.channels)
+
+    audio_info.set_format(:f32le, 16000, 1)
+    modified_structure = audio_info.to_caps.structures[0]
+    assert_equal("F32LE", modified_structure.get_value("format").value)
+    assert_equal(16000, audio_info.rate)
+    assert_equal(1, audio_info.channels)
+  end
+
+  def test_audio_info_from_caps
     caps = Gst::Caps.new("audio/ogg")
     caps.set_value("format", "S8")
     caps.set_value("rate", 44100)
