@@ -15,6 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestAudio < Test::Unit::TestCase
+  include GStreamerTestUtils
+
   def test_audio_info
     audio_info = Gst::AudioInfo.new
     audio_info.set_format(:s8, 44100, 2)
@@ -30,6 +32,8 @@ class TestAudio < Test::Unit::TestCase
   end
 
   def test_audio_info_from_caps
+    only_gstreamer_version(1, 20)
+
     caps = Gst::Caps.new("audio/ogg")
     caps.set_value("format", "S8")
     caps.set_value("rate", 44100)
