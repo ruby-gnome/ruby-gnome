@@ -39,8 +39,8 @@ def on_activate(app)
     rescue
       puts "Cancel pressed"
     end
+    win.destroy
   end
-  win.destroy
 end
 
 app = Gtk::Application.new("io.github.ruby-gnome.gtk4.example.FileDialog")
