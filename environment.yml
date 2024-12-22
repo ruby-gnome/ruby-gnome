@@ -6,8 +6,17 @@ dependencies:
   - adwaita-icon-theme
   - compilers
   - dbus
+  - expat
   - glib
   - libgcc-ng
   - make
   - pkgconf
   - ruby
+  - xorg-kbproto
+  - xorg-libxau
+  - xorg-libxext
+  - xorg-libxrender
+  - xorg-renderproto
+  - xorg-xextproto
+  - xorg-xproto
+  - zlib
