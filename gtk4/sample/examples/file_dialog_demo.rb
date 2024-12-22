@@ -43,7 +43,7 @@ def on_activate(app)
   win.destroy
 end
 
-app = Gtk::Application.new("org.gtk.Example")
+app = Gtk::Application.new("io.github.ruby-gnome.gtk4.example.FileDialog")
 app.signal_connect("activate") do |app|
   on_activate(app)
 end
