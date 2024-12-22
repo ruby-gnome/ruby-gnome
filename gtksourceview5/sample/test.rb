@@ -11,9 +11,9 @@
 require 'gtksourceview5'
 
 
-main = Gtk::Application.new("org.test.gtksourceview5")
+app = Gtk::Application.new("io.github.ruby-gnome.gtksourceview5.sample")
 
-main.signal_connect("activate") do |app|
+app.signal_connect("activate") do
   window = Gtk::ApplicationWindow.new(app)
   
   view = GtkSource::View.new
@@ -39,5 +39,5 @@ main.signal_connect("activate") do |app|
   window.present
 end
 
-main.run
+app.run
 
