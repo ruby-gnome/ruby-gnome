@@ -35,7 +35,7 @@ def on_activate(app)
   dialog.save() do |_dialog, task, some_number|
     begin
       file = dialog.save_finish(result)
-      puts "res.path", res.path.to_s
+      puts("file.path: #{file.path}")
     rescue
       puts("Cancel pressed")
     end
