@@ -47,4 +47,4 @@ app = Gtk::Application.new("io.github.ruby-gnome.gtk4.example.FileDialog")
 app.signal_connect("activate") do
   on_activate(app)
 end
-app.run(nil)
+app.run
