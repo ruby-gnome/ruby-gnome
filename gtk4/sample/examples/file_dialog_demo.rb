@@ -28,7 +28,7 @@ require "gtk4"
 
 def on_activate(app)
   win = Gtk::ApplicationWindow.new(app)
-  dialog = Gtk::FileDialog.new()
+  dialog = Gtk::FileDialog.new
   dialog.modal = true
   dialog.set_initial_file(Gio::File.new_for_path(File.expand_path(__FILE__))) 
   dialog.set_initial_folder(Gio::File.new_for_path(Dir.pwd))
