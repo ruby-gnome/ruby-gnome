@@ -37,7 +37,7 @@ def on_activate(app)
       res = dialog.save_finish(task)
       puts "res.path", res.path.to_s
     rescue
-      puts "Cancel pressed"
+      puts("Cancel pressed")
     end
     win.destroy
   end
