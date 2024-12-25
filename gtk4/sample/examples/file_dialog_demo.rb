@@ -34,7 +34,7 @@ def on_activate(app)
   dialog.set_initial_folder Gio::File.new_for_path(Dir.pwd)
   dialog.save() do |_dialog, task, some_number|
     begin
-      res = dialog.save_finish(task)
+      file = dialog.save_finish(result)
       puts "res.path", res.path.to_s
     rescue
       puts("Cancel pressed")
