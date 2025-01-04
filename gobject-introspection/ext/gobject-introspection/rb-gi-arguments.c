@@ -2463,6 +2463,8 @@ rb_gi_arguments_convert_return_value_free_everything(ReturnValueToRubyData *data
       case GI_TYPE_TAG_UINT64:
       case GI_TYPE_TAG_FLOAT:
       case GI_TYPE_TAG_DOUBLE:
+        /* We need to do nothing. */
+        break;
       case GI_TYPE_TAG_GTYPE:
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(%s) everything",
