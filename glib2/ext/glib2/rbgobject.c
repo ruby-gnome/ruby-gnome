@@ -64,7 +64,9 @@ rbgobj_initialize_object(VALUE obj, gpointer cobj)
         rbgobj_boxed_initialize(obj, cobj);
         break;
     default:
-        rbgobj_convert_initialize(type, obj, cobj);
+        if (!rbgobj_convert_initialize(type, obj, cobj)) {
+            rbgobj_instantiatable_initialize(obj, cobj);
+        }
         break;
     }
 }
@@ -97,8 +99,12 @@ rbgobj_instance_from_ruby_object(VALUE obj)
       {
         gpointer instance;
         if (!rbgobj_convert_robj2instance(fundamental_type, obj, &instance)) {
-            rb_raise(rb_eTypeError, "%s isn't supported",
-                     rb_class2name(CLASS_OF(obj)));
+            if (G_TYPE_IS_INSTANTIATABLE(fundamental_type)) {
+                return rbgobj_instantiatable_get(obj);
+            } else {
+                rb_raise(rb_eTypeError, "%s isn't supported",
+                         rb_class2name(CLASS_OF(obj)));
+            }
         }
         return instance;
       }

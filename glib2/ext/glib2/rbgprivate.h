@@ -86,11 +86,13 @@ extern VALUE rbgobj_mMetaSignal;
 extern void rbgobj_define_property_accessors(VALUE klass);
 extern void rbgobj_define_action_methods(VALUE klass);
 
+extern void rbgobj_instantiatable_initialize(VALUE self, gpointer instance);
 extern void rbgobj_param_spec_initialize(VALUE self, GParamSpec* pspec);
 extern void rbgobj_boxed_initialize(VALUE obj, gpointer boxed);
 
 extern GParamSpec* rbgobj_get_param_spec(VALUE obj);
 extern GObject* rbgobj_get_gobject(VALUE obj);
+extern GTypeInstance *rbgobj_instantiatable_get(VALUE self);
 
 extern VALUE rbgobj_get_ruby_object_from_param_spec(GParamSpec* pspec, gboolean alloc);
 

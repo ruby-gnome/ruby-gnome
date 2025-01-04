@@ -29,10 +29,67 @@ typedef void (*ClassInfoCallbackFunc) (gpointer instance,
                                        const RGObjClassInfo *class_info,
                                        gpointer user_data);
 
-static G_GNUC_NORETURN VALUE
+typedef struct {
+    VALUE self;
+    GTypeInstance* instance;
+    const RGObjClassInfo* cinfo;
+} rg_glib_instantiatable_holder;
+
+static void
+rg_glib_instantiatable_holder_free(void *holder)
+{
+    xfree(holder);
+}
+
+static const rb_data_type_t rg_glib_instantiatable_type = {
+    "GLib::Instantiatable",
+    {
+        NULL,
+        rg_glib_instantiatable_holder_free,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY | RUBY_TYPED_FROZEN_SHAREABLE,
+};
+
+static VALUE
 instantiatable_s_allocate(G_GNUC_UNUSED VALUE klass)
 {
-     rb_raise(rb_eTypeError, "abstract class");
+    rg_glib_instantiatable_holder* holder;
+    VALUE rb_instantiatable;
+
+    rb_instantiatable = TypedData_Make_Struct(klass,
+                                              rg_glib_instantiatable_holder,
+                                              &rg_glib_instantiatable_type,
+                                              holder);
+    holder->self = rb_instantiatable;
+    holder->instance = NULL;
+    holder->cinfo = NULL;
+
+    return rb_instantiatable;
+}
+
+void
+rbgobj_instantiatable_initialize(VALUE self, gpointer instance)
+{
+    rg_glib_instantiatable_holder* holder;
+    TypedData_Get_Struct(self,
+                         rg_glib_instantiatable_holder,
+                         &rg_glib_instantiatable_type,
+                         holder);
+    holder->instance = instance;
+    holder->cinfo = RVAL2CINFO(self);
+}
+
+GTypeInstance *
+rbgobj_instantiatable_get(VALUE self)
+{
+    rg_glib_instantiatable_holder* holder;
+    TypedData_Get_Struct(self,
+                         rg_glib_instantiatable_holder,
+                         &rg_glib_instantiatable_type,
+                         holder);
+    return holder->instance;
 }
 
 static VALUE

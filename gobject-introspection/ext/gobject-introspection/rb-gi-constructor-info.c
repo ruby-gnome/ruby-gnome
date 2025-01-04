@@ -56,7 +56,8 @@ initialize_receiver(VALUE receiver,
     switch (interface_type) {
       case GI_INFO_TYPE_OBJECT:
         G_INITIALIZE(receiver, value->v_pointer);
-        {
+        /* GTypeInstance * is also GI_INFO_TYPE_OBJECT. */
+        if (G_IS_OBJECT(value->v_pointer)) {
             gboolean was_floating;
             was_floating = g_object_is_floating(value->v_pointer);
             g_object_ref_sink(value->v_pointer);
