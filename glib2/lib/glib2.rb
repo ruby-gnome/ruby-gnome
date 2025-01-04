@@ -1,4 +1,4 @@
-# Copyright (C) 2005-2024  Ruby-GNOME Project Team
+# Copyright (C) 2005-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -341,6 +341,7 @@ require "glib2/deprecated"
 require "glib2/date-time"
 require "glib2/regex"
 require "glib2/time-zone"
+require "glib2/value"
 require "glib2/variant"
 
 =begin
