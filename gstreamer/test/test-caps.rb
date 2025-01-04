@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,33 @@ class TestCaps < Test::Unit::TestCase
 
     def test_media_type
       assert_equal("audio/ogg", Gst::Caps.new("audio/ogg").to_s)
+    end
+
+    def test_set_int_value
+      caps = Gst::Caps.new("audio/ogg")
+      caps.set_int_value("rate", 44100)
+      structure = caps.structures[0]
+      value = structure.get_value("rate")
+      assert_equal([GLib::Type::INT, 44100],
+                   [value.type, value.value])
+    end
+
+    def test_array_set_no_type
+      caps = Gst::Caps.new("audio/ogg")
+      caps["rate"] = 44100
+      structure = caps.structures[0]
+      value = structure.get_value("rate")
+      assert_equal([GLib::Type::UINT, 44100],
+                   [value.type, value.value])
+    end
+
+    def test_array_set_int
+      caps = Gst::Caps.new("audio/ogg")
+      caps["rate", :int] = 44100
+      structure = caps.structures[0]
+      value = structure.get_value("rate")
+      assert_equal([GLib::Type::INT, 44100],
+                   [value.type, value.value])
     end
   end
 end

@@ -28,9 +28,9 @@ raise "need appsink from gst-plugins-base" if sink.nil?
 
 # See https://gstreamer.freedesktop.org/documentation/additional/design/mediatype-audio-raw.html
 caps = Gst::Caps.new("audio/x-raw")
-caps.set_value("format", "F32LE")
-caps.set_int_value("rate", 16 * 1000)
-caps.set_int_value("channels", 1)
+caps["format"] = "F32LE"
+caps["rate", :int] = 16 * 1000
+caps["channels", :int] = 1
 sink.caps = caps
 
 sink.emit_signals = true

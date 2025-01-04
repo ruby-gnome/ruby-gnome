@@ -48,7 +48,16 @@ module Gst
     end
 
     def set_int_value(name, value)
-      set_value(name, GLib::Value.new(GLib::Type::INT, value))
+      self[name, :int] = value
+    end
+
+    def []=(name, type=nil, value)
+      if type
+        value_type = GLib::Type.const_get(type.to_s.upcase)
+        set_value(name, GLib::Value.new(value_type, value))
+      else
+        set_value(name, value)
+      end
     end
   end
 end
