@@ -32,7 +32,7 @@ class TestCaps < Test::Unit::TestCase
       caps = Gst::Caps.new("audio/ogg")
       caps.set_int_value("rate", 44100)
       structure = caps.structures[0]
-      value = structure.get_value("rate")
+      value = structure["rate"]
       assert_equal([GLib::Type::INT, 44100],
                    [value.type, value.value])
     end
@@ -41,7 +41,7 @@ class TestCaps < Test::Unit::TestCase
       caps = Gst::Caps.new("audio/ogg")
       caps["rate"] = 44100
       structure = caps.structures[0]
-      value = structure.get_value("rate")
+      value = structure["rate"]
       assert_equal([GLib::Type::UINT, 44100],
                    [value.type, value.value])
     end
@@ -50,7 +50,7 @@ class TestCaps < Test::Unit::TestCase
       caps = Gst::Caps.new("audio/ogg")
       caps["rate", :int] = 44100
       structure = caps.structures[0]
-      value = structure.get_value("rate")
+      value = structure["rate"]
       assert_equal([GLib::Type::INT, 44100],
                    [value.type, value.value])
     end

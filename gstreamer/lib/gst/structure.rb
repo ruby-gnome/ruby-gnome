@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,10 @@ module Gst
         value.extend(ValueMethods)
         [field_name, value]
       end
+    end
+
+    def [](name)
+      get_value(name)
     end
   end
 end
