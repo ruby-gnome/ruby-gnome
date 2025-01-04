@@ -36,8 +36,8 @@ class TestAudio < Test::Unit::TestCase
     only_gstreamer_version(1, 20)
 
     caps = Gst::Caps.new("audio/ogg")
-    caps.set_value("rate", GLib::Value.new(GLib::Type::INT, 44100))
-    caps.set_value("channels", GLib::Value.new(GLib::Type::INT, 2))
+    caps.set_int_value("rate", 44100)
+    caps.set_int_value("channels", 2)
 
     audio_info = Gst::AudioInfo.new(caps)
     structure = audio_info.to_caps.structures[0]

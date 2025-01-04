@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -45,6 +45,10 @@ module Gst
       size.times.collect do |i|
         get_structure(i)
       end
+    end
+
+    def set_int_value(name, value)
+      set_value(name, GLib::Value.new(GLib::Type::INT, value))
     end
   end
 end
