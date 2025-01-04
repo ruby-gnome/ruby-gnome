@@ -1,4 +1,4 @@
-# Copyright (C) 2024  Ruby-GNOME Project Team
+# Copyright (C) 2024-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,8 +19,9 @@ class TestAudio < Test::Unit::TestCase
 
   def test_audio_info
     audio_info = Gst::AudioInfo.new
-    audio_info.set_format(:s8, 44100, 2)
+    audio_info.set_format(:encoded, 44100, 2)
     structure = audio_info.to_caps.structures[0]
+    assert_equal("ENCODED", structure.get_value("format").value)
     assert_equal(44100, audio_info.rate)
     assert_equal(2, audio_info.channels)
 
@@ -35,12 +36,12 @@ class TestAudio < Test::Unit::TestCase
     only_gstreamer_version(1, 20)
 
     caps = Gst::Caps.new("audio/ogg")
-    caps.set_value("format", "S8")
-    caps.set_value("rate", 44100)
-    caps.set_value("channels", 2)
+    caps.set_value("rate", GLib::Value.new(GLib::Type::INT, 44100))
+    caps.set_value("channels", GLib::Value.new(GLib::Type::INT, 2))
 
     audio_info = Gst::AudioInfo.new(caps)
     structure = audio_info.to_caps.structures[0]
+    assert_equal("ENCODED", structure.get_value("format").value)
     assert_equal(44100, audio_info.rate)
     assert_equal(2, audio_info.channels)
 
