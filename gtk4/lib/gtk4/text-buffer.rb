@@ -1,4 +1,4 @@
-# Copyright (C) 2014-20122  Ruby-GNOME Project Team
+# Copyright (C) 2014-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -75,11 +75,11 @@ module Gtk
       anchor = arguments[:anchor]
       if line
         if offset
-          get_iter_at_line_offset_raw(line, offset)
+          get_iter_at_line_offset_raw(line, offset)[1]
         elsif index
-          get_iter_at_line_index_raw(line, index)
+          get_iter_at_line_index_raw(line, index)[1]
         else
-          get_iter_at_line_raw(line)
+          get_iter_at_line_raw(line)[1]
         end
       elsif offset
         get_iter_at_offset_raw(offset)

@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2022  Ruby-GNOME Project Team
+# Copyright (C) 2015-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -154,6 +154,40 @@ class TestGtkTextBuffer < Test::Unit::TestCase
           called = true
         end
         assert_true(called)
+      end
+    end
+
+    sub_test_case "#get_iter_at" do
+      test ":line" do
+        iter = @text_buffer.get_iter_at(line: 0)
+        assert_equal("H", iter.char)
+      end
+
+      test ":line + :offset" do
+        iter = @text_buffer.get_iter_at(line: 0, offset: 1)
+        assert_equal("e", iter.char)
+      end
+
+      test ":line + :index" do
+        iter = @text_buffer.get_iter_at(line: 0, index: 1)
+        assert_equal("e", iter.char)
+      end
+
+      test ":offset" do
+        iter = @text_buffer.get_iter_at(offset: 1)
+        assert_equal("e", iter.char)
+      end
+
+      test ":mark" do
+        mark = @text_buffer.create_mark("start", @text_buffer.start_iter, true)
+        iter = @text_buffer.get_iter_at(mark: mark)
+        assert_equal("H", iter.char)
+      end
+
+      test ":anchor" do
+        anchor = @text_buffer.create_child_anchor(@text_buffer.start_iter)
+        iter = @text_buffer.get_iter_at(anchor: anchor)
+        assert_equal(anchor, iter.child_anchor)
       end
     end
   end
