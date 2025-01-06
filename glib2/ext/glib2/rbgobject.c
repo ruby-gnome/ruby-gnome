@@ -137,16 +137,23 @@ rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc)
         }
     }
 
-    switch (G_TYPE_FUNDAMENTAL(type)) {
+    GType fundamental_type = G_TYPE_FUNDAMENTAL(type);
+    switch (fundamental_type) {
     case G_TYPE_OBJECT:
         return rbgobj_get_ruby_object_from_gobject(instance, alloc);
     case G_TYPE_PARAM:
         return rbgobj_get_ruby_object_from_param_spec(instance, alloc);
     default:
-        if (alloc) {
-            rb_raise(rb_eTypeError, "%s isn't supported", g_type_name(type));
+        if (G_TYPE_IS_INSTANTIATABLE(fundamental_type)) {
+            return rbgobj_instantiatable_to_ruby(instance, alloc);
         } else {
-            return Qnil;
+            if (alloc) {
+                rb_raise(rb_eTypeError,
+                         "%s isn't supported",
+                         g_type_name(type));
+            } else {
+                return Qnil;
+            }
         }
     }
 }

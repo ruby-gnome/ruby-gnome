@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2007-2024  Ruby-GNOME Project Team
+ *  Copyright (C) 2007-2025  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -95,6 +95,7 @@ extern GObject* rbgobj_get_gobject(VALUE obj);
 extern GTypeInstance *rbgobj_instantiatable_get(VALUE self);
 
 extern VALUE rbgobj_get_ruby_object_from_param_spec(GParamSpec* pspec, gboolean alloc);
+extern VALUE rbgobj_instantiatable_to_ruby(GTypeInstance *instance, gboolean alloc);
 
 extern void rbgobj_init_object_class(VALUE klass);
 extern void rbgobj_init_flags_class(VALUE klass);

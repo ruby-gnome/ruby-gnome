@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2023  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -53,7 +53,7 @@ static const rb_data_type_t rg_glib_instantiatable_type = {
 };
 
 static VALUE
-instantiatable_s_allocate(G_GNUC_UNUSED VALUE klass)
+instantiatable_s_allocate(VALUE klass)
 {
     rg_glib_instantiatable_holder* holder;
     VALUE rb_instantiatable;
@@ -90,6 +90,23 @@ rbgobj_instantiatable_get(VALUE self)
                          &rg_glib_instantiatable_type,
                          holder);
     return holder->instance;
+}
+
+VALUE
+rbgobj_instantiatable_to_ruby(GTypeInstance *instance, gboolean alloc)
+{
+    /* TODO: Add support for reusing existing associated Ruby object
+     * but how...? GTypeInstance doesn't provide
+     * g_type_instance_{get,set}_qdata() like
+     * g_object_{get,set}_qdata(). */
+    if (alloc) {
+        GType type = G_TYPE_FROM_INSTANCE(instance);
+        VALUE rb_instance = instantiatable_s_allocate(GTYPE2CLASS(type));
+        rbgobj_instantiatable_initialize(rb_instance, instance);
+        return rb_instance;
+    } else {
+        return Qnil;
+    }
 }
 
 static VALUE
