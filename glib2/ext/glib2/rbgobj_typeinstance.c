@@ -112,7 +112,7 @@ rbgobj_instantiatable_to_ruby(GTypeInstance *instance, gboolean alloc)
 static VALUE
 rg_inspect(VALUE self)
 {
-    rg_glib_instantiatable_holder* holder;
+    rg_glib_instantiatable_holder *holder;
 
     TypedData_Get_Struct(self, rg_glib_instantiatable_holder, &rg_glib_instantiatable_type, holder);
 
