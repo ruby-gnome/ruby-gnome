@@ -112,7 +112,7 @@ static const rb_data_type_t rg_glib_object_type = {
         holder_mark,
         holder_free,
     },
-    NULL,
+    &rbg_glib_instantiatable_type,
     NULL,
     RUBY_TYPED_FREE_IMMEDIATELY | RUBY_TYPED_FROZEN_SHAREABLE,
 };

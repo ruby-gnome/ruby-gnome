@@ -33,19 +33,19 @@ typedef struct {
     VALUE self;
     GTypeInstance* instance;
     const RGObjClassInfo* cinfo;
-} rg_glib_instantiatable_holder;
+} rbg_glib_instantiatable_holder;
 
 static void
-rg_glib_instantiatable_holder_free(void *holder)
+rbg_glib_instantiatable_holder_free(void *holder)
 {
     xfree(holder);
 }
 
-static const rb_data_type_t rg_glib_instantiatable_type = {
+const rb_data_type_t rbg_glib_instantiatable_type = {
     "GLib::Instantiatable",
     {
         NULL,
-        rg_glib_instantiatable_holder_free,
+        rbg_glib_instantiatable_holder_free,
     },
     NULL,
     NULL,
@@ -55,12 +55,12 @@ static const rb_data_type_t rg_glib_instantiatable_type = {
 static VALUE
 instantiatable_s_allocate(VALUE klass)
 {
-    rg_glib_instantiatable_holder* holder;
+    rbg_glib_instantiatable_holder* holder;
     VALUE rb_instantiatable;
 
     rb_instantiatable = TypedData_Make_Struct(klass,
-                                              rg_glib_instantiatable_holder,
-                                              &rg_glib_instantiatable_type,
+                                              rbg_glib_instantiatable_holder,
+                                              &rbg_glib_instantiatable_type,
                                               holder);
     holder->self = rb_instantiatable;
     holder->instance = NULL;
@@ -72,10 +72,10 @@ instantiatable_s_allocate(VALUE klass)
 void
 rbgobj_instantiatable_initialize(VALUE self, gpointer instance)
 {
-    rg_glib_instantiatable_holder* holder;
+    rbg_glib_instantiatable_holder* holder;
     TypedData_Get_Struct(self,
-                         rg_glib_instantiatable_holder,
-                         &rg_glib_instantiatable_type,
+                         rbg_glib_instantiatable_holder,
+                         &rbg_glib_instantiatable_type,
                          holder);
     holder->instance = instance;
     holder->cinfo = RVAL2CINFO(self);
@@ -84,10 +84,10 @@ rbgobj_instantiatable_initialize(VALUE self, gpointer instance)
 GTypeInstance *
 rbgobj_instantiatable_get(VALUE self)
 {
-    rg_glib_instantiatable_holder* holder;
+    rbg_glib_instantiatable_holder* holder;
     TypedData_Get_Struct(self,
-                         rg_glib_instantiatable_holder,
-                         &rg_glib_instantiatable_type,
+                         rbg_glib_instantiatable_holder,
+                         &rbg_glib_instantiatable_type,
                          holder);
     return holder->instance;
 }
