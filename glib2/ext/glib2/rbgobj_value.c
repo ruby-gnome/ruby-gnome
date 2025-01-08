@@ -347,7 +347,7 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
 		} else {
 		    g_warning("rbgobj_rvalue_to_gvalue: unsupported type: %s\n",
 		        g_type_name(type));
-		}
+                }
             } else {
                 func(val, result);
             }
