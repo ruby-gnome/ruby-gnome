@@ -143,8 +143,7 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
             func = g_type_get_qdata(type, qGValueToRValueFunc);
             if (!func) {
                 if (G_TYPE_IS_INSTANTIATABLE(fundamental_type)) {
-                    VALUE rb_instance = rbgobj_instantiatable_to_ruby(g_value_peek_pointer(value), TRUE);
-                    return rb_instance;
+                    rvalue = rbgobj_instantiatable_to_ruby(g_value_peek_pointer(value), TRUE);
                 } else {	
                     g_warning("rbgobj_gvalue_to_rvalue: unsupported type: %s\n",
                     g_type_name(type));
