@@ -146,7 +146,8 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
                     rvalue = rbgobj_instantiatable_to_ruby(g_value_peek_pointer(value), TRUE);
                 } else {	
                     g_warning("rbgobj_gvalue_to_rvalue: unsupported type: %s\n",
-                    g_type_name(type));
+                              g_type_name(type));
+                    rvalue = Qnil;
                 }
             } else {
                 rvalue = func(value);
