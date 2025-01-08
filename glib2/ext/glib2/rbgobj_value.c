@@ -345,8 +345,8 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
                 if (G_TYPE_IS_INSTANTIATABLE(fundamental_type)) {
                     g_value_set_instance(result, rbgobj_instantiatable_get(val));
                 } else {
-		    g_warning("rbgobj_rvalue_to_gvalue: unsupported type: %s\n",
-		        g_type_name(type));
+                    g_warning("rbgobj_rvalue_to_gvalue: unsupported type: %s\n",
+                              g_type_name(type));
                 }
             } else {
                 func(val, result);
