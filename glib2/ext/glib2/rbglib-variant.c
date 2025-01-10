@@ -113,7 +113,7 @@ static const rb_data_type_t rbg_variant_type = {
         NULL,
         rg_variant_free,
     },
-    NULL,
+    &rbg_glib_instantiatable_type,
     NULL,
     RUBY_TYPED_FREE_IMMEDIATELY |
     RUBY_TYPED_WB_PROTECTED |

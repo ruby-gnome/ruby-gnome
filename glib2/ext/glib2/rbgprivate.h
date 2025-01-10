@@ -69,6 +69,7 @@ typedef struct {
 
 G_GNUC_INTERNAL extern GPrivate rg_polling_key;
 G_GNUC_INTERNAL extern rb_encoding *rbg_filename_encoding;
+G_GNUC_INTERNAL extern const rb_data_type_t rbg_glib_instantiatable_type;
 
 extern VALUE rbgobj_cEnum;
 extern VALUE rbgobj_cFlags;
