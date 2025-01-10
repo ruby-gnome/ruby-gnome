@@ -112,8 +112,8 @@ rbgobj_instantiatable_to_ruby(GTypeInstance *instance, gboolean alloc)
 static VALUE
 rg_inspect(VALUE self)
 {
-    rg_glib_instantiatable_holder *holder;
-    TypedData_Get_Struct(self, rg_glib_instantiatable_holder, &rbg_glib_instantiatable_type, holder);
+    rbg_glib_instantiatable_holder *holder;
+    TypedData_Get_Struct(self, rbg_glib_instantiatable_holder, &rbg_glib_instantiatable_type, holder);
     return rb_sprintf("#<%" PRIsVALUE ":%p ptr=%p>",
                       rb_obj_class(self), (void *)self, holder->instance);
 }
