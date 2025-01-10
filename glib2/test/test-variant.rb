@@ -64,7 +64,7 @@ expected end of input:
 
   test "#inspect" do
     variant = GLib::Variant.new(29, "y")
-    assert_equal("#<GLib::Variant:0x00 type=y value=29>",
+    assert_equal("#<GLib::Variant:0x00 ptr=0x00 type=y value=29>",
                  variant.inspect.gsub(/0x\h+/, "0x00"))
   end
 end
