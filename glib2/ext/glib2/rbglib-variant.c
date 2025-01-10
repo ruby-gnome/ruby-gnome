@@ -352,6 +352,11 @@ rg_to_s(int argc, VALUE *argv, VALUE self)
 void
 Init_glib_variant(void)
 {
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VARIANT, "Variant", rbg_mGLib());
+
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, rg_variant_allocate);
+
+    RG_DEF_SMETHOD(parse, -1);    
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(value, 0);
     RG_DEF_METHOD(type, 0);
