@@ -356,12 +356,13 @@ Init_glib_variant(void)
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rg_variant_allocate);
 
-    RG_DEF_SMETHOD(parse, -1);    
+    RG_DEF_SMETHOD(parse, -1);
+
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(value, 0);
     RG_DEF_METHOD(type, 0);
     RG_DEF_METHOD(to_s, -1);
-    
+
     G_DEF_ERROR(G_VARIANT_PARSE_ERROR,
                 "VariantParseError",
                 rbg_mGLib(),
