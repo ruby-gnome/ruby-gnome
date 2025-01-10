@@ -16,9 +16,8 @@
 
 module GLib
   class Variant
-    alias __inspect__ inspect
     def inspect
-      __inspect__.gsub(/>\z/) do
+      super.gsub(/>\z/) do
         " type=#{type} value=#{value.inspect}>"
       end
     end
