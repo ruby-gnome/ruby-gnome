@@ -352,7 +352,7 @@ rg_to_s(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_inspect(VALUE self)
 {
-	VALUE variant_type;
+    VALUE variant_type;
     return rb_sprintf("#<%" PRIsVALUE ":%p ptr=%p>",
                       rb_obj_class(self), (void *)self, (void *)_SELF(self));
 }
@@ -360,7 +360,6 @@ rg_inspect(VALUE self)
 void
 Init_glib_variant(void)
 {
-	@@ -361,6 +369,7 @@ Init_glib_variant(void)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(value, 0);
     RG_DEF_METHOD(type, 0);
