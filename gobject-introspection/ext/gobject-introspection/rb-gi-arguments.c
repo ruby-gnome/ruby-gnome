@@ -2147,7 +2147,6 @@ rb_gi_arguments_convert_return_value_free_everything_interface(
         break;
       case GI_INFO_TYPE_OBJECT:
         {
-            GIObjectInfoUnrefFunction unref = g_object_info_get_unref_function_pointer(data->metadata->type.interface_info);
             GObject *object = data->value->v_pointer;
             if (G_IS_OBJECT(object)) {
                 if (g_object_is_floating(object)) {
@@ -2155,6 +2154,7 @@ rb_gi_arguments_convert_return_value_free_everything_interface(
                 }
                 g_object_unref(object);
             } else {
+                GIObjectInfoUnrefFunction unref = g_object_info_get_unref_function_pointer(data->metadata->type.interface_info);
                 unref(object);
             }
         }
