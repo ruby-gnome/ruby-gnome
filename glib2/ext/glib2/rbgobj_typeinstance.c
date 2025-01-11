@@ -110,6 +110,15 @@ rbgobj_instantiatable_to_ruby(GTypeInstance *instance, gboolean alloc)
 }
 
 static VALUE
+rg_inspect(VALUE self)
+{
+    rbg_glib_instantiatable_holder *holder;
+    TypedData_Get_Struct(self, rbg_glib_instantiatable_holder, &rbg_glib_instantiatable_type, holder);
+    return rb_sprintf("#<%" PRIsVALUE ":%p ptr=%p>",
+                      rb_obj_class(self), (void *)self, holder->instance);
+}
+
+static VALUE
 rg_gtype(VALUE self)
 {
     return rbgobj_gtype_new(G_TYPE_FROM_INSTANCE(rbgobj_instance_from_ruby_object(self)));
@@ -204,4 +213,5 @@ Init_gobject_typeinstance(void)
     rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))instantiatable_s_allocate);
     RG_DEF_METHOD(gtype, 0);
     RG_DEF_METHOD(clone, 0);
+    RG_DEF_METHOD(inspect, 0);
 }
