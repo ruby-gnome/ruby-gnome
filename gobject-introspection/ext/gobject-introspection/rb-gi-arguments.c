@@ -2147,11 +2147,16 @@ rb_gi_arguments_convert_return_value_free_everything_interface(
         break;
       case GI_INFO_TYPE_OBJECT:
         {
+            GIObjectInfoUnrefFunction unref = g_object_info_get_unref_function_pointer(data->metadata->type.interface_info);
             GObject *object = data->value->v_pointer;
-            if (g_object_is_floating(object)) {
-                g_object_ref_sink(object);
+            if (G_IS_OBJECT(object)) {
+                if (g_object_is_floating(object)) {
+                        g_object_ref_sink(object);
+                }
+                g_object_unref(object);
+            } else {
+                unref(object);
             }
-            g_object_unref(object);
         }
         break;
       case GI_INFO_TYPE_INTERFACE:
