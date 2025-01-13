@@ -602,6 +602,12 @@ rb_gi_arguments_convert_arg_interface_body(VALUE user_data)
         }
       case GI_INFO_TYPE_OBJECT:
       case GI_INFO_TYPE_INTERFACE:
+        if (!G_IS_OBJECT(data->arg->v_pointer)) {
+            GIObjectInfoRefFunction ref = g_object_info_get_ref_function_pointer(data->arg_metadata->type.interface_info);
+            if (ref != NULL) {
+                ref(data->arg->v_pointer);
+            }
+        }
         return GOBJ2RVAL(data->arg->v_pointer);
       case GI_INFO_TYPE_CONSTANT:
         rb_raise(rb_eNotImpError,
@@ -2155,7 +2161,9 @@ rb_gi_arguments_convert_return_value_free_everything_interface(
                 g_object_unref(object);
             } else {
                 GIObjectInfoUnrefFunction unref = g_object_info_get_unref_function_pointer(data->metadata->type.interface_info);
-                unref(object);
+                if (unref != NULL) {
+                    unref(object);
+                }
             }
         }
         break;
