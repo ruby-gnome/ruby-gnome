@@ -2156,7 +2156,7 @@ rb_gi_arguments_convert_return_value_free_everything_interface(
             GObject *object = data->value->v_pointer;
             if (G_IS_OBJECT(object)) {
                 if (g_object_is_floating(object)) {
-                        g_object_ref_sink(object);
+                    g_object_ref_sink(object);
                 }
                 g_object_unref(object);
             } else {
