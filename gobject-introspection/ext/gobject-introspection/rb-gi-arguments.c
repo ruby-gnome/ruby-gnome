@@ -602,6 +602,12 @@ rb_gi_arguments_convert_arg_interface_body(VALUE user_data)
         }
       case GI_INFO_TYPE_OBJECT:
       case GI_INFO_TYPE_INTERFACE:
+        if (!G_IS_OBJECT(data->arg->v_pointer)) {
+            GIObjectInfoRefFunction ref = g_object_info_get_ref_function_pointer(data->arg_metadata->type.interface_info);
+            if (ref) {
+                ref(data->arg->v_pointer);
+            }
+        }
         return GOBJ2RVAL(data->arg->v_pointer);
       case GI_INFO_TYPE_CONSTANT:
         rb_raise(rb_eNotImpError,
@@ -2148,10 +2154,17 @@ rb_gi_arguments_convert_return_value_free_everything_interface(
       case GI_INFO_TYPE_OBJECT:
         {
             GObject *object = data->value->v_pointer;
-            if (g_object_is_floating(object)) {
-                g_object_ref_sink(object);
+            if (G_IS_OBJECT(object)) {
+                if (g_object_is_floating(object)) {
+                    g_object_ref_sink(object);
+                }
+                g_object_unref(object);
+            } else {
+                GIObjectInfoUnrefFunction unref = g_object_info_get_unref_function_pointer(data->metadata->type.interface_info);
+                if (unref) {
+                    unref(object);
+                }
             }
-            g_object_unref(object);
         }
         break;
       case GI_INFO_TYPE_INTERFACE:
