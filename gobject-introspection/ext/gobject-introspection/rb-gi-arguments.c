@@ -604,7 +604,7 @@ rb_gi_arguments_convert_arg_interface_body(VALUE user_data)
       case GI_INFO_TYPE_INTERFACE:
         if (!G_IS_OBJECT(data->arg->v_pointer)) {
             GIObjectInfoRefFunction ref = g_object_info_get_ref_function_pointer(data->arg_metadata->type.interface_info);
-            if (ref != NULL) {
+            if (ref) {
                 ref(data->arg->v_pointer);
             }
         }
