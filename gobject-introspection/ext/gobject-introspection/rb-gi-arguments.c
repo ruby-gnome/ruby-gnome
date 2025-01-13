@@ -2161,7 +2161,7 @@ rb_gi_arguments_convert_return_value_free_everything_interface(
                 g_object_unref(object);
             } else {
                 GIObjectInfoUnrefFunction unref = g_object_info_get_unref_function_pointer(data->metadata->type.interface_info);
-                if (unref != NULL) {
+                if (unref) {
                     unref(object);
                 }
             }
