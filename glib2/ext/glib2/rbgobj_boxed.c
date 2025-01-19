@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2023  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -319,11 +319,11 @@ Init_gobject_gboxed(void)
     rbgobj_register_r2g_func(G_TYPE_BOXED, boxed_from_ruby);
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rbgobj_boxed_alloc_func);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE,
-                                "to_s",
-                                rbgutil_generic_s_to_s_gtype_name_fallback,
-                                0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE,
+                               "to_s",
+                               rbgutil_generic_s_to_s_gtype_name_fallback,
+                               0);
     RG_DEF_SALIAS("inspect", "to_s");
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
     RG_DEF_METHOD(initialize, 0);
