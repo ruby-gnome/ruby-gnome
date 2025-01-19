@@ -505,8 +505,8 @@ Init_glib_main_context(void)
     main_thread = g_thread_self();
 
     mGLibSource = rb_const_get(rbg_mGLib(), rb_intern("Source"));
-    rbg_define_singleton_method(mGLibSource, "remove", source_remove, 1);
-    rbg_define_singleton_method(mGLibSource, "current", source_current_source, 0);
+    rb_define_singleton_method(mGLibSource, "remove", source_remove, 1);
+    rb_define_singleton_method(mGLibSource, "current", source_current_source, 0);
 /*
     id_poll_func = rb_intern("__poll_func__");
 */
