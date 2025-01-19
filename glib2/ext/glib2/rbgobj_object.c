@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2023  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2002-2003  Masahiro Sakai
  *  Copyright (C) 1998-2000  Yukihiro Matsumoto,
  *                           Daisuke Kanda,
@@ -1092,8 +1092,8 @@ Init_gobject_gobject(void)
 
     RG_DEF_SMETHOD(init, 0);
 
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "property", &gobj_s_property, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "properties", &gobj_s_properties, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "property", gobj_s_property, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "properties", gobj_s_properties, -1);
     RG_DEF_SMETHOD(install_property, -1);
     q_ruby_getter = g_quark_from_static_string("__ruby_getter");
     q_ruby_setter = g_quark_from_static_string("__ruby_setter");
