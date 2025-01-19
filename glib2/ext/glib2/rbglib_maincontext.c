@@ -531,15 +531,15 @@ Init_glib_main_context(void)
     RG_DEF_METHOD(add_poll, 2);
     RG_DEF_METHOD(remove_poll, 1);
     RG_DEF_SMETHOD(depth, 0);
-    rbg_define_singleton_method(timeout, "source_new", timeout_source_new, 1);
-    rbg_define_singleton_method(timeout, "source_new_seconds", timeout_source_new_seconds, 1);
-    rbg_define_singleton_method(timeout, "add", timeout_add, -1);
-    rbg_define_singleton_method(timeout, "add_seconds", timeout_add_seconds, -1);
-    rbg_define_singleton_method(idle, "source_new", idle_source_new, 0);
-    rbg_define_singleton_method(idle, "add", idle_add, -1);
+    rb_define_singleton_method(timeout, "source_new", timeout_source_new, 1);
+    rb_define_singleton_method(timeout, "source_new_seconds", timeout_source_new_seconds, 1);
+    rb_define_singleton_method(timeout, "add", timeout_add, -1);
+    rb_define_singleton_method(timeout, "add_seconds", timeout_add_seconds, -1);
+    rb_define_singleton_method(idle, "source_new", idle_source_new, 0);
+    rb_define_singleton_method(idle, "add", idle_add, -1);
 
-    rbg_define_singleton_method(child_watch, "source_new", child_watch_source_new, 1);
-    rbg_define_singleton_method(child_watch, "add", child_watch_add, 1);
+    rb_define_singleton_method(child_watch, "source_new", child_watch_source_new, 1);
+    rb_define_singleton_method(child_watch, "add", child_watch_add, 1);
 
     default_poll_func = g_main_context_get_poll_func(NULL);
     g_main_context_set_poll_func(NULL, rg_poll);
