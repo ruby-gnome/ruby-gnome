@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2023  Ruby-GNOME Project Team
+# Copyright (C) 2002-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -26,7 +26,7 @@ package_id = "gobject-2.0"
 
 require "mkmf-gnome"
 
-unless required_pkg_config_package([package_id, 2, 12, 0],
+unless required_pkg_config_package([package_id, 2, 56, 0],
                                    :alt_linux => "glib2-devel",
                                    :arch_linux => "glib2",
                                    :conda => "glib",
