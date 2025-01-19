@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2004  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -50,7 +50,7 @@ void        g_dir_close                     (GDir *dir);
 */
 
 static VALUE
-rbglib_m_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE rb_size, rb_options;
 
@@ -98,6 +98,7 @@ Init_glib_fileutils(void)
     rb_define_const(RG_TARGET_NAMESPACE, "PERM", INT2NUM(G_FILE_ERROR_PERM));
     rb_define_const(RG_TARGET_NAMESPACE, "FAILED", INT2NUM(G_FILE_ERROR_FAILED));
 
-    rbg_define_singleton_method(rbg_mGLib(), "format_size",
-                                rbglib_m_format_size, -1);
+#undef RG_TARGET_NAMESPACE
+#define RG_TARGET_NAMESPACE rbg_mGLib()
+    RG_DEF_SMETHOD(format_size, -1);
 }
