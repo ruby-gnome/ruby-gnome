@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2021  Ruby-GNOME Project Team
+# Copyright (C) 2018-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -46,5 +46,15 @@ module GLib
     :format_size_for_display,
     warn: "Use 'GLib.format_size(size, flags: :iec_units)'.") do |_, size|
     format_size(size, flags: :iec_units)
+  end
+
+  define_deprecated_singleton_method(
+    :set_ruby_thread_priority,
+    warn: "This doesn't nothing.") do |_, _priority|
+  end
+
+  define_deprecated_singleton_method(
+    :ruby_thread_priority=,
+    warn: "This doesn't nothing.") do |_, _priority|
   end
 end

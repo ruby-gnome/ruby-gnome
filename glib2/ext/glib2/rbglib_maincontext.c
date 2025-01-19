@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -102,12 +102,6 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
     g_private_set(&rg_polling_key, GINT_TO_POINTER(FALSE));
 
     return info.result;
-}
-
-static VALUE
-ruby_source_set_priority (G_GNUC_UNUSED VALUE self, G_GNUC_UNUSED VALUE priority)
-{
-    return Qnil;
 }
 
 static void
@@ -509,9 +503,6 @@ Init_glib_main_context(void)
     g_private_set(&rg_polling_key, GINT_TO_POINTER(FALSE));
 
     main_thread = g_thread_self();
-
-    rbg_define_singleton_method(rbg_mGLib(), "set_ruby_thread_priority",
-                               ruby_source_set_priority, 1);
 
     mGLibSource = rb_const_get(rbg_mGLib(), rb_intern("Source"));
     rbg_define_singleton_method(mGLibSource, "remove", source_remove, 1);
