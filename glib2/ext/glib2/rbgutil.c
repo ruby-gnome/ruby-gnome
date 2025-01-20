@@ -32,18 +32,16 @@ static ID id_allocate;
 static ID id_equal;
 
 void
-rbg_define_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc)
+rbg_define_setter_alias_if_need(VALUE klass, const char *name, int argc)
 {
-    rb_define_method(klass, name, func, argc);
-    if ((argc != 1) || strncmp(name, "set_", 4))
+    if (argc != 1) {
         return;
+    }
+    if (strncmp(name, "set_", 4) != 0) {
+        return;
+    }
 
-    name += 4;
-    rb_funcall(klass, rbgutil_id_module_eval, 3,
-               CSTR2RVAL_FREE(g_strdup_printf("def %s=(val); set_%s(val); val; end\n",
-                                              name, name)),
-               rb_str_new2(__FILE__),
-               INT2NUM(__LINE__));
+    rb_define_alias(klass, name + 4, name);
 }
 
 void

@@ -53,7 +53,10 @@ G_BEGIN_DECLS
 #define RG_DEF_SMETHOD_OPERATOR(ope, func, argc) \
         rb_define_singleton_method(RG_TARGET_NAMESPACE, ope, rg_s_operator_ ## func, argc)
 #define RG_DEF_METHOD(method, argc) \
-        rbg_define_method(RG_TARGET_NAMESPACE, #method, rg_ ## method, argc)
+  do { \
+      rb_define_method(RG_TARGET_NAMESPACE, #method, rg_ ## method, argc); \
+      rbg_define_setter_alias_if_need(RG_TARGET_NAMESPACE, #method, argc); \
+  } while (FALSE)
 #define RG_DEF_METHOD_P(method, argc) \
         rb_define_method(RG_TARGET_NAMESPACE, #method"?", rg_ ## method ## _p, argc)
 #define RG_DEF_METHOD_BANG(method, argc) \
@@ -83,7 +86,8 @@ G_BEGIN_DECLS
 #define G_REPLACE_SET_PROPERTY(klass, name, function, args) \
     rb_undef_method(klass, "set_" name); \
     rb_undef_method(klass, name "="); \
-    rbg_define_method(klass, "set_" name, function, args)
+    rb_define_method(klass, "set_" name, function, args); \
+    rbg_define_setter_alias_if_need(klass, "set_" name, args)
 
 #define G_REPLACE_GET_PROPERTY(klass, name, function, args) \
     rb_undef_method(klass, name); \
@@ -99,7 +103,9 @@ G_BEGIN_DECLS
 #define RBG_STRING_SET_UTF8_ENCODING(string) \
     (rbgutil_string_set_utf8_encoding(string))
 
-extern void rbg_define_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc);
+extern void rbg_define_setter_alias_if_need(VALUE klass,
+                                            const char *name,
+                                            int argc);
 extern void rbg_define_private_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc);
 extern void rbg_define_singleton_setter_alias_if_need(VALUE klass,
                                                       const char *name,
