@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
- *  Copyright (C) 2004-2006  Ruby-GNOME Project Team
+ *  Copyright (C) 2004-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -417,7 +416,7 @@ Init_gobject_genums(void)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ENUM, "Enum", rbg_mGLib());
 
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
 
     RG_DEF_SMETHOD(range, 0);
