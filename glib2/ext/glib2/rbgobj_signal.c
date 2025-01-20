@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2023  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -1088,8 +1088,8 @@ Init_gobject_gsignal(void)
     rbg_define_method(cInstantiatable, "signal_handler_is_connected?",
                      gobj_sig_handler_is_connected, 1);
 
-    rbg_define_singleton_method(cInstantiatable,
-                                "signal_handler_attach",
-                                gobj_s_signal_handler_attach,
-                                2);
+    rb_define_singleton_method(cInstantiatable,
+                               "signal_handler_attach",
+                               gobj_s_signal_handler_attach,
+                               2);
 }
