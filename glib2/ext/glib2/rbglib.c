@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2024  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@
 #include "rbgprivate.h"
 #include "rbglib.h"
 
-#define RG_TARGET_NAMESPACE mGLib
+#define RG_TARGET_NAMESPACE rbg_mGLib()
 
 static ID id_inspect;
 
@@ -32,7 +32,9 @@ VALUE RG_TARGET_NAMESPACE;
 VALUE
 rbg_mGLib(void)
 {
-    return RG_TARGET_NAMESPACE;
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+    return mGLib;
+G_GNUC_END_IGNORE_DEPRECATIONS
 }
 
 const gchar *
@@ -1105,7 +1107,9 @@ Init_glib2(void)
 
     id_inspect = rb_intern("inspect");
 
-    RG_TARGET_NAMESPACE = rb_define_module("GLib");
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+    mGLib = rb_define_module("GLib");
+G_GNUC_END_IGNORE_DEPRECATIONS
 
     setlocale (LC_CTYPE, "");
 #ifdef LC_MESSAGES
