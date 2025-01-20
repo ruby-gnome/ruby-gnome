@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2006  Kouhei Sutou
  *
  *  This library is free software; you can redistribute it and/or
@@ -96,12 +96,12 @@ Init_glib_win32(void)
     RG_DEF_SMETHOD(locale, 0);
     RG_DEF_SMETHOD(version, 0);
     /* Deprecated */
-    rbg_define_singleton_method(rbg_mGLib(), "win32_locale", rbglib_m_win32_locale_deprecated, 0);
+    rb_define_singleton_method(rbg_mGLib(), "win32_locale", rbglib_m_win32_locale_deprecated, 0);
 
     RG_DEF_SMETHOD(locale_filename_from_utf8, 1);
     /* Deprecated */
-    rbg_define_singleton_method(rbg_mGLib(), "win32_locale_filename_from_utf8",
-                              rbglib_m_win32_locale_filename_from_utf8_deprecated, 1);
+    rb_define_singleton_method(rbg_mGLib(), "win32_locale_filename_from_utf8",
+                               rbglib_m_win32_locale_filename_from_utf8_deprecated, 1);
 
     RG_DEF_SMETHOD(get_package_installation_directory_of_module, -1);
 #endif
