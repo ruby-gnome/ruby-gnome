@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2006  Kouhei Sutou
  *
  *  This library is free software; you can redistribute it and/or
@@ -67,7 +67,7 @@ Init_glib_unicode(void)
 
     G_DEF_CLASS(G_TYPE_NORMALIZE_MODE, "NormalizeMode", rbg_mGLib());
 
-    rbg_define_singleton_method(rbg_mGLib(), "charset", rbglib_m_charset, 0);
+    rb_define_singleton_method(rbg_mGLib(), "charset", rbglib_m_charset, 0);
 
     RG_DEF_SMETHOD(canonical_ordering, 1);
 }
