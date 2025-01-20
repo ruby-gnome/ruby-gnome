@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -96,7 +96,7 @@ Init_gtype_pointer(void)
 {
     VALUE cPtr = G_DEF_CLASS(G_TYPE_POINTER, "Pointer", rbg_mGLib());
     rb_define_alloc_func(cPtr, ptr_alloc);
-    rbg_define_singleton_method(cPtr, "gtype", ptr_s_gtype, 0);
+    rb_define_singleton_method(cPtr, "gtype", ptr_s_gtype, 0);
     rbg_define_method(cPtr, "initialize", ptr_initialize, 1);
     rbg_define_method(cPtr, "gtype", ptr_gtype, 0);
     rbg_define_method(cPtr, "to_i", ptr_to_i, 0);
