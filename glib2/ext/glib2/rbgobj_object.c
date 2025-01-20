@@ -1092,7 +1092,7 @@ Init_gobject_gobject(void)
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_PRIVATE_METHOD(initialize_post, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "ref_count", gobj_ref_count, 0); /* for debugging */
+    rb_define_method(RG_TARGET_NAMESPACE, "ref_count", gobj_ref_count, 0); /* for debugging */
     RG_DEF_METHOD_P(floating, 0); /* for debugging */
     RG_DEF_METHOD(unref, 0);
     RG_DEF_METHOD(inspect, 0);
