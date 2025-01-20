@@ -37,7 +37,17 @@ G_BEGIN_DECLS
 #define RG_DEF_MODFUNC_OPERATOR(ope, func, argc) \
         rb_define_module_function(RG_TARGET_NAMESPACE, ope, rg_m_operator_ ## func, argc)
 #define RG_DEF_SMETHOD(method, argc) \
-        rbg_define_singleton_method(RG_TARGET_NAMESPACE, #method, rg_s_ ## method, argc)
+    do { \
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, \
+                                   #method, \
+                                   rg_s_##method, \
+                                   argc); \
+        if (argc == 1 && strncmp(#method, "set_", 4) == 0) { \
+            rb_define_alias(rb_singleton_class(RG_TARGET_NAMESPACE), \
+                            #method + 4, \
+                            #method); \
+        } \
+    } while (FALSE)
 #define RG_DEF_SMETHOD_P(method, argc) \
         rb_define_singleton_method(RG_TARGET_NAMESPACE, #method"?", rg_s_ ## method ## _p, argc)
 #define RG_DEF_SMETHOD_BANG(method, argc) \
@@ -93,7 +103,6 @@ G_BEGIN_DECLS
 
 extern void rbg_define_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc);
 extern void rbg_define_private_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc);
-extern void rbg_define_singleton_method(VALUE obj, const char *name, VALUE (*func)(ANYARGS), int argc);
 extern VALUE rbgutil_def_setters(VALUE klass);
 extern void rbgutil_set_properties(VALUE self, VALUE hash);
 extern VALUE rbgutil_protect(VALUE (*proc) (VALUE), VALUE data);

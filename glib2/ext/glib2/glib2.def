@@ -133,7 +133,6 @@ EXPORTS
 	rbg_rval2gslist
 	rbg_define_method
 	rbg_define_private_method
-	rbg_define_singleton_method
 	rbg_to_array
 	rbg_to_hash
 	rbg_check_array_type

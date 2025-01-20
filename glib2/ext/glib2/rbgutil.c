@@ -66,21 +66,6 @@ rbg_define_private_method(VALUE klass,
 }
 
 void
-rbg_define_singleton_method(VALUE obj, const char *name, VALUE (*func)(ANYARGS), int argc)
-{
-    rb_define_singleton_method(obj, name, func, argc);
-    if ((argc != 1) || strncmp(name, "set_", 4))
-        return;
-
-    name += 4;
-    rb_funcall(obj, rbgutil_id_module_eval, 3,
-               CSTR2RVAL_FREE(g_strdup_printf("def self.%s=(val); set_%s(val); val; end\n",
-                                              name, name)),
-               rb_str_new2(__FILE__),
-               INT2NUM(__LINE__));
-}
-
-void
 rbgutil_set_properties(VALUE self, VALUE hash)
 {
     int i;
