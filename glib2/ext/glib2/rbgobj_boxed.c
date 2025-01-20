@@ -325,7 +325,7 @@ Init_gobject_gboxed(void)
                                rbgutil_generic_s_to_s_gtype_name_fallback,
                                0);
     RG_DEF_SALIAS("inspect", "to_s");
-    rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(inspect, 0);
     RG_DEF_METHOD(initialize_copy, 1);
