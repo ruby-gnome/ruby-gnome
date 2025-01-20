@@ -41,7 +41,9 @@ rbg_define_setter_alias_if_need(VALUE klass, const char *name, int argc)
         return;
     }
 
-    rb_define_alias(klass, name + 4, name);
+    gchar *equal_name = g_strdup_printf("%s=", name + 4);
+    rb_define_alias(klass, equal_name, name);
+    g_free(equal_name);
 }
 
 void
@@ -75,9 +77,9 @@ rbg_define_singleton_setter_alias_if_need(VALUE klass,
         return;
     }
 
-    rb_define_alias(rb_singleton_class(klass),
-                    name + 4,
-                    name);
+    gchar *equal_name = g_strdup_printf("%s=", name + 4);
+    rb_define_alias(rb_singleton_class(klass), equal_name, name);
+    g_free(equal_name);
 }
 
 void
