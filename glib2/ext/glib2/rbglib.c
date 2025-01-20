@@ -27,7 +27,7 @@
 
 static ID id_inspect;
 
-VALUE RG_TARGET_NAMESPACE;
+VALUE mGLib;
 
 VALUE
 rbg_mGLib(void)
