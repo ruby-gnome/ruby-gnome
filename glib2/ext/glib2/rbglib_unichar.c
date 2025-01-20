@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2006  Kouhei Sutou
  *
  *  This library is free software; you can redistribute it and/or
@@ -187,36 +187,36 @@ Init_glib_unichar(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(rbg_mGLib(), "UniChar");
 
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "alnum?",
-                              rbglib_m_unichar_isalnum, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "alpha?",
-                              rbglib_m_unichar_isalpha, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "cntrl?",
-                              rbglib_m_unichar_iscntrl, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "digit?",
-                              rbglib_m_unichar_isdigit, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "graph?",
-                              rbglib_m_unichar_isgraph, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "lower?",
-                              rbglib_m_unichar_islower, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "print?",
-                              rbglib_m_unichar_isprint, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "punct?",
-                              rbglib_m_unichar_ispunct, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "space?",
-                              rbglib_m_unichar_isspace, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "upper?",
-                              rbglib_m_unichar_isupper, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "xdigit?",
-                              rbglib_m_unichar_isxdigit, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "title?",
-                              rbglib_m_unichar_istitle, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "defined?",
-                              rbglib_m_unichar_isdefined, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "wide?",
-                              rbglib_m_unichar_iswide, 1);
-    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "wide_cjk?",
-                              rbglib_m_unichar_iswide_cjk, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "alnum?",
+                               rbglib_m_unichar_isalnum, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "alpha?",
+                               rbglib_m_unichar_isalpha, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "cntrl?",
+                               rbglib_m_unichar_iscntrl, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "digit?",
+                               rbglib_m_unichar_isdigit, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "graph?",
+                               rbglib_m_unichar_isgraph, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "lower?",
+                               rbglib_m_unichar_islower, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "print?",
+                               rbglib_m_unichar_isprint, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "punct?",
+                               rbglib_m_unichar_ispunct, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "space?",
+                               rbglib_m_unichar_isspace, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "upper?",
+                               rbglib_m_unichar_isupper, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "xdigit?",
+                               rbglib_m_unichar_isxdigit, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "title?",
+                               rbglib_m_unichar_istitle, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "defined?",
+                               rbglib_m_unichar_isdefined, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "wide?",
+                               rbglib_m_unichar_iswide, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "wide_cjk?",
+                               rbglib_m_unichar_iswide_cjk, 1);
 
     RG_DEF_SMETHOD(to_upper, 1);
     RG_DEF_SMETHOD(to_lower, 1);
