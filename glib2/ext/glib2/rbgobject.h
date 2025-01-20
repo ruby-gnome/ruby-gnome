@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2003-2023  Ruby-GNOME Project Team
+ *  Copyright (C) 2003-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -162,7 +162,6 @@ extern VALUE rbgobj_get_relative_removable(VALUE obj, ID obj_ivar_id,
 extern void rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key);
 extern void rbgobj_remove_relative_all(VALUE obj, ID obj_ivar_id);
 
-extern GObject* rbgobj_gobject_new(GType type, VALUE params_hash);
 extern VALUE rbgobj_create_object(VALUE klass); /* deprecated */
 
 extern VALUE rbgobj_get_ruby_object_from_gobject(GObject* gobj, gboolean alloc);

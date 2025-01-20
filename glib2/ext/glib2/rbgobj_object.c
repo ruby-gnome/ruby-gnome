@@ -301,24 +301,122 @@ gobj_mark(gpointer ptr)
     g_free(properties);
 }
 
+typedef struct {
+    VALUE rb_properties;
+    GObjectClass* gclass;
+    guint n_properties;
+    const char **names;
+    GValue* values;
+    guint index;
+} rbgobj_new_data;
+
+static int
+rbgobj_new_set_property(VALUE key,
+                        VALUE value,
+                        VALUE rb_data)
+{
+    rbgobj_new_data *data = (rbgobj_new_data *)rb_data;
+
+    guint index = data->index;
+    if (index >= data->n_properties)
+       rb_raise(rb_eArgError, "too many properties");
+
+    const char *name;
+    if (SYMBOL_P(key)) {
+        name = rb_id2name(SYM2ID(key));
+    } else {
+        name = StringValueCStr(key);
+    }
+
+    GParamSpec *pspec = g_object_class_find_property(data->gclass, name);
+    if (!pspec)
+        rb_raise(rb_eArgError, "No such property: %s", name);
+
+    data->names[index] = pspec->name;
+    g_value_init(&(data->values[index]), G_PARAM_SPEC_VALUE_TYPE(pspec));
+    rbgobj_rvalue_to_gvalue(value, &(data->values[index]));
+
+    data->index++;
+
+    return ST_CONTINUE;
+}
+
+static VALUE
+rbgobj_new_body(VALUE rb_data)
+{
+    rbgobj_new_data *data = (rbgobj_new_data *)rb_data;
+    rb_hash_foreach(data->rb_properties, rbgobj_new_set_property, rb_data);
+    return (VALUE)g_object_new_with_properties(G_TYPE_FROM_CLASS(data->gclass),
+                                               data->n_properties,
+                                               data->names,
+                                               data->values);
+}
+
+static VALUE
+rbgobj_new_ensure(VALUE rb_data)
+{
+    rbgobj_new_data *data = (rbgobj_new_data *)rb_data;
+    guint i;
+    for (i = 0; i < data->n_properties; i++) {
+        g_value_unset(&(data->values[i]));
+    }
+    g_type_class_unref(data->gclass);
+    return Qnil;
+}
+
+static GObject *
+rbgobj_gobject_new(int argc, VALUE *argv, GType gtype)
+{
+    if (!g_type_is_a(gtype, G_TYPE_OBJECT))
+        rb_raise(rb_eArgError,
+                 "type \"%s\" is not descendant of GObject",
+                 g_type_name(gtype));
+
+    VALUE rb_properties = Qnil;
+    rb_scan_args(argc, argv, "0:", &rb_properties);
+    GObject *gobject;
+    if (NIL_P(rb_properties)) {
+        gobject = g_object_new_with_properties(gtype, 0, NULL, NULL);
+    } else {
+        /* TODO: Can we use rb_get_kwargs()? */
+        rbgobj_new_data data;
+        data.rb_properties = rb_properties;
+        data.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
+        data.n_properties = RHASH_SIZE(rb_properties);
+        data.names = NULL;
+        data.values = NULL;
+        data.names = ALLOCA_N(const char *, data.n_properties);
+        data.values = ALLOCA_N(GValue, data.n_properties);
+        guint i;
+        GValue empty_value = G_VALUE_INIT;
+        for (i = 0; i < data.n_properties; i++) {
+            data.names[i] = NULL;
+            data.values[i] = empty_value;
+        }
+        data.index = 0;
+
+        gobject = (GObject *)rb_ensure(&rbgobj_new_body, (VALUE)(&data),
+                                       &rbgobj_new_ensure, (VALUE)(&data));
+    }
+
+    if (!gobject)
+        rb_raise(rb_eRuntimeError, "g_object_new_with_properties() failed");
+
+    return gobject;
+}
+
 static VALUE
 rg_s_new_bang(int argc, VALUE *argv, VALUE self)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
-    VALUE params_hash;
     GObject* gobj;
     VALUE result;
-
-    rb_scan_args(argc, argv, "01", &params_hash);
-
-    if (!NIL_P(params_hash))
-        Check_Type(params_hash, RUBY_T_HASH);
 
     if (cinfo->klass != self)
         rb_raise(rb_eTypeError, "%s isn't registered class",
                  rb_class2name(self));
 
-    gobj = rbgobj_gobject_new(cinfo->gtype, params_hash);
+    gobj = rbgobj_gobject_new(argc, argv, cinfo->gtype);
     result = GOBJ2RVAL(gobj);
     g_object_unref(gobj);
 
@@ -329,114 +427,6 @@ static VALUE
 rg_s_init(VALUE self)
 {
     return RUBY_Qnil;
-}
-
-struct param_setup_arg {
-    GObjectClass* gclass;
-    GParameter* params;
-    guint param_size;
-    VALUE params_hash;
-    guint index;
-};
-
-static VALUE
-_params_setup(VALUE arg,
-              VALUE rb_param_setup_arg,
-              G_GNUC_UNUSED int argc,
-              G_GNUC_UNUSED const VALUE *argv,
-              G_GNUC_UNUSED VALUE block)
-{
-    struct param_setup_arg *param_setup_arg =
-        (struct param_setup_arg *)rb_param_setup_arg;
-    guint index;
-    VALUE name, val;
-    GParamSpec* pspec;
-
-    index = param_setup_arg->index;
-    if (index >= param_setup_arg->param_size)
-       rb_raise(rb_eArgError, "too many parameters");
-
-    name = rb_ary_entry(arg, 0);
-    val  = rb_ary_entry(arg, 1);
-
-    if (SYMBOL_P(name))
-        param_setup_arg->params[index].name = rb_id2name(SYM2ID(name));
-    else
-        param_setup_arg->params[index].name = StringValuePtr(name);
-
-    pspec = g_object_class_find_property(
-        param_setup_arg->gclass,
-        param_setup_arg->params[index].name);
-    if (!pspec)
-        rb_raise(rb_eArgError, "No such property: %s",
-                 param_setup_arg->params[index].name);
-
-    g_value_init(&(param_setup_arg->params[index].value),
-                 G_PARAM_SPEC_VALUE_TYPE(pspec));
-    rbgobj_rvalue_to_gvalue(val, &(param_setup_arg->params[index].value));
-
-    param_setup_arg->index++;
-
-    return Qnil;
-}
-
-static VALUE
-gobj_new_body(VALUE rb_arg)
-{
-    struct param_setup_arg *arg = (struct param_setup_arg *)rb_arg;
-    ID id_each;
-    CONST_ID(id_each, "each");
-    rb_block_call(arg->params_hash, id_each, 0, NULL, _params_setup, (VALUE)arg);
-    return (VALUE)g_object_newv(G_TYPE_FROM_CLASS(arg->gclass),
-                                arg->param_size, arg->params);
-}
-
-static VALUE
-gobj_new_ensure(VALUE rb_arg)
-{
-    struct param_setup_arg *arg = (struct param_setup_arg *)rb_arg;
-    guint i;
-    g_type_class_unref(arg->gclass);
-    for (i = 0; i < arg->param_size; i++) {
-        if (G_IS_VALUE(&arg->params[i].value))
-            g_value_unset(&arg->params[i].value);
-    }
-    return Qnil;
-}
-
-GObject*
-rbgobj_gobject_new(GType gtype, VALUE params_hash)
-{
-    GObject* result;
-
-    if (!g_type_is_a(gtype, G_TYPE_OBJECT))
-        rb_raise(rb_eArgError,
-                 "type \"%s\" is not descendant of GObject",
-                 g_type_name(gtype));
-
-    if (NIL_P(params_hash)) {
-        result = g_object_newv(gtype, 0, NULL);
-    } else {
-        guint param_size;
-        struct param_setup_arg arg;
-
-        param_size = NUM2UINT(rb_funcall(params_hash, rb_intern("length"), 0));
-
-        arg.param_size = param_size;
-        arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
-        arg.params = ALLOCA_N(GParameter, param_size);
-        memset(arg.params, 0, sizeof(GParameter) * param_size);
-        arg.params_hash = params_hash;
-        arg.index = 0;
-
-        result = (GObject*)rb_ensure(&gobj_new_body, (VALUE)&arg,
-                                     &gobj_new_ensure, (VALUE)&arg);
-    }
-
-    if (!result)
-        rb_raise(rb_eRuntimeError, "g_object_newv failed");
-
-    return result;
 }
 
 static VALUE
@@ -867,7 +857,6 @@ static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GType gtype;
-    VALUE params_hash;
     GObject* gobj;
 
     gtype = CLASS2GTYPE(CLASS_OF(self));
@@ -877,12 +866,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                  RBG_INSPECT(CLASS_OF(self)));
     }
 
-    rb_scan_args(argc, argv, "01", &params_hash);
-
-    if (!NIL_P(params_hash))
-        Check_Type(params_hash, RUBY_T_HASH);
-
-    gobj = rbgobj_gobject_new(RVAL2GTYPE(self), params_hash);
+    gobj = rbgobj_gobject_new(argc, argv, RVAL2GTYPE(self));
 
     G_INITIALIZE(self, gobj);
 
