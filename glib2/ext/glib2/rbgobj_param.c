@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -410,26 +410,26 @@ Init_gobject_gparam(void)
     /* for debugging */
     RG_DEF_METHOD(ref_count, 0);
 
-    rbg_define_method(RG_TARGET_NAMESPACE, "readable?",
-                      param_is_G_PARAM_READABLE, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "writable?",
-                      param_is_G_PARAM_WRITABLE, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "readwrite?",
-                      param_is_G_PARAM_READWRITE, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "construct?",
-                      param_is_G_PARAM_CONSTRUCT, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "construct_only?",
-                      param_is_G_PARAM_CONSTRUCT_ONLY, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "lax_validation?",
-                      param_is_G_PARAM_LAX_VALIDATION, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "static_name?",
-                      param_is_G_PARAM_STATIC_NAME, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "static_nick?",
-                      param_is_G_PARAM_STATIC_NICK, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "static_blurb?",
-                      param_is_G_PARAM_STATIC_BLURB, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "explicit_notify?",
-                      param_is_G_PARAM_EXPLICIT_NOTIFY, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "deprecated?",
-                      param_is_G_PARAM_DEPRECATED, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "readable?",
+                     param_is_G_PARAM_READABLE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "writable?",
+                     param_is_G_PARAM_WRITABLE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "readwrite?",
+                     param_is_G_PARAM_READWRITE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "construct?",
+                     param_is_G_PARAM_CONSTRUCT, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "construct_only?",
+                     param_is_G_PARAM_CONSTRUCT_ONLY, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "lax_validation?",
+                     param_is_G_PARAM_LAX_VALIDATION, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "static_name?",
+                     param_is_G_PARAM_STATIC_NAME, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "static_nick?",
+                     param_is_G_PARAM_STATIC_NICK, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "static_blurb?",
+                     param_is_G_PARAM_STATIC_BLURB, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "explicit_notify?",
+                     param_is_G_PARAM_EXPLICIT_NOTIFY, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "deprecated?",
+                     param_is_G_PARAM_DEPRECATED, 0);
 }
