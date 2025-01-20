@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2004-2024  Ruby-GNOME Project Team
+ *  Copyright (C) 2004-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2004  Pascal Terjan
  *
  *  This library is free software; you can redistribute it and/or
@@ -308,7 +308,7 @@ Init_glib_utils(void)
     RG_DEF_SMETHOD(prgname, 0);
     RG_DEF_SMETHOD(set_prgname, 1);
     RG_DEF_SMETHOD(getenv, 1);
-    RG_DEF_SMETHOD(setenv, 2);
+    RG_DEF_SMETHOD(setenv, 3);
     RG_DEF_SMETHOD(unsetenv, 1);
     RG_DEF_SMETHOD(listenv, 0);
     RG_DEF_SMETHOD(host_name, 0);
