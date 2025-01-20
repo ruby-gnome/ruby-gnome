@@ -552,7 +552,7 @@ Init_gobject_gflags(void)
                                rbgutil_generic_s_to_s_gtype_name_fallback,
                                0);
     RG_DEF_SALIAS("inspect", "to_s");
-    rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
 
     RG_DEF_SMETHOD(mask, 0);
     RG_DEF_SMETHOD(values, 0);
@@ -567,7 +567,7 @@ Init_gobject_gflags(void)
     RG_DEF_METHOD(nick, 0);
 
     /*
-    rbg_define_method(RG_TARGET_NAMESPACE, "inspect", flags_inspect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "inspect", flags_inspect, 0);
     */
 
     RG_DEF_METHOD_OPERATOR("<=>", flags_compare, 1);
@@ -577,9 +577,9 @@ Init_gobject_gflags(void)
     RG_DEF_METHOD_OPERATOR(">", flags_gt, 1);
     RG_DEF_METHOD_OPERATOR("<", flags_lt, 1);
     RG_DEF_METHOD_OPERATOR("~", flags_not, 0);
-    rbg_define_method(RG_TARGET_NAMESPACE, "&", flags_and, 1);
-    rbg_define_method(RG_TARGET_NAMESPACE, "|", flags_or, 1);
-    rbg_define_method(RG_TARGET_NAMESPACE, "^", flags_xor, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "&", flags_and, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "|", flags_or, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "^", flags_xor, 1);
     RG_DEF_METHOD_OPERATOR("-", flags_minus, 1);
 
     RG_DEF_METHOD_P(empty, 0);
