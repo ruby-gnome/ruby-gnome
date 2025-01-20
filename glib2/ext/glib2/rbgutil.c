@@ -47,25 +47,6 @@ rbg_define_setter_alias_if_need(VALUE klass, const char *name, int argc)
 }
 
 void
-rbg_define_private_method(VALUE klass,
-                          const char *name,
-                          VALUE (*func)(ANYARGS),
-                          int argc)
-{
-    rb_define_private_method(klass, name, func, argc);
-    if ((argc != 1) || strncmp(name, "set_", 4))
-        return;
-
-    name += 4;
-    rb_funcall(klass, rbgutil_id_module_eval, 3,
-               CSTR2RVAL_FREE(g_strdup_printf("def %s=(val); set_%s(val); val; end\n"
-                                              "private :%s=\n",
-                                              name, name, name)),
-               rb_str_new2(__FILE__),
-               INT2NUM(__LINE__));
-}
-
-void
 rbg_define_singleton_setter_alias_if_need(VALUE klass,
                                           const char *name,
                                           int argc)

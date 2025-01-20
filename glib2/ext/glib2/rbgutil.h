@@ -69,7 +69,10 @@ G_BEGIN_DECLS
 #define RG_DEF_SALIAS(new, old) \
         rb_define_alias(rb_class_of(RG_TARGET_NAMESPACE), new, old)
 #define RG_DEF_PRIVATE_METHOD(method, argc) \
-        rbg_define_private_method(RG_TARGET_NAMESPACE, #method, rg_ ## method, argc)
+    do { \
+        rb_define_private_method(RG_TARGET_NAMESPACE, #method, rg_##method, argc); \
+        rbg_define_setter_alias_if_need(RG_TARGET_NAMESPACE, #method, argc); \
+    } while (FALSE)
 
 #define RG_REG_GLIBID_SETTER(name) \
         rbgobj_register_property_setter(CLASS2GTYPE(RG_TARGET_NAMESPACE), name, rbgutil_glibid_r2g_func)
@@ -106,7 +109,6 @@ G_BEGIN_DECLS
 extern void rbg_define_setter_alias_if_need(VALUE klass,
                                             const char *name,
                                             int argc);
-extern void rbg_define_private_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc);
 extern void rbg_define_singleton_setter_alias_if_need(VALUE klass,
                                                       const char *name,
                                                       int argc);
