@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2023  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2002-2004  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -63,6 +63,23 @@ rbg_define_private_method(VALUE klass,
                                               name, name, name)),
                rb_str_new2(__FILE__),
                INT2NUM(__LINE__));
+}
+
+void
+rbg_define_singleton_setter_alias_if_need(VALUE klass,
+                                          const char *name,
+                                          int argc)
+{
+    if (argc != 1) {
+        return;
+    }
+    if (strncmp(name, "set_", 4) != 0) {
+        return;
+    }
+
+    rb_define_alias(rb_singleton_class(klass),
+                    name + 4,
+                    name);
 }
 
 void

@@ -42,11 +42,9 @@ G_BEGIN_DECLS
                                    #method, \
                                    rg_s_##method, \
                                    argc); \
-        if (argc == 1 && strncmp(#method, "set_", 4) == 0) { \
-            rb_define_alias(rb_singleton_class(RG_TARGET_NAMESPACE), \
-                            #method + 4, \
-                            #method); \
-        } \
+        rbg_define_singleton_setter_alias_if_need(RG_TARGET_NAMESPACE, \
+                                                  #method, \
+                                                  argc); \
     } while (FALSE)
 #define RG_DEF_SMETHOD_P(method, argc) \
         rb_define_singleton_method(RG_TARGET_NAMESPACE, #method"?", rg_s_ ## method ## _p, argc)
@@ -103,6 +101,9 @@ G_BEGIN_DECLS
 
 extern void rbg_define_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc);
 extern void rbg_define_private_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc);
+extern void rbg_define_singleton_setter_alias_if_need(VALUE klass,
+                                                      const char *name,
+                                                      int argc);
 extern VALUE rbgutil_def_setters(VALUE klass);
 extern void rbgutil_set_properties(VALUE self, VALUE hash);
 extern VALUE rbgutil_protect(VALUE (*proc) (VALUE), VALUE data);
