@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2023  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2025  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -365,14 +365,10 @@ rbgobj_class_info_lookup(VALUE klass)
     VALUE data = rb_hash_aref(klass_to_cinfo, klass);
     if (!NIL_P(data)) {
         RGObjClassInfo *cinfo;
-        if (RTYPEDDATA_P(data)) {
-            TypedData_Get_Struct(data,
-                                 RGObjClassInfo,
-                                 RTYPEDDATA_TYPE(data),
-                                 cinfo);
-        } else {
-            Data_Get_Struct(data, RGObjClassInfo, cinfo);
-        }
+        TypedData_Get_Struct(data,
+                             RGObjClassInfo,
+                             RTYPEDDATA_TYPE(data),
+                             cinfo);
         return cinfo;
     }
 
@@ -664,14 +660,10 @@ rg_s_try_convert(VALUE self, VALUE value)
             if (NIL_P(data))
                 continue;
 
-            if (RTYPEDDATA_P(data)) {
-                TypedData_Get_Struct(data,
-                                     RGObjClassInfo,
-                                     RTYPEDDATA_TYPE(data),
-                                     cinfo);
-            } else {
-                Data_Get_Struct(data, RGObjClassInfo, cinfo);
-            }
+            TypedData_Get_Struct(data,
+                                 RGObjClassInfo,
+                                 RTYPEDDATA_TYPE(data),
+                                 cinfo);
             return rb_funcall(self, id_new, 1, SIZET2NUM(cinfo->gtype));
         }
         return Qnil;
