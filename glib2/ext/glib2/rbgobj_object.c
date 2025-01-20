@@ -1036,8 +1036,8 @@ rbgobj_register_type(VALUE klass, VALUE type_name, GClassInitFunc class_init)
             initialize_module = rb_define_module_under(klass,
                                                        RubyGObjectHookModule);
             if (!(cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {
-                rbg_define_method(initialize_module,
-                                  "initialize", rg_initialize, -1);
+                rb_define_method(initialize_module,
+                                 "initialize", rg_initialize, -1);
             }
 
             rb_include_module(klass, initialize_module);
