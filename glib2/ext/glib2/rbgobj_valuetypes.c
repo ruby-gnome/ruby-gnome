@@ -97,9 +97,9 @@ Init_gtype_pointer(void)
     VALUE cPtr = G_DEF_CLASS(G_TYPE_POINTER, "Pointer", rbg_mGLib());
     rb_define_alloc_func(cPtr, ptr_alloc);
     rb_define_singleton_method(cPtr, "gtype", ptr_s_gtype, 0);
-    rbg_define_method(cPtr, "initialize", ptr_initialize, 1);
-    rbg_define_method(cPtr, "gtype", ptr_gtype, 0);
-    rbg_define_method(cPtr, "to_i", ptr_to_i, 0);
+    rb_define_method(cPtr, "initialize", ptr_initialize, 1);
+    rb_define_method(cPtr, "gtype", ptr_gtype, 0);
+    rb_define_method(cPtr, "to_i", ptr_to_i, 0);
 }
 
 /**********************************************************************/
