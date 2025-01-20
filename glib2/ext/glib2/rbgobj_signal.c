@@ -1056,7 +1056,7 @@ Init_gobject_gsignal(void)
     g_mutex_init(&rbg_signal_call_func_table_mutex);
 
     rbgobj_mMetaSignal = rb_define_module_under(rbg_mGLib(), "MetaSignal");
-    rbg_define_method(rbgobj_mMetaSignal, "define_signal", gobj_s_define_signal, -1);
+    rb_define_method(rbgobj_mMetaSignal, "define_signal", gobj_s_define_signal, -1);
     rb_define_alias(rbgobj_mMetaSignal, "signal_new", "define_signal");
     rb_define_method(rbgobj_mMetaSignal, "signals", gobj_s_signals, -1);
     rb_define_method(rbgobj_mMetaSignal, "signal", gobj_s_signal, 1);
