@@ -868,7 +868,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                  RBG_INSPECT(CLASS_OF(self)));
     }
 
-    gobj = rbgobj_gobject_new(argc, argv, RVAL2GTYPE(self));
+    gobj = rbgobj_gobject_new(argc, argv, gtype);
 
     G_INITIALIZE(self, gobj);
 
