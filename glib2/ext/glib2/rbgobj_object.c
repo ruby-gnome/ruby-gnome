@@ -373,12 +373,14 @@ rbgobj_gobject_new(int argc, VALUE *argv, GType gtype)
                  g_type_name(gtype));
 
     VALUE rb_properties = Qnil;
-    rb_scan_args(argc, argv, "0:", &rb_properties);
+    /* TODO: Can we use rb_get_kwargs()? */
+    rb_scan_args_kw(RB_SCAN_ARGS_LAST_HASH_KEYWORDS,
+                    argc, argv, "0:", &rb_properties);
+
     GObject *gobject;
     if (NIL_P(rb_properties)) {
         gobject = g_object_new_with_properties(gtype, 0, NULL, NULL);
     } else {
-        /* TODO: Can we use rb_get_kwargs()? */
         rbgobj_new_data data;
         data.rb_properties = rb_properties;
         data.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
