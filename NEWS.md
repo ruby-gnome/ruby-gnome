@@ -1,5 +1,106 @@
 # NEWS
 
+## Ruby-GNOME 4.2.6: 2025-01-25
+
+This is a C23 support release. This includes ABI incompatible changes
+but API is still compatible. If your gem uses
+`RG_DEF_METHOD()`/`RG_DEF_SMETHOD()`/`RG_DEF_PRIVATE_METHOD()`
+directly instead of using GObjectIntrospection, you need to reinstall
+them.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Added `GLib::Value.try_convert` for auto conversion.
+
+    * Added support for instantiating `GTypeInstance` objects.
+      * GH-1647
+      * Reported by ppibburr
+
+    * Added support for properties that uses `GTypeInstance`.
+      * GH-1651
+      * Reported by ppibburr
+
+    * `GLib::{Variant,Object,Param}`: Changed parent class to
+      `GLib::Instantiatable`.
+
+    * Added support for `GValue<GTypeInstance>`
+      * GH-1654
+      * GH-1655
+      * GH-1656
+      * Patch by ppibburr
+
+    * `GLib::Instantiatable#inspect`
+      * GH-1652
+      * GH-1653
+      * Patch by ppibburr
+
+    * Added support for C23.
+      * `rbg_define_singleton_method()`: Removed because it's not C23
+        compatible.
+      * `rbg_define_method()`: Removed because it's not C23 compatible.
+      * `rbg_define_private_method()`: Removed because it's not C23
+        compatible.
+      * GH-1660
+      * Reported by Mamoru TASAKA
+
+    * Removed `Data_Get_Struct()` fallback. We assume that all users
+      migrated to `TypedData` from `Data`.
+
+  * Fixes
+
+    * `GLib.setenv`: Fixed a bug that the third argument can't be
+      passed.
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for `(transfer full)` of boolean/number return.
+
+    * Added support for `ref`/`unref` for `GTypeInstance`
+      * GH-1657
+      * GH-1659
+      * Patch by ppibburr
+
+#### Ruby/GTK4
+
+  * Fixes
+
+    * Fixed a bug that `Gtk::TextBuffer#get_iter_at(:line)` returns
+      `Array`.
+      * GH-1649
+      * Reported by Eric Cunningham
+
+#### Ruby/GStreamer
+
+  * Improvements
+
+    * `Gst::AudioLoader`: Added.
+      * GH-1634
+      * GH-1641
+      * Patch by KITAITI Makoto
+
+    * `Gst::Caps#set_int_value`: Added. It's a convenient
+      `Gst::Caps#set_value` for a `GLib::Type::INT` value.
+
+    * `Gst::Caps#[]=`: Added. It's a convenient `Gst::Caps#set_value`
+      wrapper.
+
+    * `Gst::Structure#[]`: Added. It's a convenient
+      `Gst::Structure#get_value` wrapper.
+
+#### Thanks
+
+  * KITAITI Makoto
+
+  * ppibburr
+
+  * Eric Cunningham
+
 ## Ruby-GNOME 4.2.5: 2024-12-15
 
 This is a minor bug fix release.
@@ -13,7 +114,6 @@ This is a minor bug fix release.
     * Windows: Fixed a bug that `GType` conversion may be failed.
       * GH-1621
       * Reported by Eric Cunningham
-
 
 #### Ruby/GObjectIntrospection
 
