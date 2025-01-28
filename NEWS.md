@@ -1,5 +1,17 @@
 # NEWS
 
+## Ruby-GNOME 4.2.7: 2025-01-29
+
+This is a Ruby 2.5 on AlmaLinux 8 support release.
+
+### Change
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Added support for Ruby 2.5 on AlmaLinux 8 again.
+
 ## Ruby-GNOME 4.2.6: 2025-01-25
 
 This is a C23 support release. This includes ABI incompatible changes
