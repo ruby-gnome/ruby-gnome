@@ -1,8 +1,6 @@
 FROM almalinux:8
 
 RUN \
-  dnf module disable -y ruby && \
-  dnf module enable -y ruby:3.3 && \
   dnf install -y \
     epel-release && \
   dnf install -y \
@@ -22,7 +20,7 @@ RUN \
   dnf clean all
 
 RUN \
-  gem install bundler -v '< 2.5.0'
+  gem install bundler -v '< 2.4.0'
 
 RUN \
   useradd --user-group --create-home ruby-gnome

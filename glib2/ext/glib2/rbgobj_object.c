@@ -373,9 +373,15 @@ rbgobj_gobject_new(int argc, VALUE *argv, GType gtype)
                  g_type_name(gtype));
 
     VALUE rb_properties = Qnil;
+#ifdef RB_SCAN_ARGS_LAST_HASH_KEYWORDS
     /* TODO: Can we use rb_get_kwargs()? */
-    rb_scan_args_kw(RB_SCAN_ARGS_LAST_HASH_KEYWORDS,
-                    argc, argv, "0:", &rb_properties);
+    rb_scan_args_kw(RB_SCAN_ARGS_LAST_HASH_KEYWORDS, argc, argv,
+                    "0:", &rb_properties);
+#else
+    /* We can remove this when we drop support for AlmaLinux 8 that
+     * ships Ruby 2.5 as the default Ruby. */
+    rb_scan_args(argc, argv, "01", &rb_properties);
+#endif
 
     GObject *gobject;
     if (NIL_P(rb_properties)) {
