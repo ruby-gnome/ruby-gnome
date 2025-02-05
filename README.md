@@ -49,7 +49,7 @@ rbenv has a [rbenv-installer](https://github.com/rbenv/rbenv-installer)
 that installs everything and adds a line to your `.bashrc` file so you're running
 local copies of Ruby.
 
-To get rvenv:
+To get rbenv:
 1. Run the installer
 2. Restart your command prompt
 3. Run `rbenv install --list` (find recent Ruby version)
