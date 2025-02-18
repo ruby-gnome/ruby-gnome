@@ -35,6 +35,7 @@ RUN \
     libutf8proc-dev \
     libzstd-dev \
     llvm-dev \
+    meson \
     ninja-build \
     python3-pip \
     pkg-config \
@@ -44,9 +45,6 @@ RUN \
     sudo \
     tzdata \
     zlib1g-dev
-
-RUN \
-  pip3 install --upgrade meson
 
 RUN \
   useradd --user-group --create-home ruby-gnome
