@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (c) 2012-2025  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -402,7 +402,7 @@ Init_vlc_media(VALUE mVLC)
     RG_DEF_METHOD(state, 0);
     RG_DEF_METHOD(stats, 0);
     RG_DEF_METHOD(duration, 0);
-    RG_DEF_METHOD(parse, 0);
+    RG_DEF_METHOD(parse, 1);
     RG_DEF_METHOD_P(parsed, 0);
     RG_DEF_METHOD(tracks_info, 0);
     RG_DEF_METHOD(attach_event, 1);
