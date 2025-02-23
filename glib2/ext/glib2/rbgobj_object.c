@@ -53,12 +53,9 @@ weak_notify(gpointer data, G_GNUC_UNUSED GObject *where_the_object_was)
 {
     gobj_holder *holder = data;
 
-    rbgobj_instance_call_cinfo_free(holder->gobj);
     g_hash_table_unref(holder->rb_relatives);
     holder->rb_relatives = NULL;
     holder->destroyed = TRUE;
-
-    g_object_unref(holder->gobj);
     holder->gobj = NULL;
 }
 
@@ -92,6 +89,8 @@ holder_unref(gobj_holder *holder)
         if (!holder->destroyed) {
             g_object_set_qdata(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
             g_object_weak_unref(holder->gobj, (GWeakNotify)weak_notify, holder);
+            rbgobj_instance_call_cinfo_free(holder->gobj);
+            g_object_unref(holder->gobj);
             weak_notify(holder, holder->gobj);
         }
         holder->gobj = NULL;
