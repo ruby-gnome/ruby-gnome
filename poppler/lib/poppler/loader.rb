@@ -57,6 +57,8 @@ module Poppler
         1.upto(8) do |i|
           self.class.register_constant_rename_map("#{i}", "PART_#{i}")
         end
+      when "RenderAnnotsFlags"
+        self.class.register_constant_rename_map("3D", "THREE_DIMENSIONAL")
       end
       super
     end
