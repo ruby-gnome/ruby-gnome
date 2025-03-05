@@ -57,6 +57,12 @@ module Poppler
         1.upto(8) do |i|
           self.class.register_constant_rename_map("#{i}", "PART_#{i}")
         end
+      end
+      super
+    end
+
+    def load_flags_info(info)
+      case info.name
       when "RenderAnnotsFlags"
         self.class.register_constant_rename_map("3D", "THREE_DIMENSIONAL")
       end
