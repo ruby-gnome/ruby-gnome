@@ -14,13 +14,11 @@ RUN \
     make \
     redhat-rpm-config \
     ruby-devel \
+    rubygem-rake \
     sudo \
     which \
     xorg-x11-server-Xvfb && \
   dnf clean all
-
-RUN \
-  gem install bundler
 
 RUN \
   useradd --user-group --create-home ruby-gnome
@@ -31,3 +29,24 @@ RUN \
 
 USER ruby-gnome
 WORKDIR /home/ruby-gnome
+
+# GOffice: It's not available.
+# * gnumeric
+# * goffice
+#
+# GtkSourceView5: It's not available.
+# * gtksourceview5
+#
+# VTE4: It's not available.
+# * vte4
+#
+# WebKit: It's not available.
+# * webkit-gtk
+# * webkit2-gtk
+ENV \
+  RUBY_GNOME_GNUMERIC_ENABLE=no \
+  RUBY_GNOME_GOFFICE_ENABLE=no
+  RUBY_GNOME_GTKSOURCEVIEW5_ENABLE=no \
+  RUBY_GNOME_VTE4_ENABLE=no \
+  RUBY_GNOME_WEBKIT2_GTK_ENABLE=no \
+  RUBY_GNOME_WEBKIT_GTK_ENABLE=no
