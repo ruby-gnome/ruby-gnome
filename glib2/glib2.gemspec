@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018-2019  Ruby-GNOME Project Team
+# Copyright (C) 2018-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -49,6 +49,12 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("pkg-config", ">= 1.3.5")
   s.add_runtime_dependency("native-package-installer", ">= 1.0.3")
   s.add_development_dependency("test-unit", ">= 2")
+
+  [
+    ["alpine_linux", "glib-dev"],
+  ].each do |platform, package|
+    s.requirements << "system: gobject-2.0: #{platform}: #{package}"
+  end
 
   s.metadata["msys2_mingw_dependencies"] = "glib2"
 end

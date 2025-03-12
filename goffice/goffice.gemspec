@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018  Ruby-GNOME Project Team
+# Copyright (C) 2018-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -41,4 +41,10 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("gsf", "= #{s.version}")
   s.add_runtime_dependency("gtk3", "= #{s.version}")
+
+  [
+    ["alpine_linux", "goffice-dev"],
+  ].each do |platform, package|
+    s.requirements << "system: libgoffice-0.10|libgoffice-0.8: #{platform}: #{package}"
+  end
 end

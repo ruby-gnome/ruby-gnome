@@ -33,6 +33,23 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
+  alpine-linux-base:
+    image: alpine
+
+  alpine-linux:
+    image: ghcr.io/${GITHUB_REPOSITORY}:alpine-linux
+    build:
+      cache_from:
+        - ghcr.io/${GITHUB_REPOSITORY}:alpine-linux
+      context: .
+      dockerfile: dockerfiles/alpine-linux.dockerfile
+    volumes:
+      - .:/ruby-gnome:delegated
+    environment:
+      GITHUB_ACTIONS:
+    command:
+      /ruby-gnome/dockerfiles/run-test.sh
+
   apache-arrow:
     image: ghcr.io/${GITHUB_REPOSITORY}:apache-arrow
     build:

@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018  Ruby-GNOME Project Team
+# Copyright (C) 2018-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -40,6 +40,12 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("test/**/*")
 
   s.add_runtime_dependency("gtk3", "= #{s.version}")
+
+  [
+    ["alpine_linux", "gtksourceview4-dev"],
+  ].each do |platform, package|
+    s.requirements << "system: gtksourceview-4: #{platform}: #{package}"
+  end
 
   s.metadata["msys2_mingw_dependencies"] = "gtksourceview4"
 end

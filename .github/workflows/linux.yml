@@ -11,6 +11,7 @@ jobs:
         service:
           - almalinux-8
           - almalinux-9
+          - alpine-linux
           - apache-arrow
           - arch-linux
           - conda

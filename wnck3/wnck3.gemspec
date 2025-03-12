@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2019  Ruby-GNOME Project Team
+# Copyright (C) 2019-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -40,4 +40,10 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("test/**/*")
 
   s.add_runtime_dependency("gtk3", "= #{s.version}")
+
+  [
+    ["alpine_linux", "libwnck3-dev"],
+  ].each do |platform, package|
+    s.requirements << "system: libwnck-3.0: #{platform}: #{package}"
+  end
 end

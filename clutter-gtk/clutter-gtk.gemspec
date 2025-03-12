@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018  Ruby-GNOME Project Team
+# Copyright (C) 2018-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -43,6 +43,12 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("clutter", "= #{s.version}")
   s.add_runtime_dependency("clutter-gdk", "= #{s.version}")
   s.add_runtime_dependency("gtk3", "= #{s.version}")
+
+  [
+    ["alpine_linux", "clutter-gtk-dev"],
+  ].each do |platform, package|
+    s.requirements << "system: clutter-gtk-1.0: #{platform}: #{package}"
+  end
 
   s.metadata["msys2_mingw_dependencies"] = "clutter-gtk"
 end

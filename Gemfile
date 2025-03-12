@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2024  Ruby-GNOME Project Team
+# Copyright (C) 2012-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,15 +16,30 @@
 
 source "https://rubygems.org/"
 
-gem "cairo"
-gem "commonmarker"
-gem "native-package-installer"
-gem "pkg-config"
-gem "rake"
-gem "test-unit"
+plugin "rubygems-requirements-system"
+
+require_relative "helper"
+
+Helper.sorted_all_packages.each do |package|
+  gemspec path: File.join(__dir__, package)
+end
+
+group :development, :docs, :test do
+  gem "bundler"
+  gem "rake"
+end
+
+group :docs do
+  gem "commonmarker"
+  gem "yard"
+  gem "yard-gobject-introspection",
+      github: "ruby-gnome/yard-gobject-introspection"
+end
+
+group :test do
+  gem "test-unit"
 gem "webrick"
-gem "yard"
-gem "yard-gobject-introspection", github: "ruby-gnome/yard-gobject-introspection"
+end
 
 local_gemfile = File.join(File.dirname(__FILE__), "Gemfile.local")
 if File.exist?(local_gemfile)

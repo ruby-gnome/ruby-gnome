@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018  Ruby-GNOME Project Team
+# Copyright (C) 2018-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -42,6 +42,12 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("cairo-gobject", "= #{s.version}")
   s.add_runtime_dependency("gobject-introspection", "= #{s.version}")
+
+  [
+    ["alpine_linux", "pango-dev"],
+  ].each do |platform, package|
+    s.requirements << "system: pango: #{platform}: #{package}"
+  end
 
   s.metadata = {
     "bug_tracker_uri" => "https://github.com/ruby-gnome/ruby-gnome/issues",

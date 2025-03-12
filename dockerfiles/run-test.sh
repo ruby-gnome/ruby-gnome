@@ -25,30 +25,25 @@ cd ruby-gnome.build
 echo "::endgroup::"
 
 echo "::group::Install dependencies"
-cp /ruby-gnome/Gemfile ./
-if [[ -n ${SCL:-} ]]; then
-  gem install cairo
-fi
-bundle config set --local path vendor/bundle
-bundle install
+gem install --user-install \
+    rubygems-requirements-system \
+    test-unit \
+    webrick
 echo "::endgroup::"
 
-bundle exec ruby /ruby-gnome/extconf.rb --enable-debug-build "$@"
-for makefile in */Makefile; do
-  target=$(dirname ${makefile})
-  echo "::group::Build ${target}"
-  make -C ${target} -j$(nproc)
-  echo "::endgroup::"
-done
+MAKEFLAGS="-j$(nproc)" rake -f /ruby-gnome/Rakefile gem:install
 
-export RUBY_GNOME_BUILD_DIR="${PWD}"
-if type dbus-run-session > /dev/null 2>&1; then
-  if type gtk4-broadwayd; then
-    export RUBY_GNOME_GTK4_USE_BROADWAY=yes
+if [ "${RUBY_GNOME_TEST_ENABLE:-yes}" != "no" ]; then
+  export RUBY_GNOME_BUILD_DIR="${PWD}"
+  if type dbus-run-session > /dev/null 2>&1 &&
+      type xvfb-run > /dev/null 2>&1; then
+    if type gtk4-broadwayd > /dev/null 2>&1; then
+      export RUBY_GNOME_GTK4_USE_BROADWAY=yes
+    fi
+    dbus-run-session \
+      xvfb-run --server-args "-screen 0 640x480x24" \
+      /ruby-gnome/run-test.rb "$@"
+  else
+    /ruby-gnome/run-test.rb "$@"
   fi
-  dbus-run-session \
-    xvfb-run --server-args "-screen 0 640x480x24" \
-    bundle exec /ruby-gnome/run-test.rb "$@"
-else
-  bundle exec /ruby-gnome/run-test.rb "$@"
 fi

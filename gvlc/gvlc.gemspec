@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018  Ruby-GNOME Project Team
+# Copyright (C) 2018-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -45,6 +45,12 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("glib2", "= #{s.version}")
 
   s.post_install_message = "This library is experimental."
+
+  [
+    ["alpine_linux", "vlc-dev"],
+  ].each do |platform, package|
+    s.requirements << "system: libvlc: #{platform}: #{package}"
+  end
 
   s.metadata["msys2_mingw_dependencies"] = "vlc"
 end

@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018-2021  Ruby-GNOME Project Team
+# Copyright (C) 2018-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -42,4 +42,10 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("gtk3", "= #{s.version}")
   s.add_development_dependency("webrick")
+
+  [
+    ["alpine_linux", "webkit2gtk-4.1-dev"],
+  ].each do |platform, package|
+    s.requirements << "system: webkit2gtk-4.1: #{platform}: #{package}"
+  end
 end

@@ -1,11 +1,26 @@
 #!/usr/bin/env ruby
-
-# quick & dirty script for running all available tests for each module
-# Author: Joachim Glauche
+#
+# Copyright (C) 2008-2025  Ruby-GNOME Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 require "rbconfig"
 require "pathname"
 require "time"
+
+require_relative "helper"
 
 ruby = RbConfig.ruby
 
@@ -31,7 +46,7 @@ def run_broadwayd(target)
       Process.waitpid(pid)
     end
   else
-    return yield
+    yield
   end
 end
 
@@ -49,41 +64,19 @@ end
 candidates.each do |dir|
   next unless dir.directory?
   source_dir = dir.expand_path
-  package_name = dir.basename
-  build_dir = Pathname(package_name).expand_path
-  lib_dir = source_dir + "lib"
-  ext_dir = build_dir + "ext" + package_name
-  if ext_dir.exist?
-    next unless (ext_dir + "Makefile").exist?
-    includes.concat(["-I", lib_dir.to_s, "-I", ext_dir.to_s])
-  else
-    includes.concat(["-I", lib_dir.to_s])
-  end
   next unless (source_dir + "test").directory?
   targets << dir
 end
 
-ignored_modules = [
-]
+all_test_packages = Helper.all_test_packages
 
 failed_target_names = []
 targets.each do |target|
-  next if target.basename.to_s.end_with?("-no-gi")
-  next if ignored_modules.include?(target.basename.to_s)
+  next unless all_test_packages.include?(target.basename.to_s)
 
   puts "::group::Test #{target}"
   puts "#{Time.now.iso8601}: Running test for #{target}"
   puts separator
-
-  dependency_check = target + "dependency-check/Rakefile"
-  if dependency_check.exist?
-    unless system(ruby, *includes, "-S",
-                  "rake", "--rakefile", dependency_check.to_s)
-      puts "Failed to resolve dependency: #{target.basename}"
-      puts separator
-      next
-    end
-  end
 
   run_broadwayd(target) do
     run_test = target + "test/run-test.rb"

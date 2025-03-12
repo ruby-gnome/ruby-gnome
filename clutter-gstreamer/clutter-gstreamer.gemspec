@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2018  Ruby-GNOME Project Team
+# Copyright (C) 2018-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -43,6 +43,12 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("gdk_pixbuf2", "= #{s.version}")
   s.add_runtime_dependency("clutter", "= #{s.version}")
   s.add_runtime_dependency("gstreamer", "= #{s.version}")
+
+  [
+    ["alpine_linux", "clutter-gst-dev"],
+  ].each do |platform, package|
+    s.requirements << "system: clutter-gst-3.0: #{platform}: #{package}"
+  end
 
   s.metadata["msys2_mingw_dependencies"] = "clutter-gst"
 end

@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2008-2024  Ruby-GNOME Project Team
+# Copyright (C) 2008-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,8 @@ require "open-uri"
 require "pathname"
 require "tmpdir"
 
+require_relative "helper"
+
 task :default => :test
 
 def version
@@ -30,7 +32,7 @@ end
 
 def guess_version
   versions = {}
-  File.open("glib2/ext/glib2/rbglib.h") do |rbglib_h|
+  File.open(File.join(__dir__, "glib2", "ext", "glib2", "rbglib.h")) do |rbglib_h|
     rbglib_h.each_line do |line|
       if /#define\s+RBGLIB_([A-Z]+)_VERSION\s+(\d+)/ =~ line
         versions[$1.downcase] = $2.to_i
@@ -60,43 +62,8 @@ def gem_push(path, name, version)
   end
 end
 
-default_packages = [
-  "adwaita",
-  "atk",
-  "cairo-gobject",
-  "clutter",
-  "clutter-gdk",
-  "clutter-gstreamer",
-  "clutter-gtk",
-  "gdk3",
-  "gdk4",
-  "gdk_pixbuf2",
-  "gegl",
-  "gio2",
-  "glib2",
-  "gnumeric",
-  "gobject-introspection",
-  "goffice",
-  "gsf",
-  "gstreamer",
-  "gtk3",
-  "gtk4",
-  "gtksourceview3",
-  "gtksourceview4",
-  "gtksourceview5",
-  "libhandy",
-  "libsecret",
-  "pango",
-  "poppler",
-  "rsvg2",
-  "vte3",
-  "vte4",
-  "webkit-gtk",
-  "webkit2-gtk",
-  "wnck3",
-]
 packages = (ENV["PACKAGES"] || "").split(",")
-packages = default_packages if packages.empty?
+packages = Helper.all_packages if packages.empty?
 
 desc "configure all packages"
 task :configure do
@@ -176,15 +143,22 @@ namespace :gem do
 
   desc "install all gems"
   task :install do
-    packages.each do |package|
-      ruby("-S", "gem", "install", "--user-install",
-           *Dir.glob(File.join(package, "pkg", "*-#{version}.gem")))
+    Helper.sort_packages(packages).each do |package|
+      puts("::group::Install #{package}")
+      gem_path = File.join(package, "pkg", "#{package}-#{version}.gem")
+      gem_path = File.expand_path(gem_path)
+      mkdir_p(File.dirname(gem_path))
+      cd(File.join(__dir__, package)) do
+        ruby("-S", "gem", "build", "#{package}.gemspec", "--output", gem_path)
+      end
+      ruby("-S", "gem", "install", "--user-install", gem_path)
+      puts("::endgroup::")
     end
   end
 
   desc "uninstall all gems"
   task :uninstall do
-    packages.each do |package|
+    sort_packages(packages).reverse_each do |package|
       ruby("-S", "gem", "uninstall", "--version", version, package)
     end
   end

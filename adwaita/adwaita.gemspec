@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2022  Ruby-GNOME Project Team
+# Copyright (C) 2022-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -39,6 +39,12 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("lib/**/*.rb")
 
   s.add_runtime_dependency("gtk4", "= #{s.version}")
+
+  [
+    ["alpine_linux", "libadwaita-dev"],
+  ].each do |platform, package|
+    s.requirements << "system: libadwaita-1: #{platform}: #{package}"
+  end
 
   s.metadata["msys2_mingw_dependencies"] = "libadwaita"
 end
