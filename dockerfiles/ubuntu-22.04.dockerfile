@@ -20,9 +20,6 @@ RUN \
     xvfb
 
 RUN \
-  gem install bundler
-
-RUN \
   useradd --user-group --create-home ruby-gnome
 
 RUN \
@@ -31,3 +28,8 @@ RUN \
 
 USER ruby-gnome
 WORKDIR /home/ruby-gnome
+
+# VTE4: It's not available.
+# * vte4
+ENV \
+  RUBY_GNOME_VTE4_ENABLE=no
