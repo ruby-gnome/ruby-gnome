@@ -231,23 +231,6 @@ services:
     command:
       /ruby-gnome/dockerfiles/run-test.sh
 
-  ubuntu-20.04-base:
-    image: ubuntu:20.04
-
-  ubuntu-20.04:
-    image: ghcr.io/${GITHUB_REPOSITORY}:ubuntu-20.04
-    build:
-      cache_from:
-        - ghcr.io/${GITHUB_REPOSITORY}:ubuntu-20.04
-      context: .
-      dockerfile: dockerfiles/ubuntu-20.04.dockerfile
-    volumes:
-      - .:/ruby-gnome:delegated
-    environment:
-      GITHUB_ACTIONS:
-    command:
-      /ruby-gnome/dockerfiles/run-test.sh
-
   ubuntu-22.04-base:
     image: ubuntu:22.04
 
