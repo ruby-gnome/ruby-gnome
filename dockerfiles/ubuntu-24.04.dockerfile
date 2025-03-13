@@ -20,9 +20,6 @@ RUN \
     xvfb
 
 RUN \
-  gem install bundler
-
-RUN \
   useradd --user-group --create-home ruby-gnome
 
 RUN \
