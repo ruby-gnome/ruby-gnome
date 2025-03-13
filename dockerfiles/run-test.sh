@@ -26,6 +26,7 @@ echo "::endgroup::"
 
 echo "::group::Install dependencies"
 gem install --user-install \
+    erb \
     rubygems-requirements-system \
     test-unit \
     webrick

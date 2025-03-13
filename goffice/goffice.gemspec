@@ -44,6 +44,7 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "goffice-dev"],
+    ["arch_linux", "goffice"],
   ].each do |platform, package|
     s.requirements << "system: libgoffice-0.10|libgoffice-0.8: #{platform}: #{package}"
   end

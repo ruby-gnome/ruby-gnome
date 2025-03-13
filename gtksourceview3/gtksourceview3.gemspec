@@ -43,6 +43,7 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "gtksourceview-dev"],
+    ["arch_linux", "gtksourceview3"],
   ].each do |platform, package|
     s.requirements << "system: gtksourceview-3.0: #{platform}: #{package}"
   end

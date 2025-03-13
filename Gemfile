@@ -26,6 +26,7 @@ end
 
 group :development, :docs, :test do
   gem "bundler"
+  gem "erb"
   gem "rake"
 end
 

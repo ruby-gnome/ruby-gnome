@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "clutter-gst-dev"],
+    ["arch_linux", "clutter-gst"],
   ].each do |platform, package|
     s.requirements << "system: clutter-gst-3.0: #{platform}: #{package}"
   end

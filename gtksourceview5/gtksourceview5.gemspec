@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "gtksourceview5-dev"],
+    ["arch_linux", "gtksourceview5"],
   ].each do |platform, package|
     s.requirements << "system: gtksourceview-5: #{platform}: #{package}"
   end

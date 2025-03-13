@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "webkit2gtk-4.1-dev"],
+    ["arch_linux", "webkit2gtk-4.1"],
   ].each do |platform, package|
     s.requirements << "system: webkit2gtk-4.1: #{platform}: #{package}"
   end

@@ -8,16 +8,12 @@ RUN \
     dbus \
     gcc \
     git \
-    gnumeric \
-    gst-plugins-good \
     make \
     ruby \
+    ruby-rake \
     sudo \
     which \
     xorg-server-xvfb
-
-RUN \
-  gem install --no-user-install bundler
 
 RUN \
   useradd --user-group --create-home ruby-gnome
