@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2020-2022  Ruby-GNOME Project Team
+# Copyright (C) 2020-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,27 +18,35 @@
 
 set -eux
 
+echo "::group::Prepare ccache"
 export CCACHE_DIR=/ruby-gnome/.ccache
-ccache -s
+ccache -sv
+echo "::endgroup::"
 
+echo "::group::Prepare build directory"
+rm -rf ruby-gnome.build
 mkdir -p ruby-gnome.build
 cd ruby-gnome.build
+echo "::endgroup::"
 
-cp /ruby-gnome/Gemfile ./
-bundle config set --local path vendor/bundle
-MAKEFLAGS="-j$(nproc)" bundle install
+echo "::group::Install dependencies"
+gem install --user-install \
+    rubygems-requirements-system
+echo "::endgroup::"
 
 for package in glib2 gobject-introspection; do
+  echo "::group::Install ${package}"
   cp -a /ruby-gnome/${package} ./
   pushd ${package}
   rm -rf pkg
-  bundle exec rake gem
+  rake gem
   sudo env MAKEFLAGS="-j$(nproc)" gem install pkg/*.gem
   popd
+  echo "::endgroup::"
 done
 
+echo "::group::Build Apache Arrow C++"
 git clone --depth 1 https://github.com/apache/arrow.git
-mkdir -p arrow.build
 cmake \
   -G Ninja \
   -DARROW_ACERO=ON \
@@ -60,9 +68,15 @@ cmake \
   -S arrow/cpp \
   -B arrow.build/cpp
 ninja -C arrow.build/cpp
-ccache -s
+echo "::endgroup::"
+echo "::group::Show ccache statistics"
+ccache -sv
+echo "::endgroup::"
+echo "::group::Install Apache Arrow C++"
 sudo ninja -C arrow.build/cpp install
+echo "::endgroup::"
 
+echo "::group::Build Apache Arrow GLib"
 meson \
   --prefix=/usr \
   --libdir=lib \
@@ -70,6 +84,13 @@ meson \
   arrow.build/c_glib \
   arrow/c_glib
 ninja -C arrow.build/c_glib
-ccache -s
+echo "::endgroup::"
+echo "::group::Show ccache statistics"
+ccache -sv
+echo "::endgroup::"
+echo "::group::Install Apache Arrow GLib"
 sudo ninja -C arrow.build/c_glib install
+echo "::endgroup::"
+echo "::group::Test Apache Arrow GLib"
 ninja -C arrow.build/c_glib test
+echo "::endgroup::"
