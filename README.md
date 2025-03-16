@@ -152,13 +152,9 @@ Or you can compile each sub-binding:
 
 ## Bugs
 
-Please report bugs either in our bug tracker
+Please report bugs in our bug tracker:
 
-* [https://github.com/ruby-gnome/ruby-gnome/issues](https://github.com/ruby-gnome/ruby-gnome/issues) (current)
-
-or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
-
-* [http://sourceforge.net/mail/?group_id=53614](http://sourceforge.net/mail/?group_id=53614)
+* [https://github.com/ruby-gnome/ruby-gnome/issues](https://github.com/ruby-gnome/ruby-gnome/issues)
 
 ## Copying
 
