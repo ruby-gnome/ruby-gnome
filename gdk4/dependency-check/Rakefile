@@ -33,7 +33,6 @@ namespace :dependency do
     unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:alt_linux => "libgtk+4-devel",
                                             :arch_linux => "gtk4",
-                                            :conda => "gtk4",
                                             :debian => "libgtk-4-dev",
                                             :redhat => "pkgconfig(#{package_id})",
                                             :homebrew => "gtk+4",

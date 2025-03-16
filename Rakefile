@@ -151,7 +151,12 @@ namespace :gem do
       cd(File.join(__dir__, package)) do
         ruby("-S", "gem", "build", "#{package}.gemspec", "--output", gem_path)
       end
-      ruby("-S", "gem", "install", "--user-install", gem_path)
+      install_command_line = ["-S", "gem", "install"]
+      if (ENV["RUBY_GNOME_INSTALL_USER_INSTALL"] || "yes") == "yes"
+        install_command_line << "--user-install"
+      end
+      install_command_line << gem_path
+      ruby(*install_command_line)
       puts("::endgroup::")
     end
   end

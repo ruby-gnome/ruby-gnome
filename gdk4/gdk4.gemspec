@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "gtk4.0-dev"],
+    ["conda", "gtk4"],
   ].each do |platform, package|
     s.requirements << "system: gtk4: #{platform}: #{package}"
   end

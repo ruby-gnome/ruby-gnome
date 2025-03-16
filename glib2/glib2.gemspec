@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "glib-dev"],
+    ["conda", "glib"],
   ].each do |platform, package|
     s.requirements << "system: gobject-2.0: #{platform}: #{package}"
   end

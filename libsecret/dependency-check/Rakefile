@@ -32,7 +32,6 @@ namespace :dependency do
     package_id = "libsecret-1"
     unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:alt_linux => "libsecret",
-                                            :conda => "libsecret",
                                             :debian => "libsecret-1-dev",
                                             :redhat => "pkgconfig(#{package_id})",
                                             :arch_linux => "libsecret",

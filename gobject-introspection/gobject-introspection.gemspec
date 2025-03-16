@@ -50,6 +50,7 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "gobject-introspection-dev"],
+    ["conda", "gobject-introspection"],
   ].each do |platform, package|
     s.requirements << "system: gobject-introspection-1.0: #{platform}: #{package}"
   end

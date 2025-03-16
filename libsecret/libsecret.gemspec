@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "libsecret-dev"],
+    ["conda", "libsecret"],
   ].each do |platform, package|
     s.requirements << "system: libsecret-1: #{platform}: #{package}"
   end

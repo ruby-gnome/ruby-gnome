@@ -25,7 +25,11 @@ cd ruby-gnome.build
 echo "::endgroup::"
 
 echo "::group::Install dependencies"
-gem install --user-install \
+gem_install=(gem install)
+if [ "${RUBY_GNOME_INSTALL_USER_INSTALL:-yes}" = "yes" ]; then
+  gem_install+=(--user-install)
+fi
+"${gem_install[@]}" \
     erb \
     rubygems-requirements-system \
     test-unit \
