@@ -18,10 +18,11 @@ source "https://rubygems.org/"
 
 plugin "rubygems-requirements-system"
 
-require_relative "helper"
-
-Helper.sorted_all_packages.each do |package|
-  gemspec path: File.join(__dir__, package)
+if (ENV["RUBY_GNOME_GEMFILE_GEMSPEC"] || "yes") == "yes"
+  require_relative "helper"
+  Helper.sorted_all_packages.each do |package|
+    gemspec path: File.join(__dir__, package)
+  end
 end
 
 group :development, :docs, :test do
