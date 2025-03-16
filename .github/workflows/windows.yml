@@ -14,9 +14,6 @@ jobs:
           - "3.4"
     runs-on: windows-latest
     timeout-minutes: 45
-    env:
-      # Don't use "gemspec" in Gemfile.
-      RUBY_GNOME_GEMFILE_GEMSPEC: "no"
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -28,18 +25,18 @@ jobs:
           # bundler-cache: true
       - name: Install dependencies
         run: |
-          bundle install
+          gem install erb rubygems-requirements-system test-unit
       - name: Build
         run: |
-          bundle exec ruby -rdevkit -S rake build
+          ruby -rdevkit -S rake build
       - name: "Test: glib2"
         run: |
           cd glib2
-          bundle exec ruby -rdevkit test/run-test.rb
+          ruby -rdevkit test/run-test.rb
       - name: "Test: gobject-introspection"
         run: |
           cd gobject-introspection
-          bundle exec ruby -rdevkit test/run-test.rb
+          ruby -rdevkit test/run-test.rb
 
   gem:
     name: Gem
