@@ -37,8 +37,7 @@ namespace :dependency do
                                             :debian => "libgtk-4-dev",
                                             :redhat => "pkgconfig(#{package_id})",
                                             :homebrew => "gtk+4",
-                                            :macports => "gtk4",
-                                            :msys2 => "gtk4")
+                                            :macports => "gtk4")
         exit(false)
       end
     end
