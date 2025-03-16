@@ -26,9 +26,9 @@ jobs:
       - name: Install dependencies
         run: |
           gem install erb rubygems-requirements-system test-unit
-      - name: Build
+      - name: Install
         run: |
-          ruby -rdevkit -S rake build
+          ruby -rdevkit -S rake gem:install
       - name: "Test: glib2"
         run: |
           cd glib2
