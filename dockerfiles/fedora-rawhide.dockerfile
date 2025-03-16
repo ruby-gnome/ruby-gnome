@@ -14,9 +14,10 @@ RUN \
     make \
     redhat-rpm-config \
     ruby-devel \
+    rubygem-rake \
     sudo \
-    which \
     util-linux \
+    which \
     xorg-x11-server-Xvfb && \
   dnf clean all
 
