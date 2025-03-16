@@ -113,27 +113,31 @@ end
 
 Install these gems by Bundler:
 
-```console
-% bundle install
+```bash
+bundle install
 ```
 
 ## Build From Source Code
 
-    % ruby extconf.rb
-    % make
-    % sudo make install
+```bash
+ruby extconf.rb
+make
+```
 
 To compile and install a particular sub-binding, you can add arguments:
 
-    % ruby extconf.rb [subdir]...
-    e.g.) ruby extconf.rb glib2 pango atk gdk_pixbuf2 gtk4
+```bash
+ruby extconf.rb [subdir]...
+# e.g.) ruby extconf.rb glib2 pango atk gdk_pixbuf2 gtk4
+```
 
 Or you can compile each sub-binding:
 
-    % cd <each sub-directory>
-    % ruby extconf.rb
-    % make
-    % sudo make install
+```bash
+cd <each sub-directory>
+ruby extconf.rb
+make
+```
 
 ### extconf.rb options
 
@@ -147,7 +151,7 @@ Or you can compile each sub-binding:
   * top directory
 
 * `--strict`
-  * if some libraries fail to compile/install, "make"
+  * if some libraries fail to compile/install, `make`
     command returns 1(exit 1)
 
 ## Bugs
@@ -158,7 +162,7 @@ Please report bugs in our bug tracker:
 
 ## Copying
 
-Copyright (c) 2002-2024 Ruby-GNOME Project Team
+Copyright (c) 2002-2025 Ruby-GNOME Project Team
 
 This program is free software.
 You can distribute/modify this program under the terms of
