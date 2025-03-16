@@ -11,43 +11,53 @@ from Ruby that allows you to write graphical user interfaces in Ruby.
 
 ### Debian/Ubuntu
 
-Ruby can be run from the system directories, or from your home directory, or both.  
-Most people won't have the correct permissions for a system install, so the vast majority of
-people to run Ruby from their local, `/home/...` directory.  
+Ruby can be run from the system directories, or from your home
+directory, or both.  Most people won't have the correct permissions
+for a system install, so the vast majority of people to run Ruby from
+their local, `/home/...` directory.
 
-To test if your copy of Ruby is running locally enter this on the command line:
+To test if your copy of Ruby is running locally enter this on the
+command line:
 
 ```bash
 which ruby
 ```
 
 If it outputs something like this:
+
 ```bash
 /home/ralph/.rbenv/shims/ruby
 ```
-that starts with `/home/`, that's local (good!) 
+
+that starts with `/home/`, that's local (good!)
 
 But if outputs something like this:
+
 ```bash
 /usr/bin/ruby
 ```
-That is a system directory, and the gtk4 gem will fail to install.  Actually,
-a system administrator with super-user permissions could install everything
-in the system folders (see advanced install), but its much better for everyone else to run Ruby locally.
 
-If you're already running a copy of Ruby under your home directory, you can install gtk4 (or gtk3):
+That is a system directory, and the gtk4 gem will fail to install.
+Actually, a system administrator with super-user permissions could
+install everything in the system folders (see advanced install), but
+its much better for everyone else to run Ruby locally.
+
+If you're already running a copy of Ruby under your home directory,
+you can install gtk4 (or gtk3):
 
 ```bash
 gem install gtk4
 ```
 
-But if you're running ruby from the system folders, you can install a Ruby version manager
-like [RVM](https://rvm.io/) or [rbenv](https://github.com/rbenv/rbenv).  
-These programs allow you to run multiple versions of Ruby from your home directory.
+But if you're running ruby from the system folders, you can install a
+Ruby version manager like [RVM](https://rvm.io/) or
+[rbenv](https://github.com/rbenv/rbenv).  These programs allow you to
+run multiple versions of Ruby from your home directory.
 
-rbenv has a [rbenv-installer](https://github.com/rbenv/rbenv-installer)
-that installs everything and adds a line to your `.bashrc` file so you're running
-local copies of Ruby.
+rbenv has a
+[rbenv-installer](https://github.com/rbenv/rbenv-installer) that
+installs everything and adds a line to your `.bashrc` file so you're
+running local copies of Ruby.
 
 To get rbenv:
 1. Run the installer
@@ -68,14 +78,14 @@ Input needed...
 
 ### Windows
 
-In Windows, the gem should be installed without issue.  If you install Ruby using the
-[Ruby Installer](https://rubyinstaller.org/), make sure that MSYS2 gets installed too.  GTK needs MSYS2 to make the binary files.
-Then, at the Ruby command prompt:
+In Windows, the gem should be installed without issue. If you install
+Ruby using the [Ruby Installer](https://rubyinstaller.org/), make sure
+that MSYS2 gets installed too.  GTK needs MSYS2 to make the binary
+files. Then, at the Ruby command prompt:
 
 ```bash
 gem install gtk4
 ```
-
 
 ## Advanced Installation instructions
 
@@ -83,6 +93,7 @@ gem install gtk4
 
 ```bash
 sudo apt install -y gcc make ruby-dev
+sudo gem install rubygems-requirements-system
 sudo gem install gtk4
 ```
 
