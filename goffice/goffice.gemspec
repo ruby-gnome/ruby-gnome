@@ -20,8 +20,8 @@ require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
   s.name          = "goffice"
-  s.summary       = "Ruby/GOFFICE is a Ruby binding of GOFFICE."
-  s.description   = "Ruby/GOFFICE is a Ruby binding of GOFFICE."
+  s.summary       = "Ruby/GOffice is a Ruby binding of GOffice."
+  s.description   = "Ruby/GOffice is a Ruby binding of GOffice."
   s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome.github.io/"
