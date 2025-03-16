@@ -50,6 +50,4 @@ Gem::Specification.new do |s|
   ].each do |platform, package|
     s.requirements << "system: clutter-gst-3.0: #{platform}: #{package}"
   end
-
-  s.metadata["msys2_mingw_dependencies"] = "clutter-gst"
 end
