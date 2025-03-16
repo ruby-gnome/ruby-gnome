@@ -32,6 +32,11 @@ module Wnck
 
     def load_enum_info(info)
       return if info.name.start_with?("_")
+      case info.name
+      when "PagerScrollMode"
+        self.class.register_constant_rename_map("1D", "SCROLL_1D")
+        self.class.register_constant_rename_map("2D", "SCROLL_2D")
+      end
       super
     end
   end
