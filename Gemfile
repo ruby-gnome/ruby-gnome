@@ -39,7 +39,7 @@ end
 
 group :test do
   gem "test-unit"
-gem "webrick"
+  gem "webrick"
 end
 
 local_gemfile = File.join(File.dirname(__FILE__), "Gemfile.local")
