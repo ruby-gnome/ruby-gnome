@@ -13,16 +13,22 @@ jobs:
           - "3.3"
           - "3.4"
     runs-on: windows-latest
+    env:
+      RUBY_GNOME_CLUTTER_ENABLE: "no"
+      RUBY_GNOME_CLUTTER_GDK_ENABLE: "no"
+      RUBY_GNOME_CLUTTER_GSTREAMER_ENABLE: "no"
+      RUBY_GNOME_CLUTTER_GTK_ENABLE: "no"
+      RUBY_GNOME_VTE3_ENABLE: "no"
+      RUBY_GNOME_VTE4_ENABLE: "no"
+      RUBY_GNOME_WEBKIT2_GTK_ENABLE: "no"
+      RUBY_GNOME_WEBKIT_GTK_ENABLE: "no"
+      RUBY_GNOME_WNCK3_ENABLE: "no"
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
-          # We can't use "bundler-cache" because we want to install MSYS2
-          # packages such as mingw-w64-ucrt-x86_64-pkg-config
-          # automatically by installing gems such as rcairo.
-          # bundler-cache: true
       - name: Install dependencies
         run: |
           gem install erb rubygems-requirements-system test-unit
@@ -37,28 +43,3 @@ jobs:
         run: |
           cd gobject-introspection
           ruby -rdevkit test/run-test.rb
-
-  gem:
-    name: Gem
-    strategy:
-      fail-fast: false
-      matrix:
-        ruby-version:
-          - "3.2"
-          - "3.3"
-          - "3.4"
-    runs-on: windows-latest
-    timeout-minutes: 10
-    env:
-      PACKAGES: "glib2,gobject-introspection"
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
-      - name: Build
-        run: |
-          rake gem:build
-      - name: Install
-        run: |
-          rake gem:install
