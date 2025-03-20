@@ -1,10 +1,55 @@
 # NEWS
 
+## Ruby-GNOME 4.2.8: 2025-03-20
+
+This is a release that adds support for Alpine Linux.
+
+### Changes
+
+#### All
+
+  * Improvements
+
+    * Added support for Alpine Linux.
+
+#### Ruby/GLib2
+
+  * Fixes
+
+    * Fixed a GC related crash bug.
+      * [GH-1664](https://github.com/ruby-gnome/ruby-gnome/issues/1664)
+      * Reported by Mamoru TASAKA.
+
+#### Ruby/Poppler
+
+  * Improvements
+
+    * Added support for `POPPLER_RENDER_ANNOTS_3D`.
+      * [GH-1666](https://github.com/ruby-gnome/ruby-gnome/issues/1666)
+      * Patch by Mamoru TASAKA.
+
+#### Ruby/WNCK3
+
+  * Improvements
+
+    * Added support for `WNCK_PAGER_SCROLL_2D` and
+      `WNCK_PAGER_SCROLL_1D`.
+
+#### Ruby/VLC
+
+  * Fixes
+
+    * `VLC::Media#parse`: Fixed the number of arguments.
+
+### Thanks
+
+  * Mamoru TASAKA
+
 ## Ruby-GNOME 4.2.7: 2025-01-29
 
 This is a Ruby 2.5 on AlmaLinux 8 support release.
 
-### Change
+### Changes
 
 #### Ruby/GLib2
 
