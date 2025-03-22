@@ -44,6 +44,12 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "gegl-dev"],
+    ["alt_linux", "gegl-devel"],
+    ["arch_linux", "gegl"],
+    ["debian", "libgegl-dev"],
+    ["homebrew", "gegl"],
+    ["macports", "gegl"],
+    ["rhel", "pkgconfig(gegl-0.4)"],
   ].each do |platform, package|
     s.requirements << "system: gegl-0.4: #{platform}: #{package}"
   end
