@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
     ["alpine_linux", "gdk-pixbuf-dev"],
     ["alt_linux", "gdk-pixbuf-devel"],
     ["arch_linux", "gdk-pixbuf2"],
+    ["conda", "liblzma-devel"],
     ["conda", "gdk-pixbuf"],
     ["debian", "libgdk-pixbuf2.0-dev"],
     ["homebrew", "gdk-pixbuf"],
