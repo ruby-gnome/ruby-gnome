@@ -45,8 +45,15 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "poppler-dev"],
+    ["alt_linux", "libpoppler-glib-devel"],
+    ["arch_linux", "poppler-glib"],
+    ["conda", "poppler"],
+    ["debian", "libpoppler-glib-dev"],
+    ["homebrew", "poppler"],
+    ["macports", "poppler"],
+    ["rhel", "pkgconfig(poppler-glib)"],
   ].each do |platform, package|
-    s.requirements << "system: poppler-glib: #{platform}: #{package}"
+    s.requirements << "system: poppler-glib>0.12.0: #{platform}: #{package}"
   end
 
   s.metadata["msys2_mingw_dependencies"] = "poppler"
