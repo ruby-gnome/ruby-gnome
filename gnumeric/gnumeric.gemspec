@@ -43,6 +43,9 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "gnumeric-dev"],
+    ["arch_linux", "gnumeric"],
+    ["debian", "gir1.2-gnumeric"],
+    ["rhel", "pkgconfig(libspreadsheet-1.12)"],
   ].each do |platform, package|
     s.requirements << "system: libspreadsheet-1.12: #{platform}: #{package}"
   end
