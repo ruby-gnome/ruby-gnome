@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
     ["debian", "libatk1.0-dev"],
     ["homebrew", "atk"],
     ["macports", "atk"],
-    ["redhat", "pkgconfig(#{package_id})"],
+    ["redhat", "pkgconfig(atk)"],
   ].each do |platform, package|
     s.requirements << "system: atk: #{platform}: #{package}"
   end
