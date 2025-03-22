@@ -45,6 +45,9 @@ Gem::Specification.new do |s|
     ["alpine_linux", "libgsf-dev"],
     ["arch_linux", "libgsf"],
     ["conda", "libgsf"],
+    ["debian", "libgsf-1-dev"],
+    ["homebrew", "libgsf"],
+    ["rhel", "pkgconfig(libgsf-1)"],
   ].each do |platform, package|
     s.requirements << "system: libgsf-1: #{platform}: #{package}"
   end
