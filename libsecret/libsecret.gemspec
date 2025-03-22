@@ -42,7 +42,13 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "libsecret-dev"],
+    ["alt_linux", "libsecret"],
+    ["arch_linux", "libsecret"],
     ["conda", "libsecret"],
+    ["debian", "libsecret-1-dev"],
+    ["homebrew", "libsecret"],
+    ["macports", "libsecret"],
+    ["rhel", "pkgconfig(libsecret-1)"],
   ].each do |platform, package|
     s.requirements << "system: libsecret-1: #{platform}: #{package}"
   end
