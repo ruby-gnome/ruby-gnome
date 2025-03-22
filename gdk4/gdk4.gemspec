@@ -45,7 +45,13 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "gtk4.0-dev"],
+    ["alt_linux", "libgtk+4-devel"],
+    ["arch_linux", "gtk4"],
     ["conda", "gtk4"],
+    ["debian", "libgtk-4-dev"],
+    ["homebrew", "gtk+4"],
+    ["macports", "gtk4"],
+    ["rhel", "pkgconfig(gtk4)"],
   ].each do |platform, package|
     s.requirements << "system: gtk4: #{platform}: #{package}"
   end
