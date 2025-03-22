@@ -43,7 +43,11 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "vte3-dev"],
+    ["alt_linux", "libvte3-devel"],
     ["arch_linux", "vte4"],
+    ["debian", "libvte-2.91-gtk4-dev"],
+    ["homebrew", "vte3"],
+    ["rhel", "pkgconfig(vte-2.91-gtk4)"],
   ].each do |platform, package|
     s.requirements << "system: vte-2.91-gtk4: #{platform}: #{package}"
   end
