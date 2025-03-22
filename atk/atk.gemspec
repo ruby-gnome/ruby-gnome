@@ -43,6 +43,13 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "at-spi2-core-dev"],
+    ["alt_linux", "libatk-devel"],
+    ["arch_linux", "atk"],
+    ["conda", "atk"],
+    ["debian", "libatk1.0-dev"],
+    ["homebrew", "atk"],
+    ["macports", "atk"],
+    ["redhat", "pkgconfig(#{package_id})"],
   ].each do |platform, package|
     s.requirements << "system: atk: #{platform}: #{package}"
   end
