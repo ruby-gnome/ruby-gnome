@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
     ["arch_linux", "clutter-gtk"],
     ["debian", "libclutter-gtk-1.0-dev"],
     ["homebrew", "clutter-gtk"],
-    ["redhat", "pkgconfig(clutter-gtk-1.0)"],
+    ["rhel", "pkgconfig(clutter-gtk-1.0)"],
   ].each do |platform, package|
     s.requirements << "system: clutter-gtk-1.0: #{platform}: #{package}"
   end
