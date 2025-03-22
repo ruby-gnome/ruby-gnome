@@ -1,5 +1,17 @@
 # NEWS
 
+## Ruby-GNOME 4.2.9: 2025-03-22
+
+This is a release that adds support for rubygems-requirements-system.
+
+### Changes
+
+#### All
+
+  * Improvements
+
+    * Added support for rubygems-requirements-system.
+
 ## Ruby-GNOME 4.2.8: 2025-03-20
 
 This is a release that adds support for Alpine Linux.
