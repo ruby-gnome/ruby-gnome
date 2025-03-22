@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
     ["alt_linux", "libgtksourceview5-devel"],
     ["arch_linux", "gtksourceview5"],
     ["debian", "gir1.2-gtksource-5"],
+    ["debian", "libgtksourceview-5-dev"],
     ["homebrew", "gtksourceview5"],
     ["macports", "gtksourceview5"],
     ["rhel", "pkgconfig(gtksourceview-5)"],
