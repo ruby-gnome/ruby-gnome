@@ -52,9 +52,17 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "glib-dev"],
+    ["alt_linux", "glib2-devel"],
+    ["arch_linux", "glib2"],
     ["conda", "glib"],
+    ["conda", "glib"],
+    ["debian", "libglib2.0-dev"],
+    ["gentoo_linux", "dev-libs/glib"],
+    ["homebrew", "glib"],
+    ["macports", "glib2"],
+    ["rhel", "pkgconfig(gobject-2.0)"],
   ].each do |platform, package|
-    s.requirements << "system: gobject-2.0: #{platform}: #{package}"
+    s.requirements << "system: gobject-2.0>=2.56.0: #{platform}: #{package}"
   end
 
   s.metadata["msys2_mingw_dependencies"] = "glib2"
