@@ -46,6 +46,13 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "gstreamer-dev"],
+    ["alt_linux", "gstreamer1.0-devel"],
+    ["arch_linux", "gstreamer"],
+    ["conda", "gstreamer"],
+    ["debian", "libgstreamer1.0-dev"],
+    ["homebrew", "gstreamer"],
+    ["macports", "gstreamer"],
+    ["rhel", "pkgconfig(gstreamer-1.0)"],
   ].each do |platform, package|
     s.requirements << "system: gstreamer-1.0: #{platform}: #{package}"
   end
