@@ -42,6 +42,11 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "libhandy1-dev"],
+    ["alt_linux", "libhandy"],
+    ["arch_linux", "libhandy"],
+    ["debian", "libhandy-1-dev"],
+    ["homebrew", "libhandy"],
+    ["rhel", "pkgconfig(libhandy-1)"],
   ].each do |platform, package|
     s.requirements << "system: libhandy-1: #{platform}: #{package}"
   end
