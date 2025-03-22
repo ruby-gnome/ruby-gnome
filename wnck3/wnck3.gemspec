@@ -43,6 +43,9 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "libwnck3-dev"],
+    ["arch_linux", "libwnck3"],
+    ["debian", "libwnck-3-dev"],
+    ["rhel", "pkgconfig(libwnck-3.0)"],
   ].each do |platform, package|
     s.requirements << "system: libwnck-3.0: #{platform}: #{package}"
   end
