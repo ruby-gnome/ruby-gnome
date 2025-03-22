@@ -50,7 +50,14 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "gobject-introspection-dev"],
+    ["alt_linux", "gobject-introspection-devel"],
+    ["arch_linux", "gobject-introspection"],
     ["conda", "gobject-introspection"],
+    ["conda", "gobject-introspection"],
+    ["debian", "libgirepository1.0-dev"],
+    ["homebrew", "gobject-introspection"],
+    ["macports", "gobject-introspection"],
+    ["rhel", "pkgconfig(gobject-introspection-1.0)"],
   ].each do |platform, package|
     s.requirements << "system: gobject-introspection-1.0: #{platform}: #{package}"
   end
