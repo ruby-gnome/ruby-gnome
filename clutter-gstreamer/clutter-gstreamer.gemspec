@@ -48,7 +48,6 @@ Gem::Specification.new do |s|
     ["alpine_linux", "clutter-gst-dev"],
     ["arch_linux", "clutter-gst"],
     ["debian", "libclutter-gst-3.0-dev"],
-    ["homebrew", "clutter-gst"],
     ["rhel", "pkgconfig(clutter-gst-3.0)"],
   ].each do |platform, package|
     s.requirements << "system: clutter-gst-3.0: #{platform}: #{package}"
