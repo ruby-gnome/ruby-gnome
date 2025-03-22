@@ -48,7 +48,9 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "vlc-dev"],
+    ["alt_linux", "libvlc-devel"],
     ["arch_linux", "libvlc"],
+    ["debian", "libvlc-dev"],
   ].each do |platform, package|
     s.requirements << "system: libvlc: #{platform}: #{package}"
   end
