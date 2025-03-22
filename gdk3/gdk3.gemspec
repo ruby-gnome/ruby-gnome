@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "gtk+3.0-dev"],
+    ["arch_linux", "gtk3"],
     ["conda", "gtk3"],
     ["conda", "liblzma-devel"],
     ["conda", "xorg-compositeproto"],
@@ -54,6 +55,10 @@ Gem::Specification.new do |s|
     ["conda", "xorg-randrproto"],
     ["conda", "xorg-recordproto"],
     ["conda", "xorg-xineramaproto"],
+    ["debian", "libgtk-3-dev"],
+    ["homebrew", "gtk+3"],
+    ["macports", "gtk3"],
+    ["rhel", "pkgconfig(gdk-3.0)"],
   ].each do |platform, package|
     s.requirements << "system: gdk-3.0: #{platform}: #{package}"
   end
