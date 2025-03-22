@@ -45,6 +45,8 @@ Gem::Specification.new do |s|
   [
     ["alpine_linux", "webkit2gtk-6.0-dev"],
     ["arch_linux", "webkitgtk-6.0"],
+    ["debian", "libwebkitgtk-6.0-dev"],
+    ["rhel", "pkgconfig(webkitgtk-6.0)"],
   ].each do |platform, package|
     s.requirements << "system: webkitgtk-6.0: #{platform}: #{package}"
   end
