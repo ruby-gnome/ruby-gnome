@@ -45,8 +45,15 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "pango-dev"],
+    ["alt_linux", "libpango-devel"],
+    ["arch_linux", "pango"],
+    ["conda", "pango"],
+    ["debian", "libpango1.0-dev"],
+    ["homebrew", "pango"],
+    ["macports", "pango"],
+    ["rhel", "pkgconfig(pango)"],
   ].each do |platform, package|
-    s.requirements << "system: pango: #{platform}: #{package}"
+    s.requirements << "system: pango>1.14.0: #{platform}: #{package}"
   end
 
   s.metadata = {
