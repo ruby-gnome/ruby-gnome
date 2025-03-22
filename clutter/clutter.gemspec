@@ -47,6 +47,9 @@ Gem::Specification.new do |s|
   [
     ["alpine_linux", "clutter-dev"],
     ["arch_linux", "clutter"],
+    ["debian", "libclutter-1.0-dev"],
+    ["homebrew", "clutter"],
+    ["redhat", "pkgconfig(clutter-1.0)"],
   ].each do |platform, package|
     s.requirements << "system: clutter-1.0: #{platform}: #{package}"
   end
