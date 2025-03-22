@@ -45,6 +45,13 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "librsvg-dev"],
+    ["alt_linux", "librsvg-devel"],
+    ["arch_linux", "librsvg"],
+    ["conda", "librsvg"],
+    ["debian", "librsvg2-dev"],
+    ["homebrew", "librsvg"],
+    ["macports", "librsvg"],
+    ["rhel", "pkgconfig(librsvg-2.0)"],
   ].each do |platform, package|
     s.requirements << "system: librsvg-2.0: #{platform}: #{package}"
   end
