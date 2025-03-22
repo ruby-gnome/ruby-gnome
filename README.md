@@ -106,6 +106,8 @@ Create `Gemfile` like the following:
 ```ruby
 source "https://rubygems.org/"
 
+plugin "rubygems-requirements-system"
+
 git "https://github.com/ruby-gnome/ruby-gnome.git" do
   gem "gtk4"
 end
