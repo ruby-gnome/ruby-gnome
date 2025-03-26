@@ -53,7 +53,6 @@ Gem::Specification.new do |s|
     ["alt_linux", "gobject-introspection-devel"],
     ["arch_linux", "gobject-introspection"],
     ["conda", "gobject-introspection"],
-    ["conda", "gobject-introspection"],
     ["debian", "libgirepository1.0-dev"],
     ["homebrew", "gobject-introspection"],
     ["macports", "gobject-introspection"],
