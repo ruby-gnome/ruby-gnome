@@ -55,7 +55,6 @@ Gem::Specification.new do |s|
     ["alt_linux", "glib2-devel"],
     ["arch_linux", "glib2"],
     ["conda", "glib"],
-    ["conda", "glib"],
     ["debian", "libglib2.0-dev"],
     ["gentoo_linux", "dev-libs/glib"],
     ["homebrew", "glib"],
