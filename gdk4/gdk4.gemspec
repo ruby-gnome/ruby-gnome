@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
     ["arch_linux", "gtk4"],
     ["conda", "gtk4"],
     ["debian", "libgtk-4-dev"],
-    ["homebrew", "gtk+4"],
+    ["homebrew", "gtk4"],
     ["macports", "gtk4"],
     ["rhel", "pkgconfig(gtk4)"],
   ].each do |platform, package|
