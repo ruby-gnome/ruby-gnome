@@ -33,7 +33,7 @@ namespace :dependency do
     unless PKGConfig.check_version?(package_id)
       unless NativePackageInstaller.install(:alt_linux => "gdk-pixbuf-devel",
                                             :conda => "gdk-pixbuf",
-                                            :debian => "libgdk-pixbuf2.0-dev",
+                                            :debian => "libgdk-pixbuf-2.0-dev",
                                             :redhat => "pkgconfig(#{package_id})",
                                             :arch_linux => "gdk-pixbuf2",
                                             :homebrew => "gdk-pixbuf",

@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
     ["arch_linux", "gdk-pixbuf2"],
     ["conda", "liblzma-devel"],
     ["conda", "gdk-pixbuf"],
-    ["debian", "libgdk-pixbuf2.0-dev"],
+    ["debian", "libgdk-pixbuf-2.0-dev"],
     ["homebrew", "gdk-pixbuf"],
     ["macports", "gdk-pixbuf2"],
     ["rhel", "pkgconfig(gdk-pixbuf-2.0)"],
