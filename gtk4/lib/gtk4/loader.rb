@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2024  Ruby-GNOME Project Team
+# Copyright (C) 2014-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -104,6 +104,7 @@ module Gtk
       require_relative "list-store"
       require_relative "message-dialog"
       require_relative "paned"
+      require_relative "popover"
       require_relative "response-type"
       require_relative "scale-button"
       require_relative "scrolled-window"
