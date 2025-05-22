@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2023  Ruby-GNOME Project Team
+# Copyright (C) 2014-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -143,6 +143,7 @@ module Gtk
       require "gtk3/menu-item"
       require "gtk3/message-dialog"
       require "gtk3/paned"
+      require "gtk3/popover"
       require "gtk3/radio-action"
       require "gtk3/radio-button"
       require "gtk3/recent-chooser-dialog"
