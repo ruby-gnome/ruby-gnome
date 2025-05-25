@@ -343,6 +343,7 @@ require "glib2/regex"
 require "glib2/time-zone"
 require "glib2/value"
 require "glib2/variant"
+require "glib2/variant-type"
 
 =begin
 Don't we need this?

@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2021  Ruby-GNOME Project Team
+# Copyright (C) 2015-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -148,6 +148,22 @@ class TestGLibVariantType < Test::Unit::TestCase
 
     test "not found" do
       assert_nil(GLib::VariantType.scan("X"))
+    end
+  end
+
+  sub_test_case ".try_convert" do
+    test "String" do
+      assert_equal(GLib::VariantType::STRING,
+                   GLib::VariantType.try_convert("s"))
+    end
+
+    test "Symbol: found" do
+      assert_equal(GLib::VariantType::STRING,
+                   GLib::VariantType.try_convert(:string))
+    end
+
+    test "Symbol: not found" do
+      assert_nil(GLib::VariantType.try_convert(:nonexistent))
     end
   end
 
