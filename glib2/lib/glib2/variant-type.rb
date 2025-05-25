@@ -33,5 +33,11 @@ module GLib
         end
       end
     end
+
+    def inspect
+      super.gsub(/>\z/) do
+        " string=#{self}>"
+      end
+    end
   end
 end
