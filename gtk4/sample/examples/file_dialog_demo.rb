@@ -26,8 +26,8 @@ def on_activate(app)
     begin
       file = dialog.save_finish(result)
       puts("file.path: #{file.path}")
-    rescue
-      puts("Cancel pressed")
+    rescue Gtk::DialogError::Dismissed
+      puts("Dismissed")
     end
     win.destroy
   end
