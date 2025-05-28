@@ -14,16 +14,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-# Original:
-#   https://gitlab.gnome.org/GNOME/gtk/-/blob/main/demos/gtk-demo/main.c
-#
-# See the following for license information:
-#   * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/AUTHORS
-#   * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/COPYING
-
-# We need to use "GtkDemo" as type name because "menu-listitem.ui"
-# uses "GtkDemo" as type name.
-
 require "gtk4"
 
 def on_activate(app)
