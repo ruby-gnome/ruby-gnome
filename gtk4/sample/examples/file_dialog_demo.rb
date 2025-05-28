@@ -21,7 +21,7 @@ def on_activate(app)
   dialog = Gtk::FileDialog.new
   dialog.modal = true
   dialog.initial_file = Gio::File.open(path: File.expand_path(__FILE__))
-  dialog.set_initial_folder(Gio::File.new_for_path(Dir.pwd))
+  dialog.initial_folder = Gio::File.open(path: Dir.pwd)
   dialog.save do |_dialog, result|
     begin
       file = dialog.save_finish(result)
