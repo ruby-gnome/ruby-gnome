@@ -1,4 +1,4 @@
-# Copyright (C) 2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2018-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,10 @@ module Gio
         define_method(name) do
           self[Gio.const_get(constant_name)]
         end
-        define_method("#{name}=") do |value|
+
+        setter = "#{name}="
+        next if method_defined?(setter)
+        define_method(setter) do |value|
           self[Gio.const_get(constant_name)] = value
         end
       end

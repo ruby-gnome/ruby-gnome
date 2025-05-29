@@ -1,4 +1,4 @@
-# Copyright (C) 2018  Ruby-GNOME2 Project Team
+# Copyright (C) 2018-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -34,6 +34,14 @@ class TestMenuItem < Test::Unit::TestCase
       assert_nil(@menu_item.action_namespace)
       @menu_item.action_namespace = "doc"
       assert_equal("doc", @menu_item.action_namespace)
+    end
+
+    test "icon" do
+      only_gio_version(2, 36, 0)
+      assert_nil(@menu_item.action_namespace)
+      icon = Gio::ThemedIcon.new("edit")
+      @menu_item.icon = icon
+      assert_equal(icon.serialize, @menu_item.icon)
     end
   end
 end
