@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -38,6 +38,26 @@ class TestSimpleAction < Test::Unit::TestCase
         action = Gio::SimpleAction.new("open", GLib::VariantType::STRING)
         assert_equal(GLib::VariantType::STRING,
                      action.parameter_type)
+      end
+    end
+  end
+
+  sub_test_case "#change_state" do
+    def setup
+      @action = Gio::SimpleAction.new("show", nil, GLib::Variant.new(true))
+    end
+
+    test "GLib::Variant" do
+      @action.change_state(GLib::Variant.new(false))
+      assert do
+        not @action.state
+      end
+    end
+
+    test "false" do
+      @action.change_state(false)
+      assert do
+        not @action.state
       end
     end
   end
