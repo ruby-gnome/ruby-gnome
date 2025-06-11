@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2024  Ruby-GNOME Project Team
+# Copyright (C) 2013-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -61,6 +61,7 @@ module Gio
       require "gio2/action"
       require "gio2/action-map"
       require "gio2/application-command-line"
+      require "gio2/bytes-icon"
       require "gio2/content-type"
       require "gio2/file"
       require "gio2/icon"
