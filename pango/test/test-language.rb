@@ -7,7 +7,11 @@ class TestLanguage < Test::Unit::TestCase
   end
 
   def test_sample_string
-    assert_equal("The quick brown fox jumps over the lazy dog.",
-                 Pango::Language.new("en").sample_string)
+    if Pango::Version.or_later?(1, 56, 4)
+      expected = "The wizard quickly jinxed the gnomes before they vaporized."
+    else
+      expected = "The quick brown fox jumps over the lazy dog."
+    end
+    assert_equal(expected, Pango::Language.new("en").sample_string)
   end
 end
