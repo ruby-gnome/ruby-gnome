@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2015-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2015-2025  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -23,10 +23,23 @@
 static void
 rb_gtk4_widget_mark(gpointer object)
 {
-    GtkWidget *child = gtk_widget_get_first_child(object);
-    while (child) {
-        rbgobj_gc_mark_instance(child);
-        child = gtk_widget_get_next_sibling(child);
+    {
+        GtkWidget *child = gtk_widget_get_first_child(object);
+        while (child) {
+            rbgobj_gc_mark_instance(child);
+            child = gtk_widget_get_next_sibling(child);
+        }
+    }
+
+    {
+        GListModel *controllers = gtk_widget_observe_controllers(object);
+        guint n = g_list_model_get_n_items(controllers);
+        for (guint i = 0; i < n; i++) {
+            GObject *controller = g_list_model_get_object(controllers, i);
+            rbgobj_gc_mark_instance(controller);
+            g_object_unref(controller);
+        }
+        g_object_unref(controllers);
     }
 }
 
