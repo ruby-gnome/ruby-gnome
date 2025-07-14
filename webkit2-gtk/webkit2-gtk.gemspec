@@ -41,7 +41,6 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("test/**/*")
 
   s.add_runtime_dependency("gtk3", "= #{s.version}")
-  s.add_development_dependency("webrick")
 
   [
     ["alpine_linux", "webkit2gtk-4.1-dev"],

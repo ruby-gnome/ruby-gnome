@@ -48,7 +48,6 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("pkg-config", ">= 1.3.5")
   s.add_runtime_dependency("native-package-installer", ">= 1.0.3")
-  s.add_development_dependency("test-unit", ">= 2")
 
   [
     ["alpine_linux", "glib-dev"],
