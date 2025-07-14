@@ -31,6 +31,7 @@ end
 
 group :docs do
   gem "commonmarker"
+  gem "rdoc"
   gem "yard"
   gem "yard-gobject-introspection",
       github: "ruby-gnome/yard-gobject-introspection"
