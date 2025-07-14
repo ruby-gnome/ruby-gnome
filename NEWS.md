@@ -1,5 +1,64 @@
 # NEWS
 
+## Ruby-GNOME 4.3.0: 2025-07-14
+
+This is a bug fix release.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Added `GLib::VariantType.try_convert`.
+
+    * Added string representation to `GLib::VariantType#inspect`.
+
+#### Ruby/GIO2
+
+  * Improvements
+
+    * Changed `Gio::Action#change_state` to accept raw Ruby objects.
+
+    * Stopped overwriting existing `Gio::MenuItem` setters.
+
+    * Changed `Gio::BytesIcon#initialize` to keep the given
+      `GLib::Bytes` to prevent from GC.
+
+#### Ruby/GdkPixbuf
+
+  * Fixes
+
+    * Updated Debian package name.
+
+#### Ruby/GTK3
+
+  * Improvements
+
+    * Made `Gtk::Popover#pointing_to` Rubyish.
+
+#### Ruby/GDK4
+
+  * Fixes
+
+    * Fixed wrong Homebrew package name.
+
+#### Ruby/GTK4
+
+  * Improvements
+
+    * Made `Gtk::Popover#pointing_to` Rubyish.
+
+    * Added a demo for `Gtk::FileDialog`.
+      * [GH-1642](https://github.com/ruby-gnome/ruby-gnome/issues/1642)
+      * Patch by Eric Cunningham.
+
+    * Marked event controllers in `Gtk::Widget` automatically.
+
+### Thanks
+
+  * Eric Cunningham
+
 ## Ruby-GNOME 4.2.9: 2025-03-22
 
 This is a release that adds support for rubygems-requirements-system.
