@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2024  Ruby-GNOME Project Team
+# Copyright (C) 2012-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -369,7 +369,7 @@ module GObjectIntrospection
             end
           end
           full_method_name = "\#{self.class.name}\#\#{__method__}"
-          message = "wrong arguments: "
+          message = +"wrong arguments: "
           message << "\#{full_method_name}("
           message << arguments.collect(&:inspect).join(", ")
           message << "):\\n"
