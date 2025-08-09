@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Ruby-GNOME2 Project Team
+# Copyright (C) 2016-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -23,8 +23,16 @@ class TestAnimationIter < Test::Unit::TestCase
   end
 
   test("#on_currently_loading_frame?") do
-    assert do
-      not @iter.on_currently_loading_frame?
+    if GdkPixbuf::Version.or_later?(2, 43, 0)
+      # Glycin based loaders load animation at once because Glycin based
+      # loaders don't provide "load_animation".
+      assert do
+        @iter.on_currently_loading_frame?
+      end
+    else
+      assert do
+        not @iter.on_currently_loading_frame?
+      end
     end
   end
 end
