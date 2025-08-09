@@ -37,6 +37,9 @@ WORKDIR /home/ruby-gnome
 # * clutter-gtk
 # * clutter-gstreamer
 #
+# GEGL: It's not available.
+# * gegl
+#
 # GOffice: It's not available.
 # * gnumeric
 # * goffice
@@ -49,6 +52,7 @@ ENV \
   RUBY_GNOME_CLUTTER_GDK_ENABLE=no \
   RUBY_GNOME_CLUTTER_GSTREAMER_ENABLE=no \
   RUBY_GNOME_CLUTTER_GTK_ENABLE=no \
+  RUBY_GNOME_GEGL_ENABLE=no \
   RUBY_GNOME_GNUMERIC_ENABLE=no \
   RUBY_GNOME_GOFFICE_ENABLE=no \
   RUBY_GNOME_WEBKIT2_GTK_ENABLE=no \
