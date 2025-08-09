@@ -155,6 +155,7 @@ services:
     cap_add:
       - SYS_ADMIN
     security_opt:
+      - apparmor=unconfined
       - seccomp=unconfined
 
   ruby-3.0-base:
