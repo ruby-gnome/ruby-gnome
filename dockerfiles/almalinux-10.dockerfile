@@ -31,6 +31,12 @@ RUN \
 USER ruby-gnome
 WORKDIR /home/ruby-gnome
 
+# Clutter: It's not available.
+# * clutter
+# * clutter-gdk
+# * clutter-gtk
+# * clutter-gstreamer
+#
 # GOffice: It's not available.
 # * gnumeric
 # * goffice
@@ -39,6 +45,10 @@ WORKDIR /home/ruby-gnome
 # * webkit-gtk
 # * webkit2-gtk
 ENV \
+  RUBY_GNOME_CLUTTER_ENABLE=no \
+  RUBY_GNOME_CLUTTER_GDK_ENABLE=no \
+  RUBY_GNOME_CLUTTER_GSTREAMER_ENABLE=no \
+  RUBY_GNOME_CLUTTER_GTK_ENABLE=no \
   RUBY_GNOME_GNUMERIC_ENABLE=no \
   RUBY_GNOME_GOFFICE_ENABLE=no \
   RUBY_GNOME_WEBKIT2_GTK_ENABLE=no \
