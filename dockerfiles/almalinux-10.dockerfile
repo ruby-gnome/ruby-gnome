@@ -2,9 +2,10 @@ FROM almalinux:10
 
 RUN \
   dnf install -y \
+    almalinux-release-devel \
     epel-release && \
   dnf install -y \
-    adwaita-gtk2-theme \
+    adwaita-icon-theme \
     dbus-daemon \
     dejavu-sans-fonts \
     gcc \
