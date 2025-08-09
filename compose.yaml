@@ -133,6 +133,8 @@ services:
       /ruby-gnome/dockerfiles/run-test.sh
     cap_add:
       - SYS_ADMIN
+    security_opt:
+      - seccomp=unconfined
 
   fedora-rawhide-base:
     image: fedora:rawhide
@@ -152,6 +154,8 @@ services:
       /ruby-gnome/dockerfiles/run-test.sh
     cap_add:
       - SYS_ADMIN
+    security_opt:
+      - seccomp=unconfined
 
   ruby-3.0-base:
     image: ruby:3.0
