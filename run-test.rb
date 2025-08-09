@@ -79,8 +79,9 @@ targets.each do |target|
   puts separator
 
   run_broadwayd(target) do
-    run_test = target + "test/run-test.rb"
-    unless system(ruby, *includes, run_test.to_s)
+    test_run = target + "test/run.rb"
+    test_run = target + "test/run-test.rb" unless test_run.exist?
+    unless system(ruby, *includes, test_run.to_s)
       puts "Failed to run test: #{target.basename}"
       failed_target_names << target.basename.to_s
     end

@@ -3,7 +3,7 @@
 
   $Id: extconf.rb,v 1.17 2007/10/22 12:19:17 ktou Exp $
 
-  Copyright (C) 2003-2022  Ruby-GNOME Project Team
+  Copyright (C) 2003-2025  Ruby-GNOME Project Team
 =end
 
 require 'English'
@@ -22,6 +22,7 @@ prior_libs = [
   "gdk3",
   "gtk3",
   "gdk4",
+  "graphene",
   "gtk4",
 ]
 
