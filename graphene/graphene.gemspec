@@ -42,7 +42,7 @@ Gem::Specification.new do |s|
     ["alpine_linux", "graphene-dev"],
     ["alt_linux", "libgraphene-devel"],
     ["arch_linux", "graphene"],
-    ["conda", "graphene"],
+    ["conda", "libgraphene"],
     ["debian", "libgraphene-1.0-dev"],
     ["homebrew", "graphene"],
     ["macports", "graphene"],
