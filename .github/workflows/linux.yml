@@ -67,6 +67,10 @@ jobs:
       - name: Register problem matchers
         run: |
           echo ::add-matcher::dockerfiles/problem-matchers.json
+      - name: Disable AppArmor
+        # Glycin (bwrap) doesn't work with AppArmor.
+        run: |
+          sudo systemctl stop apparmor
       - name: Run
         run: |
           docker compose run --rm ${{ matrix.service }}
