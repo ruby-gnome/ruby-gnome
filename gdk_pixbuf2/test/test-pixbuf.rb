@@ -337,6 +337,7 @@ class TestPixbuf < Test::Unit::TestCase
       pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
       output = Tempfile.new(["pixbuf", ".tiff"])
       pixbuf.save(output)
+      output.rewind
       assert_equal(["image/tiff", false],
                    Gio::ContentType.guess(nil, output.read))
     end
@@ -346,6 +347,7 @@ class TestPixbuf < Test::Unit::TestCase
       pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
       output = Tempfile.new(["pixbuf", ".tiff"])
       pixbuf.save(output.path, "tiff")
+      output.rewind
       assert_equal(["image/tiff", false],
                    Gio::ContentType.guess(nil, output.read))
     end
