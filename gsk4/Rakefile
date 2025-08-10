@@ -1,4 +1,6 @@
-# Copyright (C) 2006-2022  Ruby-GNOME Project Team
+# -*- ruby -*-
+#
+# Copyright (C) 2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,21 +16,11 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gdk4"
-require "gsk4"
+$LOAD_PATH.unshift("./../glib2/lib")
+require "gnome/rake/package-task"
 
-require_relative "gtk4/loader"
+package_name = File.basename(__dir__)
+spec = Gem::Specification.load("#{package_name}.gemspec")
 
-module Gtk
-  LOG_DOMAIN = "Gtk"
-  GLib::Log.set_log_domain(LOG_DOMAIN)
-
-  class Error < StandardError
-  end
-
-  class InitError < Error
-  end
-
-  loader = Loader.new(self)
-  loader.load
+GNOME::Rake::PackageTask.define(spec, __dir__) do |package|
 end

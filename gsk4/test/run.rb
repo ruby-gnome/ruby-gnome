@@ -1,4 +1,6 @@
-# Copyright (C) 2006-2022  Ruby-GNOME Project Team
+#!/usr/bin/env ruby
+#
+# Copyright (C) 2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,21 +16,25 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gdk4"
-require "gsk4"
+require_relative "../../glib2/test/run-test"
 
-require_relative "gtk4/loader"
-
-module Gtk
-  LOG_DOMAIN = "Gtk"
-  GLib::Log.set_log_domain(LOG_DOMAIN)
-
-  class Error < StandardError
+run_test(__dir__,
+         [
+           "glib2",
+           "gobject-introspection",
+           "cairo-gobject",
+           "gdk_pixbuf2",
+           "pango",
+           "gdk4",
+           "graphene",
+           "gsk4",
+         ]) do
+  begin
+    require "gsk4"
+  rescue GObjectIntrospection::RepositoryError
+    puts("Omit because typelib file doesn't exist: #{$!.message}")
+    exit(true)
   end
 
-  class InitError < Error
-  end
-
-  loader = Loader.new(self)
-  loader.load
+  require_relative "gsk-test-utils"
 end

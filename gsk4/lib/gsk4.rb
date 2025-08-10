@@ -1,4 +1,4 @@
-# Copyright (C) 2006-2022  Ruby-GNOME Project Team
+# Copyright (C) 2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,18 +15,15 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 require "gdk4"
-require "gsk4"
+require "graphene"
 
-require_relative "gtk4/loader"
+require "gsk4/loader"
 
-module Gtk
-  LOG_DOMAIN = "Gtk"
+module Gsk
+  LOG_DOMAIN = "Gsk"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
   class Error < StandardError
-  end
-
-  class InitError < Error
   end
 
   loader = Loader.new(self)

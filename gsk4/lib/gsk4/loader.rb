@@ -1,4 +1,4 @@
-# Copyright (C) 2006-2022  Ruby-GNOME Project Team
+# Copyright (C) 2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,21 +14,16 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gdk4"
-require "gsk4"
+module Gsk
+  class Loader < GObjectIntrospection::Loader
+    register_constant_rename_map("2D", "TWO_DIMENSIONAL")
+    register_constant_rename_map("2D_AFFINE", "TWO_DIMENSIONAL_AFFINE")
+    register_constant_rename_map("2D_TRANSLATE", "TWO_DIMENSIONAL_TRANSLATE")
+    register_constant_rename_map("3D", "THREE_DIMENSIONAL")
 
-require_relative "gtk4/loader"
-
-module Gtk
-  LOG_DOMAIN = "Gtk"
-  GLib::Log.set_log_domain(LOG_DOMAIN)
-
-  class Error < StandardError
+    def load
+      self.version = "4.0"
+      super("Gsk")
+    end
   end
-
-  class InitError < Error
-  end
-
-  loader = Loader.new(self)
-  loader.load
 end

@@ -1,4 +1,4 @@
-# Copyright (C) 2006-2022  Ruby-GNOME Project Team
+# Copyright (C) 2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,21 +14,19 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gdk4"
+require "pkg-config"
+require "test-unit"
+
 require "gsk4"
 
-require_relative "gtk4/loader"
-
-module Gtk
-  LOG_DOMAIN = "Gtk"
-  GLib::Log.set_log_domain(LOG_DOMAIN)
-
-  class Error < StandardError
+module GskTestUtils
+  private
+  def only_version(major, minor, micro=nil)
+    micro ||= 0
+    gsk_version_raw = PKGConfig.modversion("gsk-4.0")
+    gsk_version = gsk_version_raw.split(".").collect(&:to_i)
+    unless (gsk_version <=> [major, minor, micro]) >= 0
+      omit("Require GSK >= #{major}.#{minor}.#{micro}")
+    end
   end
-
-  class InitError < Error
-  end
-
-  loader = Loader.new(self)
-  loader.load
 end
