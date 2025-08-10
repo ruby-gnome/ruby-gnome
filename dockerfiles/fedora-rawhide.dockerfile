@@ -30,12 +30,15 @@ RUN \
 RUN \
   gem install bundler
 
-RUN \
-  useradd --user-group --create-home ruby-gnome
+# Use root for Glycin. apparmor=unconfined + sudo work on Debian but
+# doesn't work on Ubuntu.
 
-RUN \
-  echo "ruby-gnome ALL=(ALL:ALL) NOPASSWD:ALL" | \
-    EDITOR=tee visudo -f /etc/sudoers.d/ruby-gnome
+# RUN \
+#   useradd --user-group --create-home ruby-gnome
 
-USER ruby-gnome
-WORKDIR /home/ruby-gnome
+# RUN \
+#   echo "ruby-gnome ALL=(ALL:ALL) NOPASSWD:ALL" | \
+#     EDITOR=tee visudo -f /etc/sudoers.d/ruby-gnome
+
+# USER ruby-gnome
+# WORKDIR /home/ruby-gnome
