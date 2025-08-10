@@ -336,8 +336,9 @@ class TestPixbuf < Test::Unit::TestCase
       png_filename = fixture_path("gnome-logo-icon.png")
       pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
       output = Tempfile.new(["pixbuf", ".tiff"])
-      pixbuf.save(output)
-      output.rewind
+      output.close
+      pixbuf.save(output.path)
+      output.open
       assert_equal(["image/tiff", false],
                    Gio::ContentType.guess(nil, output.read))
     end
@@ -346,8 +347,9 @@ class TestPixbuf < Test::Unit::TestCase
       png_filename = fixture_path("gnome-logo-icon.png")
       pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
       output = Tempfile.new(["pixbuf", ".tiff"])
+      output.close
       pixbuf.save(output.path, "tiff")
-      output.rewind
+      output.open
       assert_equal(["image/tiff", false],
                    Gio::ContentType.guess(nil, output.read))
     end
