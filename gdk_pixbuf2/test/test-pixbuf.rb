@@ -327,26 +327,26 @@ class TestPixbuf < Test::Unit::TestCase
     test("no options") do
       png_filename = fixture_path("gnome-logo-icon.png")
       pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
-      jpeg = pixbuf.save("jpeg")
-      assert_equal(["image/jpeg", false],
-                   Gio::ContentType.guess(nil, jpeg))
+      tiff = pixbuf.save("tiff")
+      assert_equal(["image/tiff", false],
+                   Gio::ContentType.guess(nil, tiff))
     end
 
     test("filename") do
       png_filename = fixture_path("gnome-logo-icon.png")
       pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
-      output = Tempfile.new(["pixbuf", ".jpg"])
+      output = Tempfile.new(["pixbuf", ".tiff"])
       pixbuf.save(output)
-      assert_equal(["image/jpeg", false],
+      assert_equal(["image/tiff", false],
                    Gio::ContentType.guess(nil, output.read))
     end
 
     test(":filename") do
       png_filename = fixture_path("gnome-logo-icon.png")
       pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
-      output = Tempfile.new(["pixbuf", ".jpeg"])
-      pixbuf.save(output.path, "jpeg")
-      assert_equal(["image/jpeg", false],
+      output = Tempfile.new(["pixbuf", ".tiff"])
+      pixbuf.save(output.path, "tiff")
+      assert_equal(["image/tiff", false],
                    Gio::ContentType.guess(nil, output.read))
     end
   end
@@ -354,11 +354,11 @@ class TestPixbuf < Test::Unit::TestCase
   test("#save_to_buffer") do
     png_filename = fixture_path("gnome-logo-icon.png")
     pixbuf = GdkPixbuf::Pixbuf.new(:file => png_filename)
-    jpeg = suppress_warning do
-      pixbuf.save_to_buffer("jpeg")
+    tiff = suppress_warning do
+      pixbuf.save_to_buffer("tiff")
     end
-    assert_equal(["image/jpeg", false],
-                 Gio::ContentType.guess(nil, jpeg))
+    assert_equal(["image/tiff", false],
+                 Gio::ContentType.guess(nil, tiff))
   end
 
   test("#read_pixel_bytes") do
