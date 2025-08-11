@@ -14,27 +14,28 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Graphene
-  class Loader < GObjectIntrospection::Loader
-    def load
-      self.version = "1.0"
-      super("Graphene")
+class TestPoint < Test::Unit::TestCase
+  sub_test_case("#initialize") do
+    test("nothing") do
+      point = Graphene::Point.new
+      assert_equal([0.0, 0.0], point.to_a)
     end
 
-    private
-    def post_load(repository, namespace)
-      require_relative "point"
-      require_relative "rect"
-      require_relative "vec2"
+    test("Graphene::Point") do
+      source_point = Graphene::Point.new(1.0, 2.0)
+      point = Graphene::Point.new(source_point)
+      assert_equal([1.0, 2.0], point.to_a)
     end
 
-    def rubyish_method_name(function_info, options={})
-      case function_info.name
-      when "is_2d"
-        "two_dimentional?"
-      else
-        super
-      end
+    test("Graphene::Vec2") do
+      source_vector = Graphene::Vec2.new(1.0, 2.0)
+      point = Graphene::Point.new(source_vector)
+      assert_equal([1.0, 2.0], point.to_a)
+    end
+
+    test("x, y") do
+      point = Graphene::Point.new(1.0, 2.0)
+      assert_equal([1.0, 2.0], point.to_a)
     end
   end
 end
