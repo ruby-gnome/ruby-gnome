@@ -25,7 +25,7 @@ module GrapheneTestUtils
     micro ||= 0
     graphene_version_raw = PKGConfig.modversion("graphene-gobject-1.0")
     graphene_version = graphene_version_raw.split(".").collect(&:to_i)
-    unless (gsk_version <=> [major, minor, micro]) >= 0
+    unless (graphene_version <=> [major, minor, micro]) >= 0
       omit("Require Graphene >= #{major}.#{minor}.#{micro}")
     end
   end
