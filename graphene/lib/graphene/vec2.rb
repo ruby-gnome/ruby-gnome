@@ -15,25 +15,33 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Graphene
-  class Loader < GObjectIntrospection::Loader
-    def load
-      self.version = "1.0"
-      super("Graphene")
-    end
-
-    private
-    def post_load(repository, namespace)
-      require_relative "rect"
-      require_relative "vec2"
-    end
-
-    def rubyish_method_name(function_info, options={})
-      case function_info.name
-      when "is_2d"
-        "two_dimentional?"
+  class Vec2
+    alias_method :initialize_raw, :initialize
+    def initialize(*args)
+      super()
+      case args.size
+      when 0
+      when 1
+        arg = args[0]
+        case arg
+        when Vec2
+          init_from_vec2(arg)
+        else
+          message = +"source must be Graphene::Vec2: "
+          message << "#{arg.inspect}"
+          raise ArgumentError, message
+        end
+      when 2
+        init(*args)
       else
-        super
+        message = +"wrong number of arguments "
+        message << "(given #{args.size}, expected 0..2)"
+        raise ArgumentError, message
       end
+    end
+
+    def to_a
+      [x, y]
     end
   end
 end
