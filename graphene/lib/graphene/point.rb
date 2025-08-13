@@ -16,6 +16,18 @@
 
 module Graphene
   class Point
+    class << self
+      def try_convert(value)
+        case value
+        when Array
+          return nil unless value.size == 2
+          new(*value)
+        else
+          nil
+        end
+      end
+    end
+
     alias_method :initialize_raw, :initialize
     def initialize(*args)
       super()
