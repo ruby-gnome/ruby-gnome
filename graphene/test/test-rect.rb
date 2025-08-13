@@ -15,6 +15,17 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestRect < Test::Unit::TestCase
+  sub_test_case(".try_convert") do
+    test("[x, y, w, h]") do
+      rect = Graphene::Rect.try_convert([1.0, 2.0, 3.0, 4.0])
+      assert_equal([1.0, 2.0, 3.0, 4.0], rect.to_a)
+    end
+
+    test("Array: invalid") do
+      assert_nil(Graphene::Rect.try_convert([1.0]))
+    end
+  end
+
   sub_test_case("#initialize") do
     test("nothing") do
       rect = Graphene::Rect.new
