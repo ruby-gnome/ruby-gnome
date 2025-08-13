@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2022  Ruby-GNOME Project Team
+# Copyright (C) 2013-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,8 @@ run_test(__dir__,
            "gio2",
            "pango",
            "gdk4",
+           "graphene",
+           "gsk4",
            "gtk4",
          ]) do |context|
   ENV["GTK4_FIXTURE_DIR"] = context[:build_fixture_dir]

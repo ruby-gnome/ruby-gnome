@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2022  Ruby-GNOME Project Team
+# Copyright (C) 2008-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -46,6 +46,14 @@ class TestGtkImage < Test::Unit::TestCase
                      image.resource)
       ensure
         Gio::Resources.unregister(resource)
+      end
+    end
+
+    test "paintable" do
+      Gio::File.open(path: fixture_path("gnome-logo-icon.png")) do |file|
+        texture = Gdk::Texture.new(file)
+        image = Gtk::Image.new(paintable: texture)
+        assert_equal(texture, image.paintable)
       end
     end
   end

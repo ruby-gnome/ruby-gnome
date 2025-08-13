@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2022  Ruby-GNOME Project Team
+# Copyright (C) 2014-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,7 +20,7 @@ module Gtk
     # Creates a Gtk::Image. The source of the image depends on the options
     # given.
     #
-    # @param Hash{Symbol => String, Gio::Icon, GdkPixbuf::Pixbuf}
+    # @param Hash{Symbol => String, Gio::Icon, GdkPixbuf::Pixbuf, Gdk::Paintable}
     #
     # @example Create an empty image.
     #   image = Gtk::Image.new
@@ -49,12 +49,19 @@ module Gtk
     #   Gio::Resources.register(resource)
     #   resource_path = "/path/to/image.png"
     #   image = Gtk::Image.new(resource: resource_path)
+    #
+    # @example Create an image from a paintable
+    #   Gio::File.open(path: "my.png") do |file|
+    #     texture = Gdk::Texture.new(file)
+    #     image = Gtk::Image.new(paintable: texture)
+    #   end
     def initialize(options={})
       icon_name = options[:icon_name] || nil
       icon      = options[:icon] || options[:gicon] || nil
       file      = options[:file] || nil
       pixbuf    = options[:pixbuf] || nil
       resource  = options[:resource] || nil
+      paintable = options[:paintable] || nil
 
       if icon_name
         initialize_new_from_icon_name(icon_name)
@@ -66,6 +73,8 @@ module Gtk
         initialize_new_from_pixbuf(pixbuf)
       elsif resource
         initialize_new_from_resource(resource)
+      elsif paintable
+        initialize_new_from_paintable(paintable)
       else
         initialize_raw
       end

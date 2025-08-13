@@ -1,4 +1,4 @@
-# Copyright (C) 2011-2022  Ruby-GNOME Project Team
+# Copyright (C) 2011-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -619,7 +619,8 @@ module Gtk
     define_deprecated_method :set, warn: message
     define_deprecated_method_by_hash_args :initialize,
         'image',
-        'icon_name: nil, icon: nil, file: nil, pixbuf: nil' do
+        'icon_name: nil, icon: nil, file: nil, pixbuf: nil, resource: nil, ' +
+        'paintable: nil' do
         |_self, image|
       case image
       when String
@@ -631,9 +632,11 @@ module Gtk
       when Symbol
         [{icon_name: image}]
       when GdkPixbuf::Pixbuf
-        [{:pixbuf => image}]
+        [{pixbuf: image}]
       when Gio::Icon
         [{icon: image}]
+      when Gdk::Paintable
+        [{paintable: paintable}]
       else
         message =
           "Image must be String, Symbol, GdkPixbuf::Pixbuf or " +
