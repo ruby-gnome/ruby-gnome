@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("lib/**/*.rb")
 
   s.add_runtime_dependency("gobject-introspection", "= #{s.version}")
+  s.add_runtime_dependency("rake")
 
   [
     ["alpine_linux", "libsecret-dev"],

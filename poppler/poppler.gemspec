@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("cairo-gobject", "= #{s.version}")
   s.add_runtime_dependency("gio2", "= #{s.version}")
+  s.add_runtime_dependency("rake")
 
   [
     ["alpine_linux", "poppler-dev"],

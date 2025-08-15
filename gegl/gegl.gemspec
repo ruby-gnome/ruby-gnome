@@ -41,6 +41,7 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("test/**/*")
 
   s.add_runtime_dependency("gio2", "= #{s.version}")
+  s.add_runtime_dependency("rake")
 
   [
     ["alpine_linux", "gegl-dev"],

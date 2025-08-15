@@ -39,9 +39,10 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("lib/**/*.rb")
   s.files += Dir.glob("test/**/*")
 
-  s.add_runtime_dependency("pango", "= #{s.version}")
-  s.add_runtime_dependency("gdk_pixbuf2", "= #{s.version}")
   s.add_runtime_dependency("cairo-gobject", "= #{s.version}")
+  s.add_runtime_dependency("gdk_pixbuf2", "= #{s.version}")
+  s.add_runtime_dependency("pango", "= #{s.version}")
+  s.add_runtime_dependency("rake")
 
   [
     ["alpine_linux", "gtk+3.0-dev"],

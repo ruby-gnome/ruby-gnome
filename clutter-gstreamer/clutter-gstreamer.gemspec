@@ -40,9 +40,10 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("test/**/*")
 
-  s.add_runtime_dependency("gdk_pixbuf2", "= #{s.version}")
   s.add_runtime_dependency("clutter", "= #{s.version}")
+  s.add_runtime_dependency("gdk_pixbuf2", "= #{s.version}")
   s.add_runtime_dependency("gstreamer", "= #{s.version}")
+  s.add_runtime_dependency("rake")
 
   [
     ["alpine_linux", "clutter-gst-dev"],

@@ -43,6 +43,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("clutter", "= #{s.version}")
   s.add_runtime_dependency("clutter-gdk", "= #{s.version}")
   s.add_runtime_dependency("gtk3", "= #{s.version}")
+  s.add_runtime_dependency("rake")
 
   [
     ["alpine_linux", "clutter-gtk-dev"],
