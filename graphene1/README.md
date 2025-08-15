@@ -1,6 +1,6 @@
-# Ruby/Graphene
+# Ruby/Graphene1
 
-Ruby/Graphene is a Ruby binding of Graphene.
+Ruby/Graphene1 is a Ruby binding of Graphene.
 https://ebassi.github.io/graphene/
 
 ## Requirements
@@ -12,7 +12,7 @@ https://ebassi.github.io/graphene/
 ## Install
 
 ```bash
-gem install graphene
+gem install graphene1
 ```
 
 ## License

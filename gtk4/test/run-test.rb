@@ -28,7 +28,7 @@ run_test(__dir__,
            "gio2",
            "pango",
            "gdk4",
-           "graphene",
+           "graphene1",
            "gsk4",
            "gtk4",
          ]) do |context|

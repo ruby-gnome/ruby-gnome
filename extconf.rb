@@ -22,7 +22,7 @@ prior_libs = [
   "gdk3",
   "gtk3",
   "gdk4",
-  "graphene",
+  "graphene1",
   "gsk4",
   "gtk4",
 ]

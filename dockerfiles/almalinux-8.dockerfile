@@ -35,7 +35,7 @@ WORKDIR /home/ruby-gnome
 # GTK4: It's not available.
 # * adwaita
 # * gdk4
-# * graphene
+# * graphene1
 # * gsk4
 # * gtk4
 # * gtksourceview5
@@ -60,7 +60,7 @@ ENV \
   RUBY_GNOME_GSK4_ENABLE=no \
   RUBY_GNOME_GNUMERIC_ENABLE=no \
   RUBY_GNOME_GOFFICE_ENABLE=no \
-  RUBY_GNOME_GRAPHENE_ENABLE=no \
+  RUBY_GNOME_GRAPHENE1_ENABLE=no \
   RUBY_GNOME_GTK4_ENABLE=no \
   RUBY_GNOME_GTKSOURCEVIEW5_ENABLE=no \
   RUBY_GNOME_GVLC_ENABLE=no \

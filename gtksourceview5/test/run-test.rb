@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2008-2022  Ruby-GNOME Project Team
+# Copyright (C) 2008-2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,8 @@ run_test(__dir__,
            "gdk_pixbuf2",
            "pango",
            "gdk4",
+           "graphene1",
+           "gsk4",
            "gtk4",
            "gtksourceview5",
          ]) do

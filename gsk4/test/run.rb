@@ -26,7 +26,7 @@ run_test(__dir__,
            "gdk_pixbuf2",
            "pango",
            "gdk4",
-           "graphene",
+           "graphene1",
            "gsk4",
          ]) do
   begin

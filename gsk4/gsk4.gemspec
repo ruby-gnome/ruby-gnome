@@ -37,5 +37,5 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("lib/**/*.rb")
 
   s.add_runtime_dependency("gdk4", "= #{s.version}")
-  s.add_runtime_dependency("graphene", "= #{s.version}")
+  s.add_runtime_dependency("graphene1", "= #{s.version}")
 end

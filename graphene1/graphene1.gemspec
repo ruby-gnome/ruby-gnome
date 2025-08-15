@@ -19,9 +19,9 @@
 require_relative "../glib2/version"
 
 Gem::Specification.new do |s|
-  s.name          = "graphene"
-  s.summary       = "Ruby/Graphene is a Ruby binding of Graphene."
-  s.description   = "Ruby/Graphene is a Ruby binding of Graphene."
+  s.name          = "graphene1"
+  s.summary       = "Ruby/Graphene1 is a Ruby binding of Graphene."
+  s.description   = "Ruby/Graphene1 is a Ruby binding of Graphene."
   s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome.github.io/"
