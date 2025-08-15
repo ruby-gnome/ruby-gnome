@@ -1,5 +1,15 @@
 # NEWS
 
+## Ruby-GNOME 4.3.2: 2025-08-15
+
+This is a graphene1 rename release.
+
+### Changes
+
+#### Ruby/Graphene1
+
+  * Renamed from Ruby/Graphene because "graphene" gem already exists.
+
 ## Ruby-GNOME 4.3.1: 2025-08-15
 
 This is a GSK support release.
