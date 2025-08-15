@@ -1,5 +1,27 @@
 # NEWS
 
+## Ruby-GNOME 4.3.1: 2025-08-15
+
+This is a GSK support release.
+
+### Changes
+
+#### Ruby/Graphene
+
+  * Added
+
+#### Ruby/GSK4
+
+  * Added
+
+#### Ruby/GTK4
+
+  * Improvements
+
+    * Added `Gtk::Snapshot#save(&block)`
+
+    * Added `Gtk::Image#intialize(paintable:)`
+
 ## Ruby-GNOME 4.3.0: 2025-07-14
 
 This is a bug fix release.
