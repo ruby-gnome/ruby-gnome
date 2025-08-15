@@ -14,9 +14,6 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Update APT repositories
-        run: |
-          sudo apt update -y
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ruby
