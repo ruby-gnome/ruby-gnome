@@ -2,9 +2,11 @@ name: Document
 on:
   push:
     branches:
-      - main
+      - '**'
+      - '!dependabot/**'
     tags:
-      - '*'
+      - '**'
+  pull_request:
 jobs:
   build:
     name: Build
@@ -47,6 +49,7 @@ jobs:
             cp -a public/doc/${version} public/doc/latest
           fi
       - name: Publish Documentation on GitHub Pages
+        if: github.event_name == 'push' && github.ref_name == 'main'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
