@@ -25,5 +25,23 @@ module Gsk
       self.version = "4.0"
       super("Gsk")
     end
+
+    private
+    def post_load(repository, namespace)
+      require_relative "rounded-rect"
+    end
+
+    def field_name(field_info, klass)
+      case klass.name
+      when "Gsk::RoundedRect"
+        if field_info.name == "corner"
+          "corners"
+        else
+          super
+        end
+      else
+        super
+      end
+    end
   end
 end
