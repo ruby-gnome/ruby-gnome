@@ -16,7 +16,7 @@
 
 require "gobject-introspection"
 
-require "graphene/loader"
+require_relative "graphene1/loader"
 
 module Graphene
   LOG_DOMAIN = "Graphene"

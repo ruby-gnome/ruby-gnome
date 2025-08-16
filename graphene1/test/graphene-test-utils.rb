@@ -17,7 +17,7 @@
 require "pkg-config"
 require "test-unit"
 
-require "graphene"
+require "graphene1"
 
 module GrapheneTestUtils
   private

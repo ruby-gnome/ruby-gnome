@@ -25,7 +25,7 @@ run_test(__dir__,
            "graphene1",
          ]) do
   begin
-    require "graphene"
+    require "graphene1"
   rescue GObjectIntrospection::RepositoryError
     puts("Omit because typelib file doesn't exist: #{$!.message}")
     exit(true)
