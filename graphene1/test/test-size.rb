@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-#
 # Copyright (C) 2025  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
@@ -16,20 +14,33 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require_relative "../../glib2/test/run-test"
+class TestSize < Test::Unit::TestCase
+  sub_test_case(".try_convert") do
+    test("[width, height]") do
+      size = Graphene::Size.try_convert([1.0, 2.0])
+      assert_equal([1.0, 2.0], size.to_a)
+    end
 
-run_test(__dir__,
-         [
-           "glib2",
-           "gobject-introspection",
-           "graphene1",
-         ]) do
-  begin
-    require "graphene"
-  rescue GObjectIntrospection::RepositoryError
-    puts("Omit because typelib file doesn't exist: #{$!.message}")
-    exit(true)
+    test("Array: invalid") do
+      assert_nil(Graphene::Size.try_convert([1.0]))
+    end
   end
 
-  require_relative "graphene-test-utils"
+  sub_test_case("#initialize") do
+    test("nothing") do
+      size = Graphene::Size.new
+      assert_equal([0.0, 0.0], size.to_a)
+    end
+
+    test("Graphene::Size") do
+      source_size = Graphene::Size.new(1.0, 2.0)
+      size = Graphene::Size.new(source_size)
+      assert_equal([1.0, 2.0], size.to_a)
+    end
+
+    test("width, height") do
+      size = Graphene::Size.new(1.0, 2.0)
+      assert_equal([1.0, 2.0], size.to_a)
+    end
+  end
 end

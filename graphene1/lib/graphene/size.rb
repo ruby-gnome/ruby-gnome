@@ -15,27 +15,43 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Graphene
-  class Loader < GObjectIntrospection::Loader
-    def load
-      self.version = "1.0"
-      super("Graphene")
-    end
-
-    private
-    def post_load(repository, namespace)
-      require_relative "point"
-      require_relative "rect"
-      require_relative "size"
-      require_relative "vec2"
-    end
-
-    def rubyish_method_name(function_info, options={})
-      case function_info.name
-      when "is_2d"
-        "two_dimentional?"
-      else
-        super
+  class Size
+    class << self
+      def try_convert(value)
+        case value
+        when Array
+          return nil unless value.size == 2
+          new(*value)
+        else
+          nil
+        end
       end
+    end
+
+    alias_method :initialize_raw, :initialize
+    def initialize(*args)
+      super()
+      case args.size
+      when 0
+      when 1
+        arg = args[0]
+        case arg
+        when Size
+          init_from_size(arg)
+        else
+          raise ArgumentError, "source must be Graphene::Size: #{arg.inspect}"
+        end
+      when 2
+        init(*args)
+      else
+        message = +"wrong number of arguments "
+        message << "(given #{args.size}, expected 0..2)"
+        raise ArgumentError, message
+      end
+    end
+
+    def to_a
+      [width, height]
     end
   end
 end
