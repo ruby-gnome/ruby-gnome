@@ -20,9 +20,16 @@ module GObjectIntrospection
       return nil if value.nil?
 
       type = gtype
-      return value if type == GLib::Type::NONE
+      if type == GLib::Type::NONE
+        ns = namespace
+        return value unless Object.const_defined?(ns)
+        mod = Object.const_get(ns)
+        return value unless mod.const_defined?(name)
+        klass = mod.const_get(name)
+      else
+        klass = type.to_class
+      end
 
-      klass = type.to_class
       case value
       when klass
         value
