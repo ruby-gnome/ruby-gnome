@@ -1,5 +1,34 @@
 # NEWS
 
+## Ruby-GNOME 4.3.3: 2025-08-17
+
+This is a graphene1 `require` path fix release.
+
+### Changes
+
+#### Ruby/Graphene1
+
+  * Improvements
+
+    * Improved `Graphene::Size` API.
+
+  * Fixes
+
+    * Renamed `require` path to `graphene1` from `graphene`.
+
+#### Ruby/GSK4
+
+  * Improvements
+
+    * Improved `Gsk::RoundedRect` API.
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for `try_convert` protocol for no `GTyped`
+      structs.
+
 ## Ruby-GNOME 4.3.2: 2025-08-15
 
 This is a graphene1 rename release.
