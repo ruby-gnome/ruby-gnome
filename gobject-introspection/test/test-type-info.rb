@@ -37,9 +37,9 @@ class TestTypeInfo < Test::Unit::TestCase
   end
 
   def test_interface
-    function_info = @repository.find("GObject", "type_class_ref")
+    function_info = @repository.find("Gio", "app_info_create_from_commandline")
     info = function_info.return_type
-    assert_kind_of(GObjectIntrospection::StructInfo,
+    assert_kind_of(GObjectIntrospection::InterfaceInfo,
                    info.interface)
   end
 
