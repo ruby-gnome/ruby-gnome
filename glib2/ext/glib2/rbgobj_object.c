@@ -284,8 +284,23 @@ gobj_mark(gpointer ptr)
     for (i = 0; i < n_properties; i++) {
         GParamSpec* pspec = properties[i];
         GType value_type = G_PARAM_SPEC_VALUE_TYPE(pspec);
-        if (G_TYPE_FUNDAMENTAL(value_type) != G_TYPE_OBJECT) continue;
+        if (!G_TYPE_IS_OBJECT(value_type)) continue;
         if (!(pspec->flags & G_PARAM_READABLE)) continue;
+        if (G_TYPE_IS_OBJECT(pspec->owner_type)) {
+            const RGObjClassInfo *owner_cinfo =
+                rbgobj_class_info_lookup_by_gtype(pspec->owner_type);
+            if (owner_cinfo && (owner_cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {
+                /* We can't get properties of a GObject defined by Ruby
+                 * in GC becaue we need to call a Ruby method to get a
+                 * property. It may allocates some objects in GC. It's
+                 * not allowed.
+                 *
+                 * Anyway, we don't need to mark properties here
+                 * because properties must be referred from a GObject
+                 * defined by Ruby. */
+                continue;
+            }
+        }
         /* FIXME: exclude types that doesn't have identity. */
 
         {
