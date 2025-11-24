@@ -8,7 +8,7 @@ jobs:
     runs-on: macOS-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ruby
@@ -66,7 +66,7 @@ jobs:
       ARROW_WITH_ZLIB: ON
       ARROW_WITH_ZSTD: ON
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Build
         run: |
           brew install pkg-config
@@ -76,7 +76,7 @@ jobs:
             gem install pkg/*.gem
             popd
           done
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           repository: apache/arrow
           path: arrow
