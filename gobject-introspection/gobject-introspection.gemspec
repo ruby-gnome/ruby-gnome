@@ -56,6 +56,7 @@ Gem::Specification.new do |s|
     ["debian", "libgirepository1.0-dev"],
     ["homebrew", "gobject-introspection"],
     ["macports", "gobject-introspection"],
+    ["msys2", "gobject-introspection"],
     ["rhel", "pkgconfig(gobject-introspection-1.0)"],
   ].each do |platform, package|
     s.requirements << "system: gobject-introspection-1.0: #{platform}: #{package}"
