@@ -23,16 +23,8 @@ class TestAnimationIter < Test::Unit::TestCase
   end
 
   test("#on_currently_loading_frame?") do
-    if GdkPixbuf::Version.or_later?(2, 43, 0)
-      # Glycin based loaders load animation at once because Glycin based
-      # loaders don't provide "load_animation".
-      assert do
-        @iter.on_currently_loading_frame?
-      end
-    else
-      assert do
-        not @iter.on_currently_loading_frame?
-      end
+    assert do
+      not @iter.on_currently_loading_frame?
     end
   end
 end

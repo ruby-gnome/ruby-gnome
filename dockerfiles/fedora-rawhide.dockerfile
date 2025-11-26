@@ -6,7 +6,6 @@ RUN \
     dbus-daemon \
     gcc \
     gcc-c++ \
-    gdk-pixbuf2-modules \
     git \
     gnome-icon-theme \
     gnumeric \
