@@ -58,6 +58,7 @@ Gem::Specification.new do |s|
     ["gentoo_linux", "dev-libs/glib"],
     ["homebrew", "glib"],
     ["macports", "glib2"],
+    ["msys2", "glib2"],
     ["rhel", "pkgconfig(gobject-2.0)"],
   ].each do |platform, package|
     s.requirements << "system: gobject-2.0>=2.56.0: #{platform}: #{package}"
