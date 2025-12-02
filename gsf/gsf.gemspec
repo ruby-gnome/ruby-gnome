@@ -54,5 +54,5 @@ Gem::Specification.new do |s|
     s.requirements << "system: libgsf-1: #{platform}: #{package}"
   end
 
-  os.metadata["msys2_mingw_dependencies"] = "libgsf"
+  s.metadata["msys2_mingw_dependencies"] = "libgsf"
 end
