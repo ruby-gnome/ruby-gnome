@@ -1,5 +1,35 @@
 # NEWS
 
+## Ruby-GNOME 4.3.4: 2025-12-02
+
+This is a MSYS2 Ruby support release.
+
+### Changes
+
+#### All
+
+  * Improvements
+
+    * MSYS2: Added system package information
+      * [GH-1691](https://github.com/ruby-gnome/ruby-gnome/issues/1691)
+      * [GH-1692](https://github.com/ruby-gnome/ruby-gnome/issues/1692)
+      * Patch by takuya kodama.
+
+#### Ruby/GLib2
+
+  * Fixes
+
+    * Fixed a GC problem of a GObject property in GObject defined by
+      Ruby.
+      * [GH-1688](https://github.com/ruby-gnome/ruby-gnome/issues/1688)
+      * Reported by ppibburr.
+
+### Thanks
+
+  * ppibburr
+
+  * takuya kodama
+
 ## Ruby-GNOME 4.3.3: 2025-08-17
 
 This is a graphene1 `require` path fix release.
