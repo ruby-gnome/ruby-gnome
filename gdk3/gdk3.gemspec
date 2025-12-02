@@ -59,6 +59,7 @@ Gem::Specification.new do |s|
     ["debian", "libgtk-3-dev"],
     ["homebrew", "gtk+3"],
     ["macports", "gtk3"],
+    ["msys2", "gtk3"],
     ["rhel", "pkgconfig(gdk-3.0)"],
   ].each do |platform, package|
     s.requirements << "system: gdk-3.0: #{platform}: #{package}"

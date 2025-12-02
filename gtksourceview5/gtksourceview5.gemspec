@@ -49,6 +49,7 @@ Gem::Specification.new do |s|
     ["debian", "libgtksourceview-5-dev"],
     ["homebrew", "gtksourceview5"],
     ["macports", "gtksourceview5"],
+    ["msys2", "gtksourceview5"],
     ["rhel", "pkgconfig(gtksourceview-5)"],
   ].each do |platform, package|
     s.requirements << "system: gtksourceview-5: #{platform}: #{package}"

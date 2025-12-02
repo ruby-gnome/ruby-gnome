@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
     ["debian", "libpango1.0-dev"],
     ["homebrew", "pango"],
     ["macports", "pango"],
+    ["msys2", "pango"],
     ["rhel", "pkgconfig(pango)"],
   ].each do |platform, package|
     s.requirements << "system: pango>1.14.0: #{platform}: #{package}"

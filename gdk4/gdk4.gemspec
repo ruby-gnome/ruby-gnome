@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
     ["debian", "libgtk-4-dev"],
     ["homebrew", "gtk4"],
     ["macports", "gtk4"],
+    ["msys2", "gtk4"],
     ["rhel", "pkgconfig(gtk4)"],
   ].each do |platform, package|
     s.requirements << "system: gtk4: #{platform}: #{package}"

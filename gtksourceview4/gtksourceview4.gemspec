@@ -49,6 +49,7 @@ Gem::Specification.new do |s|
     ["debian", "libgtksourceview-4-dev"],
     ["homebrew", "gtksourceview4"],
     ["macports", "gtksourceview4"],
+    ["msys2", "gtksourceview4"],
     ["rhel", "pkgconfig(gtksourceview-4)"],
   ].each do |platform, package|
     s.requirements << "system: gtksourceview-4: #{platform}: #{package}"

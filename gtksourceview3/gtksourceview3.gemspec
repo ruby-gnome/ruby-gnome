@@ -49,6 +49,7 @@ Gem::Specification.new do |s|
     ["debian", "libgtksourceview-3.0-dev"],
     ["homebrew", "gtksourceview3"],
     ["macports", "gtksourceview3"],
+    ["msys2", "gtksourceview3"],
     ["rhel", "pkgconfig(gtksourceview-3.0)"],
   ].each do |platform, package|
     s.requirements << "system: gtksourceview-3.0: #{platform}: #{package}"

@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
     ["debian", "libpoppler-glib-dev"],
     ["homebrew", "poppler"],
     ["macports", "poppler"],
+    ["msys2", "poppler"],
     ["rhel", "pkgconfig(poppler-glib)"],
   ].each do |platform, package|
     s.requirements << "system: poppler-glib>0.12.0: #{platform}: #{package}"

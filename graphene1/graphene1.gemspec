@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
     ["debian", "libgraphene-1.0-dev"],
     ["homebrew", "graphene"],
     ["macports", "graphene"],
+    ["msys2", "graphene"],
     ["rhel", "pkgconfig(graphene-gobject-1.0)"],
   ].each do |platform, package|
     s.requirements << "system: graphene-gobject-1.0: #{platform}: #{package}"

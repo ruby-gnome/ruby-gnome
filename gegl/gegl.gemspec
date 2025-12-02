@@ -50,6 +50,7 @@ Gem::Specification.new do |s|
     ["debian", "libgegl-dev"],
     ["homebrew", "gegl"],
     ["macports", "gegl"],
+    ["msys2", "gegl"],
     ["rhel", "pkgconfig(gegl-0.4)"],
   ].each do |platform, package|
     s.requirements << "system: gegl-0.4: #{platform}: #{package}"

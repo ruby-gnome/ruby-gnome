@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
     ["debian", "libgdk-pixbuf-2.0-dev"],
     ["homebrew", "gdk-pixbuf"],
     ["macports", "gdk-pixbuf2"],
+    ["msys2", "gdk-pixbuf2"],
     ["rhel", "pkgconfig(gdk-pixbuf-2.0)"],
   ].each do |platform, package|
     s.requirements << "system: gdk-pixbuf-2.0: #{platform}: #{package}"

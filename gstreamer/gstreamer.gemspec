@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
     ["debian", "libgstreamer1.0-dev"],
     ["homebrew", "gstreamer"],
     ["macports", "gstreamer"],
+    ["msys2", "gstreamer"],
     ["rhel", "pkgconfig(gstreamer-1.0)"],
   ].each do |platform, package|
     s.requirements << "system: gstreamer-1.0: #{platform}: #{package}"

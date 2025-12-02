@@ -49,6 +49,7 @@ Gem::Specification.new do |s|
     ["debian", "libsecret-1-dev"],
     ["homebrew", "libsecret"],
     ["macports", "libsecret"],
+    ["msys2", "libsecret"],
     ["rhel", "pkgconfig(libsecret-1)"],
   ].each do |platform, package|
     s.requirements << "system: libsecret-1: #{platform}: #{package}"

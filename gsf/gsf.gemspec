@@ -48,10 +48,11 @@ Gem::Specification.new do |s|
     ["conda", "libgsf"],
     ["debian", "libgsf-1-dev"],
     ["homebrew", "libgsf"],
+    ["msys2", "libgsf"],
     ["rhel", "pkgconfig(libgsf-1)"],
   ].each do |platform, package|
     s.requirements << "system: libgsf-1: #{platform}: #{package}"
   end
 
-  s.metadata["msys2_mingw_dependencies"] = "libgsf"
+  os.metadata["msys2_mingw_dependencies"] = "libgsf"
 end

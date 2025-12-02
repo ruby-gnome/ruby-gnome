@@ -47,6 +47,7 @@ Gem::Specification.new do |s|
     ["arch_linux", "libadwaita"],
     ["debian", "libadwaita-1-dev"],
     ["homebrew", "libadwaita"],
+    ["msys2", "libadwaita"],
     ["rhel", "pkgconfig(libadwaita-1)"],
   ].each do |platform, package|
     s.requirements << "system: libadwaita-1: #{platform}: #{package}"

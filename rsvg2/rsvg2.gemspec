@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
     ["debian", "librsvg2-dev"],
     ["homebrew", "librsvg"],
     ["macports", "librsvg"],
+    ["msys2", "librsvg"],
     ["rhel", "pkgconfig(librsvg-2.0)"],
   ].each do |platform, package|
     s.requirements << "system: librsvg-2.0: #{platform}: #{package}"
