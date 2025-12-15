@@ -102,7 +102,7 @@ jobs:
         run: |
           echo "CACHE_DIR=$(ccache --get-config cache_dir)" >> $GITHUB_ENV
       - name: Cache ccache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ env.CACHE_DIR }}
           key: arrow-ccache-macos-${{ hashFiles('arrow/cpp/**') }}
