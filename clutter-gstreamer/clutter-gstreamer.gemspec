@@ -47,7 +47,6 @@ Gem::Specification.new do |s|
 
   [
     ["alpine_linux", "clutter-gst-dev"],
-    ["arch_linux", "clutter-gst"],
     ["debian", "libclutter-gst-3.0-dev"],
     ["rhel", "pkgconfig(clutter-gst-3.0)"],
   ].each do |platform, package|

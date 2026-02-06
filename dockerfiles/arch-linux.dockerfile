@@ -24,3 +24,14 @@ RUN \
 
 USER ruby-gnome
 WORKDIR /home/ruby-gnome
+
+# Clutter: It's not available.
+# * clutter
+# * clutter-gdk
+# * clutter-gtk
+# * clutter-gstreamer
+ENV \
+  RUBY_GNOME_CLUTTER_ENABLE=no \
+  RUBY_GNOME_CLUTTER_GDK_ENABLE=no \
+  RUBY_GNOME_CLUTTER_GSTREAMER_ENABLE=no \
+  RUBY_GNOME_CLUTTER_GTK_ENABLE=no
