@@ -1,5 +1,47 @@
 # NEWS
 
+## Ruby-GNOME 4.3.5: 2026-02-06
+
+This is a GLib 2.87 support release.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Improvements
+
+    * Added support for GLib 2.87.
+      * [GH-1695](https://github.com/ruby-gnome/ruby-gnome/issues/1695)
+      * Patch by Alessandro Astone.
+
+#### Ruby/Clutter
+
+  * Improvements
+
+     * Dropped support for Arch Linux.
+
+#### Ruby/ClutterGDK
+
+  * Improvements
+
+     * Dropped support for Arch Linux.
+
+#### Ruby/ClutterGTK
+
+  * Improvements
+
+     * Dropped support for Arch Linux.
+
+#### Ruby/ClutterGStreamer
+
+  * Improvements
+
+     * Dropped support for Arch Linux.
+
+#### Thanks
+
+  * Alessandro Astone.
+
 ## Ruby-GNOME 4.3.4: 2025-12-02
 
 This is a MSYS2 Ruby support release.
