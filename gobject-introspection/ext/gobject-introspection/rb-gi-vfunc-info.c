@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2026  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -71,6 +71,41 @@ rg_invoker(VALUE self)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_vfunc_info_get_invoker(info));
 }
 
+static VALUE
+rg_invoke(VALUE self,
+          VALUE rb_implementor_gtype,
+          VALUE rb_receiver,
+          VALUE rb_arguments)
+{
+    GIVFuncInfo *info = SELF(self);
+    GICallableInfo *callable_info = (GICallableInfo *)info;
+    GType implementor_gtype = rbgobj_gtype_from_ruby(rb_implementor_gtype);
+    VALUE rb_return_value;
+    /* TODO: use rb_protect */
+    VALUE rb_out_args = rb_gi_callable_info_invoke_raw(info,
+                                                       self,
+                                                       implementor_gtype,
+                                                       rb_receiver,
+                                                       rb_arguments,
+                                                       NULL,
+                                                       &rb_return_value);
+
+    if (NIL_P(rb_out_args)) {
+        return rb_return_value;
+    } else {
+        GITypeInfo return_value_info;
+        g_callable_info_load_return_type(callable_info, &return_value_info);
+        if (g_type_info_get_tag(&return_value_info) != GI_TYPE_TAG_VOID) {
+            rb_ary_unshift(rb_out_args, rb_return_value);
+        }
+        if (RARRAY_LEN(rb_out_args) == 1) {
+            return RARRAY_PTR(rb_out_args)[0];
+        } else {
+            return rb_out_args;
+        }
+    }
+}
+
 void
 rb_gi_vfunc_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
@@ -86,6 +121,7 @@ rb_gi_vfunc_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
     RG_DEF_METHOD(offset, 0);
     RG_DEF_METHOD(signal, 0);
     RG_DEF_METHOD(invoker, 0);
+    RG_DEF_METHOD(invoke, 3);
 
     G_DEF_CLASS(G_TYPE_IV_FUNC_INFO_FLAGS, "VFuncInfoFlags", rb_mGI);
 }

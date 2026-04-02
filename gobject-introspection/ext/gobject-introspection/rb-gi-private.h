@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2026  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -108,8 +108,9 @@ void rb_gi_unresolved_info_init      (VALUE rb_mGI,
 void rb_gi_repository_init           (VALUE rb_mGI);
 void rb_gi_loader_init               (VALUE rb_mGI);
 
-VALUE rb_gi_function_info_invoke_raw (GIFunctionInfo *info,
+VALUE rb_gi_callable_info_invoke_raw (GICallableInfo *info,
                                       VALUE rb_info,
+                                      GType implementor_gtype,
                                       VALUE rb_receiver,
                                       VALUE rb_arguments,
                                       GIArgument *return_value,

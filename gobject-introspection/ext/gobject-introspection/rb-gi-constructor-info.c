@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2026  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -124,8 +124,9 @@ rg_invoke(VALUE self, VALUE rb_receiver, VALUE rb_arguments)
         rb_raise(rb_eArgError, "receiver is missing");
     }
     /* TODO: use rb_protect */
-    rb_gi_function_info_invoke_raw(info,
+    rb_gi_callable_info_invoke_raw(info,
                                    self,
+                                   G_TYPE_NONE,
                                    Qnil,
                                    rb_arguments,
                                    &return_value,

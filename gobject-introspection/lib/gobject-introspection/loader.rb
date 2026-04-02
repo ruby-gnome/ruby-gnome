@@ -363,7 +363,7 @@ module GObjectIntrospection
           invokers = INITIALIZE_INVOKERS
           invokers.values.each do |invoker|
             catch do |tag|
-              invoker.invoke(self, arguments.dup, block, tag)
+              invoker.invoke(self, arguments.dup, block, abort_tag: tag)
               LOADER_CLASS.initialize_instance_post(self)
               return
             end
@@ -687,10 +687,12 @@ module GObjectIntrospection
         ensure_prepared if defined?(Ractor)
       end
 
-      def invoke(receiver, arguments, block, abort_tag=nil)
+      def invoke(receiver, arguments, block,
+                 abort_tag: nil,
+                 implementor_gtype: nil)
         ensure_prepared
 
-        if receiver and @function_info_p
+        if receiver and @info.class == FunctionInfo
           arguments.unshift(receiver)
         end
 
@@ -709,7 +711,12 @@ module GObjectIntrospection
         if block.nil? and @require_callback_p
           receiver.to_enum(@method_name, *arguments)
         else
-          if @function_info_p
+          if @info.class == VFuncInfo
+            return_value = @info.invoke(implementor_gtype,
+                                        receiver,
+                                        arguments,
+                                        &block)
+          elsif @info.class == FunctionInfo
             return_value = @info.invoke(arguments, &block)
           else
             return_value = @info.invoke(receiver, arguments, &block)
@@ -753,7 +760,6 @@ module GObjectIntrospection
           @in_arg_nil_indexes << i if may_be_null
         end
 
-        @function_info_p = (@info.class == FunctionInfo)
         @have_return_value_p = @info.have_return_value?
         @require_callback_p = @info.require_callback?
 
@@ -847,6 +853,20 @@ module GObjectIntrospection
         vtable_gtype = container.gtype
         if container.respond_to?(:class_struct)
           struct = container.class_struct
+          # This is for "super" in "virtual_do_XXX".
+          parent_gtype = implementor_gtype.parent
+          parent_class = parent_gtype.to_class
+          invoker = Invoker.new(info, name, "#{parent_class.name}\##{name}")
+          parent_vfunc_callable = Module.new
+          parent_vfunc_callable.define_method(name) do |*args, &block|
+            invoker.invoke(self, args, block, implementor_gtype: parent_gtype)
+          end
+          # If we use implementor_gtype.class.include here,
+          # GLib::Instantiatable.include calls this method
+          # recursively. We don't need to call any hook for this
+          # method. So we use the original Module.include here.
+          Module.method(:include).unbind.bind_call(implementor_gtype.to_class,
+                                                   parent_vfunc_callable)
         else
           return false unless implementor_gtype.type_is_a?(vtable_gtype)
           struct = container.iface_struct

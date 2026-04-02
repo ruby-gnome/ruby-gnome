@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2026  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -43,10 +43,11 @@ rg_invoke(VALUE self, VALUE rb_receiver, VALUE rb_arguments)
     VALUE rb_return_value;
 
     info = SELF(self);
-
+    GICallableInfo *callable_info = (GICallableInfo *)info;
     /* TODO: use rb_protect */
-    rb_out_args = rb_gi_function_info_invoke_raw(info,
+    rb_out_args = rb_gi_callable_info_invoke_raw(callable_info,
                                                  self,
+                                                 G_TYPE_NONE,
                                                  rb_receiver,
                                                  rb_arguments,
                                                  NULL,
@@ -55,7 +56,6 @@ rg_invoke(VALUE self, VALUE rb_receiver, VALUE rb_arguments)
     if (NIL_P(rb_out_args)) {
         return rb_return_value;
     } else {
-        GICallableInfo *callable_info = (GICallableInfo *)info;
         GITypeInfo return_value_info;
         g_callable_info_load_return_type(callable_info, &return_value_info);
         if (g_type_info_get_tag(&return_value_info) != GI_TYPE_TAG_VOID) {
