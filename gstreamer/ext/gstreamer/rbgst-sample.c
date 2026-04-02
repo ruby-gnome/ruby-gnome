@@ -1,0 +1,384 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/*
+ *  Copyright (C) 2025  Ruby-GNOME2 Project Team
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ *  MA  02110-1301  USA
+ */
+
+#include <ruby.h>
+#include <ruby/memory_view.h>
+#include <gst/audio/audio.h>
+#include "rbgst.h"
+
+typedef struct memview_private_data {
+    GstBuffer *buffer;
+    GstMapInfo *map_info;
+} memview_private_data;
+
+static gboolean
+rg_gst_combine_buffer_list(GstBuffer **buffer, guint idx, gpointer user_data)
+{
+    GstBuffer **acc;
+
+    acc = (GstBuffer **)user_data;
+    *acc = gst_buffer_append(*acc, gst_buffer_ref(*buffer));
+
+    return TRUE;
+}
+
+static gboolean
+rg_gst_is_supported_caps(const gchar *name)
+{
+    return g_str_has_prefix(name, "audio/x-raw");
+}
+
+static bool
+rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags, GstSample *sample, GstCaps *caps)
+{
+    GstBuffer *buffer;
+    GstBufferList *buffer_list;
+    GstAudioInfo *audio_info;
+    GstMapInfo *map_info;
+    gboolean is_column_major_requested;
+    gboolean is_writable;
+    gboolean is_interleaved;
+    ssize_t *shape;
+    ssize_t *strides;
+    gint width;
+    gsize n_samples;
+    memview_private_data *private_data;
+
+    is_column_major_requested = flags & RUBY_MEMORY_VIEW_COLUMN_MAJOR;
+    if (is_column_major_requested) {
+        // TODO: column-major support
+        rb_warn("Gst::Sample: currently column-major is not supported");
+
+        return false;
+    }
+
+    audio_info = gst_audio_info_new();
+    if (!gst_audio_info_from_caps(audio_info, caps)) {
+        gst_audio_info_free(audio_info);
+        rb_warn("Gst::Sample: failed to get audio info");
+
+        return false;
+    }
+    if (!audio_info->finfo) {
+        gst_audio_info_free(audio_info);
+        rb_warn("Gst::Sample: failed to retrieve audio format info");
+
+        return false;
+    }
+
+    is_interleaved = audio_info->layout == GST_AUDIO_LAYOUT_INTERLEAVED;
+    if (!is_interleaved) {
+        // TODO: non-interleaved layout support
+        gst_audio_info_free(audio_info);
+        rb_warn("Gst::Sample: currently only interleaved layout is supported");
+
+        return false;
+    }
+
+    buffer_list = gst_sample_get_buffer_list(sample);
+    if (buffer_list) {
+        buffer = gst_buffer_new();
+        gst_buffer_list_foreach(buffer_list, rg_gst_combine_buffer_list, &buffer);
+    } else {
+        buffer = gst_sample_get_buffer(sample);
+        if (!buffer) {
+            gst_audio_info_free(audio_info);
+            rb_warn("Gst::Sample: failed to get buffer");
+
+            return false;
+        }
+        buffer = gst_buffer_ref(buffer);
+    }
+
+    is_writable = gst_sample_is_writable(sample);
+    if (!is_writable && (flags & RUBY_MEMORY_VIEW_WRITABLE)) {
+        rb_warn("Gst::Sample: sample is not writable but writable memory view is requested");
+        gst_audio_info_free(audio_info);
+        gst_buffer_unref(buffer);
+
+        return false;
+    }
+    map_info = ALLOC(GstMapInfo);
+    if (!gst_buffer_map(buffer, map_info, is_writable ? GST_MAP_WRITE : GST_MAP_READ)) {
+        rb_warn("Gst::Sample: failed to map buffer");
+        xfree(map_info);
+        gst_audio_info_free(audio_info);
+        gst_buffer_unref(buffer);
+
+        return false;
+    }
+
+    view->data = map_info->data;
+
+    view->obj = obj;
+    view->byte_size = map_info->size;
+    view->item_size = audio_info->finfo->width / 8;
+    view->readonly = !is_writable;
+    view->ndim = 2;
+
+    view->format = NULL;
+    switch (audio_info->finfo->format) {
+    case GST_AUDIO_FORMAT_UNKNOWN:
+        rb_warn("Gst::Sample: format is unknown");
+        break;
+    case GST_AUDIO_FORMAT_ENCODED:
+        rb_warn("Gst::Sample: encoded format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_S8:
+        view->format = "c";
+        break;
+    case GST_AUDIO_FORMAT_U8:
+        view->format = "C";
+        break;
+    case GST_AUDIO_FORMAT_S16LE:
+        view->format = "s<";
+        break;
+    case GST_AUDIO_FORMAT_S16BE:
+        view->format = "s>";
+        break;
+    case GST_AUDIO_FORMAT_U16LE:
+        view->format = "v";
+        break;
+    case GST_AUDIO_FORMAT_U16BE:
+        view->format = "n";
+        break;
+    case GST_AUDIO_FORMAT_S24_32LE:
+        rb_warn("Gst::Sample: S24_32LE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_S24_32BE:
+        rb_warn("Gst::Sample: S24_32BE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_U24_32LE:
+        rb_warn("Gst::Sample: U24_32LE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_U24_32BE:
+        rb_warn("Gst::Sample: U24_32BE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_S32LE:
+        view->format = "l<";
+        break;
+    case GST_AUDIO_FORMAT_S32BE:
+        view->format = "l>";
+        break;
+    case GST_AUDIO_FORMAT_U32LE:
+        view->format = "V";
+        break;
+    case GST_AUDIO_FORMAT_U32BE:
+        view->format = "N";
+        break;
+    case GST_AUDIO_FORMAT_S24LE:
+        rb_warn("Gst::Sample: S24LE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_S24BE:
+        rb_warn("Gst::Sample: S24BE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_U24LE:
+        rb_warn("Gst::Sample: U24LE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_U24BE:
+        rb_warn("Gst::Sample: U24BE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_S20LE:
+        rb_warn("Gst::Sample: S20LE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_S20BE:
+        rb_warn("Gst::Sample: S20BE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_U20LE:
+        rb_warn("Gst::Sample: U20LE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_U20BE:
+        rb_warn("Gst::Sample: U20BE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_S18LE:
+        rb_warn("Gst::Sample: S18LE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_S18BE:
+        rb_warn("Gst::Sample: S18BE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_U18LE:
+        rb_warn("Gst::Sample: U18LE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_U18BE:
+        rb_warn("Gst::Sample: U18BE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_F32LE:
+        if (rb_memory_view_item_size_from_format("e", NULL) == 4) {
+            view->format = "e";
+        } else {
+            rb_warn("Gst::Sample: only environment float size is 4 bytes is supported");
+        }
+        break;
+    case GST_AUDIO_FORMAT_F32BE:
+        if (rb_memory_view_item_size_from_format("g", NULL) == 4) {
+            view->format = "g";
+        } else {
+            rb_warn("Gst::Sample: only environment float size is 4 bytes is supported");
+        }
+        break;
+    case GST_AUDIO_FORMAT_F64LE:
+        if (rb_memory_view_item_size_from_format("E", NULL) == 8) {
+            view->format = "E";
+        } else if (rb_memory_view_item_size_from_format("e", NULL) == 8) {
+            view->format = "e";
+        } else {
+            rb_warn("Gst::Sample: only environment double or float size is 8 bytes is supported");
+        }
+        break;
+    case GST_AUDIO_FORMAT_F64BE:
+        if (rb_memory_view_item_size_from_format("G", NULL) == 8) {
+            view->format = "G";
+        } else if (rb_memory_view_item_size_from_format("g", NULL) == 8) {
+            view->format = "g";
+        } else {
+            rb_warn("Gst::Sample: only environment double or float size is 8 bytes is supported");
+        }
+        break;
+    case GST_AUDIO_FORMAT_S20_32LE:
+        rb_warn("Gst::Sample: S20_32LE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_S20_32BE:
+        rb_warn("Gst::Sample: S20_32BE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_U20_32LE:
+        rb_warn("Gst::Sample: U20_32LE format is not supported");
+        break;
+    case GST_AUDIO_FORMAT_U20_32BE:
+        rb_warn("Gst::Sample: U20_32BE format is not supported");
+        break;
+    }
+
+    if (view->format == NULL) {
+        gst_buffer_unmap(buffer, map_info);
+        xfree(map_info);
+        gst_buffer_unref(buffer);
+        gst_audio_info_free(audio_info);
+
+        return false;
+    }
+
+    n_samples = map_info->size / (audio_info->finfo->width / 8) / audio_info->channels;
+    width = audio_info->finfo->width / 8;
+    shape = ALLOC_N(ssize_t, 2);
+    strides = ALLOC_N(ssize_t, 2);
+    // Currently, interleaved and row-major audio is supported
+    shape[0] = n_samples;
+    shape[1] = audio_info->channels;
+    strides[0] = width * audio_info->channels;
+    strides[1] = width;
+    view->shape = shape;
+    view->strides = strides;
+
+    private_data = ALLOC(memview_private_data);
+    private_data->buffer = buffer;
+    private_data->map_info = map_info;
+    view->private_data = (void *const)private_data;
+
+    gst_audio_info_free(audio_info);
+
+    return true;
+}
+
+static bool
+rg_gst_sample_get(VALUE obj, rb_memory_view_t *view, int flags)
+{
+    GstSample *sample;
+    GstCaps *caps;
+
+    sample = GST_SAMPLE(RVAL2GOBJ(obj));
+    gst_sample_ref(sample);
+
+    caps = gst_sample_get_caps(sample);
+
+    if (rg_gst_memory_view_init_from_audio(obj, view, flags, sample, caps)) {
+        return true;
+    }
+
+    gst_sample_unref(sample);
+
+    rb_warn("Gst::Sample: Currently, only audio is supported");
+
+    return false;
+}
+
+static bool
+rg_gst_sample_release(VALUE obj, rb_memory_view_t *view)
+{
+    GstSample *sample;
+    memview_private_data *private_data;
+
+    xfree((void *)view->shape);
+    xfree((void *)view->strides);
+    private_data = (memview_private_data *)view->private_data;
+    gst_buffer_unmap(private_data->buffer, private_data->map_info);
+    gst_buffer_unref(private_data->buffer);
+    xfree(private_data->map_info);
+    xfree(private_data);
+    sample = GST_SAMPLE(RVAL2GOBJ(obj));
+    gst_sample_unref(sample);
+
+    return true;
+}
+
+static bool
+rg_gst_sample_available_p(VALUE obj)
+{
+    GstSample *sample;
+    GstCaps *caps;
+    gchar *name;
+    gboolean is_supported_caps;
+
+    sample = GST_SAMPLE(RVAL2GOBJ(obj));
+
+    caps = gst_sample_get_caps(sample);
+    if (!caps) {
+        return false;
+    }
+    if (gst_caps_get_size(caps) != 1) {
+        return false;
+    }
+
+    name = gst_caps_to_string(caps);
+    is_supported_caps = rg_gst_is_supported_caps(name);
+    if (!is_supported_caps) {
+        rb_warn("Gst::Sample: currently audio/x-raw caps only suppoted but is %s", name);
+    }
+
+    g_free(name);
+
+    return is_supported_caps;
+}
+
+static rb_memory_view_entry_t rg_gst_sample_entry = {
+    rg_gst_sample_get,
+    rg_gst_sample_release,
+    rg_gst_sample_available_p,
+};
+
+void
+rb_gst_init_sample(void)
+{
+    VALUE mGst;
+    VALUE cSample;
+
+    mGst = rb_const_get(rb_cObject, rb_intern("Gst"));
+    cSample = rb_const_get(mGst, rb_intern("Sample"));
+    rb_memory_view_register(cSample, &rg_gst_sample_entry);
+}
