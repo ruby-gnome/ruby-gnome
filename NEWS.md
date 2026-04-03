@@ -1,5 +1,17 @@
 # NEWS
 
+## Ruby-GNOME 4.3.6: 2026-04-03
+
+This is a `super` support in virtual method release.
+
+### Changes
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Added support for `super` in virtual method.
+
 ## Ruby-GNOME 4.3.5: 2026-02-06
 
 This is a GLib 2.87 support release.
