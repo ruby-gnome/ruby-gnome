@@ -20,6 +20,7 @@
 
 #include <ruby.h>
 #include <ruby/memory_view.h>
+#include <gst/gstversion.h>
 #include <gst/audio/audio.h>
 #include "rbgst.h"
 
@@ -251,6 +252,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
             rb_warn("Gst::Sample: only environment double or float size is 8 bytes is supported");
         }
         break;
+#if GST_CHECK_VERSION(1, 28, 0)
     case GST_AUDIO_FORMAT_S20_32LE:
         rb_warn("Gst::Sample: S20_32LE format is not supported");
         break;
@@ -263,6 +265,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     case GST_AUDIO_FORMAT_U20_32BE:
         rb_warn("Gst::Sample: U20_32BE format is not supported");
         break;
+#endif
     }
 
     if (view->format == NULL) {
