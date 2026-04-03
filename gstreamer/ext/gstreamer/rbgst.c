@@ -72,4 +72,5 @@ Init_gstreamer (void)
 
     rb_gst_init_child_proxy();
     rb_gst_init_element();
+    rb_gst_init_sample();
 }
