@@ -42,4 +42,9 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("cairo", ">= 1.16.2")
   s.add_runtime_dependency("glib2", "= #{s.version}")
+
+  # In general, cairo gem installs cairo-gobject.pc but RHEL uses
+  # separated package for cairo-gobject.pc. So we need to install it
+  # explicitly in cairo-gobject gem.
+  s.requirements << "system: cairo-gobject: rhel: pkgconfig(cairo-gobject)"
 end
