@@ -127,32 +127,20 @@ class TestSample < Test::Unit::TestCase
     caps["layout"] = layout
 
     sink.caps = caps
-    sink.emit_signals = true
-    sink.signal_connect :new_sample do |_|
-      samples << sink.pull_sample
-      Gst::FlowReturn::OK
-    end
 
     pipeline << src << convert << sink
     src >> convert >> sink
 
-    loop = GLib::MainLoop.new
-
-    bus = pipeline.bus
-    bus.add_watch do |bus, message|
-      case message.type
-      when Gst::MessageType::EOS
-        loop.quit
-      when Gst::MessageType::ERROR
-        error, debug = message.parse_error
-        raise "Error: #{error.message} (#{debug})"
-      end
-      true
-    end
-
     pipeline.play
     begin
-      loop.run
+      loop do
+        sample = sink.try_pull_sample(Gst::SECOND)
+        if sample
+          samples << sample
+        else
+          break
+        end
+      end
     ensure
       pipeline.stop
     end
