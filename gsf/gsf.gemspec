@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
     ["alpine_linux", "libgsf-dev"],
     ["arch_linux", "libgsf"],
     ["conda", "libgsf"],
+    ["conda", "libxml2-devel"],
     ["debian", "libgsf-1-dev"],
     ["homebrew", "libgsf"],
     ["msys2", "libgsf"],
