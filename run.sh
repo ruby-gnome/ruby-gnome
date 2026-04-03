@@ -55,5 +55,6 @@ RUBYLIB="${source_dir}/gegl/lib:${RUBYLIB}"
 RUBYLIB="${source_dir}/libsecret/lib:${RUBYLIB}"
 RUBYLIB="${source_dir}/libhandy/lib:${RUBYLIB}"
 RUBYLIB="${source_dir}/wnck3/lib:${RUBYLIB}"
+RUBYLIB="${source_dir}/adwaita/lib:${RUBYLIB}"
 
 RUBYLIB="${RUBYLIB}" "$@"
