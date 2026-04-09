@@ -28,6 +28,7 @@ $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s) if mkmf_gnome2_dir.exist?
 
 module_name = "gstreamer"
 package_id = "gstreamer-1.0"
+audio_package_id = "gstreamer-audio-1.0"
 
 require "mkmf-gnome"
 
@@ -47,6 +48,17 @@ unless required_pkg_config_package(package_id,
                                    :homebrew => "gstreamer",
                                    :macports => "gstreamer",
                                    :msys2 => "gstreamer")
+  exit(false)
+end
+
+unless required_pkg_config_package(audio_package_id,
+                                   :alt_linux => ["gst-plugins-base1.0", "libpcre2-devel"],
+                                   :alpine_linux => "gst-plugins-base-dev",
+                                   :conda => "gst-plugins-base",
+                                   :debian => "libgstreamer-plugins-base1.0-dev",
+                                   :redhat => "pkgconfig(#{audio_package_id})",
+                                   :arch_linux => "gst-plugins-base",
+                                   :msys2 => "gst-plugins-base")
   exit(false)
 end
 
