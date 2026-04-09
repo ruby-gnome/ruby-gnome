@@ -84,7 +84,7 @@ class TestSample < Test::Unit::TestCase
 
   def test_memory_view_from_buffer_list
     samples = generate_samples
-    assert_equal 15, samples.size
+    assert_equal(15, samples.size)
 
     buffer_list = Gst::BufferList.new
     expected_data = +"".b
@@ -103,8 +103,8 @@ class TestSample < Test::Unit::TestCase
     sample.buffer_list = buffer_list
 
     Fiddle::MemoryView.export(sample) do |view|
-      assert_equal expected_data.bytesize, view.byte_size
-      assert_equal expected_data, view.to_s
+      assert_equal(expected_data.bytesize, view.byte_size)
+      assert_equal(expected_data, view.to_s)
     end
   end
 
