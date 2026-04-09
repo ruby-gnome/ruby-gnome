@@ -52,7 +52,7 @@ unless required_pkg_config_package(package_id,
 end
 
 unless required_pkg_config_package(audio_package_id,
-                                   :alt_linux => ["gst-plugins-base1.0", "libpcre2-devel"],
+                                   :alt_linux => ["liborc-devel", "gst-plugins1.0-devel"],
                                    :alpine_linux => "gst-plugins-base-dev",
                                    :conda => "gst-plugins-base",
                                    :debian => "libgstreamer-plugins-base1.0-dev",
