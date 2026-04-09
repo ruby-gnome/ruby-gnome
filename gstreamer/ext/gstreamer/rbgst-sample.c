@@ -291,7 +291,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     private_data = ALLOC(memview_private_data);
     private_data->buffer = buffer;
     private_data->map_info = map_info;
-    view->private_data = (void *const)private_data;
+    view->private_data = (void *)private_data;
 
     gst_audio_info_free(audio_info);
 
