@@ -19,6 +19,7 @@
  */
 
 #include <ruby.h>
+#include <ruby/version.h>
 #include <ruby/memory_view.h>
 #include <gst/gstversion.h>
 #include <gst/audio/audio.h>
@@ -291,7 +292,11 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     private_data = ALLOC(memview_private_data);
     private_data->buffer = buffer;
     private_data->map_info = map_info;
+#if RUBY_API_VERSION_MAJOR == 3 && RUBY_API_VERSION_MINOR == 0
+    view->private = (void *const)private_data;
+#else
     view->private_data = (void *)private_data;
+#endif
 
     gst_audio_info_free(audio_info);
 
@@ -325,7 +330,11 @@ rg_gst_sample_release(VALUE obj, rb_memory_view_t *view)
 
     xfree((void *)view->shape);
     xfree((void *)view->strides);
+#if RUBY_API_VERSION_MAJOR == 3 && RUBY_API_VERSION_MINOR == 0
+    private_data = (memview_private_data *)view->private;
+#else
     private_data = (memview_private_data *)view->private_data;
+#endif
     gst_buffer_unmap(private_data->buffer, private_data->map_info);
     gst_buffer_unref(private_data->buffer);
     xfree(private_data->map_info);
