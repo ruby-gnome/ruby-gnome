@@ -17,28 +17,31 @@
 require "fiddle"
 
 class TestSample < Test::Unit::TestCase
-  AUDIOTESTSRC_DEFAULT_SAMPLESPERBUFFER = 1024
-  AUDIOTESTSRC_RAMP = 1
+  AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER = 1024
+  AUDIO_TEST_SRC_RAMP = 1
 
   def test_memory_view_mono
     samples = generate_samples
 
     samples.each_with_index do |sample, i|
       Fiddle::MemoryView.export(sample) do |view|
-        assert_equal(AUDIOTESTSRC_DEFAULT_SAMPLESPERBUFFER * 4, view.byte_size)
+        assert_equal(AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER * 4, view.byte_size)
         assert do
           view.readonly?
         end
         assert_equal("e", view.format)
         assert_equal(4, view.item_size)
         assert_equal(2, view.ndim)
-        assert_equal([AUDIOTESTSRC_DEFAULT_SAMPLESPERBUFFER, 1], view.shape)
+        assert_equal([AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER, 1], view.shape)
         assert_equal([4, 4], view.strides)
         assert_nil(view.sub_offsets)
 
-        offset = AUDIOTESTSRC_DEFAULT_SAMPLESPERBUFFER * i
+        offset = AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER * i
         (view.byte_size / view.item_size).times do |j|
-          assert_in_delta(Math.sin((offset + j + AUDIOTESTSRC_RAMP) * 2 * Math::PI * 440 / 16_000) * 0.8, view[j, 0], 0.001, "#{i}th buffer, #{j}th sample")
+          assert_in_delta(Math.sin((offset + j + AUDIO_TEST_SRC_RAMP) * 2 * Math::PI * 440 / 16_000) * 0.8,
+                          view[j, 0],
+                          0.001,
+                          "#{i}th buffer, #{j}th sample")
         end
       end
     end
@@ -56,14 +59,14 @@ class TestSample < Test::Unit::TestCase
         assert_equal("e", view.format)
         assert_equal(4, view.item_size)
         assert_equal(2, view.ndim)
-        assert_equal([AUDIOTESTSRC_DEFAULT_SAMPLESPERBUFFER, 2], view.shape)
+        assert_equal([AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER, 2], view.shape)
         assert_equal([8, 4], view.strides)
         assert_nil(view.sub_offsets)
 
-        offset = AUDIOTESTSRC_DEFAULT_SAMPLESPERBUFFER * i
+        offset = AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER * i
         (view.byte_size / view.item_size).times do |j|
           index, channel = j.divmod(2)
-          expected_value = Math.sin((offset + index + AUDIOTESTSRC_RAMP) * 2 * Math::PI * 440 / 16_000) * 0.8
+          expected_value = Math.sin((offset + index + AUDIO_TEST_SRC_RAMP) * 2 * Math::PI * 440 / 16_000) * 0.8
           assert_in_delta(expected_value, view[index, channel], 0.001, "#{i}th buffer, #{channel}th channel, #{index}th sample")
         end
       end
@@ -122,7 +125,7 @@ class TestSample < Test::Unit::TestCase
     convert = Gst::ElementFactory.make("audioconvert", nil)
     sink = Gst::ElementFactory.make("appsink", nil)
 
-    src.set_property("num-buffers", rate / AUDIOTESTSRC_DEFAULT_SAMPLESPERBUFFER)
+    src.set_property("num-buffers", rate / AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER)
 
     caps = Gst::Caps.new("audio/x-raw")
     caps["format"] = format
