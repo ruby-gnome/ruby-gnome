@@ -54,10 +54,10 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     GstBufferList *buffer_list;
     GstAudioInfo *audio_info;
     GstMapInfo *map_info;
-    gboolean is_column_major_requested;
-    gboolean is_writable_requested;
+    bool is_column_major_requested;
+    bool is_writable_requested;
     gboolean is_writable;
-    gboolean is_interleaved;
+    bool is_interleaved;
     ssize_t *shape;
     ssize_t *strides;
     gint width;
