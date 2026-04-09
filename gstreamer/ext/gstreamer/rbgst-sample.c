@@ -360,7 +360,7 @@ rg_gst_sample_available_p(VALUE obj)
     name = gst_caps_to_string(caps);
     is_supported_caps = rg_gst_is_supported_caps(name);
     if (!is_supported_caps) {
-        rb_warn("Gst::Sample: currently audio/x-raw caps only suppoted but is %s", name);
+        rb_warn("Gst::Sample: currently audio/x-raw caps only supported but is %s", name);
     }
 
     g_free(name);
