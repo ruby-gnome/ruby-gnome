@@ -132,7 +132,8 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
 
     view->obj = obj;
     view->byte_size = map_info->size;
-    view->item_size = audio_info->finfo->width / 8;
+    width = audio_info->finfo->width / 8;
+    view->item_size = width;
     view->readonly = !is_writable_requested;
     view->ndim = 2;
     view->sub_offsets = NULL;
@@ -280,8 +281,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         return false;
     }
 
-    n_samples = map_info->size / (audio_info->finfo->width / 8) / audio_info->channels;
-    width = audio_info->finfo->width / 8;
+    n_samples = map_info->size / width / audio_info->channels;
     shape = ALLOC_N(ssize_t, 2);
     strides = ALLOC_N(ssize_t, 2);
     // Currently, interleaved and row-major audio is supported
