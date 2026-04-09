@@ -133,6 +133,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     view->item_size = audio_info->finfo->width / 8;
     view->readonly = !is_writable;
     view->ndim = 2;
+    view->sub_offsets = NULL;
 
     view->format = NULL;
     switch (audio_info->finfo->format) {
