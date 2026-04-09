@@ -267,7 +267,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
 #endif
     }
 
-    if (view->format == NULL) {
+    if (!view->format) {
         gst_buffer_unmap(buffer, map_info);
         xfree(map_info);
         gst_buffer_unref(buffer);
