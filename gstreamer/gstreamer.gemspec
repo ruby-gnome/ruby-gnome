@@ -58,7 +58,8 @@ Gem::Specification.new do |s|
     ],
     "gstreamer-audio-1.0" => [
       ["alpine_linux", "gst-plugins-base-dev"],
-      ["alt_linux", "gst-plugins-base1.0"],
+      ["alt_linux", "liborc-devel"],
+      ["alt_linux", "gst-plugins1.0-devel"],
       ["arch_linux", "gst-plugins-base"],
       ["conda", "gst-plugins-base"],
       ["debian", "libgstreamer-plugins-base1.0-dev"],
