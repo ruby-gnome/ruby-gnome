@@ -305,16 +305,13 @@ rg_gst_sample_get(VALUE obj, rb_memory_view_t *view, int flags)
     GstCaps *caps;
 
     sample = GST_SAMPLE(RVAL2GOBJ(obj));
-    gst_sample_ref(sample);
 
     caps = gst_sample_get_caps(sample);
 
     if (rg_gst_memory_view_init_from_audio(obj, view, flags, sample, caps)) {
+        gst_sample_ref(sample);
         return true;
     }
-
-    gst_sample_unref(sample);
-
     rb_warn("Gst::Sample: currently, only audio is supported");
 
     return false;
