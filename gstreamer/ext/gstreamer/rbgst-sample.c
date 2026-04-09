@@ -55,6 +55,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     GstAudioInfo *audio_info;
     GstMapInfo *map_info;
     gboolean is_column_major_requested;
+    gboolean is_writable_requested;
     gboolean is_writable;
     gboolean is_interleaved;
     ssize_t *shape;
@@ -108,8 +109,9 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         buffer = gst_buffer_ref(buffer);
     }
 
+    is_writable_requested = flags & RUBY_MEMORY_VIEW_WRITABLE;
     is_writable = gst_sample_is_writable(sample);
-    if (!is_writable && (flags & RUBY_MEMORY_VIEW_WRITABLE)) {
+    if (is_writable_requested && !is_writable) {
         rb_warn("Gst::Sample: sample is not writable but writable memory view is requested");
         gst_audio_info_free(audio_info);
         gst_buffer_unref(buffer);
@@ -117,7 +119,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         return false;
     }
     map_info = ALLOC(GstMapInfo);
-    if (!gst_buffer_map(buffer, map_info, is_writable ? GST_MAP_WRITE : GST_MAP_READ)) {
+    if (!gst_buffer_map(buffer, map_info, is_writable_requested ? GST_MAP_WRITE : GST_MAP_READ)) {
         rb_warn("Gst::Sample: failed to map buffer");
         xfree(map_info);
         gst_audio_info_free(audio_info);
@@ -131,7 +133,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     view->obj = obj;
     view->byte_size = map_info->size;
     view->item_size = audio_info->finfo->width / 8;
-    view->readonly = !is_writable;
+    view->readonly = !is_writable_requested;
     view->ndim = 2;
     view->sub_offsets = NULL;
 
