@@ -154,10 +154,10 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         view->format = "s>";
         break;
     case GST_AUDIO_FORMAT_U16LE:
-        view->format = "v";
+        view->format = "S<";
         break;
     case GST_AUDIO_FORMAT_U16BE:
-        view->format = "n";
+        view->format = "S>";
         break;
     case GST_AUDIO_FORMAT_S24_32LE:
         rb_warn("Gst::Sample: S24_32LE format is not supported");
@@ -178,10 +178,10 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         view->format = "l>";
         break;
     case GST_AUDIO_FORMAT_U32LE:
-        view->format = "V";
+        view->format = "L<";
         break;
     case GST_AUDIO_FORMAT_U32BE:
-        view->format = "N";
+        view->format = "L>";
         break;
     case GST_AUDIO_FORMAT_S24LE:
         rb_warn("Gst::Sample: S24LE format is not supported");
