@@ -296,7 +296,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     private_data->buffer = buffer;
     private_data->map_info = map_info;
 #if RUBY_API_VERSION_MAJOR == 3 && RUBY_API_VERSION_MINOR == 0
-    view->private = (void *const)private_data;
+    *((void **)&view->private) = private_data;
 #else
     view->private_data = (void *)private_data;
 #endif
