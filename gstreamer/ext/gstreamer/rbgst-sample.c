@@ -320,7 +320,6 @@ rg_gst_sample_get(VALUE obj, rb_memory_view_t *view, int flags)
         gst_sample_ref(sample);
         return true;
     }
-    rb_warn("Gst::Sample: currently, only audio is supported");
 
     return false;
 }
