@@ -70,9 +70,8 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         return false;
     }
 
-    audio_info = gst_audio_info_new();
-    if (!gst_audio_info_from_caps(audio_info, caps)) {
-        gst_audio_info_free(audio_info);
+    audio_info = gst_audio_info_new_from_caps(caps);
+    if (!audio_info) {
         rb_warn("Gst::Sample: failed to get audio info");
 
         return false;
