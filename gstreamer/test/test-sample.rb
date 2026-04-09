@@ -26,7 +26,9 @@ class TestSample < Test::Unit::TestCase
     samples.each_with_index do |sample, i|
       Fiddle::MemoryView.export(sample) do |view|
         assert_equal(AUDIOTESTSRC_DEFAULT_SAMPLESPERBUFFER * 4, view.byte_size)
-        assert_true(view.readonly?)
+        assert do
+          view.readonly?
+        end
         assert_equal("e", view.format)
         assert_equal(4, view.item_size)
         assert_equal(2, view.ndim)
@@ -47,8 +49,10 @@ class TestSample < Test::Unit::TestCase
 
     samples.each_with_index do |sample, i|
       Fiddle::MemoryView.export(sample) do |view|
-        assert_equal(AUDIOTESTSRC_DEFAULT_SAMPLESPERBUFFER * 4 * 2, view.byte_size)
-        assert_true(view.readonly?)
+        assert_equal(AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER * 4 * 2, view.byte_size)
+        assert do
+          view.readonly?
+        end
         assert_equal("e", view.format)
         assert_equal(4, view.item_size)
         assert_equal(2, view.ndim)
@@ -92,7 +96,7 @@ class TestSample < Test::Unit::TestCase
     samples.each do |sample|
       buffer = sample.buffer
       success, map = buffer.map(:read)
-      assert_equal true, success
+      assert_true(success)
       expected_data << map.data.pack("C*")
       buffer.unmap(map)
       buffer_list.insert(-1, buffer)
