@@ -44,7 +44,7 @@ class TestBuffer < Test::Unit::TestCase
       sample = @sink.try_pull_sample(Gst::SECOND)
       buffer = sample.buffer
 
-      assert_raise(RuntimeError) do
+      assert_raise(Gst::CoreError::Failed) do
         buffer.map(:write)
       end
     ensure
@@ -73,7 +73,7 @@ class TestBuffer < Test::Unit::TestCase
       sample = @sink.try_pull_sample(Gst::SECOND)
       buffer = sample.buffer
 
-      assert_raise(RuntimeError) do
+      assert_raise(Gst::CoreError::Failed) do
         buffer.map_range(0, -1, :write)
       end
     ensure
