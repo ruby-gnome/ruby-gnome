@@ -386,7 +386,7 @@ void
 rb_gst_init_sample(void)
 {
 #ifdef HAVE_RUBY_MEMORY_VIEW_H
-  #if GST_CHECK_VERSION(1, 28, 0)
+  #if GST_CHECK_VERSION(1, 20, 0)
     VALUE mGst;
     VALUE cSample;
 
