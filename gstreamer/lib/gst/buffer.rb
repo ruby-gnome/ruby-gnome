@@ -26,7 +26,7 @@ module Gst
     alias_method :map_range_raw, :map_range
     def map_range(idx, length, flags)
       success, info = map_range_raw(idx, length, flags)
-      raise "failed to map buffer range" unless success
+      raise Gst::CoreError::Failed.new("failed to map buffer") unless success
       info
     end
   end
