@@ -385,10 +385,12 @@ static rb_memory_view_entry_t rg_gst_sample_entry = {
 void
 rb_gst_init_sample(void)
 {
+#if GST_CHECK_VERSION(1, 20, 0)
     VALUE mGst;
     VALUE cSample;
 
     mGst = rb_const_get(rb_cObject, rb_intern("Gst"));
     cSample = rb_const_get(mGst, rb_intern("Sample"));
     rb_memory_view_register(cSample, &rg_gst_sample_entry);
+#endif
 }
