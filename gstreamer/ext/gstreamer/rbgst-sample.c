@@ -386,11 +386,13 @@ void
 rb_gst_init_sample(void)
 {
 #ifdef HAVE_RUBY_MEMORY_VIEW_H
+  #if GST_CHECK_VERSION(1, 28, 0)
     VALUE mGst;
     VALUE cSample;
 
     mGst = rb_const_get(rb_cObject, rb_intern("Gst"));
     cSample = rb_const_get(mGst, rb_intern("Sample"));
     rb_memory_view_register(cSample, &rg_gst_sample_entry);
+  #endif
 #endif
 }
