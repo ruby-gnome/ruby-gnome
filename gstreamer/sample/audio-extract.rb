@@ -37,7 +37,7 @@ sink.emit_signals = true
 sink.signal_connect(:new_sample) do |_|
   sample = sink.pull_sample
   buffer = sample.buffer
-  success, map = buffer.map(:read)
+  map = buffer.map(:read)
   p map.data
   buffer.unmap(map)
   Gst::FlowReturn::OK
