@@ -54,7 +54,6 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     GstBufferList *buffer_list;
     GstAudioInfo *audio_info;
     GstMapInfo *map_info;
-    bool is_column_major_requested;
     bool is_writable_requested;
     gboolean is_writable;
     bool is_interleaved;
@@ -63,14 +62,6 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     gint width;
     gsize n_samples;
     memview_private_data *private_data;
-
-    is_column_major_requested = flags & RUBY_MEMORY_VIEW_COLUMN_MAJOR;
-    if (is_column_major_requested) {
-        // TODO: column-major support
-        rb_warn("Gst::Sample: currently column-major is not supported");
-
-        return false;
-    }
 
     audio_info = gst_audio_info_new_from_caps(caps);
     if (!audio_info) {
@@ -311,6 +302,15 @@ rg_gst_sample_get(VALUE obj, rb_memory_view_t *view, int flags)
 {
     GstSample *sample;
     GstCaps *caps;
+    bool is_column_major_requested;
+
+    is_column_major_requested = flags & RUBY_MEMORY_VIEW_COLUMN_MAJOR;
+    if (is_column_major_requested) {
+        // TODO: column-major support
+        rb_warn("Gst::Sample: currently column-major is not supported");
+
+        return false;
+    }
 
     sample = GST_SAMPLE(RVAL2GOBJ(obj));
 
