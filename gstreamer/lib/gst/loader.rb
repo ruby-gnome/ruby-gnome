@@ -61,6 +61,7 @@ module Gst
     def require_libraries
       require "gst/bin"
       require "gst/bus"
+      require "gst/buffer"
       require "gst/caps"
       require "gst/element"
       require "gst/element-factory"
