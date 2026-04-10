@@ -28,8 +28,7 @@ class TestMapInfo < Test::Unit::TestCase
     begin
       sample = @sink.try_pull_sample(Gst::SECOND)
       buffer = sample.buffer
-      success, map_info = buffer.map(:read)
-      assert_true(success)
+      map_info = buffer.map(:read)
       assert do
         map_info.data.size >= 115200
       end
